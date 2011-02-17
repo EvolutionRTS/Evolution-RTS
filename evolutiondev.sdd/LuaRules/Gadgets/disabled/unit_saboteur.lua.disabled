@@ -1,0 +1,473 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+function gadget:GetInfo()
+  return {
+    name      = "Saboteur",
+    desc      = "Adds RedAlert2's saboteur abilities to the commando",
+    author    = "jK",
+    date      = "Aug 18, 2007",
+    license   = "GNU GPL, v2 or later",
+    layer     = 0,
+    enabled   = true  --  loaded by default?
+  }
+end
+
+--todo
+-- decloak
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+if (gadgetHandler:IsSyncedCode()) then
+--------------------------------------------------------------------------------
+--  «SYNCED»  ------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+-- user-configs
+local _unitName     = 'efet'  -- the saboteur
+local _unitDefID    = UnitDefNames[_unitName].id
+local _bombName     = 'enukemine'  -- the unit which is created in the enemy unit and then selfd
+local _countdown    = 10      -- detonation countdown in gamesec
+local _plantTime    = 10      -- minimum seconds needed to plant the bomb
+local _hpPTimeBonus = 20      -- _plantTime + _hpPTimeBonus == maximum time needed
+local _hpPTimeMod   = 4000    -- it is part of a function (defined between 0-1) to adjust _hpPTimeBonus to the enemie's MaxHealth
+local _damage       = 320000  -- single unit damage additional to the bomb/mine selfd
+
+local _increment    = 0.5 / _plantTime
+local dims          = Spring.GetUnitDefDimensions(_unitDefID)
+local _range        = UnitDefs[_unitDefID].buildDistance+dims.radius+5
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+--Speed-ups
+local FindUnitCmdDesc   = Spring.FindUnitCmdDesc;
+local InsertUnitCmdDesc = Spring.InsertUnitCmdDesc;
+local EditUnitCmdDesc   = Spring.EditUnitCmdDesc;
+local GetUnitPosition   = Spring.GetUnitPosition;
+local GiveOrderToUnit   = Spring.GiveOrderToUnit;
+local CallCOBScript     = Spring.CallCOBScript;
+local GetUnitRadius     = Spring.GetUnitRadius;
+local GetUnitDefID      = Spring.GetUnitDefID;
+local GetUnitPosition   = Spring.GetUnitPosition;
+local SetUnitHealth     = Spring.SetUnitHealth;
+local GetUnitHealth     = Spring.GetUnitHealth;
+local GetUnitTeam       = Spring.GetUnitTeam;
+local CreateUnit        = Spring.CreateUnit;
+local DestroyUnit       = Spring.DestroyUnit;
+local GetUnitCommands   = Spring.GetUnitCommands;
+local AreTeamsAllied    = Spring.AreTeamsAllied;
+local max               = math.max;
+local exp               = math.exp;
+local CMD_CLOAK         = CMD.CLOAK;
+local CMD_ONOFF         = CMD.ONOFF;
+local CMD_REPEAT        = CMD.REPEAT;
+local CMD_MOVE_STATE    = CMD.MOVE_STATE;
+local CMD_FIRE_STATE    = CMD.FIRE_STATE;
+local CMD_REMOVE        = CMD.REMOVE;
+local CMD_INSERT        = CMD.INSERT;
+local CMD_STOP          = CMD.STOP;
+local CMD_OPT_INTERNAL  = CMD.OPT_INTERNAL;
+local CMD_CAPTURE       = CMD.CAPTURE;
+local CMD_SET_WANTED_MAX_SPEED = CMD.SET_WANTED_MAX_SPEED;
+
+local gaiaID = Spring.GetGaiaTeamID();
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+-- commands
+CMD_PLANTBOMB = 32523
+local plantCmdDesc = {
+  id      = CMD_PLANTBOMB,
+  type    = CMDTYPE.ICON_UNIT,
+  name    = 'PlantBomb',
+  cursor  = 'PlantBomb', --Attack',
+  action  = 'plantbomb',
+  tooltip = 'Plant a bomb on an enemy unit',
+  params  = {}
+}
+
+
+-- unit tables
+local BombPlants  = {} -- in progress implantations (index is the enemyID!)
+local PlantBombs  = {} -- saboteurID -> enemyID translation
+local UnitBombs   = {} -- units with activated bombs
+
+
+-- workarounds
+local SetGoalUnits  = {}
+local AddFakeCapture= {}
+local AddDstCapture = {}
+local RemoveFakeCapture = {}
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local function AddPlantCmdDesc(unitID)
+  local insertID = 
+    FindUnitCmdDesc(unitID, CMD_CLOAK)      or
+    FindUnitCmdDesc(unitID, CMD_ONOFF)      or
+    FindUnitCmdDesc(unitID, CMD_REPEAT)     or
+    FindUnitCmdDesc(unitID, CMD_MOVE_STATE) or
+    FindUnitCmdDesc(unitID, CMD_FIRE_STATE) or
+    123456; -- back of the pack
+  InsertUnitCmdDesc(unitID, insertID + 1, plantCmdDesc);
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local function checkDistance(unitID,unitID2,radius)
+  local x,y,z    = GetUnitPosition(unitID);
+  local tx,ty,tz = GetUnitPosition(unitID2);
+  if (x and tx) then
+    local dist = ((x-tx)^2+(z-tz)^2)^(1/2);
+    return (dist<=radius);
+  end
+  -- we return always true, if one of the units is dead. cos it is much easier
+  -- to handle unit deaths in StartPlant and UpdatePlant + UnitDestroyed
+  return true;
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local function StartPlant(unitID, unitID2)
+  -- don't set fake attack (the command is already executed...)
+  AddFakeCapture[unitID] = nil;
+
+  local team1,team2 = GetUnitTeam(unitID),GetUnitTeam(unitID2);
+  if (team1==nil)or(team2==nil)or(AreTeamsAllied(team1,team2)) then
+    return true; -- remove command
+  end
+
+  -- call cob
+  CallCOBScript(unitID, 'StartPlantBomb', 0);
+  --CallCOBScript(unitID, 'StartBuilding', 0, 1);
+
+  -- set units
+  local newBombData    = {};
+  newBombData.tanja    = unitID;
+  newBombData.unit     = unitID2;
+  newBombData.progress = 0;
+  newBombData.unit2radius = GetUnitRadius(unitID2);
+
+  -- set timings
+  newBombData.time     = _plantTime;
+  local unit2DefID     = GetUnitDefID(unitID2);
+  if (unit2DefID) then -- adjust to needed time to plant the mine to the enemie's MaxHealth
+    newBombData.time   = _plantTime + _hpPTimeBonus/(1+exp(4 - UnitDefs[unit2DefID].health / _hpPTimeMod ));
+  end
+  newBombData.increment = 0.5 / newBombData.time;
+
+--Spring.Echo('planting will take',newBombData.time);
+
+  BombPlants[unitID2]  = newBombData;
+  PlantBombs[unitID]   = unitID2;
+  return false; -- means the command won't be removed
+end
+
+local function FinishPlant(unitID, bombInfo)
+  --CallCOBScript(bombInfo.unit, 'BombPlanted', 0);
+  CallCOBScript(unitID, 'StopPlantBomb', 0);
+
+  UnitBombs[bombInfo.unit] = _countdown;
+  PlantBombs[unitID]       = nil;
+  BombPlants[bombInfo.unit]= nil;
+
+  RemoveFakeCapture[unitID] = true;
+end
+
+local function StopPlant(unitID)
+  CallCOBScript(unitID, 'StopPlantBomb', 0);
+
+  BombPlants[ PlantBombs[unitID] or -1 ] = nil;
+  PlantBombs[unitID] = nil;
+end
+
+local function UpdatePlant(unitID, bombInfo)
+  bombInfo.progress = bombInfo.progress + bombInfo.increment;
+  if (bombInfo.progress >= 1.0) then
+    FinishPlant(unitID, bombInfo);
+    return true;
+  end
+
+  return false;
+end
+
+
+local function DetonateBomb(unitID,bombInfo)
+  local x,y,z = GetUnitPosition(unitID);
+  if (x) then
+    SetUnitHealth(unitID,GetUnitHealth(unitID) - _damage);
+    local gy = Spring.GetGroundHeight(x,z);
+    if math.abs(gy-y)<100 then
+      -- ground
+      local bombID = CreateUnit(_bombName, x, y, z, 0, gaiaID);
+      DestroyUnit(bombID,true);
+    else
+      -- air
+      DestroyUnit(unitID,true);
+    end
+  end
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
+  if (cmdID==CMD_PLANTBOMB) then
+    AddFakeCapture[unitID] = cmdParams[1] or -1;
+  end
+
+  if (cmdID~=CMD_PLANTBOMB)and(cmdID~=CMD_INSERT)and(not cmdOptions.shift)and(cmdID~=CMD_SET_WANTED_MAX_SPEED)and(PlantBombs[unitID]) then
+    StopPlant(unitID);
+  end
+
+  if (SetGoalUnits[unitID])and(not cmdOptions.shift) then SetGoalUnits[unitID] = nil; end
+
+  return true;
+end
+
+
+function gadget:CommandFallback(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
+  local unitID2 = cmdParams[1] or -1;
+  if (cmdID==CMD_PLANTBOMB) then
+    if (unitID2>0)and(unitDefID==_unitDefID)and(UnitBombs[unitID2]==nil) then
+      local bombInfo = BombPlants[unitID2];
+      local unit2radius = ((bombInfo)and(bombInfo.unit2radius)) or GetUnitRadius(unitID2) or -1;
+      if (checkDistance(unitID,unitID2,_range+unit2radius)) then
+        if (bombInfo) then
+          if (bombInfo.tanja==unitID) then
+          return true,UpdatePlant(unitID, bombInfo);
+          else
+            return true,true; -- remove another unit is already planting a bomb
+          end
+        else
+          return true,StartPlant(unitID, unitID2);
+        end
+      else
+        if AreTeamsAllied(GetUnitTeam(unitID),GetUnitTeam(unitID2)) then
+          -- remove the command, units are allied
+          return true,true;
+        else
+          -- unit is too far away -> readd the fake CMD_CAPTURE,
+          AddDstCapture[unitID] = unitID2;
+          if (PlantBombs[unitID])and(bombInfo.progress>0) then
+            StopPlant(unitID);
+          end
+          return true,false;
+        end
+      end
+    else
+      return true,true; --wrong parameters
+    end
+  end
+
+  return false;
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+function gadget:UnitCreated(unitID, unitDefID, teamID)
+  if (unitDefID==_unitDefID) then
+    AddPlantCmdDesc(unitID);
+  end
+end
+
+function gadget:UnitDestroyed(unitID, unitDefID, teamID)
+  if (SetGoalUnits[unitID]) then
+    SetGoalUnits[unitID] = nil
+  end
+
+  if (unitDefID==_unitDefID)and(PlantBombs[unitID]) then 
+    --commando got killed
+    BombPlants[ PlantBombs[unitID] ] = nil;
+    PlantBombs[ unitID ] = nil;
+  elseif (BombPlants[unitID]) then
+    --victim got killed
+    PlantBombs[ BombPlants[unitID].tanja or -1 ] = nil;
+    BombPlants[ unitID ] = nil;
+  elseif (UnitBombs[unitID]) then
+    UnitBombs[unitID] = nil;
+  end
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+function gadget:Initialize()
+  gadgetHandler:RegisterCMDID(CMD_PLANTBOMB);
+
+  for _,unitID in ipairs(Spring.GetAllUnits()) do
+    local unitDefID = GetUnitDefID(unitID);
+    if (unitDefID==_unitDefID) then
+      gadget:UnitCreated(unitID, unitDefID);
+    end
+  end
+
+  Spring.AssignMouseCursor("PlantBomb","cursorBomb",true,true)
+
+  _G.bombPlants = BombPlants;
+  _G.unitBombs  = UnitBombs;
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+function gadget:GameFrame(n)
+  for unitID,unitID2 in pairs(AddFakeCapture) do
+    -- add a capture command behind the CMD_PLANTBOMB, so there is a visualization (dotted line)
+    GiveOrderToUnit(unitID,CMD_INSERT,{-1,CMD_CAPTURE,CMD_OPT_INTERNAL+1,unitID2},{"alt"});
+  end
+  AddFakeCapture = {};
+
+  for unitID,unitID2 in pairs(AddDstCapture) do
+    -- add a capture command IN FRONT of the CMD_PLANTBOMB, so we can check the distance
+    local cmds = GetUnitCommands(unitID); if (cmds) then cmds.n = nil; end
+    for _,cmd in ipairs(cmds) do
+      if (cmd.id==CMD_PLANTBOMB) then
+        GiveOrderToUnit(unitID,CMD_INSERT,{cmd.tag,CMD_CAPTURE,CMD_OPT_INTERNAL+1,unitID2},{});
+        SetGoalUnits[unitID] = unitID2;
+        break;
+      end
+    end
+  end
+  AddDstCapture = {};
+
+  for unitID,_ in pairs(RemoveFakeCapture) do
+    -- remove the cpature cmds, which were add behind CMD_PLANTBOMB
+    local cmds = GetUnitCommands(unitID); if (cmds) then cmds.n = nil; end
+    for _,cmd in ipairs(cmds) do
+      if (cmd)and(cmd.id==CMD_CAPTURE)and(cmd.options.coded==CMD_OPT_INTERNAL+1) then
+        GiveOrderToUnit(unitID,CMD_REMOVE,{cmd.tag},{});
+        break;
+      end
+    end
+  end
+  RemoveFakeCapture = {};
+
+  -- check distance and remove the fake CMD_CAPTURE if reached 
+  for unitID,unitID2 in pairs(SetGoalUnits) do
+    local bombInfo    = BombPlants[unitID2];
+    local unit2radius = ((bombInfo)and(bombInfo.unit2radius)) or GetUnitRadius(unitID2) or -1;
+    if checkDistance(unitID,unitID2,_range+unit2radius) then
+      local cmd;
+      local cmds = GetUnitCommands(unitID, 1); if (cmds) then cmd = cmds[1]; end
+      if (cmd)and(cmd.id==CMD_CAPTURE)and(cmd.options.coded==CMD_OPT_INTERNAL+1) then
+        GiveOrderToUnit(unitID,CMD_REMOVE,{cmd.tag},{});
+        GiveOrderToUnit(unitID,CMD_INSERT,{0,CMD_STOP,0},{"alt"});
+        SetGoalUnits[unitID] = nil;
+      end
+    end
+  end
+
+  -- update detonation countdowns
+  for unitID,countdown in pairs(UnitBombs) do
+    if (countdown==0) then
+      -- detonate
+      DetonateBomb(unitID);
+      UnitBombs[unitID] = nil;
+    else
+      UnitBombs[unitID] = max(countdown-0.03333,0);
+    end
+  end
+end
+
+--------------------------------------------------------------------------------
+--  «END SYNCED»  --------------------------------------------------------------
+--------------------------------------------------------------------------------
+else
+--------------------------------------------------------------------------------
+--  «UNSYNCED»  ----------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local SYNCED = SYNCED;
+include('LuaRules/headers/billboard.lua');
+
+local glBillboard         = gl.BillboardFixed;  --BUGFIX
+local CreateBillboard     = gl.CreateBillboard; --BUGFIX
+local GetUnitBasePosition = Spring.GetUnitBasePosition;
+local GetSpectatingState  = Spring.GetSpectatingState;
+local ALL_ACCESS_TEAM     = Script.ALL_ACCESS_TEAM;
+local GetLocalTeamID      = Spring.GetLocalTeamID;
+local IsUnitVisible       = Spring.IsUnitVisible;
+local strformat           = string.format;
+local glPushMatrix        = gl.PushMatrix;
+local glTranslate         = gl.Translate;
+local glPopMatrix         = gl.PopMatrix;
+local glDepthTest         = gl.DepthTest;
+local GL_LEQUAL           = GL.LEQUAL;
+local glColor             = gl.Color;
+local glText              = gl.Text;
+
+local function DrawPlantProgress(unitID, progress, localTeamID)
+  local px,py,pz = GetUnitBasePosition(unitID);
+  if (not px) then return end
+
+  glPushMatrix();
+  glTranslate(px, py-20, pz);
+  glBillboard();
+  local progStr = strformat("%.1f%%", 100 * progress);
+  glText(progStr, 0, 0, 14, "noc");
+  glPopMatrix();
+end
+
+local function DrawCountdown(unitID, countdown, localTeamID)
+  local px,py,pz = GetUnitBasePosition(unitID);
+  if (not px) then return end
+
+  glPushMatrix();
+  glTranslate(px, py-20, pz);
+  glBillboard();
+  local progStr = strformat("%.1f", countdown);
+  glText(progStr .. 's', 0, 0, 14, "noc");
+  glPopMatrix();
+end
+
+function gadget:DrawWorld()
+  local bombPlants = SYNCED.bombPlants;
+  local unitBombs  = SYNCED.unitBombs;
+
+  if ((not bombPlants) or (snext(bombPlants) == nil))and
+     ((not unitBombs) or (snext(unitBombs) == nil))
+  then
+    return; --nothing to do
+  end
+
+  local spec, specFullView = GetSpectatingState();
+  local readTeam;
+  if (specFullView) then
+    readTeam = ALL_ACCESS_TEAM;
+  else
+    readTeam = GetLocalTeamID();
+  end
+
+  CreateBillboard();
+
+  glColor(1,1,0,1);
+  CallAsTeam({ ['read'] = readTeam }, function()
+    for unitID,bombData in spairs(bombPlants) do
+      if (unitID and bombData)and(IsUnitVisible(unitID)) then
+        DrawPlantProgress(unitID, bombData.progress);
+      end
+    end
+  end);
+
+  glColor(1,0,0,1);
+  CallAsTeam({ ['read'] = readTeam }, function()
+    for unitID,countdown in spairs(unitBombs) do
+      if (unitID and countdown)and(IsUnitVisible(unitID)) then
+        DrawCountdown(unitID, countdown);
+      end
+    end
+  end);
+end
+
+--------------------------------------------------------------------------------
+--  «END UNSYNCED»  ------------------------------------------------------------
+--------------------------------------------------------------------------------
+end

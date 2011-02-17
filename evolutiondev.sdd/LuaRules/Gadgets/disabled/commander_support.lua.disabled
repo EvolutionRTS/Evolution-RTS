@@ -1,0 +1,115 @@
+function gadget:GetInfo()
+  return {
+    name      = "ecommandtank support",
+    desc      = "Provides lua for the ecommandtank",
+    author    = "lurker",
+    date      = "May, 2008",
+    license   = "GNU GPL, v2 or later",
+    layer     = 1,
+    enabled   = true  --  loaded by default?
+  }
+end
+
+--halfway abstracted, come back later
+
+if (gadgetHandler:IsSyncedCode()) then
+
+local commandtank, wascloaked
+local commanderDefs = {}
+local GetUnitIsCloaked = Spring.GetUnitIsCloaked
+
+local function commandtankcreate(unitID, unitDefID, unitTeam)
+   commandtank = unitID
+   wascloaked = false
+   local x,y,z = Spring.GetUnitPosition(unitID)
+   Spring.CreateUnit("ecommandtankweapon", x+2, y, z+2, 'n', unitTeam)
+   Spring.CreateUnit("ecommandtankweapon", x+2, y, z, 'n', unitTeam)
+   Spring.CreateUnit("ecommandtankweapon", x+2, y, z-2, 'n', unitTeam)
+   Spring.CreateUnit("ecommandtankweapon", x, y, z+2, 'n', unitTeam)
+   Spring.CreateUnit("ecommandtankweapon", x, y, z-2, 'n', unitTeam)
+   Spring.CreateUnit("ecommandtankweapon", x-2, y, z+2, 'n', unitTeam)
+   Spring.CreateUnit("ecommandtankweapon", x-2, y, z, 'n', unitTeam)
+   Spring.CreateUnit("ecommandtankweapon", x-2, y, z-2, 'n', unitTeam)
+   Spring.GiveOrderToUnit(unitID, CMD.LOAD_UNITS, {x, y, z, 100}, {})
+end
+
+local function ecpcreate(unitID, unitDefID, unitTeam)
+   local x,y,z = Spring.GetUnitPosition(unitID)
+   Spring.CreateUnit("emediumlaserplatform", x+260, y, z+150, 0, unitTeam)
+   Spring.CreateUnit("emediumlaserplatform", x-260, y, z+150, 0, unitTeam)
+   Spring.CreateUnit("emediumlaserplatform", x, y, z-300, 0, unitTeam)
+   Spring.CreateUnit("eantiairtower", x+173, y, z+100, 0, unitTeam)
+   Spring.CreateUnit("eantiairtower", x-173, y, z+100, 0, unitTeam)
+   Spring.CreateUnit("eantiairtower", x, y, z-200, 0, unitTeam)
+   Spring.CreateUnit("efactory", x, y, z+260, 0, unitTeam)
+   Spring.CreateUnit("esolar", x-200, y, z-25, 0, unitTeam)
+   Spring.CreateUnit("esolar", x-200, y, z-100, 0, unitTeam)
+   Spring.CreateUnit("eengineer", x+25, y, z+200, 0, unitTeam)
+   Spring.CreateUnit("eengineer", x+75, y, z+200, 0, unitTeam)
+end
+
+local function tcpcreate(unitID, unitDefID, unitTeam)
+   local x,y,z = Spring.GetUnitPosition(unitID)
+   Spring.CreateUnit("tmediumlaserplatform", x+260, y, z+150, 0, unitTeam)
+   Spring.CreateUnit("tmediumlaserplatform", x-260, y, z+150, 0, unitTeam)
+   Spring.CreateUnit("tmediumlaserplatform", x, y, z-300, 0, unitTeam)
+   Spring.CreateUnit("tantiairtower", x+173, y, z+100, 0, unitTeam)
+   Spring.CreateUnit("tantiairtower", x-173, y, z+100, 0, unitTeam)
+   Spring.CreateUnit("tantiairtower", x, y, z-200, 0, unitTeam)
+   Spring.CreateUnit("tfactory", x, y, z+260, 0, unitTeam)
+   Spring.CreateUnit("tsolar", x-200, y, z-25, 0, unitTeam)
+   Spring.CreateUnit("tsolar", x-200, y, z-100, 0, unitTeam)
+   Spring.CreateUnit("tengineer", x+25, y, z+200, 0, unitTeam)
+   Spring.CreateUnit("tengineer", x+75, y, z+200, 0, unitTeam)
+end
+
+function gadget:Initialize()
+   commanderDefs[UnitDefNames["ecommandtank"].id] = {
+      create = commandtankcreate,
+      --frame = commandtankframe,
+   }
+   commanderDefs[UnitDefNames["ecentralprocessing"].id] = {
+      create = ecpcreate,
+   }
+   commanderDefs[UnitDefNames["tcentralprocessing"].id] = {
+      create = tcpcreate,
+   }
+end
+
+function gadget:UnitCreated(unitID, unitDefID, unitTeam)
+   local commanderDef = commanderDefs[unitDefID]
+   if commanderDef ~= nil and commanderDef.create ~= nil then
+      commanderDef.create(unitID, unitDefID, unitTeam)
+   end
+end
+
+function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
+   if unitID == commandtank then commandtank = nil end
+end
+
+function gadget:GameFrame(frame)
+   if commandtank then
+      local cloaked = GetUnitIsCloaked(commandtank)
+      if cloaked == wascloaked then return end
+      if cloaked then
+         local transported = Spring.GetUnitIsTransporting(commandtank)
+         for _,unit in ipairs(transported) do
+            Spring.SetUnitCloak(unit, 4, 10)
+            local _,maxH,para = Spring.GetUnitHealth(unit)
+            if para>maxH then Spring.SetUnitHealth(unit, {paralyze = 1.0e9}) end
+            wascloaked = true
+         end
+      else
+         local transported = Spring.GetUnitIsTransporting(commandtank)
+         for _,unit in ipairs(transported) do
+            Spring.SetUnitCloak(unit, false)
+            local _,_,para = Spring.GetUnitHealth(unit)
+            if para > 1.0e8 then Spring.SetUnitHealth(unit, {paralyze = 0}) end
+            wascloaked = false
+         end
+      end
+   end
+end
+
+end
+

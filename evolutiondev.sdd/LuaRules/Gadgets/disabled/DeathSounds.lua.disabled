@@ -1,0 +1,186 @@
+function gadget:GetInfo()
+   return 
+   {
+      name = "Death Sounds",
+      desc = "Uses Lua to control death sound behavior.",
+      author = "Argh",
+      date = "March 16th, 2009",
+      license = "Public Domain",
+      layer = 1,
+      enabled = true
+   }
+end
+
+
+local GetUnitDefID = Spring.GetUnitDefID
+local math_rand = math.random
+local GetUnitPosition = Spring.GetUnitPosition
+local PlaySoundFile = Spring.PlaySoundFile
+
+local SoldierDeath = {}
+local GenericDeath = {}
+local BuildingDeath = {}
+
+local randomPick = 1
+local x,y,z = 0,0,0
+
+local GetUnitNeutral = Spring.GetUnitNeutral
+local Gaia = Spring.GetGaiaTeamID()
+
+if (gadgetHandler:IsSyncedCode()) then
+-----------------------------------------------SYNCHED
+----------------------------------------------------------------
+------------------------------------------------------------------------
+function gadget:Initialize()
+   for ud,_ in pairs(UnitDefs) do
+      if UnitDefs[ud].customParams.death_sounds == 'soldier' then
+         table.insert(SoldierDeath,ud,1)
+      end
+      if UnitDefs[ud].customParams.death_sounds == 'generic' then
+         table.insert(GenericDeath,ud,1)
+      end
+      if UnitDefs[ud].customParams.death_sounds == 'building' then
+         table.insert(BuildingDeath,ud,1)
+      end
+   end
+end
+
+
+
+
+function gadget:UnitDestroyed(u, ud, team)
+   if SoldierDeath[ud] and GetUnitNeutral(u) == false then
+      randomPick = math_rand(1,8)
+      x,y,z = GetUnitPosition(u)
+      if randomPick == 1 then
+         PlaySoundFile("sounds/Argh_TrooperDeath1.wav",15, x, y, z )
+      elseif randomPick == 2 then
+         PlaySoundFile("sounds/Argh_TrooperDeath2.wav",15, x, y, z )
+      elseif randomPick == 3 then
+         PlaySoundFile("sounds/Argh_TrooperDeath3.wav",15, x, y, z )
+      elseif randomPick == 4 then
+         PlaySoundFile("sounds/Argh_TrooperDeath4.wav",15, x, y, z )
+      elseif randomPick == 5 then
+         PlaySoundFile("sounds/Argh_TrooperDeath5.wav",15, x, y, z )
+      elseif randomPick == 6 then
+         PlaySoundFile("sounds/Argh_TrooperDeath6.wav",15, x, y, z )
+      elseif randomPick == 7 then
+         PlaySoundFile("sounds/Argh_TrooperDeath7.wav",15, x, y, z )
+      elseif randomPick == 8 then
+         PlaySoundFile("sounds/Argh_TrooperDeath8.wav",15, x, y, z )
+      end
+   end
+
+   if GenericDeath[ud] and GetUnitNeutral(u) == false and team ~= Gaia or GenericDeath[ud] and team == Gaia then
+      randomPick = math_rand(1,16)
+      x,y,z = GetUnitPosition(u)
+
+      if randomPick == 1 then
+         PlaySoundFile("sounds/Argh_DeathSound1.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound1.wav",15, x, y, z )
+      elseif randomPick == 2 then
+         PlaySoundFile("sounds/Argh_DeathSound2.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound2.wav",15, x, y, z )
+      elseif randomPick == 3 then
+         PlaySoundFile("sounds/Argh_DeathSound3.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound3.wav",15, x, y, z )
+      elseif randomPick == 4 then
+         PlaySoundFile("sounds/Argh_DeathSound4.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound4.wav",15, x, y, z )
+      elseif randomPick == 5 then
+         PlaySoundFile("sounds/Argh_DeathSound5.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound5.wav",15, x, y, z )
+      elseif randomPick == 6 then
+         PlaySoundFile("sounds/Argh_DeathSound6.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound6.wav",15, x, y, z )
+      elseif randomPick == 7 then
+         PlaySoundFile("sounds/Argh_DeathSound7.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound7.wav",15, x, y, z )
+      elseif randomPick == 8 then
+         PlaySoundFile("sounds/Argh_DeathSound8.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound8.wav",15, x, y, z )
+      elseif randomPick == 9 then
+         PlaySoundFile("sounds/Argh_DeathSound9.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound9.wav",15, x, y, z )
+      elseif randomPick == 10 then
+         PlaySoundFile("sounds/Argh_DeathSound10.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound10.wav",15, x, y, z )
+      elseif randomPick == 11 then
+         PlaySoundFile("sounds/Argh_DeathSound11.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound11.wav",15, x, y, z )
+      elseif randomPick == 12 then
+         PlaySoundFile("sounds/Argh_DeathSound12.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound12.wav",15, x, y, z )
+      elseif randomPick == 13 then
+         PlaySoundFile("sounds/Argh_DeathSound13.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound13.wav",15, x, y, z )
+      elseif randomPick == 14 then
+         PlaySoundFile("sounds/Argh_DeathSound14.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound14.wav",15, x, y, z )
+      elseif randomPick == 15 then
+         PlaySoundFile("sounds/Argh_DeathSound15.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound15.wav",15, x, y, z )
+      elseif randomPick == 16 then
+         PlaySoundFile("sounds/Argh_DeathSound16.wav",15, x, y, z )
+         PlaySoundFile("sounds/Argh_DeathSound16.wav",15, x, y, z )
+      end
+   end
+
+   if BuildingDeath[ud] then
+      randomPick = math_rand(1,16)
+      x,y,z = GetUnitPosition(u)
+      if randomPick == 1 then       
+         PlaySoundFile("sounds/Argh_BuildingDeath1.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath1.wav",25, x, y, z )
+      elseif randomPick == 2 then
+         PlaySoundFile("sounds/Argh_BuildingDeath2.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath2.wav",25, x, y, z )
+      elseif randomPick == 3 then
+         PlaySoundFile("sounds/Argh_BuildingDeath3.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath3.wav",25, x, y, z )
+      elseif randomPick == 4 then
+         PlaySoundFile("sounds/Argh_BuildingDeath4.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath4.wav",25, x, y, z )
+      elseif randomPick == 5 then
+         PlaySoundFile("sounds/Argh_BuildingDeath5.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath5.wav",25, x, y, z )
+      elseif randomPick == 6 then
+         PlaySoundFile("sounds/Argh_BuildingDeath6.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath6.wav",25, x, y, z )
+      elseif randomPick == 7 then
+         PlaySoundFile("sounds/Argh_BuildingDeath7.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath7.wav",25, x, y, z )
+      elseif randomPick == 8 then
+         PlaySoundFile("sounds/Argh_BuildingDeath8.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath8.wav",25, x, y, z )
+      elseif randomPick == 9 then
+         PlaySoundFile("sounds/Argh_BuildingDeath9.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath9.wav",25, x, y, z )
+      elseif randomPick == 10 then
+         PlaySoundFile("sounds/Argh_BuildingDeath10.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath10.wav",25, x, y, z )
+      elseif randomPick == 11 then
+         PlaySoundFile("sounds/Argh_BuildingDeath11.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath11.wav",25, x, y, z )
+      elseif randomPick == 12 then
+         PlaySoundFile("sounds/Argh_BuildingDeath12.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath12.wav",25, x, y, z )
+      elseif randomPick == 13 then
+         PlaySoundFile("sounds/Argh_BuildingDeath13.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath13.wav",25, x, y, z )
+      elseif randomPick == 14 then
+         PlaySoundFile("sounds/Argh_BuildingDeath14.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath14.wav",25, x, y, z )
+      elseif randomPick == 15 then
+         PlaySoundFile("sounds/Argh_BuildingDeath15.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath15.wav",25, x, y, z )
+      elseif randomPick == 16 then
+         PlaySoundFile("sounds/Argh_BuildingDeath16.wav",25, x, y, z )
+         PlaySoundFile("sounds/Argh_BuildingDeath16.wav",25, x, y, z )
+      end
+   end
+end
+------------------------------------------------------------------------
+----------------------------------------------------------------
+-----------------------------------------------END
+end
