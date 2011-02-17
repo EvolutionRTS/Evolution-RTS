@@ -1,0 +1,196 @@
+[330RLexplode]
+{
+	[pop1]
+	{
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=redexplo;
+      		heat = 10;
+      		maxheat = 15;
+      		heatFalloff = 1.4;
+
+      		size = 5;
+      		sizeGrowth = 24;
+
+         	pos = r-2 r2, 5, r-2 r2;
+         	speed=0, 1 0, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=2;
+	} 
+
+	[whiteglow]
+	{
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=laserend;
+      		heat = 10;
+      		maxheat = 15;
+      		heatFalloff = 1.1;
+
+      		size = 10;
+      		sizeGrowth = 25;
+
+         	pos = r-2 r2, 5, r-2 r2;
+         	speed=0, 1 0, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=1;
+	} 
+
+
+	[flare]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=flashside1;
+
+		colorMap	= 1 1 1 0.01	0.9 0.8 0.7 0.04	0.9 0.5 0.2 0.01	0.5 0.1 0.1 0.01;
+
+      		pos 		= 0, 2, 0;
+		gravity		= 0, -0.01, 0;
+	       	emitVector	= 0, 1, 0;
+		emitRot		= 45;
+		emitRotSpread	= 32;
+
+		sizeGrowth	= 1;
+		sizeMod		= 1.0;
+
+		airdrag			= 0.8;
+		particleLife		= 14;
+		particleLifeSpread	= 0;
+		numParticles		= 8;
+		particleSpeed		= 10;
+		particleSpeedSpread	= 5;
+		particleSize		= 70;
+		particleSizeSpread	= 0;
+
+		directional		= 1;
+		useAirLos		= 0;
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+
+	[dirt]
+	{
+		[properties]
+		{
+			size=22;
+			color=0.2, 0.1, 0.05;
+			alphaFalloff=2;
+			speed= r1.5 r-1.5, 4, r1.5 r-1.5;
+			pos=r-10 r10, 0, r-10 r10;
+		}
+		ground=1;
+		count=4;
+	}
+
+
+	[dirtw1]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=randdots;
+		sizeGrowth=1.2;
+		sizeMod=1.0;
+
+        	pos 		= r-1 r1, 1, r-1 r1;
+         	emitVector	= 0, 1, 0;
+		gravity		= 0, -0.2, 0;
+
+		colorMap	= 0.9 0.9 0.9 1.0	0.5 0.5 0.9 0.0;
+		airdrag		= 0.9;
+
+		particleLife=25;
+		particleLifeSpread=10;
+
+		numParticles=28;
+
+		particleSpeed=1;
+		particleSpeedSpread=20;
+		particleSize=10;
+		particleSizeSpread=5;
+
+		emitRot=90;
+		emitRotSpread=0;
+
+		directional=1;
+		useAirLos=1;
+		}
+	water=1;
+	count=1;
+	}
+
+	[dirtw2]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=dirt;
+		sizeGrowth=1.2;
+		sizeMod=1.0;
+
+        	pos 		= r-1 r1, 1, r-1 r1;
+         	emitVector	= 0, 1, 0;
+		gravity		= 0, 0, 0;
+
+		colorMap	= 1.0 1.0 1.0 1.0	0.5 0.5 0.8 0.0;
+		airdrag		= 0.7;
+
+		particleLife=15;
+		particleLifeSpread=10;
+
+		numParticles=10;
+
+		particleSpeed=10;
+		particleSpeedSpread=10;
+		particleSize=35;
+		particleSizeSpread=5;
+
+		emitRot=90;
+		emitRotSpread=0;
+
+		directional=1;
+		useAirLos=1;
+		}
+	water=1;
+	count=1;
+	}
+
+	[groundflash]
+   	{
+	alwaysVisible=1;
+      	ttl = 17;
+      	flashSize = 150;
+      	flashAlpha = 0.9;
+
+      	circleGrowth = 8;
+      	circleAlpha = 0.5;
+
+      	color = 1, 0.5, 0.2;
+
+	air=1;
+     	ground=1;
+      	water=1;
+	}
+}

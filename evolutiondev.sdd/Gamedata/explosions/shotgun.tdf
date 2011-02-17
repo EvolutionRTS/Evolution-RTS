@@ -1,0 +1,39 @@
+[shotgunspray]
+{
+	[searingflame]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		Texture=gunshot;
+
+		colorMap	= 1.0 0.7 0.0 0.0  1.0 0.7 0.0 0.01;
+
+      		pos 		= 0, 0, 0;
+		gravity		= 0, 0, 0;
+	       	emitVector	= dir;
+		emitRot		= 3;
+		emitRotSpread	= 1;
+
+		sizeGrowth	= 1;
+		sizeMod		= 1;
+
+		airdrag			= 1;
+
+		particleLife		= 10;
+		particleLifeSpread	= 5;
+		numParticles		= 8;
+		particleSpeed		= 20;
+		particleSpeedSpread	= 10;
+		particleSize		= 1;
+		particleSizeSpread	= 0;
+
+		directional		= 1;
+		useAirLos		= 0;
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+}

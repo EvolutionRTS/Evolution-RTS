@@ -1,0 +1,59 @@
+[nukeartyexpl]
+{
+	[pop]
+	{
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=bigexplo;
+      		heat = 10;
+      		maxheat = 15;
+      		heatFalloff = 0.4;
+
+      		size = 55;
+      		sizeGrowth = 1.5;
+
+         	pos = r-25 r25, 5, r-25 r25;
+         	speed=r-1 r1, 1 0, r-1 r1;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=5;
+	} 
+
+	[smoke]
+	{
+	[properties]
+      		{
+		alwaysVisible=1;
+         	color = 0.1;
+         	ageSpeed=0.04;
+
+         	startSize = 10;
+         	sizeExpansion = 0.9;
+         	size = 80;
+         	sizeGrowth = 30;
+
+         	pos = r-3 r3, r-3 r3, r-3 r3;
+         	speed=0, 1 r2.3, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=8;
+   	}
+   usedefaultexplosions=0;
+   [groundflash]
+   {
+	  alwaysVisible=1;
+      flashSize = 700;   // flash size
+      flashAlpha = 0.9;    // initial alpha of the flash
+      circleGrowth = 10; // size increase/frame
+      circleAlpha = 1;   // initial alpha of the ring
+      ttl = 30;          // number of frames
+      color = 0.7, 0.3, 0;
+   }
+}

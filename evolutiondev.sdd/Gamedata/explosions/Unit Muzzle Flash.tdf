@@ -1,0 +1,776 @@
+[hellfireflare]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.1 0.7 1 0.1 1 0.2 0.01 0.01 0 0 0 0.01;
+            size=5;
+            length=28;
+            sizeGrowth=-1;
+            ttl=1;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gunshipcannon]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.7 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01;
+            size=12;
+            length=28;
+            sizeGrowth=-1;
+            ttl=1;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[emgcannon]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.7 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=5;
+            length=28;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdscannon]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.7 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=12;
+            length=28;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdmcannon]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.7 0.3 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=16;
+            length=34;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdhcannon]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.7 0.4 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=18;
+            length=37;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdsflak]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.4 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=10;
+            length=20;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=flash2;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdmflak]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.4 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=11;
+            length=24;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=flash2;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdsarty]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.8 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=18;
+            length=40;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdmarty]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.8 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=22;
+            length=44;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdharty]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.8 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=25;
+            length=50;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdminigun]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.8 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=8;
+            length=20;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shot;
+            frontTexture=flash1;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdsion]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.5 0.0 0.75 0.01 0.5 0.0 0.6 0.01 0 0 0 0.01; 
+            size=20;
+            length=30;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdmion]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.5 0.0 0.75 0.01 0.5 0.0 0.6 0.01 0 0 0 0.01; 
+            size=30;
+            length=40;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[gdhion]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.5 0.0 0.75 0.01 0.5 0.0 0.6 0.01 0 0 0 0.01; 
+            size=40;
+            length=50;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[urcsplasma]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.2 1 0.2 0.01 0.2 1 0.3 0.01 0 0 0 0.01; 
+            size=13;
+            length=18;
+            sizeGrowth=-1;
+            ttl=10;
+            frontOffset=0;
+            sideTexture=shot;
+            frontTexture=flash3;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[urcmplasma]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.2 1 0.2 0.01 0.2 1 0.4 0.01 0 0 0 0.01; 
+            size=17;
+            length=23;
+            sizeGrowth=-1;
+            ttl=10;
+            frontOffset=0;
+            sideTexture=shot;
+            frontTexture=flash3;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[urchplasma]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.2 1 0.2 0.01 0.2 1 0.7 0.01 0 0 0 0.01; 
+            size=20;
+            length=28;
+            sizeGrowth=-1;
+            ttl=10;
+            frontOffset=0;
+            sideTexture=shot;
+            frontTexture=flash3;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[urcmortor]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.5 0.1 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=20;
+            length=36;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[urcscannon]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.7 0.3 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=12;
+            length=28;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[urcmcannon]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=1 0.7 0.3 0.01 1 0.2 0.1 0.01 0 0 0 0.01; 
+            size=15;
+            length=35;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=shotgunside;
+            frontTexture=shotgunflare;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[alienburst]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+      
+   [properties]
+         {
+            dir = dir;
+            colorMap=0.0 0.3 0.9 0.01 0.0 0.1 0.9 0.01 0 0 0 0.01; 
+            size=20;
+            length=30;
+            sizeGrowth=-1;
+            ttl=15;
+            frontOffset=0;
+            sideTexture=pulseshot;
+            frontTexture=beamrifletip;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[rocketlaunch]
+{
+   [POOFDOTS]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=dirt;
+
+      colorMap = 0.4 0.4 0.4 0.5   0.4 0.4 0.4 0.3 0.0 0.0 0.0 0.0;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 0;
+      emitRotSpread  = 6;
+
+      sizeGrowth  = 0.1;
+      sizeMod     = 1.00;
+
+      airdrag        = 0.8;
+      particleLife      = 10;
+      particleLifeSpread   = 2;
+      numParticles      = 16;
+      particleSpeed     = 0;
+      particleSpeedSpread  = 5;
+      particleSize      = 2;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+}
+
+[rocketlaunchsam]
+{
+   [POOFDOTS]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=dirt;
+
+      colorMap = 0.4 0.4 0.4 0.5   0.4 0.4 0.4 0.3 0.0 0.0 0.0 0.0;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 0;
+      emitRotSpread  = 6;
+
+      sizeGrowth  = 0.1;
+      sizeMod     = 1.00;
+
+      airdrag        = 0.8;
+      particleLife      = 15;
+      particleLifeSpread   = 2;
+      numParticles      = 16;
+      particleSpeed     = 0;
+      particleSpeedSpread  = 5;
+      particleSize      = 3;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+}
+
+[rocketlaunchmed]
+{
+   [POOFDOTS]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=dirt;
+
+      colorMap = 0.4 0.4 0.4 0.5   0.4 0.4 0.4 0.3 0.0 0.0 0.0 0.0;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 0;
+      emitRotSpread  = 6;
+
+      sizeGrowth  = 0.1;
+      sizeMod     = 1.00;
+
+      airdrag        = 0.8;
+      particleLife      = 12;
+      particleLifeSpread   = 3;
+      numParticles      = 16;
+      particleSpeed     = 0;
+      particleSpeedSpread  = 5;
+      particleSize      = 3;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+}
+
+[rocketlaunchhev]
+{
+   [POOFDOTS]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=dirt;
+
+      colorMap = 0.4 0.4 0.4 0.5   0.4 0.4 0.4 0.3 0.0 0.0 0.0 0.0;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 0;
+      emitRotSpread  = 6;
+
+      sizeGrowth  = 0.1;
+      sizeMod     = 1.00;
+
+      airdrag        = 0.8;
+      particleLife      = 14;
+      particleLifeSpread   = 3;
+      numParticles      = 16;
+      particleSpeed     = 0;
+      particleSpeedSpread  = 5;
+      particleSize      = 4;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+}
+
+[rocketlaunchback]
+{
+   [POOFDOTS]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=dirt;
+
+      colorMap = 0.4 0.4 0.4 0.5   0.4 0.4 0.4 0.3 0.0 0.0 0.0 0.0;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 10;
+      emitRotSpread  = 20;
+
+      sizeGrowth  = 0.3;
+      sizeMod     = 1.00;
+
+      airdrag        = 0.8;
+      particleLife      = 12;
+      particleLifeSpread   = 4;
+      numParticles      = 16;
+      particleSpeed     = 0;
+      particleSpeedSpread  = 5;
+      particleSize      = 3;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+}

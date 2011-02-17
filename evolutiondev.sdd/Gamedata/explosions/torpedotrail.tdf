@@ -1,0 +1,43 @@
+[torpedotrail]
+{
+
+   [smokeandfire]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=0;
+      Texture=randdots;
+      sizeGrowth=-0.2;
+      sizeMod=0.8;
+
+         pos      = 0.0, 1, 0.0;
+            emitVector  = 0.0, 1, 0.0;
+      gravity     = 0.0, 0.0, 0.0;
+
+       colorMap = 0.1 0.1 0.1 0.01    0.0 0.3 0.5 0.05    0.1 0.1 0.5 1.0    0.1 0.1 0.1 1.0    0.5 0.5 0.5 1.0   0 0 0 0.01;
+      airdrag     = 0.70;
+
+      particleLife=25;
+      particleLifeSpread=4;
+
+      numParticles=10;
+
+      particleSpeed=2;
+      particleSpeedSpread=2;
+      particleSize=2;
+      particleSizeSpread=10;
+
+      emitRot=90;
+      emitRotSpread=0;
+
+      directional=1;
+      useAirLos=1;
+      }
+   water=1;
+   air=1;
+   ground=1;
+   count=1;
+   }
+}

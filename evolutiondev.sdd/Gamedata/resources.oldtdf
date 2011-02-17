@@ -1,0 +1,164 @@
+[resources]
+{
+   [graphics]
+   {
+      [smoke]
+      {
+         smoke00=smoke/smoke00.tga;
+         smoke01=smoke/smoke01.tga;
+         smoke02=smoke/smoke02.tga;
+         smoke03=smoke/smoke03.tga;
+         smoke04=smoke/smoke04.tga;
+         smoke05=smoke/smoke05.tga;
+         smoke06=smoke/smoke06.tga;
+         smoke07=smoke/smoke07.tga;
+         smoke08=smoke/smoke08.tga;
+         smoke09=smoke/smoke09.tga;
+         smoke10=smoke/smoke10.tga;
+         smoke11=smoke/smoke11.tga;
+      }
+      [scars]
+      {
+         scar1=scars/scar1.bmp;
+         scar2=scars/scar2.bmp;
+         scar3=scars/scar3.bmp;
+         scar4=scars/scar4.bmp;
+         scar5=scars/scar5.bmp;
+         scar6=scars/scar6.bmp;
+      }
+      [trees]
+      {
+         bark=Bark.bmp;
+         leaf=bleaf.bmp;
+         gran1=gran.bmp;
+         gran2=gran2.bmp;
+         birch1=birch1.bmp;
+         birch2=birch2.bmp;
+         birch3=birch3.bmp;
+      }
+      [maps]
+      {
+         detailtex=detailtex2.bmp;
+         watertex=ocean.jpg;
+      }
+      [groundfx]
+      {
+         groundflash=groundflash.tga;
+         groundring=groundring.tga;
+
+         seismic=circles.tga;
+
+      }
+      [projectiletextures]
+      {
+         plasmaball=plasmaball.tga;
+         circularthingy=circularthingy.tga;
+         laserend=laserend.tga;
+         laserfalloff=laserfalloff.tga;
+         heatcoils=heatcoils.tga;
+         randdots=randdots.tga;
+         smoketrail=smoketrail.tga;
+         smoketrail=smoketrail1.tga;
+         wake=wake.tga;
+         flare=flare.tga;
+         explo=explo.tga;
+         explofade=explofade.tga;
+         heatcloud=explo.tga;
+         flame=flame.tga;
+         warp=warp.png;
+
+         muzzleflametexture=flare.tga;
+         muzzleside=muzzleside.tga;
+         muzzlefront=muzzlefront.tga;
+         largebeam=largelaserfalloff.tga;
+
+                        PlasmaHeatG=PlasmaHeatG.tga;
+                        PlasmaHeatB=PlasmaHeatB.tga;
+                        PlasmaHeatP=PlasmaHeatP.tga;
+                        PlasmaHeatDB=PlasmaHeatDB.tga;
+                        PlasmaHeatDDB=PlasmaHeatDDB.tga;
+                        PlasmaHeatDDDB=PlasmaHeatDDDB.tga;
+
+                        ExplodeHeat=ExplodeHeat.tga;
+         2explo=2explo.tga;
+              3explo=3explo.tga;
+               4explo=4explo.tga;
+               5explo=5explo.tga;
+
+                        wave=wave.tga;
+         wave2=wave_mirrored.tga;
+         null=null.tga;
+
+                        LightningStrike=LightningStrike.tga;
+                        LightningStrikeG=LightningStrike.tga;
+                        LightningStrikeP=LightningStrike.tga;
+
+                        bluegreennovaexplo=bluegreennovaexplo.tga;
+                        greennovaexplo=greennovaexplo.tga;
+              pinknovaexplo=pinknovaexplo.tga;
+               firenovaexplo=firenovaexplo.tga;
+               rednovaexplo=rednovaexplo.tga;
+               uglynovaexplo=uglynovaexplo.tga;
+            crimsonnovaexplo=crimsonnovaexplo.tga;
+               electnovaexplo=electnovaexplo.png;
+         bluenovaexplo=bluenovaexplo.tga;
+
+         plasmatexture=plasmashot3.tga;
+
+         novabg=novabg.tga;
+
+         redexplo=redexplo.tga;
+         purpleexplo=purpleexplo.tga;
+         blueexplo=blueexplo.tga;
+         pinkexplo=pinkexplo.tga;
+         brightblueexplo=brightblueexplo.tga;
+         bigexplo=bigexplo.tga;
+         fireyexplo=fireyexplo.tga;
+         bigexplosmoke=bigexplosmoke.tga;
+         explowave=explowave.tga;
+         lightning=lightning.tga;
+         lightning3=lightning3.tga;
+         lightning4=lightning4.tga;
+         lightening=lightening.tga;
+
+         flash1=flash1.tga;
+         flash2=flash2.tga;
+         flash3=flash3.tga;
+         lightening=lightening.tga;
+
+         lightning=PD/lightning.tga;
+         lightb=PD/lightningball.tga;
+         lightbp=PD/lightningballpurple.tga;
+         lightbw=PD/lightningballwhite.tga;
+         lightby=PD/Lightningballyellow.tga;
+         lightbr=PD/Lightningballred.tga;
+         lightbg=PD/Lightningballgreen.tga;
+         lightring=PD/lightring.tga;
+         whitelightb=PD/whitelightningball.tga;
+         lightb3=PD/lightningball3.tga;
+         lightb4=PD/lightningball4.tga;
+
+         shotgunflare=shotgunflare.tga;
+
+         pulseshot=pulseshot.tga;
+         flashside=flashside.tga;
+         flashside1=flashside1.tga;
+         flashside2=flashside2.tga;
+         shotgunside=shotgunside.tga;
+         megaparticle=megaparticle.tga;
+         shot=shot.tga;
+         shot2=shot2.tga;
+         shot3=shot3.tga;
+         gunshot=gunshot.tga;
+
+         beamrifle=beamrifle.tga;
+         beamrifletip=beamrifletip.tga;
+         dirt=dirt.png;
+         gizboom=giz_boom.tga;
+         gizboom2=giz_boom2.tga;
+         new_dirta=new_dirta.png;
+         new_dirtb=new_dirtb.png;
+         dirtold=dirt.tga;
+      }
+   }
+}

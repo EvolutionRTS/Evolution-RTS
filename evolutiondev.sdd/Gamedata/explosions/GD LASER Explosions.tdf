@@ -1,0 +1,38 @@
+//LASER Weapons
+
+[LASER]
+{
+	[smoke]
+	{
+	[properties]
+      		{
+         		color = 0.8 r0.2;
+         		startSize = 0.5;
+         		sizeExpansion = 0.25;
+         		ageSpeed=0.03;
+         		size = 0.5;
+         		sizeGrowth = -0.75;
+         		pos = 5 r-5, 5 r-5, 5 r-5;
+         		speed=0, 0.6 r0.3, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=2;
+   	}
+[groundflash]
+   	{
+      	flashSize = 3;
+	flashAlpha = 0.9;
+	circleGrowth = 0;
+	circleAlpha = 0;
+	ttl = 15;
+	color = 1, 0.25, 0.5;
+	air=1;
+     	ground=1;
+      	water=1;
+	}
+}
+
+
+

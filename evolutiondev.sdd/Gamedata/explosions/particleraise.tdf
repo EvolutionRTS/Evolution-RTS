@@ -1,0 +1,38 @@
+[particleraise]
+{
+	[POOF01]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		Texture=randdots;
+
+		colorMap	= 0.1 0.1 0.8 0.04	0.3 0.3 1.0 0.04	0.1 0.1 0.1 0.01;
+
+      		pos 		= 0, -2, 0;
+		gravity		= 0, 10, 0;
+	       	emitVector	= 0, 1, 0;
+		emitRot		= 45;
+		emitRotSpread	= 32;
+
+		sizeGrowth	= 0.8;
+		sizeMod		= 1.0;
+
+		airdrag			= 0.2;
+		particleLife		= 10;
+		particleLifeSpread	= 32;
+		numParticles		= 20;
+		particleSpeed		= 128;
+		particleSpeedSpread	= 128;
+		particleSize		= 20;
+		particleSizeSpread	= 0;
+
+		directional		= 0;
+		useAirLos		= 0;
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+}

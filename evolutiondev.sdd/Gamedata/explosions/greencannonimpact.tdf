@@ -1,0 +1,144 @@
+[greencannonimpact]
+{
+	[pop1]
+	{
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=greennovaexplo;
+      		heat = 10;
+      		maxheat = 10;
+      		heatFalloff = 0.8;
+
+      		size = 0.2;
+      		sizeGrowth = 7;
+
+         	pos = 0, 5, 0;
+         	speed=0, 0, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=2;
+	} 
+
+	[pop2]
+	{
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=3explo;
+      		heat = 10;
+      		maxheat = 15;
+      		heatFalloff = 2;
+
+      		size = 0.2;
+      		sizeGrowth = 3;
+
+         	pos = r-3 r3, 5, r-3 r3;
+         	speed=0, 1, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=2;
+	} 
+
+	[POOF01]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=flashside1;
+
+		colorMap	= 1.0 1.0 1.0 0.04	0.5 0.9 0.2 0.01	0.1 0.8 0.1 0.01;
+
+      		pos 		= 0, 2, 0;
+		gravity		= 0, -0.05, 0;
+	       	emitVector	= 0, 1, 0;
+		emitRot		= 45;
+		emitRotSpread	= 32;
+
+		sizeGrowth	= 1;
+		sizeMod		= 1.0;
+
+		airdrag			= 0.8;
+		particleLife		= 5;
+		particleLifeSpread	= 5;
+		numParticles		= 8;
+		particleSpeed		= 2;
+		particleSpeedSpread	= 5;
+		particleSize		= 15;
+		particleSizeSpread	= 0;
+
+		directional		= 1;
+		useAirLos		= 0;
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+
+
+	[POOF02]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=randdots;
+
+		colorMap	=0.8 0.8 0.2 0.01	0.2 0.8 0.2 0.01	0.0 0.0 0.0 0.01;
+
+      		pos 		= 0, 2, 0;
+		gravity		= 0, -0.005, 0;
+	       	emitVector	= 0, 1, 0;
+		emitRot		= 45;
+		emitRotSpread	= 32;
+
+		sizeGrowth	= 0.8;
+		sizeMod		= 1.0;
+
+		airdrag			= 0.8;
+		particleLife		= 5;
+		particleLifeSpread	= 8;
+		numParticles		= 8;
+		particleSpeed		= 8;
+		particleSpeedSpread	= 3;
+		particleSize		= 10;
+		particleSizeSpread	= 0;
+
+		directional		= 0;
+		useAirLos		= 0;
+		}
+	air=1;
+      	water=1;
+	ground=1;
+	count=1;
+	}
+
+
+	[groundflash]
+   	{
+	alwaysVisible=1;
+      	ttl = 30;
+      	flashSize = 120;
+      	flashAlpha = 0.8;
+
+      	circleGrowth = 5.5;
+      	circleAlpha = 1;
+
+      	color = 0, 1, 0;
+
+	air=1;
+     	ground=1;
+      	water=1;
+	}
+}
