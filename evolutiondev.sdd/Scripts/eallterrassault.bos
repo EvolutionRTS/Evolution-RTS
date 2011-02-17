@@ -1,0 +1,347 @@
+
+// One ninth of the full cycle duration, in millisecond
+// The larger this value the slower the walk animation
+#define WALK_PERIOD 50
+
+
+piece	base,turret,barrel1,firepoint1,
+		rf1,rf2,lf1,lf2,rr1,rr2,lr1,lr2,rfdirt,rrdirt,lfdirt,lrdirt;
+		#define barrel barrel1
+
+#include "ROCKUNIT.H"
+
+static-var maxreloadtime,moving;
+
+#define SIG_AIM1 2
+#define SIG_FIRE1 4
+#define SIG_MOVE 8
+#include "exptype.h"
+#include "sfxtype.h"
+#define SMOKEPIECE1 base
+#include "SmokeUnit.h"
+
+
+
+#define FRONT_RIGHT_DOWN\
+	turn rf1 to y-axis <60> speed <42> *1000/(WALK_PERIOD);\
+	turn rf1 to z-axis <-45> speed <45> *1000/(WALK_PERIOD);\
+	turn rf2 to z-axis <67> speed <22> *1000/(WALK_PERIOD);
+
+#define FRONT_RIGHT_MIDA\
+	turn rf1 to y-axis <50> speed <10> *500/(WALK_PERIOD);\
+	turn rf1 to z-axis <-8> speed <37> *500/(WALK_PERIOD);\
+	turn rf2 to z-axis <12> speed <55> *500/(WALK_PERIOD);
+
+#define FRONT_RIGHT_MIDB\
+	turn rf1 to y-axis <30> speed <20> *500/(WALK_PERIOD);\
+	turn rf1 to z-axis <15> speed <23> *500/(WALK_PERIOD);\
+	turn rf2 to z-axis <-20> speed <32> *500/(WALK_PERIOD);
+
+#define FRONT_RIGHT_BACK\
+	turn rf1 to y-axis <0> speed <30> *500/(WALK_PERIOD);\
+	turn rf1 to z-axis <24> speed <9> *500/(WALK_PERIOD);\
+	turn rf2 to z-axis <-32> speed <12> *500/(WALK_PERIOD);
+
+#define FRONT_RIGHT_UP\
+	turn rf1 to y-axis <0> speed <42> *1000/(WALK_PERIOD);\
+	turn rf1 to z-axis <24> speed <10> *1000/(WALK_PERIOD);\
+	turn rf2 to z-axis <0> speed <32> *1000/(WALK_PERIOD);
+
+#define FRONT_RIGHT_FRONT\
+	turn rf1 to y-axis <60> speed <60> *1000/(WALK_PERIOD);\
+	turn rf1 to z-axis <0> speed <24> *1000/(WALK_PERIOD);\
+	turn rf2 to z-axis <45> speed <45> *1000/(WALK_PERIOD);
+
+
+
+#define FRONT_LEFT_DOWN\
+	turn lf1 to y-axis <-60> speed <42> *1000/(WALK_PERIOD);\
+	turn lf1 to z-axis <45> speed <45> *1000/(WALK_PERIOD);\
+	turn lf2 to z-axis <-67> speed <22> *1000/(WALK_PERIOD);
+
+#define FRONT_LEFT_MIDA\
+	turn lf1 to y-axis <-50> speed <10> *500/(WALK_PERIOD);\
+	turn lf1 to z-axis <8> speed <37> *500/(WALK_PERIOD);\
+	turn lf2 to z-axis <-12> speed <55> *500/(WALK_PERIOD);
+
+#define FRONT_LEFT_MIDB\
+	turn lf1 to y-axis <-30> speed <20> *500/(WALK_PERIOD);\
+	turn lf1 to z-axis <-15> speed <23> *500/(WALK_PERIOD);\
+	turn lf2 to z-axis <20> speed <32> *500/(WALK_PERIOD);
+
+#define FRONT_LEFT_BACK\
+	turn lf1 to y-axis <-0> speed <30> *500/(WALK_PERIOD);\
+	turn lf1 to z-axis <-24> speed <9> *500/(WALK_PERIOD);\
+	turn lf2 to z-axis <32> speed <12> *500/(WALK_PERIOD);
+
+#define FRONT_LEFT_UP\
+	turn lf1 to y-axis <0> speed <42> *1000/(WALK_PERIOD);\
+	turn lf1 to z-axis <-24> speed <10> *1000/(WALK_PERIOD);\
+	turn lf2 to z-axis <0> speed <32> *1000/(WALK_PERIOD);
+
+#define FRONT_LEFT_FRONT\
+	turn lf1 to y-axis <-60> speed <60> *1000/(WALK_PERIOD);\
+	turn lf1 to z-axis <0> speed <24> *1000/(WALK_PERIOD);\
+	turn lf2 to z-axis <-45> speed <45> *1000/(WALK_PERIOD);
+
+
+
+#define REAR_RIGHT_DOWN\
+	turn rr1 to y-axis <0> speed <42> *1000/(WALK_PERIOD);\
+	turn rr1 to z-axis <24> speed <10> *1000/(WALK_PERIOD);\
+	turn rr2 to z-axis <-32> speed <32> *1000/(WALK_PERIOD);
+
+#define REAR_RIGHT_MIDA\
+	turn rr1 to y-axis <-30> speed <30> *500/(WALK_PERIOD);\
+	turn rr1 to z-axis <15> speed <9> *500/(WALK_PERIOD);\
+	turn rr2 to z-axis <-20> speed <12> *500/(WALK_PERIOD);
+
+#define REAR_RIGHT_MIDB\
+	turn rr1 to y-axis <-50> speed <20> *500/(WALK_PERIOD);\
+	turn rr1 to z-axis <-8> speed <23> *500/(WALK_PERIOD);\
+	turn rr2 to z-axis <12> speed <32> *500/(WALK_PERIOD);
+
+#define REAR_RIGHT_BACK\
+	turn rr1 to y-axis <-60> speed <10> *500/(WALK_PERIOD);\
+	turn rr1 to z-axis <-45> speed <37> *500/(WALK_PERIOD);\
+	turn rr2 to z-axis <67> speed <55> *500/(WALK_PERIOD);
+
+#define REAR_RIGHT_UP\
+	turn rr1 to y-axis <-60> speed <42> *1000/(WALK_PERIOD);\
+	turn rr1 to z-axis <0> speed <45> *1000/(WALK_PERIOD);\
+	turn rr2 to z-axis <45> speed <22> *1000/(WALK_PERIOD);
+
+#define REAR_RIGHT_FRONT\
+	turn rr1 to y-axis <0> speed <60> *1000/(WALK_PERIOD);\
+	turn rr1 to z-axis <24> speed <24> *1000/(WALK_PERIOD);\
+	turn rr2 to z-axis <0> speed <45> *1000/(WALK_PERIOD);
+
+
+
+#define REAR_LEFT_DOWN\
+	turn lr1 to y-axis <0> speed <42> *1000/(WALK_PERIOD);\
+	turn lr1 to z-axis <-24> speed <10> *1000/(WALK_PERIOD);\
+	turn lr2 to z-axis <32> speed <32> *1000/(WALK_PERIOD);
+
+#define REAR_LEFT_MIDA\
+	turn lr1 to y-axis <30> speed <30> *500/(WALK_PERIOD);\
+	turn lr1 to z-axis <-15> speed <9> *500/(WALK_PERIOD);\
+	turn lr2 to z-axis <20> speed <12> *500/(WALK_PERIOD);
+
+#define REAR_LEFT_MIDB\
+	turn lr1 to y-axis <50> speed <20> *500/(WALK_PERIOD);\
+	turn lr1 to z-axis <8> speed <23> *500/(WALK_PERIOD);\
+	turn lr2 to z-axis <-12> speed <32> *500/(WALK_PERIOD);
+
+#define REAR_LEFT_BACK\
+	turn lr1 to y-axis <60> speed <10> *500/(WALK_PERIOD);\
+	turn lr1 to z-axis <45> speed <37> *500/(WALK_PERIOD);\
+	turn lr2 to z-axis <-67> speed <55> *500/(WALK_PERIOD);
+
+#define REAR_LEFT_UP\
+	turn lr1 to y-axis <60> speed <42> *1000/(WALK_PERIOD);\
+	turn lr1 to z-axis <0> speed <45> *1000/(WALK_PERIOD);\
+	turn lr2 to z-axis <-45> speed <22> *1000/(WALK_PERIOD);
+
+#define REAR_LEFT_FRONT\
+	turn lr1 to y-axis <0> speed <60> *1000/(WALK_PERIOD);\
+	turn lr1 to z-axis <-24> speed <24> *1000/(WALK_PERIOD);\
+	turn lr2 to z-axis <0> speed <45> *1000/(WALK_PERIOD);
+
+
+
+#define WAIT_WALK\
+	sleep WALK_PERIOD;\
+	while(!moving)\
+	{\
+		sleep 111;\
+	}
+
+
+
+DoTheWalking()
+{
+	while(TRUE)
+	{
+		WAIT_WALK//1
+		FRONT_RIGHT_DOWN
+		emit-sfx 1025 + 0 from rfdirt;
+		FRONT_LEFT_BACK
+		REAR_RIGHT_BACK
+		REAR_LEFT_MIDA
+		WAIT_WALK//2
+		FRONT_RIGHT_MIDA
+		WAIT_WALK//3
+		FRONT_LEFT_UP
+		REAR_RIGHT_UP
+		REAR_LEFT_MIDB
+		WAIT_WALK//4
+		FRONT_RIGHT_MIDB
+		FRONT_LEFT_FRONT
+		REAR_RIGHT_FRONT
+		WAIT_WALK//5
+		FRONT_LEFT_DOWN
+		emit-sfx 1025 + 0 from lfdirt;
+		REAR_RIGHT_DOWN
+		emit-sfx 1025 + 0 from rrdirt;
+		REAR_LEFT_BACK
+		WAIT_WALK//6
+		FRONT_RIGHT_BACK
+		FRONT_LEFT_MIDA
+		REAR_RIGHT_MIDA
+		WAIT_WALK//7
+		REAR_LEFT_UP
+		WAIT_WALK//8
+		FRONT_RIGHT_UP
+		FRONT_LEFT_MIDB
+		REAR_RIGHT_MIDB
+		REAR_LEFT_FRONT
+		WAIT_WALK//9
+		FRONT_RIGHT_FRONT
+		REAR_LEFT_DOWN
+		emit-sfx 1025 + 0 from lrdirt;
+	}
+}
+
+StartMoving()
+{
+	signal SIG_MOVE;
+	set-signal-mask SIG_MOVE;
+	moving=TRUE;
+}
+
+StopMoving()
+{
+	signal SIG_MOVE;
+	set-signal-mask SIG_MOVE;
+	moving=FALSE;
+
+	sleep 4*(WALK_PERIOD);
+
+	turn rf1 to z-axis <45> speed <30> *1000/(WALK_PERIOD);
+	turn rf2 to z-axis <0> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn rf1 around z-axis;
+	wait-for-turn rf2 around z-axis;
+	turn rf1 to y-axis <30> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn rf1 around y-axis;
+	turn rf1 to z-axis <0> speed <40> *1000/(WALK_PERIOD);
+
+	turn lf1 to z-axis <-45> speed <30> *1000/(WALK_PERIOD);
+	turn lf2 to z-axis <0> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn lf1 around z-axis;
+	wait-for-turn lf2 around z-axis;
+	turn lf1 to y-axis <-30> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn lf1 around y-axis;
+	turn lf1 to z-axis <0> speed <40> *1000/(WALK_PERIOD);
+
+	turn rr1 to z-axis <45> speed <30> *1000/(WALK_PERIOD);
+	turn rr2 to z-axis <0> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn rr1 around z-axis;
+	wait-for-turn rr2 around z-axis;
+	turn rr1 to y-axis <-30> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn rr1 around y-axis;
+	turn rr1 to z-axis <0> speed <40> *1000/(WALK_PERIOD);
+
+	turn lr1 to z-axis <-45> speed <30> *1000/(WALK_PERIOD);
+	turn lr2 to z-axis <0> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn lr1 around z-axis;
+	wait-for-turn lr2 around z-axis;
+	turn lr1 to y-axis <30> speed <30> *1000/(WALK_PERIOD);
+	wait-for-turn lr1 around y-axis;
+	turn lr1 to z-axis <0> speed <40> *1000/(WALK_PERIOD);
+}
+
+
+
+Create()
+{
+	turn rf1 to y-axis <30> now;
+	turn lf1 to y-axis <-30> now;
+	turn rr1 to y-axis <-30> now;
+	turn lr1 to y-axis <30> now;
+	maxreloadtime=500;
+	moving=FALSE;
+	while(get BUILD_PERCENT_LEFT)
+	{
+		sleep 250;
+	}
+	start-script SmokeUnit();
+	start-script DoTheWalking();
+//	start-script Thrust();
+}
+
+SetMaxReloadTime(t)
+{
+	maxreloadtime=t;
+}
+
+RestoreAfterDelay()
+{
+	sleep maxreloadtime*3/2;
+	turn turret to y-axis 0 speed <60>;
+	turn barrel1 to x-axis 0 speed <30>;
+	wait-for-turn turret around y-axis;
+	wait-for-turn barrel1 around x-axis;
+}
+
+AimFromPrimary(p)
+{
+	p=turret;
+}
+
+AimPrimary(heading,pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	turn turret to y-axis heading speed <225>;
+	turn barrel1 to x-axis 0 - pitch speed <150>;
+	wait-for-turn turret around y-axis;
+	wait-for-turn barrel1 around x-axis;
+	start-script RestoreAfterDelay();
+	return(1);
+}
+
+QueryPrimary(firefrom)
+{
+	firefrom=firepoint1;
+}
+
+FirePrimary()
+{
+	signal SIG_FIRE1;
+	set-signal-mask SIG_FIRE1;
+	emit-sfx 1024 + 0 from firepoint1;
+//	move barrel to z-axis [-10] now;
+//	move barrel to z-axis [0] speed [4];
+}
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+if( severity <= 25 ) 
+{ 
+corpsetype = 1; 
+explode base type BITMAPONLY | BITMAP1; 
+explode barrel1 type BITMAPONLY | BITMAP1;  
+explode turret type BITMAPONLY | BITMAP4; 
+return (0); 
+} 
+if( severity <= 80 ) 
+{ 
+corpsetype = 2; 
+explode base type BITMAPONLY | BITMAP4; 
+explode barrel1 type FALL | BITMAP1; 
+explode turret type SHATTER | BITMAP4; 
+return (0); 
+} 
+if( severity <= 99 ) 
+{ 
+corpsetype = 3; 
+explode base type BITMAPONLY | BITMAP1; 
+explode barrel1 type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
+explode turret type SHATTER | BITMAP4; 
+return (0); 
+} 
+corpsetype = 3; 
+explode barrel1 type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
+explode turret type SHATTER | EXPLODE_ON_HIT | BITMAP4; 
+} 

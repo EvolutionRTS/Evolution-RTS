@@ -1,0 +1,84 @@
+List of Tweaked and Repaired Scripts
+I cleaned up 2 models so that they didn't have redundant and pointless objects in them.  That should improve performance slightly.  But after working on two scripts, I decided that was too much work, so I only did 2.  The rest of the scripts have been tweaked so that the big ships leave corpses more often or shatter when they don't, and the fighters spin out of control when they die.  All scripts have a reduced load so that TA:FF should be a little more enjoyable.  Oh, and a couple little bugs were found and eliminated.  I believe I found all the bugs, since I spent quite a bit of time staring at models and scripts - comparing them until I went completely insane!  :p
+
+AIARMACSS
+AICORACSS
+AIcorsyard
+AIsyard
+Arclight - model cleaned
+ARMACSS
+ARMBB - model cleaned (I got sick of cleaning them after this)
+ARMBOP2
+Armbstat
+Armccrus
+armcsc
+armelfig
+armflag
+armfltsup - :(  What happened to my scipt???  Now the repair arms are messed up.  Oh well, I fixed that.  And the arms stay out a bit longer, so if you're having energy/metal problems, the nano arms won't keep on popping in and out.  I did the same with the Fulcrum
+armhhawk
+armhods
+armmslcrus
+armnhawk
+armods
+armods2
+armpod
+armprobe
+armrd
+armrss
+battleangel
+collator
+
+CORACSS
+corbstat
+corcsc
+cordh
+corflag
+corfltsup
+corfltdrive
+corhods
+corifir
+corlan
+cornox
+corods
+corods2
+corpod
+corprobe
+corrd
+corundin
+
+Diablo
+Dronfrig
+eclipse - bug found!  One less crash to worry about :)
+eclipseB - same bug.  An ai crash averted :)
+eldritch
+FireAngel - removed a lot of explosions to help avoid a crash - an exploding ship that doesn't leave a corpse should look awesome.
+Icarus
+IronAngel
+Liberty - found a few minor bugs.  Prolly no real threat, but eliminated anyway.
+Metallion - should blow up nice :)
+Nightmare
+Norton Commando
+Perceptor
+Phobos
+Predator
+Repulse - ewww...it's not pretty in there (no bugs, just ugly)
+Sil
+Sixpack
+Sixpackb
+Sledge
+Sliver
+Starburst
+Stil
+Stormbringer
+Vengeance - couple bugs.  Big problems here.  There is no "base" :S
+Warcat
+Warhawk
+Warspite
+WildCat
+Wraith
+Woot! Woot!  DONE!!!
+
+
+
+
+

@@ -1,0 +1,117 @@
+#define TA        // This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece base, firepoint1, firepoint2;
+
+#define gdmarty 1024+0 // this is a custom explosion generator thinging 
+
+// Signal definitions
+#define SIG_AIM 2
+#define SIG_AIM_2 4
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx smoketype from base;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+return (1); 
+} 
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{
+emit-sfx gdmarty from firepoint1; 
+} 
+
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = base; 
+} 
+
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint1; 
+} 
+
+
+AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{
+signal SIG_AIM_2; 
+set-signal-mask SIG_AIM; 
+return (1); 
+} 
+
+FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+emit-sfx gdmarty from firepoint2; 
+} 
+
+AimFromWeapon2(piecenum) // where it aims the weapon from 
+{ 
+piecenum = base; 
+} 
+
+QueryWeapon2(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint2; 
+} 
+
+
+Create()
+   {
+        start-script SmokeUnit();
+   }
+
+Killed(severity, corpsetype)
+   {
+   if (severity <= 25)
+      {
+      corpsetype = 1;
+      explode base type BITMAPONLY | BITMAP2;
+      return(0);
+      }
+   if (severity <= 50)
+      {
+      corpsetype = 2;
+      explode base type SHATTER | BITMAP1;
+      return(0);
+      }
+   if (severity <= 99)
+      {
+      corpsetype = 3;
+      explode base type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP2;
+      return(0);
+      }
+   corpsetype = 3;
+   explode base type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1;
+   return(0);
+   }

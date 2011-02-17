@@ -1,0 +1,185 @@
+#define TA			// This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece	base, door1, door2, elevator, nano1, nano2, spinner, nanopoint;
+
+static-var	Aztec, spray;
+
+// Signal definitions (they must be distincts power of 2)
+#define SIG_ACTIVATE	2
+#define SIG_BUILDING	4
+#define SIG_TECH		8
+
+#define NANOFLAME 1024+0
+
+SmokeUnit()
+{
+	var healthpercent, sleeptime, smoketype;
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = SFXTYPE_BLACKSMOKE;
+			if( Rand( 1, 66 ) < healthpercent )
+				smoketype = SFXTYPE_WHITESMOKE;
+			emit-sfx smoketype from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+			sleeptime = 200;
+		sleep sleeptime;
+	}
+}
+
+Create()
+{
+	Aztec = TRUE;
+	spray = 0;
+	while( get BUILD_PERCENT_LEFT )
+		sleep 400;
+	start-script SmokeUnit();
+}
+
+QueryNanoPiece(piecenum)
+{
+	piecenum = (spray==0)*nano1+(spray!=0)*nano2;
+	spray = (spray!=0);
+}
+
+
+Activate()
+{
+	// Kill any other Activate or Deactivate:
+	signal SIG_ACTIVATE;
+	// Flag self so it can be killed:
+	set-signal-mask SIG_ACTIVATE;
+	// Wait for tech:
+	while(!Aztec)
+		sleep 400;
+	// Open animation:
+	move elevator to y-axis [37] speed [5];
+	wait-for-move elevator along y-axis;
+	turn door2 to z-axis <90> speed <50>;
+	turn door1 to z-axis <-90> speed <50>;
+	wait-for-turn door2 around z-axis;
+	wait-for-turn door1 around z-axis;
+	// Try to open the yard
+	set YARD_OPEN to TRUE;
+	// If yard not open, tell units around to bugger off until yard is open
+	while( !get YARD_OPEN )
+	{
+		set BUGGER_OFF to TRUE;
+		sleep 1500;
+		set YARD_OPEN to TRUE;
+	}
+	set BUGGER_OFF to FALSE;
+	// Now yard is open.
+	// Allow the nano to flow:
+	set INBUILDSTANCE to TRUE;
+	// Send spinner spinning:
+	spin spinner around y-axis speed <50>;
+}
+
+Deactivate()
+{
+	// Kill any other Activate or Deactivate:
+	signal SIG_ACTIVATE;
+	// Flag self so it can be killed:
+	set-signal-mask SIG_ACTIVATE;
+	// Wait for tech:
+	while(!Aztec)
+		sleep 400;
+	// Switch off the nano faucet:
+	set INBUILDSTANCE to FALSE;
+	// Halt spinner spin
+	stop-spin spinner around y-axis decelerate <30>;
+	// Try to close the yard
+	set YARD_OPEN to FALSE;
+	// If yard not closed, tell units around to bugger off until yard is closed
+	while( get YARD_OPEN )
+	{
+		set BUGGER_OFF to TRUE;
+		sleep 1500;
+		set YARD_OPEN to FALSE;
+	}
+	set BUGGER_OFF to FALSE;
+	// Now yard is closed.
+	// Close animation:
+	turn door2 to z-axis <0> speed <10>;
+	turn door1 to z-axis <0> speed <10>;
+	wait-for-turn door2 around z-axis;
+	wait-for-turn door1 around z-axis;
+	move elevator to y-axis [0] speed [5];
+	wait-for-move elevator along y-axis;
+}
+
+StartBuilding()
+{
+	signal SIG_BUILDING; // Kill any other StartBuilding
+	set-signal-mask SIG_BUILDING; // Be killable
+	while(TRUE)
+	{
+		emit-sfx NANOFLAME from nano1;
+		emit-sfx NANOFLAME from nano2;
+		emit-sfx 1025 from nanopoint;
+		sleep 5;
+	}
+}
+
+StopBuilding()
+{
+	signal SIG_BUILDING; // Kill StartBuilding
+}
+
+QueryBuildInfo(piecenum)
+{
+	piecenum = nanopoint;
+}
+
+TechLost()
+{
+	signal SIG_TECH;
+	set-signal-mask SIG_TECH;
+	Aztec=FALSE;
+	set INBUILDSTANCE to FALSE;// Cut the nano
+	start-script Activate();// Just so it can resume once TechGranted again
+	while(TRUE)
+	{
+
+		explode nanopoint type FALL | SMOKE;
+		sleep 200;
+	}
+}
+
+TechGranted()
+{
+	signal SIG_TECH;// Kill TechLost
+	Aztec=TRUE;
+}
+
+Killed(severity, corpsetype)
+{
+	if( severity <= 25 )
+	{
+		corpsetype = 1;
+		explode base type BITMAPONLY | BITMAP1;
+		return (0);
+	}
+	if( severity <= 50 )
+	{
+		corpsetype = 2;
+		explode base type BITMAPONLY | BITMAP1;
+		return (0);
+	}
+	if( severity <= 99 )
+	{
+		corpsetype = 3;
+		explode base type BITMAPONLY | BITMAP1;
+		return (0);
+	}
+	corpsetype = 3;
+	explode base type BITMAPONLY | BITMAP1;
+}

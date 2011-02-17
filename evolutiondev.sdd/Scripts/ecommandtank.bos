@@ -1,0 +1,156 @@
+#include "sfxtype.h" 
+#include "exptype.h" 
+
+piece base, mast, firepoint1, load1, load2, load3, load4, load5, load6, load7, load8; // these are the pieces of the model 
+static-var frame, l1, l2, l3, l4, l5, l6, l7, l8; //couldn't get XOR working and didn't have much time
+
+#define gdmarty 1024+0 // this is a custom explosion generator thinging 
+
+// Signal definitions 
+#define SIG_AIM 2 // this is a aim define 
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype) // this is a standard smoke point define 
+{ 
+while( get BUILD_PERCENT_LEFT ) 
+{ 
+sleep 400; 
+} 
+while( TRUE ) 
+{ 
+healthpercent = get HEALTH; 
+if( healthpercent < 66 ) 
+{ 
+smoketype = 256 | 2; 
+if( Rand( 1, 66 ) < healthpercent ) 
+{ 
+smoketype = 256 | 1; 
+} 
+emit-sfx smoketype from mast; 
+} 
+sleeptime = healthpercent * 50; 
+if( sleeptime < 200 ) 
+{ 
+sleeptime = 200; 
+} 
+sleep sleeptime; 
+} 
+} 
+
+fx()
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		emit-sfx 1024 from mast;
+		sleep 100;
+	}
+}
+
+
+Create() // tells it what to do on creation 
+{
+start-script fx();
+start-script SmokeUnit(); 
+} 
+
+TransportPickup(unitid)
+{
+if (l8 != 0) return 0;
+set BUSY to 1;
+attach-unit unitid to base;
+if (l1 == 0) {attach-unit unitid to load1; l1 = unitid; sleep 10; set BUSY to 0; return;}
+if (l2 == 0) {attach-unit unitid to load2; l2 = unitid; sleep 10; set BUSY to 0; return;}
+if (l3 == 0) {attach-unit unitid to load3; l3 = unitid; sleep 10; set BUSY to 0; return;}
+if (l4 == 0) {attach-unit unitid to load4; l4 = unitid; sleep 10; set BUSY to 0; return;}
+if (l5 == 0) {attach-unit unitid to load5; l5 = unitid; sleep 10; set BUSY to 0; return;}
+if (l6 == 0) {attach-unit unitid to load6; l6 = unitid; sleep 10; set BUSY to 0; return;}
+if (l7 == 0) {attach-unit unitid to load7; l7 = unitid; sleep 10; set BUSY to 0; return;}
+if (l8 == 0) {attach-unit unitid to load8; l8 = unitid; sleep 10; set BUSY to 0; return;}
+sleep 500;
+drop-unit unitid;
+set BUSY to 0;
+}
+
+TransportDrop(unitid)
+{
+if (l1 == unitid) l1 = 0;
+if (l2 == unitid) l2 = 0;
+if (l3 == unitid) l3 = 0;
+if (l4 == unitid) l4 = 0;
+if (l5 == unitid) l5 = 0;
+if (l6 == unitid) l6 = 0;
+if (l7 == unitid) l7 = 0;
+if (l8 == unitid) l8 = 0;
+drop-unit unitid;
+}
+
+lua_frame() {
+	return 0;
+}
+
+Deactivate()
+{
+call-script lua_frame();
+frame = get 111;
+get 81 (frame);
+if (get 125 (1) < frame) {
+	emit-sfx 2048 from firepoint1;
+	get 125(-1, frame + get 126 (1));
+}
+}
+
+Activate(){}
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+return (1); 
+} 
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+} 
+
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = base; 
+} 
+
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint1;  
+} 
+
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+if( severity <= 25 ) 
+{ 
+corpsetype = 1; 
+explode base type BITMAPONLY | BITMAP1; 
+explode mast type BITMAPONLY | BITMAP1;  
+return (0); 
+} 
+if( severity <= 80 ) 
+{ 
+corpsetype = 2; 
+explode base type BITMAPONLY | BITMAP4; 
+explode mast type FALL | BITMAP1; 
+return (0); 
+} 
+if( severity <= 99 ) 
+{ 
+corpsetype = 3; 
+explode base type BITMAPONLY | BITMAP1; 
+explode mast type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
+return (0); 
+} 
+corpsetype = 3; 
+explode base type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
+explode mast type SHATTER | EXPLODE_ON_HIT | BITMAP4; 
+}

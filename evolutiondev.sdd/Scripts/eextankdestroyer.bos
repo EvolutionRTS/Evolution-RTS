@@ -1,0 +1,185 @@
+#define TA // This is a TA script 
+
+#include "sfxtype.h" 
+#include "exptype.h" 
+
+piece base, turret1, barrel1, turret2, barrel2, firepoint1, firepoint2, dirt1, dirt2, frontwheels, rearwheels, rearmidwheels, frontmidwheels; // these are the pieces of the model 
+
+static-var terraintype, bmoving, moving, underwater; // these are the variables 
+
+// #define gdscannon 1024+0 // this is a custom explosion generator thinging 
+
+// Signal definitions 
+#define SIG_AIM 2
+#define SIG_AIM_2 4
+
+#define shot 1024+0
+
+SmokeUnit(healthpercent, sleeptime, smoketype) // this is a standard smoke point define 
+{ 
+while( get BUILD_PERCENT_LEFT ) 
+{ 
+sleep 400; 
+} 
+while( TRUE ) 
+{ 
+healthpercent = get HEALTH; 
+if( healthpercent < 66 ) 
+{ 
+smoketype = 256 | 2; 
+if( Rand( 1, 66 ) < healthpercent ) 
+{ 
+smoketype = 256 | 1; 
+} 
+emit-sfx smoketype from turret1; 
+} 
+sleeptime = healthpercent * 50; 
+if( sleeptime < 200 ) 
+{ 
+sleeptime = 200; 
+} 
+sleep sleeptime; 
+} 
+} 
+
+StartMoving()
+{
+   bMoving = TRUE;
+   moving = TRUE;
+}
+
+StopMoving()
+{
+   bMoving = FALSE;
+   moving = FALSE;
+}
+
+Thrust()
+{
+   while( TRUE )
+   {
+      if (moving)    
+      {
+  		 emit-sfx 1025 + 0 from dirt1;
+  		 emit-sfx 1025 + 0 from dirt2;
+         spin frontwheels around x-axis speed <150.005495>;
+         spin rearwheels around x-axis speed <100.005495>;
+         spin frontmidwheels around x-axis speed <100.005495>;
+         spin rearmidwheels around x-axis speed <100.005495>;
+         
+      }
+      else
+      {
+         stop-spin frontmidwheels around x-axis decelerate <20.000000>;
+         stop-spin rearmidwheels around x-axis decelerate <20.000000>;
+         stop-spin frontwheels around x-axis decelerate <20.000000>;
+         stop-spin rearwheels around x-axis decelerate <20.000000>;
+      }
+     sleep 400;    
+   }
+}
+Create() // tells it what to do on creation 
+{
+        start-script Thrust();
+        start-script SmokeUnit(); 
+} 
+
+RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
+{ 
+sleep 3000; 
+turn turret1 to y-axis <0> speed <60>; 
+turn barrel1 to x-axis <0> speed <30>;
+turn turret2 to y-axis <0> speed <60>; 
+turn barrel2 to x-axis <0> speed <30>;    
+} 
+
+//*****************
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+turn turret1 to y-axis heading speed <200>; 
+turn barrel1 to x-axis <0> - pitch speed <200>;  
+wait-for-turn turret1 around y-axis;
+wait-for-turn barrel1 around x-axis;  
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+emit-sfx shot from firepoint1;
+} 
+
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = barrel1; 
+} 
+
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint1; 
+} 
+
+//***********************
+
+AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM_2; 
+set-signal-mask SIG_AIM_2; 
+turn turret2 to y-axis heading speed <300>; 
+turn barrel2 to x-axis <0> - pitch speed <300>;  
+wait-for-turn turret2 around y-axis;
+wait-for-turn barrel2 around x-axis;  
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
+
+FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+emit-sfx shot from firepoint2;
+} 
+
+AimFromWeapon2(piecenum) // where it aims the weapon from 
+{ 
+piecenum = barrel2; 
+} 
+
+QueryWeapon2(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint2; 
+} 
+
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+if( severity <= 25 ) 
+{ 
+corpsetype = 1; 
+explode base type BITMAPONLY | BITMAP1; 
+explode barrel1 type BITMAPONLY | BITMAP1;  
+explode turret1 type BITMAPONLY | BITMAP4; 
+return (0); 
+} 
+if( severity <= 80 ) 
+{ 
+corpsetype = 2; 
+explode base type BITMAPONLY | BITMAP4; 
+explode barrel1 type FALL | BITMAP1;  
+explode turret1 type SHATTER | BITMAP4; 
+return (0); 
+} 
+if( severity <= 99 ) 
+{ 
+corpsetype = 3; 
+explode base type BITMAPONLY | BITMAP1; 
+explode barrel1 type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
+explode turret1 type SHATTER | BITMAP4; 
+return (0); 
+} 
+corpsetype = 3; 
+explode barrel1 type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
+explode base type BITMAPONLY | BITMAP3; 
+explode turret1 type SHATTER | EXPLODE_ON_HIT | BITMAP4; 
+} 

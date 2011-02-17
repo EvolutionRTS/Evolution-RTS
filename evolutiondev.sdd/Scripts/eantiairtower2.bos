@@ -1,0 +1,217 @@
+#include "sfxtype.h" 
+#include "exptype.h" 
+
+piece base, firepoint1; // these are the pieces of the model 
+
+static-var firing; // these are the variables 
+
+#define ELECTRICITY 1024+0 // this is a custom explosion generator thinging 
+
+// Signal definitions 
+#define SIG_AIM 2 // this is a aim define 
+#define SIG_AIM_2 4
+#define SIG_AIM_4 8
+#define SIG_AIM_8 16
+#define SIG_AIM_16 32
+#define SIG_AIM_32 64
+
+SmokeUnit(healthpercent, sleeptime, smoketype) // this is a standard smoke point define 
+{ 
+while( get BUILD_PERCENT_LEFT ) 
+{ 
+sleep 400; 
+} 
+while( TRUE ) 
+{ 
+healthpercent = get HEALTH; 
+if( healthpercent < 66 ) 
+{ 
+smoketype = 256 | 2; 
+if( Rand( 1, 66 ) < healthpercent ) 
+{ 
+smoketype = 256 | 1; 
+} 
+emit-sfx smoketype from base; 
+} 
+sleeptime = healthpercent * 50; 
+if( sleeptime < 200 ) 
+{ 
+sleeptime = 200; 
+} 
+sleep sleeptime; 
+} 
+} 
+
+
+LightningThing()
+{
+while (1)
+{
+emit-sfx ELECTRICITY from firepoint1;
+sleep 500;
+}
+}
+
+Create() // tells it what to do on creation 
+{ 
+start-script LightningThing();
+start-script SmokeUnit();
+} 
+
+
+AimWeapon1(heading, pitch)
+{
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+return (1);   
+}
+
+FireWeapon1()
+{ 
+} 
+
+AimFromWeapon1(piecenum)
+{ 
+piecenum = firepoint1; 
+} 
+
+QueryWeapon1(piecenum) 
+{   
+piecenum = firepoint1;  
+} 
+
+
+AimWeapon2(heading, pitch)
+{
+signal SIG_AIM_2; 
+set-signal-mask SIG_AIM; 
+return (1);   
+}
+
+FireWeapon2()
+{ 
+} 
+
+AimFromWeapon2(piecenum)
+{ 
+piecenum = firepoint1; 
+} 
+
+QueryWeapon2(piecenum) 
+{   
+piecenum = firepoint1;  
+} 
+
+
+AimWeapon3(heading, pitch)
+{
+signal SIG_AIM_4; 
+set-signal-mask SIG_AIM; 
+return (1);   
+}
+
+FireWeapon3()
+{ 
+} 
+
+AimFromWeapon3(piecenum)
+{ 
+piecenum = firepoint1; 
+} 
+
+QueryWeapon3(piecenum) 
+{   
+piecenum = firepoint1;  
+} 
+
+
+AimWeapon4(heading, pitch)
+{
+signal SIG_AIM_8; 
+set-signal-mask SIG_AIM; 
+return (1);   
+}
+
+FireWeapon4()
+{ 
+} 
+
+AimFromWeapon4(piecenum)
+{ 
+piecenum = firepoint1; 
+} 
+
+QueryWeapon4(piecenum) 
+{   
+piecenum = firepoint1;  
+} 
+
+
+AimWeapon5(heading, pitch)
+{
+signal SIG_AIM_16; 
+set-signal-mask SIG_AIM; 
+return (1);   
+}
+
+FireWeapon5()
+{ 
+} 
+
+AimFromWeapon5(piecenum)
+{ 
+piecenum = firepoint1; 
+} 
+
+QueryWeapon5(piecenum) 
+{   
+piecenum = firepoint1;  
+} 
+
+
+AimWeapon6(heading, pitch)
+{
+signal SIG_AIM_32; 
+set-signal-mask SIG_AIM; 
+return (1);   
+}
+
+FireWeapon6()
+{ 
+} 
+
+AimFromWeapon6(piecenum)
+{ 
+piecenum = firepoint1; 
+} 
+
+QueryWeapon6(piecenum) 
+{   
+piecenum = firepoint1;  
+} 
+
+
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+if( severity <= 25 ) 
+{ 
+corpsetype = 1; 
+explode base type BITMAPONLY | BITMAP1; 
+return (0); 
+} 
+if( severity <= 80 ) 
+{ 
+corpsetype = 2; 
+explode base type BITMAPONLY | BITMAP4; 
+return (0); 
+} 
+if( severity <= 99 ) 
+{ 
+corpsetype = 3; 
+explode base type BITMAPONLY | BITMAP1;  
+return (0); 
+} 
+corpsetype = 3; 
+explode base type SHATTER | EXPLODE_ON_HIT | BITMAP4; 
+}

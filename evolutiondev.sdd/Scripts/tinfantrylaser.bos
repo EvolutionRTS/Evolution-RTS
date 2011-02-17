@@ -1,0 +1,215 @@
+#define TA // This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+
+static-var moving, walking, aiming;
+piece torso, leftgun, firepointleft, rightgun, firepointright, leftlegtop, leftlegbottom, rightlegtop, rightlegbottom;
+
+#define SIG_AIM 2 // this is a aim define
+#define SIG_AIM_2 4
+#define THIGH_F <-15>
+#define THIGH_B <10>
+#define THIGHSPEED_F <50>
+#define THIGHSPEED_B <50>
+#define SHIN_F <0>
+#define SHIN_B <20>
+#define SHINSPEED_F <80>
+#define SHINSPEED_B <80>
+#define TORSO <15>
+#define torsoSPEED <50>
+#define WALKBOB [1]
+#define BOBSPEED [4]
+#define ELECTRICITY 1024+0
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype) // this is a standard smoke point define
+{
+while( get BUILD_PERCENT_LEFT )
+{
+sleep 400;
+}
+while( TRUE )
+{
+healthpercent = get HEALTH;
+if( healthpercent < 66 )
+{
+smoketype = 256 | 2;
+if( Rand( 1, 66 ) < healthpercent )
+{
+smoketype = 256 | 1;
+}
+emit-sfx smoketype from torso;
+}
+sleeptime = healthpercent * 50;
+if( sleeptime < 200 )
+{
+sleeptime = 200;
+}
+sleep sleeptime;
+}
+}
+
+
+Walk() {
+   if(walking) return 0; //semaphore
+   walking=1;
+
+   turn leftlegtop to x-axis 0 now;
+   turn leftlegbottom to x-axis 0 now;
+   turn rightlegtop to x-axis <0> now;
+   turn rightlegbottom to x-axis <0> now;
+   turn torso to z-axis TORSO now;
+   while(moving) {
+      if (moving) {
+         turn rightlegtop to x-axis THIGH_F speed THIGHSPEED_F;
+         turn rightlegbottom to x-axis SHIN_B speed SHINSPEED_B;
+         wait-for-turn leftlegtop around x-axis;
+      }
+      if (moving) {
+         turn leftlegtop to x-axis THIGH_B speed THIGHSPEED_B;
+         turn torso to z-axis 0 - torso speed torsoSPEED;
+         wait-for-turn rightlegbottom around x-axis;
+      }
+      if (moving) {
+         turn rightlegbottom to x-axis SHIN_F speed SHINSPEED_F;
+         wait-for-turn rightlegtop around x-axis;
+      }
+      if (moving) {
+         turn rightlegtop to x-axis THIGH_B speed THIGHSPEED_B;
+         turn torso to z-axis torso speed torsoSPEED;
+         wait-for-turn leftlegtop around x-axis;
+      }
+      if (moving) {
+         turn leftlegtop to x-axis THIGH_F speed THIGHSPEED_F;
+         turn leftlegbottom to x-axis SHIN_B speed SHINSPEED_B;
+         wait-for-turn leftlegbottom around x-axis;
+      }
+      if (moving) {
+         turn leftlegbottom to x-axis SHIN_F speed SHINSPEED_F;
+         wait-for-turn rightlegtop around x-axis;
+      }
+   }
+   walking=0;
+   turn rightlegtop to x-axis 0 speed THIGHSPEED_F;
+   turn leftlegtop to x-axis 0 speed THIGHSPEED_F;
+   turn rightlegbottom to x-axis 0 speed SHINSPEED_F;
+   turn leftlegbottom to x-axis 0 speed SHINSPEED_F;
+   turn torso to z-axis 0 speed torsoSPEED;
+}
+
+fx()
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		emit-sfx 1024 from firepointleft;
+		emit-sfx 1024 from firepointright;
+		sleep 150;
+	}
+}
+
+Create()
+{
+moving = 0;
+start-script Walk();
+start-script SmokeUnit();
+start-script fx();
+}
+
+StartMoving() { moving=1;
+            start-script Walk(); }
+StopMoving() { moving=0; }
+
+RestoreAfterDelay() // restore function to turn the turret and so forth back to start
+{
+sleep 10000;
+turn torso to y-axis <0> speed <30>;
+turn leftgun to x-axis <0> speed <10>;
+turn rightgun to x-axis <0> speed <10>;
+}
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming
+{
+signal SIG_AIM;
+set-signal-mask SIG_AIM;
+turn torso to y-axis heading speed <30>;
+turn leftgun to x-axis <0> - pitch speed <10>;
+wait-for-turn torso around y-axis;
+wait-for-turn leftgun around x-axis;
+start-script RestoreAfterDelay();
+return (1);
+}
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets
+{
+}
+
+AimFromWeapon1(piecenum) // where it aims the weapon from
+{
+piecenum = torso;
+}
+
+QueryWeapon1(piecenum) // where the shot is called from
+{
+piecenum = firepointleft;
+}
+
+AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming
+{
+signal SIG_AIM_2;
+set-signal-mask SIG_AIM_2;
+turn torso to y-axis heading speed <30>;
+turn rightgun to x-axis <0> - pitch speed <10>;
+wait-for-turn torso around y-axis;
+wait-for-turn rightgun around x-axis;
+start-script RestoreAfterDelay();
+return (1);
+}
+
+FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets
+{
+}
+
+AimFromWeapon2(piecenum) // where it aims the weapon from
+{
+piecenum = torso;
+}
+
+QueryWeapon2(piecenum) // where the shot is called from
+{
+piecenum = firepointright;
+}
+
+
+
+Killed(severity, corpsetype) // how it explodes
+{
+if( severity <= 25 )
+{
+corpsetype = 1;
+explode leftgun type BITMAPONLY | BITMAP1;
+explode rightgun type BITMAPONLY | BITMAP4;
+return (0);
+}
+if( severity <= 80 )
+{
+corpsetype = 2;
+explode leftgun type BITMAPONLY | BITMAP4;
+explode rightgun type SHATTER | BITMAP4;
+return (0);
+}
+if( severity <= 99 )
+{
+corpsetype = 3;
+explode leftgun type BITMAPONLY | BITMAP1;
+explode rightgun type SHATTER | BITMAP4;
+return (0);
+}
+corpsetype = 3;
+explode torso type SHATTER | EXPLODE_ON_HIT | BITMAP4;
+}
