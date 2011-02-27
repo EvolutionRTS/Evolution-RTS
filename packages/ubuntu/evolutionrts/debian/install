@@ -1,0 +1,5 @@
+evolution_rts.conf /etc/default/
+evolution_rts.desktop /usr/share/applications/
+evolution_rts.png /usr/share/pixmaps/
+evolution_rts-stable.sdz /usr/share/games/spring/mods/
+evolution_rts /usr/bin/
