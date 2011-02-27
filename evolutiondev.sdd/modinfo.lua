@@ -10,10 +10,10 @@
 --------------------------------------------------------------------------------
 
 return {
-  name='EvolutionRTS-',
+  name='Evolution RTS -',
   description='EvoRTS',
   shortname='EvoRTS',
-  version='',
+  version='$VERSION',
   mutator='Official',
   game='Evolution RTS',
   shortGame='EvoRTS',
