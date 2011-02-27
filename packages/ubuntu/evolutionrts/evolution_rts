@@ -1,0 +1,4 @@
+#!/bin/bash
+
+springlobby -n EvolutionRTS -c "EvolutionRTS-stable" "${@}"
+
