@@ -1,0 +1,15 @@
+evolutionrts
+===========
+- replace png for desktop/menu icon, preferably with svg (or find out how FDO specifies multiple images of diff sizes)
+- short and long descriptions in evolutionrts/debian/control
+- copyright notice evolutionrts/{COPYRIGHT,debian/copyright}
+
+
+
+evolutionrts-maps
+===========
+- copy stuff from s44 pack
+- decide maps to include
+- try to keep below 120 MB to not blow up ppa size?
+
+
