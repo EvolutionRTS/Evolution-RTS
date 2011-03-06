@@ -82,7 +82,7 @@ local unitDef = {
 	armortype   = "lightarmor",
 	nofriendlyfire	= "1",
 	normaltex = "unittextures/ebombnormal.png", 
-	helptext = [[The Shellshock hovering bomb is an extremely fast, stealthed warhead that packs an awesome punch. It's speed allows it to dart in and cause havok wherever it explodes. It has next to no armor though, so use them wisely as they are a costly investment]],
+	helptext = [[The Shellshock hovering bomb is an extremely fast, stealthed warhead that packs an awesome punch. It's speed allows it to dart in and cause havoc wherever it explodes. It has next to no armor though, so use them wisely as they are a costly investment]],
   },
 }
 

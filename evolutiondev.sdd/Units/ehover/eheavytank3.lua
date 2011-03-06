@@ -79,7 +79,7 @@ local unitDef = {
     RequireTech = "5 Power",
 	armortype   = "mediumarmor",
 	normaltex = "unittextures/eheavytank3normal.png", 
-	helptext = [[The Crusher is a heavy skirmish tank capable of taking out the most hardened of mobile units. THe more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.]],
+	helptext = [[The Crusher is a heavy skirmish tank capable of taking out the most hardened of mobile units. The more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.]],
   },
 }
 

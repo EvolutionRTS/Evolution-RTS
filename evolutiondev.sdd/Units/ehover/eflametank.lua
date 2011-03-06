@@ -83,7 +83,7 @@ local unitDef = {
     RequireTech = "2 Power",
 	armortype   = "lightarmor",
 	normaltex = "unittextures/eflametanknormal.png", 
-	helptext	=	[[The pyromaniac has a long range flamethrower that is deadly versus base structures and expecially economy buildings. Very fast and agile, however, it has a short line of sight. For best results, couple with Lightning raiders.]],
+	helptext	=	[[The pyromaniac has a long range flamethrower that is deadly versus base structures and especially economy buildings. Very fast and agile, however, it has a short line of sight. For best results, couple with Lightning raiders.]],
   },
 }
 

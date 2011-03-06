@@ -88,7 +88,7 @@ local unitDef = {
     RequireTech = "4 Power",
 	armortype   = "heavyarmor",
 	normaltex = "unittextures/eriottank2normal.png", 
-	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Freatures a concussion shell that will knock back opposing units. Heavy armor, but should be paired with escorts if possible.]],
+	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Features a concussion shell that will knock back opposing units. Heavy armor, but should be paired with escorts if possible.]],
   },
 }
 

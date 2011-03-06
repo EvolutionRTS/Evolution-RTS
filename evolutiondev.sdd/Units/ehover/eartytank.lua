@@ -78,7 +78,7 @@ local unitDef = {
     RequireTech = "8 Power",
 	armortype   = "lightarmor",
 	normaltex = "unittextures/eartytanknormal.png", 
-	helptext = [[The lobster has an extremely long range, fires five rounds in a burst but does very low damage in a large area of effect. Damage boost versus structures and defenses. Reduced damage to mobile units.]],
+	helptext = [[The Lobster has extremely long range, fires five rounds in a burst but does very low damage in a large area of effect. Damage boost versus structures and defenses. Reduced damage to mobile units.]],
   },
 }
 
