@@ -57,7 +57,8 @@ Ribbon.Default = {
 -----------------------------------------------------------------------------------------------------------------
 
 local spGetUnitDefID         = Spring.GetUnitDefID
-local spValidUnitID          = Spring.ValidUnitID
+local spGetUnitIsDead        = Spring.GetUnitIsDead
+local spIsUnitValid          = Spring.IsUnitValid
 local spIsSphereInView       = Spring.IsSphereInView
 local spGetUnitVelocity      = Spring.GetUnitVelocity
 local spGetUnitPiecePosition = Spring.GetUnitPiecePosition
@@ -75,7 +76,7 @@ local GL_ONE = GL.ONE
 local GL_SRC_ALPHA = GL.SRC_ALPHA
 local GL_ONE_MINUS_SRC_ALPHA = GL.ONE_MINUS_SRC_ALPHA
 
-function GetPiecePos(unit,piece)
+local function GetPiecePos(unit,piece)
   local x,y,z = spGetUnitViewPosition(unit,false)
   local front,up,right = spGetUnitVectors(unit)
   local px,py,pz = spGetUnitPiecePosition(unit,piece)
@@ -117,19 +118,31 @@ function Ribbon:Draw()
   end
 
   --// insert interpolated current unit pos
-  local x,y,z = GetPiecePos(self.unit,self.piecenum)
-  --local x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
-  glUniform( oldPosUniform[quads0+1] , x,y,z )
+  if (self.isvalid) then
+    --local x,y,z = GetPiecePos(self.unit,self.piecenum)
+    local x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+	if x and y and z then 
+		glUniform( oldPosUniform[quads0+1] , x,y,z )
+		
+		if (self.blendfactor<1) then
+			local clr = self.color
+			glColor(clr[1],clr[2],clr[3],clr[4]*self.blendfactor)
+		else
+			glColor(self.color)
+		end
 
-  --// define color and add speed blending (don't show ribbon for slow/landing units!)
-  if (self.blendfactor<1) then
-    local clr = self.color
-    glColor(clr[1],clr[2],clr[3],clr[4]*self.blendfactor)
+		glCallList(DLists[quads0])
+	else
+		--local dir = self.oldPos[j]
+		--glUniform( oldPosUniform[quads0+1] , dir[1], dir[2], dir[3] )
+	end
   else
-    glColor(self.color)
+    --local dir = self.oldPos[j]
+    --glUniform( oldPosUniform[quads0+1] , dir[1], dir[2], dir[3] )
   end
 
-  glCallList(DLists[quads0])
+  --// define color and add speed blending (don't show ribbon for slow/landing units!)
+  
 end
 
 -----------------------------------------------------------------------------------------------------------------
@@ -198,6 +211,7 @@ function Ribbon.Initialize()
   end
 end
 
+
 function Ribbon.Finalize()
   if (gl.DeleteShader) then
     gl.DeleteShader(RibbonShader)
@@ -208,6 +222,38 @@ function Ribbon.Finalize()
     DLists[i] = nil
     gl.DeleteList(v)
   end
+end
+
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+
+function Ribbon:Update(n)
+  self.isvalid = not spGetUnitIsDead(self.unit)
+
+  if (self.isvalid) then
+    local x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+    if (x) then
+      self.posIdx = (self.posIdx % self.size)+1
+      self.oldPos[self.posIdx] = {x,y,z}
+
+      local vx,vy,vz = spGetUnitVelocity(self.unit)
+      self.blendfactor = (vx*vx+vz*vz)/30
+    end
+  else
+    self.blendfactor = self.blendfactor - n * 0.01
+  end
+end
+
+
+function Ribbon:Visible()
+  self.isvalid = not spGetUnitIsDead(self.unit)
+  local pos = self.oldPos[self.posIdx]
+  return (self.blendfactor>0) and (spIsSphereInView(pos[1],pos[2],pos[3], self.radius))
+end
+
+
+function Ribbon:Valid()
+  return self.isvalid or (self.blendfactor>0)
 end
 
 -----------------------------------------------------------------------------------------------------------------
@@ -226,21 +272,6 @@ local function CreateDList(quads0)
     gl.Vertex(0,0,0)
     gl.TexCoord(-1,tex_t,0,i)
     gl.Vertex(0,0,0)
-  end
-end
-
-
-function Ribbon:Update(n)
-  self.isvalid = spValidUnitID(self.unit)
-
-  if (self.isvalid) then
-    --if ((thisGameFrame%2)>0.1) then return end
-    local x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
-    self.posIdx = (self.posIdx % self.size)+1
-    self.oldPos[self.posIdx] = {x,y,z}
-
-    local vx,vy,vz = spGetUnitVelocity(self.unit)
-    self.blendfactor = (vx*vx+vz*vz)/30
   end
 end
 
@@ -276,17 +307,6 @@ function Ribbon:CreateParticle()
 
   self.startGameFrame = thisGameFrame
   self.dieGameFrame   = self.startGameFrame + self.life
-end
-
-
-function Ribbon:Visible()
-  local pos = self.oldPos[self.posIdx]
-  return (self.blendfactor>0) and (self.isvalid) and (spIsSphereInView(pos[1],pos[2],pos[3], self.radius))
-end
-
-
-function Ribbon:Valid()
-  return self.isvalid
 end
 
 -----------------------------------------------------------------------------------------------------------------

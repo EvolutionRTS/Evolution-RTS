@@ -225,7 +225,7 @@ function SetUnitLuaDraw(unitID,nodraw)
     if (noDrawUnits[unitID]==1) then
       --if (Game.version=="0.76b1") then
         Spring.UnitRendering.ActivateMaterial(unitID,1)
-        Spring.UnitRendering.SetLODLength(unitID,1,-1000)
+        --Spring.UnitRendering.SetLODLength(unitID,1,-1000)
         for pieceID in ipairs(Spring.GetUnitPieceList(unitID) or {}) do
           Spring.UnitRendering.SetPieceList(unitID,1,pieceID,nilDispList)
         end
@@ -714,6 +714,9 @@ local function CreateVisibleFxList()
 
             if (fx.onActive and (unitActive == -1)) then
               unitActive = spGetUnitIsActive(unitID)
+              if (unitActive == nil) then
+                unitActive = true
+              end
             end
 
             if (not fx.onActive)or(unitActive) then
@@ -792,7 +795,7 @@ local function CleanInvalidUnitFX()
           Units[unitID] = nil
         else
           if (unitID>-1) then
-            if (not spValidUnitID(unitID)) then --// UnitID isn't valid anymore, remove all correspondend effects
+            if (not spValidUnitID(unitID)) then --// UnitID isn't valid anymore, remove all its effects
               for i=1,#UnitEffects do
                 local fx = UnitEffects[i]
                 removeFX[removeCnt] = fx.id

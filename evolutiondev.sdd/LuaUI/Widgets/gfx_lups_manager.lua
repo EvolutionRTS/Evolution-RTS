@@ -51,9 +51,10 @@ function MergeTable(table1,table2)
 end
 
 include("Configs/lupsFXs.lua")
-
 include("Configs/lupsUnitFXs.lua")
-local currentTime = os.date('*t')
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 local function blendColor(c1,c2,mix)
   if (mix>1) then mix=1 end
@@ -88,11 +89,12 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
 for i,f in pairs(effectUnitDefs) do
   AddFX(i,f)
 end
 
-
+local currentTime = os.date('*t')
 if (currentTime.month==12) then
   for i,f in pairs(effectUnitDefsXmas) do
     AddFX(i,f)
@@ -102,29 +104,20 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- for i,f in pairs(effectUnitDefs) do
-  -- Spring.Echo("   ",i,f)
+--   Spring.Echo("   ",i,f)
 -- end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
---// armmex overdrive FX
-local armmexDefID 
-local armmexes    = {}
-local armmexesFxIDs = {}
-local armmexFX    = armmexJet
 
 --// cormex overdrive FX
 local cormexDefID 
 local cormexes    = {}
 local cormexFX    = cormexGlow
 
-if (UnitDefNames["armmex"]) then
-  armmexDefID = UnitDefNames["armmex"].id  
-end
-
 if (UnitDefNames["cormex"]) then
   cormexDefID = UnitDefNames["cormex"].id  
 end
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -156,6 +149,7 @@ local function ClearFxs(unitID)
   end
 end
 
+
 local function ClearFx(unitID, fxIDtoDel)
   if (particleIDs[unitID]) then
   local newTable = {}
@@ -176,7 +170,6 @@ local function ClearFx(unitID, fxIDtoDel)
 end
 
 
-
 local function AddFxs(unitID,fxID)
   if (not particleIDs[unitID]) then
     particleIDs[unitID] = {}
@@ -188,16 +181,8 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
 local function UnitFinished(_,unitID,unitDefID)
-  if (unitDefID == armmexDefID) then
-    armmexes[unitID] = 0
-    armmexFX.unit    = unitID
-    particleIDs[unitID] = {}
-    
-    local fxID = LupsAddFX("airjet",armmexFX)
-    armmexesFxIDs[unitID] = fxID
-    AddFxs( unitID, fxID )
-  end
 
   if (unitDefID == cormexDefID) then
     cormexes[unitID] = 0
@@ -224,9 +209,9 @@ local function UnitFinished(_,unitID,unitDefID)
   end
 end
 
+
 local function UnitDestroyed(_,unitID,unitDefID)
-  if (unitDefID == armmexDefID)or(unitDefID == cormexDefID) then
-    armmexes[unitID] = nil
+  if (unitDefID == cormexDefID) then
     cormexes[unitID] = nil
   end
 
@@ -238,15 +223,6 @@ local function UnitEnteredLos(_,unitID)
   local spec, fullSpec = spGetSpectatingState()
   if (spec and fullSpec) then 
     return 
-  end
-
-  if (unitDefID == armmexDefID) then
-    armmexes[unitID] = 1
-    armmexFX.unit    = unitID
-    particleIDs[unitID] = {}
-    local fxID = LupsAddFX("airjet",armmexFX)
-    armmexesFxIDs[unitID] = fxID
-    AddFxs( unitID, fxID )
   end
 
   if (unitDefID == cormexDefID) then
@@ -275,8 +251,7 @@ local function UnitLeftLos(_,unitID)
   local spec, fullSpec = spGetSpectatingState()
   if (spec and fullSpec) then return end
 
-  if (unitDefID == armmexDefID)or(unitDefID == cormexDefID) then
-    armmexes[unitID] = nil
+  if (unitDefID == cormexDefID) then
     cormexes[unitID] = nil
   end
 
@@ -285,34 +260,13 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
 local color1 = {0,0,0}
 local color2 = {1,0.5,0}
 
 local function GameFrame(_,n)
-  if (((n+48)%60)<1 and (next(armmexes) or next(cormexes))) then
+  if (((n+48)%60)<1 and (next(cormexes))) then
     --//Update Overdrive Fx
-    for unitID,strength in pairs(armmexes) do
-      local cur_strength = spGetUnitRulesParam(unitID,"overdrive") or 1
-      local diff         = abs(cur_strength - strength)
-      if (diff>0.3) then
-        -- limit the maximum change per update (else the fx would jump like hell)
-        cur_strength = strength + ((cur_strength>strength and 1) or -1)*0.3
-
-        ClearFx(unitID, armmexesFxIDs[unitID])
-    
-        armmexFX.unit   = unitID
-        armmexFX.color  = blendColor(color1,color2, (cur_strength-1)*0.5)
-        armmexFX.length = blend(140,80, (cur_strength-1)*0.75)
-        
-        local fxID = LupsAddFX("airjet",armmexFX)
-        armmexesFxIDs[unitID] = fxID
-        AddFxs( unitID, fxID )
-        armmexes[unitID] = cur_strength
-      end
-    end
-    armmexFX.color  = color1
-    armmexFX.length = 140
-
     for unitID,strength in pairs(cormexes) do
       local cur_strength = spGetUnitRulesParam(unitID,"overdrive") or 1
       local diff         = abs(cur_strength - strength)
@@ -362,6 +316,7 @@ function widget:GameFrame()
     widgetHandler:RemoveWidgetCallIn("GameFrame",widget)
   end
 end
+
 
 local function CheckForExistingUnits()
   --// initialize effects for existing units

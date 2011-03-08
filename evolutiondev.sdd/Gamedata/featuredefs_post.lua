@@ -61,7 +61,8 @@ local function ProcessUnitDef(udName, ud)
 end
 
 for name, fd in pairs(FeatureDefs) do
-	if(fd["footprintz"] < 2 or fd["footprintx"] < 2 or string.lower(fd["category"]) == "vegitation") then
+	if(tonumber(fd["footprintz"]) < 2 or tonumber(fd["footprintx"]) < 2 
+	or string.lower(fd["category"]) == "vegitation" or string.lower(fd["category"]) == "vegetation") then
 		fd["blocking"] = false
 	end
 end
