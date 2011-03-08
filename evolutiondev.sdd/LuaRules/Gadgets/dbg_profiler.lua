@@ -183,9 +183,9 @@ end
 if (gadgetHandler:IsSyncedCode()) then
 
   function gadget:Initialize()
-  Spring.Echo(actionHandler)
     gadgetHandler.actionHandler.AddChatAction(gadget, 'profile', StartHook,
-      " : starts the gadget profiler (for debugging issues)")
+      " : starts the gadget profiler (for debugging issues)"
+    )
     --StartHook()
   end
 
