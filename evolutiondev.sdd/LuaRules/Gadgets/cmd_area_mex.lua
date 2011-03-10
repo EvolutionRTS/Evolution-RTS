@@ -29,11 +29,13 @@ local mexCmdDesc = {
   id      = CMD_AREA_MEX,
   type    = CMDTYPE.ICON_AREA,
   name    = 'Mex',
-  cursor  = 'Repair', 
+  cursor  = 'areamex_cursor', 
   action  = 'areamex',
   tooltip = 'Builds mexes in the area',
   texture = 'bitmaps/ui/buttons/cmd_area_mex.png',
 }
+
+Spring.AssignMouseCursor("areamex_cursor", "areamex_def", true)
 
 local mexBuildCommandID = -UnitDefNames["emetalextractor"].id
 
@@ -122,7 +124,6 @@ function gadget:UnitCreated(unitID, unitDefID)
 	end
 end
 
-
 function gadget:Initialize()
 	mexSpot = GetMetalMap()
 	if not mexSpot then
@@ -130,6 +131,5 @@ function gadget:Initialize()
 		gadgetHandler:RemoveGadget()
 		return 
 	end
-
 end
 
