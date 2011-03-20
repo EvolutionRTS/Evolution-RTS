@@ -3,10 +3,10 @@
 
 function widget:GetInfo()
   return {
-    name      = "Complete Control Camera",
-    desc      = "v0.24 Camera featuring 6 actions. Type \255\90\90\255/luaui ccc help\255\255\255\255 for help.",
-    author    = "CarRepairer (smoothscroll code by trepan)",
-    date      = "2009-12-15",
+    name      = "Combo Overhead/Free Camera",
+    desc      = "v0.04 Camera featuring 6 actions. Type \255\90\90\255/luaui cofc help\255\255\255\255 for help.",
+    author    = "CarRepairer",
+    date      = "2011-03-16",
     license   = "GNU GPL, v2 or later",
     layer     = 1002,
 	handler   = true,
@@ -19,7 +19,12 @@ include("keysym.h.lua")
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-options_path = 'Settings/View/Complete Control Camera'
+local init = true
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+options_path = 'Settings/Camera/Combo Overhead-Free Camera'
 options_order = { 
 	'helpwindow', 
 	
@@ -37,17 +42,25 @@ options_order = {
 	
 	'lblZoom',
 	'invertzoom', 
+	'invertalt', 
 	'zoomintocursor', 
 	'zoomoutfromcursor', 
 	'zoominfactor', 
 	'zoomoutfactor', 
 	
 	'lblMisc',
+	'overviewmode', 
 	'follow', 
 	'smoothness',
 	'fov',
+	--'restrictangle',
+	--'mingrounddist',
+	'freemode',
 
 }
+
+local OverviewAction = function() end
+
 options = {
 	
 	lblblank1 = {name='', type='label'},
@@ -57,10 +70,10 @@ options = {
 	lblMisc = {name='Misc.', type='label'},
 	
 	helpwindow = {
-		name = 'CC Cam Help',
+		name = 'COFCam Help',
 		type = 'text',
 		value = [[
-			Complete Control Camera has six main actions...
+			Complete Overhead/Free Camera has six main actions...
 			
 			Zoom..... <Mousewheel>
 			Tilt World..... <Ctrl> + <Mousewheel>
@@ -72,20 +85,20 @@ options = {
 			Additional actions:
 			Keyboard: <arrow keys> replicate middlebutton drag while <pgup/pgdn> replicate mousewheel. You can use these with ctrl, alt & shift to replicate mouse camera actions.
 			Use <Shift> to speed up camera movements.
-			Reset Camera..... <Ctrl> + <Alt> + <Shift> + <Middleclick> or /luaui ccc reset
+			Reset Camera..... <Ctrl> + <Alt> + <Shift> + <Middleclick> or /luaui cofc reset
 		]],
 	},
 	smoothscroll = {
 		name = 'Smooth scrolling',
+		desc = 'Use smoothscroll method when mouse scrolling.',
 		type = 'bool',
 		value = false,
-		desc = 'Use smoothscroll method when mouse scrolling.',
 	},
 	targetmouse = {
 		name = 'Rotate world origin at cursor',
+		desc = 'Rotate world using origin at the cursor rather than the center of screen.',
 		type = 'bool',
 		value = false,
-		desc = 'Rotate world using origin at the cursor rather than the center of screen.',
 	},
 	edgemove = {
 		name = 'Scroll camera at edge',
@@ -99,98 +112,125 @@ options = {
 		name = 'Mouse scroll speed',
 		desc = 'This speed applies to scrolling with the middle button.',
 		type = 'number',
-		min = 10,
-		max = 40,
+		min = 10, max = 40,
 		value = 25,
 	},
 	speedFactor_k = {
 		name = 'Keyboard/edge scroll speed',
 		desc = 'This speed applies to edge scrolling and keyboard keys.',
 		type = 'number',
-		min = 5,
-		max = 50,
+		min = 1, max = 50,
 		value = 20,
 	},
 	zoominfactor = {
 		name = 'Zoom-in speed',
 		type = 'number',
-		min = 0.1,
-		max = 0.5,
-		step = 0.05,
+		min = 0.1, max = 0.5, step = 0.05,
 		value = 0.2,
 	},
 	zoomoutfactor = {
 		name = 'Zoom-out speed',
 		type = 'number',
-		min = 0.1,
-		max = 0.5,
-		step = 0.05,
+		min = 0.1, max = 0.5, step = 0.05,
 		value = 0.2,
 	},
 	invertzoom = {
 		name = 'Invert zoom',
+		desc = 'Invert the scroll wheel direction for zooming.',
+		type = 'bool',
+		value = true,
+	},
+	invertalt = {
+		name = 'Invert altitude',
+		desc = 'Invert the scroll wheel direction for altitude.',
 		type = 'bool',
 		value = false,
-		desc = 'Invert the scroll wheel direction for zooming and altitude.',
 	},
 	zoomoutfromcursor = {
 		name = 'Zoom out from cursor',
-		type = 'bool',
-		value = true,
 		desc = 'Zoom out from the cursor rather than center of the screen.',
+		type = 'bool',
+		value = false,
 	},
 	zoomintocursor = {
 		name = 'Zoom in to cursor',
+		desc = 'Zoom in to the cursor rather than the center of the screen.',
 		type = 'bool',
 		value = true,
-		desc = 'Zoom in to the cursor rather than the center of the screen.',
 	},
 	follow = {
 		name = "Follow player's cursor",
+		desc = "Follow the cursor of the player you're spectating (needs Ally Cursor widget to be on).",
 		type = 'bool',
 		value = false,
-		desc = "Follow the cursor of the player you're spectating (needs Ally Cursor widget to be on).",
-		path = 'Settings/View',
+		path = 'Settings/Camera',
 	},	
 	rotfactor = {
 		name = 'Rotation speed',
 		type = 'number',
-		min = 0.001,
-		max = 0.010,
-		step = 0.001,
+		min = 0.001, max = 0.020, step = 0.001,
 		value = 0.005,
 	},	
 	rotateonedge = {
 		name = "Rotate camera at edge",
+		desc = "Rotate camera when the cursor is at the edge of the screen (edge scroll must be off).",
 		type = 'bool',
 		value = false,
-		desc = "Rotate camera when the cursor is at the edge of the screen (edge scroll must be off).",
 	},
 	smoothness = {
 		name = 'Smoothness',
 		desc = "Controls how smooth the camera moves.",
 		type = 'number',
-		min = 0.0,
-		max = 0.8,
-		step = 0.1,
-		value = 0.4,
+		min = 0.0, max = 0.8, step = 0.1,
+		value = 0.2,
 	},
 	fov = {
 		name = 'Field of View',
 		desc = "FOV (35 deg - 100 deg). Requires restart to take effect.",
 		springsetting = 'CamFreeFOV',
 		type = 'number',
-		min = 35,
-		max = 100,
-		step = 5,
+		min = 35, max = 100, step = 5,
 		value = 45,
 	},
 	invertscroll = {
 		name = "Invert scrolling direction",
+		desc = "Invert scrolling direction (doesn't apply to smoothscroll).",
 		type = 'bool',
 		value = false,
-		desc = "Invert scrolling direction (doesn't apply to smoothscroll).",
 	},
+	restrictangle = {
+		name = "Restrict Camera Angle",
+		desc = "If disabled you can point the camera upward, but end up with strange camera positioning.",
+		type = 'bool',
+		advanced = true,
+		value = true,
+		OnChange = function(self) init = true; end
+	},
+	freemode = {
+		name = "FreeMode (RISKY)",
+		desc = "Be free. (USE AT YOUR OWN RISK!)",
+		type = 'bool',
+		advanced = true,
+		value = false,
+		OnChange = function(self) init = true; end,
+	},
+	mingrounddist = {
+		name = 'Minimum Ground Distance',
+		desc = 'Getting too close to the ground allows strange camera positioning.',
+		type = 'number',
+		advanced = true,
+		min = 0, max = 100, step = 1,
+		value = 1,
+		OnChange = function(self) init = true; end,
+	},
+	
+	overviewmode = {
+		name = "Overview",
+		desc = "Go to overview mode, then restore view to cursor position.",
+		type = 'button',
+		OnChange = function(self) OverviewAction() end,
+	},
+	
 }
 
 --------------------------------------------------------------------------------
@@ -241,8 +281,16 @@ local helpText = {}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local ls_x, ls_y, ls_z
+local ls_dist, ls_have, ls_onmap
+local tilting
+local overview_mode, last_rx, last_ls_dist
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 local vsx, vsy = widgetHandler:GetViewSizes()
+local cx,cy = vsx * 0.5,vsy * 0.5
 function widget:ViewResize(viewSizeX, viewSizeY)
 	vsx = viewSizeX
 	vsy = viewSizeY
@@ -257,7 +305,6 @@ local HALFPI		= PI/2
 local HALFPIMINUS	= HALFPI-0.01
 
 
-local init = true
 local fpsmode = false
 local mx, my = 0,0
 local msx, msy = 0,0
@@ -265,7 +312,7 @@ local cx, cy
 local smoothscroll = false
 local springscroll = false
 local lockspringscroll = false
-local rotate, lockSpot, gx, gy, gz, gdist, movekey
+local rotate, movekey
 local move, rot = {}, {}
 local key_code = {
 	left 		= 276,
@@ -362,82 +409,160 @@ local function MoveRotatedCam(cs, mxm, mym)
 	return cs
 end
 
-local function Zoom(up, s)
 
-	local cs = spGetCameraState()
-
-	local gpos
-	local gx, gy, gz
-	local dx, dy, dz
+local function VirtTraceRay(x,y, cs)
+	local _, gpos = spTraceScreenRay(x, y, true)
 	
-	if (up and options.zoomoutfromcursor.value)
-		or 
-		(not up and options.zoomintocursor.value)
-		then
-		_,gpos = spTraceScreenRay(mx, my, true)
-	else
-		_,gpos = spTraceScreenRay(vsx/2, vsy/2, true)
-	end
-		
-		
+	
 	if gpos then
-		gx, gy, gz = gpos[1], gpos[2], gpos[3]
-	else
-		local vecDist = (- cs.py) / cs.dy
-		gx, gy, gz = cs.px + vecDist*cs.dx, 	cs.py + vecDist*cs.dy, cs.pz + vecDist*cs.dz
+		local gx, gy, gz = gpos[1], gpos[2], gpos[3]
+		if gx < 0 or gx > mwidth or gz < 0 or gz > mheight then
+			return false, gx, gy, gz	
+		else
+			return true, gx, gy, gz
+		end
 	end
+	
+	if not cs or not cs.dy or cs.dy == 0 then
+		return false, false
+	end
+	local vecDist = (- cs.py) / cs.dy
+	local gx, gy, gz = cs.px + vecDist*cs.dx, 	cs.py + vecDist*cs.dy, 	cs.pz + vecDist*cs.dz
+	
+	return false, gx, gy, gz
+end
+
+local function SetLockSpot2(cs, x, y)
+	if ls_have then
+		return
+	end
+	
+	local x, y = x, y
+	if not x then
+		x, y = cx, cy
+	end
+
+	--local gpos
+	--_, gpos = spTraceScreenRay(x, y, true)
+	local onmap, gx,gy,gz = VirtTraceRay(x, y, cs)
 	
 	if gx then
-		dx = gx - cs.px
-		dy = gy - cs.py
-		dz = gz - cs.pz
-	else
+		ls_x,ls_y,ls_z = gx,gy,gz
+		local px,py,pz = cs.px,cs.py,cs.pz
+		local dx,dy,dz = ls_x-px, ls_y-py, ls_z-pz
+		ls_onmap = onmap
+		ls_dist = sqrt(dx*dx + dy*dy + dz*dz)
+		ls_have = true
+	end
+end
+
+
+local function UpdateCam(cs)
+	local cs = cs
+	if not (cs.rx and cs.ry and ls_dist) then
+		--return cs
 		return false
 	end
 	
-	local sp = (up and -options.zoomoutfactor.value or options.zoominfactor.value) * (s and 4 or 1)
+	local opp = sin(cs.rx) * ls_dist
+	local alt = sqrt(ls_dist * ls_dist - opp * opp)
+	cs.px = ls_x - sin(cs.ry) * alt
+	cs.py = ls_y - opp
+	cs.pz = ls_z - cos(cs.ry) * alt
 	
-	MoveRotatedCam(cs, 0, 0)
+	if not options.freemode.value and cs.py < Spring.GetGroundHeight(cs.px, cs.pz)+5 then
+		return false
+	end
+	
+	return cs
+end
 
-	cs.px = cs.px + dx * sp
-	cs.py = cs.py + dy * sp
-	cs.pz = cs.pz + dz * sp
+local function Zoom(zoomin, s)
+	local zoomin = zoomin
+	if options.invertzoom.value then
+		zoomin = not zoomin
+	end
+
+	local cs = spGetCameraState()
+	-- [[
+	if
+		(zoomin and options.zoomintocursor.value)
+		or ((not zoomin) and options.zoomoutfromcursor.value)
+		then
+		
+		local onmap, gx,gy,gz = VirtTraceRay(mx, my, cs)
+		
+		if onmap then
+			if gx then
+				dx = gx - cs.px
+				dy = gy - cs.py
+				dz = gz - cs.pz
+			else
+				return false
+			end
+			
+			local sp = (zoomin and options.zoominfactor.value or -options.zoomoutfactor.value) * (s and 4 or 1)
+			
+			cs.px = cs.px + dx * sp
+			cs.py = cs.py + dy * sp
+			cs.pz = cs.pz + dz * sp
+			
+			if not options.freemode.value and cs.py < Spring.GetGroundHeight(cs.px, cs.pz)+5 then
+				return true
+			end
+			
+			spSetCameraState(cs, options.smoothness.value)
+			ls_have = false
+			return
+		end
+		
+	end
+	--]]
+	ls_have = false
+	SetLockSpot2(cs)
+	if not ls_have then
+		return
+	end
 	
-	local newDist = GetDist( cs.px,  cs.py,  cs.pz, mcx, mcy, mcz)
+	if zoomin and not ls_onmap then
+		return
+	end
 	
-	if not up or newDist < maxDistY then
+	local sp = (zoomin and -options.zoominfactor.value or options.zoomoutfactor.value) * (s and 3 or 1)
+	
+	ls_dist = ls_dist + ls_dist*sp
+
+	ls_dist = math.max(ls_dist, 20)
+	
+	local cstemp = UpdateCam(cs)
+	if cstemp then cs = cstemp; end
+	if zoomin or ls_dist < maxDistY then
 		spSetCameraState(cs, options.smoothness.value)
 	end
 
 	return true
 end
 
+
 local function Altitude(up, s)
+	ls_have = false
+	
+	local up = up
+	if options.invertalt.value then
+		up = not up
+	end
+	
 	local cs = spGetCameraState()
 	local py = max(1, abs(cs.py) )
 	local dy = py * (up and 1 or -1) * (s and 0.3 or 0.1)
-	spSetCameraState({ py = py + dy, }, options.smoothness.value)
+	cs.py = py + dy
+	if not options.freemode.value and cs.py < Spring.GetGroundHeight(cs.px, cs.pz)+5  then
+		return true
+	end
+	spSetCameraState(cs, options.smoothness.value)
 	return true
 end
 
-
-local function SetLockSpot(cs, x,y)
-	local gpos
-	if options.targetmouse.value then
-		_, gpos = spTraceScreenRay(x, y, true)
-	else
-		_, gpos = spTraceScreenRay(vsx/2, vsy/2, true)
-	end
-	if gpos then
-		gx,gy,gz = gpos[1], gpos[2], gpos[3]
-		
-		spSetCameraTarget(gx,gy,gz, 1)
-		local px,py,pz = cs.px,cs.py,cs.pz
-		local dx,dy,dz = gx-px, gy-py, gz-pz
-		gdist = sqrt(dx*dx + dy*dy + dz*dz)
-	end
-	
-end
 
 local function ResetCam()
 	local cs = spGetCameraState()
@@ -449,56 +574,160 @@ local function ResetCam()
 	spSetCameraState(cs, 1)
 end
 
+OverviewAction = function()
+	if not overview_mode then
+		
+		local cs = spGetCameraState()
+		SetLockSpot2(cs)
+		last_ls_dist = ls_dist
+		last_rx = cs.rx
+		
+		cs.px = Game.mapSizeX/2
+		cs.py = maxDistY
+		cs.pz = Game.mapSizeZ/2
+		cs.rx = -HALFPI
+		spSetCameraState(cs, 1)
+	else
+		mx, my = spGetMouseState()
+		local onmap, gx, gy, gz = VirtTraceRay(mx,my)
+		if gx and onmap then
+			local cs = spGetCameraState()			
+			cs.rx = last_rx
+			ls_dist = last_ls_dist 
+			ls_x = gx
+			ls_z = gz
+			ls_y = Spring.GetGroundHeight(ls_x, ls_z)
+			ls_have = true
+			local cstemp = UpdateCam(cs)
+			if cstemp then cs = cstemp; end
+			spSetCameraState(cs, 1)
+		end
+	end
+	
+	overview_mode = not overview_mode
+end
 
 
 
-local function RotateCamera(x, y, dx, dy, smooth)
+
+local function RotateCamera(x, y, dx, dy, smooth, lock)
 	local cs = spGetCameraState()
+	local cs1 = cs
 	if cs.rx then
 		
 		cs.rx = cs.rx + dy * options.rotfactor.value
 		cs.ry = cs.ry - dx * options.rotfactor.value
+		
+		--local max_rx = options.restrictangle.value and -0.1 or HALFPIMINUS
+		local max_rx = HALFPIMINUS
+		
 		if cs.rx < -HALFPIMINUS then
 			cs.rx = -HALFPIMINUS
-		elseif cs.rx > HALFPIMINUS then
-			cs.rx = HALFPIMINUS 
+		elseif cs.rx > max_rx then
+			cs.rx = max_rx 
 		end
 		
 		
-		if lockSpot then
-			if not gdist then
-				SetLockSpot(cs, x,y)
+		if lock and ls_onmap then
+			local cstemp = UpdateCam(cs)
+			if cstemp then
+				cs = cstemp;
 			else
-				local opp = sin(cs.rx) * gdist
-				local alt = sqrt(gdist * gdist - opp * opp)
-				cs.px = gx - sin(cs.ry) * alt
-				cs.py = gy - opp
-				cs.pz = gz - cos(cs.ry) * alt
-				spWarpMouse(cx, cy)
+				return
 			end
+		else
+			ls_have = false
 		end
 		spSetCameraState(cs, smooth and options.smoothness.value or 0)
 	end
 end
 
-local function tilt(s, dir)
-	lockSpot = true
+
+local function Tilt(s, dir)
+	if not tilting then
+		ls_have = false	
+	end
+	tilting = true
 	local cs = spGetCameraState()
-	msx = mx
-	msy = my
-	SetLockSpot(cs, vsx * 0.5, vsy * 0.5)
+	SetLockSpot2(cs)
+	if not ls_have then
+		return
+	end
+
 	local speed = dir * (s and 30 or 10)
-	RotateCamera(vsx * 0.5, vsy * 0.5, 0, speed, true)
-	lockSpot = nil
-	gdist = nil
-	spWarpMouse(msx,msy)
+	RotateCamera(vsx * 0.5, vsy * 0.5, 0, speed, true, true) --smooth, lock
+
 	return true
 end
 
+
+
+local function ScrollCam(cs, mxm, mym, smoothlevel)
+	SetLockSpot2(cs)
+	if not cs.dy or not ls_have then
+		--echo "<COFC> scrollcam fcn fail"
+		return cs	
+	end
+
+	-- forward, up, right, top, bottom, left, right
+	local camVecs = spGetCameraVectors()
+	local cf = camVecs.forward
+	local len = sqrt((cf[1] * cf[1]) + (cf[3] * cf[3]))
+	local dfx = cf[1] / len
+	local dfz = cf[3] / len
+	local cr = camVecs.right
+	local len = sqrt((cr[1] * cr[1]) + (cr[3] * cr[3]))
+	local drx = cr[1] / len
+	local drz = cr[3] / len
+	
+	local vecDist = (- cs.py) / cs.dy
+	
+	local ddx = (mxm * drx) + (mym * dfx)
+	local ddz = (mxm * drz) + (mym * dfz)
+	
+	ls_x = ls_x + ddx
+	ls_z = ls_z + ddz
+	
+	ls_x = math.min(ls_x, mwidth)
+	ls_x = math.max(ls_x, 0)
+	
+	ls_z = math.min(ls_z, mheight)
+	ls_z = math.max(ls_z, 0)
+	
+	ls_y = Spring.GetGroundHeight(ls_x, ls_z)
+	
+	local cstemp = UpdateCam(cs)
+	if cstemp then cs = cstemp; end
+	
+	spSetCameraState(cs, smoothlevel)
+	
+end
+
+local function PeriodicWarning()
+	local c_widgets, c_widgets_list = '', {}
+	for name,data in pairs(widgetHandler.knownWidgets) do
+		if data.active and
+			(
+			name:find('SmoothScroll')
+			or name:find('Hybrid Overhead')
+			or name:find('Complete Control Camera')
+			)
+			then
+			c_widgets_list[#c_widgets_list+1] = name
+		end
+	end
+	for _,wname in ipairs(c_widgets_list) do
+		c_widgets = c_widgets .. wname .. ', '
+	end
+	if c_widgets ~= '' then
+		echo('<COFCam> *Periodic warning* Please disable other camera widgets: ' .. c_widgets)
+	end
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 function widget:Update(dt)
+
 	if options.follow.value then
 		camcycle = camcycle %(32*6) + 1
 		if camcycle == 1 then
@@ -515,18 +744,7 @@ function widget:Update(dt)
 	cycle = cycle %(32*15) + 1
 	-- Periodic warning
 	if cycle == 1 then
-		local c_widgets, c_widgets_list = '', {}
-		for name,data in pairs(widgetHandler.knownWidgets) do
-			if data.active and ( name:find('SmoothScroll') or name:find('Hybrid Overhead') )then
-				c_widgets_list[#c_widgets_list+1] = name
-			end
-		end
-		for _,wname in ipairs(c_widgets_list) do
-			c_widgets = c_widgets .. wname .. ', '
-		end
-		if c_widgets ~= '' then
-			echo('<CC Cam> *Periodic warning* Please disable other camera widgets: ' .. c_widgets)
-		end
+		PeriodicWarning()
 	end
 
 	local cs = spGetCameraState()
@@ -548,7 +766,6 @@ function widget:Update(dt)
 		elseif rot.down then
 			RotateCamera(vsx * 0.5, vsy * 0.5, 0, -speed, true)
 		end
-		
 		
 	end
 	
@@ -581,8 +798,8 @@ function widget:Update(dt)
 			local dir = options.invertscroll.value and -1 or 1
 			mxm = speed * (x - mx) * dir
 			mym = speed * (y - my) * dir
-			--spWarpMouse(msx, msy)
-			spWarpMouse(cx, cy)
+			
+			spWarpMouse(cx, cy)		
 		else
 			local speed = options.speedFactor_k.value * (s and 3 or 1) * heightFactor
 			
@@ -600,10 +817,10 @@ function widget:Update(dt)
 			smoothlevel = options.smoothness.value
 		end
 		
-		cs = MoveRotatedCam(cs, mxm, mym)
+		ScrollCam(cs, mxm, mym, smoothlevel)
 		
-		spSetCameraState(cs, smoothlevel)
 	end
+	
 	mx, my = spGetMouseState()
 	
 	if options.edgemove.value then
@@ -635,7 +852,7 @@ function widget:Update(dt)
 			rot.down = true
 		end
 	end
-
+	
 	fpsmode = cs.name == "fps"
 	if init or ((cs.name ~= "free") and (cs.name ~= "ov") and not fpsmode) then 
 		init = false
@@ -643,22 +860,24 @@ function widget:Update(dt)
 		local cs = spGetCameraState()
 		cs.tiltSpeed = 0
 		cs.scrollSpeed = 0
-		cs.gndOffset = 2
+		--cs.gndOffset = options.mingrounddist.value
+		cs.gndOffset = options.freemode.value and 0 or 1
 		spSetCameraState(cs,0)
 	end
 	
 end
 
 function widget:MouseMove(x, y, dx, dy, button)
+    if fpsmode then return end
 	if rotate then
 		if abs(dx) > 0 or abs(dy) > 0 then
-			RotateCamera(x, y, dx, dy, false)
-		end
-		if not (lockSpot) then
-			spWarpMouse(msx, msy)
+			RotateCamera(x, y, dx, dy, false, ls_have)
 		end
 		
+		spWarpMouse(msx, msy)
+		
 	elseif springscroll then
+		
 		if abs(dx) > 0 or abs(dy) > 0 then
 			lockspringscroll = false
 		end
@@ -669,21 +888,16 @@ function widget:MouseMove(x, y, dx, dy, button)
 		local speed = options.speedFactor.value * cs.py/1000 / 10
 		local mxm = speed * dx * dir
 		local mym = speed * dy * dir
-	
-		cs = MoveRotatedCam(cs, mxm, mym)
-				
-		spSetCameraState(cs, 0)
-		if not (lockSpot) then
-			spWarpMouse(msx, msy)
-		end
-		
+		ScrollCam(cs, mxm, mym, 0)
 	end
 end
 
 
 function widget:MousePress(x, y, button)
+	ls_have = false
+	overview_mode = false
+    if fpsmode then return end
 	if lockspringscroll then
-		spWarpMouse(msx, msy)
 		lockspringscroll = false
 		return true
 	end
@@ -710,27 +924,40 @@ function widget:MousePress(x, y, button)
 	
 	msx = x
 	msy = y
-	spWarpMouse(cx, cy)
+	
 	spSendCommands({'trackoff'})
 	
-	rotate, lockSpot = false, false
+	rotate = false
 	-- Rotate --
 	if a then
+		spWarpMouse(cx, cy)
+		ls_have = false
 		rotate = true
 		return true
 	end
 	-- Rotate World --
 	if c then
+	
+		if options.targetmouse.value then
+			
+			local onmap, gx, gy, gz = VirtTraceRay(x,y, cs)
+			if gx and onmap then
+				SetLockSpot2(cs,x,y)
+				
+				spSetCameraTarget(gx,gy,gz, 1)
+			end
+		end
+		spWarpMouse(cx, cy)
+		SetLockSpot2(cs)
 		rotate = true
-		SetLockSpot(cs, x,y)
 		msx = cx
 		msy = cy
-		lockSpot = true
 		return true
 	end
 	
 	-- Scrolling --
 	if options.smoothscroll.value then
+		spWarpMouse(cx, cy)
 		smoothscroll = true
 	else
 		springscroll = true
@@ -744,72 +971,78 @@ end
 function widget:MouseRelease(x, y, button)
 	if (button == 2) then
 		rotate = nil
-		if not (lockSpot or lockspringscroll) then
-			spWarpMouse(msx, msy)
-		end
-		lockSpot = nil
 		smoothscroll = false
 		springscroll = false
-		gdist = nil
 		return -1
 	end
 end
 
 function widget:MouseWheel(up, value)
+    if fpsmode then return end
 	local a,c,m,s = spGetModKeyState()
-	
-	if options.invertzoom.value then
-		up = not up
-	end
 	
 	-- Altitude --
 	if c then
-		return tilt(s, up and 1 or -1)
+		return Tilt(s, up and 1 or -1)
 	elseif a then
 		return Altitude(up, s)
 	end
 	
 	-- Zoom --	
-	return Zoom(up, s)
+	return Zoom(not up, s)
 end
 
 function widget:KeyPress(key, modifier, isRepeat)
+	--ls_have = false
+	tilting = false
+	
 	if fpsmode then return end
 	if keys[key] then
 		if modifier.ctrl or modifier.alt then
+		
+			local cs = spGetCameraState()
+			SetLockSpot2(cs)
+			if not ls_have then
+				return
+			end
+			
+		
 			local speed = modifier.shift and 30 or 10 
-			if not modifier.alt then
-				lockSpot = true
-				local cs = spGetCameraState()
-				SetLockSpot(cs, vsx * 0.5, vsy * 0.5)
+			
+			if key == key_code.right then 		RotateCamera(vsx * 0.5, vsy * 0.5, speed, 0, true, not modifier.alt)
+			elseif key == key_code.left then 	RotateCamera(vsx * 0.5, vsy * 0.5, -speed, 0, true, not modifier.alt)
+			elseif key == key_code.down then 	RotateCamera(vsx * 0.5, vsy * 0.5, 0, -speed, true, not modifier.alt)
+			elseif key == key_code.up then 		RotateCamera(vsx * 0.5, vsy * 0.5, 0, speed, true, not modifier.alt)
 			end
-			if key == key_code.right then 		RotateCamera(vsx * 0.5, vsy * 0.5, speed, 0, true)
-			elseif key == key_code.left then 	RotateCamera(vsx * 0.5, vsy * 0.5, -speed, 0, true)
-			elseif key == key_code.down then 	RotateCamera(vsx * 0.5, vsy * 0.5, 0, -speed, true)
-			elseif key == key_code.up then 		RotateCamera(vsx * 0.5, vsy * 0.5, 0, speed, true)
-			end
-			lockSpot = false
+			return
 		else
 			movekey = true
 			move[keys[key]] = true
 		end
 	elseif key == key_code.pageup then
 		if modifier.ctrl then
-			tilt(modifier.shift, 1)
+			Tilt(modifier.shift, 1)
+			return
 		elseif modifier.alt then
 			Altitude(true, modifier.shift)
+			return
 		else
 			Zoom(true, modifier.shift)
+			return
 		end
 	elseif key == key_code.pagedown then
 		if modifier.ctrl then
-			tilt(modifier.shift, -1)
+			Tilt(modifier.shift, -1)
+			return
 		elseif modifier.alt then
 			Altitude(false, modifier.shift)
+			return
 		else
 			Zoom(false, modifier.shift)
+			return
 		end
 	end
+	tilting = false
 end
 function widget:KeyRelease(key)
 	if keys[key] then
@@ -826,7 +1059,7 @@ local function DrawLine(x0, y0, c0, x1, y1, c1)
 end
 
 local function DrawPoint(x, y, c, s)
-  glPointSize(s)
+  --FIXME reenable later - ATIBUG glPointSize(s)
   glColor(c)
   glBeginEnd(GL_POINTS, glVertex, x, y)
 end
@@ -841,7 +1074,7 @@ function widget:DrawScreen()
 		glBeginEnd(GL_LINES, DrawLine, x, y, green, cx, cy, red)
 		glLineWidth(1)
 		
-	    DrawPoint(cx, cy, black, 14)
+		DrawPoint(cx, cy, black, 14)
 		DrawPoint(cx, cy, white, 11)
 		DrawPoint(cx, cy, black,  8)
 		DrawPoint(cx, cy, red,    5)
@@ -850,7 +1083,7 @@ function widget:DrawScreen()
 	end
 	
 	local filefound	
-	if smoothscroll or (rotate and lockSpot) then
+	if smoothscroll or (rotate and ls_have) then
 		filefound = glTexture(LUAUI_DIRNAME .. 'Images/ccc/arrows-dot.png')
 	elseif rotate or lockspringscroll or springscroll then
 		filefound = glTexture(LUAUI_DIRNAME .. 'Images/ccc/arrows.png')
@@ -860,19 +1093,25 @@ function widget:DrawScreen()
 	
 		if smoothscroll then
 			glColor(0,1,0,1)
-		elseif (rotate and lockSpot) then
+		elseif (rotate and ls_have) then
 			glColor(1,0.6,0,1)
 		elseif rotate then
 			glColor(1,1,0,1)
 		elseif lockspringscroll then
 			glColor(1,0,0,1)
 		elseif springscroll then
-			glColor(0,1,1,1)
+			if options.invertscroll.value then
+				glColor(1,0,1,1)
+			else
+				glColor(0,1,1,1)
+			end
 		end
 		
 		glAlphaTest(GL_GREATER, 0)
 		
-		spSetMouseCursor('none')
+		if not (springscroll and not lockspringscroll) then
+		    spSetMouseCursor('none')
+		end
 		if smoothscroll then
 			local icon_size2 = icon_size
 			glTexRect(x-icon_size, y-icon_size2, x+icon_size, y+icon_size2)
@@ -891,6 +1130,8 @@ function widget:Initialize()
 	helpText = explode( '\n', options.helpwindow.value )
 	cx = vsx * 0.5
 	cy = vsy * 0.5
+	
+	Spring.SendCommands( 'unbindaction toggleoverview' )
 end
 
 function widget:Shutdown()
@@ -899,12 +1140,12 @@ end
 
 function widget:TextCommand(command)
 	
-	if command == "ccc help" then
+	if command == "cofc help" then
 		for i, text in ipairs(helpText) do
-			echo('<CC Cam['.. i ..']> '.. text)
+			echo('<COFCam['.. i ..']> '.. text)
 		end
 		return true
-	elseif command == "ccc reset" then
+	elseif command == "cofc reset" then
 		ResetCam()
 		return true
 	end
