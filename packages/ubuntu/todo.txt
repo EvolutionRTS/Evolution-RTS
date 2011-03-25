@@ -3,7 +3,7 @@ evolutionrts
 - replace png for desktop/menu icon, preferably with svg (or find out how FDO specifies multiple images of diff sizes)
 - short and long descriptions in evolutionrts/debian/control
 - copyright notice evolutionrts/{COPYRIGHT,debian/copyright}
-
+- prepare changes for natty, check which engine got synced from debian
 
 
 evolutionrts-maps
