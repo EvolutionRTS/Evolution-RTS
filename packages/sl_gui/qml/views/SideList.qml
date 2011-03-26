@@ -17,7 +17,7 @@ Item {
 				id: sideImage
 				width: 32
 				height: 32
-				source: "image://side/" + display
+				source: "image://sides/" + display
 				anchors.verticalCenter: parent.verticalCenter
 				anchors.leftMargin: 5
 				anchors.left: parent.left
