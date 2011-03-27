@@ -26,6 +26,7 @@ Image {
 		onExited: { parent.state = "plain"  }
 		onClicked: { parent.state = "clicked"
 			butTimer.start()
+			audioManager.playSound( "button_click.wav" );
 			menu_button.clicked() }
 
 	}
