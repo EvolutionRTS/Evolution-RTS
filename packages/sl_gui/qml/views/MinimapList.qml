@@ -62,7 +62,7 @@ Item {
 	ListView {
 		id: list
 		delegate: mapDelegate
-		model: myModel
+		model: maplistModel
 		anchors.left:  minimap.left
 		anchors.top: minimap.bottom
 		width: parent.width -25
@@ -74,7 +74,7 @@ Item {
 		anchors.margins: 10
 		spacing: 5
 		onCurrentIndexChanged: {
-			minimap.load( myModel.name(currentIndex) )
+			minimap.load( maplistModel.name(currentIndex) )
 		}
 	}
 

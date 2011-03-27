@@ -54,7 +54,7 @@ Item {
 		spacing: 5
 		highlight: Rectangle { opacity: 1; radius: 5; color: "red" }
 //		onCurrentIndexChanged: {
-////			minimap.load( myModel.name(currentIndex) )
+////			minimap.load( maplistModel.name(currentIndex) )
 //		}
 	}
 	property alias currentIndex: slist.currentIndex
