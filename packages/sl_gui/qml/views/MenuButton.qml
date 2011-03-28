@@ -23,12 +23,12 @@ Image {
 		anchors.fill: parent
 		hoverEnabled: true
 		onEntered: { parent.state = "rollover"
-			audioManager.playSound( "button_click.wav" );
+			audioManager.playSound( "button_rollover.wav" );
 		}
 		onExited: { parent.state = "plain"  }
 		onClicked: { parent.state = "clicked"
 			butTimer.start()
-			audioManager.playSound( "ack.wav" );
+			audioManager.playSound( "button_clicked.wav" );
 			menu_button.clicked() }
 
 	}

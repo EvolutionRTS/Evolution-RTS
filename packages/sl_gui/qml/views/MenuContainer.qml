@@ -22,7 +22,10 @@ Column {
 	MenuButton{ text: "Skirmish"; onClicked : load(1) }
 	MenuButton{ text: "Play online" }
 	MenuButton{ text: "Settings" }
-	MenuButton{ text: "Update" }
+	MenuButton{ text: audioManager.isActive() ? "Audio On" : "Audio Off";
+		onClicked: { audioManager.toggleActive();
+				text = audioManager.isActive() ? "Audio On" : "Audio Off" }
+	}
 	MenuButton{ text: "How to play" }
 	MenuButton{ text: "Website"; onClicked : load(0) }
 	MenuButton{ text: "Quit"; onClicked: Qt.quit() }
