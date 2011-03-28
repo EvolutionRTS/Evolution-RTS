@@ -22,11 +22,13 @@ Image {
 		id: mouseAreaButton
 		anchors.fill: parent
 		hoverEnabled: true
-		onEntered: { parent.state = "rollover" }
+		onEntered: { parent.state = "rollover"
+			audioManager.playSound( "button_click.wav" );
+		}
 		onExited: { parent.state = "plain"  }
 		onClicked: { parent.state = "clicked"
 			butTimer.start()
-			audioManager.playSound( "button_click.wav" );
+			audioManager.playSound( "ack.wav" );
 			menu_button.clicked() }
 
 	}
