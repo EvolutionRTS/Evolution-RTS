@@ -1,12 +1,13 @@
 import Qt 4.7
 Item {
 	id: settingsView
-	anchors.fill: parent
+	width: parent.width - 24
+	height: parent.height - 24
 	anchors.horizontalCenter: parent.horizontalCenter
 	Component {
 		id: presetDelegate
 		Rectangle {
-			anchors.horizontalCenterOffset: ListView.isCurrentItem ? -10 : 0
+			anchors.horizontalCenterOffset: ListView.isCurrentItem ? 10 : 0
 			anchors.horizontalCenter: parent.horizontalCenter
 			id: presetDelegate
 			height: 40
@@ -61,6 +62,8 @@ Item {
 		border.color: "#ffffff"
 		radius: 10
 		anchors.horizontalCenter: parent.horizontalCenter
+		anchors.top: parent.top
+		anchors.margins: 15
 		id: titleRec
 		width: parent.width * 0.8
 		height:  42

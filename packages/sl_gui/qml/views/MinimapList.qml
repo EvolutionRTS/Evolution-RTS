@@ -3,7 +3,8 @@ Item {
 	Component {
 		id: mapDelegate
 		Rectangle {
-			x: ListView.isCurrentItem ? parent.x + 10 : parent.x
+			anchors.horizontalCenterOffset: ListView.isCurrentItem ?  10 : 0
+			anchors.horizontalCenter: parent.horizontalCenter
 			id: albumDelegateRec
 			height: 30
 			width: parent.width
@@ -41,7 +42,7 @@ Item {
 					ListView.view.currentIndex = index
 					}
 			}
-			Behavior on x {
+			Behavior on anchors.horizontalCenterOffset {
 				PropertyAnimation{ easing.type: Easing.Linear; duration: 300 }
 			}
 			Behavior on scale {
