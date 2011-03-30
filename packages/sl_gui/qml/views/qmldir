@@ -9,3 +9,4 @@ MinimapList MinimapList.qml
 SideList SideList.qml
 Skirmish Skirmish.qml
 SkirmishDelegate SkirmishDelegate.qml
+GenericDelegate GenericDelegate.qml

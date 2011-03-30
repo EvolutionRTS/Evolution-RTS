@@ -1,56 +1,5 @@
 import Qt 4.7
 Item {
-	Component {
-		id: mapDelegate
-		Rectangle {
-			anchors.horizontalCenterOffset: ListView.isCurrentItem ?  10 : 0
-			anchors.horizontalCenter: parent.horizontalCenter
-			id: albumDelegateRec
-			height: 30
-			width: parent.width
-			property bool isCurrent: ListView.isCurrentItem
-			opacity: isCurrent ? 1.0 : 0.8
-			Behavior on opacity {
-				PropertyAnimation{}
-			}
-
-			color: "#0a92d5"; radius: 4
-			gradient: Gradient {
-				GradientStop {
-					position: 0.00;
-					color: "#0a92d5";
-				}
-				GradientStop {
-					position: 1.00;
-					color: "#0e7fb3";
-				}
-			}
-			scale: activeFocus ? 1.0 : 0.95
-			Text {
-				id: mapname
-				anchors.fill: parent
-				anchors.centerIn: parent
-				horizontalAlignment: Text.AlignHCenter
-				verticalAlignment:Text.AlignVCenter
-				text: display
-				color: "white"
-				smooth: true
-			}
-			MouseArea{
-				anchors.fill: parent
-				onClicked: {
-					ListView.view.currentIndex = index
-					}
-			}
-			Behavior on anchors.horizontalCenterOffset {
-				PropertyAnimation{ easing.type: Easing.Linear; duration: 300 }
-			}
-			Behavior on scale {
-				PropertyAnimation{ easing.type: Easing.Linear; duration: 300 }
-			}
-		}
-	}
-
 	Minimap {
 		id: minimap
 		anchors.margins: 10
@@ -62,7 +11,12 @@ Item {
 
 	ListView {
 		id: list
-		delegate: mapDelegate
+		delegate: GenericDelegate {
+			height: 30
+			width: list.width
+			font_bold:  false
+			font_size: 12
+		}
 		model: maplistModel
 		anchors.left:  minimap.left
 		anchors.top: minimap.bottom
