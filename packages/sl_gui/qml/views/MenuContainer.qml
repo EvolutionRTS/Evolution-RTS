@@ -7,7 +7,7 @@ Column {
 	spacing: 20
 	anchors.verticalCenter:  parent.verticalCenter
 
-	property variant elIds: [webBrowser, skirmishView]
+	property variant elIds: [webBrowser, skirmishView,settingsView]
 //	property variant elIds: [skirmishView, skirmishView]
 	function load(viewID) {
 		for ( var lid in elIds ) {
@@ -21,7 +21,7 @@ Column {
 
 	MenuButton{ text: "Skirmish"; onClicked : load(1) }
 	MenuButton{ text: "Play online" }
-	MenuButton{ text: "Settings" }
+	MenuButton{ text: "Settings" ; onClicked : load(2) }
 	MenuButton{ text: audioManager.isActive() ? "Audio On" : "Audio Off";
 		onClicked: { audioManager.toggleActive();
 				text = audioManager.isActive() ? "Audio On" : "Audio Off" }
