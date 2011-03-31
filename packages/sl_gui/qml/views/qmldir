@@ -11,3 +11,4 @@ Skirmish Skirmish.qml
 SkirmishDelegate SkirmishDelegate.qml
 GenericDelegate GenericDelegate.qml
 DText DText.qml
+Sidepic Sidepic.qml
