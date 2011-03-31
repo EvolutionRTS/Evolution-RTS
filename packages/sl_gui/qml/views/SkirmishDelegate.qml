@@ -22,7 +22,7 @@ Item {
 		}
 	}
 
-	Text {
+	DText {
 		id: name
 		text:  skirmish_name
 		color: "black"
@@ -42,7 +42,7 @@ Item {
 			anchors.fill: parent
 			radius: 5
 		}
-		Text {
+		DText {
 			text:  description
 			anchors.margins: 15
 			anchors.fill: parent
@@ -60,7 +60,7 @@ Item {
 				anchors.fill: parent
 				radius: 5
 				border.color: "#110101"
-				Text{
+				DText{
 					text: "Play"
 					font.pointSize: 12
 					anchors.centerIn: parent

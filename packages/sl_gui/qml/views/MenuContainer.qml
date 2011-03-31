@@ -8,7 +8,6 @@ Column {
 	anchors.verticalCenter:  parent.verticalCenter
 
 	property variant elIds: [webBrowser, skirmishView,settingsView]
-//	property variant elIds: [skirmishView, skirmishView]
 	function load(viewID) {
 		for ( var lid in elIds ) {
 			var qmlItem = elIds[lid]

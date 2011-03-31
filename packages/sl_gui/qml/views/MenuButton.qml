@@ -8,7 +8,7 @@ Image {
 	signal clicked()
 	property alias mouseAreaButton: mouseAreaButton
 
-	Text {
+	DText {
 		id: but_text
 		anchors.horizontalCenter: parent.horizontalCenter
 		color: "white"

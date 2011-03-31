@@ -31,6 +31,7 @@ Item {
 		onCurrentIndexChanged: {
 			minimap.load( maplistModel.name(currentIndex) )
 		}
+		clip: true
 	}
 
 	property alias currentIndex: list.currentIndex

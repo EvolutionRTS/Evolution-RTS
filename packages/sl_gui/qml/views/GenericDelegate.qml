@@ -23,7 +23,7 @@ Rectangle {
 		}
 	}
 	scale: activeFocus ? 1.0 : 0.95
-	Text {
+	DText {
 		id: textId
 		anchors.fill: parent
 		anchors.centerIn: parent

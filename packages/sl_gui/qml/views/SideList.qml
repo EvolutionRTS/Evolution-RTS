@@ -23,7 +23,7 @@ Item {
 				anchors.left: parent.left
 			}
 
-			Text {
+			DText {
 				id: side_name
 				text: display
 				font.bold: true

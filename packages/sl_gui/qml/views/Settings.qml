@@ -15,7 +15,7 @@ Item {
 		id: titleRec
 		width: parent.width * 0.8
 		height:  42
-		Text {
+		DText {
 			id: title
 			anchors.fill: parent
 			anchors.centerIn: parent
