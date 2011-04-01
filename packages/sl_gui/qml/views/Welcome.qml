@@ -22,8 +22,8 @@ MainView {
 				+"At current there is a single faction called the “Outer Colonies”. This faction has various technologies available to it, including Hovercraft, Amphibious units, All-Terrain units, Aircraft and Base structures. The broad scheme of the gameplay is still in development, however the basis is entirely intact. At the moment, the main goals are continuing the development of the gameplay, whether that be adding new units, adding new game modes, or expanding visuals and effects.<br/><br/>"
 				+"Evolution RTS also has some very powerful tools available for mappers, with a huge repository of map features (trees, buildings, wreaks, etc) that can be placed on a map simply by clicking on them. The documentation for the game is largely incomplete, but a user manual is being created, and seeks to help with basic understanding of how the game works.<br/><br/>"
 				+"Our source material is public (Open Source), and there is a link in the right hand sidebar to view our repository. Please be mindful of the license terms. When a final release of Evolution RTS is reached, the development team intends to make ALL of the source available to use in other projects.<br/><br/>"
-				+"For more information, you may feel free to either post in our forums, or join the #evolution channel in the multiplayer lobby.<br/>"
-				+"Thanks, and we hope that you enjoy our game,<br/><br/>"
+				+"For more information, you may feel free to either post in our forums, or join the #evolution channel in the multiplayer lobby.<br/><br/>"
+				+"Thanks, and we hope that you enjoy our game,<br/>"
 				+"-The Evolution RTS Development Team"
 		}
 	}
