@@ -12,3 +12,5 @@ SkirmishDelegate SkirmishDelegate.qml
 GenericDelegate GenericDelegate.qml
 DText DText.qml
 Sidepic Sidepic.qml
+Welcome Welcome.qml
+MainView MainView.qml

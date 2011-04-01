@@ -28,6 +28,7 @@ Rectangle {
 		Browser {	id: webBrowser }
 		Skirmish { id: skirmishView }
 		Settings { id: settingsView }
+		Welcome { id: welcomeView }
 	}
 
 

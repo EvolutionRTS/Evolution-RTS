@@ -1,9 +1,6 @@
 import Qt 4.7
-Item {
+MainView {
 	id: settingsView
-	width: parent.width - 24
-	height: parent.height - 24
-	anchors.horizontalCenter: parent.horizontalCenter
 
 	Rectangle {
 		color: "#000000"
@@ -49,26 +46,5 @@ Item {
 			presetModel.use( currentIndex )
 		}
 	}
-
-	states: [
-		State {
-			name: "Offscreen"
-			PropertyChanges { target: settingsView; 	anchors.topMargin:  4000 }
-			AnchorChanges { target: settingsView; anchors {top: mainContainer.bottom } }
-
-		},
-		State {
-			name: "Onscreen"
-			AnchorChanges { target: settingsView; anchors {top: mainContainer.top } }
-			PropertyChanges { target: settingsView; 	anchors.topMargin:  12 }
-		}
-	]
-	transitions: [
-		Transition {
-			AnchorAnimation{  easing.type: Easing.InOutQuad; duration: 1000  }
-		}
-	]
-	state:  "Offscreen"
-
 	property alias currentIndex: plist.currentIndex
 }

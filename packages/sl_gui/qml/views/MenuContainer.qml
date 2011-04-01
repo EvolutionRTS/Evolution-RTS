@@ -7,7 +7,7 @@ Column {
 	spacing: 20
 	anchors.verticalCenter:  parent.verticalCenter
 
-	property variant elIds: [webBrowser, skirmishView,settingsView]
+	property variant elIds: [webBrowser, skirmishView,settingsView,welcomeView]
 	function load(viewID) {
 		for ( var lid in elIds ) {
 			var qmlItem = elIds[lid]
@@ -19,7 +19,7 @@ Column {
 	}
 
 	MenuButton{ text: "Skirmish"; onClicked : load(1) }
-	MenuButton{ text: "Play online" }
+	MenuButton{ text: "Play online" ; onClicked : load(3) }
 	MenuButton{ text: "Settings" ; onClicked : load(2) }
 	MenuButton{ text: audioManager.isActive() ? "Audio On" : "Audio Off";
 		onClicked: { audioManager.toggleActive();
