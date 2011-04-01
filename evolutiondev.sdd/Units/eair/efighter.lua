@@ -24,7 +24,9 @@ local unitDef = {
   collisionSphereScale = 1,
   corpse             = "ammobox",
   cruiseAlt          = 400,
-  description        = "Fighter - Damagetype: Light :: Armortype: Light",
+  description        = [[Fighter - Damagetype: Light :: Armortype: Light
+
+Requires +5 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

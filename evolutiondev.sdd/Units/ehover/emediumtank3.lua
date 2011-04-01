@@ -22,7 +22,9 @@ local unitDef = {
   category           = "NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Light Skirmish Tank 
-  •Damagetype: Medium :: Armortype: Light]],
+  •Damagetype: Medium :: Armortype: Light
+
+Requires +3 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

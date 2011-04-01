@@ -21,7 +21,9 @@ local unitDef = {
   category           = "AMPHIB SUPPORT",
   corpse             = "ammobox",
   description        = [["Laser Support Artillery - Damagetype: Piercing :: Armortype: Light
-	• Switches to torpedos when underwater]],
+	• Switches to torpedos when underwater
+
+Requires + 10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

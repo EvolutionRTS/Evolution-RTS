@@ -32,7 +32,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = "Shield Emitter - Armortype: Light",
+  description        = [[Shield Emitter - Armortype: Light
+
+Requires +10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

@@ -21,7 +21,9 @@ local unitDef = {
   category           = "AMPHIB SUPPORT",
   corpse             = "ammobox",
   description        = [[Missile support tank - Damagetype: Medium :: Armortype: Light
-	• Switches to torpedos when underwater]],
+	• Switches to torpedos when underwater
+
+Requires +7 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

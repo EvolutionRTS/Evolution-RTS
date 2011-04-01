@@ -16,7 +16,9 @@ local unitDef = {
   category           = "NOTAIR",
   collisionVolumeTest = "1",
   corpse             = "ammobox",
-  description        = "Anti-Raid Defense Platform - Damagetype: Light :: Armortype: Armored Building",
+  description        = [[Anti-Raid Defense Platform - Damagetype: Light :: Armortype: Armored Building
+
+Requires +2 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",

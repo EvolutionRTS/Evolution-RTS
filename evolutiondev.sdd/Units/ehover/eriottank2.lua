@@ -22,7 +22,9 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR RIOT",
   corpse             = "ammobox",
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy]],
+  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy
+
+Requires +4 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

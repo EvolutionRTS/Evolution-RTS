@@ -33,7 +33,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy]],
+  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy
+
+Requires +3 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

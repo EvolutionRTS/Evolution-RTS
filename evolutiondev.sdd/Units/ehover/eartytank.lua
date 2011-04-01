@@ -22,7 +22,9 @@ local unitDef = {
   category           = "NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Artillery Support Tank 
-  •Damagetype: Explosive :: Armortype: Light]],
+  •Damagetype: Explosive :: Armortype: Light
+
+Requires +8 Power]],
   energyMake         = 0.5,
   energyStorage      = 0,
   energyUse          = 0.5,

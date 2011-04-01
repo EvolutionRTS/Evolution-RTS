@@ -20,7 +20,9 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR",
   description        = [[Hovering Bomb 
-  •Damagetype: Explosive :: Armortype: Light]],
+  •Damagetype: Explosive :: Armortype: Light
+
+Requires +12 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

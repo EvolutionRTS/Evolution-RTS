@@ -24,7 +24,9 @@ local unitDef = {
   collisionSphereScale = 1,
   corpse             = "ammobox",
   cruiseAlt          = 250,
-  description        = "Fast Armored Transport - Armortype: Heavy",
+  description        = [[Fast Armored Transport - Armortype: Heavy
+
+Requires +2 Power]],
   energyMake         = 0,
   energyUse          = 0,
   explodeAs          = "HUGE_UNIT",

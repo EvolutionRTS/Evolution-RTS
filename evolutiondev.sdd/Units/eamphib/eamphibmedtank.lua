@@ -21,7 +21,9 @@ local unitDef = {
   category           = "AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Skirmish Tank - Damagetype: Medium :: Armortype: Light
-	• Switches to torpedos when underwater]],
+	• Switches to torpedos when underwater
+
+Requires +4 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

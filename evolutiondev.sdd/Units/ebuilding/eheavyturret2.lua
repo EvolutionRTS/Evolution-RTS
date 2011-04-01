@@ -19,7 +19,9 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR",
   corpse             = "ammobox",
-  description        = "Heavy Plasma Battery - Damagetype: Medium :: Armortype: Armored Building",
+  description        = [[Heavy Plasma Battery - Damagetype: Medium :: Armortype: Armored Building
+
+Requires +5 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",

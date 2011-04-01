@@ -32,7 +32,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = "Raider - Damagetype: Explosive :: Armortype: Light",
+  description        = [[Raider - Damagetype: Explosive :: Armortype: Light
+
+Requires +2 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

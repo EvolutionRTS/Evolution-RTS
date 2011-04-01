@@ -25,7 +25,9 @@ local unitDef = {
   corpse             = "ammobox",
   defaultmissiontype = "Standby",
   description        = [[Anti-Air Support Tank 
-  •Damagetype: Explosive :: Armortype: Medium]],
+  •Damagetype: Explosive :: Armortype: Medium
+
+Requires +5 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

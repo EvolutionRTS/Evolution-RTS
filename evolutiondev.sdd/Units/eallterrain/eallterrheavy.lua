@@ -32,7 +32,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        =[[Armored Skirmish Tank - Damagetype: Medium :: Armortype: Medium]],
+  description        =[[Armored Skirmish Tank - Damagetype: Medium :: Armortype: Medium
+
+Requires +6 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

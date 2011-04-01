@@ -22,7 +22,9 @@ local unitDef = {
   category           = "AMPHIB RIOT",
   corpse             = "ammobox",
   description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy
-	• Switches to torpedos when underwater]],
+	• Switches to torpedos when underwater
+
+Requires +5 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

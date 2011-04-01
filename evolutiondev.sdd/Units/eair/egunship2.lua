@@ -26,7 +26,9 @@ local unitDef = {
   collisionSphereScale = 1,
   corpse             = "ammobox",
   cruiseAlt          = 300,
-  description        = "Gunship Skirmisher - Damagetype: Medium :: Armortype: Light",
+  description        = [[Gunship Skirmisher - Damagetype: Medium :: Armortype: Light
+
+Requires +7 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

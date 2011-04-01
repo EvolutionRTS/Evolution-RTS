@@ -21,7 +21,9 @@ local unitDef = {
    collisionVolumeType    = "box",
   
   corpse             = "ammobox",
-  description        = "Long Range Plasma Cannon - 50e Per Shot",
+  description        = [[Long Range Plasma Cannon - 50e Per Shot
+
+Requires +15 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "LARGE_BUILDING",

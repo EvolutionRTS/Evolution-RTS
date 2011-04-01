@@ -15,7 +15,9 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR",
   corpse             = "ammobox",
-  description        = "Shield Generator - Anti-Nuke/Anti-LRPC Facility",
+  description        = [[Shield Generator - Anti-Nuke/Anti-LRPC Facility
+
+Requires +10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

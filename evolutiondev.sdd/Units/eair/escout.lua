@@ -23,7 +23,9 @@ local unitDef = {
   collisionSphereScale = 1,
   corpse             = "ammobox",
   cruiseAlt          = 180,
-  description        = "Air Scout - Armortype: Light",
+  description        = [[Air Scout - Armortype: Light
+
+Requires +4 Power]],
   energyMake         = 0.2,
   energyStorage      = 0,
   energyUse          = 0.2,

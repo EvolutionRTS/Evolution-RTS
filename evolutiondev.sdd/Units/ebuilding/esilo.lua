@@ -15,7 +15,9 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR",
   corpse             = "ammobox",
-  description        = "Nuclear Missile Silo - Missile takes 4 minutes to build - Drains 50e while building",
+  description        = [[Nuclear Missile Silo - Missile takes 4 minutes to build - Drains 50e while building
+
+Requires +20 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

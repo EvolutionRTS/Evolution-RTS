@@ -16,7 +16,9 @@ local unitDef = {
   category           = "NOTAIR",
   corpse             = "ammobox",
   damageModifier     = 0.5,
-  description        = "Converts Energy into Metal",
+  description        = [[Converts Energy into Metal
+
+Requires +20 Power]],
   energyStorage      = 0,
   energyUse          = 20,
   explodeAs          = "LARGE_BUILDING",

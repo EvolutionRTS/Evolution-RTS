@@ -15,7 +15,8 @@ local unitDef = {
   category           = "NOTAIR ECO",
   corpse             = "ammobox",
   damageModifier     = 0.33333,
-  description        = "Produces 1 Energy",
+  description        = [[Produces +1 Energy
+Provides +1 Energy]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = -1,

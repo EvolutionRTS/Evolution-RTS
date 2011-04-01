@@ -32,7 +32,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        =[[Armored Assault Tank - Damagetype: Explosive :: Armortype: Heavy]],
+  description        =[[Armored Assault Tank - Damagetype: Explosive :: Armortype: Heavy
+
+Requires +10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

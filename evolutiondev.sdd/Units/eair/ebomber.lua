@@ -25,7 +25,9 @@ local unitDef = {
   collisionSphereScale = 1,
   corpse             = "ammobox",
   cruiseAlt          = 350,
-  description        = "Stealth Bomber - Damagetype: Explosive :: Armortype: Medium",
+  description        = [[Stealth Bomber - Damagetype: Explosive :: Armortype: Medium
+
+Requires +10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

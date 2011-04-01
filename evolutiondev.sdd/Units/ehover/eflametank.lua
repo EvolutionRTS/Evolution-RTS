@@ -22,7 +22,9 @@ local unitDef = {
   category           = "NOTAIR RAID",
   corpse             = "ammobox",
   description        = [[Flamethrower Raider 
-  •Damagetype: Explosive :: Armortype: Light]],
+  •Damagetype: Explosive :: Armortype: Light
+
+Requires +2 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

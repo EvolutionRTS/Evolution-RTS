@@ -21,7 +21,9 @@ local unitDef = {
   category           = "AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Destroyer Class Tank Killer
-   •Damagetype: Light/Medium :: Armortype: Heavy]],
+   •Damagetype: Light/Medium :: Armortype: Heavy
+
+Requires +50 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

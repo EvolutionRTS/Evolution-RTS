@@ -22,7 +22,9 @@ local unitDef = {
   category           = "NOTAIR ASSAULT",
   corpse             = "ammobox",
   description        = [[Armored Anti-Base Tank 
-  •Damagetype: Explosive :: Armortype: Heavy]],
+  •Damagetype: Explosive :: Armortype: Heavy
+
+Requires +10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

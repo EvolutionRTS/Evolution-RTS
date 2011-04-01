@@ -22,7 +22,9 @@ local unitDef = {
   category           = "NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Missile Support Tank 
-  •Damagetype: Piercing :: Armortype: Light]],
+  •Damagetype: Piercing :: Armortype: Light
+
+Requires +7 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

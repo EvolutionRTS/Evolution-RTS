@@ -22,7 +22,9 @@ local unitDef = {
   category           = "NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        =[[Destroyer Class Walker
-    •Damagetype: Explosive :: Armortype: Light]],
+    •Damagetype: Explosive :: Armortype: Light
+
+Requires +40 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

@@ -21,7 +21,9 @@ local unitDef = {
   category           = "AMPHIB RAID",
   corpse             = "ammobox",
   description        = [[Scout/Raider - Damagetype: Piercing :: Armortype: Light
-	• Switches to torpedos when underwater]],
+	• Switches to torpedos when underwater
+
+Requires +1 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

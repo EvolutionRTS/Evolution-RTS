@@ -22,7 +22,9 @@ local unitDef = {
   category           = "NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Low Yeild Nuclear Artillery Support Tank 
-  •Damagetype: Explosive :: Armortype: Light]],
+  •Damagetype: Explosive :: Armortype: Light
+
+Requires +80 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
