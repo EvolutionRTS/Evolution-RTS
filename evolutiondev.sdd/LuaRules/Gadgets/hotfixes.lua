@@ -104,7 +104,11 @@ if (gadgetHandler:IsSyncedCode()) then
 
 else
 	--UNSYNCED
-
+	-- replace fps mode bind with capture
+	Spring.SendCommands({
+		"unbindkeyset c",
+	})
+	Spring.SendCommands("bind c capture")
 	-- Fix gl.Text y offset that changed between 0.80.0 and 0.80.1
 	--if (tonumber(string.sub(Game.version,1,3) or 0) or 0)>=0.80 and (tonumber(string.sub(Game.version,6,6) or 0) or 0)>=1 then
 	--	local glText = gl.Text

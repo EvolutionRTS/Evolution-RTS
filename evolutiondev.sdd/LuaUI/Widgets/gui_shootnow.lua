@@ -59,7 +59,6 @@ function widget:Initialize()
 		"unbindkeyset d",
 	})
 	Spring.SendCommands("bind d fireweapon")
-
 end
 
 function widget:Shutdown()
