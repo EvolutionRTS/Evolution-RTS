@@ -31,7 +31,7 @@ local mexCmdDesc = {
   name    = 'Mex',
   cursor  = 'areamex_cursor', 
   action  = 'areamex',
-  tooltip = 'Builds mexes in the area',
+  tooltip = 'Builds mexes in the area (O)',
   texture = 'bitmaps/ui/buttons/cmd_area_mex.png',
 }
 
@@ -125,6 +125,7 @@ function gadget:UnitCreated(unitID, unitDefID)
 end
 
 function gadget:Initialize()
+    Spring.SendCommands("bind o areamex")
 	mexSpot = GetMetalMap()
 	if not mexSpot then
 		Spring.Echo("Mex spot detection failed")
