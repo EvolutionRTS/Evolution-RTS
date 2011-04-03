@@ -33,4 +33,9 @@ Rectangle {
 
 
 	MenuContainer { id: mainMenu}
+
+	function onAppLoaded()
+	{
+		settingsView.onAppLoaded()
+	}
 }

@@ -30,26 +30,16 @@ Item {
 				anchors.fill: parent
 				onClicked: {
 					ListView.view.currentIndex = index
-					}
+				}
 			}
 		}
 	}
 
-	ListView {
-		id: slist
-		orientation: "Horizontal"
+	HorizontalListView {
 		delegate: sideDelegate
 		model: sideModel
-		anchors.fill: parent
-		highlightFollowsCurrentItem: true
-		focus: true
-		keyNavigationWraps :true
-		anchors.margins: 10
-		spacing: 5
-		highlight: Rectangle { opacity: 1; radius: 5; color: "red" }
-//		onCurrentIndexChanged: {
-////			minimap.load( maplistModel.name(currentIndex) )
-//		}
+		id: listID
 	}
-	property alias currentIndex: slist.currentIndex
+
+	property alias currentIndex: listID.currentIndex
 }

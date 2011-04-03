@@ -1,8 +1,6 @@
 import Qt 4.7
 
 Rectangle {
-	anchors.horizontalCenterOffset: ListView.isCurrentItem ? 10 : 0
-	anchors.horizontalCenter: parent.horizontalCenter
 	id: presetDelegate
 	property bool isCurrent: ListView.isCurrentItem
 	opacity: isCurrent ? 1.0 : 0.8
@@ -50,4 +48,5 @@ Rectangle {
 
 	property alias font_bold: textId.font.bold
 	property alias font_size: textId.font.pointSize
+	property alias text: textId.text
 }

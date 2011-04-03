@@ -2,33 +2,15 @@ import Qt 4.7
 MainView {
 	id: settingsView
 
-	Rectangle {
-		color: "#000000"
-		border.color: "#ffffff"
-		radius: 10
-		anchors.horizontalCenter: parent.horizontalCenter
-		anchors.top: parent.top
-		anchors.margins: 15
+	SectionHeader {
 		id: titleRec
-		width: parent.width * 0.8
-		height:  42
-		DText {
-			id: title
-			anchors.fill: parent
-			anchors.centerIn: parent
-			horizontalAlignment: Text.AlignHCenter
-			verticalAlignment:Text.AlignVCenter
-			text: "Select settings preset"
-			font.bold: true
-			font.pointSize: 20
-			color: "white"
-			smooth: true
-		}
+		anchors.top: parent.top
+		text: "Select settings preset"
 	}
 
 	ListView {
 		id: plist
-		delegate: GenericDelegate {
+		delegate: GenericVerticalDelegate{
 			height: 40
 			width: 0.4 * parent.width
 		}
@@ -36,7 +18,7 @@ MainView {
 		anchors.top: titleRec.bottom
 		anchors.horizontalCenter: titleRec.horizontalCenter
 		width: 300
-		height: parent.height - titleRec.height -50
+		height: parent.height - ( titleRec.height + resHeader.height + 250 )
 		highlightFollowsCurrentItem: true
 		focus: true
 		keyNavigationWraps :true
@@ -46,5 +28,29 @@ MainView {
 			presetModel.use( currentIndex )
 		}
 	}
-	property alias currentIndex: plist.currentIndex
+
+	SectionHeader {
+		id: resHeader
+		anchors.top: plist.bottom
+		text: "Select screen resolution"
+	}
+	HorizontalListView {
+		model: screenresModel
+		delegate: GenericDelegate {
+			height: 50
+			width: 130
+		}
+		anchors.top: resHeader.bottom
+		anchors.topMargin: 15
+		id: klist
+		onCurrentIndexChanged: {
+			screenresModel.use( currentIndex )
+		}
+	}
+
+	function onAppLoaded()
+	{
+		plist.currentIndex = presetModel.lastSessionIndex();
+		klist.currentIndex = screenresModel.lastSessionIndex();
+	}
 }
