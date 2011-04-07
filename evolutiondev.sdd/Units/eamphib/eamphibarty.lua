@@ -46,7 +46,7 @@ Requires + 10 Power]],
   radarDistance      = 0,
   selfDestructAs     = "BIG_UNIT",
   sightDistance      = 600,
-  SonarRadius      = 425;
+  SonarDistance      = 425;
   stealth			 = true,
   sonarStealth		 = false,
   smoothAnim         = true,

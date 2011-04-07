@@ -49,7 +49,7 @@ Requires +5 Power]],
   selfDestructAs     = "MEDIUM_UNIT",
   side               = "CORE",
   sightDistance      = 400,
-  SonarRadius      = 250;
+  SonarDistance      = 250;
   stealth			 = true,
   sonarStealth		 = false,
   smoothAnim         = true,

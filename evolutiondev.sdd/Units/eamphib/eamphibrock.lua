@@ -53,7 +53,7 @@ Requires +7 Power]],
   selfDestructAs     = "SMALL_UNIT",
   side               = "CORE",
   sightDistance      = 600,
-  SonarRadius      = 300;
+  SonarDistance      = 300;
   stealth			 = true,
   sonarStealth		 = false,
   smoothAnim         = true,
