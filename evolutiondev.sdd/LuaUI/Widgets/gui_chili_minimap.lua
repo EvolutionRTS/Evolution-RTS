@@ -149,7 +149,7 @@ MakeMinimapWindow = function()
 		minimumSize = {iconsize*9,50},
 		children = {
 			
-			Chili.Panel:New {bottom = (iconsize), x = 0, y = 0, right = 0, margin={0,0,0,0}, padding = {0,0,0,0}, skinName="DarkGlass"},
+			Chili.Panel:New {bottom = (iconsize), x = 0, y = 0, right = 0, margin={0,0,0,0}, padding = {0,0,0,0}, skinName="Robocracy"},
 			
 			MakeMinimapButton( 'LuaUI/images/map/standard.png', 1, 'viewstandard' ),
 			MakeMinimapButton( 'LuaUI/images/map/heightmap.png', 2, 'viewheightmap' ),
