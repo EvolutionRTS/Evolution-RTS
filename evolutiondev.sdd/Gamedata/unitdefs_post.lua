@@ -214,9 +214,17 @@ end
 -- 
 
 if (modOptions and tobool(modOptions.nometalmakers)) then
-  disableunits({"armmakr", "cormakr", "armmmkr", "cormmkr", "armfmkr", "corfmkr"})
+  disableunits({"armmakr", "cormakr", "armmmkr", "cormmkr", "armfmkr", "corfmkr", "emaker"})
 end
 
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Spring Kludge Removal
+-- 
+for name, ud in pairs(UnitDefs) do
+	ud.activateWhenBuilt  = true 
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
