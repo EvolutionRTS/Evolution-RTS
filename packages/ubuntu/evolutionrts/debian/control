@@ -4,13 +4,13 @@ Priority: optional
 Maintainer: René Milk <koshi@springlobby.info>
 Uploaders: René Milk <koshi@springlobby.info>
 Build-Depends: debhelper (>> 4.0.0), dpkg-dev (>= 1.10.23)
-Standards-Version: 3.8.4
+Standards-Version: 3.9.1
 Homepage: http://www.evolutionrts.info/
 
 Package: evolutionrts
 Architecture: all
 Recommends: evolutionrts-maps
-Depends: spring-engine (>= 0.82), springlobby (>= 0.105)
+Depends: spring-engine (>= 0.82.7), springlobby (>= 0.129), evolutionrts-data (>=1.0)
 Description: Evolution RTS has oneline description
  Evolution RTS has 
  a multiline

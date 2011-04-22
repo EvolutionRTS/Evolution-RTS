@@ -1,4 +1,10 @@
-evolutionrts (0.0.1~11.04~ppa2) natty; urgency=low
+evolutionrts (0.0.3~ppa1) maverick; urgency=low
+
+  * switch to quilt
+
+ -- Rene Milk <koshi@springlobby.info>  Thu, 21 Apr 2011 19:20:24 +0200
+
+evolutionrts (0.0.2~ppa3) maverick; urgency=low
 
   * New upstream release
 

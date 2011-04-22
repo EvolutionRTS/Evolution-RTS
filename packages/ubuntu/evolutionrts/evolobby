@@ -1,0 +1,5 @@
+#!/bin/bash
+
+springlobby -n EvoLobby -c "evo_custom-sl.sdd" ${@}
+
+

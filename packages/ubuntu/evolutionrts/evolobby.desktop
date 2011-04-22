@@ -1,8 +1,7 @@
-
 [Desktop Entry]
 Name=Evolution RTS
-Comment=Evolution RTS DESCRIPTION
-Exec=evolution_rts
+Comment=Evolution RTS Lobby
+Exec=evolobby
 Icon=evolution_rts.png
 Terminal=false
 Type=Application
