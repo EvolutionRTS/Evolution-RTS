@@ -1,3 +1,9 @@
+evolutionrts (1.0.1-ppa1) maverick; urgency=low
+
+  * bump version for fixed dependency
+
+ -- Rene Milk <koshi@springlobby.info>  Sat, 23 Apr 2011 23:22:59 +0200
+
 evolutionrts (1.0.0-ppa1) maverick; urgency=low
 
   * first proper release
