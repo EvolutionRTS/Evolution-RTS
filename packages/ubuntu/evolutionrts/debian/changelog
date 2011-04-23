@@ -1,6 +1,6 @@
-evolutionrts (0.0.3~ppa1) maverick; urgency=low
+evolutionrts (0.0.3~ppa3) maverick; urgency=low
 
-  * switch to quilt
+  * repurposed package to ship customizations
 
  -- Rene Milk <koshi@springlobby.info>  Thu, 21 Apr 2011 19:20:24 +0200
 
