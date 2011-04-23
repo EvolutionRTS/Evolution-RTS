@@ -1,0 +1,17 @@
+Source: evolutionrts-maps
+Section: games
+Priority: optional
+Maintainer: René Milk <koshi@springlobby.info>
+Uploaders: René Milk <koshi@springlobby.info>
+Build-Depends: debhelper (>> 4.0.0), dpkg-dev (>= 1.10.23)
+Standards-Version: 3.9.1
+Homepage: http://evolutionrts.info
+
+Package: evolutionrts-maps
+Architecture: all
+Depends: spring (>= 0.82.5), springlobby (>= 0.104)
+Description: Evolution RTS has oneline description
+ Evolution RTS has 
+ a multiline
+ description.
+
