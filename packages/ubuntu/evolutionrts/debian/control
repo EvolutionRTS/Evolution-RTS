@@ -9,8 +9,7 @@ Homepage: http://www.evolutionrts.info/
 
 Package: evolutionrts
 Architecture: all
-Recommends: evolutionrts-maps
-Depends: spring (>= 0.82.7), springlobby (> 0.129), evolutionrts-data 
+Depends: spring (>= 0.82.7), springlobby (> 0.129), evolutionrts-data, evolutionrts-maps
 Description: Evolution RTS has oneline description
  Evolution RTS has 
  a multiline

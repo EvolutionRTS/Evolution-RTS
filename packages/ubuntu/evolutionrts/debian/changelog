@@ -1,3 +1,10 @@
+evolutionrts (1.0.0-ppa1) maverick; urgency=low
+
+  * first proper release
+  * depend on the -maps package
+
+ -- Rene Milk <koshi@springlobby.info>  Sat, 23 Apr 2011 17:49:18 +0200
+
 evolutionrts (0.0.3~ppa4) maverick; urgency=low
 
   * icon and dependency update
