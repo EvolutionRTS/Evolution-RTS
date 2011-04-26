@@ -92,8 +92,6 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-VFS.Include("LuaRules/UnitRendering.lua")
-
 if (not gl.CreateShader) then
   return false
 end
@@ -188,9 +186,8 @@ local function CompileMaterialShaders()
         mat_src.shadowMatrixLoc = gl.GetUniformLocation(GLSLshader,"shadowMatrix")
         mat_src.shadowParamsLoc = gl.GetUniformLocation(GLSLshader,"shadowParams")
         mat_src.sunLoc          = gl.GetUniformLocation(GLSLshader,"sunPos")
-        mat_src.frameLoc        = gl.GetUniformLocation(GLSLshader,"frameLoc")
+        mat_src.frameLoc        = gl.GetUniformLocation(GLSLshader,"frame2")
         mat_src.speedLoc        = gl.GetUniformLocation(GLSLshader,"speed")
-        mat_src.healthLoc        = gl.GetUniformLocation(GLSLshader,"healthLoc")
       end
     end
   end
@@ -251,7 +248,6 @@ function GetUnitMaterial(unitDefID)
                    texunits        = texUnits,
                    prelist         = mat.predl,
                    postlist        = mat.postdl,
-                   --frameLoc        = mat.frameLoc,
                  })
 
   bufMaterials[unitDefID] = luaMat
@@ -384,7 +380,6 @@ end
 function gadget:DrawUnit(unitID)
   local mat = drawUnitList[unitID]
   if (mat) then
-    --gl.Uniform(mat.frameLoc, math.random()) --nope
     return mat.DrawUnit(unitID, mat)
   end
 end
@@ -431,7 +426,6 @@ function gadget:Initialize()
   --// load the materials config files
   local unitMaterialDefs = {}
   do
-    local GADGET_DIR = "LuaRules/Configs/"
     local MATERIALS_DIR = GADGET_DIR .. "UnitMaterials/"
 
     local files = VFS.DirList(MATERIALS_DIR)

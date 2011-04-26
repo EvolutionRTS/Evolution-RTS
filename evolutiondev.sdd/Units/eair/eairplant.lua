@@ -6,6 +6,7 @@ local unitName = "eairplant"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+  activatewhenbuilt  = false,
   buildCostEnergy    = 0,
   buildCostMetal     = 40,
   builder            = true,

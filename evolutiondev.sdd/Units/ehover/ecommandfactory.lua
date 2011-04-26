@@ -6,6 +6,7 @@ local unitName = "ecommandfactory"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+  activatewhenbuilt  = false,
   buildAngle         = 1024,
   buildCostEnergy    = 0,
   buildCostMetal     = 0,

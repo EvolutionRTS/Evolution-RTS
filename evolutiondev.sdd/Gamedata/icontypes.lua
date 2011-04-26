@@ -80,7 +80,7 @@ local icontypes = {
   },
   energy = {
     bitmap='icons/ecoenergy.png',
-    size=3,
+    size=2,
     radiusadjust=0.2
   },
   air = {
