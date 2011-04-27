@@ -23,7 +23,7 @@ local unitDef = {
 
 	cancloak		 = true,
 	cloakCost		 = 20,
-	decloakDistance	 = 400,
+	decloakDistance	 = 250,
 	decloakOnFire	 = true,
 	decloakSpherical = true,
 	startCloaked	 = false,
@@ -52,6 +52,8 @@ local unitDef = {
   showNanoSpray      = "0",
   sightDistance      = 388,
   smoothAnim         = true,
+  stealth			 = true,
+  seismicSignature   = 1,
   TEDClass           = "PLANT",
   unitname           = "eminifac",
   workerTime         = 2,

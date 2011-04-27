@@ -37,6 +37,7 @@ local unitDef = {
   sightDistance      = 1500,
   smoothAnim         = true,
   sonarDistance      = 0,
+  seismicDistance    = 1750,
   unitname           = "eradar2",
   workerTime         = 0,
   yardMap            = "oooo",
