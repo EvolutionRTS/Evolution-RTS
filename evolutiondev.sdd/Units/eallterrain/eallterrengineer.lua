@@ -29,7 +29,7 @@ local unitDef = {
 
 	cancloak		 = true,
 	cloakCost		 = 2,
-	decloakDistance	 = 250,
+	decloakDistance	 = 100,
 	decloakOnFire	 = true,
 	decloakSpherical = true,
 	startCloaked	 = false,
@@ -65,7 +65,7 @@ local unitDef = {
   SonarDistance      = 500;
   smoothAnim         = true,
   stealth            = true,
-  seismicSignature   = 1,
+  seismicSignature   = 3,
   turnInPlace        = true,
   turnRate           = 1020,
   unitname           = "eallterrengineer",
