@@ -92,7 +92,7 @@ function gadget:DrawScreen()
     else
 		colorStr = "\255\224\224\0"
     end
-    local msg = colorStr .. "You are using the MT Build of Spring\nThis is not compatible with Zero-K\nExiting in "..delay.." seconds (press Escape to cancel)"
+    local msg = colorStr .. "You are using the MT Build of Spring\nThis is not compatible with Evolution RTS\nExiting in "..delay.." seconds (press Escape to cancel)"
     glPushMatrix()
     glTranslate((vsx * 0.5), (vsy * 0.5) + 50, 0)
     glScale(1.5, 1.5, 1)
