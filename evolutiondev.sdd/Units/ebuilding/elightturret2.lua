@@ -6,6 +6,10 @@ local unitName = "elightturret2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   buildAngle         = 2048,
   buildCostEnergy    = 0,
   buildCostMetal     = 30,
@@ -68,7 +72,7 @@ Requires +2 Power]],
   },
   customParams = {
 	twokhotkey = 't',
-    RequireTech = "2 Power",
+    RequireTech = "4 Power",
 	armortype   = "armoredbuilding", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Light Turret
@@ -85,7 +89,7 @@ Armortype: Armored Building
 
 Requires:
 
-+2 Power]],
++4 Power]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=6,

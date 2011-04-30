@@ -6,6 +6,10 @@ local unitName = "ebarricade"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildAngle         = 4096,
   buildCostEnergy    = 0,

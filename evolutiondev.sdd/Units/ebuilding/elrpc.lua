@@ -6,6 +6,10 @@ local unitName = "elrpc"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildCostEnergy    = 0,
   buildCostMetal     = 200,

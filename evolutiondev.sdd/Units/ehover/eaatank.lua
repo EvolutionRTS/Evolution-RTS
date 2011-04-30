@@ -7,6 +7,10 @@ local unitName = "eaatank"
 
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   acceleration       = 0.18,
   bmcode             = "1",
   brakeRate          = 0.1,

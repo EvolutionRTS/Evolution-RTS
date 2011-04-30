@@ -6,6 +6,10 @@ local unitName = "euwfusion2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildAngle         = 2500,
   buildCostEnergy    = 0,

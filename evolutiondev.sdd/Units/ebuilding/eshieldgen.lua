@@ -6,6 +6,10 @@ local unitName = "eshieldgen"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   buildAngle         = 8192,
   buildCostEnergy    = 0,
   buildCostMetal     = 230,

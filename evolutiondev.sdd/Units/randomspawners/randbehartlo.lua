@@ -6,6 +6,10 @@ local unitName = "randbehartlo"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   bmcode             = "0",
   buildCostEnergy    = 0,
   buildCostMetal     = 0,

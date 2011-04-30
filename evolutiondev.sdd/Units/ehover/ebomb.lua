@@ -6,6 +6,10 @@ local unitName = "ebomb"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   acceleration       = 1,
   brakeRate          = 1,
   buildCostEnergy    = 0,

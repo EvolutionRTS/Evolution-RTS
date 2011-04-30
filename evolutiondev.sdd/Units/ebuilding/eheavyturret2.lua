@@ -6,6 +6,10 @@ local unitName = "eheavyturret2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   buildAngle         = 8192,
   buildCostEnergy    = 0,
   buildCostMetal     = 80,
@@ -69,7 +73,7 @@ Requires +5 Power]],
   },
   customParams = {
 	twokhotkey = 'h',
-    RequireTech = "5 Power",
+    RequireTech = "8 Power",
 	armortype   = "armoredbuilding", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Heavy Turret
@@ -88,7 +92,7 @@ Armortype: Armored Building
 
 Requires:
 
-+5 Power]],
++8 Power]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=9,

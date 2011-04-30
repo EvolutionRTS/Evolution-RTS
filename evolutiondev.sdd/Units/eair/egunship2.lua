@@ -6,6 +6,10 @@ local unitName = "egunship2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   acceleration       = 0.2,
   airStrafe          = true,
   bankscale          = "1",

@@ -6,6 +6,10 @@ local unitName = "etransport"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   acceleration       = 0.2,
   brakeRate          = 5,
   buildCostEnergy    = 0,

@@ -6,6 +6,10 @@ local unitName = "eminifac"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   activatewhenbuilt  = false,
   buildAngle         = 1024,
   buildCostEnergy    = 0,

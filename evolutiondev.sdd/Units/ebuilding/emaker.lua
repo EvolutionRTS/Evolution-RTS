@@ -6,6 +6,10 @@ local unitName = "emaker"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildAngle         = 8192,
   buildCostEnergy    = 0,

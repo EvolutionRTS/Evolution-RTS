@@ -6,6 +6,10 @@ local unitName = "efighter"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   acceleration       = 0.55,
   bankscale          = "1",
   brakeRate          = 6,

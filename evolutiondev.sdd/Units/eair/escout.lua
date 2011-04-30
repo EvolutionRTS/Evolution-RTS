@@ -6,6 +6,10 @@ local unitName = "escout"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "missiletrailsmall",
+  pieceTrailCEGRange = 1,
+--End tags entered from Notepad++
   acceleration       = 10,
   bankscale          = "1",
   brakeRate          = 4,
