@@ -57,15 +57,15 @@ if (gadgetHandler:IsSyncedCode()) then
                   BoxesOnMap[box] = nil
               break
             end
-               if (UnitDefs[Spring.GetUnitDefID(unit)].customParams.amphibdronespawner) then
-                  Spring.CreateUnit("eamphibdrone", x, y, z, 0, Spring.GetUnitTeam(unit))
-                  Spring.DestroyFeature(box)
-				  local fx, fy, fz = Spring.GetFeaturePosition(box)
-				  Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
-				  SpawnCEG("sparklegreen", fx, fy, fz)
-                  BoxesOnMap[box] = nil
-              break
-            end
+               -- if (UnitDefs[Spring.GetUnitDefID(unit)].customParams.amphibdronespawner) then
+                  -- Spring.CreateUnit("eamphibdrone", x, y, z, 0, Spring.GetUnitTeam(unit))
+                  -- Spring.DestroyFeature(box)
+				  -- local fx, fy, fz = Spring.GetFeaturePosition(box)
+				  -- Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+				  -- SpawnCEG("sparklegreen", fx, fy, fz)
+                  -- BoxesOnMap[box] = nil
+              -- break
+            -- end
           end
          end
       end
