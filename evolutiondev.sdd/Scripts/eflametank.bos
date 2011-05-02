@@ -12,6 +12,10 @@ static-var terraintype, bmoving, moving; // these are the variables
 // Signal definitions 
 #define SIG_AIM 2
 
+lua_FlameShot(weapon) //flame effect?
+{
+  return 0;
+}
 
 SmokeUnit(healthpercent, sleeptime, smoketype) // this is a standard smoke point define 
 { 
@@ -117,7 +121,7 @@ turn turret to x-axis <0> speed <30>;
 move casing to z-axis [-2] speed [1];  
 } 
 
-AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+AimPrimary(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
 { 
 signal SIG_AIM; 
 set-signal-mask SIG_AIM; 
@@ -129,7 +133,7 @@ start-script RestoreAfterDelay();
 return (1); 
 } 
 
-FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+FirePrimary() // what do while firing, fires 1 barrel then the next , and resets 
 { 
 move casing to z-axis [2] speed [10];
    sleep 1;
@@ -142,15 +146,21 @@ move casing to z-axis [2] speed [10];
          emit-sfx f3  from firepoint1;
 } 
 
-AimFromWeapon1(piecenum) // where it aims the weapon from 
+AimFromPrimary(piecenum) // where it aims the weapon from 
 { 
 piecenum = barrel1; 
 } 
 
-QueryWeapon1(piecenum) // where the shot is called from 
+QueryPrimary(piecenum) // where the shot is called from 
 { 
 piecenum = firepoint1; 
 } 
+
+Shot1()
+{
+	call-script lua_FlameShot(1);
+	return (TRUE);
+}
 
 Killed(severity, corpsetype) // how it explodes 
 { 

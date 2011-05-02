@@ -81,6 +81,7 @@ else
     local posx,posy,posz, dirx,diry,dirz = Spring.GetUnitWeaponVectors(unitID,weapon-1)
     local wd  = WeaponDefs[UnitDefs[unitDefID].weapons[weapon].weaponDef]
     local weaponRange = wd.range*wd.duration
+	local weaponVelocity = wd.maxVelocity
 
     local speedx,speedy,speedz = Spring.GetUnitVelocity(unitID)
     local partpos = "x*delay,y*delay,z*delay|x="..speedx..",y="..speedy..",z="..speedz
@@ -89,7 +90,7 @@ else
       class        = 'JitterParticles2',
       colormap     = { {1,1,1,1},{1,1,1,1} },
       count        = 6,
-      life         = weaponRange / 12,
+      life         = weaponRange / 6,
       delaySpread  = 25,
       force        = {0,1.5,0},
       --forceExp     = 0.2,
@@ -100,7 +101,7 @@ else
       emitVector   = {dirx,diry,dirz},
       emitRotSpread= 10,
 
-      speed        = 7,
+      speed        = weaponVelocity / 57,
       speedSpread  = 0,
       speedExp     = 1.5,
 
@@ -122,7 +123,7 @@ else
                        {0.1, 0.035, 0.01, 0.2},
                        {0, 0, 0, 0.01} },
       count        = 4,
-      life         = weaponRange / 12,
+      life         = weaponRange / 6,
       delaySpread  = 25,
 
       force        = {0,1,0},
@@ -138,7 +139,7 @@ else
       rotSpread    = 360,
       rotExp       = 9,
 
-      speed        = 7,
+      speed        = weaponVelocity / 57,
       speedSpread  = 0,
       speedExp     = 1.5,
 
@@ -156,7 +157,7 @@ else
       colormap     = { {1, 1, 1, 0.01}, {0, 0, 0, 0.01} },
       count        = 20,
       --delay        = 20,
-      life         = weaponRange / 48,
+      life         = weaponRange / 24,
       lifeSpread   = 20,
       delaySpread  = 15,
 
@@ -173,7 +174,7 @@ else
       rotSpread    = 360,
       rotExp       = 9,
 
-      speed        = 7,
+      speed        = weaponVelocity / 57,
       speedSpread  = 0,
 
       size         = 2,
