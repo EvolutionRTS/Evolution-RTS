@@ -119,6 +119,7 @@ local weaponDefs = {
     startsmoke         = "1",
     tolerance          = 500,
     turret             = true,
+	toairweapon		   = true,
     weaponVelocity     = 5000,
 	customparams = {
 	  damagetype		= "explosive",  

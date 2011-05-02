@@ -9,7 +9,7 @@ burrowSpawnType      = Spring.GetModOptions().mo_chickenstart or "avoid"
 spawnSquare          = 300       -- size of the chicken spawn square centered on the burrow
 spawnSquareIncrement = 4         -- square size increase for each unit spawned
 burrowName           = "burrow"   -- burrow unit name
-maxAge               = 300      -- chicken die at this age, seconds
+maxAge               = 600      -- chicken die at this age, seconds
 queenName 		     = Spring.GetModOptions().mo_queendifficulty or "eexkrabgroth"
 burrowDef            = UnitDefNames[burrowName].id
 defenderChance       = 0.5       -- probability of spawning a single turret
@@ -21,7 +21,7 @@ minBaseDistance      = 1000
 maxBaseDistance      = 7200
 chickensPerPlayer    = 8
 spawnChance          = 0.5
-bonusTurret          = "eheavyturret2" -- Turret that gets spawned when a burrow dies
+bonusTurret          = "eaaturret" -- Turret that gets spawned when a burrow dies
 angerBonus           = 204
 expStep 			 = 0.0625
 lobberEMPTime        = 4
@@ -106,7 +106,7 @@ addWave(2,{"4 eallterrheavy", "3 eallterrassault"})
 
 addWave(3,{"5 emissiletank", "4 efatso2"})
 addWave(3,{"3 edrone", "3 egunship2", "3 ebomber"})
-addWave(3,{"8 eaatank"})
+addWave(3,{"8 eaatank", "5 elighttank3"})
 addWave(3,{"5 emediumtank3"})
 addWave(3,{"4 eamphibbuggy", "4 eamphibmedtank", "4 eamphibrock"})
 addWave(3,{"8 eallterrmed"})
