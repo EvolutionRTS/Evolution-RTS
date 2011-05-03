@@ -247,9 +247,9 @@
             dir = dir;
             colorMap= 0.5 0.7 0.6 0.01   0.2 0.9 0.5 0.01   0 0 0 0.01;
              size=3;
-             length=30;
-             sizeGrowth=2;
-             ttl=8;
+             length=60;
+             sizeGrowth=1.2;
+             ttl=40;
              frontOffset=0.05;
              sideTexture=flashside2;
              frontTexture=empty;

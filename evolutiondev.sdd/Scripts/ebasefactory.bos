@@ -4,7 +4,7 @@
 
 piece base, doors1, doors2, spikeleft1, spikeleft2, spikeleft3, spikeright1, spikeright2, spikeright3, spikes, topspin, wheelspin, sfxpoint1, nanopoint;
 
-static-var  Maya;
+static-var  Maya, building;
 
 // Signal definitions (they must be distincts power of 2)
 #define SIG_ACTIVATE 2
@@ -35,6 +35,19 @@ SmokeUnit()
    }
 }
 
+
+buildingfx()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx 1025 from nanopoint;
+      }        
+   sleep 300;
+   }
+}
+
 Create()
 {
    Maya=TRUE;
@@ -42,6 +55,13 @@ Create()
       sleep 400;
    start-script SmokeUnit();
    turn sfxpoint1 to x-axis <-90> now;
+   turn spikeleft1 to y-axis <-90> now;
+   turn spikeleft2 to y-axis <-90> now;
+   turn spikeleft3 to y-axis <-90> now;
+   turn spikeright1 to y-axis <90> now;
+   turn spikeright2 to y-axis <90> now;
+   turn spikeright3 to y-axis <90> now;
+   start-script Buildingfx(); 
 }
 
 QueryNanoPiece(piecenum)
@@ -155,15 +175,7 @@ StartBuilding()
 {
    signal SIG_BUILDING; // Kill any other StartBuilding
    set-signal-mask SIG_BUILDING; // Be killable
-   var f,r;
-   f=99999;
-   r=1;
-   turn spikeleft1 to y-axis (<-90>)-r*(<30>) now;
-   turn spikeleft2 to y-axis (<-90>)+r*(<30>) now;
-   turn spikeleft3 to y-axis (<-90>)-r*(<30>) now;
-   turn spikeright1 to y-axis (<90>)-r*(<30>) now;
-   turn spikeright2 to y-axis (<90>)+r*(<30>) now;
-   turn spikeright3 to y-axis (<90>)-r*(<30>) now;
+   building = 1;
    while(TRUE)
    {
       emit-sfx NANOFLAME from spikeleft1;
@@ -172,32 +184,20 @@ StartBuilding()
       emit-sfx NANOFLAME from spikeright1;
       emit-sfx NANOFLAME from spikeright2;
       emit-sfx NANOFLAME from spikeright3;
-      emit-sfx 1025 from nanopoint;
       emit-sfx FX3 from spikeleft1;
       emit-sfx FX3 from spikeleft2;
       emit-sfx FX3 from spikeleft3;
       emit-sfx FX3 from spikeright1;
       emit-sfx FX3 from spikeright2;
       emit-sfx FX3 from spikeright3;
-      sleep 5;
-      ++f;
-      if(f>59)
-      {
-         f=0;
-         turn spikeleft1 to y-axis (<-90>)+r*(<30>) speed <30>;
-         turn spikeleft2 to y-axis (<-90>)-r*(<30>) speed <30>;
-         turn spikeleft3 to y-axis (<-90>)+r*(<30>) speed <30>;
-         turn spikeright1 to y-axis (<90>)+r*(<30>) speed <30>;
-         turn spikeright2 to y-axis (<90>)-r*(<30>) speed <30>;
-         turn spikeright3 to y-axis (<90>)+r*(<30>) speed <30>;
-         r=0-r;
-      }
+      sleep 600;
    }
 }
 
 StopBuilding()
 {
    signal SIG_BUILDING; // Kill StartBuilding
+   building = 0;
 }
 
 QueryBuildInfo(piecenum)

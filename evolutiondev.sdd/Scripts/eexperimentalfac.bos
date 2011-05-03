@@ -148,7 +148,7 @@ StartBuilding()
    while(TRUE)
    {
    emit-sfx NANO from nanopoint;
-   sleep 5;
+   sleep 300;
    }
 }
 

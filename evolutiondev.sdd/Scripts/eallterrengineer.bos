@@ -287,6 +287,19 @@ Thrust()
    }
 }
 
+buildflame()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx nanoflame from nanopoint1;
+      				
+      }
+        sleep 600;    
+   }
+}
+
 Create()
 {
 	turn rf1 to y-axis <30> now;
@@ -302,6 +315,7 @@ Create()
 	start-script SmokeUnit();
 	start-script DoTheWalking();
 //	start-script Thrust();
+	start-script buildflame();
 }
 
 QueryWeapon1(piecenum)
@@ -331,10 +345,10 @@ StartBuilding(heading, pitch)
         wait-for-turn base around y-axis;
    move penis to z-axis [4] speed [1];
    set INBUILDSTANCE to 1;
+   building = 1;
    while (1) {
-      emit-sfx nanoflame from nanopoint1;
       emit-sfx 2048 from nanopoint1;
-      sleep 5;
+      sleep 30;
    }
 }
 
@@ -343,6 +357,7 @@ StopBuilding()
    signal SIG_BUILD;
    set-signal-mask SIG_BUILD;
    set INBUILDSTANCE to 0;
+   building = 0;
         move penis to z-axis [0] speed [2];
    turn doorleft to y-axis <0> speed <50.000000>;
    turn doorright to y-axis <0> speed <50.000000>;

@@ -41,10 +41,9 @@ Buildingfx()
    while(building)
    {
 
-              emit-sfx nanoflame from nano1;
               emit-sfx 2048 from nano1;
                 
-        sleep 5;
+        sleep 30;
    }
 }
 
@@ -165,6 +164,19 @@ Thrust()
    }
 }
 
+buildflame()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx nanoflame from nano1;
+      				
+      }
+        sleep 600;    
+   }
+}
+
 Create()
 {
    Static_Var_3 = 0;
@@ -173,6 +185,7 @@ Create()
         start-script Thrust();
         start-script SmokeUnit();
         turn nano1 to x-axis <90.000000> now; 
+	start-script buildflame();
 }
 
 StartBuilding(Func_Var_1)

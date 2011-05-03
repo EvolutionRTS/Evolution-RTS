@@ -39,19 +39,30 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
 	}
 }
 
-Buildingfx()
+buildingfx()
 {
-   while(building)
+   while( TRUE )
    {
-
+      if (building) 
+      {   
               emit-sfx nanoflame from nano1;
               emit-sfx nanoflame from nano2;
-              emit-sfx 1025 from nanopoint;
-                
-        sleep 5;
+       }         
+   sleep 600;
    }
 }
 
+buildingfx2()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx 1025 from nanopoint;
+      }        
+   sleep 300;
+   }
+}
 
 OpenYard()
 {
@@ -60,7 +71,6 @@ OpenYard()
 	turn doors to x-axis <-90> speed <50>;
 	wait-for-move spikes along y-axis;
 	wait-for-turn doors around z-axis;
-	start-script Buildingfx();  
 	set YARD_OPEN to 1;
 	while( !get YARD_OPEN )
 	{
@@ -119,13 +129,13 @@ RequestState(requestedstate, currentstate)
 	{
 		if( statechg_DesiredState == 0 )
 		{
-			building=1;
+			
 			call-script Go();			
 			currentstate = 0;
 		}
 		if( statechg_DesiredState == 1 )
 		{
-			building=0;
+
 			call-script Stop();
 			currentstate = 1;
 		}
@@ -141,6 +151,8 @@ Create()
 //	turn nano2 to y-axis <90> now;
 	call-script InitState();
 	start-script SmokeUnit();
+	start-script Buildingfx();  
+	start-script Buildingfx2();  
 }
 
 QueryNanoPiece(piecenum)
@@ -174,10 +186,12 @@ Deactivate()
 
 StartBuilding()
 {
+building=1;
 }
 
 StopBuilding()
 {
+building=0;
 }
 
 QueryBuildInfo(piecenum)

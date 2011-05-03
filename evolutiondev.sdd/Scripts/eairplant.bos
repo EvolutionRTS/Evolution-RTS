@@ -5,14 +5,14 @@
 
 piece	base, door1, door2, elevator, nano1, nano2, spinner, nanopoint;
 
-static-var	Aztec, spray;
+static-var	Aztec, spray, building;
 
 // Signal definitions (they must be distincts power of 2)
 #define SIG_ACTIVATE	2
 #define SIG_BUILDING	4
 #define SIG_TECH		8
 
-#define NANOFLAME 1024+0
+#define nanoflame 1024+0
 
 SmokeUnit()
 {
@@ -32,15 +32,6 @@ SmokeUnit()
 			sleeptime = 200;
 		sleep sleeptime;
 	}
-}
-
-Create()
-{
-	Aztec = TRUE;
-	spray = 0;
-	while( get BUILD_PERCENT_LEFT )
-		sleep 400;
-	start-script SmokeUnit();
 }
 
 QueryNanoPiece(piecenum)
@@ -79,6 +70,7 @@ Activate()
 	// Now yard is open.
 	// Allow the nano to flow:
 	set INBUILDSTANCE to TRUE;
+	building = 1;
 	// Send spinner spinning:
 	spin spinner around y-axis speed <50>;
 }
@@ -94,6 +86,7 @@ Deactivate()
 		sleep 400;
 	// Switch off the nano faucet:
 	set INBUILDSTANCE to FALSE;
+	building = 0;
 	// Halt spinner spin
 	stop-spin spinner around y-axis decelerate <30>;
 	// Try to close the yard
@@ -120,13 +113,6 @@ StartBuilding()
 {
 	signal SIG_BUILDING; // Kill any other StartBuilding
 	set-signal-mask SIG_BUILDING; // Be killable
-	while(TRUE)
-	{
-		emit-sfx NANOFLAME from nano1;
-		emit-sfx NANOFLAME from nano2;
-		emit-sfx 1025 from nanopoint;
-		sleep 5;
-	}
 }
 
 StopBuilding()
@@ -158,6 +144,44 @@ TechGranted()
 {
 	signal SIG_TECH;// Kill TechLost
 	Aztec=TRUE;
+}
+
+buildingfx()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx nanoflame from nano1;
+              emit-sfx nanoflame from nano2;
+       }         
+   sleep 600;
+   }
+}
+
+buildingfx2()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx 1025 from nanopoint;
+      }        
+   sleep 300;
+   }
+}
+
+Create()
+{
+	Aztec = TRUE;
+	spray = 0;
+	while(get BUILD_PERCENT_LEFT)
+	{
+		sleep 400;
+	}
+	start-script SmokeUnit();
+	start-script buildingfx(); 
+	start-script buildingfx2(); 
 }
 
 Killed(severity, corpsetype)

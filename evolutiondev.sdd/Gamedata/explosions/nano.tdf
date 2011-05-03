@@ -19,14 +19,14 @@
 		colorMap	= 0.25 0.60 0.30 1.0	0 0 0 0.0;
 		airdrag		= 0.7;
 
-		particleLife=15;
+		particleLife=60;
 		particleLifeSpread=20;
 
 		numParticles=1;
 
 		particleSpeed=1;
 		particleSpeedSpread=6;
-		particleSize=12 r4;
+		particleSize=12;
 		particleSizeSpread=10;
 
 		emitRot=0;
