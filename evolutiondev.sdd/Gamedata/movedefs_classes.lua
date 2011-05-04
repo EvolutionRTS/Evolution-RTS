@@ -9,6 +9,11 @@ local moveDefs = {
       badwaterslope=255;
       crushstrength=0;
       depthmod=0.1;
+	  heatproduced=10;
+	  heatmapping=0;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -20,6 +25,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
+	  heatproduced=20;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -31,6 +42,12 @@ local moveDefs = {
       maxwaterslope=26;
       badwaterslope=26;
       crushstrength=20;
+	  heatproduced=20;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    
@@ -42,7 +59,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-      depthmod=0.1;
+      heatproduced=20;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -54,6 +76,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
+	  heatproduced=30;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -65,7 +93,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-      depthmod=0.1;
+      heatproduced=30;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    
@@ -75,6 +108,12 @@ local moveDefs = {
       maxslope=180;
       maxwaterdepth=10;
       crushstrength=20;
+	  heatproduced=30;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -86,6 +125,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
+	  heatproduced=40;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -97,7 +142,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-      depthmod=0.1;
+      heatproduced=40;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    ALLTERRTANK4 = {
@@ -106,6 +156,12 @@ local moveDefs = {
       maxslope=180;
       maxwaterdepth=10;
       crushstrength=20;
+	  heatproduced=40;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
     UBOAT4 = {
@@ -115,6 +171,12 @@ local moveDefs = {
       minwaterdepth = 30,
       crushstrength = 20,
       subMarine = 1,
+	  heatproduced=40;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -126,6 +188,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
+	  heatproduced=50;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    
@@ -135,6 +203,12 @@ local moveDefs = {
       maxslope=180;
       maxwaterdepth=10;
       crushstrength=20;
+	  heatproduced=50;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 
@@ -146,6 +220,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
+	  heatproduced=60;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    ALLTERRTANK6 = {
@@ -154,18 +234,28 @@ local moveDefs = {
       maxslope=180;
       maxwaterdepth=10;
       crushstrength=20;
+	  heatproduced=60;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    COMMANDERTANK4 = {
       footprintx=4;
       footprintz=4;
       maxslope=180;
-      maxwaterdepth=25;
       crushstrength=20;
       maxwaterdepth=5000;
       maxwaterslope=255;
       badwaterslope=255;
-      depthmod=0.1;
+      heatproduced=40;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    EXPERIMENTALTANK10 = {
@@ -176,6 +266,12 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=100;
+	  heatproduced=120;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    HOVERTANKEXPERIMENTAL9 = {
@@ -184,6 +280,12 @@ local moveDefs = {
       maxslope=26;
       maxwaterdepth=20;
       crushstrength=100;
+	  heatproduced=90;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
    EXPERIMENTALTANK12 = {
@@ -192,6 +294,12 @@ local moveDefs = {
       maxslope=180;
       maxwaterdepth=80;
       crushstrength=100;
+	  heatproduced=120;
+	  heatmapping=0;
+	  depthmod=0.1;
+	  minwaterdepth=10;
+	  heatmod=50;
+	  slopemod=4;
 --	  heatmapping=false;
    },
 }
