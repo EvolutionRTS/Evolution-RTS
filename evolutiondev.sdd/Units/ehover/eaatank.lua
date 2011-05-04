@@ -8,8 +8,8 @@ local unitName = "eaatank"
 
 local unitDef = {
 --Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "missiletrailsmall",
-  pieceTrailCEGRange = 1,
+  pieceTrailCEGTag   = "deathceg",
+  pieceTrailCEGRange = 2,
 --End tags entered from Notepad++
   acceleration       = 0.18,
   bmcode             = "1",
@@ -118,8 +118,9 @@ local weaponDefs = {
 	energypershot      = 7.5,
     fireStarter        = 80,
     id                 = 1,
-    impulseFactor      = 3,
+    impulseFactor      = 0,
 	interceptedByShieldType = 4,
+	model              = "missilesmall.s3o",
     name               = "AA Cannon",
     pitchtolerance     = "500",
     range              = 1000,

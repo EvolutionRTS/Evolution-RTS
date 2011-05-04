@@ -7,8 +7,8 @@ local unitName = "ecommandfactory"
 
 local unitDef = {
 --Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "missiletrailsmall",
-  pieceTrailCEGRange = 1,
+  pieceTrailCEGTag   = "deathceg",
+  pieceTrailCEGRange = 2,
 --End tags entered from Notepad++
   activatewhenbuilt  = false,
   buildAngle         = 1024,

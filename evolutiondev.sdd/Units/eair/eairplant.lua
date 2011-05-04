@@ -7,8 +7,8 @@ local unitName = "eairplant"
 
 local unitDef = {
 --Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "missiletrailsmall",
-  pieceTrailCEGRange = 1,
+  pieceTrailCEGTag   = "deathceg",
+  pieceTrailCEGRange = 2,
 --End tags entered from Notepad++
   activatewhenbuilt  = false,
   buildCostEnergy    = 0,
