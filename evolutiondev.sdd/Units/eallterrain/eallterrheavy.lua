@@ -94,6 +94,7 @@ Requires +6 Power]],
     },
   },
    customParams = {
+   	death_sounds = "soldier",
 	twokhotkey = 's',
     RequireTech = "6 Power",
 	armortype   = "mediumarmor",

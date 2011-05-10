@@ -51,6 +51,7 @@ local unitDef = {
     },
   },
   customParams = {
+	death_sounds = "generic",
 	twokhotkey = 'j',
 	armortype   = "building", 
 	normaltex = "unittextures/ejammer2normal.png", 

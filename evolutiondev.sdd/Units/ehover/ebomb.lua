@@ -83,6 +83,7 @@ Requires +12 Power]],
     },
   },
   customParams = {
+  	death_sounds = "soldier",
 	twokhotkey = 'b',
     RequireTech = "12 Power",
 	armortype   = "lightarmor",

@@ -76,6 +76,7 @@ Requires +15 Power]],
     },
   },
   customParams = {
+	death_sounds = "generic",
 	twokhotkey = 'l',
     RequireTech = "15 Power",
 	armortype   = "building",

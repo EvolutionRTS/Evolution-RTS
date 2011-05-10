@@ -86,6 +86,7 @@ Requires +5 Power]],
     },
   },
    customParams = {
+   	death_sounds = "soldier",
 	twokhotkey = 'd',
     RequireTech = "5 Power",
 	armortype   = "mediumarmor",
@@ -156,6 +157,7 @@ local weaponDefs = {
 	avoidfriendly	= 0,
 	collidefriendly	= 0,
 	customparams = {
+		death_sounds = "generic",
 	  damagetype		= "light",  
     }, 
     damage = {

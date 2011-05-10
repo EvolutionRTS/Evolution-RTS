@@ -89,6 +89,7 @@ Requires +7 Power]],
     },
   },
    customParams = {
+   	death_sounds = "soldier",
 	twokhotkey = 's',
     RequireTech = "7 Power",
 	armortype   = "lightarmor",
@@ -167,6 +168,7 @@ local weaponDefs = {
 	avoidfriendly	= 0,
 	collidefriendly	= 0,
 	customparams = {
+		death_sounds = "generic",
 	  damagetype		= "medium",  
     }, 
     damage = {

@@ -67,7 +67,8 @@ local unitDef = {
     },
   },
   customParams = {
-    twokhotkey = 'm',
+    death_sounds = "generic",
+	twokhotkey = 'm',
 	armortype   = "eco",
 	normaltex = "unittextures/lego2skin_explorernormal.png",
 	helptext = [[Metal Extractor

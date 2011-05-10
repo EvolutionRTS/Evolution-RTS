@@ -115,6 +115,7 @@ local unitDef = {
     },
   },
   customParams = {
+	death_sounds = "soldier",
 	twokhotkey = 'e',
     airdronespawner = "1",
 	armortype   = "lightarmor",

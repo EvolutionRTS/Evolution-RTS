@@ -55,6 +55,7 @@ local unitDef = {
     },
   },
   customParams = {
+	death_sounds = "generic",
 	twokhotkey = 'b',
 	armortype   = "armoredbuilding", 
 	normaltex = "unittextures/ebarricadenormal.png", 

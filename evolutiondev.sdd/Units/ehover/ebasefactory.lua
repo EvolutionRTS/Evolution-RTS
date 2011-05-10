@@ -93,6 +93,7 @@ local unitDef = {
     },
   },
   customParams = {
+  	death_sounds = "generic",
 	twokhotkey = 'z',
 	armortype   = "building", 
 	normaltex = "unittextures/ebasefactorynormal.png", 

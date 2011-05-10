@@ -71,6 +71,7 @@ Requires +20 Power]],
     },
   },
   customParams = {
+	death_sounds = "nuke",
 	twokhotkey = 'i',
     RequireTech = "20 Power",
 	armortype   = "building", 
@@ -144,6 +145,7 @@ local weaponDefs = {
     weaponVelocity     = 500,
 	customparams = {
 	  damagetype		= "explosive",  
+	  death_sounds 		= "nuke",
     },      
     damage = {
       default            = 50000,

@@ -71,6 +71,7 @@ local unitDef = {
     },
   },
   customParams = {
+  	death_sounds = "nuke",
 	twokhotkey = 'd',
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 

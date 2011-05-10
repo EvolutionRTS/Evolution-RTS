@@ -62,6 +62,7 @@ Provides +1 Power]],
     },
   },
   customParams = {
+	death_sounds = "generic",
 	twokhotkey = 'e',
     ProvideTech = "Power",
     ProvideTechRange = "400",

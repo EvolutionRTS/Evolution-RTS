@@ -89,6 +89,7 @@ local unitDef = {
     },
   },
   customParams = {
+  	death_sounds = "generic",
 	twokhotkey = 'x',
 	armortype   = "building", 
 	normaltex = "unittextures/eminifacnormal.png", 

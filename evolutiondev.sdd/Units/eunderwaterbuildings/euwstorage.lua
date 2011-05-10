@@ -59,6 +59,7 @@ local unitDef = {
     },
   },
    customParams = {
+   	death_sounds = "generic",
 	armortype   = "eco", 
 	normaltex = "unittextures/estoragenormal.png", 
   },

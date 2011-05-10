@@ -86,6 +86,7 @@ local unitDef = {
     },
   },
   customParams = {
+  	death_sounds = "soldier",
 	twokhotkey = 'o',
     cancollect = "1",
 	armortype   = "lightarmor",

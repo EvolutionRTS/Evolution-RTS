@@ -52,6 +52,7 @@ local unitDef = {
     },
   },
   customParams = {
+	death_sounds = "generic",
 	twokhotkey = 'r',
 	armortype   = "building", 
 	normaltex = "unittextures/eradar2normal.png", 

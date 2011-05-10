@@ -80,6 +80,7 @@ Requires +80 Power]],
     },
   },
   customParams = {
+	death_sounds = "nuke",
 	twokhotkey = 'a',
     RequireTech = "80 Power",
 	armortype   = "lightarmor",

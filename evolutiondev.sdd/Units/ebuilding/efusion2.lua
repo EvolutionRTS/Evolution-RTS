@@ -65,6 +65,7 @@ Provides +10 Power]],
     },
   },
   customParams = {
+	death_sounds = "generic",
 	twokhotkey = 'n',
     ProvideTech = "10 Power",
     ProvideTechRange = "800",

@@ -116,6 +116,7 @@ local unitDef = {
     },
   },
   customParams = {
+	death_sounds = "soldier",
     cancollect = "1",
 	armortype   = "heavyarmor",
 	nofriendlyfire	= "1",

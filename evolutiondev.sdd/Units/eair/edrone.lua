@@ -89,6 +89,7 @@ local unitDef = {
     },
   },
   customParams = {
+  	death_sounds = "soldier",
 	normaltex = "unittextures/edronenormal.png", 
   },
 }

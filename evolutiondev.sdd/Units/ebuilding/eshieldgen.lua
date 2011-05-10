@@ -69,6 +69,7 @@ Requires +10 Power]],
     },
   },
   customParams = {
+	death_sounds = "generic",
 	twokhotkey = 'p',
     RequireTech = "10 Power",
     ProvideTechRange = "300",

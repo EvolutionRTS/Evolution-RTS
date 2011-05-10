@@ -90,6 +90,7 @@ Requires +4 Power]],
     }, ]]--
   },
   customParams = {
+	death_sounds = "soldier",
 	twokhotkey = 's',
     RequireTech = "4 Power",
 	armortype   = "heavyarmor",

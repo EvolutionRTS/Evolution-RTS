@@ -64,6 +64,7 @@ local unitDef = {
     },
   },
   customParams = {
+  	death_sounds = "generic",
 	armortype   = "eco",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },

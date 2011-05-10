@@ -66,6 +66,7 @@ Provides +10 Power]],
     },
   },
   customParams = {
+  	death_sounds = "generic",
     ProvideTech = "10 Power",
     ProvideTechRange = "800",
 	armortype   = "eco",

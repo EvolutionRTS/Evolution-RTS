@@ -77,6 +77,7 @@ local unitDef = {
     },
   },
    customParams = {
+   	death_sounds = "generic",
 	twokhotkey = 'v',
 	armortype   = "building", 
 	normaltex = "unittextures/eairplantnormal.png", 

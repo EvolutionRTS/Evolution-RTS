@@ -76,6 +76,7 @@ local unitDef = {
     },
   },
   customParams = {
+  	death_sounds = "generic",
 	twokhotkey = 'c',
 	armortype   = "building", 
 	normaltex = "unittextures/eamphibfacnormal.png", 

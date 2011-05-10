@@ -72,6 +72,7 @@ Requires +2 Power]],
     },
   },
    customParams = {
+	death_sounds = "soldier",
 	twokhotkey = 'x',
     RequireTech = "2 Power",
 	armortype   = "heavyarmor",
