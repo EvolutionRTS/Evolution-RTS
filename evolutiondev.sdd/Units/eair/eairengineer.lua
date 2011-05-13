@@ -33,7 +33,9 @@ local unitDef = {
   canstop            = "1",
   category           = "VTOL",
   collide            = true,
-  collisionSphereScale = 1,
+--Collision Volumes... Because the engine devs are idiots.
+	collisionVolumeScales = [[35 35 35]],
+--End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 300,
   description        = "Airborne Engineer :: Armortype: Light",
@@ -55,6 +57,7 @@ local unitDef = {
   maxDamage          = 140,
   maxSlope           = 10,
   maxVelocity        = 14,
+  verticalSpeed		 = 15,
   maxWaterDepth      = 0,
   metalStorage       = 0,
   moverate1          = "8",

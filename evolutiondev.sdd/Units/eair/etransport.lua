@@ -25,9 +25,11 @@ local unitDef = {
   canstop            = "1",
   category           = "VTOL",
   collide            = false,
-  collisionSphereScale = 1,
+--Collision Volumes... Because the engine devs are idiots.
+	collisionVolumeScales = [[35 35 35]],
+--End Collision volumes
   corpse             = "ammobox",
-  cruiseAlt          = 250,
+  cruiseAlt          = 400,
   description        = [[Fast Armored Transport - Armortype: Heavy
 
 Requires +2 Power]],
@@ -41,9 +43,10 @@ Requires +2 Power]],
 --  hoverAttack        = true,
   icontype           = "air",
   maxAcc             = 0.3,
-  maxDamage          = 240,
+  maxDamage          = 180,
   maxSlope           = 60,
   maxVelocity        = 18,
+  verticalSpeed		 = 15,
   name               = "Charter (x)",
   objectName         = "etransport.s3o",
   releaseHeld        = true,

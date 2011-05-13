@@ -24,7 +24,9 @@ local unitDef = {
   canstop            = "1",
   category           = "VTOL",
   collide            = false,
-  collisionSphereScale = 1,
+--Collision Volumes... Because the engine devs are idiots.
+  collisionVolumeScales = [[35 35 35]],
+--End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 180,
   description        = [[Air Scout - Armortype: Light
@@ -43,6 +45,7 @@ Requires +4 Power]],
   maxDamage          = 160,
   maxSlope           = 10,
   maxVelocity        = 20,
+  verticalSpeed		 = 15,
   maxWaterDepth      = 0,
   metalStorage       = 0,
   name               = "(A)irScout",

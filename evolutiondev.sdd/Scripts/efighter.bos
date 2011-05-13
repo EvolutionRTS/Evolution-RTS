@@ -75,13 +75,6 @@ return (1);
 FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
 {
 	emit-sfx gdmarty from firepoint1;
-	sleep 150;  
-	emit-sfx 2048 + 0 from firepoint2;
-	emit-sfx 2048 + 0 from firepoint3;
-	sleep 150;  
-	emit-sfx 2048 + 0 from firepoint4;  
-	emit-sfx 2048 + 0 from firepoint5;
-	sleep 150;  
 } 
 
 AimFromWeapon1(piecenum) // where it aims the weapon from 
