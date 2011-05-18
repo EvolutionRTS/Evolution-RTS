@@ -1,6 +1,6 @@
 Source: evolutionrts
 Section: games
-Priority: optional
+Priority: extra
 Maintainer: René Milk <koshi@springlobby.info>
 Uploaders: René Milk <koshi@springlobby.info>
 Build-Depends: debhelper (>> 4.0.0), dpkg-dev (>= 1.10.23)
