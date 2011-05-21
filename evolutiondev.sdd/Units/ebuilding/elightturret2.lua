@@ -22,7 +22,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Anti-Raid Defense Platform - Damagetype: Light :: Armortype: Armored Building
 
-Requires +2 Power]],
+Requires +4 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",

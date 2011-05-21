@@ -25,7 +25,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Heavy Plasma Battery - Damagetype: Medium :: Armortype: Armored Building
 
-Requires +5 Power]],
+Requires +8 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
