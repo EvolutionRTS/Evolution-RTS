@@ -61,9 +61,16 @@ local function ProcessUnitDef(udName, ud)
 end
 
 for name, fd in pairs(FeatureDefs) do
-	if(tonumber(fd["footprintz"]) < 2 or tonumber(fd["footprintx"]) < 2 
+	if(tonumber(fd["footprintz"]) <= 2 or tonumber(fd["footprintx"]) <= 2 
 	or string.lower(fd["category"]) == "vegitation" or string.lower(fd["category"]) == "vegetation") then
 		fd["blocking"] = false
+		if (not fd.customparams) then 
+		 fd.customparams = {}
+		end
+		if (not fd.customparams.provide_cover) then
+         fd.customparams.provide_cover = 1
+		  Spring.Echo("Feature["..name.."] is providing cover!")
+		end   
 	end
 end
 

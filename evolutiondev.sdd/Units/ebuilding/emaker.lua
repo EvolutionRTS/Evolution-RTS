@@ -62,6 +62,7 @@ Requires +20 Power]],
     },
   },
   customParams = {
+    needed_cover = 8,
 	death_sounds = "generic",
 	twokhotkey = 'o',
     RequireTech = "20 Power",

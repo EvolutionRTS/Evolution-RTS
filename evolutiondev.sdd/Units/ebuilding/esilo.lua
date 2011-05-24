@@ -71,6 +71,7 @@ Requires +20 Power]],
     },
   },
   customParams = {
+    needed_cover = 8,
 	death_sounds = "nuke",
 	twokhotkey = 'i',
     RequireTech = "20 Power",

@@ -80,6 +80,7 @@ Requires +8 Power]],
     },
   },
   customParams = {
+    needed_cover = 3,
   	death_sounds = "soldier",
 	twokhotkey = 'l',
     RequireTech = "8 Power",

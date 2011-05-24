@@ -18,6 +18,7 @@ local unitDef = {
   builder            = true,
   buildTime          = 5,
   commander			 = true,
+  capturable		 = false,
   CanAttack			 = true,
   CanAssist          = true,
   CanCapture         = true,
@@ -116,6 +117,7 @@ local unitDef = {
     },
   },
   customParams = {
+    needed_cover = 2,
 	death_sounds = "soldier",
     cancollect = "1",
 	armortype   = "heavyarmor",

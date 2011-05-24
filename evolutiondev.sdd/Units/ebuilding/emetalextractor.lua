@@ -67,6 +67,7 @@ local unitDef = {
     },
   },
   customParams = {
+    needed_cover = 3,
     death_sounds = "generic",
 	twokhotkey = 'm',
 	armortype   = "eco",

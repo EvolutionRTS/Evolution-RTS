@@ -118,6 +118,7 @@ local unitDef = {
     },
   },
   customParams = {
+    needed_cover = 2,
 	death_sounds = "soldier",
 	twokhotkey = 'e',
     airdronespawner = "1",

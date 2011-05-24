@@ -86,6 +86,7 @@ local unitDef = {
     },
   },
   customParams = {
+    needed_cover = 2,
   	death_sounds = "soldier",
 	twokhotkey = 'o',
     cancollect = "1",
