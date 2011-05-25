@@ -105,8 +105,8 @@ local options= {
 		items={
 			{key="anywhere", name="Anywhere", desc="Burrows can spawn anywhere"},
 			{key="avoid", name="Avoid Players", desc="Burrows do not spawn on player units"},
-			{key="initialbox", name="Initial Start Box", desc="First wave spawns in chicken start box, following burrows avoid players"},
-			{key="alwaysbox", name="Always Start Box", desc="Burrows always spawn in chicken start box"},
+			{key="initialbox", name="Initial Start Box", desc="First wave spawns in Spawner start box, following burrows avoid players"},
+			{key="alwaysbox", name="Always Start Box", desc="Burrows always spawn in Spawner start box"},
 		}
 	},
 	-- {
@@ -126,8 +126,8 @@ local options= {
 	-- },
 	{
 		key    = "mo_queentime",
-		name   = "Time until battleship comes",
-		desc   = "A battle ship will come to attack after given time.",
+		name   = "Time until Big Daddy comes",
+		desc   = "A Big Daddy will come to attack after given time.",
 		type   = "number",
 		def    = 40,
 		min    = 1,
@@ -149,7 +149,7 @@ local options= {
 	{
 		key    = "mo_graceperiod",
 		name   = "Grace Period (Seconds)",
-		desc   = "Time before spawner ai becomes active.",
+		desc   = "Time before Survival Mode becomes active.",
 		type   = "number",
 		def    = 120,
 		min    = 10,
@@ -180,7 +180,7 @@ local options= {
 	{
 		key    = "mo_custom_chickenspawn",
 		name   = "Wave Spawn Rate (Seconds)",
-		desc   = "Time between chicken waves.",
+		desc   = "Time between waves.",
 		type   = "number",
 		def    = 90,
 		min    = 10,
@@ -190,8 +190,8 @@ local options= {
 	},
 	{
 		key    = "mo_custom_minchicken",
-		name   = "Min Chickens Per Player",
-		desc   = "Minimum Number of chickens before spawn chance kicks in",
+		name   = "Min enemy units Per Player",
+		desc   = "Minimum Number of enemy units before spawn chance kicks in",
 		type   = "number",
 		def    = 8,
 		min    = 1,
@@ -202,7 +202,7 @@ local options= {
 	{
 		key    = "mo_custom_spawnchance",
 		name   = "Spawn Chance (Percent)",
-		desc   = "Percent chance of each chicken spawn once greater thwn the min chickens per player limit",
+		desc   = "Percent chance of each enemy unit spawn once greater than the min chickens per player limit",
 		type   = "number",
 		def    = 33,
 		min    = 0,
@@ -235,7 +235,7 @@ local options= {
 	{
 		key    = "mo_custom_expstep",
 		name   = "Bonus Experience",
-		desc   = "Exp each chicken will receive by the end of the game",
+		desc   = "Exp each enemy unit will receive by the end of the game",
 		type   = "number",
 		def    = 1.5,
 		min    = 0,

@@ -31,7 +31,7 @@ local myOldFaction
 
 local windows = {}
 
-local tx = "Many of your fathers and brothers have perished valiantly in the face of a contemptible enemy. We must never forget what the Federation has done to our people! My brother, Garma Zabi, has shown us these virtues through our own valiant sacrifice. By focusing our anger and sorrow, we are finally in a position where victory is within our grasp, and once again, our most cherished nation will flourish. Victory is the greatest tribute we can pay those who sacrifice their lives for us! Rise, our people, Rise! Take your sorrow and turn it into anger! Zeon thirsts for the strength of its people! SIEG ZEON!!! SIEG ZEON!!! SIEG ZEON!!"
+local tx = "Nothing to see here folks!"
 
 local WAR_THRESHOLD = 5000
 local PEACE_THRESHOLD = 1000
