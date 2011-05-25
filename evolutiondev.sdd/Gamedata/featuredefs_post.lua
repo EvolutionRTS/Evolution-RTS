@@ -68,7 +68,7 @@ for name, fd in pairs(FeatureDefs) do
 		or string.lower(fd["category"]) == "vegitation" 
 		or string.lower(fd["category"]) == "vegetation" 
 	)
-	and string.lower(fd["name"]) ~= "ammobox"
+	and (not fd["name"] or string.lower(fd["name"]) ~= "ammobox")
 	) then
 		fd["blocking"] = false
 		if (not fd.customparams) then 

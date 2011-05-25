@@ -14,5 +14,10 @@ local featureDef	=	{
 	reclaimable				=true,
 	autoreclaimable				=true,
 --	nodrawundergray				="1.0",
+
+  customParams = {
+    provide_cover = 0,
+  },
+
 } 
 return lowerkeys({[objectname] = featureDef}) 
