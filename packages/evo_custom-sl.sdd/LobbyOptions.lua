@@ -67,6 +67,13 @@ local options = {
 		def    = "lobby/application_icon.png", 	--bmp/png
 	},
 	{
+		key    = "icon1",
+		name   = "icon1",
+		desc   = "application icon",
+		type   = "string",
+		def    = "lobby/application_icon_64.png", 	--bmp/png
+	},
+	{
 		key    = "battlelist_filter",
 		name   = "battlelist_filter",
 		desc   = "simple string/regex filter that defines which battles are shown in multiplayer",
