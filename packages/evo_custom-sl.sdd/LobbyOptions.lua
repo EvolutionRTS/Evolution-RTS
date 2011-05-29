@@ -64,11 +64,18 @@ local options = {
 		name   = "icon",
 		desc   = "application icon",
 		type   = "string",
-		def    = "lobby/application_icon.png", 	--bmp/png
+		def    = "lobby/application_icon_16.png", 	--bmp/png
 	},
 	{
 		key    = "icon1",
 		name   = "icon1",
+		desc   = "application icon",
+		type   = "string",
+		def    = "lobby/application_icon_32.png", 	--bmp/png
+	},
+	{
+		key    = "icon2",
+		name   = "icon2",
 		desc   = "application icon",
 		type   = "string",
 		def    = "lobby/application_icon_64.png", 	--bmp/png
