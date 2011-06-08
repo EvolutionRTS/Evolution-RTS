@@ -1,4 +1,6 @@
-evolutionrts/evo_custom-sl.sdd
-evolutionrts/debian/evolutionrts
-evolutionrts/debian/evolutionrts.debhelper.log
-evolutionrts/debian/evolutionrts.substvars
+*dsc
+*build
+*changes
+*ppa.upload
+*orig.tar.gz
+*debian.tar.gz
