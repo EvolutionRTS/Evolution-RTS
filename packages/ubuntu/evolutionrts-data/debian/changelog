@@ -1,3 +1,9 @@
+evolutionrts-data (1.4-ppa1) natty; urgency=low
+
+  * new upstream release
+
+ -- Rene Milk <koshi@springlobby.info>  Mon, 23 May 2011 07:25:16 +0200
+
 evolutionrts-data (1.0~ppa2) maverick; urgency=low
 
   * move to quilt
