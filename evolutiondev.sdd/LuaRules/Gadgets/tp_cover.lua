@@ -29,8 +29,7 @@ local needed_cover = {} --[unitID]
 --Spring.GetFeatureRadius ( number featureID ) -> nil | number
 --Spring.GetFeaturePosition( number featureID ) -> nil | number x, number y, number z
 
-function gadget:Initialize()
-
+function gadget:Initialize()	
 	local all_units = Spring.GetAllUnits ()
 	for i in pairs(all_units) do
 		--Spring.Echo ("unit " .. all_units[i])
@@ -52,6 +51,10 @@ function setcover (x,z, c)
 end
 
 function getcover (x,z)
+	if (x > mapX) then return 0 end
+	if (x < 0) then return 0 end
+	if (z > mapZ) then return 0 end
+	if (z < 0) then return 0 end
 	local tx, tz = tcoord (x,z)
 	return cover[tx][tz] or 0
 end
@@ -115,7 +118,7 @@ function updateUnits ()
 	local all_units = Spring.GetAllUnits ()
 	for i in pairs(all_units) do		
 		local x,y,z=Spring.GetUnitPosition (all_units[i])
-		if (x) then		--***why is this needed? sometimes x is nil for some reason?!
+		if (x and y and z) then		--***why is this needed? sometimes x is nil for some reason?!
 			local c = getcover (x,z)
 			if (c >= (needed_cover[all_units[i]] or 999)) then
 				--Spring.Echo (c)
@@ -198,7 +201,7 @@ function gadget:DrawWorldPreUnit()
 		for x=1, mapX, SYNCED.resolution do
 			for z=1 ,mapZ, SYNCED.resolution do			
 					local c = ugetcover (x,z)
-					if (c > 0) then
+					if (c > -1) then
 						gl.DrawGroundCircle (x,100,z, SYNCED.resolution/2, 8)
 						gl.DrawGroundCircle (x,100,z, (SYNCED.resolution/10)+(c*10), 8)
 					end
@@ -208,8 +211,7 @@ function gadget:DrawWorldPreUnit()
 end
 
 function gadget:KeyPress(key, mods, isRepeat)	
-	if (key == 108) then debugDraw = not debugDraw end --108=l
-	
+	if (key == 108 and Spring.IsCheatingEnabled() ) then debugDraw = not debugDraw end --108=L
 end
 
 end
