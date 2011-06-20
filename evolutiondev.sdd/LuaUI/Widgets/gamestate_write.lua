@@ -4,7 +4,7 @@ function widget:GetInfo()
 		name = "Write GameState",
 		desc = "Necessary for Lua gadgets to write startscripts.",
 		author = "zwzsg",
-		version = "1.52",
+		version = "1.6",
 		date = "8th december, 2009",
 		license = "Public Domain",
 		layer = 0,
