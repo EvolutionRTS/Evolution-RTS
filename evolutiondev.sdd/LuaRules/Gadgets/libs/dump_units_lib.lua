@@ -15,7 +15,7 @@ CommandList={
 {CMD.REPAIR,"Repair","Rep",CMDTYPE.ICON_UNIT_OR_AREA},
 {CMD.RESURRECT,"Resurrect","Rez",CMDTYPE.ICON_UNIT_FEATURE_OR_AREA},
 {CMD.CAPTURE,"Capture","Capt",CMDTYPE.ICON_UNIT_OR_AREA},
-{CMD.SELFD,"AutoDestruct","SD",CMDTYPE.ICON},
+{CMD.SELFD,"SelfDestruct","AutoDestruct","SD",CMDTYPE.ICON},
 {CMD.DGUN,"DGun","DG",CMDTYPE.ICON_MAP},
 {CMD.STOCKPILE,"Stockpile","SP",CMDTYPE.ICON},
 {CMD.LOAD_UNITS,"LoadUnits","L",CMDTYPE.ICON_UNIT_OR_AREA},
@@ -24,7 +24,7 @@ CommandList={
 {CMD.UNLOAD_UNIT,"UnloadUnit","U",CMDTYPE.ICON_MAP}, -- Add something to sort them depending on param num
 {CMD_REPEAT,"Repeat","Rpt",CMDTYPE.ICON}, -- Enqueuable one
 {CMD.WAIT,"Wait","W",CMDTYPE.ICON},
-{CMD_TIMEWAIT,"TimeWait","TW",CMDTYPE.NUMBER},-- Replaced by my own custom gadget implementation
+{CMD_TIMEWAIT,"TimeWait","WaitTime","TW",CMDTYPE.NUMBER},-- Replaced by my own custom gadget implementation
 {CMD.DEATHWAIT,"DeathWait","DW",CMDTYPE.ICON_UNIT_OR_RECTANGLE},
 {CMD.SQUADWAIT,"SquadWait","SW",CMDTYPE.NUMBER},
 {CMD.GATHERWAIT,"GatherWait","GW",CMDTYPE.ICON},
@@ -60,6 +60,10 @@ CommandList={
 {CMD_AIRSTRIKE,"AirStrike",CMDTYPE.ICON_MAP},
 {CMD_TRANSFER,"Transfer",CMDTYPE.NUMBER},
 {CMD_IF_UNIT_IN_AREA,"CmdIfUnitInArea",{7}},
+{CMD_TRIGGERWAIT,"TriggerWait","WaitTrigger",CMDTYPE.NUMBER},
+{CMD_SELFEXPLODE,"SelfExplode","Explode","SelfDestroy","Destroy",CMDTYPE.ICON},
+{CMD_SELFREMOVE,"SelfRemove","Remove","SilentSelfRemove","SilentRemove","SilentSelfExplode","SilentExplode","SilentSelfDestroy","SilentDestroy",CMDTYPE.ICON},
+{CMD_SELECTABLE,"Selectable","CanBeSelected",CMDTYPE.ICON},
 }
 
 KeyWords_ID={"ID"}
@@ -85,6 +89,17 @@ KeyWords_AutoLand={"AutoLand","AL"} -- Is there an associated command?
 KeyWords_AutoRepairLevel={"AutoRepairLevel","ARL"}
 KeyWords_LoopBackAttackAuto={"LoopBackAttack","LBA"}
 
+KeyWords_Name={"Name"}
+KeyWords_Trigger={"Trigger"}
+KeyWords_InDisk={"InDisk"}
+KeyWords_InRect={"InRectangle","InRect"}
+KeyWords_Period={"Period"}
+KeyWords_Once={"Once"}
+KeyWords_Echo={"Echo","Message"}
+KeyWords_And={"and","&&","&"}-- Not implemented
+KeyWords_Or={"or","||","|"}-- Not implemented
+KeyWords_Xor={"xor","^"}-- Not implemented
+KeyWords_Not={"Not","!","~"}-- Not implemented
 
 local function CheckCommandType(CmdType,ParamNbr)
 	if type(CmdType)=="table" then
@@ -230,6 +245,31 @@ function SortUnitList(UnitList)
 	return UnitList
 end
 
+-- The round2 function from http://lua-users.org/wiki/SimpleRound fails on 0.11
+function FormatNbr(x,digits)
+	local _,fractional = math.modf(x)
+	if fractional==0 then
+		return x
+	elseif fractional<0.0001 then
+		return math.floor(x)
+	elseif fractional>0.9999 then
+		return math.ceil(x)
+	else
+		local ret=string.format("%."..(digits or 0).."f",x)
+		if digits and digits>0 then
+			while true do
+				local last = string.sub(ret,string.len(ret))
+				if last=="0" or last=="." then
+					ret = string.sub(ret,1,string.len(ret)-1)
+				end
+				if last~="0" then
+					break
+				end
+			end
+		end
+		return ret
+	end
+end
 
 function MakeDumpedUnitList(UnitList,UsedIDs,ArgAbbreviated,Grid)
 	local kwi=1
@@ -307,8 +347,8 @@ function MakeDumpedUnitList(UnitList,UsedIDs,ArgAbbreviated,Grid)
 		if us["autoland"] then
 			s=s.." "..KeyWords_AutoLand[kwi]..son..(us["autoland"] and "1" or "0")
 		end
-		if us["autorepairlevel"] then
-			s=s.." "..KeyWords_AutoRepairLevel[kwi]..son..us["autorepairlevel"]
+		if us["autorepairlevel"] and math.abs(us["autorepairlevel"]-0.3)>0.0001 then
+			s=s.." "..KeyWords_AutoRepairLevel[kwi]..son..FormatNbr(us["autorepairlevel"],2)
 		end
 		if us["loopbackattack"] then
 			s=s.." "..KeyWords_LoopBackAttackAuto[kwi]..son..(us["loopbackattack"] and "1" or "0")
@@ -458,6 +498,12 @@ function MakeDumpedUnitList(UnitList,UsedIDs,ArgAbbreviated,Grid)
 						end
 					end
 
+					-- If a triggerwait, replace trigger id by its name
+					if o.id==CMD_TRIGGERWAIT then
+						if GG.MissionTrigger then
+							o.params[1]=GG.MissionTrigger.Equ[o.params[1]].Name or o.params[1]
+						end
+					end
 
 					-- Write all parameters
 					if target then
@@ -894,10 +940,13 @@ function SpawnUnit(line_or_words,suggested_team) -- will return the unused words
 	end
 end
 
-
-function AssignOrder(line_or_words,OldToNew) -- will return the unused words
+-- Take a long string or a list of strings and then return a command array:
+-- {{cmdId1,params1,options1},{cmdId2,params2,options2},{cmdId3,params3,options3},...}
+-- or return false in case of error.
+function ReadCommands(line_or_words,OldToNew)
 	local udid,x,y,z,team,rotation,health,buildProgress,facing
 	local words={}
+	local Commands={}
 	if type(line_or_words)=="string" then
 		words=GetWords(line_or_words)
 	elseif type(line_or_words)=="table" then
@@ -910,22 +959,6 @@ function AssignOrder(line_or_words,OldToNew) -- will return the unused words
 	end
 	-- To count
 	local LoopCount = 0
-
-	local NewID,OldID=nil
-
-	found,param=isAnyKeyWord(words[1],{"NID","NewID"})
-	if found then
-		Eat(words)
-		if not param then
-			param=Eat(words)
-		end
-		NewID=tonumber(param)
-	else
-		Spring.Echo("Error: No NewID in AssignOrder!")
-		return false
-	end
-
-
 	while(#words>0) do
 
 		local found,param,fcofw,fcosw,iwc
@@ -980,11 +1013,11 @@ function AssignOrder(line_or_words,OldToNew) -- will return the unused words
 				if x and z then
 					local y=Spring.GetGroundHeight(x,z)
 					-- cons building buildings
-					Spring.GiveOrderToUnit(NewID,-WhatToBuild,{x,y,z,facing},{"shift"})
+					table.insert(Commands,{-WhatToBuild,{x,y,z,facing},{"shift"}})
 				else
 					-- factories building units
 					for n=1,(count or 1) do
-						Spring.GiveOrderToUnit(NewID,-WhatToBuild,{},{})
+						table.insert(Commands,{-WhatToBuild,{},{}})
 					end
 				end
 				param=nil
@@ -1099,11 +1132,33 @@ function AssignOrder(line_or_words,OldToNew) -- will return the unused words
 					Spring.Echo(pt)
 				end
 
+				if cmd[1]==CMD_TRIGGERWAIT then
+					if #params+#words<1 then
+						Spring.Echo("Not enough words left for CMD_TRIGGERWAIT")
+						break
+					end
+					if #params==0 then
+						params={Eat(words)}
+					end
+					if type(params[1])=="number" then
+						params[1]=tostring(params[1])
+					end
+					params[1]=string.lower(params[1])
+					if GG.MissionTrigger.FromNames[params[1]] then
+						params[1]=GG.MissionTrigger.FromNames[params[1]]
+					elseif isNumeral(params[1]) and GG.MissionTrigger.FromNames["trigger"..params[1]] then
+						params[1]=GG.MissionTrigger.FromNames["trigger"..params[1]]
+					else
+						Spring.Echo("Bad trigger name \""..tostring(params[1]).."\" in CMD_TRIGGERWAIT")
+						break
+					end
+				end
+
 				-- Echo what command we're about to issue for debug purpose:
-				--Spring.Echo("Spring.GiveOrderToUnit("..NewID..", "..cmd[1].." ("..cmd[2].."), {"..table.concat(params,",").."}, {\"shift\"})")
+				--Spring.Echo("Spring.GiveOrderToUnit(ID, "..cmd[1].." ("..cmd[2].."), {"..table.concat(params,",").."}, {\"shift\"})")
 
 				-- Give the order:
-				Spring.GiveOrderToUnit(NewID,cmd[1],params,{"shift"})
+				table.insert(Commands,{cmd[1],params,{"shift"}})
 			end
 		end
 
@@ -1118,7 +1173,7 @@ function AssignOrder(line_or_words,OldToNew) -- will return the unused words
 			while(isNumeral(words[1])) do
 				table.insert(params,tonumber(Eat(words)))
 			end
-			Spring.GiveOrderToUnit(NewID,tonumber(cmd_id),params,{"shift"})
+			table.insert(Commands,{tonumber(cmd_id),params,{"shift"}})
 		end
 
 		if iwc==#words then -- No words eaten during that loop: we skip the word, and all following numeral
@@ -1130,7 +1185,46 @@ function AssignOrder(line_or_words,OldToNew) -- will return the unused words
 		end
 
 	end
-	return true
+	return Commands
+end
+
+function AssignOrder(line_or_words,OldToNew) -- will return the unused words
+	local udid,x,y,z,team,rotation,health,buildProgress,facing
+	local words={}
+	if type(line_or_words)=="string" then
+		words=GetWords(line_or_words)
+	elseif type(line_or_words)=="table" then
+		words=line_or_words
+	else
+		return false
+	end
+	local function Eat(list,pos)
+		return table.remove(list,pos or 1)
+	end
+	-- To count
+	local LoopCount = 0
+
+	local NewID,OldID=nil
+
+	found,param=isAnyKeyWord(words[1],{"NID","NewID"})
+	if found then
+		Eat(words)
+		if not param then
+			param=Eat(words)
+		end
+		NewID=tonumber(param)
+	else
+		Spring.Echo("Error: No NewID in AssignOrder!")
+		return false
+	end
+
+	local Commands=ReadCommands(line_or_words,OldToNew)
+	if Commands then
+		Spring.GiveOrderArrayToUnitArray({NewID},Commands)
+	else
+		Spring.Echo("Error reading commands: \""..tostring(line_or_words).."\"")
+	end
+
 end
 
 function ListUsedIDs()
@@ -1477,6 +1571,227 @@ function SpawnFeatureList(FeatureToSpawnList)
 	end
 end
 
+function ReadTrigger(line_or_words)
+
+	local Name,Teams,UnitCount,UnitTypes,Triggers,SelectionShape,Period,Constructed,Once,Action,Message=nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil
+
+	local words={}
+	if type(line_or_words)=="string" then
+		words=GetWords(line_or_words)
+	elseif type(line_or_words)=="table" then
+		words=line_or_words
+	else
+		return false
+	end
+
+	local function Eat(list,pos)
+		return table.remove(list,pos or 1)
+	end
+
+	-- Catch any message at the end 
+	for i=1,#words do
+		if isAnyKeyWord(words[i],KeyWords_Echo) then
+			Message=table.concat(words," ",i+1,#words)
+			for j=#words,i,-1 do
+				table.remove(words)
+			end
+			break
+		end
+	end
+
+	-- To count
+	local LoopCount = 0
+
+	while(#words>0) do
+
+		local found,param,fcofw,fcosw,iwc
+		-- fcofw = first char of first word
+		-- fcosw = first char of second word
+		-- iwc = initial word count
+
+		iwc=#words
+		LoopCount=LoopCount+1
+
+		-- Skip
+		found,param=isAnyKeyWord(words[1],KeyWords_Skip)
+		if found then
+			Eat(words)
+			if not param then
+				if isNumeral(words[1]) then
+					param=Eat(words)
+				else
+					param="1"
+				end
+			end
+			for k=1,tonumber(param) do
+				Eat(words)
+			end
+		end
+
+		-- Name
+		found,param=isAnyKeyWord(words[1],KeyWords_Name)
+		if found then
+			Eat(words)
+			if not param then
+				param=Eat(words)
+			end
+			Name=string.lower(param)
+		end
+
+		-- Period
+		found,param=isAnyKeyWord(words[1],KeyWords_Period)
+		if found then
+			Eat(words)
+			if not param then
+				param=Eat(words)
+			end
+			Period=tonumber(param)
+		end
+
+		-- Team
+		found,param=isAnyKeyWord(words[1],KeyWords_Team)
+		if found then
+			Eat(words)
+			if not param then
+				param=Eat(words)
+			end
+			Teams={tonumber(param)}
+			while isNumeral(words[1]) do
+				table.insert(Teams,tonumber(Eat(words)))
+			end
+		end
+
+		-- InDisk
+		found,param=isAnyKeyWord(words[1],KeyWords_InDisk)
+		if found then
+			if SelectionShape then
+				Spring.Echo("Warning two selection shapes in same trigger!")
+			end
+			Eat(words)
+			if not param then
+				param=Eat(words)
+			end
+			local x,z,r=param,Eat(words),Eat(words)
+			if isNumeral(x) and isNumeral(z) and isNumeral(r) then
+				SelectionShape={Spring.GetUnitsInCylinder,tonumber(x),tonumber(z),tonumber(r)}
+			else
+				Spring.Echo("Bad parameters to InDisk: x=\""..tostring(x).."\" z=\""..tostring(z).."\" r=\""..tostring(r).."\"")
+			end
+		end
+
+		-- InRect
+		found,param=isAnyKeyWord(words[1],KeyWords_InRect)
+		if found then
+			if SelectionShape then
+				Spring.Echo("Warning two selection shapes in same trigger!")
+			end
+			Eat(words)
+			if not param then
+				param=Eat(words)
+			end
+			local x1,z1,x2,z2=param,Eat(words),Eat(words),Eat(words)
+			if isNumeral(x1) and isNumeral(z1) and isNumeral(x2) and isNumeral(z2) then
+				SelectionShape={Spring.GetUnitsInRectangle,tonumber(x1),tonumber(z1),tonumber(x2),tonumber(z2)}
+			else
+				Spring.Echo("Bad parameters to InRect: x1=\""..tostring(x).."\" z1=\""..tostring(z).."\" x2=\""..tostring(z).."\" z2=\""..tostring(z).."\"")
+			end
+		end
+
+		if isNumeral(words[1]) then
+			if not UnitCount then
+				UnitCount=tonumber(Eat(words))
+			else
+				Spring.Echo("Error unexpected number: "..Eat(words))
+			end
+		end
+
+		-- Unit Types
+		if UnitDefNames[string.lower(words[1] or "")] then
+			if not UnitTypes then
+				UnitTypes={}
+			end
+			table.insert(UnitTypes,UnitDefNames[string.lower(Eat(words))].id)
+		end
+
+		-- Constructed
+		found,param=isAnyKeyWord(words[1],KeyWords_BuildProgress)
+		if found then
+			Eat(words)
+			if not param and isNumeral(words[1]) then
+				param=Eat(words)
+			end
+			Constructed=param and tonumber(param)/100 or 1
+		end
+
+		-- Trigger
+		found,param=isAnyKeyWord(words[1],KeyWords_Trigger)
+		if found then
+			Eat(words)
+			if not param then
+				param=Eat(words)
+			end
+			if not Triggers then
+				Triggers={string.lower(param)}
+			else
+				table.insert(Triggers,string.lower(param))
+			end
+		end
+
+		-- Once
+		found,param=isAnyKeyWord(words[1],KeyWords_Once)
+		if found then
+			Eat(words)
+			if not param and isNumeral(words[1]) then
+				param=Eat(words)
+			end
+			if (not param) or tonumber(param)~=0 then
+				Once=true
+			end
+		end
+
+		if iwc==#words then -- No words eaten during that loop: they must be actions!
+			Action=ReadCommands(words,{})-- Second parameter is supposed to be OldToNew ID list
+			break
+		end
+
+		--if iwc==#words then -- No words eaten during that loop: we exit loop
+		--	if #words>0 then
+		--		Spring.Echo("Unused words for trigger: "..table.concat(words," "))
+		--	end
+		--	break
+		--end
+
+	end
+
+	-- Optimisation:
+	-- GetUnitsInCylinder and GetUnitsInRectangle can take an optional argument teamID
+	-- Use it if only one team, and then remove the redundant Teams field
+	if Teams and SelectionShape and #Teams==1 then
+		table.insert(SelectionShape,Teams[1])
+		Teams=nil
+	end
+
+	if not Name then
+		Spring.Echo("Error unnamed trigger!") -- Unlikely to happen, as name default to the trigger number
+	else
+		return {Name=Name, Period=Period, Teams=Teams, SelectionShape=SelectionShape, UnitCount=UnitCount, UnitTypes=UnitTypes, Constructed=Constructed, Triggers=Triggers, Once=Once, Action=Action, Message=Message}
+	end
+
+end
+
+function SpawnTriggerList(TriggerToSpawnList)
+	local TriggersTable={}
+	for li,ls in ipairs(TriggerToSpawnList) do
+		local status,ret=pcall(ReadTrigger,ls)
+		if not status then
+			Spring.Echo("ReadTrigger failed to decode \""..ls.."\"")
+			Spring.Echo("The error was: "..ret)
+		elseif type(ret)=="table" then
+			table.insert(TriggersTable,ret)
+		end
+	end
+	return TriggersTable
+end
 
 function HeightMapV1Func(m)
 	local match=string.match
@@ -1680,6 +1995,157 @@ function SpawnResources()
 	end
 end
 
+function SpawnAllTriggers()
+	-- List triggers to spawn according to team specific modoption
+	local TriggerList={}
+	for key,value in pairs(Spring.GetModOptions()) do
+		if string.len(key)>=8 and string.sub(key,1,7)=="trigger" then
+			local ok=true
+			for cn=8,string.len(key) do
+				local c=string.sub(key,cn,cn)
+				if c~="0" and c~="1" and c~="2" and c~="3" and c~="4" and c~="5" and c~="6" and c~="7" and c~="8" and c~="9" then
+					ok=false
+				end
+			end
+			if ok then
+				if string.sub(value,1,1)=="\"" and string.sub(value,-1)=="\"" then
+					value=string.sub(value,2,string.len(value)-1)
+				end
+				table.insert(TriggerList,1,"name AutoNamedTrigger"..key.." "..value)
+			end
+		end
+	end
+	GG.MissionTrigger.Equ=SpawnTriggerList(TriggerList)
+	local TriggersFromNames={}
+	for i,t in ipairs(GG.MissionTrigger.Equ) do
+		TriggersFromNames[t.Name]=i
+	end
+	GG.MissionTrigger.FromNames=TriggersFromNames
+end
+
+-- It's not fast, I just wish it was:
+local function FastAddLists(t1,t2)
+	if #t1>#t2 then
+		for _,e in ipairs(t2) do
+			table.insert(t1,e)
+		end
+		return t1
+	else
+		for _,e in ipairs(t1) do
+			table.insert(t2,e)
+		end
+		return t2
+	end
+end
+
+function RefreshTriggers(frame)
+
+	for i,t in pairs(GG.MissionTrigger.Equ) do
+		if (not t.Period) or (frame%t.Period==0) then
+
+			if t.Once and GG.MissionTrigger.States[i] then
+				GG.MissionTrigger.Equ[i]=nil
+				if Spring.IsCheatingEnabled() then
+					Spring.Echo("Trigger["..i.."]=\""..(t.Name or "?").."\" removed!")
+				end
+			else
+
+				local sel=true
+				if t.SelectionShape then
+					sel=t.SelectionShape[1](select(2,unpack(t.SelectionShape)))
+					if t.Teams then
+						for i,u in ipairs(sel) do
+							local keep=false
+							local ut=Spring.GetUnitTeam(u)
+							for _,team in ipairs(t.Teams) do
+								if team==ut then
+									keep=true
+								end
+							end
+							if not keep then
+								table.remove(sel,i)
+							end
+						end
+					end
+					if t.UnitTypes then
+						for i,u in ipairs(sel) do
+							local keep=false
+							local ud=Spring.GetUnitDefID(u)
+							for _,udefid in ipairs(t.UnitTypes) do
+								if udefid==ud then
+									keep=true
+								end
+							end
+							if not keep then
+								table.remove(sel,i)
+							end
+						end
+					end
+				elseif t.Teams then
+					if t.UnitTypes then
+						sel={}
+						for _,team in ipairs(t.Teams) do
+							sel=FastAddLists(sel,Spring.GetTeamUnitsByDefs(team,t.UnitTypes))
+						end
+					else
+						sel={}
+						for _,team in ipairs(t.Teams) do
+							sel=FastAddLists(sel,Spring.GetTeamUnits(team))
+						end
+					end
+				elseif t.UnitTypes then
+					sel={}
+					for _,team in ipairs(Spring.GetTeamList()) do
+						sel=FastAddLists(sel,Spring.GetTeamUnitsByDefs(team,t.UnitTypes))
+					end
+				else
+					sel=Spring.GetAllUnits()
+				end
+
+				if sel and t.Constructed then
+					local c=t.Constructed
+					for i,u in ipairs(sel) do
+						if select(5,Spring.GetUnitHealth(u))<c then
+							table.remove(sel,i)
+						end
+					end
+				end
+
+				if t.Triggers then
+					for _,tn in ipairs(t.Triggers) do
+						if not GG.MissionTrigger.States[GG.MissionTrigger.FromNames[tn]] then
+							sel={}
+						end
+					end
+				end
+
+				if type(sel)~="table" then
+					Spring.Echo("Error: Something is wrong with Trigger["..i.."]=\""..(t.Name or "?").."\", sel is not a table!")
+				elseif #sel>=(t.UnitCount or 1) then
+					if not GG.MissionTrigger.States[i] then
+						if Spring.IsCheatingEnabled() then
+							Spring.Echo("Trigger["..i.."]=\""..(t.Name or "?").."\" activated!")
+						end
+						if t.Message then
+							Spring.Echo("\255\96\255\255"..t.Message)
+						end
+					end
+					if t.Action then
+						Spring.GiveOrderArrayToUnitArray(sel,t.Action)
+						--Spring.Echo("Trigger["..i.."]=\""..(t.Name or "?").."\" gave "..#t.Action.." orders to "..#sel.." units.")
+					end
+					GG.MissionTrigger.States[i]=true
+				else
+					if Spring.IsCheatingEnabled() and GG.MissionTrigger.States[i] then
+						Spring.Echo("Trigger["..i.."]=\""..(t.Name or "?").."\" deactivated!")
+					end
+					GG.MissionTrigger.States[i]=false
+				end
+
+			end
+		end
+	end
+end
 
 function DisplayGetWords(str)
 	Spring.Echo("Testing \""..str.."\"")

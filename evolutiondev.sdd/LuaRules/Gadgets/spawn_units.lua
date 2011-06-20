@@ -2,9 +2,9 @@
 function gadget:GetInfo()
 	return {
 		name = "Spawn Units",
-		desc = "Spawn/dump units & features from/to missions startscripts",
+		desc = "Spawn/dump units & features & triggers from/to missions startscripts",
 		author = "zwzsg",
-		version = "1.53",
+		version = "1.6",
 		date = "20th May, 2009",
 		license = "Public Domain",
 		layer = 0,
@@ -31,17 +31,19 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 	function gadget:GameFrame(frame)
-		if frame==3 then
+		if frame>12 then
+			RefreshTriggers(frame)
+		elseif frame==3 then
 			if #fullscript>0 and Spring.GetModOptions() and Spring.GetModOptions()["fullscript"] then
 				fullscript=table.concat(fullscript,"")
 				SetModOptionsToFull(fullscript)
 				fullscript={}
 			end
 			SpawnHeightMap()
+			SpawnAllTriggers()
 			SpawnAllUnits() -- This also delete already present units for teams with RemoveUnits=1
 			SpawnAllFeatures() -- This also delete features when RemoveFeatures=1. By default does it on a pear team basis, leaving Gaia features untouched.
-		end
-		if frame==5 then
+		elseif frame==5 then
 			SpawnAllOrders()
 			SpawnResources()
 		end
@@ -98,6 +100,7 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 	function gadget:Initialize()
+		GG.MissionTrigger={Equ={},States={},FromNames={}}
 		SetupCmdDump()
 	end
 

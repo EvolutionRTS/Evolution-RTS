@@ -149,8 +149,8 @@ function WriteScript(GtW,ScriptFileName)
 		WriteEndLine()
 	end
 
-	WriteField("HostIP","localhost")
-	WriteField("HostPort","0")
+	WriteField("//HostIP","")-- Since 0.82.7 HostIP=localhost; makes Spring crash
+	WriteField("HostPort","0")-- In 0.82.7 default port is 8452, which can only be used once!
 	WriteField("IsHost","1")
 	WriteEndLine()
 	WriteFieldAndComment("StartPosType",(GtW.StartPosType or 0)>1 and "3" or "0","0 for fixed, 1 for random, 2 for chosen ingame, 3 for chosen out of game")

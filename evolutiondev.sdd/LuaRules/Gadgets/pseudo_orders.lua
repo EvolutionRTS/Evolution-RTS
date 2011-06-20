@@ -111,6 +111,44 @@ if (gadgetHandler:IsSyncedCode()) then
 				return true,tonumber(blocking)==0
 			end
 		end
+		if cmd == CMD_TRIGGERWAIT then
+			if #params~=1 then
+				Spring.Echo("CMD_TRIGGERWAIT takes one parameter, not "..#params)
+				return false
+			elseif GG.MissionTrigger.States[params[1]] then
+				return true,true
+			else
+				return true,false
+			end
+		end
+		if cmd == CMD_SELFEXPLODE then
+			if #params~=0 then
+				Spring.Echo("CMD_SELFEXPLODE does not take any parameter!")
+				return false
+			else
+				Spring.DestroyUnit(u,true,false)
+				return true,true
+			end
+		end
+		if cmd == CMD_SELFREMOVE then
+			if #params~=0 then
+				Spring.Echo("CMD_SELFREMOVE does not take any parameter!")
+				return false
+			else
+				Spring.DestroyUnit(u,false,true,u)
+				return true,true
+			end
+		end
+		if cmd == CMD_SELECTABLE then
+			if #params>1 then
+				Spring.Echo("CMD_SELECTABLE takes one or zero parameter!")
+				return false
+			else
+				local switch=((not params[1]) or tonumber(params[1])~="0") and true or false
+				Spring.SetUnitNoSelect(u,switch)
+				return true,true
+			end
+		end
 	end
 
 	function gadget:AllowCommand(u,ud,team,cmd,params,options,tag,synced)
