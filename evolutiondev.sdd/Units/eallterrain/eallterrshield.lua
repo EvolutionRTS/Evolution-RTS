@@ -32,7 +32,7 @@ local unitDef = {
 	decloakDistance	 = 100,
 	decloakOnFire	 = true,
 	decloakSpherical = true,
-	startCloaked	 = true,
+	initCloaked	 = true,
 -- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient form a micromanagement standpoint.
 -- End Cloaking
   

@@ -897,8 +897,12 @@ if (gadgetHandler:IsSyncedCode()) then
 
 
 	function gadget:AllowCommand(u,ud,team,cmd,param,opt,synced)
-		return CheckCmd(cmd,team,Spring.GetUnitPosition(u))
-	end
+                if param and cmd<0 and #param==4 then
+                    return CheckCmd(cmd,team,param[1],param[2],param[3])
+                else
+                    return CheckCmd(cmd,team,Spring.GetUnitPosition(u))
+                end
+        end
 
 
 	function gadget:AllowUnitCreation(ud,builder,team,x,y,z)
