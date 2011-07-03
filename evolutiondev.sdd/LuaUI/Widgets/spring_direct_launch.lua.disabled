@@ -80,6 +80,19 @@ local ViewPoint=nil
 local ScrollUp=nil
 local ScrollDown=nil
 
+local function SafeTry(func,...)
+	local Get=function(func) return loadstring("return "..func)() end
+	local f=Get(func)
+	if type(f)~="function" then
+		Spring.Echo(func.." not supported!")
+	else
+		local status, msg = pcall(f,...)
+		if not status then
+			Spring.Echo(func.." failed: "..msg)
+		end
+	end
+end
+
 local function UnQuoteString(str)
 	if type(str)~="string" then
 		return str
@@ -1149,6 +1162,8 @@ local function BetterizeRandom()
 end
 
 function widget:Initialize()
+	SafeTry("Spring.SetWMIcon","bitmaps/icons/SpringAppIcon"..Game.modShortName..".png")
+	SafeTry("Spring.SetWMCaption",Game.modName.." - Spring "..Game.version,Game.modShortName.." "..Game.modVersion)
 	BetterizeRandom()
 	IsActive = false
 	FunctionsList={Credits=Credits,MainMenu=MainMenu,Quit=Quit,
