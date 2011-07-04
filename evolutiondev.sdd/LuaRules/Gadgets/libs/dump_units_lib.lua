@@ -2204,7 +2204,7 @@ function GenerateFromCurrentState(Abbreviated,Grid,OnlyStartScript,WithHeightMap
 				or ((SYNCED and SYNCED.ColorWars and SYNCED.ColorWars.DoomsSecond) and ((SYNCED.ColorWars.DoomsSecond-Spring.GetGameSeconds())/60) or 0)
 	script.ModOptions["preplaced"]=Spring.GetModOptions()["preplaced"]
 	script.StartPosType=Game.startPosType
-	script.EndCondition=Game.gameMode
+	script.EndCondition=Game.gameMode or tonumber(Spring.GetModOptions()["gamemode"] or 0)
 	script.PlayerName=Spring.GetPlayerInfo(Spring.GetMyPlayerID())
 	script.NbrPlayers=#TeamFromPlayer
 	script.PlayerTeamNum=player_num-1 --- script.PlayerTeamNum is the number as in the script, starting at 0, while player_num is the one for when counting from 1
