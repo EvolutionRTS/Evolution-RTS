@@ -18,7 +18,6 @@ local unitDef = {
   buildTime          = 10,
   canAttack			 = false,
   canBeAssisted      = true,
-  canMove            = true,
   canPatrol          = true,
   canstop            = "1",
   category           = "NOTAIR",
