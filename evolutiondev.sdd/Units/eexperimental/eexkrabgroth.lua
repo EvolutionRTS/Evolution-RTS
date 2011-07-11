@@ -108,6 +108,7 @@ local weaponDefs = {
     avoidFriendly      = false,
     beamTime           = 1,
     beamWeapon         = true,
+	cameraShake		   = 1,
     collideFeature     = false,
     collideFriendly    = false,
     coreThickness      = 0.5,
