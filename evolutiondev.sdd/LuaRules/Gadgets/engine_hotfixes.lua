@@ -10,25 +10,22 @@
       }
     end
      
-if (gadgetHandler:IsSyncedCode()) then
-
--- LOCALIZATIONS GO HERE
-
 -- Destroy features in the build rectangle of new units for blocking features
 function gadget:UnitCreated(unitID, unitDefID, teamID, builderID)
-   if UnitDefs[unitDefID].speed == 0 then -- unit is probably a building
-      local x, y, z = Spring.GetUnitPosition (unitID)
-      local footprintX = UnitDefs[unitDefID]["xsize"] * 4
-      local footprintZ = UnitDefs[unitDefID]["zsize"] * 4
-      local featuresToKill = Spring.GetFeaturesInRectangle (x - footprintX, z - footprintZ, x + footprintX, z + footprintZ)
-      for _, featureID in pairs(featuresToKill) do
-         local featureDef = FeatureDefs[Spring.GetFeatureDefID(featureID)]
-         if not featureDef.geovent then
-            local fx,fy,fz = Spring.GetFeaturePosition(featureID)
-            Spring.PlaySoundFile("sounds/reclaimed.wav", 1, fx, fy, fz)
-            Spring.SpawnCEG("sparklegreen", fx, fy, fz)
-            Spring.DestroyFeature (featureID)
-         end
-      end
-   end
-end
+	if UnitDefs[unitDefID]["canMove"] == false then
+		x,y,z=Spring.GetUnitPosition (unitID)
+		local footprintx = UnitDefs[unitDefID]["xsize"] * 4
+		local footprintz = UnitDefs[unitDefID]["zsize"] * 4
+		featuresToKill = Spring.GetFeaturesInRectangle (x-footprintx,z-footprintz, x+footprintx, z+footprintz)
+		for i in pairs(featuresToKill) do
+			-- Spring.Echo('featuresToKill :'..featuresToKill [i])
+			local fx,fy,fz = Spring.GetFeaturePosition(featuresToKill [i])
+			local isGeo = FeatureDefs[Spring.GetFeatureDefID(featuresToKill[i])].name == "geovent"
+			if featuresToKill [i] ~= 0 and not isGeo then
+				Spring.PlaySoundFile("sounds/reclaimed.wav", 1, fx, fy, fz)
+				Spring.SpawnCEG("sparklegreen", fx, fy, fz)
+				Spring.DestroyFeature (featuresToKill [i])
+			end
+		end
+	end
+end 
