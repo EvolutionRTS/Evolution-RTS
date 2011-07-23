@@ -6,24 +6,41 @@ MainView {
         Component {
             id: battleDelegate
             Rectangle {
-                height: 40
-                width: parent.width -20
+                id: battleBG
+                height: 140
+                width: 600
+                anchors.margins: 15
                 color: "#d4dbd3"
                 radius:  5
                 DText {
                         id: battleText
-                        text: display
-                        font.bold: true
+                        width: parent.width -120
+                        text: "<b>Host:</b> " + founder + "<br/>" + description + "<br/>" + "Players: " + playerCurrent + " ( " + playerMax + " max )"
+                        font.bold: false
                         font.pointSize: 12
-                        anchors.centerIn: parent
-                        anchors.rightMargin: 5
+                        anchors.margins: 10
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
                 }
-//                MouseArea{
-//                        anchors.fill: parent
-//                        onClicked: {
-//                                ListView.view.currentIndex = index
-//                        }
-//                }
+                Rectangle {
+                        color: "black"
+                        radius: 5
+                        opacity: 0.4
+                        width: 120
+                        height: 120
+                        anchors.right: battleBG.right
+                        anchors.margins: 10
+                        anchors.verticalCenter: parent.verticalCenter
+                        MinimapImage {
+                            source: "image://minimaps/" + mapname
+                        }
+                }
+                MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                                ListView.view.currentIndex = index
+                        }
+                }
             }
         }
 	ListView {
@@ -40,16 +57,7 @@ MainView {
 		keyNavigationWraps :true
 		anchors.leftMargin: 10
 		anchors.topMargin: 30
-		spacing: 5
-//		onCurrentIndexChanged: {
-////			minimap.load( skirmishModel.name(currentIndex) )
-//		}
-                Rectangle {
-                        anchors.fill: parent
-                        color: "black"
-                        opacity: 0.1
-                        radius: 10
-                }
+                spacing: 10
 	}
 
 }
