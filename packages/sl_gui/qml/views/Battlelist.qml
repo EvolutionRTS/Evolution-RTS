@@ -1,4 +1,5 @@
 import Qt 4.7
+import "sprintf.js" as Util
 
 MainView {
 	id: battlelistView
@@ -15,7 +16,7 @@ MainView {
                 DText {
                         id: battleText
                         width: parent.width -120
-                        text: "<b>Host:</b> " + founder + "<br/>" + description + "<br/>" + "Players: " + playerCurrent + " ( " + playerMax + " max )"
+						text: Util.sprintf("<b>Host:</b> %s<br/>%s<br/><b>Players:</b> %d (%d max)", founder, description, playerCurrent, playerMax);
                         font.bold: false
                         font.pointSize: 12
                         anchors.margins: 10
