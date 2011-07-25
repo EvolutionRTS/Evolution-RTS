@@ -1,64 +1,75 @@
 import Qt 4.7
-import "sprintf.js" as Util
+import Sasi 1.0
 
 MainView {
 	id: battlelistView
 
-        Component {
-            id: battleDelegate
-            Rectangle {
-                id: battleBG
-                height: 140
-                width: 600
-                anchors.margins: 15
-                color: "#d4dbd3"
-                radius:  5
-                DText {
-                        id: battleText
-                        width: parent.width -120
-						text: Util.sprintf("<b>Host:</b> %s<br/>%s<br/><b>Players:</b> %d (%d max)", founder, description, playerCurrent, playerMax);
-                        font.bold: false
-                        font.pointSize: 12
-                        anchors.margins: 10
-                        anchors.left: parent.left
-                        anchors.verticalCenter: parent.verticalCenter
-                }
-                Rectangle {
-                        color: "black"
-                        radius: 5
-                        opacity: 0.4
-                        width: 120
-                        height: 120
-                        anchors.right: battleBG.right
-                        anchors.margins: 10
-                        anchors.verticalCenter: parent.verticalCenter
-                        MinimapImage {
-                            source: "image://minimaps/" + mapname
-                        }
-                }
-                MouseArea{
-                        anchors.fill: parent
-                        onClicked: {
-                                ListView.view.currentIndex = index
-                        }
-                }
-            }
-        }
 	ListView {
-                id: battleList
-                delegate: battleDelegate
-                model: battlelistModel
+		id: battleList
+		delegate: BattleListDelegate{}
+		model: battlelistModel
 		anchors.left:  parent.left
 		anchors.top: parent.top
 		width: parent.width - 40
-		height:  parent.height - 15
+		height:  parent.height - 150
 		anchors.horizontalCenter: parent.horizontalCenter
 		highlightFollowsCurrentItem: true
-                focus: true
+		focus: true
 		keyNavigationWraps :true
 		anchors.leftMargin: 10
-		anchors.topMargin: 30
-                spacing: 10
+//		anchors.topMargin: 30
+		spacing: 150
 	}
 
+	Item {
+		id: battleroomContainer
+		Battleroom {
+			id: battleroom
+			battleId: battleList.currentItem ? battleList.currentItem.current_battleId : -1
+		}
+		width:parent.width
+		height: 120
+
+		Rectangle {
+			id: output_rect
+			anchors.top: parent.top
+			width: parent.width
+			height: parent.height - 40
+			color: "#ffffff"
+			radius: 5
+			TextEdit {
+				id: output
+				anchors.fill: parent
+				anchors.margins: 5
+				text: ""
+	  //		  wrapMode: "WordWrap"
+			}
+		}
+		Rectangle {
+			id: input_rect
+			anchors.top: output_rect.bottom
+			width: parent.width
+			height: 26
+			radius: 5
+			anchors.topMargin: 10
+			color: "#ffffff"
+			TextInput {
+				id: input
+
+				text: "writeSTH and press enter"
+				anchors.fill: parent
+				anchors.margins: 5
+				Keys.onReturnPressed:  {
+					output.text = output.text + "\n" + input.text;
+					battleroom.say( input.text );
+					input.text = "";
+				}
+			}
+		}
+
+		anchors.top: battleList.bottom
+//		onBattleIdChanged: {
+//			console.log( battleId );
+//		}
+	}
 }
