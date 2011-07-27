@@ -64,13 +64,12 @@ function widget:DrawWorld()
    
    -- Get selected units, sorted for efficiency
    local selUnits = spGetSelUnitsSorted()
-   selUnits.n = nil -- So our loop works
 
    -- Set the color
    glColor(1.0, 0.3, 0.3, circleAlpha)
    
    -- Do the loop
-   for uDefID, uIDs in pairs(selUnits) do
+   for uDefID, uIDs in ipairs(selUnits) do
       
       local uWepRanges = wepRanges[uDefID]
       if uWepRanges then

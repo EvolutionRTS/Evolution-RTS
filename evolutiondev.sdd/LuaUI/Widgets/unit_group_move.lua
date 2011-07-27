@@ -26,7 +26,7 @@ end
 function widget:CommandNotify(id, params, options)
 	if (id == CMD.MOVE) and params[3] and (not myOrder) and options.coded then
 		local selUnits = GetSelectedUnits()
-		if selUnits.n > 1 then
+		if #selUnits > 1 then
 			myOrder = true
 			local tx = 0
 			local tz = 0

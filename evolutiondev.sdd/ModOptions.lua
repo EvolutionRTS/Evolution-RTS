@@ -86,6 +86,98 @@ local options= {
 			--{ key = "con", name = "Standard Constructor", desc = "A regular T1 construction unit" }
 		},
 	},  
+
+--[[ Gameovercode for 0.83
+	
+	{
+      key="teamdeathmode",
+      name="Team Game End Mode",
+      desc="What it takes to eliminate a Team",
+      type="list",
+      def="allyzerounits",
+      items={
+         {key="none", name="Never Die", desc="All Teams will stay alive regardless of what happends, gameover will never arrive."},
+         {key="teamzerounits", name="Team Death on Zero Units", desc="The Team will die when it has 0 units."},
+         {key="allyzerounits", name="AllyTeam Death on Zero units", desc="The Team will die when every Team in his AllyTeam have 0 units."},
+      }
+   },
+   {
+      key    = "shareddynamicalliancevictory",
+      name   = "Dynamic Ally Victory",
+      desc   = "Ingame alliance should count for game over condition.",
+      type   = "bool",
+      def    = false,
+    },
+	
+	]]--
+	--[[
+	{
+       key="Dawn of War 2 Scoring Mode",
+       name="Dawn of War 2 Scoring Mode",
+       desc="Dawn of War 2 Scoring Mode Options",
+       type="section",
+    },
+	
+	{
+    key    = 'dow2mode',
+    name   = 'Dawn of War 2 Scoring Mode',
+    desc   = 'Enables the Dawn of War 2 control point based scoring mode',
+    type   = 'bool',
+    section = "Dawn of War 2 Scoring Mode",
+    def    = false,
+    },
+
+	{
+      key="scoremode",
+      name="Score Mode",
+      desc="How are points are scored",
+      type="list",
+	  section = "Dawn of War 2 Scoring Mode",
+      def="countdown",
+      items = {
+         { key = "countdown", name = "Count Down", desc = "Points reduce enemy score, score cannot be regained" },
+         { key = "tugowar", name = "Tug o'War", desc = "Points steal enemy score, owner gains score" },
+         { key = "multidomination", name = "Multi Domination", desc = "Hold all points for 20 seconds to score" },
+      }
+   },
+  {
+      key="starttime",
+      name="Start Time",
+      desc="When the capturing of points can begin.",
+      type="list",
+	  section = "Dawn of War 2 Scoring Mode",
+      def="2",
+      items = {
+         { key = "2", name = "2", desc = "2 minutes" },
+         { key = "3", name = "3", desc = "3 minutes" },
+         { key = "5", name = "5", desc = "5 minutes" },
+         { key = "10", name = "10", desc = "10 minutes" },
+      }
+   },
+   {
+      key="limitscore",
+      name="Score Limit",
+      desc="Score players start at or have to reach (depending on mode)",
+      type="list",
+	  section = "Dawn of War 2 Scoring Mode",
+      def="1000",
+      items = {
+         { key = "200", name = "200", desc = "very short" },
+         { key = "500", name = "500", desc = "short" },
+         { key = "1000", name = "1000", desc = "average" },
+         { key = "2000", name = "2000", desc = "long" },
+         { key = "3000", name = "2000", desc = "long" },
+         { key = "4000", name = "2000", desc = "long" },
+         { key = "5000", name = "5000", desc = "Long" },
+         { key = "6000", name = "2000", desc = "long" },
+         { key = "7000", name = "2000", desc = "long" },
+         { key = "8000", name = "2000", desc = "long" },
+         { key = "9000", name = "2000", desc = "long" },
+         { key = "10000", name = "10000", desc = "Insane!" },
+      }
+   },
+   ]]--
+	
 		--
 	--  chickens stuff
 	--	

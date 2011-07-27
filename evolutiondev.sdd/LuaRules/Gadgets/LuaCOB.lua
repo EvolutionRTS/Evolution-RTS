@@ -43,7 +43,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				Spring_SetUnitCOBValue(nu, 82, Spring.GetUnitHeading(u.unit))
 				Spring.SetUnitHealth(nu, Spring.GetUnitHealth(u.unit) / UnitDefs[Spring.GetUnitDefID(u.unit)].health * UnitDefs[Spring.GetUnitDefID(nu)].health)
 				local c = Spring.GetUnitCommands(u.unit)
-				for i = 1, c.n do
+				for i = 1, #c do
 					Spring.GiveOrderToUnit(nu, c[i].id, c[i].params, c[i].options.coded)
 				end
 				Spring.DestroyUnit(u.unit, false, true, u.unit)
