@@ -41,26 +41,25 @@ MainView {
 				id: output
 				anchors.fill: parent
 				anchors.margins: 5
-				text: ""
+				text: battleroom.chatText
 	  //		  wrapMode: "WordWrap"
 			}
 		}
 		Rectangle {
 			id: input_rect
 			anchors.top: output_rect.bottom
-			width: parent.width
+			width: parent.width - 80
 			height: 26
 			radius: 5
 			anchors.topMargin: 10
 			color: "#ffffff"
 			TextInput {
 				id: input
-
 				text: "writeSTH and press enter"
 				anchors.fill: parent
 				anchors.margins: 5
 				Keys.onReturnPressed:  {
-					output.text = output.text + "\n" + input.text;
+//					output.text = output.text + "\n" + input.text;
 					battleroom.say( input.text );
 					input.text = "";
 				}

@@ -5,14 +5,17 @@ import "sprintf.js" as Util
 Item {
 	id: battleDelegate
 	property int current_battleId: battleId
+	property bool isCurrent: ListView.isCurrentItem
+	property int height_offset: isCurrent ? 40 : 0
 	Rectangle {
-
 		id: battleBG
-		height: 140
+		height: height_offset + 100
 		width: 600
+//		y: parent.y + height_offset
 		anchors.margins: 15
-		color: ListView.isCurrentItem ? "red" : "#d4dbd3"
+		color: isCurrent ? "#F59E00" : "#d4dbd3"
 		radius:  5
+		Behavior on height { PropertyAnimation{} }
 		DText {
 			id: battleText
 			width: parent.width -120
@@ -26,15 +29,16 @@ Item {
 		Rectangle {
 			color: "black"
 			radius: 5
-			opacity: 0.4
+			opacity: isCurrent ? 0.4 : 0.0
 			width: 120
-			height: 120
+			height: isCurrent ? 120 : 0
 			anchors.right: battleBG.right
 			anchors.margins: 10
 			anchors.verticalCenter: parent.verticalCenter
 			MinimapImage {
 				source: "image://minimaps/" + mapname
 			}
+			Behavior on opacity { PropertyAnimation{} }
 		}
 		MouseArea{
 			anchors.fill: parent
