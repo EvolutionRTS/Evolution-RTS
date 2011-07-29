@@ -44,6 +44,7 @@ Item {
 			anchors.fill: parent
 			onClicked: {
 				ListView.view.currentIndex = index;
+				multiplayerMenu.load(2);
 			}
 		}
 	}

@@ -7,7 +7,7 @@ Column {
 	spacing: 20
 	anchors.verticalCenter:  parent.verticalCenter
 
-	property variant elIds: [webBrowser, skirmishView,settingsView,welcomeView,battlelistView]
+	property variant elIds: [webBrowser, skirmishView,settingsView,welcomeView,multiplayerContainer]
 	function load(viewID) {
 		for ( var lid in elIds ) {
 			var qmlItem = elIds[lid]
