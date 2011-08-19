@@ -138,8 +138,10 @@ function hideUnit (uID)
 end
 
 function unhideUnit (uID)
-	Spring.SetUnitCloak (uID, false ,2)
-	Spring.SetUnitStealth (uID, false)
+    Spring.SetUnitCloak (uID, false ,2)
+    if not UnitDefs[Spring.GetUnitDefID(uID)].stealth then
+        Spring.SetUnitStealth (uID, false)
+    end
 end
 
 
