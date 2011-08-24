@@ -55,7 +55,7 @@ Requires +15 Power]],
   smoothAnim         = true,
   unitname           = "elrpc",
   workerTime         = 0,
-  yardMap            = "ooooooooo",
+  yardMap            = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
   sfxtypes = {
     explosiongenerators = {
       "custom:electricity",

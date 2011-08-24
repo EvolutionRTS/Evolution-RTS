@@ -41,6 +41,7 @@ Requires +2 Power]],
   sightDistance      = 500,
   smoothAnim         = true,
   unitname           = "eaaturret",
+  yardMap            = "ooooo ooooo ooooo ooooo ooooo",
     sfxtypes = {
     explosiongenerators = {
       "custom:gdmcannon",

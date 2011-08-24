@@ -37,7 +37,7 @@ function widget:CommandNotify(id, params, options)
 			local maxx = 0
 			local maxz = 0
 			local unitPos = {}
-			local maxOffset = 4 + (math.min(selUnits.n*6,150))
+			local maxOffset = 4 + (math.min(#selUnits*6,150))
 			for _,unitID in ipairs(selUnits) do
 				local x,_,z = GetUnitPosition(unitID)
 				tx = tx + x
@@ -48,8 +48,8 @@ function widget:CommandNotify(id, params, options)
 				if z > maxz then maxz = z end
 				unitPos[unitID] = {x=x,z=z}
 			end
-			tx = (tx / selUnits.n)
-			tz = (tz / selUnits.n)
+			tx = (tx / #selUnits)
+			tz = (tz / #selUnits)
 			local gather = 1
 			if (mx < maxx) and (mx > minx) and (mz < maxz) and (mz > minz) then
 				gather = 0.666

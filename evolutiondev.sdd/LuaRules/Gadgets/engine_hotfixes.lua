@@ -38,7 +38,7 @@ function gadget:UnitCreated(uID, uDefID, uTeam, bID)
             local fID = features[i]
             local fDefID = Spring.GetFeatureDefID(fID)
             local fDef = FeatureDefs[fDefID]
-           
+		   
             if (not fDef.geoThermal) and (fDef.name ~= 'geovent') then
                 local fx, fy, fz = Spring.GetFeaturePosition(fID)
                 Spring.DestroyFeature(fID)

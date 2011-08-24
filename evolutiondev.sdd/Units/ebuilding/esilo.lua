@@ -50,7 +50,7 @@ Requires +20 Power]],
   unitlimit          = "2",
   unitname           = "esilo",
   workerTime         = 0,
-  yardMap            = "ooooooooo",
+  yardMap            = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
 
     sfxtypes = {
     explosiongenerators = {

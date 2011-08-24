@@ -51,7 +51,7 @@ Requires +8 Power]],
   smoothAnim         = true,
   unitname           = "eheavyturret2",
   workerTime         = 0,
-  yardMap            = "oooo",
+  yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo",
 
   sfxtypes = {
     explosiongenerators = {
