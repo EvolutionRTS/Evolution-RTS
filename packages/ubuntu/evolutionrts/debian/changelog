@@ -1,3 +1,9 @@
+evolutionrts (1.1-ppa1) natty; urgency=low
+
+  * added evolutiorts-maps as dependency
+
+ -- Rene Milk <koshi@springlobby.info>  Sun, 11 Sep 2011 00:51:36 +0200
+
 evolutionrts (1.0.2-ppa1) maverick; urgency=low
 
   * fix default config's launch method
