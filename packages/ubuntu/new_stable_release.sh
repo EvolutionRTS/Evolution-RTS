@@ -27,4 +27,4 @@ dch -v ${REV}-ppa${PPA_REV}
 debuild -S -sa
 cp debian/changelog ${BASE}/evolutionrts-data/debian
 cd ..
-echo cd /tmp && dput ppa:evorts/testing evolutionrts-data_${REV}-ppa${PPA_REV}_source.changes
+echo cd /tmp && dput ppa:evorts/stable evolutionrts-data_${REV}-ppa${PPA_REV}_source.changes
