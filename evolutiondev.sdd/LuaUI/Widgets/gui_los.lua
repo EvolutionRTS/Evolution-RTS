@@ -11,9 +11,9 @@ function widget:GetInfo()
 end
 
 local DspLst=nil
-local res = 200			--50 to 200
-local TileMaxX = Game.mapSizeX/res +1
-local TileMaxZ = Game.mapSizeZ/res +1
+local res = 50			--50 to 200
+local TileMaxX = Game.mapSizeX/res +2
+local TileMaxZ = Game.mapSizeZ/res +2
 local unexplored = 0
 local visible = 1
 local explored = 2
@@ -92,8 +92,8 @@ local function DrawTiles()
 	--gl.Texture(":a:foggy.png")
 	--r = math.random(0,100)/100
 	gl_Color(1,1,1,1)
---	gl.BeginEnd(GL.QUADS,TilesVertices,100)
-	gl.BeginEnd(GL.QUADS,TilesVertices,150)
+	--gl.BeginEnd(GL.QUADS,TilesVertices,80)
+	gl.BeginEnd(GL.QUADS,TilesVertices,100)
 	--gl.BeginEnd(GL.TRIANGLES,TilesVertices,8)
 	gl.Texture(false)
 	gl.DepthMask(false)
