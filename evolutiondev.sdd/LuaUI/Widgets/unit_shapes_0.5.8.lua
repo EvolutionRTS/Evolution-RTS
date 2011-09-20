@@ -1,11 +1,11 @@
 function widget:GetInfo()
    return {
-      name      = "UnitShapes 0.5.6",
+      name      = "UnitShapes 0.5.8",
       desc      = "Draws blended shapes around units and buildings",
       author    = "Lelousius and aegis",
-      date      = "30.07.2010",
+      date      = "Jan 19, 2011",
       license   = "GNU GPL, v2 or later",
-      layer     = 2, -- what is this?
+      layer     = 2,
       enabled   = true  --  loaded by default?
    }
 end
@@ -24,13 +24,14 @@ local function SetupCommandColors(state)
   os.remove('cmdcolors.tmp')
 end
 
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 local math_acos				= math.acos
 local math_pi				= math.pi
 local math_cos				= math.cos
 local math_sin				= math.sin
+local math_abs				= math.abs
+local rad_con				= 180 / math_pi
 
 local GL_ONE_MINUS_SRC_ALPHA = GL.ONE_MINUS_SRC_ALPHA
 local GL_ONE_MINUS_DST_ALPHA = GL.ONE_MINUS_DST_ALPHA
@@ -45,6 +46,9 @@ local GL_QUADS = GL.QUADS
 local GL_QUAD_STRIP = GL.QUAD_STRIP
 local GL_TRIANGLE_FAN = GL.TRIANGLE_FAN
 local GL_TRIANGLE_STRIP = GL.TRIANGLE_STRIP
+local GL_LINE_LOOP = GL.LINE_LOOP
+local GL_TRIANGLES = GL.TRIANGLES
+local GL_POLYGON = GL.POLYGON
 
 local GL_COLOR_BUFFER_BIT = GL.COLOR_BUFFER_BIT
 local glPushAttrib = gl.PushAttrib
@@ -64,8 +68,6 @@ local UnitDs				 = UnitDefs
 
 -- Automatically generated local definitions
 
-local GL_LINE_LOOP           = GL.LINE_LOOP
-local GL_TRIANGLE_FAN        = GL.TRIANGLE_FAN
 local glBeginEnd             = gl.BeginEnd
 local glColor                = gl.Color
 local glCreateList           = gl.CreateList
@@ -100,17 +102,17 @@ local spGetMouseState		 = Spring.GetMouseState
 --------------------------------------------------------------------------------
 
 local clearquad
-local SquareShape, CircleShape
+local shapes = {}
 
 local myTeamID = Spring.GetLocalTeamID()
 
 local circleDivs = 32 -- how precise circle? octagon by default
-local innersize = 0.01 -- circle scale compared to unit radius
+local innersize = 0.9 -- circle scale compared to unit radius
 local selectinner = 1.5
 local outersize = 1.9 -- outer fade size compared to circle scale (1 = no outer fade)
 local scalefaktor = 2.8
 local rectangleFactor = 3.5
-local CAlpha = 0
+local CAlpha = 0.5
 
 local colorout = {   1,   1,   1,   0 } -- outer color
 local colorin  = {   1,   1,   1,   1 } -- inner color
@@ -129,8 +131,11 @@ local forceUpdate = false
 local function HasVisibilityChanged()
 	local camX, camY, camZ = spGetCameraPosition()
 	local gameFrame = spGetGameFrame()
-	if (camX ~= lastCamX) or (camY ~= lastCamY) or (camZ ~= lastCamZ) or ((gameFrame - lastGameFrame) % 5 == 0) or (#lastVisibleSelected > 0) or (#spGetSelectedUnits() > 0) or (#spGetVisibleUnits() > #lastVisibleUnits) then
-		gameFrame = lastGameFrame
+	if (camX ~= lastCamX) or (camY ~= lastCamY) or (camZ ~= lastCamZ) or
+		((gameFrame - lastGameFrame) >= 15) or (#lastVisibleSelected > 0) or
+		(#spGetSelectedUnits() > 0) then
+		
+		lastGameFrame = gameFrame
 		lastCamX, lastCamY, lastCamZ = camX, camY, camZ
 		return true
 	end
@@ -140,18 +145,16 @@ end
 local function GetVisibleUnits()
 	if (HasVisibilityChanged()) then
 		
-		local units = spGetVisibleUnits()
+		local units = spGetVisibleUnits(-1, 30, true)
 		local visibleUnits = {}
 		local visibleSelected = {}
 		
 		for i=1, #units do
 			local unitID = units[i]
-			if (not spIsUnitIcon(unitID)) then
-				if (spIsUnitSelected(unitID)) then
-					visibleSelected[#visibleSelected+1] = unitID
-				else
-					visibleUnits[#visibleUnits+1] = unitID
-				end
+			if (spIsUnitSelected(unitID)) then
+				visibleSelected[#visibleSelected+1] = unitID
+			else
+				visibleUnits[#visibleUnits+1] = unitID
 			end
 		end
 		
@@ -220,7 +223,7 @@ local function CreateDisplayLists(callback)
 	
 	return displayLists
 end
-	
+
 local function CreateCircleLists()
 	local callback = {}
 	
@@ -259,40 +262,41 @@ local function CreateCircleLists()
 		end)
 	end
 	
-	local displayLists = CreateDisplayLists(callback)
-	CircleShape = displayLists
+	shapes.circle = CreateDisplayLists(callback)
 end
 
-local function CreateSquareLists()
+local function CreatePolygonCallback(points, immediate)
+	immediate = immediate or GL_POLYGON
 	local callback = {}
 	
 	function callback.fading(colorin, colorout, innersize, outersize)
 		local diff = outersize - innersize
+		local steps = {}
 		
-		local steps = {
-			{-outersize, outersize, -1, 1},
-			{outersize, outersize, 1, 1},
-			{outersize, -outersize, 1, -1},
-			{-outersize, -outersize, -1, -1}
-		}
+		for i=1, #points do
+			local p = points[i]
+			local x, z = p[1]*outersize, p[2]*outersize
+			local xs, zs = (math_abs(x)/x and x or 1), (math_abs(z)/z and z or 1)
+			steps[i] = {x, z, xs, zs}
+		end
 		
 		return glCreateList(function()
 			glBeginEnd(GL_TRIANGLE_STRIP, function()
 				for i=1, #steps do
 					local step = steps[i] or steps[i-#steps]
 					local nexts = steps[i+1] or steps[i-#steps+1]
-				
+					
 					glColor(colorout)
 					glVertex(step[1], 0, step[2])
 					
 					glColor(colorin)
-					glVertex(step[1]-diff*step[3], 0, step[2]-diff*step[4])
+					glVertex(step[1] - diff*step[3], 0, step[2] - diff*step[4])
 					
 					glColor(colorout)
-					glVertex(step[1] + (nexts[1]-step[1]), 0, step[2] + ((nexts[2]-step[2])))
+					glVertex(step[1] + (nexts[1]-step[1]), 0, step[2] + (nexts[2]-step[2]))
 					
 					glColor(colorin)
-					glVertex(nexts[1]-diff*nexts[3], 0, nexts[2]-diff*nexts[4])
+					glVertex(nexts[1] - diff*nexts[3], 0, nexts[2] - diff*nexts[4])
 				end
 			end)
 		end)
@@ -300,18 +304,42 @@ local function CreateSquareLists()
 	
 	function callback.solid(color, size)
 		return glCreateList(function()
-			glBeginEnd(GL_QUADS, function()
-				glVertex(-size, 0, size)
-				glVertex(size, 0, size)
-				glVertex(size, 0, -size)
-				glVertex(-size, 0, -size)
+			glBeginEnd(immediate, function()
+				if (color) then
+					glColor(color)
+				end
+				for i=1, #points do
+					local p = points[i]
+					glVertex(size*p[1], 0, size*p[2])
+				end
 			end)
 		end)
 	end
 	
-	local displayLists = CreateDisplayLists(callback)
+	return callback
+end
+
+local function CreateSquareLists()
+	local points = {
+			{-1, 1},
+			{1, 1},
+			{1, -1},
+			{-1, -1}
+		}
+
+	local callback = CreatePolygonCallback(points, GL_QUADS)
+	shapes.square = CreateDisplayLists(callback)
+end
+
+local function CreateTriangleLists()
+	local points = {
+		{0, -1},
+		{1, 1},
+		{-1, 1}
+	}
 	
-	SquareShape = displayLists
+	local callback = CreatePolygonCallback(points, GL_TRIANGLES)
+	shapes.triangle = CreateDisplayLists(callback)
 end
 
 local function DestroyShape(shape)
@@ -326,19 +354,14 @@ end
 function widget:Initialize()
 	CreateCircleLists()
 	CreateSquareLists()
+	CreateTriangleLists()
 	
 	for udid, unitDef in pairs(UnitDs) do
 		local xsize, zsize = unitDef.xsize, unitDef.zsize
 		local scale = scalefaktor*( xsize^2 + zsize^2 )^0.5
 		local shape, xscale, zscale
-		
-		if (unitDef.isBuilding or unitDef.isFactory) then
-			shape = CircleShape --SquareShape
-			xscale, zscale = rectangleFactor * xsize, rectangleFactor * zsize
-		else
-			shape = CircleShape
+			shape = shapes.circle
 			xscale, zscale = scale, scale
-		end
 		
 		unitConf[udid] = {shape=shape, xscale=xscale, zscale=zscale}
 	end
@@ -359,14 +382,17 @@ function widget:Shutdown()
 	SetupCommandColors(true)
 	
 	glDeleteList(clearquad)
-	DestroyShape(SquareShape)
-	DestroyShape(CircleShape)
+	
+	for _, shape in pairs(shapes) do
+		DestroyShape(shape)
+	end
 end
 
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-local visibleUnits, visibleSelected
+local visibleUnits, visibleSelected = {}, {}
+local degrot = {}
 function widget:Update()
 	local mx, my = spGetMouseState()
 	local ct, id = spTraceScreenRay(mx, my)
@@ -377,6 +403,21 @@ function widget:Update()
 	end
 	
 	visibleUnits, visibleSelected = GetVisibleUnits()
+	heading = {}
+	for i=1, #visibleUnits do
+		local unitID = visibleUnits[i]
+		dirx, _, dirz = spGetUnitDirection(unitID)
+		if (dirz ~= nil) then
+			degrot[unitID] = 180 - math_acos(dirz) * rad_con
+		end
+	end
+	for i=1, #visibleSelected do
+		local unitID = visibleSelected[i]
+		dirx, _, dirz = spGetUnitDirection(unitID)
+		if (dirz ~= nil) then
+			degrot[unitID] = 180 - math_acos(dirz) * rad_con
+		end
+	end
 end
 
 --Funktion-vars for later use
@@ -412,7 +453,7 @@ function widget:DrawWorldPreUnit()
 		unit = unitConf[udid]
 		
 		if (unit) then
-			glDrawListAtUnit(unitID, unit.shape.select, false, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
+			glDrawListAtUnit(unitID, unit.shape.select, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
 		end
 	end
 
@@ -426,9 +467,9 @@ function widget:DrawWorldPreUnit()
 		unit = unitConf[udid]
 		
 		if (unit) then
-			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale,  0, 0, 0, 0)	
+			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)	
 		end
-	end
+	end	
 
 	--  Really draw the Circles now  (This could be optimised if we could say Draw as much as DST_ALPHA * SRC_ALPHA is)
 	-- (without protecting form drawing them twice)
@@ -457,8 +498,8 @@ function widget:DrawWorldPreUnit()
 		unit = unitConf[udid]
 		
 		if (unit) then
-			glDrawListAtUnit(unitID, unit.shape.shape, false, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
-			glDrawListAtUnit(unitID, unit.shape.inner, false, unit.xscale, 1.0, unit.zscale, 1.0, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
+			glDrawListAtUnit(unitID, unit.shape.shape, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
+			glDrawListAtUnit(unitID, unit.shape.inner, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
 		end
 	end
 	
@@ -468,8 +509,8 @@ function widget:DrawWorldPreUnit()
 		unit = unitConf[udid]
 		
 		if (unit) then
-			glDrawListAtUnit(unitID, unit.shape.shape, false, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
-			glDrawListAtUnit(unitID, unit.shape.inner, false, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
+			glDrawListAtUnit(unitID, unit.shape.shape, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
+			glDrawListAtUnit(unitID, unit.shape.inner, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
 		end
 	end
 
@@ -484,7 +525,7 @@ function widget:DrawWorldPreUnit()
 		if (teamID and unit) then
 			glColor(GetTeamColorSet(teamID))
 			
-			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
+			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
 		end
 	end
 	
@@ -495,7 +536,7 @@ function widget:DrawWorldPreUnit()
 		
 		if (unit) then
 			glColor(1,1,1,0)
-			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
+			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
 		end
 	end
 	
@@ -509,8 +550,8 @@ function widget:DrawWorldPreUnit()
 			gl_ColorMask(true,true,true,true)
 			gl_BlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA)
 			
-			glColor(0.1,0.1,0.1,0)
-			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale, 0, 0, 0, 0)
+			glColor(0.5,0.5,0.5,0)
+			glDrawListAtUnit(unitID, unit.shape.large, false, unit.xscale, 1.0, unit.zscale, degrot[unitID], 0, degrot[unitID], 0)
 		end
 	end
 	glPopAttrib()
