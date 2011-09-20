@@ -53,7 +53,7 @@ local options =
     name   = 'Max units',
     desc   = 'Determines the ceiling of how many units and buildings a player is allowed to own at the same time',
     type   = 'number',
-    def    = 500,
+    def    = 250,
     min    = 1,
     max    = 10000,
     step   = 1,  -- quantization is aligned to the def value
@@ -70,9 +70,9 @@ local options =
   },
   {
     key    = 'DiminishingMMs',
-    name   = 'Diminishing metal makers efficiency',
-    desc   = "Everytime a new metal maker will be built, the energy/metal efficiency ratio will decrease",
-    type   = 'bool',
+    name   = 'Diminishing Metal Extractor Returns',
+    desc   = "Everytime a new metal extractor will be built, the metal efficiency ratio will decrease",
+    type   = 'hidden',
     def    = false,
   },
 
