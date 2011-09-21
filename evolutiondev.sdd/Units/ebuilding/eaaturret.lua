@@ -96,7 +96,7 @@ Requires:
 local weaponDefs = {
   antiairgunflak = {
     accuracy           = 1,
-    areaOfEffect       = 50,
+    areaOfEffect       = 200,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,

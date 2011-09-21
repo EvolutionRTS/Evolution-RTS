@@ -24,7 +24,7 @@ effectUnitDefs = {
 	},
 	
 	escout = {
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="flare", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="flare", onActive=true}},
 	},
 	
 	etransport = {

@@ -138,7 +138,7 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"m",100)
+				Spring.AddTeamResource(TeamID,"m",50)
 			end
 		end
 	end
