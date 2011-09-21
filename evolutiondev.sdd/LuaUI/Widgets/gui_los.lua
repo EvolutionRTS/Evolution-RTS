@@ -92,7 +92,7 @@ local function DrawTiles()
 	--gl.Texture(":a:foggy.png")
 	--r = math.random(0,100)/100
 	gl_Color(1,1,1,1)
-	--gl.BeginEnd(GL.QUADS,TilesVertices,80)
+	--gl.BeginEnd(GL.QUADS,TilesVertices,8)
 	gl.BeginEnd(GL.QUADS,TilesVertices,100)
 	--gl.BeginEnd(GL.TRIANGLES,TilesVertices,8)
 	gl.Texture(false)
