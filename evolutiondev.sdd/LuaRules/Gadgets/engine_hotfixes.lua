@@ -48,3 +48,15 @@ function gadget:UnitCreated(uID, uDefID, uTeam, bID)
         end
     end
 end
+
+	--UNSYNCED
+	-- replace fps mode bind with capture
+	Spring.SendCommands({
+		"unbindkeyset c",
+	})
+	Spring.SendCommands("bind c capture")
+	-- set repeat to be bound to q
+	Spring.SendCommands({
+		"unbindkeyset q",
+	})
+	Spring.SendCommands("bind q repeat")
