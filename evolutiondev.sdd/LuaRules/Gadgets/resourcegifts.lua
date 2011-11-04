@@ -133,15 +133,17 @@ function gadget:GameFrame(n)
 		end
 	end
 
-	if n%450 == 1 then
+
+	if n%1800 == 1 then
 	--Give free resources to AI - Necessary for AI's to properly function
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"m",50)
+				Spring.AddTeamResource(TeamID,"m",100)
 			end
 		end
 	end
+
 	
 end
 
