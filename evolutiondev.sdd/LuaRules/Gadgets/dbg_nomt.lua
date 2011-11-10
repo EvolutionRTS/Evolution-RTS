@@ -44,24 +44,24 @@ local glTranslate      = gl.Translate
 function gadget:Initialize()
   local version = tostring(Game.version)
   if not string.find(version, "MT") then
-	Spring.Echo("<No Multithread> MT not detected, exiting")
+	Spring.Echo("MultiThreaded executable not detected (this is a good thing!), exiting")
 	gadgetHandler:RemoveGadget()
   else
 	  --SendCommands("luaui disable")
 	  endTime = GetTimer()
 	  key=nil
-	  Echo("<No Multithread> Automatically exiting in " .. delay .. " seconds. Press Escape to cancel.")
+	  Echo("MultiThreaded executable not detected (this is a good thing!) Automatically exiting in " .. delay .. " seconds. Press Escape to cancel.")
   end
 end
 
 function gadget:Update(dt)
   if endTime then
     if key == esc then
-      Echo("<No Multithread> Autoquit canceled.")
+      Echo("MultiThreaded executable not detected (this is a good thing!) Autoquit canceled.")
       endTime = false
       --gadgetHandler:RemoveGadget()
     elseif DiffTimers(GetTimer(), endTime) > delay then
-      Echo("<No Multithread> Autoquit sending quit command.")
+      Echo("MultiThreaded executable not detected (this is a good thing!) - Autoquit sending quit command.")
       SendCommands("quit")
       SendCommands("quitforce")
     end
