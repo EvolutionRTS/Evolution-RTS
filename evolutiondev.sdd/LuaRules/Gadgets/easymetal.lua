@@ -157,33 +157,33 @@ local function AnalyzeMetalMap()
 end
 
 function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
-		
-	--if cmdID < 0 and UnitDefs[-cmdID].extractsMetal > 0 then		
-	if cmdID < 0 and mex_types[ -cmdID ] then		
+	--if cmdID < 0 and UnitDefs[-cmdID].extractsMetal > 0 then
+	if cmdID < 0 and mex_types[ -cmdID ] then
 		local mx, mz = cmdParams[1],  cmdParams[3]
 		
-		local flagNum = NearFlag(mx, mz, SNAPDIST)
-		local flag = flags[flagNum]
-		
-		if flag then
-			local fx,fz = flag.x, flag.z
-			local fy = spGetGroundHeight(fx,fz)+1
+		if mx and mz then
+			local flagNum = NearFlag(mx, mz, SNAPDIST)
+			local flag = flags[flagNum]
 			
-			if (fx == mx and fz == mz) then
-				return true
+			if flag then
+				local fx,fz = flag.x, flag.z
+				local fy = spGetGroundHeight(fx,fz)+1
+				
+				if (fx == mx and fz == mz) then
+					return true
+				end
+				
+				local opts = {}
+				table.insert(opts, "shift") -- appending
+				if (cmdOptions.alt)   then table.insert(opts, "alt")   end
+				if (cmdOptions.ctrl)  then table.insert(opts, "ctrl")  end
+				if (cmdOptions.right) then table.insert(opts, "right") end
+				
+				--spGiveOrderToUnit(unitID, cmdID, {fx,fy,fz, cmdParams[4]}, opts)
+				qOrderToUnit(unitID, cmdID, {fx,fy,fz, cmdParams[4]}, opts)
 			end
-
-			local opts = {}
-			table.insert(opts, "shift") -- appending
-			if (cmdOptions.alt)   then table.insert(opts, "alt")   end
-			if (cmdOptions.ctrl)  then table.insert(opts, "ctrl")  end
-			if (cmdOptions.right) then table.insert(opts, "right") end
-			
-			--spGiveOrderToUnit(unitID, cmdID, {fx,fy,fz, cmdParams[4]}, opts)
-			qOrderToUnit(unitID, cmdID, {fx,fy,fz, cmdParams[4]}, opts)
+			return false
 		end
-		
-		return false
 	end
 
 	return true
@@ -239,7 +239,7 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			alliance = alliance,
 			flag = nearFlag,
 		}
-		flags[nearFlag].mex = unitID	
+		flags[nearFlag].mex = unitID
 	end
 
 end
@@ -356,7 +356,7 @@ local function DrawSnap(x1,z1,x2,z2)
 		DrawBox(x,z)
 	end
 	
-end				
+end
 
 function gadget:Initialize()
 	myAllyID = Spring.GetLocalAllyTeamID()
@@ -369,7 +369,7 @@ function gadget:Update()
 	if spGetMapDrawMode() == 'metal' then
 		spSendCommands({'ShowMetalMap'})
 		toggleMetal = true
-	end	
+	end
 
 	local gameFrame = spGetGameFrame()
 	local frame4 = (gameFrame) % 4
@@ -415,7 +415,7 @@ function gadget:Update()
 					blocking = spTestBuildOrder(testBuilding, flags[hoverFlagNum].x, 1, flags[hoverFlagNum].z, 1)
 		        end)
 				
-				if blocking == 0 then					
+				if blocking == 0 then
 					hoverFlagNum = false
 				end
 			end
@@ -467,7 +467,7 @@ function gadget:DrawWorld()
 				glScale(.6, .6, .6)
 				local _, curFlagInLOS = spGetPositionLosState(fx,fy,fz, myAllyID)
 				local mColor
-				if curFlagInLOS then					
+				if curFlagInLOS then
 					if mexOnFlag then
 						if mexOnFlag.alliance == myAllyID then
 							mColor = {1, 1, 0, 0.7}
@@ -556,3 +556,4 @@ end
 -------------------------------------------------------------------------------
 
 end
+

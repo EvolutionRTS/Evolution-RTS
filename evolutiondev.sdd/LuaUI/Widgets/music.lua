@@ -13,7 +13,7 @@
 
 function widget:GetInfo()
 	return {
-		name			= "Music 2",
+		name			= "Music Player",
 		desc			= "Plays music based on situation",
 		author		= "cake, trepan, Smoth",
 		date			= "Mar 01, 2008, Aug 20 2009",
@@ -56,6 +56,9 @@ local peaceOverTracks	=	VFS.DirList('evosettings/musicoverride/peace/', '*.ogg')
 
 local firsttime = true
 local firstFade = true
+
+math.randomseed(os.clock()* 101.01) --lurker wants you to burn in hell rgn
+
 local initTrack
 	
 	if (#peaceOverTracks > 0) then
@@ -199,6 +202,7 @@ function widget:Update(dt)
 		if (firsttime) then
 			volume = Spring.GetConfigInt("snd_volmusic", 60)
 			volume = volume * 0.01
+			Spring.StopSoundStream()
 			Spring.PlaySoundStream(initTrack, volume) --init to something
 			firsttime = false -- pop this cherry	
 									
@@ -241,7 +245,7 @@ function widget:Update(dt)
 			--end
 		
 
-			if ( (musicType ~= lastTrackType and musicType == 'war') or (playedTime > totalTime)	) then
+			if ( (musicType ~= lastTrackType and musicType == 'war') or (playedTime == 0 and totalTime == 0)) then
 				lastTrackType = musicType
 				local newTrack
 				repeat
@@ -280,6 +284,7 @@ function widget:Update(dt)
 				curTrack = newTrack
 				volume = Spring.GetConfigInt("snd_volmusic", 60)
 				volume = volume * 0.01
+				Spring.StopSoundStream()
 				Spring.PlaySoundStream(newTrack, volume)
 				
 				--Spring.Echo("Track: " .. newTrack)
