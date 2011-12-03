@@ -3,8 +3,8 @@
 
 function widget:GetInfo()
   return {
-    name      = "Combo Overhead/Free Camera",
-    desc      = "v0.04 Camera featuring 6 actions. Type \255\90\90\255/luaui cofc help\255\255\255\255 for help.",
+    name      = "Combo Overhead/Free Camera (experimental)",
+    desc      = "v0.100 Camera featuring 6 actions. Type \255\90\90\255/luaui cofc help\255\255\255\255 for help.",
     author    = "CarRepairer",
     date      = "2011-03-16",
     license   = "GNU GPL, v2 or later",
@@ -20,18 +20,21 @@ include("keysym.h.lua")
 --------------------------------------------------------------------------------
 
 local init = true
+local trackmode = false --before options
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-options_path = 'Settings/Camera/Combo Overhead-Free Camera'
+options_path = 'Settings/Camera/Advanced Camera Config'
 options_order = { 
 	'helpwindow', 
 	
 	'lblRotate',
 	'targetmouse', 
 	'rotateonedge', 
-	'rotfactor', 
+	'rotfactor',
+    'inverttilt',
+    'groundrot',
 	
 	'lblScroll',
 	'edgemove', 
@@ -39,6 +42,7 @@ options_order = {
 	'speedFactor', 
 	'speedFactor_k', 
 	'invertscroll', 
+	'smoothmeshscroll', 
 	
 	'lblZoom',
 	'invertzoom', 
@@ -56,6 +60,10 @@ options_order = {
 	--'restrictangle',
 	--'mingrounddist',
 	'freemode',
+	
+	'trackmode',
+	'thirdpersontrack',
+	'resetcam',
 
 }
 
@@ -85,7 +93,7 @@ options = {
 			Additional actions:
 			Keyboard: <arrow keys> replicate middlebutton drag while <pgup/pgdn> replicate mousewheel. You can use these with ctrl, alt & shift to replicate mouse camera actions.
 			Use <Shift> to speed up camera movements.
-			Reset Camera..... <Ctrl> + <Alt> + <Shift> + <Middleclick> or /luaui cofc reset
+			Reset Camera..... <Ctrl> + <Alt> + <Shift> + <Middleclick>
 		]],
 	},
 	smoothscroll = {
@@ -94,6 +102,13 @@ options = {
 		type = 'bool',
 		value = false,
 	},
+	smoothmeshscroll = {
+		name = 'Smooth Mesh Scrolling',
+		desc = 'A smoother way to scroll. Applies to all types of mouse/keyboard scrolling.',
+		type = 'bool',
+		value = true,
+	},
+	
 	targetmouse = {
 		name = 'Rotate world origin at cursor',
 		desc = 'Rotate world using origin at the cursor rather than the center of screen.',
@@ -146,6 +161,13 @@ options = {
 		type = 'bool',
 		value = false,
 	},
+    inverttilt = {
+		name = 'Invert tilt',
+		desc = 'Invert the tilt direction when using ctrl+mousewheel.',
+		type = 'bool',
+		value = false,
+	},
+    
 	zoomoutfromcursor = {
 		name = 'Zoom out from cursor',
 		desc = 'Zoom out from the cursor rather than center of the screen.',
@@ -177,6 +199,7 @@ options = {
 		type = 'bool',
 		value = false,
 	},
+    
 	smoothness = {
 		name = 'Smoothness',
 		desc = "Controls how smooth the camera moves.",
@@ -228,7 +251,41 @@ options = {
 		name = "Overview",
 		desc = "Go to overview mode, then restore view to cursor position.",
 		type = 'button',
+		hotkey = {key='tab', mod=''},
 		OnChange = function(self) OverviewAction() end,
+	},
+	
+	trackmode = {
+		name = "Enter Trackmode",
+		desc = "Track the selected unit (midclick to cancel)",
+		type = 'button',
+        hotkey = {key='t', mod='alt+'},
+		OnChange = function(self) trackmode = true; end,
+	},
+    
+    thirdpersontrack = {
+		name = "Enter 3rd Person Trackmode",
+		desc = "Track the selected unit (midclick to cancel)",
+		type = 'button',
+		OnChange = function(self)
+            Spring.SendCommands('viewfps')
+            Spring.SendCommands('track')
+        end,
+	},
+    
+    
+	resetcam = {
+		name = "Reset Camera",
+		desc = "Reset the camera position and orientation. Map a hotkey or use <Ctrl> + <Alt> + <Shift> + <Middleclick>",
+		type = 'button',
+        -- OnChange defined later
+	},
+	
+	groundrot = {
+		name = "Rotate When Camera Hits Ground",
+		desc = "If world-rotation motion causes the camera to hit the ground, camera-rotation motion takes over. Doesn't apply in Free Mode.",
+		type = 'bool',
+		value = false,
 	},
 	
 }
@@ -308,7 +365,6 @@ local HALFPIMINUS	= HALFPI-0.01
 local fpsmode = false
 local mx, my = 0,0
 local msx, msy = 0,0
-local cx, cy
 local smoothscroll = false
 local springscroll = false
 local lockspringscroll = false
@@ -331,12 +387,14 @@ local keys = {
 local icon_size = 20
 local cycle = 1
 local camcycle = 1
+local trackcycle = 1
+local hideCursor = false
 
 
 local mwidth, mheight = Game.mapSizeX, Game.mapSizeZ
 local mcx, mcz 	= mwidth / 2, mheight / 2
 local mcy 		= Spring.GetGroundHeight(mcx, mcz)
-local maxDistY = max(mheight, mwidth) * 2
+local maxDistY = max(mheight, mwidth) * 1.5
 
 
 --------------------------------------------------------------------------------
@@ -409,13 +467,17 @@ local function MoveRotatedCam(cs, mxm, mym)
 	return cs
 end
 
-
+--Note: If the x,y is not pointing at an onmap point, this function traces a virtual ray to an
+--          offmap position using the camera direction and disregards the x,y parameters. Fixme.
 local function VirtTraceRay(x,y, cs)
 	local _, gpos = spTraceScreenRay(x, y, true)
 	
 	
 	if gpos then
 		local gx, gy, gz = gpos[1], gpos[2], gpos[3]
+		
+		--gy = Spring.GetSmoothMeshHeight (gx,gz)
+		
 		if gx < 0 or gx > mwidth or gz < 0 or gz > mheight then
 			return false, gx, gy, gz	
 		else
@@ -429,6 +491,7 @@ local function VirtTraceRay(x,y, cs)
 	local vecDist = (- cs.py) / cs.dy
 	local gx, gy, gz = cs.px + vecDist*cs.dx, 	cs.py + vecDist*cs.dy, 	cs.pz + vecDist*cs.dz
 	
+	--gy = Spring.GetSmoothMeshHeight (gx,gz)
 	return false, gx, gy, gz
 end
 
@@ -470,14 +533,22 @@ local function UpdateCam(cs)
 	cs.py = ls_y - opp
 	cs.pz = ls_z - cos(cs.ry) * alt
 	
-	if not options.freemode.value and cs.py < Spring.GetGroundHeight(cs.px, cs.pz)+5 then
-		return false
+	if not options.freemode.value then
+		local gndheight = Spring.GetGroundHeight(cs.px, cs.pz)+5
+		--gndheight = Spring.GetSmoothMeshHeight(cs.px, cs.pz)+5
+		if cs.py < gndheight then
+			if options.groundrot.value then
+				cs.py = gndheight
+			else
+				return false
+			end
+		end
 	end
 	
 	return cs
 end
 
-local function Zoom(zoomin, s)
+local function Zoom(zoomin, s, forceCenter)
 	local zoomin = zoomin
 	if options.invertzoom.value then
 		zoomin = not zoomin
@@ -486,8 +557,11 @@ local function Zoom(zoomin, s)
 	local cs = spGetCameraState()
 	-- [[
 	if
-		(zoomin and options.zoomintocursor.value)
-		or ((not zoomin) and options.zoomoutfromcursor.value)
+		(not forceCenter) and
+		(
+			(zoomin and options.zoomintocursor.value)
+			or ((not zoomin) and options.zoomoutfromcursor.value)
+		)
 		then
 		
 		local onmap, gx,gy,gz = VirtTraceRay(mx, my, cs)
@@ -500,17 +574,32 @@ local function Zoom(zoomin, s)
 			else
 				return false
 			end
+            
+			local sp = (zoomin and options.zoominfactor.value or -options.zoomoutfactor.value) * (s and 3 or 1)
 			
-			local sp = (zoomin and options.zoominfactor.value or -options.zoomoutfactor.value) * (s and 4 or 1)
+			local new_px = cs.px + dx * sp
+			local new_py = cs.py + dy * sp
+			local new_pz = cs.pz + dz * sp
 			
-			cs.px = cs.px + dx * sp
-			cs.py = cs.py + dy * sp
-			cs.pz = cs.pz + dz * sp
+			if not options.freemode.value then
+                if new_py < Spring.GetGroundHeight(cs.px, cs.pz)+5 then
+                    sp = (Spring.GetGroundHeight(cs.px, cs.pz)+5 - cs.py) / dy
+                    new_px = cs.px + dx * sp
+                    new_py = cs.py + dy * sp
+                    new_pz = cs.pz + dz * sp
+                elseif (not zoomin) and new_py > maxDistY then
+                    sp = (maxDistY - cs.py) / dy
+                    new_px = cs.px + dx * sp
+                    new_py = cs.py + dy * sp
+                    new_pz = cs.pz + dz * sp
+                end
+                
+            end
 			
-			if not options.freemode.value and cs.py < Spring.GetGroundHeight(cs.px, cs.pz)+5 then
-				return true
-			end
-			
+            cs.px = new_px
+            cs.py = new_py
+            cs.pz = new_pz
+            
 			spSetCameraState(cs, options.smoothness.value)
 			ls_have = false
 			return
@@ -523,11 +612,11 @@ local function Zoom(zoomin, s)
 	if not ls_have then
 		return
 	end
-	
+    
 	if zoomin and not ls_onmap then
 		return
 	end
-	
+    
 	local sp = (zoomin and -options.zoominfactor.value or options.zoomoutfactor.value) * (s and 3 or 1)
 	
 	ls_dist = ls_dist + ls_dist*sp
@@ -555,10 +644,15 @@ local function Altitude(up, s)
 	local cs = spGetCameraState()
 	local py = max(1, abs(cs.py) )
 	local dy = py * (up and 1 or -1) * (s and 0.3 or 0.1)
-	cs.py = py + dy
-	if not options.freemode.value and cs.py < Spring.GetGroundHeight(cs.px, cs.pz)+5  then
-		return true
+	local new_py = py + dy
+	if not options.freemode.value then
+        if new_py < Spring.GetGroundHeight(cs.px, cs.pz)+5  then
+            new_py = Spring.GetGroundHeight(cs.px, cs.pz)+5  
+        elseif new_py > maxDistY then
+            new_py = maxDistY 
+        end
 	end
+    cs.py = new_py
 	spSetCameraState(cs, options.smoothness.value)
 	return true
 end
@@ -573,6 +667,7 @@ local function ResetCam()
 	cs.ry = PI
 	spSetCameraState(cs, 1)
 end
+options.resetcam.OnChange = ResetCam
 
 OverviewAction = function()
 	if not overview_mode then
@@ -627,7 +722,13 @@ local function RotateCamera(x, y, dx, dy, smooth, lock)
 			cs.rx = max_rx 
 		end
 		
-		
+        -- [[
+        if trackmode then
+            lock = true
+            ls_have = false
+            SetLockSpot2(cs)
+        end
+		--]]
 		if lock and ls_onmap then
 			local cstemp = UpdateCam(cs)
 			if cstemp then
@@ -653,6 +754,8 @@ local function Tilt(s, dir)
 	if not ls_have then
 		return
 	end
+    local dir = dir * (options.inverttilt.value and -1 or 1)
+    
 
 	local speed = dir * (s and 30 or 10)
 	RotateCamera(vsx * 0.5, vsy * 0.5, 0, speed, true, true) --smooth, lock
@@ -660,13 +763,14 @@ local function Tilt(s, dir)
 	return true
 end
 
-
-
 local function ScrollCam(cs, mxm, mym, smoothlevel)
 	SetLockSpot2(cs)
 	if not cs.dy or not ls_have then
 		--echo "<COFC> scrollcam fcn fail"
-		return cs	
+		return
+	end
+	if not ls_onmap then
+		smoothlevel = 0.5
 	end
 
 	-- forward, up, right, top, bottom, left, right
@@ -688,18 +792,23 @@ local function ScrollCam(cs, mxm, mym, smoothlevel)
 	ls_x = ls_x + ddx
 	ls_z = ls_z + ddz
 	
-	ls_x = math.min(ls_x, mwidth)
-	ls_x = math.max(ls_x, 0)
+	ls_x = math.min(ls_x, mwidth-3)
+	ls_x = math.max(ls_x, 3)
 	
-	ls_z = math.min(ls_z, mheight)
-	ls_z = math.max(ls_z, 0)
+	ls_z = math.min(ls_z, mheight-3)
+	ls_z = math.max(ls_z, 3)
 	
-	ls_y = Spring.GetGroundHeight(ls_x, ls_z)
+	if options.smoothmeshscroll.value then
+		ls_y = Spring.GetSmoothMeshHeight(ls_x, ls_z) or 0
+	else
+		ls_y = Spring.GetGroundHeight(ls_x, ls_z) or 0
+	end
 	
-	local cstemp = UpdateCam(cs)
-	if cstemp then cs = cstemp; end
 	
-	spSetCameraState(cs, smoothlevel)
+	local csnew = UpdateCam(cs)
+	if csnew then
+        spSetCameraState(csnew, smoothlevel)
+    end
 	
 end
 
@@ -723,10 +832,16 @@ local function PeriodicWarning()
 		echo('<COFCam> *Periodic warning* Please disable other camera widgets: ' .. c_widgets)
 	end
 end
+
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 function widget:Update(dt)
+
+    if hideCursor then
+        spSetMouseCursor('%none%')
+    end
 
 	if options.follow.value then
 		camcycle = camcycle %(32*6) + 1
@@ -746,6 +861,16 @@ function widget:Update(dt)
 	if cycle == 1 then
 		PeriodicWarning()
 	end
+	
+	trackcycle = trackcycle %(4) + 1
+	if trackcycle == 1 and trackmode then
+		local selUnits = Spring.GetSelectedUnits()
+		if selUnits and selUnits[1] then
+			local x,y,z = Spring.GetUnitPosition( selUnits[1] )
+			Spring.SetCameraTarget(x,y,z, 0.2)
+		end
+	end
+	
 
 	local cs = spGetCameraState()
 	
@@ -790,18 +915,21 @@ function widget:Update(dt)
 		
 		local heightFactor = (cs.py/1000)
 		if smoothscroll then
-			local speed = dt * options.speedFactor.value * heightFactor 
+			--local speed = dt * options.speedFactor.value * heightFactor 
+			local speed = math.max( dt * options.speedFactor.value * heightFactor, 0.005 )
 			mxm = speed * (x - cx)
 			mym = speed * (y - cy)
 		elseif use_lockspringscroll then
-			local speed = options.speedFactor.value * heightFactor / 10
+			--local speed = options.speedFactor.value * heightFactor / 10
+			local speed = math.max( options.speedFactor.value * heightFactor / 10, 0.05 )
 			local dir = options.invertscroll.value and -1 or 1
 			mxm = speed * (x - mx) * dir
 			mym = speed * (y - my) * dir
 			
 			spWarpMouse(cx, cy)		
 		else
-			local speed = options.speedFactor_k.value * (s and 3 or 1) * heightFactor
+			--local speed = options.speedFactor_k.value * (s and 3 or 1) * heightFactor
+			local speed = math.max( options.speedFactor_k.value * (s and 3 or 1) * heightFactor, 1 )
 			
 			if move.right then
 				mxm = speed
@@ -896,7 +1024,7 @@ end
 function widget:MousePress(x, y, button)
 	ls_have = false
 	overview_mode = false
-    if fpsmode then return end
+    --if fpsmode then return end
 	if lockspringscroll then
 		lockspringscroll = false
 		return true
@@ -906,6 +1034,9 @@ function widget:MousePress(x, y, button)
 	if (button ~= 2) then
 		return false
 	end
+	Spring.SendCommands('trackoff')
+    spSendCommands('viewfree')
+	trackmode = false
 	
 	local a,c,m,s = spGetModKeyState()
 	
@@ -1027,7 +1158,7 @@ function widget:KeyPress(key, modifier, isRepeat)
 			Altitude(true, modifier.shift)
 			return
 		else
-			Zoom(true, modifier.shift)
+			Zoom(true, modifier.shift, true)
 			return
 		end
 	elseif key == key_code.pagedown then
@@ -1038,7 +1169,7 @@ function widget:KeyPress(key, modifier, isRepeat)
 			Altitude(false, modifier.shift)
 			return
 		else
-			Zoom(false, modifier.shift)
+			Zoom(false, modifier.shift, true)
 			return
 		end
 	end
@@ -1065,8 +1196,9 @@ local function DrawPoint(x, y, c, s)
 end
 
 function widget:DrawScreen()
+    hideCursor = false
 	if not cx then return end
-	
+    
 	local x, y
 	if smoothscroll then
 		x, y = spGetMouseState()
@@ -1110,7 +1242,7 @@ function widget:DrawScreen()
 		glAlphaTest(GL_GREATER, 0)
 		
 		if not (springscroll and not lockspringscroll) then
-		    spSetMouseCursor('none')
+		    hideCursor = true
 		end
 		if smoothscroll then
 			local icon_size2 = icon_size
@@ -1131,11 +1263,16 @@ function widget:Initialize()
 	cx = vsx * 0.5
 	cy = vsy * 0.5
 	
-	Spring.SendCommands( 'unbindaction toggleoverview' )
+	spSendCommands( 'unbindaction toggleoverview' )
+	spSendCommands( 'unbindaction trackmode' )
+	spSendCommands( 'unbindaction track' )
 end
 
 function widget:Shutdown()
 	spSendCommands{"viewta"}
+	spSendCommands( 'bind any+tab toggleoverview' )
+	spSendCommands( 'bind any+t track' )
+	spSendCommands( 'bind ctrl+t trackmode' )
 end
 
 function widget:TextCommand(command)
