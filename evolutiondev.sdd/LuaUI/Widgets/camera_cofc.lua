@@ -259,7 +259,7 @@ options = {
 		name = "Enter Trackmode",
 		desc = "Track the selected unit (midclick to cancel)",
 		type = 'button',
-        hotkey = {key='t', mod='alt+'},
+        hotkey = {key='t', mod=''},
 		OnChange = function(self) trackmode = true; end,
 	},
     
@@ -394,7 +394,7 @@ local hideCursor = false
 local mwidth, mheight = Game.mapSizeX, Game.mapSizeZ
 local mcx, mcz 	= mwidth / 2, mheight / 2
 local mcy 		= Spring.GetGroundHeight(mcx, mcz)
-local maxDistY = max(mheight, mwidth) * 1.5
+local maxDistY = max(mheight, mwidth) * 1
 
 
 --------------------------------------------------------------------------------
