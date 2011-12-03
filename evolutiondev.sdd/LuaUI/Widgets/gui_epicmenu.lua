@@ -1,7 +1,7 @@
 function widget:GetInfo()
   return {
     name      = "EPIC Menu",
-    desc      = "v1.254 Extremely Powerful Ingame Chili Menu.",
+    desc      = "v1.284 Extremely Powerful Ingame Chili Menu.",
     author    = "CarRepairer",
     date      = "2009-06-02",
     license   = "GNU GPL, v2 or later",
@@ -27,17 +27,11 @@ local echo = Spring.Echo
 local VFSMODE      = VFS.RAW_FIRST
 local file = LUAUI_DIRNAME .. "Configs/epicmenu_conf.lua"
 local confdata = VFS.Include(file, nil, VFSMODE)
-local menu_tree = confdata.menu_tree
-local game_menu_tree = confdata.game_menu_tree 
+local epic_options = confdata.eopt
 local color = confdata.color
 local title_text = confdata.title
 local title_image = confdata.title_image
-local help_menu_tree = confdata.help_tree
-local menu_tree2 = {}
-local game_menu_tree2 = {}
-local help_menu_tree2 = {}
-local game_menu_index = -1
-local main_menu_index = -1
+
 local flatwindowlist = {}
 
 --------------------------------------------------------------------------------
@@ -105,6 +99,9 @@ local transkey = {
 	leftbracket 	= '[',
 	rightbracket 	= ']',
 	--delete 			= 'del',
+	comma 			= ',',
+	period 			= '.',
+	slash 			= '/',
 	
 	kp_multiply		= 'numpad*',
 	kp_divide		= 'numpad/',
@@ -144,7 +141,7 @@ local settings = {
 	versionmin = 50,
 	lang = 'en',
 	widgets = {},
-	show_crudemenu = false,
+	show_crudemenu = true,
 	music_volume = 0.5,
 }
 
@@ -222,6 +219,12 @@ WG.crude.RestoreCursor = function()
   for _, cursor in ipairs(cursorNames) do
     local topLeft = (cursor == 'cursornormal')
     Spring.ReplaceMouseCursor(cursor, cursor, topLeft)
+  end
+end
+
+WG.crude.SetSkin = function(Skin)
+  if Chili then
+    Chili.theme.skin.general.skinName = Skin
   end
 end
 
@@ -667,7 +670,7 @@ local function MakeFlags()
 	local window_height = 300
 	local window_width = 170
 	window_flags = Window:New{
-		caption = 'Choose Your Location',
+		caption = 'Choose Your Location...',
 		x = settings.sub_pos_x,  
 		y = settings.sub_pos_y,  
 		clientWidth  = window_width,
@@ -725,6 +728,40 @@ local function MakeHelp(caption, text)
 			Button:New{ caption = 'Close', OnMouseUp = { function(self) self.parent:Dispose() end }, x=10, bottom=1, right=50, height=B_HEIGHT, backgroundColor = color.sub_close_bg, textColor = color.sub_close_fg, },
 		}
 	}
+end
+
+local function AddOption(path, wname, option)
+	custompaths_i[#custompaths_i+1] = path --number indexed so that paths are added to menu in the order they appear in the widget
+	if not custompathsettings[path] then
+		custompathsettings[path] = {}
+	end
+	if not custompathsettings[path][wname] then
+		custompathsettings[path][wname] = {}
+	end
+	local custompathwidget = custompathsettings[path][wname]
+	local length = #custompathwidget
+	if option then
+		custompathsettings[path][wname][#custompathwidget+1] = option
+	end
+end
+
+local function RemPath(path, wname)
+	--If a widget disables itself in widget:Initialize it will run the removewidget before the insertwidget is complete. 
+	if not custompathsettings[path] then
+		return
+	end
+	
+	custompathsettings[path][wname] = nil
+	local deletepath = true
+	for k,v in pairs(custompathsettings[path]) do
+		deletepath = false
+	end
+	if deletepath then
+		--custompaths[path] = nil
+		custompaths_i = tableremove(custompaths_i, path) --number indexed so that paths are added to menu in the order they appear in the widget
+		--custompathsettings[path] = nil --causes strange error
+		custompathsettings[path] = {}
+	end
 end
 
 --(Un)Store custom widget settings for a widget
@@ -804,34 +841,9 @@ local function IntegrateWidget(w, addoptions, index)
 		local path = option.path or defaultpath
 		
 		if not addoptions then
-			--If a widget disables itself in widget:Initialize it will run the removewidget before the insertwidget is complete. 
-			if not custompathsettings[path] then
-				return
-			end
-			
-			custompathsettings[path][wname] = nil
-			local deletepath = true
-			for k,v in pairs(custompathsettings[path]) do
-				deletepath = false
-			end
-			if deletepath then
-				--custompaths[path] = nil
-				custompaths_i = tableremove(custompaths_i, path) --number indexed so that paths are added to menu in the order they appear in the widget
-				--custompathsettings[path] = nil --causes strange error
-				custompathsettings[path] = {}
-			end
+			RemPath(path, wname)
 		else
-			--custompaths[path] = true
-			custompaths_i[#custompaths_i+1] = path --number indexed so that paths are added to menu in the order they appear in the widget
-			if not custompathsettings[path] then
-				custompathsettings[path] = {}
-			end
-			if not custompathsettings[path][wname] then
-				custompathsettings[path][wname] = {}
-			end
-			local custompathwidget = custompathsettings[path][wname]
-			local length = #custompathwidget
-			custompathsettings[path][wname][#custompathwidget+1] = option
+			AddOption(path, wname, option)
 		end
 	end
 	
@@ -844,115 +856,6 @@ local function AddAllCustSettings()
 	for i,widget in ipairs(widgetHandler.widgets) do
 		IntegrateWidget(widget, true, i)
 	end
-end
-
--- Convert shorthand settings tree (from crudemenu_conf file) 
--- to longhand (IceUI style) settings tree
-local function ShorthandTree2Long(tree, name)
-	local rettree = {}
-	
-	local name = name or ''
-	
-	local tooltip_start = name and name:find('|')
-	local tooltip = ''
-	if tooltip_start then
-		tooltip = name:sub(tooltip_start+1)
-		name 	= name:sub(1,tooltip_start-1)
-	end
-	local advanced = false
-	if name:sub(1,1) == '@' then
-		name = name:sub(2)
-		advanced = true
-	end
-						
-	rettree.desc = tooltip
-	
-	if type(tree) == 'table'  and #tree > 0 and type(tree[1]) == 'table' then
-		rettree.name = name
-		rettree.type = 'menu'
-		
-		local subtree = {}
-		local order = {}
-		for _,data in ipairs( tree ) do
-			local subname = ''
-			if #data == 2 then
-				if type(data[1]) == 'string' and type(data[2]) == 'string' then
-					subname = data[1]
-					
-					local tooltip_start = subname and subname:find('|')
-					local tooltip = ''
-					if tooltip_start then
-						tooltip 	= subname:sub(tooltip_start+1)
-						subname 	= subname:sub(1,tooltip_start-1)
-					end
-					
-					
-					if data[2]:sub(1,1) == '=' then
-						subtree[ subname ] = {
-							type = 'text',
-							name = subname,
-							desc = tooltip,
-							value = data[2]:sub(2),
-						}
-					else
-						local advanced = false
-						local action = data[2]
-						if subname:sub(1,1) == '@' then
-							subname = subname:sub(2)
-							advanced = true
-						end
-						
-						subtree[ subname ] = {
-							type = 'button',
-							name = subname,
-							--OnChange = function(self) end,
-							desc = tooltip,
-							action = action,
-							advanced = advanced,
-						}
-					end
-				else
-					subname = data[1]
-					if subname == 'lh' then
-						subname = 'lh' .. data[2].name
-						subtree[ subname ] = data[2]
-					else
-						local subsubtree = ShorthandTree2Long( data[2], data[1] )
-						subname = subsubtree.name
-						subtree[ subname ] = subsubtree
-					end
-				end
-			elseif #data == 1 then
-				subname = 'lbl'.. data[1]
-				subtree[ subname ] = {
-					type = 'label',
-					name = data[1],
-					value = data[1],
-				}
-			elseif #data == 0 then
-				subname = 'lblempty' .. (math.random()) 
-				subtree[ subname ] = {
-					type = 'label',
-					name = 'empty',
-					value = '',
-				}
-			end
-			order[#order+1] = subname
-			subtree[subname].key = subname
-		end
-		
-		rettree.order = order
-		rettree.value = subtree
-
-	-- TERMINAL
-	else
-		rettree.type = 'button'
-		rettree.name = name
-		rettree.OnChange = tree
-		rettree.advanced = advanced
-	end
-	--rettree.key = rettree.name
-	return rettree
 end
 
 -- Make submenu window based on index from flat window list
@@ -1017,7 +920,9 @@ local function AssignKeyBind(hotkey, menukey, itemindex, item, verbose)
 		end
 	end
 	
-	local actionName = item.action or ('epic_'.. menukey .. '_' .. item.key)
+	local fullkey = ('epic_'.. menukey .. '_' .. item.key)
+	fullkey = fullkey:gsub(' ', '_')
+	local actionName = item.action or fullkey
 	
 	if verbose then
 		local actions = Spring.GetKeyBindings(hotkey.mod .. hotkey.key)
@@ -1049,6 +954,7 @@ end
 -- Unsssign a keybinding from settings and other tables that keep track of related info
 local function UnassignKeyBind(menukey, item)
 	local actionName = 'epic_'.. menukey .. '_' .. item.key
+	actionName = actionName:gsub(' ', '_')
 	
 	if item.action then
 		actionName = item.action
@@ -1117,10 +1023,8 @@ local function flattenTree(tree, parent)
 		local thispath = custompathsettings[curkey]
 		for w, options in pairs(thispath) do
 			for _,option in ipairs(options) do
-				if true then
-					tree2.order[#(tree2.order)+1] = option.key
-					tree2.value[option.key] = option
-				end
+				tree2.order[#(tree2.order)+1] = option.key
+				tree2.value[option.key] = option
 			end
 		end	
 	end
@@ -1138,9 +1042,11 @@ local function flattenTree(tree, parent)
 			--set keys to index by
 			if not option.key then
 				option.key = option.name
+				--option.key = i or option.name
 			end
 			
 			local fullkey = curkey .. '_' .. option.key
+			fullkey = fullkey:gsub(' ', '_')
 			
 			--get spring config setting
 			local valuechanged = false
@@ -1262,7 +1168,6 @@ local function flattenTree(tree, parent)
 					elseif not widgetHandler.widgets[option.windex].options[option.key] then
 						echo('<EPIC Menu> Error #77', option.windex, option.key)
 					else
-						echo '22'
 						widgetHandler.widgets[option.windex].options[option.key].OnChange = function(self)
 							controlfunc(self)
 							--origOnChange(option)
@@ -1372,7 +1277,10 @@ end
 --Get hotkey action and readable hotkey string
 local function GetHotkeyData(key, item)
 	local itemkey = item.key
-	local actionName = item.action or ('epic_' .. key .. '_' .. itemkey)
+	local fullkey = ('epic_' .. key .. '_' .. itemkey)
+	fullkey = fullkey:gsub(' ', '_')
+	local actionName = item.action or fullkey
+	
 	local hotkey = settings.keybounditems[actionName]
 	if hotkey then
 		return hotkey, GetReadableHotkeyMod(hotkey.mod) .. hotkey.key
@@ -1439,6 +1347,9 @@ local function ResetWinSettings(windowdata)
 			elseif data.type == 'list' then
 				data.value = data.default
 				data.OnChange(data.default)
+			elseif data.type == 'colors' then
+				data.color = data.default
+				data.OnChange(data)
 			end
 		else
 			echo ('<EPIC Menu> Error #627', data.name)
@@ -1466,7 +1377,6 @@ MakeSubWindow = function(fwkey)
 	
 	for i, optionkey in ipairs(windowdata.order) do
 		local data = tree[optionkey]
-		
 		if not data.OnChange then
 			data.OnChange = function(self) end
 		end
@@ -1474,7 +1384,7 @@ MakeSubWindow = function(fwkey)
 			data.desc = ''
 		end
 		
-		if data.advanced and not settings.config['Settings_lhShow Advanced Settings'] then
+		if data.advanced and not settings.config['Settings_Show_Advanced_Settings'] then
 			--do nothing
 		elseif data.type == 'button' then	
 			local button = Button:New{
@@ -1567,12 +1477,12 @@ MakeSubWindow = function(fwkey)
 			tree_children[#tree_children+1] = button
 		
 		elseif data.type == 'colors' then
-			settings_height = settings_height + B_HEIGHT*2
+			settings_height = settings_height + B_HEIGHT*2.5
 			tree_children[#tree_children+1] = Label:New{ caption = data.name, textColor = color.sub_fg, }
 			tree_children[#tree_children+1] = 
 				Colorbars:New{
 					width = "100%",
-					height = B_HEIGHT*1.5,
+					height = B_HEIGHT*2,
 					tooltip=data.desc,
 					color = data.value or {1,1,1,1},
 					OnMouseUp = { data.OnChange, },
@@ -1654,9 +1564,11 @@ end
 
 -- Show or hide menubar
 local function ShowHideCrudeMenu()
+	WG.crude.visible = settings.show_crudemenu -- HACK set it to wg to signal to player list 
 	if settings.show_crudemenu then
 		if window_crude then
 			screen0:AddChild(window_crude)
+			--WG.chat.showConsole()
 			window_crude:UpdateClientArea()
 		end
 		if window_sub_cur then
@@ -1665,6 +1577,7 @@ local function ShowHideCrudeMenu()
 	else
 		if window_crude then
 			screen0:RemoveChild(window_crude)
+			--WG.chat.hideConsole()
 		end
 		if window_sub_cur then
 			screen0:RemoveChild(window_sub_cur)
@@ -1699,9 +1612,8 @@ end
 
 
 
-local function AddCustomPaths(menutree, menuname)
+local function AddCustomPaths(menuname)
 	local menutreeret = {}
-	CopyTable(menutreeret, menutree)
 	local custompathtree = {}
 	--for pathstring, _ in pairs(custompaths) do
 	for _, pathstring in ipairs(custompaths_i) do --number indexed so that paths are added to menu in the order they appear in the widget
@@ -1717,28 +1629,30 @@ local function AddCustomPaths(menutree, menuname)
 end
 
 -- Make menubar
-local function MakeCrudeMenu()
-	local btn_padding = {4,3,2,2}
-	local btn_margin = {0,0,0,0}
-	if window_crude then
-		window_crude:Dispose()
-		window_crude = nil
-	end
-		
-	local crude_width = 425
-	local crude_height = B_HEIGHT+10
+local function BuildMenuTree()
 	
-	local menu_tree3 		= AddCustomPaths(menu_tree2, 'Settings')
-	local game_menu_tree3 	= AddCustomPaths(game_menu_tree2, 'Game')
+	local menu_tree3 		= AddCustomPaths('Settings')
+	local game_menu_tree3 	= AddCustomPaths('Game')
+	local help_menu_tree3 	= AddCustomPaths('Help')
 	
 	for actionName, _ in pairs( settings.keybounditems ) do
 		RemoveAction(actionName)
 	end
 	
-	main_menu_index = flattenTree(menu_tree3, '')
-	game_menu_index = flattenTree(game_menu_tree3, '' )
-	help_menu_index = flattenTree(help_menu_tree2, 'Help' )
+	local main_menu_index = flattenTree(menu_tree3, '')
+	local game_menu_index = flattenTree(game_menu_tree3, '' )
+	local help_menu_index = flattenTree(help_menu_tree3, '' )
 	
+end
+
+local function MakeMenuBar()
+	local btn_padding = {4,3,2,2}
+	local btn_margin = {0,0,0,0}
+		
+	local crude_width = 425
+	local crude_height = B_HEIGHT+10
+	
+
 	lbl_fps = Label:New{ name='lbl_fps', caption = 'FPS:', textColor = color.sub_header,  }
 	lbl_gtime = Label:New{ name='lbl_gtime', caption = 'Time:', textColor = color.sub_header, align="center" }
 	lbl_clock = Label:New{ name='lbl_clock', caption = 'Clock:', width = 35, height=5, textColor = color.main_fg, autosize=false, }
@@ -1746,14 +1660,15 @@ local function MakeCrudeMenu()
 	
 	window_crude = Window:New{
 		name='epicmenubar',
-		x = 420,  
-		bottom = 0,
+		right = 0,  
+		y = 50, -- resbar height
 		dockable = true,
 		clientWidth = crude_width,
 		clientHeight = crude_height,
 		draggable = false,
 		tweakDraggable = true,
 		resizable = false,
+		minimizable = false,
 		backgroundColor = color.main_bg,
 		color = {1,1,1,0.5},
 		margin = {0,0,0,0},
@@ -1778,15 +1693,15 @@ local function MakeCrudeMenu()
 					
 					-- odd-number button width keeps image centered
 					Button:New{
-						caption = "", OnMouseUp = { function() MakeSubWindow(game_menu_index) end, }, textColor=color.game_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
-						padding = btn_padding, margin = btn_margin,	tooltip = 'Game Actions',
+						caption = "", OnMouseUp = { function() MakeSubWindow('Game') end, }, textColor=color.game_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
+						padding = btn_padding, margin = btn_margin,	tooltip = 'Game Actions and Settings...',
 						children = {
 							Image:New{file=LUAUI_DIRNAME .. 'Images/epicmenu/game.png', height=B_HEIGHT-2,width=B_HEIGHT-2},
 						},
 					},
 					Button:New{
-						caption = "", OnMouseUp = { function() MakeSubWindow(main_menu_index) end, }, textColor=color.menu_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
-						padding = btn_padding, margin = btn_margin,	tooltip = 'Settings', 
+						caption = "", OnMouseUp = { function() MakeSubWindow('Settings') end, }, textColor=color.menu_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
+						padding = btn_padding, margin = btn_margin,	tooltip = 'General Settings...', 
 						children = {
 							Image:New{ tooltip = 'Settings', file=LUAUI_DIRNAME .. 'Images/epicmenu/settings.png', height=B_HEIGHT-2,width=B_HEIGHT-2, },
 						},
@@ -1869,9 +1784,25 @@ local function MakeCrudeMenu()
 						itemMargin = {0,0,0,0},
 						
 						children = {
-							lbl_gtime,
-							lbl_fps,
 							
+							lbl_fps,
+							StackPanel:New{
+								orientation = 'horizontal',
+								width = 60,
+								height = '100%',
+								resizeItems = false,
+								autoArrangeV = false,
+								autoArrangeH = false,
+								padding = {0,0,0,0},
+								itemMargin = {2,0,0,0},
+								children = {
+									Image:New{ file= LUAUI_DIRNAME .. 'Images/epicmenu/game.png', width = 20,height = 20,  },
+									lbl_gtime,
+								},
+							},
+							
+							
+							img_flag,
 							StackPanel:New{
 								orientation = 'horizontal',
 								width = 60,
@@ -1886,20 +1817,20 @@ local function MakeCrudeMenu()
 									lbl_clock,
 								},
 							},
-							img_flag,							
+							
 						},
 					},
 					
 					Button:New{
-						caption = "", OnMouseUp = { function() MakeSubWindow(help_menu_index) end, }, textColor=color.menu_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
-						padding = btn_padding, margin = btn_margin, tooltip = 'Help', 
+						caption = "", OnMouseUp = { function() MakeSubWindow('Help') end, }, textColor=color.menu_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
+						padding = btn_padding, margin = btn_margin, tooltip = 'Help...', 
 						children = {
 							Image:New{ file=LUAUI_DIRNAME .. 'Images/epicmenu/questionmark.png', height=B_HEIGHT-2,width=B_HEIGHT-2,  },
 						},
 					},
 					Button:New{
 						caption = "", OnMouseUp = { function() spSendCommands{"quitmenu"} end, }, textColor=color.menu_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
-						padding = btn_padding, margin = btn_margin, tooltip = 'Exit the game...,',
+						padding = btn_padding, margin = btn_margin, tooltip = 'Exit the game...',
 						children = {
 							Image:New{file=LUAUI_DIRNAME .. 'Images/epicmenu/quit.png', height=B_HEIGHT-2,width=B_HEIGHT-2,  }, 
 						},
@@ -1915,7 +1846,7 @@ end
 RemakeEpicMenu = function()
 	local lastSubKey = curSubKey
 	KillSubWindow()
-	MakeCrudeMenu()
+	BuildMenuTree()
 	if lastSubKey ~= '' then	
 		MakeSubWindow(lastSubKey)
 	end
@@ -1986,10 +1917,24 @@ function widget:Initialize()
 	-- add custom widget settings to crudemenu
 	AddAllCustSettings()
 	
-	menu_tree2 = ShorthandTree2Long(menu_tree, 'Settings')
-	game_menu_tree2 = ShorthandTree2Long(game_menu_tree, 'Game')
-	help_menu_tree2 = ShorthandTree2Long(help_menu_tree, 'Help Menu')
-
+	AddOption('Settings', 'epic')
+	AddOption('Settings/Reset Settings', 'epic')
+	AddOption('Settings/Camera', 'epic')
+	AddOption('Settings/Interface', 'epic')
+	AddOption('Settings/Misc', 'epic')
+	AddOption('Settings/Mouse Cursor', 'epic')
+	AddOption('Settings/Video', 'epic')
+	AddOption('Settings/View', 'epic')
+	AddOption('Game', 'epic')
+	AddOption('Help', 'epic')
+	
+	local options_temp ={}
+	CopyTable(options_temp , epic_options);
+	for i,option in ipairs(options_temp ) do
+		AddOption(option.path, 'epic', option)
+	end
+	
+	
 	widget:ViewResize(Spring.GetViewGeometry())
 	
 	-- Set default positions of windows on first run
@@ -2031,7 +1976,8 @@ function widget:Initialize()
 	Spring.SendCommands("bind esc crudemenu")
 	Spring.SendCommands("bind f11 crudewidgetlist")
 
-	MakeCrudeMenu()
+	BuildMenuTree()
+	MakeMenuBar()
 	
 	-- Override widgethandler functions for the purposes of alerting crudemenu 
 	-- when widgets are loaded, unloaded or toggled
@@ -2133,7 +2079,7 @@ function widget:Update()
 			lbl_fps:SetCaption( 'FPS: ' .. Spring.GetFPS() )
 		end
 		if lbl_gtime then
-			lbl_gtime:SetCaption( '[' .. GetTimeString() ..']' )
+			lbl_gtime:SetCaption( GetTimeString() )
 		end
 		if lbl_clock then
 			--local displaySeconds = true
@@ -2178,6 +2124,7 @@ function widget:KeyPress(key, modifier, isRepeat)
 			AssignKeyBind(kbval, kb_mkey, kb_mindex, kb_item, true) -- param5 = verbose
 		else
 			local actionName = 'epic_'.. kb_mkey .. '_' .. kb_item.key
+			actionName = actionName:gsub(' ', '_')
 			if kb_item.action then
 				actionName = kb_item.action
 			end
