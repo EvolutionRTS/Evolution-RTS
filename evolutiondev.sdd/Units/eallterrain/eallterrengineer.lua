@@ -55,6 +55,7 @@ local unitDef = {
   maxSlope           = 180,
   maxVelocity        = 3,
   maxReverseVelocity = 1,
+  turninplacespeedlimit = 3,
   maxWaterDepth      = 10,
   metalmake          = 0,
   metalStorage       = 0,

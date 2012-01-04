@@ -18,7 +18,7 @@ local moveDefs = {
       badwaterslope=255;
       crushstrength=0;
       depthmod=0.1;
-	  heatmapping=false;
+	  heatmapping=true;
    },
 
    HOVERTANK2 = {
@@ -29,7 +29,7 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-	  heatmapping=false;
+	  heatmapping=true;
    },
 
    NORMALTANK2 = {
@@ -40,7 +40,7 @@ local moveDefs = {
       maxwaterslope=26;
       badwaterslope=26;
       crushstrength=20;
-	  heatmapping=false;
+	  heatmapping=true;
    },
    
    TANK2 = {
@@ -52,7 +52,7 @@ local moveDefs = {
       badwaterslope=255;
       crushstrength=20;
       depthmod=0.1;
-	  heatmapping=false;
+	  heatmapping=true;
    },
 
    HOVERTANK3 = {
@@ -63,7 +63,7 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-	  heatmapping=false;
+	  heatmapping=true;
    },
 
    TANK3 = {
@@ -75,7 +75,7 @@ local moveDefs = {
       badwaterslope=255;
       crushstrength=20;
       depthmod=0.1;
-	  heatmapping=false;
+	  heatmapping=true;
    },
    
    ALLTERRTANK3 = {
@@ -84,7 +84,7 @@ local moveDefs = {
       maxslope=180;
       maxwaterdepth=10;
       crushstrength=20;
-	  heatmapping=false;
+	  heatmapping=true;
    },
 
    HOVERTANK4 = {
@@ -115,7 +115,7 @@ local moveDefs = {
       maxslope=180;
       maxwaterdepth=10;
       crushstrength=20;
-	  heatmapping=false;
+	  heatmapping=true;
    },
     UBOAT4 = {
       footprintx = 4,

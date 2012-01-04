@@ -128,7 +128,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "lightw",  
+	  damagetype		= "light",  
     },   
     damage = {
       default           = 38,
