@@ -2,11 +2,11 @@
 --------------------------------------------------------------------------------
 maxChicken           = tonumber(Spring.GetModOptions().mo_maxchicken) or 100
 maxBurrows           = 20
-gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 160  -- no chicken spawn in this period, seconds
+gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 280  -- no chicken spawn in this period, seconds
 queenTime            = (Spring.GetModOptions().mo_queentime or 40) * 60 -- time at which the queen appears, seconds
 addQueenAnger        = tonumber(Spring.GetModOptions().mo_queenanger) or 1
 burrowSpawnType      = Spring.GetModOptions().mo_chickenstart or "avoid"
-spawnSquare          = 300       -- size of the chicken spawn square centered on the burrow
+spawnSquare          = 500       -- size of the chicken spawn square centered on the burrow
 spawnSquareIncrement = 4         -- square size increase for each unit spawned
 burrowName           = "burrow"   -- burrow unit name
 maxAge               = 600      -- chicken die at this age, seconds
