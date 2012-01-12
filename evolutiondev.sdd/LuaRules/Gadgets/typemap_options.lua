@@ -42,7 +42,8 @@ function gadget:Initialize()
 		gadgetHandler:RemoveGadget()
 		return
 	end
-	
+
+	-- If you want to be able to use the modoptions for this, then remove the following 3 lines, otherwise the gadget will assume that "AllOff" applies and remove all typemaps
 	for i = 0,1600,1  do
 		spSetTerrainTypeData(i,1,1,1,1)
 	end
