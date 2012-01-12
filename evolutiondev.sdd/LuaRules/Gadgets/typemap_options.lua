@@ -42,6 +42,12 @@ function gadget:Initialize()
 		gadgetHandler:RemoveGadget()
 		return
 	end
+	
+	for i = 0,1600,1  do
+		spSetTerrainTypeData(i,1,1,1,1)
+	end
+
+--[[	
 	if modOptions.typemapsetting then
 	
 		if modOptions.typemapsetting == "alloff" then
@@ -111,7 +117,7 @@ function gadget:Initialize()
 		end
 		
 	end
-	
+	]]--
 	gadgetHandler:RemoveGadget()
 	
 end
