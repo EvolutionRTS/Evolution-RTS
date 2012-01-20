@@ -53,12 +53,6 @@ local function GetStartUnit(teamID)
 	return startUnit
 end
 
-local function GetFacing(name,x,z)
-	return math.abs(Game.mapSizeX/2 - x) > math.abs(Game.mapSizeZ/2 - z)
-		and ((x>Game.mapSizeX/2) and "west" or "east")
-		or ((z>Game.mapSizeZ/2) and "north" or "south")
-end
-
 local function SpawnStartUnit(teamID)
 	local startUnit = GetStartUnit(teamID)
 	if (startUnit and startUnit ~= "") then
@@ -67,18 +61,17 @@ local function SpawnStartUnit(teamID)
 		-- snap to 16x16 grid
 		x, z = 16*math.floor((x+8)/16), 16*math.floor((z+8)/16)
 		y = Spring.GetGroundHeight(x, z)
-		local facing = GetFacing(startUnit,x,z)
+		-- facing toward map center
+		local facing=math.abs(Game.mapSizeX/2 - x) > math.abs(Game.mapSizeZ/2 - z)
+			and ((x>Game.mapSizeX/2) and "west" or "east")
+			or ((z>Game.mapSizeZ/2) and "north" or "south")
 		local unitID = Spring.CreateUnit(startUnit, x, y, z, facing, teamID)
-		if unitID and Spring.SetUnitLineage then
-			-- set the *team's* lineage root
-			Spring.SetUnitLineage(unitID, teamID, true)
-		end
 	end
 
 	-- set start resources, either from mod options or custom team keys
 	local teamOptions = select(7, Spring.GetTeamInfo(teamID))
-	local m = teamOptions.startmetal  or modOptions.startmetal  or 1000
-	local e = teamOptions.startenergy or modOptions.startenergy or 1000
+	local m = teamOptions.startmetal  or modOptions.startmetal  or 100
+	local e = teamOptions.startenergy or modOptions.startenergy or 250
 
 	-- using SetTeamResource to get rid of any existing resource without affecting stats
 	-- using AddTeamResource to add starting resource and counting it as income
@@ -103,22 +96,18 @@ end
 
 function gadget:GameStart()
 	-- only activate if engine didn't already spawn units (compatibility)
-	--if (#Spring.GetAllUnits() == 0) then
-		-- spawn start units
-		local gaiaTeamID = Spring.GetGaiaTeamID()
-		local teams = Spring.GetTeamList()
-		if getfenv(0).AllowUnsafeChanges then
-			getfenv(0).AllowUnsafeChanges("USE AT YOUR OWN PERIL")
+	if (#Spring.GetAllUnits() > 0) then
+		return
+	end
+
+	-- spawn start units
+	local gaiaTeamID = Spring.GetGaiaTeamID()
+	local teams = Spring.GetTeamList()
+	for i = 1,#teams do
+		local teamID = teams[i]
+		-- don't spawn a start unit for the Gaia team
+		if (teamID ~= gaiaTeamID) then
+			SpawnStartUnit(teamID)
 		end
-		for i = 1,#teams do
-			local teamID = teams[i]
-			-- don't spawn a start unit for the Gaia team
-			if (teamID ~= gaiaTeamID) then
-				SpawnStartUnit(teamID)
-			end
-		end
-		if getfenv(0).AllowUnsafeChanges then
-			getfenv(0).AllowUnsafeChanges("Any string to turn it off")
-		end
-	--end
+	end
 end
