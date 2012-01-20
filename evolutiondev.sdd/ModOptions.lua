@@ -5,7 +5,6 @@ local options= {
     desc   = 'Sets storage and amount of resources that players will start with',
     type   = 'section',
   },
-
   {
     key    = 'StartMetal',
     name   = 'Starting metal',
@@ -19,19 +18,6 @@ local options= {
                     -- (step <= 0) means that there is no quantization
   },
   {
-   key    = 'StartMetal',
-   scope  = 'team',
-   name   = 'Team Starting metal',
-   desc   = 'Determines amount of metal and metal storage this team will start with',
-   type   = 'number',
-   section= 'StartingResources',
-   def    = 100,
-   min    = 0,
-   max    = 100,
-   step   = 1,  -- quantization is aligned to the def value
-   -- (step <= 0) means that there is no quantization
-  },
-  {
     key    = 'StartEnergy',
     name   = 'Starting energy',
     desc   = 'Determines amount of energy and energy storage that each player will start with',
@@ -42,19 +28,6 @@ local options= {
     max    = 250,
     step   = 1,  -- quantization is aligned to the def value
                     -- (step <= 0) means that there is no quantization
-  },
-  {
-   key    = 'StartEnergy',
-   scope  = 'team',
-   name   = 'Team Starting energy',
-   desc   = 'Determines amount of energy and energy storage that this team will start with',
-   type   = 'number',
-   section= 'StartingResources',
-   def    = 250,
-   min    = 0,
-   max    = 250,
-   step   = 1,  -- quantization is aligned to the def value
-   -- (step <= 0) means that there is no quantization
   },
 	{
 		key="comm",
