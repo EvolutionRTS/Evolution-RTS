@@ -16,7 +16,7 @@
 --  step:     quantization step, aligned to the def value
 --  maxlen:   the maximum string length for string options
 --  items:    array of item strings for list options
---  scope:    'all', 'player', 'team', 'allyteam'      <<< not supported yet >>>
+--  scope:    'global', 'player', 'team', 'allyteam'
 --
 
 --------------------------------------------------------------------------------
@@ -28,38 +28,24 @@
 local options =
 {
   {
-    key    = 'GameMode',
-    name   = 'Game end condition',
-    desc   = 'Determines what condition triggers the defeat of a player',
-    type   = 'list',
-    def    = '0',
-    items  =
-    {
-      {
-        key  = '0',
-        name = 'Kill everything',
-        desc = 'The player will lose only after all units of the player will be killed',
-      },
-	  {
-        key  = '3',
-        name = 'Infinite',
-        desc = 'Game will never end',
-      },
-    },
-  },
-
-  {
     key    = 'MaxUnits',
     name   = 'Max units',
-    desc   = 'Determines the ceiling of how many units and buildings a player is allowed to own at the same time',
+    desc   = 'Maximum number of units (including buildings) for each team allowed at the same time',
     type   = 'number',
-    def    = 250,
+    def    = 500,
     min    = 1,
-    max    = 10000,
+    max    = 10000, --- engine caps at lower limit if more than 3 team are ingame
     step   = 1,  -- quantization is aligned to the def value
                     -- (step <= 0) means that there is no quantization
   },
 
+  {
+    key    = 'LimitDgun',
+    name   = 'Limit D-Gun range',
+    desc   = "The commander's D-Gun weapon will be usable only close to the player's starting location",
+    type   = 'bool',
+    def    = false,
+  },
 
   {
     key    = 'GhostedBuildings',
@@ -69,19 +55,11 @@ local options =
     def    = true,
   },
   {
-    key    = 'DiminishingMMs',
-    name   = 'Diminishing Metal Extractor Returns',
-    desc   = "Everytime a new metal extractor will be built, the metal efficiency ratio will decrease",
-    type   = 'hidden',
-    def    = false,
-  },
-
-  {
     key    = 'FixedAllies',
     name   = 'Fixed ingame alliances',
     desc   = 'Disables the possibility of players to dynamically change alliances ingame',
     type   = 'bool',
-    def    = true,
+    def    = false,
   },
 
   {
@@ -128,30 +106,13 @@ local options =
 -- the following options can create problems and were never used by interface programs, thus are commented out for the moment
 
   {
-    key    = 'LuaGaia',
-    name   = 'Enables gaia',
-    desc   = 'Enables gaia player',
-    type   = 'bool',
-    def    = true,
-  },
-
-  {
     key    = 'NoHelperAIs',
     name   = 'Disable helper AIs',
-    desc   = 'Disables luaui and group ai usage for all players',
+    desc   = 'Disables luaui ai usage for all players',
     type   = 'bool',
     def    = false,
   },
-
-  {
-    key    = 'LuaRules',
-    name   = 'Enable LuaRules',
-    desc   = 'Enable mod usage of LuaRules',
-    type   = 'bool',
-    def    = true,
-  },
-
 --]]
-
 }
+
 return options
