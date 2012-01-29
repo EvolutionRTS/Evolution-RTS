@@ -133,12 +133,12 @@ end
 
 --***vielleicht lieber setunitlosstate?
 function hideUnit (uID)
-	Spring.SetUnitCloak (uID, 2 ,2)
+	Spring.SetUnitCloak (uID, 2 ,false)
 	Spring.SetUnitStealth (uID, true)
 end
 
 function unhideUnit (uID)
-    Spring.SetUnitCloak (uID, false ,2)
+    Spring.SetUnitCloak (uID, false ,false)
     if not UnitDefs[Spring.GetUnitDefID(uID)].stealth then
         Spring.SetUnitStealth (uID, false)
     end

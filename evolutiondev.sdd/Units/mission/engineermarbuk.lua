@@ -6,10 +6,6 @@ local unitName = "engineermarbuk"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
   acceleration       = 0.2,
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
@@ -85,6 +81,10 @@ local unitDef = {
       "custom:nanoflame",
       "custom:dirtsmall",
     },
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},	
   },
   buildoptions = {
     "esolar2", --new

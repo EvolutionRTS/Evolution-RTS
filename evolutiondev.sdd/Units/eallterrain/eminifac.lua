@@ -23,10 +23,10 @@ local unitDef = {
 
 	cancloak		 = true,
 	cloakCost		 = 20,
-	decloakDistance	 = 250,
+	minCloakDistance = 250,
 	decloakOnFire	 = true,
 	decloakSpherical = true,
-	startCloaked	 = false,
+	initCloaked		 = false,
 	
 -- End Cloaking
   

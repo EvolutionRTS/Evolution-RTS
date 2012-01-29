@@ -26,10 +26,11 @@ local unitDef = {
 
 	cancloak		 = true,
 	cloakCost		 = 2,
-	decloakDistance	 = 100,
+	cloakCostMoving	 = 2,
+	minCloakDistance = 75,
 	decloakOnFire	 = true,
 	decloakSpherical = true,
-	initCloaked	 = true,
+	initCloaked		 = true,
 -- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient form a micromanagement standpoint.
 -- End Cloaking
   
