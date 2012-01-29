@@ -2438,7 +2438,7 @@ You must destroy him before he can get away!</Message>
                 <TriggerLogic z:Id="531" z:Type="CMissionLib.Actions.GuiMessageAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
                   <Name z:Ref="108" i:nil="true" />
                   <ImagePath i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions" />
-                  <Message z:Id="532" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Excellent work, Overseer! The council will be pleased! Overseer Sigcourt possesed vital information concerning our operations in New Iammas. If that information had made it into the wrong hands, our war effort would take a heavy blow.
+                  <Message z:Id="532" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Excellent work, Overseer! The council will be pleased! Overseer Sigcourt possesed vital information concerning our operations in New Iammas. If that information had made it into the wrong hands, our war effort would have taken a heavy blow.
 
 Go have a drink, Overseer! You've earned it!</Message>
                   <Pause xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">true</Pause>
