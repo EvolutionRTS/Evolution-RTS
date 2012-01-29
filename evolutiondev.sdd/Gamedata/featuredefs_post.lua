@@ -60,6 +60,8 @@ local function ProcessUnitDef(udName, ud)
   end
 end
 
+if spGetModOptions then
+
 for name, fd in pairs(FeatureDefs) do
 	if(
 	(
@@ -80,6 +82,7 @@ for name, fd in pairs(FeatureDefs) do
 		end   
 	end
 end
+
 
 if ( spGetModOptions().comm  == "sandbox"  or  spGetModOptions().comm  == "feature"  ) then
 	local FeddyBuild = DEFS.unitDefs["eairengineer"].buildoptions
@@ -171,7 +174,7 @@ if ( spGetModOptions().comm  == "sandbox"  or  spGetModOptions().comm  == "featu
 	--Spring.Echo(#ZeonBuild .. " Zeon entities loaded " )
 end
 --------------------------------------------------------------------------------
-
+end
 -- Process the unitDefs
 
 local UnitDefs = DEFS.unitDefs

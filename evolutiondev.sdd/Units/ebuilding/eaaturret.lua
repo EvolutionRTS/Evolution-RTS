@@ -6,10 +6,7 @@ local unitName = "eaaturret"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   buildCostEnergy    = 0,
   buildCostMetal     = 20,
   builder            = false,
@@ -42,7 +39,12 @@ Requires +2 Power]],
   smoothAnim         = true,
   unitname           = "eaaturret",
   yardMap            = "ooooo ooooo ooooo ooooo ooooo",
-    sfxtypes = {
+    sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:gdmcannon",
 	  "custom:needspower",

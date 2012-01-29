@@ -6,10 +6,7 @@ local unitName = "eamphibriot"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.18,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
@@ -61,7 +58,12 @@ Requires +5 Power]],
   turnRate           = 430,
   unitname           = "eamphibriot",
   workerTime         = 0,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:factorysparks",
       "custom:dirt",

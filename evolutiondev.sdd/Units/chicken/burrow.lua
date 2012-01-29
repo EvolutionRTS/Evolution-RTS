@@ -103,7 +103,7 @@ local weaponDefs = {
     coreThickness      = 0.1,
     craterBoost        = 0,
     craterMult         = 0,
-    explosionGenerator = "custom:burn",
+    explosionGenerator = "custom:empty",
     fallOffRate        = 0.5,
     minintensity       = 1,
     impulseFactor      = 0,
@@ -136,7 +136,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
     duration           = 0.9,
     energypershot      = 0,
-    explosionGenerator = "custom:burn",
+    explosionGenerator = "custom:empty",
     fallOffRate        = 0.5,
     fireStarter        = 50,
     

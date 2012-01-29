@@ -6,10 +6,7 @@ local unitName = "eairengineer"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.2,
   airStrafe          = true,
   bankscale          = "1",
@@ -76,7 +73,12 @@ local unitDef = {
   TerraformSpeed     = 5000,
   ReclaimSpeed       = 1000,
   repairspeed        = 0.05,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:jethtrail",
       "custom:nanoflame",

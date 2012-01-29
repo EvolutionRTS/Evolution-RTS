@@ -6,10 +6,7 @@ local unitName = "eartytank"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.18,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
@@ -58,7 +55,12 @@ Requires +8 Power]],
   turnRate           = 250,
   unitname           = "eartytank",
   workerTime         = 0,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:gdmarty",
       "custom:dirt",

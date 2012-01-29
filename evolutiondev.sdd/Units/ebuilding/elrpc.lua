@@ -6,10 +6,7 @@ local unitName = "elrpc"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   activateWhenBuilt  = true,
   buildCostEnergy    = 0,
   buildCostMetal     = 200,
@@ -56,7 +53,12 @@ Requires +15 Power]],
   unitname           = "elrpc",
   workerTime         = 0,
   yardMap            = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:electricity",
       "custom:factorysparks",

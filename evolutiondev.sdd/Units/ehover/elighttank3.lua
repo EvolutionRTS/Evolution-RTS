@@ -6,10 +6,6 @@ local unitName = "elighttank3"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++ 
   acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
@@ -61,12 +57,18 @@ Requires +2 Power]],
   unitname           = "elighttank3",
   upright            = true,
   workerTime         = 0,
-    sfxtypes = {
-    explosiongenerators = {
-      "custom:factorysparks",
-      "custom:dirt",
+
+sfxtypes = {
+	explosiongenerators = {
+		"custom:factorysparks",
+		"custom:dirt",
     },
-  },
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},	
+},
+
   sounds = {
     underattack        = "unitsunderattack1",
     ok = {

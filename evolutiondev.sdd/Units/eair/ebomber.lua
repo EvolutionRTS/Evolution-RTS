@@ -6,10 +6,7 @@ local unitName = "ebomber"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.2,
   altfromsealevel    = "1",
   BadTargetCategory  = "VTOL",
@@ -66,7 +63,12 @@ Requires +10 Power]],
   TurnRadius         = 1000,
   unitname           = "ebomber",
   workerTime         = 0,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:jethtrail",
     },

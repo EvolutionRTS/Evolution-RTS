@@ -6,10 +6,7 @@ local unitName = "emetalextractor"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   activateWhenBuilt  = true,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
@@ -47,7 +44,12 @@ local unitDef = {
   unitname           = "emetalextractor",
   workerTime         = 0,
   yardMap            = "ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo",
-    sfxtypes = {
+    sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:dirt",
     },

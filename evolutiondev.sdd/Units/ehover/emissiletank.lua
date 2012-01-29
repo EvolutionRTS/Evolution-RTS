@@ -6,10 +6,7 @@ local unitName = "emissiletank"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.18,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
@@ -62,7 +59,12 @@ Requires +7 Power]],
   unitname           = "emissiletank",
   upright            = true,
   workerTime         = 0,
-    sfxtypes = {
+    sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:factorysparks",
       "custom:dirt",

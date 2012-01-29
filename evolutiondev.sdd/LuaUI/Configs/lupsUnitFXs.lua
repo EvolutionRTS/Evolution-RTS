@@ -99,7 +99,7 @@ effectUnitDefs = {
 --		{class='StaticParticles',options=efusCorona},
 --		{class='ShieldSphere',options=efusShieldSphere},
 
-		{class='Bursts', options=efusion2Bursts},
+		{class='Bursts', options=burrowBursts},
     {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,51,0.0}, size=23, precision=22, strength   = 0.02,  repeatEffect=true}},
   },
   

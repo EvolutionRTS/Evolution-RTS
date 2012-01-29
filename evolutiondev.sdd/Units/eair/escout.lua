@@ -6,10 +6,7 @@ local unitName = "escout"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 10,
   bankscale          = "1",
   brakeRate          = 4,
@@ -59,7 +56,12 @@ Requires +4 Power]],
   turnRate           = 800,
   unitname           = "escout",
   workerTime         = 0,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:jethtrail",
     },

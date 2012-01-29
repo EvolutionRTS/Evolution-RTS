@@ -6,10 +6,7 @@ local unitName = "eamphibfac"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   activatewhenbuilt  = false,
   buildAngle         = 1024,
   buildCostEnergy    = 0,
@@ -54,7 +51,12 @@ local unitDef = {
   BuildingGroundDecalSizeX = 17,
   BuildingGroundDecalSizeY = 17,
   BuildingGroundDecalDecaySpeed = 0.9,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:nanoflame",
       "custom:nano",

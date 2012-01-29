@@ -6,10 +6,7 @@ local unitName = "efusion2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   activateWhenBuilt  = true,
   buildAngle         = 2500,
   buildCostEnergy    = 0,
@@ -45,7 +42,12 @@ Provides +10 Power]],
   workerTime         = 0,
   yardMap            = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
 
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:fusionfx",
     },

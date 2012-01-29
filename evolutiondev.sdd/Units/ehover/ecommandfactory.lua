@@ -6,10 +6,7 @@ local unitName = "ecommandfactory"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   activatewhenbuilt  = false,
   buildAngle         = 1024,
   buildCostEnergy    = 0,
@@ -55,7 +52,12 @@ local unitDef = {
   BuildingGroundDecalSizeX = 22,
   BuildingGroundDecalSizeY = 22,
   BuildingGroundDecalDecaySpeed = 0.9,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:nanoflame",
     },

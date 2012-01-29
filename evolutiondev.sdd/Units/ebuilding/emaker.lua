@@ -6,10 +6,6 @@ local unitName = "emaker"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildAngle         = 8192,
   buildCostEnergy    = 0,
@@ -47,6 +43,14 @@ Requires +20 Power]],
   unitname           = "emaker",
   workerTime         = 0,
   yardMap            = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
+  
+sfxtypes = {
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},
+},
+  
   sounds = {
     underattack        = "unitsunderattack1",
     select = {

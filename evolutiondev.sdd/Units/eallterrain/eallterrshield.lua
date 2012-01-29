@@ -6,10 +6,7 @@ local unitName = "eallterrshield"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.18,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
@@ -72,7 +69,12 @@ Requires +10 Power]],
   unitname           = "eallterrshield",
   upright			 = false,
   workerTime         = 0,
-    sfxtypes = {
+    sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
 		"custom:gdhcannon",
 	    "custom:dirtsmall",

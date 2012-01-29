@@ -6,10 +6,7 @@ local unitName = "esubmarine"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.18,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
@@ -56,7 +53,12 @@ local unitDef = {
   unitname           = "esubmarine",
   workerTime         = 0,
   waterline           = 30,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:dirt",
       "custom:warp",

@@ -89,6 +89,24 @@ efusion2Bursts = {
   count      = 17,
 }
 
+burrowBursts = {
+  delay      = 30,
+  life       = math.huge,
+  pos        = {0,50,0},
+  rotSpeed   = 2,
+  rotSpread  = 1,
+  rotairdrag = 1,
+  arc        = 90,
+  arcSpread  = 0,
+  size       = 30,
+  sizeSpread = 5,
+  --colormap   = { {0.10, 0.8, 0.8, 0.4} },
+  colormap   = { {0.5, 0, 0.5, 0.5} },
+  directional= true,
+  repeatEffect = true,
+  count      = 17,
+}
+
 egeoBursts = {
   delay      = 30,
   life       = math.huge,

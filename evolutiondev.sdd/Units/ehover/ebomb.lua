@@ -6,10 +6,6 @@ local unitName = "ebomb"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
   acceleration       = 1,
   brakeRate          = 1,
   buildCostEnergy    = 0,
@@ -67,6 +63,14 @@ Requires +12 Power]],
   unitname           = "ebomb",
   upright            = true,
   workerTime         = 0,
+	
+sfxtypes = {
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},
+},
+	
   sounds = {
     underattack        = "unitsunderattack1",
     ok = {

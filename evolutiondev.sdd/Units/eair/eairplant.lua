@@ -6,10 +6,7 @@ local unitName = "eairplant"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   activatewhenbuilt  = false,
   buildCostEnergy    = 0,
   buildCostMetal     = 40,
@@ -53,7 +50,12 @@ local unitDef = {
   BuildingGroundDecalSizeX = 19,
   BuildingGroundDecalSizeY = 19,
   BuildingGroundDecalDecaySpeed = 0.9,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:nanoflame",
       "custom:nano",

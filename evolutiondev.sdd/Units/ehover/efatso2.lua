@@ -6,10 +6,7 @@ local unitName = "efatso2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.2,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
@@ -58,7 +55,12 @@ Requires +10 Power]],
   unitname           = "efatso2",
   upright            = true,
   workerTime         = 0,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:gdmcannon",
       "custom:dirt",

@@ -6,10 +6,7 @@ local unitName = "etransport"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.2,
   brakeRate          = 5,
   buildCostEnergy    = 0,
@@ -60,7 +57,12 @@ Requires +2 Power]],
 --  transportUnloadMethod = 1,
   turnRate           = 900,
   unitname           = "etransport",
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:jethtrail",
     },

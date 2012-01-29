@@ -1,82 +1,102 @@
--- UNITDEF -- EORB --
+-- UNITDEF -- EALLTERRENGINEER --
 --------------------------------------------------------------------------------
 
-local unitName = "eorb"
+local unitName = "engineermarbuk"
 
 --------------------------------------------------------------------------------
 
 local unitDef = {
-
+--Begin tags entered from Notepad++ en masse
+  pieceTrailCEGTag   = "deathceg",
+  pieceTrailCEGRange = 2,
+--End tags entered from Notepad++
   acceleration       = 0.2,
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
-  buildCostMetal     = 50,
-  buildDistance      = 800,
+  buildCostMetal     = 5,
+  buildDistance      = 400,
   builder            = true,
-  buildTime          = 10,
+  buildTime          = 5,
   CanAttack			 = false,
-  CanAssist			 = false,
+  CanAssist          = true,
   CanCapture         = false,
-  cancollect         = "1",
+  cancollect         = true,
   canGuard           = true,
-  canHover           = true,
   canMove            = true,
   canPatrol          = true,
-  canreclamate       = "1",
+  canreclamate       = false,
   canstop            = "1",
   category           = "NOTAIR SUPPORT",
-  description        = [[Field Medic
-  Armortype: Light
-   • Automatically repairs mobile units in the area]],
+  corpse             = "ammobox",
+  collisionVolumeTest = 1,  
+-- Cloaking
+
+	cancloak		 = true,
+	cloakCost		 = 2,
+	cloakCostMoving	 = 2,
+	minCloakDistance = 70,
+	decloakOnFire	 = true,
+	decloakSpherical = true,
+	initCloaked		 = true,
+	
+-- End Cloaking
+  
+  description        = "Engineer :: Armortype: Light",
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "CONSTRUCTOR",
-  footprintX         = 4,
-  footprintZ         = 4,
-  fireState			 = "0",
-  iconType           = "orb",
+  footprintX         = 3,
+  footprintZ         = 3,
+  iconType           = "engineer",
   idleAutoHeal       = .5,
   idleTime           = 2200,
   levelground        = true,
-  maxDamage          = 300,
-  maxSlope           = 26,
+  maxDamage          = 500,
+  maxSlope           = 180,
   maxVelocity        = 3,
   maxReverseVelocity = 1,
+  turninplacespeedlimit = 3,
   maxWaterDepth      = 10,
   metalmake          = 0,
   metalStorage       = 0,
-  movementClass      = "HOVERTANK4",
-  moveState			 = "0",
-  name               = "(O)RB",
-  objectName         = "eorb.s3o",
+  mobilestandorders  = "1",
+  movementClass      = "ALLTERRTANK3",
+  name               = "Engineer Marbuk",
+  objectName         = "eallterrengineer.s3o",
   radarDistance      = 0,
-  --radarDistanceJam   = 20,
   selfDestructAs     = "CONSTRUCTOR",
   showNanoSpray      = "0",
-  side               = "ARM",
-  sightDistance      = 800,
+  sightDistance      = 1000,
+--  SonarDistance      = 500;
   smoothAnim         = true,
   stealth            = true,
-  turnInPlace        = false,
+  seismicSignature   = 3,
+  turnInPlace        = true,
   turnRate           = 1020,
-  unitname           = "eorb",
-  upright            = true,
+  unitname           = "engineermarbuk",
   workerTime         = 2,
-  capturespeed       = 0,
-  TerraformSpeed     = 5000,
+  capturespeed       = 1,
+  TerraformSpeed     = 20000,
   ReclaimSpeed       = 1000,
-  repairspeed        = 0.10,
-  sfxtypes = { 
-	 pieceExplosionGenerators = { 
- 		"deathceg0", 
- 		"deathceg1", 
- 	}, 
-
+  repairspeed        = 0.25,
+  sfxtypes = {
     explosiongenerators = {
       "custom:nanoflame",
-      "custom:dirt",
+      "custom:dirtsmall",
     },
+  },
+  buildoptions = {
+    "esolar2", --new
+    "egeothermal", --new
+    "efusion2", --new
+    "estorage", --new
+    "eradar2", --new
+    "ejammer2", --new
+    "ebarricade",
+    "elightturret2", --new
+    "eheavyturret2", --new
+    "eaaturret",
   },
   sounds = {
     underattack        = "unitsunderattack1",
@@ -87,26 +107,18 @@ local unitDef = {
       "unitselect",
     },
   },
-  customParams = {
-    needed_cover = 2,
-  	death_sounds = "soldier",
-	twokhotkey = 'o',
-    cancollect = "1",
-	armortype   = "lightarmor",
-	normaltex = "unittextures/eorbnormal.png", 
-	helptext	= [[The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combot for 5 seconds before repairs can take place.]],
-	groundtexselectimg = ":nc:bitmaps/icons/repairzone.png",
-    groundtexselectxsize = 1000, -- optional
-    groundtexselectzsize = 1000, -- optional
- },
   weapons = {
     [1]  = {
       def                = "fusionfx",
     },
---[[	[2]  = {
-      def                = "aoeheal",
-	  onlyTargetCategories = " ",
-    }, ]]--
+  },
+  customParams = {
+    needed_cover = 1,
+  	death_sounds = "soldier",
+	twokhotkey = 'e',
+    dronespawner = "1",
+	armortype   = "lightarmor",
+	normaltex = "unittextures/con_legonormal.png", 
   },
 }
 
@@ -133,7 +145,7 @@ local weaponDefs = {
     lineOfSight        = true,
     name               = "Light Laser",
     noSelfDamage       = true,
-    range              = 800,
+    range              = 400,
     reloadtime         = 0.1,
     WeaponType         = "BeamLaser",
     rgbColor           = "0 0 0.5",
@@ -147,33 +159,6 @@ local weaponDefs = {
     weaponVelocity     = 1500,
     damage = {
       default            = 0,
-    },
-  },
-  
-  aoeheal = {
-    areaOfEffect       = 1000,
-    avoidFriendly      = false,
-    ballistic          = true,
-    collideFriendly    = false,
-	commandfire		   = true,
-    explosionGenerator = "custom:AREAHEALING",
-	energypershot      = 50,
-	edgeEffectiveness  = 1,
-    impulseFactor      = 0,
-    name               = "Area Healing Device",
-    range              = 50,
-    reloadtime         = 10,
-    renderType         = 4,
-    soundStart         = "areaheal.wav",
-    startsmoke         = "1",
-    turret             = true,
-    weaponVelocity     = 1000,
-	customparams = {
-	  damagetype		= "medium",
-	  noenemyfire		= "1",
-    },      
-    damage = {
-      default           = -250,
     },
   },
 }

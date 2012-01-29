@@ -6,10 +6,7 @@ local unitName = "eallterrengineer"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.2,
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
@@ -80,7 +77,12 @@ local unitDef = {
   TerraformSpeed     = 20000,
   ReclaimSpeed       = 1000,
   repairspeed        = 0.05,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:nanoflame",
       "custom:dirtsmall",

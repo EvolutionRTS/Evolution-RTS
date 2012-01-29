@@ -6,10 +6,6 @@ local unitName = "eshieldgen"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
   buildAngle         = 8192,
   buildCostEnergy    = 0,
   buildCostMetal     = 230,
@@ -51,6 +47,14 @@ Requires +10 Power]],
   unitname           = "eshieldgen",
   workerTime         = 0,
   yardMap            = "ooooo ooooo ooooo ooooo ooooo",
+  
+sfxtypes = {
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},
+},
+  
   sounds = {
     underattack        = "unitsunderattack1",
     select = {

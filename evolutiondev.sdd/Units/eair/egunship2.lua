@@ -6,10 +6,7 @@ local unitName = "egunship2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.2,
   airStrafe          = true,
   bankscale          = "1",
@@ -67,7 +64,12 @@ Requires +7 Power]],
   smoothAnim         = true,
   turnRate           = 920,
   unitname           = "egunship2",
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:jethtrail",
     },

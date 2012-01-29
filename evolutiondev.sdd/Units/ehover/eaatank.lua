@@ -7,10 +7,7 @@ local unitName = "eaatank"
 
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   acceleration       = 0.18,
   bmcode             = "1",
   brakeRate          = 0.1,
@@ -64,7 +61,12 @@ Requires +5 Power]],
   tolerance			 = 1000,
   unitname           = "eaatank",
   upright            = true,
-  sfxtypes = {
+  sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
       "custom:dirt",
 	  "custom:gdmcannon",

@@ -6,10 +6,7 @@ local unitName = "esilo"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
+
   buildAngle         = 8192,
   buildCostEnergy    = 0,
   buildCostMetal     = 250,
@@ -52,7 +49,12 @@ Requires +20 Power]],
   workerTime         = 0,
   yardMap            = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
 
-    sfxtypes = {
+    sfxtypes = { 
+	 pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
+
     explosiongenerators = {
 	  "custom:needspower",
     },

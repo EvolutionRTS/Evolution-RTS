@@ -6,10 +6,6 @@ local unitName = "estorage"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildAngle         = 8196,
   buildCostEnergy    = 0,
@@ -42,6 +38,14 @@ local unitDef = {
   unitname           = "estorage",
   workerTime         = 0,
   yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo ",
+  
+sfxtypes = {
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},
+},
+  
   sounds = {
     underattack        = "unitsunderattack1",
     select = {
