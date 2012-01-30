@@ -5,7 +5,7 @@
 	StartEnergy=1000;
 	StartposType=3;
 	GameMode=0;
-	GameType=Evolution RTS - Protect the Overseer;
+	GameType=Evolution RTS - Destroy Overseer Hablon;
 	LimitDGun=0;
 	DiminishingMMs=0;
 	GhostedBuildings=1;
