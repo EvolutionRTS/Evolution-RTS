@@ -13,7 +13,7 @@ SubView {
 	Column {
 		id: battleroomViewCol1
 		anchors.left: parent.left
-		width: parent.width - 80
+		width: parent.width - 280
 		spacing: 10
 		anchors.top: parent.top
 		height: parent.height * 0.60
@@ -48,6 +48,13 @@ SubView {
 				}
 			}
 		}
+	}
+	ExtendedMinimap {
+		id: minimap
+		width: parent.width - battleroomViewCol1.width
+		height: width
+		battleId: battlelistView.battleId
+		anchors.left: battleroomViewCol1.right
 	}
 //	MenuButton { text:"list"; onClicked: multiplayerMenu.load(0); anchors.left: battleroomViewCol1.right}
 }
