@@ -1,0 +1,66 @@
+[GAME]
+{
+	MapName=Eye_Of_Horus_v2;
+	StartMetal=1000;
+	StartEnergy=1000;
+	StartposType=3;
+	GameMode=0;
+	GameType=Evolution RTS - Protect the Overseer;
+	LimitDGun=0;
+	DiminishingMMs=0;
+	GhostedBuildings=1;
+	HostIP=127.0.0.1;
+	HostPort=8452;
+	IsHost=1;
+	MyPlayerNum=0;
+	MyPlayerName=Overseer;
+	NumPlayers=1;
+	NumTeams=2;
+	NumUsers=2;
+	NumRestrictions=0;
+	MaxSpeed=20;
+	MinSpeed=0.1;
+	[PLAYER0]
+	{
+		Name=Overseer;
+		Spectator=0;
+		Team=0;
+	}
+	[AI1]
+	{
+		Name=Overseer_Sigcourt;
+		ShortName=NullAI;
+		Team=1;
+		IsFromDemo=0;
+		Host=0;
+		[Options] {}
+	}
+	[TEAM0]
+	{
+		TeamLeader=0;
+		AllyTeam=0;
+		RGBColor=0 1 0.000910581;
+		Side=Outer_Colonies;
+		Handicap=0;
+		StartPosX=0;
+		StartPosZ=0;
+	}
+	[TEAM1]
+	{
+		TeamLeader=0;
+		AllyTeam=1;
+		RGBColor=1 0 0;
+		Side=Outer_Colonies;
+		Handicap=0;
+		StartPosX=0;
+		StartPosZ=0;
+	}
+	[ALLYTEAM0]
+	{
+		NumAllies=0;
+	}
+	[ALLYTEAM1]
+	{
+		NumAllies=0;
+	}
+}
