@@ -3,7 +3,7 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece	base, door1, door2, elevator, nano1, nano2, spinner, nanopoint;
+piece	base, door1, door2, elevator, nano1, nano2, spinner, nanopoint, bottom, backbone, bottombackbone;
 
 static-var	Aztec, spray, building;
 

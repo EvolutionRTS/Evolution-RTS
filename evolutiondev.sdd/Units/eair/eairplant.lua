@@ -45,6 +45,7 @@ local unitDef = {
   unitnumber         = "83",
   workerTime         = 2,
   yardMap            = "cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc",
+  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "towerdecal2.png",
   BuildingGroundDecalSizeX = 19,

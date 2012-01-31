@@ -58,6 +58,7 @@ local unitDef = {
   unitname           = "eminifac",
   workerTime         = 2,
   yardMap            = "ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc",
+  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "towerdecal2.png",
   BuildingGroundDecalSizeX = 23,

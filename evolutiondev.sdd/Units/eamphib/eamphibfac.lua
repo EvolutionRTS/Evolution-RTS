@@ -46,6 +46,7 @@ local unitDef = {
   unitname           = "eamphibfac",
   workerTime         = 2,
   yardMap            = "oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo cccccccccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc cccccccccccccccc",
+  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "amphibfactdecal.png",
   BuildingGroundDecalSizeX = 17,

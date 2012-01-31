@@ -47,6 +47,7 @@ local unitDef = {
   unitname           = "ecommandfactory",
   workerTime         = 2,
   yardMap            = "oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo oooooooocccccccooooo",
+  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "hoverfactdecal.png",
   BuildingGroundDecalSizeX = 22,
