@@ -29,7 +29,8 @@ Rectangle {
 		Skirmish { id: skirmishView }
 		Settings { id: settingsView }
 		Welcome { id: welcomeView }
-		Multiplayer {id: multiplayerContainer }
+//		Multiplayer {id: multiplayerContainer }
+        MissionView{ id: missionView }
 	}
 
 
