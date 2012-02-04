@@ -26,7 +26,10 @@ Item {
 		keyNavigationWraps :false
 		anchors.margins: 10
 		spacing: 5
-		highlight: GenericDelegate { text:""  }
+        highlight: GenericDelegate {
+            text:""
+            listID: listViewId
+        }
 		clip: true
 	}
 
@@ -46,6 +49,7 @@ Item {
 	property alias delegate: listViewId.delegate
 	property alias model: listViewId.model
 	property alias currentIndex: listViewId.currentIndex
+    property alias id: listViewId
 
 	anchors.horizontalCenter: parent.horizontalCenter
 	width: parent.width

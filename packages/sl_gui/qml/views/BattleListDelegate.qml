@@ -43,7 +43,7 @@ Item {
 		MouseArea{
 			anchors.fill: parent
 			onClicked: {
-				ListView.view.currentIndex = index;
+                battleList.currentIndex = index;
 				multiplayerMenu.load(2);
 			}
 		}

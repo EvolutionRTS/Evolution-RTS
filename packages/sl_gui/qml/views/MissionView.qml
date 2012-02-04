@@ -1,5 +1,4 @@
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
-import QtQuick 1.1
+import Qt 4.7
 
 MainView {
     anchors.fill: parent
@@ -20,5 +19,35 @@ MainView {
         anchors.leftMargin: 10
 //		anchors.topMargin: 30
         spacing: 320
+    }
+    function run(  )
+    {
+        missionModel.run( missionList.currentIndex )
+    }
+
+    Item {
+        id: startButton
+        width: 80
+        height: 30
+        anchors.verticalCenter: missionList.verticalCenter
+        anchors.left: missionList.right
+        anchors.margins: 20
+        Rectangle {
+            color: "#00c4ff"
+            anchors.fill: parent
+            radius: 5
+            border.color: "#110101"
+            DText{
+                text: "Play"
+                font.pointSize: 12
+                anchors.centerIn: parent
+            }
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    missionView.run()
+                }
+            }
+        }
     }
 }

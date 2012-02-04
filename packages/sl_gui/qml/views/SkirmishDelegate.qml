@@ -17,7 +17,7 @@ Item {
 		MouseArea{
 			anchors.fill: parent
 			onClicked: {
-				ListView.view.currentIndex = index
+                skirmishList.currentIndex = index
 			}
 		}
 	}

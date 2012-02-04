@@ -13,6 +13,7 @@ MainView {
 		delegate: GenericVerticalDelegate{
 			height: 40
 			width: 0.4 * parent.width
+            listID: plist
 		}
 		model: presetModel
 		anchors.top: titleRec.bottom
@@ -35,14 +36,15 @@ MainView {
 		text: "Select screen resolution"
 	}
 	HorizontalListView {
+        id: klist
 		model: screenresModel
 		delegate: GenericDelegate {
 			height: 50
 			width: 130
+            listID: klist
 		}
 		anchors.top: resHeader.bottom
 		anchors.topMargin: 15
-		id: klist
 		onCurrentIndexChanged: {
 			screenresModel.use( currentIndex )
 		}

@@ -4,6 +4,7 @@ Rectangle {
 	id: presetDelegate
 	property bool isCurrent: ListView.isCurrentItem
 	opacity: isCurrent ? 1.0 : 0.8
+    property Item listID;
 
 	Behavior on opacity {
 		PropertyAnimation{}
@@ -36,7 +37,7 @@ Rectangle {
 	MouseArea{
 		anchors.fill: parent
 		onClicked: {
-			ListView.view.currentIndex = index
+            listID.currentIndex = index
 		}
 	}
 	Behavior on anchors.horizontalCenterOffset {

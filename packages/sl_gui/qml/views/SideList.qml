@@ -29,7 +29,7 @@ Item {
 			MouseArea{
 				anchors.fill: parent
 				onClicked: {
-					ListView.view.currentIndex = index
+                    hlistID.currentIndex = index
 				}
 			}
 		}
@@ -38,8 +38,8 @@ Item {
 	HorizontalListView {
 		delegate: sideDelegate
 		model: sideModel
-		id: listID
+        id: hlistID
 	}
 
-	property alias currentIndex: listID.currentIndex
+    property alias currentIndex: hlistID.currentIndex
 }

@@ -16,6 +16,7 @@ Item {
 			width: list.width
 			font_bold:  false
 			font_size: 12
+            listID: list
 		}
 		model: maplistModel
 		anchors.left:  minimap.left
