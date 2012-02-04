@@ -125,6 +125,7 @@ local weaponDefs = {
     tolerance          = 500,
     turret             = true,
 	toairweapon		   = true,
+	canAttackGround    = false,
     weaponVelocity     = 5000,
 	customparams = {
 	  damagetype		= "explosive",  

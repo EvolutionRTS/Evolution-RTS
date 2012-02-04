@@ -18,8 +18,7 @@ return {
   game='Evolution RTS',
   shortGame='EvoRTS',
   modtype=1,
-  depend = {
-  },
+  depend = {"Spring Features 1.0"},
 
   NTAI = {
     tdfpath='EvoRTS';

@@ -17,7 +17,7 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=0;
-      depthmod=0.1;
+      depthModMaxValue=1.111111;
 	  heatmapping=true;
    },
 
@@ -51,7 +51,7 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-      depthmod=0.1;
+      depthModMaxValue=1.111111;
 	  heatmapping=true;
    },
 
@@ -74,7 +74,7 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-      depthmod=0.1;
+      depthModMaxValue=1.111111;
 	  heatmapping=true;
    },
    
@@ -106,7 +106,7 @@ local moveDefs = {
       maxwaterslope=255;
       badwaterslope=255;
       crushstrength=20;
-      depthmod=0.1;
+      depthModMaxValue=1.111111;
 	  heatmapping=false;
    },
    ALLTERRTANK4 = {
@@ -174,7 +174,7 @@ local moveDefs = {
       maxwaterdepth=5000;
       maxwaterslope=255;
       badwaterslope=255;
-      depthmod=0.1;
+      depthModMaxValue=1.111111;
 	  heatmapping=false;
    },
    EXPERIMENTALTANK10 = {
