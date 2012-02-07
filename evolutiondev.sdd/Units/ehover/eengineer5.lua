@@ -7,7 +7,7 @@ local unitName = "eengineer5"
 
 local unitDef = {
 
-  acceleration       = 0.2,
+  acceleration       = 1,
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 15,

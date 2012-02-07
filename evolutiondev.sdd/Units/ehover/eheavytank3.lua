@@ -7,7 +7,7 @@ local unitName = "eheavytank3"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
   buildCostMetal     = 35,
@@ -52,6 +52,7 @@ Requires +5 Power]],
   sightDistance      = 500,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 2.8,
   turnRate           = 350,
   unitname           = "eheavytank3",
   upright            = true,

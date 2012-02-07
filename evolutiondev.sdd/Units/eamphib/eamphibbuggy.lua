@@ -7,7 +7,7 @@ local unitName = "eamphibbuggy"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
   buildCostMetal     = 8,
@@ -54,6 +54,7 @@ Requires +1 Power]],
   smoothAnim         = true,
   seismicDistance    = 1000,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 6.0,
   turnRate           = 475,
   unitname           = "eamphibbuggy",
   workerTime         = 0,

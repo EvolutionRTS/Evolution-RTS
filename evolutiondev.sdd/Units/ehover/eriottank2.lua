@@ -7,7 +7,7 @@ local unitName = "eriottank2"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
   buildCostMetal     = 15,
@@ -57,6 +57,7 @@ Requires +4 Power]],
   sightDistance      = 400,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 3.3,
   turnRate           = 430,
   unitname           = "eriottank2",
   upright            = true,

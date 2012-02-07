@@ -8,7 +8,7 @@ local unitName = "eaatank"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   bmcode             = "1",
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
@@ -57,6 +57,7 @@ Requires +5 Power]],
   sightDistance      = 350,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 2.9,
   turnRate           = 430,
   tolerance			 = 1000,
   unitname           = "eaatank",

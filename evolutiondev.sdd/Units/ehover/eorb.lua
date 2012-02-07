@@ -7,7 +7,7 @@ local unitName = "eorb"
 
 local unitDef = {
 
-  acceleration       = 0.2,
+  acceleration       = 1,
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 50,
@@ -59,6 +59,7 @@ local unitDef = {
   smoothAnim         = true,
   stealth            = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 3,
   turnRate           = 1020,
   unitname           = "eorb",
   upright            = true,

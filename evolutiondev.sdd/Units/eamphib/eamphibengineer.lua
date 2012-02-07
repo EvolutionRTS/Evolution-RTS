@@ -7,7 +7,7 @@ local unitName = "eamphibengineer"
 
 local unitDef = {
 
-  acceleration       = 0.2,
+  acceleration       = 1,
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 35,
@@ -37,7 +37,7 @@ local unitDef = {
   levelground        = true,
   maxDamage          = 300,
   maxSlope           = 28,
-  maxVelocity        = 3,
+  maxVelocity        = 4,
   maxReverseVelocity = 1,
   maxWaterDepth      = 5000,
   metalmake          = 0,
@@ -55,6 +55,7 @@ local unitDef = {
   smoothAnim         = true,
   stealth            = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 4,
   turnRate           = 1020,
   unitname           = "eamphibengineer",
   workerTime         = 2,

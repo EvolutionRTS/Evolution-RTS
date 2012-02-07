@@ -7,7 +7,7 @@ local unitName = "eamphibrock"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
   buildCostMetal     = 30,
@@ -59,6 +59,7 @@ Requires +7 Power]],
   sonarStealth		 = false,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 3.4,
   turnRate           = 430,
   unitname           = "eamphibrock",
   workerTime         = 0,

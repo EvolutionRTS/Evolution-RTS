@@ -7,7 +7,7 @@ local unitName = "eartytank"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
   buildCostMetal     = 90,
@@ -52,6 +52,7 @@ Requires +8 Power]],
   sightDistance      = 500,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 2.3,
   turnRate           = 250,
   unitname           = "eartytank",
   workerTime         = 0,

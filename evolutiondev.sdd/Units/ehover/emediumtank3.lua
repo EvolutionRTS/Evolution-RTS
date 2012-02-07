@@ -7,7 +7,7 @@ local unitName = "emediumtank3"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
   buildCostMetal     = 20,
@@ -52,6 +52,7 @@ Requires +3 Power]],
   sightDistance      = 500,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 4,
   turnRate           = 430,
   unitname           = "emediumtank3",
   upright            = true,

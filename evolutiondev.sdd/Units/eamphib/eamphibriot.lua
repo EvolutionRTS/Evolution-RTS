@@ -7,7 +7,7 @@ local unitName = "eamphibriot"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
   buildCostMetal     = 25,
@@ -55,6 +55,7 @@ Requires +5 Power]],
   sonarStealth		 = false,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 3.7,
   turnRate           = 430,
   unitname           = "eamphibriot",
   workerTime         = 0,

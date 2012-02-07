@@ -7,7 +7,7 @@ local unitName = "emissiletank"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
   buildCostMetal     = 30,
@@ -55,6 +55,7 @@ Requires +7 Power]],
   sightDistance      = 400,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 2.6,
   turnRate           = 300,
   unitname           = "emissiletank",
   upright            = true,

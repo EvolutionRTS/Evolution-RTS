@@ -7,7 +7,7 @@ local unitName = "eamphibmedtank"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
   buildCostMetal     = 20,
@@ -54,6 +54,7 @@ Requires +4 Power]],
   sonarStealth		 = false,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 4.5,
   turnRate           = 430,
   unitname           = "eamphibmedtank",
   workerTime         = 0,

@@ -7,7 +7,7 @@ local unitName = "efatso2"
 
 local unitDef = {
 
-  acceleration       = 0.2,
+  acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
   buildCostMetal     = 80,
@@ -51,6 +51,7 @@ Requires +10 Power]],
   sightDistance      = 800,
   smoothAnim         = true,
   turnInPlace        = false,
+  turnInPlaceSpeedLimit = 2.2,
   turnRate           = 200,
   unitname           = "efatso2",
   upright            = true,
