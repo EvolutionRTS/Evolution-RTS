@@ -7,7 +7,7 @@ local unitName = "eallterrheavy"
 
 local unitDef = {
 
-  acceleration       = 0.18,
+  acceleration       = 1,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
   buildCostMetal     = 30,
