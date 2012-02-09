@@ -8,7 +8,7 @@ local unitName = "eallterrshield"
 local unitDef = {
 
   acceleration       = 1,
-  brakeRate          = 0.1,
+  brakeRate          = 1,
   buildCostEnergy    = 0,
   buildCostMetal     = 80,
   builder            = false,

@@ -2,7 +2,7 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece base, doors1, spikeright1, spikeright2, spikeright3, spikes, topspin, wheelspin, sfxpoint1, nanopoint;
+piece base, doors1, doors2, spikeleft1, spikeleft2, spikeleft3, spikeright1, spikeright2, spikeright3, spikes, topspin, wheelspin, sfxpoint1, nanopoint;
 
 static-var  Maya, building;
 
@@ -55,6 +55,9 @@ Create()
       sleep 400;
    start-script SmokeUnit();
    turn sfxpoint1 to x-axis <-90> now;
+   turn spikeleft1 to y-axis <-90> now;
+   turn spikeleft2 to y-axis <-90> now;
+   turn spikeleft3 to y-axis <-90> now;
    turn spikeright1 to y-axis <90> now;
    turn spikeright2 to y-axis <90> now;
    turn spikeright3 to y-axis <90> now;
@@ -76,6 +79,7 @@ Activate()
    var FrameM14,r;
    // Open animation:
    turn doors1 to z-axis <-90> speed <100>;
+   turn doors2 to z-axis <90> speed <100>;
    move spikes to y-axis [20] speed [5];
    // Try to open the yard
    set YARD_OPEN to TRUE;
@@ -121,6 +125,20 @@ Activate()
       while(!Maya)
       {
          // Activated animation when needing tech
+         r=rand(1,6);
+         if(r==1)
+            explode spikeleft1 type FALL | SMOKE;
+         if(r==2)
+            explode spikeleft2 type FALL | SMOKE;
+         if(r==3)
+            explode spikeleft3 type FALL | SMOKE;
+         if(r==4)
+            explode spikeright1 type FALL | SMOKE;
+         if(r==5)
+            explode spikeright2 type FALL | SMOKE;
+         if(r==6)
+            explode spikeright3 type FALL | SMOKE;
+         sleep 200;
       }
    }
 }
@@ -149,6 +167,7 @@ Deactivate()
    // Now yard is closed.
    // Close animation:
    turn doors1 to z-axis <0> speed <10>;
+   turn doors2 to z-axis <0> speed <10>;
    move spikes to y-axis [0] speed [5];
 }
 
@@ -159,9 +178,18 @@ StartBuilding()
    building = 1;
    while(TRUE)
    {
+      emit-sfx NANOFLAME from spikeleft1;
+      emit-sfx NANOFLAME from spikeleft2;
+      emit-sfx NANOFLAME from spikeleft3;
       emit-sfx NANOFLAME from spikeright1;
       emit-sfx NANOFLAME from spikeright2;
       emit-sfx NANOFLAME from spikeright3;
+      emit-sfx FX3 from spikeleft1;
+      emit-sfx FX3 from spikeleft2;
+      emit-sfx FX3 from spikeleft3;
+      emit-sfx FX3 from spikeright1;
+      emit-sfx FX3 from spikeright2;
+      emit-sfx FX3 from spikeright3;
       sleep 600;
    }
 }

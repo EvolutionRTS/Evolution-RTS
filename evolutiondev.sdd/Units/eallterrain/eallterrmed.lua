@@ -8,7 +8,7 @@ local unitName = "eallterrmed"
 local unitDef = {
 
   acceleration       = 1,
-  brakeRate          = 0.1,
+  brakeRate          = 1,
   buildCostEnergy    = 0,
   buildCostMetal     = 25,
   builder            = false,

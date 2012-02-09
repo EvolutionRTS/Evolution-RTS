@@ -8,7 +8,7 @@ local unitName = "eallterrengineer"
 local unitDef = {
 
   acceleration       = 1,
-  brakeRate          = 0.24,
+  brakeRate          = 1,
   buildCostEnergy    = 0,
   buildCostMetal     = 5,
   buildDistance      = 400,
