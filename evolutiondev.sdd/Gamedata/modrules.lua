@@ -9,6 +9,11 @@
 --------------------------------------------------------------------------------
 
 local modrules  = {
+
+  -- system = {
+	-- pathFinderSystem = 1;
+  -- }
+
   construction = {
     constructionDecay      = false; -- defaults to true
     constructionDecayTime  = 6.66;  -- defaults to 6.66
