@@ -23,33 +23,6 @@
 --------------------------------------------------------------------------------
 local options = {
 
-    {
-	key    = "scenarios",
-	name   = "scenarios",
-	desc   = "",
-	type   = "list",
-	def    = "easy",
-	items  =
-		{
-			{
-				key  = "easy", 		--put the options in skirmish_directory/KEY.lua
-				name = "Easy mode", --will be displayed as radio box to click
-				desc = "lalala",	--unused
-			},
-			{
-				key  = "medium",
-				name = "Medium Doh",
-				desc = "more lalala",
-			},
-		},
-	},
-	{
-		key    = "skirmish_directory",
-		name   = "skirmish_directory",
-		desc   = "directory where skirmish defintion files are located",
-		type   = "string",
-		def    = "skirmish",
-	},
 	{
 		key    = "bg_image",
 		name   = "bg_image",
@@ -60,39 +33,11 @@ local options = {
 		def    = "lobby/lobby_background.png", 
 	},
 	{
-		key    = "icon",
-		name   = "icon",
-		desc   = "application icon",
-		type   = "string",
-		def    = "lobby/application_icon_16.png", 	--bmp/png
-	},
-	{
-		key    = "icon1",
-		name   = "icon1",
-		desc   = "application icon",
-		type   = "string",
-		def    = "lobby/application_icon_32.png", 	--bmp/png
-	},
-	{
-		key    = "icon2",
-		name   = "icon2",
-		desc   = "application icon",
-		type   = "string",
-		def    = "lobby/application_icon_64.png", 	--bmp/png
-	},
-	{
 		key    = "battlelist_filter",
 		name   = "battlelist_filter",
 		desc   = "simple string/regex filter that defines which battles are shown in multiplayer",
 		type   = "string",
 		def    = "Evolution RTS",
-	},
-	{
-		key    = "default_ai",
-		name   = "default_ai",
-		desc   = "default_ai",
-		type   = "string",
-		def    = "C.R.A.I.G.",
 	},
 	{	-- optional
 		key    = "notification_background",
@@ -107,38 +52,6 @@ local options = {
 		desc   = "the url that is opened in browser if help button is clicked",
 		type   = "string",
 		def    = "http://http://www.evolutionrts.info/game-manual/",
-	},
-	{
-		-- optional
-		key    = "gradient_top",
-		name   = "gradient_top",
-		desc   = "a rgb -> rgb gradient used on controls",
-		type   = "string",
-		def    = "132,125,132|74,69,74",
-	},
-	{
-		-- optional
-		key    = "gradient_bottom",
-		name   = "gradient_bottom",
-		desc   = "another rgb -> rgb gradient used on controls",
-		type   = "string",
-		def    = "0,0,0|57,56,75",
-	},
-	{
-		-- mandatory
-		key    = "fontcolour",
-		name   = "fontcolour",
-		desc   = "r,g,b",
-		type   = "string",
-		def    = "255,255,255",
-	},
-	{
-		-- mandatory
-		key    = "controls_background",
-		name   = "controls_background",
-		desc   = "r,g,b",
-		type   = "string",
-		def    = "0,0,0",
 	},
 	{
 		-- mandatory
