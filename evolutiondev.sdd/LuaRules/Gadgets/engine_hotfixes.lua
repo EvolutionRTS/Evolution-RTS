@@ -60,3 +60,7 @@ end
 		"unbindkeyset q",
 	})
 	Spring.SendCommands("bind q repeat")
+	
+	if Game.version == "85.0" then
+		Spring.SendCommands({"unbindaction specteam"})
+	end

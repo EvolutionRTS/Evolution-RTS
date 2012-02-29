@@ -201,11 +201,11 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
     damage = {
-      default            = 0,
+      default            = -1,
     },
   },
   nukekiller = {
-    areaOfEffect       = 10,
+    areaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamlaser          = 1,

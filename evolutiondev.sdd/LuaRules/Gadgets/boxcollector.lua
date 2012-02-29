@@ -52,8 +52,8 @@ if (gadgetHandler:IsSyncedCode()) then
                   Spring.CreateUnit("edrone", x, y, z, 0, Spring.GetUnitTeam(unit))
                   Spring.DestroyFeature(box)
 				  local fx, fy, fz = Spring.GetFeaturePosition(box)
-				  Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
-				  SpawnCEG("sparklegreen", fx, fy, fz)
+				  Spring.PlaySoundFile("sounds/dronespawner.wav", 1, fx, fy, fz)
+				  SpawnCEG("sparkleorange", fx, fy, fz)
                   BoxesOnMap[box] = nil
               break
             end

@@ -104,7 +104,7 @@ Can only be built upon a geothermal vent]],
 local weaponDefs = {
   fusionfx = {
 
-    areaOfEffect       = 5,
+    areaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -135,11 +135,11 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,
     damage = {
-      default            = 0,
+      default            = -1,
     },
   },
     fusionfx2 = {
-    areaOfEffect       = 8,
+    areaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -172,7 +172,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 300,
     damage = {
-      default            = 0,
+      default            = -1,
     },
   },
 }

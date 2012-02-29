@@ -212,8 +212,8 @@ function gadget:DrawWorldPreUnit()
 	end
 end
 
-function gadget:KeyPress(key, mods, isRepeat)	
+--[[ function gadget:KeyPress(key, mods, isRepeat)	
 	if (key == 108 and Spring.IsCheatingEnabled() ) then debugDraw = not debugDraw end --108=L
-end
+end ]]--
 
 end
