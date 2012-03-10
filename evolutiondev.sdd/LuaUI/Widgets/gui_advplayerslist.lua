@@ -2007,6 +2007,8 @@ function widget:ViewResize(viewSizeX, viewSizeY)
 	end
 end
 
+Spring.SendCommands("info 0")
+
 function DrawTest()
 	--TextDraw("widgetTop: "..widgetTop,200,400)
 	--TextDraw("widgetRight: "..widgetRight,200,380)
