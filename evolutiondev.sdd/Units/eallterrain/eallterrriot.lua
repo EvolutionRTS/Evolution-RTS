@@ -115,7 +115,7 @@ Requires +3 Power]],
 
 local weaponDefs = {
   riottankweapon = {
-    areaOfEffect       = 100,
+    AreaOfEffect       = 100,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -158,7 +158,7 @@ local weaponDefs = {
   },
   
   riottanksupaweapon = {
-    areaOfEffect       = 100,
+    AreaOfEffect       = 100,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

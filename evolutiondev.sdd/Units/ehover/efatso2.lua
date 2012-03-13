@@ -105,7 +105,7 @@ Requires +10 Power]],
 local weaponDefs = {
   eheavyturretweapon = {
     accuracy           = 1,
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "factorysparks",
@@ -120,7 +120,7 @@ local weaponDefs = {
     name               = "Plasma Cannon",
     range              = 750,
     reloadtime         = 1.25,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "eturrethit.wav",
     soundStart         = "eturretfire.wav",
     tolerance          = 5000,

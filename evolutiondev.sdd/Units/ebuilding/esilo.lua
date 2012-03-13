@@ -107,7 +107,7 @@ Requires:
 
 local weaponDefs = {
   nukemissile = {
-    areaOfEffect       = 2000,
+    AreaOfEffect       = 2000,
     avoidFriendly      = false,
     cegTag             = "missiletrailnuke",
     collideFriendly    = false,
@@ -129,7 +129,7 @@ local weaponDefs = {
     name               = "Nuke",
     range              = 32000,
     reloadtime         = 10,
-    renderType         = 1,
+    weaponType		   = "MissileLauncher",
     selfprop           = true,
     smokedelay         = "0.1",
     smokeTrail         = false,

@@ -97,7 +97,7 @@ Requires +50 Power]],
 
 local weaponDefs = {
     tankkillerlaser = {
-    areaOfEffect       = 8,
+    AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -137,7 +137,7 @@ local weaponDefs = {
 
   machinegun = {
     accuracy           = 300,
-    areaOfEffect       = 8,
+    AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

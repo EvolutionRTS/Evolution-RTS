@@ -105,7 +105,7 @@ Requires +10 Power]],
 
 local weaponDefs = {
   SBOMB = {
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     ballistic          = true,
     burst              = 10,
@@ -122,7 +122,7 @@ local weaponDefs = {
     noSelfDamage       = true,
     range              = 300,
     reloadtime         = 8,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     sprayangle         = 2000,
     soundHit           = "bombhit.wav",
     soundStart         = "18393_inferno_reject.wav",

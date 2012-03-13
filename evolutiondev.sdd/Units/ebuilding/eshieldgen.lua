@@ -164,7 +164,7 @@ local weaponDefs = {
     },
   },
   FX = {
-    areaOfEffect       = 0,
+    AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamlaser          = 1,
@@ -205,7 +205,7 @@ local weaponDefs = {
     },
   },
   nukekiller = {
-    areaOfEffect       = 0,
+    AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamlaser          = 1,

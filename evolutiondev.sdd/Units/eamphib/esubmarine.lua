@@ -95,14 +95,14 @@ local unitDef = {
 
 local weaponDefs = {
   TORP = {
-    areaOfEffect       = 10,
+    AreaOfEffect       = 10,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = false,
     cegTag             = "torpedotrail",
     collideFriendly    = false,
     CylinderTargetting = true,
-    explosionGenerator = "custom:dodaibomb",
+    explosionGenerator = "custom:torpedoexplosion",
     id                 = 5,
     
     model              = "missile.s3o",
@@ -118,7 +118,7 @@ local weaponDefs = {
     tolerance          = 1000,
     turnrate           = 900,
     weaponVelocity     = 400,
-    WeaponType         = "MissileLauncher",
+    WeaponType         = "TorpedoLauncher",
     WeaponAcceleration = 100,
     flighttime         = 10,
     waterweapon        = true,

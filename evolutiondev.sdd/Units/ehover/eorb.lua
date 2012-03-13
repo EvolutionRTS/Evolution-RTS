@@ -117,7 +117,7 @@ local unitDef = {
 local weaponDefs = {
   fusionfx = {
 
-    areaOfEffect       = 5,
+    AreaOfEffect       = 5,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -153,7 +153,7 @@ local weaponDefs = {
   },
   
   aoeheal = {
-    areaOfEffect       = 1000,
+    AreaOfEffect       = 1000,
     avoidFriendly      = false,
     ballistic          = true,
     collideFriendly    = false,
@@ -165,7 +165,7 @@ local weaponDefs = {
     name               = "Area Healing Device",
     range              = 50,
     reloadtime         = 10,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundStart         = "areaheal.wav",
     startsmoke         = "1",
     turret             = true,

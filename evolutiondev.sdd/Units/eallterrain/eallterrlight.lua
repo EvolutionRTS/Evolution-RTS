@@ -115,7 +115,7 @@ Requires +2 Power]],
 
 local weaponDefs = {
   lighttankweapon = {
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -154,7 +154,7 @@ local weaponDefs = {
     },
   },
   lighttankweapon2 = {
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

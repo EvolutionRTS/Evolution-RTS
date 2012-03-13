@@ -111,7 +111,7 @@ Requires:
 local weaponDefs = {
   eheavyturretweapon = {
     accuracy           = 1000,
-    areaOfEffect       = 150,
+    AreaOfEffect       = 150,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "factorysparks",
@@ -126,7 +126,7 @@ local weaponDefs = {
     name               = "Plasma Cannon",
     range              = 1000,
     reloadtime         = 1,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "eturrethit.wav",
     soundStart         = "eturretfire.wav",
     startsmoke         = "1",
@@ -141,7 +141,7 @@ local weaponDefs = {
   },
   
   eheavyturretweapon2 = {
-    areaOfEffect       = 150,
+    AreaOfEffect       = 150,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

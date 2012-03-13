@@ -27,11 +27,16 @@ local factories = {
 --also if you put too many things into the same row, the overflow won't be displayed!
 local econ = {
 	emetalextractor = {order = 1, row = 1},
-	esolar2 = {order = 2, row = 2},
-	egeothermal = {order = 3, row = 2},
-	efusion2 = {order = 4, row = 2},
-	emaker = {order = 5, row = 2},
-	estorage = {order = 6, row = 2},
+	esolar2 = {order = 2, row = 1},
+	egeothermal = {order = 3, row = 1},
+	efusion2 = {order = 4, row = 1},
+	emaker = {order = 5, row = 1},
+	estorage = {order = 6, row = 1},
+	euwmetalextractor = {order = 1, row = 2},
+	euwsolar2 = {order = 2, row = 2},
+	euwfusion2 = {order = 4, row = 2},
+	euwstorage = {order = 6, row = 2},
+	
 }
 
 local defense = {

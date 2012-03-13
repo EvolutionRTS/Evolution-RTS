@@ -108,7 +108,7 @@ Requires:
 
 local weaponDefs = {
   lighteweapon = {
-    areaOfEffect       = 25,
+    AreaOfEffect       = 25,
     avoidFriendly      = false,
     collideFriendly    = false,
     craterBoost        = 0,

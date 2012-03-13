@@ -112,7 +112,7 @@ Requires +10 Power]],
 
 local weaponDefs = {
   assaulttankcannon = {
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

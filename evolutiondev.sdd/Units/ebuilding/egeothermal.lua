@@ -104,7 +104,7 @@ Can only be built upon a geothermal vent]],
 local weaponDefs = {
   fusionfx = {
 
-    areaOfEffect       = 0,
+    AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -139,7 +139,7 @@ local weaponDefs = {
     },
   },
     fusionfx2 = {
-    areaOfEffect       = 0,
+    AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

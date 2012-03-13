@@ -119,7 +119,7 @@ local unitDef = {
 
 local weaponDefs = {
   flashweapon = {
-    areaOfEffect       = 8,
+    AreaOfEffect       = 8,
     avoidFriendly      = false,
     collideFriendly    = false,
     color              = 1,
@@ -129,7 +129,7 @@ local weaponDefs = {
     name               = "E.M.G.",
     range              = 510,
     reloadtime         = 0.1,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundStart         = "tgunshipfire.wav",
     soundTrigger       = true,
     sprayAngle         = 1024,

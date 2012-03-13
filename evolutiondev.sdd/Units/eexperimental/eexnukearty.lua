@@ -97,7 +97,7 @@ Requires +80 Power]],
 local weaponDefs = {
   nukeartyweapon = {
     accuracy           = 200,
-    areaOfEffect       = 1000,
+    AreaOfEffect       = 1000,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "nukeartyshot",
@@ -111,7 +111,7 @@ local weaponDefs = {
     name               = "Light Cannon",
     range              = 2500,
     reloadtime         = 12,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "nukeartyhit.wav",
     soundStart         = "nukeartyshot.wav",
     startsmoke         = "1",

@@ -133,7 +133,7 @@ local unitDef = {
 local weaponDefs = {
   fusionfx = {
 
-    areaOfEffect       = 5,
+    AreaOfEffect       = 5,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -168,7 +168,7 @@ local weaponDefs = {
     },
   },
   emp = {
-    areaOfEffect       = 1000,
+    AreaOfEffect       = 1000,
     avoidFriendly      = false,
     ballistic          = true,
     collideFriendly    = false,
@@ -182,7 +182,7 @@ local weaponDefs = {
 	paralyzetime	   = 5,
     range              = 50,
     reloadtime         = 10,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundStart         = "emp.wav",
     startsmoke         = "1",
     turret             = true,

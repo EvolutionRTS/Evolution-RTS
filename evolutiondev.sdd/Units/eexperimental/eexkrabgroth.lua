@@ -106,7 +106,7 @@ Requires +40 Power]],
 
 local weaponDefs = {
   heavybeamweapon = {
-    areaOfEffect       = 200,
+    AreaOfEffect       = 200,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 1,
@@ -150,7 +150,7 @@ local weaponDefs = {
   },
   concussioncannon = {
     accuracy           = 1,
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,
@@ -169,7 +169,7 @@ local weaponDefs = {
     pitchtolerance     = "500",
     range              = 1500,
     reloadtime         = 1,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "explode2",
     soundStart         = "krabsecondary.wav",
     startsmoke         = "1",

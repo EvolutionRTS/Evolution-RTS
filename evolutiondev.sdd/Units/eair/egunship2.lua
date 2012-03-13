@@ -115,7 +115,7 @@ Requires +7 Power]],
 
 local weaponDefs = {
   gunshipweapon = {
-    areaOfEffect       = 75,
+    AreaOfEffect       = 75,
     avoidFriendly      = false,
     cegTag             = "missiletrailsmall",
     collideFriendly    = false,
@@ -133,7 +133,7 @@ local weaponDefs = {
     name               = "Rockets",
     range              = 520,
     reloadtime         = 1,
-    renderType         = 1,
+    weaponType		   = "MissileLauncher",
     selfprop           = true,
     smokedelay         = ".1",
     smokeTrail         = false,

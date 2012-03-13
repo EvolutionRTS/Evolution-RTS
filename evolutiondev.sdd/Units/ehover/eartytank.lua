@@ -100,7 +100,7 @@ Requires +8 Power]],
 local weaponDefs = {
   Artilleryweapon = {
     accuracy           = 500,
-    areaOfEffect       = 200,
+    AreaOfEffect       = 200,
     avoidFriendly      = false,
     ballistic          = true,
 	burst			   = 5,
@@ -117,7 +117,7 @@ local weaponDefs = {
     name               = "Plasma Cannon",
     range              = 1500,
     reloadtime         = 24,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "explode5.wav",
     soundStart         = "eartillery.wav",
     startsmoke         = "1",

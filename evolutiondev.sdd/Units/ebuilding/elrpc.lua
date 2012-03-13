@@ -118,7 +118,7 @@ Requires:
 local weaponDefs = {
   lrpcweapon = {
     accuracy           = 500,
-    areaOfEffect       = 200,
+    AreaOfEffect       = 200,
     avoidFriendly      = false,
     cegTag             = "BURNGREEN",
     collideFriendly    = false,
@@ -133,7 +133,7 @@ local weaponDefs = {
     name               = "Rockets",
     range              = 6000,
     reloadtime         = 10,
-    renderType         = 1,
+    weaponType		   = "MissileLauncher",
     selfprop           = true,
     smokedelay         = ".1",
     smokeTrail         = false,

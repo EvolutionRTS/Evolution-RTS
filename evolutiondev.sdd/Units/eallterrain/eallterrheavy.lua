@@ -112,7 +112,7 @@ Requires +6 Power]],
 
 local weaponDefs = {
   heavytankweapon = {
-    areaOfEffect       = 200,
+    AreaOfEffect       = 200,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

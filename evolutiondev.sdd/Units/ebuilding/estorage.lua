@@ -87,7 +87,7 @@ Will increase your storage reserves by +50
 local weaponDefs = {
   fusionfx = {
 
-    areaOfEffect       = 0,
+    AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -122,7 +122,7 @@ local weaponDefs = {
     },
   },
     fusionfx2 = {
-    areaOfEffect       = 0,
+    AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

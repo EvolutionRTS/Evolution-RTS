@@ -111,7 +111,7 @@ Requires +4 Power]],
 
 local weaponDefs = {
   mediumtankcannon = {
-    areaOfEffect       = 32,
+    AreaOfEffect       = 32,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

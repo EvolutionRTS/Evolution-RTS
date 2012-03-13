@@ -103,7 +103,7 @@ Requires +7 Power]],
 
 local weaponDefs = {
   missletankweapon = {
-    areaOfEffect       = 100,
+    AreaOfEffect       = 100,
     avoidFriendly      = false,
     cegTag             = "missiletrail",
     collideFriendly    = false,
@@ -123,7 +123,7 @@ local weaponDefs = {
     name               = "Rocket",
     range              = 850,
     reloadtime         = 6,
-    renderType         = 1,
+    weaponType		   = "MissileLauncher",
     selfprop           = true,
     smokedelay         = "0.1",
     smokeTrail         = false,

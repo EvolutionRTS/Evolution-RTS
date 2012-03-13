@@ -98,7 +98,7 @@ Requires:
 local weaponDefs = {
   antiairgunflak = {
     accuracy           = 1,
-    areaOfEffect       = 200,
+    AreaOfEffect       = 200,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,
@@ -118,7 +118,7 @@ local weaponDefs = {
     pitchtolerance     = "500",
     range              = 1500,
     reloadtime         = 0.5,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "explode2",
     soundStart         = "flakgun_shoot.wav",
     startsmoke         = "1",

@@ -104,7 +104,7 @@ Requires +5 Power]],
 
 local weaponDefs = {
   riottankweapon = {
-    areaOfEffect       = 1,
+    AreaOfEffect       = 1,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "riotweapon",
@@ -118,7 +118,7 @@ local weaponDefs = {
     projectiles        = 1,
     range              = 400,
     reloadtime         = 0.5,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "rocket_launcher2.wav",
     sprayAngle         = 2000,
@@ -135,7 +135,7 @@ local weaponDefs = {
   },
   
   TORP = {
-	rendertype		= 1,
+	weaponType		   = "TorpedoLauncher",
 	lineofsight		= 1,
 	turret			= 1,
     model              = "torpedo.s3o",
@@ -145,12 +145,12 @@ local weaponDefs = {
 	reloadtime		= 0.5,
 	weapontimer		= 3,
 	weaponvelocity	= 500,
-	startvelocity	= 25,
-	weaponacceleration	= 25,
-	areaofeffect	= 8,
+	startvelocity	= 250,
+	weaponacceleration	= 100,
+	AreaOfEffect	= 8,
     soundHit           = "subhit.wav",
     soundStart         = "torpedolaunch.wav",
-    explosionGenerator = "custom:dodaibomb",
+    explosionGenerator = "custom:torpedoexplosion",
 	selfprop		= 1,
 	waterweapon		= 1,
 	burnblow		= 1,

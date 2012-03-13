@@ -103,7 +103,7 @@ Requires +5 Power]],
 local weaponDefs = {
   antiairmissile = {
     accuracy           = 1,
-    areaOfEffect       = 300,
+    AreaOfEffect       = 300,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,
@@ -125,7 +125,7 @@ local weaponDefs = {
     pitchtolerance     = "3000",
     range              = 1500,
     reloadtime         = 1,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "aircraft_missile_01.wav",
     startsmoke         = "1",

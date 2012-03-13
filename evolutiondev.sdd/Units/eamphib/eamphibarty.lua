@@ -101,7 +101,7 @@ Requires + 10 Power]],
 
 local weaponDefs = {
   assimilatorweapon = {
-    areaOfEffect       = 8,
+    AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -143,7 +143,7 @@ local weaponDefs = {
   },
   
   TORP = {
-	rendertype		= 1,
+	weaponType		   = "TorpedoLauncher",
 	lineofsight		= 1,
 	turret			= 1,
     model              = "torpedo.s3o",
@@ -151,14 +151,14 @@ local weaponDefs = {
 	propeller		= 1,
 	range			= 1175,
 	reloadtime		= 9,
-	weapontimer		= 9,
+	weapontimer		= 25,
 	weaponvelocity	= 1500,
-	startvelocity	= 25,
-	weaponacceleration	= 25,
-	areaofeffect	= 8,
+	startvelocity	= 500,
+	weaponacceleration	= 100,
+	AreaOfEffect	= 8,
     soundHit           = "subhit.wav",
     soundStart         = "torpedolaunch.wav",
-    explosionGenerator = "custom:dodaibomb",
+    explosionGenerator = "custom:torpedoexplosion",
 	selfprop		= 1,
 	waterweapon		= 1,
 	burnblow		= 1,

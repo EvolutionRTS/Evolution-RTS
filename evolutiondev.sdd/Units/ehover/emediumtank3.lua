@@ -100,7 +100,7 @@ Requires +3 Power]],
 
 local weaponDefs = {
   mediumtankcannon = {
-    areaOfEffect       = 32,
+    AreaOfEffect       = 32,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "mediumcannonweapon",
@@ -112,7 +112,7 @@ local weaponDefs = {
     name               = "Light Cannon",
     range              = 500,
     reloadtime         = 1.0,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "medassualt_blast.wav",
     startsmoke         = "1",

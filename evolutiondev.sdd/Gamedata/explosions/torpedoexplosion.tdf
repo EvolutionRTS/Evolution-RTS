@@ -1,4 +1,4 @@
-[dodaibomb]
+[torpedoexplosion]
 {
  	[explosionspikes]
 	{
@@ -7,7 +7,7 @@
 		{
 			alwaysVisible=1;
 			dir=-45 r90,-45 r90,-45 r90;
-			width=10;
+			width=3;
 			length=0.2;
 			alpha=1;
 			alphadecay=0.19;
@@ -44,13 +44,13 @@
 		[properties]
       		{
 		alwaysVisible=1;
-		texture=uglynovaexplo;
-      		heat = 10;
-      		maxheat = 15;
+		texture=PlasmaHeatDDB;
+      		heat = 3;
+      		maxheat = 10;
       		heatFalloff = 1.1;
 
       		size = 1;
-      		sizeGrowth = 15;
+      		sizeGrowth = 5;
 
          	pos = r-2 r2, 5, r-2 r2;
          	speed=0, 1 0, 0;
@@ -71,7 +71,7 @@
 		alwaysVisible=1;
 		Texture=flashside1;
 
-		colorMap	= 1 1 1 0.01	0.9 0.8 0.5 0.04	0.9 0.5 0.0 0.01	0.5 0.1 0.1 0.01;
+		colorMap	= 1 1 1 0.01	0.5 0.8 0.9 0.04	0.0 0.5 0.9 0.01	0.1 0.1 0.5 0.01;
 
       		pos 		= 0, 2, 0;
 		gravity		= 0, -0.01, 0;
@@ -88,7 +88,7 @@
 		numParticles		= 8;
 		particleSpeed		= 10;
 		particleSpeedSpread	= 5;
-		particleSize		= 20;
+		particleSize		= 5;
 		particleSizeSpread	= 0;
 
 		directional		= 1;
@@ -101,83 +101,6 @@
 	count=1;
 	}
 
-	[dirtg]
-	{
-	class=CSimpleParticleSystem;
-
-		[properties]
-		{
-		alwaysVisible=1;
-		Texture=dirt;
-		sizeGrowth=1.5;
-		sizeMod=1.0;
-
-        	pos 		= r-1 r1, 3, r-1 r1;
-         	emitVector	= 0, 1, 0;
-		gravity		= 0, 1, 0;
-
-		colorMap	= 1 1 1 0.01	0.9 0.8 0.5 0.04	0.1 0.1 0.1 1.0 	0.5 0.4 0.3 1.0 	0 0 0 0.0;
-		airdrag		= 0.7;
-
-		particleLife=25;
-		particleLifeSpread=10;
-
-		numParticles=5;
-
-		particleSpeed=2;
-		particleSpeedSpread=5;
-		particleSize=10;
-		particleSizeSpread=5;
-
-		emitRot=90;
-		emitRotSpread=0;
-
-		directional=1;
-		useAirLos=1;
-		}
-	ground=1;
-	count=1;
-	}
-
-
-	[dirta]
-	{
-	class=CSimpleParticleSystem;
-
-		[properties]
-		{
-		alwaysVisible=1;
-		Texture=dirt;
-		sizeGrowth=1.2;
-		sizeMod=1.0;
-
-        	pos 		= r-1 r1, 1, r-1 r1;
-         	emitVector	= 0, 1, 0;
-		gravity		= 0, 0, 0;
-
-		colorMap	= 0.1 0.1 0.1 1.0	0.5 0.5 0.5 1.0		0 0 0 0.0;
-		airdrag		= 0.7;
-
-		particleLife=25;
-		particleLifeSpread=10;
-
-		numParticles=8;
-
-		particleSpeed=1;
-		particleSpeedSpread=10;
-		particleSize=15;
-		particleSizeSpread=5;
-
-		emitRot=90;
-		emitRotSpread=0;
-
-		directional=1;
-		useAirLos=1;
-		}
-	air=1;
-	count=1;
-	}
-
 	[dirtw1]
 	{
 	class=CSimpleParticleSystem;
@@ -186,7 +109,7 @@
 		{
 		alwaysVisible=1;
 		Texture=randdots;
-		sizeGrowth=1.2;
+		sizeGrowth=1.1;
 		sizeMod=1.0;
 
         	pos 		= r-1 r1, 1, r-1 r1;
@@ -203,7 +126,7 @@
 
 		particleSpeed=1;
 		particleSpeedSpread=10;
-		particleSize=5;
+		particleSize=2;
 		particleSizeSpread=5;
 
 		emitRot=90;
@@ -225,7 +148,7 @@
 		{
 		alwaysVisible=1;
 		Texture=dirt;
-		sizeGrowth=1.2;
+		sizeGrowth=1.1;
 		sizeMod=1.0;
 
         	pos 		= r-1 r1, 1, r-1 r1;
@@ -242,7 +165,7 @@
 
 		particleSpeed=1;
 		particleSpeedSpread=10;
-		particleSize=5;
+		particleSize=3;
 		particleSizeSpread=5;
 
 		emitRot=90;

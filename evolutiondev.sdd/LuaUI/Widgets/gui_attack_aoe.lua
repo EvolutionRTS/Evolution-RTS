@@ -71,9 +71,9 @@ function GetMaxAoE(unitDef)
     if (weapon.weaponDef) then
       local weaponDef = WeaponDefs[weapon.weaponDef]
       if (weaponDef and 
-           ((weaponDef.areaOfEffect > maxAoE)
-            or (weaponDef.areaOfEffect == maxAoE) and weaponDef.edgeEffectiveness > maxEE)) then
-        maxAoE = weaponDef.areaOfEffect
+           ((weaponDef.damageAreaOfEffect > maxAoE)
+            or (weaponDef.damageAreaOfEffect == maxAoE) and weaponDef.edgeEffectiveness > maxEE)) then
+        maxAoE = weaponDef.damageAreaOfEffect
         maxEE = weaponDef.edgeEffectiveness
       end
     end
@@ -101,12 +101,12 @@ function GetMaxScatter(unitDef)
           currScatter = 45055 * (math.asin(weaponDef.accuracy) + math.asin(weaponDef.sprayAngle)) / math.pi
         elseif (weaponType == "Cannon") then
           if (unitDef.highTrajectoryType > 0) then
-            currScatter = (weaponDef.accuracy + weaponDef.sprayAngle) * weaponDef.maxVelocity * weaponDef.maxVelocity * 2 / gravity
+            currScatter = (weaponDef.accuracy + weaponDef.sprayAngle) * weaponDef.projectilespeed * weaponDef.projectilespeed * 2 / gravity
             currScatterLength = currScatter
           else
             currScatter = (weaponDef.accuracy + weaponDef.sprayAngle) * weaponDef.range
             if (not unitDef.canFly) then
-              local ballisticRange = weaponDef.maxVelocity * weaponDef.maxVelocity / gravity
+              local ballisticRange = weaponDef.projectilespeed * weaponDef.projectilespeed / gravity
               local temp = ballisticRange * ballisticRange - weaponDef.range * weaponDef.range
               if (temp > 0) then
                 currScatterLength = 2 * (weaponDef.accuracy + weaponDef.sprayAngle) * math.sqrt(temp)
@@ -116,7 +116,7 @@ function GetMaxScatter(unitDef)
             currScatterLength = math.max(currScatter, currScatterLength)
           end
         elseif (weaponType == "MissileLauncher") then
-          currScatter = (weaponDef.wobble - weaponDef.turnRate) * weaponDef.maxVelocity * 10 * (weaponDef.range / weaponDef.maxVelocity + 1)
+          currScatter = (weaponDef.wobble - weaponDef.turnRate) * weaponDef.projectilespeed * 10 * (weaponDef.range / weaponDef.projectilespeed + 1)
         else
           currScatter = (weaponDef.accuracy + weaponDef.sprayAngle) * weaponDef.range
         end

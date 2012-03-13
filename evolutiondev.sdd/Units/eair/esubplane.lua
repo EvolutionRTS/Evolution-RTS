@@ -95,7 +95,7 @@ local unitDef = {
 
 local weaponDefs = {
   TBOMB = {
-    areaOfEffect       = 150,
+    AreaOfEffect       = 150,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,

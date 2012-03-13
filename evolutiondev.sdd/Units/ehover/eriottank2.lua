@@ -109,7 +109,7 @@ Requires +4 Power]],
 
 local weaponDefs = {
   riottankweapon = {
-    areaOfEffect       = 100,
+    AreaOfEffect       = 100,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "riotweapon",
@@ -123,7 +123,7 @@ local weaponDefs = {
     projectiles        = 1,
     range              = 450,
     reloadtime         = 0.5,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "rocket_launcher2.wav",
     sprayAngle         = 2000,
@@ -140,7 +140,7 @@ local weaponDefs = {
   },
 
   riottanksupaweapon = {
-    areaOfEffect       = 100,
+    AreaOfEffect       = 100,
     avoidFriendly      = false,
     ballistic          = true,
 	burst			   = 5,
@@ -157,7 +157,7 @@ local weaponDefs = {
     projectiles        = 5,
     range              = 400,
     reloadtime         = 5,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "rocket_launcher2.wav",
     sprayAngle         = 2000,

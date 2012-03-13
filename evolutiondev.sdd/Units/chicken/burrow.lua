@@ -91,7 +91,7 @@ local unitDef = {
 local weaponDefs = {
   fusionfx = {
 
-    areaOfEffect       = 5,
+    AreaOfEffect       = 5,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -126,7 +126,7 @@ local weaponDefs = {
     },
   },
     fusionfx2 = {
-    areaOfEffect       = 8,
+    AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

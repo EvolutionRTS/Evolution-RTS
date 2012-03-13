@@ -106,7 +106,7 @@ Requires +5 Power]],
 local weaponDefs = {
   eaatankshot = {
     accuracy           = 500,
-    areaOfEffect       = 300,
+    AreaOfEffect       = 300,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,
@@ -131,7 +131,7 @@ local weaponDefs = {
     pitchtolerance     = "500",
     range              = 1000,
     reloadtime         = 10,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "aatankshot.wav",
     soundStart         = "aircraft_missile_01.wav",
     startsmoke         = "1",

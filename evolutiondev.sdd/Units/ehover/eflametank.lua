@@ -105,7 +105,7 @@ Requires +2 Power]],
 local weaponDefs = {
     lightlaser = {
     accuracy           = 200,
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,
     collideFeature     = false,

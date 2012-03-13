@@ -107,7 +107,7 @@ Requires +7 Power]],
 
 local weaponDefs = {
   gunshipweapon = {
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     cegTag             = "missiletrailsmall",
     collideFriendly    = false,
@@ -123,7 +123,7 @@ local weaponDefs = {
     name               = "Rockets",
     range              = 650,
     reloadtime         = 2,
-    renderType         = 1,
+    weaponType		   = "MissileLauncher",
     selfprop           = true,
     smokedelay         = ".1",
     smokeTrail         = false,
@@ -146,7 +146,7 @@ local weaponDefs = {
   },
   
   TORP = {
-	rendertype		= 1,
+	weaponType		   = "TorpedoLauncher",
 	lineofsight		= 1,
 	turret			= 1,
     model              = "torpedo.s3o",
@@ -156,12 +156,12 @@ local weaponDefs = {
 	reloadtime		= 2,
 	weapontimer		= 3,
 	weaponvelocity	= 500,
-	startvelocity	= 25,
-	weaponacceleration	= 25,
-	areaofeffect	= 50,
+	startvelocity	= 300,
+	weaponacceleration	= 100,
+	AreaOfEffect	= 50,
     soundHit           = "subhit.wav",
     soundStart         = "torpedolaunch.wav",
-    explosionGenerator = "custom:dodaibomb",
+    explosionGenerator = "custom:torpedoexplosion",
 	selfprop		= 1,
 	waterweapon		= 1,
 	burnblow		= 1,

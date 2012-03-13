@@ -101,7 +101,7 @@ Requires +5 Power]],
 local weaponDefs = {
   heavytankweapon = {
     accuracy           = 200,
-    areaOfEffect       = 50,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "antiassualtshot2",
@@ -114,7 +114,7 @@ local weaponDefs = {
     name               = "Light Cannon",
     range              = 700,
     reloadtime         = 1.2,
-    renderType         = 4,
+    weaponType		   = "Cannon",
     soundHit           = "42024_digifishmusic_Missile_Strike.wav",
     soundStart         = "triotfire.wav",
     startsmoke         = "1",
