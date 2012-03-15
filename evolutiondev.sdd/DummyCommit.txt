@@ -1,1 +1,1 @@
-VERSION{v2.5}
+VERSION{v2.6}
