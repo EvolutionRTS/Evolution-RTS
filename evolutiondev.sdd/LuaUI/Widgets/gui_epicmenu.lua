@@ -1,7 +1,7 @@
 function widget:GetInfo()
   return {
     name      = "EPIC Menu",
-    desc      = "v1.284 Extremely Powerful Ingame Chili Menu.",
+    desc      = "v1.30 Extremely Powerful Ingame Chili Menu.",
     author    = "CarRepairer",
     date      = "2009-06-02",
     license   = "GNU GPL, v2 or later",
@@ -32,8 +32,6 @@ local color = confdata.color
 local title_text = confdata.title
 local title_image = confdata.title_image
 
-local flatwindowlist = {}
-
 --------------------------------------------------------------------------------
 
 -- Chili control classes
@@ -56,15 +54,14 @@ local screen0
 
 --------------------------------------------------------------------------------
 -- Global chili controls
-local window_widgetlist
 local window_crude 
+local window_exit
 local window_flags
 local window_help
 local window_getkey
 local lbl_gtime, lbl_fps, lbl_clock, img_flag
 local cmsettings_index = -1
 local window_sub_cur
-local widget_categorize = true
 
 --------------------------------------------------------------------------------
 -- Misc
@@ -74,9 +71,16 @@ local C_HEIGHT = 16
 local scrH, scrW = 0,0
 local cycle = 1
 local curSubKey = ''
+local curPath = ''
 
 local init = false
 local myCountry = 'wut'
+
+local pathoptions = {}	
+local pathorders = {}
+
+local exitWindowVisible = false
+
 --------------------------------------------------------------------------------
 -- Key bindings
 include("keysym.h.lua")
@@ -90,10 +94,8 @@ for k,v in pairs(KEYSYMS) do
 end
 --]]
 local get_key = false
-local kbval
-local kb_mkey
-local kb_mindex
-local kb_item
+local kb_option
+local kb_path
 
 local transkey = {
 	leftbracket 	= '[',
@@ -102,6 +104,7 @@ local transkey = {
 	comma 			= ',',
 	period 			= '.',
 	slash 			= '/',
+	backslash 			= '\\',
 	
 	kp_multiply		= 'numpad*',
 	kp_divide		= 'numpad/',
@@ -121,13 +124,8 @@ local transkey = {
 	kp9				= 'numpad9',
 }
 
---------------------------------------------------------------------------------
--- widget settings
-local customwidgets = {}
---local custompaths = {}
-local custompaths_i = {} --number indexed so that paths are added to menu in the order they appear in the widget
-local custompathsettings = {}
-	
+
+
 --------------------------------------------------------------------------------
 -- Widget globals
 WG.crude = {}
@@ -145,82 +143,7 @@ local settings = {
 	music_volume = 0.5,
 }
 
-
 --------------------------------------------------------------------------------
---For widget list
-local widget_checks = {}
-local green = {0,1,0,1}
-local orange =  {1,0.5,0,1}
-local gray =  {0.7,0.7,0.7,1}
-local groupDescs = {
-	api     = "For Developers",
-	camera  = "Camera",
-	cmd     = "Commands",
-	dbg     = "For Developers",
-	gfx     = "Effects",
-	gui     = "GUI",
-	hook    = "Commands",
-	ico     = "GUI",
-	init    = "Initialization",
-	minimap = "Minimap",
-	snd     = "Sound",
-	test    = "For Developers",
-	unit    = "Units",
-	ungrouped    = "Ungrouped",
-}
-
---------------------------------------------------------------------------------
---Mouse cursor icons
-
-local cursorNames = {
-  'cursornormal',
-  'cursorareaattack',
-  'cursorattack',
-  'cursorattack',
-  'cursorbuildbad',
-  'cursorbuildgood',
-  'cursorcapture',
-  'cursorcentroid',
-  'cursordwatch',
-  'cursorwait',
-  'cursordgun',
-  'cursorattack',
-  'cursorfight',
-  'cursorattack',
-  'cursorgather',
-  'cursorwait',
-  'cursordefend',
-  'cursorpickup',
-  'cursormove',
-  'cursorpatrol',
-  'cursorreclamate',
-  'cursorrepair',
-  'cursorrevive',
-  'cursorrepair',
-  'cursorrestore',
-  'cursorrepair',
-  'cursorselfd',
-  'cursornumber',
-  'cursorwait',
-  'cursortime',
-  'cursorwait',
-  'cursorunload',
-  'cursorwait',
-}
-
-WG.crude.SetCursor = function(cursorSet)
-  for _, cursor in ipairs(cursorNames) do
-    local topLeft = (cursor == 'cursornormal' and cursorSet ~= 'k_haos_girl')
-    Spring.ReplaceMouseCursor(cursor, cursorSet.."/"..cursor, topLeft)
-  end
-end
-
-WG.crude.RestoreCursor = function()
-  for _, cursor in ipairs(cursorNames) do
-    local topLeft = (cursor == 'cursornormal')
-    Spring.ReplaceMouseCursor(cursor, cursor, topLeft)
-  end
-end
 
 WG.crude.SetSkin = function(Skin)
   if Chili then
@@ -277,6 +200,18 @@ to_string(v, 0)
 end
 --]]
 
+local function CapCase(str)
+	local str = str:lower()
+	str = str:gsub( '_', ' ' )
+	str = str:sub(1,1):upper() .. str:sub(2)
+	
+	str = str:gsub( ' (.)', 
+		function(x) return (' ' .. x):upper(); end
+		)
+	return str
+end
+
+
 local function explode(div,str)
   if (div=='') then return false end
   local pos,arr = 0,{}
@@ -303,6 +238,7 @@ local function CopyTable(outtable,intable)
   end
 end
 
+--[[
 local function tableMerge(t1, t2, appendIndex)
 	for k,v in pairs(t2) do
 		if type(v) == "table" then
@@ -325,6 +261,7 @@ local function tableMerge(t1, t2, appendIndex)
 	end
 	return t1
 end
+--]]
 
 local function tableremove(table1, item)
 	local table2 = {}
@@ -390,9 +327,12 @@ local function AdjustWindow(window)
 	end
 end
 
-WG.SetRawSetting = function(fwkey, optionkey, value)
-	--Settings_lhShow Advanced Settings
-	--flatwindowlist[fwkey].tree[optionkey].OnChange()
+WG.SetRawSetting = function(path, optionkey, value)
+	--[[
+	local option = pathoptions[path][optionkey]
+	option.value = value
+	pathoptions[path][optionkey].OnChange(option)
+	--]]
 end
 
 -- Adding functions because of "handler=true"
@@ -401,6 +341,19 @@ local function AddAction(cmd, func, data, types)
 end
 local function RemoveAction(cmd, types)
 	return widgetHandler.actionHandler:RemoveAction(widget, cmd, types)
+end
+
+
+local function GetFullKey(path, option)
+	--local curkey = path .. '_' .. option.key
+	local fullkey = ('epic_'.. option.wname .. '_' .. option.key)
+	fullkey = fullkey:gsub(' ', '_')
+	return fullkey
+end
+
+local function GetActionName(path, option)
+	local fullkey = GetFullKey(path, option):lower()
+	return option.action or fullkey
 end
 
 
@@ -420,182 +373,18 @@ local function KillSubWindow()
 		end
 		window_sub_cur:Dispose()
 		window_sub_cur = nil
-		curSubKey = ''
-	end
-end
-
--- Kill Widgetlist window
-local function KillWidgetList()
-	if window_widgetlist then
-		settings.wl_x = window_widgetlist.x
-		settings.wl_y = window_widgetlist.y
-		
-		settings.wl_h = window_widgetlist.clientHeight
-		settings.wl_w = window_widgetlist.clientWidth
+		curPath = ''
 		
 	end
-	window_widgetlist:Dispose()
-	window_widgetlist = nil
 end
 
 -- Update colors for labels of widget checkboxes in widgetlist window
 local function checkWidget(widget)
-	local name = (type(widget) == 'string') and widget or widget.whInfo.name
-	
-	local wcheck = widget_checks[name]
-	
-	if wcheck then
-		local wdata = widgetHandler.knownWidgets[name]
-		local hilite_color = (wdata.active and green) or (WidgetEnabled(name) and orange) or gray
-		wcheck.font:SetColor(hilite_color)
+	if WG.cws_checkWidget then
+		WG.cws_checkWidget(widget)
 	end
 end
 
--- Make widgetlist window
-local function MakeWidgetList()
-
-	widget_checks = {}
-
-	if window_widgetlist then
-		window_widgetlist:Dispose()
-	end
-
-	local widget_children = {}
-	local widgets_cats = {}
-	
-	local window_height = settings.wl_h
-	local window_width = settings.wl_w
-	
-	local buttonWidth = window_width - 20
-	
-	for name,data in pairs(widgetHandler.knownWidgets) do if not data.alwaysStart then 
-		local name = name
-		local name_display = name .. (data.fromZip and ' (mod)' or '')
-		local data = data
-		local _, _, category = string.find(data.basename, "([^_]*)")
-		
-		if not groupDescs[category] then
-			category = 'ungrouped'
-		end
-		local catdesc = groupDescs[category]
-		if not widget_categorize then
-			catdesc = 'Ungrouped'
-		end
-		widgets_cats[catdesc] = widgets_cats[catdesc] or {}
-			
-		widgets_cats[catdesc][#(widgets_cats[catdesc])+1] = 
-		{	
-			catname 		= catdesc,
-			name_display	= name_display,
-			name		 	= name,
-			active 			= data.active,
-			desc 			= data.desc,
-			author 			= data.author,
-		}
-	end 
-	end 
-	
-	local widgets_cats_i = {}
-	for catdesc, catwidgets in pairs(widgets_cats) do
-		widgets_cats_i[#widgets_cats_i + 1] = {catdesc, catwidgets}
-	end
-	
-	--Sort widget categories
-	table.sort(widgets_cats_i, function(t1,t2)
-		return t1[1] < t2[1]
-	end)
-	
-	for _, data in pairs(widgets_cats_i) do
-		local catdesc = data[1]
-		local catwidgets = data[2]
-	
-		--Sort widget names within this category
-		table.sort(catwidgets, function(t1,t2)
-			return t1.name_display < t2.name_display
-		end)
-		widget_children[#widget_children + 1] = 
-			Label:New{ caption = '- '.. catdesc ..' -', textColor = color.sub_header, align='center', }
-		
-		for _, wdata in ipairs(catwidgets) do
-			local enabled = WidgetEnabled(wdata.name)
-			
-			--Add checkbox to table that is used to update checkbox label colors when widget becomes active/inactive
-			widget_checks[wdata.name] = Checkbox:New{ 
-					caption = wdata.name_display, 
-					checked = enabled,
-					tooltip = '(By ' .. tostring(wdata.author) .. ")\n" .. tostring(wdata.desc),
-					OnChange = { 
-						function(self) 
-							widgetHandler:ToggleWidget(wdata.name)
-						end,
-					},
-				}
-			widget_children[#widget_children + 1] = widget_checks[wdata.name]
-			checkWidget(wdata.name) --sets color of label for this widget checkbox
-		end
-	end
-	
-	window_widgetlist = Window:New{
-		x = settings.wl_x,
-		y = settings.wl_y,
-		clientWidth  = window_width,
-		clientHeight = window_height,
-		parent = screen0,
-		backgroundColor = color.sub_bg,
-		caption = 'Widget List (F11)',
-		minimumSize = {300,400},
-		
-		children = {
-			ScrollPanel:New{
-				x=1,
-				y=15,
-				right=5, 
-				bottom = C_HEIGHT*2,
-				
-				children = {
-					StackPanel:New{
-						x=1,
-						y=1,
-						height = #widget_children*C_HEIGHT,
-						right = 1,
-						
-						itemPadding = {1,1,1,1},
-						itemMargin = {0,0,0,0},		
-						children = widget_children,
-					},
-				},
-			},
-			
-			--Close button
-			Button:New{ 
-				caption = 'Close', 
-				OnMouseUp = { KillWidgetList }, 
-				backgroundColor=color.sub_close_bg, 
-				textColor=color.sub_close_fg, 
-				
-				x=1,
-				bottom=1,
-				width='40%',
-				height=C_HEIGHT,
-				
-			},
-			--Categorization checkbox
-			Checkbox:New{ 
-				caption = 'Categorize', 
-				tooltip = 'List widgets by category',
-				OnMouseUp = { function() widget_categorize = not widget_categorize end, KillWidgetList, MakeWidgetList }, 
-				textColor=color.sub_fg, 
-				checked = widget_categorize,
-				x = '50%',
-				width = '30%',
-				height= C_HEIGHT,
-				bottom=1,
-			},
-
-		},
-	}
-	AdjustWindow(window_widgetlist)
-end
 
 local function SetCountry(self) 
 	echo('Setting country: "' .. self.country .. '" ') 
@@ -730,141 +519,10 @@ local function MakeHelp(caption, text)
 	}
 end
 
-local function AddOption(path, wname, option)
-	custompaths_i[#custompaths_i+1] = path --number indexed so that paths are added to menu in the order they appear in the widget
-	if not custompathsettings[path] then
-		custompathsettings[path] = {}
-	end
-	if not custompathsettings[path][wname] then
-		custompathsettings[path][wname] = {}
-	end
-	local custompathwidget = custompathsettings[path][wname]
-	local length = #custompathwidget
-	if option then
-		custompathsettings[path][wname][#custompathwidget+1] = option
-	end
-end
 
-local function RemPath(path, wname)
-	--If a widget disables itself in widget:Initialize it will run the removewidget before the insertwidget is complete. 
-	if not custompathsettings[path] then
-		return
-	end
-	
-	custompathsettings[path][wname] = nil
-	local deletepath = true
-	for k,v in pairs(custompathsettings[path]) do
-		deletepath = false
-	end
-	if deletepath then
-		--custompaths[path] = nil
-		custompaths_i = tableremove(custompaths_i, path) --number indexed so that paths are added to menu in the order they appear in the widget
-		--custompathsettings[path] = nil --causes strange error
-		custompathsettings[path] = {}
-	end
-end
-
---(Un)Store custom widget settings for a widget
-local function IntegrateWidget(w, addoptions, index)
-	local options = w.options
-	if type(options) ~= 'table' then
-		return
-	end
-	
-	local wname = w.whInfo.name
-	local defaultpath = w.options_path or ('Settings/Misc/' .. wname)
-	
-	--[[
-	--If a widget disables itself in widget:Initialize it will run the removewidget before the insertwidget is complete. this fix doesn't work
-	if not WidgetEnabled(wname) then
-		return
-	end
-	--]]
-	
-	--Add empty onchange function if doesn't exist
-	for k,option in pairs(options) do
-		if not option.OnChange or type(option.OnChange) ~= 'function' then
-			w.options[k].OnChange = function(self) end
-		end
-		w.options[k].default = w.options[k].value
-	end	
-	
-	if w.options.order then
-		echo ("<EPIC Menu> " .. wname ..  ", don't index an option with the word 'order' please, it's too soon and I'm not ready.")
-		w.options.order = nil
-	end
-	
-	--Generate order table if it doesn't exist
-	local options_ordered = {}
-	if not w.options_order then
-		w.options_order = {}
-		for k,v in pairs(options) do
-			w.options_order[#(w.options_order) + 1] = k
-		end
-	end
-	
-	-- Use order table to order the options
-	for i,v in ipairs(w.options_order) do
-		local option = options[v]
-		if not option then
-			echo( '<EPIC Menu> Error in loading custom widget settings in ' .. wname .. ', order table incorrect.' )
-			return
-		end
-		option.key = v
-		options_ordered[i] = options[v]
-	end
-	
-	local tree = {}
-	
-	for _,option in ipairs(options_ordered) do
-		local k = option.key
-		option.wname = wname
-		option.windex = index
-		
-		local origOnChange = w.options[k].OnChange
-		
-		if option.type ~= 'button' then
-			option.OnChange = 
-				function(self)
-					if self then
-						w.options[k].value = self.value
-					end
-					origOnChange(self)
-				end
-		else
-			option.OnChange = 
-				function(self)
-					origOnChange(self)
-				end
-		end
-		
-		local path = option.path or defaultpath
-		
-		if not addoptions then
-			RemPath(path, wname)
-		else
-			AddOption(path, wname, option)
-		end
-	end
-	
-	customwidgets[wname] = addoptions or nil
-end
-
---Store custom widget settings for all active widgets
-local function AddAllCustSettings()
-	local cust_tree = {}
-	for i,widget in ipairs(widgetHandler.widgets) do
-		IntegrateWidget(widget, true, i)
-	end
-end
-
--- Make submenu window based on index from flat window list
--- Defined later
 local function MakeSubWindow(key)
 end
 
-local function RemakeEpicMenu()
-end
 
 
 local function HotkeyFromUikey(uikey_hotkey)
@@ -901,28 +559,31 @@ end
 
 
 -- Assign a keybinding to settings and other tables that keep track of related info
-local function AssignKeyBind(hotkey, menukey, itemindex, item, verbose)
+--local function AssignKeyBind(hotkey, menukey, itemindex, item, verbose)
+local function AssignKeyBind(hotkey, path, option, verbose) -- param4 = verbose
+
 	if not (hotkey.key and hotkey.mod) then
 		echo '<EPIC Menu> Wacky assign keybind error #1'
 		return
 	end
 	
-	local kbfunc = item.OnChange
-	if item.type == 'bool' then
+	local kbfunc = option.OnChange
+	
+	if option.type == 'bool' then
 		kbfunc = function()
-			newval = not flatwindowlist[menukey].tree[itemindex].value	
-			flatwindowlist[menukey].tree[itemindex].value = newval 
-			item.OnChange({checked=newval})
+			local wname = option.wname
+			newval = not pathoptions[path][option.wname..option.key].value	
+			pathoptions[path][option.wname..option.key].value	= newval
 			
-			if menukey == curSubKey then
-				MakeSubWindow(menukey)
+			option.OnChange({checked=newval})
+			
+			if path == curPath then
+				MakeSubWindow(path)
 			end
 		end
 	end
 	
-	local fullkey = ('epic_'.. menukey .. '_' .. item.key)
-	fullkey = fullkey:gsub(' ', '_')
-	local actionName = item.action or fullkey
+	local actionName = GetActionName(path, option)
 	
 	if verbose then
 		local actions = Spring.GetKeyBindings(hotkey.mod .. hotkey.key)
@@ -952,12 +613,11 @@ local function GetUikeyHotkeyStr(action)
 end
 
 -- Unsssign a keybinding from settings and other tables that keep track of related info
-local function UnassignKeyBind(menukey, item)
-	local actionName = 'epic_'.. menukey .. '_' .. item.key
-	actionName = actionName:gsub(' ', '_')
+local function UnassignKeyBind(path, option)
 	
-	if item.action then
-		actionName = item.action
+	local actionName = GetActionName(path, option)
+	
+	if option.action then
 		local uikey_hotkey_str = GetUikeyHotkeyStr(actionName)
 		if uikey_hotkey_str then
 			-- unbindaction doesn't work on a command+params, must be command only!
@@ -965,7 +625,6 @@ local function UnassignKeyBind(menukey, item)
 			local actionName_cmd = actionName_split[1]
 			--echo('unassign', "unbind " .. uikey_hotkey_str .. ' ' .. actionName_cmd)
 			Spring.SendCommands("unbind " .. uikey_hotkey_str .. ' ' .. actionName_cmd) 
-			--Spring.SendCommands("unbindaction " .. actionName)
 		end
 	else
 		--echo('unassign', "unbindaction " .. actionName)
@@ -976,249 +635,315 @@ local function UnassignKeyBind(menukey, item)
 end
 
 
-local function RemoveDups(t)
-	local t2 = {}
-	--CopyTable(t2, t)
-	local dupcheck = {}
-	for i,v in ipairs(t) do
-		if not dupcheck[v] then
-			t2[#t2+1] = v
-			dupcheck[v] = true
-		end
-	end
-	return t2
-end
+local function AddOption(path, option, wname )
+--echo(path, wname, option)
 
--- Convert settings tree into flat list of settings rather than tree, 
--- indexed by each setting's name in the format: "Settings_Interface_Whatever"
-local function flattenTree(tree, parent)
-	local tree2 = {}
-	CopyTable(tree2, tree)
-	
-	if tree2.type ~= 'menu' then
-		return tree2
+	if not wname then
+		wname = path
+	end
+
+	local path2 = path
+	if not option then
+		if not pathoptions[path] then
+			pathoptions[path] = {}
+			pathorders[path] = {}
+		end
+		local pathexploded = explode('/',path)
+		local pathend = pathexploded[#pathexploded]
+		pathexploded[#pathexploded] = nil
+		path = table.concat(pathexploded, '/')
+		
+		option = {
+			type='button',
+			name=pathend .. '...',
+			OnChange = function(self)
+				MakeSubWindow(path2)
+			end,
+			desc=path2,
+		}
 	end
 	
-	local curkey = parent .. '/' .. tree2.name
-	if parent == '' then
-		curkey = tree2.name
+	if not pathoptions[path] then
+		AddOption( path )
 	end
 	
+	if not option.key then
+		option.key = option.name
+	end
+	option.wname = wname
 	
-	local temptree = {}
+	local curkey = path .. '_' .. option.key
+	--local fullkey = ('epic_'.. curkey)
+	local fullkey = GetFullKey(path, option)
+	fullkey = fullkey:gsub(' ', '_')
 	
-	--Generate automatic order table if it doesn't exist, to determine order of settings
-	if not tree2.order or #(tree2.order) == 0 then
-		tree2.order = {}
-		local i = 1
-		for k,v in pairs(tree2.value) do
-			if k ~= 'order' then
-				tree2.order[i] = k
-				i = i + 1
-			end
+	--get spring config setting
+	local valuechanged = false
+	local newval
+	if option.springsetting ~= nil then --nil check as it can be false but maybe not if springconfig only assumes numbers
+		newval = Spring.GetConfigInt( option.springsetting, 0 )
+		if option.type == 'bool' then
+			newval = IntToBool(newval)
+		end
+	else
+		--load option from widget settings
+		if settings.config[fullkey] ~= nil then --nil check as it can be false
+			newval = settings.config[fullkey]
 		end
 	end
 	
-	if custompathsettings[curkey] then
-		local thispath = custompathsettings[curkey]
-		for w, options in pairs(thispath) do
-			for _,option in ipairs(options) do
-				tree2.order[#(tree2.order)+1] = option.key
-				tree2.value[option.key] = option
-			end
+	if option.default == nil then
+		if option.value ~= nil then
+			option.default = option.value
+		else
+			option.default = newval
 		end	
 	end
-	tree2.order = RemoveDups(tree2.order)
 	
-	for i, subtree in pairs(tree2.value) do
-		
-		local subcount = flattenTree(subtree, curkey)
-		if type(subcount) == 'string' then
-			temptree[subtree.name] = { type='menu', name=subtree.name .. '...', subindex=subcount, desc=subtree.desc }
-		else
-			
-			local option = subcount
-			
-			--set keys to index by
-			if not option.key then
-				option.key = option.name
-				--option.key = i or option.name
-			end
-			
-			local fullkey = curkey .. '_' .. option.key
-			fullkey = fullkey:gsub(' ', '_')
-			
-			--get spring config setting
-			local valuechanged = false
-			local newval
-			if option.springsetting ~= nil then --nil check as it can be false but maybe not if springconfig only assumes numbers
-				newval = Spring.GetConfigInt( option.springsetting, 0 )
-				if option.type == 'bool' then
-					newval = IntToBool(newval)
-				end
-			else
-				--load option from widget settings
-				if settings.config[fullkey] ~= nil then --nil check as it can be false
-					newval = settings.config[fullkey]
-				end
-			end
-			
-			if option.default == nil then
-				if option.value ~= nil then
-					option.default = option.value
-				else
-					option.default = newval
-				end	
-			end
-			
-			if newval ~= nil and option.value ~= newval then --must nilcheck newval
-				valuechanged = true
-				option.value = newval
-			end
-			
-			local controlfunc
-			if option.type == 'button' then
-				controlfunc =  
-					function(self)
-						if option.action then
-							Spring.SendCommands{option.action} 
-						end
-					end
-					
-			elseif option.type == 'bool' then
-				
-				controlfunc = 
-					function(self)
-						if self then
-							option.value = self.checked
-						end
-						if option.springsetting then
-							Spring.SetConfigInt( option.springsetting, BoolToInt(option.value) )
-						end
-						settings.config[fullkey] = option.value
-					end
-				
-			elseif option.type == 'number' then
-				if option.valuelist then
-					option.min 	= 1
-					option.max 	= #(option.valuelist)
-					option.step	= 1
-				end
-								
-				controlfunc = 
-					function(self) 
-						if self then
-							if option.valuelist then
-								option.value = option.valuelist[self.value]
-							else
-								option.value = self.value
-							end
-						end
-						
-						if option.springsetting then
-							if not option.value then
-								echo ('<EPIC Menu> Error #444', fullkey)
-							else
-								Spring.SetConfigInt( option.springsetting, option.value )
-							end
-						end
-						settings.config[fullkey] = option.value
-					end
-				
-			elseif option.type == 'list' then
-				controlfunc = 
-					function(key)
-						option.value = key
-						settings.config[fullkey] = option.value
-					end
-				
-			elseif option.type == 'colors' then
-				controlfunc = 
-					function(self) 
-						if self then
-							option.value = self.color
-						end
-						settings.config[fullkey] = option.value		
-					end
-			end
-			
-			--get original option.onchange function
-			local origOnChange = option.OnChange
-			if not option.OnChange or type(option.OnChange) ~= 'function' then
-				origOnChange = function(self) end
-			end
-
-			option.OnChange = function(self)
-				controlfunc(self)
-				origOnChange(option)
-			end
-			
-			--[[ doesn't work right for non-buttons
-			if option.windex and option.type == 'button' then 
-				option.OnChange = function(self)
-					--controlfunc(self)
-					echo '11'
-					origOnChange(option)
-				end
-				if widgetHandler.widgets[option.windex].options then
-				
-					--
-					if not option.key then
-						echo('<EPIC Menu> Error #76', option.windex)
-					elseif not widgetHandler.widgets[option.windex].options[option.key] then
-						echo('<EPIC Menu> Error #77', option.windex, option.key)
-					else
-						widgetHandler.widgets[option.windex].options[option.key].OnChange = function(self)
-							controlfunc(self)
-							--origOnChange(option)
-						end
-					end
-				end
-			end
-			--]]
-			
-			--call onchange once
-			if valuechanged and option.type ~= 'button' and (origOnChange ~= nil) 
-			--and not option.springsetting --need a different solution
-			then 
-				origOnChange(option)
-			end
-			
-			if option.key ~= 'order' then
-				temptree[option.key] = option
-			end
-			
-			--Keybindings
-			if option.type == 'button' or option.type == 'bool' then
-				local actionName = 'epic_' .. fullkey
+	if newval ~= nil and option.value ~= newval then --must nilcheck newval
+		valuechanged = true
+		option.value = newval
+	end
+	
+	
+	
+	local origOnChange = option.OnChange or function() end
+	
+	local controlfunc
+	if option.type == 'button' then
+		controlfunc = 
+			function(self)
 				if option.action then
-					actionName = option.action
+					Spring.SendCommands{option.action} 
+				end
+			end
+	elseif option.type == 'bool' then
+		
+		controlfunc = 
+			function(self)
+				if self then
+					option.value = self.checked
+				end
+				if option.springsetting then
+					Spring.SetConfigInt( option.springsetting, BoolToInt(option.value) )
+				end
+				settings.config[fullkey] = option.value
+			end
+	elseif option.type == 'number' then
+		if option.valuelist then
+			option.min 	= 1
+			option.max 	= #(option.valuelist)
+			option.step	= 1
+		end
+						
+		controlfunc = 
+			function(self) 
+				if self then
+					if option.valuelist then
+						option.value = option.valuelist[self.value]
+					else
+						option.value = self.value
+					end
 				end
 				
-				local uikey_hotkey_str = GetUikeyHotkeyStr(actionName)
-				local uikey_hotkey = uikey_hotkey_str and HotkeyFromUikey(uikey_hotkey_str)
-				
-				local hotkey = settings.keybounditems[actionName] or option.hotkey or uikey_hotkey
-				if hotkey then
-					if uikey_hotkey then
-						UnassignKeyBind(curkey, option)
+				if option.springsetting then
+					if not option.value then
+						echo ('<EPIC Menu> Error #444', fullkey)
+					else
+						Spring.SetConfigInt( option.springsetting, option.value )
 					end
-					AssignKeyBind(hotkey, curkey, option.key, option)
-				end					
-				
+				end
+				settings.config[fullkey] = option.value
 			end
-			
-		end			
-	end
-
-	local curparent = parent
-	if curparent == '' then
-		curparent = false
-	end
-	flatwindowlist[curkey] = {parent = curparent, tree = temptree, name=tree2.name, order=tree2.order }
-	--flatwindowlist[curkey] = {parent = curparent, tree = tree2, name=tree2.name, order=tree2.order }
-	return curkey 
 	
+	elseif option.type == 'colors' then
+		controlfunc = 
+			function(self) 
+				if self then
+					option.value = self.color
+				end
+				settings.config[fullkey] = option.value
+			end
+	
+	elseif option.type == 'list' then
+		controlfunc = 
+			function(key)
+				option.value = key
+				settings.config[fullkey] = option.value
+			end
+	
+	end
+	option.OnChange = function(self)
+		controlfunc(self)
+		origOnChange(option)
+	end
+	
+	--call onchange once
+	if valuechanged and option.type ~= 'button' and (origOnChange ~= nil) 
+	--and not option.springsetting --need a different solution
+	then 
+		origOnChange(option)
+	end
+	
+	pathoptions[path][wname..option.key] = option
+	local temp = #(pathorders[path])
+	pathorders[path][temp+1] = wname..option.key
+	
+	
+	--Keybindings
+	if option.type == 'button' or option.type == 'bool' then
+		local actionName = GetActionName(path, option)
+		
+		local uikey_hotkey_str = GetUikeyHotkeyStr(actionName)
+		local uikey_hotkey = uikey_hotkey_str and HotkeyFromUikey(uikey_hotkey_str)
+		
+		local hotkey = settings.keybounditems[actionName] or option.hotkey or uikey_hotkey
+		if hotkey then
+			if uikey_hotkey then
+				UnassignKeyBind(path, option)
+			end
+			AssignKeyBind(hotkey, path, option, false)
+		end
+	end
+	
+end
+
+local function RemOption(path, option, wname )
+	if not pathorders[path] then
+		--this occurs when a widget unloads itself inside :init
+		--echo ('<epic menu> error #333 ', wname, path)
+		--echo ('<epic menu> ...error #333 ', (option and option.key) )
+		return
+	end
+	for i,v in ipairs(pathorders[path]) do
+		if v == (wname..option.key) then
+			table.remove(pathorders[path], i)
+		end
+	end
+	pathoptions[path][wname..option.key] = nil
+end
+
+
+--(Un)Store custom widget settings for a widget
+local function IntegrateWidget(w, addoptions, index)
+	local options = w.options
+	if type(options) ~= 'table' then
+		return
+	end
+	
+	local wname = w.whInfo.name
+	local defaultpath = w.options_path or ('Settings/Misc/' .. wname)
+	
+	--[[
+	--If a widget disables itself in widget:Initialize it will run the removewidget before the insertwidget is complete. this fix doesn't work
+	if not WidgetEnabled(wname) then
+		return
+	end
+	--]]
+	
+	if w.options.order then
+		echo ("<EPIC Menu> " .. wname ..  ", don't index an option with the word 'order' please, it's too soon and I'm not ready.")
+		w.options.order = nil
+	end
+	
+	--Generate order table if it doesn't exist
+	if not w.options_order then
+		w.options_order = {}
+		for k,v in pairs(options) do
+			w.options_order[#(w.options_order) + 1] = k
+		end
+	end
+	
+	
+	for _,k in ipairs(w.options_order) do
+		local option = options[k]
+		if not option then
+			echo( '<EPIC Menu> Error in loading custom widget settings in ' .. wname .. ', order table incorrect.' )
+			return
+		end
+		
+		--Add empty onchange function if doesn't exist
+		if not option.OnChange or type(option.OnChange) ~= 'function' then
+			w.options[k].OnChange = function(self) end
+		end
+		
+		--store default
+		w.options[k].default = w.options[k].value
+		
+		
+		option.key = k
+		option.wname = wname
+		
+		local origOnChange = w.options[k].OnChange
+		
+		------testing
+		--[[
+		local value = w.options[k].value
+		w.options[k].value = nil
+		w.options[k].priv_value = value
+		setmetatable( w.options[k], w.options[k] )
+		w.options[k].__index = function(t, key)
+			if key == 'value' then
+				if(
+					not wname:find('Chili Chat')
+					and not wname:find('Combo Overhead')
+					and not wname:find('Selections')
+					and not wname:find('Auto Group')
+					and not wname:find('Resource Bars')
+					and not wname:find('Crude Player')
+					and not wname:find('Docking')
+					) then
+					echo ('get val', wname, k, key, t.priv_value)
+				end
+				return t.priv_value
+			end
+		end
+		w.options[k].__newindex = function(t, key, val)
+			if key == 'value' then
+				--echo 'set val'
+				t.priv_value = val
+			end
+		end
+		--]]
+		
+		if option.type ~= 'button' then
+			option.OnChange = 
+				function(self)
+					if self then
+						w.options[k].value = self.value
+					end
+					origOnChange(self)
+				end
+		else
+			option.OnChange = 
+				function(self)
+					origOnChange(self)
+				end
+		end
+		
+		local path = option.path or defaultpath
+		
+		if addoptions then
+			AddOption(path, option, wname )
+		else
+			RemOption(path, option, wname )
+		end
+		
+	end
+	
+	MakeSubWindow(curPath)
+	
+end
+
+--Store custom widget settings for all active widgets
+local function AddAllCustSettings()
+	local cust_tree = {}
+	for i,widget in ipairs(widgetHandler.widgets) do
+		IntegrateWidget(widget, true, i)
+	end
+end
+
+local function RemakeEpicMenu()
 end
 
 
@@ -1237,9 +962,9 @@ WG.crude.ShowFlags = function()
 end
 
 --Make little window to indicate user needs to hit a keycombo to save a keybinding
-local function MakeKeybindWindow(item, menukey, i, hotkey)
+local function MakeKeybindWindow( path, option, hotkey ) 
 	if hotkey then
-		UnassignKeyBind(menukey, item)
+		UnassignKeyBind(path, option)
 	end
 	
 	local window_height = 80
@@ -1249,6 +974,9 @@ local function MakeKeybindWindow(item, menukey, i, hotkey)
 	kb_mkey = menukey
 	kb_mindex = i
 	kb_item = item
+	
+	kb_option = option
+	kb_path = path
 		
 	window_getkey = Window:New{
 		caption = 'Set a HotKey',
@@ -1270,32 +998,28 @@ end
 WG.crude.GetHotkey = function(actionName)
 	local hotkey = settings.keybounditems[actionName]
 	if not hotkey then return '' end
-	return GetReadableHotkeyMod(hotkey.mod) .. hotkey.key
+	return GetReadableHotkeyMod(hotkey.mod) .. CapCase(hotkey.key)
 end
 
 
 --Get hotkey action and readable hotkey string
-local function GetHotkeyData(key, item)
-	local itemkey = item.key
-	local fullkey = ('epic_' .. key .. '_' .. itemkey)
-	fullkey = fullkey:gsub(' ', '_')
-	local actionName = item.action or fullkey
-	
+local function GetHotkeyData(path, option)
+	local actionName = GetActionName(path, option)
 	local hotkey = settings.keybounditems[actionName]
 	if hotkey then
-		return hotkey, GetReadableHotkeyMod(hotkey.mod) .. hotkey.key
+		return hotkey, GetReadableHotkeyMod(hotkey.mod) .. CapCase(hotkey.key)
 	end
 	
 	return nil, 'None'
 end
 
---Make a stack with control and its hotkey "K" button
-local function MakeHotkeyedControl(control, key, i, item)
-	--local hotkey, hotkeystring = GetHotkeyData_i(key, i)
-	local hotkey, hotkeystring = GetHotkeyData(key, item)
+--Make a stack with control and its hotkey button
+local function MakeHotkeyedControl(control, path, option)
+
+	local hotkey, hotkeystring = GetHotkeyData(path, option)
 	local kbfunc = function() 
 			if not get_key then
-				MakeKeybindWindow(item, key, i, hotkey ) 
+				MakeKeybindWindow( path, option, hotkey ) 
 			end
 		end
 
@@ -1310,7 +1034,6 @@ local function MakeHotkeyedControl(control, key, i, item)
 		right=0,
 		width = hklength,
 		--x=-30,
-		--caption = hotkey and 'K*' or 'K', 
 		caption = hotkeystring, 
 		OnMouseUp = { kbfunc },
 		backgroundColor = color.sub_button_bg,
@@ -1335,157 +1058,158 @@ local function MakeHotkeyedControl(control, key, i, item)
 	}
 end
 
-local function ResetWinSettings(windowdata)
-	local tree = windowdata.tree
-	for i, optionkey in ipairs(windowdata.order) do
-		local data = tree[optionkey]
-		if data.default ~= nil then --fixme : need default
-			if data.type == 'bool' or data.type == 'number' then
-				data.value = data.valuelist and GetIndex(data.valuelist, data.default) or data.default
-				data.checked = data.value
-				data.OnChange(data)
-			elseif data.type == 'list' then
-				data.value = data.default
-				data.OnChange(data.default)
-			elseif data.type == 'colors' then
-				data.color = data.default
-				data.OnChange(data)
+local function ResetWinSettings(path)
+	for _,optionkey in ipairs(pathorders[path]) do
+		local option = pathoptions[path][optionkey]
+		if option.default ~= nil then --fixme : need default
+			if option.type == 'bool' or option.type == 'number' then
+				option.value = option.valuelist and GetIndex(option.valuelist, option.default) or option.default
+				option.checked = option.value
+				option.OnChange(option)
+			elseif option.type == 'list' then
+				option.value = option.default
+				option.OnChange(option.default)
+			elseif option.type == 'colors' then
+				option.color = option.default
+				option.OnChange(option)
 			end
 		else
-			echo ('<EPIC Menu> Error #627', data.name)
+			echo ('<EPIC Menu> Error #627', option.name)
 		end
 	end
 end
 
 
+
+
 -- Make submenu window based on index from flat window list
 --local function MakeSubWindow(key)
-MakeSubWindow = function(fwkey)
-	local windowdata = flatwindowlist[fwkey]
-	if not windowdata then
-		return
-	end
-	local menu_name = windowdata.name	
-	local tree = windowdata.tree
-	local parent_key = windowdata.parent
+MakeSubWindow = function(path)
+	if not pathoptions[path] then return end
 	
-	local settings_height = #(windowdata.order) * B_HEIGHT
+	local explodedpath = explode('/', path)
+	explodedpath[#explodedpath] = nil
+	local parent_path = table.concat(explodedpath,'/')
+	
+	local settings_height = #(pathorders[path]) * B_HEIGHT
 	local settings_width = 270
 	
 	local tree_children = {}
 	local hotkeybuttons = {}
 	
-	for i, optionkey in ipairs(windowdata.order) do
-		local data = tree[optionkey]
-		if not data.OnChange then
-			data.OnChange = function(self) end
+	for _,optionkey in ipairs(pathorders[path]) do
+		local option = pathoptions[path][optionkey]
+		
+		local optionkey = option.key
+		
+		--fixme: shouldn't be needed
+		if not option.OnChange then
+			option.OnChange = function(self) end
 		end
-		if not data.desc then
-			data.desc = ''
+		if not option.desc then
+			option.desc = ''
 		end
 		
-		if data.advanced and not settings.config['Settings_Show_Advanced_Settings'] then
+		
+		if option.advanced and not settings.config['epic_Settings_Show_Advanced_Settings'] then
 			--do nothing
-		elseif data.type == 'button' then	
-			local button = Button:New{
-				x=0,
-				--right = 30,
-				minHeight = 30,
-				caption = data.name, 
-				OnMouseUp = {data.OnChange},
-				backgroundColor = color.sub_button_bg,
-				textColor = color.sub_button_fg, 
-				tooltip = data.desc
-			}
-			tree_children[#tree_children+1] = MakeHotkeyedControl(button, fwkey, optionkey, data)
+		elseif option.type == 'button' then
+			local hide = false
 			
-		elseif data.type == 'label' then	
-			tree_children[#tree_children+1] = Label:New{ caption = data.value or data.name, textColor = color.sub_header, }
+			if option.wname == 'epic' then --menu
+				local menupath = option.desc
+				if pathorders[menupath] and #(pathorders[menupath]) == 0 then
+					hide = true
+					settings_height = settings_height - B_HEIGHT
+				end
+			end
 			
-		elseif data.type == 'text' then	
+			if not hide then
+				local button = Button:New{
+					x=0,
+					--right = 30,
+					minHeight = 30,
+					caption = option.name, 
+					OnMouseUp = {option.OnChange},
+					backgroundColor = color.sub_button_bg,
+					textColor = color.sub_button_fg, 
+					tooltip = option.desc
+				}
+				tree_children[#tree_children+1] = MakeHotkeyedControl(button, path, option)
+			end
+			
+		elseif option.type == 'label' then	
+			tree_children[#tree_children+1] = Label:New{ caption = option.value or option.name, textColor = color.sub_header, }
+			
+		elseif option.type == 'text' then	
 			tree_children[#tree_children+1] = 
 				Button:New{
 					width = "100%",
 					minHeight = 30,
-					caption = data.name, 
-					OnMouseUp = { function() MakeHelp(data.name, data.value) end },
+					caption = option.name, 
+					OnMouseUp = { function() MakeHelp(option.name, option.value) end },
 					backgroundColor = color.sub_button_bg,
 					textColor = color.sub_button_fg, 
-					tooltip=data.desc
+					tooltip=option.desc
 				}
 			
-		elseif data.type == 'number' then	
+		elseif option.type == 'bool' then				
+			local chbox = Checkbox:New{ 
+				x=0,
+				right = 35,
+				caption = option.name, 
+				checked = option.value or false, 
+				
+				OnMouseUp = { option.OnChange, }, 
+				textColor = color.sub_fg, 
+				tooltip   = option.desc,
+			}
+			tree_children[#tree_children+1] = MakeHotkeyedControl(chbox,  path, option)
+			
+		elseif option.type == 'number' then	
 			settings_height = settings_height + B_HEIGHT
-			tree_children[#tree_children+1] = Label:New{ caption = data.name, textColor = color.sub_fg, }
-			if data.valuelist then
-				data.value = GetIndex(data.valuelist, data.value)
+			tree_children[#tree_children+1] = Label:New{ caption = option.name, textColor = color.sub_fg, }
+			if option.valuelist then
+				option.value = GetIndex(option.valuelist, option.value)
 			end
 			tree_children[#tree_children+1] = 
 				Trackbar:New{ 
 					width = "100%",
-					caption = data.name, 
-					value = data.value, 
+					caption = option.name, 
+					value = option.value, 
 					trackColor = color.sub_fg, 
-					min=data.min or 0, 
-					max=data.max or 100, 
-					step=data.step or 1, 
-					OnMouseUp = { data.OnChange }, 
-					tooltip=data.desc 
+					min=option.min or 0, 
+					max=option.max or 100, 
+					step=option.step or 1, 
+					OnMouseUp = { option.OnChange }, 
+					tooltip=option.desc 
 				}
 			
-		elseif data.type == 'bool' then				
-			local chbox = Checkbox:New{ 
-				x=0,
-				right = 35,
-				caption = data.name, 
-				checked = data.value or false, 
-				
-				OnMouseUp = { data.OnChange, }, 
-				textColor = color.sub_fg, 
-				tooltip   = data.desc,
-			}
-			tree_children[#tree_children+1] = MakeHotkeyedControl(chbox, fwkey, optionkey, data)
 			
-		elseif data.type == 'list' then	
-			tree_children[#tree_children+1] = Label:New{ caption = data.name, textColor = color.sub_header, }
-			for _,item in ipairs(data.items) do
+		elseif option.type == 'list' then	
+			tree_children[#tree_children+1] = Label:New{ caption = option.name, textColor = color.sub_header, }
+			for _,item in ipairs(option.items) do
 				settings_height = settings_height + B_HEIGHT 
 				tree_children[#tree_children+1] = 
 					Button:New{
 						width = "100%",
 						caption = item.name, 
-						OnMouseUp = { function(self) data.OnChange(item.key) end },
+						OnMouseUp = { function(self) option.OnChange(item.key) end },
 						backgroundColor = color.sub_button_bg,
 						textColor = color.sub_button_fg, 
 						tooltip=item.desc,
 					}
 			end
-			
-			
-		elseif data.type == 'menu' then	
-			local button = Button:New{
-				x=0,
-				right = 0,
-				minHeight = 30,
-				caption = data.name, 
-				OnMouseUp = { function() MakeSubWindow(data.subindex) end },
-				backgroundColor = color.sub_button_bg,
-				textColor = color.sub_button_fg,
-				tooltip=data.desc,
-			}
-				
-			tree_children[#tree_children+1] = button
-		
-		elseif data.type == 'colors' then
+		elseif option.type == 'colors' then
 			settings_height = settings_height + B_HEIGHT*2.5
-			tree_children[#tree_children+1] = Label:New{ caption = data.name, textColor = color.sub_fg, }
+			tree_children[#tree_children+1] = Label:New{ caption = option.name, textColor = color.sub_fg, }
 			tree_children[#tree_children+1] = 
 				Colorbars:New{
 					width = "100%",
 					height = B_HEIGHT*2,
-					tooltip=data.desc,
-					color = data.value or {1,1,1,1},
-					OnMouseUp = { data.OnChange, },
+					tooltip=option.desc,
+					color = option.value or {1,1,1,1},
+					OnMouseUp = { option.OnChange, },
 				}
 				
 		end
@@ -1526,14 +1250,14 @@ MakeSubWindow = function(fwkey)
 	window_height = window_height + B_HEIGHT
 	local backButton 
 	--back button
-	if parent_key then
-		window_children[#window_children+1] = Button:New{ caption = 'Back', OnMouseUp = { KillSubWindow, function() MakeSubWindow(parent_key) end,  }, 
+	if parent_path then
+		window_children[#window_children+1] = Button:New{ caption = 'Back', OnMouseUp = { KillSubWindow, function() MakeSubWindow(parent_path) end,  }, 
 			backgroundColor = color.sub_back_bg,textColor = color.sub_back_fg, x=0, bottom=1, width='33%', height=B_HEIGHT, }
 	end
 	
 	
 	--reset button
-	window_children[#window_children+1] = Button:New{ caption = 'Reset', OnMouseUp = { function() ResetWinSettings(windowdata); RemakeEpicMenu(); end }, 
+	window_children[#window_children+1] = Button:New{ caption = 'Reset', OnMouseUp = { function() ResetWinSettings(path); RemakeEpicMenu(); end }, 
 		textColor = color.sub_close_fg, backgroundColor = color.sub_close_bg, width='33%', x='33%', right='33%', bottom=1, height=B_HEIGHT, }
 	
 	
@@ -1543,17 +1267,16 @@ MakeSubWindow = function(fwkey)
 	
 	
 	
-	
-	
 	KillSubWindow()
-	curSubKey = fwkey -- must be done after KillSubWindow
+	curPath = path -- must be done after KillSubWindow
 	window_sub_cur = Window:New{  
-		caption=menu_name,
+		caption=path,
 		x = settings.sub_pos_x,  
 		y = settings.sub_pos_y, 
 		clientWidth = window_width,
 		clientHeight = window_height+B_HEIGHT*4,
-		minimumSize = {250,350},		
+		minWidth = 250,
+		minHeight = 350,		
 		--resizable = false,
 		parent = settings.show_crudemenu and screen0 or nil,
 		backgroundColor = color.sub_bg,
@@ -1588,63 +1311,6 @@ local function ShowHideCrudeMenu()
 	end
 end
 
-local function MakePath(path)
-	if #path == 0 then
-		return {}
-	end
-
-	local path2 = {}
-	for i = 2,#path do
-		path2[i-1] = path[i]
-	end
-	local tree = {
-		[path[1]] = 
-			{
-				type = 'menu',
-				name = path[1],
-				key = path[1],
-				order = { path[2] }, 
-				value = MakePath(path2),
-			}
-	}
-	return tree
-end
-
-
-
-local function AddCustomPaths(menuname)
-	local menutreeret = {}
-	local custompathtree = {}
-	--for pathstring, _ in pairs(custompaths) do
-	for _, pathstring in ipairs(custompaths_i) do --number indexed so that paths are added to menu in the order they appear in the widget
-		local path = explode('/', pathstring)
-		if path[1] == menuname then
-			local custompathtreecur = MakePath( path )
-			tableMerge( custompathtree, custompathtreecur[menuname], true )
-		end
-		
-	end
-	tableMerge( menutreeret, custompathtree, true )
-	return menutreeret
-end
-
--- Make menubar
-local function BuildMenuTree()
-	
-	local menu_tree3 		= AddCustomPaths('Settings')
-	local game_menu_tree3 	= AddCustomPaths('Game')
-	local help_menu_tree3 	= AddCustomPaths('Help')
-	
-	for actionName, _ in pairs( settings.keybounditems ) do
-		RemoveAction(actionName)
-	end
-	
-	local main_menu_index = flattenTree(menu_tree3, '')
-	local game_menu_index = flattenTree(game_menu_tree3, '' )
-	local help_menu_index = flattenTree(help_menu_tree3, '' )
-	
-end
-
 local function MakeMenuBar()
 	local btn_padding = {4,3,2,2}
 	local btn_margin = {0,0,0,0}
@@ -1658,11 +1324,71 @@ local function MakeMenuBar()
 	lbl_clock = Label:New{ name='lbl_clock', caption = 'Clock:', width = 35, height=5, textColor = color.main_fg, autosize=false, }
 	img_flag = Image:New{ tooltip='Choose Your Location', file=":cn:".. LUAUI_DIRNAME .. "Images/flags/".. settings.country ..'.png', width = 16,height = 11, OnClick = { MakeFlags }, margin={4,4,4,4}  }
 	
+	local screenWidth,screenHeight = Spring.GetWindowGeometry()
+	
+	window_exit = Window:New{
+		name='exitwindow',
+		x = screenWidth*0.5-50,  
+		y = screenHeight*0.5-70,  
+		dockable = false,
+		clientWidth = 120,
+		clientHeight = 150,
+		draggable = false,
+		tweakDraggable = true,
+		resizable = false,
+		minimizable = false,
+		backgroundColor = color.main_bg,
+		color = {1,1,1,0.5},
+		margin = {0,0,0,0},
+		padding = {0,0,0,0},
+		
+		children = {
+				
+			Label:New{ 
+				caption = 'Leave Battle?', 
+				x = 0,
+				y = 15,
+				width = 120, 
+				align="center",
+				textColor = color.main_fg },
+				
+			Button:New{
+				caption = "Exit", OnMouseUp = { function() spSendCommands{"quit","quitforce"} end, }, 
+				x = 20,  
+				y = 46, 
+				height=25, 
+				width=80,
+			},
+			
+			
+			Button:New{
+				caption = "Resign", OnMouseUp = { function() spSendCommands{"spectator"} end, }, 
+				x = 20,  
+				y = 78, 
+				height=25, 
+				width=80,
+			},
+			
+			Button:New{
+				caption = "Cancel", 
+				OnMouseUp = { function() 
+						screen0:RemoveChild(window_exit) 
+						exitWindowVisible = false
+					end, }, 
+				x = 20,  
+				y = 110, 
+				height=25, 
+				width=80,
+			},
+		},
+	}
+	
+	screen0:RemoveChild(window_exit)
+		
 	window_crude = Window:New{
 		name='epicmenubar',
-		top = 0,  
-		right = '20%',  
---		y = 50, -- resbar height
+		right = 300,  
+		y = 10, -- resbar height
 		dockable = true,
 		clientWidth = crude_width,
 		clientHeight = crude_height,
@@ -1830,8 +1556,14 @@ local function MakeMenuBar()
 						},
 					},
 					Button:New{
-						caption = "", OnMouseUp = { function() spSendCommands{"quitmenu"} end, }, textColor=color.menu_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
-						padding = btn_padding, margin = btn_margin, tooltip = 'Exit the game...',
+						caption = "", OnMouseUp = { function() 
+								if not exitWindowVisible then
+									screen0:AddChild(window_exit) 
+									exitWindowVisible = true
+								end
+							end, }, 
+						textColor=color.menu_fg, height=B_HEIGHT+4, width=B_HEIGHT+5,
+						padding = btn_padding, margin = btn_margin, tooltip = 'Exit or Resign...',
 						children = {
 							Image:New{file=LUAUI_DIRNAME .. 'Images/epicmenu/quit.png', height=B_HEIGHT-2,width=B_HEIGHT-2,  }, 
 						},
@@ -1845,14 +1577,16 @@ end
 
 --Remakes crudemenu and remembers last submenu open
 RemakeEpicMenu = function()
-	local lastSubKey = curSubKey
+	local lastPath = curPath
 	KillSubWindow()
-	BuildMenuTree()
-	if lastSubKey ~= '' then	
-		MakeSubWindow(lastSubKey)
+	if lastPath ~= '' then	
+		MakeSubWindow(lastPath)
 	end
 end
 
+function WG.crude.OpenPath(path)
+	MakeSubWindow(path)
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -1864,38 +1598,19 @@ end
 
 
 function widget:Initialize()
+	
+	Spring.SendCommands("unbindaction quitmenu") -- http://springrts.com/mantis/view.php?id=2944
+	
 	if (not WG.Chili) then
 		widgetHandler:RemoveWidget(widget)
 		return
 	end
 	init = true
 	
-	WG.country = settings.country	
-	WG.lang = settings.lang
-	
 	
 	Spring.SendCommands("unbindaction hotbind")
 	Spring.SendCommands("unbindaction hotunbind")
 	
-	-- Clears all saved settings of custom widgets stored in crudemenu's config
-	WG.crude.ResetSettings = function()
-		for fwkey, windowdata in pairs(flatwindowlist) do
-			ResetWinSettings(windowdata)
-		end
-		RemakeEpicMenu()
-		echo 'Cleared all settings.'
-	end
-	
-	WG.crude.ResetKeys = function()
-		for actionName,_ in pairs(settings.keybounditems) do
-			--local actionNameL = actionName:lower()
-			local actionNameL = actionName
-			Spring.SendCommands({"unbindaction " .. actionNameL})
-		end
-		settings.keybounditems = {}
-		
-		echo 'Cleared all hotkeys.'
-	end
 
 	-- setup Chili
 	Chili = WG.Chili
@@ -1915,25 +1630,6 @@ function widget:Initialize()
 	Colorbars = Chili.Colorbars
 	screen0 = Chili.Screen0
 
-	-- add custom widget settings to crudemenu
-	AddAllCustSettings()
-	
-	AddOption('Settings', 'epic')
-	AddOption('Settings/Reset Settings', 'epic')
-	AddOption('Settings/Camera', 'epic')
-	AddOption('Settings/Interface', 'epic')
-	AddOption('Settings/Misc', 'epic')
-	AddOption('Settings/Mouse Cursor', 'epic')
-	AddOption('Settings/Video', 'epic')
-	AddOption('Settings/View', 'epic')
-	AddOption('Game', 'epic')
-	AddOption('Help', 'epic')
-	
-	local options_temp ={}
-	CopyTable(options_temp , epic_options);
-	for i,option in ipairs(options_temp ) do
-		AddOption(option.path, 'epic', option)
-	end
 	
 	
 	widget:ViewResize(Spring.GetViewGeometry())
@@ -1965,19 +1661,59 @@ function widget:Initialize()
 		settings.country = myCountry
 	end
 	
+	WG.country = settings.country	
+	WG.lang = settings.lang
+	
+		-- add custom widget settings to crudemenu
+	AddAllCustSettings()
+	
+
+	--this is done to establish order the correct button order
+	AddOption('Settings/Reset Settings')
+	AddOption('Settings/Camera')
+	AddOption('Settings/Interface')
+	AddOption('Settings/Misc')
+	AddOption('Settings/Mouse Cursor')
+	AddOption('Settings/Video')
+	AddOption('Settings/View')
+	
+	local options_temp ={}
+	CopyTable(options_temp , epic_options);
+	for i,option in ipairs(options_temp ) do
+		AddOption(option.path, option)
+	end
+	
+	-- Clears all saved settings of custom widgets stored in crudemenu's config
+	WG.crude.ResetSettings = function()
+		for path, _ in pairs(pathoptions) do
+			ResetWinSettings(path)
+		end
+		RemakeEpicMenu()
+		echo 'Cleared all settings.'
+	end
+	
+	WG.crude.ResetKeys = function()
+		for actionName,_ in pairs(settings.keybounditems) do
+			--local actionNameL = actionName:lower()
+			local actionNameL = actionName
+			Spring.SendCommands({"unbindaction " .. actionNameL})
+		end
+		settings.keybounditems = {}
+		
+		echo 'Cleared all hotkeys.'
+	end
+	
 	-- Add actions for keybinds
 	AddAction("crudemenu", ActionMenu, nil, "t")
-	AddAction("crudewidgetlist", ActionWidgetList, nil, "t")
+	AddAction("exitwindow", ActionExitWindow, nil, "t")
 	-- replace default key binds
 	Spring.SendCommands({
 		"unbind esc quitmessage",
 		"unbind esc quitmenu", --Upgrading to 0.82 doesn't change existing uikeys so pre-0.82 keybinds still apply.
-		"unbindkeyset f11"
 	})
 	Spring.SendCommands("bind esc crudemenu")
-	Spring.SendCommands("bind f11 crudewidgetlist")
+	Spring.SendCommands("bind shift+esc exitwindow")
 
-	BuildMenuTree()
 	MakeMenuBar()
 	
 	-- Override widgethandler functions for the purposes of alerting crudemenu 
@@ -2047,16 +1783,15 @@ function widget:Shutdown()
   end
 
   RemoveAction("crudemenu")
-  RemoveAction("crudewidgetlist")
  
   -- restore key binds
+  --[[
   Spring.SendCommands({
     "bind esc quitmessage",
     "bind esc quitmenu", -- FIXME made for licho, removed after 0.82 release
-    "bind f11  luaui selector"
   })
+  --]]
   Spring.SendCommands("unbind esc crudemenu")
-  Spring.SendCommands("unbind f11 crudewidgetlist")
 end
 
 function widget:GetConfigData()
@@ -2085,7 +1820,7 @@ function widget:Update()
 		if lbl_clock then
 			--local displaySeconds = true
 			--local format = displaySeconds and "%H:%M:%S" or "%H:%M"
-			local format = "%H:%M"
+			local format = "%H:%M" --fixme: running game for over an hour pushes time label down
 			--lbl_clock:SetCaption( 'Clock\n ' .. os.date(format) )
 			lbl_clock:SetCaption( os.date(format) )
 		end
@@ -2119,21 +1854,17 @@ function widget:KeyPress(key, modifier, isRepeat)
 		get_key = false
 		window_getkey:Dispose()
 		translatedkey = transkey[ keysyms[''..key]:lower() ] or keysyms[''..key]:lower()
-		kbval = { key = translatedkey, mod = modstring, }		
+		local hotkey = { key = translatedkey, mod = modstring, }		
 		
 		if key ~= KEYSYMS.ESCAPE then		
-			AssignKeyBind(kbval, kb_mkey, kb_mindex, kb_item, true) -- param5 = verbose
+			AssignKeyBind(hotkey, kb_path, kb_option, true) -- param4 = verbose
 		else
-			local actionName = 'epic_'.. kb_mkey .. '_' .. kb_item.key
-			actionName = actionName:gsub(' ', '_')
-			if kb_item.action then
-				actionName = kb_item.action
-			end
+			local actionName = GetActionName(kb_path, kb_option)
 			echo( 'Unbound hotkeys from action: ' .. actionName )
 		end
 		
-		if kb_mkey == curSubKey then
-			MakeSubWindow(kb_mkey)
+		if kb_path == curPath then
+			MakeSubWindow(kb_path)
 		end
 		
 		return true
@@ -2141,15 +1872,24 @@ function widget:KeyPress(key, modifier, isRepeat)
 	
 end
 
+function ActionExitWindow()
+	if exitWindowVisible then
+		screen0:RemoveChild(window_exit) 
+		exitWindowVisible = false
+	else
+		screen0:AddChild(window_exit) 
+		exitWindowVisible = true
+	end						
+end
+
 function ActionMenu()
 	settings.show_crudemenu = not settings.show_crudemenu
 	ShowHideCrudeMenu()
 end
 
-function ActionWidgetList()
-	if window_widgetlist then
-		KillWidgetList()
-	else
-		MakeWidgetList()
+function WG.crude.ShowMenu() --// allow other widget to toggle-up Epic-Menu. This'll enable access to game settings' Menu via click on other GUI elements.
+	if not settings.show_crudemenu then 
+		settings.show_crudemenu = true
+		ShowHideCrudeMenu()
 	end
 end

@@ -23,7 +23,7 @@ options = {
 		name = "Docking distance",
 		type = 'number',
 		advanced = true,
-		value = 20,
+		value = 5,
 		min=1,max=50,step=1,
 		OnChange = {function() 
 			forceUpdate = true
@@ -43,6 +43,7 @@ options = {
 
 local lastPos = {} -- "windows" indexed array of {x,y,x2,y2}
 local settings = {} -- "window name" indexed array of {x,y,x2,y,2}
+local buttons = {} -- "window name" indexed array of minimize buttons
 
 
 function widget:Initialize()
@@ -114,7 +115,9 @@ local function GetBoxRelation(boxa, boxb)
 	
 	if axis ~= nil then return axis, dist 
 	else return nil, nil end
-end 
+end
+
+ 
 
 
 -- returns closest axis to snap to existing windows or screen edges - first parameter is axis (L/R/T/D) second is snap distance 
@@ -177,7 +180,45 @@ local function SnapBox(wp, a,d)
 	end 
 end 
 
+
 local lastCount = 0
+local lastWidth = 0
+local lastHeight= 0
+
+local function GetButtonPos(win)
+	local size = 5 -- button thickness
+	local mindist = win.x*5000 + win.height
+	local mode = 'L'
+	
+	local dist = win.y*5000 + win.width
+	if dist < mindist then
+		mindist = dist
+		mode = 'T'
+	end 
+	
+	dist = (screen0.width - win.x - win.width)*5000 + win.height
+	if dist < mindist then
+		mindist = dist
+		mode = 'R'
+	end
+	
+	dist = (screen0.height - win.y - win.height)*5000 + win.width
+	if dist < mindist then
+		mindist = dist
+		mode = 'B'
+	end
+	
+	
+	if mode == 'L' then
+		return {x=win.x-3, y= win.y, width = size, height = win.height}
+	elseif mode =='T' then
+		return {x=win.x, y= win.y-3, width = win.width, height = size}
+	elseif mode =='R' then
+		return {x=win.x + win.width - size-3, y= win.y, width = size, height = win.height}
+	elseif mode=='B' then
+		return {x=win.x, y= win.y + win.height - size-3, width = win.width, height = size}
+	end 
+end 
 
 function widget:DrawScreen() 
 	frameCounter = frameCounter +1
@@ -186,9 +227,17 @@ function widget:DrawScreen()
 	
 	local posChanged = false -- has position changed since last check
 
+	if (screen0.width ~= lastWidth or screen0.height ~= lastHeight) then 
+		forceUpdate = true
+		lastWidth = screen0.width
+		lastHeight = screen0.height
+	end 
+	
 	local present = {}
-	for _, win in ipairs(screen0.children) do 
+	local names = {}
+	for _, win in ipairs(screen0.children) do  -- NEEDED FOR MINIMIZE BUTTONS: table.shallowcopy( 
 		if (win.dockable) then 
+			names[win.name] = win
 			present[win] = true
 			local lastWinPos = lastPos[win]
 			if lastWinPos==nil then  -- new window appeared
@@ -227,12 +276,72 @@ function widget:DrawScreen()
 	for win, _ in pairs(lastPos) do  -- delete those not present atm
 		if not present[win] then lastPos[win] = nil end
 	end 
+
+	-- BUTTONS to minimize stuff
+	-- FIXME HACK use object:IsDescendantOf(screen0) from chili to detect visibility, not this silly hack stuff with button.winVisible
+	for name, win in pairs(names) do 
+		if win.minimizable then
+			local button = buttons[name]
+			if not button then 
+				button = Chili.Button:New{x = win.x, y = win.y; width=50; height=20; 
+                    caption='';dockable=false,winName = win.name, tooltip='Minimize ' .. win.name, backgroundColor={0,1,0,1},
+					OnClick = {
+						function(self)
+							if button.winVisible then
+								win.hidden = true -- todo this is needed for minimap to hide self, remove when windows can detect if its on the sreen or not
+								button.tooltip = 'Expand ' .. button.winName
+								button.backgroundColor={1,0,0,1}
+								if not win.selfImplementedMinimizable then
+									screen0:RemoveChild(win)
+								else
+									win.selfImplementedMinimizable(false)
+								end
+							else 
+								win.hidden = false
+								button.tooltip = 'Minimize ' .. button.winName
+								button.backgroundColor={0,1,0,1}
+								if not win.selfImplementedMinimizable then
+									screen0:AddChild(win)
+								else
+									win.selfImplementedMinimizable(true)
+								end
+							end 
+							button.winVisible = not button.winVisible
+						end
+					}
+				}
+				screen0:AddChild(button)
+				button:BringToFront()
+				buttons[name] = button
+			end
+			local pos = GetButtonPos(win)
+			button:SetPos(pos.x,pos.y, pos.width, pos.height)
+			if not button.winVisible then
+				button.winVisible = true 
+				win.hidden = false
+                button.tooltip = 'Minimize ' .. button.winName
+				button.backgroundColor={0,1,0,1}
+				button:Invalidate()
+			end
+		end
+	end 
+	
+	for name, button in pairs(buttons) do
+		if not names[name] and button.winVisible then -- widget hid externally
+			button.winVisible = false
+            button.tooltip = 'Expand ' .. button.winName
+			button.backgroundColor={1,0,0,1}
+			button:Invalidate()
+		end 
+	end 
+	
 	
 	if forceUpdate or (posChanged and options.dockEnabled.value) then 
 		forceUpdate = false
 		local dockWindows = {}	 -- make work array of windows 
-		for _, win in ipairs(screen0.children) do 
-			if (win.dockable) then 
+		for _, win in ipairs(screen0.children) do
+			local dock = win.collide or win.dockable
+			if (dock) then 
 				dockWindows[win] = {win.x, win.y, win.x + win.width, win.y + win.height}
 			end 
 		end 
@@ -267,6 +376,13 @@ end
 
 
 
+function widget:ViewResize(vsx, vsy)
+	scrW = vsx
+	scrH = vsy
+end
+
+
+
 
 function widget:SetConfigData(data)
 	settings = data
@@ -275,6 +391,5 @@ end
 function widget:GetConfigData()
 	return settings
 end
-
 
 
