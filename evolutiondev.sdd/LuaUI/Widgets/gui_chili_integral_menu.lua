@@ -2,22 +2,28 @@
 -- TODO: add missing command icons
 -- TODO: commandschanged gets called 2x for some reason, investigate
 -- TODO: display which unit is currently selected
--- TODO: display build progress
 -- TODO: proper tooltips for queue buttons
+-- TODO: make tab scrolling with keyboard detect actions prevmenu and nextmenu instead of KeyPress
 
 function widget:GetInfo()
   return {
     name      = "Chili Integral Menu",
-    desc      = "v0.3 Integral Command Menu",
+    desc      = "v0.352 Integral Command Menu",
     author    = "Licho, KingRaptor, Google Frog",
     date      = "12.10.2010",
     license   = "GNU GPL, v2 or later",
-    layer     = math.huge,
+    layer     = math.huge-1,
     enabled   = true,
 	handler   = true,
   }
 end
 
+include("keysym.h.lua")
+--[[
+for i,v in pairs(KEYSYMS) do
+	Spring.Echo(i.."\t"..v)
+end
+--]]
 --[[
 HOW IT WORKS:
 	Main window (invisible) is parent of a fake window.
@@ -38,35 +44,107 @@ HOW IT WORKS:
 	
 NOTE FOR OTHER GAME DEVS:
 	ZK uses WG.GetBuildIconFrame to draw the unit type border around buildpics.
-	IF you're not using them (likely), remove all lines containing that function.
+	If you're not using them (likely), remove all lines containing that function.
 --]]
 
 ------------------------
 --  CONFIG
 ------------------------
+------------------------
+options_path = 'Settings/Interface/Integral Menu'
+options_order = { 'disablesmartselect', 'hidetabs', }
+options = {
+	disablesmartselect = {
+		name = 'Disable Smart Tab Select',
+		type = 'bool',
+	},
+	hidetabs = {
+		name = 'Hide Tab Row',
+		type = 'bool',
+		advanced = true,
+	},
+}
+
+
+------------------------
 --speedups
 local spGetUnitDefID = Spring.GetUnitDefID
+local spGetUnitHealth     = Spring.GetUnitHealth
 local spGetFullBuildQueue = Spring.GetFullBuildQueue
+local spGetUnitIsBuilding = Spring.GetUnitIsBuilding
 
 local push        = table.insert
 
 local CMD_PAGES = 60
-local CMD_MORPH = 31210
 
-local common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, globalCommands, overrides = include("Configs/integral_menu_commands.lua")
+local common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, globalCommands, overrides, custom_cmd_actions = include("Configs/integral_menu_commands.lua")
+
+local function CapCase(str)
+	local str = str:lower()
+	str = str:gsub( '_', ' ' )
+	str = str:sub(1,1):upper() .. str:sub(2)
+	
+	str = str:gsub( ' (.)', 
+		function(x) return (' ' .. x):upper(); end
+		)
+	return str
+end
+
+local function AddHotkeyOptions()
+	local options_order_tmp_cmd = {}
+	local options_order_tmp_states = {}
+	for cmdname, number in pairs(custom_cmd_actions) do 
+			
+		local cmdnamel = cmdname:lower()
+		local cmdname_disp = CapCase(cmdname)
+		options[cmdnamel] = {
+			name = cmdname_disp,
+			type = 'button',
+			action = cmdnamel,
+			path = 'Game/Commands',
+		}
+		if number == 2 then
+			options_order_tmp_states[#options_order_tmp_states+1] = cmdnamel
+		else
+			options_order_tmp_cmd[#options_order_tmp_cmd+1] = cmdnamel
+		end
+	end
+
+	options.lblcmd 			= { type='label', name='Instant Commands', path = 'Game/Commands',}
+	options['lblstate'] 	= { type='label', name='State Commands', path = 'Game/Commands',}
+	
+	
+	table.sort(options_order_tmp_cmd)
+	table.sort(options_order_tmp_states)
+
+	options_order[#options_order+1] = 'lblcmd'
+	for _, option in ipairs( options_order_tmp_cmd ) do
+		options_order[#options_order+1] = option
+	end
+	
+	options_order[#options_order+1] = 'lblstate'
+	for _, option in ipairs( options_order_tmp_states ) do
+		options_order[#options_order+1] = option
+	end
+end
+
+AddHotkeyOptions()
+
 
 local MAX_COLUMNS = 6
 local MAX_STATE_ROWS = 5
 local MIN_HEIGHT = 80
 local MIN_WIDTH = 200
-local DEFAULT_WIDTH = 500
-local COMMAND_SECTION_WIDTH = 74	--percent
-local STATE_SECTION_WIDTH = 24	--percent
+local COMMAND_SECTION_WIDTH = 74	-- percent
+local STATE_SECTION_WIDTH = 24	-- percent
 
 local numRows = 3
 local numStateColumns = 3
 
-local selectedFac	--unitID
+local forceUpdateFrequency = 0.2	-- seconds
+
+local selectedFac	-- unitID
+local alreadyRemovedTag = {}
 
 -- Chili classes
 local Chili
@@ -75,11 +153,8 @@ local Label
 local Colorbars
 local Checkbox
 local Window
-local ScrollPanel
+local Panel
 local StackPanel
-local LayoutPanel
-local Grid
-local Trackbar
 local TextBox
 local Image
 local Progressbar
@@ -97,6 +172,7 @@ local states_main	--parent row of state buttons
 local sp_states = {}	--buttons
 local buildRow	--row of build queue buttons
 local buildRowButtons = {}	--contains arrays indexed by number 1 to MAX_COLUMNS, each of which contains three subobjects: button, label and image
+local buildProgress	--Progressbar, child of buildRowButtons[1].image; updates every gameframe
 
 local buildRow_visible = false
 local buildQueue = {}	--build order table of selectedFac
@@ -114,18 +190,13 @@ local n_states = {}
 --shortcuts
 local menuChoices = {
 	[1] = { array = n_common, name = "Order" },
-	[2] = { array = n_factories, name = "Factory" },
-	[3] = { array = n_econ, name = "Econ" },
-	[4] = { array = n_defense, name = "Defense" },
-	[5] = { array = n_special, name = "Special" },
+	[2] = { array = n_factories, name = "Factory", config = factory_commands },
+	[3] = { array = n_econ, name = "Econ", config = econ_commands },
+	[4] = { array = n_defense, name = "Defense", config = defense_commands },
+	[5] = { array = n_special, name = "Special", config = special_commands },
 	[6] = { array = n_units, name = "Units" },
 }
-local configArrayList = {	--should merge with the above array but ehh...
-	[2] = factory_commands,
-	[3] = econ_commands,
-	[4] = defense_commands,
-	[5] = special_commands,
-}
+
 local menuChoice = 1
 local lastBuildChoice = 2
 
@@ -179,6 +250,15 @@ local function MakeButton(container, cmd, insertItem)
 		text = cmd.name 
 	end
 	
+	
+	
+	local hotkey = cmd.action and WG.crude.GetHotkey(cmd.action) or ''
+	
+	
+	if not isState and hotkey ~= '' then
+		text = '\255\0\255\0' .. hotkey
+	end
+	
 	--count label (for factory build options)
 	if menuChoice == 6 and isBuild and buildQueueUnsorted[-cmd.id] then
 		countText = tostring(buildQueueUnsorted[-cmd.id])
@@ -194,7 +274,7 @@ local function MakeButton(container, cmd, insertItem)
 	elseif isBuild then
 		texture = '#'..-cmd.id
 	else
-		texture = cmd.texture 
+		texture = cmd.texture
 	end 
 	
 	-- tooltip 
@@ -202,6 +282,14 @@ local function MakeButton(container, cmd, insertItem)
 		tooltip = te.tooltip
 	else 
 		tooltip = cmd.tooltip
+	end
+	if isBuild and selectedFac then
+		local ud = UnitDefs[-cmd.id]
+		tooltip = "Build Unit: " .. ud.humanName .. " - " .. ud.tooltip .. "\n"	-- for special options
+	end
+	
+	if hotkey ~= '' then
+		tooltip = tooltip .. ' (\255\0\255\0' .. hotkey .. '\008)'	
 	end
 	
 	-- get cached menu item 
@@ -211,7 +299,7 @@ local function MakeButton(container, cmd, insertItem)
 			Spring.SendMessage("CommandBar - internal error, unexpectedly adding item!")
 		end 
 		-- decide color 
-		local color = {1,1,1,1}
+--[[		local color = {1,1,1,1}
 		if te ~= nil and te.color ~= nil then 
 			color = te.color 
 		elseif cmd.name ~= nil then 
@@ -220,7 +308,7 @@ local function MakeButton(container, cmd, insertItem)
 				color = cmdColors[nl]
 				color[4] = color[4] + 0.2
 			end 
-		end
+		end]]
 		
 		local button = Button:New {
 			parent=container;
@@ -230,13 +318,14 @@ local function MakeButton(container, cmd, insertItem)
 			isDisabled = cmd.disabled;
 			tooltip = tooltip;
 			cmdid = cmd.id;
-			OnMouseDown = {ClickFunc}
+			OnMouseDown = {ClickFunc} --activate the clicked command
 		}
 		if cmd.OnClick then 
 			button.OnMouseDown = cmd.OnClick
 		end 
 		if (isState) then 
-			button.padding = {0,0,0,0}
+			button.padding = {4,4,2.5,2}
+--			button.backgroundColor = {0,0,0,0}
 		end 
 		if (isBuild) then
 			button.padding = {1,1,1,1}
@@ -248,7 +337,7 @@ local function MakeButton(container, cmd, insertItem)
 				width="100%";
 				height="100%";
 				autosize=false;
-				align="center";
+				align="left";
 				valign="top";
 				caption = text;
 				fontSize = 11;
@@ -260,16 +349,25 @@ local function MakeButton(container, cmd, insertItem)
 		local image
 		if (texture and texture ~= "") then
 			image= Image:New {
-				width="100%";
-				height="90%";
-				y="6%";
-				color = color;
-				keepAspect = true,	--isState;
+				width="90%";
+				height= (not isBuild) and nil or "90%";
+				bottom = (isBuild) and 10 or nil;
+				y="5%";
+				x="5%";
+--				color = color;
+				keepAspect = not isBuild,	--true,	--isState;
 				file = texture;
 				parent = button;
 			}
---			if isBuild then image.file2 = WG.GetBuildIconFrame(UnitDefs[-cmd.id]) end
---		else 
+			-- if isBuild then 
+				-- image.file2 = WG.GetBuildIconFrame(UnitDefs[-cmd.id]) 
+			-- end 
+			
+			if isState then 
+				height = "100%"
+				y = 0
+			end
+		else 
 			if label~=nil then label.valign="center" end
 		end 
 		
@@ -286,8 +384,22 @@ local function MakeButton(container, cmd, insertItem)
 				fontSize = 16;
 				fontShadow = true;
 			}
+			local costLabel = Label:New {
+				parent = button,
+				right = 0;
+				y = 0;
+				x = 3;
+				bottom = 3;
+				autosize=false;
+				align="left";
+				valign="bottom";
+				caption = string.format("%d m", UnitDefs[-cmd.id].metalCost);
+				fontSize = 11;
+				fontShadow = true;
+			}
 		end
 		
+
 		--if button is disabled, set effect accordingly
 		if button.isDisabled then 
 			button.backgroundColor = {0,0,0,1};
@@ -329,7 +441,7 @@ local function MakeButton(container, cmd, insertItem)
 		item.countLabel:SetCaption(countText)
 	end
 	
-	if (item.image and texture ~= item.image.file) then 
+	if (item.image and (texture ~= item.image.file or isState) ) then 
 		item.image.file = texture
 		item.image:Invalidate()
 	end 
@@ -437,7 +549,6 @@ end
 local function BuildRowButtonFunc(num, cmdid, left, right)
 	buildQueue = spGetFullBuildQueue(selectedFac)
 	local alt,ctrl,meta,shift = Spring.GetModKeyState()
-	local order = CMD.INSERT
 	local pos = 1
 	local numInput = 1	--number of times to send the order
 	
@@ -480,14 +591,22 @@ local function BuildRowButtonFunc(num, cmdid, left, right)
 	--Spring.Echo(cmdid)
 	if not right then
 		for i = 1, numInput do
-			Spring.GiveOrderToUnit(selectedFac, order, {pos, cmdid, 0 }, {"alt", "ctrl"})
+			Spring.GiveOrderToUnit(selectedFac, CMD.INSERT, {pos, cmdid, 0 }, {"alt", "ctrl"})
 		end
 	else
+		-- delete from back so that the order is not canceled while under construction
 		local i = 0
-		while commands[i+pos] and commands[i+pos].id == cmdid and i < numInput do
-			Spring.GiveOrderToUnit(selectedFac, CMD.REMOVE, {commands[i+pos].tag}, {"ctrl"})
+		while commands[i+pos] and commands[i+pos].id == cmdid and not alreadyRemovedTag[commands[i+pos].tag] do
 			i = i + 1
 		end
+		i = i - 1
+		j = 0
+		while commands[i+pos] and commands[i+pos].id == cmdid and j < numInput do
+			Spring.GiveOrderToUnit(selectedFac, CMD.REMOVE, {commands[i+pos].tag}, {"ctrl"})
+			alreadyRemovedTag[commands[i+pos].tag] = true
+			j = j + 1
+			i = i - 1
+		end 
 	end
 end
 
@@ -510,7 +629,7 @@ local function ManageBuildRow()
 	if buildQueue[MAX_COLUMNS + 1] then 
 		overrun = true 
 	end
-	
+
 	for i=1, MAX_COLUMNS do
 		local buttonArray = buildRowButtons[i]
 		if buttonArray.button then RemoveChildren(buttonArray.button) end
@@ -528,9 +647,9 @@ local function ManageBuildRow()
 			else caption = '' end
 			buttonArray.button = Button:New{
 				parent = buildRow;
-				x = tostring((i-1)*(100/MAX_COLUMNS)).."%",
+				x = (i-1)*(100/MAX_COLUMNS).."%",
 				y = 0,
-				width = tostring(100/MAX_COLUMNS).."%",
+				width = (100/MAX_COLUMNS).."%",
 				height = "100%",
 				--caption = '',
 				OnMouseDown = {	function () 
@@ -538,22 +657,25 @@ local function ManageBuildRow()
 					BuildRowButtonFunc(i, buildRowButtons[i].cmdid, left, right)
 					end},
 				padding = {1,1,1,1},
-				keepAspect = true,
+				--keepAspect = true,
 			}
 			if overrun and i == MAX_COLUMNS then
 				buttonArray.button.caption = '...'
 				buttonArray.button.OnMouseDown = nil
 			end
 			buttonArray.button.backgroundColor[4] = 0.3
+			
 			if not (overrun and i == MAX_COLUMNS) then
 				buttonArray.button.tooltip = 'Add to/subtract from queued batch'
 				buttonArray.image = Image:New {
 					parent = buttonArray.button,
-					width="100%";
+					width="90%";
 					height="90%";
-					y="6%";
+					x="5%";
+					y="5%";
 					file = '#'..udid,
 --					file2 = WG.GetBuildIconFrame(UnitDefs[udid]),
+					keepAspect = false,
 				}
 				buttonArray.label = Label:New {
 					parent = buttonArray.image,
@@ -568,6 +690,11 @@ local function ManageBuildRow()
 					fontSize = 16;
 					fontShadow = true;
 				}
+			end
+			
+			if i == 1 then
+				buttonArray.image:AddChild(buildProgress)
+				--Spring.Echo("Adding build progress bar")
 			end
 		end
 	end
@@ -587,7 +714,9 @@ local function ManageStateIcons()
 	end
 end
 
-local function ManageCommandIcons(sourceArray, useRowSort, configArray)
+local function ManageCommandIcons(useRowSort)
+	local sourceArray = menuChoices[menuChoice].array
+	local configArray = menuChoices[menuChoice].config
 	--update factory data
 	if menuChoice == 6 and selectedFac then
 		UpdateFactoryBuildQueue()
@@ -682,17 +811,20 @@ local function Update(buttonpush)
 	table.sort(n_special, function(a,b) return special_commands[a.id].order < special_commands[b.id].order end)
 
 	ManageStateIcons()
-	ManageCommandIcons(menuChoices[menuChoice].array, useRowSort, configArrayList[menuChoice])
+	ManageCommandIcons(useRowSort)
 end 
 
 local function MakeMenuTab(i, alpha)
 	local button = Button:New{
 		parent = menuTabRow;
-		 skinName  = "DarkGlass",
-		x = tostring((16.5*i)-16.5).."%",
+		x = ((16.5*i)-16.5).."%",
 		y = 0,
 		width = "16%",
 		height = "100%",
+--		font = {
+--			shadow = true
+--		},
+		
 		caption = menuChoices[i].name,
 		OnClick = {
 			function()
@@ -720,7 +852,12 @@ end
 
 local function SmartTabSelect()
 	Update()
-	if #n_units > 0 and #n_econ == 0 then
+	if options.hidetabs.value then
+		menuChoice = 1
+		ColorTabs(1)
+	elseif options.disablesmartselect.value then 
+		return
+	elseif #n_units > 0 and #n_econ == 0 then
 		menuChoice = 6	--selected factory, jump to units
 		ColorTabs(6)
 	elseif #n_econ > 0 and menuChoice == 6 then
@@ -743,6 +880,17 @@ local function CopyTable(outtable,intable)
   end
 end
 
+-- force update every 0.2 seconds
+--[[
+local timer = 0
+function widget:Update(dt)
+	timer = timer + dt
+	if timer >= forceUpdateFrequency then
+		Update()
+		timer = 0
+	end
+end
+]]--
 -- layout handler - its needed for custom commands to work and to delete normal spring menu
 local function LayoutHandler(xIcons, yIcons, cmdCount, commands)
 	widgetHandler.commands   = commands
@@ -790,13 +938,40 @@ local function LayoutHandler(xIcons, yIcons, cmdCount, commands)
 	return "", xIcons, yIcons, {}, customCmds, {}, {}, {}, {}, reParamsCmds, {[1337]=9001}
 end 
 
+local function ScrollTabRight()
+	menuChoice = menuChoice + 1
+	if menuChoice > #menuChoices then menuChoice = 1 end
+	if menuChoice >= 2 and menuChoice <= 5 then lastBuildChoice = menuChoice end
+	Update(true)
+	ColorTabs()
+end
+
+local function ScrollTabLeft()
+	menuChoice = menuChoice - 1
+	if menuChoice < 1 then menuChoice = #menuChoices end
+	if menuChoice >= 2 and menuChoice <= 5 then lastBuildChoice = menuChoice end
+	Update(true)
+	ColorTabs()
+end
+
+local function AddAction(cmd, func, data, types)
+	return widgetHandler.actionHandler:AddAction(widget, cmd, func, data, types)
+end
+local function RemoveAction(cmd, types)
+	return widgetHandler.actionHandler:RemoveAction(widget, cmd, types)
+end
+
 -- INITS 
 function widget:Initialize()
 	widgetHandler:ConfigLayoutHandler(LayoutHandler)
 	Spring.ForceLayoutUpdate()
 
-
-	local f,it,isFile = nil,nil,false
+	RemoveAction("nextmenu")
+	RemoveAction("prevmenu")	
+	AddAction("nextmenu", ScrollTabRight, nil, "p")
+	AddAction("prevmenu", ScrollTabLeft, nil, "p")
+	
+	--[[local f,it,isFile = nil,nil,false
 	f  = io.open('cmdcolors.txt','r')
 	if f then
 		it = f:lines()
@@ -826,7 +1001,7 @@ function widget:Initialize()
 				cmdColors[n]= r
 			end
 		end
-	end
+	end]]--
 	
 	-- setup Chili
 	Chili = WG.Chili
@@ -836,34 +1011,29 @@ function widget:Initialize()
 	Checkbox = Chili.Checkbox
 	Window = Chili.Window
 	Panel = Chili.Panel
-	ScrollPanel = Chili.ScrollPanel
 	StackPanel = Chili.StackPanel
-	LayoutPanel = Chili.LayoutPanel
-	Grid = Chili.Grid
-	Trackbar = Chili.Trackbar
 	TextBox = Chili.TextBox
 	Image = Chili.Image
 	Progressbar = Chili.Progressbar
 	Control = Chili.Control
 	screen0 = Chili.Screen0
 	
-	local viewWidth,viewHeight = Spring.GetWindowGeometry()
-	local width = (viewWidth-480)
-	--local height = (viewHeight)
-	--if height > 300 then
-	--	height = 300
-	--end
-	
 	--create main Chili elements
+	local screenWidth,screenHeight = Spring.GetWindowGeometry()
+	local height = tostring(math.floor(screenWidth/screenHeight*0.35*0.35*100)) .. "%"
+	local y = tostring(math.floor((1-screenWidth/screenHeight*0.35*0.35)*100)) .. "%"
+	
+	--Spring.Echo(height)
+	--Spring.Echo(y)
+	
 	window = Window:New{
 		parent = screen0,
 		name   = 'integralwindow';
 		color = {0, 0, 0, 0},
-		width = DEFAULT_WIDTH;
-		height = "20%";
-		--temporary position fudges so it looks right on my screen w/o docking
-		x = 395 + 25; -- default chili selections width + buffer, FIXME later if needed
-		y = '80%'; 
+		width = 450;
+		height = 180; -- keep an aspect ratio regardless of screen ratio
+		x = 0; 
+		bottom = 0;
 		dockable = true;
 		draggable = false,
 		resizable = false,
@@ -872,6 +1042,13 @@ function widget:Initialize()
 		minimumSize = {MIN_WIDTH, MIN_HEIGHT},
 		padding = {0, 0, 0, 0},
 		--itemMargin  = {0, 0, 0, 0},
+		OnMouseDown={ function(self) --// click+ space on integral-menu tab will open a Game-menu.
+			local _,_, meta,_ = Spring.GetModKeyState()
+			if not meta then return false end --allow button to continue its function
+			WG.crude.OpenPath(options_path)
+			WG.crude.ShowMenu() --make epic Chili menu appear.
+			return false
+		end },
 	}
 	
 	fakewindow = Panel:New{
@@ -886,8 +1063,18 @@ function widget:Initialize()
 		draggable = false,
 		resizable = false,
 		padding = {0, 0, 0, 0},
-		--color = {0.3, 0.3, 0.3, 1},	--broke?
-		skinName  = "Robocracy",
+		--backgroundColor = {0.1, 0.1, 0.1, 1},
+--		skinName  = "DarkGlass",
+
+		OnMouseDown={ function(self) --// click+ space on any button on the integral-menu will open a Game-menu.
+			-- local forwardSlash = Spring.GetKeyState(0x02F) --reference: uikeys.txt
+			-- if not forwardSlash then return false end
+			local _,_, meta,_ = Spring.GetModKeyState()
+			if not meta then return false end --allow button to continue its function
+			WG.crude.OpenPath('Game/Commands')
+			WG.crude.ShowMenu() --make epic Chili menu appear.
+			return false
+		end },
 	}
 
 	menuTabRow = StackPanel:New{
@@ -912,7 +1099,7 @@ function widget:Initialize()
 		resizeItems = true;
 		orientation   = "vertical";
 		height = "98%";
-		width = tostring(COMMAND_SECTION_WIDTH).."%";
+		width = COMMAND_SECTION_WIDTH.."%";
 		x = "1.5%";
 		y = "1.5%";
 		padding = {0, 0, 0, 0},
@@ -923,10 +1110,10 @@ function widget:Initialize()
 			parent = commands_main,
 			resizeItems = true;
 			orientation   = "horizontal";
-			height = tostring(math.floor(100/numRows)).."%";
+			height = math.floor(100/numRows).."%";
 			width = "100%";
 			x = "0%";
-			y = tostring(math.floor(100/numRows))*(i-1).."%";
+			y = math.floor(100/numRows)*(i-1).."%";
 			padding = {0, 0, 0, 0},
 			itemMargin  = {0, 0, 0, 0},
 		}
@@ -938,8 +1125,9 @@ function widget:Initialize()
 		resizeItems = true;
 		orientation   = "horizontal";
 		height = "96%";
-		width = tostring(STATE_SECTION_WIDTH).."%";
-		x = tostring(98-STATE_SECTION_WIDTH).."%";
+		width = (STATE_SECTION_WIDTH).."%";
+		--x = tostring(100-STATE_SECTION_WIDTH).."%";
+		right = 4;
 		y = "3%";
 		padding = {0, 0, 0, 0},
 		itemMargin  = {0, 0, 0, 0},
@@ -949,12 +1137,21 @@ function widget:Initialize()
 			parent = states_main,
 			resizeItems = true;
 			orientation   = "vertical";
-			height = "98%";
-			width = tostring(math.floor(100/numStateColumns)).."%";
-			x = tostring(100 - (math.floor(100/numStateColumns))*i).."%";
+			height = "100%";
+			width = math.floor(100/numStateColumns).."%";
+			x = (100 - (math.floor(100/numStateColumns))*i).."%";
 			y = "0%";
 			padding = {0, 0, 0, 0},
 			itemMargin  = {0, 0, 0, 0},
+			OnMouseDown={ function(self) --// click+ space on any unit-State button will open Unit-AI menu, it overrides similar function above.
+				-- local forwardSlash = Spring.GetKeyState(0x02F) --reference: uikeys.txt
+				-- if not forwardSlash then return false end
+				local _,_, meta,_ = Spring.GetModKeyState()
+				if not meta then return false end --allow button to continue its function
+				WG.crude.OpenPath('Game/Unit AI')
+				WG.crude.ShowMenu() --make epic Chili menu appear.
+				return true --stop the button's function, else unit-state button will look bugged. 
+			end },
 		}
 	end
 	
@@ -962,65 +1159,33 @@ function widget:Initialize()
 		parent = commands_main,
 		resizeItems = true;
 		orientation   = "horizontal";
-		height = tostring(math.floor(100/numRows)).."%";
+		height = (math.floor(100/numRows)).."%";
 		width = "100%";
 		x = "0%";
-		y = tostring(math.floor(100/numRows))*(numRows-1).."%";
+		y = (math.floor(100/numRows))*(numRows-1).."%";
 		padding = {0, 0, 0, 0},
 		itemMargin  = {0, 0, 0, 0},
 		backgroundColor = {0.2, 0.2, 0.2, 0.6}
 	}
+
+	buildProgress = Progressbar:New{
+		value = 0.0,
+		name    = 'prog';
+		max     = 1;
+		color   		= {0.7, 0.7, 0.4, 0.6},
+		backgroundColor = {1, 1, 1, 0.01},
+		width = "92%",
+		height = "92%",
+		x = "4%",
+		y = "4%",
+		skin=nil,
+		skinName='default',
+	},
 	
 	commands_main:RemoveChild(buildRow);
 	for i=1,MAX_COLUMNS do
 		buildRowButtons[i] = {}
 	end
-end
-
---what it says on the tin
---probably inefficient, should get a better way of doing this
-local function DrawBuildProgress(left,top,right,bottom, progress, color)
-  gl.Color(color)
-  local xcen = (left+right)/2
-  local ycen = (top+bottom)/2
-
-  local alpha = 360*(progress)
-  local alpha_rad = math.rad(alpha)
-  local beta_rad  = math.pi/2 - alpha_rad
-  local list = {}
-  push(list, {v = { xcen,  ycen }})
-  push(list, {v = { xcen,  top }})
-
-  local x,y
-  x = (top-ycen)*tan(alpha_rad) + xcen
-  if (alpha<90)and(x<right) then
-    push(list, {v = { x,  top }})   
-  else
-    push(list, {v = { right,  top }})
-    y = (right-xcen)*tan(beta_rad) + ycen
-    if (alpha<180)and(y>bottom) then
-      push(list, {v = { right,  y }})
-    else
-      push(list, {v = { right,  bottom }})
-      x = (top-ycen)*tan(-alpha_rad) + xcen
-      if (alpha<270)and(x>left) then
-        push(list, {v = { x,  bottom }})
-      else
-        push(list, {v = { left,  bottom }})
-        y = (right-xcen)*tan(-beta_rad) + ycen
-        if (alpha<350)and(y<top) then
-          push(list, {v = { left,  y }})
-        else
-          push(list, {v = { left,  top }})
-          x = (top-ycen)*tan(alpha_rad) + xcen
-          push(list, {v = { x,  top }})
-        end
-      end
-    end
-  end
-
-  gl.Shape(GL.TRIANGLE_FAN, list)
-  gl.Color(1,1,1,1)
 end
 
 local lastCmd = nil  -- last active command 
@@ -1043,24 +1208,28 @@ function widget:DrawScreen()
 		end 
 		lastCmd = cmdid
 	end
-	--[[
-	if buildRow_visible and (menuChoice == 6) and selectedFac then
-		local button = buildRowButtons[1] and buildRowButtons[1].button
-		local buildee = Spring.GetUnitIsBuilding(selectedFac)
-		if buildee then local _, _, _, _, progress = Spring.GetUnitHealth(buildee) end
-		if button then DrawBuildProgress(button.left,button.top,button.right,button.bottom, progress, { 1, 1, 1, 0.5 }) end	--can't use this until I figure out how to get chili to give me button bounds
+end
+
+function widget:GameFrame()
+	--set progress bar
+	if menuChoice == 6 and selectedFac and buildRowButtons[1] and buildRowButtons[1].image then
+		local progress
+		local unitBuildID      = spGetUnitIsBuilding(selectedFac)
+		if unitBuildID then 
+			progress = select(5, spGetUnitHealth(unitBuildID))
+		end
+		buildProgress:SetValue(progress or 0)
 	end
-	--]]
 end
 
 function widget:SelectionChanged(newSelection)
 	--get new selected fac, if any
-	local function IsFactory(udid)
-		return (UnitDefs[udid].TEDClass == "PLANT") or UnitDefs[udid].isFactory
-	end
 	for i=1,#newSelection do
 		local id = newSelection[i]
-		if IsFactory((spGetUnitDefID(id))) then
+		if UnitDefs[spGetUnitDefID(id)].isFactory then
+			if selectedFac ~= id then
+				alreadyRemovedTag = {}
+			end
 			selectedFac = id
 			SmartTabSelect()
 			return
@@ -1073,4 +1242,17 @@ end
 function widget:Shutdown()
   widgetHandler:ConfigLayoutHandler(nil)
   Spring.ForceLayoutUpdate()
+end
+
+options.hidetabs.OnChange = function(self) 
+	fakewindow:SetPosRelative(_, self.value and 0 or '15%', _, self.value and '100%' or '86%')
+	fakewindow:SetPosRelative(_, self.value and 0 or '15%', _, self.value and '100%' or '86%')
+	
+	if self.value then 
+		window:RemoveChild(menuTabRow)
+	else
+		window:AddChild(menuTabRow)
+	end
+	menuChoice = 1
+	ColorTabs(1)
 end
