@@ -64,6 +64,7 @@ Requires +4 Power]],
 
     explosiongenerators = {
       "custom:jethtrail",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

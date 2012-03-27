@@ -25,7 +25,7 @@ SmokeUnit()// this is a standard smoke point define
 			smoketype = SFXTYPE_BLACKSMOKE;
 			if( Rand( 1, 66 ) < healthpercent )
 				smoketype = SFXTYPE_WHITESMOKE;
-			emit-sfx smoketype from base;
+			emit-sfx 1027 from base;
 		}
 		sleeptime = healthpercent * 50;
 		if( sleeptime < 200 )
@@ -105,30 +105,9 @@ TechGranted()
 	CanFire=TRUE;
 }
 
-Killed(severity, corpsetype) // how it explodes
-{
-	if( severity <= 25 )
-	{
-		corpsetype = 1;
-		explode turret type BITMAPONLY | BITMAP1;
-		explode barrel1 type BITMAPONLY | BITMAP4;
-		return (0);
-	}
-	if( severity <= 80 )
-	{
-		corpsetype = 2;
-		explode turret type BITMAPONLY | BITMAP4;
-		explode barrel1 type SHATTER | BITMAP4;
-		return (0);
-	}
-	if( severity <= 99 )
-	{
-		corpsetype = 3;
-		explode turret type BITMAPONLY | BITMAP1;
-		explode barrel1 type SHATTER | BITMAP4;
-		return (0);
-	}
-	corpsetype = 3;
-	explode turret type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1;
-	explode barrel1 type SHATTER | EXPLODE_ON_HIT | BITMAP4;
-}
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode turret type EXPLODE_ON_HIT;
+	explode barrel1 type EXPLODE_ON_HIT;
+} 

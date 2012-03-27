@@ -71,6 +71,7 @@ Requires +2 Power]],
     explosiongenerators = {
       "custom:dirt",
        "custom:flamethrowerrange500",
+	   "custom:blacksmoke",
     },
   },
   sounds = {

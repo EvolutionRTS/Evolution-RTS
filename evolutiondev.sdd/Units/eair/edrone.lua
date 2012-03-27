@@ -70,6 +70,7 @@ local unitDef = {
 
     explosiongenerators = {
       "custom:jetstrail",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

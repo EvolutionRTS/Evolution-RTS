@@ -48,6 +48,7 @@ Requires +2 Power]],
     explosiongenerators = {
       "custom:gdmcannon",
 	  "custom:needspower",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

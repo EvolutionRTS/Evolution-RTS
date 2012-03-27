@@ -58,6 +58,7 @@ Requires +4 Power]],
     explosiongenerators = {
       "custom:electricity",
       "custom:needspower",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

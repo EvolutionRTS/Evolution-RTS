@@ -70,6 +70,7 @@ Requires +7 Power]],
     explosiongenerators = {
       "custom:factorysparks",
       "custom:dirt",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

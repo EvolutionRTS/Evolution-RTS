@@ -59,6 +59,7 @@ local unitDef = {
 
     explosiongenerators = {
       "custom:nanohuge",
+	  "custom:blacksmoke",
     },
   },
   buildoptions = {

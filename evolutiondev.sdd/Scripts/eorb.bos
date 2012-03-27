@@ -26,7 +26,7 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
          {
             smoketype = 256 | 1;
          }
-         emit-sfx smoketype from base;
+         emit-sfx 1026 from base;
       }
       sleeptime = healthpercent * 50;
       if( sleeptime < 200 )
@@ -220,26 +220,11 @@ StopMoving()
    moving=0;
 }
 
-Killed(severity, corpsetype)
-{
-   if( severity <= 25 )
-   {
-      corpsetype = 1;
-      explode base type BITMAPONLY | BITMAP2;
-      return (0);
-   }
-   if( severity <= 50 )
-   {
-      corpsetype = 2;
-      explode base type BITMAPONLY | BITMAP2;
-      return (0);
-   }
-   if( severity <= 99 )
-   {
-      corpsetype = 3;
-      explode base type BITMAPONLY | BITMAP2;
-      return (0);
-   }
-   corpsetype = 3;
-   explode base type BITMAPONLY | BITMAP2;
-}
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode barrel1 type EXPLODE_ON_HIT;
+	explode turret type EXPLODE_ON_HIT;
+	explode base type EXPLODE_ON_HIT;
+	explode ring type EXPLODE_ON_HIT;
+} 

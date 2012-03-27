@@ -50,6 +50,7 @@ Provides +10 Power]],
 
     explosiongenerators = {
       "custom:fusionfx",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

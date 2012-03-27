@@ -63,6 +63,7 @@ sfxtypes = {
 	explosiongenerators = {
 		"custom:factorysparks",
 		"custom:dirt",
+		"custom:blacksmoke",
     },
 	pieceExplosionGenerators = {
 		"deathceg0",

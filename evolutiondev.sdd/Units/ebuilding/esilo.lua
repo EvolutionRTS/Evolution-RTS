@@ -57,6 +57,7 @@ Requires +20 Power]],
 
     explosiongenerators = {
 	  "custom:needspower",
+	  "custom:blacksmoke",
     },
   },
   

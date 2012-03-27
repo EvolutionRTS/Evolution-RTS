@@ -23,7 +23,7 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
          {
             smoketype = 256 | 1;
          }
-         emit-sfx smoketype from base;
+         emit-sfx 1026 from base;
       }
       sleeptime = healthpercent * 50;
       if( sleeptime < 200 )
@@ -158,26 +158,17 @@ MoveRate2()
    turn rearwings to x-axis <0.000000> speed <150.000000>;
 }
 
-Killed(severity, corpsetype)
-{
-   if( severity <= 25 )
-   {
-      corpsetype = 1;
-      explode base type BITMAPONLY | BITMAP2;
-      return (0);
-   }
-   if( severity <= 50 )
-   {
-      corpsetype = 2;
-      explode base type BITMAPONLY | BITMAP2;
-      return (0);
-   }
-   if( severity <= 99 )
-   {
-      corpsetype = 3;
-      explode base type BITMAPONLY | BITMAP2;
-      return (0);
-   }
-   corpsetype = 3;
-   explode base type BITMAPONLY | BITMAP2;
-}
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode doorleft type EXPLODE_ON_HIT;
+	explode doorright type EXPLODE_ON_HIT;
+	explode penis type EXPLODE_ON_HIT;
+	explode wheel type EXPLODE_ON_HIT;
+	explode frontwings type EXPLODE_ON_HIT;
+	explode fengine1 type EXPLODE_ON_HIT;
+	explode fengine2 type EXPLODE_ON_HIT;
+	explode rearwings type EXPLODE_ON_HIT;
+	explode rengine1 type EXPLODE_ON_HIT;
+	explode rengine2 type EXPLODE_ON_HIT;
+} 

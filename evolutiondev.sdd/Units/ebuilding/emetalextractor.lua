@@ -52,6 +52,7 @@ local unitDef = {
 
     explosiongenerators = {
       "custom:dirt",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

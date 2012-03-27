@@ -26,7 +26,7 @@ SmokeUnit()
          smoketype = SFXTYPE_BLACKSMOKE;
          if( Rand( 1, 66 ) < healthpercent )
             smoketype = SFXTYPE_WHITESMOKE;
-         emit-sfx smoketype from base;
+         emit-sfx 1026 from base;
       }
       sleeptime = healthpercent * 50;
       if( sleeptime < 200 )
@@ -187,26 +187,14 @@ TechGranted()
    Maya=TRUE;
 }
 
-Killed(severity, corpsetype)
-{
-   if( severity <= 25 )
-   {
-      corpsetype = 1;
-      explode base type BITMAPONLY | BITMAP1;
-      return (0);
-   }
-   if( severity <= 50 )
-   {
-      corpsetype = 2;
-      explode base type BITMAPONLY | BITMAP1;
-      return (0);
-   }
-   if( severity <= 99 )
-   {
-      corpsetype = 3;
-      explode base type BITMAPONLY | BITMAP1;
-      return (0);
-   }
-   corpsetype = 3;
-   explode base type BITMAPONLY | BITMAP1;
-}
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode doors1 type EXPLODE_ON_HIT;
+	explode spikeright1 type EXPLODE_ON_HIT;
+	explode spikeright2 type EXPLODE_ON_HIT;
+	explode spikeright3 type EXPLODE_ON_HIT;
+	explode spikes type EXPLODE_ON_HIT;
+	explode topspin type EXPLODE_ON_HIT;
+	explode wheelspin type EXPLODE_ON_HIT;
+} 

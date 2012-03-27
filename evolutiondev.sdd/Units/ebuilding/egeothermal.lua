@@ -46,6 +46,9 @@ sfxtypes = {
 		"deathceg0",
 		"deathceg1",
 	},
+	explosiongenerators = {
+	  "custom:blacksmoke",
+    },
 },
   
   sounds = {

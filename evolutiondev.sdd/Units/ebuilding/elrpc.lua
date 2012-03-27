@@ -63,6 +63,7 @@ Requires +15 Power]],
       "custom:electricity",
       "custom:factorysparks",
 	  "custom:needspower",
+	  "custom:blacksmoke",
     },
   },
   sounds = {

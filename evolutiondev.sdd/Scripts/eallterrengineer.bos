@@ -370,31 +370,17 @@ StopBuilding()
 
 Killed(severity, corpsetype) // how it explodes 
 { 
-if( severity <= 25 ) 
-{ 
-corpsetype = 1; 
-explode base type BITMAPONLY | BITMAP1; 
-explode wheel type BITMAPONLY | BITMAP1;  
-explode doorleft type BITMAPONLY | BITMAP4; 
-return (0); 
-} 
-if( severity <= 80 ) 
-{ 
-corpsetype = 2; 
-explode base type BITMAPONLY | BITMAP4; 
-explode wheel type FALL | BITMAP1; 
-explode doorright type SHATTER | BITMAP4; 
-return (0); 
-} 
-if( severity <= 99 ) 
-{ 
-corpsetype = 3; 
-explode base type BITMAPONLY | BITMAP1; 
-explode wheel type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
-explode penis type SHATTER | BITMAP4; 
-return (0); 
-} 
-corpsetype = 3; 
-explode base type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1; 
-explode penis type SHATTER | EXPLODE_ON_HIT | BITMAP4; 
+	corpsetype = 1; 
+	explode rf1 type EXPLODE_ON_HIT;
+	explode rf2 type EXPLODE_ON_HIT;
+	explode lf1 type EXPLODE_ON_HIT;
+	explode lf2 type EXPLODE_ON_HIT;
+	explode rr1 type EXPLODE_ON_HIT;
+	explode rr2 type EXPLODE_ON_HIT;
+	explode lr1 type EXPLODE_ON_HIT;
+	explode lr2 type EXPLODE_ON_HIT;
+	explode penis type EXPLODE_ON_HIT;
+	explode wheel type EXPLODE_ON_HIT;
+	explode doorleft type EXPLODE_ON_HIT;
+	explode doorright type EXPLODE_ON_HIT;
 } 

@@ -11,3 +11,8 @@ Create() // tells it what to do on creation
 	spin rotator around y-axis speed <20.005495>;
 } 
 
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode rotator type EXPLODE_ON_HIT;
+} 

@@ -24,7 +24,7 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
          {
             smoketype = 256 | 1;
          }
-         emit-sfx smoketype from base;
+         emit-sfx 1024 from base;
       }
       sleeptime = healthpercent * 50;
       if( sleeptime < 200 )
@@ -98,30 +98,11 @@ Deactivate()
 }
 
 
-Killed(severity, corpsetype)
-{
-   if( severity <= 25 )
-   {
-      corpsetype = 1;
-      explode base type BITMAPONLY | BITMAP1;
-      explode wheel type BITMAPONLY | BITMAP2;
-      return (0);
-   }
-   if( severity <= 50 )
-   {
-      corpsetype = 2;
-      explode base type BITMAPONLY | BITMAP1;
-      explode wheel type SHATTER | BITMAP2;
-      return (0);
-   }
-   if( severity <= 99 )
-   {
-      corpsetype = 3;
-      explode base type BITMAPONLY | BITMAP1;
-      explode wheel type SHATTER | EXPLODE_ON_HIT | BITMAP2;
-      return (0);
-   }
-   corpsetype = 3;
-   explode base type SHATTER | EXPLODE_ON_HIT | BITMAP1;
-   explode wheel type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP2;
-}
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode wheel type EXPLODE_ON_HIT;
+	explode door1 type EXPLODE_ON_HIT;
+	explode door2 type EXPLODE_ON_HIT;
+	explode top type EXPLODE_ON_HIT;
+} 
