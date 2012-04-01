@@ -62,7 +62,7 @@ end
 function gadget:UnitFinished(unitID, unitDefID, teamID)
 	euID = unitID
 	Spring.Echo ("now editing: " .. euID)
-	marker_on_unit (euID, "you can now edit the hitbox of this unit, press alt b to see it")
+	marker_on_unit (euID, "you can now edit the hitbox of this unit, press alt v to see it")
 end
 
 

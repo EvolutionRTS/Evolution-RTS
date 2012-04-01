@@ -31,7 +31,7 @@ local unitDef = {
 	decloakOnFire	 = true,
 	decloakSpherical = true,
 	initCloaked		 = true,
--- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient form a micromanagement standpoint.
+-- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient from a micromanagement standpoint.
 -- End Cloaking
   
   description        = [[Shield Emitter - Armortype: Light

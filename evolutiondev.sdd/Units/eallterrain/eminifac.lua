@@ -17,6 +17,12 @@ local unitDef = {
   canPatrol          = true,
   canstop            = "1",
   category           = "NOTAIR",
+  
+   collisionVolumeOffsets = "0 60 0",
+   collisionVolumeScales  = "298 142 168",
+   collisionVolumeTest    = 1,
+   collisionVolumeType    = "box",
+  
   corpse             = "ammobox",
   
 -- Cloaking
@@ -57,7 +63,7 @@ local unitDef = {
   TEDClass           = "PLANT",
   unitname           = "eminifac",
   workerTime         = 2,
-  yardMap            = "ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc ccccccccccccccccccccc",
+  yardMap            = "ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy",
 --  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "towerdecal2.png",

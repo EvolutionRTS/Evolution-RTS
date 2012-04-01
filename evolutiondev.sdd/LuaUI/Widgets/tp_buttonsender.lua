@@ -1,8 +1,8 @@
 --THIS GOES IN WIDGET FOLDER
 function widget:GetInfo()
   return {
-    name      = "button sender R1 for BOXXY",
-    desc      = "send keys presses for boxxy",
+    name      = "button sender R1",
+    desc      = "send keys presses",
     author    = "knorke",
     date      = "dec 1010",
     license   = "push button magic",
