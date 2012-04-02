@@ -27,9 +27,9 @@ end
 local CMD_PRIORITY=34220
 
 local Tooltips = {
-	'Construction spending None.',
-	'Construction spending Normal. Default - inherits low/high temporarily from unit it builds.',
-	'Construction spending Low. Served only after high and normal priority units.',
+	'Construction spending None. (Hotkey: i)',
+	'Construction spending Normal. Default - inherits low/high temporarily from unit it builds. (Hotkey: i)',
+	'Construction spending Low. Served only after high and normal priority units. (Hotkey: i)',
 }
 local DefaultState = 1
 local CommandOrder = 123456

@@ -31,7 +31,7 @@ local mexCmdDesc = {
   name    = 'Mex',
   cursor  = 'areamex_cursor', 
   action  = 'areamex',
-  tooltip = 'Builds mexes in the area (O)',
+  tooltip = 'Builds Metal Extractors in the area',
   texture = 'bitmaps/ui/buttons/cmd_area_mex.png',
 }
 

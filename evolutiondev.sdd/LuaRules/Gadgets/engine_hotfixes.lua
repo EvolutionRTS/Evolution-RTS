@@ -1,6 +1,6 @@
 function gadget:GetInfo()
     return {
-        name      = 'Engine Hotfixes for Feature reclaim behavior',
+        name      = 'Engine Hotfixes for Various Engine Kludges',
         desc      = '',
         author    = 'Niobium',
         version   = 'v1.0',
@@ -60,6 +60,11 @@ end
 		"unbindkeyset q",
 	})
 	Spring.SendCommands("bind q repeat")
+	-- set Priority to be bound to i
+	Spring.SendCommands({
+		"unbindkeyset i",
+	})
+	Spring.SendCommands("bind i priority")
 	
 	if Game.version == "85.0" then
 		Spring.SendCommands({"unbindaction specteam"})
