@@ -117,7 +117,7 @@ Create()
 
 Killed(severity, corpsetype) // how it explodes 
 { 
-	corpsetype = 1; 
+	corpsetype = 3; 
 	explode base type EXPLODE_ON_HIT;
 	explode wingsfront type EXPLODE_ON_HIT;
 	explode engine1 type EXPLODE_ON_HIT;

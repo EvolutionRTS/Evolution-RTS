@@ -35,7 +35,7 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy
+  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Light
 
 Requires +3 Power]],
   energyMake         = 0,
@@ -126,7 +126,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.3,
     duration           = 0.1,
-    energypershot      = 7.5,
+    energypershot      = 2,
     explosionGenerator = "custom:PLASMA_Expl",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -135,12 +135,11 @@ local weaponDefs = {
     lineOfSight        = true,
     minintensity       = "1",
     name               = "Laser",
-    range              = 450,
+    range              = 500,
     reloadtime         = 0.5,
     WeaponType         = "LaserCannon",
     rgbColor           = "1 0.3 0.4",
     rgbColor2          = "1 1 1",
-    sprayAngle         = 1000,
     soundTrigger       = true,
     soundstart         = "allterrriotweapon.wav",
     soundHit           = "mediumcannonhit.wav",
@@ -154,7 +153,7 @@ local weaponDefs = {
 	  damagetype		= "light",  
     }, 
     damage = {
-      default           = 38,
+      default           = 20,
     },
   },
   

@@ -147,6 +147,7 @@ local weaponDefs = {
   },
   
   TORP = {
+	cegtag			= "torpedotrailsmall",
 	weaponType		   = "TorpedoLauncher",
 	lineofsight		= 1,
 	turret			= 1,

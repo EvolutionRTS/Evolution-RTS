@@ -23,7 +23,7 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR RIOT",
   corpse             = "ammobox",
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy
+  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Light
 
 Requires +4 Power]],
   energyMake         = 0,
@@ -99,9 +99,9 @@ Requires +4 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 's',
     RequireTech = "4 Power",
-	armortype   = "heavyarmor",
+	armortype   = "lightarmor",
 	normaltex = "unittextures/eriottank2normal.png", 
-	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Features a concussion shell that will knock back opposing units. Heavy armor, but should be paired with escorts if possible.]],
+	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Features 10 concussion shells in a burst that will knock back opposing units. It has Light armor, and should be paired with escorts if possible.]],
   },
 }
 
@@ -110,25 +110,25 @@ Requires +4 Power]],
 
 local weaponDefs = {
   riottankweapon = {
-    AreaOfEffect       = 100,
+    AreaOfEffect       = 10,
+	avoidFeature       = false,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "riotweapon",
     collideFriendly    = false,
     explosionGenerator = "custom:PLASMA_Expl",
-	energypershot      = 7.5,
+	energypershot      = 25,
     id                 = 172,
     impulseFactor      = 0.5,
 	interceptedByShieldType = 4,
     name               = "Light Cannon",
-    projectiles        = 1,
-    range              = 450,
-    reloadtime         = 0.5,
+    projectiles        = 10,
+    range              = 750,
+    reloadtime         = 5,
     weaponType		   = "Cannon",
-    soundHit           = "mediumcannonhit.wav",
-    soundStart         = "rocket_launcher2.wav",
+--    soundHit           = "mediumcannonhit.wav",
+    soundStart         = "riottankshot.wav",
     sprayAngle         = 2000,
-    startsmoke         = "1",
     tolerance          = 2000,
     turret             = true,
     weaponVelocity     = 500,
@@ -136,7 +136,7 @@ local weaponDefs = {
 	  damagetype		= "light",  
     },   
     damage = {
-      default           = 38,
+      default           = 25,
     },
   },
 
