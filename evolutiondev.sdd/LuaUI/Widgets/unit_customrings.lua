@@ -14,7 +14,7 @@ end
 
 --[[
 Contains 4 variables:
-        ring1
+        ring1radius
         ring1color
         ring1thickness
         ring1ShowOnlySelected
@@ -42,17 +42,17 @@ function widget:DrawWorld()
                 local customParams = ud.customParams
                 
                 -- ring 1
-                if customParams.ring1 then
+                if customParams.ring1radius then
                     gl.Color(explode(',', customParams.ring1color))
                     gl.LineWidth(customParams.ring1thickness)
-                   gl.DrawGroundCircle(x,y,z, customParams.ring1, 32)
+                   gl.DrawGroundCircle(x,y,z, customParams.ring1radius, 32)
                 end
                 
                 -- ring 2
-                if customParams.ring2 then
+                if customParams.ring2radius then
                     gl.Color(explode(',', customParams.ring2color))
                     gl.LineWidth(customParams.ring2thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring2, 32)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring2radius, 32)
                end
        end
 

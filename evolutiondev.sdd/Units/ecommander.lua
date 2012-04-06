@@ -126,12 +126,12 @@ local unitDef = {
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext       = [[The commander has an EMP defense shockwave weapon that can be triggered every 10 seconds. It costs 50 energy, so use it wisely.]],
 	
-	ring1 = "1000", --Using this one for buildrange
+	ring1radius = "1000", --Using this one for buildrange
 	ring1color = "1,0.5,0,0.8", --Orangeish
 	ring1thickness = "1", --Normalish thickness
 	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
 	
-	ring2 = "500", --Using this one for energy core collection
+	ring2radius = "500", --Using this one for energy core collection
 	ring2color = "0.5,0,1,0.6", --purplish
 	ring2thickness = "1", --Normalish thickness
 	ring2ShowOnlySelected = "false", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
