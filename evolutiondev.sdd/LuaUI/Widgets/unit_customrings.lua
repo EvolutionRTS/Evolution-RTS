@@ -21,6 +21,17 @@ Contains 4 variables:
         
    ***To Be Continued...***     
 ]]--
+local function explode(div,str)
+  if (div=='') then return false end
+  local pos,arr = 0,{}
+  -- for each divider found
+  for st,sp in function() return string.find(str,div,pos,true) end do
+    table.insert(arr,string.sub(str,pos,st-1)) -- Attach chars left of current divider
+    pos = sp + 1 -- Jump past current divider
+  end
+  table.insert(arr,string.sub(str,pos)) -- Attach chars right of last divider
+  return arr
+end
 
 function widget:DrawWorld()
         local units = Spring.GetAllUnits()
@@ -32,14 +43,14 @@ function widget:DrawWorld()
                 
                 -- ring 1
                 if customParams.ring1 then
-                    gl.Color(customParams.ring1color)
+                    gl.Color(explode(',', customParams.ring1color))
                     gl.LineWidth(customParams.ring1thickness)
                    Spring.DrawGroundCircle(x,z, customParams.ring1, 32)
                 end
                 
                 -- ring 2
                 if customParams.ring2 then
-                    gl.Color(customParams.ring2color)
+                    gl.Color(explode(',', customParams.ring2color))
                     gl.LineWidth(customParams.ring2thickness)
                    Spring.DrawGroundCircle(x,z,customParams.ring2, 32)
                end
