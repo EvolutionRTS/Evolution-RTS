@@ -22,13 +22,13 @@ Contains 4 variables:
    ***To Be Continued...***     
 ]]--
 
-function widget:drawworld
+function widget:DrawWorld()
         local units = Spring.GetAllUnits()
         for _,unitID in ipairs(units) do
                 local x,y,z = Spring.GetUnitPosition(unitID)
-                local unitDefID = Spring.GetUnitDefid(unitID)
+                local unitDefID = Spring.GetUnitDefID(unitID)
                 local ud = UnitDefs[unitDefID]
-                local customParams = ud.customparams
+                local customParams = ud.customParams
                 
                 -- ring 1
                 if customParams.ring1 then
