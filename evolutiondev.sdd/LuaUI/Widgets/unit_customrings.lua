@@ -54,6 +54,62 @@ function widget:DrawWorld()
                     gl.LineWidth(customParams.ring2thickness)
                    gl.DrawGroundCircle(x,y,z,customParams.ring2radius, 32)
                end
+			   
+			   -- ring 3
+                if customParams.ring3radius then
+                    gl.Color(explode(',', customParams.ring3color))
+                    gl.LineWidth(customParams.ring3thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring3radius, 32)
+               end
+			   
+			   -- ring 4
+                if customParams.ring4radius then
+                    gl.Color(explode(',', customParams.ring4color))
+                    gl.LineWidth(customParams.ring4thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring4radius, 32)
+               end
+			   
+			   -- ring 5
+                if customParams.ring5radius then
+                    gl.Color(explode(',', customParams.ring5color))
+                    gl.LineWidth(customParams.ring5thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring5radius, 32)
+               end
+			   
+			   -- ring 6
+                if customParams.ring6radius then
+                    gl.Color(explode(',', customParams.ring6color))
+                    gl.LineWidth(customParams.ring6thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring6radius, 32)
+               end
+			   
+			   -- ring 7
+                if customParams.ring7radius then
+                    gl.Color(explode(',', customParams.ring7color))
+                    gl.LineWidth(customParams.ring7thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring7radius, 32)
+               end
+			   
+			   -- ring 8
+                if customParams.ring8radius then
+                    gl.Color(explode(',', customParams.ring8color))
+                    gl.LineWidth(customParams.ring8thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring8radius, 32)
+               end
+			   
+			   -- ring 9
+                if customParams.ring9radius then
+                    gl.Color(explode(',', customParams.ring9color))
+                    gl.LineWidth(customParams.ring9thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring9radius, 32)
+               end
+			   
+			   -- ring 10
+                if customParams.ring10radius then
+                    gl.Color(explode(',', customParams.ring10color))
+                    gl.LineWidth(customParams.ring10thickness)
+                   gl.DrawGroundCircle(x,y,z,customParams.ring10radius, 32)
+               end
        end
 
 end

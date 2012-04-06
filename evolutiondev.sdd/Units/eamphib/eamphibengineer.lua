@@ -11,7 +11,7 @@ local unitDef = {
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 35,
-  buildDistance      = 400,
+  buildDistance      = 1020,
   builder            = true,
   buildTime          = 5,
   CanAttack			 = false,
@@ -117,6 +117,16 @@ local unitDef = {
     dronespawner = "1",
 	armortype   = "lightarmor",
 	normaltex = "unittextures/eamphibengineernormal.png", 
+	
+	ring1radius = "600", --Using this one for buildrange
+	ring1color = "1,0.5,0,0.8", --Orangeish
+	ring1thickness = "1", --Normalish thickness
+	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	
+	ring2radius = "500", --Using this one for energy core collection
+	ring2color = "0.5,0,1,0.3", --purplish
+	ring2thickness = "1", --Normalish thickness
+	ring2ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
   },
   weapons = {
     [1]  = {

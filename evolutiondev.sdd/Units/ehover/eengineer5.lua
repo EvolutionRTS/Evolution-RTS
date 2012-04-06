@@ -11,7 +11,7 @@ local unitDef = {
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 15,
-  buildDistance      = 400,
+  buildDistance      = 1020,
   builder            = true,
   buildTime          = 5,
   CanAttack			 = false,
@@ -119,6 +119,16 @@ local unitDef = {
 	armortype   = "lightarmor",
 	normaltex = "unittextures/con_legonormal.png", 
 	helptext = [[The Erector can build new structures, reclaim features, turn energy cores into gunship drones, and capture enemy units. Upon it's death, it emits a wave of nanoparticles that will repair 100 hitpoints to any units in proximity]],
+	
+	ring1radius = "600", --Using this one for buildrange
+	ring1color = "1,0.5,0,0.8", --Orangeish
+	ring1thickness = "1", --Normalish thickness
+	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	
+	ring2radius = "500", --Using this one for energy core collection
+	ring2color = "0.5,0,1,0.6", --purplish
+	ring2thickness = "1", --Normalish thickness
+	ring2ShowOnlySelected = "false", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
   },
 }
 

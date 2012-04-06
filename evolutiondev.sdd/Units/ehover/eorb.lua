@@ -11,7 +11,7 @@ local unitDef = {
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 50,
-  buildDistance      = 800,
+  buildDistance      = 1360,
   builder            = true,
   buildTime          = 10,
   CanAttack			 = false,
@@ -98,9 +98,24 @@ local unitDef = {
 	armortype   = "lightarmor",
 	normaltex = "unittextures/eorbnormal.png", 
 	helptext	= [[The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combot for 5 seconds before repairs can take place.]],
-	groundtexselectimg = ":nc:bitmaps/icons/repairzone.png",
-    groundtexselectxsize = 1000, -- optional
-    groundtexselectzsize = 1000, -- optional
+	-- groundtexselectimg = ":nc:bitmaps/icons/repairzone.png",
+    -- groundtexselectxsize = 1000, 
+    -- groundtexselectzsize = 1000, 
+	
+	ring1radius = "800", --Using this one for buildrange
+	ring1color = "1,0.5,0,0.8", --Orangeish
+	ring1thickness = "1", --Normalish thickness
+	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	
+	ring2radius = "500", --Using this one for energy core collection
+	ring2color = "0.5,0,1,0.3", --purplish
+	ring2thickness = "1", --Normalish thickness
+	ring2ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	
+	ring3radius = "1000", --Using this one area heal range
+	ring3color = "0,1,0,0.6", --green
+	ring3thickness = "1", --Normalish thickness
+	ring3ShowOnlySelected = "false", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
  },
   weapons = {
     [1]  = {

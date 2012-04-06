@@ -226,14 +226,6 @@ for name, ud in pairs(UnitDefs) do
 	ud.activateWhenBuilt  = true 
 end
 
-for name, ud in pairs(UnitDefs) do
-	if (ud.builder) then 
-	--	local buildDistance = ud.buildDistance * 1.7
-	--	ud.buildDistance  = buildDistance
-		Spring.Echo ("Build Distance is" (ud.buildDistance))
-	end
-end
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- Festive units mod option (CarRepairer's WIP)

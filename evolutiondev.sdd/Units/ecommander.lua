@@ -132,9 +132,9 @@ local unitDef = {
 	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
 	
 	ring2radius = "500", --Using this one for energy core collection
-	ring2color = "0.5,0,1,0.6", --purplish
+	ring2color = "0.5,0,1,0.3", --purplish
 	ring2thickness = "1", --Normalish thickness
-	ring2ShowOnlySelected = "false", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	ring2ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
 
   },
 }
