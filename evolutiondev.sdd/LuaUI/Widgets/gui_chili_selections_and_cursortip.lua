@@ -934,8 +934,8 @@ local function UpdateResourceStack(tooltip_type, unitID, ud, tooltip)
 		end
 		
 		-- special cases for mexes
-		if ud.name=='cormex' then 
-			local baseMetal = 0
+		if ud.name=='cormex' or ud.name =='emetalextractor' or ud.name =='euwmetalextractor' then 
+			local baseMetal = 0.5
 			local s = tooltip:match("Makes: ([^ ]+)")
 			if s ~= nil then baseMetal = tonumber(s) end 
 							

@@ -35,7 +35,7 @@ if (gadgetHandler:IsSyncedCode()) then
       if f%10 == 1 then
          for box,b in pairs(BoxesOnMap) do
             local x,y,z = Spring.GetFeaturePosition(box)
-            local unitsInRange = Spring.GetUnitsInSphere(x,y,z, 200)--at x , y , z with radius 200
+            local unitsInRange = Spring.GetUnitsInSphere(x,y,z, 500)--at x , y , z with radius 200
           for _,unit in ipairs(unitsInRange) do
                if (UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect) then
                   local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(box)   --- [1] is metal, [3] is energy

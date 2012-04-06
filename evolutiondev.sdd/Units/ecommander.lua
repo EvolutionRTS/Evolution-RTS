@@ -14,7 +14,7 @@ local unitDef = {
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 15,
-  buildDistance      = 800,
+  buildDistance      = 850,
   builder            = true,
   buildTime          = 5,
   commander			 = true,
@@ -125,6 +125,16 @@ local unitDef = {
 	nofriendlyfire	= "1",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext       = [[The commander has an EMP defense shockwave weapon that can be triggered every 10 seconds. It costs 50 energy, so use it wisely.]],
+	
+	ring1 = "850", --Using this one for buildrange
+	ring1color = "0.5,0.5,0.1,0.5", --Orangeish
+	ring1thickness = "1", --Normalish thickness
+	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	
+	ring2 = "500", --Using this one for energy core collection
+	ring2color = "0.1,0.5,0.5,0.5", --purplish
+	ring2thickness = "1", -Normalish thickness
+	ring2ShowOnlySelected = "false", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
 
   },
 }

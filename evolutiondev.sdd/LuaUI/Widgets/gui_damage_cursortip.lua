@@ -125,6 +125,6 @@ end
 function widget:DrawScreen()
 	if drawString then
 		local x, y = Spring.GetMouseState()
-		gl.Text(attackText .. "\n" .. defendText, x+40, y, 25, "o")
+		gl.Text(attackText .. "\n" .. defendText, x+40, y, 15, "o")
 	end
 end
