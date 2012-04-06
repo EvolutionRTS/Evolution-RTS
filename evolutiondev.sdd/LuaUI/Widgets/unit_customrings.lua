@@ -45,14 +45,14 @@ function widget:DrawWorld()
                 if customParams.ring1 then
                     gl.Color(explode(',', customParams.ring1color))
                     gl.LineWidth(customParams.ring1thickness)
-                   Spring.DrawGroundCircle(x,z, customParams.ring1, 32)
+                   gl.DrawGroundCircle(x,z, customParams.ring1, 32)
                 end
                 
                 -- ring 2
                 if customParams.ring2 then
                     gl.Color(explode(',', customParams.ring2color))
                     gl.LineWidth(customParams.ring2thickness)
-                   Spring.DrawGroundCircle(x,z,customParams.ring2, 32)
+                   gl.DrawGroundCircle(x,z,customParams.ring2, 32)
                end
        end
 
