@@ -133,7 +133,7 @@ local unitDef = {
 	
 	ring2 = "500", --Using this one for energy core collection
 	ring2color = "0.1,0.5,0.5,0.5", --purplish
-	ring2thickness = "1", -Normalish thickness
+	ring2thickness = "1", --Normalish thickness
 	ring2ShowOnlySelected = "false", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
 
   },
