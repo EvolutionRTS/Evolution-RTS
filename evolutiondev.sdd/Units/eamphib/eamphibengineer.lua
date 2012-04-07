@@ -11,7 +11,7 @@ local unitDef = {
   brakeRate          = 0.24,
   buildCostEnergy    = 0,
   buildCostMetal     = 35,
-  buildDistance      = 1020,
+  buildDistance      = 800,
   builder            = true,
   buildTime          = 5,
   CanAttack			 = false,
@@ -118,7 +118,7 @@ local unitDef = {
 	armortype   = "lightarmor",
 	normaltex = "unittextures/eamphibengineernormal.png", 
 	
-	ring1radius = "600", --Using this one for buildrange
+	ring1radius = "800", --Using this one for buildrange
 	ring1color = "1,0.5,0,0.8", --Orangeish
 	ring1thickness = "1", --Normalish thickness
 	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.

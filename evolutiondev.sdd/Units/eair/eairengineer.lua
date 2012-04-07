@@ -15,7 +15,7 @@ local unitDef = {
   buildCostMetal     = 45,
   buildTime          = 10,
   builder            = true,
-  buildDistance      = 1020,
+  buildDistance      = 800,
   canAttack          = false,
   CanAssist          = true,
   CanCapture         = true,
@@ -128,7 +128,7 @@ local unitDef = {
 	armortype   = "lightarmor",
 	normaltex = "unittextures/con_legonormal.png", 
 	
-	ring1radius = "600", --Using this one for buildrange
+	ring1radius = "800", --Using this one for buildrange
 	ring1color = "1,0.5,0,0.8", --Orangeish
 	ring1thickness = "1", --Normalish thickness
 	ring1ShowOnlySelected = "true", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
