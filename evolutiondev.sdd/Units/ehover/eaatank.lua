@@ -142,7 +142,7 @@ local weaponDefs = {
 	canAttackGround    = false,
     weaponVelocity     = 1200,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "light",  
     },
     damage = {
       default            = 30,

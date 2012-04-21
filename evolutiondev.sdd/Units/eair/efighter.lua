@@ -135,7 +135,7 @@ local weaponDefs = {
 	toairweapon		   = true,
     weaponVelocity     = 2000,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "medium",  
     },
     damage = {
       default            = 150,

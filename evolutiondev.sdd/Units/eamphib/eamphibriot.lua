@@ -22,7 +22,7 @@ local unitDef = {
   canstop            = "1",
   category           = "AMPHIB RIOT",
   corpse             = "ammobox",
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Light
+  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Hight
 	• Switches to torpedos when underwater
 
 Requires +5 Power]],
@@ -105,14 +105,14 @@ Requires +5 Power]],
 
 local weaponDefs = {
   riottankweapon = {
-    AreaOfEffect       = 50,
+    AreaOfEffect       = 100,
 	avoidFeature       = false,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "riotweapon",
     collideFriendly    = false,
     explosionGenerator = "custom:PLASMA_Expl",
-	energypershot      = 12.5,
+	energypershot      = 25,
     id                 = 172,
     impulseFactor      = 0.5,
 	interceptedByShieldType = 4,
@@ -131,7 +131,7 @@ local weaponDefs = {
 	  damagetype		= "light",  
     },   
     damage = {
-      default           = 25,
+      default           = 50,
     },
   },
   

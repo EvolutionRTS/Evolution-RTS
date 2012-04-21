@@ -89,30 +89,30 @@ local function BackwardCompability(wdName,wd)
 		local damagetypelower = string.lower(wd.customparams.damagetype)
 		    if ( damagetypelower	== "beam") then
 				wd.damage.HEAVYARMOR = 		weapondamage*1
-				wd.damage.MEDIUMARMOR = 	weapondamage*0.9
-				wd.damage.LIGHTARMOR = 		weapondamage*0.75
-				wd.damage.BUILDING  = 		weapondamage*1.25
+				wd.damage.MEDIUMARMOR = 	weapondamage*0.75
+				wd.damage.LIGHTARMOR = 		weapondamage*0.5
+				wd.damage.BUILDING  = 		weapondamage*1
 				wd.damage.ARMOREDBUILDING = weapondamage*1.5
 				wd.damage.ECO	  = 		weapondamage*2
 			elseif (damagetypelower	== "explosive") then
-				wd.damage.HEAVYARMOR = 		weapondamage*0.5
-				wd.damage.MEDIUMARMOR = 	weapondamage*0.75
-				wd.damage.LIGHTARMOR = 		weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*2
-				wd.damage.ARMOREDBUILDING = weapondamage*0.75
+				wd.damage.HEAVYARMOR = 		weapondamage*0.1
+				wd.damage.MEDIUMARMOR = 	weapondamage*0.25
+				wd.damage.LIGHTARMOR = 		weapondamage*0.5
+				wd.damage.BUILDING  = 		weapondamage*1.5
+				wd.damage.ARMOREDBUILDING = weapondamage*1
 				wd.damage.ECO	  = 		weapondamage*2
 			elseif (damagetypelower	== "light") then
-				wd.damage.HEAVYARMOR = 		weapondamage*0.5
+				wd.damage.HEAVYARMOR = 		weapondamage*0.25
 				wd.damage.MEDIUMARMOR = 	weapondamage*0.5
-				wd.damage.LIGHTARMOR = 		weapondamage*2
-				wd.damage.BUILDING  = 		weapondamage*0.1
+				wd.damage.LIGHTARMOR = 		weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.15
 				wd.damage.ARMOREDBUILDING = weapondamage*0.1
-				wd.damage.ECO	  = 		weapondamage*0.1
+				wd.damage.ECO	  = 		weapondamage*0.25
 			else -- medium weapon
 				wd.damage.HEAVYARMOR = 		weapondamage*0.5
 				wd.damage.MEDIUMARMOR = 	weapondamage*1
-				wd.damage.LIGHTARMOR = 		weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*0.15
+				wd.damage.LIGHTARMOR = 		weapondamage*2
+				wd.damage.BUILDING  = 		weapondamage*0.25
 				wd.damage.ARMOREDBUILDING = weapondamage*0.1
 				wd.damage.ECO	  = 		weapondamage*0.5
 			end

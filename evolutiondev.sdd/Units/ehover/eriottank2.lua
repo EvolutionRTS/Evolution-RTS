@@ -23,7 +23,7 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR RIOT",
   corpse             = "ammobox",
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Light
+  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy
 
 Requires +4 Power]],
   energyMake         = 0,
@@ -99,7 +99,7 @@ Requires +4 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 's',
     RequireTech = "4 Power",
-	armortype   = "lightarmor",
+	armortype   = "heavyarmor",
 	normaltex = "unittextures/eriottank2normal.png", 
 	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Features 10 concussion shells in a burst that will knock back opposing units. It has Light armor, and should be paired with escorts if possible.]],
   },
@@ -110,14 +110,14 @@ Requires +4 Power]],
 
 local weaponDefs = {
   riottankweapon = {
-    AreaOfEffect       = 10,
+    AreaOfEffect       = 50,
 	avoidFeature       = false,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "riotweapon",
     collideFriendly    = false,
     explosionGenerator = "custom:PLASMA_Expl",
-	energypershot      = 25,
+	energypershot      = 50,
     id                 = 172,
     impulseFactor      = 0.5,
 	interceptedByShieldType = 4,
@@ -136,7 +136,7 @@ local weaponDefs = {
 	  damagetype		= "light",  
     },   
     damage = {
-      default           = 25,
+      default           = 50,
     },
   },
 
