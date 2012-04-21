@@ -22,7 +22,7 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SKIRMISHER",
   corpse             = "ammobox",
-  description        = [[Light Skirmish Tank 
+  description        = [[Light Tank Destroyer 
   •Damagetype: Medium :: Armortype: Light
 
 Requires +3 Power]],
@@ -92,7 +92,7 @@ Requires +3 Power]],
     RequireTech = "3 Power",
 	armortype   = "lightarmor",
 	normaltex = "unittextures/emediumtank3normal.png", 
-	helptext	= [[The brusier is a light skirmish tank, excellent versus raiders and other light skirmish units. Pair with light raiders and heavy skirmishers for best results.]],
+	helptext	= [[The brusier is a light tank destroyer, excellent versus raiders and other light units. Pair with light raiders and heavy tank destroyers for best results.]],
   },
 }
 

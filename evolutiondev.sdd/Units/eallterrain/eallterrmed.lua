@@ -34,7 +34,7 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Light Skirmish Tank - Damagetype: Medium :: Armortype: Light
+  description        = [[Light Tank Destroyer - Damagetype: Medium :: Armortype: Light
 
 Requires +4 Power]],
   energyMake         = 0,

@@ -22,7 +22,7 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SKIRMISHER",
   corpse             = "ammobox",
-  description        = [[Armored Skirmish Tank 
+  description        = [[Armored Tank Destroyer 
   •Damagetype: Medium :: Armortype: Medium
 
 Requires +5 Power]],
@@ -92,7 +92,7 @@ Requires +5 Power]],
     RequireTech = "5 Power",
 	armortype   = "mediumarmor",
 	normaltex = "unittextures/eheavytank3normal.png", 
-	helptext = [[The Crusher is a heavy skirmish tank capable of taking out the most hardened of mobile units. The more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.]],
+	helptext = [[The Crusher is a heavy tank destroyer capable of taking out the most hardened of mobile units. The more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.]],
   },
 }
 
