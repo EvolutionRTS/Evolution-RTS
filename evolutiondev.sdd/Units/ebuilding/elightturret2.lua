@@ -136,7 +136,7 @@ local weaponDefs = {
 	  damagetype		= "light",  
     },      
     damage = {
-      default            = 140,
+      default            = 70,
     },
   },
 }

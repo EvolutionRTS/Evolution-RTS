@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
---  file:    gfx_halo.lua
+--  file:    unit_icongenerator.lua
 --  brief:   
 --  author:  jK
 --
@@ -12,10 +12,16 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+--[[
+example usage (need cheats):
+/luarules buildicons all
+/luarules buildicon armcom
+]]
+
 function gadget:GetInfo()
   return {
     name      = "IconGenerator",
-    desc      = "",
+    desc      = "/luarules buildicon(s) [unitdefname|all]",
     author    = "jK",
     date      = "Oct 01, 2008",
     license   = "GNU GPL, v2 or later",
@@ -59,6 +65,7 @@ if (gadgetHandler:IsSyncedCode()) then
       if (#units>10 or ((curTeam) and (cunit.team~=curTeam))) then
         leftunits[#leftunits+1] = cunit;
       else
+		local lus = false
         local x,z = nextUnitX,nextUnitZ;
         nextUnitX = nextUnitX+200;
         if (nextUnitX>=Game.mapSizeX) then nextUnitX,nextUnitZ = 100,nextUnitZ+200 end;
@@ -73,13 +80,20 @@ if (gadgetHandler:IsSyncedCode()) then
         Spring.GiveOrderToUnit(uid,CMD.FIRE_STATE,{0},{});
         Spring.GiveOrderToUnit(uid,CMD.STOP,{},{});
 
-        Spring.CallCOBScript(uid,"Activate",0);
+		local env = Spring.UnitScript.GetScriptEnv(uid)
+		if env then lus = true end
+		
+		if lus then
+			if env.Activate then Spring.UnitScript.CallAsUnit(uid, env.Activate) end
+        else Spring.CallCOBScript(uid,"Activate",0) end
 
         if (cunit.move) then
-          Spring.CallCOBScript(uid,"StartMoving",0);
+		  if lus then
+			if env.StartMoving then Spring.UnitScript.CallAsUnit(uid, env.StartMoving) end
+          else Spring.CallCOBScript(uid,"StartMoving",0) end
         end;
 
-        if (cunit.attack) then
+        if (cunit.attack and not lus) then
           local angle = (cunit.shotAngle / 180) * 32768
 
           Spring.CallCOBScript(uid,"AimPrimary",0,Spring.GetHeadingFromVector(0,1),angle);
@@ -90,6 +104,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
           Spring.CallCOBScript(uid,"AimTertiary",0,Spring.GetHeadingFromVector(0,1),angle);
           Spring.CallCOBScript(uid,"AimWeapon3",0,Spring.GetHeadingFromVector(0,1),angle);
+
         end;
       end;
     end;
@@ -629,7 +644,7 @@ local function DrawIcon(udid,teamID,uid)
   gl.LoadIdentity();
 
   if (uid) then
-    if (UnitDefs[udid].model.type == "s3o") then
+    if (UnitDefs[udid].model.type ~= "3do") then
       gl.Texture(0, "%" .. udid .. ":0");
     else
       gl.Texture(0, "$units");
@@ -637,7 +652,9 @@ local function DrawIcon(udid,teamID,uid)
     gl.UnitRaw(uid,true,-1);
     gl.Texture(0,false);
   else
-    gl.UnitShape(udid, teamID);
+	gl.Texture(0, "%" .. udid .. ":0");
+	gl.UnitShape(udid, teamID);
+	gl.Texture(0,false);
   end
 
   gl.ActiveTexture(0,gl.MatrixMode,GL.TEXTURE);
