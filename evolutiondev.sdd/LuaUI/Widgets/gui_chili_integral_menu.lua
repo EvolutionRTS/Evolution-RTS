@@ -1030,8 +1030,8 @@ function widget:Initialize()
 		parent = screen0,
 		name   = 'integralwindow';
 		color = {0, 0, 0, 0},
-		width = 450;
-		height = 180; -- keep an aspect ratio regardless of screen ratio
+		width = 550;
+		height = 280; -- keep an aspect ratio regardless of screen ratio
 		x = 0; 
 		bottom = 0;
 		dockable = true;

@@ -2001,9 +2001,9 @@ function widget:Initialize()
 		name   = 'real_window_corner';
 		color = {0, 0, 0, 0},
 		x = 0; 
-		bottom = 180;
-        width = 450;
-		height = 130;
+		bottom = 280;
+        width = 550;
+		height = 135;
 		dockable = true;
 		draggable = false,
 		resizable = false,
