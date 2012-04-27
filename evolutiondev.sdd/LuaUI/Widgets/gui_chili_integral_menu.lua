@@ -355,7 +355,7 @@ local function MakeButton(container, cmd, insertItem)
 				y="5%";
 				x="5%";
 --				color = color;
-				keepAspect = not isBuild,	--true,	--isState;
+				keepAspect = true,	--true,	--isState;
 				file = texture;
 				parent = button;
 			}
