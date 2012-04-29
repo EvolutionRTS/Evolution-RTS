@@ -16,18 +16,24 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local spGetGroundHeight		= Spring.GetGroundHeight
+local spGetGroundHeight	 = Spring.GetGroundHeight
 
-local floor					= math.floor
+local floor				     = math.floor
 
-local SNAPDIST			= 10000
-local MEXSIZE			= 55
-local mexRad			= Game.extractorRadius > 125 and Game.extractorRadius or 125
-local mexRadSqr			= mexRad*mexRad
+local SNAPDIST		  = 10000
+local MEXSIZE		   = 55
+local mexRad		    = Game.extractorRadius > 125 and Game.extractorRadius or 125
+local mexRadSqr		 = mexRad*mexRad
+
+local MAPSIDE_METALMAP = "mapconfig/map_metal_layout.lua"
+local GAMESIDE_METALMAP = "LuaRules/Configs/MetalSpots/" .. (Game.mapName or "") .. ".lua"
+
+local gameConfig = VFS.FileExists(GAMESIDE_METALMAP) and VFS.Include(GAMESIDE_METALMAP) or false
+local mapConfig = VFS.FileExists(MAPSIDE_METALMAP) and VFS.Include(MAPSIDE_METALMAP) or false
 
 local mex_types = {
-	[UnitDefNames['emetalextractor'].id] 		= true,
-	[UnitDefNames['euwmetalextractor'].id] 		= true,
+	[UnitDefNames['emetalextractor'].id]	    = true,
+	[UnitDefNames['euwmetalextractor'].id]	  = true,
 }
 
 --------------------------------------------------------------------------------
@@ -37,28 +43,28 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local spGetGroundInfo		= Spring.GetGroundInfo
-local spGiveOrderToUnit 	= Spring.GiveOrderToUnit
-local spGetUnitPosition		= Spring.GetUnitPosition
-local spGetUnitAllyTeam		= Spring.GetUnitAllyTeam
+local spGetGroundInfo	   = Spring.GetGroundInfo
+local spGiveOrderToUnit	 = Spring.GiveOrderToUnit
+local spGetUnitPosition	 = Spring.GetUnitPosition
+local spGetUnitAllyTeam	 = Spring.GetUnitAllyTeam
 
-local GRIDSIZE			= 4
-local CUTOFFRATIO		= 0.4
-local MAXMETALDATA		= 250000
+local GRIDSIZE		  = 4
+local CUTOFFRATIO	       = 0.4
+local MAXMETALDATA	      = 250000
 
-local mapWidth 			= floor(Game.mapSizeX)
-local mapHeight 		= floor(Game.mapSizeZ)
-local mapWidth2 		= floor(Game.mapSizeX / GRIDSIZE)
-local mapHeight2 		= floor(Game.mapSizeZ / GRIDSIZE)
+local mapWidth		  = floor(Game.mapSizeX)
+local mapHeight		 = floor(Game.mapSizeZ)
+local mapWidth2		 = floor(Game.mapSizeX / GRIDSIZE)
+local mapHeight2		= floor(Game.mapSizeZ / GRIDSIZE)
 
-local metalMap 			= {}
-local maxMetal 			= 0
+local metalMap		  = {}
+local maxMetal		  = 0
 
 
-local flagCount			= 0
+local flagCount		 = 0
 
-local metalData 		= {}
-local metalDataCount 	= 0
+local metalData		 = {}
+local metalDataCount    = 0
 
 local mexes = {}
 
@@ -96,6 +102,35 @@ local function qOrderToUnit(unitID, cmdID, params, opts)
 end
 
 local function AnalyzeMetalMap()	
+	-- Check configs
+	if gameConfig then
+		local spots = gameConfig.spots
+		if spots then
+			Spring.Echo("Easymetal: Loading gameside mex config")
+			for i = 1, #spots do
+				local spot = spots[i]
+				flagCount = flagCount + 1
+				flags[flagCount] = {x = spot.x, z = spot.z, weight = spot.metal}
+			end
+			return
+		end
+	end
+
+	if mapConfig then
+		local spots = mapConfig.spots
+		if spots then
+			Spring.Echo("Easymetal: Loading mapside mex config")
+			for i = 1, #spots do
+				local spot = spots[i]
+				flagCount = flagCount + 1
+				flags[flagCount] = {x = spot.x, z = spot.z, weight = spot.metal}
+			end
+			return
+		end
+	end
+	
+	Spring.Echo("Easymetal: Detecting spots from map")
+
 	for mx_i = 1, mapWidth2 do
 		metalMap[mx_i] = {}
 		for mz_i = 1, mapHeight2 do
@@ -211,10 +246,10 @@ function gadget:GameFrame(n)
 	if frame64 < 0.1 then
 		local flagsString = ''
 		for _,coord in pairs(flags) do
-			flagsString =  flagsString ..coord.x ..',' ..coord.z ..'|'		
+			flagsString =  flagsString ..coord.x ..',' ..coord.z ..'|'	      
 		end
 		flagsString = flagsString:sub(1, -2)
-		SendToUnsynced("GetFlags", flagsString)	
+		SendToUnsynced("GetFlags", flagsString) 
 		
 	end
 	--]]
@@ -262,48 +297,48 @@ else
 --------------------------------------------------------------------------------
 
 local spGetActiveCommand	= Spring.GetActiveCommand
-local spGetUnitDefID		= Spring.GetUnitDefID
-local spGetGameFrame    	= Spring.GetGameFrame
-local spGetMouseState		= Spring.GetMouseState
-local spTraceScreenRay		= Spring.TraceScreenRay
-local spGetMapDrawMode		= Spring.GetMapDrawMode
+local spGetUnitDefID	    = Spring.GetUnitDefID
+local spGetGameFrame	    = Spring.GetGameFrame
+local spGetMouseState	   = Spring.GetMouseState
+local spTraceScreenRay	  = Spring.TraceScreenRay
+local spGetMapDrawMode	  = Spring.GetMapDrawMode
 local spGetPositionLosState = Spring.GetPositionLosState
-local spWorldToScreenCoords	= Spring.WorldToScreenCoords
-local spSendCommands		= Spring.SendCommands
-local spTestBuildOrder 		= Spring.TestBuildOrder
-local spGetUnitTeam			= Spring.GetUnitTeam
-local spGetUnitLosState		= Spring.GetUnitLosState
+local spWorldToScreenCoords     = Spring.WorldToScreenCoords
+local spSendCommands	    = Spring.SendCommands
+local spTestBuildOrder	  = Spring.TestBuildOrder
+local spGetUnitTeam		     = Spring.GetUnitTeam
+local spGetUnitLosState	 = Spring.GetUnitLosState
 
-local spGetTeamColor		= Spring.GetTeamColor
-local spGetPlayerInfo		= Spring.GetPlayerInfo
-local spGetTeamInfo			= Spring.GetTeamInfo
-local spGetTeamList			= Spring.GetTeamList
+local spGetTeamColor	    = Spring.GetTeamColor
+local spGetPlayerInfo	   = Spring.GetPlayerInfo
+local spGetTeamInfo		     = Spring.GetTeamInfo
+local spGetTeamList		     = Spring.GetTeamList
 
 local glDrawGroundCircle	= gl.DrawGroundCircle 
-local glDepthTest			= gl.DepthTest
-local glLineWidth			= gl.LineWidth
-local glScale				= gl.Scale
-local glColor				= gl.Color
-local glPushMatrix        	= gl.PushMatrix
-local glPopMatrix         	= gl.PopMatrix
-local glTranslate         	= gl.Translate
-local glBillboard         	= gl.Billboard
-local glAlphaTest      		= gl.AlphaTest
-local GL_GREATER       		= GL.GREATER
-local glTexture				= gl.Texture
-local glTexRect				= gl.TexRect
-local glVertex		 		= gl.Vertex
-local glBeginEnd	 		= gl.BeginEnd
+local glDepthTest		       = gl.DepthTest
+local glLineWidth		       = gl.LineWidth
+local glScale			   = gl.Scale
+local glColor			   = gl.Color
+local glPushMatrix	      = gl.PushMatrix
+local glPopMatrix	       = gl.PopMatrix
+local glTranslate	       = gl.Translate
+local glBillboard	       = gl.Billboard
+local glAlphaTest	       = gl.AlphaTest
+local GL_GREATER		= GL.GREATER
+local glTexture			 = gl.Texture
+local glTexRect			 = gl.TexRect
+local glVertex			  = gl.Vertex
+local glBeginEnd			= gl.BeginEnd
 
 LUAUI_DIRNAME = 'LuaUI/'
-local fontHandler	= loadstring(VFS.LoadFile(LUAUI_DIRNAME.."modfonts.lua", VFS.ZIP_FIRST))()
-local metalFont		= "LuaUI/Fonts/FreeSansBold_16"
+local fontHandler       = loadstring(VFS.LoadFile(LUAUI_DIRNAME.."modfonts.lua", VFS.ZIP_FIRST))()
+local metalFont	 = "LuaUI/Fonts/FreeSansBold_16"
 local fhDrawCentered = fontHandler.DrawCentered
 
 local showMetal, showMetalTemp, toggleMetal, showCursorIcon
 
-local snapSteps 	= 20
-local confirmSize 	= 25
+local snapSteps	 = 20
+local confirmSize       = 25
 
 local mexes
 local msx,msz
@@ -312,7 +347,7 @@ local flags, hoverFlagNum, hoverFlagInLOS
 local myAllyID, myTeamID
 local gaiaTeamID			= Spring.GetGaiaTeamID()
 
-local teamNames		= {}
+local teamNames	 = {}
 local teamColors	= {}
 
 --------------------------------------------------------------------------------
@@ -321,7 +356,7 @@ local teamColors	= {}
 
 local function NearFlag(px, pz, dist)
 	if not flags then return false end
-	for k, flag in spairs(flags) do		
+	for k, flag in spairs(flags) do	 
 		local fx, fz = flag.x, flag.z
 		if (px-fx)^2 + (pz-fz)^2 < dist then
 			return k
@@ -374,9 +409,9 @@ function gadget:Update()
 	local gameFrame = spGetGameFrame()
 	local frame4 = (gameFrame) % 4
 		
-	if (frame4 < 0.1) then	
+	if (frame4 < 0.1) then  
 		local mx, my = spGetMouseState()
-		local _,pos = spTraceScreenRay(mx,my,true)	
+		local _,pos = spTraceScreenRay(mx,my,true)      
 		if pos then
 			 msx,msz = pos[1], pos[3]
 		end
@@ -392,8 +427,8 @@ function gadget:Update()
 		local buildUnitDef = buildUnitName and UnitDefNames[buildUnitName]
 		
 		hoverFlagNum = false
-		--if pos and buildUnitDef and buildUnitDef.extractsMetal > 0 then			
-		if pos and buildUnitDef and mex_types[ -activeid ] then			
+		--if pos and buildUnitDef and buildUnitDef.extractsMetal > 0 then		       
+		if pos and buildUnitDef and mex_types[ -activeid ] then		 
 			showCursorIcon = true
 			toggleMetal = false
 			if not showMetal then
@@ -413,7 +448,7 @@ function gadget:Update()
 				local blocking
 			    CallAsTeam({ ['read'] = myTeamID }, function()
 					blocking = spTestBuildOrder(testBuilding, flags[hoverFlagNum].x, 1, flags[hoverFlagNum].z, 1)
-		        end)
+			end)
 				
 				if blocking == 0 then
 					hoverFlagNum = false
@@ -440,7 +475,7 @@ function gadget:Update()
 	end --every 4 frames
 	
 end
-function gadget:DrawWorld()	
+function gadget:DrawWorld()     
 	if showMetal and flags then
 		
 		fontHandler.UseFont(metalFont)
@@ -499,7 +534,7 @@ function gadget:DrawWorld()
 			
 			
 			glPopMatrix()
-		end	-- for every flag
+		end     -- for every flag
 		
 		glLineWidth(0)
 		glColor(1,1,1,1)
@@ -556,4 +591,3 @@ end
 -------------------------------------------------------------------------------
 
 end
-
