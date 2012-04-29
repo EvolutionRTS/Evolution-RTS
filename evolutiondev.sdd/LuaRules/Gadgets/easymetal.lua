@@ -233,9 +233,9 @@ function gadget:Initialize()
 		gadget:UnitCreated(unitID, Spring.GetUnitDefID(unitID), Spring.GetUnitTeam(unitID))
 	end
 	
-	
 	_G.mexes = mexes
 	_G.flags = flags
+    GG.flagCount = flagCount
 	
 end
 
