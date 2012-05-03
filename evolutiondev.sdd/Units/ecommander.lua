@@ -126,15 +126,25 @@ local unitDef = {
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext       = [[The commander has an EMP defense shockwave weapon that can be triggered every 10 seconds. It costs 50 energy, so use it wisely.]],
 	
-	ring1radius = "1000", --Using this one for buildrange
-	ring1color = "1,0.5,0,0.8", --Orangeish
-	ring1thickness = "1", --Normalish thickness
-	ring1showselected = "1", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	ring1radius = "1000", --How large of a radius the ring will cover.
+		
+		ring1color = "1,0.5,0,0.8", --R,G,B,A on a scale from 0 - 1. A is the opacity with 1 being fully opaque to 0 being fully transparent. Easy and quick color picker here: http://www.dematte.at/colorPicker/  Take 255 divided by the color value you want, and that is it's value on a scale from 0 - 1. 
+		
+		ring1thickness = "1", --1 is basically 1 pixel thick. It will scale as you soom in and out. Maximum value seems to be 32.
+		
+		ring1showselected = "1", --boolean (I.e. 1 = True, 0 = False) If True, ring only shows when the unit is selected, if False, show all the time.
+		
+		ring1sides = "32", -- Number of sides the ring has. 32 sides means a perfectly smooth ring. Setting to 3 will result in triangle, 4 a diamond, 5 a pentagon, etc (Less than 2 will not display at all).
 	
-	ring2radius = "500", --Using this one for energy core collection
-	ring2color = "0.5,0,1,0.3", --purplish
-	ring2thickness = "1", --Normalish thickness
-	ring2showselected = "0", --boolean If true, ring only shows when the unit is selected, if false, show all the time.
+	ring2radius = "500", --How large of a radius the ring will cover.
+		
+		ring2color = "0.5,0,1,0.3", --R,G,B,A on a scale from 0 - 1. A is the opacity with 1 being fully opaque to 0 being fully transparent. Easy and quick color picker here: http://www.dematte.at/colorPicker/  Take 255 divided by the color value you want, and that is it's value on a scale from 0 - 1. 
+		
+		ring2thickness = "1", --1 is basically 1 pixel thick. It will scale as you soom in and out. Maximum value seems to be 32.
+		
+		ring2showselected = "0", --boolean (I.e. 1 = True, 0 = False) If True, ring only shows when the unit is selected, if False, show all the time.
+		
+		ring2sides = "32", -- Number of sides the ring has. 32 sides means a perfectly smooth ring. Setting to 3 will result in triangle, 4 a diamond, 5 a pentagon, etc (Less than 2 will not display at all).
 
   },
 }
