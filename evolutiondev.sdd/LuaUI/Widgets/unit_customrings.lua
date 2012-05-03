@@ -17,7 +17,7 @@ Contains 4 variables:
         ring1radius
         ring1color
         ring1thickness
-        ring1ShowOnlySelected
+        ring1showselected
         
    ***To Be Continued...***     
 ]]--
@@ -34,86 +34,32 @@ local function explode(div,str)
 end
 
 function widget:DrawWorld()
-        local units = Spring.GetAllUnits()
-        for _,unitID in ipairs(units) do
-				if (Spring.IsUnitAllied(unitID)) then
-		
-                local x,y,z = Spring.GetUnitPosition(unitID)
-                local unitDefID = Spring.GetUnitDefID(unitID)
-                local ud = UnitDefs[unitDefID]
-                local customParams = ud.customParams
-                
-                -- ring 1
-                if customParams.ring1radius then
-                    gl.Color(explode(',', customParams.ring1color))
-                    gl.LineWidth(customParams.ring1thickness)
-                   gl.DrawGroundCircle(x,y,z, customParams.ring1radius, 32)
-                end
-                
-                -- ring 2
-                if customParams.ring2radius then
-                    gl.Color(explode(',', customParams.ring2color))
-                    gl.LineWidth(customParams.ring2thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring2radius, 32)
-               end
-			   
-			   -- ring 3
-                if customParams.ring3radius then
-                    gl.Color(explode(',', customParams.ring3color))
-                    gl.LineWidth(customParams.ring3thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring3radius, 32)
-               end
-			   
-			   -- ring 4
-                if customParams.ring4radius then
-                    gl.Color(explode(',', customParams.ring4color))
-                    gl.LineWidth(customParams.ring4thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring4radius, 32)
-               end
-			   
-			   -- ring 5
-                if customParams.ring5radius then
-                    gl.Color(explode(',', customParams.ring5color))
-                    gl.LineWidth(customParams.ring5thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring5radius, 32)
-               end
-			   
-			   -- ring 6
-                if customParams.ring6radius then
-                    gl.Color(explode(',', customParams.ring6color))
-                    gl.LineWidth(customParams.ring6thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring6radius, 32)
-               end
-			   
-			   -- ring 7
-                if customParams.ring7radius then
-                    gl.Color(explode(',', customParams.ring7color))
-                    gl.LineWidth(customParams.ring7thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring7radius, 32)
-               end
-			   
-			   -- ring 8
-                if customParams.ring8radius then
-                    gl.Color(explode(',', customParams.ring8color))
-                    gl.LineWidth(customParams.ring8thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring8radius, 32)
-               end
-			   
-			   -- ring 9
-                if customParams.ring9radius then
-                    gl.Color(explode(',', customParams.ring9color))
-                    gl.LineWidth(customParams.ring9thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring9radius, 32)
-               end
-			   
-			   -- ring 10
-                if customParams.ring10radius then
-                    gl.Color(explode(',', customParams.ring10color))
-                    gl.LineWidth(customParams.ring10thickness)
-                   gl.DrawGroundCircle(x,y,z,customParams.ring10radius, 32)
-               end
-			   
-			   end
-       end
+	local units = Spring.GetAllUnits()
+	for _,unitID in ipairs(units) do
+		local x,y,z = Spring.GetUnitPosition(unitID)
+		local unitDefID = Spring.GetUnitDefID(unitID)
+		local ud = UnitDefs[unitDefID]
+		local customParams = ud.customParams
 
+		if (Spring.IsUnitAllied(unitID)) then
+			local c
+			local doit
+			local ring_number = 1
+			while (true) do
+				if (customParams["ring"..ring_number.."radius"] == nil) then break end
+				doit = true
+				if ((tonumber(customParams["ring"..ring_number.."showselected"]) == 1) 
+				and (not Spring.IsUnitSelected(unitID))) then
+					doit = false
+				end
+				if (doit) then
+					c = explode(',', customParams["ring"..ring_number.."color"])
+					gl.Color(tonumber(c[1]),tonumber(c[2]),tonumber(c[3]),tonumber(c[4]))
+					gl.LineWidth(tonumber(customParams["ring"..ring_number.."thickness"]))
+					gl.DrawGroundCircle(x,y,z, tonumber(customParams["ring"..ring_number.."radius"]),32)
+				end
+				ring_number = ring_number + 1
+			end
+		end
+	end			
 end
