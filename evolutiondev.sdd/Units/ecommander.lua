@@ -130,7 +130,7 @@ local unitDef = {
 		
 		ring1color = "1,0.5,0,0.8", --R,G,B,A on a scale from 0 - 1. A is the opacity with 1 being fully opaque to 0 being fully transparent. Easy and quick color picker here: http://www.dematte.at/colorPicker/  Take 255 divided by the color value you want, and that is it's value on a scale from 0 - 1. 
 		
-		ring1thickness = "2", --1 is basically 1 pixel thick. It will scale as you zoom in and out. Maximum value seems to be 32.
+		ring1thickness = "1", --1 is basically 1 pixel thick. It will scale as you zoom in and out. Maximum value seems to be 32.
 		
 		ring1showselected = "1", --boolean (I.e. 1 = True, 0 = False) If True, ring only shows when the unit is selected, if False, show all the time.
 		
@@ -140,7 +140,7 @@ local unitDef = {
 		
 		ring2color = "0.5,0,1,0.2", --R,G,B,A on a scale from 0 - 1. A is the opacity with 1 being fully opaque to 0 being fully transparent. Easy and quick color picker here: http://www.dematte.at/colorPicker/  Take 255 divided by the color value you want, and that is it's value on a scale from 0 - 1. 
 		
-		ring2thickness = "5", --1 is basically 1 pixel thick. It will scale as you zoom in and out. Maximum value seems to be 32.
+		ring2thickness = "1", --1 is basically 1 pixel thick. It will scale as you zoom in and out. Maximum value seems to be 32.
 		
 		ring2showselected = "0", --boolean (I.e. 1 = True, 0 = False) If True, ring only shows when the unit is selected, if False, show all the time.
 		
