@@ -146,7 +146,7 @@ options = {
 	showSpecs = {
 		name = "Show spectators",
 		type = 'bool',
-		value = false,
+		value = true,
 		desc = "Show spectators in main window (rather than confining them to tooltip)",
 		OnChange = function() SetupPlayerNames() end,
 	},
