@@ -36,6 +36,8 @@ end
 function widget:DrawWorld()
         local units = Spring.GetAllUnits()
         for _,unitID in ipairs(units) do
+				if (Spring.IsUnitAllied(unitID)) then
+		
                 local x,y,z = Spring.GetUnitPosition(unitID)
                 local unitDefID = Spring.GetUnitDefID(unitID)
                 local ud = UnitDefs[unitDefID]
@@ -110,6 +112,8 @@ function widget:DrawWorld()
                     gl.LineWidth(customParams.ring10thickness)
                    gl.DrawGroundCircle(x,y,z,customParams.ring10radius, 32)
                end
+			   
+			   end
        end
 
 end
