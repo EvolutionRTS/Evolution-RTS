@@ -98,9 +98,10 @@ local unitDef = {
 	armortype   = "lightarmor",
 	normaltex = "unittextures/eorbnormal.png", 
 	helptext	= [[The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combot for 5 seconds before repairs can take place.]],
-	-- groundtexselectimg = ":nc:bitmaps/icons/repairzone.png",
-    -- groundtexselectxsize = 1000, 
-    -- groundtexselectzsize = 1000, 
+	
+	groundtexselectimg = ":nc:bitmaps/icons/repairzone.png",
+    groundtexselectxsize = 1000, 
+    groundtexselectzsize = 1000, 
 	
 	ring1radius = "800", --How large of a radius the ring will cover.
 		
