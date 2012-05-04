@@ -128,7 +128,7 @@ local unitDef = {
 		
 		ring1thickness = "10", --1 is basically 1 pixel thick. It will scale as you zoom in and out. Maximum value seems to be 32.
 		
-		ring1showselected = "0", --boolean (I.e. 1 = True, 0 = False) If True, ring only shows when the unit is selected, if False, show all the time.
+		ring1showselected = "1", --boolean (I.e. 1 = True, 0 = False) If True, ring only shows when the unit is selected, if False, show all the time.
 		
 		ring1sides = "32", -- Number of sides the ring has. 32 sides means a perfectly smooth ring. Setting to 3 will result in triangle, 4 a diamond, 5 a pentagon, etc (2 or less will not display at all).
 	
