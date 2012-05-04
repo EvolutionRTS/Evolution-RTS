@@ -24,8 +24,6 @@ end
             
 ]]--
 
--- This function is used for seperating out each r g b a setting of colors due to the fact that unitdef custom parameters can only be strings.
-
 local ringsDefs = {
     [UnitDefNames.ecommander.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
