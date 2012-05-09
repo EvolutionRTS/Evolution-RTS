@@ -110,7 +110,7 @@ Requires +4 Power]],
 
 local weaponDefs = {
   riottankweapon = {
-    AreaOfEffect       = 50,
+    AreaOfEffect       = 75,
 	avoidFeature       = false,
     avoidFriendly      = false,
     ballistic          = true,

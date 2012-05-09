@@ -15,7 +15,7 @@ local unitDef = {
   buildCostMetal     = 1,
   buildTime          = 1,
   canAttack          = true,
-  canDropFlare       = true,
+  canDropFlare       = false,
   canFly             = true,
   canGuard           = true,
   canLoopbackAttack  = true,
@@ -27,7 +27,7 @@ local unitDef = {
 --Collision Volumes... Because the engine devs are idiots.
 	collisionVolumeScales = [[35 35 35]],
 --End Collision volumes
-  corpse             = "ammobox",
+--  corpse             = "ammobox",
   cruiseAlt          = 100,
   description        = "Drone Gunship",
   energyMake         = 0,
@@ -56,12 +56,11 @@ local unitDef = {
   radarDistance      = 0,
   selfDestructAs     = "BIG_UNIT",
   side               = "CORE",
-  sightDistance      = 600,
+  sightDistance      = 300,
   smoothAnim         = true,
   stealth            = true,
   turnRate           = 920,
   unitname           = "edrone",
-  weaponslaveto2     = "1",
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
  		"deathceg0", 
@@ -91,6 +90,7 @@ local unitDef = {
   },
   customParams = {
 --    needed_cover = 1,
+	armortype   = "lightarmor",
   	death_sounds = "soldier",
 	normaltex = "unittextures/edronenormal.png", 
   },
@@ -113,6 +113,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     duration           = 0.02,
+	energypershot      = 0.5,
     explosionGenerator = "custom:burn",
     fallOffRate        = 0.1,
     impulseFactor      = 0,
@@ -122,7 +123,7 @@ local weaponDefs = {
     name               = "Light Laser",
     noSelfDamage       = true,
     range              = 800,
-    reloadtime         = 0.5,
+    reloadtime         = 1,
     WeaponType         = "LaserCannon",
     rgbColor           = "0.1 0.5 0.2",
     rgbColor2          = "0 1 0",
