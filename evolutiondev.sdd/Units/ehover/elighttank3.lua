@@ -102,7 +102,7 @@ sfxtypes = {
 
 local weaponDefs = {
   lighttankweapon = {
-    AreaOfEffect       = 100,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     collideFriendly    = false,
     avoidFeature       = false,

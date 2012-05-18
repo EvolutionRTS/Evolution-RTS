@@ -78,7 +78,7 @@ Requires +4 Power]],
     needed_cover = 2,
 	death_sounds = "generic",
 	twokhotkey = 't',
-    RequireTech = "4 Power",
+    RequireTech = "2 Power",
 	armortype   = "armoredbuilding", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Light Turret
