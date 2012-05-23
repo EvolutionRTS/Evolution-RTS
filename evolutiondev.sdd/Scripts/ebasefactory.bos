@@ -121,6 +121,7 @@ Activate()
       while(!Maya)
       {
          // Activated animation when needing tech
+         sleep 300;
       }
    }
 }
