@@ -15,9 +15,9 @@ local modrules  = {
   -- }
 
   construction = {
-    constructionDecay      = false; -- defaults to true
-    constructionDecayTime  = 6.66;  -- defaults to 6.66
-    constructionDecaySpeed = 0.03;  -- defaults to 0.03
+    constructionDecay      = true; -- defaults to true
+    constructionDecayTime  = 0.01;  -- defaults to 6.66
+    constructionDecaySpeed = 0.01;  -- defaults to 0.03
   },
 
 
@@ -81,13 +81,13 @@ local modrules  = {
 
 
   experience = {
-    experienceMult = 0.1; -- defaults to 1.0
+    experienceMult = 1; -- defaults to 1.0
 
     -- these are all used in the following form:
     --   value = defValue * (1 + (scale * (exp / (exp + 1))))
-    powerScale  = 0.7;  -- defaults to 1.0
-    healthScale = 0.5;  -- defaults to 0.7
-    reloadScale = 0.5;  -- defaults to 0.4
+    powerScale  = 1;  -- defaults to 1.0
+    healthScale = 1;  -- defaults to 0.7
+    reloadScale = 0;  -- defaults to 0.4
   },
 
 
