@@ -14,6 +14,13 @@ local modrules  = {
 	-- pathFinderSystem = 1;
   -- }
 
+  movement = {
+    allowAirPlanesToLeaveMap = true;  -- defaults to true
+    allowPushingEnemyUnits   = true; -- defaults to false
+    allowCrushingAlliedUnits = false; -- defaults to false
+    allowUnitCollisionDamage = true; -- defaults to false
+  },
+  
   construction = {
     constructionDecay      = true; -- defaults to true
     constructionDecayTime  = 0.01;  -- defaults to 6.66
