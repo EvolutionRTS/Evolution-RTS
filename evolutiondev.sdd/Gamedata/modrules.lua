@@ -107,6 +107,16 @@ local modrules  = {
   nanospray = {
     allow_team_colors = true;  -- defaults to true
   },
+
+  featureLOS = {
+    -- 0 - no default LOS for features
+    -- 1 - gaia features always visible
+    -- 2 - allyteam/gaia features always visible
+    -- 3 - all features always visible
+    -- default 3
+    featureVisibility = 3;
+  },
+  
 }
 
 --------------------------------------------------------------------------------
