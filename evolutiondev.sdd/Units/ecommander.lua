@@ -188,7 +188,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	 -- damagetype		= "medium",
+	  damagetype		= "medium",
 	  nofriendlyfire	= "true",
     },      
     damage = {
