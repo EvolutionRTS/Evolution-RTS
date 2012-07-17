@@ -68,7 +68,7 @@ Requires +2 Power]],
 	death_sounds = "generic",
 	twokhotkey = 'a',
     RequireTech = "2 Power",
-	armortype   = "BUILDING",
+	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Anti-Aircraft Turret
 

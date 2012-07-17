@@ -80,7 +80,7 @@ Requires +8 Power]],
 	death_sounds = "generic",
 	twokhotkey = 'h',
     RequireTech = "8 Power",
-	armortype   = "BUILDING", 
+	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Heavy Turret
 

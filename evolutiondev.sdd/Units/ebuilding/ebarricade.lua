@@ -66,7 +66,7 @@ sfxtypes = {
     needed_cover = 1,
 	death_sounds = "generic",
 	twokhotkey = 'b',
-	armortype   = "BUILDING",
+	armortype   = "building",
 	normaltex = "unittextures/ebarricadenormal.png", 
 	helptext = [[Organic Barricade
 

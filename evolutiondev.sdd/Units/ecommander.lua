@@ -121,7 +121,7 @@ local unitDef = {
     needed_cover = 2,
 	death_sounds = "soldier",
     cancollect = "1",
-	armortype   = "heavyarmor",
+	armortype   = "armored",
 	nofriendlyfire	= "1",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext       = [[The commander has an EMP defense shockwave weapon that can be triggered every 10 seconds. It costs 50 energy, so use it wisely.]],
@@ -188,7 +188,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "medium",
+	 -- damagetype		= "medium",
 	  nofriendlyfire	= "true",
     },      
     damage = {

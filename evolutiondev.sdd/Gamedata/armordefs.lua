@@ -23,12 +23,15 @@
 --------------------------------------------------------------------------------
 
 local armorDefs = {
-  LIGHTARMOR	= {}, 
-  MEDIUMARMOR   = {},
-  HEAVYARMOR	= {},
+  ARMORED	= {}, 
+  LIGHT   = {},
   BUILDING		= {},  
-  ARMOREDBUILDING		= {}, 
-  ECO			= {}, 
+  LIGHTARMOR    = {}, 
+  MEDIUMARMOR   = {},
+  HEAVYARMOR    = {},
+  BUILDING              = {},  
+  ARMOREDBUILDING               = {}, 
+  ECO                   = {}, 
 }
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -53,7 +56,7 @@ for name, ud in pairs(DEFS.unitDefs) do
   if (ud.customparams  and ud.customparams.armortype) then
 	unitArmorType = string.upper(ud.customparams.armortype)
     table.insert(armorDefs[unitArmorType], name)
-	-- Spring.Echo("Unit: ", ud.unitname, " Armorclass: ", unitArmorType) 
+	 Spring.Echo("Unit: ", ud.unitname, " Armorclass: ", unitArmorType) 
   end
 end
 
@@ -68,8 +71,8 @@ for name, ud in pairs(DEFS.unitDefs) do
     end
   end
   if (not found) then
-    table.insert(armorDefs.MEDIUMARMOR, name)
-	-- Spring.Echo("Unit: ", ud.unitname, " Armorclass: MEDIUMARMOR") 
+    table.insert(armorDefs.LIGHT, name)
+	-- Spring.Echo("Unit: ", ud.unitname, " Armorclass: LIGHT") 
   end
 end
 --------------------------------------------------------------------------------

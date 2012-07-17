@@ -61,7 +61,7 @@ sfxtypes = {
     needed_cover = 3,
 	death_sounds = "generic",
 	twokhotkey = 'j',
-	armortype   = "BUILDING",
+	armortype   = "building",
 	normaltex = "unittextures/ejammer2normal.png", 
 	helptext = [[Radar Jammer
 
