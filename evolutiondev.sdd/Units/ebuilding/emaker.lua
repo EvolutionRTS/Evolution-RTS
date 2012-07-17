@@ -74,7 +74,7 @@ sfxtypes = {
 	death_sounds = "generic",
 	twokhotkey = 'o',
     RequireTech = "20 Power",
-	armortype   = "eco",
+	armortype   = "BUILDING",
 	normaltex = "unittextures/emakernormal.png", 
 	helptext = [[Metal Maker
 

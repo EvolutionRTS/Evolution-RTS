@@ -22,8 +22,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SKIRMISHER",
   corpse             = "ammobox",
-  description        = [[Light Tank Destroyer 
-  •Damagetype: Medium :: Armortype: Light
+  description        = [[Light Tank Destroyer
+Light, 50% Damage vs Buildings
 
 Requires +3 Power]],
   energyMake         = 0,
@@ -91,7 +91,7 @@ Requires +3 Power]],
   	death_sounds = "soldier",
 	twokhotkey = 'b',
     RequireTech = "3 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/emediumtank3normal.png", 
 	helptext	= [[The brusier is a light tank destroyer, excellent versus raiders and other light units. Pair with light raiders and heavy tank destroyers for best results.]],
   },
@@ -121,7 +121,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "tankdestroyer",  
     },      
     damage = {
       default           = 100,

@@ -65,7 +65,7 @@ local unitDef = {
   },
   customParams = {
   	death_sounds = "generic",
-	armortype   = "eco",
+	armortype   = "BUILDING",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 	buildingGroundDecalDecaySpeed=30,

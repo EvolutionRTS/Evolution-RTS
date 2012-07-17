@@ -20,7 +20,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR",
   corpse             = "ammobox",
-  description        = [[Heavy Plasma Battery - Damagetype: Medium :: Armortype: Armored Building
+  description        = [[Heavy Plasma Battery
+Building, 200% Damage vs Armored
 
 Requires +8 Power]],
   energyStorage      = 0,
@@ -79,7 +80,7 @@ Requires +8 Power]],
 	death_sounds = "generic",
 	twokhotkey = 'h',
     RequireTech = "8 Power",
-	armortype   = "armoredbuilding", 
+	armortype   = "BUILDING", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Heavy Turret
 
@@ -142,7 +143,7 @@ local weaponDefs = {
   },
   
   eheavyturretweapon2 = {
-    AreaOfEffect       = 150,
+    AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -176,7 +177,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 750,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "antiarmored",  
     }, 
     damage = {
       default           = 100,

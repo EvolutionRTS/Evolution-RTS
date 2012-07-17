@@ -26,8 +26,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SUPPORT",
   description        = [[Field Medic
-  Armortype: Light
-   • Automatically repairs mobile units in the area]],
+Light
+	• Automatically repairs mobile units in the area]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -96,7 +96,7 @@ local unitDef = {
   	death_sounds = "soldier",
 	twokhotkey = 'o',
     cancollect = "1",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/eorbnormal.png", 
 	helptext	= [[The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combat for 5 seconds before repairs can take place.]],
 	

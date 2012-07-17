@@ -60,7 +60,7 @@ local unitDef = {
   },
    customParams = {
    	death_sounds = "generic",
-	armortype   = "eco", 
+	armortype   = "BUILDING",
 	normaltex = "unittextures/estoragenormal.png", 
   },
 	buildingGroundDecalDecaySpeed=30,

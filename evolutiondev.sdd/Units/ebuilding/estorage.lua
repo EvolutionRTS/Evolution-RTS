@@ -68,7 +68,7 @@ sfxtypes = {
     needed_cover = 2,
 	death_sounds = "generic",
 	twokhotkey = 's',
-	armortype   = "eco", 
+	armortype   = "BUILDING", 
 	normaltex = "unittextures/estoragenormal.png", 
 	helptext = [[Storage Facility
 

@@ -22,8 +22,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR ASSAULT",
   corpse             = "ammobox",
-  description        = [[Armored Anti-Base Tank 
-  •Damagetype: Explosive :: Armortype: Heavy
+  description        = [[Armored Anti-Base Tank
+Armored, 200% Damage vs Buildings
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -95,7 +95,7 @@ Requires +10 Power]],
   	death_sounds = "soldier",
 	twokhotkey = 'f',
     RequireTech = "10 Power",
-	armortype   = "heavyarmor", 
+	armortype   = "armored", 
 	normaltex = "unittextures/efatso2normal.png", 
 	helptext = [[The Fatso is the pinnacle of anti-base technology. It has enough hitpoints to allow it to take a beating and keep barreling down upon base structures and defenses, however, this amazing power comes at a cost. It is incapable of properly defending itself as it's weapon is slow to recharge and it simply is too slow to outmaneuver skirmish units. Bring an escort.]],
   },
@@ -130,7 +130,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 315,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "antibuilding",  
     },      
     damage = {
       default           = 350,

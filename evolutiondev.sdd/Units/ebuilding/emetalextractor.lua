@@ -73,7 +73,7 @@ local unitDef = {
     needed_cover = 3,
     death_sounds = "generic",
 	twokhotkey = 'm',
-	armortype   = "eco",
+	armortype   = "BUILDING",
 	normaltex = "unittextures/lego2skin_explorernormal.png",
 	helptext = [[Metal Extractor
 

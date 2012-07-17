@@ -26,7 +26,7 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SUPPORT",
   description        = [[Engineer 
-  •Armortype: Light]],
+Light]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -117,7 +117,7 @@ local unitDef = {
   	death_sounds = "soldier",
 	twokhotkey = 'e',
     dronespawner = "1",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/con_legonormal.png", 
 	helptext = [[The Erector can build new structures, reclaim features, turn energy cores into gunship drones, and capture enemy units. Upon it's death, it emits a wave of nanoparticles that will repair 100 hitpoints to any units in proximity]],
   },

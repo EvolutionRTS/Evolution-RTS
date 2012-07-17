@@ -82,7 +82,7 @@ Requires +15 Power]],
 	death_sounds = "generic",
 	twokhotkey = 'l',
     RequireTech = "15 Power",
-	armortype   = "building",
+	armortype   = "BUILDING",
 	normaltex = "unittextures/elrpcnormal.png", 
 	helptext = [[Long Range Plasma Cannon
 

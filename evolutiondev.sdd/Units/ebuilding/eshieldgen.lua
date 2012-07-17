@@ -82,7 +82,7 @@ sfxtypes = {
 	twokhotkey = 'p',
     RequireTech = "10 Power",
     ProvideTechRange = "300",
-	armortype   = "building", 
+	armortype   = "BUILDING", 
 	normaltex = "unittextures/eshieldgennormal.png", 
 	helptext = [[Anti-Lrpc/Nuclear Shield Generator
 

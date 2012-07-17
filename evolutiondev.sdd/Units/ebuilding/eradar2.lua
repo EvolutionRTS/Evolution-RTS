@@ -63,7 +63,7 @@ sfxtypes = {
     needed_cover = 2,
 	death_sounds = "generic",
 	twokhotkey = 'r',
-	armortype   = "building", 
+	armortype   = "BUILDING",
 	normaltex = "unittextures/eradar2normal.png", 
 	helptext = [[Radar Tower
 

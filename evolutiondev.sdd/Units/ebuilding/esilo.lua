@@ -78,7 +78,7 @@ Requires +20 Power]],
 	death_sounds = "nuke",
 	twokhotkey = 'i',
     RequireTech = "20 Power",
-	armortype   = "building", 
+	armortype   = "BUILDING",
 	normaltex = "unittextures/esilonormal.png", 
 	helptext = [[Nuclear Missile Silo
 

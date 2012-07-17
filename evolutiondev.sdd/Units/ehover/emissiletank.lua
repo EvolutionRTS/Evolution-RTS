@@ -22,8 +22,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SUPPORT",
   corpse             = "ammobox",
-  description        = [[Missile Support Tank 
-  •Damagetype: Piercing :: Armortype: Light
+  description        = [[Missile Support Tank
+Light, 200% vs Armored
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -94,7 +94,7 @@ Requires +7 Power]],
   	death_sounds = "soldier",
 	twokhotkey = 'd',
     RequireTech = "7 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/emissiletanknormal.png", 
 	helptext	= [[The Droplet is a medium range missile artillery battery. Does increased damage versus structures and units with heavy armor but is not very agile. Make sure that it has an escort.]],
   },
@@ -140,7 +140,7 @@ local weaponDefs = {
     weaponType         = "StarburstLauncher",
     weaponVelocity     = 1800,
 	customparams = {
-	  damagetype		= "beam",  
+	  damagetype		= "armoredtankdestroyer",  
     },      
     damage = {
       default           = 100,

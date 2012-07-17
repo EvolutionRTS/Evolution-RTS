@@ -19,8 +19,8 @@ local unitDef = {
   canPatrol          = true,
   canstop            = "1",
   category           = "NOTAIR",
-  description        = [[Hovering Bomb 
-  •Damagetype: Explosive :: Armortype: Heavy
+  description        = [[Hovering Bomb
+Armored, 400% Damage vs Buildings
 
 Requires +12 Power]],
   energyMake         = 0,
@@ -92,7 +92,7 @@ sfxtypes = {
   	death_sounds = "soldier",
 	twokhotkey = 'b',
     RequireTech = "12 Power",
-	armortype   = "heavyarmor",
+	armortype   = "armored",
 	nofriendlyfire	= "1",
 	normaltex = "unittextures/ebombnormal.png", 
 	helptext = [[The Shellshock hovering bomb is an extremely fast, stealthed warhead that packs an awesome punch. It's speed allows it to dart in and cause havoc wherever it explodes. It has heavy armor, so use them wisely as they are a costly investment]],
@@ -116,12 +116,12 @@ local weaponDefs = {
    soundhit="unitexplodemedium.wav",
    explosiongenerator="custom:CRAWL_SUICIDE_Expl",
    customparams = {
-	  damagetype		= "Explosive",
+	  damagetype		= "hoverbomb",
 	  nofriendlyfire	= "true", 
     },  
 
     damage = {
-      default            = 1000,
+      default            = 250,
     },
   },
 }

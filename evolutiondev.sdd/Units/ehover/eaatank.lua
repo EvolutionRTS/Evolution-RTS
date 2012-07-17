@@ -25,8 +25,8 @@ local unitDef = {
   category           = "NOTAIR SUPPORT",
   corpse             = "ammobox",
   defaultmissiontype = "Standby",
-  description        = [[Anti-Air Support Tank 
-  •Damagetype: Explosive :: Armortype: Medium
+  description        = [[Anti-Air Support Tank
+Light
 
 Requires +5 Power]],
   energyMake         = 0,
@@ -143,7 +143,7 @@ local weaponDefs = {
 	canAttackGround    = false,
     weaponVelocity     = 1200,
 	customparams = {
-	  damagetype		= "light",  
+	  damagetype		= "antiair",  
     },
     damage = {
       default            = 30,

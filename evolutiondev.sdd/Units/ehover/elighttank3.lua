@@ -21,9 +21,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR RAID",
   corpse             = "ammobox",
-  description        = [[Raider 
-  •Damagetype: Piercing :: Armortype: Light
-
+  description        = [[Raider
+Light, 200% Damage vs Buildings
 Requires +2 Power]],
   energyMake         = 0,
   energyStorage      = 0,
@@ -92,7 +91,7 @@ sfxtypes = {
 	death_sounds = "soldier",
 	twokhotkey = 'k',
     RequireTech = "2 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/elighttank3normal.png", 
 	helptext = [[The Kite is every bit as agile as it's name implies. Excellent for fast response defense in the early stages of the game. Double damage versus economy structures, very good versus units with heavy armor.]],
   },
@@ -128,7 +127,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "beam",  
+	  damagetype		= "raider",  
     },      
     damage = {
       default           = 40,

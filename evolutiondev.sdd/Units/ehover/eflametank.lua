@@ -22,8 +22,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR RAID",
   corpse             = "ammobox",
-  description        = [[Flamethrower Raider 
-  •Damagetype: Explosive :: Armortype: Light
+  description        = [[Flamethrower Raider
+Light, 200% Damage vs Buildings
 
 Requires +2 Power]],
   energyMake         = 0,
@@ -95,7 +95,7 @@ Requires +2 Power]],
   	death_sounds = "soldier",
 	twokhotkey = 'p',
     RequireTech = "2 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/eflametanknormal.png", 
 	helptext	=	[[The pyromaniac has a long range flamethrower that is deadly versus base structures and especially economy buildings. Very fast and agile, however, it has a short line of sight. For best results, couple with Lightning raiders.]],
   },
@@ -134,7 +134,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "raider",  
     },      
     damage = {
       default           = 15,

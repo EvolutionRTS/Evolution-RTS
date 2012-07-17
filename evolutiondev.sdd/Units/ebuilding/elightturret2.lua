@@ -17,7 +17,8 @@ local unitDef = {
   category           = "NOTAIR",
   collisionVolumeTest = "1",
   corpse             = "ammobox",
-  description        = [[Anti-Raid Defense Platform - Damagetype: Light :: Armortype: Armored Building
+  description        = [[Anti-Raid Defense Platform
+Building, 200% Damage vs Light
 
 Requires +2 Power]],
   energyStorage      = 0,
@@ -79,7 +80,7 @@ Requires +2 Power]],
 	death_sounds = "generic",
 	twokhotkey = 't',
     RequireTech = "2 Power",
-	armortype   = "armoredbuilding", 
+	armortype   = "BUILDING",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Light Turret
 
@@ -133,10 +134,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "light",  
+	  damagetype		= "antilight",  
     },      
     damage = {
-      default            = 70,
+      default            = 35,
     },
   },
 }

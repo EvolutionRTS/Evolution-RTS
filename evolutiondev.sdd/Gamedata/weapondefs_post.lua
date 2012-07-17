@@ -87,34 +87,50 @@ local function BackwardCompability(wdName,wd)
   if (weapondamage > 0) then
 		if (wd.customparams) then
 		local damagetypelower = string.lower(wd.customparams.damagetype)
-		    if ( damagetypelower	== "beam") then
-				wd.damage.HEAVYARMOR = 		weapondamage*1
-				wd.damage.MEDIUMARMOR = 	weapondamage*0.75
-				wd.damage.LIGHTARMOR = 		weapondamage*0.5
+		    if ( damagetypelower		== "raider") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*2
+			elseif (damagetypelower		== "tankdestroyer") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			elseif (damagetypelower		== "heavytankdestroyer") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*1
-				wd.damage.ARMOREDBUILDING = weapondamage*1.5
-				wd.damage.ECO	  = 		weapondamage*2
-			elseif (damagetypelower	== "explosive") then
-				wd.damage.HEAVYARMOR = 		weapondamage*0.1
-				wd.damage.MEDIUMARMOR = 	weapondamage*0.25
-				wd.damage.LIGHTARMOR = 		weapondamage*0.5
-				wd.damage.BUILDING  = 		weapondamage*1.5
-				wd.damage.ARMOREDBUILDING = weapondamage*1
-				wd.damage.ECO	  = 		weapondamage*2
-			elseif (damagetypelower	== "light") then
-				wd.damage.HEAVYARMOR = 		weapondamage*0.25
-				wd.damage.MEDIUMARMOR = 	weapondamage*0.5
-				wd.damage.LIGHTARMOR = 		weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*0.15
-				wd.damage.ARMOREDBUILDING = weapondamage*0.1
-				wd.damage.ECO	  = 		weapondamage*0.25
+			elseif (damagetypelower		== "armoredtankdestroyer") then
+				wd.damage.ARMORED = 		weapondamage*2
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*1
+			elseif (damagetypelower		== "riot") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*2
+				wd.damage.BUILDING  = 		weapondamage*1
+			elseif ( damagetypelower	== "antibuilding") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*2
+			elseif ( damagetypelower	== "antilight") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*2
+				wd.damage.BUILDING  = 		weapondamage*1
+			elseif ( damagetypelower	== "antiarmored") then
+				wd.damage.ARMORED = 		weapondamage*2
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*1
+			elseif ( damagetypelower	== "antiair") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*1
+			elseif ( damagetypelower	== "hoverbomb") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*4
 			else -- medium weapon
-				wd.damage.HEAVYARMOR = 		weapondamage*0.5
-				wd.damage.MEDIUMARMOR = 	weapondamage*1
-				wd.damage.LIGHTARMOR = 		weapondamage*2
-				wd.damage.BUILDING  = 		weapondamage*0.25
-				wd.damage.ARMOREDBUILDING = weapondamage*0.1
-				wd.damage.ECO	  = 		weapondamage*0.5
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*1
 			end
 		end
   end

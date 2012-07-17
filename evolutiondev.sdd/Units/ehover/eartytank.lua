@@ -22,8 +22,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SUPPORT",
   corpse             = "ammobox",
-  description        = [[Artillery Support Tank 
-  •Damagetype: Explosive :: Armortype: Light
+  description        = [[Artillery Support Tank
+Light, 200% Damage vs Buildings
 
 Requires +8 Power]],
   energyMake         = 0.5,
@@ -90,7 +90,7 @@ Requires +8 Power]],
   	death_sounds = "soldier",
 	twokhotkey = 'l',
     RequireTech = "8 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/eartytanknormal.png", 
 	helptext = [[The Lobster has extremely long range, fires five rounds in a burst but does very low damage in a large area of effect. Damage boost versus structures and defenses. Reduced damage to mobile units.]],
   },
@@ -101,8 +101,8 @@ Requires +8 Power]],
 
 local weaponDefs = {
   Artilleryweapon = {
-    accuracy           = 500,
-    AreaOfEffect       = 200,
+    accuracy           = 250,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     ballistic          = true,
 	burst			   = 5,
@@ -126,10 +126,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "antibuilding",  
     },  
     damage = {
-      default           = 50,
+      default           = 100,
      },
   },
 }
