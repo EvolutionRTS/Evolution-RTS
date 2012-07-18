@@ -8,7 +8,7 @@ function widget:GetInfo()
 		date      = "10th February 2008",
 		license   = "NONE, Licenses are for gays!",
 		layer     = -5,
-		enabled   = true  --  loaded by default
+		enabled   = false  --  loaded by default
 	}
 end
 
