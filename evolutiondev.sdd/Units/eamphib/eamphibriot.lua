@@ -22,7 +22,8 @@ local unitDef = {
   canstop            = "1",
   category           = "AMPHIB RIOT",
   corpse             = "ammobox",
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Hight
+  description        = [[Anti-Swarm Tank
+Armored
 	• Switches to torpedos when underwater
 
 Requires +5 Power]],
@@ -96,7 +97,7 @@ Requires +5 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 'd',
     RequireTech = "5 Power",
-	armortype   = "lightarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/eamphibriotnormal.png", 
   },
 }
@@ -129,7 +130,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "light",  
+	  damagetype		= "riot",  
     },   
     damage = {
       default           = 50,
@@ -166,7 +167,7 @@ local weaponDefs = {
 	collidefriendly	= 0,
 	customparams = {
 		death_sounds = "generic",
-	  damagetype		= "light",  
+	  damagetype		= "riot",  
     }, 
     damage = {
       default            = 38,

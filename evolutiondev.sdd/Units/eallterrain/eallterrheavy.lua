@@ -34,8 +34,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        =[[Armored Tank Destroyer - Damagetype: Medium :: Armortype: Medium
-
+  description        =[[Armored Tank Destroyer
+Armored
+  
 Requires +6 Power]],
   energyMake         = 0,
   energyStorage      = 0,
@@ -104,7 +105,7 @@ Requires +6 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 's',
     RequireTech = "6 Power",
-	armortype   = "mediumarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }
@@ -148,7 +149,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "heavytankdestroyer",  
     }, 
     damage = {
       default           = 120,

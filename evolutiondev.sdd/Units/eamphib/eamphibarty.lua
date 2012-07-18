@@ -21,7 +21,8 @@ local unitDef = {
   canstop            = "1",
   category           = "AMPHIB SUPPORT",
   corpse             = "ammobox",
-  description        = [["Laser Support Artillery - Damagetype: Piercing :: Armortype: Light
+  description        = [["Laser Support Artillery
+Light, 200% Damage vs Buildings
 	• Switches to torpedos when underwater
 
 Requires + 10 Power]],
@@ -93,7 +94,7 @@ Requires + 10 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 'a',
     RequireTech = "10 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/eamphibartynormal.png", 
   },
 }
@@ -137,7 +138,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,
 	customparams = {
-	  damagetype		= "beam",  
+	  damagetype		= "antibuilding",  
     }, 
     damage = {
       default           = 150,
@@ -174,7 +175,7 @@ local weaponDefs = {
 	collidefriendly	= 0,
 	customparams = {
 		death_sounds = "generic",
-	  damagetype		= "beam",  
+	  damagetype		= "antibuilding",  
     }, 
     damage = {
       default            = 150,

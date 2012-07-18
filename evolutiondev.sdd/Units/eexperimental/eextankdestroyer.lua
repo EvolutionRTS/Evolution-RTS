@@ -22,7 +22,7 @@ local unitDef = {
   category           = "AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Destroyer Class Tank Killer
-   •Damagetype: Light/Medium :: Armortype: Heavy
+Armored, 50% Damage vs Buildings
 
 Requires +50 Power]],
   energyMake         = 0,
@@ -89,7 +89,7 @@ Requires +50 Power]],
 	death_sounds = "nuke",
 	twokhotkey = 'l',
     RequireTech = "50 Power",
-	armortype   = "heavyarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/lego2skin_explorernormal.png",
   },
 }
@@ -130,7 +130,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "heavytankdestroyer",  
     }, 
     damage = {
       default           = 500,
@@ -171,7 +171,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "light",  
+	  damagetype		= "heavytankdestroyer",  
     }, 
     damage = {
       default           = 12,

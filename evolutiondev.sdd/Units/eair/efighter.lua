@@ -27,8 +27,9 @@ local unitDef = {
 --End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 400,
-  description        = [[Fighter - Damagetype: Light :: Armortype: Light
-
+  description        = [[Fighter
+Light, 150% Damage vs Armored
+ 
 Requires +5 Power]],
   energyMake         = 0,
   energyStorage      = 0,
@@ -94,7 +95,7 @@ Requires +5 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'c',
     RequireTech = "5 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/efighternormal.png", 
   },
 }
@@ -112,6 +113,7 @@ local weaponDefs = {
 	cegTag             = "missiletrailflashy",
     collideFriendly    = false,
     collideFeature     = false,
+	canAttackGround    = false,
     burnblow           = true,
 	edgeEffectiveness  = 0.5,
     endsmoke           = "1",
@@ -135,10 +137,10 @@ local weaponDefs = {
 	toairweapon		   = true,
     weaponVelocity     = 2000,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "fighter",  
     },
     damage = {
-      default            = 150,
+      default            = 50,
     },
   },
 }

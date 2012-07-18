@@ -34,8 +34,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Raider - Damagetype: Explosive :: Armortype: Light
-
+  description        = [[Raider
+Light, 200% Damage vs Light
+  
 Requires +2 Power]],
   energyMake         = 0,
   energyStorage      = 0,
@@ -107,7 +108,7 @@ Requires +2 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'r',
     RequireTech = "2 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }
@@ -149,7 +150,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "beam",  
+	  damagetype		= "raiderlight",  
     }, 
     damage = {
       default           = 30,

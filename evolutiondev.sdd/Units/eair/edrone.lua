@@ -29,7 +29,8 @@ local unitDef = {
 --End Collision volumes
 --  corpse             = "ammobox",
   cruiseAlt          = 100,
-  description        = "Drone Gunship",
+  description        = [[Gunship Drone
+Light, 150% Damage vs Light]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -91,7 +92,7 @@ local unitDef = {
   },
   customParams = {
 --    needed_cover = 1,
-	armortype   = "lightarmor",
+	armortype   = "light",
   	death_sounds = "soldier",
 	normaltex = "unittextures/edronenormal.png", 
   },
@@ -145,7 +146,7 @@ local weaponDefs = {
 	  damagetype		= "light",  
     },    
     damage = {
-      default            = 5,
+      default            = 2.5,
     },
   },
 }

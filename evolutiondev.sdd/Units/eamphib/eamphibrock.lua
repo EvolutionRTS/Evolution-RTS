@@ -21,7 +21,8 @@ local unitDef = {
   canstop            = "1",
   category           = "AMPHIB SUPPORT",
   corpse             = "ammobox",
-  description        = [[Missile support tank - Damagetype: Medium :: Armortype: Light
+  description        = [[Missile support tank
+Light, 200% vs Armored
 	• Switches to torpedos when underwater
 
 Requires +7 Power]],
@@ -99,7 +100,7 @@ Requires +7 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 's',
     RequireTech = "7 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/eamphibrocknormal.png", 
   },
 }
@@ -140,7 +141,7 @@ local weaponDefs = {
     weaponTimer        = 5,
     weaponVelocity     = 350,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "armoredtankdestroyer",  
     },     
     damage = {
       default           = 130,
@@ -177,7 +178,7 @@ local weaponDefs = {
 	collidefriendly	= 0,
 	customparams = {
 		death_sounds = "generic",
-	  damagetype		= "medium",  
+	  damagetype		= "armoredtankdestroyer",  
     }, 
     damage = {
       default            = 130,

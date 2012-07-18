@@ -24,7 +24,8 @@ local unitDef = {
   canreclamate       = "1",
   canstop            = "1",
   category           = "AMPHIB SUPPORT",
-  description        = "Engineer - Armortype: Light",
+  description        = [[Engineer
+Light]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -116,7 +117,7 @@ local unitDef = {
   	death_sounds = "soldier",
 	twokhotkey = 'e',
     dronespawner = "1",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/eamphibengineernormal.png", 
   },
   weapons = {

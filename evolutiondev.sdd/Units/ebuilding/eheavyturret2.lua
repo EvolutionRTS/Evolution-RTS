@@ -138,7 +138,7 @@ local weaponDefs = {
 	  damagetype		= "medium",  
     },    
     damage = {
-      default            = 100,
+      default            = 50,
     },
   },
   
@@ -180,7 +180,7 @@ local weaponDefs = {
 	  damagetype		= "antiarmored",  
     }, 
     damage = {
-      default           = 100,
+      default           = 50,
     },
   },
 }

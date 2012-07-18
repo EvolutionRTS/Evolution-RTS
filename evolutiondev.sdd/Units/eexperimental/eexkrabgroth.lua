@@ -23,7 +23,7 @@ local unitDef = {
   category           = "NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        =[[Destroyer Class Walker
-    •Damagetype: Explosive :: Armortype: Light
+Light, 200% Damage vs Buildings
 
 Requires +40 Power]],
   energyMake         = 0,
@@ -98,7 +98,7 @@ Requires +40 Power]],
 	death_sounds = "nuke",
 	twokhotkey = 'k',
     RequireTech = "40 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }
@@ -144,7 +144,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "antibuilding",  
     }, 
     damage = {
       default           = 300,
@@ -179,7 +179,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 5000,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "antibuilding",  
     },
     damage = {
       default            = 40,

@@ -103,7 +103,7 @@ Requires +4 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'b',
     RequireTech = "4 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }
@@ -147,7 +147,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
       default           = 100,

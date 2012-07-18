@@ -110,7 +110,7 @@ local unitDef = {
   },
    customParams = {
     RequireTech = "4 Power",
-	armortype   = "heavyarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/armregskinnormal.png", 
   },
 }

@@ -21,8 +21,8 @@ local unitDef = {
   canstop            = "1",
   category           = "AMPHIB RAID",
   corpse             = "ammobox",
-  description        = [[Scout/Raider - Damagetype: Piercing :: Armortype: Light
-	• Switches to torpedos when underwater
+  description        = [[Scout/Raider
+Light, 200% Damage vs Light
 
 Requires +1 Power]],
   energyMake         = 0,
@@ -95,7 +95,7 @@ Requires +1 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 'b',
     RequireTech = "1 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/eamphibbuggynormal.png", 
   },
 }
@@ -138,10 +138,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "beam",  
+	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default           = 12,
+      default           = 6,
     },
   },
   
@@ -175,10 +175,10 @@ local weaponDefs = {
 	collidefriendly	= 0,
 	customparams = {
 		death_sounds = "generic",
-	  damagetype		= "beam",  
+	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default            = 30,
+      default            = 15,
     },
   },  
 }

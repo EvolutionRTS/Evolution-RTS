@@ -35,7 +35,8 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Anti-Swarm Tank - Damagetype: Light :: Armortype: Heavy
+  description        = [[Anti-Swarm Tank
+Armored, 200% Damage vs Light
 
 Requires +3 Power]],
   energyMake         = 0,
@@ -107,7 +108,7 @@ Requires +3 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'm',
     RequireTech = "3 Power",
-	armortype   = "heavyarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }
@@ -151,7 +152,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "light",  
+	  damagetype		= "riot",  
     }, 
     damage = {
       default           = 40,
@@ -200,7 +201,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "light",  
+	  damagetype		= "riot",  
     }, 
     damage = {
       default           = 38,

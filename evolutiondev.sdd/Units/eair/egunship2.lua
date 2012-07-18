@@ -29,7 +29,8 @@ local unitDef = {
 --End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 300,
-  description        = [[Gunship Skirmisher - Damagetype: Medium :: Armortype: Light
+  description        = [[Gunship Tank Destroyer
+Light, 200% Damage vs Light
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -107,7 +108,7 @@ Requires +7 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'w',
     RequireTech = "7 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/egunship2normal.png", 
   },
 }
@@ -153,10 +154,10 @@ local weaponDefs = {
     weaponTimer        = 100,
     weaponVelocity     = 600,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "gunship",  
     },      
     damage = {
-      default           = 130,
+      default           = 65,
     },
   },
 }

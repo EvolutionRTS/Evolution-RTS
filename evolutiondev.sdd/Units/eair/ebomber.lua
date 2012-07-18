@@ -28,8 +28,9 @@ local unitDef = {
 --End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 350,
-  description        = [[Stealth Bomber - Damagetype: Explosive :: Armortype: Medium
-
+  description        = [[Stealth Bomber
+Light, 400% Damage vs Buildings
+  
 Requires +10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
@@ -97,7 +98,7 @@ Requires +10 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'b',
     RequireTech = "10 Power",
-	armortype   = "mediumarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/ebombernormal.png", 
   },
 }
@@ -136,7 +137,7 @@ local weaponDefs = {
 	  damagetype		= "explosive",  
     },
     damage = {
-      default           = 40,
+      default           = 20,
     },
   },
 }

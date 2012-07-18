@@ -34,7 +34,8 @@ local unitDef = {
 -- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient from a micromanagement standpoint.
 -- End Cloaking
   
-  description        = [[Shield Emitter - Armortype: Light
+  description        = [[Shield Emitter
+Light, Shield absorbs 750 damage
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -102,7 +103,7 @@ Requires +10 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'w',
     RequireTech = "10 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }

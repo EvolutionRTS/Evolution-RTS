@@ -34,7 +34,8 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        =[[Armored Assault Tank - Damagetype: Explosive :: Armortype: Heavy
+  description        =[[Armored Assault Tank
+Armored, 200% Damage vs Buildings
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -104,7 +105,7 @@ Requires +10 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 'a',
     RequireTech = "10 Power",
-	armortype   = "heavyarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }
@@ -148,7 +149,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 250,
 	customparams = {
-	  damagetype		= "Explosive",  
+	  damagetype		= "antibuilding",  
     }, 
     damage = {
       default           = 400,

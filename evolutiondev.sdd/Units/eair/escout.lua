@@ -82,7 +82,7 @@ Requires +4 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'a',
     RequireTech = "4 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/escoutnormal.png", 
   },
 }

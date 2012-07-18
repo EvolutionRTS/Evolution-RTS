@@ -117,7 +117,7 @@ local unitDef = {
   	death_sounds = "soldier",
 	twokhotkey = 'e',
     dronespawner = "1",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/con_legonormal.png", 
   },
 }

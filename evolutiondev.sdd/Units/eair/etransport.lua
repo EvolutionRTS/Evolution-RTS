@@ -27,7 +27,8 @@ local unitDef = {
 --End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 400,
-  description        = [[Fast Armored Transport - Armortype: Heavy
+  description        = [[Fast Armored Transport
+Armored
 
 Requires +2 Power]],
   energyMake         = 0,
@@ -83,7 +84,7 @@ Requires +2 Power]],
 	death_sounds = "soldier",
 	twokhotkey = 'x',
     RequireTech = "2 Power",
-	armortype   = "heavyarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/etransport2normal.png", 
   },
 }

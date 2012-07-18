@@ -21,7 +21,8 @@ local unitDef = {
   canstop            = "1",
   category           = "AMPHIB SKIRMISHER",
   corpse             = "ammobox",
-  description        = [[Tank Destroyer - Damagetype: Medium :: Armortype: Light
+  description        = [[Tank Destroyer
+Armored
 	• Switches to torpedos when underwater
 
 Requires +4 Power]],
@@ -94,7 +95,7 @@ Requires +4 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 'r',
     RequireTech = "4 Power",
-	armortype   = "lightarmor",
+	armortype   = "armored",
 	normaltex = "unittextures/eamphibmedtanknormal.png", 
   },
 }
@@ -135,7 +136,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
       default           = 100,
@@ -171,7 +172,7 @@ local weaponDefs = {
 	collidefriendly	= 0,
 	customparams = {
 		death_sounds = "generic",
-	  damagetype		= "medium",  
+	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
       default            = 100,

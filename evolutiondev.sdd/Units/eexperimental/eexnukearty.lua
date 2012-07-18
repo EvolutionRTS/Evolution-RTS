@@ -22,8 +22,8 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SUPPORT",
   corpse             = "ammobox",
-  description        = [[Low Yeild Nuclear Artillery Support Tank 
-  •Damagetype: Explosive :: Armortype: Light
+  description        = [[Low Yeild Nuclear Artillery Support Tank
+Light, 200% Damage vs Buildings
 
 Requires +80 Power]],
   energyMake         = 0,
@@ -87,7 +87,7 @@ Requires +80 Power]],
 	death_sounds = "nuke",
 	twokhotkey = 'a',
     RequireTech = "80 Power",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[]],
   },
@@ -121,7 +121,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "antibuilding",  
     }, 
     damage = {
       default           = 1000,

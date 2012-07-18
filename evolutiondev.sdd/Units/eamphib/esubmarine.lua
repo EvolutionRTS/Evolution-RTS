@@ -85,7 +85,7 @@ local unitDef = {
   
    customParams = {
    	death_sounds = "soldier",
-	armortype   = "lightarmor",
+	armortype   = "light",
 	normaltex = "unittextures/esubplanenormal.png", 
   },
   

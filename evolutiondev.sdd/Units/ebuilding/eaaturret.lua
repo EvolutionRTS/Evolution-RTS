@@ -15,7 +15,7 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR",
   corpse             = "ammobox",
-  description        = [[Dedicated Anti-Air Flak Turret - Damagetype: Explosive :: Armortype: Armored Building
+  description        = [[Dedicated Anti-Air Flak Turret
 
 Requires +2 Power]],
   energyStorage      = 0,
@@ -129,7 +129,7 @@ local weaponDefs = {
 	canAttackGround    = false,
     weaponVelocity     = 5000,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "antiairturret",  
     },
     damage = {
       default            = 75,

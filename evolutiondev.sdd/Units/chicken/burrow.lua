@@ -66,7 +66,7 @@ local unitDef = {
   },
   customParams = {
     ProvideTech = "10 Power",
-	armortype   = "eco",
+	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",
 	groundtexselectimg1 = ":nc:bitmaps/power/power1.png",
