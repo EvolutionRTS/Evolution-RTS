@@ -83,6 +83,7 @@ Light]],
     "ebasefactory", --new
     "eamphibfac",
     "eairplant",
+	"eexperimentalfac",
     "emetalextractor", --new
     "euwmetalextractor", --new
     "emaker", --new

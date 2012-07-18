@@ -91,6 +91,7 @@ local unitDef = {
     "ebasefactory", --new
     "eamphibfac",
     "eairplant",
+	"eexperimentalfac",
     "emetalextractor", --new
     "emaker", --new
     "esolar2", --new

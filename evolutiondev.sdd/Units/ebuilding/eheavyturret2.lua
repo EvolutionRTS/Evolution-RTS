@@ -21,7 +21,7 @@ local unitDef = {
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Heavy Plasma Battery
-Building, 200% Damage vs Armored
+Building
 
 Requires +8 Power]],
   energyStorage      = 0,
@@ -136,7 +136,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "medium",  
+	  damagetype		= "heavytankdestroyer",  
     },    
     damage = {
       default            = 300,
@@ -179,7 +179,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 750,
 	customparams = {
-	  damagetype		= "antiarmored",  
+	  damagetype		= "heavytankdestroyer",  
     }, 
     damage = {
       default           = 300,
