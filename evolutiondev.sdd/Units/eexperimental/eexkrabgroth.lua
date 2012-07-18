@@ -20,7 +20,7 @@ local unitDef = {
   canPatrol          = true,
   canstop            = "1",
   cantBeTransported  = true,
-  category           = "NOTAIR SKIRMISHER",
+  category           = "LIGHT NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        =[[Destroyer Class Walker
 Light, 200% Damage vs Buildings
@@ -108,6 +108,7 @@ Requires +40 Power]],
 
 local weaponDefs = {
   heavybeamweapon = {
+    badTargetCategory = [[ARMORED LIGHT]],
     AreaOfEffect       = 200,
     avoidFeature       = false,
     avoidFriendly      = false,

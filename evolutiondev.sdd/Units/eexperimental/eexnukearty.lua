@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR SUPPORT",
+  category           = "LIGHT NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Low Yeild Nuclear Artillery Support Tank
 Light, 200% Damage vs Buildings
@@ -98,6 +98,7 @@ Requires +80 Power]],
 
 local weaponDefs = {
   nukeartyweapon = {
+    badTargetCategory = [[ARMORED LIGHT]],
     accuracy           = 200,
     AreaOfEffect       = 1000,
     avoidFriendly      = false,

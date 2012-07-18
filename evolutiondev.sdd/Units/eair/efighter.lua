@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "VTOL",
+  category           = "LIGHT VTOL",
   collide            = true,
 --Collision Volumes... Because the engine devs are idiots.
 	collisionVolumeScales = [[35 35 35]],
@@ -105,6 +105,7 @@ Requires +5 Power]],
 
 local weaponDefs = {
   antiairmissile = {
+    badTargetCategory = [[LIGHT BUILDING]],
     accuracy           = 1,
     AreaOfEffect       = 300,
     avoidFriendly      = false,

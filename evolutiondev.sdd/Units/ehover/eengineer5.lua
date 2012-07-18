@@ -24,7 +24,7 @@ local unitDef = {
   canPatrol          = true,
   canreclamate       = "1",
   canstop            = "1",
-  category           = "NOTAIR SUPPORT",
+  category           = "LIGHT NOTAIR SUPPORT",
   description        = [[Engineer 
 Light]],
   energyMake         = 0,

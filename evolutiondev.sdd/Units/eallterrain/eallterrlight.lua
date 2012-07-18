@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR RAID",
+  category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
   
 -- Cloaking
@@ -118,6 +118,7 @@ Requires +2 Power]],
 
 local weaponDefs = {
   lighttankweapon = {
+    badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,

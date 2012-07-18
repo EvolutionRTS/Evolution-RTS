@@ -22,7 +22,7 @@ local unitDef = {
   canPatrol          = true,
   canreclamate       = false,
   canstop            = "1",
-  category           = "NOTAIR SUPPORT",
+  category           = "LIGHT NOTAIR SUPPORT",
   corpse             = "ammobox",
   collisionVolumeTest = 1,  
 -- Cloaking

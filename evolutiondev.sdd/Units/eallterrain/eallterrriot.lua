@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR RIOT",
+  category           = "ARMORED NOTAIR RIOT",
   corpse             = "ammobox",
   
 -- Cloaking
@@ -118,6 +118,7 @@ Requires +3 Power]],
 
 local weaponDefs = {
   riottankweapon = {
+    badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 100,
     avoidFeature       = false,
     avoidFriendly      = false,

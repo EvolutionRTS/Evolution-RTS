@@ -19,14 +19,15 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "VTOL",
+  category           = "LIGHT VTOL",
   collide            = false,
 --Collision Volumes... Because the engine devs are idiots.
   collisionVolumeScales = [[35 35 35]],
 --End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 180,
-  description        = [[Air Scout - Armortype: Light
+  description        = [[Air Scout
+Light
 
 Requires +4 Power]],
   energyMake         = 0.2,

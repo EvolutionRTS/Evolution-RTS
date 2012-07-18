@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "AMPHIB RAID",
+  category           = "LIGHT AMPHIB RAID",
   corpse             = "ammobox",
   description        = [[Scout/Raider
 Light, 200% Damage vs Light
@@ -105,6 +105,7 @@ Requires +1 Power]],
 
 local weaponDefs = {
     lightlaser = {
+	badTargetCategory = [[ARMORED BUILDING]],
     accuracy           = 200,
     AreaOfEffect       = 8,
     avoidFeature       = false,

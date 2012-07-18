@@ -13,7 +13,7 @@ local unitDef = {
   buildTime          = 10,
   canAttack          = false,
   canstop            = "1",
-  category           = "NOTAIR",
+  category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Shield Generator - Anti-Nuke/Anti-LRPC Facility
 

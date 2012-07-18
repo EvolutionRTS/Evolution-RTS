@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR RAID",
+  category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
   description        = [[Raider
 Light, 200% Damage vs Light
@@ -103,6 +103,7 @@ sfxtypes = {
 
 local weaponDefs = {
   lighttankweapon = {
+    badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 50,
     avoidFriendly      = false,
     collideFriendly    = false,

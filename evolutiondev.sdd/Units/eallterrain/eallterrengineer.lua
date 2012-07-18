@@ -23,7 +23,7 @@ local unitDef = {
   canPatrol          = true,
   canreclamate       = "1",
   canstop            = "1",
-  category           = "NOTAIR SUPPORT",
+  category           = "LIGHT NOTAIR SUPPORT",
   corpse             = "ammobox",
   
 -- Cloaking
@@ -38,7 +38,8 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = "Engineer :: Armortype: Light",
+  description        = [[Engineer
+Light]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

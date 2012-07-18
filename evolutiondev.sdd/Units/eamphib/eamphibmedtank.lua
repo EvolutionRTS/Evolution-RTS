@@ -19,10 +19,10 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "AMPHIB SKIRMISHER",
+  category           = "ARMORED AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Tank Destroyer
-Armored
+Armored, 50% Damage vs Buildings
 	• Switches to torpedos when underwater
 
 Requires +4 Power]],
@@ -105,6 +105,7 @@ Requires +4 Power]],
 
 local weaponDefs = {
     medtanklaser = {
+	badTargetCategory = [[BUILDING]],
     AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,

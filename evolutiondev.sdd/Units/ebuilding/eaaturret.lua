@@ -13,7 +13,7 @@ local unitDef = {
   buildTime          = 7,
   canAttack          = true,
   canstop            = "1",
-  category           = "NOTAIR",
+  category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Dedicated Anti-Air Flak Turret
 

@@ -20,7 +20,7 @@ local unitDef = {
   canload            = true,
   canPatrol          = false,
   canstop            = "1",
-  category           = "VTOL",
+  category           = "ARMORED VTOL",
   collide            = false,
 --Collision Volumes... Because the engine devs are idiots.
 	collisionVolumeScales = [[35 35 35]],

@@ -28,7 +28,7 @@ local unitDef = {
   canPatrol          = true,
   canreclamate       = "1",
   canstop            = "1",
-  category           = "VTOL",
+  category           = "LIGHT VTOL",
   collide            = true,
 --Collision Volumes... Because the engine devs are idiots.
 	collisionVolumeScales = [[35 35 35]],

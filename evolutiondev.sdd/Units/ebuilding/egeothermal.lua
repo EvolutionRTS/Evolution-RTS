@@ -13,7 +13,7 @@ local unitDef = {
   builder            = false,
   buildTime          = 10,
   canAttack			 = false,
-  category           = "NOTAIR ECO",
+  category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   description        = [[Produces +7 Energy
 Provides +7 Power]],

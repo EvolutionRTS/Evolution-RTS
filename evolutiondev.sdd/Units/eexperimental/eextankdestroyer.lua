@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "AMPHIB SKIRMISHER",
+  category           = "ARMORED AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Destroyer Class Tank Killer
 Armored, 50% Damage vs Buildings
@@ -99,6 +99,7 @@ Requires +50 Power]],
 
 local weaponDefs = {
     tankkillerlaser = {
+	badTargetCategory = [[BUILDING]],
     AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,
@@ -138,6 +139,7 @@ local weaponDefs = {
   },
 
   machinegun = {
+    badTargetCategory = [[BUILDING]],
     accuracy           = 300,
     AreaOfEffect       = 8,
     avoidFeature       = false,

@@ -21,7 +21,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR RIOT",
+  category           = "ARMORED NOTAIR RIOT",
   corpse             = "ammobox",
   description        = [[Anti-Swarm Tank
 Armored, 200% Damage vs Light
@@ -112,6 +112,7 @@ Requires +4 Power]],
 
 local weaponDefs = {
   riottankweapon = {
+    badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 75,
 	avoidFeature       = false,
     avoidFriendly      = false,

@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "AMPHIB SUPPORT",
+  category           = "LIGHT AMPHIB SUPPORT",
   corpse             = "ammobox",
   description        = [[Missile support tank
 Light, 200% vs Armored
@@ -110,6 +110,7 @@ Requires +7 Power]],
 
 local weaponDefs = {
   gunshipweapon = {
+    badTargetCategory = [[LIGHT BUILDING]],
     AreaOfEffect       = 50,
     avoidFriendly      = false,
     cegTag             = "missiletrailsmall",

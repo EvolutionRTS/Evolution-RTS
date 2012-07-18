@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR SKIRMISHER",
+  category           = "LIGHT NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Light Tank Destroyer
 Light, 50% Damage vs Buildings
@@ -102,6 +102,7 @@ Requires +3 Power]],
 
 local weaponDefs = {
   mediumtankcannon = {
+	  badTargetCategory = [[BUILDING]],
     AreaOfEffect       = 32,
     avoidFriendly      = false,
     ballistic          = true,

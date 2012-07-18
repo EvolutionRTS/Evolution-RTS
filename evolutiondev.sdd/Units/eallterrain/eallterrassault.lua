@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR SKIRMISHER",
+  category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   
 -- Cloaking
@@ -115,6 +115,7 @@ Requires +10 Power]],
 
 local weaponDefs = {
   assaulttankcannon = {
+    badTargetCategory = [[ARMORED LIGHT]],
     AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,

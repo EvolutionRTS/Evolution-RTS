@@ -28,7 +28,7 @@ local unitDef = {
   canPatrol          = true,
   canreclamate       = "1",
   canstop            = "1",
-  category           = "NOTAIR SUPPORT",
+  category           = "NOTAIR SUPPORT ARMORED",
   description        = [[Armortype: Heavy
   • Press 'D' to activate EMP Defense]],
   energyMake         = 0,

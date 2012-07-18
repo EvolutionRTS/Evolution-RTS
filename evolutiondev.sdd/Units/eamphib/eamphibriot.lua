@@ -20,10 +20,10 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "AMPHIB RIOT",
+  category           = "ARMORED AMPHIB RIOT",
   corpse             = "ammobox",
   description        = [[Anti-Swarm Tank
-Armored
+Armored, 200% Damage vs Light
 	• Switches to torpedos when underwater
 
 Requires +5 Power]],
@@ -107,6 +107,7 @@ Requires +5 Power]],
 
 local weaponDefs = {
   riottankweapon = {
+    badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 100,
 	avoidFeature       = false,
     avoidFriendly      = false,
@@ -138,6 +139,7 @@ local weaponDefs = {
   },
   
   TORP = {
+    badTargetCategory = [[ARMORED BUILDING]],
     cegtag			= "torpedotrailsmall",
 	weaponType		   = "TorpedoLauncher",
 	lineofsight		= 1,

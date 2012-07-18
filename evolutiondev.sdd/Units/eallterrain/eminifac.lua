@@ -16,7 +16,7 @@ local unitDef = {
   canBeAssisted      = false,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR",
+  category           = "BUILDING NOTAIR",
   
    collisionVolumeOffsets = "0 60 0",
    collisionVolumeScales  = "298 142 168",

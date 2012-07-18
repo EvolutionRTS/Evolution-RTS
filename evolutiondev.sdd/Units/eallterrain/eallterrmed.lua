@@ -34,8 +34,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Light Tank Destroyer - Damagetype: Medium :: Armortype: Light
-
+  description        = [[Light Tank Destroyer
+Light, 50% Damage vs Buildings
+  
 Requires +4 Power]],
   energyMake         = 0,
   energyStorage      = 0,
@@ -113,6 +114,7 @@ Requires +4 Power]],
 
 local weaponDefs = {
   mediumtankcannon = {
+    badTargetCategory = [[BUILDING]],
     AreaOfEffect       = 32,
     avoidFeature       = false,
     avoidFriendly      = false,

@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR ASSAULT",
+  category           = "ARMORED NOTAIR ASSAULT",
   corpse             = "ammobox",
   description        = [[Armored Anti-Base Tank
 Armored, 200% Damage vs Buildings
@@ -106,6 +106,7 @@ Requires +10 Power]],
 
 local weaponDefs = {
   eheavyturretweapon = {
+    badTargetCategory = [[ARMORED LIGHT]],
     accuracy           = 1,
     AreaOfEffect       = 50,
     avoidFriendly      = false,

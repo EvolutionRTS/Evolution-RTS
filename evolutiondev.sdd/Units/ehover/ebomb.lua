@@ -18,7 +18,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR",
+  category           = "ARMORED NOTAIR",
   description        = [[Hovering Bomb
 Armored, 400% Damage vs Buildings
 

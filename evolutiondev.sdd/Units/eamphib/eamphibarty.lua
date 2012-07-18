@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "AMPHIB SUPPORT",
+  category           = "LIGHT AMPHIB SUPPORT",
   corpse             = "ammobox",
   description        = [["Laser Support Artillery
 Light, 200% Damage vs Buildings
@@ -104,6 +104,7 @@ Requires + 10 Power]],
 
 local weaponDefs = {
   assimilatorweapon = {
+    badTargetCategory = [[ARMORED LIGHT]],
     AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,

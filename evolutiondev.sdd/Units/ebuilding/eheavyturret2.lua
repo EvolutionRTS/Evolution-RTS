@@ -18,7 +18,7 @@ local unitDef = {
    collisionVolumeType    = "box",
   canAttack          = true,
   canstop            = "1",
-  category           = "NOTAIR",
+  category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Heavy Plasma Battery
 Building, 200% Damage vs Armored
@@ -112,6 +112,7 @@ Requires:
 
 local weaponDefs = {
   eheavyturretweapon = {
+    badTargetCategory = [[BUILDING LIGHT]],
     accuracy           = 1000,
     AreaOfEffect       = 150,
     avoidFriendly      = false,
@@ -127,7 +128,7 @@ local weaponDefs = {
     impulseFactor      = 0,
     name               = "Plasma Cannon",
     range              = 1000,
-    reloadtime         = 1,
+    reloadtime         = 3,
     weaponType		   = "Cannon",
     soundHit           = "eturrethit.wav",
     soundStart         = "eturretfire.wav",
@@ -138,11 +139,12 @@ local weaponDefs = {
 	  damagetype		= "medium",  
     },    
     damage = {
-      default            = 50,
+      default            = 300,
     },
   },
   
   eheavyturretweapon2 = {
+    badTargetCategory = [[BUILDING LIGHT]],
     AreaOfEffect       = 50,
     avoidFeature       = false,
     avoidFriendly      = false,
@@ -163,7 +165,7 @@ local weaponDefs = {
     minintensity       = "1",
     name               = "Laser",
     range              = 1000,
-    reloadtime         = 1,
+    reloadtime         = 3,
     WeaponType         = "LaserCannon",
     rgbColor           = "1 0.5 0",
     rgbColor2          = "1 1 1",
@@ -180,7 +182,7 @@ local weaponDefs = {
 	  damagetype		= "antiarmored",  
     }, 
     damage = {
-      default           = 50,
+      default           = 300,
     },
   },
 }

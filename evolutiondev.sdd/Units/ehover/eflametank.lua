@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR RAID",
+  category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
   description        = [[Flamethrower Raider
 Light, 200% Damage vs Buildings
@@ -106,6 +106,7 @@ Requires +2 Power]],
 
 local weaponDefs = {
     lightlaser = {
+	badTargetCategory = [[ARMORED LIGHT]],
     accuracy           = 200,
     AreaOfEffect       = 50,
     avoidFeature       = false,

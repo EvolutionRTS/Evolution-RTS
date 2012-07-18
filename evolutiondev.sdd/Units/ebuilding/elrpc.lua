@@ -14,7 +14,7 @@ local unitDef = {
   buildTime          = 10,
   canAttack          = true,
   canstop            = "1",
-  category           = "NOTAIR",
+  category           = "BUILDING NOTAIR",
   
    collisionVolumeOffsets = "0 0 0",
    collisionVolumeScales  = "120 310 120",

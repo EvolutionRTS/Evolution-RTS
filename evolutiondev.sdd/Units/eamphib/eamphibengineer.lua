@@ -23,7 +23,7 @@ local unitDef = {
   canPatrol          = true,
   canreclamate       = "1",
   canstop            = "1",
-  category           = "AMPHIB SUPPORT",
+  category           = "LIGHT AMPHIB SUPPORT",
   description        = [[Engineer
 Light]],
   energyMake         = 0,

@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR SUPPORT",
+  category           = "LIGHT NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Artillery Support Tank
 Light, 200% Damage vs Buildings
@@ -101,6 +101,7 @@ Requires +8 Power]],
 
 local weaponDefs = {
   Artilleryweapon = {
+    badTargetCategory = [[ARMORED LIGHT]],
     accuracy           = 250,
     AreaOfEffect       = 50,
     avoidFriendly      = false,

@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR SKIRMISHER",
+  category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Armored Tank Destroyer
 Armored
@@ -102,6 +102,7 @@ Requires +5 Power]],
 
 local weaponDefs = {
   heavytankweapon = {
+	badTargetCategory = [[BUILDING]],
     accuracy           = 200,
     AreaOfEffect       = 50,
     avoidFriendly      = false,

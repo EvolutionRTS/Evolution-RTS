@@ -21,7 +21,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "VTOL",
+  category           = "ARMORED VTOL",
   collide            = true,
 --Collision Volumes... Because the engine devs are idiots.
 	collisionVolumeScales = [[35 35 35]],
@@ -29,7 +29,7 @@ local unitDef = {
   corpse             = "ammobox",
   cruiseAlt          = 350,
   description        = [[Stealth Bomber
-Light, 400% Damage vs Buildings
+Armored, 400% Damage vs Buildings
   
 Requires +10 Power]],
   energyMake         = 0,
@@ -108,6 +108,7 @@ Requires +10 Power]],
 
 local weaponDefs = {
   SBOMB = {
+    badTargetCategory = [[ARMORED LIGHT]],
     AreaOfEffect       = 50,
     avoidFriendly      = false,
     ballistic          = true,

@@ -20,7 +20,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR SUPPORT",
+  category           = "LIGHT NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Missile Support Tank
 Light, 200% vs Armored
@@ -105,6 +105,7 @@ Requires +7 Power]],
 
 local weaponDefs = {
   missletankweapon = {
+	  badTargetCategory = [[LIGHT BUILDING]],
     AreaOfEffect       = 100,
     avoidFriendly      = false,
     cegTag             = "missiletrail",

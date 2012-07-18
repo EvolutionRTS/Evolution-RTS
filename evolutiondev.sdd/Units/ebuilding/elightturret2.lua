@@ -14,7 +14,7 @@ local unitDef = {
   buildTime          = 5,
   canAttack          = true,
   canstop            = "1",
-  category           = "NOTAIR",
+  category           = "BUILDING NOTAIR",
   collisionVolumeTest = "1",
   corpse             = "ammobox",
   description        = [[Anti-Raid Defense Platform
@@ -110,6 +110,7 @@ Requires:
 
 local weaponDefs = {
   lighteweapon = {
+  badTargetCategory = [[BUILDING ARMORED]],
     AreaOfEffect       = 25,
     avoidFriendly      = false,
     collideFriendly    = false,
