@@ -102,7 +102,7 @@ Requires +8 Power]],
 local weaponDefs = {
   Artilleryweapon = {
     badTargetCategory = [[ARMORED LIGHT]],
-    accuracy           = 250,
+    accuracy           = 500,
     AreaOfEffect       = 50,
     avoidFriendly      = false,
     ballistic          = true,

@@ -9,7 +9,7 @@ local unitDef = {
 
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 80,
+  buildCostMetal     = 100,
   builder            = false,
   buildTime          = 10,
    collisionVolumeOffsets = "0 0 0",
