@@ -23,7 +23,7 @@ local unitDef = {
   category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
   description        = [[Flamethrower Raider
-Light, 200% Damage vs Buildings
+Light, 50% Damage vs Light
 
 Requires +2 Power]],
   energyMake         = 0,
@@ -106,7 +106,7 @@ Requires +2 Power]],
 
 local weaponDefs = {
     lightlaser = {
-	badTargetCategory = [[ARMORED LIGHT]],
+	badTargetCategory = [[LIGHT]],
     accuracy           = 200,
     AreaOfEffect       = 50,
     avoidFeature       = false,
@@ -135,10 +135,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "raider",  
+	  damagetype		= "tankdestroyer",  
     },      
     damage = {
-      default           = 15,
+      default           = 30,
     },
   },
 }
