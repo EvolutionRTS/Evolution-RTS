@@ -545,13 +545,17 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 
-	local function CheckCmd(cmd,team,allowBuildings,...)
+local function CheckCmd(cmd,team,allowBuildings,...)
 		if not AccessionTable[cmd] then
 			return true
 		else
-			if allowBuildings then
-				local ud = UnitDefs[-cmd]
-				if ud and ud.isBuilding then
+			local ud = UnitDefs[-cmd]
+			if ud then
+				if ud.isBuilding then
+					if allowBuildings then
+						return true
+					end
+				elseif ud.isBuilder then
 					return true
 				end
 			end
