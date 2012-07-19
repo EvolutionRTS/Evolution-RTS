@@ -32,14 +32,14 @@ local icontypes = {
     radiusadjust=0.2
   },
 
-  silo = {
+  esilo = {
     bitmap='icons/esilo.png',
     size=2,
     radiusadjust=0.2
   },
 
-  lrpc = {
-    bitmap='icons/lrpc.dds',
+  elrpc = {
+    bitmap='icons/elrpc.dds',
     size=1,
     radiusadjust=0.2
   },

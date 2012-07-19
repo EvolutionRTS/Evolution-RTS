@@ -25,7 +25,7 @@ local team = Spring.GetMyTeamID()
 
 -- What to hold ground with
 local function IsGround(ud)
- return (not (ud.canFly or ud.isBuilding or (ud.builder and not ud.canMove and not ud.isFactory) ) )
+ return (not ud.canFly)
 end
 
 -- Exceptions

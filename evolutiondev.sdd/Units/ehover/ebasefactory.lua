@@ -104,6 +104,7 @@ local unitDef = {
   	death_sounds = "generic",
 	twokhotkey = 'z',
 	armortype   = "building", 
+--	RequireTech = "12 Power",
 	normaltex = "unittextures/ebasefactorynormal.png", 
 	helptext = [[The hovertank factory is the most robust of all the technology avenues in Evolution RTS. Unlike their amphibious and all-terrain counterparts, the Hover Factory does not possess any innate traits, but the larger selection of units makes up for the lack of innate abilities.]],
   },
