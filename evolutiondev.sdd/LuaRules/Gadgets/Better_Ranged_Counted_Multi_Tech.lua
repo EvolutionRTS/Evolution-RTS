@@ -545,7 +545,7 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 
-local function CheckCmd(cmd,team,allowBuildings,...)
+	local function CheckCmd(cmd,team,allowBuildings,...)
 		if not AccessionTable[cmd] then
 			return true
 		else
@@ -718,7 +718,6 @@ local function CheckCmd(cmd,team,allowBuildings,...)
 					OriDesc[cid]=Spring.GetUnitCmdDescs(u)[UnitCmdDesc].tooltip
 				end
 				local AllowedHereAndNow=true
-				local MaybeAllowedElsewhere=true
 				for _,req in pairs(AccessionTable[cid]) do
 					local color=nil
 					if CheckTech(req.tech,team,req.quantity,u) then
@@ -729,14 +728,13 @@ local function CheckCmd(cmd,team,allowBuildings,...)
 							color="\255\255\255\64"--yellow
 						else
 							color="\255\255\64\64"--red
-							MaybeAllowedElsewhere=false
 						end
 					end
 					local q=req.quantity
 					ReqDesc=(ReqDesc and ReqDesc.."\255\255\255\255, " or "\255\255\255\255Requires ")..color..((q and q~=1) and q.." " or "")..req.tech
 				end
 				ReqDesc=ReqDesc.."\n\255\255\255\255"..(GrantDesc[cid] or OriDesc[cid])
-				local enabled=AllowedHereAndNow or (MaybeAllowedElsewhere and UnitDefs[ud].speed>0)
+				local enabled = AllowedHereAndNow or UnitDefs[ud].speed>0
 				Spring.EditUnitCmdDesc(u,UnitCmdDesc,{disabled=not enabled,tooltip=ReqDesc})
 			end
 		end
