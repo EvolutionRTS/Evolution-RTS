@@ -119,7 +119,7 @@ local weaponDefs = {
     CylinderTargetting = true,
     Commandfire        = true,
     explosionGenerator = "custom:dodaibomb",
-	energypershot      = 4,
+	energypershot      = 50,
     id                 = 5,
     interceptedByShieldType = 4,
     name               = "Bombs",
@@ -138,7 +138,7 @@ local weaponDefs = {
 	  damagetype		= "explosive",  
     },
     damage = {
-      default           = 20,
+      default           = 50,
     },
   },
 }

@@ -35,7 +35,7 @@ local unitDef = {
 -- End Cloaking
   
   description        = [[Light Tank Destroyer
-Light, 50% Damage vs Buildings
+Light, 200% Damage vs Armored
   
 Requires +4 Power]],
   energyMake         = 0,
@@ -149,7 +149,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "tankdestroyer",  
+	  damagetype		= "tankdestroyermediumtank",  
     }, 
     damage = {
       default           = 100,

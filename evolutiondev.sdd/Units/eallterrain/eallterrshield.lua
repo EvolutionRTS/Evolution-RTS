@@ -35,7 +35,7 @@ local unitDef = {
 -- End Cloaking
   
   description        = [[Shield Emitter
-Light, Shield absorbs 750 damage
+Light, Shield absorbs 2000 damage
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -121,7 +121,7 @@ local weaponDefs = {
     ShieldStartingPower = 0,
     Shieldenergyuse  = 5,
     Shieldradius     = 300,
-    Shieldpower      = 750,
+    Shieldpower      = 2000,
     Shieldpowerregen = 10,
     Shieldpowerregenenergy = 5,
     Shieldintercepttype = 4,

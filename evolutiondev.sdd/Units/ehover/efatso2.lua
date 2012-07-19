@@ -131,7 +131,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 315,
 	customparams = {
-	  damagetype		= "antibuilding",  
+	  damagetype		= "antibuildingfatso",  
     },      
     damage = {
       default           = 87.5,

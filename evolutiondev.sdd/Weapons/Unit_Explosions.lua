@@ -16,7 +16,7 @@ SMALL_BUILDING = {
    soundhit="explode2.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION_SMALL",
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -34,7 +34,7 @@ MEDIUM_BUILDING = {
    soundhit="explode4.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION_MEDIUM",
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -53,7 +53,7 @@ LARGE_BUILDING = {
    soundhit="explode1.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION",
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -71,7 +71,7 @@ ESTOR_BUILDING = {
    soundhit="explode4.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION_SMALL",
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -91,7 +91,7 @@ SMALL_UNIT = {
 
    explosiongenerator="custom:SMALL_UNIT_Expl",
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -111,7 +111,7 @@ MEDIUM_UNIT = {
    soundhit="explode4.wav",
    explosiongenerator="custom:MED_UNIT_Expl",
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -132,7 +132,7 @@ BIG_UNIT = {
    soundhit="explode3.wav",
    explosiongenerator="custom:BIG_UNIT_Expl",
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -240,7 +240,7 @@ PYRO_BLAST = {
    explosiongenerator="custom:PYRO_UNIT_Expl",
 
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -264,7 +264,7 @@ FUSIONPOP = {
     },  
 
     damage = {
-      default            = 50,
+      default            = 0,
     },
   },
 POWERPLANTPOP = {
@@ -287,7 +287,7 @@ POWERPLANTPOP = {
     },  
 
     damage = {
-      default            = 25,
+      default            = 0,
     },
   },
   
@@ -311,7 +311,7 @@ GEOPOP = {
     },  
 
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -331,7 +331,7 @@ HUGE_UNITEX = {
    explosiongenerator="custom:HUGE_UNIT_Expl",
 
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 
@@ -352,7 +352,7 @@ HUGE_UNIT = {
    explosiongenerator="custom:HUGE_UNIT_Expl",
 
     damage = {
-      default            = 10,
+      default            = 0,
     },
   },
 }

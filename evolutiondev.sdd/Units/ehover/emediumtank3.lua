@@ -23,7 +23,7 @@ local unitDef = {
   category           = "LIGHT NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Light Tank Destroyer
-Light, 50% Damage vs Buildings
+Light, 200% Damage vs Armored
 
 Requires +3 Power]],
   energyMake         = 0,
@@ -109,7 +109,7 @@ local weaponDefs = {
     cegTag             = "mediumcannonweapon",
     collideFriendly    = false,
     explosionGenerator = "custom:BulletImpactBlue",
-	energypershot      = 10,
+	energypershot      = 20,
     id                 = 51,
     interceptedByShieldType = 4,
     name               = "Light Cannon",
@@ -122,7 +122,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "tankdestroyer",  
+	  damagetype		= "tankdestroyermediumtank",  
     },      
     damage = {
       default           = 100,

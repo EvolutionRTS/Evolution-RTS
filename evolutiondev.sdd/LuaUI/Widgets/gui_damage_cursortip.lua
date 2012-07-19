@@ -116,7 +116,7 @@ function widget:Update(dt)
 		end
 		
 		if totalTime ~= 0 then
-			defendText = math.floor(totalTime/modTime*100+0.5) ..  "% Damage Recieved"
+			defendText = math.floor(totalTime/modTime*100+0.5) ..  "% Damage Received"
 		end
 	end
 

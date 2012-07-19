@@ -128,7 +128,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.3,
     duration           = 0.1,
-    energypershot      = 2.2,
+    energypershot      = 2.5,
     explosionGenerator = "custom:burn",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -154,7 +154,7 @@ local weaponDefs = {
 	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default           = 40,
+      default           = 25,
     },
   },
 }

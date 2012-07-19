@@ -23,7 +23,7 @@ local unitDef = {
   category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
   description        = [[Flamethrower Raider
-Light, 50% Damage vs Light
+Light, 300% Damage vs Buildings
 
 Requires +2 Power]],
   energyMake         = 0,
@@ -54,7 +54,7 @@ Requires +2 Power]],
   repairable		 = false,
  selfDestructAs     = "PYRO_BLAST",
   side               = "CORE",
-  sightDistance      = 600,
+  sightDistance      = 500,
   smoothAnim         = true,
   --  turnInPlace        = false,
   --  turnInPlaceSpeedLimit = 5,
@@ -116,7 +116,7 @@ local weaponDefs = {
     explosionGenerator = "custom:burnblack",
     coreThickness      = 0,
     duration           = 1,
-    energypershot      = 1,
+    energypershot      = 1.5,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -135,10 +135,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "tankdestroyer",  
+	  damagetype		= "flametankraider",  
     },      
     damage = {
-      default           = 15,
+      default           = 5,
     },
   },
 }

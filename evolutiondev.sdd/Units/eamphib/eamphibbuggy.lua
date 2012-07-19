@@ -49,7 +49,7 @@ Requires +1 Power]],
   repairable		 = false,
  selfDestructAs     = "SMALL_UNIT",
   sightDistance      = 1000,
-  SonarDistance        = 500,
+  SonarDistance        = 1000,
   stealth			 = true,
   sonarStealth		 = false,
   smoothAnim         = true,
@@ -179,7 +179,7 @@ local weaponDefs = {
 	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default            = 30,
+      default            = 40,
     },
   },  
 }

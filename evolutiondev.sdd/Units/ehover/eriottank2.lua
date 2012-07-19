@@ -91,10 +91,6 @@ Requires +4 Power]],
       def                = "riottankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
     },
---[[    [2]  = {
-      def                = "riottanksupaweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-    }, ]]--
   },
   customParams = {
     needed_cover = 2,
@@ -113,7 +109,7 @@ Requires +4 Power]],
 local weaponDefs = {
   riottankweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 75,
+    AreaOfEffect       = 100,
 	avoidFeature       = false,
     avoidFriendly      = false,
     ballistic          = true,
@@ -140,42 +136,6 @@ local weaponDefs = {
     },   
     damage = {
       default           = 25,
-    },
-  },
-
-  riottanksupaweapon = {
-    AreaOfEffect       = 100,
-    avoidFriendly      = false,
-    ballistic          = true,
-	burst			   = 5,
-	burstrate		   = 0.1,
-    cegTag             = "riotweapon",
-    collideFriendly    = false,
-    commandfire        = true,
-    explosionGenerator = "custom:PLASMA_Expl",
-	energypershot      = 187,
-    id                 = 172,
-    impulseFactor      = 0.5,
-	interceptedByShieldType = 4,
-    name               = "Light Cannon",
-    projectiles        = 5,
-    range              = 400,
-    reloadtime         = 5,
-    weaponType		   = "Cannon",
-    soundHit           = "mediumcannonhit.wav",
-    soundStart         = "rocket_launcher2.wav",
-    sprayAngle         = 2000,
-    stockpile          = true,
-    stockpileTime      = 30,
-    startsmoke         = "1",
-    tolerance          = 2000,
-    turret             = true,
-    weaponVelocity     = 500,
-	customparams = {
-	  damagetype		= "riot",  
-    },   
-    damage = {
-      default           = 38,
     },
   },
 }

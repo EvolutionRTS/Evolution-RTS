@@ -92,10 +92,19 @@ local function BackwardCompability(wdName,wd)
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*2
+			elseif (damagetypelower == "flametankraider") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*3
 				
 			elseif (damagetypelower == "raiderlight") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*2
+				wd.damage.BUILDING  = 		weapondamage*1
+				
+			elseif (damagetypelower	== "tankdestroyermediumtank") then
+				wd.damage.ARMORED = 		weapondamage*2
+				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*1
 				
 			elseif (damagetypelower	== "tankdestroyer") then
@@ -127,6 +136,11 @@ local function BackwardCompability(wdName,wd)
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*4
+			
+			elseif (damagetypelower	== "antibuildingallterrassault") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*4
 				
 			elseif (damagetypelower	== "hoverbomb") then
 				wd.damage.ARMORED = 		weapondamage*1
@@ -154,7 +168,7 @@ local function BackwardCompability(wdName,wd)
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*1
 			elseif (damagetypelower	== "heavytankdestroyerturret") then
-				wd.damage.ARMORED = 		weapondamage*3
+				wd.damage.ARMORED = 		weapondamage*4
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*1
 				

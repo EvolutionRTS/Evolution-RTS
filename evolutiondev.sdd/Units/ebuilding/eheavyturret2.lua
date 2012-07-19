@@ -21,7 +21,7 @@ local unitDef = {
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Heavy Plasma Battery
-Building, 300% Damage vs Armored
+Building, 400% Damage vs Armored
 
 Requires +8 Power]],
   energyStorage      = 0,
@@ -111,38 +111,6 @@ Requires:
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  eheavyturretweapon = {
-    badTargetCategory = [[BUILDING LIGHT]],
-    accuracy           = 1000,
-    AreaOfEffect       = 150,
-    avoidFriendly      = false,
-    ballistic          = true,
-    cegTag             = "factorysparks",
-    collideFriendly    = false,
-    explosionGenerator = "custom:xamelimpact",
-	energypershot      = 20,
-    id                 = 71,
-    
-    impulse            = "0",
-    impulseBoost       = 0,
-    impulseFactor      = 0,
-    name               = "Plasma Cannon",
-    range              = 1000,
-    reloadtime         = 3,
-    weaponType		   = "Cannon",
-    soundHit           = "eturrethit.wav",
-    soundStart         = "eturretfire.wav",
-    startsmoke         = "1",
-    turret             = true,
-    weaponVelocity     = 500,
-	customparams = {
-	  damagetype		= "heavytankdestroyerturret",  
-    },    
-    damage = {
-      default            = 100,
-    },
-  },
-  
   eheavyturretweapon2 = {
     badTargetCategory = [[BUILDING LIGHT]],
     AreaOfEffect       = 50,
@@ -155,7 +123,7 @@ local weaponDefs = {
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.4,
-    energypershot      = 20,
+    energypershot      = 10,
     explosionGenerator = "custom:xamelimpact",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -165,7 +133,7 @@ local weaponDefs = {
     minintensity       = "1",
     name               = "Laser",
     range              = 1000,
-    reloadtime         = 3,
+    reloadtime         = 1,
     WeaponType         = "LaserCannon",
     rgbColor           = "1 0.5 0",
     rgbColor2          = "1 1 1",
@@ -182,7 +150,7 @@ local weaponDefs = {
 	  damagetype		= "heavytankdestroyerturret",  
     }, 
     damage = {
-      default           = 100,
+      default           = 50,
     },
   },
 }
