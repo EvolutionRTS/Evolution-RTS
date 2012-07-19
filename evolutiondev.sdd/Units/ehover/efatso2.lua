@@ -23,7 +23,7 @@ local unitDef = {
   category           = "ARMORED NOTAIR ASSAULT",
   corpse             = "ammobox",
   description        = [[Armored Anti-Base Tank
-Armored, 200% Damage vs Buildings
+Armored, 400% Damage vs Buildings
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -35,7 +35,7 @@ Requires +10 Power]],
   iconType           = "hover",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  maxDamage          = 1000,
+  maxDamage          = 2000,
   maxSlope           = 26,
   maxVelocity        = 2.2,
   maxReverseVelocity = 1,
@@ -134,7 +134,7 @@ local weaponDefs = {
 	  damagetype		= "antibuilding",  
     },      
     damage = {
-      default           = 350,
+      default           = 87.5,
     },
   },
 }

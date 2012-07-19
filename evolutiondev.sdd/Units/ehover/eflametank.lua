@@ -35,7 +35,7 @@ Requires +2 Power]],
   iconType           = "hover",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  maxDamage          = 130,
+  maxDamage          = 260,
   maxSlope           = 26,
   maxVelocity        = 5,
   maxReverseVelocity = 1,
@@ -138,7 +138,7 @@ local weaponDefs = {
 	  damagetype		= "tankdestroyer",  
     },      
     damage = {
-      default           = 30,
+      default           = 15,
     },
   },
 }

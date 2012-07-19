@@ -35,7 +35,7 @@ Requires +1 Power]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 80,
+  maxDamage          = 160,
   maxSlope           = 28,
   maxVelocity        = 6.0,
   maxReverseVelocity = 2,
@@ -142,7 +142,7 @@ local weaponDefs = {
 	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default           = 6,
+      default           = 12,
     },
   },
   
@@ -179,7 +179,7 @@ local weaponDefs = {
 	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default            = 15,
+      default            = 30,
     },
   },  
 }

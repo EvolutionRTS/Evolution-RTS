@@ -39,7 +39,7 @@ Light
   idleAutoHeal       = .5,
   idleTime           = 2200,
   levelground        = true,
-  maxDamage          = 300,
+  maxDamage          = 600,
   maxSlope           = 26,
   maxVelocity        = 3,
   maxReverseVelocity = 1,

@@ -49,7 +49,7 @@ Requires +3 Power]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 200,
+  maxDamage          = 400,
   maxSlope           = 180,
   maxVelocity        = 3.3,
   maxReverseVelocity = 1,
@@ -156,7 +156,7 @@ local weaponDefs = {
 	  damagetype		= "riot",  
     }, 
     damage = {
-      default           = 40,
+      default           = 60,
     },
   },
   
