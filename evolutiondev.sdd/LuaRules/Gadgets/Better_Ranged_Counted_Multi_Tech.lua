@@ -1,4 +1,3 @@
-
 --[[
 ------------------------------------------------------------
 		Tech Tree gadget
@@ -546,10 +545,16 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 
-	local function CheckCmd(cmd,team,...)
+	local function CheckCmd(cmd,team,allowBuildings,...)
 		if not AccessionTable[cmd] then
 			return true
 		else
+			if allowBuildings then
+				local ud = UnitDefs[-cmd]
+				if ud and ud.isBuilding then
+					return true
+				end
+			end
 			for _,req in pairs(AccessionTable[cmd]) do
 				if not CheckTech(req.tech,team,req.quantity,...) then
 					dbgEcho("cmd "..cmd.." forbidden for lack of "..req.tech)
@@ -734,7 +739,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
 		-- Not anymore editing buttons, but calling COB scripts when tech is lost and regained
 		if UnitsWithScripts[u] then
-			local newstate=CheckCmd(-Spring.GetUnitDefID(u),team,u)
+			local newstate=CheckCmd(-Spring.GetUnitDefID(u),team,false,u)
 			if newstate~=UnitsWithScripts[u].state then
 				UnitsWithScripts[u].state=newstate
 				if newstate then
@@ -897,19 +902,19 @@ if (gadgetHandler:IsSyncedCode()) then
 
 
 	function gadget:AllowCommand(u,ud,team,cmd,param,opt,synced)
-                if param and cmd<0 and #param==4 then
-                    return CheckCmd(cmd,team,param[1],param[2],param[3])
-                else
-                    return CheckCmd(cmd,team,Spring.GetUnitPosition(u))
-                end
-        end
+			if param and cmd<0 and #param==4 then
+				return CheckCmd(cmd,team,true,param[1],param[2],param[3])
+			else
+				return CheckCmd(cmd,team,true,Spring.GetUnitPosition(u))
+			end
+	end
 
 
 	function gadget:AllowUnitCreation(ud,builder,team,x,y,z)
 		if x and z then
-			return CheckCmd(-ud,team,x,y,z)
+			return CheckCmd(-ud,team,true,x,y,z)
 		else
-			return CheckCmd(-ud,team,builder)
+			return CheckCmd(-ud,team,true,builder)
 		end
 	end
 
