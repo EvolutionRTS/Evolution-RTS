@@ -9,7 +9,7 @@ local unitDef = {
 
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 100,
+  buildCostMetal     = 250,
   builder            = false,
   buildTime          = 10,
    collisionVolumeOffsets = "0 0 0",
@@ -23,7 +23,7 @@ local unitDef = {
   description        = [[Heavy Plasma Battery
 Building, 400% Damage vs Armored
 
-Requires +8 Power]],
+Requires +20 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -79,7 +79,7 @@ Requires +8 Power]],
     needed_cover = 5,
 	death_sounds = "generic",
 	twokhotkey = 'h',
-    RequireTech = "8 Power",
+    RequireTech = "20 Power",
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Heavy Turret
@@ -98,7 +98,7 @@ Armortype: Armored Building
 
 Requires:
 
-+8 Power]],
++20 Power]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=9,
@@ -123,7 +123,7 @@ local weaponDefs = {
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.4,
-    energypershot      = 10,
+    energypershot      = 40,
     explosionGenerator = "custom:xamelimpact",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -150,7 +150,7 @@ local weaponDefs = {
 	  damagetype		= "heavytankdestroyerturret",  
     }, 
     damage = {
-      default           = 50,
+      default           = 100,
     },
   },
 }
