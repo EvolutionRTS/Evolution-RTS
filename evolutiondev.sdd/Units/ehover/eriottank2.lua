@@ -109,7 +109,7 @@ Requires +4 Power]],
 local weaponDefs = {
   riottankweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 100,
+    AreaOfEffect       = 150,
 	avoidFeature       = false,
     avoidFriendly      = false,
     ballistic          = true,

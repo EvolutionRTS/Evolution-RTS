@@ -138,7 +138,7 @@ local weaponDefs = {
 	  damagetype		= "antilight",  
     },      
     damage = {
-      default            = 35,
+      default            = 62.5,
     },
   },
 }

@@ -94,7 +94,7 @@ Armortype: Armored Building
 
 +1000 Range
 
-+150 Area of Effect
++50 Area of Effect
 
 Requires:
 

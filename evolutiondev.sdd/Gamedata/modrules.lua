@@ -10,9 +10,9 @@
 
 local modrules  = {
 
-  -- system = {
-	-- pathFinderSystem = 1;
-  -- }
+  system = {
+	pathFinderSystem = 1;
+  }
 
   movement = {
     allowAirPlanesToLeaveMap = true;  -- defaults to true
