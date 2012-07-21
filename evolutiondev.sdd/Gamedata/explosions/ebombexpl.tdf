@@ -1,4 +1,4 @@
-[nukeartyexpl]
+[ebombexpl]
 {
 	[pop]
 	{
@@ -51,7 +51,7 @@
 
       [properties]
       {
-      Texture=uglynovaexplo;
+      Texture=rednovaexplo;
 
       colorMap = 1 0.5 0.0 0.01 0.6 0.2 0.0 0.01  0.0 0.0 0.0 0.01;
 
@@ -87,7 +87,7 @@
 
       [properties]
       {
-      Texture=uglynovaexplo;
+      Texture=rednovaexplo;
 
       colorMap =1 0.5 0.0 0.01 0.6 0.2 0.0 0.01  0.0 0.0 0.0 0.01;
 
@@ -137,12 +137,12 @@
    [groundflash]
    {
 	  alwaysVisible=1;
-      flashSize = 700;   // flash size
-      flashAlpha = 0.9;    // initial alpha of the flash
+	  flashSize = 700;   // flash size
+      flashAlpha = 1;    // initial alpha of the flash
       circleGrowth = 10; // size increase/frame
-      circleAlpha = 1;   // initial alpha of the ring
+      circleAlpha = .5;   // initial alpha of the ring
       ttl = 30;          // number of frames
-      color = 0.7, 0.3, 0;
+      color = 0.7, 0.7, 0.7;
 	  
 	  air=1;
       ground=1;
