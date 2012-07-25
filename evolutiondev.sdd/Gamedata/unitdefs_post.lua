@@ -137,3 +137,22 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+--Recursive Table Reader
+
+	-- local function recursiveTableReader(currTable, dashes)
+		-- dashes = dashes .. "   "
+		-- if type(currTable) == 'table' then
+			-- for k,v in pairs(currTable) do
+				-- if (v ~= nil) then
+					-- Spring.Echo(dashes .. "[" .. k .. "]")
+					-- recursiveTableReader(v, dashes)
+				-- end
+			-- end
+		-- else
+			-- if (currTable ~= nil) then
+				-- Spring.Echo(dashes .. tostring(currTable) )
+			-- end
+		-- end
+	-- end
+	-- recursiveTableReader(UnitDefs, "DEF ")
