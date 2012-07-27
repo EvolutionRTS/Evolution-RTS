@@ -133,7 +133,7 @@ local weaponDefs = {
 	  damagetype		= "riot",  
     },   
     damage = {
-      default           = 45,
+      default           = 35,
     },
   },
   
