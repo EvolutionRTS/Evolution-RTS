@@ -113,7 +113,7 @@ RestoreAfterDelay() // restore function to turn the turret and so forth back to 
 { 
 sleep 10000; 
 turn turret to y-axis <0> speed <255>;
-turn barrel1 to x-axis <0> speed <150>;
+turn barrel1 to x-axis <0> speed <255>;
 stop-spin magazine around z-axis decelerate <10>;  
 } 
 
@@ -122,7 +122,7 @@ AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to d
 signal SIG_AIM; 
 set-signal-mask SIG_AIM; 
 turn turret to y-axis heading speed <255>;
-turn barrel1 to x-axis <0> - pitch speed <150>; 
+turn barrel1 to x-axis <0> - pitch speed <255>; 
 wait-for-turn turret around y-axis;
 wait-for-turn barrel1 around x-axis;  
 start-script RestoreAfterDelay(); 

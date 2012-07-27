@@ -115,7 +115,8 @@ Requires +3 Power]],
 local weaponDefs = {
   riottankweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 100,
+	accuracy		   = 0,
+    AreaOfEffect       = 25,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,
@@ -125,7 +126,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.3,
     duration           = 0.1,
-    energypershot      = 12,
+    energypershot      = 2.25,
     explosionGenerator = "custom:PLASMA_Expl",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -134,8 +135,8 @@ local weaponDefs = {
     lineOfSight        = true,
     minintensity       = "1",
     name               = "Laser",
-    range              = 500,
-    reloadtime         = 0.5,
+    range              = 750,
+    reloadtime         = 0.25,
     WeaponType         = "LaserCannon",
     rgbColor           = "1 0.3 0.4",
     rgbColor2          = "1 1 1",
@@ -152,7 +153,7 @@ local weaponDefs = {
 	  damagetype		= "riot",  
     }, 
     damage = {
-      default           = 60,
+      default           = 45,
     },
   },
 }
