@@ -9,7 +9,7 @@ local unitDef = {
 
   activatewhenbuilt  = false,
   buildCostEnergy    = 0,
-  buildCostMetal     = 275,
+  buildCostMetal     = 40,
   builder            = true,
   buildTime          = 10,
   canBeAssisted      = false,
@@ -27,7 +27,7 @@ local unitDef = {
   iconType           = "factory",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  maxDamage          = 10000,
+  maxDamage          = 5000,
   maxSlope           = 60,
   maxWaterDepth      = 0,
   metalStorage       = 0,

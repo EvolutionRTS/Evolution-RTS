@@ -209,10 +209,10 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 				end
 				
 				local opts = {}
-				table.insert(opts, "shift") -- appending
-				if (cmdOptions.alt)   then table.insert(opts, "alt")   end
-				if (cmdOptions.ctrl)  then table.insert(opts, "ctrl")  end
-				if (cmdOptions.right) then table.insert(opts, "right") end
+				if (cmdOptions.shift) then table.insert(opts, "shift") end
+ 				if (cmdOptions.alt)   then table.insert(opts, "alt")   end
+ 				if (cmdOptions.ctrl)  then table.insert(opts, "ctrl")  end
+ 				if (cmdOptions.right) then table.insert(opts, "right") end
 				
 				--spGiveOrderToUnit(unitID, cmdID, {fx,fy,fz, cmdParams[4]}, opts)
 				qOrderToUnit(unitID, cmdID, {fx,fy,fz, cmdParams[4]}, opts)
