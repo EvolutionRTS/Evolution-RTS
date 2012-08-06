@@ -1,3 +1,15 @@
+evolutionrts-data (3.6-ppa1) quantal; urgency=low
+
+  * new upstream release
+
+ -- Rene Milk <koshi@springlobby.info>  Tue, 05 Jun 2012 22:18:45 +0200
+
+evolutionrts-data (3.4-ppa1) precise; urgency=low
+
+  * new upstream release
+
+ -- Rene Milk <koshi@springlobby.info>  Wed, 09 May 2012 11:57:16 +0200
+
 evolutionrts-data (1.9-ppa1) oneiric; urgency=low
 
   * new upstream release
