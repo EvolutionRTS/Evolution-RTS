@@ -18,7 +18,7 @@ local unitDef = {
   collisionVolumeTest = "1",
   corpse             = "ammobox",
   description        = [[Anti-Raid Defense Platform
-Building, 200% Damage vs Light
+Building, 400% Damage vs Light
 
 Requires +2 Power]],
   energyStorage      = 0,
@@ -44,7 +44,7 @@ Requires +2 Power]],
 -- script			 = "elightturret2-script.lua",
   selfDestructAs     = "MEDIUM_BUILDING",
   side               = "CORE",
-  sightDistance      = 550,
+  sightDistance      = 750,
   smoothAnim         = true,
   unitname           = "elightturret2",
   workerTime         = 0,
@@ -123,7 +123,7 @@ local weaponDefs = {
 	interceptedByShieldType = 4,
     lineOfSight        = true,
     noSelfDamage       = true,
-    range              = 550,
+    range              = 750,
     reloadtime         = 1,
     WeaponType         = "LightningCannon",
     rgbColor           = "0.1 0.2 0.5",

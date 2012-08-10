@@ -155,7 +155,7 @@ local function BackwardCompability(wdName,wd)
 -- turrets
 			elseif (damagetypelower	== "antilight") then
 				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*2
+				wd.damage.LIGHT = 			weapondamage*4
 				wd.damage.BUILDING  = 		weapondamage*1
 				
 			elseif (damagetypelower	== "antiarmored") then
