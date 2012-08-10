@@ -23,7 +23,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Tank Destroyer
 Armored, 50% Damage vs Buildings
-	• Switches to torpedos when underwater
+	• Can fire while underwater
 
 Requires +4 Power]],
   energyMake         = 0,
@@ -86,9 +86,11 @@ Requires +4 Power]],
     [1]  = {
       def                = "medtankbeamlaser",
     },
+--[[	
 	[2]  = {
       def                = "TORP",
     },
+]]--
   },
    customParams = {
     needed_cover = 2,
@@ -179,6 +181,7 @@ local weaponDefs = {
     tolerance          = 1000,
     turret             = true,
     weaponVelocity     = 1000,
+	waterweapon		   = true,
 	customparams = {
 	  damagetype		= "tankdestroyer",  
     }, 

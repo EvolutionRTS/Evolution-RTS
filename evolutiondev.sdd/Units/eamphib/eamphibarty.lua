@@ -23,7 +23,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [["Laser Support Artillery
 Light, 200% Damage vs Buildings
-	• Switches to torpedos when underwater
+	• Can fire while underwater
 
 Requires + 10 Power]],
   energyMake         = 0,
@@ -85,9 +85,11 @@ Requires + 10 Power]],
       def                = "assimilatorbeamweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
     },
+--[[
 	[2]  = {
       def                = "TORP",
     },
+]]--
   },
    customParams = {
     needed_cover = 3,
@@ -180,6 +182,7 @@ local weaponDefs = {
     tolerance          = 500,
     turret             = true,
     weaponVelocity     = 1500,
+	waterweapon		   = true,
 	customparams = {
 	  damagetype		= "antibuilding",  
     }, 

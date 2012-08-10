@@ -23,7 +23,6 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Missile support tank
 Light, 200% vs Armored
-	• Switches to torpedos when underwater
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -91,9 +90,11 @@ Requires +7 Power]],
       def                = "gunshipweapon",
       onlyTargetCategory = "NOTAIR",
     },
+--[[
 	[2]  = {
       def                = "TORP",
     },
+]]--
   },
    customParams = {
     needed_cover = 2,

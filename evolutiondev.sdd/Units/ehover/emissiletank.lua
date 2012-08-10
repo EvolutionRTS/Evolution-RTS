@@ -88,6 +88,10 @@ Requires +7 Power]],
       def                = "missletankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
     },
+	[2]  = {
+      def                = "missletankweapon",
+      onlyTargetCategory = "NOTAIR AMPHIB",
+    },
   },
   customParams = {
     needed_cover = 3,
@@ -125,7 +129,7 @@ local weaponDefs = {
     model              = "missilesmallvlaunch.s3o",
     name               = "Rocket",
     range              = 850,
-    reloadtime         = 6,
+    reloadtime         = 3,
     weaponType		   = "MissileLauncher",
     selfprop           = true,
     smokedelay         = "0.1",
@@ -137,7 +141,7 @@ local weaponDefs = {
     turnrate           = 30000,
     vlaunch            = true,
     weaponAcceleration = 400,
-    weaponTimer        = 0.5,
+    weaponTimer        = 1,
     weaponType         = "StarburstLauncher",
     weaponVelocity     = 1800,
 	customparams = {

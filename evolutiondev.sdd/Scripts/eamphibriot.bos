@@ -92,12 +92,12 @@ turn barrel1 to x-axis <0> speed <30>;
 
 AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
 { 
-
+/*
     if ( get IN_WATER(0) == 1 )
     {
      return (0);
     }
-
+*/
 signal SIG_AIM; 
 set-signal-mask SIG_AIM; 
 turn turret to y-axis heading speed <500>; 

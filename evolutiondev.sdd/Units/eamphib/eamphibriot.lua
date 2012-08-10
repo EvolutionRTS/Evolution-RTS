@@ -24,7 +24,6 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Anti-Swarm Tank
 Armored, 200% Damage vs Light
-	• Switches to torpedos when underwater
 
 Requires +5 Power]],
   energyMake         = 0,
@@ -88,9 +87,11 @@ Requires +5 Power]],
       def                = "riottankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
     },
+--[[
     [2]  = {
       def                = "TORP",
     },
+]]--
   },
    customParams = {
     needed_cover = 2,

@@ -23,6 +23,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Scout/Raider
 Light, 200% Damage vs Light
+	• Can fire while underwater
 
 Requires +1 Power]],
   energyMake         = 0,
@@ -86,9 +87,11 @@ Requires +1 Power]],
     [1]  = {
       def                = "lightbeamlaser",
     },
+--[[	
 	[2]  = {
       def                = "TORP",
     },
+]]--
   },
    customParams = {
     needed_cover = 1,
@@ -158,7 +161,7 @@ local weaponDefs = {
     coreThickness      = 0.2,
     duration           = 0.1,
     explosionGenerator = "custom:burn",
-	energypershot      = 0.6,
+	energypershot      = 1,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -182,11 +185,12 @@ local weaponDefs = {
     tolerance          = 1000,
     turret             = true,
     weaponVelocity     = 1000,
+	waterweapon		   = true,
 	customparams = {
 	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default           = 12,
+      default           = 20,
     },
   },
   

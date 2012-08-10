@@ -5,7 +5,7 @@
 
 piece base, turret, barrel1, firepoint1, firepoint2, sfxpoint1; // these are the pieces of the model 
 
-static-var gun_1, terraintype, bmoving, moving; // these are the variables 
+static-var gun_1, terraintype, bmoving, moving, shooting_num; // these are the variables 
 
 // Signal definitions 
 #define SIG_AIM 2 // this is a aim define 
@@ -124,21 +124,42 @@ return (1);
 } 
 
 FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
-{
-emit-sfx 1024 + 0 from firepoint1;
-sleep 500;
-emit-sfx 1024 + 0 from firepoint2;
-emit-sfx 2048 + 0 from firepoint2; 
+{ 
+ 
+         if(shooting_num==1)
+         {
+         	emit-sfx 1024 from firepoint2;
+         }
+
+         if(shooting_num==2)
+         {
+         	emit-sfx 1024 from firepoint1;
+         }
+	
+   shooting_num=shooting_num+1;
+
+            if( shooting_num == 3)
+            {  
+            	shooting_num=1;
+            }
 } 
 
 AimFromWeapon1(piecenum) // where it aims the weapon from 
 { 
-piecenum = turret; 
+piecenum = barrel1; 
 } 
 
 QueryWeapon1(piecenum) // where the shot is called from 
 { 
-piecenum = firepoint1;  
+if (shooting_num==1) 
+     {  
+     	piecenum=firepoint1;     
+     }
+
+     if (shooting_num==2)
+     {   
+     	piecenum=firepoint2;
+     } 
 } 
 
 Killed(severity, corpsetype) // how it explodes 
