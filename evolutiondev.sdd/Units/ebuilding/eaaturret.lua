@@ -8,7 +8,7 @@ local unitName = "eaaturret"
 local unitDef = {
 
   buildCostEnergy    = 0,
-  buildCostMetal     = 20,
+  buildCostMetal     = 40,
   builder            = false,
   buildTime          = 7,
   canAttack          = true,

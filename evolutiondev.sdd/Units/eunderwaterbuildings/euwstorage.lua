@@ -6,14 +6,10 @@ local unitName = "euwstorage"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildAngle         = 8196,
   buildCostEnergy    = 0,
-  buildCostMetal     = 25,
+  buildCostMetal     = 50,
   builder            = false,
   buildTime          = 7,
   category           = "BUILDING NOTAIR ECO",
@@ -43,6 +39,10 @@ local unitDef = {
   workerTime         = 0,
   yardMap            = "oooooooooooooooo",
    sfxtypes = {
+   pieceExplosionGenerators = { 
+ 		"deathceg0", 
+ 		"deathceg1", 
+ 	}, 
     explosiongenerators = {
       "custom:bubbles",
     },

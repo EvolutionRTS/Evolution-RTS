@@ -10,7 +10,7 @@ local unitDef = {
   activateWhenBuilt  = true,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 20,
+  buildCostMetal     = 40,
   builder            = false,
   buildTime          = 5,
   canAttack			 = false,
@@ -77,9 +77,9 @@ local unitDef = {
 	normaltex = "unittextures/lego2skin_explorernormal.png",
 	helptext = [[Metal Extractor
 
-Extracts metal from exposed resource points on the map. Provides +0.5 metal income
+Extracts metal from exposed resource points on the map. Provides +1 metal income
 
-+0.5 Metal]],
++1 Metal]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=10,

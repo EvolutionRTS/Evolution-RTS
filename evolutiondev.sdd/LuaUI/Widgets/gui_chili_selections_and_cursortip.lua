@@ -369,7 +369,7 @@ local function UpdateDynamicGroupInfo()
 					if name == 'armmex' or name =='cormex' or name =='emetalextractor' or name =='euwmetalextractor' then -- mex case
 						local tooltip = spGetUnitTooltip(id)
 						
-						local baseMetal = 0.5
+						local baseMetal = 1
 						local s = tooltip:match("Makes: ([^ ]+)")
 						if s ~= nil then 
 							baseMetal = tonumber(s) 
@@ -935,7 +935,7 @@ local function UpdateResourceStack(tooltip_type, unitID, ud, tooltip)
 		
 		-- special cases for mexes
 		if ud.name=='cormex' or ud.name =='emetalextractor' or ud.name =='euwmetalextractor' then 
-			local baseMetal = 0.5
+			local baseMetal = 1
 			local s = tooltip:match("Makes: ([^ ]+)")
 			if s ~= nil then baseMetal = tonumber(s) end 
 							

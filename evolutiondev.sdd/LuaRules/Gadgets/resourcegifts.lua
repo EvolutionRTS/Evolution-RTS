@@ -10,7 +10,7 @@ function gadget:GetInfo()
 	}
 end
 
-local MEX_INCOME = 0.5 -- income of each mex
+local MEX_INCOME = 1 -- income of each mex
 
 if (not gadgetHandler:IsSyncedCode()) then
 	return -- No Unsynced
@@ -118,7 +118,7 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"e",9)
+				Spring.AddTeamResource(TeamID,"e",10)
 			end
 		end
 	end
