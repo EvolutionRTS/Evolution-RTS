@@ -146,15 +146,15 @@ local weaponDefs = {
   
   medtankbeamlaser = {
 	badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 8,
+    AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
-    beamTime           = 1,
+    beamTime           = 0.2,
     collideFeature     = false,
     collideFriendly    = false,
     coreThickness      = 0.5,
     duration           = 0.2,
-    energypershot      = 7.5,
+    energypershot      = 1.25,
     explosionGenerator = "custom:burn",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -165,7 +165,7 @@ local weaponDefs = {
     minintensity       = 1,
     name               = "Laser",
     range              = 550,
-    reloadtime         = 1,
+    reloadtime         = 0.1,
     WeaponType         = "BeamLaser",
     rgbColor           = "0 0.5 0",
     rgbColor2          = "0.8 0.8 0.8",
@@ -183,7 +183,7 @@ local weaponDefs = {
 	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
-      default           = 150,
+      default           = 25,
     },
   },
   
