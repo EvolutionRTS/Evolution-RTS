@@ -190,7 +190,7 @@ local weaponDefs = {
 	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default           = 20,
+      default           = 17.5,
     },
   },
   

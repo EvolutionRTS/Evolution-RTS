@@ -9,9 +9,9 @@ local unitDef = {
 
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 500,
+  buildCostMetal     = 160,
   builder            = false,
-  buildTime          = 100,
+  buildTime          = 32,
    collisionVolumeOffsets = "0 0 0",
    collisionVolumeScales  = "80 115 80",
    collisionVolumeTest    = 1,
@@ -23,7 +23,7 @@ local unitDef = {
   description        = [[Heavy Plasma Battery
 Building, 400% Damage vs Armored
 
-Requires +20 Power]],
+Requires +10 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -32,7 +32,7 @@ Requires +20 Power]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   iconType           = "defense",
-  maxDamage          = 1600,
+  maxDamage          = 1200,
   maxSlope           = 60,
   maxWaterDepth      = 0,
   metalStorage       = 0,
@@ -45,7 +45,7 @@ Requires +20 Power]],
   radarDistance      = 0,
   selfDestructAs     = "MEDIUM_BUILDING",
   side               = "CORE",
-  sightDistance      = 1200,
+  sightDistance      = 1000,
   smoothAnim         = true,
   unitname           = "eheavyturret2",
   workerTime         = 0,
@@ -79,7 +79,7 @@ Requires +20 Power]],
     needed_cover = 5,
 	death_sounds = "generic",
 	twokhotkey = 'h',
-    RequireTech = "20 Power",
+    RequireTech = "10 Power",
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Heavy Turret
@@ -98,7 +98,7 @@ Armortype: Armored Building
 
 Requires:
 
-+20 Power]],
++10 Power]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=9,
