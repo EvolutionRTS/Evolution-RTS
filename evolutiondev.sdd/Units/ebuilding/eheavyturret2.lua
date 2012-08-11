@@ -150,7 +150,7 @@ local weaponDefs = {
 	  damagetype		= "heavytankdestroyerturret",  
     }, 
     damage = {
-      default           = 100,
+      default           = 50,
     },
   },
 }
