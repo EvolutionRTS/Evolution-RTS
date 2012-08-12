@@ -119,7 +119,7 @@ local weaponDefs = {
     explosionGenerator = "custom:PLASMA_Expl",
 	energypershot      = 2.25,
     id                 = 172,
-    impulseFactor      = 0.5,
+    impulseFactor      = 50,
 	interceptedByShieldType = 4,
     name               = "Light Cannon",
     range              = 500,
@@ -129,7 +129,7 @@ local weaponDefs = {
     soundStart         = "riottankshot.wav",
     tolerance          = 2000,
     turret             = true,
-    weaponVelocity     = 500,
+    weaponVelocity     = 1000,
 	customparams = {
 	  damagetype		= "riot",  
     },   

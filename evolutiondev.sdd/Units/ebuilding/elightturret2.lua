@@ -18,7 +18,9 @@ local unitDef = {
   collisionVolumeTest = "1",
   corpse             = "ammobox",
   description        = [[Anti-Raid Defense Platform
-Building, 400% Damage vs Light
+Building
+400% Damage vs Light
+10% Damage vs Buildings
 
 Requires +2 Power]],
   energyStorage      = 0,
@@ -135,7 +137,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "antilight",  
+	  damagetype		= "antilightturret",  
     },      
     damage = {
       default            = 62.5,

@@ -130,7 +130,7 @@ local weaponDefs = {
     explosionGenerator = "custom:PLASMA_Expl",
     fallOffRate        = 1,
     fireStarter        = 50,
-    impulseFactor      = 0.5,
+    impulseFactor      = 50,
 	interceptedByShieldType = 4,
     lineOfSight        = true,
     minintensity       = "1",
@@ -148,7 +148,7 @@ local weaponDefs = {
     thickness          = 7,
     tolerance          = 1000,
     turret             = true,
-    weaponVelocity     = 500,
+    weaponVelocity     = 1000,
 	customparams = {
 	  damagetype		= "riot",  
     }, 

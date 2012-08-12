@@ -186,7 +186,7 @@ local weaponDefs = {
 	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
-      default           = 20,
+      default           = 18,
     },
   },
   

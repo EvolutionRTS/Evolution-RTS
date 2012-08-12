@@ -21,7 +21,9 @@ local unitDef = {
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Heavy Plasma Battery
-Building, 400% Damage vs Armored
+Building
+400% Damage vs Armored
+10% Damage vs Buildings
 
 Requires +10 Power]],
   energyStorage      = 0,
