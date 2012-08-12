@@ -20,10 +20,10 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "ARMORED AMPHIB RIOT",
+  category           = "LIGHT AMPHIB RIOT",
   corpse             = "ammobox",
   description        = [[Anti-Swarm Tank
-Armored, 200% Damage vs Light
+Light, 200% Damage vs Light
 
 Requires +5 Power]],
   energyMake         = 0,
@@ -98,7 +98,7 @@ Requires +5 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 'd',
     RequireTech = "5 Power",
-	armortype   = "armored",
+	armortype   = "light",
 	normaltex = "unittextures/eamphibriotnormal.png", 
   },
 }

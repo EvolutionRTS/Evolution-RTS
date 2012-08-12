@@ -19,10 +19,10 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "ARMORED AMPHIB SKIRMISHER",
+  category           = "LIGHT AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Tank Destroyer
-Armored, 50% Damage vs Buildings
+Light, 50% Damage vs Buildings
 	• Can fire while underwater
 
 Requires +4 Power]],
@@ -97,7 +97,7 @@ Requires +4 Power]],
    	death_sounds = "soldier",
 	twokhotkey = 'r',
     RequireTech = "4 Power",
-	armortype   = "armored",
+	armortype   = "light",
 	normaltex = "unittextures/eamphibmedtanknormal.png", 
   },
 }

@@ -109,7 +109,7 @@ local weaponDefs = {
     cegTag             = "mediumcannonweapon",
     collideFriendly    = false,
     explosionGenerator = "custom:BulletImpactBlue",
-	energypershot      = 5,
+	energypershot      = 3.75,
     id                 = 51,
     interceptedByShieldType = 4,
     name               = "Light Cannon",
@@ -125,7 +125,7 @@ local weaponDefs = {
 	  damagetype		= "tankdestroyermediumtank",  
     },      
     damage = {
-      default           = 100,
+      default           = 75,
     },
   },
 }
