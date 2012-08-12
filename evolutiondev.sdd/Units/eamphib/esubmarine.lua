@@ -102,7 +102,7 @@ local weaponDefs = {
     ballistic          = false,
     cegTag             = "torpedotrail",
     collideFriendly    = false,
-    CylinderTargetting = true,
+    cylinderTargeting = true,
     explosionGenerator = "custom:torpedoexplosion",
     id                 = 5,
     
