@@ -115,7 +115,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     duration           = 0.02,
-	energypershot      = 0.1,
+	energypershot      = 0.5,
     explosionGenerator = "custom:burn",
     fallOffRate        = 0.1,
     impulseFactor      = 0,
@@ -146,7 +146,7 @@ local weaponDefs = {
 	  damagetype		= "light",  
     },    
     damage = {
-      default            = 2.5,
+      default            = 5,
     },
   },
 }

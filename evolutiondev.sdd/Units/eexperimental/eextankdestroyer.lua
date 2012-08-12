@@ -22,7 +22,7 @@ local unitDef = {
   category           = "ARMORED AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Destroyer Class Tank Killer
-Armored, 50% Damage vs Buildings
+Armored, 10% Damage vs Buildings
 
 Requires +50 Power]],
   energyMake         = 0,
@@ -109,7 +109,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.5,
     duration           = 0.2,
-    energypershot      = 25,
+    energypershot      = 50,
     explosionGenerator = "custom:beam_explosion",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -131,7 +131,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "heavytankdestroyer",  
+	  damagetype		= "destroyertankkiller",  
     }, 
     damage = {
       default           = 500,
@@ -152,7 +152,7 @@ local weaponDefs = {
     duration           = 0.1,
     energypershot      = 0.6,
     explosionGenerator = "custom:burn",
-	energypershot      = 1.2,
+	energypershot      = 2.4,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -173,7 +173,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "heavytankdestroyer",  
+	  damagetype		= "destroyertankkiller",  
     }, 
     damage = {
       default           = 12,

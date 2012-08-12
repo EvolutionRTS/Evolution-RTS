@@ -202,6 +202,17 @@ local function BackwardCompability(wdName,wd)
 -- all terrain
 -- amphib
 
+-- destroyers
+			elseif (damagetypelower	== "destroyertankkiller") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.1
+				
+			elseif (damagetypelower	== "destroyerbuildingkiller") then
+				wd.damage.ARMORED = 		weapondamage*0.1
+				wd.damage.LIGHT = 			weapondamage*0.1
+				wd.damage.BUILDING  = 		weapondamage*2
+
 			else -- medium weapon
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1

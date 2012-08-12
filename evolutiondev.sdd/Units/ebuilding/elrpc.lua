@@ -9,9 +9,9 @@ local unitDef = {
 
   activateWhenBuilt  = true,
   buildCostEnergy    = 0,
-  buildCostMetal     = 400,
+  buildCostMetal     = 200,
   builder            = false,
-  buildTime          = 80,
+  buildTime          = 40,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",

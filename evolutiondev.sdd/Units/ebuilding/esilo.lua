@@ -9,9 +9,9 @@ local unitDef = {
 
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 500,
+  buildCostMetal     = 250,
   builder            = false,
-  buildTime          = 100,
+  buildTime          = 50,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",

@@ -109,7 +109,7 @@ Requires +10 Power]],
 local weaponDefs = {
   SBOMB = {
     badTargetCategory = [[ARMORED LIGHT]],
-    AreaOfEffect       = 50,
+    AreaOfEffect       = 100,
     avoidFriendly      = false,
     ballistic          = true,
     burst              = 10,
@@ -119,7 +119,7 @@ local weaponDefs = {
     cylinderTargeting = true,
     Commandfire        = true,
     explosionGenerator = "custom:dodaibomb",
-	energypershot      = 25,
+	energypershot      = 1.25,
     id                 = 5,
     interceptedByShieldType = 4,
     name               = "Bombs",
@@ -135,10 +135,10 @@ local weaponDefs = {
     tolerance          = 1000,
     weaponVelocity     = 200,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "bomber",  
     },
     damage = {
-      default           = 50,
+      default           = 12.5,
     },
   },
 }

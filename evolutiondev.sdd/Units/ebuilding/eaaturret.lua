@@ -8,9 +8,9 @@ local unitName = "eaaturret"
 local unitDef = {
 
   buildCostEnergy    = 0,
-  buildCostMetal     = 40,
+  buildCostMetal     = 20,
   builder            = false,
-  buildTime          = 8,
+  buildTime          = 4,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",

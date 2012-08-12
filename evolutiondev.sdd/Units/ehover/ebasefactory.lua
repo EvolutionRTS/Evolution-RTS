@@ -77,9 +77,9 @@ local unitDef = {
     "eriottank2", --new
     "emediumtank3", --new
     "eheavytank3", --new
-    "efatso2", --new
+	"emissiletank", --new
     "eaatank",
-    "emissiletank", --new
+	"efatso2", --new
     "eartytank", --new
     "ebomb",
   },
