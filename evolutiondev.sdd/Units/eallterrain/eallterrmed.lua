@@ -147,7 +147,7 @@ local weaponDefs = {
     thickness          = 9,
     tolerance          = 1000,
     turret             = true,
-    weaponVelocity     = 400,
+    weaponVelocity     = 600,
 	customparams = {
 	  damagetype		= "tankdestroyermediumtank",  
     }, 

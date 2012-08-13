@@ -108,7 +108,7 @@ Requires +1 Power]],
 
 local weaponDefs = {
     lightlaser = {
-	badTargetCategory = [[ARMORED BUILDING]],
+	badTargetCategory = [[ARMORED BUILDING VTOL]],
     accuracy           = 200,
     AreaOfEffect       = 8,
     avoidFeature       = false,
@@ -150,7 +150,8 @@ local weaponDefs = {
   },
   
   lightbeamlaser = {
-	badTargetCategory = [[ARMORED BUILDING]],
+	badTargetCategory = [[ARMORED BUILDING VTOL]],
+	TargetMoveError	   = 0.3,
     AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,

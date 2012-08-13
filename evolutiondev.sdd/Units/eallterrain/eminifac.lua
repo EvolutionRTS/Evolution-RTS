@@ -85,8 +85,8 @@ local unitDef = {
   buildoptions = {
     "eallterrengineer", --new
     "eallterrlight",
+	"eallterrriot",
     "eallterrmed",
-    "eallterrriot",
     "eallterrheavy",
 	"eallterrassault",
 	"eallterrshield",

@@ -96,7 +96,7 @@ Requires +4 Power]],
     needed_cover = 2,
    	death_sounds = "soldier",
 	twokhotkey = 'r',
-    RequireTech = "4 Power",
+    RequireTech = "5 Power",
 	armortype   = "light",
 	normaltex = "unittextures/eamphibmedtanknormal.png", 
   },
@@ -107,7 +107,8 @@ Requires +4 Power]],
 
 local weaponDefs = {
     medtanklaser = {
-	badTargetCategory = [[BUILDING]],
+	badTargetCategory = [[BUILDING VTOL]],
+	TargetMoveError	   = 0.3,
     AreaOfEffect       = 8,
     avoidFeature       = false,
     avoidFriendly      = false,
@@ -148,6 +149,7 @@ local weaponDefs = {
   
   medtankbeamlaser = {
 	badTargetCategory = [[BUILDING]],
+	TargetMoveError	   = 0.3,
     AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,

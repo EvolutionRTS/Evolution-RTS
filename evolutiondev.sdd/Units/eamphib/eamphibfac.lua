@@ -71,9 +71,9 @@ local unitDef = {
   buildoptions = {
     "eamphibengineer", --new
     "eamphibbuggy", --new
+	"eamphibriot", --new
     "eamphibmedtank", --new
     "eamphibrock", --new
-    "eamphibriot", --new
     "eamphibarty", --new
   },
   sounds = {
