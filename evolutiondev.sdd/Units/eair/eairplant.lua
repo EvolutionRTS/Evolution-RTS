@@ -9,15 +9,17 @@ local unitDef = {
 
   activatewhenbuilt  = false,
   buildCostEnergy    = 0,
-  buildCostMetal     = 80,
+  buildCostMetal     = 250,
   builder            = true,
-  buildTime          = 16,
+  buildTime          = 2.5,
   canBeAssisted      = false,
   canPatrol          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = "Produces Units",
+  description        = [[Produces Units
+  
+  Provides powergrid]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,
@@ -42,6 +44,7 @@ local unitDef = {
   smoothAnim         = true,
   TEDClass           = "PLANT",
   unitname           = "eairplant",
+  unitRestricted	 = 1,
   unitnumber         = "83",
   workerTime         = 1,
   yardMap            = "cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc",
@@ -84,6 +87,11 @@ local unitDef = {
 	twokhotkey = 'v',
 	armortype   = "building", 
 	normaltex = "unittextures/eairplantnormal.png", 
+	ProvideTech = "1 Powergrid",
+    ProvideTechRange = "1500",
+	groundtexselectimg = ":nc:bitmaps/power/powergrid.png",
+	groundtexselectxsize = 1500, -- optional
+    groundtexselectzsize = 1500, -- optional
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=19,

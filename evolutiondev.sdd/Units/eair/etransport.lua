@@ -12,7 +12,7 @@ local unitDef = {
   buildCostEnergy    = 0,
   buildCostMetal     = 10,
   builder            = false,
-  buildTime          = 2,
+  buildTime          = 2.5,
   canAttack          = false,
   canFly             = true,
   canGuard           = false,
@@ -26,7 +26,7 @@ local unitDef = {
 	collisionVolumeScales = [[35 35 35]],
 --End Collision volumes
   corpse             = "ammobox",
-  cruiseAlt          = 400,
+  cruiseAlt          = 150,
   description        = [[Fast Armored Transport
 Armored
 

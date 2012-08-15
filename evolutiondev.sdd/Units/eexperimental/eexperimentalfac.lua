@@ -10,15 +10,17 @@ local unitDef = {
   activatewhenbuilt  = false,
   buildAngle         = 1024,
   buildCostEnergy    = 0,
-  buildCostMetal     = 80,
+  buildCostMetal     = 250,
   builder            = true,
-  buildTime          = 16,
+  buildTime          = 2.5,
   canBeAssisted      = false,
   canPatrol          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = "Produces Destroyer Class Units",
+  description        = [[Produces Destroyer Class Units
+  
+  Provides powergrid]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,
@@ -43,6 +45,7 @@ local unitDef = {
   smoothAnim         = true,
   TEDClass           = "PLANT",
   unitname           = "eexperimentalfac",
+  unitrestricted	 = 1,
   workerTime         = 1,
   yardMap            = "ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo ooooooooooccccccccccccccoooooooooo",
   usePieceCollisionVolumes = true,
@@ -78,6 +81,11 @@ local unitDef = {
 	twokhotkey = 'd',
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	ProvideTech = "1 Powergrid",
+    ProvideTechRange = "1500",
+	groundtexselectimg = ":nc:bitmaps/power/powergrid.png",
+	groundtexselectxsize = 1500, -- optional
+    groundtexselectzsize = 1500, -- optional
   },
 }
 

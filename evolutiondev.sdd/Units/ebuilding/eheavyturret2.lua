@@ -11,7 +11,7 @@ local unitDef = {
   buildCostEnergy    = 0,
   buildCostMetal     = 80,
   builder            = false,
-  buildTime          = 16,
+  buildTime          = 2.5,
    collisionVolumeOffsets = "0 0 0",
    collisionVolumeScales  = "80 115 80",
    collisionVolumeTest    = 1,
@@ -21,11 +21,14 @@ local unitDef = {
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Heavy Plasma Battery
+Base Parimeter Defense
+
 Building
 400% Damage vs Armored
 10% Damage vs Buildings
 
-Requires +10 Power]],
+Requires +10 Power
+Must be connected to a Powergrid]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -81,7 +84,7 @@ Requires +10 Power]],
     needed_cover = 5,
 	death_sounds = "generic",
 	twokhotkey = 'h',
-    RequireTech = "10 Power",
+    RequireTech = "10 Power, 1 Powergrid",
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Heavy Turret

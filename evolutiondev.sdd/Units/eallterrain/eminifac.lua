@@ -10,9 +10,9 @@ local unitDef = {
   activatewhenbuilt  = false,
   buildAngle         = 1024,
   buildCostEnergy    = 0,
-  buildCostMetal     = 80,
+  buildCostMetal     = 250,
   builder            = true,
-  buildTime          = 16,
+  buildTime          = 2.5,
   canBeAssisted      = false,
   canPatrol          = true,
   canstop            = "1",
@@ -36,7 +36,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = "Produces Units",
+  description        = [[Produces Units
+  
+  Provides powergrid]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,
@@ -62,6 +64,7 @@ local unitDef = {
   seismicSignature   = 1,
   TEDClass           = "PLANT",
   unitname           = "eminifac",
+  unitRestricted	 = 1,
   workerTime         = 1,
   yardMap            = "ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy",
 --  usePieceCollisionVolumes = true,
@@ -102,6 +105,11 @@ local unitDef = {
 	twokhotkey = 'x',
 	armortype   = "building", 
 	normaltex = "unittextures/eminifacnormal.png", 
+	ProvideTech = "1 Powergrid",
+    ProvideTechRange = "1500",
+	groundtexselectimg = ":nc:bitmaps/power/powergrid.png",
+	groundtexselectxsize = 1500, -- optional
+    groundtexselectzsize = 1500, -- optional
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=23,
