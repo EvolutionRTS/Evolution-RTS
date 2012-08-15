@@ -5,7 +5,7 @@
 
 piece  base, firepoint1;
 
-static-var  Static_Var_1;
+static-var  Static_Var_1, tech;
 
 
 SmokeUnit(healthpercent, sleeptime, smoketype)
@@ -43,8 +43,11 @@ fx()
 	}
 	while( TRUE )
 	{
-		emit-sfx 2048 from firepoint1;
-		sleep 5;
+		if (tech)
+		{
+			emit-sfx 2048 from firepoint1;
+		}
+	sleep 5;
 	}
 }
 
@@ -54,11 +57,14 @@ fx2()
 	{
 		sleep 400;
 	}
+	
 	while( TRUE )
 	{
-
-		emit-sfx 2049 from firepoint1;
-		sleep 400;
+		if (tech)
+		{
+			emit-sfx 2049 from firepoint1;
+		}
+	sleep 400;	
 	}
 }
 
@@ -70,7 +76,17 @@ Create()
 	start-script SmokeUnit();
 }
 
+TechLost()
+{
+	set ACTIVATION to 0;
+	tech=FALSE;
+}
 
+TechGranted()
+{
+	set ACTIVATION to 1;
+	tech=TRUE;
+}
 
 Killed(severity, corpsetype) // how it explodes 
 { 

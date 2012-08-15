@@ -18,7 +18,7 @@ local unitDef = {
   damageModifier     = 0.5,
   description        = [[Converts Energy into Metal
 
-Requires +20 Power]],
+-20 Energy per Second]],
   energyStorage      = 0,
   energyUse          = 20,
   explodeAs          = "LARGE_BUILDING",
@@ -73,7 +73,6 @@ sfxtypes = {
     needed_cover = 8,
 	death_sounds = "generic",
 	twokhotkey = 'o',
-    RequireTech = "20 Power",
 	armortype   = "building",
 	normaltex = "unittextures/emakernormal.png", 
 	helptext = [[Metal Maker
