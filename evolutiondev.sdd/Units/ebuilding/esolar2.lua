@@ -6,7 +6,7 @@ local unitName = "esolar2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  activateWhenBuilt  = true,
+  activateWhenBuilt  = false,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
   buildCostMetal     = 20,
@@ -17,7 +17,8 @@ local unitDef = {
   corpse             = "ammobox",
   damageModifier     = 0.33333,
   description        = [[Produces +1 Energy
-Provides +1 Power]],
+Provides +1 Power
+Must be connected to a Powergrid]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = -1,
@@ -33,7 +34,7 @@ Provides +1 Power]],
   metalStorage       = 0,
   name               = "Pow(e)rplant",
   objectName         = "epowerplant.s3o",
-  onoffable          = true,
+  onoffable          = false,
   radarDistance      = 0,
   selfDestructAs     = "POWERPLANTPOP",
   side               = "CORE",
@@ -73,6 +74,7 @@ sfxtypes = {
 	twokhotkey = 'e',
     ProvideTech = "Power",
     ProvideTechRange = "400",
+	RequireTech = "1 Powergrid",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",

@@ -17,7 +17,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Dedicated Anti-Air Flak Turret
 
-Requires +2 Power]],
+Requires +2 Power
+Must be connected to a Powergrid]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -67,7 +68,7 @@ Requires +2 Power]],
     needed_cover = 1,
 	death_sounds = "generic",
 	twokhotkey = 'a',
-    RequireTech = "2 Power",
+    RequireTech = "2 Power, 1 Powergrid",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Anti-Aircraft Turret

@@ -6,11 +6,7 @@ local unitName = "euwfusion2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
-  activateWhenBuilt  = true,
+  activateWhenBuilt  = false,
   buildAngle         = 2500,
   buildCostEnergy    = 0,
   buildCostMetal     = 360,
@@ -19,7 +15,8 @@ local unitDef = {
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   description        = [[Produces +10 Energy
-Provides +10 Power]],
+Provides +10 Power
+Must be connected to a Powergrid]],
   energyMake         = 10,
   energyStorage      = 0,
   energyUse          = 0,
@@ -36,6 +33,7 @@ Provides +10 Power]],
   metalStorage       = 0,
   name               = "Underwater Nuclear Powerplant",
   objectName         = "efusion.s3o",
+  onoffable		 	 = false,
   radarDistance      = 0,
   reclaimable		 = false,
   selfDestructAs     = "FUSIONPOP",
@@ -69,6 +67,7 @@ Provides +10 Power]],
   	death_sounds = "generic",
     ProvideTech = "10 Power",
     ProvideTechRange = "800",
+	RequireTech = "1 Powergrid",
 	armortype   = "BUILDING",
 	normaltex = "unittextures/efusion2normal.png", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 

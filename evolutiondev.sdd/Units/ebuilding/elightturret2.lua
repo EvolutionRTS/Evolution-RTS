@@ -22,7 +22,8 @@ Building
 400% Damage vs Light
 10% Damage vs Buildings
 
-Requires +2 Power]],
+Requires +2 Power
+Must be connected to a Powergrid]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -81,7 +82,7 @@ Requires +2 Power]],
     needed_cover = 2,
 	death_sounds = "generic",
 	twokhotkey = 't',
-    RequireTech = "2 Power",
+    RequireTech = "2 Power, 1 Powergrid",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Light Turret

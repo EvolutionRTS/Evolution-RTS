@@ -6,11 +6,7 @@ local unitName = "euwsolar2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
-  activateWhenBuilt  = true,
+  activateWhenBuilt  = false,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
   buildCostMetal     = 40,
@@ -20,7 +16,8 @@ local unitDef = {
   corpse             = "ammobox",
   damageModifier     = 0.33333,
   description        = [[Produces +1 Energy
-Provides +1 Energy]],
+Provides +1 Energy
+Must be connected to a Powergrid]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = -1,
@@ -37,7 +34,7 @@ Provides +1 Energy]],
   metalStorage       = 0,
   name               = "Underwater Powerplant",
   objectName         = "esolar2.s3o",
-  onoffable          = true,
+  onoffable          = false,
   radarDistance      = 0,
   reclaimable		 = false,
   selfDestructAs     = "SMALL_BUILDING",
@@ -52,6 +49,11 @@ Provides +1 Energy]],
  -- BuildingGroundDecalSizeY = 40,
  -- BuildingGroundDecalDecaySpeed = 0.9,
    sfxtypes = {
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},
+   
     explosiongenerators = {
       "custom:bubbles",
     },
@@ -71,6 +73,7 @@ Provides +1 Energy]],
   	death_sounds = "generic",
     ProvideTech = "Power",
     ProvideTechRange = "400",
+	RequireTech = "1 Powergrid",
 	armortype   = "BUILDING",
 	normaltex = "unittextures/esolar2normal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",

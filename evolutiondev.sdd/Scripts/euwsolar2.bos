@@ -5,7 +5,7 @@
 
 piece  base, nub, firepoint1;
 
-static-var  Static_Var_1;
+static-var  Static_Var_1, tech;
 
 
 SmokeUnit(healthpercent, sleeptime, smoketype)
@@ -43,8 +43,11 @@ fx()
 	}
 	while( TRUE )
 	{
-		emit-sfx 2048 from firepoint1;
-		sleep 5;
+		if (tech)
+		{
+			emit-sfx 2048 from firepoint1;
+		}
+	sleep 5;
 	}
 }
 
@@ -56,9 +59,12 @@ fx2()
 	}
 	while( TRUE )
 	{
-		spin nub around y-axis speed <50.005495>;  
-		emit-sfx 1024 from firepoint1;
-		sleep 100;
+		if (tech)
+		{
+			spin nub around y-axis speed <50.005495>;  
+			emit-sfx 1024 from firepoint1;
+		}
+	sleep 100;
 	}
 }
 
@@ -70,6 +76,17 @@ Create()
 	start-script SmokeUnit();
 }
 
+TechLost()
+{
+	set ACTIVATION to 0;
+	tech=FALSE;
+}
+
+TechGranted()
+{
+	set ACTIVATION to 1;
+	tech=TRUE;
+}
 
 Killed(severity, corpsetype)
 {

@@ -6,7 +6,7 @@ local unitName = "egeothermal"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  activateWhenBuilt  = true,
+  activateWhenBuilt  = false,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
   buildCostMetal     = 100,
@@ -32,6 +32,7 @@ Provides +7 Power]],
   metalStorage       = 0,
   name               = "(G)eothermal Powerplant",
   objectName         = "egeothermal2.s3o",
+  onoffable			 = false,
   radarDistance      = 0,
   selfDestructAs     = "GEOPOP",
   side               = "ARM",
