@@ -6,12 +6,12 @@ local unitName = "egeothermal"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  activateWhenBuilt  = false,
+  activateWhenBuilt  = true,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 100,
+  buildCostMetal     = 180,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack			 = false,
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",

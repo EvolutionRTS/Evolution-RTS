@@ -8,17 +8,16 @@ local unitName = "eaaturret"
 local unitDef = {
 
   buildCostEnergy    = 0,
-  buildCostMetal     = 20,
+  buildCostMetal     = 60,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Dedicated Anti-Air Flak Turret
 
-Requires +2 Power
-Must be connected to a Powergrid]],
+Requires +2 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -68,24 +67,9 @@ Must be connected to a Powergrid]],
     needed_cover = 1,
 	death_sounds = "generic",
 	twokhotkey = 'a',
-    RequireTech = "2 Power, 1 Powergrid",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
-	helptext = [[Anti-Aircraft Turret
-
-Dedicated Anti-Air Flak Turret
-
-Damagetype: Explosive
-
-Armortype: Armored Building
-
-+500 Line of Sight
-
-+1500 Range
-
-Requires:
-
-+2 Power]],
+	helptext = [[]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=8,

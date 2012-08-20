@@ -10,9 +10,9 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 40,
+  buildCostMetal     = 27,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = true,
   cancollect         = "1",
   canGuard           = true,
@@ -25,7 +25,7 @@ local unitDef = {
   description        = [[Light Tank Destroyer
 Light, 200% Damage vs Armored
 
-Requires +3 Power]],
+Requires +4 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,

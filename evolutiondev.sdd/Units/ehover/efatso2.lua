@@ -10,9 +10,9 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 320,
+  buildCostMetal     = 40,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = true,
   cancollect         = "1",
   canGuard           = true,
@@ -23,7 +23,7 @@ local unitDef = {
   category           = "ARMORED NOTAIR ASSAULT",
   corpse             = "ammobox",
   description        = [[Armored Anti-Base Tank
-Armored, 400% Damage vs Buildings
+Armored, 800% Damage vs Buildings
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -134,7 +134,7 @@ local weaponDefs = {
 	  damagetype		= "antibuildingfatso",  
     },      
     damage = {
-      default           = 87.5,
+      default           = 43.75,
     },
   },
 }

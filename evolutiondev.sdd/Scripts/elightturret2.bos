@@ -48,7 +48,7 @@ cannotfire()
 
 Create() // tells it what to do on creation
 {
-	CanFire=FALSE;
+	CanFire=TRUE;
 	shooting_num=1;
 	while( get BUILD_PERCENT_LEFT )
 		sleep 400;
@@ -118,7 +118,7 @@ QueryWeapon1(piecenum) // where the shot is created at
      }
 	
 }
-
+/*
 TechLost()
 {
 	CanFire=FALSE;
@@ -131,7 +131,7 @@ TechGranted()
 {
 	CanFire=TRUE;
 }
-
+*/
 Killed(severity, corpsetype) // how it explodes 
 { 
 	corpsetype = 1; 

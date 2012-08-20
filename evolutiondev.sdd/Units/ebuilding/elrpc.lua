@@ -9,9 +9,9 @@ local unitDef = {
 
   activateWhenBuilt  = true,
   buildCostEnergy    = 0,
-  buildCostMetal     = 200,
+  buildCostMetal     = 160,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
@@ -24,8 +24,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Long Range Plasma Cannon - 50e Per Shot
 
-Requires +15 Power
-Must be connected to a powergrid]],
+Requires +15 Power]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "LARGE_BUILDING",
@@ -82,7 +81,7 @@ Must be connected to a powergrid]],
   customParams = {
 	death_sounds = "generic",
 	twokhotkey = 'l',
-    RequireTech = "15 Power, 1 Powergrid",
+    RequireTech = "15 Power",
 	armortype   = "building",
 	normaltex = "unittextures/elrpcnormal.png", 
 	helptext = [[Long Range Plasma Cannon

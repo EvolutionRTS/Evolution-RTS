@@ -6,20 +6,18 @@ local unitName = "efusion2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-
-  activateWhenBuilt  = false,
+  activateWhenBuilt  = true,
   buildAngle         = 2500,
   buildCostEnergy    = 0,
-  buildCostMetal     = 180,
+  buildCostMetal     = 240,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack			 = false,
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   description        = [[Produces +10 Energy
   
-Provides +10 Power
-Must be connected to a Powergrid]],
+Provides +10 Power]],
 --  energyMake         = 10,
   energyStorage      = 0,
   energyUse          = -10,
@@ -76,7 +74,7 @@ Must be connected to a Powergrid]],
 	twokhotkey = 'n',
     ProvideTech = "10 Power",
     ProvideTechRange = "800",
-	RequireTech = "1 Powergrid",
+--	RequireTech = "1 Powergrid",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",

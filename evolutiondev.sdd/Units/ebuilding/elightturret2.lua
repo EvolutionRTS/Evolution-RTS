@@ -9,9 +9,9 @@ local unitDef = {
 
   buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 30,
+  buildCostMetal     = 80,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
@@ -20,10 +20,7 @@ local unitDef = {
   description        = [[Anti-Raid Defense Platform
 Building
 400% Damage vs Light
-10% Damage vs Buildings
-
-Requires +2 Power
-Must be connected to a Powergrid]],
+10% Damage vs Buildings]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -82,24 +79,9 @@ Must be connected to a Powergrid]],
     needed_cover = 2,
 	death_sounds = "generic",
 	twokhotkey = 't',
-    RequireTech = "2 Power, 1 Powergrid",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
-	helptext = [[Light Turret
-
-Anti-Raid Defense Platform
-
-Damagetype: Light
-
-Armortype: Armored Building
-
-+900 Line of Sight
-
-+750 Range
-
-Requires:
-
-+4 Power]],
+	helptext = [[]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=6,

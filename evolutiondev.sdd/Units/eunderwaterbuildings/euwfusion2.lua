@@ -6,12 +6,12 @@ local unitName = "euwfusion2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  activateWhenBuilt  = false,
+  activateWhenBuilt  = true,
   buildAngle         = 2500,
   buildCostEnergy    = 0,
-  buildCostMetal     = 360,
+  buildCostMetal     = 1200,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 240,
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   description        = [[Produces +10 Energy

@@ -9,9 +9,9 @@ local unitDef = {
   activateWhenBuilt  = true,
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 100,
+  buildCostMetal     = 20,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack			 = false,
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
@@ -20,7 +20,7 @@ local unitDef = {
 
 -20 Energy per Second]],
   energyStorage      = 0,
-  energyUse          = 20,
+  energyUse          = 10,
   explodeAs          = "LARGE_BUILDING",
   footprintX         = 8,
   footprintZ         = 8,
@@ -28,7 +28,7 @@ local unitDef = {
   idleAutoHeal       = .5,
   idleTime           = 2200,
   makesMetal         = 1,
-  maxDamage          = 3000,
+  maxDamage          = 500,
   maxSlope           = 30,
   maxWaterDepth      = 0,
   metalStorage       = 0,
@@ -77,11 +77,11 @@ sfxtypes = {
 	normaltex = "unittextures/emakernormal.png", 
 	helptext = [[Metal Maker
 
-Creates metal from stored energy. Requires +20 energy per +1 metal generated
+Creates metal from stored energy. Requires +10 energy per +1 metal generated
 
 +1 Metal
 
--20 Energy]],
+-10 Energy]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=11,

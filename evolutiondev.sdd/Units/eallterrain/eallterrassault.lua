@@ -10,9 +10,9 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 130,
+  buildCostMetal     = 38,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = true,
   cancollect         = "1",
   canGuard           = true,
@@ -35,7 +35,7 @@ local unitDef = {
 -- End Cloaking
   
   description        =[[Armored Assault Tank
-Armored, 400% Damage vs Buildings
+Armored, 800% Damage vs Buildings
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -153,7 +153,7 @@ local weaponDefs = {
 	  damagetype		= "antibuildingallterrassault",  
     }, 
     damage = {
-      default           = 100,
+      default           = 50,
     },
   },
 }

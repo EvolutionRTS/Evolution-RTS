@@ -43,10 +43,10 @@ fx()
 	}
 	while( TRUE )
 	{
-		if (tech)
-		{
+//		if (tech)
+//		{
 			emit-sfx 2048 from firepoint1;
-		}
+//		}
 	sleep 5;
 	}
 }
@@ -59,10 +59,10 @@ fx2()
 	}
 	while( TRUE )
 	{
-		if (tech)
-		{
+//		if (tech)
+//		{
 			emit-sfx 1024 from firepoint1;
-		}
+//		}
 	sleep 100;
 	}
 }
@@ -74,7 +74,7 @@ Create()
 	turn firepoint1 to x-axis <-90> now;
 	start-script SmokeUnit();
 }
-
+/*
 TechLost()
 {
 	set ACTIVATION to 0;
@@ -86,7 +86,7 @@ TechGranted()
 	set ACTIVATION to 1;
 	tech=TRUE;
 }
-
+*/
 Killed(severity, corpsetype)
 {
 	if( severity <= 25 )

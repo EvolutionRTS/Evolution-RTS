@@ -135,12 +135,12 @@ local function BackwardCompability(wdName,wd)
 			elseif (damagetypelower	== "antibuildingfatso") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*4
+				wd.damage.BUILDING  = 		weapondamage*8
 			
 			elseif (damagetypelower	== "antibuildingallterrassault") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*4
+				wd.damage.BUILDING  = 		weapondamage*8
 				
 			elseif (damagetypelower	== "hoverbomb") then
 				wd.damage.ARMORED = 		weapondamage*1

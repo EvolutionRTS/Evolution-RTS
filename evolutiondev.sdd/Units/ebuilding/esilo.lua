@@ -9,17 +9,16 @@ local unitDef = {
 
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 250,
+  buildCostMetal     = 300,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Nuclear Missile Silo - Missile takes 4 minutes to build - Drains 50e while building
 
-Requires +20 Power
-Must be connected to a powergrid]],
+Requires +20 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -78,7 +77,7 @@ Must be connected to a powergrid]],
     needed_cover = 8,
 	death_sounds = "nuke",
 	twokhotkey = 'i',
-    RequireTech = "20 Power, 1 Powergrid",
+    RequireTech = "20 Power",
 	armortype   = "building",
 	normaltex = "unittextures/esilonormal.png", 
 	helptext = [[Nuclear Missile Silo

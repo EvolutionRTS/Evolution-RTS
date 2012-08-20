@@ -6,19 +6,18 @@ local unitName = "esolar2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  activateWhenBuilt  = false,
+  activateWhenBuilt  = true,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 20,
+  buildCostMetal     = 30,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack			 = false,
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   damageModifier     = 0.33333,
   description        = [[Produces +1 Energy
-Provides +1 Power
-Must be connected to a Powergrid]],
+Provides +1 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = -1,
@@ -74,7 +73,7 @@ sfxtypes = {
 	twokhotkey = 'e',
     ProvideTech = "Power",
     ProvideTechRange = "400",
-	RequireTech = "1 Powergrid",
+--	RequireTech = "1 Powergrid",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",

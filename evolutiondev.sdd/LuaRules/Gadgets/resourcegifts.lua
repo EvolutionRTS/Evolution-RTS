@@ -10,7 +10,7 @@ function gadget:GetInfo()
 	}
 end
 
-local MEX_INCOME = 1 -- income of each mex
+local MEX_INCOME = 0.5 -- income of each mex
 
 if (not gadgetHandler:IsSyncedCode()) then
 	return -- No Unsynced
@@ -111,7 +111,7 @@ function gadget:GameFrame(n)
 			local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
 			if allyTeamID then -- don't give free stuff to GAIA
 				Spring.AddTeamResource(i,"e",1)
-				Spring.AddTeamResource(i,"m",1 + mexIncome[allyTeamID])
+				Spring.AddTeamResource(i,"m",0.5 + mexIncome[allyTeamID])
 			end
 		end
 	--Give free resources to AI - Necessary for AI's to properly function

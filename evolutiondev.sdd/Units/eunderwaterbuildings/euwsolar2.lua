@@ -6,12 +6,12 @@ local unitName = "euwsolar2"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  activateWhenBuilt  = false,
+  activateWhenBuilt  = true,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 40,
+  buildCostMetal     = 165,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 33,
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   damageModifier     = 0.33333,

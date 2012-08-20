@@ -8,17 +8,16 @@ local unitName = "eshieldgen"
 local unitDef = {
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 230,
+  buildCostMetal     = 250,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   canAttack          = false,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
   description        = [[Shield Generator - Anti-Nuke/Anti-LRPC Facility
 
-Requires +10 Power
-Must be connected to a powergrid]],
+Requires +10 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -81,7 +80,7 @@ sfxtypes = {
     needed_cover = 5,
 	death_sounds = "generic",
 	twokhotkey = 'p',
-    RequireTech = "10 Power, 1 Powergrid",
+    RequireTech = "10 Power",
     ProvideTechRange = "300",
 	armortype   = "building", 
 	normaltex = "unittextures/eshieldgennormal.png", 

@@ -43,10 +43,10 @@ fx()
 	}
 	while( TRUE )
 	{
-		if (tech)
-		{
+//		if (tech)
+//		{
 			emit-sfx 2048 from sfxpoint1;
-		}
+//		}
 	sleep 5;
 	}
 }
@@ -59,10 +59,10 @@ fx2()
 	}
 	while( TRUE )
 	{
-		if (tech)
-		{
+//		if (tech)
+//		{
 			emit-sfx 2049 from sfxpoint2;
-		}
+//		}
 	sleep 400;
 	}
 }
@@ -76,7 +76,7 @@ Create()
 //	spin top around y-axis speed <50.005495>;
 	start-script SmokeUnit();
 }
-
+/*
 TechLost()
 {
 	set ACTIVATION to 0;
@@ -88,7 +88,7 @@ TechGranted()
 	set ACTIVATION to 1;
 	tech=TRUE;
 }
-
+*/
 Killed(severity, corpsetype) // how it explodes 
 { 
 	corpsetype = 1; 
