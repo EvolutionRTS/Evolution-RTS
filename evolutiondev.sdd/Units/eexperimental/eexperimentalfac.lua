@@ -13,7 +13,7 @@ local unitDef = {
   buildCostMetal     = 250,
   builder            = true,
   buildTime          = 2.5,
-  canBeAssisted      = false,
+  canBeAssisted      = true,
   canPatrol          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
@@ -81,11 +81,11 @@ local unitDef = {
 	twokhotkey = 'd',
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
-	ProvideTech = "1 Powergrid",
-    ProvideTechRange = "1500",
-	groundtexselectimg = ":nc:bitmaps/power/powergrid.png",
-	groundtexselectxsize = 1500, -- optional
-    groundtexselectzsize = 1500, -- optional
+--	ProvideTech = "1 Powergrid",
+--    ProvideTechRange = "1500",
+--	groundtexselectimg = ":nc:bitmaps/power/powergrid.png",
+--	groundtexselectxsize = 1500, -- optional
+--    groundtexselectzsize = 1500, -- optional
   },
 }
 
