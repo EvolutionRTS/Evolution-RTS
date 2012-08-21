@@ -42,10 +42,20 @@ Buildingfx()
    while(building)
    {
 
-              emit-sfx nanoflame from nano1;
               emit-sfx 2048 from nano1;
                 
         sleep 5;
+   }
+}
+
+buildflame()
+{
+   while(building)
+   {
+
+              emit-sfx nanoflame from nano1;
+                
+        sleep 600;
    }
 }
 
@@ -172,6 +182,7 @@ StartBuilding(Func_Var_1)
    start-script RequestState(0);
    spin ring around y-axis speed <100>;  
    start-script Buildingfx();  
+   start-script buildflame();  
 }
 
 StopBuilding()
