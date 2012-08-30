@@ -1,3 +1,4 @@
+
 --[[
 ------------------------------------------------------------
 		Tech Tree gadget
@@ -545,20 +546,10 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 
-	local function CheckCmd(cmd,team,allowBuildings,...)
+	local function CheckCmd(cmd,team,...)
 		if not AccessionTable[cmd] then
 			return true
 		else
-			local ud = UnitDefs[-cmd]
-			if ud then
-				if ud.isBuilding then
-					if allowBuildings then
-						return true
-					end
-				elseif ud.isBuilder then
-					return true
-				end
-			end
 			for _,req in pairs(AccessionTable[cmd]) do
 				if not CheckTech(req.tech,team,req.quantity,...) then
 					dbgEcho("cmd "..cmd.." forbidden for lack of "..req.tech)
@@ -718,6 +709,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					OriDesc[cid]=Spring.GetUnitCmdDescs(u)[UnitCmdDesc].tooltip
 				end
 				local AllowedHereAndNow=true
+				local MaybeAllowedElsewhere=true
 				for _,req in pairs(AccessionTable[cid]) do
 					local color=nil
 					if CheckTech(req.tech,team,req.quantity,u) then
@@ -728,20 +720,21 @@ if (gadgetHandler:IsSyncedCode()) then
 							color="\255\255\255\64"--yellow
 						else
 							color="\255\255\64\64"--red
+							MaybeAllowedElsewhere=false
 						end
 					end
 					local q=req.quantity
 					ReqDesc=(ReqDesc and ReqDesc.."\255\255\255\255, " or "\255\255\255\255Requires ")..color..((q and q~=1) and q.." " or "")..req.tech
 				end
 				ReqDesc=ReqDesc.."\n\255\255\255\255"..(GrantDesc[cid] or OriDesc[cid])
-				local enabled = AllowedHereAndNow or UnitDefs[ud].speed>0
+				local enabled=AllowedHereAndNow or (MaybeAllowedElsewhere and UnitDefs[ud].speed>0)
 				Spring.EditUnitCmdDesc(u,UnitCmdDesc,{disabled=not enabled,tooltip=ReqDesc})
 			end
 		end
 
 		-- Not anymore editing buttons, but calling COB scripts when tech is lost and regained
 		if UnitsWithScripts[u] then
-			local newstate=CheckCmd(-Spring.GetUnitDefID(u),team,false,u)
+			local newstate=CheckCmd(-Spring.GetUnitDefID(u),team,u)
 			if newstate~=UnitsWithScripts[u].state then
 				UnitsWithScripts[u].state=newstate
 				if newstate then
@@ -904,19 +897,19 @@ if (gadgetHandler:IsSyncedCode()) then
 
 
 	function gadget:AllowCommand(u,ud,team,cmd,param,opt,synced)
-			if param and cmd<0 and #param==4 then
-				return CheckCmd(cmd,team,true,param[1],param[2],param[3])
-			else
-				return CheckCmd(cmd,team,true,Spring.GetUnitPosition(u))
-			end
-	end
+                if param and cmd<0 and #param==4 then
+                    return CheckCmd(cmd,team,param[1],param[2],param[3])
+                else
+                    return CheckCmd(cmd,team,Spring.GetUnitPosition(u))
+                end
+        end
 
 
 	function gadget:AllowUnitCreation(ud,builder,team,x,y,z)
 		if x and z then
-			return CheckCmd(-ud,team,true,x,y,z)
+			return CheckCmd(-ud,team,x,y,z)
 		else
-			return CheckCmd(-ud,team,true,builder)
+			return CheckCmd(-ud,team,builder)
 		end
 	end
 
