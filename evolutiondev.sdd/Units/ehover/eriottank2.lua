@@ -140,7 +140,7 @@ local weaponDefs = {
   
   riottankempweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 250,
+    AreaOfEffect       = 150,
     avoidFeature       = false,
     avoidFriendly      = false,
     collideFeature     = false,
