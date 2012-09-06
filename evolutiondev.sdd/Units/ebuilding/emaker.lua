@@ -18,7 +18,7 @@ local unitDef = {
   damageModifier     = 0.5,
   description        = [[Converts Energy into Metal
 
--20 Energy per Second]],
+-10 Energy per Second]],
   energyStorage      = 0,
   energyUse          = 10,
   explodeAs          = "LARGE_BUILDING",
