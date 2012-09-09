@@ -25,7 +25,7 @@ local unitDef = {
 Light, 50% Damage vs Buildings
 	• Can fire while underwater
 
-Requires +4 Power]],
+Requires +5 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
