@@ -121,6 +121,7 @@ local weaponDefs = {
     explosionGenerator = "custom:dodaibomb",
 	energypershot      = 1.25,
     id                 = 5,
+	impulsefactor	   = 0,
     interceptedByShieldType = 4,
     name               = "Bombs",
     noSelfDamage       = true,

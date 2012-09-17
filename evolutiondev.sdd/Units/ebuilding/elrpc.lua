@@ -127,6 +127,7 @@ local weaponDefs = {
     fireStarter        = 70,
     guidance           = false,
     id                 = 136,
+	impulsefactor	   = 0,
     interceptedByShieldType = 1,
     lineOfSight        = true,
     energypershot       = 100,

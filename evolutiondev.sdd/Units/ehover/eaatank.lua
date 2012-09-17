@@ -112,8 +112,6 @@ local weaponDefs = {
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,
-    burst              = 4,
-    burstrate          = 0.5,
 	cegTag             = "missiletrailflashy",
     collideFriendly    = false,
     collideFeature     = false,
@@ -132,7 +130,7 @@ local weaponDefs = {
     name               = "AA Cannon",
     pitchtolerance     = "500",
     range              = 1000,
-    reloadtime         = 10,
+    reloadtime         = 2,
     weaponType		   = "Cannon",
     soundHit           = "aatankshot.wav",
     soundStart         = "aircraft_missile_01.wav",
@@ -146,7 +144,7 @@ local weaponDefs = {
 	  damagetype		= "antiair",  
     },
     damage = {
-      default            = 30,
+      default            = 24,
     },
   },
 }

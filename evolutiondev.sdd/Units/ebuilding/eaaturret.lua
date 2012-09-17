@@ -15,9 +15,7 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Dedicated Anti-Air Flak Turret
-
-Requires +2 Power]],
+  description        = [[Dedicated Anti-Air Flak Turret]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
