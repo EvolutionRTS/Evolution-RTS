@@ -53,7 +53,7 @@ if (gadgetHandler:IsSyncedCode()) then
                   Spring.DestroyFeature(box)
 				  local fx, fy, fz = Spring.GetFeaturePosition(box)
 				  Spring.PlaySoundFile("sounds/dronespawner.wav", 1, fx, fy, fz)
-				  SpawnCEG("sparkleorange", fx, fy, fz)
+				  SpawnCEG("sparkleorangeplus1drone", fx, fy, fz)
                   BoxesOnMap[box] = nil
               break
             end
