@@ -897,20 +897,32 @@ if (gadgetHandler:IsSyncedCode()) then
 
 
 	function gadget:AllowCommand(u,ud,team,cmd,param,opt,synced)
-                if param and cmd<0 and #param==4 then
-                    return CheckCmd(cmd,team,param[1],param[2],param[3])
-                else
-                    return CheckCmd(cmd,team,Spring.GetUnitPosition(u))
-                end
-        end
-
-
-	function gadget:AllowUnitCreation(ud,builder,team,x,y,z)
-		if x and z then
-			return CheckCmd(-ud,team,x,y,z)
+		local x,y,z
+		if param and cmd<0 and #param==4 then
+			x,y,z = param[1],param[2],param[3]
 		else
-			return CheckCmd(-ud,team,builder)
+			x,y,z = Spring.GetUnitPosition(u)
 		end
+		local ICanHaz = CheckCmd(cmd,team,x,y,z)
+		if not ICanHaz then
+			Spring.PlaySoundFile("sounds/moarpower.wav", 1)
+			Spring.SpawnCEG("moarpower", x, y, z)
+		end
+	return ICanHaz
+	end
+
+
+    function gadget:AllowUnitCreation(ud,builder,team,x,y,z)
+        local CanIHaz = true
+        if x and z then
+            CanIHaz = CheckCmd(-ud,team,x,y,z)
+        else
+            CanIHaz =  CheckCmd(-ud,team,builder)
+        end
+        if not CanIHaz then
+            Spring.PlaySoundFile("sounds/moarpower.wav", 1)
+        end
+        return CanIHaz
 	end
 
 
