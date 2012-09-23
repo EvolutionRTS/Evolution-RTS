@@ -127,7 +127,7 @@ local unitDef = {
 --    needed_cover = 2,
 	death_sounds = "soldier",
 	twokhotkey = 'e',
-    airdronespawner = "1",
+--    airdronespawner = "1",
 	armortype   = "light",
 	normaltex = "unittextures/con_legonormal.png", 
   },

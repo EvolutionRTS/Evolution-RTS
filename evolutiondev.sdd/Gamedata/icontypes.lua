@@ -39,7 +39,7 @@ local icontypes = {
   },
 
   elrpc = {
-    bitmap='icons/elrpc.dds',
+    bitmap='icons/elrpc.png',
     size=1,
     radiusadjust=0.2
   },

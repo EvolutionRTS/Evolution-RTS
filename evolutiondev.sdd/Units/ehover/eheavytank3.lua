@@ -23,7 +23,7 @@ local unitDef = {
   category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Armored Tank Destroyer
-Armored
+Armored, 50% Damage vs Buildings
 
 Requires +5 Power]],
   energyMake         = 0,

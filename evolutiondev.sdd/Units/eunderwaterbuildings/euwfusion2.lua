@@ -9,14 +9,13 @@ local unitDef = {
   activateWhenBuilt  = true,
   buildAngle         = 2500,
   buildCostEnergy    = 0,
-  buildCostMetal     = 1200,
+  buildCostMetal     = 180,
   builder            = false,
-  buildTime          = 240,
+  buildTime          = 5,
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   description        = [[Produces +10 Energy
-Provides +10 Power
-Must be connected to a Powergrid]],
+Provides +10 Power]],
   energyMake         = 10,
   energyStorage      = 0,
   energyUse          = 0,
@@ -48,6 +47,11 @@ Must be connected to a Powergrid]],
 --  BuildingGroundDecalSizeY = 50,
 --  BuildingGroundDecalDecaySpeed = 0.9,
   sfxtypes = {
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},
+   
     explosiongenerators = {
       "custom:bubbles",
     },
@@ -67,7 +71,6 @@ Must be connected to a Powergrid]],
   	death_sounds = "generic",
     ProvideTech = "10 Power",
     ProvideTechRange = "800",
-	RequireTech = "1 Powergrid",
 	armortype   = "BUILDING",
 	normaltex = "unittextures/efusion2normal.png", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 

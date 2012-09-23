@@ -23,7 +23,7 @@ local unitDef = {
   description        = [[Heavy Plasma Battery
 
 Building
-400% Damage vs Armored
+600% Damage vs Armored
 10% Damage vs Buildings]],
   energyStorage      = 0,
   energyUse          = 0,

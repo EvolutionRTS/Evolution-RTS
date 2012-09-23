@@ -35,7 +35,7 @@ local unitDef = {
 -- End Cloaking
   
   description        =[[Armored Tank Destroyer
-Armored
+Armored, 50% Damage vs Buildings
   
 Requires +6 Power]],
   energyMake         = 0,

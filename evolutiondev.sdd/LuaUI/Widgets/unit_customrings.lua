@@ -49,9 +49,6 @@ local ringsDefs = {
 	[UnitDefNames.eairengineer.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 800 },
     },
-	[UnitDefNames.ebasefactory.id] = {
-        { color = {1, 0, 0, 0.8}, lineWidth = 2, radius = 1500 },
-    },
 }
 
 local ringedUnits = {}

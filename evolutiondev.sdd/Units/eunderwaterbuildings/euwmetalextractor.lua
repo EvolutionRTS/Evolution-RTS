@@ -6,16 +6,12 @@ local unitName = "euwmetalextractor"
 --------------------------------------------------------------------------------
 
 local unitDef = {
---Begin tags entered from Notepad++ en masse
-  pieceTrailCEGTag   = "deathceg",
-  pieceTrailCEGRange = 2,
---End tags entered from Notepad++
   activateWhenBuilt  = true,
   buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 40,
+  buildCostMetal     = 20,
   builder            = false,
-  buildTime          = 2.5,
+  buildTime          = 5,
   category           = "BUILDING NOTAIR ECO",
   corpse             = "ammobox",
   description        = "Extracts Metal",
@@ -48,6 +44,11 @@ local unitDef = {
   workerTime         = 0,
   yardMap            = "ooooooooo",
     sfxtypes = {
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},
+   
     explosiongenerators = {
       "custom:bubbles",
     },

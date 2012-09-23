@@ -1,5 +1,3 @@
-
-
 function gadget:GetInfo()
   return {
     name      = "Area Mex (gadget)",
@@ -37,7 +35,9 @@ local mexCmdDesc = {
 
 Spring.AssignMouseCursor("areamex_cursor", "areamex_def", true)
 
-local mexBuildCommandID = -UnitDefNames["emetalextractor"].id
+local landMexID = -UnitDefNames["emetalextractor"].id
+
+local underWaterMexID = -UnitDefNames["euwmetalextractor"].id
 
 local mexSpot = {}
 
@@ -46,6 +46,15 @@ local recentTeamOrder = {}
 local function disSQ(x1,z1,x2,z2)
 	local dis = (x1-x2)*(x1-x2)+(z1-z2)*(z1-z2)
 	return dis
+end
+
+function TellUnitToBuildMexAt(uId, x, z)
+   local y = Spring.GetGroundHeight(x, z)
+   if y < 0 then
+      spGiveOrderToUnit(uId, underWaterMexID, {x, y, z}, {"shift"})
+   else
+      spGiveOrderToUnit(uId, landMexID, {x, y, z} , {"shift"})
+   end
 end
 
 function gadget:AllowCommand(unitID, unitDefID, teamID,cmdID, cmdParams, cmdOptions)
@@ -61,7 +70,7 @@ function gadget:AllowCommand(unitID, unitDefID, teamID,cmdID, cmdParams, cmdOpti
 					spGiveOrderToUnit(unitID, CMD.STOP, {} , CMD.OPT_RIGHT )
 				end
 				for i = 1, data.mex.count do
-					spGiveOrderToUnit(unitID, mexBuildCommandID, {data.mex[i].x,0,data.mex[i].z} , {"shift"})
+					TellUnitToBuildMexAt(unitID, data.mex[i].x, data.mex[i].z)
 				end
 				return false
 			end
@@ -107,7 +116,7 @@ function gadget:AllowCommand(unitID, unitDefID, teamID,cmdID, cmdParams, cmdOpti
 			spGiveOrderToUnit(unitID, CMD.STOP, {} , CMD.OPT_RIGHT )
 		end
 		for i = 1, orderedCommands.count do
-			spGiveOrderToUnit(unitID, mexBuildCommandID, {orderedCommands[i].x,0,orderedCommands[i].z} , {"shift"})
+			TellUnitToBuildMexAt(unitID, orderedCommands[i].x, orderedCommands[i].z)
 			recentTeamOrder[teamID].mex[recentTeamOrder[teamID].mex.count+1] = {x = orderedCommands[i].x, z = orderedCommands[i].z}
 			recentTeamOrder[teamID].mex.count = recentTeamOrder[teamID].mex.count+1
 		end
@@ -136,4 +145,3 @@ function gadget:Initialize()
 		return 
 	end
 end
-
