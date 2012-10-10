@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 maxChicken           = tonumber(Spring.GetModOptions().mo_maxchicken) or 100
 maxBurrows           = 20
-gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 180  -- no chicken spawn in this period, seconds
+gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 300  -- no chicken spawn in this period, seconds
 queenTime            = (Spring.GetModOptions().mo_queentime or 40) * 60 -- time at which the queen appears, seconds
 addQueenAnger        = tonumber(Spring.GetModOptions().mo_queenanger) or 1
 burrowSpawnType      = Spring.GetModOptions().mo_chickenstart or "avoid"
@@ -19,7 +19,7 @@ burrowSpawnRate      = 60
 chickenSpawnRate     = 59
 minBaseDistance      = 1000      
 maxBaseDistance      = 7200
-chickensPerPlayer    = 8
+chickensPerPlayer    = 4
 spawnChance          = 0.5
 bonusTurret          = "eaaturret" -- Turret that gets spawned when a burrow dies
 angerBonus           = 204
