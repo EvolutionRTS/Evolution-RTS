@@ -191,7 +191,7 @@ local n_states = {}
 local menuChoices = {
 	[1] = { array = n_common, name = "Order" },
 	[2] = { array = n_factories, name = "Factory", config = factory_commands },
-	[3] = { array = n_econ, name = "Econ", config = econ_commands },
+	[3] = { array = n_econ, name = "Economy", config = econ_commands },
 	[4] = { array = n_defense, name = "Defense", config = defense_commands },
 	[5] = { array = n_special, name = "Special", config = special_commands },
 	[6] = { array = n_units, name = "Units" },
