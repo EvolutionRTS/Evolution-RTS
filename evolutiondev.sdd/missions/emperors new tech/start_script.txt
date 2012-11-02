@@ -1,0 +1,66 @@
+[GAME]
+{
+	MapName=Industrial Revolution v1;
+	StartMetal=1000;
+	StartEnergy=1000;
+	StartposType=3;
+	GameMode=0;
+	GameType=Evolution RTS - The Emperor's New Tech;
+	LimitDGun=0;
+	DiminishingMMs=0;
+	GhostedBuildings=1;
+	HostIP=127.0.0.1;
+	HostPort=8452;
+	IsHost=1;
+	MyPlayerNum=0;
+	MyPlayerName=Engineer_Marbuk;
+	NumPlayers=1;
+	NumTeams=2;
+	NumUsers=2;
+	NumRestrictions=0;
+	MaxSpeed=20;
+	MinSpeed=0.1;
+	[PLAYER0]
+	{
+		Name=Engineer_Marbuk;
+		Spectator=0;
+		Team=0;
+	}
+	[AI1]
+	{
+		Name=Enemy_Base;
+		ShortName=NullAI;
+		Team=1;
+		IsFromDemo=0;
+		Host=0;
+		[Options] {}
+	}
+	[TEAM0]
+	{
+		TeamLeader=0;
+		AllyTeam=0;
+		RGBColor=0 1 0;
+		Side=Outer_Colonies;
+		Handicap=0;
+		StartPosX=0;
+		StartPosZ=0;
+	}
+	[TEAM1]
+	{
+		TeamLeader=0;
+		AllyTeam=1;
+		RGBColor=1 0 0;
+		Side=Outer_Colonies;
+		Handicap=0;
+		StartPosX=0;
+		StartPosZ=0;
+	}
+	[ALLYTEAM0]
+	{
+		NumAllies=0;
+	}
+	[ALLYTEAM1]
+	{
+		NumAllies=0;
+	}
+}
