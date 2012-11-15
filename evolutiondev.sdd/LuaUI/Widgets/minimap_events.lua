@@ -269,14 +269,13 @@ end
 
 
 --------------------------------------------------------------------------------
-local terraunitDefID = UnitDefNames["terraunit"].id
 
 local function AddEvent(unitID, unitDefID, color, cost)
   if (not spIsUnitAllied(unitID)) then
     return
   end
   local ud = UnitDefs[unitDefID]
-  if ((ud == nil) or ud.isFeature or unitDefID == terraunitDefID) then
+  if ((ud == nil) or ud.isFeature) then
     return
   end
   local px, py, pz = spGetUnitPosition(unitID)
