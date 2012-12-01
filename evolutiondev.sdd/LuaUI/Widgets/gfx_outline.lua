@@ -20,7 +20,7 @@ function widget:GetInfo()
     date      = "Dec 06, 2007",
     license   = "GNU GPL, v2 or later",
     layer     = -10,
-    enabled   = false  --  loaded by default?
+    enabled   = true  --  loaded by default?
   }
 end
 
@@ -286,7 +286,7 @@ local MyDrawVisibleUnits = function()
   glClear(GL_COLOR_BUFFER_BIT,0,0,0,0)
   glPushMatrix()
   glResetMatrices()
-  glColor(0,0,0,1)
+  glColor(0,0,0,0.4)
   DrawVisibleUnits()
   glColor(1,1,1,1)
   glPopMatrix()

@@ -89,6 +89,13 @@ function GroundFlash:Update(n)
     local r,g,b,a = GetColor(self.colormap,self.life)
     self.color    = {r,g,b,a}
   end
+  --cheap hack for mobility
+  if self.mobile then
+	local pos = {Spring.GetUnitPosition(self.unit)}
+	if pos[1] then
+		self.pos = pos
+	end
+  end
 end
 
 -- used if repeatEffect=true;

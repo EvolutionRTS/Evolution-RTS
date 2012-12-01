@@ -46,7 +46,7 @@ NanoLasersNoShader.Default = {
   life         = 30,
 
   --// some unit informations
-  targetID  = 0,
+  targetID  = -1,
   unitID    = -1,
   unitpiece = -1,
   unitDefID = -1,
@@ -206,7 +206,7 @@ end
 -----------------------------------------------------------------------------------------------------------------
 
 function NanoLasersNoShader:CreateParticle()
-  self.life           = self.life + 1 --// so we can reuse existing fx's
+  --self.life           = self.life + 1 --// so we can reuse existing fx's
   self.firstGameFrame = thisGameFrame
   self.dieGameFrame   = self.firstGameFrame + self.life
 
@@ -239,7 +239,6 @@ function NanoLasersNoShader.Create(Options)
       end
       knownNanoLasersNoShader[unit][nanopiece] = newObject
     end
-
     return newObject
   end
 end
