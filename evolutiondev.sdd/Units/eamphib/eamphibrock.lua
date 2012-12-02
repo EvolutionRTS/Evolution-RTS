@@ -110,9 +110,10 @@ Requires +7 Power]],
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
+
   gunshipweapon = {
     badTargetCategory = [[LIGHT BUILDING]],
-    AreaOfEffect       = 50,
+    AreaOfEffect       = 100,
     avoidFriendly      = false,
     cegTag             = "missiletrailsmall",
     collideFriendly    = false,
@@ -120,13 +121,15 @@ local weaponDefs = {
 	energypershot      = 13,
     fireStarter        = 70,
     guidance           = false,
+	burst			   = 5,
+	burstrate		   = 0.2,
     id                 = 136,
     interceptedByShieldType = 4,
     lineOfSight        = true,
     metalpershot       = 0,
     model              = "missilesmallvlaunch.s3o",
     name               = "Rockets",
-    range              = 650,
+    range              = 850,
     reloadtime         = 2,
     weaponType		   = "Cannon",
     selfprop           = true,
@@ -136,6 +139,7 @@ local weaponDefs = {
     soundHit           = "explode5.wav",
     startsmoke         = "0",
     startVelocity      = 250,
+	sprayangle		   = 2000,
     tolerance          = 8000,
     turnrate           = 4680,
     turret             = true,
@@ -146,7 +150,7 @@ local weaponDefs = {
 	  damagetype		= "armoredtankdestroyer",  
     },     
     damage = {
-      default           = 130,
+      default           = 50,
     },
   },
   
