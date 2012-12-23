@@ -104,6 +104,13 @@ Tobi (Engine dev)
 Neddie
 -Helpful critique
 
+Godde
+-Balance design suggestions and extensive playtesting support
+
+Valin
+-Numerous excellent gameplay suggestions and entensive help with Campaign story ideas
+-Created campaign story planet mockups complete with extended data
+
 **Features (in-game map objects)**
 -0AD (Wildfire Games)
 -Noize
