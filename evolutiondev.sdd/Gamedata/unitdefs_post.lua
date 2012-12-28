@@ -43,6 +43,27 @@ end
 
 
 --------------------------------------------------------------------------------
+-- Slowmode --
+--------------------------------------------------------------------------------
+
+if modOptions and tobool(modOptions.slowmode) then
+Spring.Echo("Classic RTS Mode Activated!")
+	for id,unitDef in pairs(UnitDefs) do
+--	Spring.Echo(unitDef.buildcostmetal)
+		unitDef.buildtime = unitDef.buildcostmetal
+	end
+end
+
+if modOptions and tobool(modOptions.slowmode) then
+	for name, unitDef in pairs(UnitDefs) do
+		if unitDef.unitname == "ecommander" then
+--			Spring.Echo(unitDef.unitname)
+			unitDef.workertime = unitDef.workertime * 2
+		end
+	end
+end
+
+--------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- 3dbuildrange for all none plane builders
 --

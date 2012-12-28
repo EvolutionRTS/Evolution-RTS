@@ -41,7 +41,15 @@ local options= {
 			{ key = "feature", name = "Feature Placer", desc = "Not for gameplay, used for map development." }
 			--{ key = "con", name = "Standard Constructor", desc = "A regular T1 construction unit" }
 		},
-	},  
+	},
+	{
+		key    = "slowmode",
+		name   = "Classic RTS Mode",
+		desc   = "Sets buildtimes to metalcost, resulting in Classic TA Style Building",
+		type   = "bool",
+		def    = false,
+		section= 'other',
+	},	
 }
 
 return options
