@@ -25,8 +25,8 @@ local unitDef = {
 -- Cloaking
 
 	cancloak		 = true,
-	cloakCost		 = 2,
-	cloakCostMoving	 = 2,
+	cloakCost		 = 1,
+	cloakCostMoving	 = 1,
 	minCloakDistance = 70,
 	decloakOnFire	 = true,
 	decloakSpherical = true,
@@ -143,7 +143,7 @@ local weaponDefs = {
     thickness          = 6,
     tolerance          = 1000,
     turret             = true,
-    weaponVelocity     = 1000,
+    weaponVelocity     = 2000,
 	customparams = {
 	  damagetype		= "raiderlight",  
     }, 
