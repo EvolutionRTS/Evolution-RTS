@@ -17,8 +17,8 @@ local unitDef = {
   builder            = true,
   buildDistance      = 800,
   canAttack          = false,
-  CanAssist			 = false,
-  canBeAssisted      = false,
+  CanAssist			 = true,
+  canBeAssisted      = true,
   CanCapture         = false,
   cancollect         = "1",
   canDropFlare       = true,
@@ -169,7 +169,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,
     damage = {
-      default            = 0,
+      default            = 1E-06,
     },
   },
 }

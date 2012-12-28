@@ -4,13 +4,13 @@
 #define WALK_PERIOD 50
 
 
-piece	base,turret,barrel1,barrel2,firepoint1,firepoint2,
+piece	base,turret,barrel1,firepoint1,firepoint2,
 		rf1,rf2,lf1,lf2,rr1,rr2,lr1,lr2,rfdirt,rrdirt,lfdirt,lrdirt;
 		#define barrel barrel1
 
 #include "ROCKUNIT.H"
 
-static-var maxreloadtime,moving;
+static-var maxreloadtime,moving,shooting_num;
 
 #define SIG_AIM1 2
 #define SIG_FIRE1 4
@@ -279,80 +279,62 @@ SetMaxReloadTime(t)
 RestoreAfterDelay()
 {
 	sleep maxreloadtime*3/2;
-	turn turret to y-axis 0 speed <60>;
-	turn barrel1 to x-axis 0 speed <30>;
-	turn barrel2 to x-axis 0 speed <30>;
+	turn turret to y-axis <0> speed <60>;
+	turn barrel1 to x-axis <0> speed <30>;
 	wait-for-turn turret around y-axis;
 	wait-for-turn barrel1 around x-axis;
-	wait-for-turn barrel1 around x-axis;
 }
 
-AimFromPrimary(p)
-{
-	p=turret;
-}
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM1; 
+set-signal-mask SIG_AIM1; 
+turn turret to y-axis heading speed <500>; 
+turn barrel1 to x-axis <0> - pitch speed <150>;  
+wait-for-turn turret around y-axis;
+wait-for-turn barrel1 around x-axis;  
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
 
-AimPrimary(heading,pitch)
-{
-	signal SIG_AIM1;
-	set-signal-mask SIG_AIM1;
-	turn turret to y-axis heading speed <225>;
-	turn barrel1 to x-axis 0 - pitch speed <150>;
-	turn barrel2 to x-axis 0 - pitch speed <150>;
-	wait-for-turn turret around y-axis;
-	wait-for-turn barrel1 around x-axis;
-	wait-for-turn barrel2 around x-axis;
-	start-script RestoreAfterDelay();
-	return(1);
-}
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+ 
+         if(shooting_num==1)
+         {
+         	emit-sfx 1024 from firepoint2;
+         }
 
-QueryPrimary(firefrom)
-{
-	firefrom=firepoint1;
-}
+         if(shooting_num==2)
+         {
+         	emit-sfx 1024 from firepoint1;
+         }
+	
+   shooting_num=shooting_num+1;
 
-FirePrimary()
-{
-	signal SIG_FIRE1;
-	set-signal-mask SIG_FIRE1;
-	emit-sfx 1024 + 0 from firepoint1;
-//	move barrel to z-axis [-10] now;
-//	move barrel to z-axis [0] speed [4];
-}
+            if( shooting_num == 3)
+            {  
+            	shooting_num=1;
+            }
+} 
 
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = turret; 
+} 
 
-AimFromSecondary(p)
-{
-	p=turret;
-}
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+if (shooting_num==1) 
+     {  
+     	piecenum=firepoint1;     
+     }
 
-AimSecondary(heading,pitch)
-{
-	signal SIG_AIM2;
-	set-signal-mask SIG_AIM2;
-	turn turret to y-axis heading speed <225>;
-	turn barrel1 to x-axis 0 - pitch speed <150>;
-	turn barrel2 to x-axis 0 - pitch speed <150>;
-	wait-for-turn turret around y-axis;
-	wait-for-turn barrel1 around x-axis;
-	wait-for-turn barrel2 around x-axis;
-	start-script RestoreAfterDelay();
-	return(1);
-}
-
-QuerySecondary(firefrom)
-{
-	firefrom=firepoint2;
-}
-
-FireSecondary()
-{
-	signal SIG_FIRE2;
-	set-signal-mask SIG_FIRE2;
-	emit-sfx 1024 + 0 from firepoint2;
-//	move barrel to z-axis [-10] now;
-//	move barrel to z-axis [0] speed [4];
-}
+     if (shooting_num==2)
+     {   
+     	piecenum=firepoint2;
+     } 
+} 
 
 
 Killed(severity, corpsetype) // how it explodes 

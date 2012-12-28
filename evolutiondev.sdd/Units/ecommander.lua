@@ -166,7 +166,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,
     damage = {
-      default            = 0,
+      default            = 1E-06,
     },
   },
   emp = {
