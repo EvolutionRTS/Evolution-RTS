@@ -15,6 +15,7 @@ SMALL_BUILDING = {
    soundstart="explode2.wav",
    soundhit="explode2.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION_SMALL",
+   cameraShake=200,
     damage = {
       default            = 0,
     },
@@ -33,6 +34,7 @@ MEDIUM_BUILDING = {
    soundstart="explode4.wav",
    soundhit="explode4.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION_MEDIUM",
+   cameraShake=400,
     damage = {
       default            = 0,
     },
@@ -52,6 +54,7 @@ LARGE_BUILDING = {
    soundstart="explode1.wav",
    soundhit="explode1.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION",
+   cameraShake=600,
     damage = {
       default            = 0,
     },
@@ -70,6 +73,7 @@ ESTOR_BUILDING = {
    soundstart="explode4.wav",
    soundhit="explode4.wav",
    explosiongenerator="custom:FACTORY_EXPLOSION_SMALL",
+   cameraShake=100,
     damage = {
       default            = 0,
     },
@@ -88,6 +92,7 @@ SMALL_UNIT = {
    AreaOfEffect=75,
    soundstart="explode2.wav",
    soundhit="explode2.wav",
+   cameraShake=100,
 
    explosiongenerator="custom:SMALL_UNIT_Expl",
     damage = {
@@ -110,6 +115,7 @@ MEDIUM_UNIT = {
    soundstart="explode4.wav",
    soundhit="explode4.wav",
    explosiongenerator="custom:MED_UNIT_Expl",
+   cameraShake=200,
     damage = {
       default            = 0,
     },
@@ -131,6 +137,7 @@ BIG_UNIT = {
    soundstart="explode3.wav",
    soundhit="explode3.wav",
    explosiongenerator="custom:BIG_UNIT_Expl",
+   cameraShake=300,
     damage = {
       default            = 0,
     },
@@ -149,6 +156,7 @@ CONSTRUCTOR = {
    AreaOfEffect=500,
    soundstart="explode5.wav",
    soundhit="explode5.wav",
+   cameraShake=100,
 
    explosiongenerator="custom:greencannonimpact",
     damage = {
@@ -194,6 +202,7 @@ krabblast = {
    soundstart="unitexplodemedium.wav",
    soundhit="unitexplodemedium.wav",
    explosiongenerator="custom:KRABDEATH",
+   cameraShake=500,
    customparams = {
 	  damagetype		= "Explosive",  
     },  
@@ -218,6 +227,7 @@ MEXPOP2 = {
    impulse=0,
    impulsefactor=0,
    explosiongenerator="custom:NUKE",
+   
 
     damage = {
       default            = 500,
@@ -238,6 +248,7 @@ PYRO_BLAST = {
    soundstart="unitexplodesmall.wav",
    soundhit="unitexplodesmall.wav",
    explosiongenerator="custom:PYRO_UNIT_Expl",
+   cameraShake=100,
 
     damage = {
       default            = 0,
@@ -257,6 +268,7 @@ FUSIONPOP = {
    AreaOfEffect=516,
    soundstart="explode3.wav",
    soundhit="explode3.wav",
+   cameraShake=400,
 
    explosiongenerator="custom:POWERPLANT_EXPLOSION_BIG",
    customparams = {
@@ -280,6 +292,7 @@ POWERPLANTPOP = {
    AreaOfEffect=516,
    soundstart="explode3.wav",
    soundhit="explode3.wav",
+   cameraShake=200,
 
    explosiongenerator="custom:POWERPLANT_EXPLOSION",
    customparams = {
@@ -304,6 +317,7 @@ GEOPOP = {
    AreaOfEffect=516,
    soundstart="explode3.wav",
    soundhit="explode3.wav",
+   cameraShake=300,
 
    explosiongenerator="custom:POWERPLANT_EXPLOSION_MEDIUM",
    customparams = {
@@ -329,6 +343,7 @@ HUGE_UNITEX = {
    soundstart="explode1.wav",
    soundhit="explode1.wav",
    explosiongenerator="custom:HUGE_UNIT_Expl",
+   cameraShake=500,
 
     damage = {
       default            = 0,
@@ -350,6 +365,7 @@ HUGE_UNIT = {
    soundstart="explode1.wav",
    soundhit="explode1.wav",
    explosiongenerator="custom:HUGE_UNIT_Expl",
+   cameraShake=500,
 
     damage = {
       default            = 0,

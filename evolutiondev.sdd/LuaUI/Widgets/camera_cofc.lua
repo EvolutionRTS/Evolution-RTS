@@ -100,7 +100,7 @@ options = {
 		name = 'Smooth scrolling',
 		desc = 'Use smoothscroll method when mouse scrolling.',
 		type = 'bool',
-		value = false,
+		value = true,
 	},
 	smoothmeshscroll = {
 		name = 'Smooth Mesh Scrolling',
@@ -1033,9 +1033,9 @@ function widget:MousePress(x, y, button)
 	end
 	
 	-- Not Middle Click --
-	if (button ~= 2) then
-		return false
-	end
+	-- if (button ~= 2) then
+		-- return false
+	-- end
 	Spring.SendCommands('trackoff')
     spSendCommands('viewfree')
 	trackmode = false
