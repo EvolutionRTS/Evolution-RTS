@@ -11,7 +11,7 @@ local unitDef = {
   bankscale          = "1",
   brakeRate          = 4,
   buildCostEnergy    = 0,
-  buildCostMetal     = 80,
+  buildCostMetal     = 50,
   builder            = false,
   buildTime          = 2.5,
   canFly             = true,
@@ -30,9 +30,9 @@ local unitDef = {
 Light
 
 Requires +4 Power]],
-  energyMake         = 0.2,
+  energyMake         = 0,
   energyStorage      = 0,
-  energyUse          = 0.2,
+  energyUse          = 0,
   explodeAs          = "SMALL_UNIT",
   footprintX         = 4,
   footprintZ         = 4,

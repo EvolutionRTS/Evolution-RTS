@@ -920,7 +920,7 @@ if (gadgetHandler:IsSyncedCode()) then
             CanIHaz =  CheckCmd(-ud,team,builder)
         end
         if not CanIHaz then
-            Spring.PlaySoundFile("sounds/moarpower.wav", 5, x, y, z)
+        --  Spring.PlaySoundFile("sounds/moarpower.wav", 5, x, y, z)
         end
         return CanIHaz
 	end
