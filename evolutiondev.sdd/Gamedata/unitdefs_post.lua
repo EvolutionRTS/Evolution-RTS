@@ -43,10 +43,10 @@ end
 
 
 --------------------------------------------------------------------------------
--- Slowmode --
+-- Classic RTS Mode --
 --------------------------------------------------------------------------------
 
-if modOptions and tobool(modOptions.slowmode) then
+if modOptions and tobool(modOptions.classicrtsmode) then
 Spring.Echo("Classic RTS Mode Activated!")
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
@@ -54,7 +54,7 @@ Spring.Echo("Classic RTS Mode Activated!")
 	end
 end
 
-if modOptions and tobool(modOptions.slowmode) then
+if modOptions and tobool(modOptions.classicrtsmode) then
 	for name, unitDef in pairs(UnitDefs) do
 		if unitDef.unitname == "ecommander" then
 --			Spring.Echo(unitDef.unitname)

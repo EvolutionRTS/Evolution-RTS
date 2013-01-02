@@ -43,7 +43,7 @@ local options= {
 		},
 	},
 	{
-		key    = "slowmode",
+		key    = "classicrtsmode",
 		name   = "Classic RTS Mode",
 		desc   = "Sets buildtimes to metalcost, resulting in Classic TA Style Building",
 		type   = "bool",

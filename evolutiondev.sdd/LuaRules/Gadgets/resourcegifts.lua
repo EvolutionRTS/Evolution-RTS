@@ -133,7 +133,6 @@ function gadget:GameFrame(n)
 		end
 	end
 
---[[
 	if n%1800 == 1 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
@@ -142,7 +141,6 @@ function gadget:GameFrame(n)
 			end
 		end
 	end
-]]--
 	
 end
 
