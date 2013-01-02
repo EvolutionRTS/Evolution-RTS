@@ -23,6 +23,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canreclamate       = "1",
+  canRepair			 = false,
   canstop            = "1",
   category           = "LIGHT AMPHIB SUPPORT",
   description        = [[Engineer
