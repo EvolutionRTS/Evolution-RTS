@@ -905,7 +905,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		end
 		local ICanHaz = CheckCmd(cmd,team,x,y,z)
 		if not ICanHaz then
-			Spring.PlaySoundFile("sounds/moarpower.wav", 1, x, y, z)
+		--	Spring.PlaySoundFile("sounds/moarpower.wav", 1, x, y, z)
 			Spring.SpawnCEG("moarpower", x, y, z)
 		end
 	return ICanHaz
