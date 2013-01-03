@@ -15,6 +15,7 @@ local unitDef = {
   buildTime          = 5,
   canBeAssisted      = true,
   canPatrol          = true,
+  canReclaim		 = false,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   

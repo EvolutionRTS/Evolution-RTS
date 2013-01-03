@@ -16,6 +16,7 @@ local unitDef = {
   canAttack			 = false,
   canBeAssisted      = true,
   canPatrol          = true,
+  canReclaim		 = false,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
    collisionVolumeOffsets = "0 40 0",
