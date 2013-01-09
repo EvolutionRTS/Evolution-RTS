@@ -131,6 +131,16 @@ local function BackwardCompability(wdName,wd)
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*2
+				
+			elseif (damagetypelower	== "antibuildinglobster") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*4
+				
+			elseif (damagetypelower	== "antibuildingassimilator") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*4
 			
 			elseif (damagetypelower	== "antibuildingfatso") then
 				wd.damage.ARMORED = 		weapondamage*1

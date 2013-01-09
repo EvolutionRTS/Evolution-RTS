@@ -426,7 +426,7 @@ local hideCursor = false
 local mwidth, mheight = Game.mapSizeX, Game.mapSizeZ
 local mcx, mcz 	= mwidth / 2, mheight / 2
 local mcy 		= spGetGroundHeight(mcx, mcz)
-local maxDistY = max(mheight, mwidth) * 2
+local maxDistY = max(mheight, mwidth) * 1
 
 
 --------------------------------------------------------------------------------
