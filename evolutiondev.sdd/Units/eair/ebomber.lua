@@ -23,7 +23,7 @@ local unitDef = {
   canstop            = "1",
   category           = "ARMORED VTOL",
   collide            = true,
---Collision Volumes... Because the engine devs are idiots.
+--Collision Volumes... Because the engine devs are silly.
 	collisionVolumeScales = [[35 35 35]],
 --End Collision volumes
   corpse             = "ammobox",

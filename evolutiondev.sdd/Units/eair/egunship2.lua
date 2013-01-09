@@ -9,7 +9,6 @@ local unitDef = {
 
   acceleration       = 0.2,
   airStrafe          = true,
-  bankscale          = "1",
   brakeRate          = 7,
   buildCostEnergy    = 0,
   buildCostMetal     = 60,
@@ -21,10 +20,10 @@ local unitDef = {
   canLoopbackAttack  = true,
   canMove            = true,
   canPatrol          = true,
-  canstop            = "1",
+  canstop            = true,
   category           = "LIGHT VTOL",
   collide            = true,
---Collision Volumes... Because the engine devs are idiots.
+--Collision Volumes... Because the engine devs are silly.
 	collisionVolumeScales = [[35 35 35]],
 --End Collision volumes
   corpse             = "ammobox",

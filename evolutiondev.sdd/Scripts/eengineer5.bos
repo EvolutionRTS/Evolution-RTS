@@ -143,8 +143,6 @@ StartBuilding(heading, pitch)
    turn doorright to y-axis <-90> speed <100.000000>;
         wait-for-turn doorleft around y-axis;
         wait-for-turn doorright around y-axis;
-   turn base to y-axis heading speed <160.000000>;
-        wait-for-turn base around y-axis;
    move penis to z-axis [4] speed [1];
    set INBUILDSTANCE to 1;
    building = 1;
@@ -165,8 +163,6 @@ StopBuilding()
    turn doorright to y-axis <0> speed <50.000000>;
         wait-for-turn doorleft around y-axis;
         wait-for-turn doorright around y-axis;
-   turn base to y-axis <0.000000> speed <160.000000>;
-        wait-for-turn base around y-axis;
 
 }
 

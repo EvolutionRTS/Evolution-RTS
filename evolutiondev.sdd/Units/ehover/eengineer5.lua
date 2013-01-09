@@ -73,7 +73,7 @@ Light]],
  	}, 
 
     explosiongenerators = {
-      "custom:nanoflame",
+      "custom:nanoorb",
       "custom:dirt",
 	  "custom:blacksmoke",
     },
@@ -148,7 +148,7 @@ local weaponDefs = {
     lineOfSight        = true,
     name               = "Light Laser",
     noSelfDamage       = true,
-    range              = 400,
+    range              = 800,
     reloadtime         = 0.1,
     WeaponType         = "BeamLaser",
     rgbColor           = "0 0 0.5",

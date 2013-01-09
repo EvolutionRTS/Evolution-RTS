@@ -367,8 +367,6 @@ StartBuilding(heading, pitch)
    set-signal-mask SIG_BUILD;
    turn door to x-axis <90> speed <150.000000>;
         wait-for-turn door around y-axis;
-   turn base to y-axis heading speed <160.000000>;
-        wait-for-turn base around y-axis;
    move penis to z-axis [2] speed [1];
    set INBUILDSTANCE to 1;
    building = 1;
@@ -387,8 +385,6 @@ StopBuilding()
         move penis to z-axis [0] speed [2];
    turn door to x-axis <0> speed <100.000000>;
         wait-for-turn door around y-axis;
-   turn base to y-axis <0.000000> speed <160.000000>;
-        wait-for-turn base around y-axis;
 
 }
 

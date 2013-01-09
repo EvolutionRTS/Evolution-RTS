@@ -78,7 +78,7 @@ local unitDef = {
   repairspeed        = 0.25,
   sfxtypes = {
     explosiongenerators = {
-      "custom:nanoflame",
+      "custom:nanoorb",
       "custom:dirtsmall",
     },
 	pieceExplosionGenerators = {

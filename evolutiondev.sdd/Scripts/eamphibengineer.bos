@@ -49,7 +49,6 @@ Buildingfx()
 
 Go()
 {
-   turn base to y-axis Static_Var_1 speed <160.000000>;
    turn arm to x-axis <-90> speed <50>;
         wait-for-turn base around y-axis;
         wait-for-turn arm around x-axis;
@@ -66,7 +65,6 @@ Go()
 
 Stop()
 {
-   turn base to y-axis <0.000000> speed <160.000000>;
    turn arm to x-axis <0> speed <50>;
    stop-spin spinwheels around z-axis decelerate <2.000000>; 
         set INBUILDSTANCE to 0;

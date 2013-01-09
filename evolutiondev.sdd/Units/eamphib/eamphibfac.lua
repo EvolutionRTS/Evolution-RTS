@@ -67,7 +67,7 @@ local unitDef = {
  	}, 
 
     explosiongenerators = {
-      "custom:nanoflame",
+      "custom:nanoorb",
       "custom:nano",
 	  "custom:blacksmoke",
     },

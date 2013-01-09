@@ -7,12 +7,12 @@ local unitName = "ecommander"
 
 local unitDef = {
   acceleration       = 0.2,
-  brakeRate          = 0.24,
+  brakeRate          = 1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 5000,
+  buildCostMetal     = 500,
   buildDistance      = 1000,
   builder            = true,
-  buildTime          = 5,
+  buildTime          = 2.5,
   commander			 = true,
   capturable		 = false,
   CanAttack			 = true,
@@ -27,7 +27,9 @@ local unitDef = {
   canstop            = "1",
   category           = "NOTAIR SUPPORT ARMORED",
   description        = [[Armortype: Heavy
-  • Press 'D' to activate EMP Defense]],
+  • Press 'D' to activate EMP Defense
+  
+  There can only be one!]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -59,6 +61,7 @@ local unitDef = {
   stealth            = false,
   turnRate           = 1500,
   unitname           = "ecommander",
+  unitRestricted	 = 1,
   upright            = false,
   workerTime         = 1,
   capturespeed       = 0.25,
@@ -72,7 +75,7 @@ local unitDef = {
  	}, 
 	
     explosiongenerators = {
-      "custom:nanoflame",
+      "custom:nanoorb",
       "custom:dirt",
 	  "custom:blacksmoke",
     },
@@ -125,6 +128,7 @@ local unitDef = {
     cancollect = "1",
 	armortype   = "armored",
 	nofriendlyfire	= "1",
+	RequireTech = "20 Power",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext       = [[The commander has an EMP defense shockwave weapon that can be triggered every 10 seconds. It costs 50 energy, so use it wisely.]],
   },
@@ -153,7 +157,7 @@ local weaponDefs = {
     lineOfSight        = true,
     name               = "Light Laser",
     noSelfDamage       = true,
-    range              = 800,
+    range              = 1000,
     reloadtime         = 0.1,
     WeaponType         = "BeamLaser",
     rgbColor           = "0 0 0.5",

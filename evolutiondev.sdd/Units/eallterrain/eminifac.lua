@@ -81,7 +81,7 @@ local unitDef = {
  	}, 
 
     explosiongenerators = {
-      "custom:nanoflame",
+      "custom:nanoorb",
       "custom:nano",
 	  "custom:blacksmoke",
     },
@@ -94,6 +94,7 @@ local unitDef = {
     "eallterrheavy",
 	"eallterrassault",
 	"eallterrshield",
+	"ecommander",
   },
   sounds = {
     underattack        = "unitsunderattack1",

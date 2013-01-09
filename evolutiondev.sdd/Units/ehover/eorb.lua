@@ -78,7 +78,7 @@ Light
  	}, 
 
     explosiongenerators = {
-      "custom:nanoflame",
+      "custom:nanoorb",
       "custom:dirt",
 	  "custom:blacksmoke",
     },
