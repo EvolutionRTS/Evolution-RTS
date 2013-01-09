@@ -21,6 +21,7 @@ include("keysym.h.lua")
 
 local init = true
 local trackmode = false --before options
+local thirdperson_trackunit = false 
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -62,8 +63,11 @@ options_order = {
 	'freemode',
 	
 	'trackmode',
+	'persistenttrackmode',
 	'thirdpersontrack',
 	'resetcam',
+	
+	'enableCycleView',
 
 }
 
@@ -100,7 +104,7 @@ options = {
 		name = 'Smooth scrolling',
 		desc = 'Use smoothscroll method when mouse scrolling.',
 		type = 'bool',
-		value = false,
+		value = true,
 	},
 	smoothmeshscroll = {
 		name = 'Smooth Mesh Scrolling',
@@ -205,7 +209,7 @@ options = {
 		desc = "Controls how smooth the camera moves.",
 		type = 'number',
 		min = 0.0, max = 0.8, step = 0.1,
-		value = 0.2,
+		value = 0.4,
 	},
 	fov = {
 		name = 'Field of View',
@@ -259,8 +263,15 @@ options = {
 		name = "Enter Trackmode",
 		desc = "Track the selected unit (midclick to cancel)",
 		type = 'button',
-        hotkey = {key='t', mod=''},
+        hotkey = {key='t', mod='alt+'},
 		OnChange = function(self) trackmode = true; end,
+	},
+	
+	persistenttrackmode = {
+		name = "Persistent trackmode state",
+		desc = "Trackmode will not cancel unless user press midclick",
+		type = 'bool',
+		value = false,
 	},
     
     thirdpersontrack = {
@@ -268,8 +279,12 @@ options = {
 		desc = "Track the selected unit (midclick to cancel)",
 		type = 'button',
 		OnChange = function(self)
-            Spring.SendCommands('viewfps')
-            Spring.SendCommands('track')
+			local selUnits = Spring.GetSelectedUnits()
+			if selUnits and selUnits[1] then --check for unit first before changing into FPS mode
+				Spring.SendCommands('viewfps')
+				Spring.SendCommands('track')
+				thirdperson_trackunit = selUnits[1]
+			end
         end,
 	},
     
@@ -286,6 +301,19 @@ options = {
 		desc = "If world-rotation motion causes the camera to hit the ground, camera-rotation motion takes over. Doesn't apply in Free Mode.",
 		type = 'bool',
 		value = false,
+	},
+	
+	enableCycleView = {
+		name = "Group recall cycle within group",
+		type = 'bool',
+		value = false,
+		path='Settings/Camera',
+		desc = "Cycle camera focus among group units when same number is pressed more than once. Note: This option will automatically enable \'Receive Indicator\' widget (for its cluster detection feature).",
+		OnChange = function(self) 
+			if self.value==true then
+				Spring.SendCommands("luaui enablewidget Receive Units Indicator")
+			end
+		end,
 	},
 	
 }
@@ -314,8 +342,12 @@ local white = { 1, 1, 1 }
 
 local spGetCameraState		= Spring.GetCameraState
 local spGetCameraVectors	= Spring.GetCameraVectors
+local spGetGroundHeight		= Spring.GetGroundHeight
+local spGetSmoothMeshHeight	= Spring.GetSmoothMeshHeight
 local spGetModKeyState		= Spring.GetModKeyState
 local spGetMouseState		= Spring.GetMouseState
+local spGetSelectedUnits	= Spring.GetSelectedUnits
+local spGetUnitPosition		= Spring.GetUnitPosition
 local spIsAboveMiniMap		= Spring.IsAboveMiniMap
 local spSendCommands		= Spring.SendCommands
 local spSetCameraState		= Spring.SetCameraState
@@ -393,8 +425,8 @@ local hideCursor = false
 
 local mwidth, mheight = Game.mapSizeX, Game.mapSizeZ
 local mcx, mcz 	= mwidth / 2, mheight / 2
-local mcy 		= Spring.GetGroundHeight(mcx, mcz)
-local maxDistY = max(mheight, mwidth) * 1
+local mcy 		= spGetGroundHeight(mcx, mcz)
+local maxDistY = max(mheight, mwidth) * 2
 
 
 --------------------------------------------------------------------------------
@@ -476,7 +508,7 @@ local function VirtTraceRay(x,y, cs)
 	if gpos then
 		local gx, gy, gz = gpos[1], gpos[2], gpos[3]
 		
-		--gy = Spring.GetSmoothMeshHeight (gx,gz)
+		--gy = spGetSmoothMeshHeight (gx,gz)
 		
 		if gx < 0 or gx > mwidth or gz < 0 or gz > mheight then
 			return false, gx, gy, gz	
@@ -491,7 +523,7 @@ local function VirtTraceRay(x,y, cs)
 	local vecDist = (- cs.py) / cs.dy
 	local gx, gy, gz = cs.px + vecDist*cs.dx, 	cs.py + vecDist*cs.dy, 	cs.pz + vecDist*cs.dz
 	
-	--gy = Spring.GetSmoothMeshHeight (gx,gz)
+	--gy = spGetSmoothMeshHeight (gx,gz)
 	return false, gx, gy, gz
 end
 
@@ -534,8 +566,8 @@ local function UpdateCam(cs)
 	cs.pz = ls_z - cos(cs.ry) * alt
 	
 	if not options.freemode.value then
-		local gndheight = Spring.GetGroundHeight(cs.px, cs.pz)+5
-		--gndheight = Spring.GetSmoothMeshHeight(cs.px, cs.pz)+5
+		local gndheight = spGetGroundHeight(cs.px, cs.pz)+5
+		--gndheight = spGetSmoothMeshHeight(cs.px, cs.pz)+5
 		if cs.py < gndheight then
 			if options.groundrot.value then
 				cs.py = gndheight
@@ -582,8 +614,8 @@ local function Zoom(zoomin, s, forceCenter)
 			local new_pz = cs.pz + dz * sp
 			
 			if not options.freemode.value then
-                if new_py < Spring.GetGroundHeight(cs.px, cs.pz)+5 then
-                    sp = (Spring.GetGroundHeight(cs.px, cs.pz)+5 - cs.py) / dy
+                if new_py < spGetGroundHeight(cs.px, cs.pz)+5 then
+                    sp = (spGetGroundHeight(cs.px, cs.pz)+5 - cs.py) / dy
                     new_px = cs.px + dx * sp
                     new_py = cs.py + dy * sp
                     new_pz = cs.pz + dz * sp
@@ -648,8 +680,8 @@ local function Altitude(up, s)
 	local dy = py * (up and 1 or -1) * (s and 0.3 or 0.1)
 	local new_py = py + dy
 	if not options.freemode.value then
-        if new_py < Spring.GetGroundHeight(cs.px, cs.pz)+5  then
-            new_py = Spring.GetGroundHeight(cs.px, cs.pz)+5  
+        if new_py < spGetGroundHeight(cs.px, cs.pz)+5  then
+            new_py = spGetGroundHeight(cs.px, cs.pz)+5  
         elseif new_py > maxDistY then
             new_py = maxDistY 
         end
@@ -693,7 +725,7 @@ OverviewAction = function()
 			ls_dist = last_ls_dist 
 			ls_x = gx
 			ls_z = gz
-			ls_y = Spring.GetGroundHeight(ls_x, ls_z)
+			ls_y = spGetGroundHeight(ls_x, ls_z)
 			ls_have = true
 			local cstemp = UpdateCam(cs)
 			if cstemp then cs = cstemp; end
@@ -725,7 +757,7 @@ local function RotateCamera(x, y, dx, dy, smooth, lock)
 		end
 		
         -- [[
-        if trackmode then
+        if trackmode then --always rotate world instead of camera in trackmode
             lock = true
             ls_have = false
             SetLockSpot2(cs)
@@ -801,9 +833,9 @@ local function ScrollCam(cs, mxm, mym, smoothlevel)
 	ls_z = math.max(ls_z, 3)
 	
 	if options.smoothmeshscroll.value then
-		ls_y = Spring.GetSmoothMeshHeight(ls_x, ls_z) or 0
+		ls_y = spGetSmoothMeshHeight(ls_x, ls_z) or 0
 	else
-		ls_y = Spring.GetGroundHeight(ls_x, ls_z) or 0
+		ls_y = spGetGroundHeight(ls_x, ls_z) or 0
 	end
 	
 	
@@ -827,8 +859,8 @@ local function PeriodicWarning()
 			c_widgets_list[#c_widgets_list+1] = name
 		end
 	end
-	for _,wname in ipairs(c_widgets_list) do
-		c_widgets = c_widgets .. wname .. ', '
+	for i=1, #c_widgets_list do
+		c_widgets = c_widgets .. c_widgets_list[i] .. ', '
 	end
 	if c_widgets ~= '' then
 		echo('<COFCam> *Periodic warning* Please disable other camera widgets: ' .. c_widgets)
@@ -865,11 +897,13 @@ function widget:Update(dt)
 	end
 	
 	trackcycle = trackcycle %(4) + 1
-	if trackcycle == 1 and trackmode then
-		local selUnits = Spring.GetSelectedUnits()
+	if trackcycle == 1 and trackmode and (not rotate) then --update trackmode during normal/non-rotating state (doing both will cause a zoomed-out bug)
+		local selUnits = spGetSelectedUnits()
 		if selUnits and selUnits[1] then
-			local x,y,z = Spring.GetUnitPosition( selUnits[1] )
-			Spring.SetCameraTarget(x,y,z, 0.2)
+			local x,y,z = spGetUnitPosition( selUnits[1] )
+			spSetCameraTarget(x,y,z, 0.2)
+		elseif (not options.persistenttrackmode.value) then --cancel trackmode when no more units is present in non-persistent trackmode.
+			trackmode=false --exit trackmode
 		end
 	end
 	
@@ -1025,7 +1059,7 @@ end
 
 function widget:MousePress(x, y, button)
 	ls_have = false
-	overview_mode = false
+	--overview_mode = false
     --if fpsmode then return end
 	if lockspringscroll then
 		lockspringscroll = false
@@ -1036,11 +1070,16 @@ function widget:MousePress(x, y, button)
 	if (button ~= 2) then
 		return false
 	end
-	Spring.SendCommands('trackoff')
-    spSendCommands('viewfree')
-	trackmode = false
 	
 	local a,c,m,s = spGetModKeyState()
+	
+	Spring.SendCommands('trackoff')
+    spSendCommands('viewfree')
+	if not (options.persistenttrackmode.value and (c or a)) then --only check for Ctrl or Alt if using persistent trackmode, else: always execute.
+		trackmode = false
+	end
+	thirdperson_trackunit = false
+	
 	
 	-- Reset --
 	if a and c and s then
@@ -1266,6 +1305,9 @@ function widget:Initialize()
 	spSendCommands( 'unbindaction toggleoverview' )
 	spSendCommands( 'unbindaction trackmode' )
 	spSendCommands( 'unbindaction track' )
+	spSendCommands( 'unbindaction mousestate' ) --//disable screen-panning-mode toggled by 'backspace' key
+	
+	spSendCommands("luaui disablewidget SmoothScroll")
 end
 
 function widget:Shutdown()
@@ -1273,6 +1315,7 @@ function widget:Shutdown()
 	spSendCommands( 'bind any+tab toggleoverview' )
 	spSendCommands( 'bind any+t track' )
 	spSendCommands( 'bind ctrl+t trackmode' )
+	spSendCommands( 'bind backspace mousestate' ) --//re-enable screen-panning-mode toggled by 'backspace' key
 end
 
 function widget:TextCommand(command)
@@ -1289,4 +1332,117 @@ function widget:TextCommand(command)
 	return false
 end   
 
+function widget:UnitDestroyed(unitID)
+	if thirdperson_trackunit and thirdperson_trackunit == unitID then --return user to normal view if tracked unit is destroyed
+		spSendCommands('trackoff')
+		spSendCommands('viewfree')
+		thirdperson_trackunit = false
+	end
+end
+
 --------------------------------------------------------------------------------
+--Group Recall Fix--- (by msafwan, 9 Jan 2013)
+--Remake Spring's group recall to trigger ZK's custom Spring.SetCameraTarget (which work for freestyle camera mode).
+--------------------------------------------------------------------------------
+local spGetTimer = Spring.GetTimer 
+local spDiffTimers = Spring.DiffTimers
+local spGetUnitGroup = Spring.GetUnitGroup
+local spGetGroupList  = Spring.GetGroupList 
+
+
+include("keysym.h.lua")
+local previousGroup =99
+local currentIteration = 1
+local previousKey = 99
+local previousTime = spGetTimer()
+
+function widget:KeyPress(key, modifier, isRepeat)
+	if ( not modifier.alt and not modifier.meta) then --check key for group. Reference: unit_auto_group.lua by Licho
+		local gr
+		if (key == KEYSYMS.N_0) then gr = 0 
+		elseif (key == KEYSYMS.N_1) then gr = 1
+		elseif (key == KEYSYMS.N_2) then gr = 2 
+		elseif (key == KEYSYMS.N_3) then gr = 3
+		elseif (key == KEYSYMS.N_4) then gr = 4
+		elseif (key == KEYSYMS.N_5) then gr = 5
+		elseif (key == KEYSYMS.N_6) then gr = 6
+		elseif (key == KEYSYMS.N_7) then gr = 7
+		elseif (key == KEYSYMS.N_8) then gr = 8
+		elseif (key == KEYSYMS.N_9) then gr = 9
+		end
+		if (gr ~= nil) then
+			local selectedUnit = spGetSelectedUnits()
+			local groupCount = spGetGroupList()
+			if groupCount[gr] ~= #selectedUnit then
+				return false
+			end
+			for i=1,#selectedUnit do
+				local unitGroup = spGetUnitGroup(selectedUnit[i])
+				if unitGroup~=gr then
+					return false
+				end
+			end
+			if previousKey == key and (spDiffTimers(spGetTimer(),previousTime) > 2) then
+				currentIteration = 0 --reset cycle if delay between 2 similar tap took too long.
+			end
+			previousKey = key
+			previousTime = spGetTimer()
+			
+			if options.enableCycleView.value and WG.recvIndicator then 
+				local slctUnitUnordered = {}
+				for i=1 , #selectedUnit do
+					local unitID = selectedUnit[i]
+					local x,y,z = spGetUnitPosition(unitID)
+					slctUnitUnordered[unitID] = {x,y,z}
+				end
+				selectedUnit = nil
+				local cluster, lonely = WG.recvIndicator.OPTICS_cluster(slctUnitUnordered, 600,2, Spring.GetMyTeamID(),300) --//find clusters with atleast 2 unit per cluster and with at least within 300-elmo from each other with 600-elmo detection range
+				if previousGroup == gr then
+					currentIteration = currentIteration +1
+					if currentIteration > (#cluster + #lonely) then
+						currentIteration = 1
+					end
+				else
+					currentIteration = 1
+				end
+				if currentIteration <= #cluster then
+					local sumX, sumY,sumZ, unitCount,meanX, meanY, meanZ = 0,0 ,0 ,0 ,0,0,0
+					for unitIndex=1, #cluster[currentIteration] do
+						local unitID = cluster[currentIteration][unitIndex]
+						local x,y,z= slctUnitUnordered[unitID][1],slctUnitUnordered[unitID][2],slctUnitUnordered[unitID][3] --// get stored unit position
+						sumX= sumX+x
+						sumY = sumY+y
+						sumZ = sumZ+z
+						unitCount=unitCount+1
+					end
+					meanX = sumX/unitCount --//calculate center of cluster
+					meanY = sumY/unitCount
+					meanZ = sumZ/unitCount
+					Spring.SetCameraTarget(meanX, meanY, meanZ,0.5)
+				else
+					local unitID = lonely[currentIteration-#cluster]
+					local x,y,z= slctUnitUnordered[unitID][1],slctUnitUnordered[unitID][2],slctUnitUnordered[unitID][3] --// get stored unit position
+					Spring.SetCameraTarget(x,y,z,0.5)
+				end
+				cluster=nil
+				slctUnitUnordered = nil
+			else --conventional method:
+				local sumX, sumY,sumZ, unitCount,meanX, meanY, meanZ = 0,0 ,0 ,0 ,0,0,0
+				for i=1, #selectedUnit do
+					local unitID = selectedUnit[i]
+					local x,y,z= spGetUnitPosition(unitID)
+					sumX= sumX+x
+					sumY = sumY+y
+					sumZ = sumZ+z
+					unitCount=unitCount+1
+				end
+				meanX = sumX/unitCount --//calculate center
+				meanY = sumY/unitCount
+				meanZ = sumZ/unitCount
+				Spring.SetCameraTarget(meanX, meanY, meanZ,0.5) --is overriden by Spring.SetCameraTarget() at cache.lua.
+			end
+			previousGroup= gr
+			return true
+		end
+	end
+end
