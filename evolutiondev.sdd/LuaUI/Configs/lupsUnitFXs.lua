@@ -170,6 +170,7 @@ effectUnitDefs = {
     {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=300, precision=0, strength   = 0.0025, repeatEffect=true}},
   },
 	
+	
 	----// FUSIONS //--------------------------
 	-- cafus = {
 		-- {class='Bursts',options=cafusBursts},
