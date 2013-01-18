@@ -219,7 +219,7 @@ options = {
 		name = "Hide Tooltip for Unreclaimables",
 		type = 'bool',
 		advanced = true,
-		value = true,
+		value = false,
 		desc = 'Don\'t show the tooltip for unreclaimable features.',
 	},
 	showdrawtooltip = {
