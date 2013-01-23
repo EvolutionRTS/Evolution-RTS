@@ -187,6 +187,11 @@ local function BackwardCompability(wdName,wd)
 				wd.damage.ARMORED = 		weapondamage*6
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*0.1
+			
+			elseif (damagetypelower	== "lrpc") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*4
 				
 -- aircraft
 			elseif (damagetypelower	== "gunshipdrone") then

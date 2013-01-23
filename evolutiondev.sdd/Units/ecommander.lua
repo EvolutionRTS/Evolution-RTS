@@ -67,7 +67,7 @@ local unitDef = {
   capturespeed       = 0.25,
   TerraformSpeed     = 100000,
   ReclaimSpeed       = 1000,
-  repairspeed        = 0.50,
+  repairspeed        = 0.0125,
   sfxtypes = {
 	pieceExplosionGenerators = { 
  		"deathceg0", 
@@ -179,7 +179,7 @@ local weaponDefs = {
     ballistic          = true,
     collideFriendly    = false,
 	commandfire		   = true,
-    explosionGenerator = "custom:POWERPLANT_EXPLOSION_BIG",
+    explosionGenerator = "custom:EMPOVERSEER",
 	energypershot      = 50,
 	edgeEffectiveness  = 1,
     impulseFactor      = 0,

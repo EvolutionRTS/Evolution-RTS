@@ -23,7 +23,8 @@ local unitDef = {
   
   corpse             = "ammobox",
   description        = [[Long Range Plasma Cannon - 50e Per Shot
-
+400% Damage vs Buildings
+  
 Requires +15 Power]],
   energyStorage      = 0,
   energyUse          = 0,
@@ -119,7 +120,7 @@ Requires:
 local weaponDefs = {
   lrpcweapon = {
     accuracy           = 500,
-    AreaOfEffect       = 200,
+    AreaOfEffect       = 500,
     avoidFriendly      = false,
     cegTag             = "BURNGREEN",
     collideFriendly    = false,
@@ -131,6 +132,7 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     lineOfSight        = true,
     energypershot       = 100,
+	edgeEffectiveness  = 0.1,
     model              = "rocket.s3o",
     name               = "Rockets",
     range              = 6000,
@@ -148,7 +150,7 @@ local weaponDefs = {
     weaponTimer        = 5,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "lrpc",  
     },      
     damage = {
       default            = 250,

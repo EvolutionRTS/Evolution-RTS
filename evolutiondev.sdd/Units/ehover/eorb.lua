@@ -70,7 +70,7 @@ Light
   capturespeed       = 0,
   TerraformSpeed     = 100000,
   ReclaimSpeed       = 1000,
-  repairspeed        = 0.50,
+  repairspeed        = 0.025,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
  		"deathceg0", 
