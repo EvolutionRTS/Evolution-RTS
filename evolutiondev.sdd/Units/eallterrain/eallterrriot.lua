@@ -37,6 +37,8 @@ local unitDef = {
   
   description        = [[Anti-Swarm Tank
 Armored, 200% Damage vs Light
+• Paralyzes enemy units
+• Projectile can hit multiple units
 
 Requires +3 Power]],
   energyMake         = 0,

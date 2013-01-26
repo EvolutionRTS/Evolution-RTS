@@ -24,6 +24,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Anti-Swarm Tank
 Light, 200% Damage vs Light
+• Paralyzes enemy units
+• Projectile can hit multiple units
 
 Requires +5 Power]],
   energyMake         = 0,

@@ -9,7 +9,7 @@ local unitDef = {
 
   activateWhenBuilt  = true,
   buildCostEnergy    = 0,
-  buildCostMetal     = 160,
+  buildCostMetal     = 500,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
@@ -22,7 +22,7 @@ local unitDef = {
    collisionVolumeType    = "box",
   
   corpse             = "ammobox",
-  description        = [[Long Range Plasma Cannon - 50e Per Shot
+  description        = [[Long Range Plasma Cannon - 100e Per Shot
 400% Damage vs Buildings
   
 Requires +15 Power]],
@@ -82,7 +82,7 @@ Requires +15 Power]],
   customParams = {
 	death_sounds = "generic",
 	twokhotkey = 'l',
-    RequireTech = "15 Power",
+    RequireTech = "20 Power",
 	armortype   = "building",
 	normaltex = "unittextures/elrpcnormal.png", 
 	helptext = [[Long Range Plasma Cannon
