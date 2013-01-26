@@ -225,6 +225,99 @@
    }
 }
 
+[missiletrailgunship]
+{
+
+   [smokeandfire]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=dirt;
+      sizeGrowth=-0.2;
+      sizeMod=0.9;
+
+         pos      = 0.0, 1, 0.0;
+            emitVector  = 0.0, 1, 0.0;
+      gravity     = 0.0, 0.0, 0.0;
+
+       colorMap = 0.1 0.1 0.1 0.01    0.5 0.3 0.0 0.05    0.5 0.1 0.1 1.0    0.1 0.1 0.1 1.0    0.5 0.5 0.5 1.0   0 0 0 0.01;
+      airdrag     = 0.70;
+
+      particleLife=50;
+      particleLifeSpread=4;
+
+      numParticles=3;
+
+      particleSpeed=0;
+      particleSpeedSpread=2;
+      particleSize=1;
+      particleSizeSpread=40;
+
+      emitRot=90;
+      emitRotSpread=0;
+
+      directional=1;
+      useAirLos=1;
+      }
+	  water=1;
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [searingflame]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=gunshot;
+
+      colorMap = 0.9 0.5 0.4 0.04   0.9 0.4 0.1 0.01  0.5 0.1 0.1 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.01, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 0.5;
+
+      airdrag        = 0.8;
+      particleLife      = 10;
+      particleLifeSpread   = 5;
+      numParticles      = 2;
+      particleSpeed     = 5;
+      particleSpeedSpread  = 5;
+      particleSize      = 10;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+	  water=1;
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+
+   [groundflash]
+   {
+      flashSize = 12;
+      flashAlpha = 1;
+      circleGrowth = 3;
+      circleAlpha = 0.1;
+      ttl = 8;
+      color = 0.8, 0.1, 0.0;
+   }
+}
+
 [missiletrailsmall]
 {
 

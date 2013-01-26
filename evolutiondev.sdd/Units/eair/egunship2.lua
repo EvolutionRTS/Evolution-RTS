@@ -11,7 +11,7 @@ local unitDef = {
   airStrafe          = true,
   brakeRate          = 7,
   buildCostEnergy    = 0,
-  buildCostMetal     = 60,
+  buildCostMetal     = 45,
   buildTime          = 2.5,
   canAttack          = true,
   canDropFlare       = true,
@@ -118,7 +118,7 @@ Requires +7 Power]],
 local weaponDefs = {
   gunshipweapon = {
     badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 75,
+    AreaOfEffect       = 250,
     avoidFriendly      = false,
     cegTag             = "missiletrailsmall",
     collideFriendly    = false,
@@ -152,7 +152,7 @@ local weaponDefs = {
     tracks             = true,
     weaponAcceleration = 131,
     weaponTimer        = 100,
-    weaponVelocity     = 600,
+    weaponVelocity     = 1200,
 	customparams = {
 	  damagetype		= "gunship",  
     },      
