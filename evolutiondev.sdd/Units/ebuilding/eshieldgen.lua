@@ -15,7 +15,7 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Shield Generator - Anti-Nuke/Anti-LRPC Facility
+  description        = [[Shield Generator - Anti-Nuke/Anti-Artillery base shield Facility
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -128,10 +128,10 @@ local weaponDefs = {
     ShieldStartingPower = 0,
     Shieldenergyuse  = 0,
     Shieldradius     = 1500,
-    Shieldpower      = 5000,
-    Shieldpowerregen = 15,
+    Shieldpower      = 1000,
+    Shieldpowerregen = 25,
     Shieldpowerregenenergy = 10,
-    Shieldintercepttype = 1,
+    Shieldintercepttype = 4,
     Shieldgoodcolor  = "0.2 0.2 0.5",
     Shieldbadcolor   = "1 1 1",
     Shieldalpha      = 0.3,
