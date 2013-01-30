@@ -124,6 +124,7 @@ local weaponDefs = {
     collideFriendly    = false,
     explosionGenerator = "custom:BulletImpact3",
 	energypershot      = 13,
+	edgeEffectiveness  = 0.1,
     fireStarter        = 70,
     guidance           = false,
     id                 = 136,

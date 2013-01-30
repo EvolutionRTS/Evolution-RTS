@@ -70,7 +70,7 @@ Provides +1 Energy]],
   },
   customParams = {
   	death_sounds = "generic",
-    ProvideTech = "Power",
+    ProvideTech = "1 Power",
     ProvideTechRange = "400",
 	armortype   = "BUILDING",
 	normaltex = "unittextures/esolar2normal.png", 

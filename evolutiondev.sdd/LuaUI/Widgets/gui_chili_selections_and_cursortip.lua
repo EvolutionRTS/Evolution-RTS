@@ -94,7 +94,7 @@ local controls_icons = {}
 local stack_main, stack_leftbar
 local globalitems = {}
 
-local ttFontSize = 10
+local ttFontSize = 12
 
 local green = '\255\1\255\1'
 local cyan = '\255\1\255\255'
@@ -461,7 +461,8 @@ local function WriteGroupInfo()
 		caption = gi_str;
 		valign  = 'top';
 		fontSize = 12;
-		fontShadow = true;
+		fontshadow = true,
+		fontOutline = true,
 	}
 end
 
@@ -482,7 +483,7 @@ local function GetUnitDesc(unitID, ud)
 	local lang = WG.lang or 'en'
 	if lang == 'en' then
 		if unitID then
-			local tooltip = spGetUnitTooltip(unitID)
+			local tooltip = ud.tooltip
 			if windTooltips[ud.name] and not Spring.GetUnitRulesParam(unitID,"NotWindmill") and Spring.GetUnitRulesParam(unitID,"minWind") then
 				tooltip = tooltip .. "\nWind Range " .. string.format("%.1f", Spring.GetUnitRulesParam(unitID,"minWind")) .. " - " .. string.format("%.1f", Spring.GetGameRulesParam("WindMax") )
 			end
@@ -493,9 +494,8 @@ local function GetUnitDesc(unitID, ud)
 	local suffix = ('_' .. lang)
 	local desc = ud.customParams and ud.customParams['description' .. suffix] or ud.tooltip or 'Description error'
 	if unitID then
-		local endesc = ud.tooltip
 		
-		local tooltip = spGetUnitTooltip(unitID):gsub(endesc, desc)
+		local tooltip = ud.tooltip
 		if windTooltips[ud.name] and not Spring.GetUnitRulesParam(unitID,"NotWindmill") then
 			tooltip = tooltip .. "\nWind Range " .. string.format("%.1f", Spring.GetUnitRulesParam(unitID,"minWind")) .. " - " .. Spring.GetGameRulesParam("WindMax")
 		end
@@ -528,8 +528,8 @@ local function AddSelectionIcon(barGrid,unitid,defid,unitids,counts)
 		tooltip = ud.humanName .. " - " .. ud.tooltip.. "\n\255\0\255\0Click: Select \nRightclick: Deselect \nAlt+Click: Select One \nCtrl+click: Select Type \nMiddle-click: Goto";
 		file2   = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(UnitDefs[defid]));
 		file    = "#" .. defid;
-		keepAspect = false;
-		height  = 50 * (options.squarepics.value and 1 or (4/5));
+		keepAspect = true;
+		height  = 50;
 		--height  = 50;
 		width   = 50;
 		padding = {0,0,0,0}; --FIXME something overrides the default in image.lua!!!!
@@ -1149,7 +1149,8 @@ local function MakeStack(ttname, ttstackdata, leftbar)
 					width='100%',
 					valign="ascender", 
 					font={ size=curFontSize }, 
-					--fontShadow=true,
+					fontshadow = true,
+					fontOutline = true,
 				}
 				stack_children[#stack_children+1] = controls[ttname][item.name]
 			else
@@ -1160,10 +1161,12 @@ local function MakeStack(ttname, ttstackdata, leftbar)
 				controls[ttname][item.name] = Label:New{
 					fontShadow=true,
 					defaultHeight=0,
-					autosize=false,
+					autosize=true,
 					name=item.name,
 					caption = itemtext,
 					fontSize=curFontSize,
+					fontshadow = true,
+					fontOutline = true,
 					valign='center',
 					height=icon_size+5,
 					x=icon_size+5,
@@ -1284,7 +1287,7 @@ local function BuildTooltip2(ttname, ttdata, sel)
 			y = 0,
 			orientation='vertical',
 			centerItems = false,
-			width = 220,
+			width = 300,
 			padding = {0,0,0,0},
 			itemPadding = {1,0,0,0},
 			itemMargin = {0,0,0,0},
@@ -1334,8 +1337,8 @@ local function UpdateBuildpic( ud, globalitem_name, unitID )
 		globalitems[globalitem_name] = Image:New{
 			file = "#" .. ud.id,
 			file2 = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(ud)),
-			keepAspect = false,
-			height  = 55*(4/5),
+			keepAspect = true,
+			height  = 55,
 			width   = 55,
 			unitID = unitID,
 			
@@ -1429,7 +1432,7 @@ local function MakeToolTip_Unit(data, tooltip)
 			{ name= 'cost', icon = 'LuaUI/images/ibeam.png', text = cyan .. numformat((tt_ud and tt_ud.metalCost) or '0') },
 		},
 		main = {
-			{ name='uname', icon = iconPath, text = fullname .. '\n(' .. teamColor .. playerName .. white ..')', fontSize=2, },
+			{ name='uname', icon = iconPath, text = fullname .. '\n(' .. teamColor .. playerName .. white ..')', fontSize=2, fontshadow = true, fontOutline = true,},
 			{ name='utt', text = unittooltip, wrap=true },
 			{ name='hp', directcontrol = 'hp_unit', },
 			{ name='res', directcontrol = 'resources_unit' },
@@ -1468,7 +1471,7 @@ local function MakeToolTip_SelUnit(data, tooltip)
 			{ name= 'cost', icon = 'LuaUI/images/ibeam.png', text = cyan .. numformat((stt_ud and stt_ud.metalCost) or '0') },
 		},
 		main = {
-			{ name='uname', icon = iconPath, text = fullname, fontSize=2, },
+			{ name='uname', icon = iconPath, text = fullname, fontSize=2, fontshadow = true, fontOutline = true, },
 			{ name='utt', text = unittooltip, wrap=true },
 			{ name='hp', directcontrol = 'hp_selunit', },
 			stt_ud.builder and { name='bp', directcontrol = 'bp_selunit', } or {},
@@ -1536,7 +1539,7 @@ local function MakeToolTip_Feature(data, tooltip)
 			}
 			or nil,
 		main = {
-			{ name='uname', icon = iconPath, text = fullname .. ' (' .. teamColor .. playerName .. white ..')', fontSize=2, },
+			{ name='uname', icon = iconPath, text = fullname .. ' (' .. teamColor .. playerName .. white ..')', fontSize=2, fontshadow = true, fontOutline = true, wrap = true, },
 			{ name='utt', text = unittooltip, wrap=true },
 			(	options.featurehp.value
 					and { name='hp', directcontrol = (tt_ud and 'hp_corpse' or 'hp_feature'), } 
@@ -2003,7 +2006,7 @@ function widget:Initialize()
 		x = 0; 
 		bottom = 280;
         width = 550;
-		height = 135;
+		height = 165;
 		dockable = true;
 		draggable = false,
 		resizable = false,
@@ -2011,7 +2014,7 @@ function widget:Initialize()
 		tweakResizable = true,
 		padding = {0, 0, 0, 0},
         minWidth = 450, 
-		minHeight = 130,
+		minHeight = 160,
 		
 	}
     

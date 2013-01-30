@@ -401,9 +401,9 @@ if (gadgetHandler:IsSyncedCode()) then
 		for _,tech in pairs(techtable) do
 			local q=tech.quantity
 			if (q or 1)<0 then
-				neg=(neg and neg..separator or "Consumes ").."\255\255\64\255"..((q~=-1) and (-q.." ") or "")..tech.tech.."\255\255\255\255"
+				neg=(neg and neg..separator or "Consumes +").."\255\255\64\255"..((q~=-1) and (-q.." ") or "")..tech.tech.."\255\255\255\255"
 			else
-				pos=(pos and pos..separator or "Provides ").."\255\64\255\255"..((q and q~=1) and (q.." ") or "")..tech.tech.."\255\255\255\255"
+				pos=(pos and pos..separator or "Provides +").."\255\64\255\255"..((q and q~=1) and (q.." ") or "")..tech.tech.."\255\255\255\255"
 			end
 		end
 		return (neg or "")..(neg and pos and "   /   " or "")..(pos or "")..((neg or pos) and "\r" or "")

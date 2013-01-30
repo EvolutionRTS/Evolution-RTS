@@ -24,9 +24,7 @@ local unitDef = {
    collisionVolumeTest    = 1,
    collisionVolumeType    = "box",
   corpse             = "ammobox",
-  description        = [[Produces Units
- 
- Provides Powergrid]],
+  description        = [[Produces Units]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,

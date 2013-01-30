@@ -17,7 +17,8 @@ local featureDef	=	{
 	seqnamereclamate				="tree1reclamate",
 	indestructible				="0.0",
 	upright				=true,
-	energy				=100,
+	energy = 10,
+-- energy				=100,
 	customparams = { 
 		randomrotate		= "true", 
 	}, 

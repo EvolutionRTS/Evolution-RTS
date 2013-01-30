@@ -1,7 +1,7 @@
 function widget:GetInfo()
   return {
     name      = "Context Menu",
-    desc      = "v0.08 Chili Context Menu\nPress [Space] while clicking for a context menu.",
+    desc      = "v0.084 Chili Context Menu\nPress [Space] while clicking for a context menu.",
     author    = "CarRepairer",
     date      = "2009-06-02",
     license   = "GNU GPL, v2 or later",
@@ -37,6 +37,9 @@ local ignoreweapon, iconFormat = VFS.Include(LUAUI_DIRNAME .. "Configs/chilitip_
 local confdata = VFS.Include(LUAUI_DIRNAME .. "Configs/epicmenu_conf.lua", nil, VFSMODE)
 local color = confdata.color
 
+local iconTypesPath = LUAUI_DIRNAME.."Configs/icontypes.lua"
+local icontypes = VFS.FileExists(iconTypesPath) and VFS.Include(iconTypesPath)
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -71,18 +74,11 @@ local statswindows = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
+--[[
 options = {
-
-	noContextClick = {
-		name = 'Disable Context Menu',
-		type = 'bool',
-		value = false,		
-		advanced = true,
-	},
-	
 }
 options_path = 'Settings/Interface'
+--]]
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -105,15 +101,24 @@ if tobool(Spring.GetModOptions().marketandbounty) then
 end 
 
 
-function comma_value(amount)
-	local formatted = amount .. ''
-	local k
-	while true do  
-		formatted, k = formatted:gsub("^(-?%d+)(%d%d%d)", '%1,%2')
-		if (k==0) then
-			break
+function comma_value(amount, displayPlusMinus)
+	local formatted
+
+	-- amount is a string when ToSI is used before calling this function
+	if type(amount) == "number" then
+		if (amount ==0) then formatted = "0" else 
+			if (amount < 20 and (amount * 10)%10 ~=0) then 
+				if displayPlusMinus then formatted = strFormat("%+.1f", amount)
+				else formatted = strFormat("%.1f", amount) end 
+			else 
+				if displayPlusMinus then formatted = strFormat("%+d", amount)
+				else formatted = strFormat("%d", amount) end 
+			end 
 		end
+	else
+		formatted = amount .. ""
 	end
+
   	return formatted
 end
 
@@ -141,21 +146,27 @@ local function ToSI(num)
 end
 
 local function numformat(num)
-	return comma_value(ToSI(num))
+	return comma_value(num)
 end
 
-local function AdjustWindow(x,y, width, height)
-	if x + width > scrW * (.75) then
-		x = x - width - 20
-	else
-		x = x + 20
+local function AdjustWindow(window)
+	local nx
+	if (0 > window.x) then
+		nx = 0
+	elseif (window.x + window.width > screen0.width) then
+		nx = screen0.width - window.width
 	end
-	if y + height > scrH * (.75) then
-		y = y - height - 20
-	else
-		y = y + 20
+
+	local ny
+	if (0 > window.y) then
+		ny = 0
+	elseif (window.y + window.height > screen0.height) then
+		ny = screen0.height - window.height
 	end
-	return x,y
+
+	if (nx or ny) then
+		window:SetPos(nx,ny)
+	end
 end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -184,13 +195,22 @@ local function GetUnitDefByHumanName(humanName)
 	if (cached_udef ~= nil) then
 		return cached_udef
 	end
+	-- uncomment the altResult stuff to allow a non-exact match
+	--local altResult
 
 	for _,ud in pairs(UnitDefs) do
-		if (ud.humanName:find(humanName)) then
+		if (ud.humanName == humanName) then
 			UnitDefByHumanName_cache[humanName] = ud
 			return ud
+		--elseif (ud.humanName:find(humanName)) then
+		--	altResult = altResult or ud
 		end
 	end
+	--if altResult then
+	--	UnitDefByHumanName_cache[humanName] = altResult
+	--	return altResult
+	--end
+	
 	UnitDefByHumanName_cache[humanName] = false
 	return false
 end
@@ -212,20 +232,36 @@ local function getDescription(unitDef, lang)
 	return unitDef.customParams and unitDef.customParams['description' .. suffix] or unitDef.tooltip or 'Description error'
 end	
 
-
 local function weapons2Table(cells, weaponStats, ws, merw, index)
 	local cells = cells
 	local mainweapon = merw and merw[index]
-	if not ws.slaveTo then
+	if ws.isShield then
+		cells[#cells+1] = ws.wname
+		cells[#cells+1] = ''
+		cells[#cells+1] = ' - Strength:'
+		cells[#cells+1] = ws.power
+		cells[#cells+1] = ' - Regen:'
+		cells[#cells+1] = ws.regen
+		cells[#cells+1] = ' - Energy/second:'
+		cells[#cells+1] = ws.regenE
+		cells[#cells+1] = ' - Radius:'
+		cells[#cells+1] = ws.radius
+		
+		cells[#cells+1] = ''
+		cells[#cells+1] = ''
+	elseif not ws.slaveTo then
 		if mainweapon then
-			for _,index2 in ipairs(mainweapon) do
-				wsm = weaponStats[index2]
+			for i=1, #mainweapon do
+				wsm = weaponStats[mainweapon[i]]
 				ws.damw = ws.damw + wsm.bestTypeDamagew
 				ws.dpsw = ws.dpsw + wsm.dpsw
 				ws.dam = ws.dam + wsm.bestTypeDamage
 				ws.dps = ws.dps + wsm.dps
 			end
 		end
+		-- multiply paralyze damage by 3 due to armor.txt
+		ws.damw = ws.damw * 3
+		ws.dpsw = ws.dpsw * 3
 		
 		local dps_str, dam_str = '', ''
 		if ws.dps > 0 then
@@ -246,7 +282,7 @@ local function weapons2Table(cells, weaponStats, ws, merw, index)
 		cells[#cells+1] = ' - Damage:'
 		cells[#cells+1] = dam_str
 		cells[#cells+1] = ' - Reloadtime:'
-		cells[#cells+1] = numformat(ws.reloadtime,2) ..'s'
+		cells[#cells+1] = string.format("%.1f", ws.reloadtime) ..'s'
 		cells[#cells+1] = ' - Damage/second:'
 		cells[#cells+1] = dps_str
 		cells[#cells+1] = ' - Range:'
@@ -268,90 +304,107 @@ local function printWeapons(unitDef)
 	local wd = WeaponDefs
 	if not wd then return false end	
 	
-	for i, weapon in ipairs(unitDef.weapons) do
+	for i=1, #unitDef.weapons do
+		local weapon = unitDef.weapons[i]
 		local weaponID = weapon.weaponDef
 		local weaponDef = WeaponDefs[weaponID]
 	
 		local weaponName = weaponDef.description
 		
 		if (weaponName) then
-			
 			local wsTemp = {}
-			wsTemp.slaveTo = (weapon.slavedTo ~= 0) and weapon.slavedTo or nil
+			if weaponDef.isShield then
+				wsTemp.wname = weaponDef.description or 'NoName Weapon'
+				wsTemp.isShield = true
+				wsTemp.radius = weaponDef.shieldRadius
+				wsTemp.power = weaponDef.shieldPower
+				wsTemp.regen = weaponDef.shieldPowerRegen
+				wsTemp.regenE = weaponDef.shieldPowerRegenEnergy
+			else
+				wsTemp.slaveTo = (weapon.slavedTo ~= 0) and weapon.slavedTo or nil
 
-			if wsTemp.slaveTo then
-				merw[wsTemp.slaveTo] = merw[wsTemp.slaveTo] or {}
-				merw[wsTemp.slaveTo][#(merw[wsTemp.slaveTo])+1] = i
-			end
-			wsTemp.bestTypeDamage = 0
-			wsTemp.bestTypeDamagew = 0
-			wsTemp.paralyzer = weaponDef.paralyzer	
-			for key, val in pairs(weaponDef.damages) do
-				--[[
-				if (wsTemp.bestTypeDamage <= (damage+0) and not wsTemp.paralyzer)
-					or (wsTemp.bestTypeDamagew <= (damage+0) and wsTemp.paralyzer)
-					then
+				if wsTemp.slaveTo then
+					merw[wsTemp.slaveTo] = merw[wsTemp.slaveTo] or {}
+					merw[wsTemp.slaveTo][#(merw[wsTemp.slaveTo])+1] = i
+				end
+				wsTemp.bestTypeDamage = 0
+				wsTemp.bestTypeDamagew = 0
+				wsTemp.paralyzer = weaponDef.paralyzer	
+				for key, val in pairs(weaponDef.damages) do
+					--[[
+					if (wsTemp.bestTypeDamage <= (damage+0) and not wsTemp.paralyzer)
+						or (wsTemp.bestTypeDamagew <= (damage+0) and wsTemp.paralyzer)
+						then
 
-					if wsTemp.paralyzer then
-						wsTemp.bestTypeDamagew = (damage+0)
-					else
-						wsTemp.bestTypeDamage = (damage+0)
-					end
-				--]]
-				if key == 0 then
-					if wsTemp.paralyzer then
-						wsTemp.bestTypeDamagew = val 
-					else
-						wsTemp.bestTypeDamage = val
-					end
-					
-					wsTemp.burst = weaponDef.burst or 1
-					wsTemp.projectiles = weaponDef.projectiles or 1
-					wsTemp.dam = 0
-					wsTemp.damw = 0
-					if wsTemp.paralyzer then
-						wsTemp.damw = wsTemp.bestTypeDamagew * wsTemp.burst * wsTemp.projectiles
-					else
-						wsTemp.dam = wsTemp.bestTypeDamage * wsTemp.burst * wsTemp.projectiles
-					end
-					wsTemp.reloadtime = weaponDef.reload or ''
-					wsTemp.airWeapon = weaponDef.toAirWeapon or false
-					wsTemp.range = weaponDef.range or ''
-					wsTemp.wname = weaponDef.description or 'NoName Weapon'
-					wsTemp.dps = 0
-					wsTemp.dpsw = 0
-					if  wsTemp.reloadtime ~= '' and wsTemp.reloadtime > 0 then
 						if wsTemp.paralyzer then
-							wsTemp.dpsw = math.floor(wsTemp.damw/wsTemp.reloadtime + 0.5)
+							wsTemp.bestTypeDamagew = (damage+0)
 						else
-							wsTemp.dps = math.floor(wsTemp.dam/wsTemp.reloadtime + 0.5)
+							wsTemp.bestTypeDamage = (damage+0)
 						end
+					--]]
+					if key == 0 then
+						if wsTemp.paralyzer then
+							wsTemp.bestTypeDamagew = val 
+						else
+							wsTemp.bestTypeDamage = val
+						end
+						
+						wsTemp.burst = weaponDef.salvoSize or 1
+						wsTemp.projectiles = weaponDef.projectiles or 1
+						wsTemp.dam = 0
+						wsTemp.damw = 0
+						if wsTemp.paralyzer then
+							wsTemp.damw = wsTemp.bestTypeDamagew * wsTemp.burst * wsTemp.projectiles
+						else
+							wsTemp.dam = wsTemp.bestTypeDamage * wsTemp.burst * wsTemp.projectiles
+						end
+						wsTemp.reloadtime = weaponDef.reload or ''
+						wsTemp.airWeapon = weaponDef.toAirWeapon or false
+						wsTemp.range = weaponDef.range or ''
+						wsTemp.wname = weaponDef.description or 'NoName Weapon'
+						wsTemp.dps = 0
+						wsTemp.dpsw = 0
+						if  wsTemp.reloadtime ~= '' and wsTemp.reloadtime > 0 then
+							if wsTemp.paralyzer then
+								wsTemp.dpsw = math.floor(wsTemp.damw/wsTemp.reloadtime + 0.5)
+							else
+								wsTemp.dps = math.floor(wsTemp.dam/wsTemp.reloadtime + 0.5)
+							end
+						end
+						--echo('test', unitDef.unitname, wsTemp.wname, wsTemp.bestTypeDamage, i)
+						if wsTemp.dam > bestDamage then
+							bestDamage = wsTemp.dam	
+							bestDamageIndex = i
+						end
+						if wsTemp.damw > bestDamage then
+							bestDamage = wsTemp.damw
+							bestDamageIndex = i
+						end
+						
 					end
-					--echo('test', unitDef.unitname, wsTemp.wname, wsTemp.bestTypeDamage, i)
-					if wsTemp.dam > bestDamage then
-						bestDamage = wsTemp.dam	
-						bestDamageIndex = i
-					end
-					if wsTemp.damw > bestDamage then
-						bestDamage = wsTemp.damw
-						bestDamageIndex = i
-					end
-					
 				end
 			end
-			if not wsTemp.wname then print("BAD", unitDef.unitname) return false end -- stupid negative in corhurc is breaking me.
-			weaponStats[i] = wsTemp
+			if not wsTemp.wname 
+				or wsTemp.wname:find('fake')
+				or wsTemp.wname:find('Fake')
+				or wsTemp.wname:find('NoWeapon')
+				then 
+				weaponStats[i] = false
+			else
+				weaponStats[i] = wsTemp
+			end 
 		end
 	end
 	
 	local cells = {}
 		
 	for index,ws in pairs(weaponStats) do
-		if not ignoreweapon[unitDef.name] or not ignoreweapon[unitDef.name][index] then
+		--if not ignoreweapon[unitDef.name] or not ignoreweapon[unitDef.name][index] then
+		if ws then
 			cells = weapons2Table(cells, weaponStats, ws, merw, index)
 		end
+		--end
 	end
-		
 	
 	return cells
 end
@@ -361,15 +414,16 @@ local function printunitinfo(ud, lang, buttonWidth)
 		Image:New{
 			file2 = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(ud)),
 			file = "#" .. ud.id,
-			keepAspect = false;
-			height  = 40*(4/5);
+			keepAspect = true;
+			height  = 40;
 			width   = 40;
 		},
 	}
 	if ud.iconType ~= 'default' then
 		icons[#icons + 1] = 
 			Image:New{
-				file='icons/'.. ud.iconType ..iconFormat,
+				file=icontypes and icontypes[(ud and ud.iconType or "default")].bitmap
+					or 'icons/'.. ud.iconType ..iconFormat,
 				height=40,
 				width=40,
 			}
@@ -384,19 +438,30 @@ local function printunitinfo(ud, lang, buttonWidth)
 		} 
 	
 	local statschildren = {}
+
+	-- stuff for modular commanders
+	local commModules, commCost
+	if ud.customParams.commtype then
+		commModules = WG.GetCommModules and WG.GetCommModules(ud.id)
+		commCost = ud.customParams.cost or (WG.GetCommUnitInfo and WG.GetCommUnitInfo(ud.id) and WG.GetCommUnitInfo(ud.id).cost)
+	end
+	local cost = numformat(ud.metalCost)
+	if commCost then
+		cost = cost .. ' (' .. numformat(commCost) .. ')'
+	end
 	
 	statschildren[#statschildren+1] = Label:New{ caption = 'STATS', textColor = color.stats_header, }
 	statschildren[#statschildren+1] = Label:New{ caption = '', textColor = color.stats_header, }
 
 	statschildren[#statschildren+1] = Label:New{ caption = 'Cost: ', textColor = color.stats_fg, }
-	statschildren[#statschildren+1] = Label:New{ caption = numformat(ud.metalCost), textColor = color.stats_fg, }
+	statschildren[#statschildren+1] = Label:New{ caption = cost, textColor = color.stats_fg, }
 	
 	statschildren[#statschildren+1] = Label:New{ caption = 'Max HP: ', textColor = color.stats_fg, }
 	statschildren[#statschildren+1] = Label:New{ caption = numformat(ud.health), textColor = color.stats_fg, }
 		
 	if ud.speed > 0 then
 		statschildren[#statschildren+1] = Label:New{ caption = 'Speed: ', textColor = color.stats_fg, }
-		statschildren[#statschildren+1] = Label:New{ caption = numformat(ud.speed,2), textColor = color.stats_fg, }
+		statschildren[#statschildren+1] = Label:New{ caption = numformat(ud.speed/Game.gameSpeed,2), textColor = color.stats_fg, }
 	end
 	
 	if ud.energyMake > 0 then
@@ -413,6 +478,18 @@ local function printunitinfo(ud, lang, buttonWidth)
 		statschildren[#statschildren+1] = Label:New{ caption = numformat(ud.buildSpeed,2), textColor = color.stats_fg, }
 	end
 	
+
+	if commModules then
+		statschildren[#statschildren+1] = Label:New{ caption = '', textColor = color.stats_header,}
+		statschildren[#statschildren+1] = Label:New{ caption = '', textColor = color.stats_header,}
+		statschildren[#statschildren+1] = Label:New{ caption = 'MODULES', textColor = color.stats_header, }
+		statschildren[#statschildren+1] = Label:New{ caption = '', textColor = color.stats_header,}
+		for i=1, #commModules do
+			statschildren[#statschildren+1] = Label:New{ caption = commModules[i], textColor = color.stats_fg,}
+			statschildren[#statschildren+1] = Label:New{ caption = '', textColor = color.stats_fg,}
+		end	
+	end
+	
 	
 	local cells = printWeapons(ud)
 	
@@ -423,8 +500,8 @@ local function printunitinfo(ud, lang, buttonWidth)
 		
 		statschildren[#statschildren+1] = Label:New{ caption = 'WEAPONS', textColor = color.stats_header,}
 		statschildren[#statschildren+1] = Label:New{ caption = '', textColor = color.stats_header,}
-		for _,v in ipairs(cells) do
-			statschildren[#statschildren+1] = Label:New{ caption = v, textColor = color.stats_fg, }
+		for i=1, #cells do
+			statschildren[#statschildren+1] = Label:New{ caption = cells[i], textColor = color.stats_fg, }
 		end
 	end
 	
@@ -442,7 +519,9 @@ local function printunitinfo(ud, lang, buttonWidth)
 	local stack_stats = Grid:New{
 		columns=2,
 		autoArrangeV  = false,
+		--height = (#statschildren/2)*statschildren[1].height,
 		height = (#statschildren/2)*15,
+		
 		width = '100%',
 		children = statschildren,
 		y = 1,
@@ -460,7 +539,8 @@ local function printunitinfo(ud, lang, buttonWidth)
 		right = 60,
 		x = 1,
 		--width = 200,
-		height = '100%',
+		--height = '100%',
+		autosize=true,
 		resizeItems = false,
 		children = { helptextbox, stack_stats, },
 	}
@@ -475,7 +555,8 @@ local function printunitinfo(ud, lang, buttonWidth)
 				padding = {1,1,1,1},
 				itemPadding = {1,1,1,1},
 				itemMargin = {1,1,1,1},
-				height = 400 ,
+				--height = 400 ,
+				autosize=true,
 				y = 1,
 				width = '100%',
 				children = { helptext_stack, stack_icons, },
@@ -544,11 +625,12 @@ end
 
 local function MakeStatsWindow(ud, x,y)
 	hideWindow(window_unitcontext)
+
 	local y = scrH-y
 	local x = x
 	
-	local window_width = 300
-	local window_height = 300
+	local window_width = 450
+	local window_height = 450
 
 	local num = #statswindows+1
 	
@@ -575,8 +657,6 @@ local function MakeStatsWindow(ud, x,y)
 		}
 	}
 
-	x,y = AdjustWindow(x,y, window_width, window_height)
-
 	if window_unitstats then
 		window_unitstats:Dispose()
 	end
@@ -584,18 +664,20 @@ local function MakeStatsWindow(ud, x,y)
 	statswindows[num] = Window:New{  
 		x = x,  
 		y = y,  
-		clientWidth  = window_width,
-		clientHeight = window_height,
+		width  = window_width,
+		height = window_height,
 		resizable = true,
 		parent = screen0,
 		backgroundColor = color.stats_bg, 
 		
-		minimumSize = {250,300},
+		minWidth = 250,
+		minHeight = 300,
 		
 		caption = ud.humanName ..' - '.. getDescription(ud, WG.lang or 'en'), 
 		
 		children = children,
 	}
+	AdjustWindow(statswindows[num])
 	
 end
 
@@ -620,7 +702,8 @@ local function PriceWindow(unitID, action)
 	local grid_children = {}
 	
 	local dollar_amounts = {50,100,200,500,1000,2000,5000,10000, 0}
-	for _, dollar_amount in ipairs(dollar_amounts) do
+	for i=1, #dollar_amounts do
+		local dollar_amount = dollar_amounts[i]
 		local caption, func
 		if action == 'bounty' then
 			if dollar_amount ~= 0 then
@@ -664,7 +747,6 @@ local function PriceWindow(unitID, action)
 	children[#children+1] =  CloseButton(window_width)
 	
 	local window_height = (B_HEIGHT) * (#children-1) + grid_height
-	--echo ('winheight',window_height)
 		
 	local stack1 = StackPanel:New{
 		centerItems = false,
@@ -751,7 +833,6 @@ local function MakeUnitContextMenu(unitID,x,y)
 	end
 
 	
-	--echo(window_height)
 	if ceasefires and myAlliance ~= alliance then
 		window_height = window_height + B_HEIGHT*2
 		children[#children+1] = Button:New{ caption = 'Vote for ceasefire', OnMouseUp = { function() spSendLuaRulesMsg('cf:y'..alliance) end }, width=window_width}
@@ -761,7 +842,6 @@ local function MakeUnitContextMenu(unitID,x,y)
 	
 	local window_height = (B_HEIGHT)* #children
 	
-	x,y = AdjustWindow(x,y,window_width, window_height)
 	if window_unitcontext then
 		window_unitcontext:Dispose()
 	end
@@ -788,6 +868,7 @@ local function MakeUnitContextMenu(unitID,x,y)
 		backgroundColor = color.context_bg, 
 		children = {stack1},
 	}
+	AdjustWindow(window_unitcontext)
 end
 
 --------------------------------------------------------------------------------
@@ -800,13 +881,13 @@ function widget:MousePress(x,y,button)
 	
 	local alt, ctrl, meta, shift = spGetModKeyState()
 	
-	if not options.noContextClick.value and meta then
+	if meta then
 		local cur_ttstr = screen0.currentTooltip or spGetCurrentTooltip()
 		local ud = tooltipBreakdown(cur_ttstr)
 		
 		local _,cmd_id = Spring.GetActiveCommand()
 		
-		if cmd_id and cmd_id < 0 then
+		if cmd_id then
 			return false
 		end
 		
@@ -818,14 +899,25 @@ function widget:MousePress(x,y,button)
 		local type, data = spTraceScreenRay(x, y)
 		if (type == 'unit') then
 			local unitID = data
-			MakeUnitContextMenu(unitID,x,y)
+			local ud = UnitDefs[Spring.GetUnitDefID(unitID)]
+			if ud then
+				MakeStatsWindow(ud,x,y)
+			end
+			-- FIXME enable later when does not show useless info MakeUnitContextMenu(unitID,x,y)
 			return true
 		elseif (type == 'feature') then
 			local fdid = Spring.GetFeatureDefID(data)
 			local fd = fdid and FeatureDefs[fdid]
 			local feature_name = fd and fd.name
 			if feature_name then
-				local live_name = feature_name:gsub('([^_]*).*', '%1')
+				
+				local live_name
+				if fd and fd.customParams and fd.customParams.unit then
+					live_name = fd.customParams.unit
+				else
+					live_name = feature_name:gsub('([^_]*).*', '%1')
+				end
+				
 				local ud = UnitDefNames[live_name]
 				if ud then
 					MakeStatsWindow(ud,x,y)
