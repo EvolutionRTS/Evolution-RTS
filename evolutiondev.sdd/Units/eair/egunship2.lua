@@ -29,7 +29,7 @@ local unitDef = {
   corpse             = "ammobox",
   cruiseAlt          = 300,
   description        = [[Gunship Tank Destroyer
-Light
+Light, 400% damage vs Light and Armored units
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -158,7 +158,7 @@ local weaponDefs = {
 	  damagetype		= "gunship",  
     },      
     damage = {
-      default           = 130,
+      default           = 32.5,
     },
   },
 }

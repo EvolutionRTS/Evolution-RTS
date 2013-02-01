@@ -210,8 +210,8 @@ local function BackwardCompability(wdName,wd)
 				wd.damage.BUILDING  = 		weapondamage*4
 				
 			elseif (damagetypelower	== "gunship") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*2
+				wd.damage.ARMORED = 		weapondamage*4
+				wd.damage.LIGHT = 			weapondamage*4
 				wd.damage.BUILDING  = 		weapondamage*1
 				
 -- all terrain
