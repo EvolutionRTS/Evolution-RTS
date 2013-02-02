@@ -58,6 +58,7 @@ local unitDef = {
   maxWaterDepth      = 0,
   metalStorage       = 0,
   moverate1          = "8",
+  moveState			 = "2",
   name               = "Th(e) Originator",
   objectName         = "eairengineer.s3o",
   radarDistance      = 0,

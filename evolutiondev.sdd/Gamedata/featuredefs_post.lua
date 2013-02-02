@@ -83,6 +83,12 @@ for name, fd in pairs(FeatureDefs) do
 	end
 end
 
+for name, fd in pairs(FeatureDefs) do
+	if fd.name ~= "ammobox" then
+		fd.metal = 0
+		fd.energy = 10
+	end
+end
 
 if ( spGetModOptions().comm  == "sandbox"  or  spGetModOptions().comm  == "feature"  ) then
 	local FeddyBuild = DEFS.unitDefs["eairengineer"].buildoptions

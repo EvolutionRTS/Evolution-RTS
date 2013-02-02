@@ -48,7 +48,7 @@ Light
   metalmake          = 0,
   metalStorage       = 0,
   movementClass      = "HOVERTANK4",
-  moveState			 = "0",
+  moveState			 = "2",
   name               = "(O)RB",
   objectName         = "eorb.s3o",
   radarDistance      = 0,
