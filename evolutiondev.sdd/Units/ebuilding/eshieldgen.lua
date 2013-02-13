@@ -120,7 +120,6 @@ Requires:
 
 local weaponDefs = {
   shield = {
-    IsShield         = true,
     Smartshield      = true,
     Exteriorshield   = true,
     Visibleshield    = true,
@@ -144,7 +143,6 @@ local weaponDefs = {
     },
   },
   invisiblenukeshield = {
-    IsShield         = true,
     Smartshield      = true,
     Exteriorshield   = true,
     Visibleshield    = true,
@@ -188,7 +186,7 @@ local weaponDefs = {
     interceptor        = true,
     largeBeamLaser     = true,
     lineOfSight        = true,
-    name               = "Laser Battery",
+    name               = "fake",
     range              = 0,
     reloadtime         = 300,
     WeaponType         = "BeamLaser",

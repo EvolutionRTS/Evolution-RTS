@@ -113,7 +113,6 @@ Requires +10 Power]],
 
 local weaponDefs = {
   allterrshield = {
-    IsShield         = true,
     Smartshield      = true,
     Exteriorshield   = true,
     Visibleshield    = true,
