@@ -4,7 +4,7 @@
 function widget:GetInfo()
   return {
     name      = "Shoot Now!",
-    desc      = "Orders a unit to fire its weapon at the ground below using an action.",
+    desc      = "v0.02 Orders a unit to fire its weapon at the ground below using an action.",
     author    = "CarRepairer",
     date      = "2010-04-18",
     license   = "GNU GPL, v2 or later",
@@ -19,6 +19,8 @@ end
 --------------------------------------------------------------------------------
 
 local echo = Spring.Echo
+
+VFS.Include("LuaRules/Configs/customcmds.h.lua")
 
 local unittypes = {
 	[UnitDefNames['ecommander'].id] = 1,
@@ -52,6 +54,34 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+
+
+function widget:CommandsChanged()
+	for _, unitID in ipairs(Spring.GetSelectedUnits()) do
+		local udid = Spring.GetUnitDefID(unitID)
+		if unittypes[udid] then
+			table.insert(widgetHandler.customCommands, {
+				id      = CMD_SHOOTNOW,
+				name	= 'Fire Now!',
+				type    = CMDTYPE.ICON,
+				tooltip = 'Fire weapon now.',
+				cursor  = 'Attack',
+				action  = 'fireweapon',
+				params  = { }, 
+				texture = 'LuaUI/Images/commands/emp.png',
+		
+				pos = {CMD.MOVE_STATE,CMD.FIRE_STATE, }, 
+			})
+			
+		end
+	end
+end
+function widget:CommandNotify(cmdID, cmdParams, cmdOptions)
+	if cmdID == CMD_SHOOTNOW then
+		FireWeapon()
+		return true
+	end
+end
 function widget:Initialize()
 	AddAction("fireweapon", FireWeapon, nil, "t")
 	-- replace default key binds
