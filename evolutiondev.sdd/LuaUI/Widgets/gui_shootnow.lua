@@ -84,11 +84,13 @@ function widget:CommandNotify(cmdID, cmdParams, cmdOptions)
 end
 function widget:Initialize()
 	AddAction("evocommemp", EvoCommEMP(, nil, "t")
-	-- replace default key binds
-	Spring.SendCommands({
-		"unbindkeyset d",
-	})
-	Spring.SendCommands("bind d evocommemp")
+	local uikey_hotkey_strs = Spring.GetActionHotKeys("evocommemp")
+	if not (uikey_hotkey_strs and uikey_hotkey_strs[1]) then
+		Spring.SendCommands({
+			"unbindkeyset d",
+		})
+		Spring.SendCommands("bind d evocommemp")
+	end
 end
 
 function widget:Shutdown()
