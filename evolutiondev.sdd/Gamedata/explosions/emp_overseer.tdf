@@ -135,7 +135,7 @@
       {
    alwaysVisible=1;
          ttl = 120;
-         flashSize = 400;
+         flashSize = 700;
          flashAlpha = 0.9;
 
          circleGrowth = 6;

@@ -62,9 +62,9 @@ function widget:CommandsChanged()
 		if unittypes[udid] then
 			table.insert(widgetHandler.customCommands, {
 				id      = CMD_SHOOTNOW,
-				name	= 'Fire Now!',
+				name	= 'EMP',
 				type    = CMDTYPE.ICON,
-				tooltip = 'Fire weapon now.',
+				tooltip = 'Activate Overseer EMP Defense',
 				cursor  = 'Attack',
 				action  = 'evocommemp',
 				params  = { }, 

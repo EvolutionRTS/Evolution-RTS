@@ -244,11 +244,11 @@
    [groundflash]
       {
    alwaysVisible=1;
-         ttl = 6;
+         ttl = 40;
          flashSize = 50;
          flashAlpha = 0.9;
 
-         circleGrowth = 6;
+         circleGrowth = 2;
          circleAlpha = 0.6;
 
          color = 1, 0.5, 0;

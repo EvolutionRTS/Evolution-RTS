@@ -69,7 +69,7 @@
 		sizeMod		= 1.0;
 
 		airdrag			= 0.8;
-		particleLife		= 5;
+		particleLife		= 50;
 		particleLifeSpread	= 5;
 		numParticles		= 8;
 		particleSpeed		= 2;
@@ -110,7 +110,7 @@
 		particleLife		= 5;
 		particleLifeSpread	= 8;
 		numParticles		= 8;
-		particleSpeed		= 8;
+		particleSpeed		= 20;
 		particleSpeedSpread	= 3;
 		particleSize		= 10;
 		particleSizeSpread	= 0;

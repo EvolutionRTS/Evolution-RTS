@@ -25,7 +25,7 @@
 		class=CSimpleParticleSystem;
 		[properties]
 		{
-		sizeGrowth=0.20;
+		sizeGrowth=0.50;
 		sizeMod=1.0;
 		pos=0, 1, 0; 
 		gravity=0, 0, 0;
@@ -36,10 +36,10 @@
 		colorMap=0.7 0.5 0.2 0.1 0.15 0.15 0.15 0.2 0.0 0.0 0.0 0.01;
 
 		particleLifeSpread=15; 
-		particleSpeedSpread=1;  
+		particleSpeedSpread=5;  
 		particleSizeSpread=1;   
 		
-		particleLife=140;
+		particleLife=200;
 		numParticles=4; 
 		particleSpeed=2; 
 		particleSize=13;
@@ -63,7 +63,7 @@
 		class=CSimpleParticleSystem;
 		[properties]
 		{
-		sizeGrowth=0.20;
+		sizeGrowth=0.50;
 		sizeMod=1.0;
 		pos=0, 1, 0; 
 		gravity=0, 0, 0;
@@ -74,7 +74,7 @@
 		colorMap=0.6 0.35 0.2 0.1 0.1 0.1 0.1 0.2 0.0 0.0 0.0 0.01;
 
 		particleLifeSpread=15; 
-		particleSpeedSpread=1;  
+		particleSpeedSpread=10;  
 		particleSizeSpread=1;   
 		
 		particleLife=140;

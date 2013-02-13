@@ -369,14 +369,14 @@
    [groundflash]
       {
    alwaysVisible=1;
-         ttl = 45;
-         flashSize = 120;
+         ttl = 200;
+         flashSize = 1000;
          flashAlpha = 0.9;
 
-         circleGrowth = 8;
+         circleGrowth = 4;
          circleAlpha = 0.5;
 
-         color = 0.0, 0.3, 1;
+         color = 1, 0.7, 0.3;
 
    air=1;
       ground=1;
