@@ -19,6 +19,7 @@ local modrules  = {
     allowPushingEnemyUnits   = true; -- defaults to false
     allowCrushingAlliedUnits = false; -- defaults to false
     allowUnitCollisionDamage = true; -- defaults to false
+	allowGroundUnitGravity	=	true,
   },
   
   construction = {
