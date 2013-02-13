@@ -24,7 +24,6 @@ VFS.Include("LuaRules/Configs/customcmds.h.lua")
 
 local unittypes = {
 	[UnitDefNames['ecommander'].id] = 1,
-	[UnitDefNames['eorb'].id] 		= 2,
 }
 
 --------------------------------------------------------------------------------
@@ -38,7 +37,7 @@ local function RemoveAction(cmd, types)
 end
 
 
-local function FireWeapon()
+local function EvoCommEMP()
 	local selUnits = Spring.GetSelectedUnits()
 	for _, unitID in ipairs(selUnits) do
 		local udid = Spring.GetUnitDefID(unitID)
@@ -67,7 +66,7 @@ function widget:CommandsChanged()
 				type    = CMDTYPE.ICON,
 				tooltip = 'Fire weapon now.',
 				cursor  = 'Attack',
-				action  = 'fireweapon',
+				action  = 'evocommemp',
 				params  = { }, 
 				texture = 'LuaUI/Images/commands/emp.png',
 		
@@ -79,22 +78,22 @@ function widget:CommandsChanged()
 end
 function widget:CommandNotify(cmdID, cmdParams, cmdOptions)
 	if cmdID == CMD_SHOOTNOW then
-		FireWeapon()
+		EvoCommEMP(()
 		return true
 	end
 end
 function widget:Initialize()
-	AddAction("fireweapon", FireWeapon, nil, "t")
+	AddAction("evocommemp", EvoCommEMP(, nil, "t")
 	-- replace default key binds
 	Spring.SendCommands({
 		"unbindkeyset d",
 	})
-	Spring.SendCommands("bind d fireweapon")
+	Spring.SendCommands("bind d evocommemp")
 end
 
 function widget:Shutdown()
-	RemoveAction("fireweapon")
-	Spring.SendCommands("unbindaction fireweapon")
+	RemoveAction("evocommemp")
+	Spring.SendCommands("unbindaction evocommemp")
 end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
