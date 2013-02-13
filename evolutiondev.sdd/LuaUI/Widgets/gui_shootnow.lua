@@ -45,7 +45,8 @@ local function FireWeapon()
 		if unittypes[udid] then
 			local x,_,z = Spring.GetUnitPosition(unitID)
 			local y = Spring.GetGroundHeight(x,z)
-			Spring.GiveOrderToUnit(unitID, CMD.INSERT,{0,CMD.ATTACK,CMD.OPT_INTERNAL,x,y,z},{"alt"})
+			--Spring.GiveOrderToUnit(unitID, CMD.INSERT,{0,CMD.ATTACK,CMD.OPT_INTERNAL,x,y,z},{"alt"})
+			Spring.GiveOrderToUnit(unitID, CMD.INSERT,{0,CMD.ATTACK,CMD.OPT_ALT,x,y,z},{"alt"})
 			--echo 'attacking'
 		end
 	end
