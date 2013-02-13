@@ -264,7 +264,7 @@ local custom_cmd_actions = {
 	find_pad=1,
 	embark=1,
 	disembark=1,
-	fireweapon=1,
+	evocommemp=1,
 	
 	-- terraform
 	rampground=1,

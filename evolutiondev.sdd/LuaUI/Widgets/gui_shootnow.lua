@@ -78,12 +78,12 @@ function widget:CommandsChanged()
 end
 function widget:CommandNotify(cmdID, cmdParams, cmdOptions)
 	if cmdID == CMD_SHOOTNOW then
-		EvoCommEMP(()
+		EvoCommEMP()
 		return true
 	end
 end
 function widget:Initialize()
-	AddAction("evocommemp", EvoCommEMP(, nil, "t")
+	AddAction("evocommemp", EvoCommEMP, nil, "t")
 	local uikey_hotkey_strs = Spring.GetActionHotKeys("evocommemp")
 	if not (uikey_hotkey_strs and uikey_hotkey_strs[1]) then
 		Spring.SendCommands({
