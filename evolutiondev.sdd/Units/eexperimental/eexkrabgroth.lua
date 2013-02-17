@@ -110,7 +110,7 @@ Requires +40 Power]],
 local weaponDefs = {
   heavybeamweapon = {
     badTargetCategory = [[ARMORED LIGHT]],
-    AreaOfEffect       = 200,
+    AreaOfEffect       = 10,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 1,
@@ -154,7 +154,7 @@ local weaponDefs = {
   },
   concussioncannon = {
     accuracy           = 1,
-    AreaOfEffect       = 50,
+    AreaOfEffect       = 10,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,
