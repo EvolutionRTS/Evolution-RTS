@@ -30,7 +30,7 @@
    	
 		[properties]
       		{
-		alwaysVisible=1;
+
 		texture=3explo;
       		heat = 10;
       		maxheat = 15;
@@ -54,7 +54,7 @@
 
 		[properties]
 		{
-		alwaysVisible=1;
+
 		Texture=flashside1;
 
 		colorMap	= 1.0 1.0 1.0 0.04	0.5 0.9 0.2 0.01	0.1 0.8 0.1 0.01;
@@ -92,7 +92,7 @@
 
 		[properties]
 		{
-		alwaysVisible=1;
+
 		Texture=randdots;
 
 		colorMap	=0.8 0.8 0.2 0.01	0.2 0.8 0.2 0.01	0.0 0.0 0.0 0.01;
@@ -127,7 +127,7 @@
 
 	[groundflash]
    	{
-	alwaysVisible=1;
+
       	ttl = 30;
       	flashSize = 120;
       	flashAlpha = 0.8;

@@ -257,7 +257,7 @@
 		emitRot=80;
 		emitRotSpread=0; 
 		directional=0; 
-		alwaysVisible=1;
+
 
 		}
 	air=1;
@@ -295,7 +295,6 @@
 		emitRot=80;
 		emitRotSpread=5; 
 		directional=0; 
-		alwaysVisible=1;
 
 		}
 	air=1;
