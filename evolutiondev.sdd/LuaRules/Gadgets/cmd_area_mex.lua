@@ -140,7 +140,7 @@ function gadget:Initialize()
     Spring.SendCommands("bind o areamex")
 	mexSpot = GetMetalMap()
 	if not mexSpot then
-		Spring.Echo("Mex spot detection failed")
+		Spring.Echo("Area Mex: Mex spot detection failed")
 		gadgetHandler:RemoveGadget()
 		return 
 	end
