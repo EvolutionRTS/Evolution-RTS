@@ -196,7 +196,7 @@ local function SanitiseSpots(spots)
 			local metal
 			metal, spot.x, spot.z = IntegrateMetal(spot.x, spot.z)
 			spot.y = spGetGroundHeight(spot.x, spot.z)
-			spot.metal = metalValueOverride or spot.metal or (metal > 0 and metal) or DEFAULT_MEX_INCOME
+			spot.metal = 1
 			i = i + 1
 		else
 			spot[i] = spot[#spots]
