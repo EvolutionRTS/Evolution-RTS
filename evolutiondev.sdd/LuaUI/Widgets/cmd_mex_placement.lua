@@ -152,6 +152,16 @@ local spotData = {}
 local wasSpectating = spGetSpectatingState()
 local metalSpotsNil = true
 
+options_path = 'Game'
+options_order = { 'alwaysDisplayMexes', }
+	options = {
+		alwaysDisplayMexes = {
+			name = 'Show metal spots',
+			hotkey = {key='f4', mod=''},
+			type ='bool',
+			value = false,
+	},
+}
 ------------------------------------------------------------
 -- Functions
 ------------------------------------------------------------
@@ -431,7 +441,7 @@ function widget:UnitTaken(unitID, unitDefID, oldTeamID, teamID)
 end
 
 local function Initialize() 
-
+	Spring.SendCommands("unbindaction showmetalmap")
 	local units = spGetAllUnits()
 	for i, unitID in ipairs(units) do 
 		local unitDefID = spGetUnitDefID(unitID)
@@ -625,7 +635,7 @@ function widget:DrawWorld()
 	
 	-- Check command is to build a mex
 	local _, cmdID = spGetActiveCommand()
-	local peruse = spGetGameFrame() < 1 or spGetMapDrawMode() == 'metal' or (WG.GetWidgetOption and WG.GetWidgetOption('Chili Minimap','Settings/Interface/Minimap','alwaysDisplayMexes').value)
+	local peruse = spGetGameFrame() < 1 or spGetMapDrawMode() == 'metal' or options.alwaysDisplayMexes.value
 	
 	local mx, my = spGetMouseState()
 	local _, pos = spTraceScreenRay(mx, my, true)
