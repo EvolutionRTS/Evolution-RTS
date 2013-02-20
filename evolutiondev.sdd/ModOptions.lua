@@ -30,19 +30,6 @@ local options= {
                     -- (step <= 0) means that there is no quantization
   },
 	{
-		key="comm",
-		name="Game Mode",
-		desc="Choose the type of game",
-		type="list",
-		def="std",
-		items = {
-			{ key = "std", name = "Skirmish", desc = "Commander"  },
-			{ key = "sandbox", name = "Sandbox", desc = "Testing!" },
-			{ key = "feature", name = "Feature Placer", desc = "Not for gameplay, used for map development." }
-			--{ key = "con", name = "Standard Constructor", desc = "A regular T1 construction unit" }
-		},
-	},
-	{
 		key    = "classicrtsmode",
 		name   = "Classic RTS Mode",
 		desc   = "Sets buildtimes to metalcost, resulting in Classic TA Style Building",
