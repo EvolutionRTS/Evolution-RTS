@@ -564,10 +564,10 @@ function calcMainMexDrawList()
 		
 		glPushMatrix()
 		
-		glLineWidth(spot.metal*1.5)
+		glLineWidth(2)
 		glColor(mexColor)
 		glDepthTest(true)
-		glDrawGroundCircle(x, 1, z, 40, 32)
+		glDrawGroundCircle(x, 5, z, 40, 32)
 		
 		glRotate(90,1,0,0)
 		glColor(0,1,1)		
