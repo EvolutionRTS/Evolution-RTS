@@ -42,7 +42,7 @@ local unitDef = {
   smoothAnim         = true,
   unitname           = "euwmetalextractor",
   workerTime         = 0,
-  yardMap            = "ooooooooo",
+  yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo",
     sfxtypes = {
 	pieceExplosionGenerators = {
 		"deathceg0",

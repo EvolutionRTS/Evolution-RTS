@@ -40,7 +40,7 @@ Provides +7 Power]],
   smoothAnim         = true,
   unitname           = "egeothermal",
   workerTime         = 0,
-  yardMap            = "oooooGGooooo",
+  yardMap            = "oooo oGGo oGGo oooo",
   
 sfxtypes = {
 	pieceExplosionGenerators = {

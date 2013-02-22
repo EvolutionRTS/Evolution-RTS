@@ -37,7 +37,7 @@ local unitDef = {
   smoothAnim         = true,
   unitname           = "euwstorage",
   workerTime         = 0,
-  yardMap            = "oooooooooooooooo",
+  yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo",
    sfxtypes = {
    pieceExplosionGenerators = { 
  		"deathceg0", 
