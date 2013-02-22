@@ -120,6 +120,7 @@ Requires:
 
 local weaponDefs = {
   shield = {
+	IsShield         = true,
     Smartshield      = true,
     Exteriorshield   = true,
     Visibleshield    = true,
@@ -143,6 +144,7 @@ local weaponDefs = {
     },
   },
   invisiblenukeshield = {
+	IsShield         = true,
     Smartshield      = true,
     Exteriorshield   = true,
     Visibleshield    = true,
@@ -205,6 +207,7 @@ local weaponDefs = {
     },
   },
   nukekiller = {
+	IsShield         = true,
     AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,
