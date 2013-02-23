@@ -84,7 +84,7 @@ sfxtypes = {
   weapons = {
     [1]  = {
       def                = "lighttankweapon",
-      badTargetCategory  = "VTOL",
+      badTargetCategory  = "VTOL ARMORED",
     },
   },
   customParams = {
@@ -94,7 +94,9 @@ sfxtypes = {
     RequireTech = "2 Power",
 	armortype   = "light",
 	normaltex = "unittextures/elighttank3normal.png", 
-	helptext = [[The Kite is every bit as agile as it's name implies. Excellent for fast response defense in the early stages of the game. Double damage versus lightly armored enemy units.]],
+	helptext = [[The Kite is an excellent point defense unit. It has a very large line of sight range, it can detect cloaked All Terrain units, and it is extremely fast. The kite isn't good vs buildings unless you have a lot of them. Kites are better used for harassment and picking off workers.
+	
+	As mentioned, Kites are excellent point defense. You can use their low cost to your advantage and spam them while getting your economy rolling. Kites are good units to have in your unit groups, always. Kites are best vs other Light units.]],
   },
 }
 

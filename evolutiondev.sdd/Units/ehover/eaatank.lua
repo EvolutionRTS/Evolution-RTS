@@ -98,7 +98,7 @@ Requires +5 Power]],
     RequireTech = "5 Power",
 	armortype   = "light",
 	normaltex = "unittextures/eaatanknormal.png", 
-	helptext	= [[The spewer is the only dedicated mobile Anti-Air tank in Evolution RTS. It's range is quite limited, so make sure to bring along some scouts for the additional line of sight distance. Fires 4 flak shells in a burst.]],
+	helptext	= [[The spewer is the only dedicated mobile Anti-Air tank in Evolution RTS. It's range is quite limited, so make sure to bring along some scouts for the additional line of sight distance. Very large area of effect.]],
   },
 }
 

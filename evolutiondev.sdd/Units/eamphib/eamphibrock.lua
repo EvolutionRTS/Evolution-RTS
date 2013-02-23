@@ -89,6 +89,7 @@ Requires +7 Power]],
     [1]  = {
       def                = "gunshipweapon",
       onlyTargetCategory = "NOTAIR",
+	  badTargetCategory  = "BUILDING LIGHT",
     },
 --[[
 	[2]  = {
@@ -97,6 +98,7 @@ Requires +7 Power]],
 ]]--
   },
    customParams = {
+	canareaattack="1",
     needed_cover = 2,
    	death_sounds = "soldier",
 	twokhotkey = 's',

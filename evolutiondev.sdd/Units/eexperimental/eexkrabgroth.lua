@@ -85,14 +85,17 @@ Requires +40 Power]],
     [1]  = {
       def                = "heavybeamweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
 	[2]  = {
       def                = "concussioncannon",
 	  onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
 	[3]  = {
       def                = "concussioncannon",
 	  onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
   },
    customParams = {

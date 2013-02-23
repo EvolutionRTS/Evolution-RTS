@@ -71,7 +71,7 @@ Building
   weapons = {
     [1]  = {
       def                = "lighteweapon",
-      badTargetCategory  = "VTOL BUILDING",
+      badTargetCategory  = "VTOL ARMORED BUILDING",
       onlyTargetCategory = "NOTAIR VTOL AMPHIB",
     },
   },

@@ -97,6 +97,7 @@ Requires +2 Power]],
     [1]  = {
       def                = "lighttankweapon",
       badTargetCategory  = "VTOL",
+	  badTargetCategory  = "BUILDING ARMORED",
     },
   },
    customParams = {

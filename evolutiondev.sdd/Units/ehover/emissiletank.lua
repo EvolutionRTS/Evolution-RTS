@@ -87,20 +87,23 @@ Requires +7 Power]],
     [1]  = {
       def                = "missletankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "BUILDING LIGHT",
     },
 	[2]  = {
       def                = "missletankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "BUILDING LIGHT",
     },
   },
   customParams = {
+	canareaattack="1",
     needed_cover = 3,
   	death_sounds = "soldier",
 	twokhotkey = 'd',
     RequireTech = "7 Power",
 	armortype   = "light",
 	normaltex = "unittextures/emissiletanknormal.png", 
-	helptext	= [[The Droplet is a medium range missile artillery battery. Does increased damage versus structures and units with heavy armor but is not very agile. Make sure that it has an escort.]],
+	helptext	= [[The Droplet is a medium range missile artillery battery. It does the most damage to armored units. It's damage is lower than a light tank destroyer, but it's large area of effect makes up for anything it lacks in damage.]],
   },
 }
 
@@ -110,7 +113,7 @@ Requires +7 Power]],
 local weaponDefs = {
   missletankweapon = {
 	  badTargetCategory = [[LIGHT BUILDING]],
-    AreaOfEffect       = 5,
+    AreaOfEffect       = 100,
     avoidFriendly      = false,
     cegTag             = "missiletrail",
     collideFriendly    = false,

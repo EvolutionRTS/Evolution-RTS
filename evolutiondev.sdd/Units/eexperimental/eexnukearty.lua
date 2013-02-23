@@ -83,6 +83,7 @@ Requires +80 Power]],
     [1]  = {
       def                = "nukeartyweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
   },
   customParams = {

@@ -86,6 +86,7 @@ Requires +1 Power]],
   weapons = {
     [1]  = {
       def                = "lightbeamlaser",
+	  badTargetCategory  = "ARMORED BUILDING",
     },
 --[[	
 	[2]  = {

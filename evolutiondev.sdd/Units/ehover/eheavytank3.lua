@@ -84,6 +84,7 @@ Requires +5 Power]],
     [1]  = {
       def                = "heavytankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "BUILDING",
     },
   },
   customParams = {
@@ -93,7 +94,9 @@ Requires +5 Power]],
     RequireTech = "5 Power",
 	armortype   = "armored",
 	normaltex = "unittextures/eheavytank3normal.png", 
-	helptext = [[The Crusher is a heavy tank destroyer capable of taking out the most hardened of mobile units. The more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.]],
+	helptext = [[The Crusher is a heavy tank destroyer capable of taking out the most hardened of mobile units. The more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.
+	
+	The Crusher is great vs all mobile units. It takes a damage penalty vs buildings so it isn't very good for base assaults]],
   },
 }
 

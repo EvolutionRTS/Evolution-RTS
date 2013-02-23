@@ -98,6 +98,7 @@ Requires +6 Power]],
     [1]  = {
       def                = "heavytankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "BUILDING",
     },
   },
    customParams = {

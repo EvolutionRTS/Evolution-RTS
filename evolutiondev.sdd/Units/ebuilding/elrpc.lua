@@ -77,9 +77,11 @@ Requires +15 Power]],
     [1]  = {
       def                = "lrpcweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
   },
   customParams = {
+	canareaattack="1",
 	death_sounds = "generic",
 	twokhotkey = 'l',
     RequireTech = "20 Power",

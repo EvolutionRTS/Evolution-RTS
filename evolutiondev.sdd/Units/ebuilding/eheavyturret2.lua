@@ -73,7 +73,7 @@ Building
   weapons = {
     [1]  = {
       def                = "eheavyturretweapon2",
-	  badTargetCategory  = "BUILDING",
+	  badTargetCategory  = "BUILDING LIGHT",
       onlyTargetCategory = "NOTAIR AMPHIB",
     },
   },

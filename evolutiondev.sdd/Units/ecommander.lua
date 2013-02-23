@@ -131,7 +131,9 @@ local unitDef = {
 	nofriendlyfire	= "1",
 	RequireTech = "20 Power",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
-	helptext       = [[The commander has an EMP defense shockwave weapon that can be triggered every 10 seconds. It costs 50 energy, so use it wisely.]],
+	helptext       = [[The Overseer has an EMP defense shockwave weapon that can be triggered every 10 seconds (default "D"). It costs 50 energy, so use it wisely.
+	
+	You can use this EMP to your advantage and use it offensively as well as defensively. For example, in the early game, you could use your Overseer aggressively in order to stun enemy raiders and get some free kills.]],
   },
 }
 

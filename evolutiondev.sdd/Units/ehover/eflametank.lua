@@ -88,6 +88,7 @@ Requires +2 Power]],
     [1]  = {
       def                = "lightlaser",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "ARMORED LIGHT",
     },
   },
   customParams = {
@@ -97,7 +98,9 @@ Requires +2 Power]],
     RequireTech = "2 Power",
 	armortype   = "light",
 	normaltex = "unittextures/eflametanknormal.png", 
-	helptext	=	[[The pyromaniac has a long range flamethrower that is deadly versus base structures and especially economy buildings. Very fast and agile, however, it has a short line of sight. For best results, couple with Lightning raiders.]],
+	helptext	=	[[The pyromaniac has a long range flamethrower that is deadly versus base structures and especially economy buildings. Very fast and agile, however, it has a short line of sight. For best results, couple with Kites raiders.
+	
+	Pyromaniacs don't do much damage to other units. They can be used to fend off raiders in a pinch, but avoid sending them into battle vs other mobile units. They are excellent vs buildings.]],
   },
 }
 

@@ -84,6 +84,7 @@ Requires +4 Power]],
     [1]  = {
       def                = "mediumtankcannon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "BUILDING LIGHT",
     },
   },
   customParams = {
@@ -93,7 +94,9 @@ Requires +4 Power]],
     RequireTech = "4 Power",
 	armortype   = "light",
 	normaltex = "unittextures/emediumtank3normal.png", 
-	helptext	= [[The brusier is a light tank destroyer, excellent versus raiders and other light units. Pair with light raiders and heavy tank destroyers for best results.]],
+	helptext	= [[The brusier is a lightly armored tank destroyer, excellent versus raiders and other light units. Pair with light raiders and heavy tank destroyers for best results.
+	
+	It's description si a bit deceptive if you read it incorrectly. In truth, it decimates armored units. It is moderately effective vs light units and buildings.]],
   },
 }
 

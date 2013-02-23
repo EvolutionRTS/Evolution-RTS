@@ -83,10 +83,12 @@ Requires +10 Power]],
     [1]  = {
       def                = "eheavyturretweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
     [2]  = {
       def                = "eheavyturretweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
       slaveTo            = 1,
     },
   },

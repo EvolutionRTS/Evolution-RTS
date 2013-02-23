@@ -98,6 +98,7 @@ Requires +10 Power]],
     [1]  = {
       def                = "assaulttankcannon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
   },
    customParams = {

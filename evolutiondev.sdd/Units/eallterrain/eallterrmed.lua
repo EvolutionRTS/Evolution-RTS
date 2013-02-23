@@ -97,6 +97,7 @@ Requires +4 Power]],
     [1]  = {
       def                = "mediumtankcannon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "BUILDING LIGHT",
     },
   },
    customParams = {

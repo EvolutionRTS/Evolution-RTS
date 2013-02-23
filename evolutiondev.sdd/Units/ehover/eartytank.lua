@@ -83,9 +83,11 @@ Requires +8 Power]],
     [1]  = {
       def                = "Artilleryweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT ARMORED",
     },
   },
   customParams = {
+	canareaattack="1",
     needed_cover = 3,
   	death_sounds = "soldier",
 	twokhotkey = 'l',

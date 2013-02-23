@@ -85,6 +85,7 @@ Requires +5 Power]],
   weapons = {
     [1]  = {
       def                = "medtankbeamlaser",
+	  badTargetCategory  = "BUILDING",
     },
 --[[	
 	[2]  = {
