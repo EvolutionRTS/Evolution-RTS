@@ -16,12 +16,12 @@ local moveDefs = {
          linearCoeff    = 0.3, -- deprecates "depthMod"
          constantCoeff  = 0.3,
        },
-	  heatproduced=10,
-	  heatmapping=0,
+	  heatproduced=5,
+	  heatmod=0.5,
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    HOVERTANK2 = {
@@ -32,8 +32,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-	  heatproduced=20,
-	  heatmapping=0,
+	  heatproduced=10,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -43,9 +43,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    NORMALTANK2 = {
@@ -56,8 +56,8 @@ local moveDefs = {
       maxwaterslope=26,
       badwaterslope=26,
       crushstrength=20,
-	  heatproduced=20,
-	  heatmapping=0,
+	  heatproduced=10,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -67,9 +67,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    
    TANK2 = {
@@ -80,8 +80,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-      heatproduced=20,
-	  heatmapping=0,
+      heatproduced=10,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -91,9 +91,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    HOVERTANK3 = {
@@ -104,8 +104,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-	  heatproduced=30,
-	  heatmapping=0,
+	  heatproduced=15,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -115,9 +115,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    TANK3 = {
@@ -128,8 +128,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-      heatproduced=30,
-	  heatmapping=0,
+      heatproduced=15,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -139,9 +139,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    
    ALLTERRTANK3 = {
@@ -150,8 +150,8 @@ local moveDefs = {
       maxslope=180,
       maxwaterdepth=10,
       crushstrength=20,
-	  heatproduced=30,
-	  heatmapping=0,
+	  heatproduced=15,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -161,9 +161,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    HOVERTANK4 = {
@@ -174,8 +174,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-	  heatproduced=40,
-	  heatmapping=0,
+	  heatproduced=15,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -185,9 +185,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    TANK4 = {
@@ -198,8 +198,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-      heatproduced=40,
-	  heatmapping=0,
+      heatproduced=15,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -209,9 +209,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    ALLTERRTANK4 = {
       footprintx=4,
@@ -219,8 +219,8 @@ local moveDefs = {
       maxslope=180,
       maxwaterdepth=10,
       crushstrength=20,
-	  heatproduced=40,
-	  heatmapping=0,
+	  heatproduced=15,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -230,9 +230,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
     UBOAT4 = {
       footprintx = 4,
@@ -241,8 +241,8 @@ local moveDefs = {
       minwaterdepth = 30,
       crushstrength = 20,
       subMarine = 1,
-	  heatproduced=40,
-	  heatmapping=0,
+	  heatproduced=15,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -252,9 +252,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    HOVERTANK5 = {
@@ -265,8 +265,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-	  heatproduced=50,
-	  heatmapping=0,
+	  heatproduced=20,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -276,9 +276,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    
     ALLTERRTANK5 = {
@@ -287,8 +287,8 @@ local moveDefs = {
       maxslope=180,
       maxwaterdepth=10,
       crushstrength=20,
-	  heatproduced=50,
-	  heatmapping=0,
+	  heatproduced=20,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -298,9 +298,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 
    HOVERTANK6 = {
@@ -311,8 +311,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=20,
-	  heatproduced=60,
-	  heatmapping=0,
+	  heatproduced=25,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -322,9 +322,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    ALLTERRTANK6 = {
       footprintx=6,
@@ -332,8 +332,8 @@ local moveDefs = {
       maxslope=180,
       maxwaterdepth=10,
       crushstrength=20,
-	  heatproduced=60,
-	  heatmapping=0,
+	  heatproduced=25,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -343,9 +343,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    COMMANDERTANK4 = {
       footprintx=4,
@@ -356,7 +356,7 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       heatproduced=40,
-	  heatmapping=0,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -366,9 +366,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    EXPERIMENTALTANK10 = {
       footprintx=12,
@@ -378,8 +378,8 @@ local moveDefs = {
       maxwaterslope=255,
       badwaterslope=255,
       crushstrength=100,
-	  heatproduced=120,
-	  heatmapping=0,
+	  heatproduced=30,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -389,9 +389,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    HOVERTANKEXPERIMENTAL9 = {
       footprintx=9,
@@ -399,8 +399,8 @@ local moveDefs = {
       maxslope=26,
       maxwaterdepth=20,
       crushstrength=100,
-	  heatproduced=90,
-	  heatmapping=0,
+	  heatproduced=30,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -410,9 +410,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
    EXPERIMENTALTANK12 = {
       footprintx=12,
@@ -420,8 +420,8 @@ local moveDefs = {
       maxslope=180,
       maxwaterdepth=80,
       crushstrength=100,
-	  heatproduced=120,
-	  heatmapping=0,
+	  heatproduced=30,
+	  heatmod=0.5,
 	  depthModParams = {
          minHeight      = 0,
          maxHeight      = 5000,
@@ -431,9 +431,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=50,
+	  heatmod=0.5,
 	  slopemod=4,
---	  heatmapping=false,
+	  heatmapping=false,
    },
 }
 

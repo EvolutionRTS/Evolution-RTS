@@ -18,7 +18,7 @@ local modrules  = {
     allowAirPlanesToLeaveMap = true;  -- defaults to true
     allowPushingEnemyUnits   = true; -- defaults to false
     allowCrushingAlliedUnits = false; -- defaults to false
-    allowUnitCollisionDamage = true; -- defaults to false
+    allowUnitCollisionDamage = false; -- defaults to false
 	allowGroundUnitGravity	=	true,
   },
   
