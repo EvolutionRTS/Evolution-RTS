@@ -1,4 +1,4 @@
-VERSION{v5.99}
+VERSION{v6.00}
 VERSION{Campaign Branch v1.5}
 
 Bump test revision

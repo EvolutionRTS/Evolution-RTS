@@ -25,7 +25,7 @@ local unitDef = {
   canPatrol          = true,
   canreclamate       = "1",
   canstop            = "1",
-  category           = "NOTAIR SUPPORT ARMORED",
+  category           = "NOTAIR SUPPORT LIGHT",
   description        = [[Armortype: Heavy
   • Press 'D' to activate EMP Defense
   
@@ -128,7 +128,7 @@ local unitDef = {
     needed_cover = 2,
 	death_sounds = "soldier",
     cancollect = "1",
-	armortype   = "armored",
+	armortype   = "light",
 	nofriendlyfire	= "1",
 	RequireTech = "20 Power",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
