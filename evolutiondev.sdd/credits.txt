@@ -111,6 +111,10 @@ Valin
 -Numerous excellent gameplay suggestions and entensive help with Campaign story ideas
 -Created campaign story planet mockups complete with extended data
 
+Knorke
+-Implemented cover system
+-Various help with luaz and bug fixing
+
 **Features (in-game map objects)**
 -0AD (Wildfire Games)
 -Noize
