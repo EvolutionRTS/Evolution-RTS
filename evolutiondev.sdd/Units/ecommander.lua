@@ -26,7 +26,8 @@ local unitDef = {
   canreclamate       = "1",
   canstop            = "1",
   category           = "NOTAIR SUPPORT LIGHT",
-  description        = [[Armortype: Heavy
+  description        = [[Armored
+  
   • Press 'D' to activate EMP Defense
   
   There can only be one!]],
@@ -37,6 +38,7 @@ local unitDef = {
   fireState			 = "0",
   footprintX         = 4,
   footprintZ         = 4,
+  hideDamage		 = true,
   iconType           = "commander",
   idleAutoHeal       = .5,
   idleTime           = 2200,
@@ -56,6 +58,7 @@ local unitDef = {
   radarDistance      = 0,
   repairable		 = false,
   selfDestructAs     = "emp",
+  showPlayerName	 = true,
   showNanoSpray      = "0",
   sightDistance      = 1500,
   smoothAnim         = true,
