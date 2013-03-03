@@ -218,7 +218,7 @@ MEXPOP2 = {
    weaponType		   = "Cannon",
    ballistic=1,
    turret=1,
-   range=480,
+   range=500,
    reloadtime=3.6,
    weaponvelocity=250,
    AreaOfEffect=1500,
@@ -230,7 +230,7 @@ MEXPOP2 = {
    
 
     damage = {
-      default            = 500,
+      default            = 50,
     },
   },
 

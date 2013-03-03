@@ -32,6 +32,7 @@ local unitDef = {
   noAutoFire         = false,
   objectName         = "eaaturret2.s3o",
   radarDistance      = 0,
+  repairable		 = false,
   selfDestructAs     = "MEDIUM_BUILDING",
   sightDistance      = 500,
   smoothAnim         = true,

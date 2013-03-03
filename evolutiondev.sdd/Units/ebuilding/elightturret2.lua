@@ -41,6 +41,7 @@ Building
   onlytargetcategory5 = "NOTAIR",
   onlytargetcategory6 = "NOTAIR",
   radarDistance      = 0,
+  repairable		 = false,
 -- script			 = "elightturret2-script.lua",
   selfDestructAs     = "MEDIUM_BUILDING",
   side               = "CORE",
@@ -71,8 +72,8 @@ Building
   weapons = {
     [1]  = {
       def                = "lighteweapon",
-      badTargetCategory  = "VTOL ARMORED BUILDING",
-      onlyTargetCategory = "NOTAIR VTOL AMPHIB",
+      badTargetCategory  = "VTOL ARMORED",
+      onlyTargetCategory = "LIGHT VTOL ARMORED",
     },
   },
   customParams = {

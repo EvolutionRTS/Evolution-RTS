@@ -117,7 +117,7 @@ function gadget:GameFrame(f)
 				 	inradAllyTeam = GetUnitAllyTeam(t)					
 
 					
-					if ( ( inradAllyTeam == UnitAllyTeam) and (UnitDefs[ud].canMove and UnitDefs[ud].type ~= "Factory") ) then
+					if ( inradAllyTeam == UnitAllyTeam) then
 						-- Spring.Echo("unit can be repaired")
 						
 						if (not repairStun[t] or repairStun[t]<f) then

@@ -36,6 +36,7 @@ local unitDef = {
   objectName         = "emetalextractor2.s3o",
   onoffable          = true,
   radarDistance      = 0,
+  repairable		 = false,
   selfDestructAs     = "SMALL_BUILDING",
   selfDestructCountdown = 1,
   side               = "CORE",

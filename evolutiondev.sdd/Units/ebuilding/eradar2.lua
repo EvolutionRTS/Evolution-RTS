@@ -32,6 +32,7 @@ local unitDef = {
   objectName         = "eradar2.s3o",
   onoffable          = true,
   radarDistance      = 3500,
+  repairable		 = false,
   selfDestructAs     = "SMALL_BUILDING",
   side               = "CORE",
   sightDistance      = 1500,

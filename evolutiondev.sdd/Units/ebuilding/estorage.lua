@@ -31,6 +31,7 @@ local unitDef = {
   name               = "(S)torage",
   objectName         = "estorage.s3o",
   radarDistance      = 0,
+  repairable		 = false,
   selfDestructAs     = "ESTOR_BUILDING",
   side               = "CORE",
   sightDistance      = 367,

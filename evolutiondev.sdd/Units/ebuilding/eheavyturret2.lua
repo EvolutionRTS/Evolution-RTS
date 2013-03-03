@@ -44,6 +44,7 @@ Building
   onlytargetcategory5 = "NOTAIR",
   onlytargetcategory6 = "NOTAIR",
   radarDistance      = 0,
+  repairable		 = false,
   selfDestructAs     = "MEDIUM_BUILDING",
   side               = "CORE",
   sightDistance      = 1000,
@@ -73,8 +74,8 @@ Building
   weapons = {
     [1]  = {
       def                = "eheavyturretweapon2",
-	  badTargetCategory  = "BUILDING LIGHT",
-      onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "LIGHT",
+      onlyTargetCategory = "ARMORED LIGHT",
     },
   },
   customParams = {

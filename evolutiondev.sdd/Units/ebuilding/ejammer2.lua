@@ -32,6 +32,7 @@ local unitDef = {
   objectName         = "ejammer2.s3o",
   onoffable          = true,
   radarDistanceJam   = 500,
+  repairable		 = false,
   selfDestructAs     = "SMALL_BUILDING",
   side               = "CORE",
   sightDistance      = 500,

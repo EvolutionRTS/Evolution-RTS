@@ -35,6 +35,7 @@ local unitDef = {
   metalStorage       = 0,
   name               = "Thorn (b)",
   objectName         = "ebarricade.s3o",
+  repairable		 = false,
   selfDestructAs     = "ESTOR_BUILDING",
   selfDestructCountdown = 0,
   side               = "ARM",

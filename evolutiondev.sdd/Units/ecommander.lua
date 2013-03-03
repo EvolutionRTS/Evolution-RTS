@@ -54,6 +54,7 @@ local unitDef = {
   noChaseCategories	 = "NOTAIR SUPPORT VTOL AMPHIB",
   objectName         = "ecommander2.s3o",
   radarDistance      = 0,
+  repairable		 = false,
   selfDestructAs     = "emp",
   showNanoSpray      = "0",
   sightDistance      = 1500,

@@ -36,6 +36,7 @@ local unitDef = {
   objectName         = "emaker.s3o",
   onoffable          = true,
   radarDistance      = 0,
+  repairable		 = false,
   selfDestructAs     = "LARGE_BUILDING",
   side               = "ARM",
   sightDistance      = 360,
