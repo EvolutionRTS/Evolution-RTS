@@ -19,7 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "NOTAIR SKIRMISHER",
+  category           = "LIGHT NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   
 -- Cloaking
