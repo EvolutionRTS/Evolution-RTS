@@ -20,10 +20,10 @@ local unitDef = {
   canPatrol          = true,
   canstop            = "1",
   cantBeTransported  = true,
-  category           = "LIGHT NOTAIR SKIRMISHER",
+  category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        =[[Destroyer Class Walker
-Light, 200% Damage vs Buildings
+Armored, 200% Damage vs Buildings
 
 Requires +40 Power]],
   energyMake         = 0,
@@ -102,7 +102,7 @@ Requires +40 Power]],
 	death_sounds = "nuke",
 	twokhotkey = 'k',
     RequireTech = "40 Power",
-	armortype   = "light",
+	armortype   = "armored",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }

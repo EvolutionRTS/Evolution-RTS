@@ -121,7 +121,7 @@ local weaponDefs = {
     endsmoke           = "1",
     energypershot      = 3,
     explosionGenerator = "custom:xamelImpact",
-	energypershot      = 12,
+	energypershot      = 7,
     fireStarter        = 80,
     id                 = 1,
     impulseFactor      = 0,
@@ -144,7 +144,7 @@ local weaponDefs = {
 	  damagetype		= "antiair",  
     },
     damage = {
-      default            = 24,
+      default            = 70,
     },
   },
 }

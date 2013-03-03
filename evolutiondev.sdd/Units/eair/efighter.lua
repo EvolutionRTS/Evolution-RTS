@@ -119,7 +119,7 @@ local weaponDefs = {
 	edgeEffectiveness  = 0.5,
     endsmoke           = "1",
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 5,
+	energypershot      = 7,
     fireStarter        = 80,
     id                 = 1,
     impulseFactor      = 0,
@@ -141,7 +141,7 @@ local weaponDefs = {
 	  damagetype		= "fighter",  
     },
     damage = {
-      default            = 50,
+      default            = 70,
     },
   },
 }

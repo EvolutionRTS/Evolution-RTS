@@ -20,10 +20,10 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
-  category           = "LIGHT NOTAIR SUPPORT",
+  category           = "ARMORED NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Low Yeild Nuclear Artillery Support Tank
-Light, 200% Damage vs Buildings
+Armored, 200% Damage vs Buildings
 
 Requires +80 Power]],
   energyMake         = 0,
@@ -90,7 +90,7 @@ Requires +80 Power]],
 	death_sounds = "nuke",
 	twokhotkey = 'a',
     RequireTech = "80 Power",
-	armortype   = "light",
+	armortype   = "armored",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[]],
   },
