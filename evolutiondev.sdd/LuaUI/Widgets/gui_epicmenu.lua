@@ -1387,8 +1387,8 @@ local function MakeMenuBar()
 		
 	window_crude = Window:New{
 		name='epicmenubar',
-		right = 300,  
-		y = 10, -- resbar height
+		right = 5,  
+		y = 5, -- resbar height
 		dockable = true,
 		clientWidth = crude_width,
 		clientHeight = crude_height,

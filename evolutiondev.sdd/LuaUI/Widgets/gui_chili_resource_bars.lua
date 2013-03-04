@@ -316,7 +316,7 @@ function CreateWindow()
 		dockable = true,
 		name="ResourceBars",
 		right = 0,
-		y = 0,
+		y = 50,
 		clientWidth  = 300,
 		clientHeight = 45,
 		draggable = false,

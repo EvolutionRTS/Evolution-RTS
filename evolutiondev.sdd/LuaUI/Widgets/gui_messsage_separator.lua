@@ -50,14 +50,14 @@ local SYSTEM_MSG_HISTORY			= {}
 -- "n": ignore embedded colors, "o/O": black/white outline
 local FONT_RENDER_STYLES			= {"", "o", "O"}
 local MIN_ALPHA					= 0.0
-local MAX_ALPHA					= 0.
+local MAX_ALPHA					= 0.8
 local PLAYER_BOX_ALPHA			= MIN_ALPHA
 local SYSTEM_BOX_ALPHA			= MIN_ALPHA
 local PLAYER_BOX_FILL_COLOR			= {0.66, 0.66, 0.66, PLAYER_BOX_ALPHA}
-local PLAYER_BOX_LINE_COLOR			= {0.22, 0.22, 0.22, PLAYER_BOX_ALPHA}
+local PLAYER_BOX_LINE_COLOR			= {0, 0, 0, PLAYER_BOX_ALPHA}
 local SYSTEM_BOX_FILL_COLOR			= {0.66, 0.66, 0.66, SYSTEM_BOX_ALPHA}
 local SYSTEM_BOX_LINE_COLOR			= {0.22, 0.22, 0.22, SYSTEM_BOX_ALPHA}
-local PLAYER_TEXT_OUTLINE_COLOR		= {0.00, 0.00, 0.00, 0.0}
+local PLAYER_TEXT_OUTLINE_COLOR		= {0.00, 0.00, 0.00, 0.05}
 local PLAYER_TEXT_DEFAULT_COLOR		= {-1.0, -1.0, -1.0, 1.0}
 local SYSTEM_TEXT_COLOR				= { 1.0,  1.0,  1.0, 0}
 -- use color codes to define font colors, otherwise uses gl_Color, unfortunately, colored font with outline doesn't seems to be supported when this is off
