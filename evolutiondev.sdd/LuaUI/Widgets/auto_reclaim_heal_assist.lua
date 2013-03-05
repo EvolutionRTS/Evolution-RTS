@@ -15,7 +15,7 @@ function widget:GetInfo()
 		date = "Nov 21, 2010",
 		license = "GPLv3",
 		layer = 0,
-		enabled = true --enable automatically
+		enabled = false
 	}
 end
 
@@ -25,7 +25,6 @@ local getUnitPos     = Spring.GetUnitPosition
 local orderUnit      = Spring.GiveOrderToUnit
 local getUnitTeam    = Spring.GetUnitTeam
 local isUnitSelected = Spring.IsUnitSelected
-local getGameSeconds = Spring.GetGameSeconds
 local gameInSecs     = 0
 local lastOrderGivenInSecs= 0
 local idleReclaimers={} --reclaimers because they all can reclaim
@@ -38,26 +37,26 @@ myTeamID=-1;
 --Initializer
 function widget:Initialize()
 	--disable widget if I am a spec
-  local _, _, spec = Spring.GetPlayerInfo(Spring.GetMyPlayerID())
-  if spec then
-    widgetHandler:RemoveWidget()
-    return false
-  end
-  myTeamID=Spring.GetMyTeamID()                         --get my team ID
+	local _, _, spec = Spring.GetPlayerInfo(Spring.GetMyPlayerID())
+	if spec then
+		widgetHandler:RemoveWidget()
+		return false
+	end
+	myTeamID = Spring.GetMyTeamID()                         --get my team ID
 end
 
 
 --Give reclaimers the FIGHT command every second
-function widget:GameFrame()
-	gameInSecs=math.floor(getGameSeconds())               --gives the time in seconds(rounded)
-	--echo("Time in secs: "..gameInSecs.."    Last order given at: "..lastOrderGivenInSecs) --¤debug
-	if (gameInSecs>lastOrderGivenInSecs) then
+function widget:GameFrame(n)
+	if n%30 == 0 then
+		if WG.Cutscene and WG.Cutscene.IsInCutscene() then
+			return
+		end
 		for unitID in pairs(idleReclaimers) do
 			local x, y, z = getUnitPos(unitID)                --get unit's position
 			if (not isUnitSelected(unitID)) then              --if unit is not selected
 				orderUnit(unitID, CMD.FIGHT, { x, y, z }, {})   --command unit to reclaim
 			end
-			lastOrderGivenInSecs=gameInSecs                   --record the time that command was given
 		end
 	end
 end
@@ -65,12 +64,12 @@ end
 
 --Add reclaimer to the register
 function widget:UnitIdle(unitID, unitDefID, unitTeam)
-	if (myTeamID==getUnitTeam(unitID)) then             --check if unit is mine
-	
-		if (UnitDefs[unitDefID]["canReclaim"]) then     --check if unit can reclaim
-			  idleReclaimers[unitID]=true                 --add unit to register
-			  lastRegiInSecs=gameInSecs
-			  --echo("Registering unit "..unitID.." as idle")
+	if (myTeamID==getUnitTeam(unitID)) then					--check if unit is mine
+		local unittype = UnitDefs[unitDefID].type			--***
+		if (unittype == "Factory") then return end			--no factories ***
+			if (UnitDefs[unitDefID]["canReclaim"]) then		--check if unit can reclaim
+				idleReclaimers[unitID]=true					--add unit to register
+				--echo("<auto_reclaim_heal_assist>: registering unit "..unitID.." as idle")
 		end
 		
 	end
@@ -79,11 +78,11 @@ end
 
 --Unregister reclaimer once it is given a command
 function widget:UnitCommand(unitID)
-	--echo("Unit "..unitID.." got a command") --¤debug
+	--echo("<auto_reclaim_heal_assist>: unit "..unitID.." got a command") --Â¤debug
 	for reclaimerID in pairs(idleReclaimers) do
 		if (reclaimerID==unitID) then 
 			idleReclaimers[reclaimerID]=nil
-			--echo("Unregistering unit "..reclaimerID.." as idle")
+			--echo("<auto_reclaim_heal_assist>: unregistering unit "..reclaimerID.." as idle")
 		end
 	end
 end
