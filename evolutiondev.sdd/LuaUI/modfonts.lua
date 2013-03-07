@@ -194,13 +194,15 @@ end
 --------------------------------------------------------------------------------
 
 local function StripColorCodes(text)
-  local stripped = ""
-  for txt, color in text:gmatch("([^\255]*)(\255?.?.?.?)") do
-    if (txt:len() > 0) then
-      stripped = stripped .. txt
-    end
-  end
-  return stripped
+	if text ~= nil then
+		local stripped = ""
+			for txt, color in text:gmatch("([^\255]*)(\255?.?.?.?)") do
+				if (txt:len() > 0) then
+					stripped = stripped .. txt
+				end
+			end
+		return stripped
+	end
 end
 
 
