@@ -1,10 +1,14 @@
-local objectname= "metal" 
+local objectname= "metal = 0,
+--metal" 
 local featureDef	=	{
-	name			= "metal",
+	name			= "metal = 0,
+--metal",
 	world				="allworld",
-	description				="Metal Patch",
+	description				="metal = 0,
+--metal Patch",
 	category				="Resource",
-	object				="metal.s3o",
+	object				="metal = 0,
+--metal.s3o",
 	footprintx				=4,
 	footprintz				=4,
 	height				=5,
@@ -12,7 +16,8 @@ local featureDef	=	{
 	hitdensity				=0,
 	energy = 10,
 -- energy				=0,
-	metal				=0,
+	metal = 0,
+--metal				=0,
 	damage				=9999999999,
 	flammable				=false,
 	reclaimable				=false,
