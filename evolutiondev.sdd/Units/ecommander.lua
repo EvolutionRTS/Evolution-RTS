@@ -206,6 +206,7 @@ local weaponDefs = {
     },      
     damage = {
       default           = 1000,
+	  nofriendlyfire	= "1",
     },
   },
 }
