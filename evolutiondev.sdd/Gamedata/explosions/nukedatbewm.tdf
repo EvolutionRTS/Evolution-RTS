@@ -1,8 +1,10 @@
 [NUKEDATBEWM]
 {
+	alwaysVisible=1;
    [pop1]
    {
    class=heatcloud;
+   alwaysVisible=1;
 
       [properties]
             {
@@ -27,6 +29,7 @@
    [pop2]
    {
    class=heatcloud;
+   alwaysVisible=1;
 
       [properties]
             {
@@ -92,7 +95,7 @@
       [properties]
       {
 	  alwaysVisible=1;
-      Texture=gizboom2;
+      Texture=cloudexplo;
 
       colorMap = 0.8 0.6 0.2 0.01   0 0 0 0.01  0.0 0.0 0.0 0.01;
 
@@ -129,7 +132,7 @@
       [properties]
       {
 	  alwaysVisible=1;
-      Texture=gizboom2;
+      Texture=cloudexplo;
 
       colorMap =0.8 0.6 0 0.01 0 0 0 0.01  0.0 0.0 0.0 0.01;
 
@@ -214,14 +217,14 @@
    [groundflash]
       {
    alwaysVisible=1;
-         ttl = 500;
+         ttl = 200;
          flashSize = 1000;
-         flashAlpha = 1;
+         flashAlpha = 0.9;
 
-         circleGrowth = 0;
-         circleAlpha = 0;
+         circleGrowth = 4;
+         circleAlpha = 0.5;
 
-         color = 1, 1, 1;
+         color = 1, 0.7, 0.3;
 
    air=1;
       ground=1;
