@@ -9,7 +9,7 @@ function gadget:GetInfo()
     author    = "quantum",
     date      = "June 24, 2008",
     license   = "GNU GPL, v2 or later",
-    layer     = 0,
+    layer     = -999,
     enabled   = true  --  loaded by default?
   }
 end
@@ -19,6 +19,22 @@ end
 
 if (not gadgetHandler:IsSyncedCode()) then
   return false  --  silent removal
+end
+
+local bomberWeaponDefs = {
+--	[WeaponDefNames["corshad_shield_check"].id] = true,
+}
+
+local HitByWeaponUnits = {
+--	[UnitDefNames["armsolar"].id] = true,
+}
+
+local noFFWeaponDefs = {}
+for i=1,#WeaponDefs do
+  local wd = WeaponDefs[i]
+  if wd.customParams and wd.customParams.nofriendlyfire then
+    noFFWeaponDefs[i] = true
+  end
 end
 
 --------------------------------------------------------------------------------
@@ -36,14 +52,19 @@ local spSetUnitHealth  = Spring.SetUnitHealth
 
 function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, 
                             weaponID, attackerID, attackerDefID, attackerTeam)
-  if (attackerDefID and 
-      UnitDefs[attackerDefID].customParams and 
-      UnitDefs[attackerDefID].customParams.nofriendlyfire and
-      attackerID ~= unitID and
-      spAreTeamsAllied(unitTeam, attackerTeam)) then
-	return 0
-  end
-  return damage
+	if (weaponID and
+		noFFWeaponDefs[weaponID] and
+		attackerID ~= unitID and
+		((not attackerTeam) or spAreTeamsAllied(unitTeam, attackerTeam))) then
+		return 0
+	end
+  
+	if HitByWeaponUnits[unitDefID] and not bomberWeaponDefs[weaponID] then
+		local func = Spring.UnitScript.GetScriptEnv(unitID).HitByWeaponGadget
+		Spring.UnitScript.CallAsUnit(unitID,func)
+	end
+  
+	return damage
 end
 
 --------------------------------------------------------------------------------
