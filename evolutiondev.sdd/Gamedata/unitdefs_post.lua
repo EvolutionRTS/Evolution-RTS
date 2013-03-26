@@ -46,31 +46,28 @@ end
 -- Gameplay Speed (Classic RTS Mode) --
 --------------------------------------------------------------------------------
 
-if modOptions and tobool(modOptions.gameplayspeed == normal) then
-Spring.Echo("Gameplay Speed is set to", modOptions.gameplayspeed)
+if modOptions and tobool(modOptions.gameplayspeed == "normal") then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal
 	end
 end
 
-if modOptions and tobool(modOptions.gameplayspeed == fast) then
-Spring.Echo("Gameplay Speed is set to", modOptions.gameplayspeed)
+if modOptions and tobool(modOptions.gameplayspeed == "fast") then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal / 2
 	end
 end
 
-if modOptions and tobool(modOptions.gameplayspeed == faster) then
-Spring.Echo("Gameplay Speed is set to", modOptions.gameplayspeed)
+if modOptions and tobool(modOptions.gameplayspeed == "faster") then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal / 8
 	end
 end
 
-if modOptions and tobool(modOptions.gameplayspeed ~= fastest) then
+if modOptions and tobool(modOptions.gameplayspeed ~= "fastest") then
 	for name, unitDef in pairs(UnitDefs) do
 		if unitDef.unitname == "ecommander" then
 --			Spring.Echo(unitDef.unitname)
@@ -78,7 +75,7 @@ if modOptions and tobool(modOptions.gameplayspeed ~= fastest) then
 		end
 	end
 end
-
+Spring.Echo("Gameplay Speed is set to", modOptions.gameplayspeed)
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- 3dbuildrange for all none plane builders
