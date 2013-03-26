@@ -30,13 +30,19 @@ local options= {
                     -- (step <= 0) means that there is no quantization
   },
 	{
-		key    = "classicrtsmode",
-		name   = "Classic RTS Mode",
-		desc   = "Sets buildtimes to metalcost, resulting in Classic TA Style Building",
-		type   = "bool",
-		def    = false,
-		section= 'other',
-	},	
+		key="gameplayspeed",
+		name="Gameplay Speed",
+		desc="Modifies buildtimes based upon cost",
+		type="list",
+		def="fastest",
+		section="other",
+		items={
+			{key="normal", name="Normal", desc="Unit buildtimes are equal to their metal cost"},
+			{key="fast", name="Fast", desc="Unit buildtimes are equal to their metal cost divided by 2"},
+			{key="faster", name="Faster", desc="Unit buildtimes are equal to their metal cost divided by 8"},
+			{key="fastest", name="Fastest", desc="All units have a buildtime of 2.5 seconds"},
+		}
+	},
 }
 
 return options
