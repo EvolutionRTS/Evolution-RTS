@@ -202,11 +202,10 @@ local weaponDefs = {
     weaponVelocity     = 1000,
 	customparams = {
 	  damagetype		= "medium",
-	  nofriendlyfire	= "true",
+	  nofriendlyfire	= "1",
     },      
     damage = {
       default           = 1000,
-	  nofriendlyfire	= "1",
     },
   },
 }
