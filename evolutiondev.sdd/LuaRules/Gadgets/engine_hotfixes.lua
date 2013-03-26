@@ -49,7 +49,7 @@ if gadgetHandler:IsSyncedCode() then
 		end
 	end
 	
-	function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, attackerID, attackerDefID, attackerTeam)
+	function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, projectileID, attackerID, attackerDefID, attackerTeam)
 		if weaponDefID == -1 then
 			return 0
 		end

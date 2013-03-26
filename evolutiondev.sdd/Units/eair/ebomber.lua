@@ -98,6 +98,7 @@ Requires +10 Power]],
 --    needed_cover = 2,
 	death_sounds = "soldier",
 	twokhotkey = 'b',
+	nofriendlyfire = "1",
     RequireTech = "10 Power",
 	armortype   = "armored",
 	normaltex = "unittextures/ebombernormal.png", 
@@ -137,6 +138,7 @@ local weaponDefs = {
     weaponVelocity     = 200,
 	customparams = {
 	  damagetype		= "bomber",  
+	  nofriendlyfire	= 1,
     },
     damage = {
       default           = 37.5,

@@ -43,7 +43,7 @@ end
 --------------------------------------------------------------------------------
 
 function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, 
-                            weaponID, attackerID, attackerDefID, attackerTeam)
+                            weaponID, projectileID, attackerID, attackerDefID, attackerTeam)
 	
   if (unitID == attackerID and not exceptionMap[unitDefID]) then
 	return 0

@@ -204,7 +204,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
     damage = {
-      default            = -1,
+      default            = 1E-06,
     },
   },
   nukekiller = {

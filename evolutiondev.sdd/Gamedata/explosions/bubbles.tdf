@@ -1,46 +1,7 @@
 // use this effect sparingly. It can slow machines down.
 [bubbles]
 {
-	[dirtg]
-	{
-	class=CSimpleParticleSystem;
-
-		[properties]
-		{
-		alwaysVisible=1;
-		Texture=randdots;
-		sizeGrowth=1.2;
-		sizeMod=1.0;
-
-        	pos 		= r-0.5 r0.5, 1 r2, r-0.5 r0.5;
-         	emitVector	= 0, 1, 0;
-		gravity		= 0, 0.3 r0.3, 0;
-
-		colorMap	= 0.25 0.20 0.10 1.0	0 0 0 0.0;
-		airdrag		= 0.7;
-
-		particleLife=15;
-		particleLifeSpread=20;
-
-		numParticles=4;
-
-		particleSpeed=1;
-		particleSpeedSpread=6;
-		particleSize=12 r4;
-		particleSizeSpread=10;
-
-		emitRot=90;
-		emitRotSpread=0;
-
-		directional=1;
-		useAirLos=0;
-		}
-	ground=1;
-	air=1;
-	count=1;
-	}
-
-	[dirtw]
+	[bubblesuw]
 	{
 	class=CSimpleParticleSystem;
 
@@ -58,10 +19,10 @@
 		colorMap	= 1 1 1 0.5	0.5 0.5 1 0.8	0 0 0 0.0;
 		airdrag		= 0.7;
 
-		particleLife=15;
+		particleLife=100;
 		particleLifeSpread=20;
 
-		numParticles=10;
+		numParticles=1;
 
 		particleSpeed=1;
 		particleSpeedSpread=6;
@@ -74,7 +35,6 @@
 		directional=1;
 		useAirLos=0;
 		}
-	water=1;
 	underwater=1;
 	count=1;
 	}

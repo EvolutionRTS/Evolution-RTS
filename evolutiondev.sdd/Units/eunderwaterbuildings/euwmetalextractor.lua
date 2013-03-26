@@ -95,7 +95,7 @@ local weaponDefs = {
     coreThickness      = 0.3,
     craterBoost        = 0,
     craterMult         = 0,
-    explosionGenerator = "custom:burn",
+    explosionGenerator = "custom:bubbles",
     fallOffRate        = 0.5,
     minintensity       = 1,
     impulseFactor      = 0,
@@ -114,7 +114,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,
     damage = {
-      default            = 0,
+      default            = 1E-06,
     },
   },
 }

@@ -141,7 +141,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,
     damage = {
-      default            = -1,
+      default            = 1E-06,
     },
   },
     fusionfx2 = {
@@ -178,7 +178,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 300,
     damage = {
-      default            = -1,
+      default            = 1E-06,
     },
   },
 }
