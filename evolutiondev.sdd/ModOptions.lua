@@ -39,8 +39,8 @@ local options= {
 		items={
 			{key="normal", name="Normal", desc="Unit buildtimes are equal to their metal cost"},
 			{key="fast", name="Fast", desc="Unit buildtimes are equal to their metal cost divided by 2"},
-			{key="faster", name="Faster", desc="Unit buildtimes are equal to their metal cost divided by 8"},
-			{key="fastest", name="Fastest", desc="All units have a buildtime of 2.5 seconds"},
+			{key="faster", name="Faster", desc="Unit buildtimes are equal to their metal cost divided by 4"},
+			{key="fastest", name="Fastest", desc="All units have a buildtime of 5 seconds"},
 		}
 	},
 }

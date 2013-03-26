@@ -63,7 +63,7 @@ end
 if modOptions and tobool(modOptions.gameplayspeed == "faster") then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
-		unitDef.buildtime = unitDef.buildcostmetal / 8
+		unitDef.buildtime = unitDef.buildcostmetal / 4
 	end
 end
 
@@ -75,6 +75,7 @@ if modOptions and tobool(modOptions.gameplayspeed ~= "fastest") then
 		end
 	end
 end
+
 Spring.Echo("Gameplay Speed is set to", modOptions.gameplayspeed)
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
