@@ -34,12 +34,6 @@ SmokeUnit()
 	}
 }
 
-QueryNanoPiece(piecenum)
-{
-	piecenum = (spray==0)*nano1+(spray!=0)*nano2;
-	spray = (spray!=0);
-}
-
 
 Activate()
 {
@@ -174,7 +168,7 @@ buildingfx2()
 Create()
 {
 	Aztec = TRUE;
-	spray = 0;
+	spray = nanopoint;
 	while(get BUILD_PERCENT_LEFT)
 	{
 		sleep 400;
@@ -182,6 +176,19 @@ Create()
 	start-script SmokeUnit();
 	start-script buildingfx(); 
 	start-script buildingfx2(); 
+}
+
+QueryNanoPiece(piecenum)
+{
+	if( spray == 0 )
+	{
+		piecenum = nano1;
+	}
+	if( spray != 0 )
+	{
+		piecenum = nano2;
+	}
+	spray = !spray;
 }
 
 Killed(severity, corpsetype) // how it explodes 

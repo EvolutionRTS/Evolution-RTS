@@ -4,7 +4,7 @@
 
 piece base, doors1, spikeright1, spikeright2, spikeright3, spikes, topspin, wheelspin, sfxpoint1, nanopoint;
 
-static-var  Maya, building;
+static-var  Maya, building, spray;
 
 // Signal definitions (they must be distincts power of 2)
 #define SIG_ACTIVATE 2
@@ -50,6 +50,7 @@ buildingfx()
 
 Create()
 {
+	spray = nanopoint;
    Maya=TRUE;
    while( get BUILD_PERCENT_LEFT )
       sleep 400;
@@ -63,7 +64,15 @@ Create()
 
 QueryNanoPiece(piecenum)
 {
-   piecenum = spikes;
+	if( spray == 0 )
+	{
+		piecenum = spikeright1;
+	}
+	if( spray != 0 )
+	{
+		piecenum = spikeright3;
+	}
+	spray = !spray;
 }
 
 Activate()

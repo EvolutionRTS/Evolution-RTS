@@ -12,7 +12,7 @@ local unitDef = {
   BadTargetCategory  = "VTOL",
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
-  buildCostMetal     = 70,
+  buildCostMetal     = 50,
   builder            = false,
   buildTime          = 2.5,
   canAttack          = true,
@@ -111,7 +111,7 @@ Requires +10 Power]],
 local weaponDefs = {
   SBOMB = {
     badTargetCategory = [[ARMORED LIGHT]],
-    AreaOfEffect       = 250,
+    AreaOfEffect       = 300,
     avoidFriendly      = false,
     ballistic          = true,
     burst              = 10,
@@ -141,7 +141,7 @@ local weaponDefs = {
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default           = 37.5,
+      default           = 12.5,
     },
   },
 }
