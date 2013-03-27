@@ -58,7 +58,7 @@ Requires +40 Power]],
   unitname           = "eexkrabgroth",
   unitnumber         = "110",
   upright            = false,
-  usePieceCollisionVolumes = true,
+--  usePieceCollisionVolumes = true,
   workerTime         = 0,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 

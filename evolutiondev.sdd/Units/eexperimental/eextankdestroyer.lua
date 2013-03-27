@@ -116,6 +116,7 @@ local weaponDefs = {
     fallOffRate        = 1,
     fireStarter        = 100,
     interceptedByShieldType = 4,
+	impulseFactor      = 0.1,
     lineOfSight        = true,
     minintensity       = "1",
     name               = "Anti-Tank Laser",
