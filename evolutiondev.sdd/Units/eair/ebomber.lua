@@ -12,7 +12,7 @@ local unitDef = {
   BadTargetCategory  = "VTOL",
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
-  buildCostMetal     = 50,
+  buildCostMetal     = 70,
   builder            = false,
   buildTime          = 2.5,
   canAttack          = true,
@@ -28,7 +28,7 @@ local unitDef = {
 --End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 350,
-  description        = [[Stealth Bomber
+  description        = [[Bomber
 Armored, 400% Damage vs Buildings
   
 Requires +10 Power]],
@@ -61,7 +61,7 @@ Requires +10 Power]],
   side               = "CORE",
   sightDistance      = 800,
   smoothAnim         = true,
-  stealth            = true,
+  stealth            = false,
   turnRate           = 1500,
   TurnRadius         = 1000,
   unitname           = "ebomber",

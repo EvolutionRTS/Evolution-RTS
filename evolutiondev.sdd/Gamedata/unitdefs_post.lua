@@ -67,7 +67,7 @@ if modOptions and tobool(modOptions.gameplayspeed == "faster") then
 	end
 end
 
-if modOptions and tobool(modOptions.gameplayspeed ~= "fastest") then
+if modOptions and tobool(modOptions.gameplayspeed ~= "fastest" or modOptions.gameplayspeed ~= "faster") then
 	for name, unitDef in pairs(UnitDefs) do
 		if unitDef.unitname == "ecommander" then
 --			Spring.Echo(unitDef.unitname)

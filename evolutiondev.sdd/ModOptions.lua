@@ -34,7 +34,7 @@ local options= {
 		name="Gameplay Speed",
 		desc="Modifies buildtimes based upon cost",
 		type="list",
-		def="fastest",
+		def="faster",
 		section="other",
 		items={
 			{key="normal", name="Normal", desc="Unit buildtimes are equal to their metal cost"},
