@@ -20,10 +20,11 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Heavy Plasma Battery
+  description        = [[Heavy Plasma Battery (Anti-Armor)
 
 Building
 600% Damage vs Armored
+300% Damage vs Light
 10% Damage vs Buildings]],
   energyStorage      = 0,
   energyUse          = 0,
@@ -84,23 +85,7 @@ Building
 	twokhotkey = 'h',
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
-	helptext = [[Heavy Turret
-
-Heavy Plasma Battery
-
-Damagetype: Medium
-
-Armortype: Armored Building
-
-+1200 Line of Sight
-
-+1000 Range
-
-+50 Area of Effect
-
-Requires:
-
-+10 Power]],
+	helptext = [[]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=9,

@@ -17,9 +17,10 @@ local unitDef = {
   category           = "BUILDING NOTAIR",
   collisionVolumeTest = "1",
   corpse             = "ammobox",
-  description        = [[Anti-Raid Defense Platform
+  description        = [[Anti-Raid Defense Platform (Anti-Light)
 Building
 400% Damage vs Light
+100% Damage vs Armored
 10% Damage vs Buildings]],
   energyStorage      = 0,
   energyUse          = 0,
