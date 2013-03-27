@@ -1,4 +1,2 @@
-VERSION{v6.06}
+VERSION{v6.07}
 VERSION{Campaign Branch v1.5}
-
-Bump test revision
