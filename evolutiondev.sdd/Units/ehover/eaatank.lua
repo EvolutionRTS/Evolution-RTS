@@ -97,6 +97,7 @@ Requires +5 Power]],
 	twokhotkey = 'a',
     RequireTech = "5 Power",
 	armortype   = "light",
+	nofriendlyfire	= "1",
 	normaltex = "unittextures/eaatanknormal.png", 
 	helptext	= [[The spewer is the only dedicated mobile Anti-Air tank in Evolution RTS. It's range is quite limited, so make sure to bring along some scouts for the additional line of sight distance. Very large area of effect.]],
   },
@@ -142,6 +143,7 @@ local weaponDefs = {
     weaponVelocity     = 1200,
 	customparams = {
 	  damagetype		= "antiair",  
+	  nofriendlyfire	= 1,
     },
     damage = {
       default            = 70,

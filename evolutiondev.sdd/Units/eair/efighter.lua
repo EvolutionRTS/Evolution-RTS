@@ -96,6 +96,7 @@ Requires +5 Power]],
 	twokhotkey = 'c',
     RequireTech = "5 Power",
 	armortype   = "light",
+	nofriendlyfire	= "1",
 	normaltex = "unittextures/efighternormal.png", 
   },
 }
@@ -139,6 +140,7 @@ local weaponDefs = {
     weaponVelocity     = 2000,
 	customparams = {
 	  damagetype		= "fighter",  
+	  nofriendlyfire	= 1,
     },
     damage = {
       default            = 70,

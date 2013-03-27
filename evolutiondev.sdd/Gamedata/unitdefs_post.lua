@@ -51,6 +51,12 @@ if modOptions and tobool(modOptions.gameplayspeed == "normal") then
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal
 	end
+	for name, unitDef in pairs(UnitDefs) do
+		if unitDef.unitname == "ecommander" then
+--			Spring.Echo(unitDef.unitname)
+			unitDef.workertime = unitDef.workertime * 2
+		end
+	end
 end
 
 if modOptions and tobool(modOptions.gameplayspeed == "fast") then
@@ -58,21 +64,18 @@ if modOptions and tobool(modOptions.gameplayspeed == "fast") then
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal / 2
 	end
+	for name, unitDef in pairs(UnitDefs) do
+		if unitDef.unitname == "ecommander" then
+--			Spring.Echo(unitDef.unitname)
+			unitDef.workertime = unitDef.workertime * 2
+		end
+	end
 end
 
 if modOptions and tobool(modOptions.gameplayspeed == "faster") then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal / 4
-	end
-end
-
-if modOptions and tobool(modOptions.gameplayspeed ~= "fastest" or modOptions.gameplayspeed ~= "faster") then
-	for name, unitDef in pairs(UnitDefs) do
-		if unitDef.unitname == "ecommander" then
---			Spring.Echo(unitDef.unitname)
-			unitDef.workertime = unitDef.workertime * 2
-		end
 	end
 end
 

@@ -67,6 +67,7 @@ local unitDef = {
 	death_sounds = "generic",
 	twokhotkey = 'a',
 	armortype   = "building",
+	nofriendlyfire	= "1",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[]],
   },
@@ -113,6 +114,7 @@ local weaponDefs = {
     weaponVelocity     = 5000,
 	customparams = {
 	  damagetype		= "antiairturret",  
+	  nofriendlyfire	= 1,
     },
     damage = {
       default            = 75,
