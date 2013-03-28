@@ -161,9 +161,9 @@ local weaponDefs = {
     collideFeature     = false,
     collideFriendly    = false,
     coreThickness      = 0.2,
-    duration           = 0.1,
+    duration           = 0.2,
     explosionGenerator = "custom:burn",
-	energypershot      = 1.2,
+	energypershot      = 1.6,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -173,7 +173,7 @@ local weaponDefs = {
     minintensity       = 1,
     name               = "Laser",
     range              = 300,
-    reloadtime         = 0.1,
+    reloadtime         = 0.2,
     WeaponType         = "BeamLaser",
     rgbColor           = "0.5 0 0",
     rgbColor2          = "0.8 0.8 0.8",
@@ -192,7 +192,7 @@ local weaponDefs = {
 	  damagetype		= "raiderlight",  
     }, 
     damage = {
-      default           = 12,
+      default           = 16, -- multiply * 1.2 for correct dps output
     },
   },
   

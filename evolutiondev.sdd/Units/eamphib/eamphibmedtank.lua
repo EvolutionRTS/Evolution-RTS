@@ -159,7 +159,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.5,
     duration           = 0.2,
-    energypershot      = 1.8,
+    energypershot      = 4.3,
     explosionGenerator = "custom:burn",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -170,7 +170,7 @@ local weaponDefs = {
     minintensity       = 1,
     name               = "Laser",
     range              = 550,
-    reloadtime         = 0.1,
+    reloadtime         = 0.2,
     WeaponType         = "BeamLaser",
     rgbColor           = "0 0.5 0",
     rgbColor2          = "0.8 0.8 0.8",
@@ -189,7 +189,7 @@ local weaponDefs = {
 	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
-      default           = 18,
+      default           = 43.2, -- multiply * 1.2 for correct dps output
     },
   },
   
