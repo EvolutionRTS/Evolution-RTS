@@ -388,6 +388,11 @@ StopBuilding()
 
 }
 
+QueryNanoPiece(piecenum)
+{
+		piecenum = nanopoint1;
+}
+
 Killed(severity, corpsetype) // how it explodes 
 { 
 	corpsetype = 1; 

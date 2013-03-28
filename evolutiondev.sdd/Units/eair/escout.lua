@@ -22,7 +22,7 @@ local unitDef = {
   category           = "LIGHT VTOL",
   collide            = false,
 --Collision Volumes... Because the engine devs are silly.
-  collisionVolumeScales = [[35 35 35]],
+--  collisionVolumeScales = [[35 35 35]],
 --End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 180,

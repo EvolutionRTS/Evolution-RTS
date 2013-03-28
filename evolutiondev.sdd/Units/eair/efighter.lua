@@ -56,11 +56,10 @@ Requires +5 Power]],
   repairable		 = false,
  selfDestructAs     = "SMALL_UNIT",
   side               = "ARM",
-  sightDistance      = 750,
+  sightDistance      = 1000,
   smoothAnim         = true,
   sonarDistance      = 0,
   turnRate           = 50,
-  TurnRadius         = 1000,
   unitname           = "efighter",
   workerTime         = 0,
   sfxtypes = { 
@@ -105,9 +104,7 @@ Requires +5 Power]],
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  antiairmissile = {
-    badTargetCategory = [[LIGHT BUILDING]],
-    accuracy           = 1,
+  antiaircannon = {
     AreaOfEffect       = 300,
     avoidFriendly      = false,
     avoidFeature       = false,
@@ -146,6 +143,52 @@ local weaponDefs = {
       default            = 70,
     },
   },
+  
+  antiairmissile = {
+    AreaOfEffect       = 300,
+    avoidFriendly      = false,
+    avoidFeature       = false,
+	cegTag             = "missiletrailaa",
+    collideFriendly    = false,
+    collideFeature     = false,
+	canAttackGround    = false,
+	burst				= 4,
+	burstrate			= 0.5,
+	edgeEffectiveness  = 0.5,
+    explosionGenerator = "custom:BulletImpact3",
+	energypershot      = 7,
+    fireStarter        = 80,
+    impulseFactor      = 1,
+	interceptedByShieldType = 4,
+	model              = "missilesmall.s3o",
+    name               = "AA Missile",
+    pitchtolerance     = 3000,
+    range              = 1500,
+    reloadtime         = 4,
+    weaponType		   = "MissileLauncher",
+    soundHit           = "mediumcannonhit.wav",
+    soundStart         = "aircraft_missile_01.wav",
+    tolerance          = 3000,
+    turret             = false,
+	toairweapon		   = true,
+	startVelocity	   = 750,
+	acceleration	   = 2000,
+    weaponVelocity     = 10000,
+	tracks				= true,
+	turnrate			= 100000,
+	flighttime			= 4,
+	sprayangle			= 5000,
+	
+	customparams = {
+	  damagetype		= "fighter",  
+	  nofriendlyfire	= 1,
+    },
+    damage = {
+      default            = 70,
+    },
+  },
+  
+  
 }
 unitDef.weaponDefs = weaponDefs
 
