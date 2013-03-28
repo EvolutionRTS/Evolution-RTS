@@ -55,6 +55,7 @@ Requires +50 Power]],
   turnInPlace        = false,
   turnRate           = 200,
   unitname           = "eextankdestroyer",
+  unitRestricted	 = 1,
   workerTime         = 0,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 

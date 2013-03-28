@@ -9,7 +9,7 @@ local unitDef = {
 
   activatewhenbuilt  = false,
   buildCostEnergy    = 0,
-  buildCostMetal     = 90,
+  buildCostMetal     = 120,
   builder            = true,
   buildTime          = 2.5,
   canBeAssisted      = true,
@@ -18,9 +18,7 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Produces Units
-  
-  Provides powergrid]],
+  description        = [[Produces Units]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,
@@ -50,7 +48,7 @@ local unitDef = {
   unitnumber         = "83",
   workerTime         = 1,
   yardMap            = "cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc",
-  usePieceCollisionVolumes = true,
+--  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "towerdecal2.png",
   BuildingGroundDecalSizeX = 19,

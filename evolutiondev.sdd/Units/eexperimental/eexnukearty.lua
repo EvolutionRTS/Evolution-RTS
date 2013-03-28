@@ -57,6 +57,7 @@ Requires +80 Power]],
   turnInPlace        = false,
   turnRate           = 100,
   unitname           = "eexnukearty",
+  unitRestricted	 = 1,
   workerTime         = 0,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
