@@ -164,6 +164,7 @@ local weaponDefs = {
     fallOffRate        = 1,
     fireStarter        = 50,
     interceptedByShieldType = 4,
+	impulsefactor		= 0.1,
     lineOfSight        = true,
 	largebeamlaser	   = true,
 	laserflaresize 	   = 5,

@@ -23,7 +23,7 @@ function widget:GetInfo()
 	}
 end
 
-local testing = true
+local testing = false
 -- INCLUDES
 
 --comment out any stats you don't want included, order also directly effects button layout.. [1] = engineName, [2] = Custom Widget Name (can change)
@@ -32,19 +32,19 @@ local engineStats = {
 	-- {"frame"           , ""},
 	{"metalUsed"       , "Metal Used"},
 	{"metalProduced"   , "Metal Produced"},
-	--{"metalExcess"     , "Metal Excess"},
+	{"metalExcess"     , "Metal Excess"},
 	-- {"metalReceived"   , ""},
 	-- {"metalSent"       , ""},
 	{"energyUsed"      , "Energy Used"},
 	{"energyProduced"  , "Energy Produced"},
-	--{"energyExcess"    , "Energy Excess"},
+	{"energyExcess"    , "Energy Excess"},
 	-- {"energyReceived"  , ""},
 	-- {"energySent"      , ""},
 	{"damageDealt"     , "Damage Dealt"},
-	--{"damageReceived"  , "Damage Received"},
+	{"damageReceived"  , "Damage Received"},
 	{"unitsProduced"   , "Units Built"},
 	{"unitsKilled"     , "Units Killed"},
-	--{"unitsDied"       , "Units Lost"},
+	{"unitsDied"       , "Units Lost"},
 	-- {"unitsReceived"   , ""},
 	-- {"unitsSent"       , ""},
 	-- {"unitsCaptured"   , ""},
@@ -93,7 +93,7 @@ local function formatTime(seconds)
 end
 local function drawIntervals(graphMax)
 	for i=1, 4 do
-		local line = Chili.Line:New{parent = graphPanel, x = 0, bottom = (i)/5*100 .. "%", width = "100%", color = {0.1,0.1,0.1,0.1}}
+--		local line = Chili.Line:New{parent = graphPanel, x = 0, bottom = (i)/5*100 .. "%", width = "100%", color = {0.1,0.1,0.1,0.1}}
 		local label = Chili.Label:New{parent = graphPanel, x = 0, bottom = (i)/5*100 .. "%", width = "100%", caption = numFormat(graphMax*i/5)}
 	end
 end
