@@ -201,24 +201,7 @@ StopBuilding()
 
 QueryNanoPiece(piecenum)
 {
-   if( Static_Var_5 == 0 )
-   {
       piecenum = nano1;
-      Static_Var_5 = 1;
-
-   }
-   if( Static_Var_5 == 1 )
-   {
-      piecenum = nano1;
-      Static_Var_5 = 2;
-      return (0);
-   }
-   if( Static_Var_5 == 2 )
-   {
-      piecenum = nano1;
-      Static_Var_5 = 0;
-
-   }
 }
 
 TargetHeading(Func_Var_1)

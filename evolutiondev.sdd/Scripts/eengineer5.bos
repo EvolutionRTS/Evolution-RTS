@@ -166,6 +166,12 @@ StopBuilding()
 
 }
 
+QueryNanoPiece(piecenum)
+{
+      piecenum = nanopoint1;
+}
+
+
 StartMoving()
 {
    bMoving = TRUE;

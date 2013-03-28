@@ -50,7 +50,7 @@ buildingfx()
 
 Create()
 {
-	spray = nanopoint;
+	spray = 0;
    Maya=TRUE;
    while( get BUILD_PERCENT_LEFT )
       sleep 400;
@@ -62,17 +62,26 @@ Create()
    start-script Buildingfx(); 
 }
 
+
 QueryNanoPiece(piecenum)
 {
 	if( spray == 0 )
 	{
 		piecenum = spikeright1;
 	}
-	if( spray != 0 )
+	if( spray == 1 )
+	{
+		piecenum = spikeright2;
+	}
+	if( spray == 2 )
 	{
 		piecenum = spikeright3;
 	}
-	spray = !spray;
+	++spray;
+	if( spray >= 3 )
+	{
+		spray = 0;
+	}
 }
 
 Activate()
