@@ -21,7 +21,7 @@ local unitDef = {
 -5 Energy per Second
 +0.5 Metal per Second]],
   energyStorage      = 0,
-  energyUse          = 10,
+  energyUse          = 5,
   explodeAs          = "LARGE_BUILDING",
   footprintX         = 8,
   footprintZ         = 8,
