@@ -59,22 +59,3 @@ if gadgetHandler:IsSyncedCode() then
 end
 
 	--UNSYNCED
-	-- replace fps mode bind with capture
-	Spring.SendCommands({
-		"unbindkeyset c",
-	})
-	Spring.SendCommands("bind c capture")
-	-- set repeat to be bound to q
-	Spring.SendCommands({
-		"unbindkeyset q",
-	})
-	Spring.SendCommands("bind q repeat")
-	-- set Priority to be bound to i
-	Spring.SendCommands({
-		"unbindkeyset i",
-	})
-	Spring.SendCommands("bind i priority")
-	
-	if Game.version == "85.0" then
-		Spring.SendCommands({"unbindaction specteam"})
-	end

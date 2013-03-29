@@ -134,10 +134,6 @@ function gadget:UnitCreated(unitID, unitDefID)
 end
 
 function gadget:Initialize()
-	Spring.SendCommands({
-		"unbindkeyset o",
-	})
-    Spring.SendCommands("bind o areamex")
 	mexSpot = GetMetalMap()
 	if not mexSpot then
 		Spring.Echo("Mex spot detection failed")
