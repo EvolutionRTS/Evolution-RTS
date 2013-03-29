@@ -9,7 +9,7 @@ local unitDef = {
   activateWhenBuilt  = true,
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 20,
+  buildCostMetal     = 40,
   builder            = false,
   buildTime          = 5,
   canAttack			 = false,
@@ -18,7 +18,8 @@ local unitDef = {
   damageModifier     = 0.5,
   description        = [[Converts Energy into Metal
 
--10 Energy per Second]],
+-5 Energy per Second
++0.5 Metal per Second]],
   energyStorage      = 0,
   energyUse          = 10,
   explodeAs          = "LARGE_BUILDING",
@@ -78,11 +79,7 @@ sfxtypes = {
 	normaltex = "unittextures/emakernormal.png", 
 	helptext = [[Metal Maker
 
-Creates metal from stored energy. Requires +10 energy per +1 metal generated
-
-+1 Metal
-
--10 Energy]],
+Creates metal from stored energy. Drains -5 energy per +0.5 metal generated]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=11,

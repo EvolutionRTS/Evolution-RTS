@@ -181,10 +181,9 @@ local function getEngineArrays(statistic, labelCaption)
 	local teamScores = {}
 	local teams	= Spring.GetTeamList()
 	local teams = (#teams - 1)
-	if not gameOver then graphLength = Spring.GetTeamStatsHistory(0)-1 end
+	graphLength = Spring.GetTeamStatsHistory(0)-1
 	local time = Spring.GetTeamStatsHistory(0, 0, graphLength)
 	local time = time[graphLength]["time"]
-	local timeLabel = formatTime(time)
 	Spring.Echo(time)
 	--Applies label of the selected graph at bottom of window
 	graphLabel:SetCaption(labelCaption)
