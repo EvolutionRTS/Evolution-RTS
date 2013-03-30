@@ -172,6 +172,7 @@ local weaponDefs = {
     lineOfSight        = true,
 	laserflaresize 	   = 5,
 	largebeamlaser	   = true,
+	leadlimit			= 15,
     minintensity       = 1,
     name               = "Laser",
     range              = 300,
