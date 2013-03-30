@@ -12,7 +12,7 @@ local unitDef = {
   BadTargetCategory  = "VTOL",
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
-  buildCostMetal     = 70,
+  buildCostMetal     = 55,
   builder            = false,
   buildTime          = 2.5,
   canAttack          = true,
@@ -29,7 +29,7 @@ local unitDef = {
   corpse             = "ammobox",
   cruiseAlt          = 350,
   description        = [[Bomber
-Armored, 400% Damage vs Buildings
+Armored, 800% Damage vs Buildings
   
 Requires +10 Power]],
   energyMake         = 0,
@@ -118,7 +118,7 @@ local weaponDefs = {
     collideFriendly    = false,
     cylinderTargeting = true,
     explosionGenerator = "custom:dodaibomb",
-	energypershot      = 2.5,
+	energypershot      = 1.25,
     id                 = 5,
 	impulsefactor	   = 0,
     interceptedByShieldType = 4,
@@ -139,7 +139,7 @@ local weaponDefs = {
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default           = 25,
+      default           = 12.5,
     },
   },
 }

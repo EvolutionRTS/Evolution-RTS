@@ -23,7 +23,7 @@ local unitDef = {
   category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        =[[Destroyer Class Walker
-Armored, 200% Damage vs Buildings
+Armored, 800% Damage vs Buildings
 
 Requires +40 Power]],
   energyMake         = 0,
@@ -37,7 +37,7 @@ Requires +40 Power]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 10000,
+  maxDamage          = 5000,
   maxVelocity        = 1,
   maxReverseVelocity = 0.2,
   maxWaterDepth      = 80,
@@ -150,10 +150,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "antibuilding",  
+	  damagetype		= "antibuildingkrab",  
     }, 
     damage = {
-      default           = 300,
+      default           = 75,
     },
   },
   concussioncannon = {
@@ -175,7 +175,7 @@ local weaponDefs = {
 	interceptedByShieldType = 4,
     name               = "Concussion Cannon",
     pitchtolerance     = "500",
-    range              = 1500,
+    range              = 1000,
     reloadtime         = 1,
     weaponType		   = "Cannon",
     soundHit           = "explode2",
@@ -185,10 +185,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 5000,
 	customparams = {
-	  damagetype		= "antibuilding",  
+	  damagetype		= "antibuildingkrab",  
     },
     damage = {
-      default            = 40,
+      default            = 10,
     },
   },
 }

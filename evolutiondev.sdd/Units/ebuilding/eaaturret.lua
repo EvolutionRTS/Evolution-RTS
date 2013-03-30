@@ -8,7 +8,7 @@ local unitName = "eaaturret"
 local unitDef = {
 
   buildCostEnergy    = 0,
-  buildCostMetal     = 60,
+  buildCostMetal     = 20,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
@@ -24,7 +24,7 @@ local unitDef = {
   icontype           = "defense",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  maxDamage          = 1200,
+  maxDamage          = 800,
   maxSlope           = 60,
   maxWaterDepth      = 0,
   metalStorage       = 0,
