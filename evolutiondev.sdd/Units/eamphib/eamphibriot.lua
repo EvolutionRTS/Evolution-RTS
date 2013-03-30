@@ -101,6 +101,7 @@ Requires +5 Power]],
 	twokhotkey = 'd',
     RequireTech = "4 Power",
 	armortype   = "light",
+	nofriendlyfire	= "1",
 	normaltex = "unittextures/eamphibriotnormal.png", 
   },
 }
@@ -179,7 +180,7 @@ local weaponDefs = {
   
   riottankempweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 150,
+    AreaOfEffect       = 100,
     avoidFeature       = false,
     avoidFriendly      = false,
     collideFeature     = false,
@@ -214,6 +215,7 @@ local weaponDefs = {
     weaponVelocity     = 1000,
 	customparams = {
 	  damagetype		= "riot",  
+	  nofriendlyfire	= 1,
     }, 
     damage = {
       default           = 100,

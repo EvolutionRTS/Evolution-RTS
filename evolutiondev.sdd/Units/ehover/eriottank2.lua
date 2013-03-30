@@ -100,6 +100,7 @@ Requires +3 Power]],
 	twokhotkey = 's',
     RequireTech = "3 Power",
 	armortype   = "armored",
+	nofriendlyfire	= "1",
 	normaltex = "unittextures/eriottank2normal.png", 
 	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Features 10 concussion shells in a burst that will knock back opposing units. It has Light armor, and should be paired with escorts if possible.]],
   },
@@ -141,7 +142,7 @@ local weaponDefs = {
   
   riottankempweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 150,
+    AreaOfEffect       = 100,
     avoidFeature       = false,
     avoidFriendly      = false,
     collideFeature     = false,
@@ -176,6 +177,7 @@ local weaponDefs = {
     weaponVelocity     = 1000,
 	customparams = {
 	  damagetype		= "riot",  
+	  nofriendlyfire	= 1,
     }, 
     damage = {
       default           = 100,

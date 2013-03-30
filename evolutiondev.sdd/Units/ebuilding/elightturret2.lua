@@ -9,7 +9,7 @@ local unitDef = {
 
   buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 80,
+  buildCostMetal     = 40,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
@@ -97,7 +97,6 @@ Building
 
 local weaponDefs = {
   lighteweapon = {
-  badTargetCategory = [[BUILDING ARMORED]],
     AreaOfEffect       = 25,
     avoidFriendly      = false,
     collideFriendly    = false,
@@ -125,7 +124,7 @@ local weaponDefs = {
 	  damagetype		= "antilightturret",  
     },      
     damage = {
-      default            = 62.5,
+      default            = 31.25,
     },
   },
 }

@@ -107,6 +107,7 @@ Requires +3 Power]],
 	twokhotkey = 'm',
     RequireTech = "3 Power",
 	armortype   = "armored",
+	nofriendlyfire	= "1",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }
@@ -160,7 +161,7 @@ local weaponDefs = {
   
   riottankempweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 150,
+    AreaOfEffect       = 100,
     avoidFeature       = false,
     avoidFriendly      = false,
     collideFeature     = false,
@@ -194,7 +195,8 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "riot",  
+	  damagetype		= "riot", 
+		nofriendlyfire	= 1,
     }, 
     damage = {
       default           = 100,
