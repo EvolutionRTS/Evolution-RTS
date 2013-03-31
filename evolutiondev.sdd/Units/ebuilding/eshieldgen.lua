@@ -15,9 +15,13 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Shield Generator - Anti-Nuke/Anti-Artillery base shield Facility
+  description        = [[Anti-Nuke Platform
+Anti-Artillery base shield Facility
 
-Requires +10 Power]],
+Requires +10 Power
+Drains -20 Energy while stockpiling Anti-Nuke Ammunition
+
+30 Second Anti-Nuke laser cooldown after every Nuke destroyed]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -68,10 +72,10 @@ sfxtypes = {
   },
   weapons = {
     [1]  = {
-      def                = "shield",
+      def                = "nukeinterceptor",
     },
     [2]  = {
-      def                = "invisiblenukeshield",
+      def                = "shield",
     },
     [3]  = {
       def                = "FX",
@@ -85,29 +89,7 @@ sfxtypes = {
     ProvideTechRange = "300",
 	armortype   = "building", 
 	normaltex = "unittextures/eshieldgennormal.png", 
-	helptext = [[Anti-Lrpc/Nuclear Shield Generator
-
-Will protect from Nuclear missile strikes and Long Range Plasma Cannons
-
-LRPC Shield:
-
-+1500 Shield Range
-
-+5000 Shield Hitpoints
-
--10 Energy (While shield is charging)
-
-Nuclear Missile Shield:
-
-+3000 Shield Range
-
-+50000 Shield Hitpoints
-
--20 Energy (While shield is charging)
-
-Requires:
-
-+10 Power]],
+	helptext = [[Anti-Nuke Platform / Anti-Artillery base shield Facility]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=8,
@@ -120,6 +102,50 @@ Requires:
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
+  nukeinterceptor = {
+    AreaOfEffect       = 8,
+    avoidFeature       = false,
+    avoidFriendly      = false,
+    beamTime           = 5,
+    collideFeature     = false,
+    collideFriendly    = false,
+	coverage			= 2500,
+    rgbColor           = "0 0 0.5",
+    rgbColor2          = "0.5 0.5 0.5",
+    coreThickness      = 0.5,
+    duration           = 0.4,
+    explosionGenerator = "custom:burn",
+	energypershot      = 5000,
+    fallOffRate        = 0.1,
+    fireStarter        = 50,
+	interceptor			= 1,
+    largeBeamLaser     = true,
+	laserflaresize 	   = 5,
+    lineOfSight        = true,
+	minintensity       = 1,
+    name               = "Laser",
+    range              = 2500,
+    reloadtime         = 30,
+    WeaponType         = "BeamLaser",
+    soundStart         = "antinukelaser.wav",
+    soundTrigger       = true,
+	stockpile			= true,
+	stockpiletime		= 200,
+    texture1           = "lightning",
+    texture2           = "laserend",
+    thickness          = 20,
+    tolerance          = 500,
+    turret             = true,
+    weaponVelocity     = 1500,
+	waterweapon		   = true,
+	customparams = {
+	  damagetype		= "antibuildingassimilator",  
+    }, 
+    damage = {
+      default           = 50000,
+    },
+  },
+  
   shield = {
 	IsShield         = true,
     Smartshield      = true,

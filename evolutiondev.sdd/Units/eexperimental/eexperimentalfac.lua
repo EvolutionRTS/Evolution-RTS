@@ -19,9 +19,7 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Produces Destroyer Class Units
-  
-  Provides powergrid]],
+  description        = [[Produces Destroyer Class Units]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,

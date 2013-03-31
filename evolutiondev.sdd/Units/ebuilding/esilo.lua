@@ -143,6 +143,7 @@ local weaponDefs = {
     startVelocity      = 500,
     tracks             = true,
     turnRate           = 30000,
+	targetable			= 1,
     vlaunch            = true,
     weaponAcceleration = 0,
     weaponTimer        = 10,

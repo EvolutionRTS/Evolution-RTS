@@ -59,7 +59,7 @@ Create() // tells it what to do on creation
 {
         start-script SmokeUnit(); 
         start-script fx();
-        turn barrel1 to x-axis <-90> now;
+
         spin ring around y-axis speed <150.005495>; 
 } 
 
@@ -83,12 +83,12 @@ FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets
 
 AimFromWeapon1(piecenum) // where it aims the weapon from 
 { 
-piecenum = base; 
+piecenum = firepoint1; 
 } 
 
 QueryWeapon1(piecenum) // where the shot is called from 
 { 
-piecenum = base; 
+piecenum = firepoint1; 
 } 
 
 AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
