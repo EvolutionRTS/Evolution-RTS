@@ -40,6 +40,7 @@ local econ = {
 local defense = {
 	elightturret2 = {order = 0, row = 1},
 	eheavyturret2 = {order = 1, row = 1},
+	euwturret = {order = 2, row = 1},
 	eaaturret = {order = 2, row = 1},
 	ebarricade = {order = 3, row = 1},
 	eshieldgen = {order = 4, row = 1},

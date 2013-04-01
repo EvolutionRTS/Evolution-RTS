@@ -1,66 +1,54 @@
--- UNITDEF -- EAMPHIBMEDTANK --
+-- UNITDEF -- EUWTURRET --
 --------------------------------------------------------------------------------
 
-local unitName = "eamphibmedtank"
+local unitName = "euwturret"
 
 --------------------------------------------------------------------------------
 
 local unitDef = {
 
-  acceleration       = 1,
-  brakeRate          = 0.1,
+  buildAngle         = 2048,
   buildCostEnergy    = 0,
-  buildCostMetal     = 28,
+  buildCostMetal     = 40,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
-  cancollect         = "1",
-  canGuard           = true,
-  canMove            = true,
-  canPatrol          = true,
   canstop            = "1",
-  category           = "LIGHT AMPHIB SKIRMISHER",
+  category           = "BUILDING NOTAIR",
+  collisionVolumeTest = "1",
   corpse             = "ammobox",
-  description        = [[Tank Destroyer
-Light, 50% Damage vs Buildings
-	• Can fire while underwater
-
-Requires +5 Power]],
-  energyMake         = 0,
+  description        = [[Anti-Amphibious Defense Platform]],
   energyStorage      = 0,
   energyUse          = 0,
-  explodeAs          = "MEDIUM_UNIT",
-  footprintX         = 3,
-  footprintZ         = 3,
-  iconType           = "amphib",
+  explodeAs          = "MEDIUM_BUILDING",
+  floater			 = true,
+  footprintX         = 4,
+  footprintZ         = 4,
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  leaveTracks        = false,
-  maxDamage          = 360,
-  maxSlope           = 28,
-  maxVelocity        = 4.5,
-  maxReverseVelocity = 1,
-  maxWaterDepth      = 5000,
+  iconType           = "defense",
+  maxDamage          = 250,
+  maxSlope           = 60,
+  minWaterDepth      = 20,
   metalStorage       = 0,
-  movementClass      = "TANK3",
-  name               = "(R)azor",
-  noChaseCategory    = "VTOL",
-  objectName         = "eamphibmedtank.s3o",
+  name               = "Rooter",
+  objectName         = "euwturret.s3o",
+  onlytargetcategory2 = "NOTAIR",
+  onlytargetcategory3 = "NOTAIR",
+  onlytargetcategory4 = "NOTAIR",
+  onlytargetcategory5 = "NOTAIR",
+  onlytargetcategory6 = "NOTAIR",
   radarDistance      = 0,
   repairable		 = false,
- selfDestructAs     = "MEDIUM_UNIT",
+  selfDestructAs     = "MEDIUM_BUILDING",
   side               = "CORE",
-  sightDistance      = 550,
-  SonarDistance      = 550,
-  stealth			 = true,
-  sonarStealth		 = false,
+  sightDistance      = 750,
+  SonarDistance      = 750,
   smoothAnim         = true,
-  --  turnInPlace        = false,
-  --  turnInPlaceSpeedLimit = 4.5,
-  turnRate           = 1000,
---  turnrate           = 430,
-  unitname           = "eamphibmedtank",
+  unitname           = "euwturret",
   workerTime         = 0,
+  yardMap            = "oooo oooo oooo oooo",
+
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
  		"deathceg0", 
@@ -68,46 +56,45 @@ Requires +5 Power]],
  	}, 
 
     explosiongenerators = {
-      "custom:factorysparks",
-      "custom:dirt",
+      "custom:electricity",
+      "custom:needspower",
 	  "custom:blacksmoke",
     },
   },
   sounds = {
     underattack        = "unitsunderattack1",
-    ok = {
-      "ack",
-    },
     select = {
-      "unitselect",
+      "turretselect",
     },
   },
   weapons = {
     [1]  = {
-      def                = "medtankbeamlaser",
-	  badTargetCategory  = "BUILDING",
+      def                = "euwturretlaser",
+      onlyTargetCategory = "AMPHIB",
+	  MainDir	 		 = [[0 -1 0]],
+	  MaxAngleDif		 = 180,
     },
---[[	
-	[2]  = {
-      def                = "TORP",
-    },
-]]--
   },
-   customParams = {
+  customParams = {
     needed_cover = 2,
-   	death_sounds = "soldier",
-	twokhotkey = 'r',
-    RequireTech = "5 Power",
-	armortype   = "light",
-	normaltex = "unittextures/eamphibmedtanknormal.png", 
+	death_sounds = "generic",
+	-- twokhotkey = 't',
+	armortype   = "building",
+	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	helptext = [[]],
   },
+	buildingGroundDecalDecaySpeed=30,
+	buildingGroundDecalSizeX=6,
+	buildingGroundDecalSizeY=6,
+	useBuildingGroundDecal = false,
+	buildingGroundDecalType=[[elightturret2_aoplane.dds]],
 }
 
 
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  medtankbeamlaser = {
+  euwturretlaser = {
 	badTargetCategory = [[BUILDING]],
 	TargetMoveError	   = 0.3,
     AreaOfEffect       = 0,
@@ -117,8 +104,9 @@ local weaponDefs = {
     collideFeature     = false,
     collideFriendly    = false,
     coreThickness      = 0.5,
+	cylinderTargeting	= 128,
     duration           = 0.2,
-    energypershot      = 3.8,
+    energypershot      = 1.9,
     explosionGenerator = "custom:burn",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -127,13 +115,13 @@ local weaponDefs = {
     lineOfSight        = true,
 	largebeamlaser	   = true,
 	laserflaresize 	   = 5,
-	leadlimit			= 15,
+	leadlimit			= 20,
     minintensity       = 1,
     name               = "Laser",
-    range              = 550,
+    range              = 750,
     reloadtime         = 0.2,
     WeaponType         = "BeamLaser",
-    rgbColor           = "0 0.5 0",
+    rgbColor           = "0 0 0.5",
     rgbColor2          = "0.8 0.8 0.8",
     soundTrigger       = true,
     soundstart         = "amphibmedtankshothit.wav",
@@ -150,7 +138,7 @@ local weaponDefs = {
 	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
-      default           = 38.4, -- multiply * 1.2 for correct dps output
+      default           = 19.2, -- multiply * 1.2 for correct dps output
     },
   },
 }

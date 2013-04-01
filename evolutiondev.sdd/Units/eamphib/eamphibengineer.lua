@@ -102,6 +102,7 @@ Light]],
     "elightturret2", --new
     "eheavyturret2", --new
     "eaaturret",
+	"euwturret",
     "elrpc",
     "eshieldgen",
     "esilo"

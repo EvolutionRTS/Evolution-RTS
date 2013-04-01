@@ -101,17 +101,22 @@ Light]],
     "eairplant",
 	"eexperimentalfac",
     "emetalextractor", --new
+    "euwmetalextractor", --new
     "emaker", --new
     "esolar2", --new
+    "euwsolar2", --new
     "egeothermal", --new
     "efusion2", --new
+    "euwfusion2", --new
     "estorage", --new
+    "euwstorage", --new
     "eradar2", --new
     "ejammer2", --new
     "ebarricade",
     "elightturret2", --new
     "eheavyturret2", --new
     "eaaturret",
+	"euwturret",
     "elrpc",
     "eshieldgen",
     "esilo"
