@@ -1,2 +1,2 @@
-VERSION{v6.23}
+VERSION{v6.24}
 VERSION{Campaign Branch v1.5}
