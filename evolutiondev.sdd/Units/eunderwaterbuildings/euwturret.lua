@@ -42,8 +42,8 @@ local unitDef = {
   repairable		 = false,
   selfDestructAs     = "MEDIUM_BUILDING",
   side               = "CORE",
-  sightDistance      = 750,
-  SonarDistance      = 750,
+  sightDistance      = 250,
+  SonarDistance      = 1000,
   smoothAnim         = true,
   unitname           = "euwturret",
   workerTime         = 0,
@@ -69,10 +69,10 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "euwturretlaser",
-      onlyTargetCategory = "AMPHIB",
-	  MainDir	 		 = [[0 -1 0]],
-	  MaxAngleDif		 = 180,
+      def                = "euwturretmissile",
+      onlyTargetCategory = "LIGHT ARMORED",
+--	  MainDir	 		 = [[0 -1 0]],
+--	  MaxAngleDif		 = 180,
     },
   },
   customParams = {
@@ -94,9 +94,47 @@ local unitDef = {
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
+  euwturretmissile = {
+    AreaOfEffect       = 10,
+    avoidFriendly      = false,
+    avoidFeature       = false,
+	cegTag             = "torpedotrailuwturret",
+    collideFriendly    = false,
+    collideFeature     = false,
+    explosionGenerator = "custom:torpedoexplosion",
+	energypershot      = 7,
+    fireStarter        = 80,
+    impulseFactor      = 0.1,
+	interceptedByShieldType = 4,
+	model              = "missilesmall.s3o",
+    name               = "Underwater Torpedo",
+    pitchtolerance     = 3000,
+    range              = 1000,
+    reloadtime         = 2,
+    weaponType		   = "TorpedoLauncher",
+    soundHit           = "torpedolaunch.wav",
+    soundStart         = "subhit.wav",
+    tolerance          = 3000,
+    turret             = true,
+	startVelocity	   = 200,
+	acceleration	   = 2000,
+    weaponVelocity     = 10000,
+	tracks				= true,
+	turnrate			= 100000,
+	flighttime			= 4,
+	sprayangle			= 5000,
+	waterweapon		   = true,
+	
+	customparams = {
+	  damagetype		= "tankdestroyer",  
+    },
+    damage = {
+      default            = 120,
+    },
+  },
+
   euwturretlaser = {
 	badTargetCategory = [[BUILDING]],
-	TargetMoveError	   = 0.3,
     AreaOfEffect       = 0,
     avoidFeature       = false,
     avoidFriendly      = false,

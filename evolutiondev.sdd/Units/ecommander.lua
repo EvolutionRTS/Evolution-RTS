@@ -193,6 +193,7 @@ local weaponDefs = {
     explosionGenerator = "custom:EMPOVERSEER",
 	energypershot      = 50,
 	edgeEffectiveness  = 1,
+	explosionScar		= false,
     impulseFactor      = 0,
     name               = "Emp Blast Weapon",
 	paralyzer		   = true,
