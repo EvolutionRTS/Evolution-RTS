@@ -149,7 +149,7 @@ local weaponDefs = {
   },
 
   eaatankantiairmissile = {
-    AreaOfEffect       = 300,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     avoidFeature       = false,
 	burst				= 4,
@@ -167,7 +167,7 @@ local weaponDefs = {
 	model              = "missilesmall.s3o",
     name               = "AA Missile",
     pitchtolerance     = 3000,
-    range              = 1500,
+    range              = 1000,
     reloadtime         = 4,
     weaponType		   = "MissileLauncher",
     soundHit           = "mediumcannonhit.wav",
@@ -180,7 +180,7 @@ local weaponDefs = {
     weaponVelocity     = 10000,
 	tracks				= true,
 	turnrate			= 100000,
-	flighttime			= 4,
+	flighttime			= 2,
 	sprayangle			= 5000,
 	
 	customparams = {
