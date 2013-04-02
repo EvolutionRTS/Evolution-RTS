@@ -22,7 +22,7 @@ local unitDef = {
   category           = "LIGHT AMPHIB SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Tank Destroyer
-Light, 50% Damage vs Buildings
+Light, 25% Damage vs Buildings
 	• Can fire while underwater
 
 Requires +5 Power]],
@@ -150,7 +150,7 @@ local weaponDefs = {
 	  damagetype		= "tankdestroyer",  
     }, 
     damage = {
-      default           = 38.4, -- multiply * 1.2 for correct dps output
+      default           = 28, -- multiply * 1.2 for correct dps output
     },
   },
 }

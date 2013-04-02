@@ -112,6 +112,11 @@ local function BackwardCompability(wdName,wd)
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*0.5
 				
+			elseif (damagetypelower	== "tankdestroyeramphib") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.25
+				
 			elseif (damagetypelower	== "heavytankdestroyer") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
