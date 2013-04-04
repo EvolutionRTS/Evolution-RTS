@@ -23,7 +23,9 @@ local unitDef = {
   category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        =[[Destroyer Class Walker
-Armored, 800% Damage vs Buildings
+Armored
+100% Damage vs Buildings
+10% Damage vs Light/Armored
 
 Requires +40 Power]],
   energyMake         = 0,
@@ -153,7 +155,7 @@ local weaponDefs = {
 	  damagetype		= "antibuildingkrab",  
     }, 
     damage = {
-      default           = 75,
+      default           = 600,
     },
   },
   concussioncannon = {
@@ -188,7 +190,7 @@ local weaponDefs = {
 	  damagetype		= "antibuildingkrab",  
     },
     damage = {
-      default            = 10,
+      default            = 80,
     },
   },
 }
