@@ -30,7 +30,8 @@ local unitDef = {
 --  corpse             = "ammobox",
   cruiseAlt          = 100,
   description        = [[Gunship Drone
-Light, 150% Damage vs Light]],
+Light
+3 Damage vs Light/Armored/Building]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -115,7 +116,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     duration           = 0.02,
-	energypershot      = 0.2,
+	energypershot      = 0.3,
     explosionGenerator = "custom:burn",
     fallOffRate        = 0.1,
     impulseFactor      = 0,
@@ -143,7 +144,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "light",  
+	  damagetype		= "edrone",  
     },    
     damage = {
       default            = 3,

@@ -22,7 +22,11 @@ local unitDef = {
   category           = "LIGHT AMPHIB SUPPORT",
   corpse             = "ammobox",
   description        = [[Missile support tank
-Light, 200% vs Armored
+Light
+100 Damage (per rocket) vs Armored
+50 Damage (per rocket) vs Light/Building
+
+• Fires 5 rockets in a burst pattern
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -87,7 +91,7 @@ Requires +7 Power]],
   },
   weapons = {
     [1]  = {
-      def                = "gunshipweapon",
+      def                = "antiarmorrockets",
       onlyTargetCategory = "NOTAIR",
 	  badTargetCategory  = "BUILDING LIGHT",
     },
@@ -113,14 +117,14 @@ Requires +7 Power]],
 
 local weaponDefs = {
 
-  gunshipweapon = {
+  antiarmorrockets = {
     badTargetCategory = [[LIGHT BUILDING]],
     AreaOfEffect       = 100,
     avoidFriendly      = false,
     cegTag             = "missiletrailsmall",
     collideFriendly    = false,
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 13,
+	energypershot      = 50,
     fireStarter        = 70,
     guidance           = false,
 	burst			   = 5,
@@ -131,7 +135,7 @@ local weaponDefs = {
     metalpershot       = 0,
     model              = "missilesmallvlaunch.s3o",
     name               = "Rockets",
-    range              = 600,
+    range              = 650,
     reloadtime         = 2,
     weaponType		   = "Cannon",
     selfprop           = true,
@@ -149,49 +153,12 @@ local weaponDefs = {
     weaponTimer        = 5,
     weaponVelocity     = 350,
 	customparams = {
-	  damagetype		= "armoredtankdestroyer",  
+	  damagetype		= "eamphibrock",  
     },     
     damage = {
-      default           = 50,
+      default           = 100,
     },
   },
-  
-  TORP = {
-	cegtag			= "torpedotrailsmall",
-	weaponType		   = "TorpedoLauncher",
-	lineofsight		= 1,
-	turret			= 1,
-    model              = "torpedo.s3o",
-    energypershot      = 6.5,
-	propeller		= 1,
-	range			= 650,
-	reloadtime		= 2,
-	weapontimer		= 3,
-	weaponvelocity	= 500,
-	startvelocity	= 300,
-	weaponacceleration	= 100,
-	AreaOfEffect	= 50,
-    soundHit           = "subhit.wav",
-    soundStart         = "torpedolaunch.wav",
-    explosionGenerator = "custom:torpedoexplosion",
-	selfprop		= 1,
-	waterweapon		= 1,
-	burnblow		= 1,
-	predictboost	= 0,
-	impulsefactor	= 0,
-	cratermult		= 0,
-	craterboost		= 0,
-	noselfdamage	= 1,
-	avoidfriendly	= 0,
-	collidefriendly	= 0,
-	customparams = {
-		death_sounds = "generic",
-	  damagetype		= "armoredtankdestroyer",  
-    }, 
-    damage = {
-      default            = 130,
-    },
-  },  
 }
 unitDef.weaponDefs = weaponDefs
 

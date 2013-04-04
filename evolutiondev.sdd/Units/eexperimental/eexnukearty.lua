@@ -23,7 +23,9 @@ local unitDef = {
   category           = "ARMORED NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Low Yeild Nuclear Artillery Support Tank
-Armored, 200% Damage vs Buildings
+Armored
+2000 Damage vs Building
+1000 Damage vs Light/Armored
 
 Requires +80 Power]],
   energyMake         = 0,
@@ -110,7 +112,7 @@ local weaponDefs = {
     cegTag             = "nukeartyshot",
     collideFriendly    = false,
     explosionGenerator = "custom:nukeartyexpl",
-	energypershot      = 100,
+	energypershot      = 200,
     id                 = 172,
     impulseFactor      = 0,
     interceptedByShieldType = 4,
@@ -125,10 +127,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "antibuilding",  
+	  damagetype		= "eexnukearty",  
     }, 
     damage = {
-      default           = 1000,
+      default           = 2000,
     },
   },
 }

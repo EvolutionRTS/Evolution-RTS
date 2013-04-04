@@ -23,9 +23,9 @@ local unitDef = {
   description        = [[Heavy Plasma Battery (Anti-Armor)
 
 Building
-600% Damage vs Armored
-300% Damage vs Light
-10% Damage vs Buildings]],
+300 Damage vs Armored
+125 Damage vs Light
+30 Damage vs Buildings]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -134,10 +134,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 750,
 	customparams = {
-	  damagetype		= "heavytankdestroyerturret",  
+	  damagetype		= "eheavyturret2",  
     }, 
     damage = {
-      default           = 50,
+      default           = 300,
     },
   },
 }

@@ -22,7 +22,9 @@ local unitDef = {
   category           = "LIGHT AMPHIB RAID",
   corpse             = "ammobox",
   description        = [[Scout/Raider
-Light, 200% Damage vs Light
+Light
+160 Damage/s vs Light
+80 Damages/s vs Armored/Building
 	• Can fire while underwater
 
 Requires +1 Power]],
@@ -121,7 +123,7 @@ local weaponDefs = {
     coreThickness      = 0.2,
     duration           = 0.2,
     explosionGenerator = "custom:burn",
-	energypershot      = 1.6,
+	energypershot      = 3.2,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -149,10 +151,10 @@ local weaponDefs = {
     weaponVelocity     = 1000,
 	waterweapon		   = true,
 	customparams = {
-	  damagetype		= "raiderlight",  
+	  damagetype		= "eamphibbuggy",  
     }, 
     damage = {
-      default           = 16, -- multiply * 1.2 for correct dps output
+      default           = 32, -- multiply * 1.2 for correct dps output
     },
   },
 }

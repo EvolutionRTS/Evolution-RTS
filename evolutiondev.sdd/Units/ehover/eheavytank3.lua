@@ -23,7 +23,9 @@ local unitDef = {
   category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
   description        = [[Armored Tank Destroyer
-Armored, 50% Damage vs Buildings
+Armored
+120 Damage vs Light/Armored
+60 Damage vs Building
 
 Requires +5 Power]],
   energyMake         = 0,
@@ -128,7 +130,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "heavytankdestroyer",  
+	  damagetype		= "eheavytank3",  
     },      
     damage = {
      default         = 120,

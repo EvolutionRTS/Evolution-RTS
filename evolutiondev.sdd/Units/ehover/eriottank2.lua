@@ -23,8 +23,11 @@ local unitDef = {
   canstop            = "1",
   category           = "ARMORED NOTAIR RIOT",
   corpse             = "ammobox",
-  description        = [[Anti-Swarm Tank
-Armored, 200% Damage vs Light
+  description        = [[Anti-Swarm Paralyzer Tank
+Armored
+200 Damage vs Light
+100 Damage vs Armored/Building
+
 • Paralyzes enemy units
 • Projectile can hit multiple units
 
@@ -110,36 +113,6 @@ Requires +3 Power]],
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  riottankweapon = {
-    badTargetCategory = [[ARMORED BUILDING]],
-	accuracy		   = 0,
-    AreaOfEffect       = 25,
-	avoidFeature       = false,
-    avoidFriendly      = false,
-    ballistic          = true,
-    cegTag             = "riotweapon",
-    collideFriendly    = false,
-    explosionGenerator = "custom:PLASMA_Expl",
-	energypershot      = 4.5,
-    id                 = 172,
-    impulseFactor      = 50,
-    name               = "Light Cannon",
-    range              = 500,
-    reloadtime         = 0.25,
-    weaponType		   = "Cannon",
---    soundHit           = "mediumcannonhit.wav",
-    soundStart         = "riottankshot.wav",
-    tolerance          = 2000,
-    turret             = true,
-    weaponVelocity     = 1000,
-	customparams = {
-	  damagetype		= "riot",  
-    },   
-    damage = {
-      default           = 25,
-    },
-  },
-  
   riottankempweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 100,
@@ -150,7 +123,7 @@ local weaponDefs = {
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.05,
-    energypershot      = 10,
+    energypershot      = 20,
     explosionGenerator = "custom:fusionfx",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -176,11 +149,11 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "riot",  
+	  damagetype		= "eriottank2",  
 	  nofriendlyfire	= 1,
     }, 
     damage = {
-      default           = 100,
+      default           = 200,
     },
   },
 }

@@ -35,7 +35,9 @@ local unitDef = {
 -- End Cloaking
   
   description        = [[Light Tank Destroyer
-Light, 200% Damage vs Armored
+Light
+200 Damage vs Armored
+100 Damage vs Light/Building
   
 Requires +4 Power]],
   energyMake         = 0,
@@ -126,7 +128,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.1,
-    energypershot      = 10,
+    energypershot      = 20,
     explosionGenerator = "custom:BulletImpactBlue",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -150,10 +152,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 600,
 	customparams = {
-	  damagetype		= "tankdestroyermediumtank",  
+	  damagetype		= "eallterrmed",  
     }, 
     damage = {
-      default           = 100,
+      default           = 200,
     },
   },
   

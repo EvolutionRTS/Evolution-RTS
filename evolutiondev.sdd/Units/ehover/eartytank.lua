@@ -23,7 +23,9 @@ local unitDef = {
   category           = "LIGHT NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Artillery Support Tank
-Light, 400% Damage vs Buildings
+Light
+1000 Damage vs Buildings
+250 Damage vs Light/Armored
 
 Requires +8 Power]],
   energyMake         = 0.5,
@@ -116,7 +118,7 @@ local weaponDefs = {
 	avoidNeutral	   = false,
     collideFriendly    = false,
     explosionGenerator = "custom:ARTILLERY_EXPLOSION",
-	energypershot      = 50,
+	energypershot      = 100,
     id                 = 59,
     impulse            = "0",
     impulseFactor      = 0,
@@ -132,10 +134,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "antibuildinglobster",  
+	  damagetype		= "eartytank",  
     },  
     damage = {
-      default           = 50,
+      default           = 200,
      },
   },
 }

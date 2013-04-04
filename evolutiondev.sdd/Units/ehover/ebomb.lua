@@ -20,7 +20,9 @@ local unitDef = {
   canstop            = "1",
   category           = "ARMORED NOTAIR",
   description        = [[Hovering Bomb
-Armored, 400% Damage vs Buildings
+Armored
+1000 Damage vs Buildings
+250 Damage vs Light/Armored
 
 Requires +12 Power]],
   energyMake         = 0,
@@ -116,12 +118,12 @@ local weaponDefs = {
    soundhit="unitexplodemedium.wav",
    explosiongenerator="custom:ebombexpl",
    customparams = {
-	  damagetype		= "hoverbomb",
+	  damagetype		= "ebomb",
 	  nofriendlyfire	= "true", 
     },  
 
     damage = {
-      default            = 250,
+      default            = 1000,
     },
   },
 }

@@ -35,7 +35,9 @@ local unitDef = {
 -- End Cloaking
   
   description        = [[Shield Emitter
-Light, Shield absorbs 2000 damage
+Light
+Shield absorbs 500 damage
+Shield can link with other shield units to increase charging and capacity
 
 Requires +10 Power]],
   energyMake         = 0,

@@ -15,7 +15,11 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Dedicated Anti-Air Flak Turret]],
+  description        = [[Anti-Air Flak Turret
+  Building
+  112.5 Damage vs Armored
+  75 Damage vs Light/Building
+  ]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -93,7 +97,7 @@ local weaponDefs = {
     burnblow           = true,
     endsmoke           = "1",
     explosionGenerator = "custom:xamelImpact",
-	energypershot      = 7.5,
+	energypershot      = 11.25,
     fireStarter        = 80,
     id                 = 1,
     impulseFactor      = 3,
@@ -112,11 +116,11 @@ local weaponDefs = {
 	canAttackGround    = false,
     weaponVelocity     = 5000,
 	customparams = {
-	  damagetype		= "antiairturret",  
+	  damagetype		= "eaaturret",  
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default            = 75,
+      default            = 112.5,
     },
   },
 }

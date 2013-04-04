@@ -35,7 +35,9 @@ local unitDef = {
 -- End Cloaking
   
   description        = [[Raider
-Light, 200% Damage vs Light
+Light
+50 Damage vs Light
+25 Damage vs Armored/Building
   
 Requires +2 Power]],
   energyMake         = 0,
@@ -123,7 +125,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.3,
     duration           = 0.1,
-    energypershot      = 2.5,
+    energypershot      = 5,
     explosionGenerator = "custom:burn",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -146,10 +148,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 2000,
 	customparams = {
-	  damagetype		= "raiderlight",  
+	  damagetype		= "eallterrlight",  
     }, 
     damage = {
-      default           = 25,
+      default           = 50,
     },
   },
 }

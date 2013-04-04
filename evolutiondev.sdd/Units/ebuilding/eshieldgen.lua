@@ -19,7 +19,8 @@ local unitDef = {
 Anti-Artillery base shield Facility
 
 Requires +10 Power
-Drains -20 Energy while stockpiling Anti-Nuke Ammunition
+Drains -50 Energy while stockpiling Anti-Nuke Ammunition
+Drains -2.5 Energy while charging shield
 
 30 Second Anti-Nuke laser cooldown after every Nuke destroyed]],
   energyMake         = 0,
@@ -171,30 +172,7 @@ local weaponDefs = {
       default            = 1,
     },
   },
-  invisiblenukeshield = {
-	IsShield         = true,
-    Smartshield      = true,
-    Exteriorshield   = true,
-    Visibleshield    = true,
-    Visibleshieldrepulse = true,
-    ShieldStartingPower = 0,
-    Shieldenergyuse  = 0,
-    Shieldradius     = 3000,
-    Shieldpower      = 50001,
-    Shieldpowerregen = 50001/230,
-    Shieldpowerregenenergy = 20,
-    Shieldintercepttype = 2,
-    Shieldgoodcolor  = "1 1 1",
-    Shieldbadcolor   = "0 0 0",
-    Shieldalpha      = 0.1,
-    ShieldRepulsor   = false,
-    visibleShieldHit = true,
-    visibleShieldHitFrames = 10,
-    weaponType       = [[Shield]],
-    damage = {
-      default            = 1,
-    },
-  },
+  
   FX = {
     AreaOfEffect       = 0,
     avoidFeature       = false,
@@ -232,46 +210,6 @@ local weaponDefs = {
     weaponVelocity     = 1000,
     damage = {
       default            = 1E-06,
-    },
-  },
-  nukekiller = {
-	IsShield         = true,
-    AreaOfEffect       = 0,
-    avoidFeature       = false,
-    avoidFriendly      = false,
-    beamlaser          = 1,
-    beamTime           = 3,
-    beamWeapon         = true,
-    collideFeature     = false,
-    collideFriendly    = false,
-    coreThickness      = 0.1,
-    duration           = 10,
-    energypershot      = 0,
-    explosionGenerator = "custom:empty",
-    fallOffRate        = 0.1,
-    fireStarter        = 90,
-    guidance           = true,
-    id                 = 666,
-    impluse            = "0",
-    interceptor        = true,
-    largeBeamLaser     = true,
-    lineOfSight        = true,
-    name               = "Laser Battery",
-    range              = 1,
-    reloadtime         = 300,
-    WeaponType         = "BeamLaser",
-    rgbColor           = "0 0 1",
-    rgbColor2          = "1 0.5 0",
-    sweep              = "1",
-    sweepfire          = true,
-    targetMoveError    = 0,
-    texture            = "fireyexplo",
-    thickness          = 30,
-    tolerance          = 8000,
-    turret             = true,
-    weaponVelocity     = 1000,
-    damage = {
-      default            = 100,
     },
   },
 }

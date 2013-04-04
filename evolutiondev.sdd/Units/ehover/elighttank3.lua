@@ -22,7 +22,9 @@ local unitDef = {
   category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
   description        = [[Raider
-Light, 200% Damage vs Light
+Light
+80 Damage vs Light
+40 Damage vs Armored/Building
 
 Requires +2 Power]],
   energyMake         = 0,
@@ -113,7 +115,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     explosionGenerator = "custom:LIGHTNINGPLOSION1SMALL",
-	energypershot      = 4,
+	energypershot      = 8,
     impulseBoost       = 0,
     impulseFactor      = 0,
     interceptedByShieldType = 4,
@@ -131,10 +133,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "raiderlight",  
+	  damagetype		= "elighttank3",  
     },      
     damage = {
-      default           = 40,
+      default           = 80,
     },
   },
 }

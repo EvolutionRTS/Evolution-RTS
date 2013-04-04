@@ -29,7 +29,11 @@ local unitDef = {
   corpse             = "ammobox",
   cruiseAlt          = 350,
   description        = [[Bomber
-Armored, 800% Damage vs Buildings
+Armored
+100 Damage (per bomb) vs Buildings
+12.5 Damage (per bomb) vs Light/Armored
+
+• Each bomb has a very large AOE
   
 Requires +10 Power]],
   energyMake         = 0,
@@ -135,11 +139,11 @@ local weaponDefs = {
     tolerance          = 1000,
     weaponVelocity     = 200,
 	customparams = {
-	  damagetype		= "bomber",  
+	  damagetype		= "ebomber",  
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default           = 12.5,
+      default           = 100,
     },
   },
 }

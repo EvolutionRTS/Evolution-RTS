@@ -24,8 +24,14 @@ local unitDef = {
   corpse             = "ammobox",
   description        =[[Destroyer Class Walker
 Armored
-100% Damage vs Buildings
-10% Damage vs Light/Armored
+
+Primary Laser:
+600 Damage/s vs Building
+60 Damage/s vs Light/Armored
+
+Secondary Cannons:
+80 Damage vs Building
+8 Damage vs Light/Armored
 
 Requires +40 Power]],
   energyMake         = 0,
@@ -127,7 +133,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
 --	cegTag             = "mediumcannonweapon3",
 --    duration           = 0.2,
-    energypershot      = 30,
+    energypershot      = 60,
     explosionGenerator = "custom:MEDMECHPOP",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -152,7 +158,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "antibuildingkrab",  
+	  damagetype		= "eexkrabgroth",  
     }, 
     damage = {
       default           = 600,
@@ -170,7 +176,7 @@ local weaponDefs = {
     burnblow           = true,
     endsmoke           = "1",
     explosionGenerator = "custom:xamelImpact",
-	energypershot      = 4,
+	energypershot      = 8,
     fireStarter        = 80,
     id                 = 1,
     impulseFactor      = 0.1,
@@ -187,7 +193,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 5000,
 	customparams = {
-	  damagetype		= "antibuildingkrab",  
+	  damagetype		= "eexkrabgroth",  
     },
     damage = {
       default            = 80,

@@ -29,7 +29,9 @@ local unitDef = {
   corpse             = "ammobox",
   cruiseAlt          = 300,
   description        = [[Gunship Tank Destroyer
-Light, 400% damage vs Light and Armored units
+Light
+130 Damage vs Light/Armored
+32.5 Damage vs Building
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -156,10 +158,10 @@ local weaponDefs = {
     weaponTimer        = 100,
     weaponVelocity     = 1200,
 	customparams = {
-	  damagetype		= "gunship",  
+	  damagetype		= "egunship2",  
     },      
     damage = {
-      default           = 32.5,
+      default           = 130,
     },
   },
 }

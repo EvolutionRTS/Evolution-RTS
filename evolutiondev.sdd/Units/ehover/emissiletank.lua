@@ -23,7 +23,9 @@ local unitDef = {
   category           = "LIGHT NOTAIR SUPPORT",
   corpse             = "ammobox",
   description        = [[Missile Support Tank
-Light, 200% vs Armored
+Light
+100 Damage vs Light/Armored
+50 Damage vs Building
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -120,7 +122,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     explosionGenerator = "custom:xamelimpact",
-	energypershot      = 5,
+	energypershot      = 10,
     fireStarter        = 100,
     flightTime         = 10,
     guidance           = true,
@@ -148,10 +150,10 @@ local weaponDefs = {
     weaponType         = "StarburstLauncher",
     weaponVelocity     = 1800,
 	customparams = {
-	  damagetype		= "armoredtankdestroyer",  
+	  damagetype		= "emissiletank",  
     },      
     damage = {
-      default           = 50,
+      default           = 100,
     },
   },
 }

@@ -87,158 +87,192 @@ local function BackwardCompability(wdName,wd)
   if (weapondamage > 0) then
 		if (wd.customparams) then
 		local damagetypelower = string.lower(wd.customparams.damagetype)
--- hovers
-		if (damagetypelower == "raider") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*2
-			elseif (damagetypelower == "flametankraider") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*4
+
+		if (damagetypelower == "nonexistent") then
+				wd.damage.ARMORED = 		weapondamage*0.1
+				wd.damage.LIGHT = 			weapondamage*0.1
+				wd.damage.BUILDING  = 		weapondamage*0.1
 				
-			elseif (damagetypelower == "raiderlight") then
+-----------------------------------------------------------------------------				
+				
+			-- Start Hovers
+			elseif (damagetypelower	== "eaatank") then
 				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*2
+				wd.damage.LIGHT = 			weapondamage*0.66
+				wd.damage.BUILDING  = 		weapondamage*0.66
+				
+			elseif (damagetypelower	== "eartytank") then
+				wd.damage.ARMORED = 		weapondamage*0.25
+				wd.damage.LIGHT = 			weapondamage*0.25
 				wd.damage.BUILDING  = 		weapondamage*1
 				
-			elseif (damagetypelower	== "tankdestroyermediumtank") then
-				wd.damage.ARMORED = 		weapondamage*2
-				wd.damage.LIGHT = 			weapondamage*1
+			elseif (damagetypelower	== "ebomb") then
+				wd.damage.ARMORED = 		weapondamage*0.25
+				wd.damage.LIGHT = 			weapondamage*0.25
 				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "tankdestroyer") then
+			
+			elseif (damagetypelower	== "efatso") then
+				wd.damage.ARMORED = 		weapondamage*0.125
+				wd.damage.LIGHT = 			weapondamage*0.125
+				wd.damage.BUILDING  = 		weapondamage*1
+			
+			elseif (damagetypelower == "eflametank") then
+				wd.damage.ARMORED = 		weapondamage*0.25
+				wd.damage.LIGHT = 			weapondamage*0.25
+				wd.damage.BUILDING  = 		weapondamage*1
+			
+			elseif (damagetypelower == "elighttank3") then
+				wd.damage.ARMORED = 		weapondamage*0.5
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "eheavytank3") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "emediumtank3") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*0.5
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "emissiletank") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*0.5
 				
-			elseif (damagetypelower	== "tankdestroyeramphib") then
+			elseif (damagetypelower	== "eriottank2") then
+				wd.damage.ARMORED = 		weapondamage*0.5
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			-- End Hovers
+			
+			-- Start All Terrains
+			elseif (damagetypelower	== "eallterrheavy") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower == "eallterrlight") then
+				wd.damage.ARMORED = 		weapondamage*0.5
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+				
+			elseif (damagetypelower	== "eallterrmed") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*0.5
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "eallterrriot") then
+				wd.damage.ARMORED = 		weapondamage*0.5
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "eallterrassault") then
+				wd.damage.ARMORED = 		weapondamage*0.125
+				wd.damage.LIGHT = 			weapondamage*0.125
+				wd.damage.BUILDING  = 		weapondamage*1
+			-- End All Terrains
+			
+			-- Start Amphibs
+			elseif (damagetypelower == "eamphibbuggy") then
+				wd.damage.ARMORED = 		weapondamage*0.5
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "eamphibriot") then
+				wd.damage.ARMORED = 		weapondamage*0.5
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "eamphibmedtank") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "eamphibrock") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*0.5
+				wd.damage.BUILDING  = 		weapondamage*0.5
+			
+			elseif (damagetypelower	== "eamphibarty") then
+				wd.damage.ARMORED = 		weapondamage*0.25
+				wd.damage.LIGHT = 			weapondamage*0.25
+				wd.damage.BUILDING  = 		weapondamage*1
+			-- End Amphibs
+			
+			-- Start Aircraft
+			elseif (damagetypelower == "edrone") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*1
+			
+			elseif (damagetypelower	== "efighter") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*0.66
+				wd.damage.BUILDING  = 		weapondamage*0.66
+			
+			elseif (damagetypelower	== "egunship2") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*0.25
 				
-			elseif (damagetypelower	== "heavytankdestroyer") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*0.5
-				
-			elseif (damagetypelower	== "armoredtankdestroyer") then
-				wd.damage.ARMORED = 		weapondamage*2
-				wd.damage.LIGHT = 			weapondamage*1
+			elseif (damagetypelower	== "ebomber") then
+				wd.damage.ARMORED = 		weapondamage*0.125
+				wd.damage.LIGHT = 			weapondamage*0.125
 				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "riot") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*2
-				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "antibuilding") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*2
-				
-			elseif (damagetypelower	== "antibuildingkrab") then
+			-- End Aircraft
+			
+			-- Start Experimentals
+			elseif (damagetypelower	== "eexkrabgroth") then
 				wd.damage.ARMORED = 		weapondamage*0.1
 				wd.damage.LIGHT = 			weapondamage*0.1
 				wd.damage.BUILDING  = 		weapondamage*1
 				
-			elseif (damagetypelower	== "antibuildinglobster") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*4
-				
-			elseif (damagetypelower	== "antibuildingassimilator") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*4
-			
-			elseif (damagetypelower	== "antibuildingfatso") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*8
-			
-			elseif (damagetypelower	== "antibuildingallterrassault") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*8
-				
-			elseif (damagetypelower	== "hoverbomb") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*4
-				
-			elseif (damagetypelower	== "antiair") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*1
-				
--- turrets
-			elseif (damagetypelower	== "antilight") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*4
-				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "antilightturret") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*4
-				wd.damage.BUILDING  = 		weapondamage*0.1
-				
-			elseif (damagetypelower	== "antiarmored") then
-				wd.damage.ARMORED = 		weapondamage*2
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "antiairturret") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "heavytankdestroyerturret") then
-				wd.damage.ARMORED = 		weapondamage*6
-				wd.damage.LIGHT = 			weapondamage*3
-				wd.damage.BUILDING  = 		weapondamage*0.1
-			
-			elseif (damagetypelower	== "lrpc") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*4
-				
--- aircraft
-			elseif (damagetypelower	== "gunshipdrone") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1.5
-				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "fighter") then
-				wd.damage.ARMORED = 		weapondamage*1.5
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*1
-				
-			elseif (damagetypelower	== "bomber") then
-				wd.damage.ARMORED = 		weapondamage*1
-				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*8
-				
-			elseif (damagetypelower	== "gunship") then
-				wd.damage.ARMORED = 		weapondamage*4
-				wd.damage.LIGHT = 			weapondamage*4
-				wd.damage.BUILDING  = 		weapondamage*1
-				
--- all terrain
--- amphib
-
--- destroyers
-			elseif (damagetypelower	== "destroyertankkiller") then
+			elseif (damagetypelower	== "eextankdestroyer") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*0.1
-				
-			elseif (damagetypelower	== "destroyerbuildingkiller") then
-				wd.damage.ARMORED = 		weapondamage*0.1
-				wd.damage.LIGHT = 			weapondamage*0.1
-				wd.damage.BUILDING  = 		weapondamage*2
-
-			else -- medium weapon
+			
+			elseif (damagetypelower	== "eexnukearty") then
+				wd.damage.ARMORED = 		weapondamage*0.5
+				wd.damage.LIGHT = 			weapondamage*0.5
+				wd.damage.BUILDING  = 		weapondamage*1
+			-- End Experimentals
+			
+			-- Start Buildings
+			elseif (damagetypelower	== "elightturret2") then
+				wd.damage.ARMORED = 		weapondamage*0.25
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.1
+			
+			elseif (damagetypelower	== "eheavyturret2") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*0.5
+				wd.damage.BUILDING  = 		weapondamage*0.1
+			
+			elseif (damagetypelower	== "eaaturret") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*0.66
+				wd.damage.BUILDING  = 		weapondamage*0.66
+			
+			elseif (damagetypelower	== "elrpc") then
+				wd.damage.ARMORED = 		weapondamage*0.25
+				wd.damage.LIGHT = 			weapondamage*0.25
+				wd.damage.BUILDING  = 		weapondamage*1
+			
+			elseif (damagetypelower	== "euwturret") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.1
+			-- End Buildings
+			
+			-- Start Miscellaneous
+			
+			
+			-- End Miscellaneous
+			
+			else -- Default Damage
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
 				wd.damage.BUILDING  = 		weapondamage*1

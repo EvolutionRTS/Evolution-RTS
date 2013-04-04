@@ -35,7 +35,9 @@ local unitDef = {
 -- End Cloaking
   
   description        =[[Armored Assault Tank
-Armored, 800% Damage vs Buildings
+Armored
+400 Damage vs Buildings
+50 Damage vs Light/Armored
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -127,7 +129,7 @@ local weaponDefs = {
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.4,
-    energypershot      = 10,
+    energypershot      = 40,
     explosionGenerator = "custom:burn",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -151,10 +153,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 250,
 	customparams = {
-	  damagetype		= "antibuildingallterrassault",  
+	  damagetype		= "eallterrassault",  
     }, 
     damage = {
-      default           = 50,
+      default           = 400,
     },
   },
 }

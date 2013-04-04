@@ -17,7 +17,11 @@ local unitDef = {
   category           = "BUILDING NOTAIR",
   collisionVolumeTest = "1",
   corpse             = "ammobox",
-  description        = [[Anti-Amphibious Defense Platform]],
+  description        = [[Anti-Amphibious Defense Platform
+  Building
+  120 Damage vs Light/Armored
+  12 Damage vs Building
+  ]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -102,7 +106,7 @@ local weaponDefs = {
     collideFriendly    = false,
     collideFeature     = false,
     explosionGenerator = "custom:torpedoexplosion",
-	energypershot      = 7,
+	energypershot      = 12,
     fireStarter        = 80,
     impulseFactor      = 0.1,
 	interceptedByShieldType = 4,
@@ -126,57 +130,10 @@ local weaponDefs = {
 	waterweapon		   = true,
 	
 	customparams = {
-	  damagetype		= "tankdestroyer",  
+	  damagetype		= "euwturret",  
     },
     damage = {
       default            = 120,
-    },
-  },
-
-  euwturretlaser = {
-	badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 0,
-    avoidFeature       = false,
-    avoidFriendly      = false,
-    beamTime           = 0.2,
-    collideFeature     = false,
-    collideFriendly    = false,
-    coreThickness      = 0.5,
-	cylinderTargeting	= 128,
-    duration           = 0.2,
-    energypershot      = 1.9,
-    explosionGenerator = "custom:burn",
-    fallOffRate        = 1,
-    fireStarter        = 50,
-    interceptedByShieldType = 4,
-	impulsefactor		= 0.1,
-    lineOfSight        = true,
-	largebeamlaser	   = true,
-	laserflaresize 	   = 5,
-	leadlimit			= 20,
-    minintensity       = 1,
-    name               = "Laser",
-    range              = 750,
-    reloadtime         = 0.2,
-    WeaponType         = "BeamLaser",
-    rgbColor           = "0 0 0.5",
-    rgbColor2          = "0.8 0.8 0.8",
-    soundTrigger       = true,
-    soundstart         = "amphibmedtankshothit.wav",
---	soundHit		   = "amphibmedtankshothit.wav",
-	scrollspeed		   = 5,
-    texture1           = "lightning",
-    texture2           = "laserend",
-    thickness          = 4,
-    tolerance          = 3000,
-    turret             = true,
-    weaponVelocity     = 1000,
-	waterweapon		   = true,
-	customparams = {
-	  damagetype		= "tankdestroyer",  
-    }, 
-    damage = {
-      default           = 19.2, -- multiply * 1.2 for correct dps output
     },
   },
 }

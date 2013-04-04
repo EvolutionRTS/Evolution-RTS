@@ -22,7 +22,10 @@ local unitDef = {
   category           = "LIGHT AMPHIB SUPPORT",
   corpse             = "ammobox",
   description        = [["Laser Support Artillery
-Light, 400% Damage vs Buildings
+Light
+300 Damage vs Buildings
+75 Damage vs Light/Armored
+
 	• Can fire while underwater
 
 Requires + 10 Power]],
@@ -119,7 +122,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
     duration           = 0.4,
     explosionGenerator = "custom:burn",
-	energypershot      = 7.5,
+	energypershot      = 30,
     fallOffRate        = 0.1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -143,10 +146,10 @@ local weaponDefs = {
     weaponVelocity     = 1500,
 	waterweapon		   = true,
 	customparams = {
-	  damagetype		= "antibuildingassimilator",  
+	  damagetype		= "eamphibarty",  
     }, 
     damage = {
-      default           = 75,
+      default           = 300,
     },
   },
 }

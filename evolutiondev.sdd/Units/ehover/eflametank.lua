@@ -23,7 +23,11 @@ local unitDef = {
   category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
   description        = [[Flamethrower Raider
-Light, 400% Damage vs Buildings
+Light
+100 Damage/s vs Buildings
+25 Damage/s vs Light/Armored
+
+Energy Drain: 10/s
 
 Requires +2 Power]],
   energyMake         = 0,
@@ -138,10 +142,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "flametankraider",  
+	  damagetype		= "eflametank",  
     },      
     damage = {
-      default           = 2.5,
+      default           = 10,
     },
   },
 }

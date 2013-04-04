@@ -22,8 +22,11 @@ local unitDef = {
   canstop            = "1",
   category           = "LIGHT AMPHIB RIOT",
   corpse             = "ammobox",
-  description        = [[Anti-Swarm Tank
-Light, 200% Damage vs Light
+  description        = [[Anti-Swarm Paralyzer Tank
+Light
+200 Damage vs Light
+100 Damage vs Armored/Building
+
 • Paralyzes enemy units
 • Projectile can hit multiple units
 
@@ -110,74 +113,6 @@ Requires +5 Power]],
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  riottankweapon = {
-    badTargetCategory = [[ARMORED BUILDING]],
-	accuracy		   = 0,
-    AreaOfEffect       = 25,
-	avoidFeature       = false,
-    avoidFriendly      = false,
-    ballistic          = true,
-    cegTag             = "riotweapon",
-    collideFriendly    = false,
-    explosionGenerator = "custom:PLASMA_Expl",
-	energypershot      = 4.5,
-    id                 = 172,
-    impulseFactor      = 50,
-    name               = "Light Cannon",
-    range              = 500,
-    reloadtime         = 0.25,
-    weaponType		   = "Cannon",
---    soundHit           = "mediumcannonhit.wav",
-    soundStart         = "riottankshot.wav",
-    tolerance          = 2000,
-    turret             = true,
-    weaponVelocity     = 1000,
-	customparams = {
-	  damagetype		= "riot",  
-    },   
-    damage = {
-      default           = 25,
-    },
-  },
-  
-  TORP = {
-    badTargetCategory = [[ARMORED BUILDING]],
-    cegtag			= "torpedotrailsmall",
-	weaponType		   = "TorpedoLauncher",
-	lineofsight		= 1,
-	turret			= 1,
-    model              = "torpedo.s3o",
-    energypershot      = 2.25,
-	propeller		= 1,
-	range			= 500,
-	reloadtime		= 0.5,
-	weapontimer		= 10,
-	weaponvelocity	= 500,
-	startvelocity	= 250,
-	weaponacceleration	= 100,
-	AreaOfEffect	= 8,
-    soundHit           = "subhit.wav",
-    soundStart         = "torpedolaunch.wav",
-    explosionGenerator = "custom:torpedoexplosion",
-	selfprop		= 1,
-	waterweapon		= 1,
-	burnblow		= 1,
-	predictboost	= 0,
-	impulsefactor	= 0,
-	cratermult		= 0,
-	craterboost		= 0,
-	noselfdamage	= 1,
-	avoidfriendly	= 0,
-	collidefriendly	= 0,
-	customparams = {
-		death_sounds = "generic",
-	  damagetype		= "riot",  
-    }, 
-    damage = {
-      default            = 38,
-    },
-  }, 
-  
   riottankempweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 100,
@@ -188,7 +123,7 @@ local weaponDefs = {
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.05,
-    energypershot      = 10,
+    energypershot      = 20,
     explosionGenerator = "custom:fusionfx",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -214,11 +149,11 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "riot",  
+	  damagetype		= "eamphibriot",  
 	  nofriendlyfire	= 1,
     }, 
     damage = {
-      default           = 100,
+      default           = 200,
     },
   },
 }

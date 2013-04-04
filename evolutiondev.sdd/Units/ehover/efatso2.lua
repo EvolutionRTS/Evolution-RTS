@@ -23,7 +23,9 @@ local unitDef = {
   category           = "ARMORED NOTAIR ASSAULT",
   corpse             = "ammobox",
   description        = [[Armored Anti-Base Tank
-Armored, 800% Damage vs Buildings
+Armored
+350 Damage vs Building
+43.75 Damage vs Light/Armored
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -116,7 +118,7 @@ local weaponDefs = {
     cegTag             = "factorysparks",
     collideFriendly    = false,
     explosionGenerator = "custom:fatsoimpact",
-	energypershot      = 8.6,
+	energypershot      = 35,
     id                 = 71,
     interceptedByShieldType = 4,
     impulse            = "0",
@@ -133,10 +135,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 315,
 	customparams = {
-	  damagetype		= "antibuildingfatso",  
+	  damagetype		= "efatso",  
     },      
     damage = {
-      default           = 43.75,
+      default           = 350,
     },
   },
 }

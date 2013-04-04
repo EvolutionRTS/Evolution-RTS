@@ -28,7 +28,11 @@ local unitDef = {
   corpse             = "ammobox",
   cruiseAlt          = 400,
   description        = [[Fighter
-Light, 150% Damage vs Armored
+Light
+105 Damage vs Armored
+70 Damage vs Light/Building
+
+• Fires 4 missiles in a burst
  
 Requires +5 Power]],
   energyMake         = 0,
@@ -104,46 +108,6 @@ Requires +5 Power]],
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  antiaircannon = {
-    AreaOfEffect       = 300,
-    avoidFriendly      = false,
-    avoidFeature       = false,
-    ballistic          = true,
-	cegTag             = "missiletrailflashy",
-    collideFriendly    = false,
-    collideFeature     = false,
-	canAttackGround    = false,
-    burnblow           = true,
-	edgeEffectiveness  = 0.5,
-    endsmoke           = "1",
-    explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 7,
-    fireStarter        = 80,
-    id                 = 1,
-    impulseFactor      = 0,
-	interceptedByShieldType = 4,
-	model              = "missilesmall.s3o",
-    name               = "AA Cannon",
-    pitchtolerance     = "3000",
-    range              = 1500,
-    reloadtime         = 1,
-    weaponType		   = "Cannon",
-    soundHit           = "mediumcannonhit.wav",
-    soundStart         = "missilefiring.wav",
-    startsmoke         = "1",
-    tolerance          = 3000,
-    turret             = false,
-	toairweapon		   = true,
-    weaponVelocity     = 2000,
-	customparams = {
-	  damagetype		= "fighter",  
-	  nofriendlyfire	= 1,
-    },
-    damage = {
-      default            = 70,
-    },
-  },
-  
   antiairmissile = {
     AreaOfEffect       = 300,
     avoidFriendly      = false,
@@ -156,7 +120,7 @@ local weaponDefs = {
 	burstrate			= 0.5,
 	edgeEffectiveness  = 0.5,
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 7,
+	energypershot      = 42,
     fireStarter        = 80,
     impulseFactor      = 1,
 	interceptedByShieldType = 4,
@@ -180,11 +144,11 @@ local weaponDefs = {
 	sprayangle			= 5000,
 	
 	customparams = {
-	  damagetype		= "fighter",  
+	  damagetype		= "efighter",  
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default            = 70,
+      default            = 105,
     },
   },
   

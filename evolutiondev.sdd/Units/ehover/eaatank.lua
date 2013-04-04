@@ -27,6 +27,10 @@ local unitDef = {
   defaultmissiontype = "Standby",
   description        = [[Anti-Air Support Tank
 Light
+105 Damage vs Armored
+70 Damage vs Light/Building
+
+• Fires 4 missiles in a burst
 
 Requires +5 Power]],
   energyMake         = 0,
@@ -107,47 +111,6 @@ Requires +5 Power]],
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  eaatankshot = {
-    accuracy           = 500,
-    AreaOfEffect       = 300,
-    avoidFriendly      = false,
-    avoidFeature       = false,
-    ballistic          = true,
-	cegTag             = "missiletrailflashy",
-    collideFriendly    = false,
-    collideFeature     = false,
-    cylinderTargeting  = true,
-    burnblow           = true,
-	edgeEffectiveness  = 1,
-    endsmoke           = "1",
-    energypershot      = 7,
-    explosionGenerator = "custom:xamelImpact",
-    fireStarter        = 80,
-    impulseFactor      = 0,
-	interceptedByShieldType = 4,
-	model              = "missilesmall.s3o",
-    name               = "AA Cannon",
-    pitchtolerance     = "500",
-    range              = 1000,
-    reloadtime         = 1,
-    weaponType		   = "Cannon",
-    soundHit           = "aatankshot.wav",
-    soundStart         = "missilefiring.wav",
-    startsmoke         = "1",
-    tolerance          = 500,
-    turret             = true,
-	toairweapon		   = true,
-	canAttackGround    = false,
-    weaponVelocity     = 1200,
-	customparams = {
-	  damagetype		= "antiair",  
-	  nofriendlyfire	= 1,
-    },
-    damage = {
-      default            = 70,
-    },
-  },
-
   eaatankantiairmissile = {
     AreaOfEffect       = 50,
     avoidFriendly      = false,
@@ -160,7 +123,7 @@ local weaponDefs = {
 	canAttackGround    = false,
 	edgeEffectiveness  = 0.5,
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 7,
+	energypershot      = 42,
     fireStarter        = 80,
     impulseFactor      = 1,
 	interceptedByShieldType = 4,
@@ -184,11 +147,11 @@ local weaponDefs = {
 	sprayangle			= 5000,
 	
 	customparams = {
-	  damagetype		= "fighter",  
+	  damagetype		= "eaatank",  
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default            = 70,
+      default            = 105,
     },
   },
   

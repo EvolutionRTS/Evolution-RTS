@@ -23,7 +23,9 @@ local unitDef = {
   
   corpse             = "ammobox",
   description        = [[Long Range Plasma Cannon - 100e Per Shot
-400% Damage vs Buildings
+Building
+1000 Damage vs Buildings
+250 Damage vs Light/Armored
   
 Requires +15 Power]],
   energyStorage      = 0,
@@ -88,27 +90,7 @@ Requires +15 Power]],
     RequireTech = "20 Power",
 	armortype   = "building",
 	normaltex = "unittextures/elrpcnormal.png", 
-	helptext = [[Long Range Plasma Cannon
-
-LRPC’s provide long range bombardment of defensive positions and base structures.
-
-Damagetype: Explosive
-
-Armortype: Building
-
-+900 Line of Sight
-
-+6000 Range
-
-+200 Area of Effect
-
--100 Energy per Shot
-
-10s Reload Time
-
-Requires:
-
-+15 Power]],
+	helptext = [[]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=11,
@@ -153,10 +135,10 @@ local weaponDefs = {
     weaponTimer        = 5,
     weaponVelocity     = 800,
 	customparams = {
-	  damagetype		= "lrpc",  
+	  damagetype		= "elrpc",  
     },      
     damage = {
-      default            = 250,
+      default            = 1000,
     },
   },
 }
