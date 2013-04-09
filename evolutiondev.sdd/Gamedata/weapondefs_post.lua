@@ -34,8 +34,8 @@ local function tobool(val)
 end
 
 --------------------------------------------------------------------------------
-
 local function BackwardCompability(wdName,wd)
+
   -- weapon reloadTime and stockpileTime were seperated in 77b1
   if (tobool(wd.stockpile) and (wd.stockpiletime==nil)) then
     wd.stockpiletime = wd.reloadtime
@@ -280,8 +280,6 @@ local function BackwardCompability(wdName,wd)
 			end
 		end
   end
-  
-  
   
   -- 
   if (tobool(wd.ballistic) or tobool(wd.dropped)) then

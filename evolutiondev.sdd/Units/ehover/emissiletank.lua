@@ -122,7 +122,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     explosionGenerator = "custom:xamelimpact",
-	energypershot      = 10,
+	energypershot      = 15,
     fireStarter        = 100,
     flightTime         = 10,
     guidance           = true,
@@ -153,7 +153,7 @@ local weaponDefs = {
 	  damagetype		= "emissiletank",  
     },      
     damage = {
-      default           = 100,
+      default           = 150,
     },
   },
 }
