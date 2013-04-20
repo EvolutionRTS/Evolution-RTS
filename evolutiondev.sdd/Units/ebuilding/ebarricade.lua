@@ -32,6 +32,7 @@ local unitDef = {
   maxDamage          = 1000,
   maxSlope           = 60,
   maxWaterDepth      = 0,
+  mass				 = 1,
   metalStorage       = 0,
   name               = "Thorn (b)",
   objectName         = "ebarricade.s3o",
