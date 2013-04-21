@@ -80,7 +80,7 @@ Requires +15 Power]],
     [1]  = {
       def                = "lrpcweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED",
+	  badTargetCategory  = "LIGHT ARMORED WALL",
     },
   },
   customParams = {

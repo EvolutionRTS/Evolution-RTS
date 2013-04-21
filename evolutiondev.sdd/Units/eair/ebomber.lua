@@ -92,7 +92,7 @@ Requires +10 Power]],
     [1]  = {
       def                = "SBOMB",
       OnlyTargetCategory = "NOTAIR AMPHIB",
-      BadTargetCategory  = "VTOL LIGHT ARMORED",
+      BadTargetCategory  = "VTOL LIGHT ARMORED WALL",
       noChaseCategory    = "VTOL",
     },
   },

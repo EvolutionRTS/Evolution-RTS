@@ -85,7 +85,7 @@ Requires +8 Power]],
     [1]  = {
       def                = "Artilleryweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED",
+	  badTargetCategory  = "LIGHT ARMORED WALL",
     },
   },
   customParams = {

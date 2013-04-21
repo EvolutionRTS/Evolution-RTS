@@ -86,7 +86,7 @@ sfxtypes = {
   weapons = {
     [1]  = {
       def                = "ebombboom",
-      badTargetCategory  = "VTOL",
+      badTargetCategory  = "VTOL WALL",
     },
   },
   customParams = {

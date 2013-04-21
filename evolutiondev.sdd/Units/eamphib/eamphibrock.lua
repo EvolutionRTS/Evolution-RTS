@@ -93,7 +93,7 @@ Requires +7 Power]],
     [1]  = {
       def                = "antiarmorrockets",
       onlyTargetCategory = "NOTAIR",
-	  badTargetCategory  = "BUILDING LIGHT",
+	  badTargetCategory  = "BUILDING LIGHT WALL",
     },
 --[[
 	[2]  = {

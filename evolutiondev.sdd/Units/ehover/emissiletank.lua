@@ -94,7 +94,7 @@ Requires +7 Power]],
 	[2]  = {
       def                = "missletankweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "BUILDING LIGHT",
+	  badTargetCategory  = "BUILDING LIGHT WALL",
     },
   },
   customParams = {

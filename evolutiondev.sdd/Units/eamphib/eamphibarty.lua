@@ -87,7 +87,7 @@ Requires + 10 Power]],
     [1]  = {
       def                = "assimilatorbeamweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED",
+	  badTargetCategory  = "LIGHT ARMORED WALL",
     },
 --[[
 	[2]  = {

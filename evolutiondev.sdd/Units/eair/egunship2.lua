@@ -93,7 +93,7 @@ Requires +7 Power]],
       mainDir            = "0 0 1",
       maxAngleDif        = 45,
       OnlyTargetCategory = "NOTAIR AMPHIB",
-      BadTargetCategory  = "VTOL BUILDING",
+      BadTargetCategory  = "VTOL BUILDING WALL",
       noChaseCategory    = "VTOL",
     },
     -- [2]  = {

@@ -92,7 +92,7 @@ Requires +2 Power]],
     [1]  = {
       def                = "lightlaser",
       onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "ARMORED LIGHT",
+	  badTargetCategory  = "ARMORED LIGHT WALL",
     },
   },
   customParams = {

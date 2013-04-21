@@ -86,7 +86,7 @@ sfxtypes = {
   weapons = {
     [1]  = {
       def                = "lighttankweapon",
-      badTargetCategory  = "VTOL ARMORED",
+      badTargetCategory  = "VTOL ARMORED WALL",
     },
   },
   customParams = {

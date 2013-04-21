@@ -102,6 +102,7 @@ Requires +3 Power]],
     [1]  = {
       def                = "riottankempweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "WALL",
     },
   },
   customParams = {

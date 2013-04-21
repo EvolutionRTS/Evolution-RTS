@@ -32,7 +32,7 @@ local unitDef = {
   maxDamage          = 1000,
   maxSlope           = 60,
   maxWaterDepth      = 0,
-  mass				 = 1,
+  mass				 = 1000,
   metalStorage       = 0,
   name               = "Thorn (b)",
   objectName         = "ebarricade.s3o",
@@ -74,11 +74,7 @@ sfxtypes = {
 
 Regenerates Hitpoints as it takes damage. Provides cover for your units or structures.
 
-Armortype: Armored Building
-
-+500 Hitpoints
-
-+15 Hitpoints regenerated per second]],
++20 Hitpoints regenerated per second]],
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=5,

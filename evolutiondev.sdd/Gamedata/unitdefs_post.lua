@@ -78,7 +78,13 @@ if modOptions and tobool(modOptions.gameplayspeed == "faster") then
 	end
 end
 
-Spring.Echo("Gameplay Speed is set to", modOptions.gameplayspeed)
+if modOptions then
+	if modOptions.gameplayspeed == nil then
+		Spring.Echo("Gameplay Speed is set to fastest")
+	else
+		Spring.Echo("Gameplay Speed is set to " .. modOptions.gameplayspeed)
+	end
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- 3dbuildrange for all none plane builders

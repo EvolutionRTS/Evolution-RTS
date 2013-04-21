@@ -89,11 +89,11 @@ Requires +50 Power]],
   weapons = {
     [1]  = {
       def                = "tankkillerlaser",
-	  badTargetCategory  = "BUILDING",
+	  badTargetCategory  = "BUILDING WALL",
     },
 	[2]  = {
       def                = "machinegun",
-	  badTargetCategory  = "BUILDING",
+	  badTargetCategory  = "BUILDING WALL",
     },
   },
    customParams = {

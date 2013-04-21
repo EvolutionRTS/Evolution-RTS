@@ -89,6 +89,7 @@ Light
       def                = "droneweapon",
       mainDir            = "0 0 1",
       maxAngleDif        = 45,
+	  badTargetCategory  = "WALL",
     },
   },
   customParams = {
