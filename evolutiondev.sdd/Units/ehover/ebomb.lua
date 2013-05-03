@@ -9,7 +9,7 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 40,
+  buildCostMetal     = 80,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
@@ -22,7 +22,7 @@ local unitDef = {
   description        = [[Hovering Bomb
 Armored
 1000 Damage vs Buildings
-250 Damage vs Light/Armored
+50 Damage vs Light/Armored
 
 Requires +12 Power]],
   energyMake         = 0,
@@ -97,7 +97,7 @@ sfxtypes = {
 	armortype   = "armored",
 	nofriendlyfire	= "1",
 	normaltex = "unittextures/ebombnormal.png", 
-	helptext = [[The Shellshock hovering bomb is an extremely fast, stealthed warhead that packs an awesome punch. It's speed allows it to dart in and cause havoc wherever it explodes. It has heavy armor, so use them wisely as they are a costly investment]],
+	helptext = [[]],
   },
 }
 
