@@ -21,8 +21,8 @@ local unitDef = {
   category           = "ARMORED NOTAIR",
   description        = [[Hovering Bomb
 Armored
-1000 Damage vs Buildings
-50 Damage vs Light/Armored
+500 Damage vs Buildings
+25 Damage vs Light/Armored
 
 Requires +12 Power]],
   energyMake         = 0,
@@ -86,7 +86,8 @@ sfxtypes = {
   weapons = {
     [1]  = {
       def                = "ebombboom",
-      badTargetCategory  = "VTOL WALL",
+	  onlyTargetCategoy	 = "BUILDING",
+      badTargetCategory  = "WALL",
     },
   },
   customParams = {
@@ -123,7 +124,7 @@ local weaponDefs = {
     },  
 
     damage = {
-      default            = 1000,
+      default            = 500,
     },
   },
 }
