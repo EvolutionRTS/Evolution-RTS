@@ -24,7 +24,7 @@ function widget:GameFrame(t)
 		local allUnits = GetTeamUnits(GetMyTeamID())
 		for _, unitID in pairs(allUnits) do
 			local unitDefID = GetUnitDefID(unitID)
-			if (unitDefID and UnitDefs[unitDefID].canCapture) then
+			if (unitDefID and UnitDefs[unitDefID].customParams.iscommander) then
 				SetUnitGroup( unitID, commanderGroup )
 			end
 		end

@@ -20,7 +20,7 @@ local unitDef = {
   canGuard           = true,
   canMove            = true,
   canPatrol          = true,
-  canstop            = "1",
+  canstop            = true,
   category           = "ARMORED VTOL",
   collide            = true,
 --Collision Volumes... Because the engine devs are silly.

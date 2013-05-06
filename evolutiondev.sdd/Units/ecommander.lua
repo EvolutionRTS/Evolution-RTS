@@ -132,6 +132,7 @@ local unitDef = {
     },
   },
   customParams = {
+	iscommander = true,
     needed_cover = 2,
 	death_sounds = "soldier",
     cancollect = "1",
