@@ -24,8 +24,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Artillery Support Tank
 Light
-1000 Damage vs Buildings
-250 Damage vs Light/Armored
+1000 Damage vs Buildings (Per Volley)
+250 Damage vs Light/Armored (Per Volley)
 
 Requires +8 Power]],
   energyMake         = 0.5,
