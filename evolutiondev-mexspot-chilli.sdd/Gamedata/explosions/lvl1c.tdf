@@ -1,0 +1,85 @@
+[lvl1c]
+{
+
+	[groundflash]
+	{
+		alwaysVisible=1;
+		ttl = 7;
+		flashSize = 100;
+		flashAlpha = 0.9;
+
+		circleGrowth = 1;
+		circleAlpha = 0.3;
+
+		color = 0.8, 0.5, 0.0;
+
+		air=1;
+		ground=1;
+		water=1;
+	}
+
+	[dirt1]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=3;
+			sizeMod=1.0;
+			pos=0, 2, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=1 0.5 0.3 0.3  0.45 0.37 0.3 1  0.45 0.37 0.3 1 0.0 0.0 0.0 0.01 0 0 0 0.01;
+			Texture=flashside2alpha;
+			airdrag=0.8;
+			particleLife=18.5;
+			particleLifeSpread=5;
+			numParticles=20;
+			particleSpeed=0;
+			particleSpeedSpread=19;
+			particleSize=1.5;
+			particleSizeSpread=3;
+			emitRot=0;
+			emitRotSpread=25;
+			directional=1;
+			alwaysvisible=1;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+
+
+	[dirt2]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=3;
+			sizeMod=1.0;
+			pos=0, 2, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=1 0.5 0.3 0.3	 0 0 0 0.01;
+			Texture=flashside2alpha;
+			airdrag=0.8;
+			particleLife=8.5;
+			particleLifeSpread=5;
+			numParticles=20;
+			particleSpeed=0;
+			particleSpeedSpread=19;
+			particleSize=1.5;
+			particleSizeSpread=3;
+			emitRot=0;
+			emitRotSpread=25;
+			directional=1;
+			alwaysvisible=1;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=0;
+	}	
+
+
+}

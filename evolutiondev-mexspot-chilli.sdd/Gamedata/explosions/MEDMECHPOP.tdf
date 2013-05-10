@@ -1,0 +1,154 @@
+[MEDMECHPOP]
+{
+ 	[explosionspikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			alwaysVisible=1;
+			dir=-45 r90,-45 r90,-45 r90;
+			width=4;
+			length=0.2;
+			alpha=1;
+			alphadecay=0.19;
+			color=1, 0.3, 0.5;
+
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=7; 
+	}
+
+	[explosionsphere]
+	{
+		class=CSpherePartSpawner;
+		[properties]
+		{
+			alwaysVisible=1;
+			ttl=11;
+			alpha=0.4;
+			expansionSpeed=10 r3;
+			color=1, 0.3, 0.5;
+		}
+		ground=1;
+		air=1;
+		count=1;
+	}
+
+  [pop0]
+   {
+   class=heatcloud;
+      
+      [properties]
+        {
+	alwaysVisible=1;
+	texture=pinknovaexplo;
+	heat = 10;
+	maxheat = 15;
+	heatFalloff = 1.7;
+	size = 20;
+	sizeGrowth = 15;
+
+	pos = 0, 5, 0;
+	speed=0, 0, 0;
+	}
+	air=1;
+        water=1;
+        ground=1;
+        count=2;
+   }
+
+   [pop1]
+   {
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=purpleexplo;
+      		heat = 10;
+      		maxheat = 15;
+      		heatFalloff = 1;
+
+      		size = 1;
+      		sizeGrowth = 12;
+
+         	pos = r-3 r3, 5, r-3 r3;
+         	speed=0, 1, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=3;
+   } 
+
+   [dirt]
+   {
+      [properties]
+      {
+	alwaysVisible=1;
+        size=20;
+        color=0.1, 0.1, 0.05;
+        alphaFalloff=2;
+        speed= r1.5 r-1.5, 2, r1.5 r-1.5;
+        pos=r-10 r10, 0, r-10 r10;
+      }
+      ground=1;
+      count=4;
+   }
+
+   [POOF01]
+   {
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=randdots;
+
+		colorMap	= 1.0 1.0 1.0 0.04	0.5 0.0 0.5 0.01	0.1 0.1 0.1 0.01;
+
+      		pos 		= 0, 2, 0;
+		gravity		= 0, -0.005, 0;
+	       	emitVector	= 0, 1, 0;
+		emitRot		= 45;
+		emitRotSpread	= 32;
+
+		sizeGrowth	= 0.8;
+		sizeMod		= 1.0;
+
+		airdrag			= 0.2;
+		particleLife		= 5;
+		particleLifeSpread	= 16;
+		numParticles		= 40;
+		particleSpeed		= 19;
+		particleSpeedSpread	= 10;
+		particleSize		= 15;
+		particleSizeSpread	= 0;
+
+		directional		= 0;
+		useAirLos		= 0;
+		}
+	air=1;
+	ground=1;
+	count=1;
+   }
+
+   [groundflash]
+   {
+	alwaysVisible=1;
+         ttl = 12;
+         flashSize = 150;
+         flashAlpha = 0.9;
+
+         circleGrowth = 10;
+         circleAlpha = 0.7;
+
+         color = 1, 0.3, 0.5;
+
+   	air=1;
+        ground=1;
+        water=1;
+   }
+}

@@ -1,0 +1,447 @@
+[LIGHTNINGPLOSION1]   //big container effect for the lightning impact
+{
+   [whiteglow]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=laserend;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1.2;
+
+            size = 10;
+            sizeGrowth = 25;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   } 
+
+   [electricstorm]  // residual electricity effect
+   {
+       class=CExpGenSpawner;
+      [properties]
+      {
+      pos=-100 r200, 1, -100 r200; 
+      delay=10 r200;    
+      explosionGenerator=custom:LIGHTNINGPLOSION_STORMBOLT; 
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=10;
+   }
+
+      [yellowbolts]
+   {
+       class=CExpGenSpawner;
+      [properties]
+      {
+      pos=0, 0, 0;
+       delay=0;
+      explosionGenerator=custom:LIGHTNINGPLOSION_YELLOWBOLTS;
+   }
+    air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+
+   [bluebolts1]
+      {
+       class=CExpGenSpawner;
+      [properties]
+      {
+      pos=0, 0, 0;
+      delay=3;
+      explosionGenerator=custom:LIGHTNINGPLOSION_BLUEBOLTS1;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+
+   [pikes]
+   {
+      class=explspike;
+      [properties]
+      {
+         dir=-15 r30,-15 r30,-15 r30;
+         width=5;
+         length=30;
+         alpha=0.8;
+         alphadecay=0.1;
+         color=0.5,0.5,1;
+
+      }
+   air=1;
+   water=1;
+   ground=1;
+    count=5;
+   }
+      [groundflash]
+   {
+      flashsize=86;
+      flashalpha=0.3;
+      circlegrowth=0;
+      circlealpha=1;
+      ttl=12;
+      color=1,1,1;
+   }
+}
+
+
+
+[LIGHTNINGPLOSION1SMALL]   //big container effect for the lightning impact
+{
+   [whiteglow]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=laserend;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1.2;
+
+            size = 2;
+            sizeGrowth = 5;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+   [electricstorm]  // residual electricity effect
+   {
+       class=CExpGenSpawner;
+      [properties]
+      {
+      pos=-100 r200, 1, -100 r200;
+      delay=10 r200;
+      explosionGenerator=custom:LIGHTNINGPLOSION_STORMBOLT;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=10;
+   }
+
+      [yellowbolts]
+   {
+       class=CExpGenSpawner;
+      [properties]
+      {
+      pos=0, 0, 0;
+       delay=0;
+      explosionGenerator=custom:LIGHTNINGPLOSION_YELLOWBOLTS;
+   }
+    air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+
+   [bluebolts1]
+      {
+       class=CExpGenSpawner;
+      [properties]
+      {
+      pos=0, 0, 0;
+      delay=3;
+      explosionGenerator=custom:LIGHTNINGPLOSION_BLUEBOLTS1;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+
+   [pikes]
+   {
+      class=explspike;
+      [properties]
+      {
+         dir=-15 r30,-15 r30,-15 r30;
+         width=5;
+         length=30;
+         alpha=0.8;
+         alphadecay=0.1;
+         color=0.5,0.5,1;
+
+      }
+   air=1;
+   water=1;
+   ground=1;
+    count=5;
+   }
+      [groundflash]
+   {
+      flashsize=86;
+      flashalpha=0.3;
+      circlegrowth=0;
+      circlealpha=1;
+      ttl=12;
+      color=1,1,1;
+   }
+}
+
+
+[LIGHTNINGPLOSION_BLUEBOLTS1]
+{
+ [electric thingies2]
+   {
+      class=CSimpleParticleSystem;
+      [properties]
+      {
+      sizeGrowth=0;
+      sizeMod=1.0;
+      pos=0, 1.0, 0;
+      emitVector=0, 1, 0;
+      gravity=0, 0, 0;
+      colorMap=1 1 1 0.01  1 1 1 0.01   1 1 1 0.01  1 1 1 0.01  1 1 1 0.01 0 0 0 0.01;
+      Texture=lightbw;
+      airdrag=0.1;
+      particleLife=8;
+      particleLifeSpread=4;
+      numParticles=10;
+      particleSpeed=20;
+      particleSpeedSpread=20;
+      particleSize=10;
+      particleSizeSpread=15;
+      emitRot=0;
+      emitRotSpread=80;
+      directional=1;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[LIGHTNINGPLOSION_YELLOWBOLTS]
+{
+ [electric thingies]
+   {
+      class=CSimpleParticleSystem;
+      [properties]
+      {
+      sizeGrowth=0;
+      sizeMod=1.0;
+      pos=0, 1.0, 0;
+      emitVector=0, 1, 0;
+      gravity=0, 0, 0;
+      colorMap=1  1 1 0.01  1 1 1 0.01 1 1 0 0.01  1 1 1 0.01   0 0 0 0.01;
+      Texture=whitelightbw;
+      airdrag=0.95;
+      particleLife=2;
+      particleLifeSpread=5;
+      numParticles=5;
+      particleSpeed=2;
+      particleSpeedSpread=0;
+      particleSize=40;
+      particleSizeSpread=0;
+      emitRot=0;
+      emitRotSpread=180;
+      directional=1;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+
+   [sparks]
+   {
+      class=CSimpleParticleSystem;
+      [properties]
+      {
+      sizeGrowth=0;
+      sizeMod=1.0;
+      pos=0, 0, 0;
+      emitVector=0, 1, 0;
+      gravity=0, -0.2, 0;
+      colorMap=1 1 1 0.01   1 1 1 0.01   0.0 0.0 0 0.01;
+      Texture=spark;
+      airdrag=0.97;
+      particleLife=20;
+      particleLifeSpread=5;
+      numParticles=20;
+      particleSpeed=5;
+      particleSpeedSpread=0;
+      particleSize=2;
+      particleSizeSpread=0;
+      emitRot=0;
+      emitRotSpread=60;
+      directional=1;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[LIGHTNINGPLOSION_STORMBOLT]
+{
+   [lightningballs]
+   {
+      class=CSimpleParticleSystem;
+      [properties]
+      {
+      sizeGrowth=0;
+      sizeMod=1.0;
+      pos=-10 r10, 1.0, -10 r10;
+      emitVector=0, 1, 0;
+      gravity=0, 0, 0;
+      colorMap=0 0 0 0.01 1 1 1 0.01 0 0 0 0.01;
+      Texture=lightbw;
+      airdrag=1;
+      particleLife=3;
+      particleLifeSpread=0;
+      numParticles=1;
+      particleSpeed=0.01;
+      particleSpeedSpread=0;
+      particleSize=1;
+      particleSizeSpread=20;
+      emitRot=80;
+      emitRotSpread=0;
+      directional=1;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+      [groundflash]
+   {
+      flashsize=46;
+      flashalpha=0.3;
+      circlegrowth=0;
+      circlealpha=1;
+      ttl=3;
+      color=1,1,1;
+   }
+}
+
+[ZEUSMUZZLE]
+{
+   usedefaultexplosions=0;
+ [lightball]
+   {
+      class=CSimpleParticleSystem;
+      [properties]
+      {
+      sizeGrowth=0;
+      sizeMod=1.0;
+      pos=0, 0, 0;
+      emitVector=dir;
+      gravity=0, 0, 0;
+      colorMap=0.7 0.7 0.7 0.01  1 1 1 0.01  0 0 0 0.01;
+      Texture=lightb3;
+      airdrag=0.95;
+      particleLife=20;
+      particleLifeSpread=0;
+      numParticles=1;
+      particleSpeed=0;
+      particleSpeedSpread=0;
+      particleSize=10;
+      particleSizeSpread=0;
+      emitRot=0;
+      emitRotSpread=1;
+      directional=0;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+
+ [lightring]
+   {
+      class=CSimpleParticleSystem;
+      [properties]
+      {
+      sizeGrowth=1;
+      sizeMod=1.0;
+      pos=0, 0, 0;
+      emitVector=dir;
+      gravity=0, 0, 0;
+      colorMap=0.7 0.7 0.7 0.01  0.7 0.7 0.7 0.01  0 0 0 0.01;
+      Texture=lightring;
+      airdrag=0.95;
+      particleLife=20;
+      particleLifeSpread=0;
+      numParticles=1;
+      particleSpeed=0;
+      particleSpeedSpread=0;
+      particleSize=1;
+      particleSizeSpread=0;
+      emitRot=0;
+      emitRotSpread=1;
+      directional=0;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+
+ [lightball2]
+   {
+      class=CSimpleParticleSystem;
+      [properties]
+      {
+      sizeGrowth=0;
+      sizeMod=1.0;
+      pos=0, 0, 0;
+      emitVector=dir;
+      gravity=0, 0, 0;
+      colorMap=0 0 0 0.01 0 0 0 0.01 0.7 0.7 0.7 0.01  1 1 1 0.01  0 0 0 0.01;
+      Texture=lightb4;
+      airdrag=0.95;
+      particleLife=20;
+      particleLifeSpread=0;
+      numParticles=1;
+      particleSpeed=0;
+      particleSpeedSpread=0;
+      particleSize=10;
+      particleSizeSpread=0;
+      emitRot=0;
+      emitRotSpread=1;
+      directional=0;
+      }
+   air=1;
+   water=1;
+   ground=1;
+   count=1;
+   }
+}
+
+[ZEUSGROUNDFLASH]
+{
+   [groundflash]
+   {
+      flashsize=46;
+      flashalpha=0.3;
+      circlegrowth=0;
+      circlealpha=1;
+      ttl=12;
+      color=1,1,1;
+   }
+}

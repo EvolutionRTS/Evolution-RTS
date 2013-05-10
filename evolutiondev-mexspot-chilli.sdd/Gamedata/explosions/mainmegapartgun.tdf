@@ -1,0 +1,114 @@
+[mainmegapartgun]
+{
+   [pop]
+   {
+   class=heatcloud;
+
+      	[properties]
+	{
+	alwaysVisible=1;
+	texture=pinknovaexplo;
+	heat = 10;
+	maxheat = 15;
+	heatFalloff = 0.5;
+	size = 90;
+	sizeGrowth = 0.9;
+	pos = r-2 r2, 5, r-2 r2;	speed=0, 1 0, 0;
+	}
+   	air=1;
+        water=1;
+        ground=1;
+        count=1;
+   }
+
+   [pillar]
+   {
+   class=heatcloud;
+      
+      [properties]
+        {
+	alwaysVisible=1;
+	texture=pinknovaexplo;
+	heat = 15;
+	maxheat = 15;
+	heatFalloff = 2.5;
+	size = 90;
+	sizeGrowth = -11;
+
+	pos = 0,0 i5, 0;
+	speed=0, 10, 0;
+        }
+	air=1;
+	water=1;
+	ground=1;
+	count=3;
+   }
+
+   [dirt]
+   {
+      [properties]
+      {
+	alwaysVisible=1;
+        size=20;
+        color=0.2, 0.1, 0.05;
+        alphaFalloff=2;
+        speed= r1.5 r-1.5, 2, r1.5 r-1.5;
+        pos=r-10 r10, 0, r-10 r10;
+      }
+      ground=1;
+      count=4;
+   }
+
+   [POOF01]
+   {
+   class=CSimpleParticleSystem;
+
+	[properties]
+	{
+	alwaysVisible=1;
+	Texture=randdots;
+
+	colorMap	= 1.0 0.0 1.0 0.04	0.5 0.0 0.5 0.01	0.1 0.1 0.1 0.01;
+
+      	pos 		= 0, 2, 0;
+	gravity		= 0, -0.005, 0;
+	emitVector	= 0, 1, 0;
+	emitRot		= 45;
+	emitRotSpread	= 32;
+
+	sizeGrowth	= 0.8;
+	sizeMod		= 1.0;
+
+	airdrag			= 0.2;
+	particleLife		= 5;
+	particleLifeSpread	= 16;
+	numParticles		= 40;
+	particleSpeed		= 19;
+	particleSpeedSpread	= 4;
+	particleSize		= 20;
+	particleSizeSpread	= 0;
+
+	directional		= 0;
+	useAirLos		= 0;
+	}
+	air=1;
+	ground=1;
+	count=1;
+   }
+
+   [groundflash]
+      {
+	alwaysVisible=1;
+	ttl = 17;
+	flashSize = 120;	flashAlpha = 0.9;
+	circleGrowth = 8;
+	circleAlpha = 0.5;
+	alwaysVisible=1;
+
+	color = 1, 0.3, 0.5;
+
+   	air=1;
+        ground=1;
+        water=1;
+   }
+}

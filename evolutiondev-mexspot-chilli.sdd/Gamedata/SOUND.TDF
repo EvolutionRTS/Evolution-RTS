@@ -1,0 +1,38 @@
+// unit sounds
+
+[factory]
+   {
+   select1=gdfactoryselect;
+   underattack=unitsunderattack1;
+   }
+[energy]
+   {
+   select1=gdenergy;
+   underattack=unitsunderattack1;
+   }
+
+[mex]
+   {
+   select1=gdmex;
+   underattack=unitsunderattack1;
+   }
+[radar]
+   {
+   select1=gdradar;
+   underattack=unitsunderattack1;
+   }
+
+
+[mobileunit]
+   {
+   select1=unitselect;
+   ok1=ack;
+   underattack=unitsunderattack1;
+   }
+
+[turret]
+   {
+   select1=turretselect;
+   underattack=unitsunderattack1;
+   }
+

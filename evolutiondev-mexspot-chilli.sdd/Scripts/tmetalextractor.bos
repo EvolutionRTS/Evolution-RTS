@@ -1,0 +1,197 @@
+#define TA			// This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  base, firepoint1, firepoint2, ball1, ball2, ball3, ball4, bottom, middle, top, fireball1, fireball2, fireball3, fireball4;
+
+static-var  Static_Var_1, Static_Var_2, Static_Var_3, statechg_DesiredState, statechg_StateChanging, ball1state, ball2state, ball3state, ball4state, ballstate;
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+Go()
+{
+	spin top around y-axis speed Static_Var_1 accelerate Static_Var_2;
+	ballstate = 1;
+}
+
+Stop()
+{
+	stop-spin top around y-axis decelerate Static_Var_3;
+	wait-for-turn top around y-axis;
+	ballstate = 0;
+}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+
+mexanimation()
+{
+while (1)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+emit-sfx 1024 from firepoint2;
+sleep 400;
+}
+}
+}
+
+fx()
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		emit-sfx 2048 from fireball1;
+		emit-sfx 2048 from fireball2;
+		emit-sfx 2048 from fireball3;
+		emit-sfx 2048 from fireball4;
+
+
+		sleep 5;
+	}
+}
+
+fx2()
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+
+		emit-sfx 2049 from fireball1;
+		emit-sfx 2049 from fireball2;
+		emit-sfx 2049 from fireball3;
+		emit-sfx 2049 from fireball4;
+		sleep 400;
+	}
+}
+
+
+Create()
+{
+	start-script mexanimation();
+	start-script fx();
+	start-script fx2();
+	Static_Var_1 = 0;
+	Static_Var_2 = 25;
+	Static_Var_3 = 50;
+	turn firepoint1 to x-axis <-90> now;
+	turn fireball1 to x-axis <-90> now;
+	turn fireball2 to x-axis <-90> now;
+	turn fireball3 to x-axis <-90> now;
+	turn fireball4 to x-axis <-90> now;
+	spin bottom around y-axis speed <-10.000000>;
+	spin middle around y-axis speed <-20.000000>;
+	call-script InitState();
+	start-script SmokeUnit();
+}
+
+Activate()
+{
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	start-script RequestState(1);
+}
+
+
+SetSpeed(Func_Var_1)
+{
+	Static_Var_1 = Func_Var_1 * 5;
+}
+
+Killed(severity, corpsetype)
+{
+	if( severity <= 25 )
+	{
+		corpsetype = 1;
+		explode top type BITMAPONLY | BITMAP1;
+		explode base type BITMAPONLY | BITMAP2;
+		return (0);
+	}
+	if( severity <= 50 )
+	{
+		corpsetype = 2;
+		explode top type SHATTER | BITMAP1;
+		explode base type BITMAPONLY | BITMAP2;
+		return (0);
+	}
+	if( severity <= 99 )
+	{
+		corpsetype = 3;
+		explode top type SHATTER | EXPLODE_ON_HIT | BITMAP1;
+		explode base type BITMAPONLY | BITMAP2;
+		return (0);
+	}
+	corpsetype = 3;
+	explode top type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP1;
+	explode base type SHATTER | EXPLODE_ON_HIT | BITMAP2;
+}

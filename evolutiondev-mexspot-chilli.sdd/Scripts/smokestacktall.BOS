@@ -1,0 +1,27 @@
+piece GP, smoke1, base;
+
+#include "\headers\definitions.h"	
+#define smoke 1024+0
+
+	Flamingass()
+	{
+		while(TRUE)
+		{
+			emit-sfx smoke from smoke1;
+		sleep 20;			
+		}
+
+	}
+	
+Create()
+	{
+	start-script Flamingass();
+	}
+	
+
+	
+
+Killed( severity, corpsetype )
+	{
+
+	}

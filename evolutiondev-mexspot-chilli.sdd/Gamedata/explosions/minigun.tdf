@@ -1,0 +1,151 @@
+[minigun]
+{
+   [sparks1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=shot;
+
+      colorMap = 0.4 0.5 0.9 0.04   0.1 0.4 0.1 0.01  0.1 0.1 0.5 0.01;
+
+            pos      = r3, 0, r3;
+      gravity     = 0, -1, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.7;
+      sizeMod     = 0.5;
+
+      airdrag        = 0.9;
+      particleLife      = 13;
+      particleLifeSpread   = 5;
+      numParticles      = 5;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [sparks2]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=shot;
+
+      colorMap = 0.4 0.5 0.9 0.04   0.1 0.4 0.9 0.01  0.1 0.1 0.1 0.05;
+
+            pos      = r3, r6, r3;
+      gravity     = 0, -1, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.7;
+      sizeMod     = 0.5;
+
+      airdrag        = 0.9;
+      particleLife      = 13;
+      particleLifeSpread   = 5;
+      numParticles      = 5;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+}
+
+
+
+[minigun2]
+{
+   [sparks1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=shot;
+
+      colorMap = 0.9 0.5 0.4 0.04   0.1 0.4 0.1 0.01  0.5 0.1 0.1 0.01;
+
+            pos      = r3, 0, r3;
+      gravity     = 0, -1, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.7;
+      sizeMod     = 0.5;
+
+      airdrag        = 0.9;
+      particleLife      = 13;
+      particleLifeSpread   = 5;
+      numParticles      = 5;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [sparks2]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=shot;
+
+      colorMap = 0.9 0.5 0.4 0.04   0.9 0.4 0.1 0.01  0.1 0.1 0.1 0.05;
+
+            pos      = r3, r6, r3;
+      gravity     = 0, -1, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.7;
+      sizeMod     = 0.5;
+
+      airdrag        = 0.9;
+      particleLife      = 13;
+      particleLifeSpread   = 5;
+      numParticles      = 5;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+}

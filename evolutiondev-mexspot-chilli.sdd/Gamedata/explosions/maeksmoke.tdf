@@ -1,0 +1,80 @@
+// use this effect sparingly. It can slow machines down.
+[maeksmoke]
+{
+   [dirtg]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=new_dirta;
+      sizeGrowth=1.2;
+      sizeMod=1;
+
+         pos      = 0.5 0.5, 1 2, 0.5 0.5;
+            emitVector  = 0, 1, 0;
+      gravity     = 0, 0 0, 0;
+
+      colorMap = 0.20 0.20 0.20 1.0 0 0 0 0.0;
+      airdrag     = 0.7;
+
+      particleLife=50;
+      particleLifeSpread=5;
+
+      numParticles=4;
+
+      particleSpeed=10;
+      particleSpeedSpread=2;
+      particleSize=2;
+      particleSizeSpread=10;
+
+      emitRot=90;
+      emitRotSpread=0;
+
+      directional=1;
+      useAirLos=0;
+      }
+   ground=1;
+   air=1;
+   count=1;
+   }
+
+   [dirtw]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=new_dirta;
+      sizeGrowth=-0.2;
+      sizeMod=1;
+
+         pos      = 0.5 0.5, 1 2, 0.5 0.5;
+            emitVector  = 0, 1, 0;
+      gravity     = 0, 0 0, 0;
+
+      colorMap = 1 1 1 0.5 0.5 0.5 0.5 0.8  0 0 0 0.0;
+      airdrag     = 0.7;
+
+      particleLife=50;
+      particleLifeSpread=5;
+
+      numParticles=10;
+
+      particleSpeed=10;
+      particleSpeedSpread=2;
+      particleSize=2;
+      particleSizeSpread=2;
+
+      emitRot=90;
+      emitRotSpread=0;
+
+      directional=1;
+      useAirLos=0;
+      }
+   water=1;
+   count=1;
+   }
+}

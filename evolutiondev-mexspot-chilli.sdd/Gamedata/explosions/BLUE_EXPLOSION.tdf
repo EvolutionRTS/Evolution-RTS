@@ -1,0 +1,534 @@
+[BLUE_EXPLOSION]
+{
+   [explosionspikes]
+   {
+      class=explspike;
+      [properties]
+      {
+         alwaysVisible=1;
+         dir=-45 r90,-45 r90,-45 r90;
+         width=4;
+         length=0.2;
+         alpha=1;
+         alphadecay=0.19;
+         color=0.0, 0.3, 1;
+
+      }
+      air=1;
+      water=1;
+      ground=1;
+      count=7;
+   }
+
+   [explosionsphere]
+   {
+      class=CSpherePartSpawner;
+      [properties]
+      {
+         alwaysVisible=1;
+         ttl=11;
+         alpha=0.4;
+         expansionSpeed=10 r3;
+         color= 0.0, 0.3, 1;
+      }
+      ground=1;
+      air=1;
+      count=1;
+   }
+
+   [pop1]
+   {
+   class=heatcloud;
+      
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=bluenovaexplo;
+            heat = 10;
+            maxheat = 10;
+            heatFalloff = 0.8;
+
+            size = 1;
+            sizeGrowth = 16;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+   [pop2]
+   {
+   class=heatcloud;
+      
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=brightblueexplo;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1;
+
+            size = 1;
+            sizeGrowth = 12;
+
+            pos = r-3 r3, 5, r-3 r3;
+            speed=0, 1, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=3;
+   }
+
+   [POOF02]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap =0.2 0.2 0.8 0.01 0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.005, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed     = 16;
+      particleSpeedSpread  = 3;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [POOF01]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 0.0 1.0 0.04   0.2 0.2 0.8 0.01  0.2 0.2 0.4 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.005, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed     = 16;
+      particleSpeedSpread  = 3;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [dirt]
+   {
+      [properties]
+      {
+      alwaysVisible=1;
+      size=20;
+      color=0.2, 0.1, 0.05;
+      alphaFalloff=2;
+      speed= r1.5 r-1.5, 2, r1.5 r-1.5;
+      pos=r-10 r10, 0, r-10 r10;
+      }
+      ground=1;
+      count=4;
+   }
+
+   [groundflash]
+      {
+   alwaysVisible=1;
+         ttl = 17;
+         flashSize = 150;
+         flashAlpha = 0.9;
+
+         circleGrowth = 8;
+         circleAlpha = 0.5;
+
+         color = 0.0, 0.3, 1;
+
+   air=1;
+      ground=1;
+         water=1;
+   }
+}
+
+
+
+[BLUE_EXPLOSION2]
+{
+   [explosionspikes]
+   {
+      class=explspike;
+      [properties]
+      {
+         alwaysVisible=1;
+         dir=-45 r90,-45 r90,-45 r90;
+         width=4;
+         length=0.2;
+         alpha=1;
+         alphadecay=0.19;
+         color=0.0, 0.3, 1;
+
+      }
+      air=1;
+      water=1;
+      ground=1;
+      count=7;
+   }
+
+   [explosionsphere]
+   {
+      class=CSpherePartSpawner;
+      [properties]
+      {
+         alwaysVisible=1;
+         ttl=11;
+         alpha=0.4;
+         expansionSpeed=10 r3;
+         color= 0.0, 0.3, 1;
+      }
+      ground=1;
+      air=1;
+      count=1;
+   }
+
+   [pop1]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=bluenovaexplo;
+            heat = 10;
+            maxheat = 10;
+            heatFalloff = 0.8;
+
+            size = 1;
+            sizeGrowth = 16;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+   [pop2]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=brightblueexplo;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1;
+
+            size = 1;
+            sizeGrowth = 12;
+
+            pos = r-3 r3, 5, r-3 r3;
+            speed=0, 1, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=3;
+   }
+
+   [POOF02]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap =0.2 0.2 0.8 0.01 0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.005, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed     = 16;
+      particleSpeedSpread  = 3;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [POOF01]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 0.0 1.0 0.04   0.2 0.2 0.8 0.01  0.2 0.2 0.4 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.005, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed     = 16;
+      particleSpeedSpread  = 3;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [groundflash]
+      {
+   alwaysVisible=1;
+         ttl = 17;
+         flashSize = 150;
+         flashAlpha = 0.9;
+
+         circleGrowth = 8;
+         circleAlpha = 0.5;
+
+         color = 0.0, 0.3, 1;
+
+   air=1;
+      ground=1;
+         water=1;
+   }
+}
+
+
+[BLUE_EXPLOSION_SMALL]
+{
+   [explosionspikes]
+   {
+      class=explspike;
+      [properties]
+      {
+         alwaysVisible=0;
+         dir=-45 r90,-45 r90,-45 r90;
+         width=0.5;
+         length=0.5;
+         alpha=1;
+         alphadecay=0.19;
+         color=0.0, 0.3, 1;
+
+      }
+      air=1;
+      water=1;
+      ground=1;
+      count=7;
+   }
+
+   [explosionsphere]
+   {
+      class=CSpherePartSpawner;
+      [properties]
+      {
+         alwaysVisible=0;
+         ttl=2;
+         alpha=0.4;
+         expansionSpeed=1 r3;
+         color= 0.0, 0.3, 1;
+      }
+      ground=1;
+      air=1;
+      count=1;
+   }
+
+   [pop1]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=0;
+      texture=bluenovaexplo;
+            heat = 10;
+            maxheat = 10;
+            heatFalloff = 0.8;
+
+            size = 0.2;
+            sizeGrowth = 1;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+   [pop2]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=0;
+      texture=brightblueexplo;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1;
+
+            size = 0.2;
+            sizeGrowth = 1;
+
+            pos = r-3 r3, 5, r-3 r3;
+            speed=0, 1, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=3;
+   }
+
+   [POOF02]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=0;
+      Texture=randdots;
+
+      colorMap =0.2 0.2 0.8 0.01 0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.005, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 1;
+      particleLifeSpread   = 2;
+      numParticles      = 16;
+      particleSpeed     = 1;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [POOF01]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=0;
+      Texture=randdots;
+
+      colorMap = 1.0 0.0 1.0 0.04   0.2 0.2 0.8 0.01  0.2 0.2 0.4 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.005, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 1;
+      particleLifeSpread   = 2;
+      numParticles      = 16;
+      particleSpeed     = 1;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+}

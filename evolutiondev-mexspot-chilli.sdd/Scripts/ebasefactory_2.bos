@@ -1,0 +1,240 @@
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece base, doors1, doors2, spikeleft1, spikeleft2, spikeleft3, spikeright1, spikeright2, spikeright3, spikes, topspin, wheelspin, sfxpoint1, nanopoint;
+
+static-var  Maya, building;
+
+// Signal definitions (they must be distincts power of 2)
+#define SIG_ACTIVATE 2
+#define SIG_BUILDING 4
+
+#define NANOFLAME 1024+0
+#define FX1 2048
+#define FX2 2049
+#define FX3 2050
+
+SmokeUnit()
+{
+   var healthpercent, sleeptime, smoketype;
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = SFXTYPE_BLACKSMOKE;
+         if( Rand( 1, 66 ) < healthpercent )
+            smoketype = SFXTYPE_WHITESMOKE;
+         emit-sfx smoketype from base;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+         sleeptime = 200;
+      sleep sleeptime;
+   }
+}
+
+
+buildingfx()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx 1025 from nanopoint;
+      }        
+   sleep 300;
+   }
+}
+
+Create()
+{
+   Maya=TRUE;
+   while( get BUILD_PERCENT_LEFT )
+      sleep 400;
+   start-script SmokeUnit();
+   turn sfxpoint1 to x-axis <-90> now;
+   turn spikeleft1 to y-axis <-90> now;
+   turn spikeleft2 to y-axis <-90> now;
+   turn spikeleft3 to y-axis <-90> now;
+   turn spikeright1 to y-axis <90> now;
+   turn spikeright2 to y-axis <90> now;
+   turn spikeright3 to y-axis <90> now;
+   start-script Buildingfx(); 
+}
+
+QueryNanoPiece(piecenum)
+{
+   piecenum = spikes;
+}
+
+Activate()
+{
+   // Kill any other Activate or Deactivate:
+   signal SIG_ACTIVATE;
+   // Flag self so it can be killed:
+   set-signal-mask SIG_ACTIVATE;
+   // Local variables
+   var FrameM14,r;
+   // Open animation:
+   turn doors1 to z-axis <-90> speed <100>;
+   turn doors2 to z-axis <90> speed <100>;
+   move spikes to y-axis [20] speed [5];
+   // Try to open the yard
+   set YARD_OPEN to TRUE;
+   // If yard not open, tell units around to bugger off until yard is open
+   while( !get YARD_OPEN )
+   {
+      set BUGGER_OFF to TRUE;
+      sleep 1500;
+      set YARD_OPEN to TRUE;
+   }
+   set BUGGER_OFF to FALSE;
+   // Now yard is open.
+   wait-for-move spikes along y-axis;
+   wait-for-turn doors1 around z-axis;
+   // Allow the nano to flow:
+   set INBUILDSTANCE to TRUE;
+   // Send wheel spinning:
+   spin wheelspin around x-axis speed <500>;
+   spin topspin around y-axis speed <50>;
+
+   // The idle but activated animation
+   FrameM14=0;
+   while(TRUE)
+   {
+      if(Maya)
+         // Allow the nano to flow
+         set INBUILDSTANCE to TRUE;
+      while(Maya)
+      {
+         // Activated animation when having tech
+         emit-sfx FX1 from sfxpoint1;
+         sleep 5;
+         ++FrameM14;
+         if(FrameM14==15)
+         {
+            emit-sfx FX2 from sfxpoint1;
+            FrameM14=0;
+         }
+      }
+      if(!Maya)
+         // Cut the nano
+         set INBUILDSTANCE to FALSE;
+      while(!Maya)
+      {
+         // Activated animation when needing tech
+         r=rand(1,6);
+         if(r==1)
+            explode spikeleft1 type FALL | SMOKE;
+         if(r==2)
+            explode spikeleft2 type FALL | SMOKE;
+         if(r==3)
+            explode spikeleft3 type FALL | SMOKE;
+         if(r==4)
+            explode spikeright1 type FALL | SMOKE;
+         if(r==5)
+            explode spikeright2 type FALL | SMOKE;
+         if(r==6)
+            explode spikeright3 type FALL | SMOKE;
+         sleep 200;
+      }
+   }
+}
+
+Deactivate()
+{
+   // Kill any other Activate or Deactivate:
+   signal SIG_ACTIVATE;
+   // Flag self so it can be killed:
+   set-signal-mask SIG_ACTIVATE;
+   // Switch off the nano faucet:
+   set INBUILDSTANCE to FALSE;
+   // Stop wheel spinning
+   stop-spin wheelspin around x-axis decelerate <30>;
+   stop-spin topspin around y-axis decelerate <10>;
+   // Try to close the yard
+   set YARD_OPEN to FALSE;
+   // If yard not closed, tell units around to bugger off until yard is closed
+   while( get YARD_OPEN )
+   {
+      set BUGGER_OFF to TRUE;
+      sleep 1500;
+      set YARD_OPEN to FALSE;
+   }
+   set BUGGER_OFF to FALSE;
+   // Now yard is closed.
+   // Close animation:
+   turn doors1 to z-axis <0> speed <10>;
+   turn doors2 to z-axis <0> speed <10>;
+   move spikes to y-axis [0] speed [5];
+}
+
+StartBuilding()
+{
+   signal SIG_BUILDING; // Kill any other StartBuilding
+   set-signal-mask SIG_BUILDING; // Be killable
+   building = 1;
+   while(TRUE)
+   {
+      emit-sfx NANOFLAME from spikeleft1;
+      emit-sfx NANOFLAME from spikeleft2;
+      emit-sfx NANOFLAME from spikeleft3;
+      emit-sfx NANOFLAME from spikeright1;
+      emit-sfx NANOFLAME from spikeright2;
+      emit-sfx NANOFLAME from spikeright3;
+      emit-sfx FX3 from spikeleft1;
+      emit-sfx FX3 from spikeleft2;
+      emit-sfx FX3 from spikeleft3;
+      emit-sfx FX3 from spikeright1;
+      emit-sfx FX3 from spikeright2;
+      emit-sfx FX3 from spikeright3;
+      sleep 600;
+   }
+}
+
+StopBuilding()
+{
+   signal SIG_BUILDING; // Kill StartBuilding
+   building = 0;
+}
+
+QueryBuildInfo(piecenum)
+{
+   piecenum = nanopoint;
+}
+
+TechLost()
+{
+   Maya=FALSE;
+}
+
+TechGranted()
+{
+   Maya=TRUE;
+}
+
+Killed(severity, corpsetype)
+{
+   if( severity <= 25 )
+   {
+      corpsetype = 1;
+      explode base type BITMAPONLY | BITMAP1;
+      return (0);
+   }
+   if( severity <= 50 )
+   {
+      corpsetype = 2;
+      explode base type BITMAPONLY | BITMAP1;
+      return (0);
+   }
+   if( severity <= 99 )
+   {
+      corpsetype = 3;
+      explode base type BITMAPONLY | BITMAP1;
+      return (0);
+   }
+   corpsetype = 3;
+   explode base type BITMAPONLY | BITMAP1;
+}

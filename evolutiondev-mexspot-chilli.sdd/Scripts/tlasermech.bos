@@ -1,0 +1,392 @@
+#define TA        // This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  torso, upleg1, lowleg1, foot1, upleg2, lowleg2, foot2, firepoint1, firepoint2, arm1, arm2;
+
+static-var  moving;
+
+#define f3 1024+0
+
+// Signal definitions
+#define SIG_AIM   2 
+#define SIG_AIM_2  4
+#define SIG_AIM_4   8
+#define SIG_AIM_8    16
+
+Walkscript()
+{
+   while(1)
+   {
+      if (moving)
+      // Step 1
+      {
+                
+                turn upleg1 to x-axis <-35> speed <300.000000>;
+      turn lowleg1 to x-axis <10> speed <300.000000>;
+      turn foot1 to x-axis <25> speed <300.000000>;
+
+
+      turn upleg2 to x-axis <5> speed <200.000000>;
+      turn lowleg2 to x-axis <-45> speed <200.000000>;
+      turn foot2 to x-axis <30> speed <100.000000>;
+      
+   
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>;     
+                sleep 50;
+                }
+      // Step 2
+      if (moving)
+      {
+
+      turn upleg2 to x-axis <-35> speed <300.000000>;
+      turn lowleg2 to x-axis <10> speed <300.000000>;
+      turn foot2 to x-axis <25> speed <300.000000>;
+      
+   
+      turn upleg1 to x-axis <5> speed <200.000000>;
+      turn lowleg1 to x-axis <-45> speed <200.000000>;
+      turn foot1 to x-axis <30> speed <100.000000>;
+      
+   
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>;     
+                sleep 50;
+                }
+   // Step 3
+      if (moving)
+      {
+   
+      turn upleg1 to x-axis <-35> speed <300.000000>;
+      turn lowleg1 to x-axis <10> speed <300.000000>;
+      turn foot1 to x-axis <25> speed <300.000000>;
+      
+   
+      turn upleg2 to x-axis <5> speed <200.000000>;
+      turn lowleg2 to x-axis <-45> speed <200.000000>;
+      turn foot2 to x-axis <30> speed <100.000000>;
+      
+
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>;   
+                sleep 50;
+                }
+      // Step 4
+      if (moving)
+      {
+
+      turn upleg2 to x-axis <-35> speed <300.000000>;
+      turn lowleg2 to x-axis <10> speed <300.000000>;
+      turn foot2 to x-axis <25> speed <300.000000>;
+      
+   
+      turn upleg1 to x-axis <5> speed <200.000000>;
+      turn lowleg1 to x-axis <-45> speed <200.000000>;
+      turn foot1 to x-axis <30> speed <100.000000>;
+      
+
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>;  
+                sleep 50;
+                }
+      // Step 5
+      if (moving)
+      {
+   
+      turn upleg1 to x-axis <-35> speed <300.000000>;
+      turn lowleg1 to x-axis <10> speed <300.000000>;
+      turn foot1 to x-axis <25> speed <300.000000>;
+      
+   
+      turn upleg2 to x-axis <5> speed <200.000000>;
+      turn lowleg2 to x-axis <-45> speed <200.000000>;
+      turn foot2 to x-axis <30> speed <100.000000>;
+
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>; 
+                sleep 50;
+                }
+      // Step 6
+      if (moving)
+      {
+      
+                turn upleg2 to x-axis <-35> speed <300.000000>;
+      turn lowleg2 to x-axis <10> speed <300.000000>;
+      turn foot2 to x-axis <25> speed <300.000000>;
+      
+   
+      turn upleg1 to x-axis <5> speed <200.000000>;
+      turn lowleg1 to x-axis <-45> speed <200.000000>;
+      turn foot1 to x-axis <30> speed <100.000000>;
+      
+
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>; 
+                sleep 50;
+                }
+   //Step 7
+      if (moving)
+      {
+
+      turn upleg1 to x-axis <-35> speed <300.000000>;
+      turn lowleg1 to x-axis <10> speed <300.000000>;
+      turn foot1 to x-axis <25> speed <300.000000>;
+      
+   
+      turn upleg2 to x-axis <5> speed <200.000000>;
+      turn lowleg2 to x-axis <-45> speed <200.000000>;
+      turn foot2 to x-axis <30> speed <100.000000>;
+
+
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>; 
+                sleep 50;
+                }
+      // Step 8
+      if (moving)
+      {
+
+      turn upleg2 to x-axis <-35> speed <300.000000>;
+      turn lowleg2 to x-axis <10> speed <300.000000>;
+      turn foot2 to x-axis <25> speed <300.000000>;
+      
+   
+      turn upleg1 to x-axis <5> speed <200.000000>;
+      turn lowleg1 to x-axis <-45> speed <200.000000>;
+      turn foot1 to x-axis <30> speed <100.000000>;
+      
+
+      sleep 400;
+      }
+      while(!moving)
+      {
+                sleep 50;
+                turn upleg1 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg1 to x-axis <10.0> speed <300.000000>;
+                turn foot1 to x-axis <25.0> speed <300.000000>;
+                turn upleg2 to x-axis <-35.0> speed <300.000000>;
+                turn lowleg2 to x-axis <10.0> speed <300.000000>;
+                turn foot2 to x-axis <25.0> speed <300.000000>;   
+                sleep 50;
+                }
+   }
+}
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx smoketype from torso;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+
+
+Create()
+{
+   turn upleg1 to x-axis <-35.0> speed <500.000000>;
+        turn lowleg1 to x-axis <10.0> speed <500.000000>;
+        turn foot1 to x-axis <25.0> speed <500.000000>;
+        turn upleg2 to x-axis <-35.0> speed <500.000000>;
+        turn lowleg2 to x-axis <10.0> speed <500.000000>;
+        turn foot2 to x-axis <25.0> speed <500.000000>;
+   moving = FALSE;
+        start-script Walkscript();
+        start-script SmokeUnit();
+}
+
+RestoreAfterDelay()
+{
+   sleep 3000;
+   turn torso to y-axis <0.0> speed <70.0>;
+   turn arm1 to x-axis <0.0> speed <50.0>;
+        turn arm2 to x-axis <0.0> speed <50.0>;
+}
+
+AimWeapon1(heading, pitch)
+{
+        signal SIG_AIM;
+   set-signal-mask SIG_AIM;
+   turn torso to y-axis heading speed <150.0>;
+   turn arm1 to x-axis <0.0> - pitch speed <100.0>;
+   wait-for-turn torso around y-axis;
+   wait-for-turn arm1 around x-axis;
+   start-script RestoreAfterDelay();
+   return (1);
+}
+
+FireWeapon1()
+{
+   sleep 1;
+         emit-sfx f3  from firepoint1;
+   sleep 1;
+         emit-sfx f3  from firepoint1;
+   sleep 1;
+         emit-sfx f3  from firepoint1;
+   sleep 1;
+         emit-sfx f3  from firepoint1;
+}
+
+AimFromWeapon1(piecenum)
+{
+   piecenum = torso;
+}
+
+QueryWeapon1(piecenum)
+{
+      piecenum = firepoint1;
+}
+
+AimWeapon2(heading, pitch)
+{
+        signal SIG_AIM_2;
+   set-signal-mask SIG_AIM_2;
+   turn torso to y-axis heading speed <150.0>;
+   turn arm2 to x-axis <0.0> - pitch speed <100.0>;
+   wait-for-turn torso around y-axis;
+   wait-for-turn arm2 around x-axis;
+   start-script RestoreAfterDelay();
+   return (1);
+}
+
+FireWeapon2()
+{
+   sleep 1;
+         emit-sfx f3  from firepoint2;
+   sleep 1;
+         emit-sfx f3  from firepoint2;
+   sleep 1;
+         emit-sfx f3  from firepoint2;
+   sleep 1;
+         emit-sfx f3  from firepoint2;
+}
+
+AimFromWeapon2(piecenum)
+{
+   piecenum = torso;
+}
+
+QueryWeapon2(piecenum)
+{
+      piecenum = firepoint2;
+}
+
+
+StartMoving()
+{
+   moving = TRUE;
+}
+
+StopMoving()
+{
+   moving = FALSE;
+}
+
+Killed(severity, corpsetype)
+{
+   if( severity <= 25 )
+   {
+      corpsetype = 1;
+      explode torso type BITMAPONLY | BITMAP1;
+      return (0);
+   }
+   if( severity <= 50 )
+   {
+      corpsetype = 2;
+      explode torso type FALL | BITMAP3;
+      return (0);
+   }
+   if( severity <= 99 )
+   {
+      corpsetype = 3;
+      explode torso type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP3;
+      return (0);
+   }
+   corpsetype = 3;
+   explode torso type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP3;
+}
