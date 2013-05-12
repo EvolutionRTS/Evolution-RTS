@@ -1273,7 +1273,7 @@ function widget:Initialize()
 		x = 0,
 		y = '15%',
 		width = "100%";
-		height = "86%";
+		height = "100%";
 		--disableChildrenHitTest = false,
 		--itemMargin  = {0, 0, 0, 0},
 		dockable = false;

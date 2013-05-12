@@ -259,7 +259,7 @@ options = {
 	showgroupinfo = {name='Show Group Info', type='bool', value=true, OnChange = option_Deselect,
 		path = selPath,
 	},
-	squarepics = {name='Square Buildpics', type='bool', value=false, OnChange = option_Deselect,
+	squarepics = {name='Square Buildpics', type='bool', value=true, OnChange = option_Deselect,
 		path = selPath,
 	},
 	unitCommand = {
@@ -467,10 +467,10 @@ local function UpdateDynamicGroupInfo()
 				
 				local stunned_or_inbuld = spGetUnitIsStunned(id)
 				if not stunned_or_inbuld then 
-					if name == 'armmex' or name =='cormex' then -- mex case
+					if name == 'emetalextractor' or name =='euwmetalextractor' then -- mex case
 						local tooltip = spGetUnitTooltip(id)
 						
-						local baseMetal = 0
+						local baseMetal = 0.5
 						local s = tooltip:match("Makes: ([^ ]+)")
 						if s ~= nil then 
 							baseMetal = tonumber(s) 
@@ -1126,8 +1126,8 @@ local function UpdateResourceStack(tooltip_type, unitID, ud, tooltip)
 		end
 		
 		-- special cases for mexes
-		if ud.name=='cormex' then 
-			local baseMetal = 0
+		if ud.name == 'emetalextractor' or ud.name =='euwmetalextractor' then
+			local baseMetal = 0.5
 			local s = tooltip:match("Makes: ([^ ]+)")
 			if s ~= nil then baseMetal = tonumber(s) end 
 							
@@ -1536,7 +1536,7 @@ local function UpdateBuildpic( ud, globalitem_name, unitID )
 			file2 = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(ud)),
 			tooltip = 'Middle-click: Goto',
 			keepAspect = false,
-			height  = 55*(4/5),
+			height  = 55,
 			width   = 55,
 			unitID = unitID,
 			
