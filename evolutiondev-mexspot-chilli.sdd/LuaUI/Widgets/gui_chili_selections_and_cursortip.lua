@@ -227,7 +227,7 @@ options = {
 		name = "Hide Tooltip for Unreclaimables",
 		type = 'bool',
 		advanced = true,
-		value = true,
+		value = false,
 		desc = 'Don\'t show the tooltip for unreclaimable features.',
 	},
 	showdrawtooltip = {
@@ -1483,7 +1483,7 @@ local function BuildTooltip2(ttname, ttdata, sel)
 			y = 0,
 			orientation='vertical',
 			centerItems = false,
-			width = 220,
+			width = 475,
 			padding = {0,0,0,0},
 			itemPadding = {1,0,0,0},
 			itemMargin = {0,0,0,0},
@@ -2316,9 +2316,9 @@ function widget:Initialize()
 		name   = 'real_window_corner';
 		color = options.color_background.value,
 		x = 0; 
-		bottom = 180;
-        width = 450;
-		height = 130;
+		bottom = 280;
+        width = 700;
+		height = 150;
 		dockable = true;
 		draggable = false,
 		resizable = false,
