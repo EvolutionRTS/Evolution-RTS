@@ -98,7 +98,7 @@ end
 
 options = { 
   eexcessflashalways = {name='Always Flash On Energy Excess', type='bool', value=false},
-  onlyShowExpense = {name='Only Show Expense', type='bool', value=false},
+  onlyShowExpense = {name='Only Show Expense', type='bool', value=true},
   enableReserveBar = {name='Enable Metal Reserve', type='bool', value=false, tooltip = "Enables high priority reserve"},
   workerUsage = {name = "Show Worker Usage", type = "bool", value=false, OnChange = option_workerUsageUpdate},
   energyFlash = {name = "Energy Stall Flash", type = "number", value=0.1, min=0,max=1,step=0.02},
