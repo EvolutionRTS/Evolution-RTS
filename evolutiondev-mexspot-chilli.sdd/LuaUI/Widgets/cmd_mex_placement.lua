@@ -1,9 +1,8 @@
-
 function widget:GetInfo()
 	return {
 		name      = "Mex Placement Handler",
 		desc      = "Places mexes in the correct position DO NOT DISABLE",
-		author    = "Google Frog with some from Niobium and Evil4Zerggin.",
+		author    = "Google Frog with some from Niobium, Evil4Zerggin and Smoth",
 		version   = "v1",
 		date      = "22 April, 2012", --2 April 2013
 		license   = "GNU GPL, v2 or later",
@@ -114,8 +113,19 @@ local MINIMAP_DRAW_SIZE = math.max(mapX,mapZ) * 0.0145
 -------------------------------------------------------------------------------------
 -- Mexes and builders
 
-local mexDefID = UnitDefNames["emetalextractor"].id
-local mexUnitDef = UnitDefNames["emetalextractor"]
+local mexUnitDef				= UnitDefNames["emetalextractor"]
+local referenceLandMexId		= mexUnitDef.id	
+local referenceUnderWaterMexId	= UnitDefNames["euwmetalextractor"].id
+
+local mexDefIDs = {	
+					[referenceLandMexId]			= referenceLandMexId,
+					[referenceUnderWaterMexId]	= referenceUnderWaterMexId,
+				}
+
+				
+
+
+
 local mexDefInfo = {
 	extraction = 0.001,
 	square = mexUnitDef.extractSquare,
@@ -124,11 +134,15 @@ local mexDefInfo = {
 }
 
 local mexBuilder = {}
-
 local mexBuilderDefs = {}
+
+
+
 for udid, ud in ipairs(UnitDefs) do 
-	for i, option in ipairs(ud.buildOptions) do 
-		if mexDefID == option then
+	for _, targetId in ipairs(ud.buildOptions) do 
+		if referenceUnderWaterMexId == targetId or referenceLandMexId == targetId then
+
+
 			mexBuilderDefs[udid] = true
 		end
 	end
@@ -237,6 +251,7 @@ end
 
 function widget:CommandNotify(cmdID, params, options)	
 	if (cmdID == CMD_AREA_MEX and WG.metalSpots) then
+	
 
 		local cx, cy, cz, cr = params[1], params[2], params[3], math.max((params[4] or 60),60)
 		
@@ -250,19 +265,23 @@ function widget:CommandNotify(cmdID, params, options)
 		local dis = {}
 		
 		local ux = 0
+		local uy = 0
 		local uz = 0
 		local us = 0
 		
 		local aveX = 0
 		local aveZ = 0
+		local aveY = 0
 		
 		local units = spGetSelectedUnits()
 
 		for i = 1, #units do 
 			local unitID = units[i]
+
 			if mexBuilder[unitID] then
-				local x,_,z = spGetUnitPosition(unitID)
+				local x,y,z = spGetUnitPosition(unitID)
 				ux = ux+x
+				uy = uy+y
 				uz = uz+z
 				us = us+1
 			end
@@ -272,6 +291,7 @@ function widget:CommandNotify(cmdID, params, options)
 			return
 		else
 			aveX = ux/us
+			aveY = uy/us
 			aveZ = uz/us
 		end
 	
@@ -279,7 +299,7 @@ function widget:CommandNotify(cmdID, params, options)
 			local mex = WG.metalSpots[i]
 			--if (mex.x > xmin) and (mex.x < xmax) and (mex.z > zmin) and (mex.z < zmax) then -- square area, should be faster
 			if (not spotData[i]) and (Distance(cx,cz,mex.x,mex.z) < cr*cr) then -- circle area, slower
-				commands[#commands+1] = {x = mex.x, z = mex.z, d = Distance(aveX,aveZ,mex.x,mex.z)}
+				commands[#commands+1] = {x = mex.x, y = mex.y, z = mex.z, d = Distance(aveX,aveZ,mex.x,mex.z)}
 			end
 		end
 
@@ -289,6 +309,7 @@ function widget:CommandNotify(cmdID, params, options)
 			tasort(commands, function(a,b) return a.d < b.d end)
 			orderedCommands[#orderedCommands+1] = commands[1]
 			aveX = commands[1].x
+			aveY = commands[1].y
 			aveZ = commands[1].z
 			taremove(commands, 1)
 			for k, com in pairs(commands) do		
@@ -298,7 +319,7 @@ function widget:CommandNotify(cmdID, params, options)
 		end
 	
 		local shift = options.shift
-	
+
 		do --issue ordered order to unit(s)
 			local commandArrayToIssue={}
 			local unitArrayToReceive ={}
@@ -313,17 +334,29 @@ function widget:CommandNotify(cmdID, params, options)
 				commandArrayToIssue[1] = {CMD.STOP, {} , {}}
 				--spGiveOrderToUnit(unitID, CMD.STOP, {} , 0 )
 			end
+
 			for i, command in ipairs(orderedCommands) do
 				local x = command.x
+				local y = command.y
 				local z = command.z
-				local buildable, feature = spTestBuildOrder(mexDefID,x,0,z,1)
+				
+				local referenceMexId = referenceLandMexId
+				
+				if y < 0  then
+					referenceMexId = referenceUnderWaterMexId	
+				end
+				
+				local buildable, feature = spTestBuildOrder(referenceMexId,x,0,z,1)
+
 				if buildable ~= 0 then
 					local handledExternally = false
+
 					if (Script.LuaUI('CommandNotifyMex')) then --send away new mex queue in an event called CommandNotifyMex. Used by "central_build_AI.lua"
-						handledExternally = Script.LuaUI.CommandNotifyMex(-mexDefID, {x,0,z,0} , options , true) --add additional flag "true" for additional logic for zk areamex
+						handledExternally = Script.LuaUI.CommandNotifyMex(-referenceMexId, {x,0,z,0} , options , true) --add additional flag "true" for additional logic for zk areamex
 					end
 					if ( not handledExternally ) then
-						commandArrayToIssue[#commandArrayToIssue+1] = {-mexDefID, {x,0,z,0} , {"shift"}}
+						commandArrayToIssue[#commandArrayToIssue+1] = {-referenceMexId, {x,0,z,0} , {"shift"}}
+
 						--spGiveOrderToUnit(unitID, -mexDefID, {x,0,z,0} , {"shift"})
 					end
 				else
@@ -331,7 +364,7 @@ function widget:CommandNotify(cmdID, params, options)
 					for i = 1, #mexes do --check unit in build location
 						local aid = mexes[i]
 						local udid = spGetUnitDefID(aid)
-						if spGetUnitAllyTeam(aid) == myAllyTeam and mexDefID == udid then
+						if spGetUnitAllyTeam(aid) == myAllyTeam and mexDefIDs[udid] then
 							if select(5, spGetUnitHealth(aid)) ~= 1 then
 								commandArrayToIssue[#commandArrayToIssue+1] = {CMD.REPAIR, {aid} , {"shift"}}
 								--spGiveOrderToUnit(unitID, CMD.REPAIR, {aid} , {"shift"})
@@ -348,7 +381,7 @@ function widget:CommandNotify(cmdID, params, options)
 		return true
 	end
 
-	if -mexDefID == cmdID and WG.metalSpots then
+	if mexDefIDs[-cmdID] and WG.metalSpots then
 		
 		local bx, bz = params[1], params[3]
 		local closestSpot = GetClosestMetalSpot(bx, bz)
@@ -358,8 +391,10 @@ function widget:CommandNotify(cmdID, params, options)
 			local myAlly = spGetMyAllyTeamID()
 			for i = 1, #units do
 				local unitID = units[i]
-				local unitDefID = Spring.GetUnitDefID(unitID)
-				if unitDefID and mexDefID == unitDefID and spGetUnitAllyTeam(unitID) == myAlly then
+				--why would you even?!?
+				--local unitDefID = Spring.GetUnitDefID(unitID)
+
+				if unitID and mexDefIDs[unitID] and spGetUnitAllyTeam(unitID) == myAlly then
 					foundUnit = unitID
 					break
 				end
@@ -393,7 +428,7 @@ function widget:UnitCreated(unitID, unitDefID)
 end
 
 function widget:UnitFinished(unitID, unitDefID, teamID)
-	if unitDefID == mexDefID and WG.metalSpots then
+	if mexDefIDs[unitID] and WG.metalSpots then
 		if spGetSpectatingState() then
 			local x,_,z = Spring.GetUnitPosition(unitID)
 			local spotID = WG.metalSpotsByPos[x] and WG.metalSpotsByPos[x][z]
@@ -415,7 +450,7 @@ function widget:UnitFinished(unitID, unitDefID, teamID)
 end
 
 function widget:UnitDestroyed(unitID, unitDefID)
-	if unitDefID == mexDefID and spotByID[unitID] then
+	if mexDefIDs[unitID]  and spotByID[unitID] then
 		spotData[spotByID[unitID]] = nil
 		spotByID[unitID] = nil
 		updateMexDrawList()
@@ -423,7 +458,8 @@ function widget:UnitDestroyed(unitID, unitDefID)
 end
 
 function widget:UnitGiven(unitID, unitDefID, newTeamID, teamID)
-	if unitDefID == mexDefID then
+	if mexDefIDs[unitID] then
+
 		local done = select(5, spGetUnitHealth(unitID))
 		if done == 1 then
 			widget:UnitFinished(unitID, unitDefID,unitDefID)
@@ -441,7 +477,8 @@ local function Initialize()
 	for i, unitID in ipairs(units) do 
 		local unitDefID = spGetUnitDefID(unitID)
 		widget:UnitCreated(unitID, unitDefID)
-		if unitDefID == mexDefID then
+		if mexDefIDs[unitID] then
+
 			local done = select(5, spGetUnitHealth(unitID))
 			if done == 1 then
 				widget:UnitFinished(unitID, unitDefID,team)
@@ -467,7 +504,8 @@ function widget:Update()
 		local units = spGetAllUnits()
 		for i, unitID in ipairs(units) do 
 			local unitDefID = spGetUnitDefID(unitID)
-		if unitDefID == mexDefID then
+		if mexDefIDs[unitID] then
+
 			local done = select(5, spGetUnitHealth(unitID))
 				if done == 1 then
 					widget:UnitFinished(unitID, unitDefID,team)
@@ -486,7 +524,8 @@ function widget:Update()
 		WG.mouseoverMexIncome = mexSpotToDraw.metal
 	else
 		local _, cmd_id = spGetActiveCommand()
-		if -mexDefID ~= cmd_id then
+		if cmd_id ~= nil and mexDefIDs[-cmd_id] == nil then
+
 			return
 		end
 		local mx, my = spGetMouseState()
@@ -636,16 +675,36 @@ function widget:DrawWorld()
 	local _, pos = spTraceScreenRay(mx, my, true)
 	
 	mexSpotToDraw = false
-	drawMexSpots = WG.metalSpots and (-mexDefID == cmdID or CMD_AREA_MEX == cmdID or peruse)
 	
-	if WG.metalSpots and pos and (-mexDefID == cmdID or peruse or CMD_AREA_MEX == cmdID) then
+	local validMexId = false
 	
+	if cmd_id ~= nil and mexDefIDs[-cmd_id] then
+
+		validMexId = true
+	end
+	
+	drawMexSpots = WG.metalSpots and (validMexId or CMD_AREA_MEX == cmdID or peruse)
+
+	if WG.metalSpots and pos and (validMexId or peruse or CMD_AREA_MEX == cmdID) then
+	
+
+
 		-- Find build position and check if it is valid (Would get 100% metal)
-		local bx, by, bz = Spring.Pos2BuildPos(mexDefID, pos[1], pos[2], pos[3])
+		
+		local referenceMexId = referenceLandMexId
+
+		if pos[2] < 1  then
+			referenceMexId = referenceUnderWaterMexId	
+		end	
+
+		local bx, by, bz = Spring.Pos2BuildPos(referenceMexId, pos[1], pos[2], pos[3])
+		
+
+
 		local bface = Spring.GetBuildFacing()
 		local closestSpot, distance, index = GetClosestMetalSpot(bx, bz)
 		
-		if closestSpot and (-mexDefID == cmdID or not ((CMD_AREA_MEX == cmdID or peruse) and distance > 60)) and (not spotData[index]) then 
+		if closestSpot and (validMexId or not ((CMD_AREA_MEX == cmdID or peruse) and distance > 1000)) and (not spotData[index]) then 
 		
 			mexSpotToDraw = closestSpot
 			gl.DepthTest(false)
@@ -665,7 +724,7 @@ function widget:DrawWorld()
 			gl.PushMatrix()
 			gl.Translate(closestSpot.x, height, closestSpot.z)
 			gl.Rotate(90 * bface, 0, 1, 0)
-			gl.UnitShape(mexDefID, Spring.GetMyTeamID())
+			gl.UnitShape(referenceMexId, Spring.GetMyTeamID())
 			gl.PopMatrix()
 			
 			gl.DepthTest(false)
