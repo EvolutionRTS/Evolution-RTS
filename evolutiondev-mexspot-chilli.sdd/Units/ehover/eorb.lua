@@ -49,7 +49,7 @@ Light
   metalStorage       = 0,
   movementClass      = "HOVERTANK4",
   moveState			 = "2",
-  name               = "(O)RB",
+  name               = "ORB",
   objectName         = "eorb.s3o",
   radarDistance      = 0,
   --radarDistanceJam   = 20,
@@ -95,7 +95,6 @@ Light
   customParams = {
     needed_cover = 2,
   	death_sounds = "soldier",
-	twokhotkey = 'o',
     cancollect = "1",
 	armortype   = "light",
 	normaltex = "unittextures/eorbnormal.png", 

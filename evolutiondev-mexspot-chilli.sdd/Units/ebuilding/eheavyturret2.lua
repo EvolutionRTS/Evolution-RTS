@@ -38,7 +38,7 @@ Building
   maxSlope           = 60,
   maxWaterDepth      = 0,
   metalStorage       = 0,
-  name               = "Immolator (h)",
+  name               = "Immolator",
   objectName         = "eheavyturret3.s3o",
   onlytargetcategory3 = "NOTAIR",
   onlytargetcategory4 = "NOTAIR",
@@ -82,7 +82,6 @@ Building
   customParams = {
     needed_cover = 5,
 	death_sounds = "generic",
-	twokhotkey = 'h',
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[]],

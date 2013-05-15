@@ -34,7 +34,7 @@ local unitDef = {
   metalStorage       = 0,
   metalMake          = 0,
   mobilestandorders  = "1",
-  name               = "Aircraft Plant (V)",
+  name               = "Aircraft Plant",
   objectName         = "eairplant.s3o",
   radarDistance      = 0,
   repairable		 = false,
@@ -84,7 +84,6 @@ local unitDef = {
   },
    customParams = {
    	death_sounds = "generic",
-	twokhotkey = 'v',
 	armortype   = "building", 
 	normaltex = "unittextures/eairplantnormal.png", 
 --	ProvideTech = "1 Powergrid",

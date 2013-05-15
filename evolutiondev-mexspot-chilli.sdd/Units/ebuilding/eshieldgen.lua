@@ -36,7 +36,7 @@ Drains -2.5 Energy while charging shield
   maxSlope           = 30,
   maxWaterDepth      = 0,
   metalStorage       = 0,
-  name               = "(P)rotector",
+  name               = "Protector",
   objectName         = "eshieldgen.s3o",
   onlytargetcategory2 = "NOTAIR",
   onlytargetcategory3 = "NOTAIR",
@@ -85,7 +85,6 @@ sfxtypes = {
   customParams = {
     needed_cover = 5,
 	death_sounds = "generic",
-	twokhotkey = 'p',
     RequireTech = "10 Power",
     ProvideTechRange = "300",
 	armortype   = "building", 

@@ -52,7 +52,7 @@ local unitDef = {
   maxWaterDepth      = 0,
   metalStorage       = 0,
   metalMake          = 0,
-  name               = "All-Terrain Factory (X)",
+  name               = "All-Terrain Factory",
   objectName         = "eminifac.s3o",
   radarDistance      = 0,
   repairable		 = false,
@@ -103,7 +103,6 @@ local unitDef = {
   },
   customParams = {
   	death_sounds = "generic",
-	twokhotkey = 'x',
 	armortype   = "building", 
 	normaltex = "unittextures/eminifacnormal.png", 
 --	ProvideTech = "1 Powergrid",
