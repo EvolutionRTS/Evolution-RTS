@@ -1,1 +1,0 @@
-frame anims/cursorareamex_0.png 0
