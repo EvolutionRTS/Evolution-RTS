@@ -124,8 +124,6 @@ local mexDefIDs = {
 
 				
 
-
-
 local mexDefInfo = {
 	extraction = 0.001,
 	square = mexUnitDef.extractSquare,
@@ -137,12 +135,9 @@ local mexBuilder = {}
 local mexBuilderDefs = {}
 
 
-
 for udid, ud in ipairs(UnitDefs) do 
 	for _, targetId in ipairs(ud.buildOptions) do 
-		if referenceUnderWaterMexId == targetId or referenceLandMexId == targetId then
-
-
+		if mexDefIDs[targetId] then
 			mexBuilderDefs[udid] = true
 		end
 	end
@@ -252,7 +247,6 @@ end
 function widget:CommandNotify(cmdID, params, options)	
 	if (cmdID == CMD_AREA_MEX and WG.metalSpots) then
 	
-
 		local cx, cy, cz, cr = params[1], params[2], params[3], math.max((params[4] or 60),60)
 		
 		local xmin = cx-cr
@@ -277,7 +271,6 @@ function widget:CommandNotify(cmdID, params, options)
 
 		for i = 1, #units do 
 			local unitID = units[i]
-
 			if mexBuilder[unitID] then
 				local x,y,z = spGetUnitPosition(unitID)
 				ux = ux+x
@@ -319,7 +312,6 @@ function widget:CommandNotify(cmdID, params, options)
 		end
 	
 		local shift = options.shift
-
 		do --issue ordered order to unit(s)
 			local commandArrayToIssue={}
 			local unitArrayToReceive ={}
@@ -334,7 +326,6 @@ function widget:CommandNotify(cmdID, params, options)
 				commandArrayToIssue[1] = {CMD.STOP, {} , {}}
 				--spGiveOrderToUnit(unitID, CMD.STOP, {} , 0 )
 			end
-
 			for i, command in ipairs(orderedCommands) do
 				local x = command.x
 				local y = command.y
@@ -347,7 +338,6 @@ function widget:CommandNotify(cmdID, params, options)
 				end
 				
 				local buildable, feature = spTestBuildOrder(referenceMexId,x,0,z,1)
-
 				if buildable ~= 0 then
 					local handledExternally = false
 
@@ -356,7 +346,6 @@ function widget:CommandNotify(cmdID, params, options)
 					end
 					if ( not handledExternally ) then
 						commandArrayToIssue[#commandArrayToIssue+1] = {-referenceMexId, {x,0,z,0} , {"shift"}}
-
 						--spGiveOrderToUnit(unitID, -mexDefID, {x,0,z,0} , {"shift"})
 					end
 				else
@@ -459,7 +448,6 @@ end
 
 function widget:UnitGiven(unitID, unitDefID, newTeamID, teamID)
 	if mexDefIDs[unitID] then
-
 		local done = select(5, spGetUnitHealth(unitID))
 		if done == 1 then
 			widget:UnitFinished(unitID, unitDefID,unitDefID)
@@ -478,7 +466,6 @@ local function Initialize()
 		local unitDefID = spGetUnitDefID(unitID)
 		widget:UnitCreated(unitID, unitDefID)
 		if mexDefIDs[unitID] then
-
 			local done = select(5, spGetUnitHealth(unitID))
 			if done == 1 then
 				widget:UnitFinished(unitID, unitDefID,team)
@@ -505,7 +492,6 @@ function widget:Update()
 		for i, unitID in ipairs(units) do 
 			local unitDefID = spGetUnitDefID(unitID)
 		if mexDefIDs[unitID] then
-
 			local done = select(5, spGetUnitHealth(unitID))
 				if done == 1 then
 					widget:UnitFinished(unitID, unitDefID,team)
@@ -525,7 +511,6 @@ function widget:Update()
 	else
 		local _, cmd_id = spGetActiveCommand()
 		if cmd_id ~= nil and mexDefIDs[-cmd_id] == nil then
-
 			return
 		end
 		local mx, my = spGetMouseState()
@@ -688,7 +673,6 @@ function widget:DrawWorld()
 	if WG.metalSpots and pos and (validMexId or peruse or CMD_AREA_MEX == cmdID) then
 	
 
-
 		-- Find build position and check if it is valid (Would get 100% metal)
 		
 		local referenceMexId = referenceLandMexId
@@ -699,8 +683,6 @@ function widget:DrawWorld()
 
 		local bx, by, bz = Spring.Pos2BuildPos(referenceMexId, pos[1], pos[2], pos[3])
 		
-
-
 		local bface = Spring.GetBuildFacing()
 		local closestSpot, distance, index = GetClosestMetalSpot(bx, bz)
 		
