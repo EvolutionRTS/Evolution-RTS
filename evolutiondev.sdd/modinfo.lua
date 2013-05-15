@@ -13,7 +13,7 @@ return {
   name='Evolution RTS -',
   description='EvoRTS',
   shortname='EvoRTS',
-  version='$VERSION',
+  version='Chilligui+Mexspot',
   mutator='Official',
   game='Evolution RTS',
   shortGame='EvoRTS',

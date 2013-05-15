@@ -16,7 +16,7 @@ function widget:Initialize()
 	Spring.SendCommands({
 		"unbindkeyset c",
 	})
-	Spring.SendCommands("bind c capture")
+	Spring.SendCommands("bind ctrl+c capture")
 	
 	
 	-- set repeat to be bound to q
@@ -31,12 +31,6 @@ function widget:Initialize()
 		"unbindkeyset i",
 	})
 	Spring.SendCommands("bind i priority")
-	
-	
-		Spring.SendCommands({
-		"unbindkeyset o",
-	})
-    Spring.SendCommands("bind o areamex")
 	
 	if Game.version == "85.0" then
 		Spring.SendCommands({"unbindaction specteam"})

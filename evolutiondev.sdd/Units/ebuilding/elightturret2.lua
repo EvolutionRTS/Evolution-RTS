@@ -34,7 +34,7 @@ Building
   maxSlope           = 60,
   maxWaterDepth      = 0,
   metalStorage       = 0,
-  name               = "Lightning Rod (t)",
+  name               = "Lightning Rod",
   objectName         = "elightturret3.s3o",
   onlytargetcategory2 = "NOTAIR",
   onlytargetcategory3 = "NOTAIR",
@@ -80,7 +80,6 @@ Building
   customParams = {
     needed_cover = 2,
 	death_sounds = "generic",
-	twokhotkey = 't',
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[]],

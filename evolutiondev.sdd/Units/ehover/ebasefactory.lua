@@ -39,7 +39,7 @@ local unitDef = {
   maxWaterDepth      = 0,
   metalStorage       = 0,
   metalMake          = 0,
-  name               = "Hovertank Factory (Z)",
+  name               = "Hovertank Factory",
   objectName         = "ebasefactory.s3o",
   radarDistance      = 0,
   repairable		 = false,
@@ -105,7 +105,6 @@ local unitDef = {
   },
   customParams = {
   	death_sounds = "generic",
-	twokhotkey = 'z',
 	armortype   = "building", 
 --	RequireTech = "12 Power",
 	normaltex = "unittextures/ebasefactorynormal.png", 

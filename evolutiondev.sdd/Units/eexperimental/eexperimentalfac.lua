@@ -34,7 +34,7 @@ local unitDef = {
   maxWaterDepth      = 0,
   metalStorage       = 0,
   metalMake          = 0,
-  name               = "(D)estroyer Class Factory",
+  name               = "Destroyer Class Factory",
   objectName         = "eexperimentalfac.s3o",
   radarDistance      = 0,
   repairable		 = false,
@@ -78,7 +78,6 @@ local unitDef = {
   },
   customParams = {
   	death_sounds = "nuke",
-	twokhotkey = 'd',
 	armortype   = "building", 
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 --	ProvideTech = "1 Powergrid",

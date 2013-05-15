@@ -38,7 +38,7 @@ local unitDef = {
   maxWaterDepth      = 5000,
   metalStorage       = 0,
   metalMake          = 0,
-  name               = "Amphibious Tank Factory (C)",
+  name               = "Amphibious Tank Factory",
   objectName         = "eamphibfac.s3o",
   radarDistance      = 0,
   repairable		 = false,
@@ -87,7 +87,6 @@ local unitDef = {
   },
   customParams = {
   	death_sounds = "generic",
-	twokhotkey = 'c',
 	armortype   = "building", 
 	normaltex = "unittextures/eamphibfacnormal.png", 
 --	ProvideTech = "1 Powergrid",
