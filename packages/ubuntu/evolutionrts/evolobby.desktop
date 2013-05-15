@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Evolution RTS
-Comment=Evolution RTS Lobby
-Exec=evolobby
-Icon=evolution_rts.png
-Terminal=false
-Type=Application
-Categories=Application;Game;StrategyGame;
-X-SuSE-translate=false

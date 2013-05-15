@@ -1,6 +1,0 @@
-Browser Browser.qml
-Button Button.qml
-FlickableWebView FlickableWebView.qml
-Header Header.qml
-ScrollBar ScrollBar.qml
-UrlInput UrlInput.qml
