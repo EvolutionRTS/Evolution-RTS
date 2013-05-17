@@ -383,7 +383,8 @@ function widget:CommandNotify(cmdID, params, options)
 				--why would you even?!?
 				--local unitDefID = Spring.GetUnitDefID(unitID)
 
-				if unitID and mexDefIDs[unitID] and spGetUnitAllyTeam(unitID) == myAlly then
+				local unitDefID = Spring.GetUnitDefID(unitID)
+				if unitDefID and mexDefIDs[unitDefID] and spGetUnitAllyTeam(unitID) == myAlly then
 					foundUnit = unitID
 					break
 				end
