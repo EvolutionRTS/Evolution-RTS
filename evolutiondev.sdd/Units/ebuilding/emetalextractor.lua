@@ -71,6 +71,7 @@ local unitDef = {
     },
   },
   customParams = {
+	iseco = 1,
     needed_cover = 3,
     death_sounds = "generic",
 	armortype   = "building",

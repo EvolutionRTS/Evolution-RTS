@@ -69,6 +69,7 @@ Provides +1 Energy]],
     },
   },
   customParams = {
+	iseco = 1,
   	death_sounds = "generic",
     ProvideTech = "1 Power",
     ProvideTechRange = "400",

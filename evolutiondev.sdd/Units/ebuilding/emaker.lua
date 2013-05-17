@@ -72,6 +72,7 @@ sfxtypes = {
     },
   },
   customParams = {
+	iseco = 1,
     needed_cover = 8,
 	death_sounds = "generic",
 	armortype   = "building",

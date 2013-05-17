@@ -70,6 +70,7 @@ Provides +10 Power]],
     },
   },
   customParams = {
+	iseco = 1,
     needed_cover = 5,
 	death_sounds = "generic",
     ProvideTech = "10 Power",

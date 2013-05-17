@@ -178,7 +178,7 @@ path='Settings/Camera'
 			{name = 'Rotatable Overhead',key='Rotatable Overhead', desc='Rotatable Overhead camera', hotkey=nil},
 			{name = 'Total War',key='Total War', desc='TW camera', hotkey=nil},
 			{name = 'COFC',key='COFC', desc='Combo Overhead/Free Camera', hotkey=nil},
-		},'Total Annihilation',
+		},'COFC',
 		function(self)
 			local key = self.value
 			if key == 'Total Annihilation' then
@@ -231,6 +231,7 @@ path='Settings/HUD Panels/HUD Skin'
 			WG.crude.SetSkin( self.value );
 		end,
 		items = {
+			{ key = 'Evolved', name = 'Evolved', },
 			{ key = 'Carbon', name = 'Carbon', },
 			{ key = 'Robocracy', name = 'Robocracy', },
 			{ key = 'DarkHive', name = 'DarkHive', },
@@ -315,7 +316,7 @@ path='Settings/Graphics'
 	AddOption({
 		name = 'Shadow Detail (Slide left for off)',
 		type = 'number',
-		valuelist = {512, 1024, 2048, 4096},
+		valuelist = {512, 1024, 2048, 4096, 8192},
 		springsetting = 'ShadowMapSize',
 		OnChange=function(self)
 			if self.value == 512 then

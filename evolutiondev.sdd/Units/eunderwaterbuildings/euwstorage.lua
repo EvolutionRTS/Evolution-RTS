@@ -60,6 +60,7 @@ local unitDef = {
     },
   },
    customParams = {
+	iseco = 1,
    	death_sounds = "generic",
 	armortype   = "BUILDING",
 	normaltex = "unittextures/estoragenormal.png", 

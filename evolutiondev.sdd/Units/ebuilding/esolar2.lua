@@ -69,6 +69,7 @@ sfxtypes = {
     },
   },
   customParams = {
+	iseco = 1,
     needed_cover = 2,
 	death_sounds = "generic",
     ProvideTech = "1 Power",

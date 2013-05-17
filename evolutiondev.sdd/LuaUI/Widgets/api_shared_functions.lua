@@ -22,17 +22,28 @@ Spring.Utilities = Spring.Utilities or {}
 VFS.Include("LuaRules/Utilities/tablefunctions.lua")
 
 local function GetBuildIconFrame(udef) 
-  if (udef.builder and udef.speed>0) then
+  if (udef.customParams.isconstructor) then
+	return consTex
+	
+  elseif ((udef.customParams.iseco) or (udef.customParams.ismex)) then
+    return ecoTex
+	
+  elseif (udef.customParams.isattacker) then
+    return unitTex
+
+	--Some of this logic is reduntantly redundant, but it was done this way to allow customparams to take priority
+	
+  elseif (udef.builder and udef.speed>0) then
     return consTex
 
   elseif (udef.builder or udef.isFactory) then
     return consTex
 
+  elseif ((udef.totalEnergyOut>0) or (udef.customParams.iseco) or (udef.customParams.ismex) or (udef.name=="emetalextractor" or udef.name=="euwmetalextractor")) then
+    return ecoTex
+	
   elseif (udef.weapons[1] and udef.isBuilding) then
     return unitTex
-
-  elseif ((udef.totalEnergyOut>0) or (udef.customParams.ismex) or (udef.name=="armwin" or udef.name=="corwin")) then
-    return ecoTex
 
   elseif (udef.weapons[1] or udef.canKamikaze) then
     return unitTex
