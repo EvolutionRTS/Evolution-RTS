@@ -116,6 +116,7 @@ local weaponDefs = {
 	energypershot      = 10,
     id                 = 51,
     interceptedByShieldType = 4,
+	impulseFactor      = 0,
     name               = "Light Cannon",
     range              = 500,
     reloadtime         = 1.0,
