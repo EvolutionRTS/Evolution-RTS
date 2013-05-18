@@ -46,9 +46,9 @@ fx()
 	{
 //		if (tech)
 //		{
-			emit-sfx 2048 from sfxpoint1;
+			emit-sfx 1025 from sfxpoint1;
 //		}
-	sleep 5;
+	sleep 500;
 	}
 }
 
@@ -63,9 +63,9 @@ fx2()
 	{
 //		if (tech)
 //		{
-			emit-sfx 2049 from sfxpoint1;
+			emit-sfx 1026 from sfxpoint1;
 //		}
-	sleep 400;
+	sleep 500;
 	}
 }
 

@@ -1,0 +1,40 @@
+[fusionreaction]
+{
+
+   [ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=lightening;
+
+      colorMap = 1.0 1.0 1.0 0.04   0.2 0.5 0.9 0.01  0.1 0.5 0.7 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.3;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+}

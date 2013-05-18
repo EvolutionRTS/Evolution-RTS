@@ -51,6 +51,8 @@ sfxtypes = {
 	
 	explosiongenerators = {
 	  "custom:blacksmoke",
+	  "custom:fusionreaction",
+	  "custom:skyhatelaser",
     },
 },
 
@@ -61,12 +63,6 @@ sfxtypes = {
     },
   },
   weapons = {
-    [1]  = {
-      def                = "fusionfx",
-    },
-    [2]  = {
-      def                = "fusionfx2",
-    },
   },
   customParams = {
 	iseco = 1,

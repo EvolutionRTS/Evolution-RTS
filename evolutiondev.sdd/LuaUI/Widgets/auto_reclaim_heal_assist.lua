@@ -15,8 +15,7 @@ function widget:GetInfo()
 		date = "Nov 21, 2010",
 		license = "GPLv3",
 		layer = 0,
-		enabled = false
-	}
+		enabled = true
 end
 
 --------------------------------------------------------------------------------------

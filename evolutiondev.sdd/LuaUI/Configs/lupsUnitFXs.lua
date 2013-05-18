@@ -47,8 +47,8 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova3},
 --    {class='StaticParticles', options=corfusNova4},
 
-		{class='Bursts', options=esolarBursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,32,0}, size=10, precision=22, strength   = 0.02,  repeatEffect=true}},
+		-- {class='Bursts', options=esolarBursts},
+    -- {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,32,0}, size=10, precision=22, strength   = 0.02,  repeatEffect=true}},
   },
 	emetalextractor = {
 --    {class='StaticParticles', options=corfusNova},
