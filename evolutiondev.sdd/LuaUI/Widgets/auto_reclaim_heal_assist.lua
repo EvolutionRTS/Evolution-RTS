@@ -16,6 +16,7 @@ function widget:GetInfo()
 		license = "GPLv3",
 		layer = 0,
 		enabled = true
+	}
 end
 
 --------------------------------------------------------------------------------------
