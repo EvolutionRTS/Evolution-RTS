@@ -47,7 +47,7 @@ fx()
 //		{
 			emit-sfx 2048 from firepoint1;
 //		}
-	sleep 5;
+	sleep 32;
 	}
 }
 

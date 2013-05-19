@@ -92,7 +92,7 @@ fx()
 	{
 		emit-sfx 2048 from sfxpoint1;
 		
-		sleep 5;
+		sleep 32;
 	}
 }
 
