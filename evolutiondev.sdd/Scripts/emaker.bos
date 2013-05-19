@@ -48,8 +48,8 @@ Smoke()
    {
       if (maeksmoke)    
       {
-        emit-sfx 2048 from sfxpoint1;
-		sleep 5;
+        emit-sfx 1025 from sfxpoint1;
+		sleep 500;
       }
      sleep 5;
    }
@@ -61,8 +61,8 @@ Smoke2()
    {
       if (maeksmoke)    
       {
-		emit-sfx 2049 from sfxpoint1;
-		sleep 400;
+		emit-sfx 1026 from sfxpoint1;
+		sleep 500;
       } 
      sleep 5;
    }

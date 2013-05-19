@@ -57,7 +57,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,55,0}, size=10, precision=22, strength   = 0.015,  repeatEffect=true}},
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,55,0}, size=10, precision=22, strength   = 0.015,  repeatEffect=true}},
   },
 	euwmetalextractor = {
 --    {class='StaticParticles', options=corfusNova},
@@ -66,7 +66,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,25,0}, size=15, precision=22, strength   = 0.015,  repeatEffect=true}},
+ --   {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,25,0}, size=15, precision=22, strength   = 0.015,  repeatEffect=true}},
   },
 	egeothermal = {
 --    {class='StaticParticles', options=corfusNova},
@@ -74,8 +74,8 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova3},
 --    {class='StaticParticles', options=corfusNova4},
 
-		{class='Bursts', options=egeoBursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,26,0.0}, size=10, precision=22, strength   = 0.02,  repeatEffect=true}},
+--		{class='Bursts', options=egeoBursts},
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,26,0.0}, size=10, precision=22, strength   = 0.02,  repeatEffect=true}},
   },
 	efusion2 = {
 --		{class='StaticParticles', options=corfusNova},
@@ -86,8 +86,8 @@ effectUnitDefs = {
 --		{class='StaticParticles',options=efusCorona},
 --		{class='ShieldSphere',options=efusShieldSphere},
 
-		{class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,51,0.0}, size=23, precision=22, strength   = 0.02,  repeatEffect=true}},
+--		{class='Bursts', options=efusion2Bursts},
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,51,0.0}, size=23, precision=22, strength   = 0.02,  repeatEffect=true}},
   },
   
 	burrow = {
@@ -99,8 +99,8 @@ effectUnitDefs = {
 --		{class='StaticParticles',options=efusCorona},
 --		{class='ShieldSphere',options=efusShieldSphere},
 
-		{class='Bursts', options=burrowBursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,51,0.0}, size=23, precision=22, strength   = 0.02,  repeatEffect=true}},
+--		{class='Bursts', options=burrowBursts},
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,51,0.0}, size=23, precision=22, strength   = 0.02,  repeatEffect=true}},
   },
   
 	eminifac = {

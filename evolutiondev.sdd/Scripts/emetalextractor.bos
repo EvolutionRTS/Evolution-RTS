@@ -24,7 +24,7 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
 			{
 				smoketype = 256 | 1;
 			}
-			emit-sfx 1025 from base;
+			emit-sfx 1024 from base;
 		}
 		sleeptime = healthpercent * 50;
 		if( sleeptime < 200 )
@@ -98,10 +98,14 @@ fx()
 	}
 	while( TRUE )
 	{
-		emit-sfx 2048 from sfxpoint1;
-		sleep 5;
+//		if (tech)
+//		{
+			emit-sfx 1025 from sfxpoint1;
+//		}
+	sleep 500;
 	}
 }
+
 
 fx2()
 {
@@ -111,9 +115,11 @@ fx2()
 	}
 	while( TRUE )
 	{
-
-		emit-sfx 2049 from sfxpoint1;
-		sleep 400;
+//		if (tech)
+//		{
+			emit-sfx 1026 from sfxpoint1;
+//		}
+	sleep 500;
 	}
 }
 

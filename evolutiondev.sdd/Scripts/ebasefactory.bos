@@ -11,9 +11,8 @@ static-var  Maya, building, spray;
 #define SIG_BUILDING 4
 
 #define NANOFLAME 1024+0
-#define FX1 2048
-#define FX2 2049
-#define FX3 2050
+#define FX1 1027
+#define FX2 1028
 
 SmokeUnit()
 {
@@ -125,13 +124,8 @@ Activate()
       {
          // Activated animation when having tech
          emit-sfx FX1 from sfxpoint1;
-         sleep 5;
-         ++FrameM14;
-         if(FrameM14==15)
-         {
-            emit-sfx FX2 from sfxpoint1;
-            FrameM14=0;
-         }
+         emit-sfx FX2 from sfxpoint1;
+         sleep 500;
       }
       if(!Maya)
          // Cut the nano

@@ -43,10 +43,14 @@ fx()
 	}
 	while( TRUE )
 	{
-		emit-sfx 2048 from sfxpoint1;
-		sleep 5;
+//		if (tech)
+//		{
+			emit-sfx 1025 from sfxpoint1;
+//		}
+	sleep 500;
 	}
 }
+
 
 fx2()
 {
@@ -56,8 +60,11 @@ fx2()
 	}
 	while( TRUE )
 	{
-		emit-sfx 2049 from sfxpoint1;
-		sleep 400;
+//		if (tech)
+//		{
+			emit-sfx 1026 from sfxpoint1;
+//		}
+	sleep 500;
 	}
 }
 
