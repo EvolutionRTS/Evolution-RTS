@@ -129,6 +129,7 @@ local weaponDefs = {
 	burst			   = 5,
 	burstrate		   = 0.2,
     id                 = 136,
+	impulseFactor      = 0,
     interceptedByShieldType = 4,
     lineOfSight        = true,
     metalpershot       = 0,
