@@ -34,7 +34,7 @@ Light
 
 • Fires 4 missiles in a burst
  
-Requires +5 Power]],
+Requires +3 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
