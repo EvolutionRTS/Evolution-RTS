@@ -1,0 +1,3 @@
+[submodule "chili"]
+	path = chili
+	url = https://github.com/jk3064/chiliui.git
