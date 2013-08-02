@@ -1737,7 +1737,7 @@ local function MakeMenuBar()
 	local btn_padding = {4,3,2,2}
 	local btn_margin = {0,0,0,0}
     local exit_menu_width = 210
-    local exit_menu_height = 280
+    local exit_menu_height = 200
     local exit_menu_btn_width = 7*exit_menu_width/8
     local exit_menu_btn_height = max(exit_menu_height/8, 30)
     local exit_menu_cancel_width = exit_menu_btn_width/2
@@ -1779,7 +1779,7 @@ local function MakeMenuBar()
                 y = 2*exit_menu_height/64,
 				align="center",
 				textColor = color.main_fg },
-			
+--[[			
 			Button:New{
                 caption = "Vote Resign",
                 OnMouseUp = { function()
@@ -1793,7 +1793,7 @@ local function MakeMenuBar()
                 x = exit_menu_width/2 - exit_menu_btn_width/2, 
                 y = 20*exit_menu_height/64 - exit_menu_btn_height/2, 
 			},
-			
+]]--			
 			Button:New{
                 caption = "Resign and Spectate",
                 OnMouseUp = { function()
@@ -1801,17 +1801,17 @@ local function MakeMenuBar()
 						screen0:RemoveChild(window_exit)
 						exitWindowVisible = false
 					end, },
-				tooltip = "Abandon team and be spectator",
+				tooltip = "Abandon team and become a spectator",
 				height=exit_menu_btn_height, 
 				width=exit_menu_btn_width,
                 x = exit_menu_width/2 - exit_menu_btn_width/2, 
-                y = 30*exit_menu_height/64 - exit_menu_btn_height/2, 
+                y = 20*exit_menu_height/64 - exit_menu_btn_height/2, 
 			},
 			
 			
 			Button:New{
 				caption = "Exit game", OnMouseUp = { function() spSendCommands{"quit","quitforce"} end, },
-				tooltip = "Leave game completely.",
+				tooltip = "Leave the game completely",
 				height=exit_menu_btn_height, 
 				width=exit_menu_btn_width,
                 x = exit_menu_width/2 - exit_menu_btn_width/2,  
