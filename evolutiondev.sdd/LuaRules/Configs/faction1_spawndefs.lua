@@ -229,7 +229,7 @@ addWave(10,{"2 eexkrabgroth", "1 eextankdestroyer"})
 addWave(10,{"2 eextankdestroyer", "1 eexkrabgroth"})
 addWave(10,{"3 eexkrabgroth"})
 
-addwave 11,{"5 eexnukearty"})
+addwave(11,{"5 eexnukearty"})
 
 addWave(12,{"5 ebomb"})
 addWave(12,{"5 ebomb"})
