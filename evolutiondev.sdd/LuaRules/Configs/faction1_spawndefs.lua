@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-maxChicken           = tonumber(Spring.GetModOptions().mo_maxchicken) or 100
-maxBurrows           = 20
+maxChicken           = tonumber(Spring.GetModOptions().mo_maxchicken) or 25
+maxBurrows           = 10
 gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 300  -- no chicken spawn in this period, seconds
 queenTime            = (Spring.GetModOptions().mo_queentime or 40) * 60 -- time at which the queen appears, seconds
 addQueenAnger        = tonumber(Spring.GetModOptions().mo_queenanger) or 1
@@ -15,8 +15,8 @@ burrowDef            = UnitDefNames[burrowName].id
 defenderChance       = 0.5       -- probability of spawning a single turret
 maxTurrets           = 3   		 -- Max Turrets per burrow
 queenSpawnMult       = 1         -- how many times bigger is a queen hatch than a normal burrow hatch
-burrowSpawnRate      = 60
-chickenSpawnRate     = 59
+burrowSpawnRate      = 20
+chickenSpawnRate     = 30
 minBaseDistance      = 1000      
 maxBaseDistance      = 7200
 chickensPerPlayer    = 4
@@ -191,19 +191,183 @@ addWave(9,{"10 eflametank"})
 addWave(9,{"10 eflametank"})
 addWave(9,{"10 eflametank"})
 
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"7 elighttank3"})
+addWave(10,{"6 eartytank"})
+addWave(10,{"8 efatso2", "8 eallterrassault"})
+addWave(10,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(10,{"10 eallterrheavy", "12 eallterrriot", "15 eallterrlight"})
+addWave(10,{"5 ebomb"})
+addWave(10,{"15 elighttank3"})
+addWave(10,{"10 eartytank"})
+addWave(10,{"7 efatso2", "10 eallterrassault"})
+addWave(10,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(10,{"10 eallterrheavy", "12 eallterrriot", "12 eallterrlight"})
+addWave(10,{"1 eextankdestroyer"})
+addWave(10,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(10,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(10,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(10,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(10,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(10,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(10,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(10,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(10,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(10,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(10,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
 addWave(10,{"2 eexkrabgroth", "1 eextankdestroyer"})
 addWave(10,{"2 eextankdestroyer", "1 eexkrabgroth"})
 addWave(10,{"3 eexkrabgroth"})
 
+addwave 11,{"5 eexnukearty"})
 
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"7 elighttank3"})
+addWave(12,{"6 eartytank"})
+addWave(12,{"8 efatso2", "8 eallterrassault"})
+addWave(12,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(12,{"10 eallterrheavy", "12 eallterrriot", "15 eallterrlight"})
+addWave(12,{"5 ebomb"})
+addWave(12,{"15 elighttank3"})
+addWave(12,{"10 eartytank"})
+addWave(12,{"7 efatso2", "10 eallterrassault"})
+addWave(12,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(12,{"10 eallterrheavy", "12 eallterrriot", "12 eallterrlight"})
+addWave(12,{"1 eextankdestroyer"})
+addWave(12,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(12,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(12,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(12,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(12,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(12,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(12,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(12,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(12,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(12,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(12,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"7 elighttank3"})
+addWave(13,{"6 eartytank"})
+addWave(13,{"8 efatso2", "8 eallterrassault"})
+addWave(13,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(13,{"10 eallterrheavy", "12 eallterrriot", "15 eallterrlight"})
+addWave(13,{"5 ebomb"})
+addWave(13,{"15 elighttank3"})
+addWave(13,{"10 eartytank"})
+addWave(13,{"7 efatso2", "10 eallterrassault"})
+addWave(13,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(13,{"10 eallterrheavy", "12 eallterrriot", "12 eallterrlight"})
+addWave(13,{"1 eextankdestroyer"})
+addWave(13,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(13,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(13,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(13,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(13,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(13,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(13,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(13,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(13,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(13,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(13,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"7 elighttank3"})
+addWave(14,{"6 eartytank"})
+addWave(14,{"8 efatso2", "8 eallterrassault"})
+addWave(14,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(14,{"10 eallterrheavy", "12 eallterrriot", "15 eallterrlight"})
+addWave(14,{"5 ebomb"})
+addWave(14,{"15 elighttank3"})
+addWave(14,{"10 eartytank"})
+addWave(14,{"7 efatso2", "10 eallterrassault"})
+addWave(14,{"5 emissiletank", "8 eheavytank3", "5 emediumtank3"})
+addWave(14,{"10 eallterrheavy", "12 eallterrriot", "12 eallterrlight"})
+addWave(14,{"1 eextankdestroyer"})
+addWave(14,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(14,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(14,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(14,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(14,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(14,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(14,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(14,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(14,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(14,{"10 eallterrriot", "5 emissiletank", "3 efatso2", "5 eallterrheavy"})
+addWave(14,{"10 elighttank3", "5 eallterrheavy", "4 eaatank"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"4 ebomber", "4 egunship2", "3 efighter"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
+addWave(14,{"10 edrone"})
 --------------------------------------------------------------------------------
 
 
 
 difficulties = {
   ['Survival Spawner: Very Easy'] = {
-    chickenSpawnRate = 150, 
-    burrowSpawnRate  = 120,
+    chickenSpawnRate = 20, 
+    burrowSpawnRate  = 20,
     queenSpawnMult   = 0,
     angerBonus       = 20,
     expStep 		 = 0,
@@ -214,8 +378,8 @@ difficulties = {
     spawnChance      = 0.25,
   },
   ['Survival Spawner: Easy'] = {
-    chickenSpawnRate = 110, 
-    burrowSpawnRate  = 120,
+    chickenSpawnRate = 20, 
+    burrowSpawnRate  = 20,
     queenSpawnMult   = 0,
     angerBonus       = 20,
     expStep 		 = 0.09375,
@@ -227,8 +391,8 @@ difficulties = {
   },
 
   ['Survival Spawner: Normal'] = {
-    chickenSpawnRate = 80,
-    burrowSpawnRate  = 105,
+    chickenSpawnRate = 20,
+    burrowSpawnRate  = 20,
     queenSpawnMult   = 1,
     angerBonus       = 25,
     expStep 		 = 0.125,
@@ -240,8 +404,8 @@ difficulties = {
   },
 
   ['Survival Spawner: Hard'] = {
-    chickenSpawnRate = 70,
-    burrowSpawnRate  = 60,
+    chickenSpawnRate = 20,
+    burrowSpawnRate  = 20,
     queenSpawnMult   = 2,
     angerBonus       = 30,
     expStep 		 = 0.25,
@@ -254,8 +418,8 @@ difficulties = {
 
 
   ['Survival Spawner: Very Hard'] = {
-    chickenSpawnRate = 45,
-    burrowSpawnRate  = 40,
+    chickenSpawnRate = 20,
+    burrowSpawnRate  = 20,
     queenSpawnMult   = 3,
     angerBonus       = 30,
     expStep 		 = 0.4,
