@@ -10,7 +10,7 @@ spawnSquare          = 500       -- size of the chicken spawn square centered on
 spawnSquareIncrement = 4         -- square size increase for each unit spawned
 burrowName           = "burrow"   -- burrow unit name
 maxAge               = 600      -- chicken die at this age, seconds
-queenName 		     = Spring.GetModOptions().mo_queendifficulty or "eexkrabgroth"
+queenName 		     = Spring.GetModOptions().mo_queendifficulty or "queen"
 burrowDef            = UnitDefNames[burrowName].id
 defenderChance       = 0.5       -- probability of spawning a single turret
 maxTurrets           = 3   		 -- Max Turrets per burrow
@@ -366,7 +366,7 @@ addWave(14,{"10 edrone"})
 
 difficulties = {
   ['Survival Spawner: Very Easy'] = {
-    chickenSpawnRate = 20, 
+    chickenSpawnRate = 90, 
     burrowSpawnRate  = 20,
     queenSpawnMult   = 0,
     angerBonus       = 20,
@@ -378,7 +378,7 @@ difficulties = {
     spawnChance      = 0.25,
   },
   ['Survival Spawner: Easy'] = {
-    chickenSpawnRate = 20, 
+    chickenSpawnRate = 60, 
     burrowSpawnRate  = 20,
     queenSpawnMult   = 0,
     angerBonus       = 20,
@@ -391,7 +391,7 @@ difficulties = {
   },
 
   ['Survival Spawner: Normal'] = {
-    chickenSpawnRate = 20,
+    chickenSpawnRate = 45,
     burrowSpawnRate  = 20,
     queenSpawnMult   = 1,
     angerBonus       = 25,
@@ -404,7 +404,7 @@ difficulties = {
   },
 
   ['Survival Spawner: Hard'] = {
-    chickenSpawnRate = 20,
+    chickenSpawnRate = 30,
     burrowSpawnRate  = 20,
     queenSpawnMult   = 2,
     angerBonus       = 30,

@@ -269,6 +269,15 @@ local function BackwardCompability(wdName,wd)
 			
 			-- Start Miscellaneous
 			
+			elseif (damagetypelower	== "queenbeam") then
+				wd.damage.ARMORED = 		weapondamage*0.1
+				wd.damage.LIGHT = 			weapondamage*0.1
+				wd.damage.BUILDING  = 		weapondamage*1
+			
+			elseif (damagetypelower	== "queenflames") then
+				wd.damage.ARMORED = 		weapondamage*1
+				wd.damage.LIGHT = 			weapondamage*1
+				wd.damage.BUILDING  = 		weapondamage*0.1
 			
 			-- End Miscellaneous
 			
