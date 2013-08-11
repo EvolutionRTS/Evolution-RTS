@@ -86,6 +86,7 @@ local defenders = {
   eaaturret		= true,
 }
 
+addWave(1,{"10 eaatank"})
 addWave(1,{"3 elighttank3"})
 addWave(1,{"3 eallterrlight"})
 addWave(1,{"3 eamphibbuggy"})

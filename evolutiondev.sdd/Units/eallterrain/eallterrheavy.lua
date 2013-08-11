@@ -36,7 +36,7 @@ local unitDef = {
   
   description        =[[Armored Tank Destroyer
 Armored
-120 Damage vs Light/Armored
+100 Damage vs Light/Armored
 60 Damage vs Buildings
   
 Requires +6 Power]],
@@ -155,7 +155,7 @@ local weaponDefs = {
 	  damagetype		= "eallterrheavy",  
     }, 
     damage = {
-      default           = 120,
+      default           = 100,
     },
   },
 }
