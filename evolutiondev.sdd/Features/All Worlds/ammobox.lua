@@ -2,7 +2,7 @@ local objectname= "ammobox"
 local featureDef	=	{
 	name			= "ammobox",
 	description				=[[Energy Core
-	• Can be reclaimed for 5 Metal and 5 Energy by moving an Overseer or an ORB in range for 5 Metal and 5 Energy
+	• Can be reclaimed for 5 Metal and 5 Energy by moving an Overseer or an ORB in range
 	
 	• Can be converted to MidKnight Gunship Drone by moving an Engineer in range
 ]],
