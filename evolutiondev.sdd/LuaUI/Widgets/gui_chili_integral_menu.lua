@@ -179,8 +179,8 @@ AddHotkeyOptions()
 
 local MAX_COLUMNS = 6
 local MAX_STATE_ROWS = 5
-local MIN_HEIGHT = 80
-local MIN_WIDTH = 200
+local MIN_HEIGHT = 150
+local MIN_WIDTH = 300
 local COMMAND_SECTION_WIDTH = 74	-- percent
 local STATE_SECTION_WIDTH = 24	-- percent
 
