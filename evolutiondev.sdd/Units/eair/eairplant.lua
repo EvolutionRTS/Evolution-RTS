@@ -50,7 +50,7 @@ local unitDef = {
   yardMap            = "cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc",
 --  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
-  BuildingGroundDecalType = "towerdecal2.png",
+  BuildingGroundDecalType = "genericfacdecal.png",
   BuildingGroundDecalSizeX = 19,
   BuildingGroundDecalSizeY = 19,
   BuildingGroundDecalDecaySpeed = 0.9,
@@ -92,11 +92,6 @@ local unitDef = {
 --	groundtexselectxsize = 1500, -- optional
 --    groundtexselectzsize = 1500, -- optional
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=19,
-	buildingGroundDecalSizeY=19,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[eairplant_aoplane.dds]],
 }
 
 

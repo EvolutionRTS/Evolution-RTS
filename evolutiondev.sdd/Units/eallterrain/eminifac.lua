@@ -69,7 +69,7 @@ local unitDef = {
   yardMap            = "ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo ooooooooooooooooooooo yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyyyyy",
 --  usePieceCollisionVolumes = true,
   useBuildingGroundDecal = true,
-  BuildingGroundDecalType = "towerdecal2.png",
+  BuildingGroundDecalType = "genericfacdecal.png",
   BuildingGroundDecalSizeX = 23,
   BuildingGroundDecalSizeY = 23,
   BuildingGroundDecalDecaySpeed = 0.9,
@@ -111,11 +111,6 @@ local unitDef = {
 --	groundtexselectxsize = 1500, -- optional
 --    groundtexselectzsize = 1500, -- optional
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=23,
-	buildingGroundDecalSizeY=23,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[eminifac_aoplane.dds]],
 }
 
 
