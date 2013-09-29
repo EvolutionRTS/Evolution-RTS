@@ -97,7 +97,7 @@ Light]],
     "euwstorage", --new
     "eradar2", --new
     "ejammer2", --new
-    "ebarricade",
+--    "ebarricade",
     "elightturret2", --new
     "eheavyturret2", --new
     "eaaturret",
