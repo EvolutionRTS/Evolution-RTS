@@ -423,7 +423,7 @@ local function SaveKeybinds()
 	
 	local file = io.open (keybind_file, "w")
 	if (file== nil) then
-		Spring.Log(widget:GetInfo().name, LOG.ERROR, "Could not open keybind file " .. keybind_file .. " for writing")
+		Spring.Log(widget:GetInfo().name, "error", "Could not open keybind file " .. keybind_file .. " for writing")
 		return
 	end
 	
@@ -1178,7 +1178,7 @@ local function PreIntegrateWidget(w)
 		local k = w.options_order[i]
 		local option = options[k]
 		if not option then
-			Spring.Log(widget:GetInfo().name, LOG.ERROR,  '<EPIC Menu> Error in loading custom widget settings in ' .. wname .. ', order table incorrect.' )
+			Spring.Log(widget:GetInfo().name, "error",  '<EPIC Menu> Error in loading custom widget settings in ' .. wname .. ', order table incorrect.' )
 			return
 		end
 		
@@ -1225,7 +1225,7 @@ local function IntegrateWidget(w, addoptions, index)
 		local k = w.options_order[i]
 		local option = options[k]
 		if not option then
-			Spring.Log(widget:GetInfo().name, LOG.ERROR,  '<EPIC Menu> Error in loading custom widget settings in ' .. wname .. ', order table incorrect.' )
+			Spring.Log(widget:GetInfo().name, "error",  '<EPIC Menu> Error in loading custom widget settings in ' .. wname .. ', order table incorrect.' )
 			return
 		end
 		
@@ -1459,7 +1459,7 @@ local function ResetWinSettings(path)
 					option.OnChange(option)
 				end
 			else
-				Spring.Log(widget:GetInfo().name, LOG.ERROR, '<EPIC Menu> Error #627', option.name, option.type)
+				Spring.Log(widget:GetInfo().name, "error", '<EPIC Menu> Error #627', option.name, option.type)
 			end
 		end
 	end
