@@ -36,7 +36,7 @@ include("savetable.lua")
 
 local ORDER_FILENAME     = LUAUI_DIRNAME .. 'Config/' .. Game.modShortName:upper() .. '_order.lua'
 local CONFIG_FILENAME    = LUAUI_DIRNAME .. 'Config/' .. Game.modShortName:upper() .. '_data.lua'
-local WIDGET_DIRNAME     = LUAUI_DIRNAME .. 'Widgets/'
+local WIDGET_DIRNAME     = LUAUI_DIRNAME .. 'Widgets_Evo/'
 
 local SELECTOR_BASENAME = 'selector.lua'
 
