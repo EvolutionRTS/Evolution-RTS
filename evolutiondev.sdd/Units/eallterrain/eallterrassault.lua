@@ -34,10 +34,12 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        =[[Armored Assault Tank
+  description        =[[Armored Dedicated Anti-Base Tank
 Armored
 400 Damage vs Buildings
 50 Damage vs Light/Armored
+
+This unit can only fire at buildings!
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -99,8 +101,7 @@ Requires +10 Power]],
   weapons = {
     [1]  = {
       def                = "assaulttankcannon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+      onlyTargetCategory = "BUILDING",
     },
   },
    customParams = {

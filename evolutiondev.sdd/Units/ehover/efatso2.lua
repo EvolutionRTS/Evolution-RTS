@@ -22,10 +22,12 @@ local unitDef = {
   canstop            = "1",
   category           = "ARMORED NOTAIR ASSAULT",
   corpse             = "ammobox",
-  description        = [[Armored Anti-Base Tank
+  description        = [[Armored Dedicated Anti-Base Tank
 Armored
 350 Damage vs Building
 43.75 Damage vs Light/Armored
+
+This unit can only fire at buildings!
 
 Requires +10 Power]],
   energyMake         = 0,
@@ -39,7 +41,7 @@ Requires +10 Power]],
   idleTime           = 2200,
   maxDamage          = 1500,
   maxSlope           = 26,
-  maxVelocity        = 2.2,
+  maxVelocity        = 2.5,
   maxReverseVelocity = 1,
   maxWaterDepth      = 10,
   metalStorage       = 0,
@@ -84,13 +86,11 @@ Requires +10 Power]],
   weapons = {
     [1]  = {
       def                = "eheavyturretweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+      onlyTargetCategory = "BUILDING",
     },
     [2]  = {
       def                = "eheavyturretweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+      onlyTargetCategory = "BUILDING",
       slaveTo            = 1,
     },
   },
