@@ -43,7 +43,7 @@ local defense = {
 	eheavyturret2 = {order = 1, row = 1},
 	euwturret = {order = 2, row = 1},
 	eaaturret = {order = 2, row = 1},
-	ebarricade = {order = 3, row = 1},
+	ekmar = {order = 3, row = 1},
 	eshieldgen = {order = 4, row = 1},
 }
 
