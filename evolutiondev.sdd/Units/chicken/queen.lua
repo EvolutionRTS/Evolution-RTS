@@ -90,18 +90,15 @@ Secondary Flamethrowers:
   weapons = {
     [1]  = {
       def                = "heavybeamweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+      onlyTargetCategory = "BUILDING",
     },
 	[2]  = {
       def                = "flamethrower",
 	  onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
     },
 	[3]  = {
       def                = "flamethrower",
 	  onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
     },
   },
    customParams = {
