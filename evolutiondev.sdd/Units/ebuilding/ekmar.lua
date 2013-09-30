@@ -16,7 +16,10 @@ local unitDef = {
   canstop            = "1",
   category           = "BUILDING NOTAIR WALL",
   damageModifier     = 0.2,
-  description        = [[Protective Turret Shield]],
+  description        = [[Protective Turret Shield
+  
+  Shield recharges at a rate of 20hp/s
+  Maximum shield power is 500hp]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "ESTOR_BUILDING",
@@ -31,8 +34,8 @@ local unitDef = {
   mass				 = 1000,
   metalStorage       = 0,
   name               = "Kmar",
-  objectName         = "ebarricade2.s3o",
-  script			 = "ebarricade2.cob",
+  objectName         = "ebarricade3.s3o",
+  script			 = "ebarricade3.cob",
   repairable		 = false,
   selfDestructAs     = "ESTOR_BUILDING",
   selfDestructCountdown = 0,

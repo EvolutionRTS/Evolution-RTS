@@ -1,0 +1,74 @@
+#define TA // This is a TA script 
+
+#include "sfxtype.h" 
+#include "exptype.h" 
+
+piece base, ball, topring, middlering; // these are the pieces of the model 
+
+#define SIG_AIM 2
+
+SmokeUnit(healthpercent, sleeptime, smoketype) // this is a standard smoke point define 
+{ 
+while( get BUILD_PERCENT_LEFT ) 
+{ 
+sleep 400; 
+} 
+while( TRUE ) 
+{ 
+healthpercent = get HEALTH; 
+if( healthpercent < 66 ) 
+{ 
+smoketype = 256 | 2; 
+if( Rand( 1, 66 ) < healthpercent ) 
+{ 
+smoketype = 256 | 1; 
+} 
+emit-sfx 1024 from ball; 
+} 
+sleeptime = healthpercent * 50; 
+if( sleeptime < 200 ) 
+{ 
+sleeptime = 200; 
+} 
+sleep sleeptime; 
+} 
+} 
+
+Create() // tells it what to do on creation 
+{
+	spin ball around y-axis speed <20.005495>;
+	spin ball around z-axis speed <30.005495>;
+	spin middlering around y-axis speed <-90.005495>;
+	spin middlering around z-axis speed <-60.005495>;
+	spin topring around y-axis speed <90.005495>;
+	spin topring around z-axis speed <60.005495>;
+} 
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+return (1); 
+} 
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{
+} 
+
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = base; 
+} 
+
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+piecenum = base; 
+} 
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode ball type EXPLODE_ON_HIT;
+	explode topring type EXPLODE_ON_HIT;
+	explode middlering type EXPLODE_ON_HIT;
+} 
