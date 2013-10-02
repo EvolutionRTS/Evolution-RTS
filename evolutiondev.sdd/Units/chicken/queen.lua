@@ -94,11 +94,11 @@ Secondary Flamethrowers:
     },
 	[2]  = {
       def                = "flamethrower",
-	  onlyTargetCategory = "NOTAIR AMPHIB",
+	  onlyTargetCategory = "LIGHT ARMORED",
     },
 	[3]  = {
       def                = "flamethrower",
-	  onlyTargetCategory = "NOTAIR AMPHIB",
+	  onlyTargetCategory = "LIGHT ARMORED",
     },
   },
    customParams = {
