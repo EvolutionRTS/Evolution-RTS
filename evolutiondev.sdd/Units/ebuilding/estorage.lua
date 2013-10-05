@@ -19,7 +19,7 @@ local unitDef = {
   energyStorage      = 50,
   energyUse          = 0,
   explodeAs          = "ESTOR_BUILDING",
-  footprintX         = 6,
+  footprintX         = 3,
   footprintZ         = 6,
   idleAutoHeal       = .5,
   idleTime           = 2200,
@@ -29,7 +29,8 @@ local unitDef = {
   maxWaterDepth      = 0,
   metalStorage       = 50,
   name               = "Storage",
-  objectName         = "estorage.s3o",
+  objectName         = "estorage2.s3o",
+  script			 = "estorage2.cob",
   radarDistance      = 0,
   repairable		 = false,
   selfDestructAs     = "ESTOR_BUILDING",
@@ -38,7 +39,7 @@ local unitDef = {
   smoothAnim         = true,
   unitname           = "estorage",
   workerTime         = 0,
-  yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo ",
+  yardMap            = "yooooy yooooy yooooy yooooy yooooy yooooy ",
   
 sfxtypes = {
 	pieceExplosionGenerators = {
@@ -48,7 +49,8 @@ sfxtypes = {
 	
 	explosiongenerators = {
 	  "custom:blacksmoke",
-	  "custom:fusionreactionstorage",
+	  "custom:fusionreactionstoragenew",
+	  "custom:fusionreactionstoragenewbackwards",
 	  "custom:skyhatelaser",
     },
 },
@@ -66,7 +68,7 @@ sfxtypes = {
     needed_cover = 2,
 	death_sounds = "generic",
 	armortype   = "building", 
-	normaltex = "unittextures/estoragenormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[Storage Facility
 
 Will increase your storage reserves by +50
@@ -75,11 +77,11 @@ Will increase your storage reserves by +50
 
 +50 Energy Storage]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=9,
-	buildingGroundDecalSizeY=9,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[estorage_aoplane.dds]],
+	-- buildingGroundDecalDecaySpeed=30,
+	-- buildingGroundDecalSizeX=9,
+	-- buildingGroundDecalSizeY=9,
+	-- useBuildingGroundDecal = true,
+	-- buildingGroundDecalType=[[estorage_aoplane.dds]],
 }
 
 --------------------------------------------------------------------------------
