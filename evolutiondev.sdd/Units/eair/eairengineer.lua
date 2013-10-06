@@ -112,7 +112,8 @@ local unitDef = {
 	"euwturret",
     "elrpc",
     "eshieldgen",
-    "esilo"
+    "esilo",
+	"eorb",
   },
   sounds = {
     underattack        = "unitsunderattack1",

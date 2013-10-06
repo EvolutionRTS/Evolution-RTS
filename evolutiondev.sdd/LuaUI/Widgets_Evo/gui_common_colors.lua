@@ -1,7 +1,7 @@
 function widget:GetInfo()
 	return {
 		name = "Common Team Colors",
-		desc = "v0.003 Makes neat team color scheme and everyone using this widget will see the same colors",
+		desc = "v0.004 Makes neat team color scheme and everyone using this widget will see the same colors",
 		author = "CarRepairer",
 		date = "2013-09-24",
 		license = "GPL v2",
@@ -34,11 +34,11 @@ colors = {
 	{'Navy',			'#000080'};
 	{'Blue',			'#0000FF'};
 	{'SkyBlue', 		'#87CEEB'};
-	{'Teal', 			'#008080'};
 	{'Cyan', 			'#00FFFF'};
 	
 	-- greenish
 	{'Aquamarine', 		'#7FFFD4'};
+	{'Teal', 			'#008080'};
 	{'DarkGreen',		'#006400'};
 	{'Green',			'#008000'};
 	{'Lime', 			'#00FF00'};
@@ -260,4 +260,3 @@ function widget:TextCommand(command)
     end
 	
 end
-

@@ -14,13 +14,19 @@ local unitDef = {
   buildTime          = 5,
   canAttack			 = false,
   category           = "BUILDING NOTAIR ECO",
+ 
+   collisionVolumeScales  = [[66 74 126]],
+   collisionVolumeOffsets = [[0 10 0]],
+   collisionVolumeTest    = 1,
+   collisionVolumeType    = "box",
+  
   corpse             = "ammobox",
   description        = "Resource Storage - Stores 50m/50e",
   energyStorage      = 50,
   energyUse          = 0,
   explodeAs          = "ESTOR_BUILDING",
-  footprintX         = 3,
-  footprintZ         = 6,
+  footprintX         = 4,
+  footprintZ         = 8,
   idleAutoHeal       = .5,
   idleTime           = 2200,
   icontype           = "eco",
@@ -39,7 +45,7 @@ local unitDef = {
   smoothAnim         = true,
   unitname           = "estorage",
   workerTime         = 0,
-  yardMap            = "yyooyy yyooyy yyooyy yyooyy yyooyy yyooyy ",
+  yardMap            = "yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy ",
   
 sfxtypes = {
 	pieceExplosionGenerators = {
@@ -50,7 +56,6 @@ sfxtypes = {
 	explosiongenerators = {
 	  "custom:blacksmoke",
 	  "custom:fusionreactionstoragenew",
-	  "custom:fusionreactionstoragenewbackwards",
 	  "custom:skyhatelaser",
     },
 },

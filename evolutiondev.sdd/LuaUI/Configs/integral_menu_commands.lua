@@ -48,8 +48,9 @@ local defense = {
 }
 
 local aux = {	--merged into special
-	eradar2 = {order = 10, row = 1},
-	ejammer2 = {order = 11, row = 1},
+	eorb = {order = 0, row = 1},
+	eradar2 = {order = 0, row = 2},
+	ejammer2 = {order = 1, row = 2},
 }
 
 local super = {	--merged into special

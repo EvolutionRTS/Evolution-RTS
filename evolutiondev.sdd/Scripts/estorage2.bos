@@ -46,7 +46,7 @@ fx()
 //		if (tech)
 //		{
 			emit-sfx 1025 from sfxpoint1;
-			emit-sfx 1026 from sfxpoint3;
+			emit-sfx 1025 from sfxpoint3;
 //		}
 	sleep 500;
 	}
@@ -63,7 +63,7 @@ fx2()
 	{
 //		if (tech)
 //		{
-			emit-sfx 1027 from sfxpoint2;
+			emit-sfx 1026 from sfxpoint2;
 //		}
 	sleep 500;
 	}
@@ -74,11 +74,11 @@ Create()
 {
 	start-script fx();
 	start-script fx2();
-	turn sfxpoint1 to x-axis <-90> now;
-	spin innerringrear around z-axis speed <50.005495>;
-	spin outerringrear around z-axis speed <-70.005495>;
-	spin innerringfore around z-axis speed <-35.005495>;
-	spin outerringfore around z-axis speed <90.005495>;
+	turn sfxpoint3 to x-axis <180> now;
+	spin innerringrear around z-axis speed <150.005495>;
+	spin outerringrear around z-axis speed <-170.005495>;
+	spin innerringfore around z-axis speed <-135.005495>;
+	spin outerringfore around z-axis speed <190.005495>;
 	start-script SmokeUnit();
 }
 

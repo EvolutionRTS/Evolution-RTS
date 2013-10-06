@@ -76,7 +76,6 @@ local unitDef = {
   },
   buildoptions = {
     "eengineer5", --new
-    "eorb",
     "elighttank3", --new
     "eflametank", --new
     "eriottank2", --new
