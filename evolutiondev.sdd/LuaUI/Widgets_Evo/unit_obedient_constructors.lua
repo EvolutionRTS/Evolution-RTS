@@ -2,12 +2,12 @@
 --------------------------------------------------------------------------------
 function widget:GetInfo()
     return {
-        name      = "Obedient constructors",
+        name      = "Obedient constructors v3",
         desc      = "Cancel constructor's orders when it has a fight order and new order given",
         author    = "[teh]decay",
         date      = "5 oct 2013",
         license   = "GNU GPL, v2 or later",
-        version   = 2,
+        version   = 3,
         layer     = 5,
         enabled   = true --  loaded by default?
     }
@@ -17,6 +17,7 @@ end
 
 --Changelog
 -- v2 [teh]decay - fixed bug when only one constructor executes order
+-- v3 [teh]decay - fix bug with queueing line of buildings after guard or fight order
 
 
 local spGiveOrderToUnit = Spring.GiveOrderToUnit
@@ -29,14 +30,36 @@ local spGetCommandQueue = Spring.GetCommandQueue
 local spFightCMD = CMD.FIGHT
 local spGuardCMD = CMD.GUARD
 
+local previouslySelectedUnits = {}
+
 -------------------------------------------------------------------------------
 function widget:CommandNotify(id, params, options)
     local units = spGetSelectedUnits()
+
+    if #units < 1 then return false end
+
+    local theSameUnits = true
+
+    for i, unit_id in ipairs(units) do
+        local unitExists = false
+        for j, old_unit_id in ipairs(previouslySelectedUnits) do
+            if unit_id == old_unit_id then
+                unitExists = true
+            end
+        end
+
+        if not unitExists or #units ~= #previouslySelectedUnits then
+            theSameUnits = false
+        end
+    end
 
     for i, unit_id in ipairs(units) do
         local commands = spGetCommandQueue(unit_id)
 --        Spring.Echo("cmds:" .. table.tostring(commands))
 --        Spring.Echo("cmds size:" .. #commands)
+--        Spring.Echo("id:" .. id)
+--        Spring.Echo("params:" .. table.tostring(params))
+--        Spring.Echo("options:" .. table.tostring(options))
 --        Spring.Echo("")
 
         local containsFightOrder = false
@@ -51,7 +74,13 @@ function widget:CommandNotify(id, params, options)
         local ud = UnitDefs[unitDefID]
         if containsFightOrder and UnitDefs[unitDefID]["canReclaim"] and not ud.isFactory then
             local options2 = {}
---            if options.shift then options2[#options2+1] = 'shift' end
+
+            if theSameUnits then
+                if options.shift then options2[#options2+1] = 'shift' end
+            else
+                previouslySelectedUnits = units
+            end
+
             if options.alt then options2[#options2+1] = 'alt' end
             if options.ctrl then options2[#options2+1] = 'ctrl' end
             if options.right then options2[#options2+1] = 'right' end
@@ -62,6 +91,10 @@ function widget:CommandNotify(id, params, options)
             for option, enabled in pairs(options) do if enabled then options2[#options2+1] = tostring(option) end end
             spGiveOrderToUnit(unit_id, id, params, options2)
         end
+    end
+
+    if(id == spFightCMD or id == spGuardCMD) then
+        previouslySelectedUnits = {}
     end
 
     return true
@@ -75,9 +108,9 @@ function widget:PlayerChanged(playerID)
     end
 end
 
-
 function widget:Initialize()
     local _, _, spec = Spring.GetPlayerInfo(Spring.GetMyPlayerID())
+
     if spec then
         widgetHandler:RemoveWidget()
         return false
