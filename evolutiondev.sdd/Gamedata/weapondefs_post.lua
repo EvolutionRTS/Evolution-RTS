@@ -215,11 +215,11 @@ local function BackwardCompability(wdName,wd)
 			elseif (damagetypelower	== "egunship2") then
 				wd.damage.ARMORED = 		weapondamage*1
 				wd.damage.LIGHT = 			weapondamage*1
-				wd.damage.BUILDING  = 		weapondamage*0.25
+				wd.damage.BUILDING  = 		weapondamage*0.5
 				
 			elseif (damagetypelower	== "ebomber") then
-				wd.damage.ARMORED = 		weapondamage*0.125
-				wd.damage.LIGHT = 			weapondamage*0.125
+				wd.damage.ARMORED = 		weapondamage*0.25
+				wd.damage.LIGHT = 			weapondamage*0.25
 				wd.damage.BUILDING  = 		weapondamage*1
 			-- End Aircraft
 			

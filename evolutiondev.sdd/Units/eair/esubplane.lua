@@ -11,7 +11,7 @@ local unitDef = {
   airStrafe          = true,
   brakeRate          = 7,
   buildCostEnergy    = 0,
-  buildCostMetal     = 50,
+  buildCostMetal     = 25,
   buildTime          = 2.5,
   canAttack          = true,
   canDropFlare       = false,
@@ -118,7 +118,7 @@ local weaponDefs = {
     collideFeature     = false,
 	cylinderTargeting  = true,
     explosionGenerator = "custom:torpedoexplosion",
-	energypershot      = 12,
+	energypershot      = 3,
     fireStarter        = 80,
     impulseFactor      = 0.1,
 	interceptedByShieldType = 4,
@@ -145,7 +145,7 @@ local weaponDefs = {
 	  damagetype		= "euwturret",  
     },
     damage = {
-      default            = 120,
+      default            = 60,
     },
   },
 }

@@ -12,7 +12,7 @@ local unitDef = {
   BadTargetCategory  = "VTOL",
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
-  buildCostMetal     = 55,
+  buildCostMetal     = 27.5,
   builder            = false,
   buildTime          = 2.5,
   canAttack          = true,
@@ -30,7 +30,7 @@ local unitDef = {
   cruiseAlt          = 350,
   description        = [[Bomber
 Armored
-100 Damage (per bomb) vs Buildings
+50 Damage (per bomb) vs Buildings
 12.5 Damage (per bomb) vs Light/Armored
 
 • Each bomb has a very large AOE
@@ -121,7 +121,7 @@ local weaponDefs = {
     collideFriendly    = false,
     cylinderTargeting = true,
     explosionGenerator = "custom:dodaibomb",
-	energypershot      = 50,
+	energypershot      = 25,
     id                 = 5,
 	impulsefactor	   = 0,
     interceptedByShieldType = 4,
@@ -142,7 +142,7 @@ local weaponDefs = {
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default           = 100,
+      default           = 50,
     },
   },
 }

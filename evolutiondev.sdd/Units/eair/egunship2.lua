@@ -11,7 +11,7 @@ local unitDef = {
   airStrafe          = true,
   brakeRate          = 7,
   buildCostEnergy    = 0,
-  buildCostMetal     = 50,
+  buildCostMetal     = 25,
   buildTime          = 2.5,
   canAttack          = true,
   canDropFlare       = false,
@@ -30,7 +30,7 @@ local unitDef = {
   cruiseAlt          = 300,
   description        = [[Gunship Tank Destroyer
 Light
-130 Damage vs Light/Armored
+65 Damage vs Light/Armored
 32.5 Damage vs Building
 
 Requires +7 Power]],
@@ -125,7 +125,7 @@ local weaponDefs = {
     cegTag             = "missiletrailgunship",
     collideFriendly    = false,
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 6.5,
+	energypershot      = 3.25,
 	edgeEffectiveness  = 0.1,
     fireStarter        = 70,
     guidance           = false,
@@ -160,7 +160,7 @@ local weaponDefs = {
 	  damagetype		= "egunship2",  
     },      
     damage = {
-      default           = 130,
+      default           = 65,
     },
   },
 }
