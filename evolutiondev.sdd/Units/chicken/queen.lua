@@ -31,8 +31,8 @@ Secondary Flamethrowers:
 25 Damage/s vs Buildings
 
 • Flames can hit multiple units]],
-  energyMake         = 0,
-  energyStorage      = 0,
+  energyMake         = 998,
+  energyStorage      = 900,
   energyUse          = 0,
   explodeAs          = "nukemissile",
   firestandorders    = "1",
@@ -46,7 +46,8 @@ Secondary Flamethrowers:
   maxVelocity        = 1,
   maxReverseVelocity = 0.2,
   maxWaterDepth      = 80,
-  metalStorage       = 0,
+  metalmake	         = 998,
+  metalStorage       = 900,
   movementClass      = "EXPERIMENTALTANK12",
   name               = "Queen",
   noChaseCategory    = "VTOL",
