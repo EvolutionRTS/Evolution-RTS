@@ -26,7 +26,7 @@ local unitDef = {
   corpse             = "ammobox",
   defaultmissiontype = "Standby",
   description        = [[Anti-Air Support Tank
-Light
+Armored
 105 Damage vs Armored
 70 Damage vs Light/Building
 
@@ -44,7 +44,7 @@ Requires +5 Power]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 370,
+  maxDamage          = 600,
   maxSlope           = 26,
   maxVelocity        = 2.9,
   maxReverseVelocity = 1,
@@ -59,7 +59,7 @@ Requires +5 Power]],
   radarDistance      = 0,
   repairable		 = false,
  selfDestructAs     = "SMALL_UNIT",
-  sightDistance      = 350,
+  sightDistance      = 750,
   smoothAnim         = true,
   --  turnInPlace        = false,
   --  turnInPlaceSpeedLimit = 2.9,

@@ -30,8 +30,8 @@ local unitDef = {
   cruiseAlt          = 300,
   description        = [[Gunship Tank Destroyer
 Light
-65 Damage vs Light/Armored
-32.5 Damage vs Building
+100 Damage vs Light/Armored
+50 Damage vs Building
 
 Requires +7 Power]],
   energyMake         = 0,
@@ -49,7 +49,7 @@ Requires +7 Power]],
   iconType           = "air",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  maxDamage          = 280,
+  maxDamage          = 600,
   maxSlope           = 10,
   maxVelocity        = 14,
   verticalSpeed		 = 15,
@@ -109,7 +109,7 @@ Requires +7 Power]],
 	canareaattack="1",
 	death_sounds = "soldier",
     RequireTech = "7 Power",
-	armortype   = "light",
+	armortype   = "armored",
 	normaltex = "unittextures/egunship2normal.png", 
   },
 }
@@ -120,12 +120,12 @@ Requires +7 Power]],
 local weaponDefs = {
   gunshipweapon = {
     badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 250,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     cegTag             = "missiletrailgunship",
     collideFriendly    = false,
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 3.25,
+	energypershot      = 5,
 	edgeEffectiveness  = 0.1,
     fireStarter        = 70,
     guidance           = false,
@@ -160,7 +160,7 @@ local weaponDefs = {
 	  damagetype		= "egunship2",  
     },      
     damage = {
-      default           = 65,
+      default           = 100,
     },
   },
 }
