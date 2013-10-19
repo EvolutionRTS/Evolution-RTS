@@ -30,8 +30,8 @@ local unitDef = {
   cruiseAlt          = 350,
   description        = [[Bomber
 Armored
-25 Damage (per bomb - 10 bombers per load) vs Buildings
-6.25 Damage (per bomb - 10 bombers per load) vs Light/Armored
+50 Damage (per bomb - 10 bombers per load) vs Buildings
+12.5 Damage (per bomb - 10 bombers per load) vs Light/Armored
 
 • Each bomb has a very large AOE
   
@@ -112,7 +112,7 @@ Requires +10 Power]],
 local weaponDefs = {
   SBOMB = {
     badTargetCategory = [[ARMORED LIGHT]],
-    AreaOfEffect       = 500,
+    AreaOfEffect       = 300,
     avoidFriendly      = false,
     ballistic          = true,
     burst              = 10,
@@ -142,7 +142,7 @@ local weaponDefs = {
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default           = 25,
+      default           = 50,
     },
   },
 }

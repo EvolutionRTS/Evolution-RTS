@@ -46,7 +46,7 @@ Light
   iconType           = "air",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  maxDamage          = 150,
+  maxDamage          = 100,
   maxSlope           = 30,
   maxVelocity        = 30,
   verticalSpeed		 = 15,
