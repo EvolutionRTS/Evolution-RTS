@@ -103,7 +103,7 @@ Requires +3 Power]],
     },
   },
    customParams = {
-    needed_cover = 2,
+    needed_cover = 3,
    	death_sounds = "soldier",
     RequireTech = "3 Power",
 	armortype   = "armored",
