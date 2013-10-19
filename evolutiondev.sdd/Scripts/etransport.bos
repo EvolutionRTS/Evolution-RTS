@@ -152,5 +152,5 @@ EndTransport()
 
 Killed(severity, corpsetype) // how it explodes 
 { 
-	corpsetype = 1; 
+
 } 
