@@ -51,7 +51,6 @@ local unitDef = {
   metalmake          = 0,
   metalStorage       = 0,
   movementClass      = "COMMANDERTANK4",
-  moveState			 = "0",
   name               = "The Overseer",
   noChaseCategories	 = "NOTAIR SUPPORT VTOL AMPHIB",
   objectName         = "ecommander2.s3o",

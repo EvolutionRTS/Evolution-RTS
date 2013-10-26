@@ -67,7 +67,7 @@ function widget:UnitIdle(unitID, unitDefID, unitTeam)
 	if (myTeamID==getUnitTeam(unitID)) then					--check if unit is mine
 		local unittype = UnitDefs[unitDefID].type			--***
 		if (unittype == "Factory") then return end			--no factories ***
-			if (UnitDefs[unitDefID]["canReclaim"]) then		--check if unit can reclaim
+			if (UnitDefs[unitDefID]["builder"]) then		--check if unit can reclaim
 				idleReclaimers[unitID]=true					--add unit to register
 				--echo("<auto_reclaim_heal_assist>: registering unit "..unitID.." as idle")
 		end
