@@ -309,7 +309,7 @@ FirePrimary()
 {
 	signal SIG_FIRE1;
 	set-signal-mask SIG_FIRE1;
-	emit-sfx 1024 + 0 from firepoint1;
+	emit-sfx 1024 from firepoint1;
 //	move barrel to z-axis [-10] now;
 //	move barrel to z-axis [0] speed [4];
 }

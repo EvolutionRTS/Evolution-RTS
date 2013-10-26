@@ -304,6 +304,92 @@
 	}
 }
 
+
+
+
+[missiletrailgunshiplesssmokey]
+{
+   
+   [coreflame]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=3;
+		sizeMod=0.8;
+		pos=0, 1, 0; 
+		gravity=0, 0, 0;
+		
+
+		Texture=smoke;
+		airdrag=0.5;
+		colorMap=0.7 0.5 0.2 0.1 0.15 0.15 0.15 0.2 0.0 0.0 0.0 0.01;
+
+		particleLifeSpread=15; 
+		particleSpeedSpread=1;  
+		particleSizeSpread=1;   
+		
+		particleLife=20;
+		numParticles=4; 
+		particleSpeed=0.; 
+		particleSize=13;
+		
+		
+		emitVector=dir; 
+		emitRot=0;
+		emitRotSpread=0.015; 
+		directional=0; 
+
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	
+	[exhale]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=3;
+		sizeMod=0.8;
+		pos=0, 1, 0; 
+		gravity=0, 0, 0;
+		
+
+		Texture=smoke;
+		airdrag=0.87;
+		colorMap=0.25 0.25 0.25 0.5		0.5 0.5 0.5 0.5		0.25 0.25 0.25 0.5		0.0 0.0 0.0 0.01;
+
+		particleLifeSpread=15; 
+		particleSpeedSpread=1;  
+		particleSizeSpread=1;   
+		
+		particleLife=40;
+		numParticles=4; 
+		particleSpeed=2; 
+		particleSize=13;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=80;
+		emitRotSpread=2; 
+		directional=0; 
+
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}
+
+
+
+
+
+
 [missiletrailaa]
 {
    
