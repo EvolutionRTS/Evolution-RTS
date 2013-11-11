@@ -120,7 +120,7 @@ Requires +7 Power]],
 local weaponDefs = {
   gunshipweapon = {
     badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 50,
+    AreaOfEffect       = 0,
     avoidFriendly      = false,
     cegTag             = "missiletrailgunshiplesssmokey",
     collideFriendly    = false,
