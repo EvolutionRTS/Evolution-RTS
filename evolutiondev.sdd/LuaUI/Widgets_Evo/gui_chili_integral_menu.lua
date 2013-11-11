@@ -336,6 +336,10 @@ local function MakeButton(container, cmd, insertItem, index)
 	local texture
 	local countText = ''
 	local tooltip = cmd.tooltip
+	
+	local myTeamID = Spring.GetMyTeamID()
+	local disableString = "disallowed_" .. (-cmd.id)
+	local disabled = cmd.disabled or (Spring.GetTeamRulesParam(myTeamID, disableString) == 1)
 
 	local te = overrides[cmd.id]  -- command overrides 
 	
@@ -426,7 +430,7 @@ local function MakeButton(container, cmd, insertItem, index)
 			padding = {5, 5, 5, 5},
 			margin = {0, 0, 0, 0},
 			caption="";
-			isDisabled = cmd.disabled;
+			isDisabled = disabled;
 			tooltip = tooltip;
 			cmdid = cmd.id;
 			OnMouseDown = {ClickFunc} --activate the clicked command
@@ -531,8 +535,8 @@ local function MakeButton(container, cmd, insertItem, index)
 	end 
 	
 	-- update item if something changed
-	if (cmd.disabled ~= item.button.isDisabled) then 
-		if cmd.disabled then 
+	if (disabled ~= item.button.isDisabled) then 
+		if disabled then 
 			item.button.backgroundColor = {0,0,0,1};
 			item.image.color = {0.3, 0.3, 0.3, 1}
 		else 
@@ -541,7 +545,7 @@ local function MakeButton(container, cmd, insertItem, index)
 		end 
 		item.button:Invalidate()
 		item.image:Invalidate()
-		item.button.isDisabled = cmd.disabled
+		item.button.isDisabled = disabled
 	end 
 	
 	if (not cmd.onlyTexture and item.label and text ~= item.label.caption) then 

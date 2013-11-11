@@ -72,6 +72,7 @@ sfxtypes = {
     ProvideTechRange = "400",
 --	RequireTech = "1 Powergrid",
 	armortype   = "building",
+	supply_granted = 7,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",
 	groundtexselectimg1 = ":nc:bitmaps/power/power1.png",
