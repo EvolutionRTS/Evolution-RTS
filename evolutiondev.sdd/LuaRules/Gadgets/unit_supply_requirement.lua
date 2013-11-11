@@ -35,6 +35,7 @@ local spSetTeamRulesParam = Spring.SetTeamRulesParam
 -- Configuration
 
 local SUPPLY_CAP = 100
+local INTRINSIC_SUPPLY = 20
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -218,8 +219,8 @@ end
 -- Initialisation
 
 local function InitializeTeamSupply(teamID)
-	maxSupply[teamID] = 0
-	maxSupplyWithCap[teamID] = 0
+	maxSupply[teamID] = INTRINSIC_SUPPLY
+	maxSupplyWithCap[teamID] = INTRINSIC_SUPPLY
 	currentSupply[teamID] = 0
 	lockedUnitsArray[teamID] = {}
 	grantingSupply[teamID] = {}
@@ -228,7 +229,7 @@ local function InitializeTeamSupply(teamID)
 	-- If no units have been added then we have 0 supply cap so everything is locked
 	for i = 1, costUnitCount do
 		local unitDefID = costUnitList[i]
-		if costUnitDefID[unitDefID] > 0 then
+		if costUnitDefID[unitDefID] > maxSupplyWithCap[teamID] then
 			lockedUnitsArray[teamID][unitDefID] = true
 		end
 	end
