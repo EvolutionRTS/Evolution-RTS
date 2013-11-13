@@ -41,7 +41,7 @@ local Chili
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local col_normal = {0.8, 0.8, 0.2, 1}
+local col_normal = {0.2, 0.8, 0.2, 1}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -94,9 +94,10 @@ local function CreateWindow()
 		parent = Chili.Screen0,
 		dockable = true,
 		name = "supply_info",
-		padding = {0,0,0,0},
-		right = 0,
+		padding = {5,5,5,5},
+		right = 30,
 		y = 0,
+		width = 100,
 		clientWidth  = 430,
 		clientHeight = 40,
 		draggable = false,
@@ -120,7 +121,7 @@ local function CreateWindow()
 		width  = 25,
 		y      = 0,
 		right  = 0,
-		file   = 'LuaUI/Images/ibeam.png',	-- FIXME proper supply image
+		file   = 'LuaUI/Images/supplyicon.png',	-- FIXME proper supply image
 	}
 
 	bar = Chili.Progressbar:New{
@@ -130,7 +131,7 @@ local function CreateWindow()
 		right  = 26,
                 x      = 110,
 		caption = "0/0";
-		tooltip = "Supply used/supply available",
+		tooltip = "Supply used/supply available (default 100 maximum)",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
 
@@ -144,7 +145,7 @@ function widget:Update(s)
 	blink_alpha = math.abs(blink_periode/2 - blink)
 
 	if blink_status then
-		bar:SetColor( 1 - 119/255*blink_alpha,214/255,251/255,0.65 + 0.3*blink_alpha )
+		bar:SetColor( 255,251/255*blink_alpha,214/119/255,0.65 + 0.3*blink_alpha )
 	end
 end
 

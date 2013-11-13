@@ -26,7 +26,8 @@ Light
 80 Damage vs Light
 40 Damage vs Armored/Building
 
-Requires +2 Power]],
+Requires +2 Power
+Uses +3 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
