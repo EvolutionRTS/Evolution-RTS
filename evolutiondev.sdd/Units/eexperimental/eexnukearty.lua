@@ -27,7 +27,7 @@ Armored
 2000 Damage vs Building
 1000 Damage vs Light/Armored
 
-Requires +80 Power]],
+Requires +40 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -59,7 +59,6 @@ Requires +80 Power]],
   turnInPlace        = false,
   turnRate           = 100,
   unitname           = "eexnukearty",
-  unitRestricted	 = 1,
   workerTime         = 0,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
@@ -91,8 +90,9 @@ Requires +80 Power]],
   },
   customParams = {
 	death_sounds = "nuke",
-    RequireTech = "80 Power",
+    RequireTech = "40 Power",
 	armortype   = "armored",
+	supply_cost = 40,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	helptext = [[]],
   },

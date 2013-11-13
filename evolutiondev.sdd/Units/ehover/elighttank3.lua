@@ -27,7 +27,7 @@ Light
 40 Damage vs Armored/Building
 
 Requires +2 Power
-Uses +3 Supply]],
+Uses +2 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -95,7 +95,7 @@ sfxtypes = {
 	death_sounds = "soldier",
     RequireTech = "2 Power",
 	armortype   = "light",
-	supply_cost = 3,
+	supply_cost = 2,
 	normaltex = "unittextures/elighttank3normal.png", 
 	helptext = [[The Kite is an excellent point defense unit. It has a very large line of sight range, it can detect cloaked All Terrain units, and it is extremely fast. The kite isn't good vs buildings unless you have a lot of them. Kites are better used for harassment and picking off workers.
 	

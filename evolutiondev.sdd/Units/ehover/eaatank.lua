@@ -32,7 +32,8 @@ Armored
 
 • Fires 4 missiles in a burst
 
-Requires +5 Power]],
+Requires +5 Power
+Uses +5 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -101,6 +102,7 @@ Requires +5 Power]],
     RequireTech = "3 Power",
 	armortype   = "light",
 	nofriendlyfire	= "1",
+	supply_cost = 5,
 	normaltex = "unittextures/eaatanknormal.png", 
 	helptext	= [[The spewer is the only dedicated mobile Anti-Air tank in Evolution RTS. It's range is quite limited, so make sure to bring along some scouts for the additional line of sight distance. Very large area of effect.]],
   },

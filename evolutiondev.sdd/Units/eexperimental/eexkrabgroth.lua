@@ -33,7 +33,8 @@ Secondary Cannons:
 80 Damage vs Building
 8 Damage vs Light/Armored
 
-Requires +40 Power]],
+Requires +25 Power
+Uses +25 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -65,7 +66,6 @@ Requires +40 Power]],
   turnRate           = 150,
   unitname           = "eexkrabgroth",
   unitnumber         = "110",
-  unitRestricted	 = 1,
   upright            = false,
 --  usePieceCollisionVolumes = true,
   workerTime         = 0,
@@ -109,8 +109,9 @@ Requires +40 Power]],
   },
    customParams = {
 	death_sounds = "nuke",
-    RequireTech = "40 Power",
+    RequireTech = "25 Power",
 	armortype   = "armored",
+	supply_cost = 25,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }

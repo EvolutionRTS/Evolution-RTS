@@ -27,7 +27,8 @@ Light
 100 Damage vs Light/Armored
 50 Damage vs Building
 
-Requires +7 Power]],
+Requires +7 Power
+Uses +7 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -103,6 +104,7 @@ Requires +7 Power]],
   	death_sounds = "soldier",
     RequireTech = "7 Power",
 	armortype   = "light",
+	supply_cost = 7,
 	normaltex = "unittextures/emissiletanknormal.png", 
 	helptext	= [[The Droplet is a medium range missile artillery battery. It does the most damage to armored units. It's damage is lower than a light tank destroyer, but it's large area of effect makes up for anything it lacks in damage.]],
   },

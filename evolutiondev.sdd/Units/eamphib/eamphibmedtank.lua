@@ -28,7 +28,8 @@ Light
 
 	• Can fire while underwater
 
-Requires +5 Power]],
+Requires +4 Power
+Uses +4 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -99,8 +100,9 @@ Requires +5 Power]],
    customParams = {
     needed_cover = 2,
    	death_sounds = "soldier",
-    RequireTech = "5 Power",
+    RequireTech = "4 Power",
 	armortype   = "light",
+	supply_cost = 4,
 	normaltex = "unittextures/eamphibmedtanknormal.png", 
   },
 }

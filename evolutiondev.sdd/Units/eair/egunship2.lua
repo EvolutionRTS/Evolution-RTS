@@ -33,7 +33,8 @@ Light
 100 Damage vs Light/Armored
 50 Damage vs Building
 
-Requires +7 Power]],
+Requires +7 Power
+Uses +7 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -110,6 +111,7 @@ Requires +7 Power]],
 	death_sounds = "soldier",
     RequireTech = "7 Power",
 	armortype   = "armored",
+	supply_cost = 7,
 	normaltex = "unittextures/egunship2normal.png", 
   },
 }

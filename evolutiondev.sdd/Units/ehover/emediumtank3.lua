@@ -27,7 +27,8 @@ Light
 200 Damage vs Armored
 100 Damage vs Light/Building
 
-Requires +4 Power]],
+Requires +4 Power
+Uses +4 supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -94,6 +95,7 @@ Requires +4 Power]],
   	death_sounds = "soldier",
     RequireTech = "4 Power",
 	armortype   = "light",
+	supply_cost = 4,
 	normaltex = "unittextures/emediumtank3normal.png", 
 	helptext	= [[The brusier is a lightly armored tank destroyer, excellent versus raiders and other light units. Pair with light raiders and heavy tank destroyers for best results.
 	

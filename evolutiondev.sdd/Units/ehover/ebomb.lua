@@ -22,9 +22,10 @@ local unitDef = {
   description        = [[Hovering Bomb
 Armored
 500 Damage vs Buildings
-25 Damage vs Light/Armored
+250 Damage vs Light/Armored
 
-Requires +12 Power]],
+Requires +12 Power
+Uses +12 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -96,6 +97,7 @@ sfxtypes = {
     RequireTech = "12 Power",
 	armortype   = "armored",
 	nofriendlyfire	= "1",
+	supply_cost = 12,
 	normaltex = "unittextures/ebombnormal.png", 
 	helptext = [[]],
   },

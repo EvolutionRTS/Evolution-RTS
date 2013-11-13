@@ -28,7 +28,8 @@ Light
 
 • Fires 5 rockets in a burst pattern
 
-Requires +7 Power]],
+Requires +5 Power
+Uses +5 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -105,8 +106,9 @@ Requires +7 Power]],
 	canareaattack="1",
     needed_cover = 2,
    	death_sounds = "soldier",
-    RequireTech = "7 Power",
+    RequireTech = "5 Power",
 	armortype   = "light",
+	supply_cost = 5,
 	normaltex = "unittextures/eamphibrocknormal.png", 
   },
 }

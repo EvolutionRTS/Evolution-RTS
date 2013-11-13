@@ -29,7 +29,8 @@ Light
 
 Energy Drain: 10/s
 
-Requires +2 Power]],
+Requires +2 Power
+Uses +2 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -100,6 +101,7 @@ Requires +2 Power]],
   	death_sounds = "soldier",
     RequireTech = "2 Power",
 	armortype   = "light",
+	supply_cost = 2,
 	normaltex = "unittextures/eflametanknormal.png", 
 	helptext	=	[[The pyromaniac has a long range flamethrower that is deadly versus base structures and especially economy buildings. Very fast and agile, however, it has a short line of sight. For best results, couple with Kites raiders.
 	

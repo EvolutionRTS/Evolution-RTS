@@ -27,7 +27,8 @@ Armored
 100 Damage vs Light/Armored
 50 Damage vs Building
 
-Requires +5 Power]],
+Requires +5 Power
+Uses +5 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -94,6 +95,7 @@ Requires +5 Power]],
   	death_sounds = "soldier",
     RequireTech = "5 Power",
 	armortype   = "armored",
+	supply_cost = 5,
 	normaltex = "unittextures/eheavytank3normal.png", 
 	helptext = [[The Crusher is a heavy tank destroyer capable of taking out the most hardened of mobile units. The more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.
 	

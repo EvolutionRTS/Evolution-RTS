@@ -39,7 +39,8 @@ Armored
 100 Damage vs Armored
 66 Damage vs Light/Building
   
-Requires +3 Power]],
+Requires +3 Power
+Uses +3 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -107,6 +108,7 @@ Requires +3 Power]],
    	death_sounds = "soldier",
     RequireTech = "3 Power",
 	armortype   = "armored",
+	supply_cost = 3,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }

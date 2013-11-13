@@ -27,7 +27,8 @@ Light
 80 Damages/s vs Armored/Building
 	• Can fire while underwater
 
-Requires +1 Power]],
+Requires +1 Power
+Uses +1 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -101,6 +102,7 @@ Requires +1 Power]],
    	death_sounds = "soldier",
     RequireTech = "1 Power",
 	armortype   = "light",
+	supply_cost = 1,
 	normaltex = "unittextures/eamphibbuggynormal.png", 
   },
 }

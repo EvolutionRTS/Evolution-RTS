@@ -27,7 +27,8 @@ Light
 1000 Damage vs Buildings (Per Volley)
 250 Damage vs Light/Armored (Per Volley)
 
-Requires +8 Power]],
+Requires +8 Power
+Uses +8 Supply]],
   energyMake         = 0.5,
   energyStorage      = 0,
   energyUse          = 0.5,
@@ -94,6 +95,7 @@ Requires +8 Power]],
   	death_sounds = "soldier",
     RequireTech = "8 Power",
 	armortype   = "light",
+	supply_cost = 8,
 	normaltex = "unittextures/eartytanknormal.png", 
 	helptext = [[The Lobster has extremely long range, fires five rounds in a burst but does very low damage in a large area of effect. Damage boost versus structures and defenses. Reduced damage to mobile units.]],
   },

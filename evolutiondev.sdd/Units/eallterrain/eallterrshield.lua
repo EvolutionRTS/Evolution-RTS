@@ -39,7 +39,8 @@ Light
 Shield absorbs 500 damage
 Shield can link with other shield units to increase charging and capacity
 
-Requires +10 Power]],
+Requires +5 Power
++Uses +5 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -103,8 +104,9 @@ Requires +10 Power]],
    customParams = {
     needed_cover = 3,
 	death_sounds = "soldier",
-    RequireTech = "10 Power",
+    RequireTech = "5 Power",
 	armortype   = "light",
+	supply_cost = 5,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }

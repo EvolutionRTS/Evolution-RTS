@@ -35,7 +35,8 @@ Armored
 
 • Each bomb has a very large AOE
   
-Requires +10 Power]],
+Requires +10 Power
+Uses +10 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -102,6 +103,7 @@ Requires +10 Power]],
 	nofriendlyfire = "1",
     RequireTech = "10 Power",
 	armortype   = "armored",
+	supply_cost = 10,
 	normaltex = "unittextures/ebombernormal.png", 
   },
 }

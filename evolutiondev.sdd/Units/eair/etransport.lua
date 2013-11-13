@@ -27,7 +27,8 @@ local unitDef = {
   description        = [[Fast Armored Transport
 Armored
 
-Requires +2 Power]],
+Requires +2 Power
+Uses +2 Supply]],
   energyMake         = 0,
   energyUse          = 0,
   explodeAs          = "HUGE_UNIT",
@@ -81,6 +82,7 @@ Requires +2 Power]],
 	death_sounds = "soldier",
     RequireTech = "2 Power",
 	armortype   = "armored",
+	supply_cost = 2,
 	normaltex = "unittextures/etransport2normal.png", 
   },
 }

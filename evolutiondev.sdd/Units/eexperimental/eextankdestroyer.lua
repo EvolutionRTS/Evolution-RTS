@@ -32,7 +32,7 @@ Secondary Machinegun:
 120 Damage/s vs Light/Armored
 12 Damage/s vs Building
 
-Requires +50 Power]],
+Requires +30 Power]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -63,7 +63,6 @@ Requires +50 Power]],
   turnInPlace        = false,
   turnRate           = 200,
   unitname           = "eextankdestroyer",
-  unitRestricted	 = 1,
   workerTime         = 0,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
@@ -98,8 +97,9 @@ Requires +50 Power]],
   },
    customParams = {
 	death_sounds = "nuke",
-    RequireTech = "50 Power",
+    RequireTech = "30 Power",
 	armortype   = "armored",
+	supply_cost = 30,
 	normaltex = "unittextures/lego2skin_explorernormal.png",
   },
 }

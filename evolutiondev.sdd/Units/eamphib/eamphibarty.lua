@@ -28,7 +28,8 @@ Light
 
 	• Can fire while underwater
 
-Requires + 10 Power]],
+Requires + 10 Power
+Uses +10 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -100,6 +101,7 @@ Requires + 10 Power]],
    	death_sounds = "soldier",
     RequireTech = "10 Power",
 	armortype   = "light",
+	supply_cost = 10,
 	normaltex = "unittextures/eamphibartynormal.png", 
   },
 }

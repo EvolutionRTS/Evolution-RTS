@@ -29,7 +29,8 @@ Armored
 
 This unit can only fire at buildings!
 
-Requires +10 Power]],
+Requires +10 Power
+Uses +10 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -99,6 +100,7 @@ Requires +10 Power]],
   	death_sounds = "soldier",
     RequireTech = "10 Power",
 	armortype   = "armored", 
+	supply_cost = 10,
 	normaltex = "unittextures/efatso2normal.png", 
 	helptext = [[The Fatso is the pinnacle of anti-base technology. It has enough hitpoints to allow it to take a beating and keep barreling down upon base structures and defenses, however, this amazing power comes at a cost. It is incapable of properly defending itself as it's weapon is slow to recharge and it simply is too slow to outmaneuver skirmish units. Bring an escort.]],
   },

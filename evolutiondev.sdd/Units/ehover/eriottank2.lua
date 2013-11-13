@@ -31,7 +31,8 @@ Armored
 • Paralyzes enemy units
 • Projectile can hit multiple units
 
-Requires +3 Power]],
+Requires +3 Power
+Uses +3 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -104,6 +105,7 @@ Requires +3 Power]],
     RequireTech = "3 Power",
 	armortype   = "armored",
 	nofriendlyfire	= "1",
+	supply_cost = 3,
 	normaltex = "unittextures/eriottank2normal.png", 
 	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Features 10 concussion shells in a burst that will knock back opposing units. It has Light armor, and should be paired with escorts if possible.]],
   },

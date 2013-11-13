@@ -39,7 +39,8 @@ Light
 50 Damage vs Light
 25 Damage vs Armored/Building
   
-Requires +2 Power]],
+Requires +2 Power
+Uses +2 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -107,6 +108,7 @@ Requires +2 Power]],
 	death_sounds = "soldier",
     RequireTech = "2 Power",
 	armortype   = "light",
+	supply_cost = 2,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
   },
 }

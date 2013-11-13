@@ -34,7 +34,8 @@ Light
 
 • Fires 4 missiles in a burst
  
-Requires +3 Power]],
+Requires +3 Power
+Uses +3 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -99,6 +100,7 @@ Requires +3 Power]],
     RequireTech = "3 Power",
 	armortype   = "light",
 	nofriendlyfire	= "1",
+	supply_cost = 3,
 	normaltex = "unittextures/efighternormal.png", 
   },
 }
