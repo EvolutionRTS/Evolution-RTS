@@ -2,7 +2,7 @@
 ModSpecific = nil
 
 function CutOrAddMapSuffix(name)-- Not local so can be used wherever that .lua is included
-	local version=tonumber(string.match(Game.version,"^(%d+%.%d+)"))+(string.match(Game.version,"^[%d%.]+(%+)") and 0.009 or 0)
+	local version=tonumber(string.match(Game.version,"^(%d+%.%d+)") or string.match(Game.version,"^(%d+)") or 100)+(string.match(Game.version,"^[%d%.]+(%+)") and 0.009 or 0)
 	local hasSuffix=string.lower(string.sub(name,-4))==".smf"
 	if version<0.815 then
 		if hasSuffix then
