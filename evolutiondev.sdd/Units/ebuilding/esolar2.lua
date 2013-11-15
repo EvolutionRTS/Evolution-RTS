@@ -18,7 +18,7 @@ local unitDef = {
   damageModifier     = 0.33333,
   description        = [[Produces +1 Energy
 Provides +1 Power
-Provides +5 Supply]],
+\255\255\170\170Provides +5 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = -1,

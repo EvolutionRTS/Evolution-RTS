@@ -94,8 +94,8 @@ local function CreateWindow()
 		parent = Chili.Screen0,
 		dockable = true,
 		name = "supply_info",
-		padding = {5,5,5,5},
-		right = 30,
+		padding = {5,10,10,5},
+		right = 0,
 		y = 0,
 		width = 100,
 		clientWidth  = 430,
@@ -128,9 +128,9 @@ local function CreateWindow()
 		parent = window,
 		color  = col_normal,
 		height = "100%",
-		right  = 26,
-                x      = 110,
-		caption = "0/0";
+		right  = 30,
+                x      = 90,
+		caption = "0/0",
 		tooltip = "Supply used/supply available (default 100 maximum)",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
