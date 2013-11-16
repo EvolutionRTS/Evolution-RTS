@@ -17,7 +17,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Produces +10 Energy 
 Provides +10 Power
-Provides +10 Supply]],
+Provides +30 Supply]],
 --  energyMake         = 10,
   energyStorage      = 0,
   energyUse          = -10,
@@ -72,7 +72,7 @@ Provides +10 Supply]],
     ProvideTechRange = "800",
 --	RequireTech = "1 Powergrid",
 	armortype   = "building",
-	supply_granted = 10,
+	supply_granted = 30,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",
 	groundtexselectimg1 = ":nc:bitmaps/power/power1.png",

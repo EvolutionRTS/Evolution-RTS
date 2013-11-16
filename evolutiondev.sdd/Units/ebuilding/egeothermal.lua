@@ -17,7 +17,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Produces +7 Energy
 Provides +7 Power
-Provides +7 Supply]],
+Provides +20 Supply]],
   energyMake         = 7,
   energyStorage      = 0,
   energyUse          = 0,
@@ -71,7 +71,7 @@ sfxtypes = {
     ProvideTech = "7 Power",
     ProvideTechRange = "600",
 	armortype   = "building",
-	supply_granted = 7,
+	supply_granted = 20,
 	normaltex = "unittextures/lego2skin_explorernormal.png", 
 	groundtexselectimg = ":nc:bitmaps/power/power.png",
 	groundtexselectimg1 = ":nc:bitmaps/power/power1.png",
