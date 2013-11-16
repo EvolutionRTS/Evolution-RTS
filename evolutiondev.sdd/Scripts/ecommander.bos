@@ -323,43 +323,30 @@ Create()
 	start-script buildflame();
 }
 
-AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
-{ 
-signal SIG_AIM_2; 
-set-signal-mask SIG_AIM_2; 
-return (1); 
-} 
-
-FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets 
+AimFromPrimary(p)
 {
-} 
+	p=penis;
+}
 
-AimFromWeapon2(piecenum) // where it aims the weapon from 
-{ 
-piecenum = penis; 
-} 
+AimPrimary(heading,pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	return(1);
+}
 
-QueryWeapon2(piecenum) // where the shot is called from 
-{ 
-piecenum = firepoint1;  
-} 
+QueryPrimary(firefrom)
+{
+	firefrom=penis;
+}
+
+FirePrimary()
+{
+	signal SIG_FIRE1;
+	set-signal-mask SIG_FIRE1;
+}
 
 //EMP Weapon End
-
-QueryWeapon1(piecenum)
-{
-   piecenum=nanopoint1;
-}
-
-AimFromWeapon1(piecenum)
-{
-   piecenum=penis;
-}
-
-AimWeapon1(h,p)
-{
-   return 0;
-}
 
 StartBuilding(heading, pitch)
 {
@@ -371,7 +358,7 @@ StartBuilding(heading, pitch)
    set INBUILDSTANCE to 1;
    building = 1;
    while (1) {
-   emit-sfx 2048 from nanopoint1;
+//   emit-sfx 2048 from nanopoint1;
    sleep 30;
    }
 }

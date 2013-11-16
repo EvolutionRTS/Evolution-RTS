@@ -28,7 +28,7 @@ local unitDef = {
   category           = "NOTAIR SUPPORT LIGHT",
   description        = [[Armored
   
-  • Press 'D' to activate EMP Defense
+  • Armed with a small emp weapon capable of disabling light units for a short period of time (Must be manually fired!)
   
   There can only be one!]],
   energyMake         = 0,
@@ -124,10 +124,6 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "fusionfx",
-	  onlyTargetCategories = " ",
-    },
-    [2]  = {
       def                = "emp",
 	  onlyTargetCategories = " ",
     },
@@ -187,12 +183,17 @@ local weaponDefs = {
     },
   },
   emp = {
-    AreaOfEffect       = 1000,
+    AreaOfEffect       = 500,
     avoidFriendly      = false,
-    ballistic          = true,
     collideFriendly    = false,
 	commandfire		   = true,
-    explosionGenerator = "custom:EMPOVERSEER",
+    explosionGenerator = "custom:EMPOVERSEERSHOT",
+	coreThickness      = 0,
+    duration           = 1,
+	rgbColor           = "0 0 0",
+    rgbColor2          = "0 0 0",
+    thickness          = 0,
+    tolerance          = 1000,
 	energypershot      = 50,
 	edgeEffectiveness  = 1,
 	explosionScar		= false,
@@ -200,11 +201,10 @@ local weaponDefs = {
     name               = "Emp Blast Weapon",
 	paralyzer		   = true,
 	paralyzetime	   = 5,
-    range              = 50,
+    range              = 500,
     reloadtime         = 10,
-    weaponType		   = "Cannon",
-    soundStart         = "emp.wav",
-    startsmoke         = "1",
+    weaponType		   = "LaserCannon",
+    soundhit         = "emp.wav",
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
