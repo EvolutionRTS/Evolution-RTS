@@ -35,7 +35,7 @@ local spSetTeamRulesParam = Spring.SetTeamRulesParam
 -- Configuration
 
 local SUPPLY_CAP = 200
-local INTRINSIC_SUPPLY = 200
+local INTRINSIC_SUPPLY = 0
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
