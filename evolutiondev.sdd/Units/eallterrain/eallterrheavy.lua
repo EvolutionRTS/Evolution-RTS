@@ -120,7 +120,7 @@ Uses +6 Supply]],
 local weaponDefs = {
   heavytankweapon = {
     badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 200,
+    AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

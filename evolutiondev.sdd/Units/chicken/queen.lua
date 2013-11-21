@@ -42,7 +42,7 @@ Secondary Flamethrowers:
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 15000,
+  maxDamage          = 30000,
   maxVelocity        = 1,
   maxReverseVelocity = 0.2,
   maxWaterDepth      = 80,

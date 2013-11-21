@@ -119,7 +119,7 @@ Uses +4 Supply]],
 local weaponDefs = {
   mediumtankcannon = {
     badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 32,
+    AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.1,

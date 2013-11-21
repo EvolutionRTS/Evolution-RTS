@@ -110,7 +110,7 @@ Uses +3 Supply]],
 
 local weaponDefs = {
   antiairmissile = {
-    AreaOfEffect       = 300,
+    AreaOfEffect       = 50,
     avoidFriendly      = false,
     avoidFeature       = false,
 	cegTag             = "missiletrailaa",

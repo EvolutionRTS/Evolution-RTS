@@ -109,7 +109,7 @@ Uses +4 supply]],
 local weaponDefs = {
   mediumtankcannon = {
 	  badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 32,
+    AreaOfEffect       = 1,
     avoidFriendly      = false,
     ballistic          = true,
     cegTag             = "mediumcannonweapon",

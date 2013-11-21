@@ -106,7 +106,7 @@ Light
 local weaponDefs = {
   droneweapon = {
     accuracy           = 500,
-    AreaOfEffect       = 5,
+    AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 0.2,

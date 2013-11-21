@@ -119,7 +119,7 @@ Uses +2 Supply]],
 local weaponDefs = {
   lighttankweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 50,
+    AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
     collideFeature     = false,

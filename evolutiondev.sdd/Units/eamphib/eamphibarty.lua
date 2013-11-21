@@ -112,7 +112,7 @@ Uses +10 Supply]],
 local weaponDefs = {  
   assimilatorbeamweapon = {
     badTargetCategory = [[ARMORED LIGHT]],
-    AreaOfEffect       = 8,
+    AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
     beamTime           = 1.8,

@@ -122,7 +122,7 @@ Uses +7 Supply]],
 local weaponDefs = {
   gunshipweapon = {
     badTargetCategory = [[BUILDING]],
-    AreaOfEffect       = 0,
+    AreaOfEffect       = 1,
     avoidFriendly      = false,
     cegTag             = "missiletrailgunshiplesssmokey",
     collideFriendly    = false,
