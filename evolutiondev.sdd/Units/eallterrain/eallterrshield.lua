@@ -71,7 +71,7 @@ Requires +5 Power
   stealth			 = true,
   seismicSignature   = 5,
   turnInPlace        = true,
-  turnRate           = 1000,
+  turnRate           = 2500,
   unitname           = "eallterrshield",
   upright			 = false,
   workerTime         = 0,
