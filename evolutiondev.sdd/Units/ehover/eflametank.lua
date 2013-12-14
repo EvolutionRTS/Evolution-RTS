@@ -24,13 +24,13 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Flamethrower Raider
 Light
-100 Damage/s vs Buildings
-25 Damage/s vs Light/Armored
+120 Damage/s vs Buildings
+30 Damage/s vs Light/Armored
 
-Energy Drain: 10/s
+Energy Drain: 12/s
 
-Requires +2 Power
-Uses +2 Supply]],
+Requires +1 Power
+Uses +1 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -99,13 +99,11 @@ Uses +2 Supply]],
   customParams = {
     needed_cover = 2,
   	death_sounds = "soldier",
-    RequireTech = "2 Power",
+    RequireTech = "1 Power",
 	armortype   = "light",
-	supply_cost = 2,
+	supply_cost = 1,
 	normaltex = "unittextures/eflametanknormal.png", 
-	helptext	=	[[The pyromaniac has a long range flamethrower that is deadly versus base structures and especially economy buildings. Very fast and agile, however, it has a short line of sight. For best results, couple with Kites raiders.
-	
-	Pyromaniacs don't do much damage to other units. They can be used to fend off raiders in a pinch, but avoid sending them into battle vs other mobile units. They are excellent vs buildings.]],
+	helptext	=	[[]],
   },
 }
 
@@ -124,7 +122,7 @@ local weaponDefs = {
     explosionGenerator = "custom:burnblack",
     coreThickness      = 0,
     duration           = 1,
-    energypershot      = 0.5,
+    energypershot      = 0.6,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -146,7 +144,7 @@ local weaponDefs = {
 	  damagetype		= "eflametank",  
     },      
     damage = {
-      default           = 10,
+      default           = 12,
     },
   },
 }

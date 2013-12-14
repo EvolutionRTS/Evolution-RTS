@@ -8,10 +8,15 @@ KaiserJ (Lead 3d Artist (Models, Textures))
 
 Jay Sound (Sound Design http://www.impactgameaudio.com)
 
-Wasp (Soundtrack - Peace)
-Deathkillr84 (Soundtrack - War)
+Music:
+Wasp - Michael J. Powell
+Deathkillr84 http://deathkllr84.newgrounds.com/
+FreddyFog http://freddyfog.newgrounds.com/
+Fire118 http://fire118.newgrounds.com/
+Lunyalex http://lunyalex.newgrounds.com/
+Wahnsinn http://wahnsinn.newgrounds.com/
 
-Zoombie (Writer - Storyline creator)
+Zoombie (Writer - Prologue Storyline creator)
 
 Sabutai/[Rox]John (Artwork)
 
@@ -114,6 +119,9 @@ Valin
 Knorke
 -Implemented cover system
 -Various help with luaz and bug fixing
+
+Firestorm
+-Remodeled the amphibious units as legos
 
 **Features (in-game map objects)**
 -0AD (Wildfire Games)

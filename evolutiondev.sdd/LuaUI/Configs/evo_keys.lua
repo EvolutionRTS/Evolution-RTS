@@ -96,7 +96,7 @@ return {
 	{	"unloadunits",	"u",},
 	{	"pastetext",	"Ctrl+v",},
 	{	"wait",	"w",},
-	{	"areamex",	"ctrl+w",},
+	{	"areamex",	"ctrl+q",},
 	{	"onoff",	"o",},
 	{	"buildspacing dec",	"Any+x",},
 	{	"buildspacing inc",	"Any+z",},

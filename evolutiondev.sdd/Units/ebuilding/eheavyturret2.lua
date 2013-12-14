@@ -34,7 +34,7 @@ Building
   idleAutoHeal       = .5,
   idleTime           = 2200,
   iconType           = "defense",
-  maxDamage          = 750,
+  maxDamage          = 1250,
   maxSlope           = 60,
   maxWaterDepth      = 0,
   metalStorage       = 0,
