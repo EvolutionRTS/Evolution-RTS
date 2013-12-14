@@ -57,7 +57,7 @@ Uses +8 Supply]],
   smoothAnim         = true,
   --  turnInPlace        = false,
   --  turnInPlaceSpeedLimit = 2.3,
-  turnRate           = 2500,
+  turnRate           = 1000,
 --  turnrate           = 250,
   unitname           = "eartytank",
   workerTime         = 0,
@@ -85,8 +85,7 @@ Uses +8 Supply]],
   weapons = {
     [1]  = {
       def                = "Artilleryweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+      onlyTargetCategory = "BUILDING",
     },
   },
   customParams = {

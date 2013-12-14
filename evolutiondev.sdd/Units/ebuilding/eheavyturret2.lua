@@ -75,7 +75,7 @@ Building
   weapons = {
     [1]  = {
       def                = "eheavyturretweapon2",
-	  badTargetCategory  = "LIGHT",
+	  badTargetCategory  = "LIGHT VTOL",
       onlyTargetCategory = "ARMORED LIGHT",
     },
   },

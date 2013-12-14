@@ -59,7 +59,7 @@ Uses +10 Supply]],
   smoothAnim         = true,
   --  turnInPlace        = false,
   --  turnInPlaceSpeedLimit = 3.0,
-  turnRate           = 2500,
+  turnRate           = 1000,
 --  turnrate           = 300,
   unitname           = "eamphibarty",
   workerTime         = 0,
@@ -87,8 +87,7 @@ Uses +10 Supply]],
   weapons = {
     [1]  = {
       def                = "assimilatorbeamweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+      onlyTargetCategory = "BUILDING",
     },
 --[[
 	[2]  = {
