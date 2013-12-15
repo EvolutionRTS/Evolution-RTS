@@ -124,54 +124,8 @@ Light]],
 	armortype   = "light",
 	normaltex = "unittextures/eamphibengineernormal.png", 
   },
-  weapons = {
-    [1]  = {
-      def                = "fusionfx",
-    },
-  },
 }
 
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  fusionfx = {
-
-    AreaOfEffect       = 5,
-    avoidFeature       = false,
-    avoidFriendly      = false,
-    beamTime           = 0.1,
-    beamWeapon         = true,
-    collideFeature     = false,
-    collideFriendly    = false,
-    coreThickness      = 0.1,
-    craterBoost        = 0,
-    craterMult         = 0,
-    explosionGenerator = "custom:empty",
-    fallOffRate        = 0.5,
-    minintensity       = 1,
-    impulseFactor      = 0,
-    largeBeamLaser     = true,
-    lineOfSight        = true,
-    name               = "fake",
-    noSelfDamage       = true,
-    range              = 800,
-    reloadtime         = 0.1,
-    WeaponType         = "BeamLaser",
-    rgbColor           = "0 0 0.5",
-    rgbColor2          = "0.2 0.2 0.2",
-    selfprop           = true,
-    soundTrigger       = true,
-    startVelocity      = 1500,
-    targetMoveError    = 0.3,
-    thickness          = 1,
-    turret             = true,
-    weaponVelocity     = 1500,
-    damage = {
-      default            = 1E-06,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName] = unitDef })

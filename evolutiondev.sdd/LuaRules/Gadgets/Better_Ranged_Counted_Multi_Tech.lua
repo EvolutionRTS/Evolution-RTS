@@ -912,12 +912,12 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 
-    function gadget:AllowUnitCreation(ud,builder,team,x,y,z)
+    function gadget:AllowUnitCreation(ud,isBuilder,team,x,y,z)
         local CanIHaz = true
         if x and z then
             CanIHaz = CheckCmd(-ud,team,x,y,z)
         else
-            CanIHaz =  CheckCmd(-ud,team,builder)
+            CanIHaz =  CheckCmd(-ud,team,isBuilder)
         end
         if not CanIHaz then
         --  Spring.PlaySoundFile("sounds/moarpower.wav", 5, x, y, z)

@@ -149,7 +149,7 @@ local weaponDefs = {
     weaponType         = "StarburstLauncher",
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "default",  
 	  death_sounds 		= "nuke",
     },      
     damage = {

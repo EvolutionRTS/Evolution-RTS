@@ -375,7 +375,7 @@ difficulties = {
     lobberEMPTime    = 0,
     chickenTypes     = Copy(chickenTypes),
     defenders        = Copy(defenders),
-    chickensPerPlayer = 2,
+    chickensPerPlayer = 1,
     spawnChance      = 0.25,
   },
   ['Survival Spawner: Easy'] = {
@@ -387,7 +387,7 @@ difficulties = {
     lobberEMPTime    = 2.5,
     chickenTypes     = Copy(chickenTypes),
     defenders        = Copy(defenders),
-    chickensPerPlayer = 4,
+    chickensPerPlayer = 2,
     spawnChance      = 0.33,
   },
 
@@ -400,7 +400,7 @@ difficulties = {
     lobberEMPTime    = 4,
     chickenTypes     = Copy(chickenTypes),
     defenders        = Copy(defenders),
-    chickensPerPlayer = 5,
+    chickensPerPlayer = 4,
     spawnChance      = 0.4,
   },
 
@@ -413,7 +413,7 @@ difficulties = {
     lobberEMPTime    = 5,
     chickenTypes     = Copy(chickenTypes),
     defenders        = Copy(defenders),
-    chickensPerPlayer = 7,
+    chickensPerPlayer = 8,
     spawnChance      = 0.5,
   },
 
@@ -427,7 +427,7 @@ difficulties = {
     lobberEMPTime    = 7.5,
     chickenTypes     = Copy(chickenTypes),
     defenders        = Copy(defenders),
-    chickensPerPlayer = 9,
+    chickensPerPlayer = 16,
     spawnChance      = 0.6,
   },
 

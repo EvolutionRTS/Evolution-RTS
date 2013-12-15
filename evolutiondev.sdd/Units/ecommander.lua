@@ -13,7 +13,6 @@ local unitDef = {
   buildDistance      = 1000,
   builder            = true,
   buildTime          = 2.5,
-  commander			 = true,
   capturable		 = false,
   CanAttack			 = true,
   CanAssist			 = true,
@@ -125,7 +124,6 @@ local unitDef = {
   weapons = {
     [1]  = {
       def                = "emp",
-	  onlyTargetCategories = " ",
     },
   },
   customParams = {
@@ -146,42 +144,6 @@ local unitDef = {
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  fusionfx = {
-
-    AreaOfEffect       = 5,
-    avoidFeature       = false,
-    avoidFriendly      = false,
-    beamTime           = 0.1,
-    beamWeapon         = true,
-    collideFeature     = false,
-    collideFriendly    = false,
-    coreThickness      = 0.1,
-    craterBoost        = 0,
-    craterMult         = 0,
-    explosionGenerator = "custom:empty",
-    fallOffRate        = 0.5,
-    minintensity       = 1,
-    impulseFactor      = 0,
-    largeBeamLaser     = true,
-    lineOfSight        = true,
-    name               = "fake",
-    noSelfDamage       = true,
-    range              = 1000,
-    reloadtime         = 0.1,
-    WeaponType         = "BeamLaser",
-    rgbColor           = "0 0 0.5",
-    rgbColor2          = "0.2 0.2 0.2",
-    selfprop           = true,
-    soundTrigger       = true,
-    startVelocity      = 1500,
-    targetMoveError    = 0.3,
-    thickness          = 1,
-    turret             = true,
-    weaponVelocity     = 1500,
-    damage = {
-      default            = 1E-06,
-    },
-  },
   emp = {
     AreaOfEffect       = 500,
     avoidFriendly      = false,
@@ -209,7 +171,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 5000,
 	customparams = {
-	  damagetype		= "medium",
+	  damagetype		= "default",
 	  nofriendlyfire	= 1,
     },      
     damage = {

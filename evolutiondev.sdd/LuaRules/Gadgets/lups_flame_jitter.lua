@@ -14,10 +14,7 @@ function gadget:GetInfo()
   }
 end
 
-if (Game.version=="0.76b1") then
-	return false
-end
-
+local MIN_EFFECT_INTERVAL = 20
 
 if (gadgetHandler:IsSyncedCode()) then
 -------------------------------------------------------------------------------------
@@ -34,12 +31,15 @@ if (gadgetHandler:IsSyncedCode()) then
   local lastLupsSpawn = {}
 
   function FlameShot(unitID,unitDefID,_, weapon)
-    if ( ((lastLupsSpawn[unitID] or 0) - thisGameFrame) <= -15 ) then
-      lastLupsSpawn[unitID] = thisGameFrame
+    lastLupsSpawn[unitID] = lastLupsSpawn[unitID] or {}
+    if ( ((lastLupsSpawn[unitID][weapon] or 0) - thisGameFrame) <= -MIN_EFFECT_INTERVAL ) then
+      lastLupsSpawn[unitID][weapon] = thisGameFrame
       SendToUnsynced("flame_FlameShot", unitID, unitDefID, weapon)
     end
   end
-
+  
+  GG.LUPS = GG.LUPS or {}
+  GG.LUPS.FlameShot = FlameShot
 
   function gadget:GameFrame(n)
     thisGameFrame = n
@@ -72,25 +72,30 @@ else
   local lastShoot = {}
 
   function FlameShot(_,unitID, unitDefID, weapon)
+	-- why is this even needed? we limited frequency of fire FX back in synced
+	--[[
     local n = Spring.GetGameFrame()
-    if ((lastShoot[unitID] or 0) > (n-10) ) then
+	lastShoot[unitID] = lastShoot[unitID] or {}
+    if ((lastShoot[unitID][weapon] or 0) > (n-MIN_EFFECT_INTERVAL) ) then
       return
     end
-    lastShoot[unitID] = n
+    lastShoot[unitID][weapon] = n
+	]]--
 
-    local posx,posy,posz, dirx,diry,dirz = Spring.GetUnitWeaponVectors(unitID,weapon-1)
+    local posx,posy,posz, dirx,diry,dirz = Spring.GetUnitWeaponVectors(unitID,weapon)
     local wd  = WeaponDefs[UnitDefs[unitDefID].weapons[weapon].weaponDef]
-    local weaponRange = wd.range*wd.duration
-	local weaponVelocity = wd.projectilespeed
+    local weaponRange = wd.range*wd.duration*15
 
     local speedx,speedy,speedz = Spring.GetUnitVelocity(unitID)
     local partpos = "x*delay,y*delay,z*delay|x="..speedx..",y="..speedy..",z="..speedz
 
+	local altFlameTexture = wd.customParams.altflametex	-- FIXME: more elegant solution when this is actually implemented (as in, one that doesn't rely on different unitdef)
+	
     particleList[particleCnt] = {
       class        = 'JitterParticles2',
       colormap     = { {1,1,1,1},{1,1,1,1} },
       count        = 6,
-      life         = weaponRange / 6,
+      life         = weaponRange / 12,
       delaySpread  = 25,
       force        = {0,1.5,0},
       --forceExp     = 0.2,
@@ -101,7 +106,7 @@ else
       emitVector   = {dirx,diry,dirz},
       emitRotSpread= 10,
 
-      speed        = 7,
+      speed        = 10,
       speedSpread  = 0,
       speedExp     = 1.5,
 
@@ -123,7 +128,7 @@ else
                        {0.1, 0.035, 0.01, 0.2},
                        {0, 0, 0, 0.01} },
       count        = 4,
-      life         = weaponRange / 6,
+      life         = weaponRange / 12,
       delaySpread  = 25,
 
       force        = {0,1,0},
@@ -139,7 +144,7 @@ else
       rotSpread    = 360,
       rotExp       = 9,
 
-      speed        = 7,
+      speed        = 10,
       speedSpread  = 0,
       speedExp     = 1.5,
 
@@ -148,7 +153,7 @@ else
       sizeExp      = 0.7,
 
       --texture     = "bitmaps/smoke/smoke06.tga",
-      texture     = "bitmaps/GPL/flame.png",
+      texture     = altFlameTexture and "bitmaps/GPL/flame_alt.png" or "bitmaps/GPL/flame.png",
     }
     particleCnt = particleCnt + 1
 
@@ -157,7 +162,7 @@ else
       colormap     = { {1, 1, 1, 0.01}, {0, 0, 0, 0.01} },
       count        = 20,
       --delay        = 20,
-      life         = weaponRange / 24,
+      life         = weaponRange / 48,
       lifeSpread   = 20,
       delaySpread  = 15,
 
@@ -174,7 +179,7 @@ else
       rotSpread    = 360,
       rotExp       = 9,
 
-      speed        = 7,
+      speed        = 10,
       speedSpread  = 0,
 
       size         = 2,
@@ -182,7 +187,7 @@ else
       sizeExp      = 0.65,
 
       --texture     = "bitmaps/smoke/smoke06.tga",
-      texture     = "bitmaps/GPL/flame.png",
+      texture     = altFlameTexture and "bitmaps/GPL/flame_alt.png" or "bitmaps/GPL/flame.png",
     }
     particleCnt = particleCnt + 1
 

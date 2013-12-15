@@ -22,11 +22,14 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local armorDefs = {
-  ARMORED	= {}, 
-  LIGHT   = {},
-  BUILDING		= {},  
-}
+local damageClasses		= VFS.Include("gamedata/configs/damageTypes.lua")
+local armorDefs = {}
+
+for _,armorName in pairs(damageClasses.armorDefs) do
+	--Spring.Echo("armordefs.lua: adding armor class:" .. armorName)
+	armorDefs[armorName] = {}
+end
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -45,12 +48,11 @@ local function tobool(val)
   return false
 end
 
- -- add anything that can fly to the PLANES category
 for name, ud in pairs(DEFS.unitDefs) do
   if (ud.customparams  and ud.customparams.armortype) then
 	unitArmorType = string.upper(ud.customparams.armortype)
-    table.insert(armorDefs[unitArmorType], name)
-	 Spring.Echo("Unit: ", ud.unitname, " Armorclass: ", unitArmorType) 
+    --Spring.Echo("Unit: ", ud.unitname, " Armorclass: ", unitArmorType) 
+	table.insert(armorDefs[unitArmorType], name)
   end
 end
 
@@ -66,7 +68,7 @@ for name, ud in pairs(DEFS.unitDefs) do
   end
   if (not found) then
     table.insert(armorDefs.LIGHT, name)
-	-- Spring.Echo("Unit: ", ud.unitname, " Armorclass: LIGHT") 
+	--Spring.Echo("Unit: ", ud.unitname, " Armorclass: MEDIUMARMOR") 
   end
 end
 --------------------------------------------------------------------------------
@@ -77,7 +79,7 @@ end
 for categoryName, categoryTable in pairs(armorDefs) do
   local t = {}
   for _, unitName in pairs(categoryTable) do
-    t[unitName] = 99
+    t[#t + 1] = unitName
   end
   armorDefs[categoryName] = t
 end

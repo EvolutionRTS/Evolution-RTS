@@ -11,8 +11,8 @@ function widget:GetInfo()
 	return {
 		name = "Auto Reclaim/Heal/Assist",
 		desc = "Makes idle unselected builders/rez/com/nanos to reclaim metal if metal bar is not full, repair nearby units and assist in building",
-		author = "Pithikos",
-		date = "Nov 21, 2010",
+		author = "Pithikos/smoth",
+		date = "Nov 21, 2010, last update 12/15/2013",
 		license = "GPLv3",
 		layer = 0,
 		enabled = true
@@ -20,13 +20,14 @@ function widget:GetInfo()
 end
 
 --------------------------------------------------------------------------------------
-local echo           = Spring.Echo
-local getUnitPos     = Spring.GetUnitPosition
-local orderUnit      = Spring.GiveOrderToUnit
-local getUnitTeam    = Spring.GetUnitTeam
-local isUnitSelected = Spring.IsUnitSelected
-local gameInSecs     = 0
-local lastOrderGivenInSecs= 0
+local spEcho			= Spring.Echo
+local spGetUnitPos		= Spring.GetUnitPosition
+local spOrderUnit		= Spring.GiveOrderToUnit
+local spGetUnitTeam		= Spring.GetUnitTeam
+local spIsUnitSelected	= Spring.IsUnitSelected
+
+local gameInSecs			= 0
+local lastOrderGivenInSecs	= 0
 local idleReclaimers={} --reclaimers because they all can reclaim
 
 myTeamID=-1;
@@ -53,9 +54,9 @@ function widget:GameFrame(n)
 			return
 		end
 		for unitID in pairs(idleReclaimers) do
-			local x, y, z = getUnitPos(unitID)                --get unit's position
-			if (not isUnitSelected(unitID)) then              --if unit is not selected
-				orderUnit(unitID, CMD.FIGHT, { x, y, z }, {})   --command unit to reclaim
+			local x, y, z = spGetUnitPos(unitID)                --get unit's position
+			if (not spIsUnitSelected(unitID)) then              --if unit is not selected
+				spOrderUnit(unitID, CMD.FIGHT, { x, y, z }, {})   --command unit to reclaim
 			end
 		end
 	end
@@ -64,25 +65,30 @@ end
 
 --Add reclaimer to the register
 function widget:UnitIdle(unitID, unitDefID, unitTeam)
-	if (myTeamID==getUnitTeam(unitID)) then					--check if unit is mine
-		local unittype = UnitDefs[unitDefID].type			--***
-		if (unittype == "Factory") then return end			--no factories ***
-			if (UnitDefs[unitDefID]["builder"]) then		--check if unit can reclaim
-				idleReclaimers[unitID]=true					--add unit to register
-				--echo("<auto_reclaim_heal_assist>: registering unit "..unitID.." as idle")
-		end
+	--check if unit is mine
+	if (myTeamID == spGetUnitTeam(unitID)) then					
+		local unitDef = UnitDefs[unitDefID]		
 		
+		--no factories ***
+		if (unitDef.isFactory) then 
+			return 
+		end	
+		
+		--check if unit can reclaim		
+		if (unitDef.isBuilder) then
+			--add unit to register		
+			idleReclaimers[unitID]=true					
+			--spEcho("<auto_reclaim_heal_assist>: registering unit "..unitID.." as idle")
+		end
 	end
 end
 
 
 --Unregister reclaimer once it is given a command
 function widget:UnitCommand(unitID)
-	--echo("<auto_reclaim_heal_assist>: unit "..unitID.." got a command") --Â¤debug
-	for reclaimerID in pairs(idleReclaimers) do
-		if (reclaimerID==unitID) then 
-			idleReclaimers[reclaimerID]=nil
-			--echo("<auto_reclaim_heal_assist>: unregistering unit "..reclaimerID.." as idle")
-		end
+	--spEcho("<auto_reclaim_heal_assist>: unit "..unitID.." got a command") --Â¤debug
+	if idleReclaimers[unitID] then
+		idleReclaimers[unitID]=nil
+		--spEcho("<auto_reclaim_heal_assist>: unregistering unit "..reclaimerID.." as idle")
 	end
 end

@@ -36,24 +36,12 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
    }
 }
 
-Buildingfx()
-{
-   while(building)
-   {
-
-              emit-sfx 2048 from nano1;
-                
-        sleep 30;
-   }
-}
-
 Go()
 {
    turn arm to x-axis <-90> speed <50>;
         wait-for-turn base around y-axis;
         wait-for-turn arm around x-axis;
         spin spinwheels around x-axis speed <50.005495>;
-        start-script Buildingfx();  
         Static_Var_3 = 1;
    if( Static_Var_3 )
    {

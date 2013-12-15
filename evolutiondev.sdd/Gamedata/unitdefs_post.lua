@@ -91,7 +91,7 @@ end
 --
 --[[
 for name, ud in pairs(UnitDefs) do
-  if (tobool(ud.builder) and not tobool(ud.canfly)) then
+  if (tobool(ud.isBuilder) and not tobool(ud.canfly)) then
     ud.buildrange3d = true
   end
 end

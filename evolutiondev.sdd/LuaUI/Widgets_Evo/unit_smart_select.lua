@@ -361,7 +361,7 @@ function widget:Initialize()
 	for udid, udef in pairs(UnitDefs) do
 		local mobile = (udef.canMove and udef.speed > 0.000001)
 		local builder = (udef.canReclaim and udef.reclaimSpeed > 0) or
-						(udef.builder and udef.buildSpeed > 0) or
+						(udef.isBuilder and udef.buildSpeed > 0) or
 						(udef.canResurrect and udef.resurrectSpeed > 0) or
 						(udef.canRepair and udef.repairSpeed > 0)
 		local building = (mobile == false)

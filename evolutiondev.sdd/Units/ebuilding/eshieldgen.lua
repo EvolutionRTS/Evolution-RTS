@@ -78,9 +78,6 @@ sfxtypes = {
     [2]  = {
       def                = "shield",
     },
-    [3]  = {
-      def                = "FX",
-    },
   },
   customParams = {
     needed_cover = 5,
@@ -139,9 +136,6 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,
 	waterweapon		   = true,
-	customparams = {
-	  damagetype		= "antibuildingassimilator",  
-    }, 
     damage = {
       default           = 50000,
     },
@@ -170,46 +164,6 @@ local weaponDefs = {
     weaponType       = [[Shield]],
     damage = {
       default            = 1,
-    },
-  },
-  
-  FX = {
-    AreaOfEffect       = 0,
-    avoidFeature       = false,
-    avoidFriendly      = false,
-    beamlaser          = 1,
-    beamTime           = 0.1,
-    beamWeapon         = true,
-    collideFeature     = false,
-    collideFriendly    = false,
-    coreThickness      = 0.1,
-    duration           = 10,
-    energypershot      = 0,
-    explosionGenerator = "custom:empty",
-    fallOffRate        = 0.1,
-    fireStarter        = 90,
-    guidance           = true,
-    id                 = 666,
-    impluse            = "0",
-    interceptor        = true,
-    largeBeamLaser     = true,
-    lineOfSight        = true,
-    name               = "fake",
-    range              = 0,
-    reloadtime         = 300,
-    WeaponType         = "BeamLaser",
-    rgbColor           = "0 0 1",
-    rgbColor2          = "1 0.5 0",
-    sweep              = "1",
-    sweepfire          = true,
-    targetMoveError    = 0,
-    texture            = "fireyexplo",
-    thickness          = 5,
-    tolerance          = 8000,
-    turret             = true,
-    weaponVelocity     = 1000,
-    damage = {
-      default            = 1E-06,
     },
   },
 }

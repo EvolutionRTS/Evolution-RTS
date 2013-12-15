@@ -179,7 +179,7 @@ ebombblast = {
    soundhit="unitexplodemedium.wav",
    explosiongenerator="custom:CRAWL_SUICIDE_Expl",
    customparams = {
-	  damagetype		= "Explosive",
+	  damagetype		= "default",
 	  nofriendlyfire	= "1",	  
     },  
 
@@ -204,7 +204,7 @@ krabblast = {
    explosiongenerator="custom:KRABDEATH",
    cameraShake=500,
    customparams = {
-	  damagetype		= "Explosive",  
+	  damagetype		= "default",  
     },  
 
     damage = {
@@ -272,7 +272,7 @@ FUSIONPOP = {
 
    explosiongenerator="custom:POWERPLANT_EXPLOSION_BIG",
    customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "default",  
     },  
 
     damage = {
@@ -296,7 +296,7 @@ POWERPLANTPOP = {
 
    explosiongenerator="custom:POWERPLANT_EXPLOSION",
    customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "default",  
     },  
 
     damage = {
@@ -321,7 +321,7 @@ GEOPOP = {
 
    explosiongenerator="custom:POWERPLANT_EXPLOSION_MEDIUM",
    customparams = {
-	  damagetype		= "explosive",  
+	  damagetype		= "default",  
     },  
 
     damage = {

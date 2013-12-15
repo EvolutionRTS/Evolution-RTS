@@ -1440,7 +1440,8 @@ function SetSidePics()
 				end
 			else
 				if teamside ~= "" then
-					Echo("Image missing for side "..teamside..", using default.")
+				--  Fuck off, because no one wants all that shit in infolog... asshole.
+				--	Echo("Image missing for side "..teamside..", using default.")
 				end
 				sidePics[team] = ":n:"..LUAUI_DIRNAME.."Images/Advplayerslist/default.png"
 				sidePicsWO[team] = ":n:"..LUAUI_DIRNAME.."Images/Advplayerslist/defaultWO.png"

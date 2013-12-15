@@ -45,20 +45,22 @@ end
 if (gadgetHandler:IsSyncedCode()) then
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
-
+  local registeredBuilders = {}
   function gadget:GameFrame(...)
 	SendToUnsynced("nano_GameFrame", ...)
   end
 
   function gadget:UnitFinished(uid, udid)
-	if (UnitDefs[udid].builder) then
+	if (UnitDefs[udid].isBuilder) and not registeredBuilders[uid] then
 		SendToUnsynced("nano_BuilderFinished", uid)
+		registeredBuilders[uid] = nil
 	end
   end
 
   function gadget:UnitDestroyed(uid, udid)
-	if (UnitDefs[udid].builder) then
+	if (UnitDefs[udid].isBuilder) and registeredBuilders[uid] then
 		SendToUnsynced("nano_BuilderDestroyed", uid)
+		registeredBuilders[uid] = nil
 	end
   end
 
@@ -68,7 +70,7 @@ if (gadgetHandler:IsSyncedCode()) then
   local function WarnDeprecated()
 	if (alreadyWarned<10) then
 		alreadyWarned = alreadyWarned + 1
-		Spring.Log(LOG.WARNING, "LUS/COB: QueryNanoPiece is deprecated! Use Spring.SetUnitNanoPieces() instead!")
+		Spring.Log("LUPS", LOG.WARNING, "LUS/COB: QueryNanoPiece is deprecated! Use Spring.SetUnitNanoPieces() instead!")
 	end
   end
 
@@ -297,7 +299,7 @@ local builders = {}
 		for i=1,#builders do
 			local unitID = builders[i]
 			if ((unitID + frame) % 30 < 1) then --// only update once per second
-				local strength = Spring.GetUnitCurrentBuildPower(unitID)	-- * 16
+				local strength = Spring.GetUnitCurrentBuildPower(unitID) or 0	-- * 16
 				if (strength > 0) then
 					local type, target, isFeature = Spring.Utilities.GetUnitNanoTarget(unitID)
 

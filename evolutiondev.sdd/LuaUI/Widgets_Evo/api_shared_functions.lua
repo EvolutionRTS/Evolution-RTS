@@ -33,10 +33,10 @@ local function GetBuildIconFrame(udef)
 
 	--Some of this logic is reduntantly redundant, but it was done this way to allow customparams to take priority
 	
-  elseif (udef.builder and udef.speed>0) then
+  elseif (udef.isBuilder and udef.speed>0) then
     return consTex
 
-  elseif (udef.builder or udef.isFactory) then
+  elseif (udef.isBuilder or udef.isFactory) then
     return consTex
 
   elseif ((udef.totalEnergyOut>0) or (udef.customParams.iseco) or (udef.customParams.ismex) or (udef.name=="emetalextractor" or udef.name=="euwmetalextractor")) then

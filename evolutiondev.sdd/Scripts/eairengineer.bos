@@ -104,7 +104,7 @@ StartBuilding(heading, pitch)
    set INBUILDSTANCE to 1;
    building = 1;
    while (1) {
-      emit-sfx 2048 from nanopoint1;
+//      emit-sfx 2048 from nanopoint1;
       sleep 30;
    }
 }

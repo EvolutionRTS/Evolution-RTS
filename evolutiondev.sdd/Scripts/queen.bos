@@ -353,7 +353,7 @@ FireSecondary()
 {
 	signal SIG_FIRE2;
 	set-signal-mask SIG_FIRE2;
-	emit-sfx 1024 + 0 from firepoint2;
+//	emit-sfx 1024 + 0 from firepoint2;
 //	move barrel to z-axis [-10] now;
 //	move barrel to z-axis [0] speed [4];
 }
@@ -385,7 +385,7 @@ FireTertiary()
 {
 	signal SIG_FIRE3;
 	set-signal-mask SIG_FIRE3;
-	emit-sfx 1024 + 0 from firepoint3;
+//	emit-sfx 1024 + 0 from firepoint3;
 //	move barrel to z-axis [-10] now;
 //	move barrel to z-axis [0] speed [4];
 }
