@@ -204,12 +204,13 @@ local damageClasses = {
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
-		},
+		},	
 		queencannon = {
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
-		},
+		},	
+			
 			-- End Miscellaneous
 		default = {
 			ARMORED		= 1,
@@ -219,9 +220,8 @@ local damageClasses = {
 	},
 	
 	armorDefs = {
-		"LIGHTARMOR", 
-		"MEDIUMARMOR",
-		"HEAVYARMOR",
+		"LIGHT", 
+		"ARMORED",
 		"BUILDING", 
 	},
 } 
