@@ -143,38 +143,33 @@ local unitDef = {
 
 --------------------------------------------------------------------------------
 
-local weaponDefs = {
-  emp = {
-    AreaOfEffect       = 500,
-    avoidFriendly      = false,
-    collideFriendly    = false,
-	commandfire		   = true,
-    explosionGenerator = "custom:EMPOVERSEERSHOT",
-	coreThickness      = 0,
-	cylinderTargeting  = 1,
-    duration           = 1,
-	rgbColor           = "0 0 0",
-    rgbColor2          = "0 0 0",
-    thickness          = 0,
-    tolerance          = 1000,
-	energypershot      = 50,
-	edgeEffectiveness  = 1,
+local weaponDefs        = {
+  emp                   = {
+    AreaOfEffect        = 500,
+    avoidFriendly       = false,
+    collideFriendly     = false,
+	commandfire		    = true,
+    explosionGenerator  = "custom:EMPOVERSEERSHOT",
+    tolerance           = 1000,
+	energypershot       = 50,
 	explosionScar		= false,
-    impulseFactor      = 0,
-    name               = "Emp Blast Weapon",
-	paralyzer		   = true,
-	paralyzetime	   = 5,
-    range              = 500,
-    reloadtime         = 10,
-    weaponType		   = "LaserCannon",
-    soundhit         = "emp.wav",
-    turret             = true,
-    weaponVelocity     = 5000,
-	customparams = {
+    impulseFactor       = 0,
+    name                = "Emp Blast Weapon",
+	paralyzer		    = true,
+	paralyzetime	    = 5,
+    range               = 500,
+    reloadtime          = 10,
+    weaponType		    = "Cannon",
+    soundhit            = "emp.wav",
+	size				= 0,
+    turret              = true,
+    weaponVelocity      = 10000,
+	onlyforward			= true,
+	customparams        = {
 	  damagetype		= "default",
 	  nofriendlyfire	= 1,
     },      
-    damage = {
+    damage              = {
       default           = 1000,
     },
   },

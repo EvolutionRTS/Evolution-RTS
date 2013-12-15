@@ -1,4 +1,15 @@
 local loadscreens = {
+
+	{
+		tipText	= "Be sure to use the Repeat button. It will cause it's current orders to be repeated over and over until the unit dies. In this way, you could assign base building to an Engineer on repeat, and if anything dies, the engineer will go and rebuild it!",
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background1.png",
+		tipImage	= "bitmaps/ui/loadingscreen/repeattip.png",
+		backgroundColor	= {0,0,0,0},
+	},
+
+--[[
 	{
 		tipText	= "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		tipTextColor 	= {1.0,0.2,0.2,0.6},
@@ -27,6 +38,7 @@ local loadscreens = {
 		backgroundColor	= {0.5,0.1,0.5,0.0},
 		backgroundImage1	= "bitmaps/ui/loadingscreen/rainbows.png",
 	},
+]]--
 }
 
 return loadscreens
