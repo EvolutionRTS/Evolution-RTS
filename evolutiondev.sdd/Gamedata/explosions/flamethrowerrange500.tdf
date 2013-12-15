@@ -1,75 +1,14 @@
 [flamethrowerrange500]
 {
-   [whiteglow]
-   {
-   class=heatcloud;
-      
-      [properties]
-            {
-      texture=laserend;
-            heat = 5;
-            maxheat = 15;
-            heatFalloff = 1;
-
-            size = 2;
-            sizeGrowth = 5;
-
-            pos = 0, 0, 0;
-            speed=0, 0, 0;
-            }
-   air=1;
-         water=1;
-         ground=1;
-         count=1;
-   }
-
-   [searingflame]
-   {
-   class=CSimpleParticleSystem;
-
-      [properties]
-      {
-      Texture=fire;
-
-      colorMap = 0.1 0.1 0.1 0.01    0.5 0.5 1 0.01    0.8 0.3 0.1 0.01    0 0 0 0.01;
-
-            pos      = 0, 0, 0;
-      gravity     = 0, 0.05, 0;
-            emitVector  = dir;
-      emitRot     = 3;
-      emitRotSpread  = 1;
-
-      sizeGrowth  = 0.5;
-      sizeMod     = 1;
-
-      airdrag        = 1;
-
-      particleLife      = 50;
-      particleLifeSpread   = 0;
-      numParticles      = 10;
-      particleSpeed     = 8;
-      particleSpeedSpread  = 2;
-      particleSize      = 2;
-      particleSizeSpread   = 1;
-
-      directional    = 1;
-      useAirLos      = 1;
-      }
-   water=1;
-   air=1;
-   ground=1;
-   count=1;
-   }
-
    [searingflame2]
    {
    class=CSimpleParticleSystem;
 
       [properties]
       {
-      Texture=flashside2;
+      Texture=flame;
 
-      colorMap = 0.1 0.1 0.1 0.005    0.4 0.4 1 0.005    0.8 0.3 0.1 0.005    0 0 0 0.01;
+      colorMap = 0.01 0.01 0.01 0.005    0.04 0.04 0.1 0.005    0.08 0.03 0.01 0.005    0 0 0 0.05 0 0 0 0.01;
 
             pos      = 0, 0, 0;
       gravity     = 0, 0.05, 0;
@@ -82,15 +21,19 @@
 
       airdrag        = 1;
 
-      particleLife      = 50;
+      particleLife      = 60;
       particleLifeSpread   = 5;
-      numParticles      = 10;
+      numParticles      = 30;
       particleSpeed     = 8;
       particleSpeedSpread  = 3;
-      particleSize      = 2;
+      particleSize      = 2 r3;
       particleSizeSpread   = 0;
 
       directional    = 1;
+	  
+	  emitVector=dir; 
+		emitRotSpread=5;
+		
       useAirLos      = 1;
       }
    water=1;
