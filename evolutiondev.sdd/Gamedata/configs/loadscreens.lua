@@ -8,6 +8,14 @@ local loadscreens = {
 		tipImage	= "bitmaps/ui/loadingscreen/repeattip.png",
 		backgroundColor	= {0,0,0,0},
 	},
+	{
+		tipText	= [[The ORB field medic will automatically reclaim and energy cores it gets close to. This means that if you include them in your unit groups, not only do you get excellent repair, you can also turn a profit from even a bad engagement.]],
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background2.png",
+		tipImage	= "bitmaps/ui/loadingscreen/orbtip.png",
+		backgroundColor	= {0,0,0,0},
+	},
 
 --[[
 	{

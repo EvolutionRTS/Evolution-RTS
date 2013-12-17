@@ -37,16 +37,6 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
    }
 }
 
-/* Buildingfx()
-{
-   while(building)
-   {
-
-              emit-sfx 2048 from nanopoint1;
-                
-        sleep 5;
-   }
-} */
 
 buildflame()
 {
@@ -141,29 +131,6 @@ Thrust()
         sleep 400;    
    }
 }
-
-
-AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
-{ 
-signal SIG_AIM_2; 
-set-signal-mask SIG_AIM_2; 
-return (1); 
-} 
-
-FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets 
-{
-} 
-
-AimFromWeapon2(piecenum) // where it aims the weapon from 
-{ 
-piecenum = nanopoint1; 
-} 
-
-QueryWeapon2(piecenum) // where the shot is called from 
-{ 
-piecenum = nanopoint1;  
-} 
-
 
 Create()
 {
