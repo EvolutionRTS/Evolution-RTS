@@ -84,7 +84,7 @@ local unitDef = {
 	death_sounds = "generic",
 	-- twokhotkey = 't',
 	armortype   = "building",
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
 	buildingGroundDecalDecaySpeed=30,

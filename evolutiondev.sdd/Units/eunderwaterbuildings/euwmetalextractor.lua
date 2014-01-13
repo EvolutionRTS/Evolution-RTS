@@ -69,7 +69,7 @@ local unitDef = {
 	iseco = 1,
   	death_sounds = "generic",
 	armortype   = "BUILDING",
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=9,

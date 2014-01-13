@@ -110,7 +110,7 @@ Uses +6 Supply]],
     RequireTech = "6 Power",
 	armortype   = "armored",
 	supply_cost = 6,
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 }
 

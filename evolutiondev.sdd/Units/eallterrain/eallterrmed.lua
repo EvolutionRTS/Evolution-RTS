@@ -109,7 +109,7 @@ Uses +4 Supply]],
     RequireTech = "4 Power",
 	armortype   = "light",
 	supply_cost = 4,
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 }
 

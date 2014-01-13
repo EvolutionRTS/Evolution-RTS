@@ -113,7 +113,7 @@ Uses +3 Supply]],
 	armortype   = "armored",
 	nofriendlyfire	= "1",
 	supply_cost = 3,
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 }
 

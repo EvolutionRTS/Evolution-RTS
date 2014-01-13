@@ -83,7 +83,7 @@ Building
     needed_cover = 5,
 	death_sounds = "generic",
 	armortype   = "building", 
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
 	buildingGroundDecalDecaySpeed=30,

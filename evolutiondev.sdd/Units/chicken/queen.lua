@@ -106,7 +106,7 @@ Secondary Flamethrowers:
 	death_sounds = "nuke",
     RequireTech = "40 Power",
 	armortype   = "armored",
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 }
 

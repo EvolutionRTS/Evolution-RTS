@@ -71,7 +71,7 @@ local unitDef = {
 	death_sounds = "generic",
 	armortype   = "building",
 	nofriendlyfire	= "1",
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
 	buildingGroundDecalDecaySpeed=30,

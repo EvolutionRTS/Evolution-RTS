@@ -63,7 +63,7 @@ local unitDef = {
   customParams = {
     ProvideTech = "100 Power",
 	armortype   = "building",
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 	buildingGroundDecalDecaySpeed=30,
 	buildingGroundDecalSizeX=11,

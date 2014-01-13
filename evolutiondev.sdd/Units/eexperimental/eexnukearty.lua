@@ -93,7 +93,7 @@ Requires +40 Power]],
     RequireTech = "40 Power",
 	armortype   = "armored",
 	supply_cost = 40,
-	normaltex = "unittextures/lego2skin_explorernormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
 }
