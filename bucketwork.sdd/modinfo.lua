@@ -1,8 +1,8 @@
 return {
-  name='EVO Test Project',
+  name='Evolution RTS - Bukkitwork - ',
   description='test project',
   shortname='tests',
-  version='259',
+  version='$VERSION',
   url="www.smoth.net",
   mutator='Official',
   game='',
