@@ -14,9 +14,11 @@ local unitDef = {
   builder            = true,
   buildTime          = 5,
   canBeAssisted      = true,
+  canGuard           = true,
+  canMove            = true,
   canPatrol          = true,
   canReclaim		 = false,
-  canstop            = "1",
+  canstop            = true,
   category           = "BUILDING NOTAIR AMPHIB",
    collisionVolumeOffsets = "0 20 0",
    collisionVolumeScales  = "238 92 128",
@@ -75,6 +77,7 @@ local unitDef = {
     "eamphibengineer", --new
     "eamphibbuggy", --new
 	"eamphibriot", --new
+	"eamphibaa",
     "eamphibmedtank", --new
     "eamphibrock", --new
     "eamphibarty", --new
