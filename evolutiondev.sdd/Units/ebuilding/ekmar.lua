@@ -78,11 +78,11 @@ sfxtypes = {
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
-	-- buildingGroundDecalDecaySpeed=30,
-	-- buildingGroundDecalSizeX=5,
-	-- buildingGroundDecalSizeY=5,
-	-- useBuildingGroundDecal = true,
-	-- buildingGroundDecalType=[[ebarricade_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 5,
+  BuildingGroundDecalSizeY = 5,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

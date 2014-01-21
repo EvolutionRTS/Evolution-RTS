@@ -73,11 +73,11 @@ Provides long range radar and line of sight
 
 +1500 Line of Sight]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=6,
-	buildingGroundDecalSizeY=6,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[eradar2_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 6,
+  BuildingGroundDecalSizeY = 6,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

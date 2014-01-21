@@ -94,11 +94,11 @@ Produces energy and power in an increased capacity and radius
 
 Can only be built upon a geothermal vent]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=6,
-	buildingGroundDecalSizeY=6,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[egeothermal_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 6,
+  BuildingGroundDecalSizeY = 6,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

@@ -74,11 +74,11 @@ local unitDef = {
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=8,
-	buildingGroundDecalSizeY=8,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[eaaturret_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 7,
+  BuildingGroundDecalSizeY = 7,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

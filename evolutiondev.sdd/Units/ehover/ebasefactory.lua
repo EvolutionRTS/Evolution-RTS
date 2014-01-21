@@ -57,11 +57,6 @@ local unitDef = {
   yardMap            = "ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ooooooyyyyyyyyyyyyyy ",
 --  usePieceCollisionVolumes = true,
 --  modelCenterOffset	 = {108, 10, 0},
-  useBuildingGroundDecal = true,
-  BuildingGroundDecalType = "hoverfactdecal.png",
-  BuildingGroundDecalSizeX = 22,
-  BuildingGroundDecalSizeY = 22,
-  BuildingGroundDecalDecaySpeed = 0.9,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
  		"deathceg0", 
@@ -109,11 +104,11 @@ local unitDef = {
 --    groundtexselectzsize = 1500, -- optional
 	helptext = [[The hovertank factory is the most robust of all the technology avenues in Evolution RTS. Unlike their amphibious and all-terrain counterparts, the Hover Factory does not possess any innate traits, but the larger selection of units makes up for the lack of innate abilities.]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=22,
-	buildingGroundDecalSizeY=22,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[ebasefactory_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 22,
+  BuildingGroundDecalSizeY = 22,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 --------------------------------------------------------------------------------

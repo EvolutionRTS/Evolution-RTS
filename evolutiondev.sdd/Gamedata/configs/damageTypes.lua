@@ -108,6 +108,11 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
+		eamphibaa	= {
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
+		},
 		eamphibmedtank	= {
 			ARMORED		= 1,
 			LIGHT		= 1,

@@ -88,11 +88,11 @@ sfxtypes = {
 	normaltex = "unittextures/eshieldgennormal.png", 
 	helptext = [[Anti-Nuke Platform / Anti-Artillery base shield Facility]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=8,
-	buildingGroundDecalSizeY=8,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[eshieldgen_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 7,
+  BuildingGroundDecalSizeY = 7,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

@@ -77,11 +77,11 @@ Extracts metal from exposed resource points on the map. Provides +1 metal income
 
 +1 Metal]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=10,
-	buildingGroundDecalSizeY=10,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[emetalextractor_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 9,
+  BuildingGroundDecalSizeY = 9,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

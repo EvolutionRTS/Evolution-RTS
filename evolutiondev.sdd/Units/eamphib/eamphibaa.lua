@@ -23,12 +23,11 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Scout/Raider
 Light
-160 Damage/s vs Light
-80 Damages/s vs Armored/Building
-	• Can fire while underwater
+200 Damage/s vs Light
+100 Damages/s vs Armored/Building
 
-Requires +1 Power
-Uses +1 Supply]],
+Requires +2 Power
+Uses +2 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -143,7 +142,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 2500,
 	customparams = {
-	  damagetype		= "eallterrmed",  
+	  damagetype		= "eamphibaa",  
     }, 
     damage = {
       default           = 20,

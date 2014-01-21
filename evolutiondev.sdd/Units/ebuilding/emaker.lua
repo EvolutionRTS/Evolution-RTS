@@ -77,11 +77,11 @@ sfxtypes = {
 
 Creates metal from stored energy. Drains -5 energy per +0.5 metal generated]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=11,
-	buildingGroundDecalSizeY=11,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[emaker_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 10,
+  BuildingGroundDecalSizeY = 10,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 --------------------------------------------------------------------------------

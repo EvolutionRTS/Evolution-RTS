@@ -87,11 +87,11 @@ Provides +10 Supply]],
     groundtexselectxsize = 800, -- optional
     groundtexselectzsize = 800, -- optional
   },
-	-- buildingGroundDecalDecaySpeed=30,
-	-- buildingGroundDecalSizeX=50,
-	-- buildingGroundDecalSizeY=50,
-	-- useBuildingGroundDecal = true,
-	-- buildingGroundDecalType=[[euwfusion2_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 10,
+  BuildingGroundDecalSizeY = 10,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 --------------------------------------------------------------------------------

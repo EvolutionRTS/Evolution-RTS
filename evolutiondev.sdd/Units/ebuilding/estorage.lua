@@ -82,11 +82,11 @@ Will increase your storage reserves by +50
 
 +50 Energy Storage]],
   },
-	-- buildingGroundDecalDecaySpeed=30,
-	-- buildingGroundDecalSizeX=9,
-	-- buildingGroundDecalSizeY=9,
-	-- useBuildingGroundDecal = true,
-	-- buildingGroundDecalType=[[estorage_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 10,
+  BuildingGroundDecalSizeY = 10,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 --------------------------------------------------------------------------------

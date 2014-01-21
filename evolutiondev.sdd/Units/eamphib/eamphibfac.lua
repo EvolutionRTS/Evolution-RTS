@@ -20,10 +20,10 @@ local unitDef = {
   canReclaim		 = false,
   canstop            = true,
   category           = "BUILDING NOTAIR AMPHIB",
-   collisionVolumeOffsets = "0 20 0",
-   collisionVolumeScales  = "238 92 128",
-   collisionVolumeTest    = 1,
-   collisionVolumeType    = "box",
+--   collisionVolumeOffsets = "0 20 0",
+--   collisionVolumeScales  = "238 92 128",
+--   collisionVolumeTest    = 1,
+--   collisionVolumeType    = "box",
   corpse             = "ammobox",
   description        = [[Produces Units]],
   energyStorage      = 0,
@@ -41,7 +41,8 @@ local unitDef = {
   metalStorage       = 0,
   metalMake          = 0,
   name               = "Amphibious Tank Factory",
-  objectName         = "eamphibfac.s3o",
+  objectName         = "eamphibfac2.s3o",
+  script			 = "eamphibfac2.cob",
   radarDistance      = 0,
   repairable		 = false,
   selfDestructAs     = "LARGE_BUILDING",
@@ -54,12 +55,13 @@ local unitDef = {
   unitname           = "eamphibfac",
 --  unitRestricted	 = 1,
   workerTime         = 1,
-  yardMap            = "oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo yyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyy",
+  yardMap            = "yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo",
 --  usePieceCollisionVolumes = true,
+  
   useBuildingGroundDecal = true,
-  BuildingGroundDecalType = "amphibfactdecal.png",
-  BuildingGroundDecalSizeX = 17,
-  BuildingGroundDecalSizeY = 17,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 18,
+  BuildingGroundDecalSizeY = 18,
   BuildingGroundDecalDecaySpeed = 0.9,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
@@ -71,6 +73,7 @@ local unitDef = {
       "custom:nanoorb",
       "custom:nano",
 	  "custom:blacksmoke",
+	  "custom:fusionreactionbasic",
     },
   },
   buildoptions = {
@@ -91,18 +94,13 @@ local unitDef = {
   customParams = {
   	death_sounds = "generic",
 	armortype   = "building", 
-	normaltex = "unittextures/eamphibfacnormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds",  
 --	ProvideTech = "1 Powergrid",
 --    ProvideTechRange = "1500",
 --	groundtexselectimg = ":nc:bitmaps/power/powergrid.png",
 --	groundtexselectxsize = 1500, -- optional
 --    groundtexselectzsize = 1500, -- optional
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=17,
-	buildingGroundDecalSizeY=17,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[eamphibfac_aoplane.dds]],
 }
 
 

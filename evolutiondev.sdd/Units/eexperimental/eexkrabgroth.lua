@@ -93,18 +93,15 @@ Uses +25 Supply]],
   weapons = {
     [1]  = {
       def                = "heavybeamweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+      onlyTargetCategory = "BUILDING",
     },
 	[2]  = {
       def                = "concussioncannon",
-	  onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+	  onlyTargetCategory = "BUILDING",
     },
 	[3]  = {
       def                = "concussioncannon",
-	  onlyTargetCategory = "NOTAIR AMPHIB",
-	  badTargetCategory  = "LIGHT ARMORED WALL",
+	  onlyTargetCategory = "BUILDING",
     },
   },
    customParams = {

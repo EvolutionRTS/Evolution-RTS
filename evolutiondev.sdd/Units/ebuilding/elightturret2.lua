@@ -84,11 +84,11 @@ Building
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=6,
-	buildingGroundDecalSizeY=6,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[elightturret2_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 6,
+  BuildingGroundDecalSizeY = 6,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

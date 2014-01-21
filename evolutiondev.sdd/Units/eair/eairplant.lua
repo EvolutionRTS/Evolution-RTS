@@ -51,11 +51,7 @@ local unitDef = {
   workerTime         = 1,
   yardMap            = "cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc",
 --  usePieceCollisionVolumes = true,
-  useBuildingGroundDecal = true,
-  BuildingGroundDecalType = "genericfacdecal.png",
-  BuildingGroundDecalSizeX = 19,
-  BuildingGroundDecalSizeY = 19,
-  BuildingGroundDecalDecaySpeed = 0.9,
+
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
  		"deathceg0", 
@@ -94,6 +90,11 @@ local unitDef = {
 --	groundtexselectxsize = 1500, -- optional
 --    groundtexselectzsize = 1500, -- optional
   },
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 20,
+  BuildingGroundDecalSizeY = 20,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

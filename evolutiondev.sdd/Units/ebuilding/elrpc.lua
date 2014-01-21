@@ -91,11 +91,11 @@ Requires +15 Power]],
 	normaltex = "unittextures/elrpcnormal.png", 
 	helptext = [[]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=11,
-	buildingGroundDecalSizeY=11,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[elrpc_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 10,
+  BuildingGroundDecalSizeY = 10,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

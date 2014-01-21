@@ -65,11 +65,11 @@ local unitDef = {
 	armortype   = "BUILDING",
 	normaltex = "unittextures/estoragenormal.png", 
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=9,
-	buildingGroundDecalSizeY=9,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[euwstorage_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 8,
+  BuildingGroundDecalSizeY = 8,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

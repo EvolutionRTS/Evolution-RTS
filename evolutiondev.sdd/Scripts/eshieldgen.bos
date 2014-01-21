@@ -58,7 +58,7 @@ fx()
 Create() // tells it what to do on creation 
 {
         start-script SmokeUnit(); 
-        start-script fx();
+//        start-script fx();
 
         spin ring around y-axis speed <150.005495>; 
 } 

@@ -71,11 +71,11 @@ local unitDef = {
 	armortype   = "BUILDING",
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=9,
-	buildingGroundDecalSizeY=9,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[euwmetalextractor_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 8,
+  BuildingGroundDecalSizeY = 8,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

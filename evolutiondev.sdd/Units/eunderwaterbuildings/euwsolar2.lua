@@ -87,11 +87,11 @@ Provides +5 Supply]],
     groundtexselectxsize = 400, -- optional
     groundtexselectzsize = 400, -- optional
   },
-	-- buildingGroundDecalDecaySpeed=30,
-	-- buildingGroundDecalSizeX=40,
-	-- buildingGroundDecalSizeY=40,
-	-- useBuildingGroundDecal = true,
-	-- buildingGroundDecalType=[[euwsolar2_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 6,
+  BuildingGroundDecalSizeY = 6,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

@@ -94,11 +94,11 @@ Produces energy and power in a radius
 
 +400 Power Radius]],
   },
-	buildingGroundDecalDecaySpeed=30,
-	buildingGroundDecalSizeX=6,
-	buildingGroundDecalSizeY=6,
-	useBuildingGroundDecal = true,
-	buildingGroundDecalType=[[esolar2_aoplane.dds]],
+  useBuildingGroundDecal = true,
+  BuildingGroundDecalType = "factorygroundplate.dds",
+  BuildingGroundDecalSizeX = 6,
+  BuildingGroundDecalSizeY = 6,
+  BuildingGroundDecalDecaySpeed = 0.9,
 }
 --------------------------------------------------------------------------------
 
