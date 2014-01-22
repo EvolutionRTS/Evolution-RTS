@@ -6,12 +6,12 @@ function widget:GetInfo()
     date      = "Mar 2011, 2011",
     license   = "Public Domain",
     layer     = -3,
-    enabled   = false
+    enabled   = true
   }
 end
 
 local DspLst=nil
-local res = 152			--75  50 to 200, multiple of 8 work better eg 64
+local res = 75			--75  50 to 200, multiple of 8 work better eg 64
 local TileMaxX = Game.mapSizeX/res +1
 local TileMaxZ = Game.mapSizeZ/res +1
 local unexplored = 0
@@ -20,7 +20,7 @@ local explored = 2
 local FOG = {}
 local localAllyID = Spring.GetLocalAllyTeamID ()
 local updateRate = 15	--15 to 30,lower=faster updating
-local fogAlpha = 1	--0.7
+local fogAlpha = 0.25	--0.7
 ---magical speedups---
 local Spring_GetGroundHeight = Spring.GetGroundHeight
 local Spring_IsPosInLos = Spring.IsPosInLos

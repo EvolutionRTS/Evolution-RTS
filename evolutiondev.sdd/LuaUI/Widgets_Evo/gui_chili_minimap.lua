@@ -102,7 +102,7 @@ options = {
 		name = "Initial LOS state",
 		desc = "Game starts with LOS enabled",
 		type = 'bool',
-		value = true,
+		value = false,
 	},
 	
 	lblViews = { type = 'label', name = 'Views', },
