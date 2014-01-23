@@ -10,7 +10,7 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
-  buildCostMetal     = 22,
+  buildCostMetal     = 25,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
@@ -24,13 +24,13 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Flamethrower Raider
 Light
-120 Damage/s vs Buildings
-30 Damage/s vs Light/Armored
+200 Damage/s vs Buildings
+100 Damage/s vs Light/Armored
 
-Energy Drain: 12/s
+Energy Drain: 12.5/s
 
-Requires +1 Power
-Uses +1 Supply]],
+Requires +3 Power
+Uses +3 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -40,7 +40,7 @@ Uses +1 Supply]],
   iconType           = "hover",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  maxDamage          = 260,
+  maxDamage          = 400,
   maxSlope           = 26,
   maxVelocity        = 5,
   maxReverseVelocity = 1,
@@ -59,7 +59,8 @@ Uses +1 Supply]],
   repairable		 = false,
  selfDestructAs     = "PYRO_BLAST",
   side               = "CORE",
-  sightDistance      = 500,
+  sightDistance      = 750,
+  seismicDistance    = 500,
   smoothAnim         = true,
   --  turnInPlace        = false,
   --  turnInPlaceSpeedLimit = 5,
@@ -99,9 +100,9 @@ Uses +1 Supply]],
   customParams = {
     needed_cover = 2,
   	death_sounds = "soldier",
-    RequireTech = "1 Power",
+    RequireTech = "3 Power",
 	armortype   = "light",
-	supply_cost = 1,
+	supply_cost = 3,
 	normaltex = "unittextures/eflametanknormal.png", 
 	helptext	=	[[]],
   },
@@ -113,7 +114,7 @@ Uses +1 Supply]],
 local weaponDefs = {
     lightlaser = {
 	badTargetCategory = [[LIGHT]],
-    accuracy           = 200,
+    accuracy           = 0,
     AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
@@ -122,13 +123,13 @@ local weaponDefs = {
     explosionGenerator = "custom:burnblack",
     coreThickness      = 0,
     duration           = 1,
-    energypershot      = 0.6,
+    energypershot      = 1.25,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
     soundstart         = "flamethrower1.wav",
     lineOfSight        = true,
-    minintensity       = 0.1,
+    minintensity       = 1,
     impulseFactor      = 0,
     name               = "Something with Flames",
     range              = 500,
@@ -144,7 +145,7 @@ local weaponDefs = {
 	  damagetype		= "eflametank",  
     },      
     damage = {
-      default           = 12,
+      default           = 25,
     },
   },
 }

@@ -42,9 +42,10 @@ local defense = {
 	elightturret2 = {order = 0, row = 1},
 	eheavyturret2 = {order = 1, row = 1},
 	euwturret = {order = 2, row = 1},
-	eaaturret = {order = 2, row = 1},
-	ekmar = {order = 3, row = 1},
-	eshieldgen = {order = 4, row = 1},
+	eaaturret = {order = 3, row = 1},
+	emine = {order = 4, row = 1},
+	ekmar = {order = 5, row = 1},
+	eshieldgen = {order = 6, row = 1},
 }
 
 local aux = {	--merged into special

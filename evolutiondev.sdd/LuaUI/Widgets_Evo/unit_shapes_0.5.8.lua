@@ -431,6 +431,7 @@ end
 -- Drawing:
 
 function widget:DrawWorldPreUnit()
+if not Spring.IsGUIHidden() then 
 	if (#visibleUnits + #visibleSelected == 0) then return end
 
 	glPushAttrib(GL_COLOR_BUFFER_BIT)
@@ -555,6 +556,7 @@ function widget:DrawWorldPreUnit()
 		end
 	end
 	glPopAttrib()
+end
 end
 
 --------------------------------------------------------------------------------

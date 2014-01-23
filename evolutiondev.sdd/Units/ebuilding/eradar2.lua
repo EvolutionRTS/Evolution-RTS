@@ -14,7 +14,7 @@ local unitDef = {
   buildTime          = 5,
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = "Radar Tower - High LOS",
+  description        = "Radar Tower",
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -31,14 +31,14 @@ local unitDef = {
   name               = "Radar Tower",
   objectName         = "eradar2.s3o",
   onoffable          = true,
-  radarDistance      = 3500,
+  radarDistance      = 1500,
   repairable		 = false,
   selfDestructAs     = "SMALL_BUILDING",
   side               = "CORE",
-  sightDistance      = 1500,
+  sightDistance      = 500,
   smoothAnim         = true,
   sonarDistance      = 0,
-  seismicDistance    = 1500,
+  seismicDistance    = 750,
   unitname           = "eradar2",
   workerTime         = 0,
   yardMap            = "oooo oooo oooo oooo",
@@ -65,13 +65,7 @@ sfxtypes = {
 	death_sounds = "generic",
 	armortype   = "building",
 	normaltex = "unittextures/eradar2normal.png", 
-	helptext = [[Radar Tower
-
-Provides long range radar and line of sight
-
-+3500 Radar Range
-
-+1500 Line of Sight]],
+	helptext = [[]],
   },
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "factorygroundplate.dds",

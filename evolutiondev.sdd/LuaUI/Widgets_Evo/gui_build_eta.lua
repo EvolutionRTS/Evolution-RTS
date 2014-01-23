@@ -182,6 +182,7 @@ end
 --------------------------------------------------------------------------------
 
 function widget:DrawWorld()
+if not Spring.IsGUIHidden() then 
   gl.DepthTest(true)
 
   gl.Color(1, 1, 1)
@@ -210,6 +211,7 @@ function widget:DrawWorld()
   end
 
   gl.DepthTest(false)
+end
 end
   
 

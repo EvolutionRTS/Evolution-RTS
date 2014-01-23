@@ -9,7 +9,7 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 20,
+  buildCostMetal     = 25,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
@@ -23,11 +23,11 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Raider
 Light
-80 Damage vs Light
-40 Damage vs Armored/Building
+70 Damage vs Light/Armored
+140 Damage vs Building
 
-Requires +2 Power
-Uses +2 Supply]],
+Requires +3 Power
+Uses +3 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -38,9 +38,9 @@ Uses +2 Supply]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 240,
+  maxDamage          = 400,
   maxSlope           = 26,
-  maxVelocity        = 5.5,
+  maxVelocity        = 5,
   maxReverseVelocity = 2,
   maxWaterDepth      = 10,
   metalStorage       = 0,
@@ -52,9 +52,9 @@ Uses +2 Supply]],
   repairable		 = false,
  selfDestructAs     = "SMALL_UNIT",
   side               = "CORE",
-  sightDistance      = 1000,
+  sightDistance      = 500,
   smoothAnim         = true,
-  seismicDistance    = 1000,
+  seismicDistance    = 500,
   --  turnInPlace        = false,
   --  turnInPlaceSpeedLimit = 5.5,
   turnRate           = 1000,
@@ -93,13 +93,11 @@ sfxtypes = {
   customParams = {
     needed_cover = 1,
 	death_sounds = "soldier",
-    RequireTech = "2 Power",
+    RequireTech = "3 Power",
 	armortype   = "light",
-	supply_cost = 2,
+	supply_cost = 3,
 	normaltex = "unittextures/elighttank3normal.png", 
-	helptext = [[The Kite is an excellent point defense unit. It has a very large line of sight range, it can detect cloaked All Terrain units, and it is extremely fast. The kite isn't good vs buildings unless you have a lot of them. Kites are better used for harassment and picking off workers.
-	
-	As mentioned, Kites are excellent point defense. You can use their low cost to your advantage and spam them while getting your economy rolling. Kites are good units to have in your unit groups, always. Kites are best vs other Light units.]],
+	helptext = [[]],
   },
 }
 
@@ -115,14 +113,14 @@ local weaponDefs = {
     avoidFeature       = false,
     craterBoost        = 0,
     craterMult         = 0,
-    explosionGenerator = "custom:genericshellexplosion-small-lightning",
-	energypershot      = 4,
+    explosionGenerator = "custom:genericshellexplosion-medium-lightning",
+	energypershot      = 4.5,
     impulseBoost       = 0,
     impulseFactor      = 0,
     interceptedByShieldType = 4,
     lineOfSight        = true,
     noSelfDamage       = true,
-    range              = 350,
+    range              = 500,
     reloadtime         = 1,
     WeaponType         = "LightningCannon",
     rgbColor           = "0.1 0.2 0.5",
@@ -137,7 +135,7 @@ local weaponDefs = {
 	  damagetype		= "elighttank3",  
     },      
     damage = {
-      default           = 80,
+      default           = 90,
     },
   },
 }

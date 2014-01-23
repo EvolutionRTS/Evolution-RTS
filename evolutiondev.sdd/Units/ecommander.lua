@@ -110,6 +110,7 @@ local unitDef = {
     "elrpc",
     "eshieldgen",
     "esilo",
+	"emine",
 	"eorb",
   },
   sounds = {

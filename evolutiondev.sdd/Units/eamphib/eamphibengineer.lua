@@ -107,6 +107,7 @@ Light]],
     "elrpc",
     "eshieldgen",
     "esilo",
+	"emine",
 	"eorb",
   },
   sounds = {

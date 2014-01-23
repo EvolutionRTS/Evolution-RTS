@@ -10,7 +10,7 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,
-  buildCostMetal     = 30,
+  buildCostMetal     = 29,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
@@ -27,8 +27,8 @@ Armored
 100 Damage vs Light/Armored
 50 Damage vs Building
 
-Requires +5 Power
-Uses +5 Supply]],
+Requires +4 Power
+Uses +4 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -39,9 +39,9 @@ Uses +5 Supply]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 600,
+  maxDamage          = 450,
   maxSlope           = 26,
-  maxVelocity        = 2.8,
+  maxVelocity        = 3.5,
   maxReverseVelocity = 1,
   maxWaterDepth      = 10,
   metalStorage       = 0,
@@ -53,7 +53,7 @@ Uses +5 Supply]],
   repairable		 = false,
  selfDestructAs     = "BIG_UNIT",
   side               = "CORE",
-  sightDistance      = 750,
+  sightDistance      = 650,
   smoothAnim         = true,
   --  turnInPlace        = false,
   --  turnInPlaceSpeedLimit = 2.8,
@@ -93,13 +93,11 @@ Uses +5 Supply]],
   customParams = {
     needed_cover = 3,
   	death_sounds = "soldier",
-    RequireTech = "5 Power",
+    RequireTech = "4 Power",
 	armortype   = "armored",
-	supply_cost = 5,
+	supply_cost = 4,
 	normaltex = "unittextures/eheavytank3normal.png", 
-	helptext = [[The Crusher is a heavy tank destroyer capable of taking out the most hardened of mobile units. The more of these you have, the better. Short line of sight. It is recommended that they be paired with raiders.
-	
-	The Crusher is great vs all mobile units. It takes a damage penalty vs buildings so it isn't very good for base assaults]],
+	helptext = [[]],
   },
 }
 
@@ -121,7 +119,7 @@ local weaponDefs = {
     impulseFactor      = 0,
     interceptedByShieldType = 4,
     name               = "Light Cannon",
-    range              = 750,
+    range              = 650,
     reloadtime         = 1,
     weaponType		   = "Cannon",
     soundHit           = "42024_digifishmusic_Missile_Strike.wav",

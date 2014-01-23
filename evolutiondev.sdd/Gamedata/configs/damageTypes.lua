@@ -33,14 +33,14 @@ local damageClasses = {
 			BUILDING 	= 1,
 		},
 		eflametank	= {
-			ARMORED		= 0.25,
-			LIGHT		= 0.25,
+			ARMORED		= 0.5,
+			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		elighttank3	= {
 			ARMORED		= 0.5,
-			LIGHT		= 1,
-			BUILDING 	= 0.5,
+			LIGHT		= 0.5,
+			BUILDING 	= 1,
 		},
 		eheavytank3	= {
 			ARMORED		= 1,
@@ -196,6 +196,11 @@ local damageClasses = {
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
+		},
+		emine	= {
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 0,
 		},
 		-- End Buildings
 			
