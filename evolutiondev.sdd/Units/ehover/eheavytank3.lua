@@ -132,7 +132,7 @@ local weaponDefs = {
 	  damagetype		= "eheavytank3",  
     },      
     damage = {
-     default         = 100,
+     default         = 125,
     },
   },
 }

@@ -52,8 +52,6 @@ end
 local chickenTypes = {
   elighttank3	=  true,
   eriottank2	=  true,
---  elighttank	=  true,
---  eheavytank3	=  true,
   eheavytank3	=  true,
   emissiletank	=  true,
   eaatank		=  true,
@@ -90,7 +88,7 @@ addWave(1,{"10 eaatank"})
 addWave(1,{"3 elighttank3"})
 addWave(1,{"3 eallterrlight"})
 addWave(1,{"3 eamphibbuggy"})
-addWave(1,{"3 elighttank"})
+addWave(1,{"3 elighttank3"})
 addWave(1,{"3 elighttank3"})
 addWave(1,{"3 elighttank3", "2 eriottank2"})
 addWave(1,{"3 eamphibbuggy", "2 eamphibmedtank"})
@@ -180,17 +178,17 @@ addWave(8,{"10 edrone"})
 addWave(8,{"10 edrone"})
 addWave(8,{"10 edrone"})
 
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
-addWave(9,{"10 elighttank"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
+addWave(9,{"10 elighttank3"})
 
 addWave(10,{"5 ebomb"})
 addWave(10,{"5 ebomb"})
