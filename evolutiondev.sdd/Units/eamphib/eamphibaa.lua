@@ -21,7 +21,7 @@ local unitDef = {
   canstop            = "1",
   category           = "LIGHT AMPHIB RAID",
   corpse             = "ammobox",
-  description        = [[Scout/Raider
+  description        = [[Dedicated Anti-Air
 Light
 200 Damage/s vs Light
 100 Damages/s vs Armored/Building
