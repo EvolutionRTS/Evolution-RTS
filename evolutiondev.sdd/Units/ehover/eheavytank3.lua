@@ -24,8 +24,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Armored Tank Destroyer
 Armored
-100 Damage vs Light/Armored
-50 Damage vs Building
+125 Damage vs Light/Armored
+62.5 Damage vs Building
 
 Requires +4 Power
 Uses +4 Supply]],

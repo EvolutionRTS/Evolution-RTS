@@ -23,8 +23,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Raider
 Light
-70 Damage vs Light/Armored
-140 Damage vs Building
+45 Damage vs Light/Armored
+90 Damage vs Building
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -47,7 +47,7 @@ Uses +3 Supply]],
   movementClass      = "HOVERTANK2",
   name               = "Kite",
   noChaseCategory    = "VTOL",
-  objectName         = "elighttank3.s3o",
+  objectName         = "elighttank4.s3o",
   radarDistance      = 0,
   repairable		 = false,
  selfDestructAs     = "SMALL_UNIT",
@@ -96,7 +96,7 @@ sfxtypes = {
     RequireTech = "3 Power",
 	armortype   = "light",
 	supply_cost = 3,
-	normaltex = "unittextures/elighttank3normal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
   },
 }
