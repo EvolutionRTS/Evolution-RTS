@@ -107,7 +107,7 @@ options = {
 		name = 'Smooth scrolling',
 		desc = 'Use smoothscroll method when mouse scrolling.',
 		type = 'bool',
-		value = true,
+		value = false,
 	},
 	smoothmeshscroll = {
 		name = 'Smooth Mesh Scrolling',
