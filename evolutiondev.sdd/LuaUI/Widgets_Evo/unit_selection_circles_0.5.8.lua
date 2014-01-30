@@ -1,12 +1,12 @@
 function widget:GetInfo()
    return {
-      name      = "UnitShapes 0.5.8",
-      desc      = "Draws blended shapes around units and buildings",
-      author    = "Lelousius and aegis",
+      name      = "Unit Selection Circles 0.5.8",
+      desc      = "Draws blended shapes around units and buildings ",
+      author    = "Lelousius and aegis (edited by Forboding Angel)",
       date      = "Jan 19, 2011",
       license   = "GNU GPL, v2 or later",
       layer     = 2,
-      enabled   = true  --  loaded by default?
+      enabled   = false  --  loaded by default?
    }
 end
 

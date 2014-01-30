@@ -49,15 +49,87 @@ local icontypes = {
     size=2,
     radiusadjust=0.2
   },
+  
+  hoverraider = {
+    bitmap='icons/hoverraider.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  hovertankdestroyer = {
+    bitmap='icons/hovertankdestroyer.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  hoverassault = {
+    bitmap='icons/hoverassault.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  hoveraa = {
+    bitmap='icons/hoveraa.png',
+    size=2,
+    radiusadjust=0.2
+  },
 
   amphib = {
     bitmap='icons/amphib.png',
     size=2,
     radiusadjust=0.2
   },
+  
+  amphibraider = {
+    bitmap='icons/amphibraider.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  amphibtankdestroyer = {
+    bitmap='icons/amphibtankdestroyer.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  amphibassault = {
+    bitmap='icons/amphibassault.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  amphibaa = {
+    bitmap='icons/amphibaa.png',
+    size=2,
+    radiusadjust=0.2
+  },
 
   allterr = {
     bitmap='icons/allterr.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  allterrraider = {
+    bitmap='icons/allterrraider.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  allterrtankdestroyer = {
+    bitmap='icons/allterrtankdestroyer.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  allterrassault = {
+    bitmap='icons/allterrassault.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  allterraa = {
+    bitmap='icons/allterraa.png',
     size=2,
     radiusadjust=0.2
   },
