@@ -10,10 +10,41 @@
 
 local icontypes = {
   default = {
+	bitmap='icons/hover.png',
     size=1,
     radiusadjust=0.2,
   },
+  
+  raider = {
+    bitmap='icons/raider.png',
+    size=2,
+    radiusadjust=0.2
+  },
 
+  tankdestroyer = {
+    bitmap='icons/tankdestroyer.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  assault = {
+    bitmap='icons/assault.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  aa = {
+    bitmap='icons/aa.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
+  support = {
+    bitmap='icons/support.png',
+    size=2,
+    radiusadjust=0.2
+  },
+  
   commander = {
     bitmap='icons/commander.png',
     size=3,

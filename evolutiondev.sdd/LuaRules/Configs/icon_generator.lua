@@ -7,7 +7,7 @@
 
 --// Info
 if (info) then
-  local ratios      = {["5to4"]=(1/1)} --{["16to10"]=(10/16), ["1to1"]=(1/1), ["5to4"]=(4/5)} --, ["4to3"]=(3/4)}
+  local ratios      = {["1to1"]=(1/1)} --{["16to10"]=(10/16), ["1to1"]=(1/1), ["5to4"]=(4/5)} --, ["4to3"]=(3/4)}
   local resolutions = {{128,128}} --{{128,128},{64,64}}
   local schemes     = {""}
 
@@ -188,37 +188,14 @@ backgrounds = {
 --//empty  := empty model (used for fake units in CA)
 --//attempts := number of tries to scale the model to fit in the icon
 
-defaults = {border=0.05, angle=45, rot="right", clamp=-10000, scale=1.5, empty=false, attempts=10, wait=120, zoom=1.0, offset={0,0,0},};
+defaults = {border=0.05, angle=45, rot="right", clamp=-10000, scale=2, empty=false, attempts=10, wait=300, zoom=1.0, offset={0,0,0},};
 
 
 -----------------------------------------------------------------------
 -----------------------------------------------------------------------
 
---// per unitdef settings
 unitConfigs = {
-  [UnitDefNames.eartytank.id]  = { wait = 30 },
-  [UnitDefNames.ebasefactory.id]  = { wait = 30 },
-  [UnitDefNames.ebomber.id]  = { wait = 30 },
-  [UnitDefNames.efatso2.id]  = { wait = 30 },
-  [UnitDefNames.efighter.id]  = { wait = 30 },
-  [UnitDefNames.eflametank.id]  = { wait = 30 },
-  [UnitDefNames.efusion2.id]  = { wait = 30 },
-  [UnitDefNames.egeothermal.id]  = { wait = 30 },
-  [UnitDefNames.egunship2.id]  = { wait = 30 },
-  [UnitDefNames.eheavytank3.id]  = { wait = 30 },
-  [UnitDefNames.eheavyturret2.id]  = { wait = 30 },
-  [UnitDefNames.ejammer2.id]  = { wait = 30 },
-  [UnitDefNames.elighttank3.id]  = { wait = 30 },
-  [UnitDefNames.elightturret2.id]  = { wait = 30 },
-  [UnitDefNames.emediumtank3.id]  = { wait = 30 },
-  [UnitDefNames.emetalextractor.id]  = { wait = 30 },
-  [UnitDefNames.emissiletank.id]  = { wait = 30 },
-  [UnitDefNames.eradar2.id]  = { wait = 30 },
-  [UnitDefNames.eriottank2.id]  = { wait = 30 },
-  [UnitDefNames.escout.id]  = { wait = 30 },
-  [UnitDefNames.esolar2.id]  = { wait = 30 },
-  [UnitDefNames.estorage.id]  = { wait = 30 },
-  [UnitDefNames.etransport.id]  = { wait = 30 },
+--  [UnitDefNames.eartytank.id]  = { wait = 30 },
 }
 
 for i=1,#UnitDefs do

@@ -69,7 +69,6 @@ Light]],
  selfDestructAs     = "CONSTRUCTOR",
   showNanoSpray      = "0",
   sightDistance      = 500,
-  SonarDistance      = 500;
   smoothAnim         = true,
   stealth            = true,
   seismicSignature   = 3,

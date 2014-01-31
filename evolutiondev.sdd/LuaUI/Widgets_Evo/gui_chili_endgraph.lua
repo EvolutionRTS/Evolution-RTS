@@ -1,244 +1,556 @@
---[[
-	TO DO:
-		Add amount label when mouseover line on graph (e.g to see exact metal produced at a certain time),
-		Implement camera control to pan in the background while viewing graph,
-		Add minimize option
-		Come up with better way of handling specs, active players and players who died (currently doesn't show players who have died
-
-	Graph Ideas:
-		Total metal in units and/or buildings
-		Total metal in units/# of units, (Average cost of units)
-		Metal spent - damage recieved = total metal in units?
-
-]]
+-- v1.0
 function widget:GetInfo()
 	return {
-		name		    = "EndGame Stats v0.9",
-		desc		    = "v0.9 Chili replacement for default end game statistics",
-		author		  = "Funkencool",
-		date		    = "2013",
-		license     = "public domain",
-		layer		    = math.huge,
-		enabled   	= true
+		name    = 'Funks EndGame Graph',
+		desc    = 'Chili replacement for default EndGame Graph, v1.0',
+		author  = 'Funkencool',
+		date    = '2013', -- 2014
+		license = 'GNU GPL v2',
+		layer   = 0,
+		enabled = true
 	}
 end
 
-local testing = false
--- INCLUDES
 
---comment out any stats you don't want included, order also directly effects button layout.. [1] = engineName, [2] = Custom Widget Name (can change)
-local engineStats = {
-	--{"time"            , "time"},
-	-- {"frame"           , ""},
-	{"metalUsed"       , "Metal Used"},
-	{"metalProduced"   , "Metal Produced"},
-	{"metalExcess"     , "Metal Excess"},
---	{"metalReceived"   , "Metal Received"},
---	{"metalSent"       , "Metal Sent"},
-	{"energyUsed"      , "Energy Used"},
-	{"energyProduced"  , "Energy Produced"},
-	{"energyExcess"    , "Energy Excess"},
---	{"energyReceived"  , "Energy Received"},
---	{"energySent"      , "Energy Sent"},
---	{"damageDealt"     , "Damage Dealt"},
---	{"damageReceived"  , "Damage Received"},
-	{"unitsProduced"   , "Units Built"},
-	{"unitsKilled"     , "Units Killed"},
-	{"unitsDied"       , "Units Lost"},
---	{"unitsReceived"   , "Units Received"},
---	{"unitsSent"       , "Units Sent"},
---	{"unitsCaptured"   , "Units Captured"},
-	-- {"unitsOutCaptured", ""},
+-- Comment out any stats you don't want included
+--  order also directly effects button layout..
+--  { [1] = engineName, [2] = 'Custom Caption' }
+local statName = {
+	--{'time'            , 'time'},
+	--{'frame'           , ''},
+	{'metalUsed'       , 'Metal Used'},
+	{'metalProduced'   , 'Metal Produced'},
+	--{'metalExcess'     , 'Metal Excess'},
+	--{'metalReceived'   , ''},
+	--{'metalSent'       , ''},
+	{'energyUsed'      , 'Energy Used'},
+	{'energyProduced'  , 'Energy Produced'},
+	--{'energyExcess'    , 'Energy Excess'},
+	--{'energyReceived'  , ''},
+	--{'energySent'      , ''},
+	{'damageDealt'     , 'Damage Dealt'},
+	{'damageReceived'  , 'Damage Received'},
+	{'unitsProduced'   , 'Units Built'},
+	{'unitsKilled'     , 'Units Killed'},
+	--{'unitsDied'       , 'Units Lost'},
+	--{'unitsReceived'   , ''},
+	--{'unitsSent'       , ''},
+	--{'unitsCaptured'   , ''},
+	--{'unitsOutCaptured', ''},
 }
 
-local graphLength = 0
-local gameOver = false
-local isDelta = false
+local speccing = Spring.IsGameOver() or Spring.GetSpectatingState()
+local isDelta  = false
 local curGraph = {}
+local button = {}
+local team = {}
 
--- CHILI CONTROLS
-local Chili, window0, graphPanel, graphSelect, graphLabel, graphTime
-local wasActive = {}
-local playerNames = {}
+-- Chili vars
+local Chili, control0
+local graphPanel, graphLabel, graphTime, lineLabels, graphPanel
+local playerList, graphSelect
+-------------
+
 ------------------------------------
---formats final stat to fit in label
-local function numFormat(label)
-	local number = math.floor(label)
-	local string = ""
-	if number/1000000000 >= 1 then
-		string = string.sub(number/1000000000 .. "", 0, 4) .. "B"
-	elseif number/1000000 >= 1 then
-		string = string.sub(number/1000000 .. "", 0, 4) .. "M"
-	elseif number/10000 >= 1 then
-		string = string.sub(number/1000 .. "", 0, 4) .. "k"
+-- Formats final stat to fit in label
+--  could use some work
+local function numFormat(value)
+	local value = math.floor(value)
+	local label = ''
+	if value/1000000000 >= 1 then
+		label = string.sub(value/1000000000 .. '', 0, 4) .. 'B'
+	elseif value/1000000 >= 1 then
+		label = string.sub(value/1000000 .. '', 0, 4) .. 'M'
+	elseif value/10000 >= 1 then
+		label = string.sub(value/1000 .. '', 0, 4) .. 'k'
 	else
-		string = math.floor(number) .. ""
+		label = math.floor(value) .. ''
 	end
-	return string
+	if label:find('%.') == 4 then
+		label = label:gsub('%.', '')
+	end
+	return label
 end
-local function formatTime(seconds)
+
+local function formatTime(seconds, short)
+	local seconds = math.floor(seconds)
 	local minutes = math.floor(seconds/60)
-	local hours = math.floor(minutes/60)
-	local seconds = seconds % 60
-	if minutes < 10 then minutes = "0" .. minutes end
-	if seconds < 10 then seconds = "0" .. seconds end
-	return hours .. ":" .. minutes .. ":" .. seconds
+	seconds = seconds % 60
+	if short then
+		if seconds < 10 then
+			seconds = '0' .. seconds
+		end
+		-- if minutes < 10 then
+			-- minutes = '0' .. minutes
+		-- end
+		return minutes..':'..seconds
+	else
+		return '\255\255\127\0'..minutes..'\bmin, '..'\255\255\127\0'..seconds..'\bsec'
+	end
 end
-local function drawIntervals(graphMax)
+
+local function drawIntervals(graphMax, gameTime)
 	for i=1, 4 do
-		local line = Chili.Line:New{parent = graphPanel, x = 0, bottom = (i)/5*100 .. "%", width = "100%", color = {0.1,0.1,0.1,0.1}}
-		local label = Chili.Label:New{parent = graphPanel, x = 0, bottom = (i)/5*100 .. "%", width = "100%", caption = numFormat(graphMax*i/5)}
-	end
-end
-
-local function fixLabelAlignment()
-	local doAgain
-	for a=1, #lineLabels.children do
-		for b=1, #lineLabels.children do
-			if lineLabels.children[a] ~= lineLabels.children[b] then
-				if lineLabels.children[a].y >= lineLabels.children[b].y and lineLabels.children[a].y < lineLabels.children[b].y+11 then
-					lineLabels.children[a]:SetPos(0, lineLabels.children[b].y+11)
-					doAgain = false
-	end end end end
-	if doAgain then fixLabelAlignment() end
-end
-------------------------------------------------------------------------
---Total package of graph: Draws graph and labels for each nonSpec player
-local function drawGraph(graphArray, graph_m, teamID)
-	--get's all the needed info about players and teams
-	local _,teamLeader,isDead,isAI = Spring.GetTeamInfo(teamID)
-	local playerName, isActive, isSpec = Spring.GetPlayerInfo(teamLeader)
-	local r,g,b,a = Spring.GetTeamColor(teamID)
-	local teamColor = {r,g,b,a}
-	local lineLabel = numFormat(graphArray[#graphArray])
-	local shortName
-	--playerName = playerNames[teamID]
-	--Sets AI name to reflect AI used and player hosting it
-	if isAI then
-		local _,botID,_,shortName = Spring.GetAIInfo(teamID)
-		playerName = shortName .."-" .. botID .. ""
-	end
-
-
---	if isActive or wasActive[teamID] then --Prevents specs from being included in Graph
-	if isActive or isDead then --Prevents specs from being included in Graph
-		for i=1, #graphArray do
-			if (graph_m < graphArray[i]) then graph_m = graphArray[i] end
-		end
-
-		--gets vertex's from array and plots them
-		local drawLine = function()
-			for i=1, #graphArray do
-				local ordinate = graphArray[i]
-				gl.Vertex((i - 1)/(#graphArray - 1), 1 - ordinate/graph_m)
-			end
-		end
-
-		--adds value to end of graph
-		local label1 = Chili.Label:New{parent = lineLabels, y = (1 - graphArray[#graphArray]/graph_m) * 88 - 1 .. "%", width = "100%", caption = lineLabel, font = {color = teamColor}}
-
-		--adds player to Legend
-		local label2 = Chili.Label:New{parent = graphPanel, x = 55, y = (teamID)*20 + 5, width = "100%", height  = 20, caption = playerName, font = {color = teamColor}}
-
-		--creates graph element
-		local graph = Chili.Control:New{
-			parent	= graphPanel,
+		-- Stat
+		Chili.Line:New{
+			parent = graphPanel,
+			x      = 0,
+			bottom = (i)/5*100 .. '%',
+			width  = '100%',
+		}
+		Chili.Label:New{
+			parent  = graphPanel,
 			x       = 0,
+			bottom  = (i)/5*100+2 .. '%',
+			caption = numFormat(graphMax*i/5),
+		}
+		-- Time
+		Chili.Line:New{
+			parent = graphPanel,
+			x      = (i)/5*100 .. '%',
+			y      = 0,
+			width  = 1,
+			height = '100%',
+			style  = 'vertical',
+		}
+		Chili.Label:New{
+			parent  = graphPanel,
+			x       = (i)/5*100+2 .. '%',
 			y       = 0,
-			height  = "100%",
-			width   = "100%",
-			padding = {0,0,0,0},
-			DrawControl = function (obj)
-				local x = obj.x
-				local y = obj.y
-				local w = obj.width
-				local h = obj.height
+			caption = formatTime(gameTime*i/5, true),
+		}
+		--------
+	end
+end
 
-				gl.Color(teamColor)
-				gl.PushMatrix()
-				gl.Translate(x, y, 0)
-				gl.Scale(w, h, 1)
-				gl.LineWidth(3)
-				gl.BeginEnd(GL.LINE_STRIP, drawLine)
-				gl.PopMatrix()
+
+local function setTip(obj, x, y)
+	local graph    = graphPanel
+	local gameTime = graphPanel.time
+	local graphMax = graphPanel.maxValue
+	local height   = graphPanel.height
+	local width    = graphPanel.width
+	local score = numFormat(graphMax - (graphMax/height)*y)
+	local time  = formatTime((gameTime/width)*x, true)
+	graphPanel.tooltip = 'Time: '.. time ..'\n'.. 'Score: '..score
+end
+
+
+local function alignLabels()
+	local checkAgain
+	local labels = lineLabels.children
+	for a=1, #labels do
+		local first = labels[a].y
+		for b=1, #labels do
+			if a ~= b then
+				local second = labels[b].y
+				local overlap = (first >= second and first < second + 14)
+				if overlap then
+					labels[a]:SetPos(0, labels[b].y + 14)
+					checkAgain = true
+				end
 			end
-			}
-	end
-end
-----------------------------------------------------------------
-----------------------------------------------------------------
-local function getEngineArrays(statistic, labelCaption)
-	local teamScores = {}
-	local teams	= Spring.GetTeamList()
-	local teams = (#teams - 1)
-	local graphLength = Spring.GetTeamStatsHistory(0)-1
-	local time = Spring.GetTeamStatsHistory(0, 0, graphLength)
-	local time = time[graphLength]["time"]
-	--Applies label of the selected graph at bottom of window
-	graphLabel:SetCaption(labelCaption)
-	
-	graphTime:SetCaption("Total Time: " .. formatTime(time))
-	curGraph.caption = labelCaption
-	curGraph.name = statistic
-
-	--finds highest stat out all the player stats, i.e. the highest point of the graph
-	local teamScores = {}
-	local graphMax = 0
-	for a=0, teams do
-		local temp = {}
-		local stats = Spring.GetTeamStatsHistory(a, 0, graphLength)
-		for b=1, graphLength - 1 do
-			temp[b] = stats[b][statistic]
-			if isDelta then temp[b] = stats[b+1][statistic] - stats[b][statistic] end
-			if (graphMax < temp[b]) then graphMax = temp[b] end --TODO: check for to see if team has any stats, if not don't show
 		end
-		teamScores[a] = temp
 	end
-	if graphMax > 5 then drawIntervals(graphMax) end
-	for a=0, teams do
-		drawGraph(teamScores[a], graphMax, a)	--Applies per player elements
-	end
-	fixLabelAlignment()
+	lineLabels.children = labels
+	if checkAgain then alignLabels() end
 end
+
+local function labelLine(teamID)
+	local graphMax = graphPanel.maxValue
+	local array = team[teamID].array
+	if not array[#array] then return end
+	-- Adds value to end of graph
+	local lineLabel = numFormat(array[#array])
+	local bottom = (array[#array]/graphMax) * (lineLabels.height-30)
+	Chili.Label:New{
+		parent  = lineLabels,
+		height  = 14,
+		bottom  = bottom,
+		width   = '100%',
+		caption = lineLabel,
+		font    = {
+			color        = team[teamID].color,
+			outlineColor = {0,0,0,1},
+		},
+	}
+end
+
+local function resize()
+	if not lineLabels then return end
+	-- Draws each teams relevant line
+	lineLabels:ClearChildren()
+	for teamID = 1, #team do
+		if team[teamID].show then
+			labelLine(teamID)
+		end
+	end
+	alignLabels()
+end
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+------------------------
+-- Total package of graph: Draws graph and labels for a single nonSpec player
+local function drawLine(graphMax, teamID)
+	local array = team[teamID].array
+
+	-- Gets vertex's from array and plots them
+	local vertex = function()
+		for i=1, #array do
+			local ordinate = array[i]
+			gl.Vertex((i - 1)/(#array - 1), 1 - ordinate/graphMax)
+		end
+	end
+
+	-- Creates graph element with custom drawcontrol for the lines in the graph
+	Chili.Control:New{
+		parent        = graphPanel,
+		x             = 0,
+		y             = 0,
+		height        = '100%',
+		width         = '100%',
+		padding       = {0,0,0,0},
+		drawcontrolv2 = true,
+		DrawControl   = function (obj)
+			local x = obj.x
+			local y = obj.y
+			local w = obj.width
+			local h = obj.height
+
+			gl.Color(team[teamID].color)
+			gl.PushMatrix()
+			gl.Translate(x, y, 0)
+			gl.Scale(w, h, 1)
+			gl.LineWidth(3)
+			gl.BeginEnd(GL.LINE_STRIP, vertex)
+			gl.PopMatrix()
+		end
+	}
+
+end
+
+------------------------
+-- Returns arrays for each team (to be drawn)
+--  also finds highest point of graph
+local function getArrays(statName, graphLength)
+	local graphMax = 0
+	for teamID = 1, #team do
+		if team[teamID].show then
+			local array = {}
+
+			-- GetTeamStatsHistory() is synced so  being a spec or gameOver is required to work
+			local engineID = team[teamID].id
+			local stats = Spring.GetTeamStatsHistory(engineID, 0, graphLength)
+
+			-- subtract one from graphlength to correct for delta (should do it a better way)
+			for i=1, graphLength - 1 do
+				array[i] = stats[i][statName]
+
+				-- Gets difference between current index and the next
+				if isDelta then
+					array[i] = ( stats[i+1][statName] - array[i] )
+				end
+
+				-- Checks for highest value in the graph
+				if ( array[i] > graphMax ) then
+					graphMax = array[i]
+				end
+
+			end
+			team[teamID].array = array
+		end
+	end
+
+	return graphMax
+end
+
+------------------------
+-- Starting point for graph drawing
+--  when button is pressed, it graphs relevant stats
+local function drawGraph(obj)
+
+	-- if no obj is passed it recycles old graph (when options are toggled)
+	local obj = obj or curGraph
+	graphPanel:ClearChildren()
+	lineLabels:ClearChildren()
+
+	local graphLength = Spring.GetTeamStatsHistory(0) - 1 -- last index isn't complete
+
+	if graphLength < 4 then
+		Spring.Echo("End game Stats is still collecting data")
+		return false
+	end
+
+	local gameStats = Spring.GetTeamStatsHistory(0, 0, graphLength - 1)
+	local gameTime  = gameStats[graphLength - 1]['time']
+
+
+	-- Sets title of graph and game time
+	graphLabel:SetCaption(obj.caption)
+	graphTime:SetCaption('Total Time: ' .. formatTime(gameTime))
+	------------------------------------
+
+	curGraph.caption = obj.caption
+	curGraph.name    = obj.name
+
+	local graphMax = getArrays(curGraph.name, graphLength)
+	graphPanel.maxValue = graphMax
+	graphPanel.time     = gameTime
+	-- draws 5 lines across graph for reference
+	if graphMax > 5 then drawIntervals(graphMax, gameTime) end
+
+	-- Draws each teams relevant line
+	for teamID = 1, #team do
+		if team[teamID].show then
+			drawLine(graphMax,teamID)
+			labelLine(teamID)
+		end
+	end
+
+	alignLabels()
+end
+
+------------------------
+-- Fetches needed team info from engine
+--  filters out inactive teams
+--  Todo: handle multiple players per team (commander sharing)
+local function getTeamInfo()
+	for engineID = 0, (#Spring.GetTeamList() - 1) do
+
+		-- All the needed info about players
+		local _,teamLeader,_,isAI    = Spring.GetTeamInfo(engineID)
+		local name, isActive, isSpec = Spring.GetPlayerInfo(teamLeader)
+		local r,g,b,a                = Spring.GetTeamColor(engineID)
+		local teamColor              = {r,g,b,a}
+
+		-- Sets AI name to reflect AI used
+		if isAI then
+			local _,botID,_,shortName = Spring.GetAIInfo(engineID)
+			name = botID ..' (' .. shortName .. ')'
+		end
+
+		if isActive then
+			team[#team + 1] = {
+				id    = engineID,
+				color = teamColor,
+				name  = name,
+				show  = true, -- Toggled with checkbox
+				array = {},
+			}
+		end
+
+	end
+end
+
 -----------------------------------------------------------------------
--- Starting point: Draws all the main elements which are later tailored
-function loadpanel()
-
-	Chili = WG.Chili
-	local screen0 = Chili.Screen0
+-- Draws all the main elements which are later tailored
+function loadWindow()
 	local selW  = 150
-	window0 		= Chili.Window:New{parent = screen0, x = "20%", y = "20%", width = "60%", height = "60%", padding = {5,5,5,5}}
 
-	lineLabels 	= Chili.Control:New{parent = window0, right = 0, y = 0, width = 37, height = "100%", padding = {0,0,0,0},}
-	graphSelect	= Chili.StackPanel:New{minHeight = 70, parent = window0, x =  0, y = 0, width = selW, height = "100%",}
-	graphPanel 	= Chili.Panel:New{parent = window0, x = selW, right = 30, y = 0, bottom = 40, padding = {10,10,10,10}}
-	graphLabel  = Chili.Label:New{autosize = true, parent = window0, bottom = 0,caption = "", align = "center", width = "70%", x = "20%", height = "10%", font = {size = 30,},}
-	graphTime		= Chili.Label:New{parent = window0, bottom = 30,caption = "", width = 50, right = 50, height = 10}
+	control0 = Chili.Control:New{
+		x        = 0,
+		y        = 0,
+		right    = 0,
+		bottom   = 0,
+		padding  = {5,5,5,5},
+	}
 
-	for a=1, #engineStats do
-		local engineButton =	Chili.Button:New{name = engineStats[a][1], caption = engineStats[a][2], maxHeight = 30, parent = graphSelect, OnClick = {
-			function(obj) graphPanel:ClearChildren();lineLabels:ClearChildren();getEngineArrays(obj.name,obj.caption);end}}
+	graphSelect = Chili.StackPanel:New{
+		width       = '100%',
+		x           = 0,
+		y           = 0,
+		height      = 30,
+		padding     = {0,0,0,0},
+		itemPadding = {0,3,0,3},
+		itemMargin  = {0,0,0,0},
+		resizeItems = false,
+		autosize    = true,
+		preserveChildrenOrder = true,
+	}
+
+	graphPanel = Chili.Control:New{
+		parent   = control0,
+		maxValue = 0,
+		time     = 0,
+		x        = selW,
+		y        = 40,
+		right    = 40,
+		bottom   = 0,
+		tooltip  = '',
+		OnMouseMove = {setTip},
+	}
+
+	Chili.ScrollPanel:New{
+		parent    = control0,
+		width     = selW,
+		x         = 0,
+		y         = 0,
+		bottom    = '50%',
+		children  = {graphSelect},
+	}
+
+	playerList = Chili.StackPanel:New{
+		width       = '100%',
+		x           = 0,
+		y           = 0,
+		height      = 30,
+		padding     = {0,0,0,0},
+		itemPadding = {0,0,0,0},
+		itemMargin  = {0,0,0,0},
+		resizeItems = false,
+		autosize    = true,
+		preserveChildrenOrder = true,
+	}
+
+	Chili.ScrollPanel:New{
+		parent    = control0,
+		width     = selW,
+		x         = 0,
+		y         = '50%',
+		bottom    = 0,
+		children  = {playerList},
+	}
+
+
+	lineLabels = Chili.Control:New{
+		parent  = control0,
+		right   = 0,
+		width   = 40,
+		y       = 20,
+		bottom  = 0,
+		padding = {0,0,0,0},
+		OnResize = {resize},
+	}
+
+	graphLabel = Chili.Label:New{
+		caption  = 'Wait a minute, collecting data',
+		parent   = control0,
+		x        = selW+5,
+		right    = 0,
+		y        = 0,
+		font     = {size = 25},
+	}
+
+	graphTime = Chili.Label:New{
+		parent  = control0,
+		caption = '',
+		y       = 0,
+		right   = 60,
+	}
+
+	for a=1, #statName do
+		button[a] = Chili.Button:New{
+			parent  = graphSelect,
+			name    = statName[a][1],
+			caption = statName[a][2],
+			width   = '100%',
+			height  = 25,
+			align   = "left",
+			OnClick = {drawGraph},
+		}
 	end
 
-	local exitButton = Chili.Button:New{name = "exit", caption = "Exit", bottom = 0, right = 0, height = 30, width = 40 , parent = window0, OnClick = {
-		function() Spring.SendCommands("quit");end}}
-	local exitButton = Chili.Button:New{caption = "Delta", bottom = 0, right = 45, height = 30, width = 50 , parent = window0, OnClick = {
-		function()  isDelta = not isDelta; if curGraph.name then graphPanel:ClearChildren();lineLabels:ClearChildren();getEngineArrays(curGraph.name,curGraph.caption)end;end}}
+	-- Adds players to Legend
+	for teamID = 1, #team do
+		Chili.Checkbox:New{
+			parent   = playerList,
+			teamID   = teamID,
+			width    = '100%',
+			x        = 0,
+			height   = 20,
+			caption  = team[teamID].name,
+			font     = {color = team[teamID].color},
+			OnChange = {
+				function()
+					team[teamID].show = not team[teamID].show
+					if curGraph.name then
+						drawGraph()
+					end
+				end
+			},
+		}
+	end
 
+	Chili.Checkbox:New{
+		parent   = control0,
+		caption  = 'Delta',
+		y        = 25,
+		x        = selW + 6,
+		width    = 60,
+		checked  = false,
+		OnChange = {
+			function()
+				isDelta = not isDelta
+				if curGraph.name then
+					drawGraph()
+				end
+			end
+		},
+	}
+
+	if WG.BarMenu then
+		WG.BarMenu.AddControl('Graph', control0)
+	else
+		Chili.Button:New{
+			parent = control0,
+			caption = 'Quit',
+			right = 0,
+			y = 0,
+			width = 50,
+			height = 25,
+			OnMouseUp = {
+				function()
+					Spring.SendCommands{'quit'}
+				end
+			},
+		}
+		Chili.Window:New{
+			parent    = Chili.Screen0,
+			x         = '20%',
+			y         = '20%',
+			right     = '20%',
+			bottom    = '20%',
+			draggable = true,
+			resizable = true,
+			children  = {control0},
+		}
+	end
 end
 
---to do: possible to run from start when playing as spec
+function widget:Initialize()
+	Spring.SendCommands('endgraph 0')
+	Chili = WG.Chili
+
+	if Spring.GetGameFrame() < 30 then
+		return -- not started, wait for callin
+	end
+
+	getTeamInfo()
+	if WG.BarMenu and speccing then
+		loadWindow()
+	end
+end
+
 function widget:GameStart()
-	local teams	= Spring.GetTeamList()
-	local teams = (#teams - 1)
-	for teamID=0, teams do
-		playerNames[teamID],_ = Spring.GetPlayerInfo(teamID)
-		Spring.Echo(playerNames[teamID])
+	getTeamInfo()
+	if WG.BarMenu and speccing then
+		loadWindow()
 	end
 end
 
 function widget:GameOver()
-	gameOver = true
-	Spring.SendCommands("endgraph 0")
-	loadpanel()
+	if not (WG.BarMenu and speccing) then
+		loadWindow()
+		drawGraph(button[1])
+	end
+	
+	if WG.BarMenu then
+		drawGraph(button[1])
+		WG.BarMenu.ShowHide('Graph')
+	end
+end
+
+function widget:Shutdown()
+	Spring.SendCommands('endgraph 1')
 end

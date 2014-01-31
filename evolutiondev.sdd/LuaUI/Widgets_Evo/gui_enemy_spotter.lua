@@ -34,7 +34,7 @@ local skipOwnAllyTeam                   = false    -- keep this 'true' if you do
 
 local circleSize                        = 1
 local circleDivs                        = 12      -- how precise circle? octagon by default
-local circleOpacity                     = 0.50
+local circleOpacity                     = 0.5
 local innerSize                         = 1.35    -- circle scale compared to unit radius
 local outerSize                         = 1.5    -- outer fade size compared to circle scale (1 = no outer fade)
                                         

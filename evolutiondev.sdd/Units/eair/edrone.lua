@@ -43,7 +43,7 @@ Light
   footprintX         = 2,
   footprintZ         = 2,
   hoverAttack        = true,
-  iconType           = "air",
+  iconType           = "tankdestroyer",
   idleAutoHeal       = .5,
   idleTime           = 2200,
   maxDamage          = 100,

@@ -48,7 +48,7 @@ Requires +5 Power
   fireState			 = "0",
   footprintX         = 5,
   footprintZ         = 5,
-  iconType           = "allterr",
+  iconType           = "support",
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
