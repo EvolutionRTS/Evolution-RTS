@@ -123,7 +123,7 @@ Light]],
   	death_sounds = "soldier",
     dronespawner = "1",
 	armortype   = "light",
-	normaltex = "unittextures/con_legonormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[The Erector can build new structures, reclaim features, turn energy cores into gunship drones, and capture enemy units. Upon it's death, it emits a wave of nanoparticles that will repair 100 hitpoints to any units in proximity]],
   },
 }
