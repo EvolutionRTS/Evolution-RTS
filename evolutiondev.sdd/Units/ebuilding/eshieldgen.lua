@@ -18,11 +18,11 @@ local unitDef = {
   description        = [[Anti-Nuke Platform
 Anti-Artillery base shield Facility
 
-Requires +10 Power
 Drains -50 Energy while stockpiling Anti-Nuke Ammunition
 Drains -2.5 Energy while charging shield
 
-30 Second Anti-Nuke laser cooldown after every Nuke destroyed]],
+Shield recharges at a rate of 50hp/s
+Maximum shield power is 5000hp]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -82,7 +82,6 @@ sfxtypes = {
   customParams = {
     needed_cover = 5,
 	death_sounds = "generic",
-    RequireTech = "10 Power",
     ProvideTechRange = "300",
 	armortype   = "building", 
 	normaltex = "unittextures/eshieldgennormal.png", 
@@ -123,7 +122,7 @@ local weaponDefs = {
 	minintensity       = 1,
     name               = "Laser",
     range              = 2500,
-    reloadtime         = 30,
+    reloadtime         = 5,
     WeaponType         = "BeamLaser",
     soundStart         = "antinukelaser.wav",
     soundTrigger       = true,
@@ -151,7 +150,7 @@ local weaponDefs = {
     Shieldenergyuse  = 0,
     Shieldradius     = 1500,
     Shieldpower      = 5000,
-    Shieldpowerregen = 25,
+    Shieldpowerregen = 50,
     Shieldpowerregenenergy = 2.5,
     Shieldintercepttype = 4,
     Shieldgoodcolor  = "0.2 0.2 0.5",

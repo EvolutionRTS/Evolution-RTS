@@ -9,7 +9,7 @@
 
 function widget:GetInfo()
 	return {
-		name = "Auto Reclaim/Heal/Assist",
+		name = "Unit Auto Reclaim/Heal/Assist",
 		desc = "Makes idle unselected builders/rez/com/nanos to reclaim metal if metal bar is not full, repair nearby units and assist in building",
 		author = "Pithikos/smoth",
 		date = "Nov 21, 2010, last update 12/15/2013",
@@ -89,6 +89,6 @@ function widget:UnitCommand(unitID)
 	--spEcho("<auto_reclaim_heal_assist>: unit "..unitID.." got a command") --Â¤debug
 	if idleReclaimers[unitID] then
 		idleReclaimers[unitID]=nil
-		--spEcho("<auto_reclaim_heal_assist>: unregistering unit "..reclaimerID.." as idle")
+		--spEcho("<auto_reclaim_heal_assist>: unregistering unit "..unitID.." as idle")
 	end
 end

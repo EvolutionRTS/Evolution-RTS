@@ -7,7 +7,7 @@ local unitName = "escout"
 
 local unitDef = {
 
-  acceleration       = 10,
+  acceleration       = 0.55,
   bankscale          = "1",
   brakeRate          = 4,
   buildCostEnergy    = 0,
@@ -49,7 +49,7 @@ Uses +4 Supply]],
   metalStorage       = 0,
   name               = "AirScout",
   objectName         = "escout.s3o",
-  radarDistance      = 2000,
+  radarDistance      = 1500,
   SonarDistance      = 1000,
   repairable		 = false,
  selfDestructAs     = "SMALL_UNIT",

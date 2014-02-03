@@ -100,7 +100,6 @@ Uses +3 Supply]],
   	death_sounds = "soldier",
     cancollect = "1",
 	armortype   = "light",
-	supply_cost = 3,
 	normaltex = "unittextures/lego2skin_explorernormal.dds",  
 	helptext	= [[The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combat for 5 seconds before repairs can take place.
 	

@@ -24,8 +24,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Armored Tank Destroyer
 Armored
-125 Damage vs Light/Armored
-62.5 Damage vs Building
+150 Damage vs Light/Armored
+75 Damage vs Building
 
 Requires +4 Power
 Uses +4 Supply]],
@@ -133,7 +133,7 @@ local weaponDefs = {
 	  damagetype		= "eheavytank3",  
     },      
     damage = {
-     default         = 125,
+     default         = 150,
     },
   },
 }

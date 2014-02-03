@@ -9,16 +9,14 @@ local unitDef = {
 
   buildAngle         = 8192,
   buildCostEnergy    = 0,
-  buildCostMetal     = 300,
+  buildCostMetal     = 1000,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
   canstop            = "1",
   category           = "BUILDING NOTAIR",
   corpse             = "ammobox",
-  description        = [[Nuclear Missile Silo - Missile takes 4 minutes to build - Drains 50e while building
-
-Requires +20 Power]],
+  description        = [[Nuclear Missile Silo - Missile takes 4 minutes to build - Drains 50e while building]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -76,8 +74,8 @@ Requires +20 Power]],
   },
   customParams = {
     needed_cover = 8,
+	RequireTech = "0 Power",
 	death_sounds = "nuke",
-    RequireTech = "20 Power",
 	armortype   = "building",
 	normaltex = "unittextures/esilonormal.png", 
 	helptext = [[Nuclear Missile Silo
@@ -90,11 +88,7 @@ Will completely devastate a large area
 
 -50 Energy (While missile is building)
 
-10s Reload Time
-
-Requires:
-
-+20 Power]],
+10s Reload Time]],
   },
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "factorygroundplate.dds",

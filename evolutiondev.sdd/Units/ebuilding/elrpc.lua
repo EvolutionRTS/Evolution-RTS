@@ -24,10 +24,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Long Range Plasma Cannon - 100e Per Shot
 Building
-1000 Damage vs Buildings
-250 Damage vs Light/Armored
-  
-Requires +15 Power]],
+2000 Damage vs Buildings
+500 Damage vs Light/Armored]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "LARGE_BUILDING",
@@ -86,7 +84,7 @@ Requires +15 Power]],
   customParams = {
 	canareaattack="1",
 	death_sounds = "generic",
-    RequireTech = "20 Power",
+	RequireTech = "0 Power",
 	armortype   = "building",
 	normaltex = "unittextures/elrpcnormal.png", 
 	helptext = [[]],
@@ -120,7 +118,7 @@ local weaponDefs = {
     model              = "rocket.s3o",
     name               = "Rockets",
     range              = 6000,
-    reloadtime         = 10,
+    reloadtime         = 25,
     weaponType		   = "Cannon",
     selfprop           = true,
     smokedelay         = ".1",
@@ -137,7 +135,7 @@ local weaponDefs = {
 	  damagetype		= "elrpc",  
     },      
     damage = {
-      default            = 1000,
+      default            = 2000,
     },
   },
 }

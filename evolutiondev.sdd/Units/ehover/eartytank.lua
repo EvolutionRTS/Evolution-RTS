@@ -46,7 +46,7 @@ Uses +8 Supply]],
   maxWaterDepth      = 10,
   metalStorage       = 0,
   movementClass      = "HOVERTANK3",
-  name               = "ShadowFury",  --Because he first one to get the "Lobster" pun
+  name               = "ShadowFury",  --Because he was the first one to get the "Lobster" pun
   noChaseCategory    = "VTOL",
   objectName         = "eartytank2.s3o",
   script			 = "eartytank2.cob",
@@ -97,7 +97,7 @@ Uses +8 Supply]],
 	armortype   = "light",
 	supply_cost = 8,
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
-	helptext = [[The Lobster has extremely long range, fires five rounds in a burst but does very low damage in a large area of effect. Damage boost versus structures and defenses. Reduced damage to mobile units.]],
+	helptext = [[]],
   },
 }
 
