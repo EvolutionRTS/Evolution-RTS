@@ -9,7 +9,7 @@ local unitDef = {
 
   activateWhenBuilt  = true,
   buildCostEnergy    = 0,
-  buildCostMetal     = 500,
+  buildCostMetal     = 750,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
