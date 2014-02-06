@@ -1,0 +1,114 @@
+[11:20:53 PM] [Evo]Forboding_Angel: lets see
+[11:20:58 PM] [Evo]Forboding_Angel: thigns you need to know are
+[11:21:06 PM] [H]joooo: maybe i have played it 6 years ago a few times, but i cant remember
+[11:21:09 PM] [Evo]Forboding_Angel: he'll brb btw
+[11:21:22 PM] [Evo]Forboding_Angel: Metal is used to make unit sna structures
+[11:21:33 PM] [Evo]Forboding_Angel: energy is only used for units to fire, shileds, nukes etc
+[11:21:41 PM] [Evo]Forboding_Angel: In order to tech up
+[11:21:44 PM] [H]joooo: not for building?
+[11:21:48 PM] [Evo]Forboding_Angel: put powerplants next to your factories
+[11:21:48 PM] [H]joooo: energy?
+[11:21:51 PM] EvoRTSDedicated1: * Hi ikinz (Highly experienced player), welcome to EvoRTSDedicated1 (SPADS 0.11.20b, automated host).
+[11:21:54 PM] [Evo]Forboding_Angel: energy is not used for building
+[11:21:57 PM] [H]joooo: ok
+[11:22:00 PM] [Evo]Forboding_Angel: but you will need  shitloads of it
+[11:22:05 PM] ikinz: connection dies for a moment
+[11:22:06 PM] [Evo]Forboding_Angel: because without energy, your units don't fire
+[11:22:11 PM] [Evo]Forboding_Angel: also
+[11:22:14 PM] [Evo]Forboding_Angel: build storage
+[11:22:15 PM] [H]joooo: hehe sound interesting
+[11:22:16 PM] ikinz: so I still dont' know if you hit the supply cap
+[11:22:18 PM] [Evo]Forboding_Angel: storage si super important
+[11:22:21 PM] [Evo]Forboding_Angel: also
+[11:22:36 PM] [H]joooo: ok
+[11:22:36 PM] [Evo]Forboding_Angel: generators give you supply
+[11:22:36 PM] [Evo]Forboding_Angel: the supply cap is 200/200
+[11:22:56 PM] [Evo]Forboding_Angel: Generators say how much supply, power, and energy they give oyu
+[11:22:56 PM] [H]joooo: what need supply?
+[11:23:05 PM] [H]joooo: units only?
+[11:23:08 PM] [Evo]Forboding_Angel: you need supply in order to build units
+[11:23:09 PM] [H]joooo: or buildings as well?
+[11:23:13 PM] [Evo]Forboding_Angel: only units
+[11:23:13 PM] ikinz: only unit
+[11:23:14 PM] ikinz: s
+[11:23:19 PM] [Evo]Forboding_Angel: ok
+[11:23:32 PM] [Evo]Forboding_Angel: basic generators give you 5 supply, 1 pwoer (in a radius) and 1 energy
+[11:23:43 PM] [Evo]Forboding_Angel: adv gens give you 30 supply, 10 pwoer and 10 energy
+[11:23:50 PM] [H]joooo: what is power?
+[11:23:57 PM] [Evo]Forboding_Angel: geothermal gens give you 20 supply 7 power and 7 energy
+[11:24:01 PM] [Evo]Forboding_Angel: power is what is used to tech up
+[11:24:11 PM] ikinz: so build your gens really close to your fac
+[11:24:11 PM] [H]joooo: so its 3 ressources
+[11:24:13 PM] [Evo]Forboding_Angel: the gens have graphics aroudn them when you place them
+[11:24:15 PM] ikinz: right next to it
+[11:24:16 PM] [H]joooo: metal, power and energy
+[11:24:27 PM] [Evo]Forboding_Angel: place them so that they are near your factory, and it will unlock higher tech units
+[11:24:27 PM] ikinz: power is not really a resource per se
+[11:24:33 PM] [Evo]Forboding_Angel: ^^
+[11:24:40 PM] [Evo]Forboding_Angel: techning up is easy
+[11:24:48 PM] [H]joooo: ah ok i think i get the idea
+[11:24:53 PM] [Evo]Forboding_Angel: but if you lose your power, you lose the ability to produce higher tech units
+[11:25:07 PM] [Evo]Forboding_Angel: engineers do not use supply
+[11:25:10 PM] [Evo]Forboding_Angel: make as many as you want
+[11:25:11 PM] [H]joooo: the more power a factory is supplied with, the better tech units it can build?
+[11:25:15 PM] [Evo]Forboding_Angel: yep
+[11:25:25 PM] [Evo]Forboding_Angel: ORBs are field repair units
+[11:25:36 PM] ikinz: and field reclaim
+[11:25:43 PM] [Evo]Forboding_Angel: they repair everythign in a huge radius for 10hp every secodn as long as they are out of combat (for free)
+[11:25:48 PM] [H]joooo: any metal makers?
+[11:25:50 PM] [Evo]Forboding_Angel: yes
+[11:25:54 PM] [Evo]Forboding_Angel: metal makers are good
+[11:25:58 PM] [Evo]Forboding_Angel: not as good as mexes
+[11:26:00 PM] [H]joooo: ok
+[11:26:02 PM] [Evo]Forboding_Angel: but good
+[11:26:12 PM] [Evo]Forboding_Angel: basically 5 energy per metalmaker
+[11:26:29 PM] [Evo]Forboding_Angel: but remember you need energy for your units to fire
+[11:26:34 PM] [Evo]Forboding_Angel: so make storage
+[11:26:36 PM] [H]joooo: how much metal does a generator cost?
+[11:26:41 PM] [Evo]Forboding_Angel: storage is super important, and it's cheap
+[11:26:47 PM] [Evo]Forboding_Angel: adv gens are 180
+[11:26:54 PM] [Evo]Forboding_Angel: basics are umm... 10 I think?
+[11:26:56 PM] [Evo]Forboding_Angel: or 20
+[11:26:59 PM] [Evo]Forboding_Angel: lemmie look
+[11:27:13 PM] [Evo]Forboding_Angel: basics are 20
+[11:27:16 PM] [Evo]Forboding_Angel: geos are 70 iirc
+[11:27:23 PM] [Evo]Forboding_Angel: geos are super cost effective
+[11:27:32 PM] [Evo]Forboding_Angel: protip
+[11:27:38 PM] [Evo]Forboding_Angel: oh wait geos are 100 that's right
+[11:27:46 PM] [Evo]Forboding_Angel: protip, on this map there are geos
+[11:27:51 PM] [Evo]Forboding_Angel: they give 7 energy and 7 pwoer
+[11:27:57 PM] [Evo]Forboding_Angel: you can plant your factory next tot hem
+[11:28:06 PM] [Evo]Forboding_Angel: and save having to build basic generators for a while
+[11:28:13 PM] [Evo]Forboding_Angel: but you'll catch on
+[11:28:23 PM] [H]joooo: so 20 metal gives 1 energy, 180 metal gives 10 energy, and 100 metalg ives 7 energy
+[11:28:25 PM] [Evo]Forboding_Angel: first game or so will prolly be kinda confusing
+[11:28:33 PM] [Evo]Forboding_Angel: basically
+[11:28:42 PM] ikinz: &quot;why are there blue beams coming out of the water?&quot;
+[11:28:44 PM] [Evo]Forboding_Angel: oh
+[11:28:45 PM] [Evo]Forboding_Angel: btw
+[11:28:47 PM] [Evo]Forboding_Angel: there are 5 techs
+[11:28:57 PM] [Evo]Forboding_Angel: hover, amphib, all terrain, air and destroyers
+[11:29:09 PM] [Evo]Forboding_Angel: hover can of course go over watyer and are jsut moderately good
+[11:29:20 PM] [Evo]Forboding_Angel: amphibs are super fast, super high dps, but weak ass armor
+[11:29:21 PM] [H]joooo: uh gos i will die very painfully in the first round :)
+[11:29:34 PM] [Evo]Forboding_Angel: amphibs are also stealth to radar
+[11:29:45 PM] [H]joooo: so everyone build amphibs :)
+[11:29:51 PM] [Evo]Forboding_Angel: all terrains can of course go everywhere except water
+[11:30:04 PM] [H]joooo: exist the dgun?
+[11:30:05 PM] [Evo]Forboding_Angel: theya re a bit slower, but have good firepower and nice dps
+[11:30:08 PM] [Evo]Forboding_Angel: but they can also cloak
+[11:30:15 PM] [H]joooo: wtf
+[11:30:18 PM] [Evo]Forboding_Angel: they can't be automatically targetted when cloaked
+[11:30:27 PM] [H]joooo: lolz
+[11:30:29 PM] [Evo]Forboding_Angel: but you can see them via seismic indicators
+[11:30:36 PM] [Evo]Forboding_Angel: so you can fore fire at them if you want
+[11:30:39 PM] [H]joooo: but cloaking use up energy they need to fire as well... :)
+[11:30:43 PM] [Evo]Forboding_Angel: cloaking them si expensive wrt energy
+[11:30:48 PM] [Evo]Forboding_Angel: exactly
+[11:30:52 PM] [Evo]Forboding_Angel: so best way to use them is
+[11:30:57 PM] [Evo]Forboding_Angel: clock right before a fight
+[11:31:00 PM] [Evo]Forboding_Angel: cloak
+[11:31:03 PM] [Evo]Forboding_Angel: so that you get the first shot
+[11:31:18 PM] [H]joooo: uh gos micromanagement -.-
+[11:31:25 PM] [Evo]Forboding_Angel: Lots of nifty little strategies
+[11:31:31 PM] [Evo]Forboding_Angel: it's actually pretty simple really
