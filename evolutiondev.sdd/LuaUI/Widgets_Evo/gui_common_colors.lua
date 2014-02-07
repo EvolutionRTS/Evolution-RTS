@@ -30,6 +30,8 @@ local echo = Spring.Echo
 
 -- HTML color names, colors should be a "wheel"
 colors = {
+
+--[[
 	-- bluish
 	{'Navy',			'#000080'};
 	{'Blue',			'#0000FF'};
@@ -63,6 +65,21 @@ colors = {
 	{'Plum', 			'#DDA0DD'};
 	{'NeonPink',		'#F535AA'};
 	{'Indigo', 			'#4B0082'};
+]]--
+	{'SkyBlue', 		'#87CEEB'};
+	{'DarkGreen',		'#006400'};
+	{'Coffee',			'#6F4E37'};
+	{'Parchment',		'#FFFFC2'};
+	{'Teal',			'#009B95'};
+	{'Red',				'#FF0000'};
+	{'Purple',			'#3914AF'};
+	{'Yellow',			'#FFD300'};
+	{'Green',			'#00CC00'};
+	{'Blue',			'#1144AA'};
+	{'Pink',			'#C9007A'};
+	{'Orange',			'#FF7100'};
+	
+	
 }
 
 local colorNames = {}
