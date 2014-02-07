@@ -452,10 +452,7 @@ local function GetPlayerTeamStats(teamID)
 	
 	local eCurr, eStor, ePull, eInco, eExpe, eShar, eSent, eReci = Spring.GetTeamResources(teamID, "energy")
 	local mCurr, mStor, mPull, mInco, mExpe, mShar, mSent, mReci = Spring.GetTeamResources(teamID, "metal")
-	if eStor then
-		eStor = eStor - 10000					-- eStor has a "hidden 10k" to account for
-		if eStor > 50000 then eStor = 1000 end	-- fix for weirdness where sometimes storage is reported as huge, assume it should be 1000
-	end
+
 	-- guard against dividing by zero later, when the fill bar percentage is calculated
 	-- these probably aren't ever going to be zero, but better safe than sorry
 	if mStore and mStore == 0 then mStore = 1000 end
