@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
---  file:    gui_enemy_spotter.lua
+--  file:    gui_fancy_teamplatter.lua
 --  brief:   Draws transparant smoothed donuts under enemy units
 --  author:  Dave Rodgers (orig. TeamPlatter edited by TradeMark)
 --
@@ -13,8 +13,8 @@
 
 function widget:GetInfo()
    return {
-      name      = "EnemySpotter",
-      desc      = "Draws transparant smoothed donuts under enemy units (with teamcolors or predefined colors, depending on situation)",
+      name      = "Fancy Teamplatter",
+      desc      = "Draws transparant smoothed donuts under friendly and enemy units (using teamcolor)",
       author    = "TradeMark  (Floris: added multiple ally color support)",
       date      = "17.03.2013",
       license   = "GNU GPL, v2 or later",

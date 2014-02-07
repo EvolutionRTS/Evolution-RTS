@@ -66,19 +66,16 @@ colors = {
 	{'NeonPink',		'#F535AA'};
 	{'Indigo', 			'#4B0082'};
 ]]--
-	{'SkyBlue', 		'#87CEEB'};
-	{'DarkGreen',		'#006400'};
-	{'Coffee',			'#6F4E37'};
+
+	{'Orange',			'#ffaf00'};
 	{'Parchment',		'#FFFFC2'};
 	{'Teal',			'#009B95'};
 	{'Red',				'#FF0000'};
 	{'Purple',			'#3914AF'};
 	{'Yellow',			'#FFD300'};
-	{'Green',			'#00CC00'};
 	{'Blue',			'#1144AA'};
 	{'Pink',			'#C9007A'};
-	{'Orange',			'#FF7100'};
-	
+	{'Green',			'#00CC00'};
 	
 }
 
