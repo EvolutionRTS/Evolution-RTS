@@ -26,9 +26,9 @@ local unitDef = {
 600 Damage/s vs Building
 60 Damage/s vs Light/Armored
 
-Secondary Flamethrowers:
-100 Damage/s vs Light/Armored
-25 Damage/s vs Buildings
+Secondary Concussion Cannons:
+160 Damage/s vs Light/Armored
+16 Damage/s vs Buildings
 
 • Flames can hit multiple units]],
   energyMake         = 998,
@@ -43,7 +43,7 @@ Secondary Flamethrowers:
   idleTime           = 2200,
   leaveTracks        = false,
   maxDamage          = 30000,
-  maxVelocity        = 1,
+  maxVelocity        = 2.5,
   maxReverseVelocity = 0.2,
   maxWaterDepth      = 80,
   metalmake	         = 998,

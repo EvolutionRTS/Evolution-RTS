@@ -5,7 +5,6 @@ effectUnitDefs = {
 	},
 	
 	egunship2 = {
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="engine", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
@@ -13,7 +12,10 @@ effectUnitDefs = {
 	},
 	
 	ebomber = {
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="engine", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
 	},
 	
 	eairengineer = {

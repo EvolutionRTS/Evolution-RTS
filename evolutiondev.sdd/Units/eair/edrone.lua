@@ -7,10 +7,10 @@ local unitName = "edrone"
 
 local unitDef = {
 
-  acceleration       = 0.2,
+  acceleration       = 0.5,
   airStrafe          = true,
   bankscale          = "1",
-  brakeRate          = 7,
+  brakeRate          = 0.5,
   buildCostEnergy    = 1,
   buildCostMetal     = 5,
   buildTime          = 2.5,

@@ -7,9 +7,9 @@ local unitName = "egunship2"
 
 local unitDef = {
 
-  acceleration       = 0.2,
+  acceleration       = 0.5,
   airStrafe          = true,
-  brakeRate          = 7,
+  brakeRate          = 0.5,
   buildCostEnergy    = 0,
   buildCostMetal     = 35,
   buildTime          = 2.5,
@@ -23,9 +23,6 @@ local unitDef = {
   canstop            = true,
   category           = "LIGHT VTOL",
   collide            = true,
---Collision Volumes... Because the engine devs are silly.
-	collisionVolumeScales = [[35 35 35]],
---End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 300,
   description        = [[Gunship Tank Destroyer
@@ -44,8 +41,8 @@ Uses +7 Supply]],
   flareefficieny     = "0.3",
   flareReload        = 3,
   floater            = true,
-  footprintX         = 3,
-  footprintZ         = 3,
+  footprintX         = 4,
+  footprintZ         = 4,
   hoverAttack        = true,
   iconType           = "tankdestroyer",
   idleAutoHeal       = .5,
@@ -59,7 +56,8 @@ Uses +7 Supply]],
   moverate1          = "8",
   name               = "Wildcat",
   noChaseCategory    = "VTOL",
-  objectName         = "EGUNSHIP2.s3o",
+  objectName         = "egunship3.s3o",
+  script			 = "egunship3.cob",
   radarDistance      = 0,
   repairable		 = false,
  selfDestructAs     = "BIG_UNIT",
@@ -112,7 +110,7 @@ Uses +7 Supply]],
     RequireTech = "7 Power",
 	armortype   = "armored",
 	supply_cost = 7,
-	normaltex = "unittextures/egunship2normal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 }
 
