@@ -74,7 +74,7 @@ Uses +3 Supply]],
  	}, 
 
     explosiongenerators = {
-      "custom:factorysparks",
+      "custom:gdhcannon",
       "custom:dirt",
 	  "custom:blacksmoke",
     },

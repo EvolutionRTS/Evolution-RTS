@@ -152,6 +152,66 @@
    ground=1;
    count=1;
    }
+   
+   [front_muzzlesmoke]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=0.5;
+			sizeMod=1.0;
+			pos=0, 1, 3;
+			emitVector=dir;
+			gravity=0, 0.05, 0;
+			colorMap=1 0.8 0.6 0.01 0.1 0.1 0.1 0.2 0.1 0.1 0.1 0.2 0 0 0 0.001 0 0 0 0.001;
+			Texture=smoke;
+			airdrag=0.8;
+			particleLife=70;
+			particleLifeSpread=5;
+			numParticles=4;
+			particleSpeed=2;
+			particleSpeedSpread=6;
+			particleSize=6;
+			particleSizeSpread=0.6;
+			emitRot=0;
+			emitRotSpread=10;
+			directional=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+	
+	[exhaustsmoke]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=0.05;
+			sizeMod=1.0;
+			pos=0, 1, 3;
+			emitVector=dir;
+			gravity= 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
+			colorMap=1 0.8 0.6 0.01 0.1 0.1 0.1 0.2 0.1 0.1 0.1 0.2 0 0 0 0.001 0 0 0 0.001;
+			Texture=smoke;
+			airdrag=0.8;
+			particleLife=62;
+			particleLifeSpread=0;
+			numParticles=3;
+			particleSpeed=-5;
+			particleSpeedSpread=-2; //12
+			particleSize=6;
+			particleSizeSpread=2;
+			emitRot=0;
+			emitRotSpread=20;
+			directional=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
 }
 
 [gdsflak]
