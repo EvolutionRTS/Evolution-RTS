@@ -3,7 +3,7 @@
 
 function widget:GetInfo()
   return {
-    name      = "Chili Deluxe Player List - Alpha 2.02",
+    name      = "Chili Deluxe Player List - Alpha 2.02 (Modified for Evolution RTS)",
     desc      = "v0.203 Chili Deluxe Player List, Alpha Release",
     author    = "CarRepairer, KingRaptor, CrazyEddie",
     date      = "2012-06-30",
@@ -195,29 +195,6 @@ if VFS.FileExists("mission.lua") then
 else
 	IsMission = false
 end
-
-local function IsFFA()
-	local allyteams = Spring.GetAllyTeamList()
-	local gaiaT = Spring.GetGaiaTeamID()
-	local gaiaAT = select(6, Spring.GetTeamInfo(gaiaT))
-	local numAllyTeams = 0
-	for i=1,#allyteams do
-		if allyteams[i] ~= gaiaAT then
-			local teams = Spring.GetTeamList()
-			if #teams > 0  then
-				numAllyTeams = numAllyTeams + 1
-			end
-		end
-	end
-	return numAllyTeams > 2
-end
-
--- The ceasefire functionality isn't working right now.
--- I'm leaving all the code in place, but disabling the buttons.
--- Someone can come back in and fix it later.
---
-local cf = IsFFA()
---local cf = false
 
 local localTeam = 0
 local localAlliance = 0
@@ -922,7 +899,7 @@ local function AddEntity(entity, teamID, allyTeamID)
 		)
 	end
 
-	-- mobile and defense metal, metal and energy income, resource bars
+	-- mobile and defence metal, metal and energy income, resource bars
 	if teamID ~= -1 and (allyTeamID == localAlliance or amSpec) then
 		local s = GetPlayerTeamStats(teamID)
 		DrawPlayerTeamStats(entity,teamcolor,s)
@@ -1262,18 +1239,7 @@ SetupPlayerNames = function()
 		end
 	end
 	MakeSpecTooltip()
-
-	-- ceasefire: restricted zones button
-	if cf then
-		scroll_cpl:AddChild( Checkbox:New{
-			x=5, y=(fontsize+1) * (row + 0.5),
-			height=fontsize * 1.5, width=160,
-			caption = 'Place Restricted Zones',
-			checked = WG.rzones.rZonePlaceMode,
-			OnChange = { function(self) WG.rzones.rZonePlaceMode = not WG.rzones.rZonePlaceMode; end },
-		} )
-		row = row + 1.5
-	end
+	
 	AlignScrollPanel()
 end
 
