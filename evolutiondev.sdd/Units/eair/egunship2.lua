@@ -66,6 +66,7 @@ Uses +7 Supply]],
   smoothAnim         = true,
   turnRate           = 920,
   unitname           = "egunship2",
+  useFootPrintCollisionVolume	= true,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
  		"deathceg0", 

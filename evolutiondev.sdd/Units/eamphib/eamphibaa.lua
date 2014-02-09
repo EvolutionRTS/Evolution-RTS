@@ -145,7 +145,7 @@ local weaponDefs = {
 	  damagetype		= "eamphibaa",  
     }, 
     damage = {
-      default           = 20,
+      default           = 30,
     },
   },
 }

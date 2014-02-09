@@ -70,6 +70,7 @@ Must be forcefired on the target]],
   stealth            = false,
   turnRate           = 400,
   unitname           = "ebomber",
+  useFootPrintCollisionVolume	= true,
   workerTime         = 0,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
