@@ -21,9 +21,6 @@ local unitDef = {
   canstop            = "1",
   category           = "LIGHT VTOL",
   collide            = false,
---Collision Volumes... Because the engine devs are silly.
---  collisionVolumeScales = [[35 35 35]],
---End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 180,
   description        = [[Air Scout

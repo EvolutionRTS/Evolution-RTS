@@ -138,8 +138,8 @@ local damageClasses = {
 		},
 		efighter	= {
 			ARMORED		= 1,
-			LIGHT		= 0.66,
-			BUILDING 	= 0.66,
+			LIGHT		= 1,
+			BUILDING 	= 0.25,
 		},
 		egunship2	= {
 			ARMORED		= 1,

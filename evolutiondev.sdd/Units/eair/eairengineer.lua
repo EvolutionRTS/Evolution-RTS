@@ -29,9 +29,6 @@ local unitDef = {
   canstop            = true,
   category           = "LIGHT VTOL",
   collide            = true,
---Collision Volumes... Because the engine devs are silly.
-	collisionVolumeScales = [[35 35 35]],
---End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 300,
   description        = "Airborne Engineer :: Armortype: Light",

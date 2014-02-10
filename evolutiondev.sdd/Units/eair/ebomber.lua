@@ -23,9 +23,6 @@ local unitDef = {
   canstop            = true,
   category           = "ARMORED VTOL",
   collide            = true,
---Collision Volumes... Because the engine devs are silly.
-	collisionVolumeScales = [[35 35 35]],
---End Collision volumes
   corpse             = "ammobox",
   cruiseAlt          = 350,
   description        = [[Bomber
@@ -70,7 +67,6 @@ Must be forcefired on the target]],
   stealth            = false,
   turnRate           = 400,
   unitname           = "ebomber",
-  useFootPrintCollisionVolume	= true,
   workerTime         = 0,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 
