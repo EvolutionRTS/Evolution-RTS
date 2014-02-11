@@ -31,7 +31,7 @@ local unitDef = {
   idleTime           = 2200,
   maxDamage          = 2500,
   maxSlope           = 60,
-  maxWaterDepth      = 0,
+  maxWaterDepth      = 5000,
   metalmake	         = 998,
   metalStorage       = 900,
   name               = "Plot Device",
@@ -61,7 +61,7 @@ local unitDef = {
   weapons = {
   },
   customParams = {
-    ProvideTech = "100 Power",
+    ProvideTech = "50 Power",
 	armortype   = "building",
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },

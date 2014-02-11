@@ -8,7 +8,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.2 0.5 0.9 0.01  0.1 0.5 0.7 0.01	0 0 0 0.01;
 
@@ -37,6 +37,42 @@
    ground=1;
    count=1;
    }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.3;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
+   count=1;
+   }
 }
 
 [fusionreactionbasic]
@@ -49,7 +85,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01;
 
@@ -76,6 +112,42 @@
       }
    air=1;
    ground=1;
+   count=1;
+   }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.3;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
    count=1;
    }
 }
@@ -90,7 +162,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01;
 
@@ -119,6 +191,42 @@
    ground=1;
    count=1;
    }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.3;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
+   count=1;
+   }
 }
 
 [fusionreactionnuclear]
@@ -131,7 +239,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01;
 
@@ -160,6 +268,42 @@
    ground=1;
    count=1;
    }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.7;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 4;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
+   count=1;
+   }
 }
 
 [fusionreactionburrow]
@@ -172,7 +316,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0.5 0.01  0.8 0.5 0.8 0.01	0 0 0 0.01;
 
@@ -201,6 +345,42 @@
    ground=1;
    count=1;
    }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0.5 0 0.5 0.01  0.8 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.7;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 4;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
+   count=1;
+   }
 }
 
 [fusionreactionmex]
@@ -213,7 +393,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.2 0.5 0.9 0.01  0.1 0.5 0.7 0.01	0 0 0 0.01;
 
@@ -223,14 +403,14 @@
       emitRot     = 45;
       emitRotSpread  = 15;
 
-      sizeGrowth  = 0.3;
+      sizeGrowth  = 0.5;
       sizeMod     = 1.0;
 
       airdrag        = 0.8;
       particleLife      = 45;
       particleLifeSpread   = 1;
       numParticles      = 8;
-      particleSpeed     = 2;
+      particleSpeed     = 3;
       particleSpeedSpread  = 1;
       particleSize      = 1;
       particleSizeSpread   = 0;
@@ -240,6 +420,7 @@
       }
    air=1;
    ground=1;
+   underwater=1;
    count=1;
    }
 }
@@ -254,7 +435,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01;
 
@@ -283,6 +464,42 @@
    ground=1;
    count=1;
    }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.5;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
+   count=1;
+   }
 }
 
 [fusionreactionstoragenew]
@@ -295,7 +512,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01;
 
@@ -324,6 +541,44 @@
    ground=1;
    count=1;
    }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 0;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.2;
+      sizeMod     = 1;
+
+      airdrag        = 1;
+      particleLife      = 70;
+      particleLifeSpread   = 1;
+      numParticles      = 4;
+      particleSpeed     = 0.2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
+   count=1;
+   }
+   
+   
 }
 
 [fusionreactionmaker]
@@ -336,7 +591,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01;
 
@@ -365,6 +620,42 @@
    ground=1;
    count=1;
    }
+   
+   [UNDERWATER_ELECTRICARCS1]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=plasmaball;
+
+      colorMap = 1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 15;
+
+      sizeGrowth  = 0.5;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 45;
+      particleLifeSpread   = 1;
+      numParticles      = 8;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 1;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   underwater=1;
+   count=1;
+   }
 }
 
 [fusionreactionhoverfac]
@@ -377,7 +668,7 @@
       [properties]
       {
       alwaysVisible=1;
-      Texture=lightening;
+      Texture=plasmaball;
 
       colorMap = 1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01;
 

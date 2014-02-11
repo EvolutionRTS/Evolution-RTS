@@ -10,7 +10,7 @@
 
 local icontypes = {
   default = {
-	bitmap='icons/hover.png',
+	bitmap='icons/default.png',
     size=1,
     radiusadjust=0.2,
   },
@@ -192,7 +192,7 @@ local icontypes = {
     radiusadjust=0.2
   },
   factory = {
-    bitmap='icons/factories.png',
+    bitmap='icons/factory.png',
     size=1,
     radiusadjust=0.2
   },
