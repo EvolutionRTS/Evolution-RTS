@@ -22,7 +22,7 @@ local unitDef = {
   canstop            = "1",
   category           = "ARMORED NOTAIR SUPPORT",
   corpse             = "ammobox",
-  description        = [[Low Yeild Nuclear Artillery Support Tank
+  description        = [[Endbringer Class Low Yeild Nuclear Artillery
 Armored
 2000 Damage vs Building
 1000 Damage vs Light/Armored

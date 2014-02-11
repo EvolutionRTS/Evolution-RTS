@@ -5,7 +5,7 @@
 
 piece base, turret, sleeve, barrel1, barrel2, firepoint1, firepoint2, wheels1, wheels2, wheels3, wheels4, wheels5, dirt; // these are the pieces of the model 
 
-static-var moving, gun_1; // these are the variables 
+static-var moving, gun_1, shooting_num; // these are the variables 
 
 // #define gdscannon 1024+0 // this is a custom explosion generator thinging 
 
@@ -79,6 +79,7 @@ StopMoving()
 
 Create() // tells it what to do on creation 
 {
+		shooting_num=1;
         start-script Thrust(); 
         start-script SmokeUnit(); 
 } 
@@ -104,7 +105,22 @@ return (1);
 
 FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
 { 
-		emit-sfx shot from firepoint1;
+         if(shooting_num==1)
+         {
+         	emit-sfx 1024 from firepoint2;
+         }
+
+         if(shooting_num==2)
+         {
+         	emit-sfx 1024 from firepoint1;
+         }
+	
+   shooting_num=shooting_num+1;
+
+            if( shooting_num == 3)
+            {  
+            	shooting_num=1;
+            }
 } 
 
 AimFromWeapon1(piecenum) // where it aims the weapon from 
@@ -114,34 +130,15 @@ piecenum = sleeve;
 
 QueryWeapon1(piecenum) // where the shot is called from 
 { 
-piecenum = firepoint1; 
-} 
+if (shooting_num==1) 
+     {  
+     	piecenum=firepoint1;     
+     }
 
-AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
-{ 
-signal SIG_AIM_2; 
-set-signal-mask SIG_AIM_2;
-turn turret to y-axis heading speed <255>; 
-turn sleeve to x-axis <0> - pitch speed <150>;  
-wait-for-turn turret around y-axis;
-wait-for-turn sleeve around x-axis;  
-start-script RestoreAfterDelay(); 
-return (1); 
-} 
-
-FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets 
-{ 
-		emit-sfx shot from firepoint2;
-} 
-
-AimFromWeapon2(piecenum) // where it aims the weapon from 
-{ 
-piecenum = sleeve; 
-} 
-
-QueryWeapon2(piecenum) // where the shot is called from 
-{ 
-piecenum = firepoint2; 
+     if (shooting_num==2)
+     {   
+     	piecenum=firepoint2;
+     } 
 } 
 
 Killed(severity, corpsetype) // how it explodes 

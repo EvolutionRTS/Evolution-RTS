@@ -22,7 +22,7 @@ local unitDef = {
   cantBeTransported  = true,
   category           = "ARMORED NOTAIR SKIRMISHER",
   corpse             = "ammobox",
-  description        =[[Destroyer Class Walker
+  description        =[[Endbringer Class Base Assault Walker
 Armored
 
 Primary Laser:
@@ -60,7 +60,7 @@ Uses +25 Supply]],
   repairable		 = false,
  selfDestructAs     = "krabblast",
   shootme            = "1",
-  sightDistance      = 500,
+  sightDistance      = 1000,
   smoothAnim         = true,
   turnInPlace        = true,
   turnRate           = 1000,
@@ -139,7 +139,7 @@ local weaponDefs = {
     lineOfSight        = true,
     minintensity       = "1",
     name               = "Laser",
-    range              = 500,
+    range              = 1000,
     reloadtime         = 1,
     WeaponType         = "BeamLaser",
     rgbColor           = "1 0 1",
@@ -180,7 +180,7 @@ local weaponDefs = {
 	interceptedByShieldType = 4,
     name               = "Concussion Cannon",
     pitchtolerance     = "500",
-    range              = 500,
+    range              = 1000,
     reloadtime         = 1,
     weaponType		   = "Cannon",
     soundHit           = "explode2",

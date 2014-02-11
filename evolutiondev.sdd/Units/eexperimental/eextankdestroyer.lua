@@ -21,7 +21,7 @@ local unitDef = {
   canstop            = "1",
   category           = "ARMORED AMPHIB SKIRMISHER",
   corpse             = "ammobox",
-  description        = [[Destroyer Class Tank Killer
+  description        = [[Endbringer Class Tank Destroyer
 Armored
 
 Main Cannon:

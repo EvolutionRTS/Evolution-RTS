@@ -85,7 +85,7 @@ local unitDef = {
   zbuffer            = "1",
    sfxtypes = {
     explosiongenerators = {
-      "custom:emgcannon",
+      "custom:gdhcannon",
 	  "custom:dirt",
     },
   },
@@ -100,10 +100,6 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "flashweapon",
-      onlyTargetCategory = "NOTAIR AMPHIB",
-    },
-    [2]  = {
       def                = "flashweapon",
       onlyTargetCategory = "NOTAIR AMPHIB",
     },
