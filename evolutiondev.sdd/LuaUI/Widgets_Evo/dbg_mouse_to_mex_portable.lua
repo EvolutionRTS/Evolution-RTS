@@ -30,7 +30,7 @@ function widget:KeyPress(key, modifier, isRepeat)
 			if enabled then
 				for i = 1, #spots do
 					local spot = spots[i]
-					Spring.Echo("{x = " .. floor(spot.x+0.5) .. ", z = " .. floor(spot.z+0.5) .. ", metal = false},")
+					Spring.Echo("		[00] = {x = " .. floor(spot.x+0.5) .. ", z = " .. floor(spot.z+0.5) .. ", metal = false},")
 				end
 				spots = {}
 			end

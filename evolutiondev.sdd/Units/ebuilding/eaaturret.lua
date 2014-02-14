@@ -49,7 +49,7 @@ local unitDef = {
  	}, 
 
     explosiongenerators = {
-      "custom:gdmcannon",
+      "custom:gdhcannon",
 	  "custom:needspower",
 	  "custom:blacksmoke",
     },

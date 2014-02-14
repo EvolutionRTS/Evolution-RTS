@@ -70,7 +70,7 @@ Uses +10 Supply]],
  	}, 
 
     explosiongenerators = {
-      "custom:gdmcannon",
+      "custom:gdhcannon",
       "custom:dirt",
 	  "custom:blacksmoke",
     },
