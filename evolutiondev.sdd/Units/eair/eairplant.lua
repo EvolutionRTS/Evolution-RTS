@@ -37,7 +37,8 @@ local unitDef = {
   metalMake          = 0,
   mobilestandorders  = "1",
   name               = "Aircraft Plant",
-  objectName         = "eairplant.s3o",
+  objectName         = "eairplant2.s3o",
+  script			 = "eairplant2.cob",
   radarDistance      = 0,
   repairable		 = false,
   selfDestructAs     = "LARGE_BUILDING",
@@ -49,7 +50,7 @@ local unitDef = {
 --  unitRestricted	 = 1,
   unitnumber         = "83",
   workerTime         = 1,
-  yardMap            = "cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc cccccccccccccccccc",
+  yardMap            = "oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo",
 --  usePieceCollisionVolumes = true,
 
   sfxtypes = { 
@@ -62,6 +63,7 @@ local unitDef = {
       "custom:nanoorb",
       "custom:nano",
 	  "custom:blacksmoke",
+	  "custom:fusionreactionbasic",
     },
   },
   zbuffer            = "1",
@@ -83,7 +85,7 @@ local unitDef = {
    customParams = {
    	death_sounds = "generic",
 	armortype   = "building", 
-	normaltex = "unittextures/eairplantnormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 --	ProvideTech = "1 Powergrid",
 --    ProvideTechRange = "1500",
 --	groundtexselectimg = ":nc:bitmaps/power/powergrid.png",
