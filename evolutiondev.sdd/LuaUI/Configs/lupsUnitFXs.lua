@@ -44,9 +44,10 @@ effectUnitDefs = {
 	},
 
 	edrone = {
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="engine1", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=15, piece="engine2", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=15, piece="engine3", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
 	},
 	esolar2 = {
 --    {class='StaticParticles', options=corfusNova},
@@ -144,7 +145,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,280,30}, size=55, precision=22, strength   = 0.015,  repeatEffect=true}},
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,280,30}, size=55, precision=22, strength   = 0.015,  repeatEffect=true}},
   },
 
 	eexperimentalfac = {
