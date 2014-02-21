@@ -38,8 +38,8 @@ local damageClasses = {
 			BUILDING 	= 1,
 		},
 		elighttank3	= {
-			ARMORED		= 0.5,
-			LIGHT		= 0.5,
+			ARMORED		= 1,
+			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		eheavytank3	= {

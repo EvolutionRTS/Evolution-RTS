@@ -23,8 +23,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Raider
 Light
-45 Damage vs Light/Armored
-90 Damage vs Building
+40 Damage vs Light/Armored/Building
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -135,7 +134,7 @@ local weaponDefs = {
 	  damagetype		= "elighttank3",  
     },      
     damage = {
-      default           = 80,
+      default           = 40,
     },
   },
 }

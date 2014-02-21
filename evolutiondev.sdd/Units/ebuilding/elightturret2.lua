@@ -46,7 +46,7 @@ Building
 -- script			 = "elightturret2-script.lua",
   selfDestructAs     = "MEDIUM_BUILDING",
   side               = "CORE",
-  sightDistance      = 500,
+  sightDistance      = 750,
   smoothAnim         = true,
   unitname           = "elightturret2",
   workerTime         = 0,
