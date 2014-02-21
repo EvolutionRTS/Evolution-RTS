@@ -26,7 +26,7 @@ options = {
 		name = "Enable Timeout",
 		type = 'bool',
 		value = true,
-		desc = "When enabled, the key must be pressed twice in quick sucession to zoom to a control group.",
+		desc = "When enabled, the key must be pressed twice in quick succession to zoom to a control group.",
 	},
 	timeoutlength = {
 		name = "Double Press Speed", 
@@ -71,7 +71,7 @@ local function GroupRecallFix(key, modifier, isRepeat)
 			local selectedUnit = spGetSelectedUnits()
 			local groupCount = spGetGroupList() --get list of group with number of units in them
 			
-			-- First check that the selectio and group in question are the same size.
+			-- First check that the selection and group in question are the same size.
 			if groupCount[group] ~= #selectedUnit then
 				previousKey = key
 				previousTime = spGetTimer()
