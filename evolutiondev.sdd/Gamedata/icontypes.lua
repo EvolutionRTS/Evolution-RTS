@@ -142,9 +142,9 @@ local icontypes = {
   },
   
   allterrraider = {
-    bitmap='icons/allterrraider.png',
+    bitmap='icons/raider.png',
     size=2,
-    radiusadjust=0.2
+    radiusadjust=0
   },
   
   allterrtankdestroyer = {

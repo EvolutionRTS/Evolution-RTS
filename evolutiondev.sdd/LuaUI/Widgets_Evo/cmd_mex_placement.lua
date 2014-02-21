@@ -115,7 +115,7 @@ local MINIMAP_DRAW_SIZE = math.max(mapX,mapZ) * 0.0145
 
 local mexUnitDef				= UnitDefNames["emetalextractor"]
 local referenceLandMexId		= mexUnitDef.id	
-local referenceUnderWaterMexId	= UnitDefNames["euwmetalextractor"].id
+local referenceUnderWaterMexId	= UnitDefNames["emetalextractor"].id
 
 local mexDefIDs = {	
 					[referenceLandMexId]			= referenceLandMexId,
