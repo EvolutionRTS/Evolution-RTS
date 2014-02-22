@@ -118,7 +118,7 @@ Uses +3 Supply]],
 local weaponDefs = {
   riottankempweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
-    AreaOfEffect       = 100,
+    AreaOfEffect       = 250,
     avoidFeature       = false,
     avoidFriendly      = false,
     collideFeature     = false,
@@ -126,6 +126,7 @@ local weaponDefs = {
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.05,
+	edgeeffectiveness  = 0.1,
     energypershot      = 10,
     explosionGenerator = "custom:genericshellexplosion-medium-blue",
     fallOffRate        = 1,
