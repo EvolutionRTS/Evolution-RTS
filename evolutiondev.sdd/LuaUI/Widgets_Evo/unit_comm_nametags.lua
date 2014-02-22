@@ -151,6 +151,7 @@ end
 
 
 function widget:DrawWorld()
+if not Spring.IsGUIHidden() then 
   glDepthTest(true)
   glAlphaTest(GL_GREATER, 0)
 
@@ -206,6 +207,7 @@ function widget:DrawWorld()
   glColor(1,1,1,1)
   glTexture(false)
   glDepthTest(false)
+end
 end
 
 function widget:UnitCreated( unitID,  unitDefID,  unitTeam)
