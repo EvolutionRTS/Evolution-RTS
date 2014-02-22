@@ -46,6 +46,7 @@ local defense = {
 
 local aux = {	--merged into special
 	eorb = {order = 0, row = 1},
+	ecommander = {order = 1, row = 1},
 	eradar2 = {order = 0, row = 2},
 	ejammer2 = {order = 1, row = 2},
 }

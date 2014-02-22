@@ -9,7 +9,7 @@ local unitDef = {
   acceleration       = 0.2,
   brakeRate          = 1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 500,
+  buildCostMetal     = 150,
   buildDistance      = 1000,
   builder            = true,
   buildTime          = 2.5,
@@ -28,6 +28,8 @@ local unitDef = {
   description        = [[Armored
   
   • Armed with a small emp weapon capable of disabling light units for a short period of time (Must be manually fired!)
+  
+  • EMP costs 50 energy to fire
   
   There can only be one!]],
   energyMake         = 0,
@@ -131,11 +133,8 @@ local unitDef = {
     cancollect = "1",
 	armortype   = "light",
 	nofriendlyfire	= "1",
-	RequireTech = "20 Power",
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
-	helptext       = [[The Overseer has an EMP defense shockwave weapon that can be triggered every 10 seconds (default "D"). It costs 50 energy, so use it wisely.
-	
-	You can use this EMP to your advantage and use it offensively as well as defensively. For example, in the early game, you could use your Overseer aggressively in order to stun enemy raiders and get some free kills.]],
+	helptext       = [[]],
   },
 }
 

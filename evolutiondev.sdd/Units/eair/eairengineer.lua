@@ -108,6 +108,7 @@ local unitDef = {
     "esilo",
 	"emine",
 	"eorb",
+	"ecommander",
   },
   sounds = {
     underattack        = "unitsunderattack1",

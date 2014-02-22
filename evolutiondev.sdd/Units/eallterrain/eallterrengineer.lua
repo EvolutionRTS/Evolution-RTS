@@ -117,6 +117,7 @@ Light]],
     "esilo",
 	"emine",
 	"eorb",
+	"ecommander",
   },
   sounds = {
     underattack        = "unitsunderattack1",
