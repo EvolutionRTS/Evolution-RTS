@@ -52,7 +52,8 @@ end
 
 
 
-function gadget:UnitDestroyed(u, ud, team)
+function gadget:UnitDestroyed(u, ud, team, attackerID)
+if attackerID ~= nil then --Add this so that units who are destroyed via lua (like salvaging) or self destructed, will not play an overlapping sound effect
 	if SoldierDeath[ud] and GetUnitNeutral(u) == false then
 		randomPick = math_rand(1,32)
 		x,y,z = GetUnitPosition(u)
@@ -243,6 +244,7 @@ function gadget:UnitDestroyed(u, ud, team)
 		elseif randomPick == 4 then
 			PlaySoundFile("sounds/nuke/nuke4.wav",15, x, y, z )
 	end
+end
 end
 end
 end
