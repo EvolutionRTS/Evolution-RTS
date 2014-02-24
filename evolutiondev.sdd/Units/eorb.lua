@@ -23,8 +23,8 @@ local unitDef = {
   canHover           = true,
   canMove            = true,
   canPatrol          = true,
-  canreclamate       = "1",
-  canstop            = "1",
+  canreclam			 = false,
+  canstop            = true,
   category           = "LIGHT NOTAIR SUPPORT",
   description        = [[Field Medic
 Light
@@ -72,7 +72,7 @@ Uses +3 Supply]],
   workerTime         = 1,
   capturespeed       = 0,
   TerraformSpeed     = 100000,
-  ReclaimSpeed       = 1000,
+  ReclaimSpeed       = 0,
   repairspeed        = 0.3125,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 

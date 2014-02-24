@@ -105,7 +105,7 @@ end
 function gadget:GameFrame(n)
 
 	-- Give a trickle of resources to teams
-	if n%30 == 4 then
+	if n%32 == 4 then
 		local mexIncome = getMexIncomes()
 		for _,i in ipairs(Spring.GetTeamList()) do
 			local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
@@ -133,7 +133,7 @@ function gadget:GameFrame(n)
 		end
 	end
 
-	if n%1800 == 1 then
+	if n%1920 == 1 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then

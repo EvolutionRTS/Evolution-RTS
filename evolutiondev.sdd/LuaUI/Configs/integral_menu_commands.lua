@@ -157,6 +157,7 @@ local overrides = {
 	[CMD.MOVE] = { texture = imageDir .. 'Bold/move.png'},
 	[CMD.PATROL] = { texture = imageDir .. 'Bold/patrol.png'},
 	[CMD.WAIT] = { texture = imageDir .. 'Bold/wait.png'},
+	[CMD.CAPTURE] = { texture = imageDir .. 'Bold/capture.png'},
 	
 	[CMD.REPAIR] = {texture = imageDir .. 'Bold/repair.png'},
 	[CMD.RECLAIM] = {texture = imageDir .. 'Bold/reclaim.png'},

@@ -22,14 +22,12 @@ local unitDef = {
   canGuard           = true,
   canMove            = true,
   canPatrol          = true,
-  canreclamate       = "1",
-  canstop            = "1",
+  canreclam			 = false,
+  canstop            = true,
   category           = "NOTAIR SUPPORT LIGHT",
   description        = [[Armored
   
   • Armed with a small emp weapon capable of disabling light units for a short period of time (Must be manually fired!)
-  
-  • EMP costs 50 energy to fire
   
   There can only be one!]],
   energyMake         = 0,
@@ -72,7 +70,7 @@ local unitDef = {
   workerTime         = 1,
   capturespeed       = 0.25,
   TerraformSpeed     = 100000,
-  ReclaimSpeed       = 1000,
+  ReclaimSpeed       = 0,
   -- 0.03125 = 1 hp per second
   repairspeed        = 0.15625,
   sfxtypes = {
@@ -123,7 +121,7 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "emp",
+      def                = "emptesla",
     },
   },
   customParams = {
@@ -144,11 +142,12 @@ local weaponDefs        = {
   emp                   = {
     AreaOfEffect        = 500,
     avoidFriendly       = false,
+	avoidFeature        = false,
     collideFriendly     = false,
 	commandfire		    = true,
-    explosionGenerator  = "custom:EMPOVERSEERSHOT",
+    explosionGenerator  = "custom:genericshellexplosion-large-lightning",
     tolerance           = 1000,
-	energypershot       = 50,
+	energypershot       = 0,
 	explosionScar		= false,
     impulseFactor       = 0,
     name                = "Emp Blast Weapon",
@@ -168,6 +167,44 @@ local weaponDefs        = {
     },      
     damage              = {
       default           = 1000,
+    },
+  },
+  
+  emptesla = {
+    badTargetCategory = [[ARMORED BUILDING]],
+    AreaOfEffect       = 500,
+    avoidFriendly      = false,
+    collideFriendly    = false,
+    avoidFeature       = false,
+	commandfire		    = true,
+    craterBoost        = 0,
+    craterMult         = 0,
+    explosionGenerator = "custom:genericshellexplosion-large-lightning",
+	energypershot      = 2,
+    impulseBoost       = 0,
+    impulseFactor      = 0,
+    interceptedByShieldType = 4,
+    lineOfSight        = false,
+    noSelfDamage       = true,
+    paralyzer		    = true,
+	paralyzetime	    = 5,
+    range               = 500,
+    reloadtime          = 0.1,
+    WeaponType         = "LightningCannon",
+    rgbColor           = "0.1 0.2 0.5",
+    rgbColor2          = "0 0 1",
+    soundStart         = "emp.wav",
+    startsmoke         = "1",
+    texture1           = "lightning",
+    thickness          = 5,
+    turret             = true,
+    weaponVelocity     = 10000,
+	customparams = {
+	  damagetype		= "default",
+	  nofriendlyfire	= 1,
+    },      
+    damage = {
+      default           = 40,
     },
   },
 }

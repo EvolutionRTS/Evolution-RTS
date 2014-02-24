@@ -22,8 +22,8 @@ local unitDef = {
   canGuard           = true,
   canMove            = true,
   canPatrol          = true,
-  canreclamate       = "1",
-  canstop            = "1",
+  canreclam			 = false,
+  canstop            = true,
   category           = "LIGHT AMPHIB SUPPORT",
   description        = [[Engineer
 Light]],
@@ -67,7 +67,7 @@ Light]],
   workerTime         = 1,
   capturespeed       = 1,
   TerraformSpeed     = 100000,
-  ReclaimSpeed       = 1000,
+  ReclaimSpeed       = 0,
   repairspeed        = 0.15625,
   sfxtypes = { 
 	 pieceExplosionGenerators = { 

@@ -93,6 +93,7 @@ return {
 	{	"groupclear",	"Shift+q",},
 	{	"repair",	"r",},
 	{	"stop",	"s",},
+	{	"sell",	"Shift+v",},
 	{	"unloadunits",	"u",},
 	{	"pastetext",	"Ctrl+v",},
 	{	"wait",	"w",},
