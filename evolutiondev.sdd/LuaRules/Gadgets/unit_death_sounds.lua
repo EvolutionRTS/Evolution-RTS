@@ -1,5 +1,3 @@
-Spring.Echo ('This is my dick, there are many like it but this one is mine')
-
 function gadget:GetInfo()
 	return {
 		name = "Randomised Death Sounds",
