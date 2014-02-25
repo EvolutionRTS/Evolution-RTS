@@ -60,16 +60,18 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 
-	function gadget:UnitDestroyed(unitID, unitDefID, teamId)
-		local soundClass = udSoundCache[unitDefID]
-		-- Spring.Echo (soundClass)
-		-- Spring.Echo (soundClasses)
-		-- Spring.Echo (soundClassSizes)
-		if soundClass then
-			local choice = random(soundClassSizes[soundClass])
-			local x, y, z = GetUnitPosition(unitID)
-			local volume = udVolumeCache[unitDefID]
-			PlaySoundFile(soundClasses[soundClass][choice], volume, x, y, z)
+	function gadget:UnitDestroyed(unitID, unitDefID, teamId,attackerID)
+		if attackerID ~= nil then --Add this so that units who are destroyed via lua (like salvaging) or self destructed, will not play an overlapping sound effect
+			local soundClass = udSoundCache[unitDefID]
+			-- Spring.Echo (soundClass)
+			-- Spring.Echo (soundClasses)
+			-- Spring.Echo (soundClassSizes)
+			if soundClass then
+				local choice = random(soundClassSizes[soundClass])
+				local x, y, z = GetUnitPosition(unitID)
+				local volume = udVolumeCache[unitDefID]
+				PlaySoundFile(soundClasses[soundClass][choice], volume, x, y, z)
+			end
 		end
 	end
 
