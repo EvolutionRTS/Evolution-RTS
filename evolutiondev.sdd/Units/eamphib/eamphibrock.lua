@@ -107,7 +107,7 @@ Uses +5 Supply]],
    customParams = {
 	canareaattack="1",
     needed_cover = 2,
-   	death_sounds = "soldier",
+   	death_sounds = "generic",
     RequireTech = "5 Power",
 	armortype   = "light",
 	supply_cost = 5,

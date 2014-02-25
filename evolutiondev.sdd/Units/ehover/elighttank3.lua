@@ -91,7 +91,7 @@ sfxtypes = {
   },
   customParams = {
     needed_cover = 1,
-	death_sounds = "soldier",
+	death_sounds = "generic",
     RequireTech = "3 Power",
 	armortype   = "light",
 	supply_cost = 3,

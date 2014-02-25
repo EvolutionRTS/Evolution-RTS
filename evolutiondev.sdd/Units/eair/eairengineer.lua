@@ -121,7 +121,7 @@ local unitDef = {
   },
   customParams = {
 --    needed_cover = 2,
-	death_sounds = "soldier",
+	death_sounds = "generic",
 --    airdronespawner = "1",
 	armortype   = "light",
 	normaltex = "unittextures/con_legonormal.png", 

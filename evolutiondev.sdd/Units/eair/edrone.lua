@@ -93,7 +93,7 @@ Light
   customParams = {
 --    needed_cover = 1,
 	armortype   = "light",
-  	death_sounds = "soldier",
+  	death_sounds = "generic",
 	normaltex = "unittextures/lego2skin_explorernormal.dds",  
   },
 }
@@ -116,7 +116,7 @@ local weaponDefs = {
     craterMult         = 0,
     duration           = 0.05,
 	energypershot      = 0.3,
-    explosionGenerator = "custom:burn",
+    explosionGenerator = "custom:genericshellexplosion-sparks",
     fallOffRate        = 0.1,
     impulseFactor      = 0,
     interceptedByShieldType = 4,

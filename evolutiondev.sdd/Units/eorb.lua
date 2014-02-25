@@ -97,7 +97,7 @@ Uses +3 Supply]],
   },
   customParams = {
     needed_cover = 2,
-  	death_sounds = "soldier",
+  	death_sounds = "generic",
     cancollect = "1",
 	armortype   = "light",
 	normaltex = "unittextures/lego2skin_explorernormal.dds",  

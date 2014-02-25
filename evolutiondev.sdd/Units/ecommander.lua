@@ -121,13 +121,13 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "emptesla",
+      def                = "emp",
     },
   },
   customParams = {
 	iscommander = true,
     needed_cover = 2,
-	death_sounds = "soldier",
+	death_sounds = "generic",
     cancollect = "1",
 	armortype   = "light",
 	nofriendlyfire	= "1",

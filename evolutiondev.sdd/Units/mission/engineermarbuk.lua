@@ -114,7 +114,7 @@ local unitDef = {
   },
   customParams = {
     needed_cover = 1,
-  	death_sounds = "soldier",
+  	death_sounds = "generic",
 	twokhotkey = 'e',
     dronespawner = "1",
 	armortype   = "light",

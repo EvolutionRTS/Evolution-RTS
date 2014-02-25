@@ -96,7 +96,7 @@ Must be forcefired on the target]],
   },
    customParams = {
 --    needed_cover = 2,
-	death_sounds = "soldier",
+	death_sounds = "generic",
 	nofriendlyfire = "1",
     RequireTech = "10 Power",
 	armortype   = "armored",

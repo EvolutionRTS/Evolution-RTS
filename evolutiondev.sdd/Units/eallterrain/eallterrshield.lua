@@ -103,7 +103,7 @@ Requires +5 Power
   },
    customParams = {
     needed_cover = 3,
-	death_sounds = "soldier",
+	death_sounds = "generic",
     RequireTech = "5 Power",
 	armortype   = "light",
 	supply_cost = 5,

@@ -95,7 +95,7 @@ local unitDef = {
   
    customParams = {
 --    needed_cover = 2,
-	death_sounds = "soldier",
+	death_sounds = "generic",
 	twokhotkey = 't',
 	nofriendlyfire = "1",
     RequireTech = "10 Power",

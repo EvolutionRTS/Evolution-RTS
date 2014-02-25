@@ -106,7 +106,7 @@ Uses +6 Supply]],
   },
    customParams = {
     needed_cover = 3,
-   	death_sounds = "soldier",
+   	death_sounds = "generic",
     RequireTech = "6 Power",
 	armortype   = "armored",
 	supply_cost = 6,

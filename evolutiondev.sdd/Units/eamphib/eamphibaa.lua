@@ -96,7 +96,7 @@ Uses +2 Supply]],
   },
    customParams = {
     needed_cover = 2,
-   	death_sounds = "soldier",
+   	death_sounds = "generic",
     RequireTech = "2 Power",
 	armortype   = "light",
 	supply_cost = 2,

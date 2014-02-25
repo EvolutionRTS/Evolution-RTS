@@ -82,7 +82,7 @@ sfxtypes = {
   
   customParams = {
     needed_cover = 1,
-  	death_sounds = "soldier",
+  	death_sounds = "generic",
 	armortype   = "armored",
 	nofriendlyfire	= "1",
 	armortype   = "building",

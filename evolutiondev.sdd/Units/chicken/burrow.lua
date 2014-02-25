@@ -61,6 +61,7 @@ local unitDef = {
   weapons = {
   },
   customParams = {
+	death_sounds = "generic",
     ProvideTech = "50 Power",
 	armortype   = "building",
 	supply_granted = 200,
