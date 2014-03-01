@@ -148,6 +148,9 @@ local weaponDefs = {
 	waterweapon		   = true,
 	customparams = {
 	  damagetype		= "eamphibarty",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 300,

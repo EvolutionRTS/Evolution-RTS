@@ -143,6 +143,9 @@ local weaponDefs = {
     weaponVelocity     = 1000,
 	customparams = {
 	  damagetype		= "eextankdestroyer",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 500,
@@ -184,7 +187,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 	customparams = {
-	  damagetype		= "eextankdestroyer",  
+	  damagetype		= "eextankdestroyer", 
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 12,

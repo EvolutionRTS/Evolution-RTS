@@ -143,6 +143,9 @@ local weaponDefs = {
     weaponVelocity     = 2500,
 	customparams = {
 	  damagetype		= "eamphibaa",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 30,

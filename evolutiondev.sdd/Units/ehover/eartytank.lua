@@ -133,7 +133,10 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 500,
 	customparams = {
-	  damagetype		= "eartytank",  
+	  damagetype		= "eartytank", 
+
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",	  
     },  
     damage = {
       default           = 200,

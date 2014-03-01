@@ -153,6 +153,9 @@ local weaponDefs = {
 	waterweapon		   = true,
 	customparams = {
 	  damagetype		= "eamphibmedtank",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 28, -- multiply * 1.2 for correct dps output

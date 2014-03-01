@@ -131,6 +131,9 @@ local weaponDefs = {
     weaponVelocity     = 800,
 	customparams = {
 	  damagetype		= "eheavytank3",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     },      
     damage = {
      default         = 150,

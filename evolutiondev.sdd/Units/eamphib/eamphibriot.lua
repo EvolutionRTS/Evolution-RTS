@@ -154,6 +154,9 @@ local weaponDefs = {
 	customparams = {
 	  damagetype		= "eamphibriot",  
 	  nofriendlyfire	= 1,
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 200,

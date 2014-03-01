@@ -153,6 +153,9 @@ local weaponDefs = {
     weaponVelocity     = 1800,
 	customparams = {
 	  damagetype		= "emissiletank",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     },      
     damage = {
       default           = 150,

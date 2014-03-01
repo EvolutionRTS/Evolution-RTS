@@ -126,6 +126,9 @@ local weaponDefs = {
    customparams = {
 	  damagetype		= "ebomb",
 	  nofriendlyfire	= "true", 
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     },  
 
     damage = {

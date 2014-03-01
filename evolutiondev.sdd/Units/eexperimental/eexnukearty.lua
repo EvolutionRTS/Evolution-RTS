@@ -128,6 +128,9 @@ local weaponDefs = {
     weaponVelocity     = 800,
 	customparams = {
 	  damagetype		= "eexnukearty",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 2000,

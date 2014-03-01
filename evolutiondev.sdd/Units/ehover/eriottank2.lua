@@ -155,6 +155,9 @@ local weaponDefs = {
 	customparams = {
 	  damagetype		= "eriottank2",  
 	  nofriendlyfire	= 1,
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 200,

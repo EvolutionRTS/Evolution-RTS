@@ -156,6 +156,9 @@ local weaponDefs = {
     weaponVelocity     = 800,
 	customparams = {
 	  damagetype		= "eexkrabgroth",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 600,
@@ -191,6 +194,9 @@ local weaponDefs = {
     weaponVelocity     = 5000,
 	customparams = {
 	  damagetype		= "eexkrabgroth",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     },
     damage = {
       default            = 80,

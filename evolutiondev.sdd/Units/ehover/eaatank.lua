@@ -151,6 +151,9 @@ local weaponDefs = {
 	customparams = {
 	  damagetype		= "eaatank",  
 	  nofriendlyfire	= 1,
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     },
     damage = {
       default            = 105,

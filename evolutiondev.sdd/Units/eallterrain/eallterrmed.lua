@@ -154,6 +154,9 @@ local weaponDefs = {
     weaponVelocity     = 600,
 	customparams = {
 	  damagetype		= "eallterrmed",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
     }, 
     damage = {
       default           = 200,

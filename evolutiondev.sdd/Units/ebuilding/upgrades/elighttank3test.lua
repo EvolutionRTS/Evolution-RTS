@@ -1,92 +1,80 @@
--- UNITDEF -- EALLTERRLIGHT --
+-- UNITDEF -- ELIGHTTANK3TEST --
 --------------------------------------------------------------------------------
 
-local unitName = "eallterrlight"
+local unitName = "elighttank3test"
 
 --------------------------------------------------------------------------------
 
 local unitDef = {
-
   acceleration       = 1,
-  brakeRate          = 1,
+  brakeRate          = 0.1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 22,
+  buildCostMetal     = 27,
   builder            = false,
   buildTime          = 5,
   canAttack          = true,
   cancollect         = "1",
   canGuard           = true,
+  canHover           = true,
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
   category           = "LIGHT NOTAIR RAID",
   corpse             = "ammobox",
-  
--- Cloaking
-
-	cancloak		 = true,
-	cloakCost		 = 2,
-	cloakCostMoving	 = 2,
-	minCloakDistance = 70,
-	decloakOnFire	 = true,
-	decloakSpherical = true,
-	initCloaked		 = false,
-	
--- End Cloaking
-  
   description        = [[Raider
 Light
-50 Damage vs Light
-25 Damage vs Armored/Building
-  
-Requires +2 Power
-Uses +2 Supply]],
+40 Damage vs Light/Armored/Building
+
+Requires +3 Power
+Uses +3 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "SMALL_UNIT",
-  firestandorders    = "1",
-  footprintX         = 4,
-  footprintZ         = 4,
-  iconType           = "allterrraider",
+  footprintX         = 2,
+  footprintZ         = 2,
+  iconType           = "raider",
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 200,
-  maxVelocity        = 5.5,
+  maxDamage          = 250,
+  maxSlope           = 26,
+  maxVelocity        = 5,
   maxReverseVelocity = 2,
-  turninplacespeedlimit = 5.5,
   maxWaterDepth      = 10,
   metalStorage       = 0,
-  movementClass      = "ALLTERRTANK4",
-  name               = "Recluse",
+  movementClass      = "HOVERTANK2",
+  name               = "Kite",
   noChaseCategory    = "VTOL",
-  objectName         = "eallterrlight2.s3o",
+  objectName         = "elighttank4.s3o",
+  script			 = "elighttank3.cob",
   radarDistance      = 0,
   repairable		 = false,
  selfDestructAs     = "SMALL_UNIT",
+  side               = "CORE",
   sightDistance      = 500,
   smoothAnim         = true,
-  stealth			 = true,
-  seismicSignature   = 4,
   seismicDistance    = 500,
-  turnInPlace        = true,
+  --  turnInPlace        = false,
+  --  turnInPlaceSpeedLimit = 5.5,
   turnRate           = 1000,
-  unitname           = "eallterrlight",
-  upright			 = false,
+--  turnrate           = 475,
+  unitname           = "elighttank3test",
+  upright            = true,
   workerTime         = 0,
-    sfxtypes = { 
-	 pieceExplosionGenerators = { 
- 		"deathceg0", 
- 		"deathceg1", 
- 	}, 
 
-    explosiongenerators = {
-      "custom:factorysparks",
-      "custom:dirtsmall",
-	  "custom:blacksmoke",
+sfxtypes = {
+	explosiongenerators = {
+		"custom:factorysparks",
+		"custom:dirt",
+		"custom:blacksmoke",
     },
-  },
+	pieceExplosionGenerators = {
+		"deathceg0",
+		"deathceg1",
+	},	
+},
+
   sounds = {
     underattack        = "unitsunderattack1",
     ok = {
@@ -99,17 +87,17 @@ Uses +2 Supply]],
   weapons = {
     [1]  = {
       def                = "lighttankweapon",
-      badTargetCategory  = "VTOL",
-	  badTargetCategory  = "BUILDING ARMORED WALL",
+      badTargetCategory  = "VTOL ARMORED WALL",
     },
   },
-   customParams = {
+  customParams = {
     needed_cover = 1,
 	death_sounds = "generic",
-    RequireTech = "2 Power",
+    RequireTech = "3 Power",
 	armortype   = "light",
-	supply_cost = 2,
+	supply_cost = 3,
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
+	helptext = [[]],
   },
 }
 
@@ -120,42 +108,35 @@ local weaponDefs = {
   lighttankweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 1,
-    avoidFeature       = false,
     avoidFriendly      = false,
-    collideFeature     = false,
     collideFriendly    = false,
-    coreThickness      = 0.3,
-    duration           = 0.1,
-    energypershot      = 2.5,
-    explosionGenerator = "custom:genericshellexplosion-small-blue",
-    fallOffRate        = 1,
-    fireStarter        = 50,
-	impulseFactor      = 0,
-	interceptedByShieldType = 4,
+    avoidFeature       = false,
+    craterBoost        = 0,
+    craterMult         = 0,
+    explosionGenerator = "custom:genericshellexplosion-medium-lightning",
+	energypershot      = 2,
+    impulseBoost       = 0,
+    impulseFactor      = 0,
+    interceptedByShieldType = 4,
     lineOfSight        = true,
-    minintensity       = "1",
-    name               = "Laser",
-    range              = 350,
-    reloadtime         = 0.5,
-    WeaponType         = "LaserCannon",
-    rgbColor           = "0.5 0.8 1",
-    rgbColor2          = "1 1 1",
-    soundTrigger       = true,
-    soundstart         = "heavycannonGD.wav",
-    texture1           = "shot",
-    texture2           = "empty",
-    thickness          = 6,
-    tolerance          = 1000,
+    noSelfDamage       = true,
+    range              = 500,
+    reloadtime         = 1,
+    WeaponType         = "LightningCannon",
+    rgbColor           = "0.1 0.2 0.5",
+    rgbColor2          = "0 0 1",
+    soundStart         = "jacobs.wav",
+    startsmoke         = "1",
+    texture1           = "lightning",
+    thickness          = 5,
     turret             = true,
-    weaponVelocity     = 2000,
+    weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "eallterrlight",  
-	  
-	  --Upgrades--
 	  upgradeClass		= "groundweapons",
-    }, 
+	  damagetype		= "elighttank3",  
+    },      
     damage = {
-      default           = 50,
+      default           = 40,
     },
   },
 }
