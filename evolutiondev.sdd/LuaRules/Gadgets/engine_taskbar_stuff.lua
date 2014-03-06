@@ -26,7 +26,7 @@ local SetWMCaption = Spring.SetWMCaption or noFunc
 
 function gadget:Initialize()
 	local name = Game.modName
-	SetWMIcon("bitmaps/evologo.png")
+	SetWMIcon("bitmaps/evologo.bmp")
 	SetWMCaption(name .. " (Spring " .. Game.version .. ")", name)
 	gadgetHandler:RemoveGadget()
 end

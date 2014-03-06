@@ -28,9 +28,7 @@ local unitDef = {
 
 Secondary Concussion Cannons:
 160 Damage/s vs Light/Armored
-16 Damage/s vs Buildings
-
-• Flames can hit multiple units]],
+16 Damage/s vs Buildings]],
   energyMake         = 998,
   energyStorage      = 900,
   energyUse          = 0,
@@ -42,9 +40,9 @@ Secondary Concussion Cannons:
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 30000,
+  maxDamage          = 50000,
   maxVelocity        = 2.5,
-  maxReverseVelocity = 0.2,
+  maxReverseVelocity = 1,
   maxWaterDepth      = 80,
   metalmake	         = 998,
   metalStorage       = 900,
@@ -60,7 +58,7 @@ Secondary Concussion Cannons:
   sightDistance      = 1500,
   smoothAnim         = true,
   turnInPlace        = true,
-  turnRate           = 150,
+  turnRate           = 1000,
   unitname           = "queen",
   unitnumber         = "110",
   unitRestricted	 = 1,
@@ -95,11 +93,9 @@ Secondary Concussion Cannons:
     },
 	[2]  = {
       def                = "concussioncannon",
-	  onlyTargetCategory = "LIGHT ARMORED",
     },
 	[3]  = {
       def                = "concussioncannon",
-	  onlyTargetCategory = "LIGHT ARMORED",
     },
   },
    customParams = {
@@ -136,7 +132,7 @@ local weaponDefs = {
     lineOfSight        = true,
     minintensity       = "1",
     name               = "Laser",
-    range              = 1000,
+    range              = 1500,
     reloadtime         = 1,
     WeaponType         = "BeamLaser",
     rgbColor           = "1 0 0",
@@ -178,7 +174,7 @@ local weaponDefs = {
 	interceptedByShieldType = 4,
     name               = "Concussion Cannon",
     pitchtolerance     = "500",
-    range              = 1000,
+    range              = 1500,
     reloadtime         = 1,
     weaponType		   = "Cannon",
     soundHit           = "explode2",
