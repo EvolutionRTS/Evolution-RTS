@@ -92,6 +92,7 @@ Must be forcefired on the target]],
     [1]  = {
       def                = "SBOMB",
       noChaseCategory    = "VTOL",
+	  onlyTargetCategory = "BUILDING",
     },
   },
    customParams = {
