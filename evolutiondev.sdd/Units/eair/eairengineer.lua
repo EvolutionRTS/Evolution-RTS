@@ -57,7 +57,8 @@ local unitDef = {
   moverate1          = "8",
   moveState			 = "2",
   name               = "The Originator",
-  objectName         = "eairengineer.s3o",
+  objectName         = "eairengineer2.s3o",
+  script			 = "eairengineer2.cob",
   radarDistance      = 0,
   repairable		 = false,
  selfDestructAs     = "BIG_UNIT",
@@ -124,7 +125,7 @@ local unitDef = {
 	death_sounds = "generic",
 --    airdronespawner = "1",
 	armortype   = "light",
-	normaltex = "unittextures/con_legonormal.png", 
+	normaltex = "unittextures/lego2skin_explorernormal.dds", 
   },
 }
 
