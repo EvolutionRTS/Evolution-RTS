@@ -111,6 +111,10 @@ sfxtypes = {
 
 local weaponDefs = {
   ebombboom = {
+  avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
    name="hoverbomb",
    weaponType		   = "Cannon",
    ballistic=1,
@@ -126,6 +130,7 @@ local weaponDefs = {
    customparams = {
 	  damagetype		= "ebomb",
 	  nofriendlyfire	= "true", 
+	  nofriendlyfire	= "1",
 	  
 	  --Upgrades--
 	  upgradeClass		= "groundweapons",

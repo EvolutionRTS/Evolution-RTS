@@ -23,10 +23,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Missile support tank
 Light
-100 Damage (per rocket) vs Armored
-50 Damage (per rocket) vs Light/Building
-
-• Fires 5 rockets in a burst pattern
+200 Damage (per rocket) vs Armored
+100 Damage (per rocket) vs Light/Building
 
 Requires +5 Power
 Uses +5 Supply]],
@@ -110,6 +108,7 @@ Uses +5 Supply]],
    	death_sounds = "generic",
     RequireTech = "5 Power",
 	armortype   = "light",
+	nofriendlyfire	= "1",
 	supply_cost = 5,
 	normaltex = "unittextures/lego2skin_explorernormal.dds",  
   },
@@ -123,37 +122,34 @@ local weaponDefs = {
   antiarmorrockets = {
     badTargetCategory = [[LIGHT BUILDING]],
     AreaOfEffect       = 100,
-    avoidFriendly      = false,
+	avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
     cegTag             = "missiletrailsmall",
-    collideFriendly    = false,
     explosionGenerator = "custom:genericshellexplosion-medium-red",
 	energypershot      = 5,
     fireStarter        = 70,
-    guidance           = false,
-    id                 = 136,
+    tracks             = true,
 	impulseFactor      = 0,
     interceptedByShieldType = 4,
-    lineOfSight        = true,
-    metalpershot       = 0,
-    model              = "missilesmallvlaunch.s3o",
+    model              = "missilesmalllauncher.s3o",
     name               = "Rockets",
     range              = 700,
-    reloadtime         = 0.4,
-    weaponType		   = "Cannon",
-    selfprop           = true,
-    smokedelay         = ".1",
+    reloadtime         = 1,
+    weaponType		   = "MissileLauncher",
     smokeTrail         = false,
     soundStart         = "rocket1.wav",
     soundHit           = "explode5.wav",
-    startsmoke         = "0",
     startVelocity      = 250,
---	sprayangle		   = 2000,
     tolerance          = 8000,
-    turnrate           = 4680,
+    turnrate           = 2500,
+	predictBoost	   = 0.5,
     turret             = true,
-    weaponAcceleration = 131,
-    weaponTimer        = 5,
-    weaponVelocity     = 350,
+    weaponAcceleration = 50,
+    flightTime         = 5,
+	trajectoryHeight   = 1.5,
+    weaponVelocity     = 500,
 	customparams = {
 	  damagetype		= "eamphibrock",  
 	  
@@ -161,7 +157,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     },     
     damage = {
-      default           = 100,
+      default           = 200,
     },
   },
 }

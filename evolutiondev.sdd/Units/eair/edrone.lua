@@ -94,6 +94,7 @@ Light
 --    needed_cover = 1,
 	armortype   = "light",
   	death_sounds = "generic",
+	nofriendlyfire	= "1",
 	normaltex = "unittextures/lego2skin_explorernormal.dds",  
   },
 }
@@ -105,12 +106,12 @@ local weaponDefs = {
   droneweapon = {
     accuracy           = 500,
     AreaOfEffect       = 1,
-    avoidFeature       = false,
     avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
     beamTime           = 0.2,
     beamWeapon         = true,
-    collideFeature     = false,
-    collideFriendly    = false,
     coreThickness      = 0.5,
     craterBoost        = 0,
     craterMult         = 0,

@@ -23,7 +23,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Raider
 Light
-40 Damage vs Light/Armored/Building
+43 Damage vs Light/Armored/Building
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -94,6 +94,7 @@ sfxtypes = {
 	death_sounds = "generic",
     RequireTech = "3 Power",
 	armortype   = "light",
+	nofriendlyfire	= "1",
 	supply_cost = 3,
 	normaltex = "unittextures/lego2skin_explorernormal.dds", 
 	helptext = [[]],
@@ -107,9 +108,10 @@ local weaponDefs = {
   lighttankweapon = {
     badTargetCategory = [[ARMORED BUILDING]],
     AreaOfEffect       = 1,
-    avoidFriendly      = false,
-    collideFriendly    = false,
+	avoidFriendly      = false,
     avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
     craterBoost        = 0,
     craterMult         = 0,
     explosionGenerator = "custom:genericshellexplosion-medium-lightning",
@@ -137,7 +139,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     },      
     damage = {
-      default           = 40,
+      default           = 43,
     },
   },
 }
