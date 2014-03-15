@@ -25,7 +25,7 @@ local unitDef = {
   collide            = true,
   corpse             = "ammobox",
   cruiseAlt          = 400,
-  description        = [[Fighter
+  description        = [[Air Superiority Fighter
 Light
 300 Damage vs Light/Armored/s
 75 Damage vs Building/s
