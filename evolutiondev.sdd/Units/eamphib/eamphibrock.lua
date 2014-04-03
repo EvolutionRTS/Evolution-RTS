@@ -23,8 +23,9 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Missile support tank
 Light
-200 Damage (per rocket) vs Armored
-100 Damage (per rocket) vs Light/Building
+200 Paralysis Damage vs Light
+100 Paralysis Damage vs Armored/Building
+20 Damage vs All
 
 Requires +5 Power
 Uses +5 Supply]],
@@ -152,7 +153,8 @@ local weaponDefs = {
     weaponVelocity     = 500,
 	customparams = {
 	  damagetype		= "eamphibrock",  
-	  
+	  single_hit		= true,
+	  extra_damage		= 20,
 	  --Upgrades--
 	  upgradeClass		= "groundweapons",
     },     

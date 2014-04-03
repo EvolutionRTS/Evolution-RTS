@@ -31,43 +31,31 @@ local echo = Spring.Echo
 -- HTML color names, colors should be a "wheel"
 colors = {
 
---[[
-	-- bluish
-	{'Navy',			'#000080'};
-	{'Blue',			'#0000FF'};
-	{'SkyBlue', 		'#87CEEB'};
-	{'Cyan', 			'#00FFFF'};
-	
-	-- greenish
-	{'Aquamarine', 		'#7FFFD4'};
-	{'Teal', 			'#008080'};
-	{'DarkGreen',		'#006400'};
-	{'Green',			'#008000'};
-	{'Lime', 			'#00FF00'};
-	
-	-- yellowish
-	{'Yellow', 			'#FFFF00'};
-	{'Parchment',		'#FFFFC2'};
-	{'Mustard', 		'#FFDB58'};
-	{'Orange', 			'#FFA500'};
-	
-	-- brownish
-	{'Sienna', 			'#A0522D'};
+-- Car's per player randomizer kinda sucks, so we randomize the shit out of the lines. Sad, but effective.
 	{'Coffee',			'#6F4E37'};
-	
-	-- reddish
-	{'Maroon', 			'#800000'};
-	{'Red', 			'#FF0000'};
+	{'Teal', 			'#008080'};
 	{'Salmon', 			'#FA8072'};
-	
-	
-	-- violetish
 	{'Plum', 			'#DDA0DD'};
+	{'Aquamarine', 		'#7FFFD4'};
+	{'Yellow', 			'#FFFF00'};
+	{'SkyBlue', 		'#87CEEB'};
+	{'Navy',			'#000080'};
 	{'NeonPink',		'#F535AA'};
+	{'Blue',			'#1144AA'};
+	{'Cyan', 			'#00FFFF'};
+	{'Parchment',		'#FFFFC2'};
 	{'Indigo', 			'#4B0082'};
-]]--
+	{'Red', 			'#FF0000'};
+	{'Orange', 			'#FFA500'};
+	{'Lime', 			'#00FF00'};
+	{'Maroon', 			'#800000'};
+	{'DarkGreen',		'#006400'};
+	{'Green',			'#00CC00'};
+	{'Mustard', 		'#FFDB58'};
+	{'Sienna', 			'#A0522D'};
 
-	{'Orange',			'#ffaf00'};
+--[[
+	{'Orange',			'#ff6600'};
 	{'Parchment',		'#FFFFC2'};
 	{'Teal',			'#009B95'};
 	{'Red',				'#FF0000'};
@@ -76,6 +64,7 @@ colors = {
 	{'Blue',			'#1144AA'};
 	{'Pink',			'#C9007A'};
 	{'Green',			'#00CC00'};
+]]--	
 	
 }
 

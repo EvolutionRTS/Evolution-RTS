@@ -37,8 +37,9 @@ local unitDef = {
   
   description        = [[Anti-Swarm Paralyzer Tank
 Armored
-200 Damage vs Light
-100 Damage vs Armored/Building
+200 Paralysis Damage vs Light
+100 Paralysis Damage vs Armored/Building
+20 Damage vs All
 
 • Paralyzes enemy units
 • Projectile can hit multiple units
@@ -160,6 +161,8 @@ local weaponDefs = {
 	customparams = {
 	  damagetype		= "eallterrriot", 
 		nofriendlyfire	= 1,
+		single_hit		= true,
+		extra_damage	= 20,
 		
 	  --Upgrades--
 	  upgradeClass		= "groundweapons",
