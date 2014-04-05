@@ -30,7 +30,7 @@ local function toggleTeamColors()
 	if WG.LocalColor and WG.LocalColor.localTeamColorToggle then
 		WG.LocalColor.localTeamColorToggle()
 	else
-		Spring.SendCommands("luaui enablewidget Local Team Colors")
+--		Spring.SendCommands("luaui enablewidget Local Team Colors")
 	end
 end 
 

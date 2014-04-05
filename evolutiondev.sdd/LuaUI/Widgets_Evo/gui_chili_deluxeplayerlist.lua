@@ -952,7 +952,7 @@ local function AddAllAllyTeamSummaries(allyTeamsSorted)
 end
 
 local function AlignScrollPanel()
-	local height = math.ceil(row * (fontsize+1.5) + 8)
+	local height = math.ceil(row * (fontsize+1.5) + 16) --Adjusting this fixes the bad sizing of the initial box
 	scroll_cpl.height = math.min(height, window_cpl.height)
 	if not (options.alignToTop.value) then
 		scroll_cpl.y = (window_cpl.height) - scroll_cpl.height

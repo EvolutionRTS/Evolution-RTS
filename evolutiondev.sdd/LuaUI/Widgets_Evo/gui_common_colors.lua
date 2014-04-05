@@ -73,8 +73,8 @@ for _,v in ipairs(colors) do
 	colorNames[v[1]] = v[2]
 end
 
-local myColor		= colorNames.Cyan
-local allyColor 	= colorNames.Lime
+local myColor		= colorNames.Green
+local allyColor 	= colorNames.Yellow
 local gaiaColor		= '#CCCCCC'
 local enemyColor 	= colorNames.Red
 

@@ -27,8 +27,8 @@ local unitDef = {
 60 Damage/s vs Light/Armored
 
 Secondary Concussion Cannons:
-160 Damage/s vs Light/Armored
-16 Damage/s vs Buildings]],
+320 Damage/s vs Light/Armored
+32 Damage/s vs Buildings]],
   energyMake         = 998,
   energyStorage      = 900,
   energyUse          = 0,
@@ -93,9 +93,11 @@ Secondary Concussion Cannons:
     },
 	[2]  = {
       def                = "concussioncannon",
+	  onlyTargetCategory = "LIGHT ARMORED",
     },
 	[3]  = {
       def                = "concussioncannon",
+	  onlyTargetCategory = "LIGHT ARMORED",
     },
   },
    customParams = {
@@ -157,7 +159,7 @@ local weaponDefs = {
   },
   concussioncannon = {
     accuracy           = 1,
-    AreaOfEffect       = 100,
+    AreaOfEffect       = 150,
     avoidFriendly      = false,
     avoidFeature       = false,
     ballistic          = true,
@@ -175,7 +177,7 @@ local weaponDefs = {
     name               = "Concussion Cannon",
     pitchtolerance     = "500",
     range              = 1500,
-    reloadtime         = 1,
+    reloadtime         = 0.5,
     weaponType		   = "Cannon",
     soundHit           = "explode2",
     soundStart         = "krabsecondary.wav",
