@@ -161,8 +161,6 @@ local weaponDefs = {
 	customparams = {
 	  damagetype		= "eallterrriot", 
 		nofriendlyfire	= 1,
-		single_hit		= true,
-		extra_damage	= 20,
 		
 	  --Upgrades--
 	  upgradeClass		= "groundweapons",
