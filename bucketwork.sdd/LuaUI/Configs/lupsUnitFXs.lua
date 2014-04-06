@@ -86,6 +86,7 @@ effectUnitDefs = {
 		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=4 }},
 		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=5 }},
 	}, 
+
 	
 	-- defense units	
 	eshieldgen = {
@@ -93,12 +94,22 @@ effectUnitDefs = {
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.7},}, piecenum=4 }},
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.6},}, piecenum=1 }},
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.7},}, piecenum=3 }},
+		--{class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1500, precision=0, strength   = 0.0025, repeatEffect=true}},
+		{class='GroundFlash', options={radiusFactor=35,mobile=false,life=6,colormap={ {0, 0.5, 1.0, 0.4},},repeatEffect=true}},
 	}, 
+	  
+	eallterrshield = {
+		--{class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=300, precision=0, strength   = 0.0025, repeatEffect=true}},
+		{class='UnitPieceLight',	options={ colormap={{1,0,0.1,1},}, piecenum=2 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.7},}, piecenum=1 }},
+	},
 	
 	ekmar = {
-		{class='UnitPieceLight',	options={ colormap={{1,0,0.1,1},}, piecenum=2 }},
+		{class='UnitPieceLight',	options={ colormap={{1.0,0,0.1,1},}, piecenum=2 }},
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,1},}, piecenum=4 }},
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,1},}, piecenum=3 }},
+		--{class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=200, precision=0, strength   = 0.0025, repeatEffect=true}},
+		{class='GroundFlash', options={radiusFactor=4.5,mobile=false,life=6,colormap={ {0, 0.5, 1.0, 0.4},},repeatEffect=true}},
 	}, 
 	
 	--units
@@ -255,17 +266,7 @@ effectUnitDefs = {
     {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,50,0}, size=140, precision=22, strength   = 0.015,  repeatEffect=true}},
   },
   
-  
-	eallterrshield = {
---    {class='StaticParticles', options=corfusNova},
---    {class='StaticParticles', options=corfusNova2},
---    {class='StaticParticles', options=corfusNova3},
---    {class='StaticParticles', options=corfusNova4},
 
---    {class='Bursts', options=efusion2Bursts},
---    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=300, precision=0, strength   = 0.0025, repeatEffect=true}},
-  },
-	
 	
 --[[  --// FUSIONS //--------------------------
   cafus = {
