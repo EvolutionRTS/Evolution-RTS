@@ -62,7 +62,7 @@ colors = {
 	{'Teal',			'#009B95'};
 	{'Red',				'#FF0000'};
 	{'Purple',			'#3914AF'};
-	{'Yellow',			'#FFD300'};
+	{'Yellow', 			'#FFFF00'};
 	{'Blue',			'#1144AA'};
 	{'Pink',			'#C9007A'};
 	{'Green',			'#00CC00'};
