@@ -52,12 +52,14 @@ local presets = {
 }
 
 effectUnitDefs = {
+	--metal	
+	emaker = {
+		{class='UnitPieceLight',	options={life=10, colormap={{1,0.1,0,0.6}, }, piecenum=3 }},
+		{class='UnitPieceLight',	options={life=10, colormap={{1,0.1,0,0.6}, }, piecenum=4 }},
+		{class='UnitPieceLight',	options={life=10, colormap={{1,0.4,0,0.7}, }, piecenum=5 }},
 
-	ecommander = {
-		{class='UnitPieceLight',	options={life=10, colormap={{1,0,0,1}, {1,0.12,0,1}, {1,0,0,1}, }, piecenum=2 }},
-		{class='AirJet',	options={color={1.0,0.4,0.1},width =  10, length=50, piece="mandible"}},	
 	}, 
-
+	
 	emetalextractor = {
 		{class='UnitPieceLight',	options={life=10, 
 			colormap={{1,0,0,1}, {1,0.12,0,1}, {1,0,0,1}, }, piecenum=5 }},
@@ -70,11 +72,42 @@ effectUnitDefs = {
 
 	}, 
 
+	-- power
 	efusion2 = {
 		{class='UnitPieceLight',	options={life=10, 
-			colormap={{0,0,1,1}, {0,0.12,1,1}, {0,0,1,1}, }, piecenum=1}},
+			colormap={{0,0,1,0.8}, }, piecenum=1}},
 
 	}, 
+	
+	estorage = {
+		{class='UnitPieceLight',	options={ colormap={{0.0,0.0,0.1,0.7},}, piecenum=1 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=2 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=3 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=4 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=5 }},
+	}, 
+	
+	-- defense units	
+	eshieldgen = {
+		{class='UnitPieceLight',	options={ colormap={{1,0,0.1,0.8},}, piecenum=2 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.7},}, piecenum=4 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.6},}, piecenum=1 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.7},}, piecenum=3 }},
+	}, 
+	
+	ekmar = {
+		{class='UnitPieceLight',	options={ colormap={{1,0,0.1,1},}, piecenum=2 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,1},}, piecenum=4 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,1},}, piecenum=3 }},
+	}, 
+	
+	--units
+	ecommander = {
+		{class='UnitPieceLight',	options={life=10, colormap={{1,0,0,1}, {1,0.12,0,1}, {1,0,0,1}, }, piecenum=2 }},
+		{class='AirJet',	options={color={1.0,0.4,0.1},width =  10, length=50, piece="mandible"}},	
+	}, 
+
+
 
 	efighter = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
@@ -222,15 +255,6 @@ effectUnitDefs = {
     {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,50,0}, size=140, precision=22, strength   = 0.015,  repeatEffect=true}},
   },
   
-	eshieldgen = {
---    {class='StaticParticles', options=corfusNova},
---    {class='StaticParticles', options=corfusNova2},
---    {class='StaticParticles', options=corfusNova3},
---    {class='StaticParticles', options=corfusNova4},
-
---    {class='Bursts', options=efusion2Bursts},
---    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1500, precision=0, strength   = 0.0025, repeatEffect=true}},
-  },
   
 	eallterrshield = {
 --    {class='StaticParticles', options=corfusNova},
