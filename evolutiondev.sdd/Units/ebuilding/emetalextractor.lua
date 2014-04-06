@@ -71,7 +71,8 @@ local unitDef = {
     death_sounds = "generic",
 	armortype   = "building",
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
-	 buckettex = "unittextures/lego2skin_explorerbucket.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
+	factionname	= "outer_colonies", 
 	helptext = [[Metal Extractor
 
 Extracts metal from exposed resource points on the map. Provides +1 metal income

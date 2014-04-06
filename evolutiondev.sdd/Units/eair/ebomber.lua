@@ -104,7 +104,8 @@ Must be forcefired on the target]],
 	nofriendlyfire	= "1",
 	supply_cost = 10,
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
-	 buckettex = "unittextures/lego2skin_explorerbucket.dds",   
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
+	factionname	= "outer_colonies",   
   },
 }
 

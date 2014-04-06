@@ -74,7 +74,8 @@ sfxtypes = {
 	death_sounds = "generic",
 	armortype   = "building", 
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
-	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
+	factionname	= "outer_colonies",  
 	helptext = [[Storage Facility
 
 Will increase your storage reserves by +50

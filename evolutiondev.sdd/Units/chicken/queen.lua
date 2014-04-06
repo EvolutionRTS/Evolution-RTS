@@ -105,7 +105,8 @@ Secondary Concussion Cannons:
     RequireTech = "40 Power",
 	armortype   = "armored",
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
-	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
+	factionname	= "outer_colonies",  
   },
 }
 

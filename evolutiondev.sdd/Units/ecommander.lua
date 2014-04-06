@@ -132,7 +132,8 @@ local unitDef = {
 	armortype   = "light",
 	nofriendlyfire	= "1",
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
-	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
+	factionname	= "outer_colonies",
 	helptext       = [[]],
   },
 }

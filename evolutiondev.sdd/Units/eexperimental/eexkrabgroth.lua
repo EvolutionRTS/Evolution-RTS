@@ -110,7 +110,8 @@ Uses +25 Supply]],
 	armortype   = "armored",
 	supply_cost = 25,
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
-	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
+	factionname	= "outer_colonies",  
   },
 }
 
