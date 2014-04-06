@@ -1,23 +1,23 @@
 local colors	= {
-		paintR				= "light_brown",
+		paintR				= "taupe",
 		sheenR				= "black_matte",
 		--texture projection map setting
 		projectionGlmode1		= '',
 		projectionTexture1 		= '',
 		projectionMatrix1	= '',
 		
-		paintG				= "grey_20",
+		paintG				= "caputmortuum",
 		sheenG				= "black_matte",
 		--texture projection map setting
 		projectionGlmode2		= '',
 		projectionTexture2 		= '',
 		projectionMatrix2	= '',
 		
-		paintB				= "safetyorange",
+		paintB				= "dark_khaki",
 		sheenB				= "black_matte",
 		--does not have a texture projection map setting
 				
-		paintA				= "aqua",
+		paintA				= "safetyorange",
 		sheenA				= "black_matte",
 		--does not have a texture projection map setting
 }
