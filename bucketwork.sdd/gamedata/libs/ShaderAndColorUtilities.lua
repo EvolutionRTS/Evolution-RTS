@@ -12,9 +12,12 @@
 local spGetTeamList			= Spring.GetTeamList
 local spGetPlayerList		= Spring.GetPlayerList
 local spGetPlayerInfo		= Spring.GetPlayerInfo
+
+local sideDataFile		= VFS.Include("gamedata/sidedata.lua")
 -- look ups for shader
 local finishVarients		= { gloss = 1.0, standard = 0.2, matte = 0.01,}
 
+local SWAGTheme				= "default"
 local pigmentTypes			= {	"paintR", "paintG", "paintB", "paintA"}
 local finishTypes			= {	"sheenR", "sheenG", "sheenB", "sheenA"}
 local matrixTypes			= {	"projectionMatrix1", "projectionMatrix2"} 
@@ -23,11 +26,12 @@ local projectionTextureTypes	= {	"projectionTexture1", "projectionTexture2",
 local bucketTypes			= { "sheenR", "sheenG", "sheenB", "sheenA", 
 								"paintR", "paintG", "paintB", "paintA",
 								"projectionTexture1", "projectionTexture2",
-								"projectionGlmode1", "projectionGlmode2"}
-								
+								"projectionMatrix1", "projectionMatrix2",
+								"projectionGlmode1", "projectionGlmode2",}
+
 local playerSchemeSelections = {}
 
-								-- prints a copy of a table to chat
+-- prints a copy of a table to chat
 local function recursiveTableReader(currTable, dashes)
 	dashes = dashes .. dashes
 	if type(currTable) == 'table' then
@@ -56,7 +60,7 @@ function HandleSchemeAssignment(teamID, mergedSchemes, newChoice)
 	if mergedSchemes[schemeSelection] then
 		currentColorScheme = schemeSelection
 	else-- we have a selection but it doesn't exist anyway
-		currentColorScheme	= "default"
+		currentColorScheme	= SWAGTheme
 	end
 
 	return currentColorScheme
@@ -97,27 +101,10 @@ function GetprojectionTextureTypes()
 end
 
 -----------------------------------------------------------
--- Retrieves the scheme selections of each player 
+-- Retrieves theme we all get name
 -----------------------------------------------------------
-function GetPlayerSchemeSelection()
-	-- if the list has nothing in it so far, build a list
-	if #playerSchemeSelections < 1 then
-		for _, teamID in ipairs(spGetTeamList()) do	
-			playerSchemeSelections[teamID] = "default"	
-			Spring.Echo(teamID,  "default")
-		end
-	end
-	return playerSchemeSelections
-end
-
------------------------------------------------------------
--- Retrieves the scheme selections of each player 
------------------------------------------------------------
-function AlterPlayerSchemeSelection(teamID, mergedSchemes, selection)
-	--Spring.Echo(teamID, mergedSchemes, selection)
-	selection = HandleSchemeAssignment(teamID, mergedSchemes, selection)
-	playerSchemeSelections[teamID] = selection
-	return selection
+function GetSWAGScheme()
+	return SWAGTheme
 end
 
 -----------------------------------------------------------
@@ -128,6 +115,30 @@ function GetBucketTypes()
 	AddReverseLookup(bucketTypes)
 	return bucketTypes
 end
+
+-----------------------------------------------------------
+-- Retrieves the scheme selections of each player 
+-----------------------------------------------------------
+function GetPlayerSchemeSelection()
+	-- if the list has nothing in it so far, build a list
+	if #playerSchemeSelections < 1 then
+		for _, teamID in ipairs(spGetTeamList()) do	
+			playerSchemeSelections[teamID] = SWAGTheme	
+			--Spring.Echo(teamID,  SWAGTheme)
+		end
+	end
+	return playerSchemeSelections
+end
+
+-----------------------------------------------------------
+-- Retrieves the scheme selections of each player 
+-----------------------------------------------------------
+function AlterPlayerSchemeSelection(teamID, mergedSchemes, selection)
+	selection = HandleSchemeAssignment(teamID, mergedSchemes, selection)
+	playerSchemeSelections[teamID] = selection
+	return selection
+end
+
 
 
 local function PrepColor(currentTable, currentName, currentColor, nameIsLookUp, topText)
@@ -143,7 +154,6 @@ local function PrepColor(currentTable, currentName, currentColor, nameIsLookUp, 
 	if nameIsLookUp then
 		currentTable[currentName]	= currentColor
 	else		
-		--Spring.Echo(currentName, currentColor[1], currentColor[2], currentColor[3], currentColor[4])
 		currentTable[#currentTable+1] = { 	name = currentName,
 											colors = currentColor,
 											displayName = displayNameBuilt,}
@@ -175,14 +185,11 @@ end
 -- convert to argb with 0-255 instead of 0-1
 local function ARGBMe(vals)
 	local convertedVals = {}
-	--Spring.Echo("ARGBMe",vals[1],vals[2],vals[3],vals[4])
 	
 	convertedVals[1] = math.floor(vals[4]*255)
 	convertedVals[2] = math.floor(vals[1]*255)
 	convertedVals[3] = math.floor(vals[2]*255)
 	convertedVals[4] = math.floor(vals[3]*255)
-	
-	--Spring.Echo("convertedVals",convertedVals[1], convertedVals[2], convertedVals[3], convertedVals[4])
 	
 	local convertedString = string.char(convertedVals[1], convertedVals[2], 
 										convertedVals[3], convertedVals[4])
@@ -241,16 +248,15 @@ end
 
 --this will be run per scheme
 function BuildDefaults(baseScheme)
-	local sideDataFile		= VFS.Include("gamedata/sidedata.lua")
 	local defaultSets	= {}
-	defaultSets["default"]		= baseScheme.default
+	defaultSets[SWAGTheme]		= baseScheme.default
 	
 	for id, sideTable in pairs(sideDataFile) do
 		local factionSchemeName = "default_" .. string.lower(sideTable.name)
 		if baseScheme[factionSchemeName] ~= nil then
 			defaultSets[factionSchemeName]		= baseScheme[factionSchemeName]
 		else
-			defaultSets[factionSchemeName]		= defaultSets["default"]
+			defaultSets[factionSchemeName]		= defaultSets[SWAGTheme]
 		end
 	end
 	return defaultSets
@@ -264,20 +270,45 @@ end
 -- 			-- used for everything else
 -----------------------------------------------------------
 function BuildColorSets(colors)
-	local colorSets			= {}
+	local colorSets				= {}
+	colorSets["uiSets_rgba"]	= {}
+	colorSets["uiSets_argb"]	= {}
+
+	for id, sideTable in pairs(sideDataFile) do
+		local faction	= string.upper(sideTable.name)
+		
+		local rgbaName	= "uiSets_rgba"
+		local argbName	= "uiSets_argb"
+		colorSets[rgbaName][faction] = {}
+		colorSets[argbName][faction] = {}
+			
+		for subName,subVals in pairs(sideTable.uiSets) do
+			local argbVersion = ARGBMe(subVals)	
+			colorSets[rgbaName][faction][subName] = {}
+			colorSets[argbName][faction][subName] = {}
+				
+			colorSets[rgbaName][faction][subName] = subVals
+			colorSets[argbName][faction][subName] = argbVersion
+		end
+	end
 	
 	for colorSetName,vals in pairs(colors) do
 		--Spring.Echo(colorSetName,vals)		
 		local rgbaName	=	colorSetName .. "_rgba"
 		local argbName	=	colorSetName .. "_argb"
 		
-		colorSets[rgbaName]	= {}
-		colorSets[argbName]	= {}
+		-- we already created this earlier
+		if colorSetName ~= "uiSets" then 
+			colorSets[rgbaName]	= {}
+			colorSets[argbName]	= {}
+		end
 		
 		if (colorSetName == "uiSets") then
 			for factionName, subItems in pairs(vals) do
-				colorSets[rgbaName][factionName] = {}
-				colorSets[argbName][factionName] = {}
+				if colorSets[rgbaName][factionName] == nil then
+					colorSets[rgbaName][factionName] = {}
+					colorSets[argbName][factionName] = {}
+				end
 				
 				for subName,subVals in pairs(subItems) do
 					local argbVersion = ARGBMe(subVals)	
@@ -574,7 +605,7 @@ function SetupBuckets(mergedSchemes, schemeTable)
 	local selectionsCollection		= {}	
 	local selectionsByName			= {}
 	
-	local currentColorScheme	= "default"
+	local currentColorScheme	= SWAGTheme
 	
 	for _, teamID in ipairs(spGetTeamList()) do	
 		currentColorScheme = HandleSchemeAssignment(teamID, mergedSchemes)

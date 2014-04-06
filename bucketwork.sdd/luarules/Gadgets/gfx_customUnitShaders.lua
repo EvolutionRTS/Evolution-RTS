@@ -27,7 +27,7 @@ VFS.Include('gamedata/libs/ShaderAndColorUtilities.lua')
 local spEcho			= Spring.Echo
 local spGetUnitDefID	= Spring.GetUnitDefID
 local spGetUnitHealth	= Spring.GetUnitHealth
-
+local currentUnitSelection	= {}
 
 -- prints a copy of a table to chat
 local function recursiveTableReader(currTable, dashes)
@@ -54,12 +54,27 @@ end
 if (gadgetHandler:IsSyncedCode()) then
 
 	function gadget:RecvLuaMsg(msg, playerID)
-		if (msg:sub(1,12) == 'selectscheme') then
+		local isSelectScheme = msg:sub(1,12) == 'selectscheme'
+		local isSelectColorUnit = msg:sub(1,15) == 'selectcolorunit'
+		local isUpdateUnitMaterial = msg:sub(1,18) == 'updateunitmaterial'
+		--Spring.Echo(msg, isSelectScheme, isSelectColorUnit, isUpdateUnitMaterial)
+		if (msg:sub(1,15) == 'selectcolorunit') then
+			--Spring.Echo("selectcolorunit", msg:sub(16))
+			currentUnitSelection[playerID] = tonumber(msg:sub(16))
+			SendToUnsynced("sendMaterialSettings", currentUnitSelection[playerID])
+		end
+		
+		if ( isSelectScheme or isSelectColorUnit) then
 			local newChoice = msg:sub(13)
 			local _,_,_,teamID = Spring.GetPlayerInfo(playerID)
 			
 			GG.playerSchemeSelections[teamID] = AlterPlayerSchemeSelection(teamID, GG.mergedSchemes, newChoice)
 			SendToUnsynced("sendRefreshSchemes", GG.playerSchemeSelections[teamID], teamID)
+		elseif (isUpdateUnitMaterial) then
+			local unitID = currentUnitSelection[playerID]
+			local _,_,_,teamID = Spring.GetPlayerInfo(playerID)
+			--Spring.Echo("sendRefreshScheme", teamID, unitID)
+			SendToUnsynced("sendRefreshScheme", teamID, unitID)
 		end
 	end
 	
@@ -137,16 +152,16 @@ else
 	local materialDefs		= {}
 	local loadedTextures	= {}
 	local drawUnitList		= {}
-	local materialList		= {}
-	local materialNames		= {}
+	local materialList
+	local materialNames
 	
 	GG.bufMaterials			= bufMaterials
 	GG.unitMaterialInfos	= unitMaterialInfos
 	GG.materialDefs			= materialDefs
 	GG.loadedTextures		= loadedTextures
 	GG.drawUnitList			= drawUnitList
-	GG.materialList			= materialList
-	GG.materialNames		= materialNames
+	GG.materialList			= {}
+	GG.materialNames		= {}
 	
 	--so I don't have to query for unit team each draw frame
 
@@ -165,7 +180,6 @@ else
 		--str = str:upper()
 		return (_plugins and _plugins[str]) or ""
 	end
-
 
 	local function CompileShader(shader, definitions, plugins)
 		shader.vertexOrig	 = shader.vertex
@@ -218,7 +232,6 @@ else
 		return GLSLshader
 	end
 
-
 	local function CompileMaterialShaders()
 		for _,mat_src in pairs(materialDefs) do
 			if (mat_src.shaderSource) then
@@ -257,7 +270,6 @@ else
 
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-
 	function GetUnitMaterial(matInfo, materialName, unitDefID, teamID)
 		local mat = bufMaterials[teamID][unitDefID]
 
@@ -321,7 +333,6 @@ else
 
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
-
 	function ToggleShadows()
 		shadows = Spring.HaveShadows()
 
@@ -341,7 +352,6 @@ else
 		end
 	end
 
-
 	function ToggleAdvShading()
 		advShading = Spring.HaveAdvShading()
 
@@ -358,7 +368,6 @@ else
 			ToggleShadows()
 		end
 	end
-
 
 	function ToggleNormalmapping(_,_,_, playerID)
 		if (playerID ~= Spring.GetMyPlayerID()) then
@@ -389,7 +398,6 @@ else
 		end
 	end
 
-
 	local n = -1
 	function gadget:Update()
 		--spEcho('gfx_gadget:Update()')
@@ -409,10 +417,12 @@ else
 
 		local unitMat = unitMaterialInfos[teamID][unitDefID]
 		if (unitMat) then
+		--Spring.Echo("ProcessUnitMaterial unitMat", unitMat, #unitMat)
 			unitTeamLookUp[unitID] = teamID
 			teamUnitLookUp[teamID][unitID] = true
 			
-			local materialName = materialNames[teamID][unitDefID] 
+			local materialName = materialNames[teamID][unitDefID]
+			--Spring.Echo("ProcessUnitMaterial materialName",materialName)
 			-- if we do NOT have a material name already stored, set the default.
 			if (materialName == nil) then
 				materialName = unitMat[1]
@@ -426,6 +436,7 @@ else
 				local unitMaterialList	=	materialList[teamID][unitDefID]
 				-- current scheme selected by the player. 
 				local schemeSelection	=	GG.playerSchemeSelections[teamID]
+				--Spring.Echo("ProcessUnitMaterial schemeSelection", schemeSelection)
 				-- userdata table preped by GetMaterial
 				local processedMaterial	=	GetUnitMaterial(unitMat,materialName,unitDefID,teamID)
 				
@@ -436,15 +447,18 @@ else
 				end
 
 				if (currentMaterial.PrepUnit) then
-					materialList[teamID][unitDefID]	= currentMaterial.PrepUnit(unitDefID, teamID)
+					materialList[teamID][unitDefID]	= 
+							currentMaterial.PrepUnit(unitDefID, teamID)
 				end
 				
 				if (currentMaterial.GetTexUnitValues) then					
-					materialList[teamID][unitDefID]["GetTexUnitValues"]			= currentMaterial.GetTexUnitValues
+					materialList[teamID][unitDefID]["GetTexUnitValues"]			= 
+							currentMaterial.GetTexUnitValues
 				end
 				
 				if (currentMaterial.GetMaterialSelections) then					
-					materialList[teamID][unitDefID]["GetMaterialSelections"]	= currentMaterial.GetMaterialSelections
+					materialList[teamID][unitDefID]["GetMaterialSelections"]	= 
+							currentMaterial.GetMaterialSelections
 				end
 				
 				if (currentMaterial.DrawUnit) then
@@ -465,7 +479,7 @@ else
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------							
 	function gadget:UnitFinished(unitID,unitDefID,teamID)
-		
+		--Spring.Echo("unit shaders UnitFinished")
 		if	unitTeamLookUp[unitID] then
 			local oldTeamID	= unitTeamLookUp[unitID]
 			-- remove the old entry
@@ -500,7 +514,6 @@ else
 	--	removeUnitMaterials(unitID)
 	end
 
-
 	function gadget:DrawUnit(unitID, DrawMode)
 		local mat				= drawUnitList[unitID]
 		local teamID			= unitTeamLookUp[unitID]
@@ -534,9 +547,8 @@ else
 	end
 
 	--------------------------------------------------------------------------------
+	-- Workaround: unsynced LuaRules doesn't receive Shutdown events
 	--------------------------------------------------------------------------------
-
-	--// Workaround: unsynced LuaRules doesn't receive Shutdown events
 	Shutdown = Script.CreateScream()
 	Shutdown.func = function()
 		--// unload textures, so the user can do a `/luarules reload` to reload the normalmaps
@@ -544,8 +556,20 @@ else
 			gl.DeleteTexture(loadedTextures[i])
 		end
 	end
-
+	
+	function RefreshUnitScheme(_, teamID,unitID)
+		local unitDefID = spGetUnitDefID(unitID)
+		
+		--Spring.Echo("RefreshUnitScheme", teamID,unitID)
+		if bufMaterials[teamID][unitDefID] then
+			bufMaterials[teamID][unitDefID] = nil
+		end
+		
+		ProcessUnitMaterial(unitID, unitDefID, teamID)
+	end
+	
 	function RefreshUnitSchemes(_, playerSchemeSelection, teamID)
+		--Spring.Echo("RefreshUnitSchemes", playerSchemeSelection, GG.playerSchemeSelections[teamID])
 		for unitID,v in pairs(teamUnitLookUp[teamID])do
 			if v then
 				local unitDefID = spGetUnitDefID(unitID)
@@ -555,14 +579,14 @@ else
 				end
 				ProcessUnitMaterial(unitID, unitDefID, teamID)
 			end
-		end
-		
+		end		
 	end
 
 	function gadget:Initialize()
-		--spEcho("gameframe unsyncd init")
+		spEcho("gameframe unsyncd init")
 		--// check user configs
 
+		gadgetHandler:AddSyncAction("sendRefreshScheme", RefreshUnitScheme)
 		gadgetHandler:AddSyncAction("sendRefreshSchemes", RefreshUnitSchemes)
 		shadows = Spring.HaveShadows()
 		advShading = Spring.HaveAdvShading()
@@ -597,14 +621,16 @@ else
 			CompileMaterialShaders()
 			for _, teamID in ipairs(Spring.GetTeamList())do
 				unitMaterialInfos[teamID]	= {}
-				materialList[teamID]	= {}
-				materialNames[teamID]	= {}
+				GG.materialList[teamID]		= {}
+				GG.materialNames[teamID]	= {}
+				materialList				= GG.materialList
+				materialNames				= GG.materialNames
 				bufMaterials[teamID]	= {}
 
 				teamUnitLookUp[teamID]	= {}
 				local currentTeamDefs	= unitMaterialDefs[teamID]
 				for unitName,materialInfo in pairs(currentTeamDefs) do
-				--Spring.Echo("material def process -----------------")
+				--Spring.Echo("material def process -----------------", teamID)
 					if (type(materialInfo) ~= "table") then
 						materialInfo = {materialInfo}
 					end

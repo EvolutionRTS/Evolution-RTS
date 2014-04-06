@@ -12,13 +12,15 @@ end
 
 VFS.Include('gamedata/libs/ShaderAndColorUtilities.lua')
 
+GG.materialList		= {}
+GG.materialNames	= {}
+			
 local spGetUnitTeam			= Spring.GetUnitTeam
 local spGetLocalTeamID		= Spring.GetLocalTeamID
 local spGetUnitDefId		= Spring.GetUnitDefID
 local colorSets				= GetColorSets()
 local bucketTypes			= GetBucketTypes()
 local projectionTextureTypes	= GetprojectionTextureTypes()
-
 local currentUnitSelection	= {}
 
 -- reverse look up for bucket types
@@ -26,21 +28,20 @@ for k,v in pairs(bucketTypes) do
 	bucketTypes[v]=k
 end
 
+-- texture that is used when nothing is selected.
+local nilTexture			= "notexture.gif"
+
 if gadgetHandler:IsSyncedCode() then
-	--SYNCED	
+	--SYNCED
 	function SetColor(playerID, newColorName, bucketName)
 		local unitID		= currentUnitSelection[playerID]
-		local unitDefId		= spGetUnitDefId(unitID)
-		local teamID        = spGetUnitTeam(unitID)
+		--Spring.Echo(unitID, playerID, newColorName, bucketName)
 
-		local bucketSelection	= GG.bucketSelections[teamID][unitDefId]
-		
-		bucketSelection[bucketName] = GG.colors[newColorName]
-		SendToUnsynced("UpdateColors", currentUnitSelection[playerID], bucketName, newColorName)
+		SendToUnsynced("UpdateBucketSettings", currentUnitSelection[playerID], bucketName, newColorName)
 	end
 	 
 	function gadget:RecvLuaMsg(msg, playerID)
-		--Spring.Echo(msg)
+		--Spring.Echo("BucketManagement:RecvLuaMsg", msg)
 		if (msg:sub(1,15) == 'selectcolorunit') then
 			--Spring.Echo("selectcolorunit", msg:sub(16))
 			currentUnitSelection[playerID] = tonumber(msg:sub(16))
@@ -51,61 +52,109 @@ if gadgetHandler:IsSyncedCode() then
 			local bucketId 			= tonumber(msg:sub(17,17))
 			bucketName				= bucketTypes[bucketId]
 			newColorName			= msg:sub(18)
-			
+			--Spring.Echo("BucketManagement:RecvLuaMsg updateunitcolors", playerID, newColorName, bucketName)
 			SetColor(playerID, newColorName, bucketName)
 		end
 		
-		if (msg:sub(1,19) == 'updateprojectionTexture') then
-			local bucketId 			= tonumber(msg:sub(20,20))
-			projectionTextureName		= bucketTypes[bucketId]
-			newTextureName			= msg:sub(21)
+		if (msg:sub(1,23) == 'updateprojectionTexture') then
+			local bucketId 			= tonumber(msg:sub(24,24))
+			bucketName				= bucketTypes[bucketId+8]
+			newTextureName			= msg:sub(25)
+			SendToUnsynced("UpdateBucketSettings", currentUnitSelection[playerID], bucketName, newTextureName)
 		end
 		
 		if (msg:sub(1,12) == 'selectscheme') then
 			local newChoice = msg:sub(13)
-			local _,_,_,teamId = Spring.GetPlayerInfo(playerID)
+			local _,_,_,teamID = Spring.GetPlayerInfo(playerID)
 
-			GG.playerSchemeSelections[teamId] = AlterPlayerSchemeSelection(teamId, GG.mergedSchemes, newChoice)
-			SendToUnsynced("sendUpdateScheme", GG.playerSchemeSelections[teamId], teamId)
+			GG.playerSchemeSelections[teamID] = AlterPlayerSchemeSelection(teamID, GG.mergedSchemes, newChoice)
+			SendToUnsynced("sendUpdateScheme", GG.playerSchemeSelections[teamID], teamID)
 		end
 	end	
-else	
-	function ColorUpdate(_, currentUnitSelection, bucketName, newColorName)
-		--Spring.Echo(currentUnitSelection, bucketName, newColorName)
+	
+	function gadget:GameFrame(frameNumber)
+		if frameNumber <1 then
+			--Spring.Echo("gadget:Initialize", GG.playerSchemeSelections, #GG.playerSchemeSelections)
+			for teamID, schemeChoice  in pairs(GG.playerSchemeSelections) do
+				if schemeChoice ~= GG.SWAGTheme then
+					--Spring.Echo("sendUpdateScheme", schemeChoice, teamID)
+					SendToUnsynced("sendUpdateScheme", schemeChoice, teamID)
+				end
+			end
+		end
+	end
+else
+	-- 
+	function SettingUpdate(_, currentUnitSelection, bucketName, itemSetting)
 		local teamID        = spGetLocalTeamID()
-		--Spring.Echo(teamID, currentUnitSelection)
-		local unitDefId					= spGetUnitDefId(currentUnitSelection)
-		local bucketSelection			= GG.bucketSelections[teamID][unitDefId]
-		local bucketSelectionByName		= GG.bucketSelectionsByName[teamID][unitDefId]
+		--Spring.Echo("SettingUpdate()", teamID, currentUnitSelection, bucketName, itemSetting)
+		local unitDefID					= spGetUnitDefId(currentUnitSelection)
+		local bucketSelection			= GG.bucketSelections[teamID][unitDefID]
+		local bucketSelectionByName		= GG.bucketSelectionsByName[teamID][unitDefID]
+		local currentMaterialList		= GG.materialList[teamID][unitDefID]
 		local bucketId					= bucketTypes[bucketName]
 		local colorTable
 		
-		if bucketId < 4 then
-			colorTable		= GG.finishes[newColorName]
-		else
-			colorTable		= GG.pigments[newColorName]
+		--Spring.Echo("SettingUpdate()",currentUnitSelection, bucketName, bucketId, bucketId < 4, itemSetting)
+		-- if we are a finish
+		if bucketId <= 4 then
+			colorTable		= GG.finishes[itemSetting]
+		-- if we are a color
+		elseif bucketId < 9 then
+			colorTable		= GG.pigments[itemSetting]
 		end
-		
+
 		if colorTable ~= nil then
-			bucketSelection[bucketName] = colorTable
-			bucketSelectionByName[bucketName] = newColorName
-		else
-			Spring.Echo("failed to find color: " .. newColorName)
+			--Spring.Echo("SettingUpdate()", bucketName, colorTable, itemSetting)
+			bucketSelection[bucketName]			= colorTable
+			bucketSelectionByName[bucketName]	= itemSetting
+			-- need to update the material list for when I assign a texture
+			currentMaterialList[bucketName]		= colorTable
+		elseif bucketId <= 10 then -- probably a texture setting
+			local bucketSelectionTexture
+			if itemSetting == nilTexture then
+				bucketSelectionTexture = nil
+			else
+				bucketSelectionTexture = "bitmaps/detailtextures/" .. itemSetting
+			end
+			bucketSelection[bucketName] = bucketSelectionTexture
+			bucketSelectionByName[bucketName] = bucketSelectionTexture
+			
+					
+			local unitDef				= UnitDefs[unitDefID]
+			local materialSelections	= GG.mergedSchemes[GG.playerSchemeSelections[teamID]].values[unitDefID]
+			local vals 					= GG.materialList[teamID][unitDefID]
+			local texUnitVals			= vals.GetTexUnitValues(unitDef, materialSelections)
+							
+			GG.unitMaterialInfos[teamID][unitDefID] = nil
+			GG.unitMaterialInfos[teamID][unitDefID] = texUnitVals
+			GG.materialNames[teamID][unitDefID]		= texUnitVals[1]
+			--Spring.Echo(GG.materialNames[teamID][unitDefID], bucketSelection[bucketName],
+			--			bucketSelectionByName[bucketName],itemSetting)
+		else-- probably a matrix setting
+			bucketSelection[bucketName] = itemSetting
+			bucketSelectionByName[bucketName] = itemSetting
 		end
+
+		--for bucketName, bucketValue in pairs(bucketSelectionByName)do
+		--	Spring.Echo("POSToLuaUIColors", bucketName, bucketValue)
+		--end
 	end
 	
 	function POSToLuaUIColors(_, currentUnitSelection)
 		if (Script.LuaUI('SetUpdateColors')) then
 			local teamID			= spGetLocalTeamID()
-			local unitDefId			= spGetUnitDefId(currentUnitSelection)
+			local unitDefID			= spGetUnitDefId(currentUnitSelection)
 			
-			local bucketSelection	= GG.bucketSelectionsByName[teamID][unitDefId]
+			local bucketSelection	= GG.bucketSelectionsByName[teamID][unitDefID]
 
-			--Spring.Echo(bucketSelection, "bucketSelection")
+			
 			for bucketName, bucketValue in pairs(bucketSelection)do
+				--Spring.Echo("POSToLuaUIColors", bucketName, bucketValue)
 				Script.LuaUI.SetUpdateColors(currentUnitSelection, bucketName, bucketValue)
 			end	
-				Script.LuaUI.SetUpdateColors(currentUnitSelection, "1", "done")
+			
+			Script.LuaUI.SetUpdateColors(currentUnitSelection, "1", "done")
 		end
 	end
 	
@@ -127,37 +176,69 @@ else
 
 	-----------------------------------------------------------
 	-- playerSchemeSelection = color scheme name as string
-	-- teamId = team id
+	-- teamID = team id
 	-----------------------------------------------------------	
-	function POSToLuaUIScheme(_, playerSchemeSelection, teamId)
-		--Spring.Echo(teamId,playerSchemeSelection)
-		GG.playerSchemeSelections[teamId] = playerSchemeSelection
-		local assignedTexUnitValues	= GG.bufMaterials[teamId] -- needed for when we change to/from materials with textures
-		local assignedBuckets		= GG.materialList[teamId]
+	function POSToLuaUIScheme(_, playerSchemeSelection, teamID)
+		--Spring.Echo("POSToLuaUIScheme playerSchemeSelection", playerSchemeSelection)
+		GG.playerSchemeSelections[teamID] = playerSchemeSelection
+		local assignedTexUnitValues	= GG.bufMaterials[teamID] -- needed for when we change to/from materials with textures
 		-- process each of the units which have
 		-- already been assigned colors
+		
+		local assignedBuckets		= GG.materialList[teamID]
+		if  #assignedBuckets  == 0 then
+			for unitDefID,v in pairs(UnitDefs) do				
+				local unitMat = GG.unitMaterialInfos[teamID][unitDefID]
+				if (unitMat) then
+					local materialSelections	= GG.mergedSchemes[playerSchemeSelection].values[unitDefID]
+					local materialName			= GG.materialNames[teamID][unitDefID]					
+					local currentMaterial
+					
+					if (materialName == nil) then
+						materialName = unitMat[1]
+					--else
+					--	Spring.Echo(UnitDefs[unitDefID].name, "has no scheme setting")		
+					end					
+					currentMaterial	= GG.materialDefs[materialName]
+					
+					--Spring.Echo("POSToLuaUIScheme materialName", materialName, currentMaterial, v.name)				
+					if (currentMaterial.PrepUnit) then
+						GG.materialList[teamID][unitDefID]							= currentMaterial.PrepUnit(unitDefID, teamID)
+					end
+					
+					if (currentMaterial.GetTexUnitValues) then					
+						GG.materialList[teamID][unitDefID]["GetTexUnitValues"]		= currentMaterial.GetTexUnitValues
+					end
+					
+					if (currentMaterial.GetMaterialSelections) then					
+						GG.materialList[teamID][unitDefID]["GetMaterialSelections"]	= currentMaterial.GetMaterialSelections
+					end
 
-		if assignedBuckets then
-			for unitDefId,vals in pairs(assignedBuckets) do
-				local unitDef	= UnitDefs[unitDefId]
-
-				local materialSelections	=	vals.GetMaterialSelections(teamId, unitDefId)
-				local texUnitVals 			=	vals.GetTexUnitValues(unitDef, materialSelections)
-				
-				GG.unitMaterialInfos[teamId][unitDefId] = nil
-				GG.unitMaterialInfos[teamId][unitDefId] = texUnitVals
-	
-				GG.materialNames[teamId][unitDefId]	= texUnitVals[1]
-			end				
+				end
+			end
 		end
 		
+		--Spring.Echo(#assignedBuckets,#GG.materialList[teamID], "GG.unitMaterialInfos", GG.unitMaterialInfos[teamID])
+		for unitDefID,vals in pairs(assignedBuckets) do
+			local unitDef	= UnitDefs[unitDefID]
+			--Spring.Echo("POSToLuaUIScheme name", unitDef.name)
+			local materialSelections	=	vals.GetMaterialSelections(teamID, unitDefID)
+			local texUnitVals 			=	vals.GetTexUnitValues(unitDef, materialSelections)
+				
+			GG.unitMaterialInfos[teamID][unitDefID] = nil
+			GG.unitMaterialInfos[teamID][unitDefID] = texUnitVals
+
+			GG.materialNames[teamID][unitDefID]	= texUnitVals[1]
+			--Spring.Echo("POSToLuaUIScheme GG.materialNames[teamID][unitDefID]",GG.materialNames[teamID][unitDefID])
+		end				
+		
 		if (Script.LuaUI('sendUpdateScheme')) then
-			Script.LuaUI.SetUpdateColors(playerSchemeSelection, teamId)
+			Script.LuaUI.SetUpdateColors(playerSchemeSelection, teamID)
 		end
 	end
 	 
 	function gadget:Initialize()
-		gadgetHandler:AddSyncAction("UpdateColors", ColorUpdate)
+		gadgetHandler:AddSyncAction("UpdateBucketSettings", SettingUpdate)
 		gadgetHandler:AddSyncAction("sendMaterialSettings", POSToLuaUIColors)
 		gadgetHandler:AddSyncAction("sendUpdateScheme", POSToLuaUIScheme)
 		

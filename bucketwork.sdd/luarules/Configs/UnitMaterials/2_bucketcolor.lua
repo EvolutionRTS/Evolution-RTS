@@ -167,12 +167,13 @@ local function GetTexUnitValues(unitDef, unitMaterialSetting)
 end
 
 local function GetMaterialSelections(teamId, unitDefId)
-	local materialSetting 	= {}
-	local schemeSelection	= GG.playerSchemeSelections[teamId]
+	local materialSetting		= {}
+	local schemeSelection		= GG.playerSchemeSelections[teamId]
+	
 	if schemeSelection then
 		local myScheme		= GG.mergedSchemes[schemeSelection]
 
-		if schemeSelection ~= "default" and myScheme.values[unitDefId] then
+		if schemeSelection ~= GG.SWAGTheme and myScheme.values[unitDefId] then
 			--Spring.Echo("Current Scheme specified: " .. schemeSelection)
 			materialSetting	= myScheme.values[unitDefId]
 		else
@@ -181,6 +182,7 @@ local function GetMaterialSelections(teamId, unitDefId)
 		end
 		--recursiveTableReader(materialSetting," ")
 	end
+	--Spring.Echo("GetMaterialSelections", materialSetting)
 	return materialSetting
 end
 
@@ -199,10 +201,12 @@ local function PrepUnit(unitDefId, teamId)
 			currentSelections[paint]	=	materialSelections[paint]
 			currentSelections[finish]	=	materialSelections[finish]
 			currentSelections[texture]	=	materialSelections[texture]
+			--Spring.Echo("PrepUnit", currentSelections[texture])
 		end
-		-- Spring.Echo(materialSelections["projectionMatrix1"], 
-					-- GG.matrices, 
-					-- GG.matrices[materialSelections["projectionMatrix1"]])
+		--Spring.Echo("PrepUnit", materialSelections["projectionMatrix1"], 
+		--			GG.matrices, 
+		--			GG.matrices[materialSelections["projectionMatrix1"]])
+		
 		for key, value in pairs(projectionMatrixInfo)do
 			--Spring.Echo(value, materialSelections[value])
 			currentSelections[value]	=	GG.matrices[materialSelections[value]]

@@ -12,6 +12,22 @@ function widget:GetInfo()
 	}
 end
 
+-- prints a copy of a table to chat
+local function recursiveTableReader(currTable, dashes)
+	dashes = dashes .. dashes
+	if type(currTable) == 'table' then
+		for k,v in pairs(currTable) do
+			if (v ~= nil) then
+				Spring.Echo(dashes .. "[" .. tostring(k) .. "]")
+				recursiveTableReader(v, dashes)
+			end
+		end
+	else
+		if (currTable ~= nil) then
+			Spring.Echo(dashes .. tostring(currTable) )
+		end
+	end
+end
 
 -- Jk's function taken from chili\headers\util.lua
 function table:merge(table2)
@@ -38,10 +54,13 @@ local pigmentLookup				= CreateColorLookup(pigments)
 local mergedSchemes				= SetupSchemes(pigments, finishes)
 local playerSchemeSelections	= GetPlayerSchemeSelection()
 local bucketSelections, bucketSelectionsByName	= SetupBuckets(mergedSchemes)
+local _,matrices				= ProcessMatrices()
 
-WG.colors 					= BuildColorSets(colorSets)
+WG.SWAGTheme				= GetSWAGScheme()
+WG.colors 					= BuildColorSets(colorSets)		
 WG.finishes					= finishes
 WG.pigments					= pigments
+WG.matrices					= matrices
 WG.bucketsChoices			= bucketsChoices
 WG.bucketSelections			= bucketSelections
 WG.paintSchemes				= mergedSchemes
@@ -100,7 +119,7 @@ WG.myfaction = "NOTSET"
 local function HandleFaction (factionName)
 	if ( factionName == "" ) then 
 		--default to first faction in list
-		factionName = 	string.lower(sidedata[1].name)		
+		factionName = 	string.lower(sidedata[1].name)
 	end	
 	
 	return string.lower(factionName)
@@ -119,8 +138,10 @@ function widget:Initialize()
 	WG.myTeamID = Spring.GetMyTeamID()
 	WG.sideData = sidedata
 	WG.myFaction = string.upper(HandleFaction(select(5, Spring.GetTeamInfo(WG.myTeamID))))
+
 	WG.myOldFaction = WG.myFaction
 	WG.myOldFaction = WG.myFaction
+	
 	WG.factionColorSet = WG.colors["uiSets_rgba"][WG.myFaction]
 
 	WG.mainColor		= WG.factionColorSet["Main"]
