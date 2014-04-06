@@ -111,7 +111,8 @@ Uses +5 Supply]],
 	armortype   = "light",
 	nofriendlyfire	= "1",
 	supply_cost = 5,
-	normaltex = "unittextures/lego2skin_explorernormal.dds",  
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",   
   },
 }
 

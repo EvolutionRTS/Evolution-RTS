@@ -62,7 +62,7 @@ sfxtypes = {
     needed_cover = 3,
 	death_sounds = "generic",
 	armortype   = "building",
-	normaltex = "unittextures/ejammer2normal.png", 
+	normalstex = "unittextures/ejammer2normal.png", 
 	helptext = [[Radar Jammer
 
 Will jam radar in a +500 Radius

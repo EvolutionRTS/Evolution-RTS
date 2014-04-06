@@ -73,7 +73,8 @@ sfxtypes = {
     needed_cover = 2,
 	death_sounds = "generic",
 	armortype   = "building", 
-	normaltex = "unittextures/lego2skin_explorernormal.dds", 
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
 	helptext = [[Storage Facility
 
 Will increase your storage reserves by +50

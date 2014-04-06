@@ -64,7 +64,7 @@ local unitDef = {
 	iseco = 1,
   	death_sounds = "generic",
 	armortype   = "BUILDING",
-	normaltex = "unittextures/esolar2normal.png", 
+	normalstex = "unittextures/esolar2normal.png", 
 	upgradeTech = "groundweapons",
 	upgradeLevel = "1.15",
   },

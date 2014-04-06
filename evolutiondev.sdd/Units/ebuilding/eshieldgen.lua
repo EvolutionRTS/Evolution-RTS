@@ -84,7 +84,7 @@ sfxtypes = {
 	death_sounds = "generic",
     ProvideTechRange = "300",
 	armortype   = "building", 
-	normaltex = "unittextures/eshieldgennormal.png", 
+	normalstex = "unittextures/eshieldgennormal.png", 
 	helptext = [[Anti-Nuke Platform / Anti-Artillery base shield Facility]],
   },
   useBuildingGroundDecal = true,

@@ -72,7 +72,7 @@ sfxtypes = {
     needed_cover = 8,
 	death_sounds = "generic",
 	armortype   = "building",
-	normaltex = "unittextures/emakernormal.png", 
+	normalstex = "unittextures/emakernormal.png", 
 	helptext = [[Metal Maker
 
 Creates metal from stored energy. Drains -5 energy per +0.5 metal generated]],

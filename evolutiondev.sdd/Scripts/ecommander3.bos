@@ -4,7 +4,7 @@
 #define WALK_PERIOD 50
 
 
-piece	base, nanopoint1, rf1, rf2, lf1, lf2, rr1, rr2, lr1, lr2, rfdirt, rrdirt, lfdirt, lrdirt, firepoint1;
+piece	base, nanopoint1, rf1, rf2, lf1, lf2, rr1, rr2, lr1, lr2, rfdirt, rrdirt, lfdirt, lrdirt, firepoint1, mandible;
 
 static-var maxreloadtime, moving, bMoving, terraintype, building;
 
@@ -385,4 +385,5 @@ Killed(severity, corpsetype) // how it explodes
 	explode rr2 type EXPLODE_ON_HIT;
 	explode lr1 type EXPLODE_ON_HIT;
 	explode lr2 type EXPLODE_ON_HIT;
+	explode mandible type EXPLODE_ON_HIT;
 } 

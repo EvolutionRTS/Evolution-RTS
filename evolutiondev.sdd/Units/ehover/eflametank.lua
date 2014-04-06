@@ -104,7 +104,7 @@ Uses +3 Supply]],
 	armortype   = "light",
 	nofriendlyfire	= "1",
 	supply_cost = 3,
-	normaltex = "unittextures/eflametanknormal.png", 
+	normalstex = "unittextures/eflametanknormal.png", 
 	helptext	=	[[]],
   },
 }

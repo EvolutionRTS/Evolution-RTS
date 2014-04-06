@@ -20,7 +20,7 @@ local materials = {
          [2] = '$shadow',
          [3] = '$specular',
          [4] = '$reflection',
-         [5] = '%NORMALTEX',
+         [5] = '%normalstex',
        },
    },
 }
@@ -32,7 +32,7 @@ local materials = {
 local unitMaterials = {}
 
 local function FindNormalmap(tex1, tex2)
-  local normaltex
+  local normalstex
 
   --// check if there is a corresponding _normals.dds file
   if (VFS.FileExists(tex1)) then
@@ -43,13 +43,13 @@ local function FindNormalmap(tex1, tex2)
     if (basefilename:sub(-1,-1) == "_") then
        basefilename = basefilename:sub(1,-2)
     end
-    normaltex = basefilename .. "_normals.dds"
-    if (not VFS.FileExists(normaltex)) then
-      normaltex = nil
+    normalstex = basefilename .. "_normals.dds"
+    if (not VFS.FileExists(normalstex)) then
+      normalstex = nil
     end
   end --if FileExists
 
-  if (not normaltex) and tex2 and (VFS.FileExists(tex2)) then
+  if (not normalstex) and tex2 and (VFS.FileExists(tex2)) then
     local basefilename = tex2:gsub("%....","")
     if (tonumber(basefilename:sub(-1,-1))) then
       basefilename = basefilename:sub(1,-2)
@@ -57,13 +57,13 @@ local function FindNormalmap(tex1, tex2)
     if (basefilename:sub(-1,-1) == "_") then
       basefilename = basefilename:sub(1,-2)
     end
-    normaltex = basefilename .. "_normals.dds"
-    if (not VFS.FileExists(normaltex)) then
-      normaltex = nil
+    normalstex = basefilename .. "_normals.dds"
+    if (not VFS.FileExists(normalstex)) then
+      normalstex = nil
     end
   end
 
-  return normaltex
+  return normalstex
 end
 
 
@@ -71,8 +71,8 @@ end
 for i=1,#UnitDefs do
   local udef = UnitDefs[i]
 
-  if (udef.customParams.normaltex and VFS.FileExists(udef.customParams.normaltex)) then
-    unitMaterials[udef.name] = {"normalMappedS3o", NORMALTEX = udef.customParams.normaltex}
+  if (udef.customParams.normalstex and VFS.FileExists(udef.customParams.normalstex)) then
+    unitMaterials[udef.name] = {"normalMappedS3o", normalstex = udef.customParams.normalstex}
 
   elseif (udef.model.type == "s3o") then
     local modelpath = udef.model.path
@@ -94,9 +94,9 @@ for i=1,#UnitDefs do
         Spring.Echo("CustomUnitShaders: " .. udef.name .. " no tex2")
       end
 
-      local normaltex = FindNormalmap(tex1,tex2)
-      if (normaltex and not unitMaterials[udef.name]) then
-        unitMaterials[udef.name] = {"normalMappedS3o", NORMALTEX = normaltex}
+      local normalstex = FindNormalmap(tex1,tex2)
+      if (normalstex and not unitMaterials[udef.name]) then
+        unitMaterials[udef.name] = {"normalMappedS3o", normalstex = normalstex}
       end
     end --if model
 
@@ -116,9 +116,9 @@ for i=1,#UnitDefs do
             Spring.Echo("CustomUnitShaders: " .. udef.name .. " no tex2")
           end
 
-          local normaltex = FindNormalmap(tex1,tex2)
-          if (normaltex and not unitMaterials[udef.name]) then
-            unitMaterials[udef.name] = {"normalMappedS3o", NORMALTEX = normaltex}
+          local normalstex = FindNormalmap(tex1,tex2)
+          if (normalstex and not unitMaterials[udef.name]) then
+            unitMaterials[udef.name] = {"normalMappedS3o", normalstex = normalstex}
           end
         end
       end

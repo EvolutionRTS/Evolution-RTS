@@ -103,7 +103,8 @@ Must be forcefired on the target]],
 	armortype   = "armored",
 	nofriendlyfire	= "1",
 	supply_cost = 10,
-	normaltex = "unittextures/lego2skin_explorernormal.dds",  
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",   
   },
 }
 

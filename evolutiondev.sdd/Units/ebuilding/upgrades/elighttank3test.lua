@@ -96,7 +96,8 @@ sfxtypes = {
     RequireTech = "3 Power",
 	armortype   = "light",
 	supply_cost = 3,
-	normaltex = "unittextures/lego2skin_explorernormal.dds", 
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
 	helptext = [[]],
   },
 }

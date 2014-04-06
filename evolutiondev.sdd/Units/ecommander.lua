@@ -53,7 +53,7 @@ local unitDef = {
   moveState			 = "0",
   name               = "The Overseer",
   noChaseCategories	 = "NOTAIR SUPPORT VTOL AMPHIB",
-  objectName         = "ecommander3.s3o",
+  objectName         = "ecommander4.s3o",
   script			 = "ecommander3.cob",
   radarDistance      = 0,
   repairable		 = false,
@@ -131,7 +131,8 @@ local unitDef = {
     cancollect = "1",
 	armortype   = "light",
 	nofriendlyfire	= "1",
-	normaltex = "unittextures/lego2skin_explorernormal.dds", 
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
 	helptext       = [[]],
   },
 }

@@ -125,7 +125,8 @@ local unitDef = {
 	death_sounds = "generic",
 --    airdronespawner = "1",
 	armortype   = "light",
-	normaltex = "unittextures/lego2skin_explorernormal.dds", 
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
   },
 }
 

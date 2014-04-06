@@ -118,7 +118,7 @@ local unitDef = {
 	twokhotkey = 'e',
     dronespawner = "1",
 	armortype   = "light",
-	normaltex = "unittextures/con_legonormal.png", 
+	normalstex = "unittextures/con_legonormal.png", 
   },
 }
 

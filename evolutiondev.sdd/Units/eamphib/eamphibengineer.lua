@@ -121,7 +121,8 @@ Light]],
   	death_sounds = "generic",
     dronespawner = "1",
 	armortype   = "light",
-	normaltex = "unittextures/lego2skin_explorernormal.dds", 
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
   },
 }
 

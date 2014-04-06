@@ -77,7 +77,7 @@ local unitDef = {
 	RequireTech = "0 Power",
 	death_sounds = "nuke",
 	armortype   = "building",
-	normaltex = "unittextures/esilonormal.png", 
+	normalstex = "unittextures/esilonormal.png", 
 	helptext = [[Nuclear Missile Silo
 
 Will completely devastate a large area

@@ -70,7 +70,8 @@ local unitDef = {
     needed_cover = 3,
     death_sounds = "generic",
 	armortype   = "building",
-	normaltex = "unittextures/lego2skin_explorernormal.dds",
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds", 
 	helptext = [[Metal Extractor
 
 Extracts metal from exposed resource points on the map. Provides +1 metal income

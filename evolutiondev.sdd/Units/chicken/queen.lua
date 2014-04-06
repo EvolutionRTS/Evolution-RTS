@@ -104,7 +104,8 @@ Secondary Concussion Cannons:
 	death_sounds = "nuke",
     RequireTech = "40 Power",
 	armortype   = "armored",
-	normaltex = "unittextures/lego2skin_explorernormal.dds", 
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds",  
   },
 }
 

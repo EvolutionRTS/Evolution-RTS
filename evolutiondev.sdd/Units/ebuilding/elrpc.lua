@@ -86,7 +86,7 @@ Building
 	death_sounds = "generic",
 	RequireTech = "0 Power",
 	armortype   = "building",
-	normaltex = "unittextures/elrpcnormal.png", 
+	normalstex = "unittextures/elrpcnormal.png", 
 	helptext = [[]],
   },
   useBuildingGroundDecal = true,
