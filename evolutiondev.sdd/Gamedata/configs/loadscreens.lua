@@ -1,5 +1,6 @@
 local loadscreens = {
 
+
 	{
 		tipText	= "Be sure to use the Repeat button. It will cause it's current orders to be repeated over and over until the unit dies. In this way, you could assign base building to an Engineer on repeat, and if anything dies, the engineer will go and rebuild it!",
 		tipTextColor 	= {1.0,1.0,1.0,1.0},
@@ -14,6 +15,60 @@ local loadscreens = {
 		fontShadow		= true,
 		backgroundImage1	= "bitmaps/ui/loadingscreen/background2.png",
 		tipImage	= "bitmaps/ui/loadingscreen/orbtip.png",
+		backgroundColor	= {0,0,0,0},
+	},
+
+	{
+		tipText	= [[Hoverbombs are extremely fast and maneuverable kamikaze bombs that deal heavy damage to structures and moderate damage to mobile units. They have a very high top speed but cannot turn well, so it's best to get it pointed in the correct direction before sending them in.]],
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background3.png",
+		tipImage	= "bitmaps/ui/loadingscreen/ebombtip.png",
+		backgroundColor	= {0,0,0,0},
+	},
+	
+	{
+		tipText	= [[MidKnight gunship drones are spawned from energy cores by Engineers. Their damage is very low but with enough of them they make excellent economy raiders. They are also quite good for scouting purposes.]],
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background4.png",
+		tipImage	= "bitmaps/ui/loadingscreen/edronetip.png",
+		backgroundColor	= {0,0,0,0},
+	},
+	
+	{
+		tipText	= [[Advanced generators are probably the most important structure in the game. Now only do they give you lots of energy and lots of power in a radius, they also provide a large amount of supply as well. The more you have, the better.]],
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background5.png",
+		tipImage	= "bitmaps/ui/loadingscreen/efusion2tip.png",
+		backgroundColor	= {0,0,0,0},
+	},
+	
+	{
+		tipText	= [[Kmar shield generators are excellent for shielding turrets or clustered buildings. If you have more than one in an area, the shields will link together and feed off of each other's power levels and regeneration.]],
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background6.png",
+		tipImage	= "bitmaps/ui/loadingscreen/ekmartip.png",
+		backgroundColor	= {0,0,0,0},
+	},
+	
+	{
+		tipText	= [[In team games, the income from Metal Extractors is split between all allies. Because of this reason, it does not matter which ally makes the Metal Extractors; The entire team will benefit from them. This resource splitting only applies to Metal Extractors.]],
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background7.png",
+		tipImage	= "bitmaps/ui/loadingscreen/emetalextractortip.png",
+		backgroundColor	= {0,0,0,0},
+	},
+	
+	{
+		tipText	= [[Endbringer class units are extremely powerful, but they are very vulnerable if left alone. Remember to protect your investment by sending along a squad of escort units.]],
+		tipTextColor 	= {1.0,1.0,1.0,1.0},
+		fontShadow		= true,
+		backgroundImage1	= "bitmaps/ui/loadingscreen/background8.png",
+		tipImage	= "bitmaps/ui/loadingscreen/eextankdestroyertip.png",
 		backgroundColor	= {0,0,0,0},
 	},
 

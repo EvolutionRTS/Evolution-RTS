@@ -32,6 +32,8 @@ local echo = Spring.Echo
 colors = {
 
 -- Car's per player randomizer kinda sucks, so we randomize the shit out of the lines. Sad, but effective.
+
+--[[
 	{'Coffee',			'#6F4E37'};
 	{'Teal', 			'#008080'};
 	{'Salmon', 			'#FA8072'};
@@ -53,8 +55,8 @@ colors = {
 	{'Green',			'#00CC00'};
 	{'Mustard', 		'#FFDB58'};
 	{'Sienna', 			'#A0522D'};
+]]--
 
---[[
 	{'Orange',			'#ff6600'};
 	{'Parchment',		'#FFFFC2'};
 	{'Teal',			'#009B95'};
@@ -64,7 +66,7 @@ colors = {
 	{'Blue',			'#1144AA'};
 	{'Pink',			'#C9007A'};
 	{'Green',			'#00CC00'};
-]]--	
+
 	
 }
 
