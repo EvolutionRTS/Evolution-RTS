@@ -1,16 +1,16 @@
 local colors	= {
-		sheenR		= "fuschia_gloss",
-		sheenG		= "fuschia_gloss",
-		sheenB		= "gold_gloss",
-		sheenA		= "gold_gloss",
+		sheenR		= "black_matte",
+		sheenG		= "black_matte",
+		sheenB		= "black_matte",
+		sheenA		= "black_matte",
 		paintR		= "fuschia",
 		paintG		= "fuschia",
-		paintB		= "neongreen",
-		paintA		= "red",
+		paintB		= "safetyorange",
+		paintA		= "orange",
 		projectionTexture1		= "bitmaps/detailtextures/blueblobs.png",
 		projectionTexture2		= "bitmaps/detailtextures/blueblobs.png",
-		projectionMatrix1		= "scale05",
-		projectionMatrix2		= "scale05b",
+		projectionMatrix1		= "scale02",
+		projectionMatrix2		= "custom",
 		----------------------------------
 }
 return colors

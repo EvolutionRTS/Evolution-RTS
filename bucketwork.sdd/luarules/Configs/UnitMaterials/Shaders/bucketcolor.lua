@@ -182,7 +182,7 @@ return {
 			vec4 extraColor = texture2D(textureS3o2, gl_TexCoord[0].st);
 			vec3 reflectDir = reflect(cameraDir, normal);
 			vec3 specTex	= textureCube(specularTex, reflectDir).rgb;
-			vec3 specular	= specTex * extraColor.b * 2.0;
+			vec3 specular	= specTex * extraColor.g;
 			vec3 reflection = textureCube(reflectTex,	reflectDir).rgb;
 
 		#ifdef use_shadows
@@ -196,16 +196,16 @@ return {
 			specular *= shadow;
 		#endif
 
-		reflection	= mix(light, reflection, extraColor.g); // reflection
-		reflection	+= extraColor.rrr;// self-illum
+		//reflection	= mix(light, reflection, extraColor.b); // reflection
+		//reflection	+= extraColor.rrr;// self-illum
+		
 
 		vec4 tex1 = texture2D(textureS3o1, gl_TexCoord[0].st);
-
+		
 		tex1.rgb = mix(tex1.rgb, teamColor.rgb, tex1.a); // teamcolor
 		
 		#ifdef use_buckets
 			vec4 bucketMult = texture2D(bucketMap, tc).rgba;
-			//bucketMult *= bucketMult*1.5;
 			//bucketMult		= (bucketMult.r, bucketMult.g, bucketMult.b, 1 - bucketMult.a)
 			
 			vec3 bucketColour = vec3(0);
@@ -213,24 +213,35 @@ return {
 			#ifdef bucket_1_texture
 				* texture2D(projectionTex1, bucket1tc).rgb
 			#endif
-			* (bucketMult.r*paintR.a);
+			* (bucketMult.r*bucketMult.r*paintR.a);
 
 			bucketColour += paintG.rgb
 			#ifdef bucket_2_texture
 				* texture2D(projectionTex2, bucket2tc).rgb
 			#endif
-			* (bucketMult.g*paintG.a);
+			* (bucketMult.g*bucketMult.g*paintG.a);
 
-			bucketColour += paintB.rgb*(bucketMult.b*paintB.a);//mix(bucketColour, paintB.rgb, bucketMult.b*paintB.a);
-			bucketColour += paintA.rgb*((1-bucketMult.a)*paintA.a);//mix(bucketColour, paintA.rgb, bucketMult.a*paintA.a);
+			bucketColour += paintB.rgb*(bucketMult.b*bucketMult.b*paintB.a);//mix(bucketColour, paintB.rgb, bucketMult.b*paintB.a);
+			bucketColour += paintA.rgb*((1-(bucketMult.a*bucketMult.a))*paintA.a);//mix(bucketColour, paintA.rgb, bucketMult.a*paintA.a);
 	
-			vec3 spec =  (pow(max( dot(normal, sunPos), 0.0),2.0) * sunDiffuse + sunAmbient)*specTex*2.0;
-			vec3 specular2color = 	spec*sheenR.rgb*bucketMult.r*sheenR.a +
-						spec*sheenG.rgb*bucketMult.g*sheenG.a +
-						spec*sheenB.rgb*bucketMult.b*sheenB.a +
-						spec*sheenA.rgb*((1-bucketMult.a)*sheenA.a);
-			gl_FragColor.rgb = (bucketColour + tex1.rgb) * reflection + (specular+specular2color)/2;
+			vec3 spec =  (pow(max( dot(normal, sunPos), 0.0),2.0) * sunDiffuse + sunAmbient)*specTex;
+			vec3 specular2color = 	(spec*sheenR.rgb*bucketMult.r)*sheenR.a*6 +
+									(spec*sheenG.rgb*bucketMult.g)*sheenG.a*6 +
+									spec*sheenB.rgb*bucketMult.b*sheenB.a*6 +
+									spec*sheenA.rgb*((1-bucketMult.a)*sheenA.a*6);
+									
+			vec3 ref	= 	reflection*extraColor.b +
+							reflection*bucketMult.r*sheenR.a +
+							reflection*bucketMult.g*sheenG.a +
+							reflection*bucketMult.b*sheenB.a +
+							reflection*((1-bucketMult.a)*sheenA.a)+ light/2.5 ;
+			
+			ref	+= extraColor.rrr;// self-illum				
+			gl_FragColor.rgb = (bucketColour + tex1.rgb) * light * (ref *3);// + (specular+specular2color)/2;
 		#else
+			reflection	= mix(light, reflection, extraColor.b); // reflection
+			reflection	+= extraColor.rrr;// self-illum
+		
 			gl_FragColor.rgb = tex1.rgb * reflection + specular;
 		#endif
 		
