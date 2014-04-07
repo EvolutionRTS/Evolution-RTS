@@ -1,5 +1,5 @@
 local colors	= {
-		paintR				= "limegreen",
+		paintR				= "white",
 		sheenR				= "black_matte",
 		--texture projection map setting
 		projectionGlmode1		= '',
@@ -13,11 +13,11 @@ local colors	= {
 		projectionTexture2 		= '',
 		projectionMatrix2	= '',
 		
-		paintB				= "white",
-		sheenB				= "black_matte",
+		paintB				= "green",
+		sheenB				= "neongreen_gloss",
 		--does not have a texture projection map setting
 				
-		paintA				= "yellow",
+		paintA				= "limegreen",
 		sheenA				= "black_matte",
 		--does not have a texture projection map setting
 }
