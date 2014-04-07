@@ -236,8 +236,8 @@ return {
 							reflection*bucketMult.b*sheenB.a +
 							reflection*((1-bucketMult.a)*sheenA.a)+ light/2.5 ;
 			
-			ref	+= extraColor.rrr;// self-illum				
-			gl_FragColor.rgb = (bucketColour + tex1.rgb) * light * (ref *3);// + (specular+specular2color)/2;
+			ref	+= extraColor.rrr;// self-illum		
+			gl_FragColor.rgb = (bucketColour + tex1.rgb) * light * (ref *3) + (specular+specular2color)/2;
 		#else
 			reflection	= mix(light, reflection, extraColor.b); // reflection
 			reflection	+= extraColor.rrr;// self-illum
