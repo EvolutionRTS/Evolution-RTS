@@ -176,6 +176,8 @@ local overrides = {
 	[CMD_RESTORE] = {texture = imageDir .. 'restore.png'},
 	[CMD_BUMPY] = {texture = imageDir .. 'bumpy.png'},
 	
+	[CMD_AREA_GUARD] = { texture = imageDir .. 'Bold/guard.png'},
+	
 	[CMD_AREA_MEX] = {text = ' ', texture = imageDir .. 'Bold/mex.png'},
 	
 	[CMD_JUMP] = {texture = imageDir .. 'Bold/jump.png'},	
@@ -262,6 +264,7 @@ local custom_cmd_actions = {
 	sethaven=1,
 	--build=1,
 	areamex=1,
+	areaguard=1,
 	mine=1,
 	build=1,
 	jump=1,
