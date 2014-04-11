@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 maxChicken           = tonumber(Spring.GetModOptions().mo_maxchicken) or 25
 maxBurrows           = 10
-gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 300  -- no chicken spawn in this period, seconds
+gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 0  -- no chicken spawn in this period, seconds
 queenTime            = (Spring.GetModOptions().mo_queentime or 40) * 60 -- time at which the queen appears, seconds
 addQueenAnger        = tonumber(Spring.GetModOptions().mo_queenanger) or 1
 burrowSpawnType      = Spring.GetModOptions().mo_chickenstart or "avoid"
@@ -26,6 +26,8 @@ angerBonus           = 204
 expStep 			 = 0.0625
 lobberEMPTime        = 4
 waves         = {}
+
+chickenSwitches	= {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -76,6 +78,35 @@ local chickenTypes = {
   eexkrabgroth	=  true,
   eextankdestroyer = true,
   
+}
+
+chickenSwitches	= {
+	[1] = {
+		ebomber	=  "edrone",	
+		egunship2	=  "edrone",	
+		efighter	=  "edrone",	
+		eamphibarty	=  "elighttank3",	
+		ebomb	=  "elighttank3",
+		efatso2	=  "elighttank3",
+	},
+	
+	[2] = {
+		ebomber		=  "edrone",
+		egunship2	=  "edrone",	
+		ebomb		=  "elighttank3",		
+	},
+	
+	[3] = {
+		ebomber	=  "edrone",
+	},
+	
+	[4] = {
+		edrone	=  "efighter",
+	},
+	
+	[5] = {
+		edrone	=  "efighter",
+	},
 }
 
 local defenders = { 
@@ -360,9 +391,6 @@ addWave(14,{"10 edrone"})
 addWave(14,{"10 edrone"})
 addWave(14,{"10 edrone"})
 --------------------------------------------------------------------------------
-
-
-
 difficulties = {
   ['Survival Spawner: Very Easy'] = {
     chickenSpawnRate = 90, 
@@ -445,3 +473,4 @@ difficulties = {
 
 defaultDifficulty = 'Survival Spawner: Normal'
 --------------------------------------------------------------------------------
+

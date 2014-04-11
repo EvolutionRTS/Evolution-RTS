@@ -1,10 +1,10 @@
 local spawnerSettings	= {
 	smallUnit		= "elighttank3",--"aacar"
-	mediumUnit		= "eallterrmed",--"ez8"
+	mediumUnit		= "emediumtank3",--"ez8"
 	largeUnit		= "eheavytank3",--xamel
-	referenceUnit	= "burrow",--fedmechist
+	referenceUnit	= "efatso2",--fedmechist
 	
-	testUnit		= "burrow",
+	testUnit		= "elighttank3",
 	
 	modes			= {
 		[1]		= "Survival Spawner: Very Easy",
