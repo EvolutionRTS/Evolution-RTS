@@ -1,5 +1,5 @@
 local colors	= {
-		paintR				= "light_imperialpurple",
+		paintR				= "imperialpurple",
 		sheenR				= "black_matte",
 		--texture projection map setting
 		projectionGlmode1		= '',
