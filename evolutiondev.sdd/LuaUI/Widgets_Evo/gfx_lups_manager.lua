@@ -77,6 +77,7 @@ end
 --------------------------------------------------------------------------------
 
 local UnitEffects = {}
+local registeredUnits = {}	-- all finished units - prevents partial unbuild then rebuild from being treated as two UnitFinished events
 
 local function AddFX(unitname,fx)
   local ud = UnitDefNames[unitname]
@@ -142,7 +143,8 @@ local tryloading  = 1     --// try to activate lups if it isn't found
 
 local function ClearFxs(unitID)
   if (particleIDs[unitID]) then
-    for _,fxID in ipairs(particleIDs[unitID]) do
+    for i=1,#particleIDs[unitID] do
+      local fxID = particleIDs[unitID][i]
       Lups.RemoveParticles(fxID)
     end
     particleIDs[unitID] = nil
@@ -153,7 +155,8 @@ end
 local function ClearFx(unitID, fxIDtoDel)
   if (particleIDs[unitID]) then
   local newTable = {}
-    for _,fxID in ipairs(particleIDs[unitID]) do
+    for i=1,#particleIDs[unitID] do
+      local fxID = particleIDs[unitID][i]
       if fxID == fxIDtoDel then 
         Lups.RemoveParticles(fxID)
       else 
@@ -183,6 +186,10 @@ end
 --------------------------------------------------------------------------------
 
 local function UnitFinished(_,unitID,unitDefID)
+  if registeredUnits[unitID] then
+    return
+  end
+  registeredUnits[unitID] = true
 
   if (unitDefID == cormexDefID) then
     cormexes[unitID] = 0
@@ -193,15 +200,23 @@ local function UnitFinished(_,unitID,unitDefID)
 
   local effects = UnitEffects[unitDefID]
   if (effects) then
-    for _,fx in ipairs(effects) do
+    for i=1,#effects do
+      local fx = effects[i]
       if (not fx.options) then
-        Spring.Echo("LUPS DEBUG GRRR", UnitDefs[unitDefID].name, fx and fx.class)
+        Spring.Log(widget:GetInfo().name, LOG.ERROR, "LUPS DEBUG GRRR", UnitDefs[unitDefID].name, fx and fx.class)
         return
       end
 
       if (fx.class=="GroundFlash") then
-        fx.options.pos = { Spring.GetUnitBasePosition(unitID) }
+        fx.options.pos = { Spring.GetUnitPosition(unitID) }
       end
+      if (fx.options.heightFactor) then
+		local pos = fx.options.pos or {0, 0, 0}
+        fx.options.pos = { pos[1], Spring.GetUnitHeight(unitID)*fx.options.heightFactor, pos[3] }
+      end
+	  if (fx.options.radiusFactor) then
+		fx.options.size = Spring.GetUnitRadius(unitID)*fx.options.radiusFactor
+	  end
       fx.options.unit = unitID
       AddFxs( unitID,LupsAddFX(fx.class,fx.options) )
       fx.options.unit = nil
@@ -211,6 +226,7 @@ end
 
 
 local function UnitDestroyed(_,unitID,unitDefID)
+  registeredUnits[unitID] = nil
   if (unitDefID == cormexDefID) then
     cormexes[unitID] = nil
   end
@@ -224,6 +240,13 @@ local function UnitEnteredLos(_,unitID)
   if (spec and fullSpec) then 
     return 
   end
+  
+  --[[
+  if registeredUnits[unitID] then
+    return
+  end
+  registeredUnits[unitID] = true
+  ]]
 
   if (unitDefID == cormexDefID) then
     cormexes[unitID] = 1
@@ -235,9 +258,10 @@ local function UnitEnteredLos(_,unitID)
   local unitDefID = spGetUnitDefID(unitID)
   local effects   = UnitEffects[unitDefID]
   if (effects) then
-    for _,fx in ipairs(effects) do
+    for i=1,#effects do
+      local fx = effects[i]
       if (fx.class=="GroundFlash") then
-        fx.options.pos = { Spring.GetUnitBasePosition(unitID) }
+        fx.options.pos = { Spring.GetUnitPosition(unitID) }
       end
     fx.options.unit = unitID
     AddFxs( unitID,LupsAddFX(fx.class,fx.options) )
@@ -251,6 +275,7 @@ local function UnitLeftLos(_,unitID)
   local spec, fullSpec = spGetSpectatingState()
   if (spec and fullSpec) then return end
 
+  --registeredUnits[unitID] = nil
   if (unitDefID == cormexDefID) then
     cormexes[unitID] = nil
   end
@@ -297,7 +322,8 @@ local function PlayerChanged(_,playerID)
   if (playerID == Spring.GetMyPlayerID()) then
     --// clear all FXs
     for _,unitFxIDs in pairs(particleIDs) do
-      for _,fxID in ipairs(unitFxIDs) do
+      for i=1,#unitFxIDs do
+	local fxID = unitFxIDs[i]    
         Lups.RemoveParticles(fxID)
       end
     end
@@ -350,7 +376,7 @@ function widget:Update()
         tryloading=-1
         return
       else
-        Spring.Echo("LuaParticleSystem (Lups) couldn't be loaded!")
+        Spring.Log(widget:GetInfo().name, LOG.ERROR, "LuaParticleSystem (Lups) couldn't be loaded!")
         widgetHandler:RemoveWidgetCallIn("Update",self)
         return
       end
@@ -406,8 +432,8 @@ end
 function widget:Shutdown()
   if (initialized) then
     for _,unitFxIDs in pairs(particleIDs) do
-      for _,fxID in ipairs(unitFxIDs) do
-        Lups.RemoveParticles(fxID)
+      for i=1,#unitFxIDs do
+	local fxID = unitFxIDs[i]
       end
     end
     particleIDs = {}

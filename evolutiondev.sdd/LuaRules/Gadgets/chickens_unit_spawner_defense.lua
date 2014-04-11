@@ -513,17 +513,18 @@ if (gadgetHandler:IsSyncedCode()) then
 				else
 					targetCache = units[1]
 				end
-				if targetCache then
-				local slowunit = true
+					local slowunit = true
 					if tries < 5 then
-						local defID = GetUnitDefID(targetCache)
-						if UnitDefs[defID] and (UnitDefs[defID].speed > 75) then
-							slowunit = false
+						if targetCache then
+							local defID = GetUnitDefID(targetCache)
+							if UnitDefs[defID] and (UnitDefs[defID].speed > 75) then
+								slowunit = false
+							end
 						end
 					end		
 					tries = (tries + 1)
-				end
-			until ((not GetUnitIsDead(targetCache)) and (not GetUnitNeutral(targetCache)) and slowunit) or (tries > maxTries)
+
+			until targetCache and((not GetUnitIsDead(targetCache)) and (not GetUnitNeutral(targetCache)) and slowunit) or (tries > maxTries)
 				targetCacheCount = 0
 				nextSquadSize = 6 + mRandom(0,4)
 		else

@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 maxChicken           = tonumber(Spring.GetModOptions().mo_maxchicken) or 25
 maxBurrows           = 10
-gracePeriod          = tonumber(Spring.GetModOptions().mo_graceperiod) or 0  -- no chicken spawn in this period, seconds
+gracePeriod          = 300  -- no chicken spawn in this period, seconds
 queenTime            = (Spring.GetModOptions().mo_queentime or 40) * 60 -- time at which the queen appears, seconds
 addQueenAnger        = tonumber(Spring.GetModOptions().mo_queenanger) or 1
 burrowSpawnType      = Spring.GetModOptions().mo_chickenstart or "avoid"
@@ -13,7 +13,7 @@ maxAge               = 120      -- chicken die at this age, seconds
 queenName 		     = Spring.GetModOptions().mo_queendifficulty or "queen"
 burrowDef            = UnitDefNames[burrowName].id
 defenderChance       = 0.5       -- probability of spawning a single turret
-maxTurrets           = 3   		 -- Max Turrets per burrow
+maxTurrets           = 6   		 -- Max Turrets per burrow
 queenSpawnMult       = 1         -- how many times bigger is a queen hatch than a normal burrow hatch
 burrowSpawnRate      = 20
 chickenSpawnRate     = 30
@@ -113,6 +113,7 @@ local defenders = {
   elightturret2 = true,
   eheavyturret2 = true,
   eaaturret		= true,
+  ekmar			= true,
 }
 
 addWave(1,{"10 eaatank"})
@@ -393,8 +394,8 @@ addWave(14,{"10 edrone"})
 --------------------------------------------------------------------------------
 difficulties = {
   ['Survival Spawner: Very Easy'] = {
-    chickenSpawnRate = 90, 
-    burrowSpawnRate  = 20,
+    chickenSpawnRate = 130, 
+    burrowSpawnRate  = 100,
     queenSpawnMult   = 0,
     angerBonus       = 20,
     expStep 		 = 0,
@@ -405,8 +406,8 @@ difficulties = {
     spawnChance      = 0.25,
   },
   ['Survival Spawner: Easy'] = {
-    chickenSpawnRate = 60, 
-    burrowSpawnRate  = 20,
+    chickenSpawnRate = 90, 
+    burrowSpawnRate  = 50,
     queenSpawnMult   = 0.5,
     angerBonus       = 20,
     expStep 		 = 0.09375,
@@ -419,7 +420,7 @@ difficulties = {
 
   ['Survival Spawner: Normal'] = {
     chickenSpawnRate = 45,
-    burrowSpawnRate  = 20,
+    burrowSpawnRate  = 30,
     queenSpawnMult   = 1,
     angerBonus       = 25,
     expStep 		 = 0.125,
