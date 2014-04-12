@@ -19,9 +19,9 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Anti-Raid Defense Platform (Anti-Light)
 Building
-125 Damage vs Light
-31.25 Damage vs Armored
-12.5 Damage vs Buildings]],
+62.5 Damage vs Light
+15.6 Damage vs Armored
+6.25 Damage vs Buildings]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -104,14 +104,14 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     explosionGenerator = "custom:genericshellexplosion-medium-lightning",
-	energypershot      = 12.5,
+	energypershot      = 3.125,
     impulseBoost       = 0,
     impulseFactor      = 0,
 	interceptedByShieldType = 4,
     lineOfSight        = true,
     noSelfDamage       = true,
     range              = 600,
-    reloadtime         = 1,
+    reloadtime         = 0.5,
     WeaponType         = "LightningCannon",
     rgbColor           = "0.1 0.2 0.5",
     rgbColor2          = "0 0 1",
@@ -125,7 +125,7 @@ local weaponDefs = {
 	  damagetype		= "elightturret2",  
     },      
     damage = {
-      default            = 125,
+      default            = 62.5,
     },
   },
 }

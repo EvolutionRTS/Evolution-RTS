@@ -10,7 +10,7 @@ local unitDef = {
   acceleration       = 1,
   brakeRate          = 1,
   buildCostEnergy    = 0,
-  buildCostMetal     = 34,
+  buildCostMetal     = 28,
   builder            = false,
   buildTime          = 5,
   canAttack          = false,
@@ -36,7 +36,7 @@ local unitDef = {
   
   description        = [[Shield Emitter
 Light
-Shield absorbs 500 damage
+Shield absorbs 250 damage
 Shield can link with other shield units to increase charging and capacity
 
 Requires +5 Power
@@ -127,9 +127,9 @@ local weaponDefs = {
     ShieldStartingPower = 0,
     Shieldenergyuse  = 0,
     Shieldradius     = 300,
-    Shieldpower      = 1000,
-    Shieldpowerregen = 20,
-    Shieldpowerregenenergy = 1,
+    Shieldpower      = 250,
+    Shieldpowerregen = 5,
+    Shieldpowerregenenergy = 0.25,
     Shieldintercepttype = 4,
     Shieldgoodcolor  = "0.0 0.2 1.0",
     Shieldbadcolor   = "1.0 0 0",

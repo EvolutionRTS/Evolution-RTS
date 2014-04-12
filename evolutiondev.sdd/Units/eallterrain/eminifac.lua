@@ -39,7 +39,7 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Produces Units]],
+  description        = [[Place generators near this factory to unlock higher tier units]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,

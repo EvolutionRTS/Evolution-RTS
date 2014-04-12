@@ -54,21 +54,19 @@ local presets = {
 effectUnitDefs = {
 	--metal	
 	emaker = {
-		{class='UnitPieceLight',	options={life=10, colormap={{1,0.1,0,0.6}, }, piecenum=3 }},
-		{class='UnitPieceLight',	options={life=10, colormap={{1,0.1,0,0.6}, }, piecenum=4 }},
-		{class='UnitPieceLight',	options={life=10, colormap={{1,0.4,0,0.7}, }, piecenum=5 }},
-
+		{class='UnitPieceLight',	options={life=50, colormap={{0.4,0.1,0,1}, }, piecenum=2 }},
+		{class='UnitPieceLight',	options={life=50, colormap={{0.4,0.1,0,1}, }, piecenum=3 }},
 	}, 
 	
 	emetalextractor = {
 		{class='UnitPieceLight',	options={life=50, 
-			colormap={{1,0,0,1}, {1,0.12,0,1}, {1,0,0,0.7}, }, piecenum=5 }},
+			colormap={{0.3,0.1,0,0.9}, }, piecenum=5 }},
 		{class='UnitPieceLight',	options={life=50, 
-			colormap={{1,0,0,1}, {1,0.12,0,1}, {1,0,0,0.7}, }, piecenum=4 }},
+			colormap={{0.3,0.1,0,0.9}, }, piecenum=4 }},
 		{class='UnitPieceLight',	options={life=50, 
-			colormap={{1,0,0,1}, {1,0.12,0,1}, {1,0,0,0.7}, }, piecenum=6 }},
+			colormap={{0.3,0.1,0,0.9}, }, piecenum=6 }},
 		{class='UnitPieceLight',	options={life=50, 
-			colormap={{1,0,0,1}, {1,0.12,0,1}, {1,0,0,0.7}, }, piecenum=3 }},
+			colormap={{0.3,0.1,0,0.9}, }, piecenum=3 }},
 
 	}, 
 
@@ -81,7 +79,7 @@ effectUnitDefs = {
 	
 	egeothermal = {
 		{class='UnitPieceLight',	options={life=10, 
-			colormap={{0,0,1,0.8}, }, piecenum=2}},
+			colormap={{0,0,1,0.9}, }, piecenum=2}},
 
 	}, 
 	
@@ -94,10 +92,10 @@ effectUnitDefs = {
 	
 	estorage = {
 		{class='UnitPieceLight',	options={ colormap={{0.0,0.0,0.1,0.7},}, piecenum=1 }},
-		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=2 }},
-		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=3 }},
-		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=4 }},
-		{class='UnitPieceLight',	options={ colormap={{0.0,0.1,0.5,1},}, piecenum=5 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,1,0,0.8},}, piecenum=2 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,1,0,0.8},}, piecenum=3 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,1,0,0.8},}, piecenum=4 }},
+		{class='UnitPieceLight',	options={ colormap={{0.0,1,0,0.8},}, piecenum=5 }},
 	}, 
 
 	

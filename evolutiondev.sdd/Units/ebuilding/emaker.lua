@@ -34,7 +34,8 @@ local unitDef = {
   maxWaterDepth      = 5000,
   metalStorage       = 0,
   name               = "Metal Maker",
-  objectName         = "emaker.s3o",
+  objectName         = "emaker3.s3o",
+  script			 = "emaker3.cob",
   onoffable          = true,
   radarDistance      = 0,
   repairable		 = false,
@@ -54,7 +55,7 @@ sfxtypes = {
 	
 	explosiongenerators = {
 	  "custom:blacksmoke",
-	  "custom:fusionreactionmaker",
+	  "custom:fusionreactionmakernew",
 	  "custom:skyhatelaser",
     },
 },
@@ -72,15 +73,16 @@ sfxtypes = {
     needed_cover = 8,
 	death_sounds = "generic",
 	armortype   = "building",
-	normalstex = "unittextures/emakernormal.png", 
+	normalstex = "unittextures/lego2skin_explorernormal.dds", 
+	 buckettex = "unittextures/lego2skin_explorerbucket.dds", 
 	helptext = [[Metal Maker
 
 Creates metal from stored energy. Drains -5 energy per +0.5 metal generated]],
   },
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "factorygroundplate.dds",
-  BuildingGroundDecalSizeX = 10,
-  BuildingGroundDecalSizeY = 10,
+  BuildingGroundDecalSizeX = 12,
+  BuildingGroundDecalSizeY = 12,
   BuildingGroundDecalDecaySpeed = 0.9,
 }
 
