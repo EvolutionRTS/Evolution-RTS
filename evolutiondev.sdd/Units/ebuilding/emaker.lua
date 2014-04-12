@@ -75,6 +75,7 @@ sfxtypes = {
 	armortype   = "building",
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
 	 buckettex = "unittextures/lego2skin_explorerbucket.dds", 
+	factionname	= "outer_colonies",
 	helptext = [[Metal Maker
 
 Creates metal from stored energy. Drains -5 energy per +0.5 metal generated]],
