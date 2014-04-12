@@ -106,7 +106,7 @@ effectUnitDefs = {
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.6},}, piecenum=1 }},
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,0.7},}, piecenum=3 }},
 		--{class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1500, precision=0, strength   = 0.0025, repeatEffect=true}},
-		{class='GroundFlash', options={radiusFactor=35,mobile=false,life=6,colormap={ {0.2, 0.6, 1.0, 0.3},},repeatEffect=true}},
+		--{class='GroundFlash', options={radiusFactor=35,mobile=false,life=6,colormap={ {0.2, 0.6, 1.0, 0.3},},repeatEffect=true}},
 	}, 
 	  
 	eallterrshield = {
@@ -120,7 +120,7 @@ effectUnitDefs = {
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,1},}, piecenum=4 }},
 		{class='UnitPieceLight',	options={ colormap={{0.0,0,0.2,1},}, piecenum=3 }},
 		--{class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=200, precision=0, strength   = 0.0025, repeatEffect=true}},
-		{class='GroundFlash', options={radiusFactor=4.287,mobile=false,life=6,colormap={ {0.2, 0.6, 1.0, 0.3},},repeatEffect=true}},
+		--{class='GroundFlash', options={radiusFactor=4.287,mobile=false,life=6,colormap={ {0.2, 0.6, 1.0, 0.3},},repeatEffect=true}},
 	}, 
 	
 	--units
