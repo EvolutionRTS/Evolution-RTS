@@ -213,31 +213,31 @@ return {
 			#ifdef bucket_1_texture
 				* texture2D(projectionTex1, bucket1tc).rgb
 			#endif
-			* (bucketMult.r*paintR.a);
+			* (bucketMult.r*bucketMult.r*paintR.a);
 
 			bucketColour += paintG.rgb
 			#ifdef bucket_2_texture
 				* texture2D(projectionTex2, bucket2tc).rgb
 			#endif
-			* (bucketMult.g*paintG.a);
+			* (bucketMult.g*bucketMult.g*paintG.a);
 
-			bucketColour += paintB.rgb*(bucketMult.b*paintB.a);//mix(bucketColour, paintB.rgb, bucketMult.b*paintB.a);
-			bucketColour += paintA.rgb*((1-(bucketMult.a))*paintA.a);//mix(bucketColour, paintA.rgb, bucketMult.a*paintA.a);
+			bucketColour += paintB.rgb*(bucketMult.b*bucketMult.b*paintB.a);//mix(bucketColour, paintB.rgb, bucketMult.b*paintB.a);
+			bucketColour += paintA.rgb*((1-(bucketMult.a*bucketMult.a))*paintA.a);//mix(bucketColour, paintA.rgb, bucketMult.a*paintA.a);
 	
 			vec3 spec =  (pow(max( dot(normal, sunPos), 0.0),2.0) * sunDiffuse + sunAmbient)*specTex;
 			vec3 specular2color = 	(spec*sheenR.rgb*bucketMult.r)*sheenR.a*6 +
 									(spec*sheenG.rgb*bucketMult.g)*sheenG.a*6 +
 									spec*sheenB.rgb*bucketMult.b*sheenB.a*6 +
-									spec*sheenA.rgb*((1-bucketMult.a)*sheenA.a*6);
+									spec*sheenA.rgb*((1-bucketMult.a)*sheenA.a*6)* light*light;
 									
-			vec3 ref	= 	reflection*extraColor.b +
-							reflection*bucketMult.r*sheenR.a +
+			vec3 ref	= 	reflection*extraColor.b*1.2+ light/3 +
+							reflection*bucketMult.r*sheenR.a+
 							reflection*bucketMult.g*sheenG.a +
 							reflection*bucketMult.b*sheenB.a +
-							reflection*((1-bucketMult.a)*sheenA.a)+ light/2.5 ;
+							reflection*((1-bucketMult.a)*sheenA.a)+ light/10 ;
 			
-			ref	+= extraColor.rrr;// self-illum		
-			gl_FragColor.rgb = (bucketColour + tex1.rgb) *(light*0.8)* (ref *3) + (specular+specular2color)/2;
+			ref	+= extraColor.rrr/4;// self-illum				
+			gl_FragColor.rgb = (bucketColour*2.5 + tex1.rgb) * (ref) + (specular+specular2color)/2;
 		#else
 			reflection	= mix(light, reflection, extraColor.b); // reflection
 			reflection	+= extraColor.rrr;// self-illum

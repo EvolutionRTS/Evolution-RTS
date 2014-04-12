@@ -57,8 +57,8 @@ if gadgetHandler:IsSyncedCode() then
 	local mergedSchemes				= SetupSchemes(pigments, finishes)
 	local playerSchemeSelections	= GetPlayerSchemeSelection()
 	local bucketSelections, bucketSelectionsByName	= SetupBuckets(mergedSchemes)
-	
-	
+
+	GG.SWAGTheme				= GetSWAGScheme()
 	GG.colors 					= BuildColorSets(colorSets)
 	GG.bucketSelections			= bucketSelections
 	GG.bucketSelectionsByName	= bucketSelectionsByName
@@ -81,7 +81,7 @@ else
 	--recursiveTableReader(bucketSelections, "=")
 	--recursiveTableReader(bucketSelectionsByName, "-")
 	local matrices, matrixTransforms				= ProcessMatrices()	
-	
+	GG.SWAGTheme				= GetSWAGScheme()
 	GG.pigments					= pigments
 	GG.finishes					= finishes
 	GG.matrices					= matrices
