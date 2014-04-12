@@ -7,6 +7,12 @@ local unitName = "efighter"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.5,
   airStrafe          = true,
   bankscale          = "1",

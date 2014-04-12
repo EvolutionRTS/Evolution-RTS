@@ -7,6 +7,12 @@ local unitName = "egunship2"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.5,
   airStrafe          = true,
   brakeRate          = 0.5,

@@ -7,6 +7,12 @@ local unitName = "eengineer5"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 1,
   brakeRate          = 0.24,
   buildCostEnergy    = 0,

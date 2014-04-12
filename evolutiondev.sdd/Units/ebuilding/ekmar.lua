@@ -18,7 +18,7 @@ local unitDef = {
   damageModifier     = 0.2,
   description        = [[Protective Turret Shield
   
-  Shield recharges at a rate of 40hp/s
+  Shield recharges at a rate of 25hp/s
   Maximum shield power is 1000hp]],
   energyStorage      = 0,
   energyUse          = 0,
@@ -101,8 +101,8 @@ local weaponDefs = {
     Shieldenergyuse  = 0,
     Shieldradius     = 200,
     Shieldpower      = 1000,
-    Shieldpowerregen = 40,
-    Shieldpowerregenenergy = 2,
+    Shieldpowerregen = 25,
+    Shieldpowerregenenergy = 1.25,
     Shieldintercepttype = 4,
     Shieldgoodcolor  = "0.0 0.2 1.0",
     Shieldbadcolor   = "1.0 0 0",

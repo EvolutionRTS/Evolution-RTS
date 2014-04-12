@@ -7,6 +7,12 @@ local unitName = "esubplane"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.2,
   airStrafe          = true,
   brakeRate          = 7,

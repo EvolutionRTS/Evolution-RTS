@@ -7,6 +7,12 @@ local unitName = "eallterrmed"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 1,
   brakeRate          = 1,
   buildCostEnergy    = 0,

@@ -7,6 +7,12 @@ local unitName = "ebomber"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.2,
   airStrafe          = false,
   BadTargetCategory  = "VTOL",

@@ -7,6 +7,12 @@ local unitName = "eriottank2"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 1,
   brakeRate          = 0.1,
   buildCostEnergy    = 0,

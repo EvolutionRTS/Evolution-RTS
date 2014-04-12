@@ -7,6 +7,12 @@ local unitName = "etransport"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.5,
   airStrafe          = true,
   airHoverFactor	 = 0,

@@ -7,6 +7,12 @@ local unitName = "eairengineer"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.2,
   airStrafe          = true,
   brakeRate          = 7,

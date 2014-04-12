@@ -7,6 +7,12 @@ local unitName = "escout"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.5,
   airStrafe          = true,
   brakeRate          = 0.5,

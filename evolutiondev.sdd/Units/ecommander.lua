@@ -6,6 +6,12 @@ local unitName = "ecommander"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+
+--mobileunit 
+  transportbyenemy   = false; 
+
+--**
+
   acceleration       = 0.2,
   brakeRate          = 1,
   buildCostEnergy    = 0,

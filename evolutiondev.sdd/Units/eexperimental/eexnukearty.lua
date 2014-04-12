@@ -7,6 +7,12 @@ local unitName = "eexnukearty"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 0.18,
   brakeRate          = 0.2,
   buildCostEnergy    = 0,

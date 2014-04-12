@@ -8,6 +8,12 @@ local unitName = "eaatank"
 
 local unitDef = {
 
+--mobileunit 
+  transportbyenemy   = false;
+
+--**
+
+
   acceleration       = 1,
   bmcode             = "1",
   brakeRate          = 0.1,
