@@ -533,7 +533,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		end	
 		--debug--Spring.Echo(t .. " ChooseTarget " .. targetCache)
 		if targetCache then
-			Spring.Echo(GetUnitPosition(targetCache))
+			--Spring.Echo(GetUnitPosition(targetCache))
 			return {GetUnitPosition(targetCache)}	
 		else
 			return {100,100,100}
