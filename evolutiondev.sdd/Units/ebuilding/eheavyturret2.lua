@@ -25,7 +25,9 @@ local unitDef = {
 Building
 300 Damage vs Armored
 125 Damage vs Light
-30 Damage vs Buildings]],
+30 Damage vs Buildings
+
+Uses +2 Supply]],
   energyStorage      = 0,
   energyUse          = 0,
   explodeAs          = "MEDIUM_BUILDING",
@@ -81,6 +83,7 @@ Building
   },
   customParams = {
     needed_cover = 5,
+	supply_cost = 2,
 	death_sounds = "generic",
 	armortype   = "building", 
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
