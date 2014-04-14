@@ -424,7 +424,7 @@ function loadWindow()
 	}
 
 	graphLabel = Chili.Label:New{
-		caption  = 'Wait a minute, collecting data',
+		caption  = 'Game has ended, collecting data',
 		parent   = control0,
 		x        = selW+5,
 		right    = 0,
