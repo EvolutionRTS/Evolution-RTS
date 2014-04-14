@@ -25,9 +25,7 @@ local colors = {
 	
 	--resource colors
 	resource = {	
-		exotic	= {0.78, 0.40, 0.78, 1},
-		refined	= {1.00, 1.00, 0.30, 1},
-		basic	= {1.00, 0.30, 0.30, 1},
+		metal	= {0.50, 0.50, 0.78, 1},
 		energy	= {0.30, 0.88, 1.00, 1},
 	},
 	--damage class sets
