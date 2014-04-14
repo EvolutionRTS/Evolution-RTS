@@ -20,5 +20,12 @@ local spawnerSettings	= {
 		feature	= true,
 		sandbox	= true,
 	},
+	
+	defenders = { 
+		elightturret2	= true,
+		eheavyturret2	= true,
+		eaaturret		= true,
+		ekmar			= true,
+	}
 }
 return spawnerSettings
