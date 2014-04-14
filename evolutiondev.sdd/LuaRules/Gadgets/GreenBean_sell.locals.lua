@@ -170,14 +170,16 @@ function gadget:DrawWorld()
 	local f = GetGameFrame()
 	for u,b in spairs(SYNCED.unitsBeingSold) do
 		if GetUnitAllyTeam(u) == team or spec then
-			PushMatrix()
-			local x,y,z = GetUnitBasePosition(u)
-			Translate(x,y + 80 + GetUnitHeight(u),z)
-			Billboard()
-			Texture("bitmaps/icons/selling.png") --Sale icon goes here
-			TexRect(-20,-20,20,20)
-			Text(ceiling((b - f)/30.0), 0, -25, 16, "oc")
-			PopMatrix()
+				local x,y,z = GetUnitBasePosition(u)
+			if x and y and z then
+				PushMatrix()
+				Translate(x,y + 80 + GetUnitHeight(u),z)
+				Billboard()
+				Texture("bitmaps/icons/selling.png") --Sale icon goes here
+				TexRect(-20,-20,20,20)
+				Text(ceiling((b - f)/30.0), 0, -25, 16, "oc")
+				PopMatrix()
+			end
 		end
 	end
 	Texture(false)

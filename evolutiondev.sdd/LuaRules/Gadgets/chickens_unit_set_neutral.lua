@@ -17,19 +17,18 @@ if (not gadgetHandler:IsSyncedCode()) then
   return
 end
 
+local spawnerConfig = include("gamedata/configs/survival_settings.lua")
+
 local GetUnitCOBValue = Spring.GetUnitCOBValue
 local SetUnitNeutral = Spring.SetUnitNeutral
 local GetUnitStates = Spring.GetUnitStates
 local neutralUnits = {}
 local armourTurrets = {}
-armourTurrets[UnitDefNames["cormaw"].id] = true
-armourTurrets[UnitDefNames["armclaw"].id] = true
-armourTurrets[UnitDefNames["corvipe"].id] = true
-armourTurrets[UnitDefNames["armpb"].id] = true
-armourTurrets[UnitDefNames["cortoast"].id] = true
-armourTurrets[UnitDefNames["armamb"].id] = true
-armourTurrets[UnitDefNames["cordoom"].id] = true
-armourTurrets[UnitDefNames["packo"].id] = true
+
+for k,_ in pairs (spawnerConfig.defenders) do
+	armourTurrets[UnitDefNames[k].id] = true
+end
+
 local UPDATE = 30
 local timeCounter = 15
 

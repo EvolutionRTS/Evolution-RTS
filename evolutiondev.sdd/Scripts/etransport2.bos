@@ -155,8 +155,4 @@ EndTransport()
 
 Killed(severity, corpsetype) // how it explodes 
 { 
-	corpsetype = 1; 
-	explode base type EXPLODE_ON_HIT;
-	explode frontengines type EXPLODE_ON_HIT;
-	explode rearengines type EXPLODE_ON_HIT;
 } 
