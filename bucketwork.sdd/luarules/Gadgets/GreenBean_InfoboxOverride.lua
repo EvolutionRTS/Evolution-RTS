@@ -24,8 +24,14 @@ local categoryLexicon = {
 	ARMORED		= "Heavily Armored",
 	VTOL		= "Aircraft",
 	BUILDING	= "Buildings",
-	NOTAIR		= "Not Aircraft",
+	NOTAIR		= "Land units",
 }
+
+local categoryLexiconCount = 0 
+
+for _,_ in pairs(categoryLexicon) do
+	categoryLexiconCount = categoryLexiconCount +1
+end
 
 local metColor
 local nrgColor
@@ -51,7 +57,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		local ArText	= ""
 		local wepText	= ""
 		local sqdText	= ""
-		local trgtText	= "\nTargets\255\150\250\150"
+		local trgtText	= "\nOnly targets\255\150\250\150"
 
 		unitPow = ( tonumber(UnitDefs[unitDefID].customParams.power)  or nil)
 
@@ -101,19 +107,26 @@ if (gadgetHandler:IsSyncedCode()) then
 		local weaponnum = 0
 		local targetsStringBuilder ={}
 		local targetTypes = {}
-		
+		Spring.Echo("-= " .. UnitDefs[unitDefID].humanName .. " =-")
 		for k,v in pairs(UnitDefs[unitDefID].weapons ) do
 			if (type(v) == "table") then
 				local Ability	= false
 				
 				weaponnum = weaponnum + 1
-				--Spring.Echo("v.weaponType ", v.weaponType)
-				--if v.weaponType ~= "shield" then
+				if WeaponDefs[v.weaponDef].isShield then
+					Spring.Echo("  weapon num:" .. weaponnum, "Shield",
+								WeaponDefs[v.weaponDef].shieldRadius)
+				end
+				
+				if not WeaponDefs[v.weaponDef].isShield then
+					Spring.Echo("  weapon num:" .. weaponnum, "not Shield", 
+								WeaponDefs[v.weaponDef].shieldRadius)
+								
 					for categoryName,_ in pairs (v.onlyTargets) do
 						if categoryLexicon[string.upper(categoryName)]then
 							targetTypes[string.upper(categoryName)] = true
 						else
-							Spring.Echo(string.upper(categoryName) .. "missing from categoryLexicon table")
+						--	Spring.Echo(string.upper(categoryName) .. "missing from categoryLexicon table")
 						end
 					end
 					
@@ -126,7 +139,8 @@ if (gadgetHandler:IsSyncedCode()) then
 						wepText = wepText .. "\n" .. WeaponDefs[v.weaponDef].description .. 
 							", " .. " ( " ..  WeaponDefs[v.weaponDef].damages[0] .." )"
 					end
-			--	end
+				end
+				
 			end 
 		end
 
@@ -137,7 +151,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		end
 		
 		-- do we have more than JUST the string targets?
-		if #targetsStringBuilder > 1 then
+		if #targetsStringBuilder > 1 and #targetsStringBuilder < categoryLexiconCount +1 then
 			trgtText = table.concat(targetsStringBuilder,", ")
 		else -- nope, just that string, so let's empty
 			trgtText = ""
@@ -177,10 +191,10 @@ if (gadgetHandler:IsSyncedCode()) then
 		for _,buildListUnit in pairs(UnitDefs[unitDefID].buildOptions) do
 			
 			local unitDescription = spFindUnitCmdDesc(unitID,-buildListUnit)
-			Spring.Echo(UnitDefs[unitDefID].name, spFindUnitCmdDesc(unitID,-buildListUnit))
+			--Spring.Echo(UnitDefs[unitDefID].name, spFindUnitCmdDesc(unitID,-buildListUnit))
 			if buildListUnit ~= 0 and unitDescription then
-			Spring.Echo(unitID, buildListUnit, unitbBuildToolTips[buildListUnit])
-			spEditUnitCmdDesc(unitID, unitDescription,{	tooltip = unitbBuildToolTips[buildListUnit]	})
+				--Spring.Echo(unitID, buildListUnit, unitbBuildToolTips[buildListUnit])
+				spEditUnitCmdDesc(unitID, unitDescription,{	tooltip = unitbBuildToolTips[buildListUnit]	})
 			end
 		end
 	end
