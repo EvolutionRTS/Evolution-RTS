@@ -124,7 +124,7 @@ addWave(1,{"1 eallterrlight"})
 
 addWave(2,{"2 elighttank3"})
 addWave(2,{"1 eheavytank3"})
-addWave(2,{"1 amphibmedtank"})
+addWave(2,{"1 eamphibmedtank"})
 addWave(2,{"2 eaatank"})
 
 addWave(3,{"2 elighttank3"})
@@ -211,9 +211,9 @@ difficulties = {
   },
 
   ['Survival Spawner: Hard'] = {
-    chickenSpawnRate = 30,
+    chickenSpawnRate = 20,
     burrowSpawnRate  = 20,
-    queenSpawnMult   = 2,
+    queenSpawnMult   = 3,
     angerBonus       = 30,
     expStep 		 = 0.25,
     lobberEMPTime    = 5,
@@ -225,10 +225,10 @@ difficulties = {
 
 
   ['Survival Spawner: Very Hard'] = {
-    chickenSpawnRate = 15,
-    burrowSpawnRate  = 20,
-    queenSpawnMult   = 3,
-    angerBonus       = 30,
+    chickenSpawnRate = 10,
+    burrowSpawnRate  = 10,
+    queenSpawnMult   = 5,
+    angerBonus       = 35,
     expStep 		 = 0.4,
     lobberEMPTime    = 7.5,
     chickenTypes     = Copy(chickenTypes),
