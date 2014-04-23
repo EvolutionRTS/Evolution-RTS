@@ -130,7 +130,7 @@ local weaponDefs = {
 
   antiarmorrockets = {
     badTargetCategory = [[LIGHT BUILDING]],
-    AreaOfEffect       = 100,
+    AreaOfEffect       = 1,
 	avoidFriendly      = false,
     avoidFeature       = false,
 	collideFriendly    = false,
