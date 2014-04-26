@@ -50,7 +50,7 @@ Go()
 
 Stop()
 {
-   stop-spin penis around z-axis decelerate <15.000000>; 
+   stop-spin penis around y-axis decelerate <15.000000>; 
         set INBUILDSTANCE to 0;
    if( Static_Var_3 )
    {

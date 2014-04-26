@@ -136,7 +136,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={20,25,10}, size=55, precision=22, strength   = 0.015,  repeatEffect=true}},
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={20,25,10}, size=55, precision=22, strength   = 0.015,  repeatEffect=true}},
   },
 	eamphibfac = {
 --    {class='StaticParticles', options=corfusNova},
