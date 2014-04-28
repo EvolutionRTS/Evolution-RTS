@@ -306,20 +306,17 @@ end
 
 
 function UnitPieceLight:Visible()
-  local radius = 300
-  local pos = {0,0,0}
-  local losState
-
   local ux,uy,uz = Spring.GetUnitViewPosition(self.unit)
-  if (ux) then
-    pos[1],pos[2],pos[3] = pos[1]+ux,pos[2]+uy,pos[3]+uz
-    radius = radius + Spring.GetUnitRadius(self.unit)
-    losState = Spring.GetUnitLosState(self.unit, LocalAllyTeamID)
-
-    return losState and(losState.los)and(Spring.IsSphereInView(pos[1],pos[2],pos[3],radius))
-  else
+  if not ux then
     return false
   end
+
+  local pos = {0,0,0}
+  pos[1],pos[2],pos[3] = pos[1]+ux,pos[2]+uy,pos[3]+uz
+  local radius = 300 + Spring.GetUnitRadius(self.unit)
+  local losState = Spring.GetUnitLosState(self.unit, LocalAllyTeamID)
+
+  return (losState and losState.los)and(Spring.IsSphereInView(pos[1],pos[2],pos[3],radius))
 end
 
 function UnitPieceLight:Valid()
