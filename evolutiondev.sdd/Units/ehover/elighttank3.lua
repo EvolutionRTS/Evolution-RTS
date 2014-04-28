@@ -70,7 +70,7 @@ Uses +3 Supply]],
 
 sfxtypes = {
 	explosiongenerators = {
-		"custom:factorysparks",
+		"custom:electricity",
 		"custom:dirt",
 		"custom:blacksmoke",
     },

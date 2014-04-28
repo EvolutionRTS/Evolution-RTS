@@ -81,6 +81,7 @@ local unitDef = {
   },
   customParams = {
     needed_cover = 2,
+	supply_cost = 1,
 	death_sounds = "generic",
 	-- twokhotkey = 't',
 	armortype   = "building",

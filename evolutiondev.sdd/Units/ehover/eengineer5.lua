@@ -24,6 +24,7 @@ local unitDef = {
   CanAssist			 = true,
   canBeAssisted      = true,
   CanCapture         = false,
+  CanRepair			 = false,
   cancollect         = "1",
   canGuard           = true,
   canHover           = true,

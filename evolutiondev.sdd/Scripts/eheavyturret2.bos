@@ -3,9 +3,9 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece base, turret, barrel1, firepoint1, firepoint2, sfxpoint1; // these are the pieces of the model
+piece base, turret, barrel1, firepoint1, firepoint2, sfxpoint1, lilypad; // these are the pieces of the model
 
-static-var CanFire, shooting_num;
+static-var CanFire, shooting_num, terraintype;
 
 // Signal definitions
 #define SIG_AIM 2 // this is a aim define <- o_O This is a kill flag
@@ -33,6 +33,34 @@ SmokeUnit()// this is a standard smoke point define
 		sleep sleeptime;
 	}
 }
+
+
+setSFXoccupy(setSFXoccupy_argument)
+{
+terraintype = setSFXoccupy_argument;
+
+                if(terraintype == 2)
+      {
+                move base to y-axis [-0.5] speed [50];
+                show lilypad;
+                }
+      else
+      {
+                move base to y-axis [0] speed [50];
+                hide lilypad;
+                }
+                if(terraintype == 4)
+      {
+                move base to y-axis [0] speed [50];
+                hide lilypad;
+                }
+      else
+      {
+                move base to y-axis [-0.85] speed [50];
+                show lilypad;
+                }
+}
+
 
 cannotfire()
 {

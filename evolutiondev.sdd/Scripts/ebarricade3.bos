@@ -3,7 +3,9 @@
 #include "sfxtype.h" 
 #include "exptype.h" 
 
-piece base, ball, topring, middlering; // these are the pieces of the model 
+piece base, ball, topring, middlering, lilypad; // these are the pieces of the model 
+
+static-var terraintype;
 
 #define SIG_AIM 2
 
@@ -33,6 +35,34 @@ sleeptime = 200;
 sleep sleeptime; 
 } 
 } 
+
+
+setSFXoccupy(setSFXoccupy_argument)
+{
+terraintype = setSFXoccupy_argument;
+
+                if(terraintype == 2)
+      {
+                move base to y-axis [-0.5] speed [50];
+                show lilypad;
+                }
+      else
+      {
+                move base to y-axis [0] speed [50];
+                hide lilypad;
+                }
+                if(terraintype == 4)
+      {
+                move base to y-axis [0] speed [50];
+                hide lilypad;
+                }
+      else
+      {
+                move base to y-axis [-0.85] speed [50];
+                show lilypad;
+                }
+}
+
 
 Create() // tells it what to do on creation 
 {

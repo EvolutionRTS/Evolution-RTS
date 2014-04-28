@@ -3,9 +3,9 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece  base, dome, antennae;
+piece  base, dome, antennae, lilypad;
 
-static-var  statechg_DesiredState, statechg_StateChanging;
+static-var  statechg_DesiredState, statechg_StateChanging, terraintype;
 
 
 SmokeUnit(healthpercent, sleeptime, smoketype)
@@ -33,6 +33,33 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
       }
       sleep sleeptime;
    }
+}
+
+
+setSFXoccupy(setSFXoccupy_argument)
+{
+terraintype = setSFXoccupy_argument;
+
+                if(terraintype == 2)
+      {
+                move base to y-axis [-0.5] speed [50];
+                show lilypad;
+                }
+      else
+      {
+                move base to y-axis [0] speed [50];
+                hide lilypad;
+                }
+                if(terraintype == 4)
+      {
+                move base to y-axis [0] speed [50];
+                hide lilypad;
+                }
+      else
+      {
+                move base to y-axis [-0.85] speed [50];
+                show lilypad;
+                }
 }
 
 
