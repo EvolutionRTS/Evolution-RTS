@@ -424,12 +424,12 @@ function loadWindow()
 	}
 
 	graphLabel = Chili.Label:New{
-		caption  = 'Game has ended, collecting data',
+		caption  = 'You have no opponent, therefore, the game has ended immediately.',
 		parent   = control0,
 		x        = selW+5,
 		right    = 0,
 		y        = 0,
-		font     = {size = 25},
+		font     = {size = 18},
 	}
 
 	graphTime = Chili.Label:New{
