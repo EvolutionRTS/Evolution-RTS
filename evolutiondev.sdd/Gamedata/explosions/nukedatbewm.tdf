@@ -199,35 +199,20 @@
    count=1;
    }
 
-   [dirt]
-   {
-      [properties]
-      {
-      alwaysVisible=1;
-      size=40;
-      color=0.2, 0.1, 0.05;
-      alphaFalloff=2;
-      speed= r1.5 r-1.5, 2, r1.5 r-1.5;
-      pos=r-10 r10, 0, r-10 r10;
-      }
-      ground=1;
-      count=4;
-   }
-
    [groundflash]
       {
    alwaysVisible=1;
-         ttl = 200;
-         flashSize = 1000;
-         flashAlpha = 0.9;
+         ttl = 600;
+         flashSize = 2000;
+         flashAlpha = 0.5;
 
-         circleGrowth = 4;
+         circleGrowth = 2;
          circleAlpha = 0.5;
 
          color = 1, 0.7, 0.3;
 
-   air=1;
-      ground=1;
-         water=1;
+		air=1;
+		ground=1;
+        water=1;
    }
 }
