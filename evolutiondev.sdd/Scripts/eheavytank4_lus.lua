@@ -6,7 +6,7 @@ isMoving = "isMoving"
 terrainType = "terrainType"
 
 function script.Create()
-
+	StartThread(common.SmokeUnit, {base, turret, barrel1})
 end
 
 common = include("headers/common_includes_lus.lua")
@@ -60,23 +60,6 @@ end
 function script.FireWeapon(weaponID)
 	--Spring.Echo("FireWeapon: FireWeapon")
 	EmitSfx (firepoint1, 1024)
-end
-
-
-local random = math.random
-
-function SmokeUnit(smokePieces)
-	local n = #smokePieces
-	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) ~= 0) do
-		Sleep(1000)
-	end
-	while true do
-		local health = GetUnitValue(COB.HEALTH)
-		if (health <= 66) then -- only smoke if less then 2/3rd health left
-			EmitSfx(smokePieces[random(1,n)], 1026)
-		end
-		Sleep(20*health + 200)
-	end
 end
 
 function script.Killed()
