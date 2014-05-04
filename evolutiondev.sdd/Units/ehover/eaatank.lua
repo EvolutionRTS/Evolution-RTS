@@ -120,6 +120,8 @@ Uses +5 Supply]],
 
 --------------------------------------------------------------------------------
 
+local weapon1Damage = 105
+
 local weaponDefs = {
   eaatankantiairmissile = {
     AreaOfEffect       = 50,
@@ -133,7 +135,7 @@ local weaponDefs = {
 	canAttackGround    = false,
 	edgeEffectiveness  = 0.5,
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = 21,
+	energypershot      = weapon1Damage / 20,
     fireStarter        = 80,
     impulseFactor      = 0,
 	interceptedByShieldType = 4,
@@ -164,7 +166,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     },
     damage = {
-      default            = 105,
+      default            = weapon1Damage,
     },
   },
   

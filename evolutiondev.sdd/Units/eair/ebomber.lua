@@ -117,6 +117,7 @@ Must be forcefired on the target]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 1000
 
 local weaponDefs = {
   SBOMB = {
@@ -128,7 +129,7 @@ local weaponDefs = {
     cegTag             = "missiletrailgunship",
 	commandfire		   = "true",
     explosionGenerator = "custom:genericshellexplosion-large-red",
-	energypershot      = 50,
+	energypershot      = weapon1Damage / 20,
 	edgeEffectiveness  = 0.1,
     fireStarter        = 70,
     guidance           = false,
@@ -165,7 +166,7 @@ local weaponDefs = {
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default           = 1000,
+      default           = weapon1Damage,
     },
   },
 }

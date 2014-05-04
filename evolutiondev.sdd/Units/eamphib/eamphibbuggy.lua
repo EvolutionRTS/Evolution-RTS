@@ -118,6 +118,7 @@ Uses +1 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 32
 
 local weaponDefs = {
   lightbeamlaser = {
@@ -133,7 +134,7 @@ local weaponDefs = {
     coreThickness      = 0.2,
     duration           = 0.2,
     explosionGenerator = "custom:genericshellexplosion-small-sparks-burn",
-	energypershot      = 1.6,
+	energypershot      = weapon1Damage / 20,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -167,7 +168,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 32, -- multiply * 1.2 for correct dps output
+      default           = weapon1Damage, -- multiply * 1.2 for correct dps output
     },
   },
 }

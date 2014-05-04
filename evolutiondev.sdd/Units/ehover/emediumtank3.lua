@@ -112,6 +112,7 @@ Uses +4 supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 200
 
 local weaponDefs = {
   mediumtankcannon = {
@@ -124,7 +125,7 @@ local weaponDefs = {
     ballistic          = true,
     cegTag             = "bruisercannon",
     explosionGenerator = "custom:genericshellexplosion-small",
-	energypershot      = 10,
+	energypershot      = weapon1Damage / 20,
     id                 = 51,
     interceptedByShieldType = 4,
 	impulseFactor      = 0,
@@ -141,7 +142,7 @@ local weaponDefs = {
 	  damagetype		= "emediumtank3",  
     },      
     damage = {
-      default           = 200,
+      default           = weapon1Damage,
     },
   },
 }

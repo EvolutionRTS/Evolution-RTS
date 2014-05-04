@@ -46,7 +46,7 @@ Requires +40 Power]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 5000,
+  maxDamage          = 10000,
   maxVelocity        = 2.3,
   maxReverseVelocity = 1,
   maxWaterDepth      = 20,
@@ -108,6 +108,7 @@ Requires +40 Power]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 2000
 
 local weaponDefs = {
   nukeartyweapon = {
@@ -122,7 +123,7 @@ local weaponDefs = {
     cegTag             = "nukeartyshot",
     explosionGenerator = "custom:nukeartyexpl",
 	edgeEffectiveness  = 0.1,
-	energypershot      = 100,
+	energypershot      = weapon1Damage / 20,
     id                 = 172,
     impulseFactor      = 0,
     interceptedByShieldType = 4,
@@ -143,7 +144,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 2000,
+      default           = weapon1Damage,
     },
   },
 }

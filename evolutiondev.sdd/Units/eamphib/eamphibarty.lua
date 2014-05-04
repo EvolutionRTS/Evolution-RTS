@@ -117,6 +117,7 @@ Uses +10 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 300
 
 local weaponDefs = {  
   assimilatorbeamweapon = {
@@ -132,7 +133,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
     duration           = 0.4,
     explosionGenerator = "custom:genericshellexplosion-large-sparks-burn",
-	energypershot      = 7.5,
+	energypershot      = weapon1Damage / 20,
     fallOffRate        = 0.1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -162,7 +163,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 300,
+      default           = weapon1Damage,
     },
   },
 }

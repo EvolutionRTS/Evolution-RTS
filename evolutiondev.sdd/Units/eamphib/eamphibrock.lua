@@ -29,8 +29,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Missile support tank
 Light
-200 Paralysis Damage vs Light
-100 Paralysis Damage vs Armored/Building
+200 Damage vs Light
+100 Damage vs Armored/Building
 20 Damage vs All
 
 Requires +5 Power
@@ -125,6 +125,7 @@ Uses +5 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 200
 
 local weaponDefs = {
 
@@ -137,7 +138,7 @@ local weaponDefs = {
     collideFeature     = false,
     cegTag             = "missiletrailsmall",
     explosionGenerator = "custom:genericshellexplosion-medium-red",
-	energypershot      = 5,
+	energypershot      = weapon1Damage / 20,
     fireStarter        = 70,
     tracks             = true,
 	impulseFactor      = 0,
@@ -167,7 +168,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     },     
     damage = {
-      default           = 200,
+      default           = weapon1Damage,
     },
   },
 }

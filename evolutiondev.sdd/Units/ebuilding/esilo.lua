@@ -99,6 +99,7 @@ Will completely devastate a large area
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 240000
 
 local weaponDefs = {
   nukemissile = {
@@ -109,7 +110,7 @@ local weaponDefs = {
     commandfire        = true,
     craterBoost        = 0,
     craterMult         = 0,
-    energypershot      = 12000,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:NUKEDATBEWM",
     fireStarter        = 100,
     flightTime         = 400,
@@ -147,7 +148,7 @@ local weaponDefs = {
 	  death_sounds 		= "nuke",
     },      
     damage = {
-      default            = 50000,
+      default            = weapon1Damage,
     },
   },
 }

@@ -109,6 +109,7 @@ Light
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 3
 
 local weaponDefs = {
   droneweapon = {
@@ -124,7 +125,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     duration           = 0.05,
-	energypershot      = 0.3,
+	energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-sparks",
     fallOffRate        = 0.1,
     impulseFactor      = 0,
@@ -155,7 +156,7 @@ local weaponDefs = {
 	  damagetype		= "edrone",  
     },    
     damage = {
-      default            = 3,
+      default            = weapon1Damage,
     },
   },
 }

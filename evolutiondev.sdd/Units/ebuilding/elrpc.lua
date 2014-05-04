@@ -98,6 +98,7 @@ Building
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 2000
 
 local weaponDefs = {
   lrpcweapon = {
@@ -113,7 +114,7 @@ local weaponDefs = {
 	impulsefactor	   = 0,
     interceptedByShieldType = 4,
     lineOfSight        = true,
-    energypershot       = 100,
+    energypershot      = weapon1Damage / 20,
 	edgeEffectiveness  = 0.1,
     model              = "rocket.s3o",
     name               = "Rockets",
@@ -135,7 +136,7 @@ local weaponDefs = {
 	  damagetype		= "elrpc",  
     },      
     damage = {
-      default            = 2000,
+      default            = weapon1Damage,
     },
   },
 }

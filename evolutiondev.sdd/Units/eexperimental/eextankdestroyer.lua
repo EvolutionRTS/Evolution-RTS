@@ -49,7 +49,7 @@ Requires +30 Power]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 7500,
+  maxDamage          = 12500,
   maxSlope           = 28,
   maxVelocity        = 2.8,
   maxReverseVelocity = 1,
@@ -114,10 +114,11 @@ Requires +30 Power]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 500
+local weapon2Damage = 12
 
 local weaponDefs = {
     tankkillerlaser = {
-	badTargetCategory = [[BUILDING]],
     AreaOfEffect       = 8,
     avoidFriendly      = false,
     avoidFeature       = false,
@@ -127,7 +128,7 @@ local weaponDefs = {
     beamWeapon         = true,
     coreThickness      = 0.5,
     duration           = 0.2,
-    energypershot      = 25,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-large-purple",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -156,12 +157,11 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 500,
+      default           = weapon1Damage,
     },
   },
 
   machinegun = {
-    badTargetCategory = [[BUILDING]],
     accuracy           = 300,
     AreaOfEffect       = 8,
     avoidFriendly      = false,
@@ -174,7 +174,7 @@ local weaponDefs = {
     duration           = 0.1,
     energypershot      = 0.6,
     explosionGenerator = "custom:genericshellexplosion-small-red",
-	energypershot      = 1.2,
+	energypershot      = weapon2Damage / 20,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -201,7 +201,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 12,
+      default           = weapon2Damage,
     },
   },
 }

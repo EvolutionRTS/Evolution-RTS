@@ -122,6 +122,7 @@ Requires +5 Power
 
 
 --------------------------------------------------------------------------------
+local shield1PowerRegen = 5
 
 local weaponDefs = {
   allterrshield = {
@@ -134,8 +135,8 @@ local weaponDefs = {
     Shieldenergyuse  = 0,
     Shieldradius     = 300,
     Shieldpower      = 500,
-    Shieldpowerregen = 5,
-    Shieldpowerregenenergy = 0.25,
+    Shieldpowerregen = shield1PowerRegen,
+    Shieldpowerregenenergy = shield1PowerRegen / 20,
     Shieldintercepttype = 4,
     Shieldgoodcolor  = "0.0 0.2 1.0",
     Shieldbadcolor   = "1.0 0 0",

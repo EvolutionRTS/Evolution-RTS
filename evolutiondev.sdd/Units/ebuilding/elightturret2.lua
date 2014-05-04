@@ -99,6 +99,7 @@ Uses +1 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 125
 
 local weaponDefs = {
   lighteweapon = {
@@ -108,7 +109,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     explosionGenerator = "custom:genericshellexplosion-medium-lightning",
-	energypershot      = 12.5,
+	energypershot      = weapon1Damage / 20,
     impulseBoost       = 0,
     impulseFactor      = 0,
 	interceptedByShieldType = 4,
@@ -129,7 +130,7 @@ local weaponDefs = {
 	  damagetype		= "elightturret2",  
     },      
     damage = {
-      default            = 125,
+      default            = weapon1Damage,
     },
   },
 }

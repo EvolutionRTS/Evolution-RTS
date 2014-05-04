@@ -113,6 +113,7 @@ Uses +4 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 150
 
 local weaponDefs = {
   heavytankweapon = {
@@ -126,7 +127,7 @@ local weaponDefs = {
     ballistic          = true,
     cegTag             = "antiassualtshot2",
     explosionGenerator = "custom:genericshellexplosion-medium",
-	energypershot      = 6,
+	energypershot      = weapon1Damage / 20,
     id                 = 172,
     impulseFactor      = 0,
     interceptedByShieldType = 4,
@@ -147,7 +148,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     },      
     damage = {
-     default         = 150,
+     default         = weapon1Damage,
     },
   },
 }

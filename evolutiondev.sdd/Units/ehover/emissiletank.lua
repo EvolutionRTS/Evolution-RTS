@@ -122,6 +122,7 @@ Uses +7 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 150
 
 local weaponDefs = {
   missletankweapon = {
@@ -135,7 +136,7 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     explosionGenerator = "custom:genericshellexplosion-medium-red",
-	energypershot      = 7.5,
+	energypershot      = weapon1Damage / 20,
     fireStarter        = 100,
     flightTime         = 10,
     guidance           = true,
@@ -169,7 +170,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     },      
     damage = {
-      default           = 150,
+      default           = weapon1Damage,
     },
   },
 }

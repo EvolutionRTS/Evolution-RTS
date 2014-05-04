@@ -96,6 +96,8 @@ sfxtypes = {
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 100000
+local shield1PowerRegen = 50
 
 local weaponDefs = {
   nukeinterceptor = {
@@ -111,7 +113,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
     duration           = 0.4,
     explosionGenerator = "custom:genericshellexplosion-large-blue",
-	energypershot      = 5000,
+	energypershot      = weapon1Damage / 20,
     fallOffRate        = 0.1,
     fireStarter        = 50,
 	interceptor			= 1,
@@ -136,7 +138,7 @@ local weaponDefs = {
     weaponVelocity     = 1500,
 	waterweapon		   = true,
     damage = {
-      default           = 50000,
+      default           = weapon1Damage,
     },
   },
   
@@ -150,8 +152,8 @@ local weaponDefs = {
     Shieldenergyuse  = 0,
     Shieldradius     = 1500,
     Shieldpower      = 5000,
-    Shieldpowerregen = 50,
-    Shieldpowerregenenergy = 2.5,
+    Shieldpowerregen = shield1PowerRegen,
+    Shieldpowerregenenergy = shield1PowerRegen / 20,
     Shieldintercepttype = 4,
     Shieldgoodcolor  = "0.0 0.2 1.0",
     Shieldbadcolor   = "1.0 0 0",

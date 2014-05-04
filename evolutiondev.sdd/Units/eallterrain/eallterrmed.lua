@@ -124,6 +124,7 @@ Uses +4 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 200
 
 local weaponDefs = {
   mediumtankcannon = {
@@ -138,7 +139,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.1,
-    energypershot      = 10,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -168,7 +169,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 200,
+      default           = weapon1Damage,
     },
   },
   

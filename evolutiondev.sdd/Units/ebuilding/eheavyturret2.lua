@@ -101,6 +101,7 @@ Uses +2 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 300
 
 local weaponDefs = {
   eheavyturretweapon2 = {
@@ -115,7 +116,7 @@ local weaponDefs = {
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.4,
-    energypershot      = 30,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-medium",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -142,7 +143,7 @@ local weaponDefs = {
 	  damagetype		= "eheavyturret2",  
     }, 
     damage = {
-      default           = 300,
+      default           = weapon1Damage,
     },
   },
 }

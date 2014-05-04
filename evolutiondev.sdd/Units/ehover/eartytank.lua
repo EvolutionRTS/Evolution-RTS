@@ -112,6 +112,7 @@ Uses +8 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 200
 
 local weaponDefs = {
   Artilleryweapon = {
@@ -126,7 +127,7 @@ local weaponDefs = {
     cegTag             = "artyshot2",
 	avoidNeutral	   = false,
     explosionGenerator = "custom:genericshellexplosion-large",
-	energypershot      = 50,
+	energypershot      = weapon1Damage / 20,
     id                 = 59,
     impulse            = "0",
     impulseFactor      = 0,
@@ -148,7 +149,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",	  
     },  
     damage = {
-      default           = 200,
+      default           = weapon1Damage,
      },
   },
 }

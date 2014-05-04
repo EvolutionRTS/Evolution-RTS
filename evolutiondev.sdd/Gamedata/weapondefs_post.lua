@@ -164,7 +164,7 @@ local function ProcessUnitDef(udName, ud)
     if (WeaponDefs[fullName]) then
       ud.explodeas = fullName
 	else
-		Spring.Echo("Missing explosion def")
+		Spring.Echo("Explosion def (weapon) does not exist for", udName)
     end
   end
   if (isstring(ud.selfdestructas)) then
@@ -172,7 +172,7 @@ local function ProcessUnitDef(udName, ud)
     if (WeaponDefs[fullName]) then
       ud.selfdestructas = fullName
 	else
-		Spring.Echo("Missing self-d def")
+		Spring.Echo("Self-Destruct def (weapon) does not exist for", udName)
     end
   end
 end

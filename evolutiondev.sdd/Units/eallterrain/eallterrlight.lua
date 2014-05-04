@@ -124,6 +124,7 @@ Uses +2 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 50
 
 local weaponDefs = {
   lighttankweapon = {
@@ -135,7 +136,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.3,
     duration           = 0.1,
-    energypershot      = 2.5,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-small-blue",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -164,7 +165,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 50,
+      default           = weapon1Damage,
     },
   },
 }

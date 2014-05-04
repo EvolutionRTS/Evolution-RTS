@@ -114,6 +114,7 @@ Uses +3 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 30
 
 local weaponDefs = {
   antiaircannon = {
@@ -127,7 +128,7 @@ local weaponDefs = {
 	burnblow		   = true,
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.05,
-    energypershot      = 1.5,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-small",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -153,7 +154,7 @@ local weaponDefs = {
 	  damagetype		= "efighter",  
     }, 
     damage = {
-      default           = 30,
+      default           = weapon1Damage,
     },
   },  
 }

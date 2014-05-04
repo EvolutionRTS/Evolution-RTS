@@ -124,6 +124,7 @@ Uses +3 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 100
 
 local weaponDefs = {
   heavytankweapon = {
@@ -138,7 +139,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
 	cegTag             = "railgun",
     duration           = 0.1,
-    energypershot      = 5,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:BulletImpact3",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -167,7 +168,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 100,
+      default           = weapon1Damage,
     },
   },
 }

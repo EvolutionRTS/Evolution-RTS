@@ -90,6 +90,7 @@ sfxtypes = {
 
 
 --------------------------------------------------------------------------------
+local shield1PowerRegen = 25
 
 local weaponDefs = {
   shield = {
@@ -102,8 +103,8 @@ local weaponDefs = {
     Shieldenergyuse  = 0,
     Shieldradius     = 200,
     Shieldpower      = 1000,
-    Shieldpowerregen = 25,
-    Shieldpowerregenenergy = 1.25,
+    Shieldpowerregen = shield1PowerRegen,
+    Shieldpowerregenenergy = shield1PowerRegen / 20,
     Shieldintercepttype = 4,
     Shieldgoodcolor  = "0.0 0.2 1.0",
     Shieldbadcolor   = "1.0 0 0",

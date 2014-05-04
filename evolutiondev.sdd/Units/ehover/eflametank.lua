@@ -117,6 +117,7 @@ Uses +3 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 25
 
 local weaponDefs = {
     lightlaser = {
@@ -130,7 +131,7 @@ local weaponDefs = {
     explosionGenerator = "custom:burnblack",
     coreThickness      = 0,
     duration           = 1,
-    energypershot      = 1.25,
+    energypershot      = weapon1Damage / 20,
     fallOffRate        = 1,
     fireStarter        = 50,
 	interceptedByShieldType = 4,
@@ -152,7 +153,7 @@ local weaponDefs = {
 	  damagetype		= "eflametank",  
     },      
     damage = {
-      default           = 25,
+      default           = weapon1Damage,
     },
   },
 }

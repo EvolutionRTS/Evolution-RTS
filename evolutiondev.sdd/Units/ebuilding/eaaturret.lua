@@ -86,6 +86,7 @@ local unitDef = {
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 112.5
 
 local weaponDefs = {
   antiairgunflak = {
@@ -99,7 +100,7 @@ local weaponDefs = {
     burnblow           = true,
     endsmoke           = "1",
     explosionGenerator = "custom:xamelImpact",
-	energypershot      = 7.5,
+	energypershot      = weapon1Damage / 20,
     fireStarter        = 80,
     id                 = 1,
     impulseFactor      = 0,
@@ -122,7 +123,7 @@ local weaponDefs = {
 	  nofriendlyfire	= 1,
     },
     damage = {
-      default            = 112.5,
+      default            = weapon1Damage,
     },
   },
 }

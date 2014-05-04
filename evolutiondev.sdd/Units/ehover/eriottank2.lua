@@ -122,6 +122,7 @@ Uses +3 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 200
 
 local weaponDefs = {
   riottankempweapon = {
@@ -135,7 +136,7 @@ local weaponDefs = {
 --	cegTag             = "mediumcannonweapon3",
     duration           = 0.05,
 	edgeeffectiveness  = 0.1,
-    energypershot      = 10,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-medium-blue",
     fallOffRate        = 1,
     fireStarter        = 100,
@@ -168,7 +169,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 200,
+      default           = weapon1Damage,
     },
   },
 }

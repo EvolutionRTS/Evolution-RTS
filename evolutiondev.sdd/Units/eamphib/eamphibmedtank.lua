@@ -119,6 +119,7 @@ Uses +4 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 28
 
 local weaponDefs = {
   medtankbeamlaser = {
@@ -132,7 +133,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.5,
     duration           = 0.2,
-    energypershot      = 2.8,
+    energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-medium-sparks-burn",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -167,7 +168,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 28, -- multiply * 1.2 for correct dps output
+      default           = weapon1Damage, -- multiply * 1.2 for correct dps output
     },
   },
 }

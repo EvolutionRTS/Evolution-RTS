@@ -52,7 +52,7 @@ Uses +25 Supply]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 10000,
+  maxDamage          = 15000,
   maxVelocity        = 2.5,
   maxReverseVelocity = 1,
   maxWaterDepth      = 80,
@@ -123,10 +123,11 @@ Uses +25 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 600
+local weapon2Damage = 600
 
 local weaponDefs = {
   heavybeamweapon = {
-    badTargetCategory = [[ARMORED LIGHT]],
     AreaOfEffect       = 10,
 	avoidFriendly      = false,
     avoidFeature       = false,
@@ -138,7 +139,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
 --	cegTag             = "mediumcannonweapon3",
 --    duration           = 0.2,
-    energypershot      = 30,
+	energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-large-purple",
     fallOffRate        = 1,
     fireStarter        = 50,
@@ -169,9 +170,10 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     }, 
     damage = {
-      default           = 600,
+      default           = weapon1Damage,
     },
   },
+
   concussioncannon = {
     accuracy           = 1,
     AreaOfEffect       = 10,
@@ -184,7 +186,7 @@ local weaponDefs = {
     burnblow           = true,
     endsmoke           = "1",
     explosionGenerator = "custom:genericshellexplosion-medium",
-	energypershot      = 4,
+	energypershot      = weapon2Damage / 20,
     fireStarter        = 80,
     id                 = 1,
     impulseFactor      = 0.1,
@@ -207,7 +209,7 @@ local weaponDefs = {
 	  upgradeClass		= "groundweapons",
     },
     damage = {
-      default            = 80,
+      default            = weapon2Damage,
     },
   },
 }

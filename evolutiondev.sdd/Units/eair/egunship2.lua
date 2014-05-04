@@ -125,6 +125,8 @@ Uses +7 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 100
+local weapon2Damage = 100
 
 local weaponDefs = {
   gunshipweapon = {
@@ -136,7 +138,7 @@ local weaponDefs = {
     collideFeature     = false,
     cegTag             = "missiletrailgunshiplesssmokey",
     explosionGenerator = "custom:genericshellexplosion-medium",
-	energypershot      = 5,
+	energypershot      = weapon1Damage / 20,
 	edgeEffectiveness  = 0.1,
     fireStarter        = 70,
     guidance           = false,
@@ -172,7 +174,7 @@ local weaponDefs = {
 	  damagetype		= "egunship2",  
     },      
     damage = {
-      default           = 100,
+      default           = weapon1Damage,
     },
   },
   
@@ -185,7 +187,7 @@ local weaponDefs = {
 	cegTag             = "torpedotrailuwturret",
 	cylinderTargeting  = true,
     explosionGenerator = "custom:torpedoexplosion",
-	energypershot      = 5,
+	energypershot      = weapon2Damage / 20,
     fireStarter        = 80,
     impulseFactor      = 0.1,
 	interceptedByShieldType = 4,
@@ -209,7 +211,7 @@ local weaponDefs = {
 	  damagetype		= "egunship2",  
     },      
     damage = {
-      default           = 100,
+      default           = weapon2Damage,
     },
   },
   

@@ -115,6 +115,7 @@ Uses +10 Supply]],
 
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 350
 
 local weaponDefs = {
   eheavyturretweapon = {
@@ -129,7 +130,7 @@ local weaponDefs = {
     cegTag             = "factorysparks",
     collideFriendly    = false,
     explosionGenerator = "custom:genericshellexplosion-medium-white",
-	energypershot      = 17.5,
+	energypershot      = weapon1Damage / 20,
     id                 = 71,
     interceptedByShieldType = 4,
     impulse            = "0",
@@ -149,7 +150,7 @@ local weaponDefs = {
 	  damagetype		= "efatso",  
     },      
     damage = {
-      default           = 350,
+      default           = weapon1Damage,
     },
   },
 }
