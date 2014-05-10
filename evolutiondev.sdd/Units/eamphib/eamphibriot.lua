@@ -36,7 +36,7 @@ Light
 • Paralyzes enemy units
 • Projectile can hit multiple units
 
-Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when un shotgun mode.
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -195,7 +195,7 @@ local weaponDefs = {
     weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "bruisercannon.wav",
-	sprayangle		   = 6000,
+	sprayangle		   = 2000,
     startsmoke         = "1",
     turret             = true,
     weaponVelocity     = 400,

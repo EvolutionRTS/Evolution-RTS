@@ -65,7 +65,7 @@ local damageClasses = {
 		eriottank2shotgun	= {
 			ARMORED		= 0.5,
 			LIGHT		= 1,
-			BUILDING 	= 0.1,
+			BUILDING 	= 0.25,
 		},	
 		-- End Hovers
 			
@@ -98,7 +98,7 @@ local damageClasses = {
 		eallterrriotshotgun	= {
 			ARMORED		= 0.5,
 			LIGHT		= 1,
-			BUILDING 	= 0.1,
+			BUILDING 	= 0.25,
 		},
 		eallterrassault	= {
 			ARMORED		= 0.125,
@@ -121,7 +121,7 @@ local damageClasses = {
 		eamphibriotshotgun	= {
 			ARMORED		= 0.5,
 			LIGHT		= 1,
-			BUILDING 	= 0.1,
+			BUILDING 	= 0.25,
 		},
 		eamphibaa	= {
 			ARMORED		= 0.5,

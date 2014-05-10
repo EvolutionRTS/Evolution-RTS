@@ -37,7 +37,7 @@ Armored
 • Paralyzes enemy units
 • Projectile can hit multiple units
 
-Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when un shotgun mode.
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -123,7 +123,7 @@ Uses +3 Supply]],
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
 	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
 	factionname	= "outer_colonies",   
-	helptext	= [[The Spas is a unit designed to take on large amounts of raiders and pound them all to dust. Features 10 concussion shells in a burst that will knock back opposing units. It has Light armor, and should be paired with escorts if possible.]],
+	helptext	= [[]],
   },
 }
 
@@ -201,7 +201,7 @@ local weaponDefs = {
     weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "bruisercannon.wav",
-	sprayangle		   = 6000,
+	sprayangle		   = 2000,
     startsmoke         = "1",
     turret             = true,
     weaponVelocity     = 400,
