@@ -182,6 +182,32 @@
    }
 }
 
+[airfactoryhtrail]
+{
+   [BitmapMuzzleFlame]
+   {
+   class = CBitmapMuzzleFlame;
+
+   [properties]
+         {
+            dir = dir;
+            colorMap= 0.9 0.8 0.7 0.01   0.9 0.5 0.2 0.01   0 0 0 0.01;
+             size=15;
+             length=25;
+             sizeGrowth=2;
+             ttl=3;
+             frontOffset=0.05;
+             sideTexture=shot;
+             frontTexture=empty;
+         }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+
 [jethtrail]
 {
    [BitmapMuzzleFlame]

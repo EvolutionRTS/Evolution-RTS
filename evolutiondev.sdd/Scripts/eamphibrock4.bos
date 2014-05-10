@@ -7,7 +7,7 @@ piece base, turret1, barrel1, firepoint1, turret2, barrel2, firepoint2, turret3,
 
 #include "ROCKUNIT.H"
 
-static-var terraintype, bmoving, moving, underwater, shooting_num; // these are the variables 
+static-var terraintype, bmoving, moving, underwater, shooting_num, WeaponTypeSelect; // these are the variables 
 
 // #define gdscannon 1024+0 // this is a custom explosion generator thinging 
 
@@ -78,16 +78,23 @@ Thrust()
      sleep 400;    
    }
 }
+
+WeaponType(select)
+{
+	WeaponTypeSelect = select;
+}
+
 Create() // tells it what to do on creation 
 {
 		shooting_num=1;
         start-script Thrust();
         start-script SmokeUnit(); 
+        WeaponTypeSelect = 1;
 } 
 
 RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
 { 
-sleep 3000; 
+sleep 10000; 
 turn turret1 to y-axis <0> speed <60>; 
 turn turret2 to y-axis <0> speed <60>; 
 turn turret3 to y-axis <0> speed <60>; 
@@ -102,12 +109,7 @@ turn barrel5 to x-axis <0> speed <30>;
 
 AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
 { 
-/*
-    if ( get IN_WATER(0) == 1 )
-    {
-     return (0);
-    }
-*/
+if(!WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
 signal SIG_AIM; 
 set-signal-mask SIG_AIM; 
 turn turret1 to y-axis heading speed <500>; 
@@ -166,6 +168,14 @@ FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets
             }
 } 
 
+BlockShot1(unit, block)
+{
+	if (!WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
 AimFromWeapon1(piecenum) // where it aims the weapon from 
 { 
 piecenum = turret3; 
@@ -199,6 +209,111 @@ if (shooting_num==1)
      	piecenum=firepoint5;
      } 
 } 
+
+
+AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+if(WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+turn turret1 to y-axis heading speed <500>; 
+turn turret2 to y-axis heading speed <500>; 
+turn turret3 to y-axis heading speed <500>; 
+turn turret4 to y-axis heading speed <500>; 
+turn turret5 to y-axis heading speed <500>; 
+turn barrel1 to x-axis <0> - pitch speed <300>;  
+turn barrel2 to x-axis <0> - pitch speed <300>; 
+turn barrel3 to x-axis <0> - pitch speed <300>; 
+turn barrel4 to x-axis <0> - pitch speed <300>; 
+turn barrel5 to x-axis <0> - pitch speed <300>; 
+wait-for-turn turret1 around y-axis;
+wait-for-turn turret2 around y-axis;
+wait-for-turn turret3 around y-axis;
+wait-for-turn turret4 around y-axis;
+wait-for-turn turret5 around y-axis;
+wait-for-turn barrel1 around x-axis;  
+wait-for-turn barrel2 around x-axis;
+wait-for-turn barrel3 around x-axis;
+wait-for-turn barrel4 around x-axis;
+wait-for-turn barrel5 around x-axis;
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
+
+FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+
+	if(shooting_num==1)
+         {
+         	emit-sfx 1026 from firepoint2;
+         }
+	if(shooting_num==2)
+         {
+         	emit-sfx 1026 from firepoint3;
+         }
+	if(shooting_num==3)
+         {
+         	emit-sfx 1026 from firepoint4;
+         }
+	if(shooting_num==4)
+         {
+         	emit-sfx 1026 from firepoint5;
+         }
+	if(shooting_num==5)
+         {
+         	emit-sfx 1026 from firepoint1;
+         }
+
+	shooting_num=shooting_num+1;
+
+            if( shooting_num == 6)
+            {  
+            	shooting_num=1;
+            }
+} 
+
+BlockShot2(unit, block)
+{
+	if (WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
+AimFromWeapon2(piecenum) // where it aims the weapon from 
+{ 
+piecenum = turret3; 
+} 
+
+QueryWeapon2(piecenum) // where the shot is called from 
+{ 
+
+if (shooting_num==1) 
+     {  
+     	piecenum=firepoint1;     
+     }
+
+     if (shooting_num==2)
+     {   
+     	piecenum=firepoint2;
+     } 
+     
+     if (shooting_num==3)
+     {   
+     	piecenum=firepoint3;
+     } 
+     
+     if (shooting_num==4)
+     {   
+     	piecenum=firepoint4;
+     } 
+     
+     if (shooting_num==5)
+     {   
+     	piecenum=firepoint5;
+     } 
+} 
+
 
 Killed(severity, corpsetype) // how it explodes 
 { 

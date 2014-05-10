@@ -5,7 +5,7 @@
 
 piece base, firepoint1, frontengines, fengine1, fengine2, rearengines, rengine1, rengine2;
 
-static-var  moving, flames, MissileTypeSelect;
+static-var  moving, flames, WeaponTypeSelect;
 
 #define jethtrail 1024+0
 
@@ -55,9 +55,9 @@ Thrust()
    }
 }
 
-MissileType(select)
+WeaponType(select)
 {
-	MissileTypeSelect = select;
+	WeaponTypeSelect = select;
 }
 
 StartMoving()
@@ -94,12 +94,12 @@ Create()
    {
 //      start-script Thrust();
         start-script SmokeUnit();
-        MissileTypeSelect = 1;
+        WeaponTypeSelect = 1;
    }
 
 
 AimPrimary(heading, pitch) { // single weapon with 2 fires this tell sit what to do while aiming
-	if(!MissileTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
+	if(!WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
 	signal SIG_AIM; 
 	set-signal-mask SIG_AIM;
 	return (1);
@@ -111,7 +111,7 @@ FirePrimary()
 
 BlockShot1(unit, block)
 {
-	if (!MissileTypeSelect)
+	if (!WeaponTypeSelect)
 	{
 		block = 1;
 	}
@@ -126,7 +126,7 @@ QueryPrimary(piecenum) { // where the shot is called from
 } 
 
 AimSecondary(heading, pitch) { // single weapon with 2 fires this tell sit what to do while aiming 	
-	if(MissileTypeSelect OR (get WEAPON_RELOADSTATE(1) > get GAME_FRAME)) return (0);
+	if(WeaponTypeSelect OR (get WEAPON_RELOADSTATE(1) > get GAME_FRAME)) return (0);
 	signal SIG_AIM; 
 	set-signal-mask SIG_AIM;
 	return (1);
@@ -137,7 +137,7 @@ FireSecondary() { // what do while firing, fires 1 barrel then the next , and re
 
 BlockShot2(unit, block)
 {
-	if (MissileTypeSelect)
+	if (WeaponTypeSelect)
 	{
 		block = 1;
 	}

@@ -10,7 +10,7 @@ piece	base,turret,barrel1, firepoint1,
 
 #include "ROCKUNIT.H"
 
-static-var maxreloadtime,moving;
+static-var maxreloadtime,moving,WeaponTypeSelect;
 
 #define SIG_AIM1 2
 #define SIG_FIRE1 4
@@ -203,6 +203,11 @@ DoTheWalking()
 	}
 }
 
+WeaponType(select)
+{
+	WeaponTypeSelect = select;
+}
+
 StartMoving()
 {
 	signal SIG_MOVE;
@@ -266,6 +271,7 @@ Create()
 	}
 	start-script SmokeUnit();
 	start-script DoTheWalking();
+	WeaponTypeSelect = 1;
 
 }
 
@@ -290,6 +296,7 @@ AimFromPrimary(p)
 
 AimPrimary(heading,pitch)
 {
+	if(!WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
 	signal SIG_AIM1;
 	set-signal-mask SIG_AIM1;
 	turn turret to y-axis heading speed <255>;
@@ -298,6 +305,14 @@ AimPrimary(heading,pitch)
 	wait-for-turn barrel1 around x-axis;
 	start-script RestoreAfterDelay();
 	return(1);
+}
+
+BlockShot1(unit, block)
+{
+	if (!WeaponTypeSelect)
+	{
+		block = 1;
+	}
 }
 
 QueryPrimary(firefrom)
@@ -321,6 +336,7 @@ AimFromSecondary(p)
 
 AimSecondary(heading,pitch)
 {
+	if(WeaponTypeSelect OR (get WEAPON_RELOADSTATE(1) > get GAME_FRAME)) return (0);
 	signal SIG_AIM1;
 	set-signal-mask SIG_AIM1;
 	turn turret to y-axis heading speed <255>;
@@ -329,6 +345,14 @@ AimSecondary(heading,pitch)
 	wait-for-turn barrel1 around x-axis;
 //	start-script RestoreAfterDelay();
 	return(1);
+}
+
+BlockShot2(unit, block)
+{
+	if (WeaponTypeSelect)
+	{
+		block = 1;
+	}
 }
 
 QuerySecondary(firefrom)

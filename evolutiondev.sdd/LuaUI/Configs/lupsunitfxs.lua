@@ -58,6 +58,18 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
 	},
+	
+	eairplant = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine1"}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine2"}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine3"}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine4"}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine5"}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine6"}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine7"}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine8"}},
+	},
+	
 	esolar2 = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},

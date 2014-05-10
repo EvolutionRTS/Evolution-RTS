@@ -61,7 +61,7 @@ local damageClasses = {
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
-		},
+		},		
 		-- End Hovers
 			
 		-- Start All Terrains

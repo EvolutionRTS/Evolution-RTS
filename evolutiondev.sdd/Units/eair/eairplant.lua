@@ -7,7 +7,7 @@ local unitName = "eairplant"
 
 local unitDef = {
 
-  activatewhenbuilt  = false,
+  activatewhenbuilt  = true,
   buildCostEnergy    = 0,
   buildCostMetal     = 60,
   builder            = true,
@@ -18,27 +18,29 @@ local unitDef = {
   canPatrol          = true,
   canReclaim		 = false,
   canstop            = true,
-  category           = "BUILDING NOTAIR",
+  category           = "BUILDING NOTAIR VTOL",
   corpse             = "ammobox",
   description        = [[Place generators near this factory to unlock higher tier units]],
   energyStorage      = 0,
   energyUse          = 0,
   energyMake         = 0,
   explodeAs          = "MEXPOP2",
+  floater			 = true,
   footprintX         = 18,
   footprintZ         = 18,
   iconType           = "factory",
   idleAutoHeal       = .5,
   idleTime           = 2200,
+  levelground		 = false,
   maxDamage          = 1500,
-  maxSlope           = 60,
-  maxWaterDepth      = 0,
+  maxSlope           = 90,
+  maxWaterDepth      = 999999,
   metalStorage       = 0,
   metalMake          = 0,
   mobilestandorders  = "1",
   name               = "Aircraft Plant",
-  objectName         = "eairplant2.s3o",
-  script			 = "eairplant2.cob",
+  objectName         = "eairplant3.s3o",
+  script			 = "eairplant3.cob",
   radarDistance      = 0,
   repairable		 = false,
   selfDestructAs     = "LARGE_BUILDING",
@@ -50,7 +52,7 @@ local unitDef = {
 --  unitRestricted	 = 1,
   unitnumber         = "83",
   workerTime         = 1,
-  yardMap            = "oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo",
+  yardMap            = "yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy",
 --  usePieceCollisionVolumes = true,
 
   sfxtypes = { 
@@ -64,6 +66,7 @@ local unitDef = {
       "custom:nano",
 	  "custom:blacksmoke",
 	  "custom:fusionreactionbasic",
+	  "custom:airfactoryhtrail",
     },
   },
   zbuffer            = "1",
@@ -94,11 +97,11 @@ local unitDef = {
 --	groundtexselectxsize = 1500, -- optional
 --    groundtexselectzsize = 1500, -- optional
   },
-  useBuildingGroundDecal = true,
-  BuildingGroundDecalType = "factorygroundplate.dds",
-  BuildingGroundDecalSizeX = 20,
-  BuildingGroundDecalSizeY = 20,
-  BuildingGroundDecalDecaySpeed = 0.9,
+--  useBuildingGroundDecal = true,
+--  BuildingGroundDecalType = "factorygroundplate.dds",
+--  BuildingGroundDecalSizeX = 20,
+--  BuildingGroundDecalSizeY = 20,
+--  BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 

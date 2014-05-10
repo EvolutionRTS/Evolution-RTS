@@ -103,11 +103,11 @@ Uses +5 Supply]],
       onlyTargetCategory = "NOTAIR AMPHIB",
 	  badTargetCategory  = "BUILDING LIGHT WALL",
     },
---[[
-	[2]  = {
-      def                = "TORP",
+    [2]  = {
+      def                = "antiarmorrocketssalvo",
+      onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "BUILDING LIGHT WALL",
     },
-]]--
   },
    customParams = {
 	canareaattack="1",
@@ -126,11 +126,11 @@ Uses +5 Supply]],
 
 --------------------------------------------------------------------------------
 local weapon1Damage = 200
+local weapon2Damage = 200
 
 local weaponDefs = {
 
   antiarmorrockets = {
-    badTargetCategory = [[LIGHT BUILDING]],
     AreaOfEffect       = 1,
 	avoidFriendly      = false,
     avoidFeature       = false,
@@ -169,6 +169,51 @@ local weaponDefs = {
     },     
     damage = {
       default           = weapon1Damage,
+    },
+  },
+  
+  antiarmorrocketssalvo = {
+    AreaOfEffect       = 1,
+	avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
+	burst			   = 5,
+	burstrate		   = 0.1,
+    cegTag             = "missiletrailsmall",
+    explosionGenerator = "custom:genericshellexplosion-medium-red",
+	energypershot      = weapon2Damage / 20,
+    fireStarter        = 70,
+    tracks             = true,
+	impulseFactor      = 0,
+    interceptedByShieldType = 4,
+    model              = "missilesmalllauncher.s3o",
+    name               = "Rockets",
+    range              = 700,
+    reloadtime         = 5,
+    weaponType		   = "MissileLauncher",
+    smokeTrail         = false,
+    soundStart         = "rocket1.wav",
+    soundHit           = "explode5.wav",
+    startVelocity      = 250,
+    tolerance          = 8000,
+    turnrate           = 10000,
+	predictBoost	   = 0.5,
+    turret             = true,
+    weaponAcceleration = 50,
+    flightTime         = 5,
+	trajectoryHeight   = 1.5,
+	sprayangle		   = 10000,
+    weaponVelocity     = 500,
+	customparams = {
+	  damagetype		= "eamphibrock",  
+	  single_hit		= true,
+	  extra_damage		= 20,
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
+    },     
+    damage = {
+      default           = weapon2Damage,
     },
   },
 }

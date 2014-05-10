@@ -41,7 +41,7 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Anti-Swarm Paralyzer Tank
+  description        = [[Anti-Swarm EMP/Riot Tank
 Armored
 200 Paralysis Damage vs Light
 100 Paralysis Damage vs Armored/Building
@@ -49,6 +49,8 @@ Armored
 
 • Paralyzes enemy units
 • Projectile can hit multiple units
+
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -112,6 +114,11 @@ Uses +3 Supply]],
       onlyTargetCategory = "NOTAIR AMPHIB",
 	  badTargetCategory  = "WALL",
     },
+	[2]  = {
+      def                = "riottankshotgun",
+      onlyTargetCategory = "NOTAIR AMPHIB",
+	  badTargetCategory  = "WALL",
+    },
   },
   customParams = {
     needed_cover = 2,
@@ -129,6 +136,8 @@ Uses +3 Supply]],
 
 --------------------------------------------------------------------------------
 local weapon1Damage = 200
+local weapon2Damage = 75
+local weapon2Projectiles = 10
 
 local weaponDefs = {
   riottankempweapon = {
@@ -176,6 +185,37 @@ local weaponDefs = {
     }, 
     damage = {
       default           = weapon1Damage,
+    },
+  },
+  
+  riottankshotgun = {
+    AreaOfEffect       = 100,
+    avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
+    ballistic          = true,
+    cegTag             = "bruisercannon",
+    explosionGenerator = "custom:genericshellexplosion-small",
+	energypershot      = weapon2Damage / 20 * weapon2Projectiles,
+    interceptedByShieldType = 4,
+	impulseFactor      = 0,
+    name               = "Light Cannon",
+	projectiles		   = weapon2Projectiles,
+    range              = 600,
+    reloadtime         = 5,
+    weaponType		   = "Cannon",
+    soundHit           = "mediumcannonhit.wav",
+    soundStart         = "bruisercannon.wav",
+	sprayangle		   = 2000,
+    startsmoke         = "1",
+    turret             = true,
+    weaponVelocity     = 400,
+	customparams = {
+	  damagetype		= "eallterrriot",  
+    },      
+    damage = {
+      default           = weapon2Damage,
     },
   },
 }

@@ -7,11 +7,9 @@ piece base, turret, firepoint1, dirt, barrel1; // these are the pieces of the mo
 
 #include "ROCKUNIT.H"
 
-#define gdmarty 1024+0 // this is a custom explosion generator thinging 
-
 #define SIG_AIM 2 // this is a aim define 
 
-static-var terraintype, bmoving, moving; // these are the variables 
+static-var terraintype, bmoving, moving, WeaponTypeSelect; // these are the variables 
 
 SmokeUnit(healthpercent, sleeptime, smoketype) // this is a standard smoke point define 
 { 
@@ -45,7 +43,7 @@ EmitWakes()
 {
 	while( TRUE )
 	{
-		if( bMoving )
+		if( moving )
 		{
 			emit-sfx 2 from base;
 		}
@@ -91,6 +89,11 @@ Thrust()
    }
 }
 
+WeaponType(select)
+{
+	WeaponTypeSelect = select;
+}
+
 StartMoving()
 {
         moving=1;
@@ -103,10 +106,11 @@ StopMoving()
 
 Create() // tells it what to do on creation 
 {
-		start-script Thrust();
-        start-script setSFXoccupy(); 
-        start-script EmitWakes(); 
-start-script SmokeUnit(); 
+	start-script Thrust();
+    start-script setSFXoccupy(); 
+    start-script EmitWakes(); 
+	start-script SmokeUnit(); 
+    WeaponTypeSelect = 1;
 } 
 
 RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
@@ -116,8 +120,9 @@ turn turret to y-axis <0> speed <255>;
 turn barrel1 to x-axis <0> speed <255>;
 } 
 
-AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+AimPrimary(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
 { 
+if(!WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
 signal SIG_AIM; 
 set-signal-mask SIG_AIM; 
 turn turret to y-axis heading speed <255>;
@@ -128,17 +133,61 @@ start-script RestoreAfterDelay();
 return (1); 
 } 
 
-FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+FirePrimary() // what do while firing, fires 1 barrel then the next , and resets 
 {
-emit-sfx gdmarty from firepoint1;  
+emit-sfx 1024 from firepoint1;  
 } 
 
-AimFromWeapon1(piecenum) // where it aims the weapon from 
+BlockShot1(unit, block)
+{
+	if (!WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
+AimFromPrimary(piecenum) // where it aims the weapon from 
 { 
 piecenum = turret; 
 } 
 
-QueryWeapon1(piecenum) // where the shot is called from 
+QueryPrimary(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint1; 
+}
+
+AimSecondary(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+if(WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+turn turret to y-axis heading speed <255>;
+turn barrel1 to x-axis <0> - pitch speed <255>; 
+wait-for-turn turret around y-axis;
+wait-for-turn barrel1 around x-axis;  
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
+
+FireSecondary() // what do while firing, fires 1 barrel then the next , and resets 
+{
+emit-sfx 1024 from firepoint1;  
+} 
+
+BlockShot2(unit, block)
+{
+	if (WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
+AimFromSecondary(piecenum) // where it aims the weapon from 
+{ 
+piecenum = turret; 
+} 
+
+QuerySecondary(piecenum) // where the shot is called from 
 { 
 piecenum = firepoint1; 
 }

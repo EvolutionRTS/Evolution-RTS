@@ -36,6 +36,8 @@ Light
 100 Damage vs Light/Armored
 50 Damage vs Building
 
+Can switch firemodes to torpedos
+
 Requires +7 Power
 Uses +7 Supply]],
   energyMake         = 0,
