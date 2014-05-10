@@ -50,7 +50,7 @@ Armored
 • Paralyzes enemy units
 • Projectile can hit multiple units
 
-Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when un shotgun mode.
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -207,12 +207,12 @@ local weaponDefs = {
     weaponType		   = "Cannon",
     soundHit           = "mediumcannonhit.wav",
     soundStart         = "bruisercannon.wav",
-	sprayangle		   = 2000,
+	sprayangle		   = 6000,
     startsmoke         = "1",
     turret             = true,
     weaponVelocity     = 400,
 	customparams = {
-	  damagetype		= "eallterrriot",  
+	  damagetype		= "eallterrriotshotgun",  
     },      
     damage = {
       default           = weapon2Damage,

@@ -62,6 +62,11 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},		
+		eriottank2shotgun	= {
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.1,
+		},	
 		-- End Hovers
 			
 		-- Start All Terrains
@@ -90,6 +95,11 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
+		eallterrriotshotgun	= {
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.1,
+		},
 		eallterrassault	= {
 			ARMORED		= 0.125,
 			LIGHT		= 0.125,
@@ -107,6 +117,11 @@ local damageClasses = {
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
+		},
+		eamphibriotshotgun	= {
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.1,
 		},
 		eamphibaa	= {
 			ARMORED		= 0.5,

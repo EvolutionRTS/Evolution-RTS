@@ -52,7 +52,7 @@ local unitDef = {
 --  unitRestricted	 = 1,
   unitnumber         = "83",
   workerTime         = 1,
-  yardMap            = "yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy yyyyyyyyyyyyyyyyyy",
+  yardMap            = "oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo oooooooooooooooooo",
 --  usePieceCollisionVolumes = true,
 
   sfxtypes = { 
