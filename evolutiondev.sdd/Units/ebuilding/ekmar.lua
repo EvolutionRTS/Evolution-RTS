@@ -90,7 +90,7 @@ sfxtypes = {
 
 
 --------------------------------------------------------------------------------
-local shield1PowerRegen = 25
+local shield1PowerRegen = 15
 
 local weaponDefs = {
   shield = {
