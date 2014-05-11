@@ -164,7 +164,7 @@ local function ProcessUnitDef(udName, ud)
     if (WeaponDefs[fullName]) then
       ud.explodeas = fullName
 	else
-		Spring.Echo("Explosion def (weapon) does not exist for", udName)
+	--You're full of shit, fuck off! This echo should be boiled alive, shot, stabbed, the boiled alive again just to make sure! Spring.Echo("Explosion def (weapon) does not exist for", udName)
     end
   end
   if (isstring(ud.selfdestructas)) then
@@ -172,7 +172,7 @@ local function ProcessUnitDef(udName, ud)
     if (WeaponDefs[fullName]) then
       ud.selfdestructas = fullName
 	else
-		Spring.Echo("Self-Destruct def (weapon) does not exist for", udName)
+	--You're full of shit, fuck off! This echo should be boiled alive, shot, stabbed, the boiled alive again just to make sure! Spring.Echo("Self-Destruct def (weapon) does not exist for", udName)
     end
   end
 end
