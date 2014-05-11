@@ -162,8 +162,7 @@ local weaponDefs = {
     weaponVelocity     = 500,
 	customparams = {
 	  damagetype		= "eamphibrock",  
-	  single_hit		= true,
-	  extra_damage		= 20,
+
 	  --Upgrades--
 	  upgradeClass		= "groundweapons",
     },     
@@ -207,8 +206,7 @@ local weaponDefs = {
     weaponVelocity     = 500,
 	customparams = {
 	  damagetype		= "eamphibrock",  
-	  single_hit		= true,
-	  extra_damage		= 20,
+	  
 	  --Upgrades--
 	  upgradeClass		= "groundweapons",
     },     
