@@ -289,10 +289,9 @@ end
 
 function widgetHandler:LoadOrderList()
   local chunk, err = loadfile(ORDER_FILENAME)
-  if (chunk == nil) or (chunk() == nil) or (err) then
-    if err then
-      Spring.Log(section, LOG.ERROR, err)
-    end
+  if (chunk == nil) then
+    self.orderList = {} -- safety
+    return {}
   else
     local tmp = {}
     setfenv(chunk, tmp)
