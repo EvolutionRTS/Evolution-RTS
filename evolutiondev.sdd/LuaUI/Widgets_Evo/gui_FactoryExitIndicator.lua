@@ -121,12 +121,6 @@ function normalizeDegreeRange( degree )
 	return degree
 end
 
---returns the rotation degrees between mouse move vector and defined forward vector
-function getMouseFacingDegree( mouseVec )
-	local forwVec = { 0.0, 1.0 }
-	return getRotationVectors2d( forwVec, mouseVec )
-end
-
 function normalizeVector2d( vector )
 	local len = getVector2dLen( vector )
 	local normVec = {0.0,0.0};
