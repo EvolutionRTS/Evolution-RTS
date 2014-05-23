@@ -10,7 +10,7 @@ local unitDef = {
   blocking			 = false,
   buildAngle         = 1024,
   buildCostEnergy    = 0,
-  buildCostMetal     = 50,
+  buildCostMetal     = 15,
   builder            = false,
   buildTime          = 5,
   category           = "BUILDING NOTAIR",
@@ -27,7 +27,9 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        = [[Explodes on contact dealing 650 damage to anything caught within it's large blast envelope. Very difficult to detect!]],
+  description        = [[Explodes on contact dealing 650 damage to anything caught within it's large blast envelope. Very difficult to detect!
+  
+  Costs +1 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -82,6 +84,7 @@ sfxtypes = {
   
   customParams = {
     needed_cover = 1,
+	supply_cost = 1,
   	death_sounds = "generic",
 	armortype   = "armored",
 	nofriendlyfire	= "1",
