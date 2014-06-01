@@ -42,7 +42,7 @@ local unitDef = {
   
   description        = [[Shield Emitter
 Light
-Shield absorbs 500 damage
+Shield absorbs 1000 damage
 Shield can link with other shield units to increase charging and capacity
 
 Requires +5 Power
@@ -134,7 +134,7 @@ local weaponDefs = {
     ShieldStartingPower = 0,
     Shieldenergyuse  = 0,
     Shieldradius     = 300,
-    Shieldpower      = 500,
+    Shieldpower      = 1000,
     Shieldpowerregen = shield1PowerRegen,
     Shieldpowerregenenergy = shield1PowerRegen / 20,
     Shieldintercepttype = 4,

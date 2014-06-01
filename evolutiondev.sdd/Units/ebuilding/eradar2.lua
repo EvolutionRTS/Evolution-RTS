@@ -25,6 +25,7 @@ local unitDef = {
   iconType           = "radar",
   idleAutoHeal       = .5,
   idleTime           = 2200,
+  isTargetingUpgrade = false,
   maxDamage          = 750,
   maxSlope           = 75,
   maxWaterDepth      = 999999,

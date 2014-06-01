@@ -47,8 +47,8 @@ Armored
 
 This unit can only fire at buildings!
 
-Requires +5 Power
-Uses +5 Supply]],
+Requires +10 Power
+Uses +10 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -114,10 +114,10 @@ Uses +5 Supply]],
    customParams = {
     needed_cover = 4,
    	death_sounds = "generic",
-    RequireTech = "5 Power",
+    RequireTech = "10 Power",
 	armortype   = "armored",
 	nofriendlyfire	= "1",
-	supply_cost = 5,
+	supply_cost = 10,
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
 	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
 	factionname	= "outer_colonies",  

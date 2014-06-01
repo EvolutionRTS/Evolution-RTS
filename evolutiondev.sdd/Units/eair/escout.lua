@@ -32,8 +32,8 @@ local unitDef = {
   description        = [[Air Scout
 Light
 
-Requires +1 Power
-Uses +1 Supply]],
+Requires +2 Power
+Uses +2 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -45,6 +45,7 @@ Uses +1 Supply]],
   iconType           = "air",
   idleAutoHeal       = .5,
   idleTime           = 2200,
+  isTargetingUpgrade = false,
   maxAcc             = 0.5,
   maxDamage          = 320,
   maxSlope           = 10,
@@ -88,9 +89,9 @@ Uses +1 Supply]],
    customParams = {
 --    needed_cover = 1,
 	death_sounds = "generic",
-    RequireTech = "1 Power",
+    RequireTech = "2 Power",
 	armortype   = "light",
-	supply_cost = 1,
+	supply_cost = 2,
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
 	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
 	factionname	= "outer_colonies",  
