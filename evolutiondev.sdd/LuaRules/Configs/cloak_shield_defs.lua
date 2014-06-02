@@ -32,16 +32,16 @@ local function GetUnitDecloakDistance(defName)
 end
 
 local cloakShieldDefs = {
-  ejammer2 = {
-    init = true,
-    draw = true,
-    energy = 5,
-    maxrad = JammerAlign('ejammer2'),
-    growRate = 512,
-    shrinkRate = 2048,
-    selfCloak = true,
-    decloakDistance = 500,
-  },
+	ejammer2 = {
+		init = false,
+		draw = true,
+		energy = 5,
+		maxrad = JammerAlign('ejammer2'),
+		growRate = 512,
+		shrinkRate = 2048,
+		selfCloak = false,
+		decloakDistance = 500,
+	},
 }
 
 -- reads from customParams and copies to cloakShieldDefs as appropriate - needed for procedurally generated comms
