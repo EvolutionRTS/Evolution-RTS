@@ -16,7 +16,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Radar Jamming Tower
   
-  Drains -10 Energy while emitting cloaking field]],
+  Drains -5 Energy while emitting cloaking field]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
