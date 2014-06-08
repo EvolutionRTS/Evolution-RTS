@@ -1,5 +1,3 @@
-<img src="http://www.evolutionrts.info/name-100pxtall.png">
-
 <h1>Evolution RTS</h1>
 
 Evolution RTS is a free an Open Source RTS game designed using the Spring Engine. It has been in development for over 5 years and receives updates often. Its gameplay is designed specifically to appeal to gamers of all skill levels. The gameplay is designed around the use of unit groups, and the mixture of your unit group often will determine how successful you are in battle, as opposed to churning out hundreds of the same unit continually.
