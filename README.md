@@ -51,7 +51,7 @@ Full unit orders can be given via the minimap, so you can control your units int
 <h3>Place map markers with or without labels, and draw directly on the map</h3>
 Map markers, drawing, and labels make it easy for you and your allies to communicate your battle plans, and illustrate them!
 
-<h3>Unit balance dependent on unit mixture instead of one unit owning an entire army all by itself
+<h3>Unit balance dependent on unit mixture instead of one unit owning an entire army all by itself</h3>
 Unit balance is designed so that composition matters more than simply churning out hordes of the most expensive unit.
 
 <h3>Intelligent builder AI</h3>
