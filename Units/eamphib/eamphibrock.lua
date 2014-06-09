@@ -127,6 +127,7 @@ Uses +5 Supply]],
 --------------------------------------------------------------------------------
 local weapon1Damage = 200
 local weapon2Damage = 200
+local weapon2Burst = 5
 
 local weaponDefs = {
 
@@ -177,11 +178,11 @@ local weaponDefs = {
     avoidFeature       = false,
 	collideFriendly    = false,
     collideFeature     = false,
-	burst			   = 5,
+	burst			   = weapon2Burst,
 	burstrate		   = 0.1,
     cegTag             = "missiletrailsmall",
     explosionGenerator = "custom:genericshellexplosion-medium-red",
-	energypershot      = weapon2Damage / 20,
+	energypershot      = weapon2Damage / 20 * weapon2Burst,
     fireStarter        = 70,
     tracks             = true,
 	impulseFactor      = 0,
