@@ -1,0 +1,100 @@
+[f1]
+{
+   [whiteglow]
+   {
+   class=heatcloud;
+      
+      [properties]
+            {
+      texture=laserend;
+            heat = 1;
+            maxheat = 15;
+            heatFalloff = 1;
+
+            size = 1;
+            sizeGrowth = 10;
+
+            pos = 0, 0, 0;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   } 
+
+   [searingflame]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=fire;
+
+      colorMap = 0.1 0.1 0.1 0.01    0.6 0.5 0.0 0.01    0.3 0.2 0.1 0.01    0.01 0.01 0.1 0.01 0 0 0 0.01;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 2;
+      emitRotSpread  = 1;
+
+      sizeGrowth  = 1;
+      sizeMod     = 1;
+
+      airdrag        = 1;
+
+      particleLife      = 20;
+      particleLifeSpread   = 5;
+      numParticles      = 5;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 10;
+      particleSize      = 2;
+      particleSizeSpread   = 4;
+
+      directional    = 1;
+      useAirLos      = 1;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [searingflame2]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=flashside2;
+
+      colorMap = 0.1 0.1 0.1 0.01    0.6 0.4 0.0 0.01    0.3 0.2 0.1 0.01    0.01 0.01 0.1 0.01 0 0 0 0.01;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = dir;
+      emitRot     = 2;
+      emitRotSpread  = 1;
+
+      sizeGrowth  = 1.2;
+      sizeMod     = 1;
+
+      airdrag        = 1;
+
+      particleLife      = 15;
+      particleLifeSpread   = 5;
+      numParticles      = 8;
+      particleSpeed     = 2;
+      particleSpeedSpread  = 30;
+      particleSize      = 3;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 1;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+}

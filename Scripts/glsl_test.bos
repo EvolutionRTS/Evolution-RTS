@@ -1,0 +1,61 @@
+// Argh's Skyscraper1 Script
+
+// This script is hereby released under GPL v. 2 or later by Wolfe Games, 2007
+// All contents were created by Wolfe Games.
+
+// This Include is absolutely VITAL.  
+// You must call it FIRST.  PERIOD.
+// Don't say I didn't warn you ;-)
+#include "STANDARD_COMMANDS_WORLDovm_builder.h"
+
+piece base, orbiter, orbit, light;
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+StartBuilding(heading,pitch)
+{
+set INBUILDSTANCE to 1;
+	return (0);
+}
+
+StopBuilding()
+{
+set INBUILDSTANCE to 0;
+	return (0);
+}
+
+QueryNanoPiece(piecenum)
+{
+	piecenum = base;
+}
+
+randomLight()
+{
+	var R,G,B,A;
+	while(TRUE)
+	{
+		R = rand(0,255);
+		G = rand(0,255);
+		B = rand(0,255);
+		A = rand(64,200);
+		call-script lua_CreateLightMe(light, R, G, B, A);
+		sleep 1000;
+	}
+}
+
+Create()
+{
+set INBUILDSTANCE to 1;
+	spin orbiter around y-axis speed <-45>;
+	spin orbit around y-axis speed <30>;
+	start-script randomLight();
+	
+	return (0);
+}
+
+Killed()
+{
+	call-script lua_DestroyLightMe();
+	return (0);
+}

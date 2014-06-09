@@ -1,0 +1,13 @@
+#define TA // This is a TA script 
+
+#include "sfxtype.h" 
+#include "exptype.h" 
+
+piece base, rotator; // these are the pieces of the model 
+
+
+Create() // tells it what to do on creation 
+{
+	spin rotator around y-axis speed <20.005495>;
+} 
+

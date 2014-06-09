@@ -1,0 +1,246 @@
+#define TA			// This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  base, rearforwarddoor, rearbackdoor, frontforwarddoor, frontbackdoor, nanoarms, nanopoint1, nano1, nano2, nano3, nano4, sfxpoint1, sfxpoint2;
+
+static-var  spray, unitviewer, statechg_DesiredState, statechg_StateChanging, building;
+
+// Signal definitions
+#define SIG_ACTIVATE			2
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx 1026 from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+buildingfx()
+{
+   while( TRUE )
+   {
+      if (building) 
+      {   
+              emit-sfx 1024 from nano1;
+              sleep 60;
+              emit-sfx 1024 from nano4;
+              sleep 60;
+              emit-sfx 1024 from nano3;
+              sleep 60;
+              emit-sfx 1024 from nano2;
+              sleep 60;
+       }         
+   sleep 600;
+   }
+}
+
+buildingfx2()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx 1025 from nanopoint1;
+      }        
+   sleep 300;
+   }
+}
+
+fx()
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+//		if (tech)
+//		{
+			emit-sfx 1027 from sfxpoint1;
+			emit-sfx 1027 from sfxpoint2;
+//		}
+	sleep 500;
+	}
+}
+
+OpenYard()
+{
+	move nanoarms to y-axis [20] speed [10];	
+	turn frontforwarddoor to x-axis <90> speed <100>;
+	turn frontbackdoor to x-axis <-90> speed <100>;
+	turn rearforwarddoor to x-axis <90> speed <100>;
+	turn rearbackdoor to x-axis <-90> speed <100>;
+	wait-for-move nanoarms along y-axis;
+	wait-for-turn frontforwarddoor around x-axis; 
+	set YARD_OPEN to 1;
+	while( !get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 1;
+	}
+	set BUGGER_OFF to 0;
+}
+
+CloseYard()
+{
+	move nanoarms to y-axis [0] speed [10];
+	turn frontforwarddoor to x-axis <0> speed <20>;
+	turn frontbackdoor to x-axis <0> speed <20>;
+	turn rearforwarddoor to x-axis <0> speed <20>;
+	turn rearbackdoor to x-axis <0> speed <20>;
+	set YARD_OPEN to 0;
+	while( get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 0;
+	}
+	set BUGGER_OFF to 0;
+}
+
+Go()
+{
+	call-script OpenYard();
+	set INBUILDSTANCE to 1;
+}
+
+Stop()
+{
+	set INBUILDSTANCE to 0;
+	call-script CloseYard();
+	
+}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();			
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Create()
+{
+	unitviewer = FALSE;
+	spray = nanopoint1;
+	call-script InitState();
+	start-script SmokeUnit();
+	start-script Buildingfx(); 
+//	start-script Buildingfx2(); 
+	start-script fx();
+}
+
+QueryNanoPiece(piecenum)
+{
+	if( spray == 0 )
+	{
+		piecenum = nano1;
+	}
+	if( spray == 1 )
+	{
+		piecenum = nano2;
+	}
+	if( spray == 2 )
+	{
+		piecenum = nano3;
+	}
+	if( spray == 3 )
+	{
+		piecenum = nano4;
+	}
+	++spray;
+	if( spray >= 4 )
+	{
+		spray = 0;
+	}
+}
+
+
+Activate()
+{
+	signal SIG_ACTIVATE;
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	signal SIG_ACTIVATE;
+	set-signal-mask SIG_ACTIVATE;
+
+	set-signal-mask 0;
+	start-script RequestState(1);
+}
+
+StartBuilding()
+{
+building = 1;
+}
+
+StopBuilding()
+{
+building = 0;
+}
+
+QueryBuildInfo(piecenum)
+{
+	piecenum = nanopoint1;
+}
+
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode nanoarms type EXPLODE_ON_HIT;
+	explode frontforwarddoor type EXPLODE_ON_HIT;
+	explode frontbackdoor type EXPLODE_ON_HIT;
+	explode rearforwarddoor type EXPLODE_ON_HIT;
+	explode rearbackdoor type EXPLODE_ON_HIT;
+} 

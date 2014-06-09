@@ -1,0 +1,207 @@
+[100RLexplode]
+{
+   [pop1]
+   {
+   class=heatcloud;
+      
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=fireyexplo;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1;
+
+            size = 1;
+            sizeGrowth = 24;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=2;
+   } 
+
+   [pop2]
+   {
+   class=heatcloud;
+      
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=flare;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1.1;
+
+            size = 3;
+            sizeGrowth = 25;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   } 
+
+   [POOF00]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 1.0 1.0 0.04   0.9 0.5 0.2 0.01  0.8 0.5 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.5;
+      sizeMod     = 1;
+
+      airdrag        = 0.8;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed     = 10;
+      particleSpeedSpread  = 3;
+      particleSize      = 25;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [dirt]
+   {
+      [properties]
+      {
+      alwaysVisible=1;
+      size=20;
+      color=0.2, 0.1, 0.05;
+      alphaFalloff=2;
+      speed= r1.5 r-1.5, 2, r1.5 r-1.5;
+      pos=r-10 r10, 0, r-10 r10;
+      }
+      ground=1;
+      count=4;
+   }
+
+   [groundflash]
+      {
+         alwaysVisible=1;
+   ttl = 17;
+         flashSize = 150;
+         flashAlpha = 0.9;
+
+         circleGrowth = 8;
+         circleAlpha = 0.5;
+
+         color = 1, 0, 0;
+
+   air=1;
+      ground=1;
+         water=1;
+   }
+}
+
+[100RLexplodesmall]
+{
+   [pop1]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=fireyexplo;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1;
+
+            size = 1;
+            sizeGrowth = 5;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=2;
+   }
+
+   [pop2]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=flare;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1.1;
+
+            size = 2;
+            sizeGrowth = 5;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+   [POOF00]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 1.0 1.0 0.04   0.9 0.5 0.2 0.01  0.8 0.5 0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.5;
+      sizeMod     = 0.5;
+
+      airdrag        = 0.8;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed     = 10;
+      particleSpeedSpread  = 3;
+      particleSize      = 25;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+}

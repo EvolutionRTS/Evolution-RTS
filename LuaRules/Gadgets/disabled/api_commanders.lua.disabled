@@ -1,0 +1,60 @@
+function gadget:GetInfo()
+  return {
+    name      = "commander tracker",
+    desc      = "keeps a table of commanders",
+    author    = "lurker",
+    date      = "May, 2008",
+    license   = "GNU GPL, v2 or later",
+    layer     = 1,
+    enabled   = true  --  loaded by default?
+  }
+end
+
+if (gadgetHandler:IsSyncedCode()) then
+
+local AddUnitResource = Spring.AddUnitResource
+local commandersally = {}
+local commandersteam = {}
+local commanderdefs = {}
+local teamtoally = {}
+
+function gadget:Initialize()
+	GG.commandersally = commandersally
+	GG.commandersteam = commandersteam
+	GG.teamtoally = teamtoally
+	for _,at in ipairs(Spring.GetAllyTeamList()) do
+		commandersally[at] = {}
+	end
+	for _,t in ipairs(Spring.GetTeamList()) do
+		commandersteam[t] = {}
+		local _,_,_,_,_,at = Spring.GetTeamInfo(t)
+		teamtoally[t] = at
+	end
+	commanderdefs[UnitDefNames.ecentralprocessing.id] = true
+	commanderdefs[UnitDefNames.tcentralprocessing.id] = true
+end
+
+function gadget:UnitCreated(unitID, unitDefID, unitTeam)
+	if commanderdefs[unitDefID] then
+		commandersteam[unitTeam][unitID] = true
+		commandersally[Spring.GetUnitAllyTeam(unitID)][unitID] = true
+	end
+end
+
+function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
+	if commanderdefs[unitDefID] then
+		commandersteam[unitTeam][unitID] = nil
+		commandersally[Spring.GetUnitAllyTeam(unitID)][unitID] = nil
+	end
+end
+
+function gadget:AllowUnitTransfer(unitID, unitDefID, oldTeam, newTeam, capture)
+	if commanderdefs[unitDefID] then
+		commandersally[teamtoally[oldTeam]][unitID] = nil
+		commandersally[teamtoally[newTeam]][unitID] = true
+		commandersteam[oldTeam][unitID] = nil
+		commandersteam[newTeam][unitID] = true
+	end
+end
+
+end

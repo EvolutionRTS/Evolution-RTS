@@ -1,0 +1,7 @@
+[nanospray]
+{
+allow_team_colours=1;
+shownanoframe=1;
+shownanospray=0;
+nanocolor=0;
+}

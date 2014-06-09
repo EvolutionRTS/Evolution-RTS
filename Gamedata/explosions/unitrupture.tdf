@@ -1,0 +1,131 @@
+[unitrupture]
+{
+	[POOF]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=flashside1;
+
+		colorMap	= 1 1 1 0.01	0.9 0.8 0.7 0.01	0.9 0.5 0.2 0.01	0.5 0.1 0.1 0.01;
+
+      		pos 		= 0, 0, 0;
+		gravity		= 0, 0, 0;
+	       	emitVector	= dir;
+		emitRot		= 5;
+		emitRotSpread	= 1;
+
+		sizeGrowth	= 3;
+		sizeMod		= 1;
+
+		airdrag			= 0.5;
+		particleLife		= 10;
+		particleLifeSpread	= 5;
+		numParticles		= 2;
+		particleSpeed		= 15;
+		particleSpeedSpread	= 1;
+		particleSize		= 10;
+		particleSizeSpread	= 2;
+
+		directional		= 1;
+		useAirLos		= 0;
+		}
+	air=1;
+	ground=1;
+	water=1;
+	count=1;
+	}
+
+	[dirtg]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		alwaysVisible=1;
+		Texture=dirt;
+		sizeGrowth=1.2;
+		sizeMod=1.0;
+
+        	pos 		= r-1 r1, 1, r-1 r1;
+         	emitVector	= 0, 1, 0;
+		gravity		= 0, 0, 0;
+
+		colorMap	= 0.1 0.1 0.1 1.0	0.5 0.4 0.3 1.0		0 0 0 0.0;
+		airdrag		= 0.7;
+
+		particleLife=25;
+		particleLifeSpread=10;
+
+		numParticles=8;
+
+		particleSpeed=1;
+		particleSpeedSpread=15;
+		particleSize=8;
+		particleSizeSpread=8;
+
+		emitRot=90;
+		emitRotSpread=0;
+
+		directional=1;
+		useAirLos=1;
+		}
+	ground=1;
+	count=1;
+	}
+
+	[searingflame]
+	{
+	class=CSimpleParticleSystem;
+
+		[properties]
+		{
+		Texture=shot;
+
+		colorMap	=  1 1 1 0.01	0.9 0.5 0.4 0.04	0.9 0.4 0.1 0.01	0.5 0.1 0.1 0.01;
+
+      		pos 		= 0, 2, 0;
+		gravity		= 0, -0.01, 0;
+	       	emitVector	= dir;
+		emitRot		= 45;
+		emitRotSpread	= 32;
+
+		sizeGrowth	= 1;
+		sizeMod		= 0.5;
+
+		airdrag			= 0.8;
+		particleLife		= 10;
+		particleLifeSpread	= 5;
+		numParticles		= 8;
+		particleSpeed		= 5;
+		particleSpeedSpread	= 5;
+		particleSize		= 20;
+		particleSizeSpread	= 0;
+
+		directional		= 1;
+		useAirLos		= 0;
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+
+	[groundflash]
+   	{
+	alwaysVisible=1;
+      	ttl = 13;
+      	flashSize = 50;
+      	flashAlpha = 0.9;
+
+      	circleGrowth = 6;
+      	circleAlpha = 0.6;
+
+      	color = 1, 0.5, 0;
+
+	air=1;
+     	ground=1;
+      	water=1;
+	}
+}

@@ -1,0 +1,727 @@
+[genericunitexplosion-small]
+{	
+   [outerflash]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+			texture=orangenovaexplo;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.1;
+
+            size = 1;
+            sizeGrowth = 10; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+	air=1;
+         water=1;
+         ground=1;
+         count=2;
+   }
+
+   [centerflare]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+      texture=flare;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.3;
+
+            size = 1;
+            sizeGrowth = 5; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+
+   [orangeexplosionspikes]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=flashside2;
+
+      colorMap = 0.7 0.8 0.9 0.03   0.9 0.5 0.2 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.01, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.8;
+      particleLife      = 8;
+      particleLifeSpread   = 0;
+      numParticles      = 8;
+      particleSpeed     = 12; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 2;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+   [kickedupdirt]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=bigexplosmoke;
+		airdrag=0.87;
+		colorMap=0.25 0.20 0.10 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=30;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=2;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+	
+   [kickedupwater]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=wake;
+		airdrag=0.87;
+		colorMap=0.7 0.7 0.9 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=30;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=2;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	water=1;
+	count=1;
+	}
+   //flashsize * 4, ttl * 5, circlegrowth / 2
+   [groundflash]
+      {
+		alwaysVisible=1;
+         ttl = 100;
+         flashSize = 200; //This is the glow on the ground, you'll want to size this so that it covers the entire area of the explosion
+         flashAlpha = 0.9;
+
+         circleGrowth = 1.5; //Use this to control how large the pretty expanding shockwave graphic travels
+         circleAlpha = 0.6;
+
+         color = 1, 0.5, 0;
+
+   air=1;
+   ground=1;
+   water=1;
+   }
+}
+
+[genericunitexplosion-medium]
+{	
+   [outerflash]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+			texture=orangenovaexplo;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.1;
+
+            size = 1;
+            sizeGrowth = 15; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=2;
+   }
+
+   [centerflare]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+      texture=flare;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.3;
+
+            size = 1;
+            sizeGrowth = 8; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+
+   [orangeexplosionspikes]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=flashside2;
+
+      colorMap = 0.7 0.8 0.9 0.03   0.9 0.5 0.2 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.01, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.8;
+      particleLife      = 8;
+      particleLifeSpread   = 0;
+      numParticles      = 8;
+      particleSpeed     = 16; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 2;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+   [kickedupdirt]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=bigexplosmoke;
+		airdrag=0.87;
+		colorMap=0.25 0.20 0.10 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=60;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=5;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+	
+   [kickedupwater]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=wake;
+		airdrag=0.87;
+		colorMap=0.7 0.7 0.9 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=60;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=5;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	water=1;
+	count=1;
+	}
+   
+   [groundflash]
+      {
+		alwaysVisible=1;
+         ttl = 100;
+         flashSize = 400; //This is the glow on the ground, you'll want to size this so that it covers the entire area of the explosion
+         flashAlpha = 0.9;
+
+         circleGrowth = 2; //Use this to control how large the pretty expanding shockwave graphic travels
+         circleAlpha = 0.6;
+
+         color = 1, 0.5, 0;
+
+   air=1;
+   ground=1;
+   water=1;
+   }
+}
+
+[genericunitexplosion-large]
+{	
+   [outerflash]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+			texture=orangenovaexplo;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.1;
+
+            size = 1;
+            sizeGrowth = 30; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=2;
+   }
+
+   [centerflare]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+      texture=flare;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.3;
+
+            size = 1;
+            sizeGrowth = 12; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+
+   [orangeexplosionspikes]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=flashside2;
+
+      colorMap = 0.7 0.8 0.9 0.03   0.9 0.5 0.2 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.01, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.8;
+      particleLife      = 8;
+      particleLifeSpread   = 0;
+      numParticles      = 8;
+      particleSpeed     = 20; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 2;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+   [kickedupdirt]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=bigexplosmoke;
+		airdrag=0.87;
+		colorMap=0.25 0.20 0.10 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=120;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=10;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+   
+   [kickedupwater]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=wake;
+		airdrag=0.87;
+		colorMap=0.7 0.7 0.9 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=120;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=10;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	water=1;
+	count=1;
+	}
+   
+   [groundflash]
+      {
+		alwaysVisible=1;
+         ttl = 100;
+         flashSize = 600; //This is the glow on the ground, you'll want to size this so that it covers the entire area of the explosion
+         flashAlpha = 0.9;
+
+         circleGrowth = 3; //Use this to control how large the pretty expanding shockwave graphic travels
+         circleAlpha = 0.6;
+
+         color = 1, 0.5, 0;
+
+   air=1;
+   ground=1;
+   water=1;
+   }
+}
+
+[genericunitexplosion-huge]
+{	
+   [outerflash]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+			texture=orangenovaexplo;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.1;
+
+            size = 1;
+            sizeGrowth = 40; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=2;
+   }
+
+   [centerflare]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+			alwaysVisible=1;
+      texture=flare;
+            heat = 10;
+            maxheat = 20;
+            heatFalloff = 1.3;
+
+            size = 1;
+            sizeGrowth = 18; //when adjusting the sizes, adjust this up and down
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+
+   [orangeexplosionspikes]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=flashside2;
+
+      colorMap = 0.7 0.8 0.9 0.03   0.9 0.5 0.2 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, -0.01, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.8;
+      particleLife      = 8;
+      particleLifeSpread   = 0;
+      numParticles      = 8;
+      particleSpeed     = 26; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 2;
+      particleSize      = 1;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+   [kickedupdirt]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=bigexplosmoke;
+		airdrag=0.87;
+		colorMap=0.25 0.20 0.10 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=160;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=14;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	air=1;
+	ground=1;
+	count=1;
+	}
+   
+   [kickedupwater]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		alwaysVisible=1;
+		sizeGrowth=0.5;
+		sizeMod=1.0;
+		pos=0, 1, 0; 
+		gravity=0, 0.1, 0;
+		
+
+		Texture=wake;
+		airdrag=0.87;
+		colorMap=0.7 0.7 0.9 0.35	0 0 0 0.0;
+
+		particleLifeSpread=30;   //This adjusts how long the particles stick around travelling upward
+		particleSpeedSpread=6;  
+		particleSizeSpread=1;   
+		
+		particleLife=2;
+		numParticles=160;  //These particles die incredibly quickly, you can feel free to go nuts here
+		particleSpeed=14;  //Adjusting this will control how far out the dust spreads
+		particleSize=2;
+		
+		
+		emitVector=0, 1, 0; 
+		emitRot=90;
+		emitRotSpread=5; 
+		directional=0; 
+		
+
+		}
+	water=1;
+	count=1;
+	}
+   
+   [groundflash]
+      {
+		alwaysVisible=1;
+         ttl = 100;
+         flashSize = 800; //This is the glow on the ground, you'll want to size this so that it covers the entire area of the explosion
+         flashAlpha = 0.9;
+
+         circleGrowth = 4; //Use this to control how large the pretty expanding shockwave graphic travels
+         circleAlpha = 0.6;
+
+         color = 1, 0.5, 0;
+
+   air=1;
+   ground=1;
+   water=1;
+   }
+}

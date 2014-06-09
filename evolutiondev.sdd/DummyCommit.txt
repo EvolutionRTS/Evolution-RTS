@@ -1,3 +1,0 @@
-VERSION{v7.63}
-VERSION{Campaign Branch v1.5}
- 

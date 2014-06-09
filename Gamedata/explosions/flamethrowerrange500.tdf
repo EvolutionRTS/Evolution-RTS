@@ -1,0 +1,45 @@
+[flamethrowerrange500]
+{
+   [searingflame2]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=flame;
+
+      colorMap = 0.01 0.01 0.01 0.005    0.04 0.04 0.1 0.005    0.08 0.03 0.01 0.005    0 0 0 0.05 0 0 0 0.01;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0.05, 0;
+            emitVector  = dir;
+      emitRot     = 3;
+      emitRotSpread  = 1;
+
+      sizeGrowth  = 0.5;
+      sizeMod     = 1;
+
+      airdrag        = 1;
+
+      particleLife      = 60;
+      particleLifeSpread   = 5;
+      numParticles      = 30;
+      particleSpeed     = 8;
+      particleSpeedSpread  = 3;
+      particleSize      = 2 r3;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+	  
+	  emitVector=dir; 
+		emitRotSpread=5;
+		
+      useAirLos      = 1;
+      }
+   water=1;
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+}

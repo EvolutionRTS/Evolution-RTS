@@ -1,0 +1,40 @@
+[factorydustsmall]
+{
+	[POOF01]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=1.2;
+		sizeMod=1.0;
+
+        	pos = r-1 r1, 1, r-1 r1;
+         	emitVector=0, 1, 0;
+		gravity= 0, 0, 0;
+
+		colorMap=0.1 0.1 0.1 1.0	0.5 0.4 0.3 1.0		0 0 0 0.0;
+		Texture=dirt;
+		airdrag=0.95;
+
+		particleLife=15;
+		particleLifeSpread=10;
+
+		numParticles=80;
+
+		particleSpeed=1;
+		particleSpeedSpread=10;
+		particleSize=15;
+		particleSizeSpread=5;
+
+		emitRot=90;
+		emitRotSpread=0;
+
+		directional=0;
+		useAirLos=1;
+		}
+	water=1;
+	air=1;
+	ground=1;
+	count=1;
+	}
+}

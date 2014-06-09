@@ -1,0 +1,164 @@
+#define TA        // This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece base, firepoint1, frontengines, fengine1, fengine2, rearengines, rengine1, rengine2;
+
+static-var  moving, flames, WeaponTypeSelect;
+
+#define jethtrail 1024+0
+
+// Signal definitions
+#define SIG_AIM 2
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx 1025 from base;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+
+Thrust()
+{
+   while( TRUE )
+   {
+      if (moving)    
+      {
+              emit-sfx jethtrail from fengine1;
+              emit-sfx jethtrail from fengine2;
+              emit-sfx jethtrail from rengine1;
+              emit-sfx jethtrail from rengine2;
+                }
+        sleep 5;    
+   }
+}
+
+WeaponType(select)
+{
+	WeaponTypeSelect = select;
+}
+
+StartMoving()
+{
+        moving=1;
+}
+   
+StopMoving()
+{   
+        moving=0; 
+}
+
+MoveRate0()
+{
+	flames=0;
+ 	turn frontengines to x-axis <-90.000000> speed <150.000000>;
+ 	turn rearengines to x-axis <-90.000000> speed <150.000000>;
+}
+MoveRate1()
+{
+	flames=0;
+ 	turn frontengines to x-axis <-70.005495> speed <150.000000>;
+ 	turn rearengines to x-axis <-70.005495> speed <150.000000>;
+}
+MoveRate2()
+{
+	flames=1;
+ 	turn frontengines to x-axis <0.000000> speed <150.000000>;
+ 	turn rearengines to x-axis <0.000000> speed <150.000000>;
+}
+
+
+Create()
+   {
+//      start-script Thrust();
+        start-script SmokeUnit();
+        WeaponTypeSelect = 1;
+   }
+
+
+AimPrimary(heading, pitch) { // single weapon with 2 fires this tell sit what to do while aiming
+	if(!WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
+	signal SIG_AIM; 
+	set-signal-mask SIG_AIM;
+	return (1);
+} 
+
+FirePrimary()
+{ // what do while firing, fires 1 barrel then the next , and resets 
+} 
+
+BlockShot1(unit, block)
+{
+	if (!WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
+AimFromPrimary(piecenum) { // where it aims the weapon from 
+	piecenum = base; 
+} 
+
+QueryPrimary(piecenum) { // where the shot is called from 
+	piecenum = firepoint1; 
+} 
+
+AimSecondary(heading, pitch) { // single weapon with 2 fires this tell sit what to do while aiming 	
+	if(WeaponTypeSelect OR (get WEAPON_RELOADSTATE(1) > get GAME_FRAME)) return (0);
+	signal SIG_AIM; 
+	set-signal-mask SIG_AIM;
+	return (1);
+} 
+
+FireSecondary() { // what do while firing, fires 1 barrel then the next , and resets 
+} 
+
+BlockShot2(unit, block)
+{
+	if (WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
+AimFromSecondary(piecenum) { // where it aims the weapon from 
+	piecenum = base; 
+} 
+
+QuerySecondary(piecenum) { // where the shot is called from  
+	piecenum = firepoint1; 
+} 
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode base type EXPLODE_ON_HIT;
+	explode frontengines type EXPLODE_ON_HIT;
+	explode fengine1 type EXPLODE_ON_HIT;
+	explode fengine2 type EXPLODE_ON_HIT;
+	explode rearengines type EXPLODE_ON_HIT;
+	explode rengine1 type EXPLODE_ON_HIT;
+	explode rengine2 type EXPLODE_ON_HIT;
+}

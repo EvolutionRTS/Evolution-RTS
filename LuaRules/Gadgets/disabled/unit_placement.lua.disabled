@@ -1,0 +1,55 @@
+function gadget:GetInfo()
+  return {
+    name      = "Unit Placement",
+    desc      = "Acts like .give for host",
+    author    = "lurker",
+    date      = "May 3,	2008",
+    license   = "GNU GPL, v2 or later",
+    layer     = 1,
+    enabled   = true  --  loaded by default?
+  }
+end
+
+if (gadgetHandler:IsSyncedCode()) then
+
+local createlist = {}
+
+function gadget:Initialize()
+	gadgetHandler:UpdateCallIn('RecvLuaMsg')
+end
+
+function gadget:RecvLuaMsg(msg, player)
+	if string.sub(msg, 1, 4) ~= "give" then return false end
+    if player~= 0 then Spring.Echo("Invalid give command: must be host") end
+	local wordsplit = {}
+    msg:gsub("%S+", function(c) table.insert(wordsplit, c) end)
+	local i, x, y, z, count, unitname, team
+	i,_ = next(wordsplit)
+	while(true) do
+		i,team = next(wordsplit, i)
+		i,x = next(wordsplit, i) if(i==nil) then return true end
+		i,y = next(wordsplit, i) if(i==nil) then return true end
+		i,z = next(wordsplit, i) if(i==nil) then return true end
+		i,count = next(wordsplit, i) if(i==nil) then return true end
+		i,unitname = next(wordsplit, i) if(i==nil) then return true end
+		if tonumber(team) and tonumber(x) and tonumber(y) and tonumber(z) and tonumber(count) and UnitDefNames[unitname] then
+			if count == 1 then
+				table.insert(createlist, {unitname=unitname, x=x, y=y, z=z, team=team})
+			else
+				for j=1,count do
+					table.insert(createlist, {unitname=unitname, x=x + 100*math.random(), y=y, z=z+100*math.random(), team=team})
+				end
+			end
+		end
+	end
+end
+
+function gadget:GameFrame(frame)
+	for i,p in pairs(createlist) do
+		Spring.CreateUnit(p.unitname, p.x, p.y, p.z, 'n', p.team)
+		createlist[i] = nil
+	end
+end
+
+end
+

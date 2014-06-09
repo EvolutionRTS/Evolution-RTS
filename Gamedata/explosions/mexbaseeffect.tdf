@@ -1,0 +1,25 @@
+[mexbaseeffect]
+{
+   [smoke]
+   {
+   [properties]
+            {
+      alwaysVisible=1;
+            color = 0.1;
+            ageSpeed=0.05;
+
+            startSize = 1;
+            sizeExpansion = 0.6;
+            size = 2;
+            sizeGrowth = 5;
+
+            pos = r-800 r800, 3, r-800 r800;
+            speed=r-3 r3, 1 r2.3, r-3 r3;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=3;
+      }
+
+}

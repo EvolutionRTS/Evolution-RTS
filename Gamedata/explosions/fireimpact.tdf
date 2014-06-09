@@ -1,0 +1,44 @@
+[fireimpact]
+{
+
+	[whiteglow]
+	{
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=laserend;
+      		heat = 10;
+      		maxheat = 15;
+      		heatFalloff = 1.7;
+
+      		size = 5;
+      		sizeGrowth = 10;
+
+         	pos = 0, 0, 0;
+         	speed=0, 0, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=1;
+	} 
+
+	[groundflash]
+   	{
+	alwaysVisible=1;
+      	ttl = 7;
+      	flashSize = 50;
+      	flashAlpha = 0.3;
+
+      	circleGrowth = 9;
+      	circleAlpha = 0.0;
+
+      	color = 1, 0.7, 0.1;
+
+	air=1;
+     	ground=1;
+      	water=1;
+	}
+}

@@ -1,0 +1,112 @@
+piece gp,base;
+static-var shooting_num,shooting_num3,shooting_num4,missile_num,happened,notdead,burning;
+
+#define zapImpact 			1024+0
+#define RED_EXPLOSION 		1024+1
+#define BIGBOMB_EXPLOSION	1024+2
+#define COMM_EXPLOSION 		1024+3
+
+static-var ISBUILDING;
+
+#define CRASHLANDING  			4096+4
+
+#define SMOKEPIECE1 base
+
+#define SIG_AIM				2
+
+#include "\headers\smoke.h"
+
+Thrusters(sleeptime, smoketype)
+{
+	smoketype = 256 | 2;
+			
+	while( get BUILD_PERCENT_LEFT )
+	{	sleep 400;	}
+		
+	while( TRUE )
+	{
+			emit-sfx zapImpact from base;
+	sleep 150;
+	}
+}
+
+//------------------------------------------------------
+//start ups :)
+//------------------------------------------------------
+Create()
+	{
+	ISBUILDING 		= 	FALSE;
+	
+	start-script SmokeUnit();
+	start-script Thrusters();
+	}
+	
+	
+SweetSpot(piecenum)
+	{	piecenum=gp;			}		
+	
+QueryNanoPiece(piecenum)
+	{	piecenum=base;			}
+/*==============================================
+//nano functions
+==============================================*/
+
+StartBuilding(heading,pitch)
+	{
+	ISBUILDING = TRUE;
+	while (!ISBUILDING)
+		{	sleep 100;	}
+	set INBUILDSTANCE to TRUE;
+	}
+
+TargetCleared(which)
+	{
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	sleep 500;	
+	ISBUILDING = FALSE;
+	}
+
+StopBuilding()
+	{
+	set INBUILDSTANCE to FALSE;
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	sleep 500;	
+	ISBUILDING = FALSE;
+	}
+	
+/*=============================================\
+| Death function								|
+\=============================================*/
+	Killed( severity, corpsetype )
+	{
+	//RED_EXPLOSION
+	//BIGBOMB_EXPLOSION
+	//COMM_EXPLOSION
+	if (severity <= 25)
+		{
+		corpsetype = 1;
+		//explode base type		SHATTER  | BITMAP3;
+		return( 0 );
+		}
+
+	if (severity <= 50)
+		{
+		corpsetype = 2;
+		//explode base type		SHATTER  | BITMAP3;
+		return( 0 );
+		}
+
+	if (severity <= 99)
+		{
+		corpsetype = 3;
+		//explode base type		SHATTER | BITMAP3;
+		return( 0 );
+		}
+
+	corpsetype = 3;
+//	explode base type		SHATTER | BITMAP3;
+	return( 0 );
+	return( 0 );
+	}

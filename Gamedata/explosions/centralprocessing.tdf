@@ -1,0 +1,62 @@
+[centralprocessing]
+{
+   [explosionspikes]
+   {
+      class=explspike;
+      [properties]
+      {
+         alwaysVisible=0;
+         dir=-45 r90,-45 r90,-45 r90;
+         width=4;
+         length=0.4;
+         alpha=1;
+         alphadecay=0.19;
+         color=0.0, 0.3, 1;
+
+      }
+      air=1;
+      water=1;
+      ground=1;
+      count=7;
+   }
+
+   [explosionsphere]
+   {
+      class=CSpherePartSpawner;
+      [properties]
+      {
+         alwaysVisible=0;
+         ttl=20;
+         alpha=0.4;
+         expansionSpeed=3 r3;
+         color= 0.0, 0.3, 0.5;
+      }
+      ground=1;
+      air=1;
+      count=1;
+   }
+
+   [pop1]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=0;
+      texture=bluenovaexplo;
+            heat = 10;
+            maxheat = 10;
+            heatFalloff = 0.8;
+
+            size = 1;
+            sizeGrowth = 16;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+}

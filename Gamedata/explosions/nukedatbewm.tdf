@@ -1,0 +1,218 @@
+[NUKEDATBEWM]
+{
+	alwaysVisible=1;
+   [pop1]
+   {
+   class=heatcloud;
+   alwaysVisible=1;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=bigexplosmoke;
+            heat = 10;
+            maxheat = 10;
+            heatFalloff = 0.4;
+
+            size = 1;
+            sizeGrowth = 50;
+
+            pos = r-10 r10, 0, r-10 r10;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=2;
+   }
+
+   [pop2]
+   {
+   class=heatcloud;
+   alwaysVisible=1;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=bigexplosmoke;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 0.6;
+
+            size = 1;
+            sizeGrowth = 40;
+
+            pos = r-150 r150, 0, r-300 r150;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=10;
+   }
+
+   [POOF02]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=bigexplosmoke;
+
+      colorMap =0.8 0.6 0 0.01 0.4 0.4 0.4 0.01  0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, 0.5, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 300;
+      particleLifeSpread   = 350;
+      numParticles      = 128;
+      particleSpeed     = 104;
+      particleSpeedSpread  = 32;
+      particleSize      = 50;
+      particleSizeSpread   = 1;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+   
+   [POOF01]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=cloudexplo;
+
+      colorMap = 0.8 0.6 0.2 0.01   0 0 0 0.01  0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 15;
+      emitRotSpread  = 90;
+
+      sizeGrowth  = 0;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 300;
+      particleLifeSpread   = 350;
+      numParticles      = 150;
+      particleSpeed     = 128;
+      particleSpeedSpread  = 6;
+      particleSize      = 55;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=2;
+   }
+
+   [POOF03]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=cloudexplo;
+
+      colorMap =0.8 0.6 0 0.01 0 0 0 0.01  0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+            emitVector  = 0, -1, 0;
+      emitRot     = 15;
+      emitRotSpread  = 300;
+
+      sizeGrowth  = 0;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 50;
+      particleLifeSpread   = 350;
+      numParticles      = 150;
+      particleSpeed     = 128;
+      particleSpeedSpread  = 6;
+      particleSize      = 55;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=2;
+   }
+   
+	[POOF04]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=bigexplosmoke;
+
+      colorMap =0.8 0.6 0 0.01 0.4 0.4 0.4 0.01  0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, 0.2, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 300;
+      particleLifeSpread   = 350;
+      numParticles      = 20;
+      particleSpeed     = 20;
+      particleSpeedSpread  = 32;
+      particleSize      = 50;
+      particleSizeSpread   = 1;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=1;
+   }
+
+   [groundflash]
+      {
+   alwaysVisible=1;
+         ttl = 600;
+         flashSize = 2000;
+         flashAlpha = 0.5;
+
+         circleGrowth = 2;
+         circleAlpha = 0.5;
+
+         color = 1, 0.7, 0.3;
+
+		air=1;
+		ground=1;
+        water=1;
+   }
+}

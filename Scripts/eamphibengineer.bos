@@ -1,0 +1,207 @@
+#define TA        // This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  base, arm, spinwheels, frontwheels, rearwheels, nano1, dirt;
+
+static-var Static_Var_1, Static_Var_3, Static_Var_5, statechg_DesiredState, statechg_StateChanging, bMoving, terraintype, building, moving, underwater;
+
+#define nanoflame 1024+0
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx 1026 from base;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+Go()
+{
+   turn arm to x-axis <-90> speed <50>;
+        wait-for-turn base around y-axis;
+        wait-for-turn arm around x-axis;
+        spin spinwheels around x-axis speed <50.005495>;
+        Static_Var_3 = 1;
+   if( Static_Var_3 )
+   {
+
+   }
+   sleep 15;
+   set INBUILDSTANCE to 1;
+}
+
+Stop()
+{
+   turn arm to x-axis <0> speed <50>;
+   stop-spin spinwheels around z-axis decelerate <2.000000>; 
+        set INBUILDSTANCE to 0;
+   if( Static_Var_3 )
+   {
+
+   }
+   sleep 20;
+   Static_Var_3 = 0;
+}
+
+InitState()
+{
+   statechg_DesiredState = TRUE;
+   statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+   if( statechg_StateChanging )
+   {
+      statechg_DesiredState = requestedstate;
+      return (0);
+   }
+   statechg_StateChanging = TRUE;
+   currentstate = statechg_DesiredState;
+   statechg_DesiredState = requestedstate;
+   while( statechg_DesiredState != currentstate )
+   {
+      if( statechg_DesiredState == 0 )
+      {
+         call-script Go();
+         currentstate = 0;
+      }
+      if( statechg_DesiredState == 1 )
+      {
+         call-script Stop();
+         currentstate = 1;
+      }
+   }
+   statechg_StateChanging = FALSE;
+}
+
+StartMoving()
+{
+   bMoving = TRUE;
+   moving = TRUE;
+}
+
+StopMoving()
+{
+   bMoving = FALSE;
+   moving = FALSE;
+}
+
+setSFXoccupy(setSFXoccupy_argument)
+{
+terraintype = setSFXoccupy_argument;
+
+                if(terraintype == 2)
+      {
+				underwater=1;
+                }
+      else
+      {
+                underwater=0;
+                }
+                if(terraintype == 4)
+      {
+                underwater=0;
+                }
+      else
+      {
+                underwater=1;
+                }
+}
+
+Thrust()
+{
+   while( TRUE )
+   {
+      if (moving)    
+      {
+  		 emit-sfx 1025 + 0 from dirt;
+         spin frontwheels around x-axis speed <500.005495>;
+         spin rearwheels around x-axis speed <500.005495>;
+         
+      }
+      else
+      {
+         stop-spin frontwheels around x-axis decelerate <200.000000>;
+         stop-spin rearwheels around x-axis decelerate <200.000000>;
+      }
+     sleep 400;    
+   }
+}
+
+buildflame()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx nanoflame from nano1;
+      				
+      }
+        sleep 600;    
+   }
+}
+
+Create()
+{
+   Static_Var_3 = 0;
+   Static_Var_1 = 0;
+   call-script InitState();
+        start-script Thrust();
+        start-script SmokeUnit();
+        turn nano1 to x-axis <90.000000> now; 
+	start-script buildflame();
+}
+
+StartBuilding(Func_Var_1)
+{
+   building=1;
+   Static_Var_1 = Func_Var_1;
+   start-script RequestState(0);
+}
+
+StopBuilding()
+{
+   building=0;
+   start-script RequestState(1);
+}
+
+QueryNanoPiece(piecenum)
+{
+      piecenum = nano1;
+}
+
+TargetHeading(Func_Var_1)
+{
+   Static_Var_1 = 0 - Func_Var_1;
+}
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode arm type EXPLODE_ON_HIT;
+	explode spinwheels type EXPLODE_ON_HIT;
+	explode frontwheels type EXPLODE_ON_HIT;
+	explode rearwheels type EXPLODE_ON_HIT;
+} 

@@ -1,0 +1,40 @@
+Metal is used to make unit and structures.
+
+Energy is only used for units to fire, shields, nukes etc.
+
+Energy is not used for building, but you will need tons of it because it is often depleted by units firing their weapons in battles, or shields powering up or simply used by metal makers when converting energy to metal
+Without energy, your units can't fire. Along those lines, build storage. Build LOTS of storage. Storage buildings increase the total amount of metal and energy that youc an store, and so in that way act like capacitors for your army. Storage buildings are quite possibly the most important buildings in your base.
+
+In order to tech up put generators next to your factories.
+
+Basic generators give you 5 supply, 1 power (in a radius) and 1 energy
+Geothermal generators give you 20 supply 7 power and 7 energy
+Advanced generators give you 30 supply, 10 power and 10 energy
+
+Generators give you supply. The supply cap is 200/200. Generators say how much supply, power, and energy they give you in the unit descriptions that pop up when you mouseover them on the build menu. You need supply in order to build units.
+
+Power is used to tech up. The generators have graphics around them when you place them for building. That graphic is a visualization of the radius in which power is supplied. Place generators so that they are near your factory, and the power they provide will unlock higher tech units within the factory.
+
+In this way, teching up is easy, but if you lose your generators, then you will lose the tech that the generator was allowing you to build.
+
+Engineers, ORBs, and Overseers do not use supply. Make as many as you would like. It's a good idea to have many on hand sot hat you always have workers available and they will assist with other construction projects.
+
+ORBs are field repair units. They repair everything in a huge radius for 10hp every second, as long as what they are repairing is out of combat (for free).
+
+Metal Makers are good. They are not as efficient as metal extractors, but they can help use your excess energy while supplying you you additional income. Each Metal Maker uses 5 energy to produce 0.5 metal (The same income as a metal extractor).
+
+However, if you are using metal makers, remember that you need energy in order for your units to fire, so build storage so that you have a buffer zone.
+
+There are 5 tech paths:
+
+Hover, Amphibious, All Terrain, Air and Destroyers
+
+Hover can of course go over water and are moderately good in all situations.
+
+Amphibious units are extremely fast, very high damage output, but have very weak armor. Amphibious units are stealthed to radar.
+
+All Terrains units can of course go everywhere except water. They are the slowest of the 3 main technologies (Hover/Amphibious/All-Terrain), but have good firepower and solid damage output and good armor. All Terrain units can cloak. All Terrain units can't be automatically targeted when cloaked, but you can see them via seismic indicators, so you can fore fire at them if you want. Cloaking All Terrain units is uses a lot of energy (2 per unit). The best way to use them is to cloak them right before a fight so that you get the first shot in the battle. It can make the difference between winning and losing a battle.
+
+Destroyer units are end-game units. They are extremely powerful and deal critical amounts of damage, but they can be brought down by surrounding them and focusing your fire. Make sure that if you are using them, that you keep them protected.
+
+This might seem like a lot to take in, but the game and the gameplay itself is quite simple really. I hope that this crash course has been helpful!

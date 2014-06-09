@@ -1,0 +1,64 @@
+[miofskyparticles]
+{
+	[POOF01]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0.8;
+		sizeMod=1.0;
+
+        	pos = r-1 r1, r-1 r1, r-1 r1;
+         	emitVector=0, 1, 0;
+		gravity= 0, 0.3, 0;
+
+		colorMap= 0.3 0.5 0.01 1.0 0.15 0.2 0.15 0.1   0 0 0 0.01;
+		Texture=dirt;
+
+		airdrag=0.95;
+
+		particleLife=10;
+		particleLifeSpread=10;
+
+		numParticles=5;
+
+		particleSpeed=17;
+		particleSpeedSpread=2;
+		particleSize=20;
+		particleSizeSpread=0;
+
+		emitRot=90;
+		emitRotSpread=10;
+
+		directional=1;
+		useAirLos=1;
+		}
+	water=1;
+	air=1;
+	ground=1;
+	count=1;
+	}
+
+	[smoke]
+	{
+	[properties]
+      		{
+		alwaysVisible=1;
+         	color = 0.1;
+         	ageSpeed=0.05;
+
+         	startSize = 1;
+         	sizeExpansion = 0.6;
+         	size = 2;
+         	sizeGrowth = 5;
+
+         	pos = r-800 r800, 3, r-800 r800;
+         	speed=r-3 r3, 1 r2.3, r-3 r3;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=3;
+   	}
+
+}

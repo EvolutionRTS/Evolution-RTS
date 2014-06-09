@@ -1,0 +1,204 @@
+#define TA			// This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  base, door, spike, wheels, nanopoint, nano1;
+
+static-var  spray, unitviewer, statechg_DesiredState, statechg_StateChanging, building;
+
+// Signal definitions
+#define SIG_ACTIVATE			2
+
+#define nanoflame 1024+0
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx 1026 from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+buildingfx()
+{
+   while( TRUE )
+   {
+      if (building) 
+      {   
+              emit-sfx nanoflame from nano1;
+       }         
+   sleep 600;
+   }
+}
+
+buildingfx2()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx 1025 from nanopoint;
+      }        
+   sleep 300;
+   }
+}
+
+OpenYard()
+{
+	spin wheels around z-axis speed <50.005495>;
+	move spike to y-axis [20] speed [5];	
+	turn door to x-axis <-90> speed <50>;
+	wait-for-move spike along y-axis;
+	wait-for-turn door around x-axis; 
+	set YARD_OPEN to 1;
+	while( !get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 1;
+	}
+	set BUGGER_OFF to 0;
+}
+
+CloseYard()
+{
+	stop-spin wheels around z-axis decelerate <2.000000>; 
+	move spike to y-axis [0] speed [5];
+	turn door to x-axis <0> speed <50>;
+	set YARD_OPEN to 0;
+	while( get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 0;
+	}
+	set BUGGER_OFF to 0;
+}
+
+Go()
+{
+	call-script OpenYard();
+	set INBUILDSTANCE to 1;
+}
+
+Stop()
+{
+	set INBUILDSTANCE to 0;
+	call-script CloseYard();
+	
+}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();			
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Create()
+{
+	unitviewer = FALSE;
+	spray = nanopoint;
+	call-script InitState();
+	start-script SmokeUnit();
+	start-script Buildingfx(); 
+	start-script Buildingfx2(); 
+}
+
+QueryNanoPiece(piecenum)
+{
+	if( spray == 0 )
+	{
+		piecenum = nano1;
+	}
+	if( spray != 0 )
+	{
+		piecenum = nano1;
+	}
+	spray = !spray;
+}
+
+
+Activate()
+{
+	signal SIG_ACTIVATE;
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	signal SIG_ACTIVATE;
+	set-signal-mask SIG_ACTIVATE;
+
+	set-signal-mask 0;
+	start-script RequestState(1);
+}
+
+StartBuilding()
+{
+building = 1;
+}
+
+StopBuilding()
+{
+building = 0;
+}
+
+QueryBuildInfo(piecenum)
+{
+	piecenum = nanopoint;
+}
+
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode door type EXPLODE_ON_HIT;
+	explode spike type EXPLODE_ON_HIT;
+	explode wheels type EXPLODE_ON_HIT;
+} 

@@ -1,0 +1,104 @@
+[dgun]
+{
+   [searingflame2]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=starexplobw;
+
+      colorMap = 1 0.2 0.1 0.01	1 0.5 0.1 0.01	0 0 0 0.01;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+
+      sizeGrowth  = -0.5;
+      sizeMod     = 1;
+
+      airdrag        = 1;
+
+      particleLife      = 5;
+      particleLifeSpread   = 5;
+      numParticles      = 1;
+      particleSpeed     = 0;
+      particleSpeedSpread  = 0;
+      particleSize      = 10;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+	  
+	  emitVector=dir; 
+	  emitRot     = 0;
+      emitRotSpread  = 0;
+		
+      useAirLos      = 1;
+      }
+   water=1;
+   air=1;
+   ground=1;
+   count=1;
+   }
+   
+      [pop2]
+   {
+   class=heatcloud;
+
+      [properties]
+            {
+      alwaysVisible=1;
+      texture=flare;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 1.3;
+
+            size = 10;
+            sizeGrowth = -0.5;
+
+            pos = 0, 0, 0;
+            speed=0, 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+   
+   [POOF01]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      alwaysVisible=1;
+      Texture=muzzleside;
+
+      colorMap = 1.0 1.0 1.0 0.04   0.5 0.3 0.0 0.01  0.5 0 0.0 0.01;
+
+            pos      = 0, 0, 0;
+      gravity     = 0, 0, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 1;
+      sizeMod     = 0.6;
+
+      airdrag        = 0.8;
+      particleLife      = 10;
+      particleLifeSpread   = 0;
+      numParticles      = 8;
+      particleSpeed     = 1;
+      particleSpeedSpread  = 0;
+      particleSize      = 2;
+      particleSizeSpread   = 0;
+
+      directional    = 1;
+      useAirLos      = 0;
+      }
+   air=1;
+         water=1;
+   ground=1;
+   count=1;
+   }
+}

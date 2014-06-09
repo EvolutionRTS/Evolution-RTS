@@ -1,0 +1,174 @@
+piece base, doorleft, doorright, nanopoint1, penis, wheel, frontwings, fengine1, fengine2, rearwings, rengine1, rengine2;
+
+#include "springdefs.h"
+#define SIG_BUILD 8
+#define jethtrail 1024+0
+#define nanoflame 1025+0
+
+static-var bMoving, terraintype, building, moving, flames;
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx 1026 from base;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+Thrust()
+{
+   while( TRUE )
+   {
+      if (moving)
+      {
+              emit-sfx jethtrail from fengine1;
+              emit-sfx jethtrail from fengine2;
+              emit-sfx jethtrail from rengine1;
+              emit-sfx jethtrail from rengine2;
+                }
+        sleep 5;
+   }
+}
+
+buildflame()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx nanoflame from nanopoint1;
+      				
+      }
+        sleep 600;    
+   }
+}
+
+Create()
+{
+//        start-script Thrust();
+        start-script SmokeUnit();
+//         turn fengine1 to y-axis <180> now;
+//         turn fengine2 to y-axis <180> now;
+//         turn rengine1 to y-axis <180> now;
+//         turn rengine2 to y-axis <180> now;
+	start-script buildflame();
+}
+
+QueryWeapon1(piecenum)
+{
+   piecenum=nanopoint1;
+}
+
+AimFromWeapon1(piecenum)
+{
+   piecenum=penis;
+}
+
+AimWeapon1(h,p)
+{
+   return 0;
+}
+
+StartBuilding(heading, pitch)
+{
+   signal SIG_BUILD;
+   set-signal-mask SIG_BUILD;
+   turn doorleft to y-axis <90> speed <100.000000>;
+   turn doorright to y-axis <-90> speed <100.000000>;
+        wait-for-turn doorleft around y-axis;
+        wait-for-turn doorright around y-axis;
+//   turn base to y-axis heading speed <160.000000>;
+//   turn base to x-axis heading speed <160.000000>;
+//        wait-for-turn base around y-axis;
+//        wait-for-turn base around x-axis;
+   move penis to z-axis [4] speed [1];
+   set INBUILDSTANCE to 1;
+   building = 1;
+   while (1) {
+//      emit-sfx 2048 from nanopoint1;
+      sleep 30;
+   }
+}
+
+StopBuilding()
+{
+   signal SIG_BUILD;
+   set-signal-mask SIG_BUILD;
+   set INBUILDSTANCE to 0;
+   building = 0;
+        move penis to z-axis [0] speed [2];
+   turn doorleft to y-axis <0> speed <50.000000>;
+   turn doorright to y-axis <0> speed <50.000000>;
+        wait-for-turn doorleft around y-axis;
+        wait-for-turn doorright around y-axis;
+//   turn base to y-axis <0.000000> speed <160.000000>;
+//   turn base to x-axis <0.000000> speed <160.000000>;
+//        wait-for-turn base around y-axis;
+//        wait-for-turn base around x-axis;
+
+}
+
+StartMoving()
+{
+   bMoving = TRUE;
+   moving=1;
+}
+
+StopMoving()
+{
+   bMoving = FALSE;
+   moving=0;
+}
+
+MoveRate0()
+{
+   flames=0;
+   turn frontwings to x-axis <-90.000000> speed <150.000000>;
+   turn rearwings to x-axis <-90.000000> speed <150.000000>;
+}
+MoveRate1()
+{
+   flames=0;
+   turn frontwings to x-axis <-70.005495> speed <150.000000>;
+   turn rearwings to x-axis <-70.005495> speed <150.000000>;
+}
+MoveRate2()
+{
+   flames=1;
+   turn frontwings to x-axis <0.000000> speed <150.000000>;
+   turn rearwings to x-axis <0.000000> speed <150.000000>;
+}
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode doorleft type EXPLODE_ON_HIT;
+	explode doorright type EXPLODE_ON_HIT;
+	explode penis type EXPLODE_ON_HIT;
+	explode wheel type EXPLODE_ON_HIT;
+	explode frontwings type EXPLODE_ON_HIT;
+	explode fengine1 type EXPLODE_ON_HIT;
+	explode fengine2 type EXPLODE_ON_HIT;
+	explode rearwings type EXPLODE_ON_HIT;
+	explode rengine1 type EXPLODE_ON_HIT;
+	explode rengine2 type EXPLODE_ON_HIT;
+} 

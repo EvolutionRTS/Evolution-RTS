@@ -1,0 +1,50 @@
+#define TA        // This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece  base, top, topspin, bottomspin;
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx 1024 from base;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+
+Create()
+{
+	spin top around y-axis speed <-15.005495>;
+	spin topspin around y-axis speed <10.005495>;
+	spin bottomspin around y-axis speed <-5.005495>;
+   start-script SmokeUnit();
+}
+
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode topspin type EXPLODE_ON_HIT;
+	explode bottomspin type EXPLODE_ON_HIT;
+} 

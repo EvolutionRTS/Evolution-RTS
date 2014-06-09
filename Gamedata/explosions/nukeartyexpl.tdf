@@ -1,0 +1,151 @@
+[nukeartyexpl]
+{
+	[pop]
+	{
+	class=heatcloud;
+   	
+		[properties]
+      		{
+		alwaysVisible=1;
+		texture=bigexplo;
+      		heat = 10;
+      		maxheat = 15;
+      		heatFalloff = 0.4;
+
+      		size = 55;
+      		sizeGrowth = 1.5;
+
+         	pos = r-25 r25, 5, r-25 r25;
+         	speed=r-1 r1, 1 0, r-1 r1;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=5;
+	} 
+
+	[smoke]
+	{
+	[properties]
+      		{
+		alwaysVisible=1;
+         	color = 0.1;
+         	ageSpeed=0.04;
+
+         	startSize = 10;
+         	sizeExpansion = 0.9;
+         	size = 80;
+         	sizeGrowth = 30;
+
+         	pos = r-3 r3, r-3 r3, r-3 r3;
+         	speed=0, 1 r2.3, 0;
+      		}
+	air=1;
+      	water=1;
+      	ground=1;
+      	count=8;
+   	}
+	   [POOF01]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=uglynovaexplo;
+
+      colorMap = 1 0.5 0.0 0.01 0.6 0.2 0.0 0.01  0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+            emitVector  = 0, 1, 0;
+      emitRot     = 15;
+      emitRotSpread  = 90;
+
+      sizeGrowth  = 0;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 1.5;
+      particleLifeSpread   = 350;
+      numParticles      = 64;
+      particleSpeed     = 25;
+      particleSpeedSpread  = 6;
+      particleSize      = 25;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=2;
+   }
+
+   [POOF02]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=uglynovaexplo;
+
+      colorMap =1 0.5 0.0 0.01 0.6 0.2 0.0 0.01  0.0 0.0 0.0 0.01;
+
+            pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+            emitVector  = 0, -1, 0;
+      emitRot     = 15;
+      emitRotSpread  = 90;
+
+      sizeGrowth  = 0;
+      sizeMod     = 1.0;
+
+      airdrag        = 0.8;
+      particleLife      = 3;
+      particleLifeSpread   = 350;
+      numParticles      = 64;
+      particleSpeed     = 25;
+      particleSpeedSpread  = 6;
+      particleSize      = 25;
+      particleSizeSpread   = 3;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   count=2;
+   }
+
+
+   [dirt]
+   {
+      [properties]
+      {
+      alwaysVisible=1;
+      size=40;
+      color=0.2, 0.1, 0.05;
+      alphaFalloff=2;
+      speed= r1.5 r-1.5, 2, r1.5 r-1.5;
+      pos=r-10 r10, 0, r-10 r10;
+      }
+      ground=1;
+      count=4;
+   }	
+	
+   usedefaultexplosions=0;
+   [groundflash]
+   {
+	  alwaysVisible=1;
+      flashSize = 700;   // flash size
+      flashAlpha = 0.9;    // initial alpha of the flash
+      circleGrowth = 10; // size increase/frame
+      circleAlpha = 1;   // initial alpha of the ring
+      ttl = 30;          // number of frames
+      color = 0.7, 0.3, 0;
+	  
+	  air=1;
+      ground=1;
+      water=1;
+   }
+}

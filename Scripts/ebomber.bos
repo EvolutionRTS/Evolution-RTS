@@ -1,0 +1,102 @@
+#define TA        // This is a TA script
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece base, firepoint1, engine;
+
+static-var  moving;
+
+// Signal definitions
+#define SIG_AIM 2
+
+#define jethtrail 1024+0
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx 1025 from base;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+
+Thrust()
+{
+   while( TRUE )
+   {
+      if (moving)    
+      {
+              emit-sfx jethtrail from engine;
+                }
+        sleep 5;    
+   }
+}
+
+StartMoving()
+{
+        moving=1;
+}
+   
+StopMoving()
+{   
+        moving=0; 
+}
+
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+return (1); 
+} 
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+} 
+
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = base; 
+} 
+
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint1; 
+} 
+
+
+
+
+Create()
+   {
+//   start-script Thrust();
+//         turn engine to y-axis <180> now;
+        start-script SmokeUnit();
+   }
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode base type EXPLODE_ON_HIT;
+	explode engine type EXPLODE_ON_HIT;
+} 
