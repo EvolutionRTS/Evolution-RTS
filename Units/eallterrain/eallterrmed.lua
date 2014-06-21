@@ -31,7 +31,7 @@ local unitDef = {
 -- Cloaking
 
 	cancloak		 = true,
-	cloakCost		 = 2,
+	cloakCost		 = 1,
 	cloakCostMoving	 = 2,
 	minCloakDistance = 70,
 	decloakOnFire	 = true,
@@ -57,7 +57,7 @@ Uses +4 Supply]],
   idleAutoHeal       = .5,
   idleTime           = 2200,
   leaveTracks        = false,
-  maxDamage          = 450,
+  maxDamage          = 500,
   maxSlope           = 180,
   maxVelocity        = 3.5,
   maxReverseVelocity = 1,

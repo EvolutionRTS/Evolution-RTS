@@ -42,6 +42,17 @@ local cloakShieldDefs = {
 		selfCloak = false,
 		decloakDistance = 500,
 	},
+	
+	eallterrshield = {
+		init = true,
+		draw = true,
+		energy = 5,
+		maxrad = 150,
+		growRate = 512,
+		shrinkRate = 2048,
+		selfCloak = false,
+		decloakDistance = 150,
+	},
 }
 
 -- reads from customParams and copies to cloakShieldDefs as appropriate - needed for procedurally generated comms

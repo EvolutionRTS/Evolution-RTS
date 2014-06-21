@@ -31,9 +31,9 @@ local unitDef = {
 -- Cloaking
 
 	cancloak		 = true,
-	cloakCost		 = 2,
+	cloakCost		 = 1,
 	cloakCostMoving	 = 2,
-	minCloakDistance = 75,
+	minCloakDistance = 150,
 	decloakOnFire	 = false,
 	decloakSpherical = true,
 	initCloaked		 = true,
@@ -44,6 +44,7 @@ local unitDef = {
 Light
 Shield absorbs 1000 damage
 Shield can link with other shield units to increase charging and capacity
+Generates a Cloaking Field
 
 Requires +5 Power
 +Uses +5 Supply]],
@@ -122,7 +123,7 @@ Requires +5 Power
 
 
 --------------------------------------------------------------------------------
-local shield1PowerRegen = 5
+local shield1PowerRegen = 10
 
 local weaponDefs = {
   allterrshield = {

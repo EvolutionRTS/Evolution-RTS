@@ -31,7 +31,7 @@ local unitDef = {
 -- Cloaking
 
 	cancloak		 = true,
-	cloakCost		 = 2,
+	cloakCost		 = 1,
 	minCloakDistance = 250,
 	decloakOnFire	 = true,
 	decloakSpherical = true,

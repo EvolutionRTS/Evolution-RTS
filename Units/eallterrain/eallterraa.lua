@@ -31,7 +31,7 @@ local unitDef = {
 -- Cloaking
 
 	cancloak		 = true,
-	cloakCost		 = 2,
+	cloakCost		 = 1,
 	cloakCostMoving	 = 2,
 	minCloakDistance = 70,
 	decloakOnFire	 = true,
@@ -124,7 +124,7 @@ Uses +3 Supply]],
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage = 100
+local weapon1Damage = 200
 
 local weaponDefs = {
   heavytankweapon = {
