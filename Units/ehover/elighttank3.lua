@@ -29,7 +29,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Raider
 Light
-43 Damage vs Light/Armored/Building
+45 Damage vs Light/Armored
+60 Damage vs Building
 
 Requires +3 Power
 Uses +3 Supply]],
@@ -112,7 +113,7 @@ sfxtypes = {
 
 --------------------------------------------------------------------------------
 
-local weapon1Damage = 43
+local weapon1Damage = 60
 
 local weaponDefs = {
   lighttankweapon = {
@@ -132,7 +133,7 @@ local weaponDefs = {
     lineOfSight        = true,
 	name			   = "elighttank3weapon",
     noSelfDamage       = true,
-    range              = 500,
+    range              = 550,
     reloadtime         = 1,
     WeaponType         = "LightningCannon",
     rgbColor           = "0.1 0.2 0.5",

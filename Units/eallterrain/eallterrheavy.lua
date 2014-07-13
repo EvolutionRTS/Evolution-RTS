@@ -43,7 +43,7 @@ local unitDef = {
   description        =[[Armored Tank Destroyer
 Armored
 100 Damage vs Light/Armored
-60 Damage vs Buildings
+50 Damage vs Buildings
   
 Requires +6 Power
 Uses +6 Supply]],

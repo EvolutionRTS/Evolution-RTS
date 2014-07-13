@@ -32,7 +32,7 @@ local unitDef = {
   corpse             = "ammobox",
   defaultmissiontype = "Standby",
   description        = [[Anti-Air Support Tank
-Armored
+Light
 105 Damage vs Armored
 70 Damage vs Light/Building
 
@@ -59,7 +59,7 @@ Uses +5 Supply]],
   metalStorage       = 0,
   mobilestandorders  = "1",
   movementClass      = "HOVERTANK4",
-  name               = "Spewer",
+  name               = "Paladin",
   noAutoFire         = false,
   noChaseCategory    = "VTOL AMPHIB NOTAIR SUPPORT",
   objectName         = "eaatank2.s3o",

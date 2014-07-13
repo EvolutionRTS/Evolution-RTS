@@ -24,7 +24,7 @@ local unitDef = {
 
 Building
 300 Damage vs Armored
-125 Damage vs Light
+150 Damage vs Light
 30 Damage vs Buildings
 
 Uses +2 Supply]],

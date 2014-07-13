@@ -30,8 +30,8 @@ Armored
 500 Damage vs Buildings
 250 Damage vs Light/Armored
 
-Requires +12 Power
-Uses +12 Supply]],
+Requires +5 Power
+Uses +5 Supply]],
   energyMake         = 0,
   energyStorage      = 0,
   energyUse          = 0,
@@ -104,10 +104,10 @@ sfxtypes = {
   customParams = {
     needed_cover = 1,
   	death_sounds = "generic",
-    RequireTech = "12 Power",
+    RequireTech = "5 Power",
 	armortype   = "armored",
 	nofriendlyfire	= "1",
-	supply_cost = 12,
+	supply_cost = 5,
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
 	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
 	factionname	= "outer_colonies", 

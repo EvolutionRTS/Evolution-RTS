@@ -32,7 +32,7 @@ local unitDef = {
   canreclaim		 = false,
   canstop            = true,
   category           = "NOTAIR SUPPORT LIGHT",
-  description        = [[Armored
+  description        = [[Light
   
   • Armed with a small emp weapon capable of disabling light units for a short period of time (Must be manually fired!)
   

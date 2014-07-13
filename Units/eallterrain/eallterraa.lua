@@ -42,8 +42,8 @@ local unitDef = {
   
   description        =[[Armored Dedicated Anti-Air
 Armored
-100 Damage vs Armored
-66 Damage vs Light/Building
+200 Damage vs Armored
+132 Damage vs Light/Building
   
 Requires +3 Power
 Uses +3 Supply]],

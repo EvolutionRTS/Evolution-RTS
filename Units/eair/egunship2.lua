@@ -32,7 +32,7 @@ local unitDef = {
   corpse             = "ammobox",
   cruiseAlt          = 300,
   description        = [[Gunship Tank Destroyer
-Light
+Armored
 100 Damage vs Light/Armored
 50 Damage vs Building
 
