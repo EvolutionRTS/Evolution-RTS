@@ -77,7 +77,7 @@ Uses +4 Supply]],
   stealth			 = true,
   seismicSignature   = 4,
   turnInPlace        = true,
-  turnRate           = 1000,
+  turnRate           = 5000,
   unitname           = "eallterrmed",
   upright			 = false,
   workerTime         = 0,
@@ -161,7 +161,7 @@ local weaponDefs = {
     thickness          = 9,
     tolerance          = 1000,
     turret             = true,
-    weaponVelocity     = 600,
+    weaponVelocity     = 1000,
 	customparams = {
 	  damagetype		= "eallterrmed",  
 	  

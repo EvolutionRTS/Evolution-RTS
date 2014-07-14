@@ -9,7 +9,7 @@ local unitDef = {
   activateWhenBuilt  = true,
   buildAngle         = 8196,
   buildCostEnergy    = 0,
-  buildCostMetal     = 20,
+  buildCostMetal     = 90,
   builder            = false,
   buildTime          = 5,
   canAttack			 = false,
@@ -21,8 +21,10 @@ local unitDef = {
    collisionVolumeType    = "box",
   
   corpse             = "ammobox",
-  description        = "Resource Storage - Stores 50m/50e",
-  energyStorage      = 50,
+  description        = [[Storage Facility
+
+Increases your Metal and Energy storage reserves by +250]],
+  energyStorage      = 250,
   energyUse          = 0,
   explodeAs          = "ESTOR_BUILDING",
   footprintX         = 4,
@@ -30,10 +32,10 @@ local unitDef = {
   idleAutoHeal       = .5,
   idleTime           = 2200,
   icontype           = "eco",
-  maxDamage          = 1200,
+  maxDamage          = 2250,
   maxSlope           = 50,
   maxWaterDepth      = 5000,
-  metalStorage       = 50,
+  metalStorage       = 250,
   name               = "Storage",
   objectName         = "estorage2.s3o",
   script			 = "estorage2.cob",
@@ -76,13 +78,7 @@ sfxtypes = {
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
 	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
 	factionname	= "outer_colonies",  
-	helptext = [[Storage Facility
-
-Will increase your storage reserves by +50
-
-+50 Metal Storage
-
-+50 Energy Storage]],
+	helptext = [[]],
   },
   useBuildingGroundDecal = true,
   BuildingGroundDecalType = "factorygroundplate.dds",

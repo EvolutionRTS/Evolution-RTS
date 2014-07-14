@@ -30,8 +30,8 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Missile Support Tank
 Light
-100 Damage vs Light/Armored
-50 Damage vs Building
+150 Damage vs Light/Armored
+75 Damage vs Building
 
 Requires +7 Power
 Uses +7 Supply]],
