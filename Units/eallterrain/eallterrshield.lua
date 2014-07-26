@@ -76,7 +76,7 @@ Requires +5 Power
   sightDistance      = 800,
   smoothAnim         = true,
   stealth			 = true,
-  seismicSignature   = 5,
+  seismicSignature   = 2,
   turnInPlace        = true,
   turnRate           = 5000,
   unitname           = "eallterrshield",
