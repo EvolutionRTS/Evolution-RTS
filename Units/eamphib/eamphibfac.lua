@@ -55,7 +55,7 @@ local unitDef = {
   unitname           = "eamphibfac",
 --  unitRestricted	 = 1,
   workerTime         = 1,
-  yardMap            = "yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo",
+  yardMap            = "ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo",
 --  usePieceCollisionVolumes = true,
   
   useBuildingGroundDecal = true,
