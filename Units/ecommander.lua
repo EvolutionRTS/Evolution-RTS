@@ -71,6 +71,7 @@ local unitDef = {
   smoothAnim         = true,
   stealth			 = true,
   seismicSignature   = 2,
+  turnInPlace        = true,
   turnRate           = 5000,
   unitname           = "ecommander",
   unitRestricted	 = 1,
