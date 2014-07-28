@@ -140,7 +140,7 @@ local weaponDefs = {
     beamWeapon         = true,
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
-    duration           = 0.4,
+    duration           = 0.2,
     energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-large-purple",
     fallOffRate        = 1,
@@ -163,7 +163,7 @@ local weaponDefs = {
     thickness          = 9,
     tolerance          = 1000,
     turret             = true,
-    weaponVelocity     = 250,
+    weaponVelocity     = 800,
 	customparams = {
 	  damagetype		= "eallterrassault",  
 	  

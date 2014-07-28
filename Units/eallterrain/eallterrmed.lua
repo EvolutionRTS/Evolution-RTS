@@ -43,7 +43,7 @@ local unitDef = {
   description        = [[Light Tank Destroyer
 Light
 200 Damage vs Armored
-100 Damage vs Light/Building
+50 Damage vs Light/Building
   
 Requires +4 Power
 Uses +4 Supply]],

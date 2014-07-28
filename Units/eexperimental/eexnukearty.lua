@@ -28,10 +28,10 @@ local unitDef = {
   canstop            = "1",
   category           = "ARMORED NOTAIR SUPPORT",
   corpse             = "ammobox",
-  description        = [[Endbringer Class Low Yeild Nuclear Artillery
+  description        = [[Endbringer Class Low Yeild Nuclear Saturation Artillery
 Armored
-2000 Damage vs Building
-1000 Damage vs Light/Armored
+500 Damage vs Building
+250 Damage vs Light/Armored
 
 Requires +40 Power]],
   energyMake         = 0,
@@ -108,12 +108,12 @@ Requires +40 Power]],
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage = 2000
+local weapon1Damage = 500
 
 local weaponDefs = {
   nukeartyweapon = {
     badTargetCategory = [[ARMORED LIGHT]],
-    accuracy           = 200,
+    accuracy           = 1000,
     AreaOfEffect       = 500,
     avoidFriendly      = false,
     avoidFeature       = false,
@@ -129,7 +129,7 @@ local weaponDefs = {
     interceptedByShieldType = 4,
     name               = "Light Cannon",
     range              = 3000,
-    reloadtime         = 15,
+    reloadtime         = 0.5,
     weaponType		   = "Cannon",
     soundHit           = "nukeartyhit.wav",
     soundStart         = "nukeartyshot.wav",

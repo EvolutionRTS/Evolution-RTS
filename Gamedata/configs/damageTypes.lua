@@ -82,8 +82,8 @@ local damageClasses = {
 		},
 		eallterrmed	= {
 			ARMORED		= 1,
-			LIGHT		= 0.5,
-			BUILDING 	= 0.5,
+			LIGHT		= 0.25,
+			BUILDING 	= 0.25,
 		},	
 		eallterraa	= {
 			ARMORED		= 1,

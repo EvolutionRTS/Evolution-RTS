@@ -115,7 +115,7 @@ local weaponDefs = {
     collideFriendly    = false,
     coreThickness      = 0.6,
 --	cegTag             = "mediumcannonweapon3",
-    duration           = 0.4,
+    duration           = 0.25,
     energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-medium",
     fallOffRate        = 1,
@@ -138,7 +138,7 @@ local weaponDefs = {
     thickness          = 9,
     tolerance          = 1000,
     turret             = true,
-    weaponVelocity     = 750,
+    weaponVelocity     = 1500,
 	customparams = {
 	  damagetype		= "eheavyturret2",  
     }, 
