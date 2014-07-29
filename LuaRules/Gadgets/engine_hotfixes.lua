@@ -29,7 +29,9 @@ if gadgetHandler:IsSyncedCode() then
 			local ux, uy, uz = Spring.GetUnitPosition(uID)
 			local xr, zr
 			if Spring.GetUnitBuildFacing(uID) % 2 == 0 then
-				xr, zr = 5 * uDef.xsize, 5 * uDef.zsize
+ 				xr, zr = 5 * uDef.xsize, 5 * uDef.zsize
+ 			else
+ 				xr, zr = 5 * uDef.zsize, 5 * uDef.xsize
 			end
 		
 			local features = Spring.GetFeaturesInRectangle(ux-xr, uz-zr, ux+xr, uz+zr)
