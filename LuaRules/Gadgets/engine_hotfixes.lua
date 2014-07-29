@@ -25,12 +25,11 @@ if gadgetHandler:IsSyncedCode() then
    
 		local uDef = UnitDefs[uDefID]
 		if uDef.isBuilding or uDef.isFactory then
+			--Spring.Echo("Wheee it spins!")
 			local ux, uy, uz = Spring.GetUnitPosition(uID)
 			local xr, zr
 			if Spring.GetUnitBuildFacing(uID) % 2 == 0 then
-				xr, zr = 4 * uDef.xsize, 4 * uDef.zsize
-			else
-				xr, zr = 4 * uDef.zsize, 4 * uDef.xsize
+				xr, zr = 5 * uDef.xsize, 5 * uDef.zsize
 			end
 		
 			local features = Spring.GetFeaturesInRectangle(ux-xr, uz-zr, ux+xr, uz+zr)

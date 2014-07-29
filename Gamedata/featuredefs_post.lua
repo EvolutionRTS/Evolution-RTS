@@ -27,8 +27,8 @@ if spGetModOptions then
 for name, fd in pairs(FeatureDefs) do
 	if(
 	(
-		tonumber(fd["footprintz"]) <= 2 
-		or tonumber(fd["footprintx"]) <= 2 
+		tonumber(fd["footprintz"]) <= 8 
+		or tonumber(fd["footprintx"]) <= 8 
 		or string.lower(fd["category"]) == "vegitation" 
 		or string.lower(fd["category"]) == "vegetation" 
 	)
@@ -48,7 +48,7 @@ end
 for name, fd in pairs(FeatureDefs) do
 	if fd.name ~= "ammobox" then
 		fd.metal = 0
-		fd.energy = 10
+		fd.energy = 0
 	end
 end
 

@@ -7,10 +7,10 @@ local unitName = "emine"
 
 local unitDef = {
   activateWhenBuilt  = true,
-  blocking			 = false,
+  blocking			 = true,
   buildAngle         = 1024,
   buildCostEnergy    = 0,
-  buildCostMetal     = 45,
+  buildCostMetal     = 5,
   builder            = false,
   buildTime          = 5,
   category           = "BUILDING NOTAIR",
@@ -20,27 +20,26 @@ local unitDef = {
 	cancloak		 = true,
 	cloakCost		 = 0,
 	cloakCostMoving	 = 0,
-	minCloakDistance = 200,
-	decloakOnFire	 = false,
+	minCloakDistance = 0,
+	decloakOnFire	 = true,
 	decloakSpherical = true,
 	initCloaked		 = true,
 	
 -- End Cloaking
   
-  description        = [[Explodes on contact dealing 650 damage to anything caught within it's large blast envelope. Very difficult to detect!
+  description        = [[Anti-Tank Land Mine
+  Explodes on contact dealing 100 damage
   
-  Costs +1 Supply]],
+  Costs 0.15 Energy Upkeep]],
   energyMake         = 0,
   energyStorage      = 0,
-  energyUse          = 0,
-  explodeAs          = "emineboom",
+  energyUse          = 0.25,
+  explodeAs          = "smallExplosionGenericWhite",
   footprintX         = 1,
   footprintZ         = 1,
   iconType           = "mine",
   idleAutoHeal       = .5,
   idleTime           = 2200,
-  kamikaze           = true,
-  kamikazeDistance   = 100,
   levelground        = false,
   maxDamage          = 10,
   maxSlope           = 60,
@@ -52,10 +51,10 @@ local unitDef = {
   onoffable          = false,
   radarDistance      = 0,
   repairable		 = false,
-  selfDestructAs     = "emineboom",
+  selfDestructAs     = "smallExplosionGenericWhite",
   selfDestructCountdown = 0,
   side               = "CORE",
-  sightDistance      = 50,
+  sightDistance      = 200,
   smoothAnim         = true,
   sonarDistance      = 0,
   seismicDistance    = 0,
@@ -82,11 +81,16 @@ sfxtypes = {
     },
   },
   
+  weapons = {
+    [1]  = {
+      def                = "emineboom",
+	  onlyTargetCategory = "LIGHT ARMORED",
+    },
+  },
+  
   customParams = {
     needed_cover = 1,
-	supply_cost = 1,
   	death_sounds = "generic",
-	armortype   = "armored",
 	nofriendlyfire	= "1",
 	armortype   = "building",
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
@@ -102,29 +106,40 @@ sfxtypes = {
 }
 
 --------------------------------------------------------------------------------
+local weapon1Damage = 100
 
 local weaponDefs = {
   emineboom = {
    name="Land Mine",
-   weaponType		   = "Cannon",
-   ballistic=1,
+    avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
+	coreThickness      = 0.3,
+	thickness          = 6,
+    tolerance          = 1000,
+   weaponType		   = "LaserCannon",
    turret=1,
    impulseFactor      = 0,
    edgeeffectiveness	= 1,
-   range=100,
-   reloadtime=3.6,
-   weaponvelocity=1000,
-   AreaOfEffect=350,
-   soundhit="minedetonation.wav",
+   energypershot      = weapon1Damage / 20,
+   range=200,
+   reloadtime=15,
+   rgbColor           = "0.5 0.8 1",
+   rgbColor2          = "1 1 1",
+   texture1           = "shot",
+   texture2           = "empty",
+   weaponvelocity=2500,
+   AreaOfEffect=15,
    soundstart="minedetonation.wav",
-   explosiongenerator="custom:genericshellexplosion-large-white",
+   explosiongenerator="custom:genericshellexplosion-small-white",
    customparams = {
 	  damagetype		= "emine",
 	  nofriendlyfire	= "true", 
     },  
 
     damage = {
-      default            = 650,
+      default           = weapon1Damage,
     },
   },
 }

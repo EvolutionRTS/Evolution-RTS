@@ -3,9 +3,8 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece base, spinner; // these are the pieces of the model
 
-static-var CanFire;
+piece base, spinner; // these are the pieces of the model
 
 // Signal definitions
 #define SIG_AIM 2 // this is a aim define <- o_O This is a kill flag
@@ -14,31 +13,8 @@ static-var CanFire;
 // Custom SFX
 #define GDMARTY 1024+0
 
-SmokeUnit()// this is a standard smoke point define
-{
-	var healthpercent, sleeptime, smoketype;
-	while( TRUE )
-	{
-		healthpercent = get HEALTH;
-		if( healthpercent < 66 )
-		{
-			smoketype = SFXTYPE_BLACKSMOKE;
-			if( Rand( 1, 66 ) < healthpercent )
-				smoketype = SFXTYPE_WHITESMOKE;
-			emit-sfx 1026 from base;
-		}
-		sleeptime = healthpercent * 50;
-		if( sleeptime < 200 )
-			sleeptime = 200;
-		sleep sleeptime;
-	}
-}
-
 Create() // tells it what to do on creation
 {
-	while( get BUILD_PERCENT_LEFT )
-		sleep 400;
-	start-script SmokeUnit();
 	spin spinner around y-axis speed <20>;  
 }
 
@@ -63,7 +39,7 @@ AimFromWeapon1(piecenum) // where it aims the weapon from
 QueryWeapon1(piecenum) // where the shot is created at
 {
 
-     	piecenum=spinner;     
+  	piecenum=spinner;     
 	
 }
 
