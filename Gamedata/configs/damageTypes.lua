@@ -212,7 +212,7 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
-		eminelight	= {
+		emine	= {
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0,
