@@ -50,6 +50,7 @@ if gadgetHandler:IsSyncedCode() then
 		end
 	end
 	
+	--Remove damage hardcoded in the engine of gibbed pieces of units (hardcoded to 50 damage in engine)
 	function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, projectileID, attackerID, attackerDefID, attackerTeam)
 		if weaponDefID == -1 then
 			return 0
