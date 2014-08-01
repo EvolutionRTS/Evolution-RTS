@@ -35,13 +35,12 @@ Light
 
 Requires +8 Power
 Uses +8 Supply]],
-  energyMake         = 0.5,
+  energyMake         = 0,
   energyStorage      = 0,
-  energyUse          = 0.5,
+  energyUse          = 0,
   explodeAs          = "mediumExplosionGeneric",
   footprintX         = 3,
   footprintZ         = 3,
-  highTrajectory     = 2,
   iconType           = "assault",
   idleAutoHeal       = .5,
   idleTime           = 2200,
@@ -97,6 +96,10 @@ Uses +8 Supply]],
       def                = "Artilleryweapon",
       onlyTargetCategory = "BUILDING",
     },
+    [2]  = {
+      def                = "SaturationArtilleryweapon",
+      onlyTargetCategory = "BUILDING",
+    },
   },
   customParams = {
 	canareaattack="1",
@@ -116,6 +119,7 @@ Uses +8 Supply]],
 
 --------------------------------------------------------------------------------
 local weapon1Damage = 200
+local weapon2Damage = 20
 
 local weaponDefs = {
   Artilleryweapon = {
@@ -129,13 +133,12 @@ local weaponDefs = {
     ballistic          = true,
     cegTag             = "artyshot2",
 	avoidNeutral	   = false,
-    explosionGenerator = "custom:genericshellexplosion-large",
+    explosionGenerator = "custom:genericshellexplosion-medium",
 	energypershot      = weapon1Damage / 20,
-    id                 = 59,
     impulse            = "0",
     impulseFactor      = 0,
     interceptedByShieldType = 4,
-    minbarrelangle     = "-25",
+    highTrajectory	   = 0,
     name               = "Plasma Cannon",
     range              = 1500,
     reloadtime         = 5,
@@ -155,6 +158,45 @@ local weaponDefs = {
       default           = weapon1Damage,
      },
   },
+  
+  SaturationArtilleryweapon = {
+    badTargetCategory = [[ARMORED LIGHT]],
+    accuracy           = 750,
+    AreaOfEffect       = 250,
+	avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
+    ballistic          = true,
+    cegTag             = "artyshot2",
+	avoidNeutral	   = false,
+    explosionGenerator = "custom:genericshellexplosion-large",
+	energypershot      = weapon2Damage / 20,
+	edgeEffectiveness  = 1,
+    impulse            = "0",
+    impulseFactor      = 0,
+    interceptedByShieldType = 4,
+    highTrajectory	   = 1,
+    name               = "Plasma Cannon",
+    range              = 1500,
+    reloadtime         = 0.5,
+    weaponType		   = "Cannon",
+    soundHit           = "artyhit.wav",
+    soundStart         = "arty2.wav",
+    startsmoke         = "1",
+    turret             = true,
+    weaponVelocity     = 500,
+	customparams = {
+	  damagetype		= "eartytank", 
+
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",	  
+    },  
+    damage = {
+      default           = weapon2Damage,
+     },
+  },
+  
 }
 unitDef.weaponDefs = weaponDefs
 

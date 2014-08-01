@@ -28,12 +28,12 @@ local unitDef = {
 -- End Cloaking
   
   description        = [[Anti-Tank Land Mine
-  Explodes on contact dealing 100 damage
+  Fires a projectile dealing 200 damage
   
   Costs 0.15 Energy Upkeep]],
   energyMake         = 0,
   energyStorage      = 0,
-  energyUse          = 0.25,
+  energyUse          = 0.15,
   explodeAs          = "smallExplosionGenericWhite",
   footprintX         = 1,
   footprintZ         = 1,
@@ -106,7 +106,7 @@ sfxtypes = {
 }
 
 --------------------------------------------------------------------------------
-local weapon1Damage = 100
+local weapon1Damage = 200
 
 local weaponDefs = {
   emineboom = {

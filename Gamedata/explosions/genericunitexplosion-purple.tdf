@@ -24,6 +24,44 @@
          count=2;
    }
 
+   [unitpoofs]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 1.0 1.0 0.04	0.11 0 0.29 0.01	0.1 0.1 0.1 0.01;
+
+	  pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+      emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.2;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 8;
+      particleSpeed     = 16; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 1;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+   
    [centerflare]
    {
    class=heatcloud;
@@ -206,6 +244,44 @@
          count=2;
    }
 
+   [unitpoofs]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 1.0 1.0 0.04	0.11 0 0.29 0.01	0.1 0.1 0.1 0.01;
+
+	  pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+      emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.2;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 8;
+      particleSpeed     = 16; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 1;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+   
    [centerflare]
    {
    class=heatcloud;
@@ -388,6 +464,44 @@
          count=2;
    }
 
+   [unitpoofs]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 1.0 1.0 0.04	0.11 0 0.29 0.01	0.1 0.1 0.1 0.01;
+
+	  pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+      emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.2;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 8;
+      particleSpeed     = 16; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 1;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+   
    [centerflare]
    {
    class=heatcloud;
@@ -570,6 +684,44 @@
          count=2;
    }
 
+   [unitpoofs]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+	  alwaysVisible=1;
+      Texture=randdots;
+
+      colorMap = 1.0 1.0 1.0 0.04	0.11 0 0.29 0.01	0.1 0.1 0.1 0.01;
+
+	  pos      = 0, 2, 0;
+      gravity     = 0, 0.05, 0;
+      emitVector  = 0, 1, 0;
+      emitRot     = 45;
+      emitRotSpread  = 32;
+
+      sizeGrowth  = 0.8;
+      sizeMod     = 1; //when adjusting the size of the spikes, adjust this up and down
+
+      airdrag        = 0.2;
+      particleLife      = 5;
+      particleLifeSpread   = 16;
+      numParticles      = 8;
+      particleSpeed     = 16; //when adjusting the distance that the spikes travel, adjust this up and down
+      particleSpeedSpread  = 1;
+      particleSize      = 20;
+      particleSizeSpread   = 0;
+
+      directional    = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+   
    [centerflare]
    {
    class=heatcloud;

@@ -8,7 +8,7 @@ piece base, turret, barrel1, firepoint1, dirt; // these are the pieces of the mo
 
 #include "ROCKUNIT.H"
 
-static-var gun_1, terraintype, bmoving, moving; // these are the variables 
+static-var gun_1, terraintype, bmoving, moving, WeaponTypeSelect; // these are the variables 
 
 // Signal definitions 
 #define SIG_AIM 2 // this is a aim define 
@@ -101,12 +101,18 @@ StopMoving()
         moving=0; 
 }
 
+WeaponType(select)
+{
+	WeaponTypeSelect = select;
+}
+
 Create() // tells it what to do on creation 
 {
 		start-script Thrust();
         start-script setSFXoccupy(); 
         start-script EmitWakes(); 
-start-script SmokeUnit(); 
+		start-script SmokeUnit(); 
+        WeaponTypeSelect = 1;
 } 
 
 RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
@@ -117,7 +123,8 @@ turn barrel1 to x-axis <0> speed <30>;
 } 
 
 AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
-{ 
+{
+if(!WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0); 
 signal SIG_AIM; 
 set-signal-mask SIG_AIM; 
 turn turret to y-axis heading speed <225>;
@@ -133,6 +140,14 @@ FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets
 emit-sfx 1024 + 0 from firepoint1;
 } 
 
+BlockShot1(unit, block)
+{
+	if (!WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
 AimFromWeapon1(piecenum) // where it aims the weapon from 
 { 
 piecenum = turret; 
@@ -141,6 +156,42 @@ piecenum = turret;
 QueryWeapon1(piecenum) // where the shot is called from 
 { 
 piecenum = firepoint1;  
+} 
+
+
+AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+if(WeaponTypeSelect OR (get WEAPON_RELOADSTATE(2) > get GAME_FRAME)) return (0);
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+turn turret to y-axis heading speed <225>;
+turn barrel1 to x-axis <0> - pitch speed <150>; 
+wait-for-turn turret around y-axis;
+wait-for-turn barrel1 around x-axis;  
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
+
+FireWeapon2() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+} 
+
+BlockShot2(unit, block)
+{
+	if (WeaponTypeSelect)
+	{
+		block = 1;
+	}
+}
+
+AimFromWeapon2(piecenum) // where it aims the weapon from 
+{ 
+piecenum = turret; 
+} 
+
+QueryWeapon2(piecenum) // where the shot is called from 
+{ 
+	piecenum=firepoint1;
 } 
 
 
