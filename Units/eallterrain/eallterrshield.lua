@@ -42,7 +42,8 @@ local unitDef = {
   
   description        = [[Shield Emitter
 Light
-Shield absorbs 1000 damage
+Shield recharges at a rate of 20hp/s
+Maximum shield power is 1000hp
 Shield can link with other shield units to increase charging and capacity
 Generates a Cloaking Field
 
@@ -123,7 +124,7 @@ Requires +5 Power
 
 
 --------------------------------------------------------------------------------
-local shield1PowerRegen = 10
+local shield1PowerRegen = 15
 
 local weaponDefs = {
   allterrshield = {

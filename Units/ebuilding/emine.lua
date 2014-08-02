@@ -30,10 +30,10 @@ local unitDef = {
   description        = [[Anti-Tank Land Mine
   Fires a projectile dealing 200 damage
   
-  Costs 0.15 Energy Upkeep]],
+  Costs 0.25 Energy Upkeep]],
   energyMake         = 0,
   energyStorage      = 0,
-  energyUse          = 0.15,
+  energyUse          = 0.25,
   explodeAs          = "smallExplosionGenericWhite",
   footprintX         = 1,
   footprintZ         = 1,
@@ -130,9 +130,9 @@ local weaponDefs = {
    texture1           = "shot",
    texture2           = "empty",
    weaponvelocity=2500,
-   AreaOfEffect=15,
+   AreaOfEffect=5,
    soundstart="minedetonation.wav",
-   explosiongenerator="custom:genericshellexplosion-small-white",
+   explosiongenerator="custom:genericshellexplosion-small-purple",
    customparams = {
 	  damagetype		= "emine",
 	  nofriendlyfire	= "true", 
