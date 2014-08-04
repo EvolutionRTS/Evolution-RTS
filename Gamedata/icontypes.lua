@@ -45,6 +45,12 @@ local icontypes = {
     radiusadjust=3,
   },
   
+  etransport = {
+    bitmap='icons/support.png',
+    size=6,
+    radiusadjust=3,
+  },
+  
   commander = {
     bitmap='icons/commander.png',
     size=3,
@@ -211,7 +217,6 @@ local icontypes = {
     size=1,
     radiusadjust=3,
   },
-
 }
 
 --------------------------------------------------------------------------------
