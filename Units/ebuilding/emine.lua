@@ -18,9 +18,9 @@ local unitDef = {
 -- Cloaking
 
 	cancloak		 = true,
-	cloakCost		 = 0,
+	cloakCost		 = 0.25,
 	cloakCostMoving	 = 0,
-	minCloakDistance = 0,
+	minCloakDistance = 100,
 	decloakOnFire	 = true,
 	decloakSpherical = true,
 	initCloaked		 = true,
@@ -33,7 +33,7 @@ local unitDef = {
   Costs 0.25 Energy Upkeep]],
   energyMake         = 0,
   energyStorage      = 0,
-  energyUse          = 0.25,
+  energyUse          = 0,
   explodeAs          = "smallExplosionGenericWhite",
   footprintX         = 1,
   footprintZ         = 1,
