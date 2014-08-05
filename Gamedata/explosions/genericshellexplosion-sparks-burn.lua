@@ -47,7 +47,7 @@ return {
         pos                = [[0, 1, 0]],
         sizegrowth         = 0.5,
         sizemod            = 0.7,
-        texture            = [[randdots]],
+        texture            = [[randomdots]],
       },
     },
     kickedupwater = {
@@ -178,7 +178,7 @@ return {
         pos                = [[0, 1, 0]],
         sizegrowth         = 0.5,
         sizemod            = 0.7,
-        texture            = [[randdots]],
+        texture            = [[randomdots]],
       },
     },
     kickedupwater = {
@@ -309,7 +309,7 @@ return {
         pos                = [[0, 1, 0]],
         sizegrowth         = 0.7,
         sizemod            = 0.7,
-        texture            = [[randdots]],
+        texture            = [[randomdots]],
       },
     },
     kickedupwater = {

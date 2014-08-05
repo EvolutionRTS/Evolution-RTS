@@ -57,7 +57,7 @@ return {
       water              = true,
       properties = {
         delay              = [[10 r200]],
-        explosiongenerator = [[custom:LIGHTNINGPLOSION_STORMBOLT]],
+        explosiongenerator = [[custom:lightning_stormbolt]],
         pos                = [[-100 r300, 1, -100 r300]],
       },
     },

@@ -26,7 +26,7 @@ return {
         pos                = [[r-1 r1, 1, r-1 r1]],
         sizegrowth         = 1.1,
         sizemod            = 1.0,
-        texture            = [[randdots]],
+        texture            = [[randomdots]],
         useairlos          = true,
       },
     },

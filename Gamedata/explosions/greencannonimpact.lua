@@ -68,7 +68,7 @@ return {
         pos                = [[0, 2, 0]],
         sizegrowth         = 0.8,
         sizemod            = 1.0,
-        texture            = [[randdots]],
+        texture            = [[randomdots]],
         useairlos          = false,
       },
     },
