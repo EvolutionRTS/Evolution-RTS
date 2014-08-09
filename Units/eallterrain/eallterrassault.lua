@@ -40,10 +40,12 @@ local unitDef = {
 	
 -- End Cloaking
   
-  description        =[[Armored Dedicated Anti-Base Tank
+  description        =[[Anti-Base Siege Tank
 Armored
 400 Damage vs Buildings
 50 Damage vs Light/Armored
+
+Takes 50% less damage from Defensive turrets
 
 This unit can only fire at buildings!
 
@@ -63,7 +65,6 @@ Uses +10 Supply]],
   maxDamage          = 2000,
   maxVelocity        = 2.8,
   maxReverseVelocity = 1,
-  turninplacespeedlimit = 2.5,
   maxWaterDepth      = 10,
   metalStorage       = 0,
   movementClass      = "ALLTERRTANK6",
@@ -115,7 +116,7 @@ Uses +10 Supply]],
     needed_cover = 4,
    	death_sounds = "generic",
     RequireTech = "10 Power",
-	armortype   = "armored",
+	armortype   = "siege",
 	nofriendlyfire	= "1",
 	supply_cost = 10,
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
@@ -174,6 +175,53 @@ local weaponDefs = {
       default           = weapon1Damage,
     },
   },
+  
+  assaulttankcannonbeam = {
+    badTargetCategory = [[ARMORED LIGHT]],
+    AreaOfEffect       = 1,
+    avoidFriendly      = false,
+    avoidFeature       = false,
+	collideFriendly    = false,
+    collideFeature     = false,
+    beamTime           = 4,
+    beamWeapon         = true,
+    coreThickness      = 0.6,
+--	cegTag             = "mediumcannonweapon3",
+    duration           = 0.2,
+    energypershot      = weapon1Damage / 20,
+    explosionGenerator = "custom:genericshellexplosion-large-purple",
+    fallOffRate        = 1,
+    fireStarter        = 100,
+	impulseFactor      = 0,
+	interceptedByShieldType = 4,
+    lineOfSight        = true,
+    minintensity       = "1",
+    name               = "Laser",
+    range              = 750,
+    reloadtime         = 10,
+    WeaponType         = "BeamLaser",
+    rgbColor           = "0.5 0 1",
+    rgbColor2          = "1 1 1",
+    soundTrigger       = true,
+    soundstart         = "allterrassaultshot.wav",
+--    soundHit           = "assaultshothit.wav",
+    texture1           = "shot",
+    texture2           = "empty",
+    thickness          = 9,
+    tolerance          = 1000,
+    turret             = true,
+    weaponVelocity     = 800,
+	customparams = {
+	  damagetype		= "eallterrassault",  
+	  
+	  --Upgrades--
+	  upgradeClass		= "groundweapons",
+    }, 
+    damage = {
+      default           = weapon1Damage,
+    },
+  },
+  
 }
 unitDef.weaponDefs = weaponDefs
 

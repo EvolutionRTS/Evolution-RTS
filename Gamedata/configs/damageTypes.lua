@@ -5,6 +5,7 @@ local damageClasses = {
 	-- classes with armor classes for weapons
 	damageTypes = {
 		nonexistent	= {
+			SIEGE		= 0.1,
 			ARMORED		= 0.1,
 			LIGHT		= 0.1,
 			BUILDING 	= 0.1,
@@ -13,56 +14,67 @@ local damageClasses = {
 			
 		-- Start Hovers
 		eaatank	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.66,
 			BUILDING 	= 0.66,
 		},
 		eartytank	= {
+			SIEGE		= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		ebomb	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		efatso	= {
+			SIEGE		= 0.125,
 			ARMORED		= 0.125,
 			LIGHT		= 0.125,
 			BUILDING 	= 1,
 		},
 		eflametank	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		elighttank3	= {
+			SIEGE		= 0.75,
 			ARMORED		= 0.75,
 			LIGHT		= 0.75,
 			BUILDING 	= 1,
 		},
 		eheavytank3	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.33,
 		},
 		emediumtank3	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},
 		emissiletank	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},	
 		eriottank2	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},		
 		eriottank2shotgun	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
@@ -71,36 +83,43 @@ local damageClasses = {
 			
 		-- Start All Terrains
 		eallterrheavy	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eallterrlight	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eallterrmed	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.25,
 			BUILDING 	= 0.25,
 		},	
 		eallterraa	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.66,
 			BUILDING 	= 0.66,
 		},
 		eallterrriot	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eallterrriotshotgun	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},
 		eallterrassault	= {
+			SIEGE		= 0.125,
 			ARMORED		= 0.125,
 			LIGHT		= 0.125,
 			BUILDING 	= 1,
@@ -109,36 +128,43 @@ local damageClasses = {
 			
 		-- Start Amphibs
 		eamphibbuggy	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibriot	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibriotshotgun	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},
 		eamphibaa	= {
+			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibmedtank	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibrock	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},
 		eamphibarty	= {
+			SIEGE		= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
@@ -147,21 +173,25 @@ local damageClasses = {
 			
 		-- Start Aircraft
 		edrone	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		efighter	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},
 		egunship2	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},	
 		ebomber	= {
+			SIEGE		= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
@@ -170,16 +200,19 @@ local damageClasses = {
 			
 		-- Start Experimentals
 		eexkrabgroth	= {
+			SIEGE		= 0.1,
 			ARMORED		= 0.1,
 			LIGHT		= 0.1,
 			BUILDING 	= 1,
 		},	
 		eextankdestroyer	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
-			eexnukearty	= {
+		eexnukearty	= {
+			SIEGE		= 0.5,			
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
 			BUILDING 	= 1,
@@ -188,31 +221,37 @@ local damageClasses = {
 			
 		-- Start Buildings
 		elightturret2	= {
+			SIEGE		= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		eheavyturret2	= {
+			SIEGE		= 0.5,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.1,
 		},
 		eaaturret	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.66,
 			BUILDING 	= 0.66,
 		},
 		elrpc	= {
+			SIEGE		= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		euwturret	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		emine	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0,
@@ -221,16 +260,19 @@ local damageClasses = {
 			
 		-- Start Miscellaneous
 		queenbeam	= {
+			SIEGE		= 0.1,
 			ARMORED		= 0.1,
 			LIGHT		= 0.1,
 			BUILDING 	= 1,
 		},	
 		queenflames	= {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},	
 		queencannon = {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
@@ -238,6 +280,7 @@ local damageClasses = {
 			
 			-- End Miscellaneous
 		default = {
+			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -247,6 +290,7 @@ local damageClasses = {
 	armorDefs = {
 		"LIGHT", 
 		"ARMORED",
+		"SIEGE",
 		"BUILDING", 
 	},
 } 

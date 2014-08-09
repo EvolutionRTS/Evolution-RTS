@@ -39,6 +39,8 @@ Secondary Cannons:
 80 Damage vs Building
 8 Damage vs Light/Armored
 
+This unit can only attack buildings!
+
 Requires +25 Power
 Uses +25 Supply]],
   energyMake         = 0,

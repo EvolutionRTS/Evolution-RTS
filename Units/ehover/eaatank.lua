@@ -124,6 +124,7 @@ Uses +5 Supply]],
 --------------------------------------------------------------------------------
 
 local weapon1Damage = 105
+local burstProjectiles = 4
 
 local weaponDefs = {
   eaatankantiairmissile = {
@@ -132,13 +133,13 @@ local weaponDefs = {
     avoidFeature       = false,
 	collideFriendly    = false,
     collideFeature     = false,
-	burst				= 4,
+	burst				= burstProjectiles,
 	burstrate			= 0.5,
 	cegTag             = "missiletrailaa",
 	canAttackGround    = false,
 	edgeEffectiveness  = 0.5,
     explosionGenerator = "custom:BulletImpact3",
-	energypershot      = weapon1Damage / 20,
+	energypershot      = weapon1Damage / 20 * burstProjectiles,
     fireStarter        = 80,
     impulseFactor      = 0,
 	interceptedByShieldType = 4,

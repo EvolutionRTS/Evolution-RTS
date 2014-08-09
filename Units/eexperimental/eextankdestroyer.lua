@@ -38,6 +38,8 @@ Secondary Machinegun:
 120 Damage/s vs Light/Armored
 12 Damage/s vs Building
 
+This unit can only attack other mobile units!
+
 Requires +30 Power]],
   energyMake         = 0,
   energyStorage      = 0,
@@ -98,7 +100,7 @@ Requires +30 Power]],
     },
 	[2]  = {
       def                = "machinegun",
-	  badTargetCategory  = "LIGHT ARMORED",
+	  onlyTargetCategory  = "LIGHT ARMORED",
     },
   },
    customParams = {

@@ -121,7 +121,7 @@ Uses +4 Supply]],
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage = 28
+local weapon1Damage = 14
 
 local weaponDefs = {
   medtankbeamlaser = {
@@ -130,11 +130,11 @@ local weaponDefs = {
     AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
-    beamTime           = 0.2,
+    beamTime           = 0.1,
     collideFeature     = false,
     collideFriendly    = false,
     coreThickness      = 0.5,
-    duration           = 0.2,
+    duration           = 0.1,
     energypershot      = weapon1Damage / 20,
     explosionGenerator = "custom:genericshellexplosion-medium-sparks-burn",
     fallOffRate        = 1,
@@ -148,7 +148,7 @@ local weaponDefs = {
     minintensity       = 1,
     name               = "Laser",
     range              = 550,
-    reloadtime         = 0.2,
+    reloadtime         = 0.1,
     WeaponType         = "BeamLaser",
     rgbColor           = "0 0.5 0",
     rgbColor2          = "0.8 0.8 0.8",

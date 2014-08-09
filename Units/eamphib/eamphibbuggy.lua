@@ -119,7 +119,7 @@ Uses +1 Supply]],
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage = 32
+local weapon1Damage = 16
 
 local weaponDefs = {
   lightbeamlaser = {
@@ -128,12 +128,12 @@ local weaponDefs = {
     AreaOfEffect       = 1,
     avoidFeature       = false,
     avoidFriendly      = false,
-    beamTime           = 0.2,
+    beamTime           = 0.1,
     beamlaser          = true,
     collideFeature     = false,
     collideFriendly    = false,
     coreThickness      = 0.2,
-    duration           = 0.2,
+    duration           = 0.1,
     explosionGenerator = "custom:genericshellexplosion-small-sparks-burn",
 	energypershot      = weapon1Damage / 20,
     fallOffRate        = 1,
@@ -147,7 +147,7 @@ local weaponDefs = {
     minintensity       = 1,
     name               = "Laser",
     range              = 300,
-    reloadtime         = 0.2,
+    reloadtime         = 0.1,
     WeaponType         = "BeamLaser",
     rgbColor           = "0.5 0 0",
     rgbColor2          = "0.8 0.8 0.8",
