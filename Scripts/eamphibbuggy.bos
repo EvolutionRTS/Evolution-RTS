@@ -98,8 +98,8 @@ AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to d
 */
 signal SIG_AIM; 
 set-signal-mask SIG_AIM; 
-turn turret to y-axis heading speed <1000>; 
-turn barrel1 to x-axis <0> - pitch speed <1000>;  
+turn turret to y-axis heading speed <5000>; 
+turn barrel1 to x-axis <0> - pitch speed <5000>;  
 wait-for-turn turret around y-axis;
 wait-for-turn barrel1 around x-axis;  
 start-script RestoreAfterDelay(); 
@@ -131,8 +131,8 @@ AimWeapon2(heading, pitch) // single weapon with 2 fires this tell sit what to d
 
 signal SIG_AIM_2; 
 set-signal-mask SIG_AIM_2; 
-turn turret to y-axis heading speed <500>; 
-turn barrel1 to x-axis <0> - pitch speed <300>;  
+turn turret to y-axis heading speed <5000>; 
+turn barrel1 to x-axis <0> - pitch speed <5000>;  
 wait-for-turn turret around y-axis;
 wait-for-turn barrel1 around x-axis;  
 start-script RestoreAfterDelay(); 

@@ -119,7 +119,7 @@ Uses +7 Supply]],
 	normalstex = "unittextures/lego2skin_explorernormal.dds", 
 	 buckettex = "unittextures/lego2skin_explorerbucket.dds",
 	factionname	= "outer_colonies",  
-	helptext	= [[The Droplet is a medium range missile artillery battery. It does the most damage to armored units. It's damage is lower than a light tank destroyer, but it's large area of effect makes up for anything it lacks in damage.]],
+	helptext	= [[]],
   },
 }
 

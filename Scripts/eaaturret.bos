@@ -93,8 +93,8 @@ AimWeapon1(heading, pitch) // aiming animation and firing authorization
 	set-signal-mask SIG_AIM;
 	while(!CanFire)
 		sleep 200;
-	turn turret to y-axis heading speed <500>;
-	turn barrel1 to x-axis <0> - pitch speed <300>;
+	turn turret to y-axis heading speed <5000>;
+	turn barrel1 to x-axis <0> - pitch speed <5000>;
 	wait-for-turn turret around y-axis;
 	wait-for-turn barrel1 around x-axis;
 	start-script RestoreAfterDelay();
