@@ -29,7 +29,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Scout/Raider
 Light
-160 Damage/s vs Light
+135 Damage/s vs Light
 80 Damages/s vs Armored/Building
 	• Can fire while underwater
 
@@ -120,7 +120,7 @@ Uses +1 Supply]],
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage = 16
+local weapon1Damage = 13.5
 
 local weaponDefs = {
   lightbeamlaser = {

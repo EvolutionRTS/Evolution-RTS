@@ -29,7 +29,7 @@ local unitDef = {
   corpse             = "ammobox",
   description        = [[Tank Destroyer
 Light
-140 Damage vs Light/Armored
+125 Damage vs Light/Armored
 70 Damage vs Building
 
 	• Can fire while underwater
@@ -121,7 +121,7 @@ Uses +4 Supply]],
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage = 14
+local weapon1Damage = 12.5
 
 local weaponDefs = {
   medtankbeamlaser = {
