@@ -90,7 +90,7 @@ local unitDef                     = {
 
 		10s Reload Time]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 10,
 	BuildingGroundDecalSizeY      = 10,

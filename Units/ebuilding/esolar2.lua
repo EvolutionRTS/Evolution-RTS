@@ -96,7 +96,7 @@ local unitDef                     = {
 
 		+400 Power Radius]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 6,
 	BuildingGroundDecalSizeY      = 6,

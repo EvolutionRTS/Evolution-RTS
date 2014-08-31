@@ -67,7 +67,7 @@ local unitDef                     = {
 		armortype                 = "building",
 		normalstex                = "unittextures/ejammer2normal.png", 
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 6,
 	BuildingGroundDecalSizeY      = 6,

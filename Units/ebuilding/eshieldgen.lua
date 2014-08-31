@@ -87,7 +87,7 @@ local unitDef                     = {
 		normalstex                = "unittextures/eshieldgennormal.png", 
 		helptext                  = [[Anti-Nuke Platform / Anti-Artillery base shield Facility]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 7,
 	BuildingGroundDecalSizeY      = 7,

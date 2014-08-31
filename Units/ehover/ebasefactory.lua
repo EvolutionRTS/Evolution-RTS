@@ -97,7 +97,7 @@ local unitDef                     = {
 		factionname	              = "outer_colonies",   
 		helptext                  = [[The hovertank factory is the most robust of all the technology avenues in Evolution RTS. Unlike their amphibious and all-terrain counterparts, the Hover Factory does not possess any innate traits, but the larger selection of units makes up for the lack of innate abilities.]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 26,
 	BuildingGroundDecalSizeY      = 26,

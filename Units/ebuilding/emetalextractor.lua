@@ -79,7 +79,7 @@ local unitDef                     = {
 
 		+1 Metal]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 9,
 	BuildingGroundDecalSizeY      = 9,

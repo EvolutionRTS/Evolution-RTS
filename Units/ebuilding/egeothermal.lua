@@ -96,7 +96,7 @@ local unitDef                     = {
 
 		Can only be built upon a geothermal vent]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 6,
 	BuildingGroundDecalSizeY      = 6,

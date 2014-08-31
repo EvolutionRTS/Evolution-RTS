@@ -58,7 +58,7 @@ local unitDef                      = {
 	yardMap                        = "ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo",
 	--  usePieceCollisionVolumes   = true,
 
-	useBuildingGroundDecal         = true,
+	useGroundDecal                 = true,
 	BuildingGroundDecalType        = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX       = 18,
 	BuildingGroundDecalSizeY       = 18,

@@ -72,7 +72,7 @@ local unitDef                     = {
 		factionname	              = "outer_colonies",  
 		helptext                  = [[]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 8,
 	BuildingGroundDecalSizeY      = 8,

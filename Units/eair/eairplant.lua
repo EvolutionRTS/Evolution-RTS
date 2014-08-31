@@ -97,7 +97,7 @@ local unitDef                         = {
 		--	groundtexselectxsize      = 1500, -- optional
 		--    groundtexselectzsize    = 1500, -- optional
 	},
-	--  useBuildingGroundDecal        = true,
+	--  useGroundDecal                = true,
 	--  BuildingGroundDecalType       = "factorygroundplate.dds",
 	--  BuildingGroundDecalSizeX      = 20,
 	--  BuildingGroundDecalSizeY      = 20,

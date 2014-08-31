@@ -80,7 +80,7 @@ local unitDef                     = {
 
 		Creates metal from stored energy. Drains -5 energy per +0.5 metal generated]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 12,
 	BuildingGroundDecalSizeY      = 12,

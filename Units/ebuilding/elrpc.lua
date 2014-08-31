@@ -89,7 +89,7 @@ local unitDef                     = {
 		normalstex                = "unittextures/elrpcnormal.png", 
 		helptext                  = [[]],
 	},
-	useBuildingGroundDecal        = true,
+	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 10,
 	BuildingGroundDecalSizeY      = 10,
