@@ -72,40 +72,42 @@ if (gadgetHandler:IsSyncedCode()) then
         local y   = Spring.GetGroundHeight(0,0);
         Spring.LevelHeightMap(x-50,z-50,x+50,z+50,y);
 
-        local uid = Spring.CreateUnit(cunit.defname,x,y,z,"south",cunit.team);
-        units[#units+1] = {id=uid,defname=cunit.defname,frame=n+cunit.time};
-        curTeam = cunit.team;
+        local uid = Spring.CreateUnit(cunit.defname,x,y,z,"south", 0);	-- FIXME needs to be a non-gaia team if gaia doesn't have its unitlimit assigned
+        if uid then
+			units[#units+1] = {id=uid,defname=cunit.defname,frame=n+cunit.time};
+			curTeam = cunit.team;
 
-        Spring.SetUnitNeutral(uid,true);
-        Spring.GiveOrderToUnit(uid,CMD.FIRE_STATE,{0},{});
-        Spring.GiveOrderToUnit(uid,CMD.STOP,{},{});
+			Spring.SetUnitNeutral(uid,true);
+			Spring.GiveOrderToUnit(uid,CMD.FIRE_STATE,{0},{});
+			Spring.GiveOrderToUnit(uid,CMD.STOP,{},{});
 
-		local env = Spring.UnitScript.GetScriptEnv(uid)
-		if env then lus = true end
-		
-		if lus then
-			if env.Activate then Spring.UnitScript.CallAsUnit(uid, env.Activate) end
-        else Spring.CallCOBScript(uid,"Activate",0) end
+			local env = Spring.UnitScript.GetScriptEnv(uid)
+			if env then lus = true end
+			
+			if lus then
+				if env.Activate then Spring.UnitScript.CallAsUnit(uid, env.Activate) end
+			else Spring.CallCOBScript(uid,"Activate",0) end
 
-        if (cunit.move) then
-		  if lus then
-			if env.StartMoving then Spring.UnitScript.CallAsUnit(uid, env.StartMoving) end
-          else Spring.CallCOBScript(uid,"StartMoving",0) end
-        end;
+			if (cunit.move) then
+			  if lus then
+				if env.StartMoving then Spring.UnitScript.CallAsUnit(uid, env.StartMoving) end
+			  else Spring.CallCOBScript(uid,"StartMoving",0) end
+			end;
 
-        if (cunit.attack and not lus) then
-          local angle = (cunit.shotAngle / 180) * 32768
+			if (cunit.attack and not lus) then
+			  local angle = (cunit.shotAngle / 180) * 32768
 
-          Spring.CallCOBScript(uid,"AimPrimary",0,Spring.GetHeadingFromVector(0,1),angle);
-          Spring.CallCOBScript(uid,"AimWeapon1",0,Spring.GetHeadingFromVector(0,1),angle);
+			  Spring.CallCOBScript(uid,"AimPrimary",0,Spring.GetHeadingFromVector(0,1),angle);
+			  Spring.CallCOBScript(uid,"AimWeapon1",0,Spring.GetHeadingFromVector(0,1),angle);
 
-          Spring.CallCOBScript(uid,"AimSecondary",0,Spring.GetHeadingFromVector(0,1),angle);
-          Spring.CallCOBScript(uid,"AimWeapon2",0,Spring.GetHeadingFromVector(0,1),angle);
+			  Spring.CallCOBScript(uid,"AimSecondary",0,Spring.GetHeadingFromVector(0,1),angle);
+			  Spring.CallCOBScript(uid,"AimWeapon2",0,Spring.GetHeadingFromVector(0,1),angle);
 
-          Spring.CallCOBScript(uid,"AimTertiary",0,Spring.GetHeadingFromVector(0,1),angle);
-          Spring.CallCOBScript(uid,"AimWeapon3",0,Spring.GetHeadingFromVector(0,1),angle);
+			  Spring.CallCOBScript(uid,"AimTertiary",0,Spring.GetHeadingFromVector(0,1),angle);
+			  Spring.CallCOBScript(uid,"AimWeapon3",0,Spring.GetHeadingFromVector(0,1),angle);
 
-        end;
+			end;
+		end
       end;
     end;
     createunits = leftunits;
@@ -121,11 +123,10 @@ if (gadgetHandler:IsSyncedCode()) then
 
   function gadget:RecvLuaMsg(msg, playerID)
     if (msg:find("buildicon",1,true)) then
-		Spring.Echo("Creating unit for animation pose...")
-      --[[if (not Spring.IsCheatingEnabled()) then
+      if (not Spring.IsCheatingEnabled()) then
         Spring.SendMessageToPlayer(playerID, "Cheating must be enabled");
         return true;
-      end;]]
+      end;
 
       local msg     = msg:sub(11,msg:len());
       local d = msg:find(";",d,true);
@@ -274,12 +275,11 @@ local function CreateResources()
       varying vec3 normal;
       varying vec4 pos;
       varying float clamp;
-	  uniform float clampIn;
 
       void main(void) {
         gl_FrontColor = gl_Color;
         gl_TexCoord[0] = gl_MultiTexCoord0;
-        clamp = clampIn;//gl_MultiTexCoord1.x;
+        clamp = gl_MultiTexCoord1.x;
         normal = gl_Normal;
 
         pos = gl_ModelViewMatrix * gl_Vertex;
@@ -308,7 +308,7 @@ local function CreateResources()
     },
   })
 
-  if (not pre_shader) then Spring.Echo(gl.GetShaderLog()) end
+  if (not pre_shader) then Spring.Log(gadget:GetInfo().name, LOG.ERROR, gl.GetShaderLog()) end
 
   post_shader = gl.CreateShader({
     vertex = [[
@@ -424,7 +424,7 @@ local function CreateResources()
     },
   })
 
-  if (not post_shader) then Spring.Echo(gl.GetShaderLog()) end
+  if (not post_shader) then Spring.Log(gadget:GetInfo().name, LOG.ERROR, gl.GetShaderLog()) end
 
   halo_shader = gl.CreateShader({
     vertex = [[
@@ -485,7 +485,7 @@ local function CreateResources()
   })
 
 
-  if (not halo_shader) then Spring.Echo(gl.GetShaderLog()) end
+  if (not halo_shader) then Spring.Log(gadget:GetInfo().name, LOG.ERROR, gl.GetShaderLog()) end
 
   clear_shader = gl.CreateShader({
     fragment = [[
@@ -496,7 +496,7 @@ local function CreateResources()
     ]]
   })
 
-  if (not clear_shader) then Spring.Echo(gl.GetShaderLog()) end
+  if (not clear_shader) then Spring.Log(gadget:GetInfo().name, LOG.ERROR, gl.GetShaderLog()) end
 end
 
 --------------------------------------------------------------------------------
@@ -611,8 +611,7 @@ local function DrawIcon(udid,teamID,uid)
   local midx,midy,midz,radius = GetUnitDefDims(udid);
 
   radius = radius * cfg.zoom;
-  --gl.MultiTexCoord(1, cfg.clamp);
-  gl.Uniform(gl.GetUniformLocation(pre_shader , "clampIn"), cfg.clamp)
+  gl.MultiTexCoord(1, cfg.clamp);
 
   gl.Blending(false);
   gl.DepthTest(true);
@@ -731,11 +730,9 @@ end
 
       gl.Shape(GL.QUADS,elements);
     else
-	  gl.Color(0,0,0,0);
       gl.Texture(background);
       gl.TexRect(-1,-1,1,1);
       gl.Texture(false);
-	  gl.Color(1,1,1);
     end
   end
 
@@ -865,21 +862,23 @@ end
   local function ProcessJobs()
     --//note: we have a LIFO stack
     for i=#jobs,1,-1 do
-		--Spring.Echo("Test banana")
       if (jobs[i]() ~= false) then
-		--Spring.Echo("Test banana 2")
         jobs[i] = nil;
       else
-		--Spring.Echo("Test banana 3")
         break;
       end;
     end;
 
     if (#jobs == 0) then
-      --[[gadget.DrawGenesis = nil;
-      gadgetHandler:UpdateCallIn("DrawGenesis");]]
+      --gadget.DrawGenesis = nil;
+      --gadgetHandler:UpdateCallIn("DrawGenesis");
     end;
   end
+
+
+function gadget:DrawGenesis()
+  ProcessJobs()
+end
 
 
   local function GetFaction(udef_factions)
@@ -951,16 +950,7 @@ end
       gl.Blending(false);
       gl.Texture(false);
 
-      local outfile = (outdir) .."/".. (UnitDefs[udid].name);
-	  if VFS.FileExists(outfile .. imageExt, VFS.RAW) then
-	    local count = 1
-	    while VFS.FileExists(outfile .. "_" .. count .. (imageExt), VFS.RAW) do
-		  count = count + 1
-	    end
-	    outfile = outfile .. "_" .. count
-	  end
-	  outfile = outfile .. imageExt
-	  Spring.Echo("Saving image to " .. outfile)
+      local outfile = (outdir) .."/".. (UnitDefs[udid].name) .. (imageExt);
       --if (VFS.FileExists(outfile, VFS.RAW)) then
       --  os.remove(outfile);
       --end;
@@ -969,7 +959,7 @@ end
     end);
 
     if (not result and not cfg.empty) then
-      Spring.Echo("icongen: ".. (UnitDefs[udid].name) ..": give up :<");
+      Spring.Log(gadget:GetInfo().name, LOG.ERROR, "icongen: ".. (UnitDefs[udid].name) ..": give up :<");
     end;
   end
 
@@ -1021,10 +1011,10 @@ end
 local schemes,resolutions,ratios = {},{},{}
 
   local function BuildIcon(cmd, line, words, playerID)
-    --[[if (not Spring.IsCheatingEnabled()) then
+    if (not Spring.IsCheatingEnabled()) then
       Spring.Echo("Cheating must be enabled");
       return false;
-    end;]]
+    end;
     if (not Spring.GetModUICtrl()) then
       Spring.Echo("ModUICtrl is needed (type /luamoduictrl 1)");
       return false;
@@ -1044,11 +1034,11 @@ local schemes,resolutions,ratios = {},{},{}
     for _,res in pairs(resolutions) do
       for _,_scheme in pairs(schemes) do
         for _ratio_name,_ratio in pairs(ratios) do
-		  Spring.Echo("THIS IS A TEST 1")
+
           AddJob( FreeResources );
---Spring.Echo("THIS IS A TEST 2")
+
           AddJob( WaitForSyncedJobs );
---Spring.Echo("THIS IS A TEST 2")
+
           if (words[1] and words[1]~="all") then
             AddJob( function () AddUnitJob(UnitDefNames[ words[1] ].id); end);
           else
@@ -1056,28 +1046,27 @@ local schemes,resolutions,ratios = {},{},{}
               AddJob( function () AddUnitJob(udid); end);
             end;
           end;
---Spring.Echo("THIS IS A TEST 3")
+
           AddJob( CreateResources );
---Spring.Echo("THIS IS A TEST 4")
+
           AddJob( function ()
             scheme            = _scheme;
             ratio, ratio_name = _ratio, _ratio_name;
             iconX, iconY      = res[1], res[2];
 
             outdir = "buildicons/".. (scheme) .."_".. (ratio_name) .."_".. (iconX) .."x".. (iconY);
-			Spring.Echo(outdir)
             Spring.CreateDir(outdir);
---Spring.Echo("THIS IS A TEST 6")
+
             LoadScheme();
           end );
---Spring.Echo("THIS IS A TEST 5")
+
         end;
       end;
     end;
 
-    --[[gadget.DrawGenesis = ProcessJobs;
-    gadgetHandler:UpdateCallIn("DrawGenesis");
-    gadgetHandler:UpdateCallIn("DrawGenesis"); --stupid bug]]
+    --gadget.DrawGenesis = ProcessJobs;
+    --gadgetHandler:UpdateCallIn("DrawGenesis");
+    --gadgetHandler:UpdateCallIn("DrawGenesis"); --stupid bug
   end
 
 
@@ -1087,9 +1076,9 @@ local schemes,resolutions,ratios = {},{},{}
     local uid,defname = uid,defname;
     jobs[#jobs+1] = function() CreateIcon(UnitDefNames[defname].id,uid) end;
 
-    --[[gadget.DrawGenesis = ProcessJobs;
+    gadget.DrawGenesis = ProcessJobs;
     gadgetHandler:UpdateCallIn("DrawGenesis");
-    gadgetHandler:UpdateCallIn("DrawGenesis"); --stupid bug]]
+    gadgetHandler:UpdateCallIn("DrawGenesis"); --stupid bug
   end
 
   function gadget:Initialize()
@@ -1101,9 +1090,6 @@ local schemes,resolutions,ratios = {},{},{}
     gadgetHandler:AddSyncAction("buildicon_unitcreated", UnitCreated);
   end
 
-  function gadget:DrawGenesis()
-		ProcessJobs()
-	end
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 end

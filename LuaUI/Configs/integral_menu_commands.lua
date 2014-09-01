@@ -52,7 +52,7 @@ local aux = {	--merged into special
 }
 
 local super = {	--merged into special
-	elrpc = {order = 0, row = 2},
+	ecruisesilo = {order = 0, row = 2},
 	esilo = {order = 1, row = 2},
 }
 

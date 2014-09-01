@@ -59,5 +59,4 @@ return {
 	params = {'1', 'Normal', 'Saturation'},
     },
   },
-  
 }

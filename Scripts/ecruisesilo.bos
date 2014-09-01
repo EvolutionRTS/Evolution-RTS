@@ -1,0 +1,85 @@
+#define TA // This is a TA script 
+
+#include "sfxtype.h" 
+#include "exptype.h" 
+
+piece base, pipes, lilypad, firepoint1, sfxpoint1; // these are the pieces of the model  
+
+static-var steaming; // these are the variables
+
+// Signal definitions 
+#define SIG_AIM 2
+
+SmokeUnit()// this is a standard smoke point define
+{
+	var healthpercent, sleeptime, smoketype;
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = SFXTYPE_BLACKSMOKE;
+			if( Rand( 1, 66 ) < healthpercent )
+				smoketype = SFXTYPE_WHITESMOKE;
+			emit-sfx 1024 from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+			sleeptime = 200;
+		sleep sleeptime;
+	}
+}
+
+Steam()
+{
+   while( TRUE )
+   {
+      if (steaming)    
+      {
+              emit-sfx 1025 + 0 from sfxpoint1;
+                }
+        sleep 128;    
+   }
+}
+
+Create() // tells it what to do on creation 
+{
+	start-script SmokeUnit();
+	start-script Steam();
+	steaming=TRUE;
+} 
+
+RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
+{ 
+sleep 3000; 
+} 
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM; 
+set-signal-mask SIG_AIM;
+start-script RestoreAfterDelay(); 
+start-script Steam(); 
+return (1);  
+} 
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{
+} 
+
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = base; 
+} 
+
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint1; 
+} 
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode lilypad type EXPLODE_ON_HIT;
+	explode base type EXPLODE_ON_HIT;
+} 
