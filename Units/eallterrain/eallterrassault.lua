@@ -127,12 +127,15 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 400
+local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	assaulttankcannon            = {
 		badTargetCategory        = [[ARMORED LIGHT]],
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -142,7 +145,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.6,
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.2,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-large-purple",
 		fallOffRate              = 1,
 		fireStarter              = 100,
@@ -178,7 +181,7 @@ local weaponDefs                 = {
 
 	assaulttankcannonbeam        = {
 		badTargetCategory        = [[ARMORED LIGHT]],
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -188,7 +191,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.6,
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.2,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-large-purple",
 		fallOffRate              = 1,
 		fireStarter              = 100,

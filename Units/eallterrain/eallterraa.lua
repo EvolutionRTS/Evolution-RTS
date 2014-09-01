@@ -124,12 +124,15 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 200
+local weapon1AOE				 = 50
 
 local weaponDefs                 = {
 	heavytankweapon              = {
 		badTargetCategory        = [[BUILDING]],
-		AreaOfEffect             = 50,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -139,7 +142,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.5,
 		cegTag                   = "railgun",
 		duration                 = 0.1,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:BulletImpact3",
 		fallOffRate              = 1,
 		fireStarter              = 50,

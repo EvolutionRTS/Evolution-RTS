@@ -18,9 +18,6 @@ local unitDef                     = {
 	description                   = [[Anti-Nuke Platform
 	Anti-Artillery base shield Facility
 
-	Drains -50 Energy while stockpiling Anti-Nuke Ammunition
-	Drains -2.5 Energy while charging shield
-
 	Shield recharges at a rate of 50hp/s
 	Maximum shield power is 5000hp]],
 	energyMake                    = 0,
@@ -96,12 +93,13 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage               = 100000
+local weapon1Damage               = 2001
+local weapon1AOE				  = 1
 local shield1PowerRegen           = 50
 
 local weaponDefs                  = {
 	nukeinterceptor               = {
-		AreaOfEffect              = 8,
+		AreaOfEffect              = weapon1AOE,
 		avoidFeature              = false,
 		avoidFriendly             = false,
 		beamTime                  = 5,
@@ -113,7 +111,7 @@ local weaponDefs                  = {
 		coreThickness             = 0.5,
 		duration                  = 0.4,
 		explosionGenerator        = "custom:genericshellexplosion-large-blue",
-		energypershot             = weapon1Damage / 20,
+		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		fallOffRate               = 0.1,
 		fireStarter               = 50,
 		interceptor			      = 1,
@@ -129,7 +127,7 @@ local weaponDefs                  = {
 		soundStart                = "antinukelaser.wav",
 		soundTrigger              = true,
 		stockpile			      = true,
-		stockpiletime		      = 100,
+		stockpiletime		      = 30,
 		texture1                  = "lightning",
 		texture2                  = "laserend",
 		thickness                 = 20,

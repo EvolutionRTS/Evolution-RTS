@@ -125,12 +125,16 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 600
+local weapon1AOE				 = 10
 local weapon2Damage              = 600
+local weapon2AOE				 = 10
 
 local weaponDefs                 = {
 	heavybeamweapon              = {
-		AreaOfEffect             = 10,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -141,7 +145,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.5,
 		--	cegTag               = "mediumcannonweapon3",
 		--    duration           = 0.2,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-large-purple",
 		fallOffRate              = 1,
 		fireStarter              = 50,
@@ -178,7 +182,7 @@ local weaponDefs                 = {
 
 	concussioncannon             = {
 		accuracy                 = 1,
-		AreaOfEffect             = 10,
+		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		ballistic                = true,
@@ -188,7 +192,7 @@ local weaponDefs                 = {
 		burnblow                 = true,
 		endsmoke                 = "1",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = weapon2Damage / 20,
+		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
 		fireStarter              = 80,
 		id                       = 1,
 		impulseFactor            = 0.1,

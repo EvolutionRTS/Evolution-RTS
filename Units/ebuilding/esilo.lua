@@ -27,7 +27,7 @@ local unitDef                     = {
 	iconType                      = "esilo",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 20000,
+	maxDamage                     = 9800,
 	maxSlope                      = 30,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
@@ -103,18 +103,21 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage               = 240000
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
+local weapon1Damage               = 2000
+local weapon1AOE				  = 2000
 
 local weaponDefs                  = {
 	nukemissile                   = {
-		AreaOfEffect              = 2000,
+		AreaOfEffect              = weapon1AOE,
 		avoidFriendly             = false,
 		cegTag                    = "NUKETRAIL",
 		collideFriendly           = false,
 		commandfire               = true,
 		craterBoost               = 0,
 		craterMult                = 0,
-		energypershot             = weapon1Damage / 20,
+		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator        = "custom:NUKEDATBEWM",
 		fireStarter               = 100,
 		flightTime                = 400,
@@ -137,7 +140,7 @@ local weaponDefs                  = {
 		soundStart                = "nukelaunch.wav",
 		startsmoke                = "0",
 		stockpile                 = true,
-		stockpileTime             = 240,
+		stockpileTime             = 60,
 		startVelocity             = 10,
 		tracks                    = true,
 		turnRate                  = 3000,

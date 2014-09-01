@@ -17,10 +17,9 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 
 	corpse                        = "ammobox",
-	description                   = [[Long Range Cruise Missile - 100e Per Shot
+	description                   = [[Long Range Cruise Missile
 	Building
-	2000 Damage vs Buildings
-	500 Damage vs Light/Armored]],
+	2000 Damage vs Light/Armored/Buildings]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "cruisemissile",
@@ -93,23 +92,26 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage               = 2000
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
+local weapon1Damage               = 1000
+local weapon1AOE				  = 1
 
 local weaponDefs                  = {
 	cruisemissile                   = {
-		AreaOfEffect              = 1000,
+		AreaOfEffect              = weapon1AOE,
 		avoidFriendly             = false,
 		cegTag                    = "cruisemissiletrail",
 		collideFriendly           = false,
 		craterBoost               = 0,
 		craterMult                = 0,
-		energypershot             = weapon1Damage / 20,
+		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator        = "custom:cruisemissile",
 		fireStarter               = 100,
 		flightTime                = 400,
 		impulseBoost              = 0,
 		impulseFactor             = 0,
-		interceptedByShieldType   = 2,
+		interceptedByShieldType   = 4,
 		lineOfSight               = true,
 		metalpershot              = 0,
 		model                     = "ecruisemissile.s3o",

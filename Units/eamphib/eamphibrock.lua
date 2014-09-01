@@ -126,21 +126,25 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 200
+local weapon1AOE				 = 1
 local weapon2Damage              = 200
+local weapon2AOE				 = 1
 local weapon2Burst               = 5
 
 local weaponDefs                 = {
 
 	antiarmorrockets             = {
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		cegTag                   = "missiletrailsmall",
 		explosionGenerator       = "custom:genericshellexplosion-medium-red",
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		fireStarter              = 70,
 		tracks                   = true,
 		impulseFactor            = 0,
@@ -174,7 +178,7 @@ local weaponDefs                 = {
 	},
 
 	antiarmorrocketssalvo        = {
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -183,7 +187,7 @@ local weaponDefs                 = {
 		burstrate		         = 0.1,
 		cegTag                   = "missiletrailsmall",
 		explosionGenerator       = "custom:genericshellexplosion-medium-red",
-		energypershot            = weapon2Damage / 20 * weapon2Burst,
+		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1) * weapon2Burst,
 		fireStarter              = 70,
 		tracks                   = true,
 		impulseFactor            = 0,

@@ -108,13 +108,16 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 500
+local weapon1AOE				 = 500
 
 local weaponDefs                 = {
 	nukeartyweapon               = {
 		badTargetCategory        = [[ARMORED LIGHT]],
 		accuracy                 = 1000,
-		AreaOfEffect             = 500,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -123,7 +126,7 @@ local weaponDefs                 = {
 		cegTag                   = "nukeartyshot",
 		explosionGenerator       = "custom:nukeartyexpl",
 		edgeEffectiveness        = 0.1,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		id                       = 172,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,

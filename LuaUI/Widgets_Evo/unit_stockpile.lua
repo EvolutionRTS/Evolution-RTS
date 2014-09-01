@@ -13,8 +13,8 @@
 
 function widget:GetInfo()
   return {
-    name      = "Stockpiler",
-    desc      = "Automatically adds 100 stockpile builds to new units",
+    name      = "Stockpiler (Evolution RTS)",
+    desc      = "Automatically adds stockpile builds to new units",
     author    = "trepan",
     date      = "Jan 8, 2007",
     license   = "GNU GPL, v2 or later",
@@ -30,10 +30,15 @@ end
 function widget:UnitCreated(unitID, unitDefID, unitTeam)
   local ud = UnitDefs[unitDefID]
   if ((ud ~= nil) and (unitTeam == Spring.GetMyTeamID())) then
-    if (ud.canStockpile) then
-      -- give stockpilers 100 units to build
-      Spring.GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "shift" })
-    end
+    if (ud.name == "esilo" or ud.name == "eshieldgen") then
+		-- give stockpilers 5 units to build
+		Spring.GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "shift" })
+    elseif (ud.name == "ecruisesilo") then
+	-- give stockpilers 5 units to build
+		Spring.GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "ctrl" })
+	else
+		Spring.Echo("Waffles!!!")
+	end
   end
 end
 

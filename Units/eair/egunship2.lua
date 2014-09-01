@@ -127,20 +127,24 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 100
+local weapon1AOE				 = 1
 local weapon2Damage              = 100
+local weapon2AOE				 = 1
 
 local weaponDefs                 = {
 	gunshipweapon                = {
 		badTargetCategory        = [[BUILDING]],
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		cegTag                   = "missiletrailgunshiplesssmokey",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		edgeEffectiveness        = 0.1,
 		fireStarter              = 70,
 		guidance                 = false,
@@ -181,7 +185,7 @@ local weaponDefs                 = {
 	},
 
 	gunshiptorpedo               = {
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -189,7 +193,7 @@ local weaponDefs                 = {
 		cegTag                   = "torpedotrailuwturret",
 		cylinderTargeting        = true,
 		explosionGenerator       = "custom:torpedoexplosion",
-		energypershot            = weapon2Damage / 20,
+		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
 		fireStarter              = 80,
 		impulseFactor            = 0.1,
 		interceptedByShieldType  = 4,

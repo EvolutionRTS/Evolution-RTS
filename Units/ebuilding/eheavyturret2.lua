@@ -101,12 +101,15 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage               = 300
+local weapon1AOE				  = 50
 
 local weaponDefs                  = {
 	eheavyturretweapon2           = {
 		badTargetCategory         = [[BUILDING LIGHT]],
-		AreaOfEffect              = 50,
+		AreaOfEffect              = weapon1AOE,
 		avoidFeature              = false,
 		avoidFriendly             = false,
 		beamTime                  = 0.1,
@@ -116,7 +119,7 @@ local weaponDefs                  = {
 		coreThickness             = 0.6,
 		--	cegTag                = "mediumcannonweapon3",
 		duration                  = 0.25,
-		energypershot             = weapon1Damage / 20,
+		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator        = "custom:genericshellexplosion-medium",
 		fallOffRate               = 1,
 		fireStarter               = 100,

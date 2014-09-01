@@ -132,14 +132,18 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 200
+local weapon1AOE				 = 250
 local weapon2Damage              = 75
+local weapon2AOE				 = 100
 local weapon2Projectiles         = 10
 
 local weaponDefs                 = {
 	riottankempweapon            = {
 		badTargetCategory        = [[ARMORED BUILDING]],
-		AreaOfEffect             = 250,
+		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
@@ -148,7 +152,7 @@ local weaponDefs                 = {
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.05,
 		edgeeffectiveness        = 0.1,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-medium-blue",
 		fallOffRate              = 1,
 		fireStarter              = 100,
@@ -186,7 +190,7 @@ local weaponDefs                 = {
 	},
 
 	riottankshotgun              = {
-		AreaOfEffect             = 100,
+		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -194,7 +198,7 @@ local weaponDefs                 = {
 		ballistic                = true,
 		cegTag                   = "bruisercannon",
 		explosionGenerator       = "custom:genericshellexplosion-small",
-		energypershot            = weapon2Damage / 20 * weapon2Projectiles,
+		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1) * weapon2Projectiles,
 		interceptedByShieldType  = 4,
 		impulseFactor            = 0,
 		name                     = "Light Cannon",

@@ -118,14 +118,17 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 local weapon1Damage              = 200
+local weapon1AOE				 = 50
 local weapon2Damage              = 20
+local weapon2AOE				 = 250
 
 local weaponDefs                 = {
 	Artilleryweapon              = {
 		badTargetCategory        = [[ARMORED LIGHT]],
 		accuracy                 = 500,
-		AreaOfEffect             = 50,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -134,7 +137,7 @@ local weaponDefs                 = {
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		impulse                  = "0",
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
@@ -162,7 +165,7 @@ local weaponDefs                 = {
 	SaturationArtilleryweapon    = {
 		badTargetCategory        = [[ARMORED LIGHT]],
 		accuracy                 = 750,
-		AreaOfEffect             = 250,
+		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -171,7 +174,7 @@ local weaponDefs                 = {
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-large",
-		energypershot            = weapon2Damage / 20,
+		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
 		edgeEffectiveness        = 1,
 		impulse                  = "0",
 		impulseFactor            = 0,

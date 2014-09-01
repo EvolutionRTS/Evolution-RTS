@@ -119,12 +119,15 @@ customParams                  = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage           = 300
+local weapon1AOE			  = 1
 
 local weaponDefs              = {  
 assimilatorbeamweapon         = {
 	badTargetCategory         = [[ARMORED LIGHT]],
-	AreaOfEffect              = 1,
+	AreaOfEffect              = weapon1AOE,
 	avoidFeature              = false,
 	avoidFriendly             = false,
 	beamTime                  = 1.8,
@@ -135,7 +138,7 @@ assimilatorbeamweapon         = {
 	coreThickness             = 0.5,
 	duration                  = 0.4,
 	explosionGenerator        = "custom:genericshellexplosion-large-sparks-burn",
-	energypershot             = weapon1Damage / 20,
+	energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 	fallOffRate               = 0.1,
 	fireStarter               = 50,
 	interceptedByShieldType   = 4,

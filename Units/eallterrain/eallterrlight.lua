@@ -123,19 +123,22 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 50
+local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	lighttankweapon              = {
 		badTargetCategory        = [[ARMORED BUILDING]],
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
 		collideFriendly          = false,
 		coreThickness            = 0.3,
 		duration                 = 0.1,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-small-blue",
 		fallOffRate              = 1,
 		fireStarter              = 50,

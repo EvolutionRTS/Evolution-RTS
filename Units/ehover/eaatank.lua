@@ -122,13 +122,15 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 local weapon1Damage              = 105
+local weapon1AOE				 = 50
 local burstProjectiles           = 4
 
 local weaponDefs                 = {
 eaatankantiairmissile            = {
-	AreaOfEffect                 = 50,
+	AreaOfEffect                 = weapon1AOE,
 	avoidFriendly                = false,
 	avoidFeature                 = false,
 	collideFriendly              = false,
@@ -139,7 +141,7 @@ eaatankantiairmissile            = {
 	canAttackGround              = false,
 	edgeEffectiveness            = 0.5,
 	explosionGenerator           = "custom:BulletImpact3",
-	energypershot                = weapon1Damage / 20 * burstProjectiles,
+	energypershot                = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1) * burstProjectiles,
 	fireStarter                  = 80,
 	impulseFactor                = 0,
 	interceptedByShieldType      = 4,

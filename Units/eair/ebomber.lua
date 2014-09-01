@@ -117,11 +117,14 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 1000
+local weapon1AOE				 = 500
 
 local weaponDefs                 = {
 	SBOMB                        = {
-		AreaOfEffect             = 500,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -129,7 +132,7 @@ local weaponDefs                 = {
 		cegTag                   = "missiletrailgunship",
 		commandfire		         = "true",
 		explosionGenerator       = "custom:genericshellexplosion-large-red",
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		edgeEffectiveness        = 0.1,
 		fireStarter              = 70,
 		guidance                 = false,

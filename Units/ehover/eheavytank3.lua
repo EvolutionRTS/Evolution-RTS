@@ -116,13 +116,15 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 local weapon1Damage              = 150
+local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	heavytankweapon              = {
 		badTargetCategory        = [[BUILDING]],
 		accuracy                 = 200,
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -130,7 +132,7 @@ local weaponDefs                 = {
 		ballistic                = true,
 		cegTag                   = "antiassualtshot2",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		id                       = 172,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,

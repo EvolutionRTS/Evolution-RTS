@@ -99,17 +99,20 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage               = 125
+local weapon1AOE				  = 25
 
 local weaponDefs                  = {
 	lighteweapon                  = {
-		AreaOfEffect              = 25,
+		AreaOfEffect              = weapon1AOE,
 		avoidFriendly             = false,
 		collideFriendly           = false,
 		craterBoost               = 0,
 		craterMult                = 0,
 		explosionGenerator        = "custom:genericshellexplosion-medium-lightning",
-		energypershot             = weapon1Damage / 20,
+		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		impulseBoost              = 0,
 		impulseFactor             = 0,
 		interceptedByShieldType   = 4,

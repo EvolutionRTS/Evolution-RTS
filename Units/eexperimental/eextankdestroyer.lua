@@ -116,12 +116,16 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 500
+local weapon1AOE				 = 8
 local weapon2Damage              = 12
+local weapon2AOE				 = 8
 
 local weaponDefs                 = {
 	tankkillerlaser              = {
-		AreaOfEffect             = 8,
+		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -130,7 +134,7 @@ local weaponDefs                 = {
 		beamWeapon               = true,
 		coreThickness            = 0.5,
 		duration                 = 0.2,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-large-purple",
 		fallOffRate              = 1,
 		fireStarter              = 100,
@@ -165,7 +169,7 @@ local weaponDefs                 = {
 
 	machinegun                   = {
 		accuracy                 = 300,
-		AreaOfEffect             = 8,
+		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -176,7 +180,7 @@ local weaponDefs                 = {
 		duration                 = 0.1,
 		energypershot            = 0.6,
 		explosionGenerator       = "custom:genericshellexplosion-small-red",
-		energypershot            = weapon2Damage / 20,
+		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,

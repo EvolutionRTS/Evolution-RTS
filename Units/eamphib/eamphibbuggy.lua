@@ -120,13 +120,16 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage              = 13.5
+local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	lightbeamlaser               = {
 		badTargetCategory        = [[ARMORED BUILDING VTOL]],
 		TargetMoveError	         = 0.3,
-		AreaOfEffect             = 1,
+		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		beamTime                 = 0.1,
@@ -136,7 +139,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.2,
 		duration                 = 0.1,
 		explosionGenerator       = "custom:genericshellexplosion-small-sparks-burn",
-		energypershot            = weapon1Damage / 20,
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,

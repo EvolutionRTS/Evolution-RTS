@@ -86,11 +86,14 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
 local weapon1Damage               = 112.5
+local weapon1AOE				  = 300
 
 local weaponDefs                  = {
 	antiairgunflak                = {
-		AreaOfEffect              = 300,
+		AreaOfEffect              = weapon1AOE,
 		avoidFriendly             = false,
 		avoidFeature              = false,
 		ballistic                 = true,
@@ -100,7 +103,7 @@ local weaponDefs                  = {
 		burnblow                  = true,
 		endsmoke                  = "1",
 		explosionGenerator        = "custom:xamelImpact",
-		energypershot             = weapon1Damage / 20,
+		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		fireStarter               = 80,
 		id                        = 1,
 		impulseFactor             = 0,
