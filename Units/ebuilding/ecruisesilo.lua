@@ -9,7 +9,7 @@ local unitDef                     = {
 
 	activateWhenBuilt             = true,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 750,
+	buildCostMetal                = 400,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = true,
@@ -94,7 +94,7 @@ local unitDef                     = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage               = 1000
+local weapon1Damage               = 1500
 local weapon1AOE				  = 1
 
 local weaponDefs                  = {
