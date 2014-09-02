@@ -36,8 +36,6 @@ function widget:UnitCreated(unitID, unitDefID, unitTeam)
     elseif (ud.name == "ecruisesilo") then
 	-- give stockpilers 5 units to build
 		Spring.GiveOrderToUnit(unitID, CMD.STOCKPILE, {}, { "ctrl" })
-	else
-		Spring.Echo("Waffles!!!")
 	end
   end
 end
