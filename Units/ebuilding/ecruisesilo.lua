@@ -9,7 +9,7 @@ local unitDef                     = {
 
 	activateWhenBuilt             = true,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 400,
+	buildCostMetal                = 750,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = true,
@@ -106,7 +106,7 @@ local weaponDefs                  = {
 		craterBoost               = 0,
 		craterMult                = 0,
 		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
-		explosionGenerator        = "custom:cruisemissile",
+		explosionGenerator        = "custom:ebombexpl",
 		fireStarter               = 100,
 		flightTime                = 400,
 		impulseBoost              = 0,
