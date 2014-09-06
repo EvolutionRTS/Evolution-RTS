@@ -43,7 +43,7 @@ local unitDef                    = {
 	description                  = [[Shield Emitter
 	Light
 	Shield recharges at a rate of 20hp/s
-	Maximum shield power is 1000hp
+	Maximum shield power is 1500hp
 	Shield can link with other shield units to increase charging and capacity
 	Generates a Cloaking Field
 
@@ -136,7 +136,7 @@ local weaponDefs                 = {
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
 		Shieldradius             = 300,
-		Shieldpower              = 1000,
+		Shieldpower              = 1500,
 		Shieldpowerregen         = shield1PowerRegen,
 		Shieldpowerregenenergy   = shield1PowerRegen / 20,
 		Shieldintercepttype      = 4,

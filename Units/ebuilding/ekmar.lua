@@ -19,7 +19,7 @@ local unitDef                     = {
 	description                   = [[Protective Turret Shield
 
 	Shield recharges at a rate of 20hp/s
-	Maximum shield power is 1000hp
+	Maximum shield power is 2000hp
 	Shield can link with other shield units to increase charging and capacity]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -103,7 +103,7 @@ local weaponDefs                  = {
 		ShieldStartingPower       = 0,
 		Shieldenergyuse           = 0,
 		Shieldradius              = 200,
-		Shieldpower               = 1000,
+		Shieldpower               = 2000,
 		Shieldpowerregen          = shield1PowerRegen,
 		Shieldpowerregenenergy    = shield1PowerRegen / 20,
 		Shieldintercepttype       = 4,

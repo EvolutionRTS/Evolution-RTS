@@ -95,16 +95,20 @@ local unitDef                     = {
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 local weapon1Damage               = 1500
-local weapon1AOE				  = 1
+local weapon1AOE				  = 250
 
 local weaponDefs                  = {
 	cruisemissile                   = {
 		AreaOfEffect              = weapon1AOE,
 		avoidFriendly             = false,
+		avoidFeature              = false,
 		cegTag                    = "cruisemissiletrail",
 		collideFriendly           = false,
+		collideFeature            = false,
+		commandfire               = true,
 		craterBoost               = 0,
 		craterMult                = 0,
+		edgeeffectiveness		  = 0.1,
 		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator        = "custom:ebombexpl",
 		fireStarter               = 100,
