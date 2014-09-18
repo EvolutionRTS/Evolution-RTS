@@ -33,8 +33,8 @@ local unitDef                    = {
 	cruiseAlt                    = 350,
 	description                  = [[Bomber
 	Armored
-	1000 Damage vs Buildings
-	250 Damage vs Light/Armored
+	200 Damage vs Buildings
+	50 Damage vs Light/Armored
 
 	Requires +10 Power
 	Uses +10 Supply
@@ -119,7 +119,7 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 1000
+local weapon1Damage              = 200
 local weapon1AOE				 = 500
 
 local weaponDefs                 = {
@@ -145,7 +145,7 @@ local weaponDefs                 = {
 		model                    = "missile.s3o",
 		name                     = "Rockets",
 		range                    = 900,
-		reloadtime               = 30,
+		reloadtime               = 6,
 		weaponType		         = "MissileLauncher",  -- This causes the missile trail to go off kilter
 		--	rendertype		     = 1,
 		selfprop                 = true,

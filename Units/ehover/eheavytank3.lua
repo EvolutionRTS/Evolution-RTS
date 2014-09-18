@@ -145,7 +145,7 @@ local weaponDefs                 = {
 		startsmoke               = "1",
 		tolerance                = 2000,
 		turret                   = true,
-		weaponVelocity           = 1200,
+		weaponVelocity           = 1500,
 		customparams             = {
 			damagetype		     = "eheavytank3",  
 			

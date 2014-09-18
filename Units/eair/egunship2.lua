@@ -34,7 +34,7 @@ local unitDef                    = {
 	description                  = [[Gunship Tank Destroyer
 	Armored
 	100 Damage vs Light/Armored
-	50 Damage vs Building
+	25 Damage vs Building
 
 	Can switch firemodes to torpedos
 
@@ -100,7 +100,7 @@ local unitDef                    = {
 			mainDir              = "0 0 1",
 			maxAngleDif          = 90,
 			OnlyTargetCategory   = "NOTAIR AMPHIB",
-			BadTargetCategory    = "VTOL BUILDING WALL",
+			BadTargetCategory    = "BUILDING WALL",
 			noChaseCategory      = "VTOL",
 		},
 		[2]                      = {
@@ -108,6 +108,7 @@ local unitDef                    = {
 			mainDir              = "0 0 1",
 			maxAngleDif          = 180,
 			OnlyTargetCategory   = "NOTAIR AMPHIB SUB",
+			BadTargetCategory    = "BUILDING WALL",
 			noChaseCategory      = "VTOL",
 		},
 	},
@@ -214,7 +215,7 @@ local weaponDefs                 = {
 		turnrate			     = 100000,
 		flighttime			     = 4,
 		customparams             = {
-			damagetype		     = "egunship2",  
+			damagetype		     = "egunship2torpedo",  
 		},      
 		damage                   = {
 			default              = weapon2Damage,
