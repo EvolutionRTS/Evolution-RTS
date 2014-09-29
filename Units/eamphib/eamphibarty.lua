@@ -34,8 +34,8 @@ Light
 
 	• Can fire while underwater
 
-Requires + 10 Power
-Uses +10 Supply]],
+Requires +5 Power
+Uses +5 Supply]],
 energyMake                    = 0,
 energyStorage                 = 0,
 energyUse                     = 0,
