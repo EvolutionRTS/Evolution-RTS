@@ -5,11 +5,18 @@ local unitName                   = "elighttank3"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[3 power]]
+local armortype					 = [[light]]
+local supply					 = [[3]]
+
+local weapon1Damage              = 60
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
 local unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
-
 	--**
 
 	acceleration                 = 1,
@@ -27,13 +34,16 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Raider
-	Light
-	45 Damage vs Light/Armored
-	60 Damage vs Building
+	description                  = [[Unit Type: Raider 
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +3 Power
-	Uses +3 Supply]],
+45 Damage vs Light/Armored
+60 Damage vs Building 
+
+Energy cost to fire: ]] .. energycosttofire .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -101,10 +111,10 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 1,
 		death_sounds             = "generic",
-		RequireTech              = "3 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 3,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -115,9 +125,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 60
-local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	lighttankweapon              = {
