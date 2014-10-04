@@ -119,6 +119,7 @@ local weaponDefs                  = {
 		commandfire               = true,
 		craterBoost               = 0,
 		craterMult                = 0,
+		edgeeffectiveness		  = 1,
 		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator        = "custom:NUKEDATBEWM",
 		fireStarter               = 100,

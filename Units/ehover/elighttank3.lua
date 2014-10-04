@@ -13,6 +13,10 @@ local weapon1Damage              = 60
 local weapon1AOE				 = 1
 local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
 
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -40,7 +44,7 @@ Armortype: ]] ..armortype.. [[
 45 Damage vs Light/Armored
 60 Damage vs Building 
 
-Energy cost to fire: ]] .. energycosttofire .. [[ 
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 
 Requires +]] .. power .. [[ 
 Uses +]] .. supply .. [[ Supply]],
