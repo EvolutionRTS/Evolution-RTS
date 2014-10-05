@@ -5,6 +5,18 @@ local unitName                   = "eheavytank3"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[4]]
+local armortype					 = [[armored]]
+local supply					 = [[4]]
+
+local weapon1Damage              = 150
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -28,13 +40,16 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR SKIRMISHER",
 	corpse                       = "ammobox",
-	description                  = [[Armored Tank Destroyer
-	Armored
-	150 Damage vs Light/Armored
-	75 Damage vs Building
+	description                  = [[Unit Type: Armored Tank Destroyer
+Armortype: ]] ..armortype.. [[ 
+	
+150 Damage vs Light/Armored
+75 Damage vs Building
 
-	Requires +4 Power
-	Uses +4 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -103,10 +118,10 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = "4 Power",
-		armortype                = "armored",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 4,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -117,8 +132,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-local weapon1Damage              = 150
-local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	heavytankweapon              = {

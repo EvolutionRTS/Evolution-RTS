@@ -5,6 +5,8 @@ local unitName                   = "ecommander"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[light]]
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -32,11 +34,12 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Light
+	description                  = [[Unit Type: Command Unit
+Armortype: ]] ..armortype.. [[ 
 
-	• Armed with a small emp weapon capable of disabling light units for a short period of time (Must be manually fired!)
+1000 EMP Damage vs Light/Armored/Building
 
-	There can only be one!]],
+There can only be one!]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -138,7 +141,7 @@ local unitDef                    = {
 		needed_cover             = 2,
 		death_sounds             = "generic",
 		cancollect               = "1",
-		armortype                = "light",
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",

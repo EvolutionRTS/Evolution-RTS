@@ -5,6 +5,8 @@ local unitName                   = "eorb"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[light]]
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -33,11 +35,10 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
-	description                  = [[Field Medic
-	Light
-	• Automatically repairs mobile units in the area
+	description                  = [[Unit Type: Field Medic
+Armortype: ]] ..armortype.. [[ 
 
-	Uses +3 Supply]],
+• Automatically repairs mobile units in the area]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -108,7 +109,7 @@ local unitDef                    = {
 		needed_cover             = 2,
 		death_sounds             = "generic",
 		cancollect               = "1",
-		armortype                = "light",
+		armortype                = armortype,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   

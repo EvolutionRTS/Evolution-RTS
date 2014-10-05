@@ -5,6 +5,21 @@ local unitName                   = "eartytank"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[5 power]]
+local armortype					 = [[light]]
+local supply					 = [[5]]
+
+local weapon1Damage              = 200
+local weapon1AOE				 = 50
+local weapon2Damage              = 20
+local weapon2AOE				 = 250
+
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -28,13 +43,16 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR SUPPORT",
 	corpse                       = "ammobox",
-	description                  = [[Artillery Support Tank
-	Light
-	200 Damage vs Buildings
-	50 Damage vs Light/Armored
+	description                  = [[Unit Type: Artillery Support Tank
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +8 Power
-	Uses +8 Supply]],
+200 Damage vs Buildings
+50 Damage vs Light/Armored
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -105,10 +123,10 @@ local unitDef                    = {
 		canareaattack            ="1",
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = "5 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 5,
+		supply_cost              = supple,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  

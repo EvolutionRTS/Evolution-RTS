@@ -5,6 +5,18 @@ local unitName                   = "eaatank"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[5 power]]
+local armortype					 = [[light]]
+local supply					 = [[5]]
+
+local weapon1Damage              = 105
+local weapon1AOE				 = 50
+local burstProjectiles           = 4
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1) * burstProjectiles
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
 
 local unitDef                    = {
 
@@ -31,15 +43,16 @@ local unitDef                    = {
 	category                     = "LIGHT NOTAIR SUPPORT",
 	corpse                       = "ammobox",
 	defaultmissiontype           = "Standby",
-	description                  = [[Anti-Air Support Tank
-	Light
-	105 Damage vs Armored
-	70 Damage vs Light/Building
+	description                  = [[Unit Type: Anti-Air Support Tank
+Armortype: ]] ..armortype.. [[ 
 
-	• Fires 4 missiles in a burst
+105 Damage vs Armored
+70 Damage vs Light/Building
 
-	Requires +5 Power
-	Uses +5 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -109,24 +122,20 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 1,
 		death_sounds             = "generic",
-		RequireTech              = "5 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 5,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies", 
-		helptext	             = [[The spewer is the only dedicated mobile Anti-Air tank in Evolution RTS. It's range is quite limited, so make sure to bring along some scouts for the additional line of sight distance. Very large area of effect.]],
+		helptext	             = [[]],
 },
 }
 
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 105
-local weapon1AOE				 = 50
-local burstProjectiles           = 4
 
 local weaponDefs                 = {
 eaatankantiairmissile            = {

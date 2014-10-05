@@ -2,7 +2,7 @@ local loadscreens = {
 
 
 	{
-		tipText	= "Be sure to use the Repeat button. It will cause it's current orders to be repeated over and over until the unit dies. In this way, you could assign base building to an Engineer on repeat, and if anything dies, the engineer will go and rebuild it!",
+		tipText	= [[Be sure to use the Repeat button. It will cause it's current orders to be repeated over and over until the unit dies. In this way, you could assign base building to an Engineer on repeat, and if anything dies, the engineer will go and rebuild it!]],
 		tipTextColor 	= {1.0,1.0,1.0,1.0},
 		fontShadow		= true,
 		backgroundImage1	= "bitmaps/ui/loadingscreen/background1.png",
@@ -10,7 +10,7 @@ local loadscreens = {
 		backgroundColor	= {0,0,0,0},
 	},
 	{
-		tipText	= [[The ORB field medic will automatically reclaim and energy cores it gets close to. This means that if you include them in your unit groups, not only do you get excellent repair, you can also turn a profit from even a bad engagement.]],
+		tipText	= [[The ORB field medic will automatically reclaim any energy cores it gets close to. This means that if you include them in your unit groups, not only do you get excellent repair, you can also turn a profit from even a bad engagement.]],
 		tipTextColor 	= {1.0,1.0,1.0,1.0},
 		fontShadow		= true,
 		backgroundImage1	= "bitmaps/ui/loadingscreen/background2.png",
@@ -37,7 +37,7 @@ local loadscreens = {
 	},
 	
 	{
-		tipText	= [[Advanced generators are probably the most important structure in the game. Now only do they give you lots of energy and lots of power in a radius, they also provide a large amount of supply as well. The more you have, the better.]],
+		tipText	= [[Advanced generators are probably the most important structure in the game. Not only do they give you lots of energy and lots of power in a radius, they also provide a large amount of supply as well. The more you have, the better.]],
 		tipTextColor 	= {1.0,1.0,1.0,1.0},
 		fontShadow		= true,
 		backgroundImage1	= "bitmaps/ui/loadingscreen/background5.png",

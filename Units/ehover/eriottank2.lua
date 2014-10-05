@@ -5,6 +5,27 @@ local unitName                   = "eriottank2"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[3 power]]
+local armortype					 = [[light]]
+local supply					 = [[3]]
+
+local weapon1Damage              = 200
+local weapon1AOE				 = 250
+local weapon2Damage              = 75
+local weapon2AOE				 = 100
+local weapon2Projectiles         = 10
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire2          = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1) * weapon2Projectiles
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
+local function roundToFirstDecimal(energycosttofire2)
+    return math.floor(energycosttofire2*10 + 0.5)*0.1
+end
+
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -29,18 +50,22 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR RIOT",
 	corpse                       = "ammobox",
-	description                  = [[Anti-Swarm EMP/Riot Tank
-	Armored
-	200 Paralysis Damage vs Light
-	100 Paralysis Damage vs Armored/Building
+	description                  = [[Unit Type: Anti-Swarm EMP/Riot Tank
+Armortype: ]] ..armortype.. [[ 
+
+200 Paralysis Damage vs Light
+100 Paralysis Damage vs Armored/Building
 
 	• Paralyzes enemy units
 	• Projectile can hit multiple units
 
-	Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
 
-	Requires +3 Power
-	Uses +3 Supply]],
+Energy cost to fire EMP: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Shotgun: ]] .. roundToFirstDecimal(energycosttofire2) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -119,10 +144,10 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = "3 Power",
-		armortype                = "armored",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 3,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
@@ -133,12 +158,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 200
-local weapon1AOE				 = 250
-local weapon2Damage              = 75
-local weapon2AOE				 = 100
-local weapon2Projectiles         = 10
 
 local weaponDefs                 = {
 	riottankempweapon            = {

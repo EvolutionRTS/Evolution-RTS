@@ -5,6 +5,18 @@ local unitName                   = "emissiletank"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[7 power]]
+local armortype					 = [[light]]
+local supply					 = [[7]]
+
+local weapon1Damage              = 150
+local weapon1AOE				 = 100
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -28,13 +40,16 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR SUPPORT",
 	corpse                       = "ammobox",
-	description                  = [[Missile Support Tank
-	Light
-	150 Damage vs Light/Armored
-	75 Damage vs Building
+	description                  = [[Unit Type: Missile Support Tank
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +7 Power
-	Uses +7 Supply]],
+150 Damage vs Light/Armored
+75 Damage vs Building
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -112,10 +127,10 @@ local unitDef                    = {
 		canareaattack            ="1",
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = "7 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 7,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -126,9 +141,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 150
-local weapon1AOE				 = 100
 
 local weaponDefs                 = {
 	missletankweapon             = {
