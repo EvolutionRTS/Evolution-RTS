@@ -57,8 +57,8 @@ local unitDef                     = {
 
 	sfxtypes                      = { 
 		pieceExplosionGenerators  = { 
-			"deathceg0", 
-			"deathceg1", 
+			"deathceg3", 
+			"deathceg4", 
 		}, 
 
 		explosiongenerators       = {

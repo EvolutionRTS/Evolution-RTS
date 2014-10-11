@@ -82,8 +82,8 @@ local unitDef                    = {
 			"custom:dirtsmall",
 		},
 		pieceExplosionGenerators = {
-			"deathceg0",
-			"deathceg1",
+			"deathceg3",
+			"deathceg4",
 		},	
 	},
 	buildoptions                 = {

@@ -86,8 +86,8 @@ Armortype: ]] ..armortype.. [[
 	repairspeed                  = 0.3125,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
-			"deathceg0", 
-			"deathceg1", 
+			"deathceg3", 
+			"deathceg4", 
 		}, 
 
 		explosiongenerators      = {

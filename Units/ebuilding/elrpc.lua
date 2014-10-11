@@ -57,8 +57,8 @@ local unitDef                     = {
 	yardMap                       = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
 	sfxtypes                      = { 
 		pieceExplosionGenerators  = { 
-			"deathceg0", 
-			"deathceg1", 
+			"deathceg3", 
+			"deathceg4", 
 		}, 
 
 		explosiongenerators       = {

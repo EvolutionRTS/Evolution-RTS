@@ -79,8 +79,8 @@ local unitDef                    = {
 	repairspeed                  = 0.15625,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
-			"deathceg0", 
-			"deathceg1", 
+			"deathceg3", 
+			"deathceg4", 
 		}, 
 
 		explosiongenerators      = {

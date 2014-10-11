@@ -70,8 +70,8 @@ local unitDef = {
 			"custom:blacksmoke",
 		},
 		pieceExplosionGenerators = {
-			"deathceg0",
-			"deathceg1",
+			"deathceg3",
+			"deathceg4",
 		},	
 	},
 
