@@ -131,7 +131,7 @@ local function CreateWindow()
 		right  = 30,
                 x      = 90,
 		caption = "0/0",
-		tooltip = "Supply used/supply available (default 100 maximum)",
+		tooltip = "Supply used/supply available (default 200 maximum). Build more generators to increase available supply.",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
 
