@@ -333,7 +333,7 @@ local function MakeButton(container, cmd, insertItem, index)
 	local isBuild = (cmd.id < 0)
 	local gridHotkeyed = not isState and menuChoice ~= 1 and menuChoice ~= 6 
 	local text
-	local overlayText
+	local overlayText = ''
 	local texture
 	local countText = ''
 	local tooltip = cmd.tooltip
@@ -361,8 +361,8 @@ local function MakeButton(container, cmd, insertItem, index)
 		text = cmd.name 
 	end
 
-	if powerBlocked then overlayText = 'NO\nPOWER' end
-	if supplyBlocked then overlayText = 'NO\nSUPPLY' end
+	if powerBlocked then overlayText = '   NO\nPOWER' end
+	if supplyBlocked then overlayText = '   NO\nSUPPLY' end
 
 	local hotkey = cmd.action and WG.crude.GetHotkey(cmd.action) or ''
 	
@@ -470,9 +470,9 @@ local function MakeButton(container, cmd, insertItem, index)
 				parent = button;
 			}
 		end
-
-		if (overlayText) then
-			Label:New {
+		local overlayLabel
+		if (isBuild) then
+			overlayLabel = Label:New {
 				width="100%";
 				height="100%";
 				autosize = false;
@@ -551,6 +551,7 @@ local function MakeButton(container, cmd, insertItem, index)
 			button = button,
 			image = image,
 			label = label,
+			overlayLabel = overlayLabel,
 			countLabel = countLabel,
 		}
 		commandButtons[cmd.id] = item
@@ -573,6 +574,11 @@ local function MakeButton(container, cmd, insertItem, index)
 		item.image:Invalidate()
 		item.button.isDisabled = disabled
 	end 
+
+	-- update if supply/blocking status changed
+	if (isBuild and item.overlayLabel.caption ~= overlayText) then
+		item.overlayLabel:SetCaption(overlayText)
+	end
 	
 	if (not cmd.onlyTexture and item.label and text ~= item.label.caption) then 
 		item.label:SetCaption(text)
