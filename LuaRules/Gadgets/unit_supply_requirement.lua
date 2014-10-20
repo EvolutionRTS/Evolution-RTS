@@ -231,6 +231,7 @@ local function InitializeTeamSupply(teamID)
 		local unitDefID = costUnitList[i]
 		if costUnitDefID[unitDefID] > maxSupplyWithCap[teamID] then
 			lockedUnitsArray[teamID][unitDefID] = true
+			DisableUnit(unitDefID, teamID)
 		end
 	end
 	
