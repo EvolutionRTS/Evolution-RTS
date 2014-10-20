@@ -333,27 +333,37 @@ local function MakeButton(container, cmd, insertItem, index)
 	local isBuild = (cmd.id < 0)
 	local gridHotkeyed = not isState and menuChoice ~= 1 and menuChoice ~= 6 
 	local text
+	local overlayText = ''
 	local texture
 	local countText = ''
 	local tooltip = cmd.tooltip
 	
 	local myTeamID = Spring.GetMyTeamID()
 	local disableString = "disallowed_" .. (-cmd.id)
-	local disabled = cmd.disabled or (Spring.GetTeamRulesParam(myTeamID, disableString) == 1)
+	-- This is a hack that lets us avoid changing
+	-- Better_Ranged_Counted_Multi_Tech.lua and unit_supply_requirement.lua at
+	-- the cost of not being flexible if another means of disabling unit
+	-- building is introduced.
+	local powerBlocked = cmd.disabled
+	local supplyBlocked = (Spring.GetTeamRulesParam(myTeamID, disableString) == 1)
+	local disabled = powerBlocked or supplyBlocked
 
-	local te = overrides[cmd.id]  -- command overrides 
-	
-	-- text 
-	if te and te.text then 
-		text = te.text 
-	elseif isState then 
+	local te = overrides[cmd.id]  -- command overrides
+
+	-- text
+	if te and te.text then
+		text = te.text
+	elseif isState then
 		text = cmd.params[cmd.params[1]+2]
 	elseif isBuild then
 		text = ''
 	else 
 		text = cmd.name 
 	end
-	
+
+	if powerBlocked then overlayText = '   NO\nPOWER' end
+	if supplyBlocked then overlayText = '   NO\nSUPPLY' end
+
 	local hotkey = cmd.action and WG.crude.GetHotkey(cmd.action) or ''
 	
 	if (options.unitstabhotkey.value and menuChoice == 6 and selectedFac and container.i_am_sp_commands) then
@@ -460,7 +470,23 @@ local function MakeButton(container, cmd, insertItem, index)
 				parent = button;
 			}
 		end
-		
+		local overlayLabel
+		if (isBuild) then
+			overlayLabel = Label:New {
+				width="100%";
+				height="100%";
+				autosize = false;
+				align="center";
+				valign="center";
+				caption = overlayText;
+				font = {
+					size = 10;
+					color = { 0.95, 0.75, 0.2, 0.85 };
+				};
+				parent = button;
+			}
+		end
+
 		local image
 		if (texture and texture ~= "") then
 			image= Image:New {
@@ -525,6 +551,7 @@ local function MakeButton(container, cmd, insertItem, index)
 			button = button,
 			image = image,
 			label = label,
+			overlayLabel = overlayLabel,
 			countLabel = countLabel,
 		}
 		commandButtons[cmd.id] = item
@@ -547,6 +574,11 @@ local function MakeButton(container, cmd, insertItem, index)
 		item.image:Invalidate()
 		item.button.isDisabled = disabled
 	end 
+
+	-- update if supply/blocking status changed
+	if (isBuild and item.overlayLabel.caption ~= overlayText) then
+		item.overlayLabel:SetCaption(overlayText)
+	end
 	
 	if (not cmd.onlyTexture and item.label and text ~= item.label.caption) then 
 		item.label:SetCaption(text)
