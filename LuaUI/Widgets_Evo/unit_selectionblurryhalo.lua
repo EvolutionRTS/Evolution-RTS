@@ -14,14 +14,13 @@ function widget:GetInfo()
   }
 end
 
---this widget requires the gui_selectionsend.lua widget
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 local showAlly = false
 local visibleAllySelUnits = {}
 local visibleSelected = {}
+local thickness = 1.0
 
 local function UpdateHaloColors(self) end
 
@@ -30,8 +29,9 @@ options_path = 'Settings/Interface/Selection/Blurry Halo Selections'
 options_order = {
 	'showally',
 	'useteamcolors',
-	
-	
+	'thickness',
+
+
 	'lblPresetColors',
 	'selectColor',
 	'allySelectColor',
@@ -39,8 +39,8 @@ options_order = {
 	'allyHoverColor',
 	'enemyHoverColor',
 	'featureHoverColor',
-	
-	
+
+
 }
 
 options = {
@@ -49,7 +49,7 @@ options = {
 		type = 'bool',
 		desc = 'Highlight the units your allies currently have selected.',
 		value = true,
-		OnChange = function(self) 
+		OnChange = function(self)
 			visibleAllySelUnits = {}
 			showAlly = self.value
 		end,
@@ -60,9 +60,17 @@ options = {
 		desc = 'Highlight your allies\' selections with their team colors instead of the preset colors.',
 		value = false,
 	},
-	
+
+	thickness = {
+    name = 'Outline Thickness',
+    desc = 'How thick the outline appears around objects',
+    type = 'number',
+    min = 0.4, max = 2, step = 0.01,
+    value = 0.8,
+    OnChange = function(self) UpdateHaloColors(); end
+  },
 	-----
-	
+
 	lblPresetColors = {type='label', name = 'Preset Colors' },
 	selectColor = {
 		name = 'Selected Units Color',
@@ -70,45 +78,45 @@ options = {
 		value = { 0, 1, 0, 1 },
 		OnChange = function(self) UpdateHaloColors(); end
 	},
-	
+
 	allySelectColor = {
 		name = 'Ally Selected Units Color',
 		type = 'colors',
 		value = { 1, 1, 0, 1 },
 		OnChange = function(self) UpdateHaloColors(); end
-	}, 
-	
+	},
+
 	myHoverColor = {
 		name = 'My Unit Hover Color',
 		type = 'colors',
 		value = { 1, 1, 1, 1 },
 		OnChange = function(self) UpdateHaloColors(); end
 	},
-	
+
 	allyHoverColor = {
 		name = 'Ally Unit Hover Color',
 		type = 'colors',
 		value = { 0.5, 0.5, 1, 1 },
 		OnChange = function(self) UpdateHaloColors(); end
-	}, 
-	
+	},
+
 	enemyHoverColor = {
 		name = 'Enemy Unit Hover Color',
 		type = 'colors',
 		value = { 1, 0, 0, 1 },
 		OnChange = function(self) UpdateHaloColors(); end
-	}, 
-	
-	
+	},
+
+
 	featureHoverColor = {
 		name = 'Feature Hover Color',
 		type = 'colors',
 		value = { 1, 0, 1, 1 },
 		OnChange = function(self) UpdateHaloColors(); end
-	}, 
-	
-	
-	
+	},
+
+
+
 }
 
 --------------------------------------------------------------------------------
@@ -122,7 +130,6 @@ local gAlpha = 0.8
 
 local offscreentex
 local outlinemasktex
-local depthtex
 local blurtex
 local fbo
 
@@ -131,6 +138,7 @@ local blurShader_v
 local maskGenShader
 local maskApplyShader
 local uniformScreenX, uniformScreenY
+local uniformThicknessX, uniformThicknessY
 
 local vsx, vsy = 0,0
 local resChanged = false
@@ -180,8 +188,6 @@ local spGetPlayerControlledUnit		= Spring.GetPlayerControlledUnit
 local spGetVisibleUnits			= Spring.GetVisibleUnits
 local spIsUnitIcon = Spring.IsUnitIcon
 
---local myPlayerID = Spring.GetMyPlayerID()
-
 local GL_FRONT = GL.FRONT
 local GL_BACK  = GL.BACK
 local GL_MODELVIEW  = GL.MODELVIEW
@@ -224,27 +230,29 @@ UpdateHaloColors = function(self)
 	selectColor = options.selectColor.value
 	allySelectColor = options.allySelectColor.value
 	myHoverColor = options.myHoverColor.value
-	
+
 	allyHoverColor = options.allyHoverColor.value
 	enemyHoverColor = options.enemyHoverColor.value
 	featureHoverColor = options.featureHoverColor.value
+
+  thickness = options.thickness.value
 end
 
 local function GetVisibleUnits()
-    local units = spGetVisibleUnits(-1, 30, false)
-    
+  local units = spGetVisibleUnits(-1, 30, false)
+
 	local visibleAllySelUnits = {}
     local visibleSelected = {}
-    
+
     for i=1, #units do
 	    local unitID = units[i]
 	    if (spIsUnitSelected(unitID)) then
 		    visibleSelected[#visibleSelected+1] = unitID
-	    elseif showAlly and WG.allySelUnits[unitID] then
+	    elseif showAlly and WG.allySelUnits and WG.allySelUnits[unitID] then
 		    visibleAllySelUnits[#visibleAllySelUnits+1] = unitID
 	    end
     end
-    
+
     return visibleAllySelUnits, visibleSelected
 
 end
@@ -256,9 +264,9 @@ local function DrawHaloFunc()
 	glColor(selectColor)
 	for i=1,#visibleSelected do
 		local unitID = visibleSelected[i]
-		glUnit(unitID,true)
+		glUnit(unitID,true,-1)
 	end
-    
+
 	if not options.useteamcolors.value then glColor(allySelectColor) end
 	for i=1,#visibleAllySelUnits do
 		local unitID = visibleAllySelUnits[i]
@@ -271,12 +279,12 @@ local function DrawHaloFunc()
 				glColor(allySelectColor)
 			end
 		end
-		glUnit(unitID,true)
+		glUnit(unitID,true,-1)
 	end
-    
+
 	local mx, my = spGetMouseState()
     local pointedType, data = spTraceScreenRay(mx, my)
-	if pointedType == 'unit' and spValidUnitID(data) and not spIsUnitIcon(data) then
+	if pointedType == 'unit' and spValidUnitID(data) then -- and not spIsUnitIcon(data) then
 		local teamID = spGetUnitTeam(data)
 		if teamID == spGetMyTeamID() then
 			glColor(myHoverColor)
@@ -285,13 +293,13 @@ local function DrawHaloFunc()
 		else
 			glColor(enemyHoverColor)
 		end
-		
-		glUnit(data, true)
+
+		glUnit(data, true,-1)
     elseif (pointedType == 'feature') and ValidFeatureID(data) then
 		glColor(featureHoverColor)
 		glFeature(data, true)
     end
-  
+
 end
 
 local DrawVisibleUnits
@@ -300,59 +308,51 @@ DrawVisibleUnits = DrawHaloFunc
 
 local MyDrawVisibleUnits = function()
   glClear(GL_COLOR_BUFFER_BIT,0,0,0,0)
-  -- glClear(GL_DEPTH_BUFFER_BIT)
-  --glCulling(GL_FRONT)
   DrawVisibleUnits()
-  --glCulling(GL_BACK)
-  --glCulling(false)
   glColor(1,1,1,1)
 end
 local maskGen = function()
   glClear(GL_COLOR_BUFFER_BIT,0,0,0,0)
   glUseShader(maskGenShader)
   glTexRect(-1-0.25/vsx,1+0.25/vsy,1+0.25/vsx,-1-0.25/vsy)
-  --glTexRect(-1-1/vsx,1+1/vsy,1+1/vsx,-1-1/vsy)
 end
 local blur_h = function()
   glClear(GL_COLOR_BUFFER_BIT,0,0,0,0)
   glUseShader(blurShader_h)
+    glUniform(uniformThicknessX, thickness)
   glTexRect(-1-0.25/vsx,1+0.25/vsy,1+0.25/vsx,-1-0.25/vsy)
-  --glTexRect(-1-1/vsx,1+1/vsy,1+1/vsx,-1-1/vsy)
 end
 local blur_v = function()
-  --glClear(GL_COLOR_BUFFER_BIT,0,0,0,0)
   glUseShader(blurShader_v)
+    glUniform(uniformThicknessY, thickness)
   glTexRect(-1-0.25/vsx,1+0.25/vsy,1+0.25/vsx,-1-0.25/vsy)
-  --glTexRect(-1-1/vsx,1+1/vsy,1+1/vsx,-1-1/vsy)
 end
 
 function widget:DrawWorldPreUnit()
   if Spring.IsGUIHidden() then
 	return
   end
-  -- glCopyToTexture(depthtex, 0, 0, 0, 0, vsx, vsy)
 
   glBlending(true)
-   
+
   if (resChanged) then
     resChanged = false
     if (vsx==1) or (vsy==1) then return end
      glUseShader(blurShader_h)
-    glUniformInt(uniformScreenX,  math.ceil(vsx*0.8) ) --can use these numbers to adjust thickness
+    glUniformInt(uniformScreenX,  vsx )
      glUseShader(blurShader_v)
-    glUniformInt(uniformScreenY,  math.ceil(vsy*0.8) ) --can use these numbers to adjust thickness
+    glUniformInt(uniformScreenY,  vsy )
   end
 
-  glDepthTest(GL.GEQUAL)
-  glActiveFBO(fbo,MyDrawVisibleUnits)
   glDepthTest(false)
+  glActiveFBO(fbo,MyDrawVisibleUnits)
 
   glTexture(offscreentex)
   glRenderToTexture(outlinemasktex, maskGen)
   glRenderToTexture(blurtex, blur_h)
   glTexture(blurtex)
   glRenderToTexture(offscreentex, blur_v)
-  
+
   glBlending(false)
 end
 
@@ -390,8 +390,8 @@ end
 --call ins
 
 function widget:Initialize()
-	showAlly = options.showally.value 
-	
+	showAlly = options.showally.value
+
   if (not gl.CreateShader)or(not gl.CreateFBO) then
     Spring.Echo("Halo widget: your card is unsupported!")
     widgetHandler:RemoveWidget()
@@ -424,33 +424,30 @@ function widget:Initialize()
     fragment = [[
       uniform sampler2D tex0;
       uniform int screenX;
-
-      const vec2 kernel = vec2(0.6,0.7);
+      uniform float thickness;
 
       void main(void) {
         vec2 texCoord  = vec2(gl_TextureMatrix[0] * gl_TexCoord[0]);
         gl_FragColor = vec4(0.0);
 
-        int i;
-        int n = 1;
-        float pixelsize = 1.0/float(screenX);
-        for(i = 1; i < 3; ++i){
-          gl_FragColor += kernel[n] * texture2D(tex0, vec2(texCoord.s + i*pixelsize,texCoord.t) );
-          --n;
-        }
+        float pixelsize = thickness/float(screenX);
+        gl_FragColor += 0.6 * texture2D(tex0, vec2(texCoord.s + 2.0*pixelsize,texCoord.t) );
+        gl_FragColor += 0.7 * texture2D(tex0, vec2(texCoord.s + pixelsize,texCoord.t) );
 
         gl_FragColor += texture2D(tex0, texCoord );
 
-        n = 0;
-        for(i = -2; i < 0; ++i){
-          gl_FragColor += kernel[n] * texture2D(tex0, vec2(texCoord.s + i*pixelsize,texCoord.t) );
-          ++n;
-        }
+        gl_FragColor += 0.7 * texture2D(tex0, vec2(texCoord.s - 1.0*pixelsize,texCoord.t) );
+        gl_FragColor += 0.6 * texture2D(tex0, vec2(texCoord.s - 2.0*pixelsize,texCoord.t) );
+
+        gl_FragColor.rgb /= max(max(gl_FragColor.r, gl_FragColor.g), max(gl_FragColor.b, 1.0));
       }
     ]],
     uniformInt = {
       tex0 = 0,
-      screenX = math.ceil(vsx*0.5),
+      screenX = vsx,
+    },
+    uniformFloat = {
+      thickness = 1.0,
     },
   })
 
@@ -464,33 +461,30 @@ function widget:Initialize()
   blurShader_v = gl.CreateShader({
     fragment = [[      uniform sampler2D tex0;
       uniform int screenY;
-
-      const vec2 kernel = vec2(0.6,0.7);
+      uniform float thickness;
 
       void main(void) {
         vec2 texCoord  = vec2(gl_TextureMatrix[0] * gl_TexCoord[0]);
         gl_FragColor = vec4(0.0);
 
-        int i;
-        int n = 1;
-        float pixelsize = 1.0/float(screenY);
-        for(i = 0; i < 2; ++i){
-          gl_FragColor += kernel[n] * texture2D(tex0, vec2(texCoord.s,texCoord.t + i*pixelsize) );
-          --n;
-        }
+        float pixelsize = thickness/float(screenY);
+        gl_FragColor += 0.6 * texture2D(tex0, vec2(texCoord.s,texCoord.t + 2.0*pixelsize) );
+        gl_FragColor += 0.7 * texture2D(tex0, vec2(texCoord.s,texCoord.t + pixelsize) );
 
         gl_FragColor += texture2D(tex0, texCoord );
 
-        n = 0;
-        for(i = -2; i < 0; ++i){
-          gl_FragColor += kernel[n] * texture2D(tex0, vec2(texCoord.s,texCoord.t + i*pixelsize) );
-          ++n;
-        }
+        gl_FragColor += 0.7 * texture2D(tex0, vec2(texCoord.s,texCoord.t - 1.0*pixelsize) );
+        gl_FragColor += 0.6 * texture2D(tex0, vec2(texCoord.s,texCoord.t - 2.0*pixelsize) );
+
+        gl_FragColor.rgb /= max(max(gl_FragColor.r, gl_FragColor.g), max(gl_FragColor.b, 1.0));
       }
     ]],
     uniformInt = {
       tex0 = 0,
-      screenY = math.ceil(vsy*0.5),
+      screenY = vsy,
+    },
+    uniformFloat = {
+      thickness = 1.0,
     },
   })
 
@@ -523,6 +517,8 @@ function widget:Initialize()
 
   uniformScreenX  = gl.GetUniformLocation(blurShader_h, 'screenX')
   uniformScreenY  = gl.GetUniformLocation(blurShader_v, 'screenY')
+  uniformThicknessX = gl.GetUniformLocation(blurShader_h, 'thickness')
+  uniformThicknessY = gl.GetUniformLocation(blurShader_v, 'thickness')
 
   fbo = gl.CreateFBO()
 
@@ -540,8 +536,8 @@ function widget:Initialize()
     glTexture(1, false)
     glUseShader(0)
   end)
-  
-  
+
+
   ShowSelectionSquares(false)
 end --init
 
@@ -551,17 +547,9 @@ function widget:ViewResize(viewSizeX, viewSizeY)
 
   fbo.color0 = nil
 
-  gl.DeleteTexture(depthtex or 0)
   gl.DeleteTextureFBO(offscreentex or 0)
   gl.DeleteTextureFBO(blurtex or 0)
   gl.DeleteTextureFBO(outlinemasktex or 0)
-
-  depthtex = gl.CreateTexture(vsx,vsy, {
-    border = false,
-    format = GL_DEPTH_COMPONENT24,
-    min_filter = GL.NEAREST,
-    mag_filter = GL.NEAREST,
-  })
 
   offscreentex = gl.CreateTexture(vsx,vsy, {
     border = false,
@@ -590,7 +578,6 @@ function widget:ViewResize(viewSizeX, viewSizeY)
     fbo = true,
   })
 
-  fbo.depth  = depthtex
   fbo.color0 = offscreentex
   fbo.drawbuffers = GL_COLOR_ATTACHMENT0_EXT
 
@@ -599,7 +586,6 @@ end
 
 
 function widget:Shutdown()
-  gl.DeleteTexture(depthtex)
   if (gl.DeleteTextureFBO) then
     gl.DeleteTextureFBO(offscreentex)
     gl.DeleteTextureFBO(blurtex)
@@ -619,7 +605,7 @@ function widget:Shutdown()
 
   gl.DeleteList(enter2d)
   gl.DeleteList(leave2d)
-  
+
     ShowSelectionSquares(true)
 end
 
