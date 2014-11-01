@@ -125,7 +125,7 @@ function widget:Update(dt)
 	if gameOver then
 		return
 	end
-	if (Spring.GetGameSeconds()>0) then
+	if (Spring.GetGameSeconds()>=0) then
 		if not seedInitialized then
 			math.randomseed(os.clock()* 100)
 			seedInitialized=true
