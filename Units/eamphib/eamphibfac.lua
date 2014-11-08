@@ -80,7 +80,7 @@ local unitDef                      = {
 		"eamphibengineer", --new
 		"eamphibbuggy", --new
 		"eamphibriot", --new
-		"eamphibaa",
+--		"eamphibaa",
 		"eamphibmedtank", --new
 		"eamphibrock", --new
 		"eamphibarty", --new

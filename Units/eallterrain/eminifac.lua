@@ -86,7 +86,7 @@ local unitDef                      = {
 		"eallterrengineer", --new
 		"eallterrlight",
 		"eallterrriot",
-		"eallterraa",
+--		"eallterraa",
 		"eallterrmed",
 		"eallterrheavy",
 		"eallterrassault",

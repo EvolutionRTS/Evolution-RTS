@@ -101,12 +101,12 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "antiarmorrockets",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 		[2]                      = {
 			def                  = "antiarmorrocketssalvo",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 	},

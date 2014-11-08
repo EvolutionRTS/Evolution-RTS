@@ -114,12 +114,12 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "missletankweapon",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "BUILDING LIGHT",
 		},
 		[2]                      = {
 			def                  = "missletankweapon",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 	},

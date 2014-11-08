@@ -106,7 +106,7 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "heavytankweapon",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "BUILDING WALL",
 		},
 	},

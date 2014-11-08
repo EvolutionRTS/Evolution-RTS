@@ -111,7 +111,7 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "heavytankweapon",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "BUILDING WALL",
 		},
 	},

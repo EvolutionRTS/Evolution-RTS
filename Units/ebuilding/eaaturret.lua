@@ -5,6 +5,8 @@ local unitName                    = "eaaturret"
 
 --------------------------------------------------------------------------------
 
+local supply					 = [[2]]
+
 local unitDef                     = {
 
 	buildCostEnergy               = 0,
@@ -19,7 +21,8 @@ local unitDef                     = {
 	Building
 	112.5 Damage vs Armored
 	75 Damage vs Light/Building
-	]],
+	
+	Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "MEDIUM_BUILDING",
@@ -68,6 +71,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",
 		armortype                 = "building",

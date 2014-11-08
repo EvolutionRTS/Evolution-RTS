@@ -101,12 +101,12 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "riottankempweapon",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "WALL",
 		},
 		[2]                      = {
 			def                  = "riottankshotgun",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "LIGHT ARMORED",
 			badTargetCategory    = "WALL",
 		},
 	},
