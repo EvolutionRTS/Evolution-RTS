@@ -104,7 +104,6 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "lighttankweapon",
-			badTargetCategory    = "VTOL",
 			badTargetCategory    = "BUILDING ARMORED WALL",
 		},
 	},

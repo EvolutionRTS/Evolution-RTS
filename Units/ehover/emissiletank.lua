@@ -114,12 +114,12 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "missletankweapon",
-			onlyTargetCategory   = "LIGHT ARMORED",
+			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT",
 		},
 		[2]                      = {
 			def                  = "missletankweapon",
-			onlyTargetCategory   = "LIGHT ARMORED",
+			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 	},
