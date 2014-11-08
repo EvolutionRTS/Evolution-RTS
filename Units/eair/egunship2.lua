@@ -30,7 +30,7 @@ local unitDef                    = {
 	category                     = "LIGHT VTOL",
 	collide                      = true,
 	corpse                       = "ammobox",
-	cruiseAlt                    = 300,
+	cruiseAlt                    = 120,
 	description                  = [[Gunship Tank Destroyer
 	Armored
 	100 Damage vs Light/Armored

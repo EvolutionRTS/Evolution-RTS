@@ -30,7 +30,7 @@ local unitDef                    = {
 	category                     = "ARMORED VTOL",
 	collide                      = true,
 	corpse                       = "ammobox",
-	cruiseAlt                    = 350,
+	cruiseAlt                    = 140,
 	description                  = [[Bomber
 	Armored
 	200 Damage vs Buildings
