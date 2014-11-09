@@ -114,7 +114,7 @@ There can only be one!]],
 		"ekmar",
 		"elightturret2", --new
 		"eheavyturret2", --new
-		"eaaturret",
+		"eartyturret",
 		"euwturret",
 		"ecruisesilo",
 		"eshieldgen",
