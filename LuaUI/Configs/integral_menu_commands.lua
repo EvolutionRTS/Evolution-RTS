@@ -38,7 +38,7 @@ local defense = {
 	elightturret2 = {order = 0, row = 1},
 	eheavyturret2 = {order = 1, row = 1},
 	euwturret = {order = 2, row = 1},
-	eaaturret = {order = 3, row = 1},
+	eartyturret = {order = 3, row = 1},
 	emine = {order = 4, row = 1},
 	ekmar = {order = 0, row = 2},
 	eshieldgen = {order = 1, row = 2},
