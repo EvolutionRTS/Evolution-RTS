@@ -37,16 +37,13 @@ local unitDef                    = {
 	50 Damage vs Light/Armored
 
 	Requires +10 Power
-	Uses +10 Supply
-
-	Must be forcefired on the target]],
+	Uses +10 Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "hugeExplosionGeneric",
 	footprintX                   = 7,
 	footprintZ                   = 7,
-	fireState			     	 = 0,
 	floater                      = true,
 	hoverAttack                  = true,
 	iconType                     = "assault",
