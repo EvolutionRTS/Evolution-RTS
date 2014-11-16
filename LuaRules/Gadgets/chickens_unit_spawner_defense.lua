@@ -95,7 +95,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	local showScoresOnce		= true
 	local gameOver				= false
 	local qMove					= false
-	local warningMessage		= false
 	local computerTeams			= {}
 	local humanTeams			= {}
 	local disabledUnits			= {}
@@ -114,14 +113,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	local chickenTargets		= {}
 	local burrows				= {}		
 	local AIfaction				
-
-	-- local EMP_GOO = {}
-	-- EMP_GOO[WeaponDefNames['chickenr1_goolauncher'].id] = WeaponDefNames['chickenr1_goolauncher'].damages[1]
-	-- EMP_GOO[WeaponDefNames['weaver_death'].id] = WeaponDefNames['weaver_death'].damages[1]
-	-- local LOBBER = UnitDefNames["chickenr1"].id
-	-- local JUNO = WeaponDefNames["juno_pulse"].id
-	-- local KROW_ID = UnitDefNames["corcrw"].id
-	-- local KROW_LASER = "krow_laser_index"
 	
 	local spawnerConfig = include("gamedata/configs/survival_settings.lua")
 		
@@ -142,17 +133,10 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	for _, teamID in ipairs(teams) do
 		local faction
-		Spring.Echo("-------------Survival Debug Messages---------------- ")		
-		Spring.Echo("TEAM ",Spring.GetAIInfo(teamID))
-		Spring.Echo("TEAM ",Spring.GetTeamInfo(teamID))
-		Spring.Echo("---------------------------------------------------- ")
 
 		if(GetTeamLuaAI(teamID) ~= "") then -- we found a lua ai, lets get his team!
 			_, _, _, _, hooffaction = Spring.GetTeamInfo(teamID)	 
 			AIfaction = hooffaction
-				 Spring.Echo("AI FACTION: ")
-				 Spring.Echo(hooffaction)
-				 Spring.Echo(GetTeamLuaAI(teamID))
 		end
 			
 		local teamLuaAI = GetTeamLuaAI(teamID)
@@ -175,20 +159,10 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	luaAI = modes[highestLevel]
 
-	Spring.Echo("Spring.GetModOptions()",#Spring.GetModOptions())
-	Spring.Echo(chickenTeamID, "chickenTeamID","Spring.GetModOptions()",Spring.GetModOptions(),
-	"materialstorage", Spring.GetModOptions()["materialstorage"],
-	"StartMetal", Spring.GetModOptions()["startmetal"])
-
 	local gaiaTeamID	 = GetGaiaTeamID()
 	if not chickenTeamID then
-		if	Spring.GetModOptions()["materialstorage"] == nil and 
-			Spring.GetModOptions()["startmetal"] == nil then
-			chickenTeamID = gaiaTeamID
-			warningMessage = true
-		else -- no chickens, lets go!
-			return;
-		end
+		-- no chickens, lets go!
+		return
 	else
 		computerTeams[gaiaTeamID] = nil
 	end
@@ -202,8 +176,6 @@ if (gadgetHandler:IsSyncedCode()) then
 		return false
 	end
 
-	Spring.Echo(chickenTeamID,	Spring.GetModOptions()["materialstorage"] == nil and 
-								Spring.GetModOptions()["startmetal"] == nil)
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	--
@@ -255,11 +227,7 @@ if (gadgetHandler:IsSyncedCode()) then
 	Spring.Echo(AIfaction, " AIfaction")
 	VFS.Include("gamedata/configs/" .. AIfaction .. "_spawn_defs.lua")
 	
-		-- Spring.Echo("bonusTurret")
-		-- Spring.Echo(bonusTurret)
-
 	local function SetGlobals(difficulty)
-		--Spring.Echo(difficulty)
 		for key, value in pairs(gadget.difficulties[difficulty]) do
 			gadget[key] = value
 		end
@@ -457,7 +425,6 @@ if (gadgetHandler:IsSyncedCode()) then
 		if (not targetID) or (GetUnitTeam(targetID) == chickenTeamID) or (GetUnitTeam(chickenID) ~= chickenTeamID) then 
 			return 
 		end
-		--debug--Spring.Echo(t .. " addChickenTarget " .. chickenID .. "," .. targetID)
 		if chickenTargets[chickenID] and chickenTargets[chickenTargets[chickenID]] then
 			chickenTargets[chickenTargets[chickenID]][chickenID] = nil
 		end
@@ -474,7 +441,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	local function AttackNearestEnemy(unitID, unitDefID, unitTeam)
 		local targetID = GetUnitNearestEnemy(unitID)
 		if (targetID) and (not GetUnitIsDead(targetID)) and (not GetUnitNeutral(targetID)) then
-		--debug--Spring.Echo(t .. " AttackNearestEnemy " .. unitID .. " -> " .. targetID)
 		local defID = GetUnitDefID(targetID)
 		if UnitDefs[defID] and (UnitDefs[defID].speed > 75) then
 			return false
@@ -531,9 +497,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		else
 			targetCacheCount = targetCacheCount + 1
 		end	
-		--debug--Spring.Echo(t .. " ChooseTarget " .. targetCache)
 		if targetCache then
-			--Spring.Echo(GetUnitPosition(targetCache))
 			return {GetUnitPosition(targetCache)}	
 		else
 			return {100,100,100}
@@ -715,8 +679,6 @@ if (gadgetHandler:IsSyncedCode()) then
 
 
 	local function Wave()
-		--debug--Spring.Echo(t .. "Wave()")
-		
 		if gameOver then 
 			return 
 		end
@@ -846,7 +808,6 @@ if (gadgetHandler:IsSyncedCode()) then
 			return 
 		end
 		if (unitTeam == chickenTeamID) and (chickenDefTypes[unitDefID] or (unitID == queenID)) then
-		--debug--Spring.Echo(t .. " unitIdle " .. unitID)
 			if not AttackNearestEnemy(unitID, unitDefID, unitTeam) then
 				idleOrderQueue[unitID] = {cmd = CMD.FIGHT, params = ChooseTarget(), opts = {}}
 				if targetCache then
@@ -868,10 +829,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, 
 								weaponID, attackerID, attackerDefID, attackerTeam)
 									
-		-- if EMP_GOO[weaponID] and (unitTeam ~= chickenTeamID) and (lobberEMPTime > 0) then
-		-- stunUnit(unitID, ((damage / EMP_GOO[weaponID]) * lobberEMPTime))
-		-- end
-		 
 		if chickenBirths[attackerID] then 
 			chickenBirths[attackerID] = t 
 		end
@@ -910,7 +867,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					if queenResistance[weaponID].notify == 0 then
 						local weaponName
 						weaponName = WeaponDefs[weaponID].description
-						Spring.Echo("Battleship is becoming resistant to " .. UnitDefs[attackerDefID].humanName .. "'s attacks (" .. weaponName .. ")")
+						Spring.Echo("Queen is becoming resistant to " .. UnitDefs[attackerDefID].humanName .. "'s attacks (" .. weaponName .. ")")
 						queenResistance[weaponID].notify = 1
 					end
 					local qHealth = GetUnitHealth(unitID)
@@ -954,11 +911,6 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	function gadget:GameStart()
 		Spring.Echo("GameStart() chickenTeamID",chickenTeamID)
-		if warningMessage then 
-			Spring.Echo("Warning: No Survival bot team available, adding a Survival bot")
-			Spring.Echo("(Assigning Survival bot Team to Gaia)")
-			Spring.SendCommands("endgraph 0") -- it's an ugly broken hack, but the only one I found
-		end
 		DisableComputerUnits()
 		if (burrowSpawnType == "initialbox") or (burrowSpawnType == "alwaysbox") then
 			local _,_,_,_,_,luaAllyID = Spring.GetTeamInfo(chickenTeamID)
@@ -1046,6 +998,8 @@ if (gadgetHandler:IsSyncedCode()) then
 				SendToUnsynced("ChickenEvent")
 				_G.chickenEventArgs = nil
 				_,queenMaxHP = GetUnitHealth(queenID)
+				queenMaxHP = queenMaxHP * queenHealthMult
+				Spring.SetUnitMaxHealth(queenID, queenMaxHP)
 				SetUnitExperience(queenID, (expMod*1.5))
 				chickenSpawnRate = (chickenSpawnRate * 0.75)	 
 			end
@@ -1112,7 +1066,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 	function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
-		--debug--Spring.Echo(t .. " UnitDestroyed " .. unitID)
 		if gameOver then 
 			return 
 		end
@@ -1135,9 +1088,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
 		if chickenTargets[unitID] then
 			if (unitTeam ~= chickenTeamID) then
-				--debug--Spring.Echo(t .. " chickenTargets " .. unitID)
 				for chickenID in pairs(chickenTargets[unitID]) do
-					--debug--Spring.Echo(t .. " stopChicken " .. chickenID)
 					if GetUnitDefID(chickenID) then 
 						idleOrderQueue[chickenID] = {cmd = CMD.STOP, params = {}, opts = {}}	 
 					end
