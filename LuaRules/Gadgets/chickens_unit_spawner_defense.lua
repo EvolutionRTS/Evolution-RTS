@@ -829,10 +829,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, 
 								weaponID, attackerID, attackerDefID, attackerTeam)
 									
-		-- if EMP_GOO[weaponID] and (unitTeam ~= chickenTeamID) and (lobberEMPTime > 0) then
-		-- stunUnit(unitID, ((damage / EMP_GOO[weaponID]) * lobberEMPTime))
-		-- end
-		 
 		if chickenBirths[attackerID] then 
 			chickenBirths[attackerID] = t 
 		end
@@ -1002,6 +998,8 @@ if (gadgetHandler:IsSyncedCode()) then
 				SendToUnsynced("ChickenEvent")
 				_G.chickenEventArgs = nil
 				_,queenMaxHP = GetUnitHealth(queenID)
+				queenMaxHP = queenMaxHP * queenHealthMult
+				Spring.SetUnitMaxHealth(queenID, queenMaxHP)
 				SetUnitExperience(queenID, (expMod*1.5))
 				chickenSpawnRate = (chickenSpawnRate * 0.75)	 
 			end
