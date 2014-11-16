@@ -182,13 +182,8 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	local gaiaTeamID	 = GetGaiaTeamID()
 	if not chickenTeamID then
-		if	Spring.GetModOptions()["materialstorage"] == nil and 
-			Spring.GetModOptions()["startmetal"] == nil then
-			chickenTeamID = gaiaTeamID
-			warningMessage = true
-		else -- no chickens, lets go!
-			return;
-		end
+		-- no chickens, lets go!
+		return
 	else
 		computerTeams[gaiaTeamID] = nil
 	end
