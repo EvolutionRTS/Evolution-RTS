@@ -12,7 +12,7 @@ burrowName           = "burrow"   -- burrow unit name
 maxAge               = 120      -- chicken die at this age, seconds
 queenName 		     = Spring.GetModOptions().mo_queendifficulty or "queen"
 burrowDef            = UnitDefNames[burrowName].id
-defenderChance       = 0.5       -- probability of spawning a single turret
+defenderChance       = 1       -- probability of spawning a single turret
 maxTurrets           = 6   		 -- Max Turrets per burrow
 queenSpawnMult       = 1         -- how many times bigger is a queen hatch than a normal burrow hatch
 burrowSpawnRate      = 20
@@ -21,7 +21,7 @@ minBaseDistance      = 1000
 maxBaseDistance      = 7200
 chickensPerPlayer    = 1
 spawnChance          = 0.5
-bonusTurret          = "eaaturret" -- Turret that gets spawned when a burrow dies
+bonusTurret          = "eheavyturret2", -- Turret that gets spawned when a burrow dies
 angerBonus           = 204
 expStep 			 = 0.0625
 lobberEMPTime        = 4
@@ -56,7 +56,6 @@ local chickenTypes = {
   eriottank2	=  true,
   eheavytank3	=  true,
   emissiletank	=  true,
-  eaatank		=  true,
   eartytank		=  true,
   efatso2		=  true,
   ebomb			=  true,
@@ -75,7 +74,6 @@ local chickenTypes = {
   eamphibmedtank	=  true,
   eamphibriot	=  true,
   eamphibrock	=  true,
-  eamphibaa		= true,
   eexkrabgroth	=  true,
   eextankdestroyer = true,
   
@@ -117,7 +115,6 @@ local defenders = {
   ekmar			= true,
 }
 
-addWave(1,{"1 eaatank"})
 addWave(1,{"1 elighttank3"})
 addWave(1,{"1 eamphibbuggy"})
 addWave(1,{"1 eallterrlight"})
@@ -125,30 +122,24 @@ addWave(1,{"1 eallterrlight"})
 addWave(2,{"2 elighttank3"})
 addWave(2,{"1 eheavytank3"})
 addWave(2,{"1 eamphibmedtank"})
-addWave(2,{"2 eaatank"})
 
 addWave(3,{"2 elighttank3"})
 addWave(3,{"1 eheavytank3"})
 addWave(3,{"1 emissiletank"})
-addWave(3,{"2 eaatank"})
 
 addWave(4,{"2 elighttank3"})
 addWave(4,{"1 eheavytank3"})
 addWave(4,{"1 emissiletank"})
-addWave(4,{"2 eamphibaa"})
 addWave(4,{"2 ebomb"})
-addWave(4,{"2 eaatank"})
 
 addWave(5,{"2 elighttank3"})
 addWave(5,{"2 eamphibmedtank"})
-addWave(5,{"2 eaatank"})
 
 addWave(6,{"2 elighttank3"})
 addWave(6,{"1 eriottank2"})
 addWave(6,{"1 eheavytank3"})
 addWave(6,{"1 eallterrheavy"})
 addWave(6,{"1 eartytank"})
-addWave(6,{"2 eaatank"})
 
 addWave(7,{"2 egunship2"})
 addWave(7,{"1 ebomber"})
@@ -161,7 +152,6 @@ addWave(8,{"2 eamphibrock"})
 addWave(6,{"3 eartytank"})
 addWave(6,{"3 eallterrassault"})
 addWave(6,{"3 eamphibarty"})
-addWave(8,{"2 eamphibaa"})
 addWave(8,{"1 ebomber"})
 
 addWave(9,{"3 elighttank3"})

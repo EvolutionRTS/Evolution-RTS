@@ -1,8 +1,8 @@
 local spawnerSettings	= {
 	smallUnit		= "elighttank3",--"aacar"
-	mediumUnit		= "emediumtank3",--"ez8"
+	mediumUnit		= "eriottank2",--"ez8"
 	largeUnit		= "eheavytank3",--xamel
-	referenceUnit	= "efatso2",--fedmechist
+	referenceUnit	= "eheavytank3",--fedmechist
 	
 	testUnit		= "elighttank3",
 	
@@ -24,7 +24,7 @@ local spawnerSettings	= {
 	defenders = { 
 		elightturret2	= true,
 		eheavyturret2	= true,
-		eaaturret		= true,
+		eartyturret		= true,
 		ekmar			= true,
 	}
 }
