@@ -111,7 +111,7 @@ chickenSwitches	= {
 local defenders = { 
   elightturret2 = true,
   eheavyturret2 = true,
-  eaaturret		= true,
+  eartyturret	= true,
   ekmar			= true,
 }
 
