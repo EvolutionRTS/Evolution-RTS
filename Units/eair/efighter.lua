@@ -59,7 +59,6 @@ local unitDef                    = {
 	metalStorage                 = 0,
 	moverate1                    = "8",
 	name                         = "Koyote",
-	noChaseCategory              = "NOTAIR",
 	objectName                   = "efighter2.s3o",
 	script			             = "efighter2.cob",
 	radarDistance                = 0,
