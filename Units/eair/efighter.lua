@@ -36,8 +36,8 @@ local unitDef                    = {
 	200 Damage vs Light/Armored/s
 	75 Damage vs Building/s
 	
-	Requires +5 Power
-	Uses +5 Supply]],
+	Requires +4 Power
+	Uses +4 Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -65,7 +65,7 @@ local unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericWhite",
 	side                         = "ARM",
-	sightDistance                = 500,
+	sightDistance                = 850,
 	smoothAnim                   = true,
 	sonarDistance                = 0,
 	turnRate                     = 1500,
@@ -101,10 +101,10 @@ local unitDef                    = {
 	customParams                 = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
-		RequireTech              = "5 Power",
+		RequireTech              = "4 Power",
 		armortype                = "light",
 		nofriendlyfire	         = "1",
-		supply_cost              = 5,
+		supply_cost              = 4,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -116,7 +116,7 @@ local unitDef                    = {
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 local weapon1Damage              = 20
-local weapon1AOE				 = 5
+local weapon1AOE				 = 50
 
 local weaponDefs                 = {
 	antiaircannon                = {
@@ -141,7 +141,7 @@ local weaponDefs                 = {
 		name                     = "Laser",
 		paralyzer		         = true,
 		paralyzetime	         = 2.5,
-		range                    = 500,
+		range                    = 850,
 		reloadtime               = 0.1,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0.5 0.5 0.5",
