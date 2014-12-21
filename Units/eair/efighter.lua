@@ -115,8 +115,8 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 20
-local weapon1AOE				 = 50
+local weapon1Damage              = 50
+local weapon1AOE				 = 100
 
 local weaponDefs                 = {
 	antiaircannon                = {
@@ -125,11 +125,10 @@ local weaponDefs                 = {
 		avoidFriendly            = false,
 		collideFeature           = false,
 		collideFriendly          = false,
-		canAttackGround          = false,
 		coreThickness            = 0.4,
 		burnblow		         = true,
 		--	cegTag               = "mediumcannonweapon3",
-		duration                 = 0.025,
+		duration                 = 0.1,
 		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		fallOffRate              = 1,

@@ -63,7 +63,6 @@ local unitDef                    = {
 	metalStorage                 = 0,
 	moverate1                    = "8",
 	name                         = "Wildcat",
-	noChaseCategory              = "VTOL",
 	objectName                   = "egunship3.s3o",
 	script			             = "egunship3.cob",
 	radarDistance                = 0,
@@ -98,8 +97,8 @@ local unitDef                    = {
 		[1]                      = {
 			def                  = "gunshipweapon",
 			mainDir              = "0 0 1",
-			maxAngleDif          = 90,
-			OnlyTargetCategory   = "NOTAIR AMPHIB",
+			maxAngleDif          = 180,
+			OnlyTargetCategory   = "LIGHT ARMORED",
 			BadTargetCategory    = "BUILDING WALL",
 			noChaseCategory      = "VTOL",
 		},
@@ -136,7 +135,48 @@ local weapon2Damage              = 100
 local weapon2AOE				 = 1
 
 local weaponDefs                 = {
-	gunshipweapon                = {
+
+	gunshipweapon             = {
+		AreaOfEffect             = weapon1AOE,
+		avoidFriendly            = false,
+		avoidFeature             = false,
+		collideFriendly          = false,
+		collideFeature           = false,
+		cegTag                   = "missiletrailgunshiplesssmokey",
+		explosionGenerator       = "custom:genericshellexplosion-medium",
+		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		edgeEffectiveness        = 0.1,
+		fireStarter              = 70,
+		tracks                   = true,
+		impulseBoost             = 0,
+		impulseFactor            = 0,
+		interceptedByShieldType  = 4,
+		model                    = "missilesmalllauncher.s3o",
+		name                     = "Rockets",
+		range                    = 520,
+		reloadtime               = 1,
+		weaponType		         = "MissileLauncher",
+		smokeTrail               = false,
+		soundHit                 = "bombhit.wav",
+		soundHitVolume	         = 10,
+		soundStart               = "18395_inferno_rltx.wav",
+		soundStartVolume         = 10,
+		startVelocity            = 500,
+		tolerance                = 8000,
+		turnRate                 = 20000,
+		turret                   = true,
+		weaponAcceleration       = 500,
+		flightTime               = 5,
+		weaponVelocity           = 2000,
+		customparams             = {
+			damagetype		     = "egunship2",  
+		},      
+		damage                   = {
+			default              = weapon1Damage,
+		},
+	},
+
+	oldgunshipweapon                = {
 		badTargetCategory        = [[BUILDING]],
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
