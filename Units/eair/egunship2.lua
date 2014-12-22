@@ -98,7 +98,7 @@ local unitDef                    = {
 			def                  = "gunshipweapon",
 			mainDir              = "0 0 1",
 			maxAngleDif          = 180,
-			OnlyTargetCategory   = "LIGHT ARMORED",
+			OnlyTargetCategory   = "LIGHT ARMORED BUILDING",
 			BadTargetCategory    = "BUILDING WALL",
 			noChaseCategory      = "VTOL",
 		},

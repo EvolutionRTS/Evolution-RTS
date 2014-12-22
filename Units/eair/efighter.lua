@@ -33,8 +33,8 @@ local unitDef                    = {
 	cruiseAlt                    = 200,
 	description                  = [[Paralysis Gunship
 	Light
-	200 Damage vs Light/Armored/s
-	75 Damage vs Building/s
+	500 Damage vs Light/Armored/s
+	125 Damage vs Building/s
 	
 	Requires +4 Power
 	Uses +4 Supply]],
@@ -94,7 +94,7 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "antiaircannon",
+			def                  = "aircannon",
 			badTargetCategory    = "BUILDING VTOL",
 		},
 	},
@@ -119,16 +119,16 @@ local weapon1Damage              = 50
 local weapon1AOE				 = 100
 
 local weaponDefs                 = {
-	antiaircannon                = {
+	aircannon   	             = {
 		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
 		collideFriendly          = false,
-		coreThickness            = 0.4,
+		coreThickness            = 0.5,
 		burnblow		         = true,
-		--	cegTag               = "mediumcannonweapon3",
-		duration                 = 0.1,
+		--cegTag                   = "railgun",
+		duration                 = 0.05,
 		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		fallOffRate              = 1,
@@ -143,16 +143,16 @@ local weaponDefs                 = {
 		range                    = 850,
 		reloadtime               = 0.1,
 		WeaponType               = "LaserCannon",
-		rgbColor                 = "0.5 0.5 0.5",
+		rgbColor                 = "0 0 1",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
 		soundstart               = "tmediumtankfire.wav",
 		texture1                 = "shot",
 		texture2                 = "empty",
-		thickness                = 6,
+		thickness                = 15,
 		tolerance                = 10000,
 		turret                   = false,
-		weaponVelocity           = 2500,
+		weaponVelocity           = 5000,
 		customparams             = {
 			damagetype		     = "efighter",  
 		}, 
