@@ -13,10 +13,10 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 0.5,
+	acceleration                 = 5,
 	airStrafe                    = true,
 	bankscale                    = "1",
-	brakeRate                    = 0.5,
+	brakeRate                    = 5,
 	buildCostEnergy              = 1,
 	buildCostMetal               = 5,
 	buildTime                    = 2.5,
@@ -66,7 +66,7 @@ local unitDef                    = {
 	sightDistance                = 300,
 	smoothAnim                   = true,
 	stealth                      = true,
-	turnRate                     = 920,
+	turnRate                     = 5000,
 	unitname                     = "edrone",
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

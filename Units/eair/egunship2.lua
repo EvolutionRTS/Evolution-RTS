@@ -13,9 +13,9 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 0.5,
+	acceleration                 = 5,
 	airStrafe                    = true,
-	brakeRate                    = 0.5,
+	brakeRate                    = 5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 35,
 	buildTime                    = 2.5,
@@ -71,7 +71,7 @@ local unitDef                    = {
 	side                         = "CORE",
 	sightDistance                = 800,
 	smoothAnim                   = true,
-	turnRate                     = 920,
+	turnRate                     = 5000,
 	unitname                     = "egunship2",
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

@@ -13,9 +13,9 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 0.2,
+	acceleration                 = 5,
 	airStrafe                    = true,
-	brakeRate                    = 3.5,
+	brakeRate                    = 5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 80,
 	buildTime                    = 2.5,
@@ -72,7 +72,7 @@ local unitDef                    = {
 	showNanoSpray                = false,
 	sightDistance                = 600,
 	smoothAnim                   = true,
-	turnRate                     = 920,
+	turnRate                     = 5000,
 	unitname                     = "eairengineer",
 	unitnumber                   = "148",
 	workerTime                   = 1,

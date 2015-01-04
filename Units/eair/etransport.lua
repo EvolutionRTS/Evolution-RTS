@@ -13,10 +13,10 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 0.5,
+	acceleration                 = 5,
 	airStrafe                    = true,
 	airHoverFactor	             = 0,
-	brakeRate                    = 0.5,
+	brakeRate                    = 5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 20,
 	builder                      = false,
@@ -47,7 +47,6 @@ local unitDef                    = {
 	holdSteady                   = true,
 	--  hoverAttack              = true,
 	icontype                     = "etransport",
-	maxAcc                       = 0.3,
 	maxDamage                    = 550,
 	maxSlope                     = 60,
 	maxVelocity                  = 18,
@@ -65,7 +64,7 @@ local unitDef                    = {
 	transportMass                = 10000,
 	transportSize                = 6,
 	--  transportUnloadMethod    = 1,
-	turnRate                     = 900,
+	turnRate                     = 5000,
 	unitname                     = "etransport",
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

@@ -13,9 +13,9 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 0.5,
+	acceleration                 = 5,
 	airStrafe                    = true,
-	brakeRate                    = 0.5,
+	brakeRate                    = 5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 40,
 	builder                      = false,
@@ -46,7 +46,6 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	isTargetingUpgrade           = false,
-	maxAcc                       = 0.5,
 	maxDamage                    = 320,
 	maxSlope                     = 10,
 	maxVelocity                  = 20,
@@ -64,7 +63,7 @@ local unitDef                    = {
 	side                         = "ARM",
 	sightDistance                = 750,
 	smoothAnim                   = true,
-	turnRate                     = 800,
+	turnRate                     = 5000,
 	unitname                     = "escout",
 	workerTime                   = 0,
 	sfxtypes                     = { 

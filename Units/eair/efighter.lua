@@ -13,10 +13,10 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 0.5,
+	acceleration                 = 5,
 	airStrafe                    = true,
 	bankscale                    = "1",
-	brakeRate                    = 0.5,
+	brakeRate                    = 5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 30,
 	buildTime                    = 2.5,
@@ -68,7 +68,7 @@ local unitDef                    = {
 	sightDistance                = 850,
 	smoothAnim                   = true,
 	sonarDistance                = 0,
-	turnRate                     = 1500,
+	turnRate                     = 5000,
 	unitname                     = "efighter",
 	workerTime                   = 0,
 	sfxtypes                     = { 

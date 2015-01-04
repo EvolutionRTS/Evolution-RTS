@@ -13,10 +13,10 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 0.2,
+	acceleration                 = 5,
 	airStrafe                    = true,
 	BadTargetCategory            = "VTOL",
-	brakeRate                    = 0.2,
+	brakeRate                    = 5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 40,
 	builder                      = false,
@@ -50,7 +50,6 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	loopbackattack               = false,
-	maxAcc                       = 0.18,
 	maxDamage                    = 540,
 	maxSlope                     = 10,
 	maxVelocity                  = 11,
@@ -68,7 +67,7 @@ local unitDef                    = {
 	sightDistance                = 900,
 	smoothAnim                   = true,
 	stealth                      = false,
-	turnRate                     = 400,
+	turnRate                     = 5000,
 	unitname                     = "ebomber",
 	workerTime                   = 0,
 	sfxtypes                     = { 
