@@ -13,10 +13,10 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 5,
+	acceleration                 = 0.5,
 	airStrafe                    = true,
 	bankscale                    = "1",
-	brakeRate                    = 0.75,
+	brakeRate                    = 0.5,
 	buildCostEnergy              = 1,
 	buildCostMetal               = 5,
 	buildTime                    = 2.5,

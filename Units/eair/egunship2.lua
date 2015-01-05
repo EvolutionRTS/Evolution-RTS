@@ -13,9 +13,9 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 5,
+	acceleration                 = 0.5,
 	airStrafe                    = true,
-	brakeRate                    = 0.75,
+	brakeRate                    = 0.5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 35,
 	buildTime                    = 2.5,
