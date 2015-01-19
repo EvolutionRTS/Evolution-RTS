@@ -134,7 +134,6 @@ local weaponDefs                 = {
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		impulseFactor            = 0,
-		interceptedByShieldType  = 4,
 		lineOfSight              = true,
 		minintensity             = "1",
 		name                     = "Laser",
