@@ -85,6 +85,7 @@ local unitDef                     = {
 		[1]                       = {
 			def                   = "emineboom",
 			onlyTargetCategory    = "LIGHT ARMORED",
+			badTargetCategory	  = "DRONE VTOL",
 		},
 	},
 
@@ -128,7 +129,7 @@ local weaponDefs                  = {
 		edgeeffectiveness	      = 1,
 		energypershot             = weapon1Damage / 20,
 		range                     =400,
-		reloadtime                =15,
+		reloadtime                =5,
 		weaponvelocity            =2500,
 		selfprop                 = true,
 		smokedelay               = "0.1",
