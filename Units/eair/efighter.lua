@@ -33,8 +33,8 @@ local unitDef                    = {
 	cruiseAlt                    = 200,
 	description                  = [[Paralysis Gunship
 	Light
-	500 Damage vs Light/Armored/s
-	125 Damage vs Building/s
+	250 Damage vs Light/Armored/s
+	62.5 Damage vs Building/s
 	
 	Requires +4 Power
 	Uses +4 Supply]],
@@ -115,7 +115,7 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 50
+local weapon1Damage              = 25
 local weapon1AOE				 = 100
 
 local weaponDefs                 = {
