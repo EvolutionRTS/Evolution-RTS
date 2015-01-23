@@ -10,9 +10,9 @@ local unitDef                     = {
 	blocking			          = true,
 	buildAngle                    = 1024,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 5,
+	buildCostMetal                = 20,
 	builder                       = false,
-	buildTime                     = 5,
+	buildTime                     = 20,
 	category                      = "BUILDING NOTAIR",
 
 	-- Cloaking
@@ -94,6 +94,7 @@ local unitDef                     = {
 		death_sounds              = "generic",
 		nofriendlyfire	          = "1",
 		armortype                 = "building",
+		supply_cost               = 1,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -107,7 +108,7 @@ local unitDef                     = {
 }
 
 --------------------------------------------------------------------------------
-local weapon1Damage               = 200
+local weapon1Damage               = 300
 
 local weaponDefs                  = {
 	emineboom                     = {
@@ -129,7 +130,7 @@ local weaponDefs                  = {
 		edgeeffectiveness	      = 1,
 		energypershot             = weapon1Damage / 20,
 		range                     =400,
-		reloadtime                =15,
+		reloadtime                =8,
 		weaponvelocity            =2500,
 		selfprop                 = true,
 		smokedelay               = "0.1",
