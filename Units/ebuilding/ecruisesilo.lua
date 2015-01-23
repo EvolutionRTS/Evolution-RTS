@@ -71,8 +71,6 @@ local unitDef                     = {
 	weapons                       = {
 		[1]                       = {
 			def                   = "cruisemissile",
-			onlyTargetCategory    = "NOTAIR AMPHIB",
-			badTargetCategory     = "LIGHT ARMORED WALL",
 		},
 	},
 	customParams                  = {

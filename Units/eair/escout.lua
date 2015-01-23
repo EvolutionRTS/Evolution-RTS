@@ -91,7 +91,6 @@ local unitDef                    = {
 		death_sounds             = "generic",
 		RequireTech              = "2 Power",
 		armortype                = "light",
-		supply_cost              = 2,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
