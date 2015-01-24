@@ -9,19 +9,17 @@ local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 40,
+	buildCostMetal                = 150,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
 	damageModifier                = 0.5,
-	description                   = [[Converts Energy into Metal
-
-	-5 Energy per Second
-	+0.5 Metal per Second]],
+	description                   = [[Fabricates Metal
+	Generates +0.5 metal per second]],
 	energyStorage                 = 0,
-	energyUse                     = 5,
+	energyUse                     = 0,
 	explodeAs                     = "LARGE_BUILDING",
 	footprintX                    = 8,
 	footprintZ                    = 8,
@@ -29,11 +27,11 @@ local unitDef                     = {
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	makesMetal                    = 0.5,
-	maxDamage                     = 500,
+	maxDamage                     = 1700,
 	maxSlope                      = 30,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
-	name                          = "Metal Maker",
+	name                          = "Metal Fabricator",
 	objectName                    = "emaker3.s3o",
 	script			              = "emaker3.cob",
 	onoffable                     = true,
@@ -76,9 +74,7 @@ local unitDef                     = {
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
 		factionname	              = "outer_colonies",
-		helptext                  = [[Metal Maker
-
-		Creates metal from stored energy. Drains -5 energy per +0.5 metal generated]],
+		helptext                  = [[]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
