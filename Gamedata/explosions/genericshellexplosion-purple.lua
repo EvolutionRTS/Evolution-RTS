@@ -22,6 +22,37 @@ return {
         texture            = [[flare]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[0.10999999940395 0 0.28999999165535 0.05	0 0 0 0.0]], -- same as groundflash colors
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[20]], -- same as groundflash ttl
+        particlelifespread = 0,
+        particlesize       = 4, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesizespread = 1,
+        particlespeed      = [[8]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 6, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+      },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,
@@ -159,6 +190,37 @@ return {
         texture            = [[flare]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[0.10999999940395 0 0.28999999165535 0.05	0 0 0 0.0]], -- same as groundflash colors
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[20]], -- same as groundflash ttl
+        particlelifespread = 0,
+        particlesize       = 2, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesizespread = 1,
+        particlespeed      = [[8]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 3, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+      },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,
@@ -296,6 +358,37 @@ return {
         texture            = [[flare]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[0.10999999940395 0 0.28999999165535 0.05	0 0 0 0.0]], -- same as groundflash colors
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[20]], -- same as groundflash ttl
+        particlelifespread = 0,
+        particlesize       = 6, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesizespread = 1,
+        particlespeed      = [[8]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 12, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+      },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,

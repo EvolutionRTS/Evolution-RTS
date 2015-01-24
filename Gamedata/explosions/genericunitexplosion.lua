@@ -23,6 +23,37 @@ return {
         texture            = [[flare]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[1 0.5 0 0.05	0 0 0 0.0]], -- same as groundflash colors
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[100]], -- same as groundflash ttl
+        particlelifespread = 0,
+        particlesize       = 8, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesizespread = 1,
+        particlespeed      = [[8]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 1.5, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+	  },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,
@@ -189,6 +220,37 @@ return {
         texture            = [[flare]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[1 0.5 0 0.05	0 0 0 0.0]], -- same as groundflash colors
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[100]], -- same as groundflash ttl
+        particlelifespread = 0,
+        particlesize       = 24, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesizespread = 1,
+        particlespeed      = [[8]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 3, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+	  },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,
@@ -355,6 +417,37 @@ return {
         texture            = [[flare]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[1 0.5 0 0.05	0 0 0 0.0]], -- same as groundflash colors
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[100]], -- same as groundflash ttl
+        particlelifespread = 0,
+        particlesize       = 16, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesizespread = 1,
+        particlespeed      = [[8]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 2, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+	  },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,
@@ -521,6 +614,37 @@ return {
         texture            = [[flare]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[1 0.5 0 0.05	0 0 0 0.0]], -- same as groundflash colors
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[100]], -- same as groundflash ttl
+        particlelifespread = 0,
+        particlesize       = 32, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesizespread = 1,
+        particlespeed      = [[8]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 4, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+	  },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,

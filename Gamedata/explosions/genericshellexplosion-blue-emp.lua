@@ -40,13 +40,31 @@ return {
       properties = {
         alwaysvisible      = true,
         heat               = 10,
-        heatfalloff        = 1.3,
+        heatfalloff        = 0.2,
         maxheat            = 20,
         pos                = [[r-2 r2, 5, r-2 r2]],
         size               = 1,
-        sizegrowth         = 12,
-        speed              = [[0, 1 0, 0]],
+        sizegrowth         = 4,
+        speed              = [[0, 0.2 0, 0]],
         texture            = [[flare]],
+      },
+    },
+	centerflare2 = {
+      air                = true,
+      class              = [[heatcloud]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        alwaysvisible      = true,
+        heat               = 10,
+        heatfalloff        = 0.2,
+        maxheat            = 20,
+        pos                = [[r-2 r2, 5, r-2 r2]],
+        size               = 1,
+        sizegrowth         = 4,
+        speed              = [[0, 0.2 0, 0]],
+        texture            = [[electnovaexplo]],
       },
     },
     electricstorm = {
@@ -61,6 +79,38 @@ return {
         pos                = [[-100 r300, 1, -100 r300]],
       },
     },
+	
+	-- put this next to groundflash
+	explosionwave = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        airdrag            = 0.87,
+        alwaysvisible      = true,
+        colormap           = [[0 0.5 1 0.05	0 0 0 0.0]], -- same as groundflash colors
+        delay              = [[10 r200]],
+        directional        = false,
+        emitrot            = 90,
+        emitrotspread      = 5,
+        emitvector         = [[0, 0, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 1,
+        particlelife       = [[30]], -- same as groundflash ttl
+        particlelifespread = 30,
+        particlesize       = 2,
+        particlesizespread = 1,
+        particlespeed      = [[8 r20]],
+        particlespeedspread = 6,
+        pos                = [[0, 1, 0]],
+        sizegrowth         = 4, -- same as groundflash circlegrowth
+        sizemod            = 1.0,
+        texture            = [[explosionwave]],
+      },
+    },
+	
     groundflash = {
       air                = true,
       alwaysvisible      = true,
@@ -86,7 +136,7 @@ return {
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
-        colormap           = [[1 1 1 0.05	0 0 0 0.0]],
+        colormap           = [[0.75 0.75 1 0.05	0 0 0 0.0]],
         delay              = [[10 r200]],
         directional        = false,
         emitrot            = 90,
@@ -106,6 +156,7 @@ return {
         texture            = [[whitelightb]],
       },
     },
+	
     outerflash = {
       air                = true,
       class              = [[heatcloud]],
