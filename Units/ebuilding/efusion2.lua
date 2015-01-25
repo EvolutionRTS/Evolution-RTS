@@ -17,7 +17,7 @@ local unitDef                     = {
 	corpse                        = "ammobox",
 	description                   = [[Produces +10 Energy 
 	Provides +10 Power
-	Provides +30 Supply]],
+	Provides +50 Supply]],
 	--  energyMake                = 10,
 	energyStorage                 = 0,
 	energyUse                     = -10,

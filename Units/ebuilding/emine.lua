@@ -28,7 +28,7 @@ local unitDef                     = {
 	-- End Cloaking
 
 	description                   = [[Anti-Tank Land Mine
-	Fires a projectile dealing 200 damage
+	Fires a projectile dealing 300 damage
 
 	Costs 0.25 Energy Upkeep]],
 	energyMake                    = 0,
@@ -43,7 +43,7 @@ local unitDef                     = {
 	levelground                   = false,
 	maxDamage                     = 10,
 	maxSlope                      = 60,
-	maxWaterDepth                 = 5000,
+	maxWaterDepth                 = 0,
 	metalStorage                  = 0,
 	name                          = "Land Mine",
 	objectName                    = "emine.s3o",
