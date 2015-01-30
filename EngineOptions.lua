@@ -27,92 +27,92 @@
 
 local options =
 {
-  {
-    key    = 'MaxUnits',
-    name   = 'Max units',
-    desc   = 'Maximum number of units (including buildings) for each team allowed at the same time',
-    type   = 'number',
-    def    = 5000,
-    min    = 100,
-    max    = 5000, --- engine caps at lower limit if more than 3 team are ingame
-    step   = 1,  -- quantization is aligned to the def value
-                    -- (step <= 0) means that there is no quantization
-  },
+	{
+		key    = 'engineoptions',
+		name   = 'Engine Options',
+		desc   = 'Limits maximum and minimum speed that the players will be allowed to change to',
+		type   = 'section',
+	},
+	{
+		key    = 'maxunits',
+		name   = 'Max units',
+		desc   = 'Maximum number of units (including buildings) for each team allowed at the same time',
+		type   = 'number',
+		section= 'engineoptions',
+		def    = 5000,
+		min    = 100,
+		max    = 5000, --- engine caps at lower limit if more than 3 team are ingame
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'ghostedbuildings',
+		name   = 'Ghosted buildings',
+		desc   = "Once an enemy building will be spotted\na ghost trail will be placed to memorize location even after the loss of the line of sight",
+		type   = 'bool',
+		section= 'engineoptions',
+		def    = true,
+	},
+	{
+		key    = 'fixedallies',
+		name   = 'Fixed ingame alliances',
+		desc   = 'Disables the possibility of players to dynamically change alliances ingame',
+		type   = 'bool',
+		section= 'engineoptions',
+		def    = false,
+	},
+	{
+		key    = 'disablemapdamage',
+		name   = 'Undeformable map',
+		desc   = 'Prevents the map shape from being changed by weapons',
+		type   = 'bool',
+		section= 'engineoptions',
+		def    = false,
+	},
 
-  {
-    key    = 'LimitDgun',
-    name   = 'Limit D-Gun range',
-    desc   = "The commander's D-Gun weapon will be usable only close to the player's starting location",
-    type   = 'bool',
-    def    = false,
-  },
+	{
+		key    = 'limitspeed',
+		name   = 'Speed Restriction',
+		desc   = 'Limits maximum and minimum speed that the players will be allowed to change to',
+		type   = 'section',
+	},
 
-  {
-    key    = 'GhostedBuildings',
-    name   = 'Ghosted buildings',
-    desc   = "Once an enemy building will be spotted\na ghost trail will be placed to memorize location even after the loss of the line of sight",
-    type   = 'bool',
-    def    = true,
-  },
-  {
-    key    = 'FixedAllies',
-    name   = 'Fixed ingame alliances',
-    desc   = 'Disables the possibility of players to dynamically change alliances ingame',
-    type   = 'bool',
-    def    = false,
-  },
+	{
+		key    = 'maxspeed',
+		name   = 'Maximum game speed',
+		desc   = 'Sets the maximum speed that the players will be allowed to change to',
+		type   = 'number',
+		section= 'limitspeed',
+		def    = 1,
+		min    = 0.1,
+		max    = 100,
+		step   = 0.1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
 
-  {
-    key    = 'LimitSpeed',
-    name   = 'Speed Restriction',
-    desc   = 'Limits maximum and minimum speed that the players will be allowed to change to',
-    type   = 'section',
-  },
+	{
+		key    = 'minspeed',
+		name   = 'Minimum game speed',
+		desc   = 'Sets the minimum speed that the players will be allowed to change to',
+		type   = 'number',
+		section= 'limitspeed',
+		def    = 1,
+		min    = 0.1,
+		max    = 100,
+		step   = 0.1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	--[[
+	-- the following options can create problems and were never used by interface programs, thus are commented out for the moment
 
-  {
-    key    = 'MaxSpeed',
-    name   = 'Maximum game speed',
-    desc   = 'Sets the maximum speed that the players will be allowed to change to',
-    type   = 'number',
-    section= 'LimitSpeed',
-    def    = 1,
-    min    = 0.1,
-    max    = 100,
-    step   = 0.1,  -- quantization is aligned to the def value
-                    -- (step <= 0) means that there is no quantization
-  },
-
-  {
-    key    = 'MinSpeed',
-    name   = 'Minimum game speed',
-    desc   = 'Sets the minimum speed that the players will be allowed to change to',
-    type   = 'number',
-    section= 'LimitSpeed',
-    def    = 1,
-    min    = 0.1,
-    max    = 100,
-    step   = 0.1,  -- quantization is aligned to the def value
-                    -- (step <= 0) means that there is no quantization
-  },
-
-  {
-    key    = 'DisableMapDamage',
-    name   = 'Undeformable map',
-    desc   = 'Prevents the map shape from being changed by weapons',
-    type   = 'bool',
-    def    = false,
-  },
---[[
--- the following options can create problems and were never used by interface programs, thus are commented out for the moment
-
-  {
-    key    = 'NoHelperAIs',
-    name   = 'Disable helper AIs',
-    desc   = 'Disables luaui ai usage for all players',
-    type   = 'bool',
-    def    = false,
-  },
---]]
+	{
+		key    = 'NoHelperAIs',
+		name   = 'Disable helper AIs',
+		desc   = 'Disables luaui ai usage for all players',
+		type   = 'bool',
+		def    = false,
+	},
+	--]]
 }
 
 return options

@@ -11,6 +11,15 @@ function gadget:GetInfo()
 end
 
 local MEX_INCOME = 0.5 -- income of each mex
+local modOptions = Spring.GetModOptions();
+
+local aiCheatHandicap = { 
+	["veryeasy"] =  5,
+	["easy"] =  10,
+	["medium"] =  25,
+	["hard"] =  50,
+	["insane"] =  100,
+}
 
 if (not gadgetHandler:IsSyncedCode()) then
 	return -- No Unsynced
@@ -118,7 +127,8 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"e",10)
+				Spring.AddTeamResource(TeamID,"e",998)
+				Spring.SetTeamResource(TeamID,"e",1000000000000)
 			end
 		end
 	end
@@ -133,15 +143,14 @@ function gadget:GameFrame(n)
 		end
 	end
 
-	if n%1920 == 1 then
+	if n%160 == 1 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
-			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
+			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"m",100)
+				Spring.AddTeamResource(TeamID,"m", aiCheatHandicap[modOptions.aidifficulty or "veryeasy"])
 			end
 		end
 	end
-	
 end
 
 function gadget:UnitCreated(unitID, unitDefID, unitTeam)
