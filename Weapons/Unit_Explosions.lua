@@ -11,6 +11,335 @@ local hugeExplosionImpulseFactor = 0
 
 unitDeaths = {
 
+--BUILDING DEATHS--
+
+--Orange
+
+	smallBuildingExplosionGeneric = {
+		weaponType		   = "Cannon",
+		impulseFactor      = smallExplosionImpulseFactor,
+		AreaOfEffect=smallExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-small",
+		cameraShake=smallExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	mediumBuildingExplosionGeneric = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-medium",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	largeBuildingExplosionGeneric = {
+		weaponType		   = "Cannon",
+		impulseFactor      = largeExplosionImpulseFactor,
+		AreaOfEffect=largeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-large",
+		cameraShake=largeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	hugeBuildingExplosionGeneric = {
+		weaponType		   = "Cannon",
+		impulseFactor      = hugeExplosionImpulseFactor,
+		AreaOfEffect=hugeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-huge",
+		cameraShake=hugeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+--blue
+
+	smallBuildingExplosionGenericBlue = {
+		weaponType		   = "Cannon",
+		impulseFactor      = smallExplosionImpulseFactor,
+		AreaOfEffect=smallExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-small-blue",
+		cameraShake=smallExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	mediumBuildingExplosionGenericBlue = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-medium-blue",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	largeBuildingExplosionGenericBlue = {
+		weaponType		   = "Cannon",
+		impulseFactor      = largeExplosionImpulseFactor,
+		AreaOfEffect=largeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-large-blue",
+		cameraShake=largeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	hugeBuildingExplosionGenericBlue = {
+		weaponType		   = "Cannon",
+		impulseFactor      = hugeExplosionImpulseFactor,
+		AreaOfEffect=hugeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-huge-Blue",
+		cameraShake=hugeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+--blue-emp
+
+	smallBuildingExplosionGenericBlueEMP = {
+		weaponType		   = "Cannon",
+		impulseFactor      = smallExplosionImpulseFactor,
+		AreaOfEffect=smallExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-small-blue-emp",
+		cameraShake=smallExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	mediumBuildingExplosionGenericBlueEMP = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-medium-blue-emp",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	largeBuildingExplosionGenericBlueEMP = {
+		weaponType		   = "Cannon",
+		impulseFactor      = largeExplosionImpulseFactor,
+		AreaOfEffect=largeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-large-blue-emp",
+		cameraShake=largeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	hugeBuildingExplosionGenericBlueEMP = {
+		weaponType		   = "Cannon",
+		impulseFactor      = hugeExplosionImpulseFactor,
+		AreaOfEffect=hugeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-huge-Blue-emp",
+		cameraShake=hugeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+--green
+
+	smallBuildingExplosionGenericGreen = {
+		weaponType		   = "Cannon",
+		impulseFactor      = smallExplosionImpulseFactor,
+		AreaOfEffect=smallExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-small-green",
+		cameraShake=smallExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	mediumBuildingExplosionGenericGreen = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-medium-green",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	largeBuildingExplosionGenericGreen = {
+		weaponType		   = "Cannon",
+		impulseFactor      = largeExplosionImpulseFactor,
+		AreaOfEffect=largeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-large-green",
+		cameraShake=largeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	hugeBuildingExplosionGenericGreen = {
+		weaponType		   = "Cannon",
+		impulseFactor      = hugeExplosionImpulseFactor,
+		AreaOfEffect=hugeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-huge-green",
+		cameraShake=hugeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+--purple
+
+	smallBuildingExplosionGenericPurple = {
+		weaponType		   = "Cannon",
+		impulseFactor      = smallExplosionImpulseFactor,
+		AreaOfEffect=smallExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-small-purple",
+		cameraShake=smallExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	mediumBuildingExplosionGenericPurple = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-medium-purple",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	largeBuildingExplosionGenericPurple = {
+		weaponType		   = "Cannon",
+		impulseFactor      = largeExplosionImpulseFactor,
+		AreaOfEffect=largeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-large-purple",
+		cameraShake=largeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	hugeBuildingExplosionGenericPurple = {
+		weaponType		   = "Cannon",
+		impulseFactor      = hugeExplosionImpulseFactor,
+		AreaOfEffect=hugeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-huge-purple",
+		cameraShake=hugeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+--red
+
+	smallBuildingExplosionGenericRed = {
+		weaponType		   = "Cannon",
+		impulseFactor      = smallExplosionImpulseFactor,
+		AreaOfEffect=smallExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-small-red",
+		cameraShake=smallExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	mediumBuildingExplosionGenericRed = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-medium-red",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	largeBuildingExplosionGenericRed = {
+		weaponType		   = "Cannon",
+		impulseFactor      = largeExplosionImpulseFactor,
+		AreaOfEffect=largeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-large-red",
+		cameraShake=largeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	hugeBuildingExplosionGenericRed = {
+		weaponType		   = "Cannon",
+		impulseFactor      = hugeExplosionImpulseFactor,
+		AreaOfEffect=hugeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-huge-red",
+		cameraShake=hugeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+--white
+
+	smallBuildingExplosionGenericWhite = {
+		weaponType		   = "Cannon",
+		impulseFactor      = smallExplosionImpulseFactor,
+		AreaOfEffect=smallExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-small-white",
+		cameraShake=smallExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	mediumBuildingExplosionGenericWhite = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-medium-white",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	largeBuildingExplosionGenericWhite = {
+		weaponType		   = "Cannon",
+		impulseFactor      = largeExplosionImpulseFactor,
+		AreaOfEffect=largeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-large-white",
+		cameraShake=largeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+
+	hugeBuildingExplosionGenericWhite = {
+		weaponType		   = "Cannon",
+		impulseFactor      = hugeExplosionImpulseFactor,
+		AreaOfEffect=hugeExplosion,
+		explosiongenerator="custom:genericbuildingexplosion-huge-white",
+		cameraShake=hugeExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
+	
+--UNIT DEATHS--
+
+--Orange
+
 	smallExplosionGeneric = {
 		weaponType		   = "Cannon",
 		impulseFactor      = smallExplosionImpulseFactor,

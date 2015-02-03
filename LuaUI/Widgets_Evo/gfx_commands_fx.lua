@@ -1,6 +1,6 @@
 function widget:GetInfo()
    return {
-      name      = "Commands FX",
+      name      = "Commands FX Original",
       desc      = "Adds glow-pulses wherever commands are queued. Including mapmarks.",
       author    = "Floris",
       date      = "14.04.2014",
