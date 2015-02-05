@@ -106,7 +106,7 @@ There can only be one!]],
 		"eamphibfac",
 		"eairplant",
 		"eexperimentalfac",
-		"emetalextractorai", --new
+		"emetalextractor", --new
 		"emaker", --new
 		"esolar2", --new
 		"egeothermal", --new
