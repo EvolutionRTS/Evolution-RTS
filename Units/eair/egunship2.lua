@@ -33,8 +33,8 @@ local unitDef                    = {
 	cruiseAlt                    = 120,
 	description                  = [[Gunship Tank Destroyer
 	Armored
-	50 Damage vs Light/Armored
-	12.5 Damage vs Building
+	85 Damage vs Light/Armored
+	21.25 Damage vs Building
 
 	Can switch firemodes to torpedos
 
@@ -129,9 +129,9 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 50
+local weapon1Damage              = 85
 local weapon1AOE				 = 1
-local weapon2Damage              = 50
+local weapon2Damage              = 85
 local weapon2AOE				 = 1
 
 local weaponDefs                 = {
