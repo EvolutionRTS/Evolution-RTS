@@ -1,7 +1,7 @@
--- UNITDEF -- EMETALEXTRACTOR --
+-- UNITDEF -- EMETALEXTRACTORAI --
 --------------------------------------------------------------------------------
 
-local unitName                    = "emetalextractor"
+local unitName                    = "emetalextractorai"
 
 --------------------------------------------------------------------------------
 
@@ -36,6 +36,7 @@ local unitDef                     = {
 	metalMake                     = 0,
 	name                          = "Metal Extractor",
 	objectName                    = "emetalextractor2.s3o",
+	script						  = "emetalextractor.cob",
 	onoffable                     = true,
 	radarDistance                 = 0,
 	repairable		              = false,
@@ -44,7 +45,7 @@ local unitDef                     = {
 	side                          = "CORE",
 	sightDistance                 = 367,
 	smoothAnim                    = true,
-	unitname                      = "emetalextractor",
+	unitname                      = "emetalextractorai",
 	workerTime                    = 0,
 	yardMap                       = "ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo",
 	sfxtypes                      = { 
@@ -70,7 +71,6 @@ local unitDef                     = {
 	customParams                  = {
 		iseco                     = 1,
 		needed_cover              = 3,
-		supply_cost               = 5,
 		death_sounds              = "generic",
 		armortype                 = "building",
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 

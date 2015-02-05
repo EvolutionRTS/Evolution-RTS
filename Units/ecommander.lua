@@ -6,6 +6,7 @@ local unitName                   = "ecommander"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
+local supplyGiven				 = [[35]]
 
 local unitDef                    = {
 
@@ -38,6 +39,8 @@ local unitDef                    = {
 Armortype: ]] ..armortype.. [[ 
 
 1000 EMP Damage vs Light/Armored/Building
+
+Gives ]] ..supplyGiven.. [[ Supply
 
 There can only be one!]],
 	energyMake                   = 0,
@@ -103,7 +106,7 @@ There can only be one!]],
 		"eamphibfac",
 		"eairplant",
 		"eexperimentalfac",
-		"emetalextractor", --new
+		"emetalextractorai", --new
 		"emaker", --new
 		"esolar2", --new
 		"egeothermal", --new
@@ -139,6 +142,7 @@ There can only be one!]],
 	customParams                 = {
 		iscommander              = true,
 		needed_cover             = 2,
+		supply_granted            = supplyGiven,
 		death_sounds             = "generic",
 		cancollect               = "1",
 		armortype                = armortype,

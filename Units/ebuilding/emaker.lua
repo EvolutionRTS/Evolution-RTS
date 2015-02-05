@@ -16,8 +16,9 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
 	damageModifier                = 0.5,
-	description                   = [[Fabricates Metal
-	Generates +0.5 metal per second]],
+	description                   = [[Generates +0.5 metal per second
+	
+	Uses +5 Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericPurple",
@@ -69,6 +70,7 @@ local unitDef                     = {
 	customParams                  = {
 		iseco                     = 1,
 		needed_cover              = 8,
+		supply_cost               = 5,
 		death_sounds              = "generic",
 		armortype                 = "building",
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
