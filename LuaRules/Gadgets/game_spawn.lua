@@ -35,22 +35,36 @@ end
 --------------------------------------------------------------------------------
 
 local modOptions = Spring.GetModOptions()
-
-
+ 
+function IsTeamAI(teamID)
+	teamID,leader,isDead,isAiTeam=Spring.GetTeamInfo(teamID)
+	return isAiTeam
+end
+ 
 local function GetStartUnit(teamID)
-	-- get the team startup info
-	local side = select(5, Spring.GetTeamInfo(teamID))
-	local startUnit
-	if (side == "") then
-		-- startscript didn't specify a side for this team
-		local sidedata = Spring.GetSideData()
-		if (sidedata and #sidedata > 0) then
-			startUnit = sidedata[1 + teamID % #sidedata].startUnit
-		end
-	else
-		startUnit = Spring.GetSideData(side)
-	end
-	return startUnit
+        -- get the team startup info
+        local side = select(5, Spring.GetTeamInfo(teamID))
+        local startUnit
+       
+        boolIsAI= IsTeamAI(teamID)
+       
+                if boolIsAI==true then
+					Spring.Echo ("Waffles!")
+					local sidedata = Spring.GetSideData()
+					startUnit = "ecommanderai"
+					return startUnit
+                end
+       
+        if (side == "") then
+                -- startscript didn't specify a side for this team
+                local sidedata = Spring.GetSideData()
+                if (sidedata and #sidedata > 0) then
+                        startUnit = sidedata[1 + teamID % #sidedata].startUnit
+                end
+        else
+                startUnit = Spring.GetSideData(side)
+        end
+        return startUnit
 end
 
 local function SpawnStartUnit(teamID)
@@ -66,6 +80,11 @@ local function SpawnStartUnit(teamID)
 			and ((x>Game.mapSizeX/2) and "west" or "east")
 			or ((z>Game.mapSizeZ/2) and "north" or "south")
 		local unitID = Spring.CreateUnit(startUnit, x, y, z, facing, teamID)
+-- Fun times		
+--		if startUnit then
+--			id1=Spring.CreateUnit("eorb", x+100, y+200, z, facing, teamID)
+--			Spring.GiveOrderToUnit(id1,CMD.GUARD,{unitID}, {"shift"})
+--		end
 	end
 
 	-- set start resources, either from mod options or custom team keys

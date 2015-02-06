@@ -16,9 +16,13 @@ local tooltips = {
 
 local factories = {
 	ebasefactory = {order = 1},
+	ebasefactoryai = {order = 1},
 	eamphibfac = {order = 2},
+	eamphibfacai = {order = 2},
 	eminifac = {order = 3},
+	eminifacai = {order = 3},
 	eairplant = {order = 4},
+	eairplantai = {order = 4},
 	eexperimentalfac = {order = 5},
 }
 
@@ -27,6 +31,7 @@ local factories = {
 --you can put too many things into the same row, but the buttons will be squished
 local econ = {
 	emetalextractor = {order = 1, row = 1},
+	emetalextractorai = {order = 1, row = 1},
 	esolar2 = {order = 2, row = 1},
 	egeothermal = {order = 3, row = 1},
 	efusion2 = {order = 4, row = 1},
