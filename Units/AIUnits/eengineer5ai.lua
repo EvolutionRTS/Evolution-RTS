@@ -90,10 +90,10 @@ local unitDef                    = {
 		},
 	},
 	buildoptions                 = {
-		"eminifac", --new
-		"ebasefactory", --new
-		"eamphibfac",
-		"eairplant",
+		"eminifacai", --new
+		"ebasefactoryai", --new
+		"eamphibfacai",
+		"eairplantai",
 		"eexperimentalfac",
 		"emetalextractorai", --new
 		"emaker", --new
