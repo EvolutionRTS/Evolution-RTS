@@ -32,9 +32,9 @@ local unitDef                    = {
 	corpse                       = "ammobox",
 	cruiseAlt                    = 120,
 	description                  = [[Gunship Tank Destroyer
-	Armored
-	85 Damage vs Light/Armored
-	21.25 Damage vs Building
+	Light
+	150 Damage vs Light/Armored
+	37.5 Damage vs Building
 
 	Can switch firemodes to torpedos
 
@@ -129,9 +129,9 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 85
+local weapon1Damage              = 150
 local weapon1AOE				 = 1
-local weapon2Damage              = 85
+local weapon2Damage              = 150
 local weapon2AOE				 = 1
 
 local weaponDefs                 = {
@@ -154,7 +154,7 @@ local weaponDefs                 = {
 		model                    = "missilesmalllauncher.s3o",
 		name                     = "Rockets",
 		range                    = 420,
-		reloadtime               = 0.5,
+		reloadtime               = 1,
 		weaponType		         = "MissileLauncher",
 		smokeTrail               = false,
 		soundHit                 = "bombhit.wav",
@@ -242,7 +242,7 @@ local weaponDefs                 = {
 		name                     = "Underwater Torpedo",
 		pitchtolerance           = 3000,
 		range                    = 420,
-		reloadtime               = 0.5,
+		reloadtime               = 1,
 		weaponType		         = "TorpedoLauncher",
 		soundHit                 = "torpedolaunch.wav",
 		soundStart               = "18393_inferno_reject.wav",
