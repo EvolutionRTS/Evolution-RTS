@@ -5,6 +5,25 @@ local unitName                   = "eextankdestroyer"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[30 power]]
+local armortype					 = [[armored]]
+local supply					 = [[30]]
+
+local weapon1Damage              = 500
+local weapon1AOE				 = 8
+local weapon2Damage              = 12
+local weapon2AOE				 = 8
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire2			 = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
+local function roundToFirstDecimal(energycosttofire2)
+    return math.floor(energycosttofire2*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -27,20 +46,24 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED AMPHIB SKIRMISHER",
 	corpse                       = "ammobox",
-	description                  = [[Endbringer Class Tank Destroyer
-	Armored
+	description                  = [[Unit Type: Endbringer Class Tank Destroyer
+Armortype: ]] ..armortype.. [[ 
 
-	Main Cannon:
-	500 Damage vs Light/Armored
-	50 Damage vs Building
+Main Cannon:
+500 Damage vs Light/Armored
+50 Damage vs Building
 
-	Secondary Machinegun:
-	120 Damage/s vs Light/Armored
-	12 Damage/s vs Building
+Secondary Machinegun:
+120 Damage/s vs Light/Armored
+12 Damage/s vs Building
 
-	This unit can only attack other mobile units!
+This unit can only attack other mobile units!
 
-	Requires +30 Power]],
+Energy cost to fire Main Cannon: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Secondary Machinegun: ]] .. roundToFirstDecimal(energycosttofire2 * 10) .. [[/s 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -118,11 +141,6 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 500
-local weapon1AOE				 = 8
-local weapon2Damage              = 12
-local weapon2AOE				 = 8
-
 local weaponDefs                 = {
 	tankkillerlaser              = {
 		AreaOfEffect             = weapon1AOE,
@@ -134,7 +152,7 @@ local weaponDefs                 = {
 		beamWeapon               = true,
 		coreThickness            = 0.5,
 		duration                 = 0.2,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-large-purple",
 		fallOffRate              = 1,
 		fireStarter              = 100,
@@ -180,7 +198,7 @@ local weaponDefs                 = {
 		duration                 = 0.1,
 		energypershot            = 0.6,
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
-		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
+		energypershot            = energycosttofire2,
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,

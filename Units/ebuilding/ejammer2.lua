@@ -5,6 +5,8 @@ local unitName                    = "ejammer2"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 16384,
@@ -15,8 +17,9 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
 	description                   = [[Radar Jamming Tower
-
-	Drains -5 Energy while emitting cloaking field]],
+Armortype: ]] ..armortype.. [[ 
+	
+Drains -5 Energy while emitting cloaking field]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -65,7 +68,7 @@ local unitDef                     = {
 		cannotcloak               = true,
 		needed_cover              = 3,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 	},

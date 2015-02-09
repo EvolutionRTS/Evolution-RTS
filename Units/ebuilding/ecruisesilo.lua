@@ -5,6 +5,17 @@ local unitName                    = "ecruisesilo"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
+local weapon1Damage              = 1250
+local weapon1AOE				 = 250
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local stockpiletime				 = 35
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                     = {
 
 	activateWhenBuilt             = true,
@@ -17,9 +28,12 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 
 	corpse                        = "ammobox",
-	description                   = [[Long Range Cruise Missile
-	Building
-	2000 Damage vs Light/Armored/Buildings]],
+	description                   = [[Long Range Tactical Cruise Missile
+Armortype: ]] ..armortype.. [[ 
+
+]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings in a small area
+
+Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofire / stockpiletime) .. [[/s]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "cruisemissile",
@@ -75,8 +89,7 @@ local unitDef                     = {
 	},
 	customParams                  = {
 		death_sounds              = "generic",
-		RequireTech               = "0 Power",
-		armortype                 = "building",
+		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
 		helptext                  = [[]],
@@ -92,9 +105,6 @@ local unitDef                     = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage               = 1500
-local weapon1AOE				  = 250
-
 local weaponDefs                  = {
 	cruisemissile                   = {
 		AreaOfEffect              = weapon1AOE,
@@ -107,7 +117,7 @@ local weaponDefs                  = {
 		craterBoost               = 0,
 		craterMult                = 0,
 		edgeeffectiveness		  = 0.1,
-		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot             = energycosttofire,
 		explosionGenerator        = "custom:ebombexpl",
 		fireStarter               = 100,
 		flightTime                = 400,
@@ -128,7 +138,7 @@ local weaponDefs                  = {
 		soundStart                = "cruisemissilelaunch.wav",
 		startsmoke                = "0",
 		stockpile                 = true,
-		stockpileTime             = 35,
+		stockpileTime             = stockpiletime,
 		startVelocity             = 10,
 		turnRate                  = 6000,
 		tracks					  = true,

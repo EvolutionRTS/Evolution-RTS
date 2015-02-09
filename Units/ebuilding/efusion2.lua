@@ -5,6 +5,12 @@ local unitName                    = "efusion2"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local energyproduced			 = [[10]]
+local powerprovided				 = [[10 power]]
+local powerradius				 = [[800]]
+local supplygranted				 = [[50]]
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2500,
@@ -15,12 +21,16 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Produces +10 Energy 
-	Provides +10 Power
-	Provides +50 Supply]],
-	--  energyMake                = 10,
+	description                   = [[Armortype: ]] ..armortype.. [[ 
+
+Produces +]] .. energyproduced .. [[ Energy 
+
+Provides +]] .. powerprovided .. [[ 
+Power Radius: ]] .. powerradius .. [[ 
+
+Provides +]] .. supplygranted .. [[ Supply]],
 	energyStorage                 = 0,
-	energyUse                     = -10,
+	energyMake                    = energyproduced,
 	explodeAs                     = "hugeBuildingExplosionGenericBlueEMP",
 	footprintX                    = 8,
 	footprintZ                    = 8,
@@ -68,11 +78,11 @@ local unitDef                     = {
 		iseco                     = 1,
 		needed_cover              = 5,
 		death_sounds              = "generic",
-		ProvideTech               = "10 Power",
-		ProvideTechRange          = "800",
+		ProvideTech               = powerprovided,
+		ProvideTechRange          = powerradius,
 		--	RequireTech           = "1 Powergrid",
-		armortype                 = "building",
-		supply_granted            = 50,
+		armortype                 = armortype,
+		supply_granted            = supplygranted,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -85,15 +95,7 @@ local unitDef                     = {
 		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
 		groundtexselectxsize      = 800, -- optional
 		groundtexselectzsize      = 800, -- optional
-		helptext                  = [[Nuclear Powerplant
-
-		Produces energy and power in an increased capacity and radius
-
-		+10 Energy
-
-		+10 Power
-
-		+1000 Power Radius]],
+		helptext                  = [[]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

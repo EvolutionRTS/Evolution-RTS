@@ -5,6 +5,10 @@ local unitName                    = "estorage"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local storage					  = 25
+local supplygranted				  = 10
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 8196,
@@ -21,12 +25,12 @@ local unitDef                     = {
 	collisionVolumeType           = "box",
 
 	corpse                        = "ammobox",
-	description                   = [[Storage and Supply Depot
+	description                   = [[Armortype: ]] ..armortype.. [[ 
 
-	Increases your Metal and Energy storage reserves by +25
+Increases your Metal and Energy storage reserves by +]] .. storage .. [[ 
 	
-	Grants +10 Supply]],
-	energyStorage                 = 25,
+Provides +]] .. supplygranted .. [[ Supply]],
+	energyStorage                 = storage,
 	energyUse                     = 0,
 	explodeAs                     = "hugeBuildingExplosionGenericPurple",
 	footprintX                    = 4,
@@ -37,8 +41,8 @@ local unitDef                     = {
 	maxDamage                     = 200,
 	maxSlope                      = 50,
 	maxWaterDepth                 = 5000,
-	metalStorage                  = 25,
-	name                          = "Storage",
+	metalStorage                  = storage,
+	name                          = "Storage and Supply Depot",
 	objectName                    = "estorage2.s3o",
 	script			              = "estorage2.cob",
 	radarDistance                 = 0,
@@ -75,7 +79,7 @@ local unitDef                     = {
 	customParams                  = {
 		iseco                     = 1,
 		needed_cover              = 2,
-		supply_granted            = 10,
+		supply_granted            = supplygranted,
 		death_sounds              = "generic",
 		armortype                 = "building", 
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 

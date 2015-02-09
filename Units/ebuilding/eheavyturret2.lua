@@ -5,6 +5,17 @@ local unitName                    = "eheavyturret2"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local supply					 = [[5]]
+
+local weapon1Damage               = 300
+local weapon1AOE				  = 50
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                     = {
 
 	buildAngle                    = 8192,
@@ -21,13 +32,15 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
 	description                   = [[Heavy Plasma Battery (Anti-Armor)
+Armortype: ]] ..armortype.. [[ 
 
-	Building
-	300 Damage vs Armored
-	150 Damage vs Light
-	30 Damage vs Buildings
+300 Damage vs Armored
+150 Damage vs Light
+30 Damage vs Buildings
 
-	Uses +5 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
@@ -84,9 +97,9 @@ local unitDef                     = {
 	},
 	customParams                  = {
 		needed_cover              = 5,
-		supply_cost               = 5,
+		supply_cost               = supply,
 		death_sounds              = "generic",
-		armortype                 = "building", 
+		armortype                 = armortype, 
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -103,9 +116,6 @@ local unitDef                     = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage               = 300
-local weapon1AOE				  = 50
-
 local weaponDefs                  = {
 	eheavyturretweapon2           = {
 		badTargetCategory         = [[BUILDING LIGHT]],
@@ -119,7 +129,7 @@ local weaponDefs                  = {
 		coreThickness             = 0.6,
 		--	cegTag                = "mediumcannonweapon3",
 		duration                  = 0.25,
-		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot             = energycosttofire,
 		explosionGenerator        = "custom:genericshellexplosion-medium",
 		fallOffRate               = 1,
 		fireStarter               = 100,

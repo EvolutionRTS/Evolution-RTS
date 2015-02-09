@@ -5,6 +5,10 @@ local unitName                    = "emetalextractor"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local metal						 = [[0.5]] --The actual amount is set in resourcegifts gadget
+local supply					 = [[5]]
+
 local unitDef                     = {
 
 	activateWhenBuilt             = true,
@@ -16,9 +20,11 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Provides +0.5 Metal income per second
+	description                   = [[Armortype: ]] ..armortype.. [[ 
+
+Generates +]] .. metal .. [[ metal per second
 	
-	Uses +5 Supply]],
+Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
@@ -70,9 +76,9 @@ local unitDef                     = {
 	customParams                  = {
 		iseco                     = 1,
 		needed_cover              = 3,
-		supply_cost               = 5,
+		supply_cost               = supply,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies", 

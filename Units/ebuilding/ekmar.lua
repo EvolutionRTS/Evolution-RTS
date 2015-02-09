@@ -5,6 +5,12 @@ local unitName                    = "ekmar"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
+local shield1Power               = 2000
+local shield1PowerRegen          = 20
+local shield1PowerRegenEnergy    = shield1PowerRegen / 20
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 4096,
@@ -17,10 +23,13 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR WALL",
 	damageModifier                = 0.2,
 	description                   = [[Protective Turret Shield
+Armortype: ]] ..armortype.. [[ 
 
-	Shield recharges at a rate of 20hp/s
-	Maximum shield power is 2000hp
-	Shield can link with other shield units to increase charging and capacity]],
+Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
+Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
+Maximum shield power is ]] .. shield1Power ..[[hp
+Shield can link with other shield units to increase charging and capacity
+Generates a Cloaking Field]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGenericBlue",
@@ -76,7 +85,7 @@ local unitDef                     = {
 	customParams                  = {
 		needed_cover              = 1,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -91,7 +100,6 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
-local shield1PowerRegen           = 20
 
 local weaponDefs                  = {
 	shield                        = {
@@ -103,9 +111,9 @@ local weaponDefs                  = {
 		ShieldStartingPower       = 0,
 		Shieldenergyuse           = 0,
 		Shieldradius              = 200,
-		Shieldpower               = 2000,
+		Shieldpower               = shield1power,
 		Shieldpowerregen          = shield1PowerRegen,
-		Shieldpowerregenenergy    = shield1PowerRegen / 20,
+		Shieldpowerregenenergy    = shield1PowerRegenEnergy,
 		Shieldintercepttype       = 4,
 		Shieldgoodcolor           = "0.0 0.2 1.0",
 		Shieldbadcolor            = "1.0 0 0",

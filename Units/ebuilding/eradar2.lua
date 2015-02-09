@@ -5,6 +5,8 @@ local unitName                    = "eradar2"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 16384,
@@ -14,7 +16,8 @@ local unitDef                     = {
 	buildTime                     = 5,
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = "Radar Dome/Sensor Tower",
+	description                   = [[Radar Dome/Sensor Tower
+Armortype: ]] ..armortype,
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -66,7 +69,7 @@ local unitDef                     = {
 	customParams                  = {
 		needed_cover              = 2,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  

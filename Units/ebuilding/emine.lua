@@ -5,6 +5,17 @@ local unitName                    = "emine"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local supply					 = [[1]]
+
+local weapon1Damage              = 305
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	blocking			          = true,
@@ -18,7 +29,7 @@ local unitDef                     = {
 	-- Cloaking
 
 	cancloak		              = true,
-	cloakCost		              = 0.25,
+	cloakCost		              = 0,
 	cloakCostMoving	              = 0,
 	minCloakDistance              = 0,
 	decloakOnFire	              = false,
@@ -28,9 +39,11 @@ local unitDef                     = {
 	-- End Cloaking
 
 	description                   = [[Anti-Tank Land Mine
-	Fires a projectile dealing 305 damage
+Armortype: ]] ..armortype.. [[ 
 
-	Costs 0.25 Energy Upkeep]],
+Fires a projectile dealing]] .. weapon1Damage .. [[ damage
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -93,8 +106,8 @@ local unitDef                     = {
 		needed_cover              = 1,
 		death_sounds              = "generic",
 		nofriendlyfire	          = "1",
-		armortype                 = "building",
-		supply_cost               = 1,
+		armortype                 = armortype,
+		supply_cost               = supply,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -108,8 +121,6 @@ local unitDef                     = {
 }
 
 --------------------------------------------------------------------------------
-local weapon1Damage               = 305
-local weapon1AOE				  = 1,
 
 local weaponDefs                  = {
 	emineboom                     = {
@@ -129,7 +140,7 @@ local weaponDefs                  = {
 		lineOfSight              = true,
 		model                    = "missilesmallvlaunch.s3o",
 		edgeeffectiveness	      = 1,
-		energypershot             = weapon1Damage / 20,
+		energypershot             = energycosttofire,
 		range                     =400,
 		reloadtime                =8,
 		weaponvelocity            =2500,

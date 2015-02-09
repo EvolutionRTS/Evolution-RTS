@@ -5,6 +5,10 @@ local unitName                    = "emaker"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local metal						  = [[0.5]]
+local supply					 = [[5]]
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 8192,
@@ -16,9 +20,11 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
 	damageModifier                = 0.5,
-	description                   = [[Generates +0.5 metal per second
+	description                   = [[Armortype: ]] ..armortype.. [[ 
+
+Generates +]] .. metal .. [[ metal per second
 	
-	Uses +5 Supply]],
+Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericPurple",
@@ -27,7 +33,7 @@ local unitDef                     = {
 	iconType                      = "eco",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	makesMetal                    = 0.5,
+	makesMetal                    = metal,
 	maxDamage                     = 1700,
 	maxSlope                      = 30,
 	maxWaterDepth                 = 5000,
@@ -70,9 +76,9 @@ local unitDef                     = {
 	customParams                  = {
 		iseco                     = 1,
 		needed_cover              = 8,
-		supply_cost               = 5,
+		supply_cost               = supply,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
 		factionname	              = "outer_colonies",

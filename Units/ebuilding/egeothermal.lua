@@ -5,6 +5,12 @@ local unitName                    = "egeothermal"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local energyproduced			 = [[7]]
+local powerprovided				 = [[7 power]]
+local powerradius				 = [[600]]
+local supplygranted				 = [[30]]
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2048,
@@ -15,12 +21,16 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Produces +7 Energy
-	Provides +7 Power
-	Provides +30 Supply]],
-	energyMake                    = 7,
+	description                   = [[Armortype: ]] ..armortype.. [[ 
+
+Produces +]] .. energyproduced .. [[ Energy 
+
+Provides +]] .. powerprovided .. [[ 
+Power Radius: ]] .. powerradius .. [[ 
+
+Provides +]] .. supplygranted .. [[ Supply]],
+	energyMake                    = energyproduced,
 	energyStorage                 = 0,
-	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericBlueEMP",
 	footprintX                    = 4,
 	footprintZ                    = 4,
@@ -68,10 +78,10 @@ local unitDef                     = {
 		iseco                     = 1,
 		needed_cover              = 2,
 		death_sounds              = "generic",
-		ProvideTech               = "7 Power",
-		ProvideTechRange          = "600",
-		armortype                 = "building",
-		supply_granted            = 30,
+		ProvideTech               = powerprovided,
+		ProvideTechRange          = powerradius,
+		armortype                 = armortype,
+		supply_granted            = supplygranted,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -84,17 +94,7 @@ local unitDef                     = {
 		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
 		groundtexselectxsize      = 600, -- optional
 		groundtexselectzsize      = 600, -- optional
-		helptext                  = [[Geothermal Powerplant
-
-		Produces energy and power in an increased capacity and radius
-
-		+7 Energy
-
-		+7 Power
-
-		+600 Power Radius
-
-		Can only be built upon a geothermal vent]],
+		helptext                  = [[]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

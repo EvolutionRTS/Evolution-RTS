@@ -5,7 +5,16 @@ local unitName                    = "eartyturret"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
 local supply					 = [[2]]
+
+local weapon1Damage               = 200
+local weapon1AOE				  = 50
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
 
 local unitDef                     = {
 
@@ -18,12 +27,14 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
 	description                   = [[Medium Range Artillery Turret
-	Building
+Armortype: ]] ..armortype.. [[ 
 	
-	200 Damage vs Buildings
-	50 Damage vs Light/Armored
-	
-	Uses +]] .. supply .. [[ Supply]],
+200 Damage vs Buildings
+50 Damage vs Light/Armored
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
@@ -75,7 +86,7 @@ local unitDef                     = {
 		supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		nofriendlyfire	          = "1",
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
@@ -93,9 +104,6 @@ local unitDef                     = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage               = 200
-local weapon1AOE				  = 50
-
 local weaponDefs                  = {
 	artyweapon  		          = {
 		AreaOfEffect             = weapon1AOE,
@@ -107,7 +115,7 @@ local weaponDefs                  = {
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-large",
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		edgeEffectiveness        = 1,
 		impulse                  = "0",
 		impulseFactor            = 0,

@@ -5,7 +5,16 @@ local unitName                    = "eaaturret"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
 local supply					 = [[2]]
+
+local weapon1Damage               = 112.5
+local weapon1AOE				  = 300
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
 
 local unitDef                     = {
 
@@ -18,11 +27,14 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
 	description                   = [[Anti-Air Flak Turret
-	Building
-	112.5 Damage vs Armored
-	75 Damage vs Light/Building
-	
-	Uses +]] .. supply .. [[ Supply]],
+Armortype: ]] ..armortype.. [[ 
+
+112.5 Damage vs Armored
+75 Damage vs Light/Building
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
@@ -74,7 +86,7 @@ local unitDef                     = {
 		supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		nofriendlyfire	          = "1",
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
@@ -92,9 +104,6 @@ local unitDef                     = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage               = 112.5
-local weapon1AOE				  = 300
-
 local weaponDefs                  = {
 	antiairgunflak                = {
 		AreaOfEffect              = weapon1AOE,
@@ -107,7 +116,7 @@ local weaponDefs                  = {
 		burnblow                  = true,
 		endsmoke                  = "1",
 		explosionGenerator        = "custom:xamelImpact",
-		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot             = energycosttofire,
 		fireStarter               = 80,
 		id                        = 1,
 		impulseFactor             = 0,

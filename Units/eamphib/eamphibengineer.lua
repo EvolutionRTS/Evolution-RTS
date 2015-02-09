@@ -5,6 +5,8 @@ local unitName                   = "eamphibengineer"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[light]]
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -32,8 +34,8 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT AMPHIB SUPPORT",
-	description                  = [[Engineer
-	Light]],
+	description                  = [[Unit Type: Engineer
+Armortype: ]] .. armortype,
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -129,7 +131,7 @@ local unitDef                    = {
 		needed_cover             = 1,
 		death_sounds             = "generic",
 		dronespawner             = "1",
-		armortype                = "light",
+		armortype                = armortype,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  

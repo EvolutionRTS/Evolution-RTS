@@ -5,6 +5,17 @@ local unitName                       = "euwturret"
 
 --------------------------------------------------------------------------------
 
+local armortype						 = [[building]]
+local supply						 = [[4]]
+
+local weapon1Damage		             = 120
+local weapon1AOE		             = 10
+local energycosttofire				 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                        = {
 
 	buildAngle                       = 2048,
@@ -18,10 +29,14 @@ local unitDef                        = {
 	collisionVolumeTest              = "1",
 	corpse                           = "ammobox",
 	description                      = [[Anti-Amphibious Defense Platform
-	Building
-	120 Damage vs Light/Armored
-	12 Damage vs Building
-	]],
+Armortype: ]] ..armortype.. [[ 
+
+120 Damage vs Light/Armored
+12 Damage vs Building
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyStorage                    = 0,
 	energyUse                        = 0,
 	explodeAs                        = "mediumBuildingExplosionGenericGreen",
@@ -81,10 +96,10 @@ local unitDef                        = {
 	},
 	customParams                     = {
 		needed_cover                 = 2,
-		supply_cost                  = 1,
+		supply_cost                  = supply,
 		death_sounds                 = "generic",
 		-- twokhotkey                = 't',
-		armortype                    = "building",
+		armortype                    = armortype,
 		normalstex                   = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                    = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	                 = "outer_colonies",  
@@ -101,9 +116,6 @@ local unitDef                        = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage		             = 120
-local weapon1AOE		             = 10
-
 local weaponDefs                     = {
 	euwturretmissile                 = {
 		AreaOfEffect                 = weapon1AOE,
@@ -113,7 +125,7 @@ local weaponDefs                     = {
 		collideFriendly              = false,
 		collideFeature               = false,
 		explosionGenerator           = "custom:torpedoexplosion",
-		energypershot                = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot                = energycosttofire,
 		fireStarter                  = 80,
 		impulseFactor                = 0.1,
 		interceptedByShieldType      = 4,

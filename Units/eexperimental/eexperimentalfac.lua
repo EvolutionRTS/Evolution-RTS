@@ -5,6 +5,8 @@ local unitName                     = "eexperimentalfac"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
 local unitDef                      = {
 
 	activatewhenbuilt              = false,
@@ -21,7 +23,8 @@ local unitDef                      = {
 	canstop                        = true,
 	category                       = "BUILDING NOTAIR",
 	corpse                         = "ammobox",
-	description                    = [[Place generators near this factory to unlock higher tier units]],
+	description                    = [[Place generators near this factory to unlock higher tier units
+Armortype: ]] ..armortype,
 	energyStorage                  = 0,
 	energyUse                      = 0,
 	energyMake                     = 0,
@@ -80,7 +83,7 @@ local unitDef                      = {
 	},
 	customParams                   = {
 		death_sounds               = "nuke",
-		armortype                  = "building", 
+		armortype                  = armortype, 
 		normalstex                 = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                  = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	               = "outer_colonies",  

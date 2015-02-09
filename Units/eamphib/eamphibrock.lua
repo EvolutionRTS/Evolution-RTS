@@ -5,6 +5,22 @@ local unitName                   = "eamphibrock"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[5 power]]
+local armortype					 = [[light]]
+local supply					 = [[5]]
+
+local weapon1Damage              = 200
+local weapon1AOE				 = 1
+local weapon2Damage              = 200
+local weapon2AOE				 = 1
+local weapon2Burst               = 5
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire2          = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1) * weapon2Burst
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -27,13 +43,17 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT AMPHIB SUPPORT",
 	corpse                       = "ammobox",
-	description                  = [[Missile support tank
-	Light
-	200 Damage vs Armored
-	100 Damage vs Light/Building
+	description                  = [[Unit Type: Missile support tank
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +5 Power
-	Uses +5 Supply]],
+200 Damage vs Armored
+100 Damage vs Light/Building
+
+Energy cost to fire Single Shot: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Salvo: ]] .. roundToFirstDecimal(energycosttofire2) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -114,10 +134,10 @@ local unitDef                    = {
 		canareaattack            ="1",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = "5 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 5,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
@@ -127,12 +147,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 200
-local weapon1AOE				 = 1
-local weapon2Damage              = 200
-local weapon2AOE				 = 1
-local weapon2Burst               = 5
 
 local weaponDefs                 = {
 
@@ -144,7 +158,7 @@ local weaponDefs                 = {
 		collideFeature           = false,
 		cegTag                   = "missiletrailsmall",
 		explosionGenerator       = "custom:genericshellexplosion-medium-red",
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		fireStarter              = 70,
 		tracks                   = true,
 		impulseFactor            = 0,
@@ -187,7 +201,7 @@ local weaponDefs                 = {
 		burstrate		         = 0.1,
 		cegTag                   = "missiletrailsmall",
 		explosionGenerator       = "custom:genericshellexplosion-medium-red",
-		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1) * weapon2Burst,
+		energypershot            = energycosttofire2,
 		fireStarter              = 70,
 		tracks                   = true,
 		impulseFactor            = 0,

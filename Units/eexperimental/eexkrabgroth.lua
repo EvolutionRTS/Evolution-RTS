@@ -5,6 +5,25 @@ local unitName                   = "eexkrabgroth"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[25 power]]
+local armortype					 = [[armored]]
+local supply					 = [[25]]
+
+local weapon1Damage              = 600
+local weapon1AOE				 = 10
+local weapon2Damage              = 600
+local weapon2AOE				 = 10
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire2			 = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
+local function roundToFirstDecimal(energycosttofire2)
+    return math.floor(energycosttofire2*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -28,21 +47,24 @@ local unitDef                    = {
 	cantBeTransported            = true,
 	category                     = "ARMORED NOTAIR SKIRMISHER",
 	corpse                       = "ammobox",
-	description                  =[[Endbringer Class Base Assault Walker
-	Armored
+	description                  =[[Unit Type: Endbringer Class Base Assault Walker
+Armortype: ]] ..armortype.. [[ 
 
-	Primary Laser:
-	600 Damage/s vs Building
-	60 Damage/s vs Light/Armored
+Primary Laser:
+600 Damage/s vs Building
+60 Damage/s vs Light/Armored
 
-	Secondary Cannons:
-	80 Damage vs Building
-	8 Damage vs Light/Armored
+Secondary Cannons:
+80 Damage vs Building
+8 Damage vs Light/Armored
 
-	This unit can only attack buildings!
+This unit can only attack buildings!
+	
+Energy cost to fire Primary Laser: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Secondary Cannons: ]] .. roundToFirstDecimal(energycosttofire2) .. [[ 
 
-	Requires +25 Power
-	Uses +25 Supply]],
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -114,9 +136,9 @@ local unitDef                    = {
 	},
 	customParams                 = {
 		death_sounds             = "nuke",
-		RequireTech              = "25 Power",
-		armortype                = "armored",
-		supply_cost              = 25,
+		RequireTech              = power,
+		armortype                = armortype,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -126,11 +148,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 600
-local weapon1AOE				 = 10
-local weapon2Damage              = 600
-local weapon2AOE				 = 10
 
 local weaponDefs                 = {
 	heavybeamweapon              = {
@@ -145,7 +162,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.5,
 		--	cegTag               = "mediumcannonweapon3",
 		--    duration           = 0.2,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-large-purple",
 		fallOffRate              = 1,
 		fireStarter              = 50,
@@ -192,7 +209,7 @@ local weaponDefs                 = {
 		burnblow                 = true,
 		endsmoke                 = "1",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
+		energypershot            = energycosttofire2,
 		fireStarter              = 80,
 		id                       = 1,
 		impulseFactor            = 0.1,

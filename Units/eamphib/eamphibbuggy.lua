@@ -5,6 +5,18 @@ local unitName                   = "eamphibbuggy"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[1 power]]
+local armortype					 = [[light]]
+local supply					 = [[1]]
+
+local weapon1Damage              = 13.5
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -27,14 +39,18 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT AMPHIB RAID",
 	corpse                       = "ammobox",
-	description                  = [[Scout/Raider
-	Light
-	135 Damage/s vs Light
-	80 Damages/s vs Armored/Building
-	• Can fire while underwater
+	description                  = [[Unit Type: Raider
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +1 Power
-	Uses +1 Supply]],
+135 Damage/s vs Light
+80 Damages/s vs Armored/Building
+
+Can fire while underwater
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -122,9 +138,6 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 13.5
-local weapon1AOE				 = 1
-
 local weaponDefs                 = {
 	lightbeamlaser               = {
 		badTargetCategory        = [[ARMORED BUILDING VTOL]],
@@ -139,7 +152,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.2,
 		duration                 = 0.1,
 		explosionGenerator       = "custom:genericshellexplosion-small-sparks-burn",
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,

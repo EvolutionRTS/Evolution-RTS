@@ -5,6 +5,18 @@ local unitName                = "eamphibarty"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[5 power]]
+local armortype					 = [[light]]
+local supply					 = [[5]]
+
+local weapon1Damage              = 300
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                 = {
 
 	--mobileunit 
@@ -27,15 +39,18 @@ local unitDef                 = {
 	canstop                   = "1",
 	category                  = "LIGHT AMPHIB SUPPORT",
 	corpse                    = "ammobox",
-	description               = [["Laser Support Artillery
-Light
+	description               = [["Unit Type: Laser Support Artillery
+Armortype: ]] ..armortype.. [[ 
+
 300 Damage vs Buildings
 75 Damage vs Light/Armored
 
-	• Can fire while underwater
+Can fire while underwater
 
-Requires +5 Power
-Uses +5 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 energyMake                    = 0,
 energyStorage                 = 0,
 energyUse                     = 0,
@@ -107,10 +122,10 @@ weapons                       = {
 customParams                  = {
 	needed_cover              = 3,
 	death_sounds              = "generic",
-	RequireTech               = "5 Power",
-	armortype                 = "light",
+	RequireTech               = power,
+	armortype                 = armortype,
 	nofriendlyfire	          = "1",
-	supply_cost               = 5,
+	supply_cost               = supply,
 	normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 	buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 	factionname	              = "outer_colonies",  
@@ -120,9 +135,6 @@ customParams                  = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage           = 300
-local weapon1AOE			  = 1
 
 local weaponDefs              = {  
 assimilatorbeamweapon         = {
@@ -138,7 +150,7 @@ assimilatorbeamweapon         = {
 	coreThickness             = 0.5,
 	duration                  = 0.4,
 	explosionGenerator        = "custom:genericshellexplosion-large-sparks-burn",
-	energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+	energypershot             = energycosttofire,
 	fallOffRate               = 0.1,
 	fireStarter               = 50,
 	interceptedByShieldType   = 4,

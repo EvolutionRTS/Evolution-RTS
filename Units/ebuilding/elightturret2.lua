@@ -5,6 +5,17 @@ local unitName                    = "elightturret2"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local supply					 = [[2]]
+
+local weapon1Damage               = 125
+local weapon1AOE				  = 25
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                     = {
 
 	buildAngle                    = 2048,
@@ -18,12 +29,15 @@ local unitDef                     = {
 	collisionVolumeTest           = "1",
 	corpse                        = "ammobox",
 	description                   = [[Anti-Raid Defense Platform (Anti-Light)
-	Building
-	125 Damage vs Light
-	31.25 Damage vs Armored
-	12.5 Damage vs Buildings
+Armortype: ]] ..armortype.. [[ 
 
-	Uses +2 Supply]],
+125 Damage vs Light
+31.25 Damage vs Armored
+12.5 Damage vs Buildings
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
@@ -82,9 +96,9 @@ local unitDef                     = {
 	},
 	customParams                  = {
 		needed_cover              = 2,
-		supply_cost               = 2,
+		supply_cost               = supply,
 		death_sounds              = "generic",
-		armortype                 = "building",
+		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -101,9 +115,6 @@ local unitDef                     = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage               = 125
-local weapon1AOE				  = 25
-
 local weaponDefs                  = {
 	lighteweapon                  = {
 		AreaOfEffect              = weapon1AOE,
@@ -112,7 +123,7 @@ local weaponDefs                  = {
 		craterBoost               = 0,
 		craterMult                = 0,
 		explosionGenerator        = "custom:genericshellexplosion-medium-lightning",
-		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot             = energycosttofire,
 		impulseBoost              = 0,
 		impulseFactor             = 0,
 		interceptedByShieldType   = 4,

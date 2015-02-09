@@ -5,6 +5,21 @@ local unitName                    = "eshieldgen"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
+local weapon1Damage              = 2001
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local stockpiletime				 = 60
+
+local shield1Power               = 5000
+local shield1PowerRegen          = 50
+local shield1PowerRegenEnergy    = shield1PowerRegen / 20
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                     = {
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
@@ -17,9 +32,14 @@ local unitDef                     = {
 	corpse                        = "ammobox",
 	description                   = [[Anti-Nuke Platform
 	Anti-Artillery base shield Facility
+Armortype: ]] ..armortype.. [[ 
 
-	Shield recharges at a rate of 50hp/s
-	Maximum shield power is 5000hp]],
+Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
+Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
+Maximum shield power is ]] .. shield1Power ..[[hp
+Shield can link with other shield units to increase charging and capacity
+
+Energy cost while Anti-Nuke Beams: ]] .. roundToFirstDecimal(energycosttofire / stockpiletime) .. [[/s]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -80,7 +100,7 @@ local unitDef                     = {
 		needed_cover              = 5,
 		death_sounds              = "generic",
 		ProvideTechRange          = "300",
-		armortype                 = "building", 
+		armortype                 = armortype, 
 		normalstex                = "unittextures/eshieldgennormal.png", 
 		helptext                  = [[Anti-Nuke Platform / Anti-Artillery base shield Facility]],
 	},
@@ -93,9 +113,7 @@ local unitDef                     = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage               = 2001
-local weapon1AOE				  = 1
-local shield1PowerRegen           = 50
+
 
 local weaponDefs                  = {
 	nukeinterceptor               = {
@@ -111,7 +129,7 @@ local weaponDefs                  = {
 		coreThickness             = 0.5,
 		duration                  = 0.4,
 		explosionGenerator        = "custom:genericshellexplosion-large-blue",
-		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot             = energycosttofire,
 		fallOffRate               = 0.1,
 		fireStarter               = 50,
 		interceptor			      = 1,
@@ -127,7 +145,7 @@ local weaponDefs                  = {
 		soundStart                = "antinukelaser.wav",
 		soundTrigger              = true,
 		stockpile			      = true,
-		stockpiletime		      = 60,
+		stockpiletime		      = stockpiletime,
 		texture1                  = "lightning",
 		texture2                  = "laserend",
 		thickness                 = 20,
@@ -149,9 +167,9 @@ local weaponDefs                  = {
 		ShieldStartingPower       = 0,
 		Shieldenergyuse           = 0,
 		Shieldradius              = 1500,
-		Shieldpower               = 5000,
+		Shieldpower               = shield1power,
 		Shieldpowerregen          = shield1PowerRegen,
-		Shieldpowerregenenergy    = shield1PowerRegen / 20,
+		Shieldpowerregenenergy    = shield1PowerRegenEnergy,
 		Shieldintercepttype       = 4,
 		Shieldgoodcolor           = "0.0 0.2 1.0",
 		Shieldbadcolor            = "1.0 0 0",

@@ -5,6 +5,17 @@ local unitName                    = "esilo"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
+local weapon1Damage               = 2000
+local weapon1AOE				  = 2000
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local stockpiletime				 = 60
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                     = {
 
 	buildAngle                    = 8192,
@@ -16,7 +27,12 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Nuclear Missile Silo - Missile takes 4 minutes to build - Drains 50e while building]],
+	description                   = [[Nuclear Missile Silo
+Armortype: ]] ..armortype.. [[ 
+
+]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings in a large area
+
+Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofire / stockpiletime) .. [[/s]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -77,22 +93,11 @@ local unitDef                     = {
 	},
 	customParams                  = {
 		needed_cover              = 8,
-		RequireTech               = "0 Power",
 		death_sounds              = "nuke",
 		armortype                 = "building",
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
-		helptext                  = [[Nuclear Missile Silo
-
-		Will completely devastate a large area
-
-		+50000 Damage
-
-		+2000 Area of Effect
-
-		-50 Energy (While missile is building)
-
-		10s Reload Time]],
+		helptext                  = [[]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
@@ -104,9 +109,6 @@ local unitDef                     = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage               = 2000
-local weapon1AOE				  = 2000
 
 local weaponDefs                  = {
 	nukemissile                   = {
@@ -120,7 +122,7 @@ local weaponDefs                  = {
 		craterBoost               = 0,
 		craterMult                = 0,
 		edgeeffectiveness		  = 1,
-		energypershot             = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot             = energycosttofire,
 		explosionGenerator        = "custom:NUKEDATBEWM",
 		fireStarter               = 100,
 		flightTime                = 400,
@@ -143,7 +145,7 @@ local weaponDefs                  = {
 		soundStart                = "nukelaunch.wav",
 		startsmoke                = "0",
 		stockpile                 = true,
-		stockpileTime             = 60,
+		stockpileTime             = stockpiletime,
 		startVelocity             = 10,
 		tracks                    = true,
 		turnRate                  = 3000,

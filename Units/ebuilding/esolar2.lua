@@ -5,6 +5,12 @@ local unitName                    = "esolar2"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+local energyproduced			 = [[1]]
+local powerprovided				 = [[1 power]]
+local powerradius				 = [[400]]
+local supplygranted				 = [[5]]
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2048,
@@ -16,12 +22,16 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
 	damageModifier                = 0.33333,
-	description                   = [[Produces +1 Energy
-	Provides +1 Power
-	Provides +5 Supply]],
-	energyMake                    = 0,
+	description                   = [[Armortype: ]] ..armortype.. [[ 
+
+Produces +]] .. energyproduced .. [[ Energy 
+
+Provides +]] .. powerprovided .. [[ 
+Power Radius: ]] .. powerradius .. [[ 
+
+Provides +]] .. supplygranted .. [[ Supply]],
 	energyStorage                 = 0,
-	energyUse                     = -1,
+	energyMake                    = energyproduced,
 	explodeAs                     = "mediumBuildingExplosionGenericBlueEMP",
 	footprintX                    = 4,
 	footprintZ                    = 4,
@@ -69,11 +79,11 @@ local unitDef                     = {
 		iseco                     = 1,
 		needed_cover              = 2,
 		death_sounds              = "generic",
-		ProvideTech               = "1 Power",
-		ProvideTechRange          = "400",
+		ProvideTech               = powerprovided,
+		ProvideTechRange          = powerradius,
 		--	RequireTech           = "1 Powergrid",
-		armortype                 = "building",
-		supply_granted            = 5,
+		armortype                 = armortype,
+		supply_granted            = supplygranted,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
@@ -86,15 +96,7 @@ local unitDef                     = {
 		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
 		groundtexselectxsize      = 400, -- optional
 		groundtexselectzsize      = 400, -- optional
-		helptext                  = [[Basic Powerplant
-
-		Produces energy and power in a radius
-
-		+1 Energy
-
-		+1 Power
-
-		+400 Power Radius]],
+		helptext                  = [[]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
