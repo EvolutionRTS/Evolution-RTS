@@ -11,6 +11,6 @@ function widget:GetInfo()
 end
 
 function widget:Initialize()
-	Spring.SendCommands("grassdetail 0")
+	Spring.SetConfigInt("GrassDetail",0)
 end
 
