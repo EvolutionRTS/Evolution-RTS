@@ -5,6 +5,15 @@ local unitName                   = "eallterrshield"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[5 power]]
+local armortype					 = [[light]]
+local supply					 = [[5]]
+
+local shield1Power               = 1500
+local shield1PowerRegen          = 15
+local shield1PowerRegenEnergy    = shield1PowerRegen / 20
+
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -40,15 +49,17 @@ local unitDef                    = {
 	-- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient from a micromanagement standpoint.
 	-- End Cloaking
 
-	description                  = [[Shield Emitter
-	Light
-	Shield recharges at a rate of 20hp/s
-	Maximum shield power is 1500hp
-	Shield can link with other shield units to increase charging and capacity
-	Generates a Cloaking Field
+	description                  = [[Unit Type: Shield Emitter
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +5 Power
-	+Uses +5 Supply]],
+Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
+Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
+Maximum shield power is ]] .. shield1Power ..[[hp
+Shield can link with other shield units to increase charging and capacity
+Generates a Cloaking Field
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -112,10 +123,10 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = "5 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 5,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -124,7 +135,6 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
-local shield1PowerRegen          = 15
 
 local weaponDefs                 = {
 	allterrshield                = {
@@ -136,9 +146,9 @@ local weaponDefs                 = {
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
 		Shieldradius             = 300,
-		Shieldpower              = 1500,
+		Shieldpower              = shield1Power,
 		Shieldpowerregen         = shield1PowerRegen,
-		Shieldpowerregenenergy   = shield1PowerRegen / 20,
+		Shieldpowerregenenergy   = shield1PowerRegenEnergy,
 		Shieldintercepttype      = 4,
 		Shieldgoodcolor          = "0.0 0.2 1.0",
 		Shieldbadcolor           = "1.0 0 0",

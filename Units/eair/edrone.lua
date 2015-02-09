@@ -5,6 +5,11 @@ local unitName                   = "edrone"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[light]]
+
+local weapon1Damage              = 3
+local energycosttofire			 = weapon1Damage / 20
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -33,8 +38,9 @@ local unitDef                    = {
 	--  corpse                   = "ammobox",
 	cruiseAlt                    = 100,
 	description                  = [[Gunship Drone
-	Light
-	3 Damage vs Light/Armored/Building]],
+Armortype: ]] .. armortype ..[[
+
+]] .. weapon1Damage .. [[ Damage vs Light/Armored/Building]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -98,7 +104,7 @@ local unitDef                    = {
 	},
 	customParams                 = {
 		--    needed_cover       = 1,
-		armortype                = "light",
+		armortype                = armortype,
 		death_sounds             = "generic",
 		nofriendlyfire	         = "1",
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
@@ -109,7 +115,6 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage              = 3
 
 local weaponDefs                 = {
 	droneweapon                  = {
@@ -125,7 +130,7 @@ local weaponDefs                 = {
 		craterBoost              = 0,
 		craterMult               = 0,
 		duration                 = 0.05,
-		energypershot            = weapon1Damage / 20,
+		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-small-sparks-burn",
 		fallOffRate              = 0.1,
 		impulseFactor            = 0,

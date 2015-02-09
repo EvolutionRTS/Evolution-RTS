@@ -4,6 +4,17 @@
 local unitName                   = "ebomber"
 
 --------------------------------------------------------------------------------
+local power						 = [[10 power]]
+local armortype					 = [[light]]
+local supply					 = [[10]]
+
+local weapon1Damage              = 200
+local weapon1AOE				 = 500
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
 
 local unitDef                    = {
 
@@ -31,13 +42,16 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 140,
-	description                  = [[Bomber
-	Armored
-	200 Damage vs Buildings
-	50 Damage vs Light/Armored
+	description                  = [[Unit Type: Bomber
+Armortype: ]] ..armortype.. [[ 
+	
+200 Damage vs Buildings
+50 Damage vs Light/Armored
 
-	Requires +10 Power
-	Uses +10 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -101,10 +115,10 @@ local unitDef                    = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
 		nofriendlyfire           = "1",
-		RequireTech              = "10 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 10,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
@@ -115,9 +129,6 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 200
-local weapon1AOE				 = 500
-
 local weaponDefs                 = {
 	SBOMB                        = {
 		AreaOfEffect             = weapon1AOE,
@@ -127,7 +138,7 @@ local weaponDefs                 = {
 		collideFeature           = false,
 		cegTag                   = "missiletrailgunship",
 		explosionGenerator       = "custom:genericshellexplosion-large-red",
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		edgeEffectiveness        = 0.1,
 		fireStarter              = 70,
 		guidance                 = false,
@@ -157,6 +168,7 @@ local weaponDefs                 = {
 		tracks                   = false,
 		turret			         = false,
 		weaponAcceleration       = 10,
+		waterweapon				 = true,
 		flightTime               = 10,
 		weaponVelocity           = 800,
 		customparams             = {

@@ -1,15 +1,5 @@
 return {
-  
-  egunship2 = {
-    {
-	name     = "Weapon type",
-	tooltip  = "Switch between air to ground missiles and torpedos",
-	cob      = "WeaponType",  -- only this is required
-	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'Missile', 'Torpedo'},
-    },
-  },
-  
+   
   eriottank2 = {
     {
 	name     = "Weapon type",

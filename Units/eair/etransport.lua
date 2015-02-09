@@ -5,6 +5,10 @@ local unitName                   = "etransport"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[2 power]]
+local armortype					 = [[armored]]
+local supply					 = [[2]]
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -32,11 +36,12 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 150,
-	description                  = [[Fast Armored Transport
-	Armored
+	description                  = [[Unit Type: Fast Armored Transport
+Armortype: ]] ..armortype.. 
+[[
 
-	Requires +2 Power
-	Uses +2 Supply]],
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyUse                    = 0,
 	explodeAs                    = "hugeExplosionGenericRed",
@@ -89,9 +94,9 @@ local unitDef                    = {
 	customParams                 = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
-		RequireTech              = "2 Power",
-		armortype                = "armored",
-		supply_cost              = 2,
+		RequireTech              = power,
+		armortype                = armortype,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  

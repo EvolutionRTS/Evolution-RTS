@@ -5,6 +5,9 @@ local unitName                   = "escout"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[2 power]]
+local armortype					 = [[light]]
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -29,11 +32,10 @@ local unitDef                    = {
 	collide                      = false,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 180,
-	description                  = [[Air Scout
-	Light
+	description                  = [[Unit Type: Air Scout
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +2 Power
-	Uses +2 Supply]],
+Requires +]] .. power,
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -89,8 +91,8 @@ local unitDef                    = {
 	customParams                 = {
 		--    needed_cover       = 1,
 		death_sounds             = "generic",
-		RequireTech              = "2 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  

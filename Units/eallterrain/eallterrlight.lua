@@ -5,6 +5,18 @@ local unitName                   = "eallterrlight"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[2 power]]
+local armortype					 = [[light]]
+local supply					 = [[2]]
+
+local weapon1Damage              = 50
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -40,13 +52,16 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Raider
-	Light
-	50 Damage vs Light
-	25 Damage vs Armored/Building
+	description                  = [[Unit Type: Raider
+Armortype: ]] ..armortype.. [[ 
+	
+50 Damage vs Light
+25 Damage vs Armored/Building
 
-	Requires +2 Power
-	Uses +2 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -110,10 +125,10 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 1,
 		death_sounds             = "generic",
-		RequireTech              = "2 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 2,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -123,9 +138,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 50
-local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	lighttankweapon              = {
@@ -137,7 +149,7 @@ local weaponDefs                 = {
 		collideFriendly          = false,
 		coreThickness            = 0.3,
 		duration                 = 0.1,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-small-blue",
 		fallOffRate              = 1,
 		fireStarter              = 50,

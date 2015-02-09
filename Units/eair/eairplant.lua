@@ -5,6 +5,8 @@ local unitName                        = "eairplant"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[building]]
+
 local unitDef                         = {
 
 	activatewhenbuilt                 = true,
@@ -20,7 +22,8 @@ local unitDef                         = {
 	canstop                           = true,
 	category                          = "BUILDING NOTAIR VTOL",
 	corpse                            = "ammobox",
-	description                       = [[Place generators near this factory to unlock higher tier units]],
+	description                       = [[Place generators near this factory to unlock higher tier units
+Armortype: ]] .. armortype,
 	energyStorage                     = 0,
 	energyUse                         = 0,
 	energyMake                        = 0,
@@ -87,7 +90,7 @@ local unitDef                         = {
 	},
 	customParams                      = {
 		death_sounds                  = "generic",
-		armortype                     = "building", 
+		armortype                     = armortype, 
 		normalstex                    = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                     = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	                  = "outer_colonies",  

@@ -5,6 +5,18 @@ local unitName                   = "egunship2"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[4 power]]
+local armortype					 = [[armored]]
+local supply					 = [[4]]
+
+local weapon1Damage              = 150
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -31,15 +43,16 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 120,
-	description                  = [[Gunship Tank Destroyer
-	Light
-	150 Damage vs Light/Armored
-	37.5 Damage vs Building
+	description                  = [[Unit Type: Gunship Tank Destroyer
+Armortype: ]] ..armortype.. [[ 
 
-	Can switch firemodes to torpedos
+150 Damage vs Light/Armored
+75 Damage vs Building
 
-	Requires +7 Power
-	Uses +7 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -102,23 +115,15 @@ local unitDef                    = {
 			BadTargetCategory    = "BUILDING WALL",
 			noChaseCategory      = "VTOL",
 		},
-		[2]                      = {
-			def                  = "gunshiptorpedo",
-			mainDir              = "0 0 1",
-			maxAngleDif          = 180,
-			OnlyTargetCategory   = "NOTAIR AMPHIB SUB",
-			BadTargetCategory    = "BUILDING WALL",
-			noChaseCategory      = "VTOL",
-		},
 	},
 	customParams                 = {
 		--    needed_cover       = 2,
 		canareaattack            ="1",
 		death_sounds             = "generic",
-		RequireTech              = "8 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 8,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -128,11 +133,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 150
-local weapon1AOE				 = 1
-local weapon2Damage              = 150
-local weapon2AOE				 = 1
 
 local weaponDefs                 = {
 
@@ -144,7 +144,7 @@ local weaponDefs                 = {
 		collideFeature           = false,
 		cegTag                   = "missiletrailgunshiplesssmokey",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		edgeEffectiveness        = 0.1,
 		fireStarter              = 70,
 		tracks                   = true,
@@ -156,6 +156,7 @@ local weaponDefs                 = {
 		range                    = 420,
 		reloadtime               = 1,
 		weaponType		         = "MissileLauncher",
+		waterweapon				 = true,
 		smokeTrail               = false,
 		soundHit                 = "bombhit.wav",
 		soundHitVolume	         = 10,
@@ -175,93 +176,6 @@ local weaponDefs                 = {
 			default              = weapon1Damage,
 		},
 	},
-
-	oldgunshipweapon                = {
-		badTargetCategory        = [[BUILDING]],
-		AreaOfEffect             = weapon1AOE,
-		avoidFriendly            = false,
-		avoidFeature             = false,
-		collideFriendly          = false,
-		collideFeature           = false,
-		cegTag                   = "missiletrailgunshiplesssmokey",
-		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
-		edgeEffectiveness        = 0.1,
-		fireStarter              = 70,
-		guidance                 = false,
-		id                       = 136,
-		impulseBoost             = 0,
-		impulseFactor            = 0,
-		interceptedByShieldType  = 4,
-		lineOfSight              = true,
-		metalpershot             = 0,
-		model                    = "missilegunship.s3o",
-		name                     = "Rockets",
-		range                    = 520,
-		reloadtime               = 1,
-		weaponType		         = "Cannon",  -- This causes the missile trail to go off kilter
-		--	rendertype		     = 1,
-		selfprop                 = true,
-		smokedelay               = ".1",
-		smokeTrail               = false,
-		soundHit                 = "bombhit.wav",
-		soundHitVolume	         = 10,
-		soundStart               = "18395_inferno_rltx.wav",
-		soundStartVolume         = 10,
-		startsmoke               = "0",
-		startVelocity            = 250,
-		tolerance                = 8000,
-		turnRate                 = 4680,
-		turret			         = true,
-		tracks                   = true,
-		weaponAcceleration       = 131,
-		weaponTimer              = 100,
-		weaponVelocity           = 1200,
-		customparams             = {
-			damagetype		     = "egunship2",  
-		},      
-		damage                   = {
-			default              = weapon1Damage,
-		},
-	},
-
-	gunshiptorpedo               = {
-		AreaOfEffect             = weapon2AOE,
-		avoidFriendly            = false,
-		avoidFeature             = false,
-		collideFriendly          = false,
-		collideFeature           = false,
-		cegTag                   = "torpedotrailuwturret",
-		cylinderTargeting        = true,
-		explosionGenerator       = "custom:torpedoexplosion",
-		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
-		fireStarter              = 80,
-		impulseFactor            = 0.1,
-		interceptedByShieldType  = 4,
-		model                    = "missilesmall.s3o",
-		name                     = "Underwater Torpedo",
-		pitchtolerance           = 3000,
-		range                    = 420,
-		reloadtime               = 1,
-		weaponType		         = "TorpedoLauncher",
-		soundHit                 = "torpedolaunch.wav",
-		soundStart               = "18393_inferno_reject.wav",
-		tolerance                = 3000,
-		turret                   = true,
-		startVelocity	         = 200,
-		acceleration	         = 2000,
-		weaponVelocity           = 10000,
-		tracks				     = true,
-		turnrate			     = 100000,
-		flighttime			     = 4,
-		customparams             = {
-			damagetype		     = "egunship2torpedo",  
-		},      
-		damage                   = {
-			default              = weapon2Damage,
-		},
-	},
-
 }
 unitDef.weaponDefs               = weaponDefs
 

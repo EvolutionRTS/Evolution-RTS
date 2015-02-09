@@ -28,7 +28,7 @@ local unitDef                     = {
 	-- End Cloaking
 
 	description                   = [[Anti-Tank Land Mine
-	Fires a projectile dealing 300 damage
+	Fires a projectile dealing 305 damage
 
 	Costs 0.25 Energy Upkeep]],
 	energyMake                    = 0,
@@ -108,7 +108,8 @@ local unitDef                     = {
 }
 
 --------------------------------------------------------------------------------
-local weapon1Damage               = 300
+local weapon1Damage               = 305
+local weapon1AOE				  = 1,
 
 local weaponDefs                  = {
 	emineboom                     = {

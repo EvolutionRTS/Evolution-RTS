@@ -5,6 +5,18 @@ local unitName                   = "eallterrheavy"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[6 power]]
+local armortype					 = [[armored]]
+local supply					 = [[6]]
+
+local weapon1Damage              = 100
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -40,13 +52,16 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Armored Tank Destroyer
-	Armored
-	100 Damage vs Light/Armored
-	50 Damage vs Buildings
+	description                  =[[Unit Type: Armored Tank Destroyer
+Armortype: ]] ..armortype.. [[ 
+	
+100 Damage vs Light/Armored
+50 Damage vs Buildings
 
-	Requires +6 Power
-	Uses +6 Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -113,10 +128,10 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = "6 Power",
-		armortype                = "armored",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 6,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -126,9 +141,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 100
-local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	heavytankweapon              = {
@@ -143,7 +155,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.5,
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.1,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-medium-green",
 		fallOffRate              = 1,
 		fireStarter              = 50,

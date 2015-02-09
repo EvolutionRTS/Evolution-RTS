@@ -5,6 +5,18 @@ local unitName                   = "efighter"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[4 power]]
+local armortype					 = [[light]]
+local supply					 = [[4]]
+
+local weapon1Damage              = 25
+local weapon1AOE				 = 100
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -31,13 +43,16 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 200,
-	description                  = [[Paralysis Gunship
-	Light
-	250 Damage vs Light/Armored/s
-	62.5 Damage vs Building/s
+	description                  = [[Unit Type: Paralysis Gunship
+Armortype: ]] ..armortype.. [[ 
 	
-	Requires +4 Power
-	Uses +4 Supply]],
+250 Damage vs Light/Armored/s
+62.5 Damage vs Building/s
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -101,10 +116,10 @@ local unitDef                    = {
 	customParams                 = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
-		RequireTech              = "4 Power",
-		armortype                = "light",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 4,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -114,9 +129,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 25
-local weapon1AOE				 = 100
 
 local weaponDefs                 = {
 	aircannon   	             = {
@@ -129,7 +141,7 @@ local weaponDefs                 = {
 		burnblow		         = true,
 		--cegTag                   = "railgun",
 		duration                 = 0.05,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		fallOffRate              = 1,
 		fireStarter              = 50,

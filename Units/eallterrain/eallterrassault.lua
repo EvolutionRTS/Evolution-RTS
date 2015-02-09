@@ -5,6 +5,18 @@ local unitName                   = "eallterrassault"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[10 power]]
+local armortype					 = [[siege]]
+local supply					 = [[10]]
+
+local weapon1Damage              = 400
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -40,17 +52,20 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Anti-Base Siege Tank
-	Armored
-	400 Damage vs Buildings
-	50 Damage vs Light/Armored
+	description                  =[[Unit Type: Anti-Base Siege Tank
+Armortype: ]] ..armortype.. [[ 
 
-	Takes 50% less damage from Defensive turrets
+400 Damage vs Buildings
+50 Damage vs Light/Armored
 
-	This unit can only fire at buildings!
+Takes 50% less damage from Defensive turrets
 
-	Requires +10 Power
-	Uses +10 Supply]],
+This unit can only fire at buildings!
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -115,10 +130,10 @@ local unitDef                    = {
 	customParams                 = {
 		needed_cover             = 4,
 		death_sounds             = "generic",
-		RequireTech              = "10 Power",
-		armortype                = "siege",
+		RequireTech              = power,
+		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		supply_cost              = 10,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -128,9 +143,6 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weapon1Damage              = 400
-local weapon1AOE				 = 1
 
 local weaponDefs                 = {
 	assaulttankcannon            = {
@@ -145,7 +157,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.6,
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.2,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-large-purple",
 		fallOffRate              = 1,
 		fireStarter              = 100,
@@ -178,53 +190,6 @@ local weaponDefs                 = {
 			default              = weapon1Damage,
 		},
 	},
-
-	assaulttankcannonbeam        = {
-		badTargetCategory        = [[ARMORED LIGHT]],
-		AreaOfEffect             = weapon1AOE,
-		avoidFriendly            = false,
-		avoidFeature             = false,
-		collideFriendly          = false,
-		collideFeature           = false,
-		beamTime                 = 4,
-		beamWeapon               = true,
-		coreThickness            = 0.6,
-		--	cegTag               = "mediumcannonweapon3",
-		duration                 = 0.2,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
-		explosionGenerator       = "custom:genericshellexplosion-large-purple",
-		fallOffRate              = 1,
-		fireStarter              = 100,
-		impulseFactor            = 0,
-		interceptedByShieldType  = 4,
-		lineOfSight              = true,
-		minintensity             = "1",
-		name                     = "Laser",
-		range                    = 750,
-		reloadtime               = 10,
-		WeaponType               = "BeamLaser",
-		rgbColor                 = "0.5 0 1",
-		rgbColor2                = "1 1 1",
-		soundTrigger             = true,
-		soundstart               = "allterrassaultshot.wav",
-		--    soundHit           = "assaultshothit.wav",
-		texture1                 = "shot",
-		texture2                 = "empty",
-		thickness                = 9,
-		tolerance                = 1000,
-		turret                   = true,
-		weaponVelocity           = 800,
-		customparams             = {
-			damagetype		     = "eallterrassault",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
-		}, 
-		damage                   = {
-			default              = weapon1Damage,
-		},
-	},
-
 }
 unitDef.weaponDefs               = weaponDefs
 
