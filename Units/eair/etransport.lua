@@ -38,7 +38,7 @@ local unitDef                    = {
 	cruiseAlt                    = 150,
 	description                  = [[Unit Type: Fast Armored Transport
 Armortype: ]] ..armortype.. 
-[[
+[[ 
 
 Requires +]] .. power .. [[ 
 Uses +]] .. supply .. [[ Supply]],
