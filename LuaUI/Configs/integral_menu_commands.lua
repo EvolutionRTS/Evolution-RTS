@@ -33,8 +33,9 @@ local econ = {
 	emetalextractor = {order = 1, row = 1},
 	emetalextractorai = {order = 1, row = 1},
 	esolar2 = {order = 2, row = 1},
-	egeothermal = {order = 3, row = 1},
-	efusion2 = {order = 4, row = 1},
+	emediumgen = {order = 3, row = 1},
+	egeothermal = {order = 4, row = 1},
+	efusion2 = {order = 5, row = 1},
 	emaker = {order = 1, row = 2},
 	estorage = {order = 2, row = 2},
 }

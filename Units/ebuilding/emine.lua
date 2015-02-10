@@ -41,7 +41,7 @@ local unitDef                     = {
 	description                   = [[Anti-Tank Land Mine
 Armortype: ]] ..armortype.. [[ 
 
-Fires a projectile dealing]] .. weapon1Damage .. [[ damage
+Fires a projectile dealing ]] .. weapon1Damage .. [[ damage
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	energyMake                    = 0,

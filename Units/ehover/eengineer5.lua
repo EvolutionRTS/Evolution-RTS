@@ -98,6 +98,7 @@ local unitDef                    = {
 		"emetalextractor", --new
 		"emaker", --new
 		"esolar2", --new
+		"emediumgen",
 		"egeothermal", --new
 		"efusion2", --new
 		"estorage", --new

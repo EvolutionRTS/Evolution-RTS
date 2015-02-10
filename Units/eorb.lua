@@ -54,7 +54,7 @@ Armortype: ]] ..armortype.. [[
 	maxSlope                     = 26,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
-	maxWaterDepth                = 10,
+	maxWaterDepth                = 5000,
 	metalmake                    = 0,
 	metalStorage                 = 0,
 	movementClass                = "HOVERTANK6",

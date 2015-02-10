@@ -9,7 +9,7 @@ local armortype					 = [[building]]
 local energyproduced			 = [[7]]
 local powerprovided				 = [[7 power]]
 local powerradius				 = [[600]]
-local supplygranted				 = [[30]]
+local supplygranted				 = [[35]]
 
 local unitDef                     = {
 	activateWhenBuilt             = true,

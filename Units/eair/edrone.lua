@@ -56,7 +56,7 @@ Armortype: ]] .. armortype ..[[
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	maxDamage                    = 55,
-	maxSlope                     = 30,
+	maxSlope                     = 90,
 	maxVelocity                  = 30,
 	verticalSpeed		         = 15,
 	maxWaterDepth                = 0,
