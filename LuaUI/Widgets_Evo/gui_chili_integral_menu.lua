@@ -290,7 +290,7 @@ local n_states = {}
 local menuChoices = {
 	[1] = { array = n_common, name = "Order", hotkeyName = "Order" },
 	[2] = { array = n_factories, name = "Factory", hotkeyName = "Factory", config = factory_commands, actionName = "epic_chili_integral_menu_tab_factory" },
-	[3] = { array = n_econ, name = "Econ", hotkeyName = "Econ", config = econ_commands, actionName = "epic_chili_integral_menu_tab_economy" },
+	[3] = { array = n_econ, name = "Economy", hotkeyName = "Economy", config = econ_commands, actionName = "epic_chili_integral_menu_tab_economy" },
 	[4] = { array = n_defense, name = "Defense", hotkeyName = "Defense", config = defense_commands, actionName = "epic_chili_integral_menu_tab_defence" },
 	[5] = { array = n_special, name = "Special", hotkeyName = "Special", config = special_commands, actionName = "epic_chili_integral_menu_tab_special" },
 	[6] = { array = n_units, name = "Units", hotkeyName = "Units" },

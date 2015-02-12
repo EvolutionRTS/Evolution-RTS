@@ -50,8 +50,8 @@ do
 	local isMission = Game.modDesc:find("Mission Mutator")
 	if isMission then -- all missions will be forced to use a specific name
 		if not VFS.FileExists(ORDER_FILENAME) or not VFS.FileExists(CONFIG_FILENAME) then
-			ORDER_FILENAME     = LUAUI_DIRNAME .. 'Config/ZK_order.lua' --use "ZK" name when running any mission mod (provided that there's no existing config file)
-			CONFIG_FILENAME    = LUAUI_DIRNAME .. 'Config/ZK_data.lua'
+			ORDER_FILENAME     = LUAUI_DIRNAME .. 'Config/evo_order.lua' --use "evo" name when running any mission mod (provided that there's no existing config file)
+			CONFIG_FILENAME    = LUAUI_DIRNAME .. 'Config/evo_data.lua'
 		end
 	end
 end
@@ -67,7 +67,7 @@ local glPushAttrib = gl.PushAttrib
 local pairs = pairs
 local ipairs = ipairs
 
-do -- create backup for ZK_data.lua and ZK_order.lua to workaround against case of file corruption when OS crash
+do -- create backup for evo_data.lua and evo_order.lua to workaround against case of file corruption when OS crash
  	local fileToCheck = {ORDER_FILENAME,CONFIG_FILENAME}
 	local extraText = {'-- Widget Order List  (0 disables a widget)', '-- Widget Custom Data'} --this is a header text that is appended to start of file
 	for i=1, #fileToCheck do
@@ -81,7 +81,7 @@ local localWidgets = false
 
 if VFS.FileExists(CONFIG_FILENAME) then --check config file whether user want to use localWidgetsFirst
   local cadata = VFS.Include(CONFIG_FILENAME)
-  if cadata["Local Widgets Config"] then
+  if cadata and cadata["Local Widgets Config"] then
     localWidgetsFirst = cadata["Local Widgets Config"].localWidgetsFirst
     localWidgets = cadata["Local Widgets Config"].localWidgets
   end
