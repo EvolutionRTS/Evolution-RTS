@@ -6,6 +6,7 @@ local unitName                   = "eallterrengineer"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
+local supply					 = [[7]]
 
 local unitDef                    = {
 
@@ -49,7 +50,9 @@ local unitDef                    = {
 	-- End Cloaking
 
 	description                  = [[Unit Type: Engineer
-Armortype: ]] ..armortype,
+Armortype: ]] .. armortype .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -143,6 +146,7 @@ Armortype: ]] ..armortype,
 		death_sounds             = "generic",
 		dronespawner             = "1",
 		armortype                = armortype,
+		supply_cost              = supply,
 		normalstex               = "unittextures/con_legonormal.png", 
 	},
 }

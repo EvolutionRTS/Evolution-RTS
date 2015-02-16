@@ -5,6 +5,9 @@ local unitName                   = "eengineer5"
 
 --------------------------------------------------------------------------------
 
+local armortype					 = [[light]]
+local supply					 = [[5]]
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -33,8 +36,10 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
-	description                  = [[Engineer 
-	Light]],
+	description                  = [[Unit Type: Engineer
+Armortype: ]] .. armortype .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -129,7 +134,8 @@ local unitDef                    = {
 		needed_cover             = 1,
 		death_sounds             = "generic",
 		dronespawner             = "1",
-		armortype                = "light",
+		armortype                = armortype,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  

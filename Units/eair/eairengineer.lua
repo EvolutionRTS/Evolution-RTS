@@ -6,6 +6,7 @@ local unitName                   = "eairengineer"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
+local supply					 = [[6]]
 
 local unitDef                    = {
 
@@ -40,8 +41,10 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 300,
-	description                  = [[Airborne Engineer 
-Armortype: ]] .. armortype,
+	description                  = [[Unit Type: Engineer
+Armortype: ]] .. armortype .. [[ 
+
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -136,6 +139,7 @@ Armortype: ]] .. armortype,
 		death_sounds             = "generic",
 		--    airdronespawner    = "1",
 		armortype                = armortype,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
