@@ -108,7 +108,7 @@ local unitDef                    = {
 		"eheavyturret2", --new
 		"eartyturret",
 		"euwturret",
-		"ecruisesilo",
+		"ecruisesiloai",
 		"eshieldgen",
 		"esilo",
 		"emine",

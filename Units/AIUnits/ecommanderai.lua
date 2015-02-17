@@ -119,7 +119,7 @@ There can only be one!]],
 		"eheavyturret2", --new
 		"eartyturret",
 		"euwturret",
-		"ecruisesilo",
+		"ecruisesiloai",
 		"eshieldgen",
 		"esilo",
 		"emine",
