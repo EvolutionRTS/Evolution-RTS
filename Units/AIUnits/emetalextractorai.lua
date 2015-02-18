@@ -69,6 +69,7 @@ local unitDef                     = {
 	weapons                       = {
 	},
 	customParams                  = {
+		supply_granted            = 250,
 		iseco                     = 1,
 		needed_cover              = 3,
 		death_sounds              = "generic",
