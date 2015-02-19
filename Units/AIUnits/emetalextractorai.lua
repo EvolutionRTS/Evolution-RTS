@@ -46,6 +46,7 @@ local unitDef                     = {
 	sightDistance                 = 367,
 	smoothAnim                    = true,
 	unitname                      = "emetalextractorai",
+	unitrestricted				  = 27,
 	workerTime                    = 0,
 	yardMap                       = "ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo",
 	sfxtypes                      = { 

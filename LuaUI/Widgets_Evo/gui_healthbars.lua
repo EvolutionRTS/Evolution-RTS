@@ -57,7 +57,7 @@ local addGlow                   = false      -- adds a small subtle glow around 
 local glowSize					= outlineSize*6
 local glowAlpha					= 0.17
 
-local minPercentageDistance     = 110000     -- always show health percentage text below this distance
+local minPercentageDistance     = 120000     -- always show health percentage text below this distance
 local infoDistance              = 800000
 local maxFeatureInfoDistance    = 300000    --max squared distance at which text it drawn for features 
 local maxFeatureDistance        = 550000    --max squared distance at which any info is drawn for features 
@@ -147,6 +147,19 @@ local glDepthTest     = gl.DepthTest
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+
+-- tiny perf improvement this way:
+local unitsUnitDefCache = {}
+function aGetUnitDefID(unitID)
+	if unitsUnitDefCache[unitID] == nil then
+		unitsUnitDefCache[unitID] = spGetUnitDefID(unitID)
+	end
+	return unitsUnitDefCache[unitID]
+end
+function widget:UnitDestroyed(unitID, unitDefID, unitTeam)
+    unitsUnitDefCache[unitID] = nil
+end
+  
 
 do
   local deactivated = false
@@ -1314,7 +1327,7 @@ do
     --glDepthMask(true)
 
     cx, cy, cz = GetCameraPosition()
-
+	
     
     --if the camera is too far up, higher than maxDistance on smoothmesh, dont even call any visibility checks or nothing 
     local smoothheight=GetSmoothMeshHeight(cx,cz) --clamps x and z
@@ -1402,13 +1415,13 @@ do
 
     videoFrame = videoFrame+1
     sec1=sec1+dt
-    if (sec1>1/25) and ((cy-smoothheight)^2 < maxUnitDistance) then
+    if (sec1>1/4) and ((cy-smoothheight)^2 < maxUnitDistance) then
       sec1 = 0
-      visibleUnits = GetVisibleUnits(-1,nil,false)
+      visibleUnits = GetVisibleUnits(-1,nil,false)	-- expensive
     end
 
     sec2=sec2+dt
-    if (sec2>1/3) and  ((cy-smoothheight)^2 < maxFeatureDistance)  then
+    if (sec2>1/2) and  ((cy-smoothheight)^2 < maxFeatureDistance)  then
       sec2 = 0
       visibleFeatures = GetVisibleFeatures(-1,nil,false,false)
       local cnt = #visibleFeatures

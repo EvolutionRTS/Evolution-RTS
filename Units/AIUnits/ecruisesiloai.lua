@@ -64,6 +64,7 @@ Energy cost to fire missiles: ]] .. roundToFirstDecimal(energycosttofire) .. [[/
 	sightDistance                 = 900,
 	smoothAnim                    = true,
 	unitname                      = "ecruisesiloai",
+	unitrestricted				  = 4,
 	workerTime                    = 0,
 	yardMap                       = "oooooooooo oooooooooo oooooooooo oooooooooo oooooooooo oooooooooo oooooooooo oooooooooo oooooooooo oooooooooo ",
 	sfxtypes                      = { 

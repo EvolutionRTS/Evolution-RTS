@@ -71,6 +71,7 @@ local unitDef                    = {
 	turnRate                     = 5000,
 	--  turnrate                 = 1020,
 	unitname                     = "eengineer5ai",
+	unitrestricted				 = 4,
 	upright                      = true,
 	workerTime                   = 1,
 	capturespeed                 = 1,
@@ -97,23 +98,23 @@ local unitDef                    = {
 		"eexperimentalfac",
 		"emetalextractorai", --new
 		"emaker", --new
-		"esolar2", --new
+		"esolar2ai", --new
 		"egeothermal", --new
 		"efusion2", --new
-		"estorage", --new
+		"estorageai", --new
 		"eradar2", --new
 		"ejammer2", --new
 		"ekmar",
-		"elightturret2", --new
-		"eheavyturret2", --new
+		"elightturret2ai", --new
+		"eheavyturret2ai", --new
 		"eartyturret",
 		"euwturret",
 		"ecruisesiloai",
 		"eshieldgen",
-		"esilo",
-		"emine",
+		"esiloai",
+		"emineai",
 		"eorb",
-		"ecommander",
+		"ecommanderai",
 	},
 	sounds                       = {
 		underattack              = "unitsunderattack1",

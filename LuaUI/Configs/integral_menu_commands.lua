@@ -33,25 +33,31 @@ local econ = {
 	emetalextractor = {order = 1, row = 1},
 	emetalextractorai = {order = 1, row = 1},
 	esolar2 = {order = 2, row = 1},
+	esolar2ai = {order = 2, row = 1},
 	emediumgen = {order = 3, row = 1},
 	egeothermal = {order = 4, row = 1},
 	efusion2 = {order = 5, row = 1},
 	emaker = {order = 1, row = 2},
 	estorage = {order = 2, row = 2},
+	estorageai = {order = 2, row = 2},
 }
 
 local defense = {
 	elightturret2 = {order = 0, row = 1},
+	elightturret2ai = {order = 0, row = 1},
 	eheavyturret2 = {order = 1, row = 1},
+	eheavyturret2ai = {order = 1, row = 1},
 	euwturret = {order = 2, row = 1},
 	eartyturret = {order = 3, row = 1},
 	emine = {order = 4, row = 1},
+	emineai = {order = 4, row = 1},
 	ekmar = {order = 0, row = 2},
 	eshieldgen = {order = 1, row = 2},
 }
 
 local aux = {	--merged into special
 	eorb = {order = 0, row = 1},
+	eorbai = {order = 0, row = 1},
 	ecommander = {order = 1, row = 1},
 	eradar2 = {order = 0, row = 2},
 	ejammer2 = {order = 1, row = 2},
