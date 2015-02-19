@@ -187,6 +187,11 @@ local icontypes = {
     size=1,
     radiusadjust=3,
   },
+  storage = {
+    bitmap='icons/storage.png',
+    size=1,
+    radiusadjust=3,
+  },
   energy = {
     bitmap='icons/ecoenergy.png',
     size=2,
