@@ -75,6 +75,7 @@ end
 
 local doesNotCountList = {
 	[GetUnitDefIdByName("emine")] = true,
+	[GetUnitDefIdByName("emineai")] = true,
 	[GetUnitDefIdByName("edrone")] = true,
 }
 

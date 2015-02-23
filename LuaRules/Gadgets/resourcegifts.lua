@@ -13,7 +13,15 @@ end
 local MEX_INCOME = 0.5 -- income of each mex
 local modOptions = Spring.GetModOptions();
 
-local aiCheatHandicap = { 
+local aiCheatHandicapMetal = { 
+	["veryeasy"] =  5,
+	["easy"] =  10,
+	["medium"] =  25,
+	["hard"] =  50,
+	["insane"] =  100,
+}
+
+local aiCheatHandicapEnergy = { 
 	["veryeasy"] =  5,
 	["easy"] =  10,
 	["medium"] =  25,
@@ -125,10 +133,9 @@ function gadget:GameFrame(n)
 		end
 	--Give free resources to AI - Necessary for AI's to properly function
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
-			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
+			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"e",998)
-				Spring.SetTeamResource(TeamID,"e",1000000000000)
+				Spring.AddTeamResource(TeamID,"e", aiCheatHandicapEnergy[modOptions.aidifficulty or "veryeasy"])
 			end
 		end
 	end
@@ -147,7 +154,7 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"m", aiCheatHandicap[modOptions.aidifficulty or "veryeasy"])
+				Spring.AddTeamResource(TeamID,"m", aiCheatHandicapMetal[modOptions.aidifficulty or "veryeasy"])
 			end
 		end
 	end

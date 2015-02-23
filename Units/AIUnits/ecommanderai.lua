@@ -108,9 +108,10 @@ There can only be one!]],
 		"eexperimentalfac",
 		"emetalextractorai", --new
 		"emaker", --new
-		"esolar2ai", --new
+		"esolar2ai",
+		"emediumgenai",		--new
 		"egeothermal", --new
-		"efusion2", --new
+		"efusion2ai", --new
 		"estorageai", --new
 		"eradar2", --new
 		"ejammer2", --new

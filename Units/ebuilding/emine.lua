@@ -74,7 +74,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	stealth                       = false,
 	unitname                      = "emine",
 	workerTime                    = 0,
-	yardMap                       = "oo oo oo oo",
+	yardMap                       = "oo oo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {

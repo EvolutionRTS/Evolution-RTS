@@ -18,7 +18,7 @@ end
 
 local unitDef                     = {
 	activateWhenBuilt             = true,
-	blocking			          = true,
+	blocking			          = false,
 	buildAngle                    = 1024,
 	buildCostEnergy               = 0,
 	buildCostMetal                = 20,
@@ -73,9 +73,9 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	seismicDistance               = 0,
 	stealth                       = false,
 	unitname                      = "emineai",
-	unitrestricted				  = 15,
+	unitrestricted				  = 8,
 	workerTime                    = 0,
-	yardMap                       = "oo oo oo oo",
+	yardMap                       = "oo oo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {

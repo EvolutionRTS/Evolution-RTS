@@ -1,21 +1,21 @@
--- UNITDEF -- ESOLAR2AI --
+-- UNITDEF -- EMEDIUMGENAI --
 --------------------------------------------------------------------------------
 
-local unitName                    = "esolar2ai"
+local unitName                    = "emediumgenai"
 
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[1]]
-local powerprovided				 = [[1 power]]
-local powerradius				 = [[400]]
-local supplygranted				 = [[5]]
+local energyproduced			 = [[5]]
+local powerprovided				 = [[5 power]]
+local powerradius				 = [[500]]
+local supplygranted				 = [[25]]
 
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 20,
+	buildCostMetal                = 90,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
@@ -32,29 +32,29 @@ Power Radius: ]] .. powerradius .. [[
 Provides +]] .. supplygranted .. [[ Supply]],
 	energyStorage                 = 0,
 	energyMake                    = energyproduced,
-	explodeAs                     = "mediumBuildingExplosionGenericBlueEMP",
-	footprintX                    = 4,
-	footprintZ                    = 4,
+	explodeAs                     = "largeBuildingExplosionGenericBlueEMP",
+	footprintX                    = 6,
+	footprintZ                    = 6,
 	icontype                      = "energy",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 800,
+	maxDamage                     = 1400,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
-	name                          = "Basic Generator",
-	objectName                    = "epowerplant.s3o",
-	script						  = "esolar2.cob",
+	name                          = "Medium Generator (AI)",
+	objectName                    = "emediumgen.s3o",
+	script						  = "emediumgen.cob",
 	onoffable                     = false,
 	radarDistance                 = 0,
 	repairable		              = false,
-	selfDestructAs                = "mediumBuildingExplosionGenericBlueEMP",
+	selfDestructAs                = "largeBuildingExplosionGenericBlueEMP",
 	side                          = "CORE",
 	sightDistance                 = 367,
 	smoothAnim                    = true,
-	unitname                      = "esolar2ai",
-	unitrestricted				  = 10,
-	yardMap                       = "oooo oooo oooo oooo",
+	unitname                      = "emediumgenai",
+	unitrestricted				  = 3,
+	yardMap                       = "oooooo oooooo oooooo oooooo oooooo oooooo ",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {
@@ -64,7 +64,7 @@ Provides +]] .. supplygranted .. [[ Supply]],
 		
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactionbasic",
+			"custom:fusionreactionnuclear",
 			"custom:skyhatelaser",
 		},
 	},
@@ -79,7 +79,7 @@ Provides +]] .. supplygranted .. [[ Supply]],
 	},
 	customParams                  = {
 		iseco                     = 1,
-		needed_cover              = 2,
+		needed_cover              = 4,
 		death_sounds              = "generic",
 		ProvideTech               = powerprovided,
 		ProvideTechRange          = powerradius,
@@ -96,14 +96,14 @@ Provides +]] .. supplygranted .. [[ Supply]],
 		groundtexselectimg4       = ":nc:bitmaps/power/power4.png",
 		groundtexselectimg5       = ":nc:bitmaps/power/power5.png",
 		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
-		groundtexselectxsize      = 400, -- optional
-		groundtexselectzsize      = 400, -- optional
+		groundtexselectxsize      = 500, -- optional
+		groundtexselectzsize      = 500, -- optional
 		helptext                  = [[]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 6,
-	BuildingGroundDecalSizeY      = 6,
+	BuildingGroundDecalSizeX      = 8,
+	BuildingGroundDecalSizeY      = 8,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 --------------------------------------------------------------------------------
