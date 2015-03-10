@@ -57,7 +57,7 @@ local options= {
 		name="AI Difficulty",
 		desc="Modifies how much Shard cheats",
 		type="list",
-		def="medium",
+		def="veryeasy",
 		section="gameplayoptions",
 		items={
 			{key="veryeasy", name="Very Easy", desc="AI gets a gift of 5 metal every 5 seconds and a static 5 energy income."},
