@@ -158,6 +158,7 @@ local weaponDefs                 = {
 		smokedelay               = ".1",
 		smokeTrail               = false,
 		soundHit                 = "unitexplodebig.wav",
+		soundHitWet				 = "subhitbomb.wav",
 		soundHitVolume	         = 10,
 		soundStart               = "bomberlaunch.wav",
 		soundStartVolume         = 10,

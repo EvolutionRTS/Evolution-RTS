@@ -159,6 +159,7 @@ local weaponDefs                 = {
 		waterweapon				 = true,
 		smokeTrail               = false,
 		soundHit                 = "bombhit.wav",
+		soundHitWet				 = "subhit.wav",
 		soundHitVolume	         = 10,
 		soundStart               = "18395_inferno_rltx.wav",
 		soundStartVolume         = 10,

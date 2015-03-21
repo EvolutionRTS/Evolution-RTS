@@ -7,7 +7,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -27,7 +28,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -60,7 +62,8 @@ return {
       flashsize          = 150,
       ground             = true,
       ttl                = 20,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 1,
         [2]  = 0.30000001192093,
@@ -72,7 +75,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         colormap           = [[0.25 0.20 0.10 0.35	0 0 0 0.0]],
@@ -99,7 +103,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -128,7 +133,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,

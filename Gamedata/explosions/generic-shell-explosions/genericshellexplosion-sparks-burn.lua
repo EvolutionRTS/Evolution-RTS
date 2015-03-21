@@ -10,7 +10,8 @@ return {
       count              = 1,
       ground             = true,
       underwater         = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -53,7 +54,8 @@ return {
     kickedupwater = {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -81,7 +83,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -141,7 +144,8 @@ return {
       count              = 1,
       ground             = true,
       underwater         = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -184,7 +188,8 @@ return {
     kickedupwater = {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -212,7 +217,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -272,7 +278,8 @@ return {
       count              = 1,
       ground             = true,
       underwater         = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -315,7 +322,8 @@ return {
     kickedupwater = {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -343,7 +351,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,

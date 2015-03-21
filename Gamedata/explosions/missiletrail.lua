@@ -277,7 +277,7 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      underwater         = 1,
+      underwater         = true,
       water              = true,
       properties = {
         airdrag            = 0.87,
@@ -305,7 +305,7 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      underwater         = 1,
+      underwater         = true,
       water              = true,
       properties = {
         airdrag            = 0.87,

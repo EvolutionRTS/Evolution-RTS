@@ -5,6 +5,9 @@ return {
     alwaysvisible      = true,
     groundflash = {
       air                = true,
+      ground             = true,
+	  water				 = true,
+	  underwater		 = true,
       alwaysvisible      = true,
       circlealpha        = 0.5,
       circlegrowth       = 2,
@@ -20,10 +23,12 @@ return {
       },
     },
     poof01 = {
-      air                = true,
       class              = [[CSimpleParticleSystem]],
       count              = 2,
+	  air                = true,
       ground             = true,
+	  water				 = true,
+	  underwater		 = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -49,9 +54,11 @@ return {
     },
     poof02 = {
       air                = true,
+      ground             = true,
+	  water				 = true,
+	  underwater		 = true,
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      ground             = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -77,9 +84,11 @@ return {
     },
     poof03 = {
       air                = true,
+      ground             = true,
+	  water				 = true,
+	  underwater		 = true,
       class              = [[CSimpleParticleSystem]],
       count              = 2,
-      ground             = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -105,9 +114,11 @@ return {
     },
     poof04 = {
       air                = true,
+      ground             = true,
+	  water				 = true,
+	  underwater		 = true,
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      ground             = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -133,11 +144,12 @@ return {
     },
     pop1 = {
       air                = true,
+      ground             = true,
+	  water				 = true,
+	  underwater		 = true,
       alwaysvisible      = true,
       class              = [[heatcloud]],
       count              = 2,
-      ground             = true,
-      water              = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -152,11 +164,12 @@ return {
     },
     pop2 = {
       air                = true,
+      ground             = true,
+	  water				 = true,
+	  underwater		 = true,
       alwaysvisible      = true,
       class              = [[heatcloud]],
       count              = 10,
-      ground             = true,
-      water              = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,

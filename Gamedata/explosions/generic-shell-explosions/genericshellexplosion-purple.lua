@@ -9,7 +9,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -29,7 +30,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -62,7 +64,8 @@ return {
       flashsize          = 100,
       ground             = true,
       ttl                = 20,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 0.10999999940395,
         [2]  = 0,
@@ -99,7 +102,8 @@ return {
     kickedupwater = {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -127,7 +131,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -156,7 +161,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -177,7 +183,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -197,7 +204,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -230,7 +238,8 @@ return {
       flashsize          = 50,
       ground             = true,
       ttl                = 20,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 0.10999999940395,
         [2]  = 0,
@@ -267,7 +276,8 @@ return {
     kickedupwater = {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -295,7 +305,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -324,7 +335,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -345,7 +357,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -365,7 +378,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -398,7 +412,8 @@ return {
       flashsize          = 150,
       ground             = true,
       ttl                = 20,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 0.10999999940395,
         [2]  = 0,
@@ -435,7 +450,8 @@ return {
     kickedupwater = {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -463,7 +479,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         alwaysvisible      = true,
@@ -492,7 +509,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,

@@ -10,7 +10,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -29,7 +30,8 @@ return {
       class              = [[CExpGenSpawner]],
       count              = 30,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         delay              = [[10 r200]],
         explosiongenerator = [[custom:lightning_stormbolt]],
@@ -43,7 +45,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -76,7 +79,8 @@ return {
       flashsize          = 200,
       ground             = true,
       ttl                = 200,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 0,
         [2]  = 0,
@@ -88,7 +92,8 @@ return {
       air                = true,
       count              = 8,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         agespeed           = 0.01,
         alwaysvisible      = true,
@@ -135,7 +140,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.9,
         alwaysvisible      = true,
@@ -165,7 +171,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -183,7 +190,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.2,
         alwaysvisible      = true,
@@ -215,7 +223,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -234,7 +243,8 @@ return {
       class              = [[CExpGenSpawner]],
       count              = 30,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         delay              = [[10 r200]],
         explosiongenerator = [[custom:lightning_stormbolt]],
@@ -248,7 +258,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -281,7 +292,8 @@ return {
       flashsize          = 600,
       ground             = true,
       ttl                = 200,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 0,
         [2]  = 0,
@@ -293,7 +305,8 @@ return {
       air                = true,
       count              = 8,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         agespeed           = 0.01,
         alwaysvisible      = true,
@@ -312,7 +325,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-	  water              = true,
+	  water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -340,7 +354,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.9,
         alwaysvisible      = true,
@@ -370,7 +385,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -388,7 +404,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.2,
         alwaysvisible      = true,
@@ -420,7 +437,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -439,7 +457,8 @@ return {
       class              = [[CExpGenSpawner]],
       count              = 30,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         delay              = [[10 r200]],
         explosiongenerator = [[custom:lightning_stormbolt]],
@@ -453,7 +472,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -486,7 +506,8 @@ return {
       flashsize          = 400,
       ground             = true,
       ttl                = 200,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 0,
         [2]  = 0,
@@ -498,7 +519,8 @@ return {
       air                = true,
       count              = 8,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         agespeed           = 0.01,
         alwaysvisible      = true,
@@ -517,7 +539,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-	  water              = true,
+	  water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -545,7 +568,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.9,
         alwaysvisible      = true,
@@ -575,7 +599,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -593,7 +618,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.2,
         alwaysvisible      = true,
@@ -625,7 +651,8 @@ return {
       class              = [[heatcloud]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -644,7 +671,8 @@ return {
       class              = [[CExpGenSpawner]],
       count              = 30,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         delay              = [[10 r200]],
         explosiongenerator = [[custom:lightning_stormbolt]],
@@ -658,7 +686,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -691,7 +720,8 @@ return {
       flashsize          = 800,
       ground             = true,
       ttl                = 200,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       color = {
         [1]  = 0,
         [2]  = 0,
@@ -703,7 +733,8 @@ return {
       air                = true,
       count              = 8,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         agespeed           = 0.01,
         alwaysvisible      = true,
@@ -722,7 +753,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-	  water              = true,
+	  water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.87,
         alwaysvisible      = true,
@@ -750,7 +782,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.9,
         alwaysvisible      = true,
@@ -780,7 +813,8 @@ return {
       class              = [[heatcloud]],
       count              = 2,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         alwaysvisible      = true,
         heat               = 10,
@@ -798,7 +832,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
-      water              = true,
+      water              = true, 
+	  underwater         = true,
       properties = {
         airdrag            = 0.2,
         alwaysvisible      = true,

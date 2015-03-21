@@ -20,6 +20,7 @@ return {
       count              = 1,
       ground             = true,
       water              = true,
+	  underwater		 = true,
       properties = {
         airdrag            = 1,
         colormap           = [[0 0 0 0.01 1 1 1 0.01 0 0 0 0.01]],
