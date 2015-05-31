@@ -128,6 +128,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
 		dronespawner             = "1",

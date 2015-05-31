@@ -120,6 +120,7 @@ Uses +]] .. supply .. [[ Supply]],
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		canareaattack            ="1",
 		needed_cover             = 3,
 		death_sounds             = "generic",

@@ -105,6 +105,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 5,
 		death_sounds             = "generic",
 		RequireTech              = "5 Power",
@@ -149,7 +150,8 @@ eheavyturretweapon               = {
 	startsmoke                   = "1",
 	turret                       = true,
 	weaponVelocity               = 315,
-	customparams                 = {
+	customParams                 = {
+		canbetransported 		 = "true",
 	damagetype		             = "efatso",  
 	},      
 	damage                       = {

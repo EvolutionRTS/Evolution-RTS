@@ -1,9 +1,9 @@
 function widget:GetInfo()
   return {
     name      = "Commander Name Tags",
-    desc      = "Displays a name tag above each commander.",
+    desc      = "Displays a name tags above commanders.",
     author    = "Bluestone, Floris",
-    date      = "January 2015",
+    date      = "20 february 2015",
     license   = "GNU GPL, v2 or later",
     layer     = -10,
     enabled   = true,  --  loaded by default?
@@ -14,11 +14,16 @@ end
 -- config
 --------------------------------------------------------------------------------
 
+local useThickLeterring		= true
 local heightOffset			= 50
-local fontSize				= 13
-local scaleFontAmount		= 130
+local fontSize				= 15		-- not real fontsize, it will be scaled
+local scaleFontAmount		= 115
+local fontShadow			= true		-- only shows if font has a white outline
+local shadowOpacity			= 0.35
 
-local font = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 50, 8, 8)
+local font = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 55, 10, 10)
+local shadowFont = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 55, 38, 1.6)
+
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -26,6 +31,7 @@ local font = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 50, 8, 8)
 local GetUnitTeam        		= Spring.GetUnitTeam
 local GetTeamInfo        		= Spring.GetTeamInfo
 local GetPlayerInfo      		= Spring.GetPlayerInfo
+local GetPlayerList    		    = Spring.GetPlayerList
 local GetTeamColor       		= Spring.GetTeamColor
 local GetVisibleUnits    		= Spring.GetVisibleUnits
 local GetUnitDefID       		= Spring.GetUnitDefID
@@ -33,6 +39,7 @@ local GetAllUnits        		= Spring.GetAllUnits
 local IsUnitInView	 	 		= Spring.IsUnitInView
 local GetCameraPosition  		= Spring.GetCameraPosition
 local GetUnitPosition    		= Spring.GetUnitPosition
+local GetFPS					= Spring.GetFPS
 
 local glDepthTest        		= gl.DepthTest
 local glAlphaTest        		= gl.AlphaTest
@@ -41,14 +48,23 @@ local glText             		= gl.Text
 local glTranslate        		= gl.Translate
 local glBillboard        		= gl.Billboard
 local glDrawFuncAtUnit   		= gl.DrawFuncAtUnit
+local glDrawListAtUnit   		= gl.DrawListAtUnit
 local GL_GREATER     	 		= GL.GREATER
 local GL_SRC_ALPHA				= GL.SRC_ALPHA	
 local GL_ONE_MINUS_SRC_ALPHA	= GL.ONE_MINUS_SRC_ALPHA
 local glBlending          		= gl.Blending
+local glScale          			= gl.Scale
+
+local glCreateList				= gl.CreateList
+local glBeginEnd				= gl.BeginEnd
+local glDeleteList				= gl.DeleteList
+local glCallList				= gl.CallList
 
 --------------------------------------------------------------------------------
 
 local comms = {}
+local drawShadow = fontShadow
+local comnameList = {}
 
 --------------------------------------------------------------------------------
 
@@ -58,38 +74,70 @@ local function GetCommAttributes(unitID, unitDefID)
   if team == nil then
     return nil
   end
-  local _, player = GetTeamInfo(team)
-  local name,_,_,_,_,_,_,country,rank = GetPlayerInfo(player)
+  local players = GetPlayerList(team)
+  local name = (#players>0) and GetPlayerInfo(players[1]) or 'Robert Paulson'
+  for _,pID in ipairs(players) do
+    local pname,active = GetPlayerInfo(pID)
+    if active then
+      name = pname
+      break
+    end
+  end
   local r, g, b, a = GetTeamColor(team)
   local bgColor = {0,0,0,1}
   if (r + g*1.35 + b*0.5) < 0.75 then  -- not acurate (enough) with playerlist   but...   font:SetAutoOutlineColor(true)   doesnt seem to work
 	bgColor = {1,1,1,1}
   end
+  
   local height = UnitDefs[unitDefID].height + heightOffset
-  return {name or 'Overseer', {r, g, b, a}, height, bgColor}
+  return {name, {r, g, b, a}, height, bgColor}
 end
 
-
-local function DrawName(unitID, attributes)
-  
-  local iconHeight = (12.5+usedFontSize/1.6)
-  
-  glTranslate(0, attributes[3], 0 )
-  glBillboard()
-   
-  font:Begin()
-  font:SetTextColor(attributes[2])
-  font:SetOutlineColor(attributes[4])
-  font:Print(attributes[1], -0.3, 0, usedFontSize, "con")
-  font:End()
+local function createComnameList(attributes)
+	comnameList[attributes[1]] = gl.CreateList( function()
+		if useThickLeterring then
+			if (attributes[2][1] + attributes[2][2]*1.35 + attributes[2][3]*0.5) < 0.75 then
+				if fontShadow then
+				  glTranslate(0, -(fontSize/44), 0)
+				  shadowFont:Begin()
+				  shadowFont:SetTextColor({0,0,0,shadowOpacity})
+				  shadowFont:SetOutlineColor({0,0,0,shadowOpacity})
+				  shadowFont:Print(attributes[1], 0, 0, fontSize, "con")
+				  shadowFont:End()
+				  glTranslate(0, (fontSize/44), 0)
+				end
+				font:SetTextColor({1,1,1,0.9*attributes[2][4]*attributes[2][4]*attributes[2][4]*attributes[2][4]})
+				font:SetOutlineColor(({1,1,1,0.9*attributes[2][4]*attributes[2][4]*attributes[2][4]*attributes[2][4]}))
+			else
+				font:SetTextColor({0,0,0,0.9*attributes[2][4]*attributes[2][4]*attributes[2][4]*attributes[2][4]})
+				font:SetOutlineColor(({0,0,0,0.9*attributes[2][4]*attributes[2][4]*attributes[2][4]*attributes[2][4]}))
+			end
+			font:Print(attributes[1], -(fontSize/38), -(fontSize/33), fontSize, "con")
+			font:Print(attributes[1], (fontSize/38), -(fontSize/33), fontSize, "con")
+		end
+		font:Begin()
+		font:SetTextColor(attributes[2])
+		font:SetOutlineColor(attributes[4])
+		font:Print(attributes[1], 0, 0, fontSize, "con")
+		font:End()
+	end)
 end
 
+local function DrawName(unitID, attributes, shadow)
+	if comnameList[attributes[1]] == nil then
+		createComnameList(attributes)
+	end
+	glTranslate(0, attributes[3], 0)
+	glBillboard()
+	glScale(usedFontSize/fontSize,usedFontSize/fontSize,usedFontSize/fontSize)
+	glCallList(comnameList[attributes[1]])
+	glScale(1,1,1)
+end
 
 local vsx, vsy = Spring.GetViewGeometry()
 function widget:ViewResize()
   vsx,vsy = Spring.GetViewGeometry()
 end
-
 
 function widget:DrawWorld()
   --if Spring.IsGUIHidden() then return end
@@ -112,7 +160,7 @@ function widget:DrawWorld()
 		
 	    usedFontSize = (fontSize*0.5) + (camDistance/scaleFontAmount)
 	    
-		glDrawFuncAtUnit(unitID, false, DrawName, unitID, attributes)
+		glDrawFuncAtUnit(unitID, false, DrawName, unitID, attributes, fontShadow)
 	end
   end
   
@@ -130,8 +178,8 @@ function CheckCom(unitID, unitDefID, unitTeam)
 end
 
 function CheckAllComs()
-  local units = GetAllUnits()
-  for _, unitID in ipairs(units) do
+  local allUnits = GetAllUnits()
+  for _, unitID in pairs(allUnits) do
     local unitDefID = GetUnitDefID(unitID)
     if (unitDefID and UnitDefs[unitDefID].customParams.iscommander) then
       comms[unitID] = GetCommAttributes(unitID, unitDefID)
@@ -143,8 +191,10 @@ function widget:Initialize()
   CheckAllComs()
 end
 
-function PlayerChanged()
-  CheckAllComs()
+function widget:PlayerChanged(playerID)
+   if Spring.GetGameFrame()<30*5 then
+       CheckAllComs() -- handle substitutions, etc
+   end
 end
     
 function widget:UnitCreated(unitID, unitDefID, unitTeam)

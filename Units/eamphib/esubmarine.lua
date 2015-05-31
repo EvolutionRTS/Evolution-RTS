@@ -90,6 +90,7 @@ local unitDef                    = {
 	},
 
 	customParams                 = {
+		canbetransported 		 = "true",
 		death_sounds             = "generic",
 		armortype                = "light",
 		normalstex               = "unittextures/esubplanenormal.png", 

@@ -142,6 +142,7 @@ Uses +]] .. supply .. [[ Supply]],
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
 		RequireTech              = power,

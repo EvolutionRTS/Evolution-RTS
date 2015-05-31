@@ -100,6 +100,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
 		RequireTech              = "4 Power",
@@ -141,7 +142,8 @@ mediumtankcannon                 = {
 	startsmoke                   = "1",
 	turret                       = true,
 	weaponVelocity               = 400,
-	customparams                 = {
+	customParams                 = {
+		canbetransported 		 = "true",
 	damagetype		             = "emediumtank3",  
 	},      
 	damage                       = {

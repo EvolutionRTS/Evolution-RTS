@@ -28,7 +28,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 28,
+	buildCostMetal               = 33,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -125,6 +125,7 @@ Uses +]] .. supply .. [[ Supply]],
 		]]--
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
 		RequireTech              = power,

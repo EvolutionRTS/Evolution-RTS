@@ -142,6 +142,7 @@ There can only be one!]],
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,
 		supply_granted            = supplyGiven,

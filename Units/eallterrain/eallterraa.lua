@@ -110,6 +110,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 3,
 		death_sounds             = "generic",
 		RequireTech              = "3 Power",

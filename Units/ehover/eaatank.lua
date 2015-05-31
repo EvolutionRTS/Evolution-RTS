@@ -120,6 +120,7 @@ Uses +]] .. supply .. [[ Supply]],
 		},
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
 		RequireTech              = power,
@@ -173,7 +174,8 @@ eaatankantiairmissile            = {
 	flighttime			         = 2,
 	sprayangle			         = 5000,
 	
-	customparams                 = {
+	customParams                 = {
+		canbetransported 		 = "true",
 	damagetype		             = "eaatank",  
 	nofriendlyfire	             = 1,
 	

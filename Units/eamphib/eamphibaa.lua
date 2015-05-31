@@ -5,6 +5,18 @@ local unitName                   = "eamphibaa"
 
 --------------------------------------------------------------------------------
 
+local power						 = [[4 power]]
+local armortype					 = [[light]]
+local supply					 = [[4]]
+
+local weapon1Damage              = 0
+local weapon1AOE				 = 0
+local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -27,13 +39,21 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT AMPHIB RAID",
 	corpse                       = "ammobox",
-	description                  = [[Dedicated Anti-Air
-	Light
-	200 Damage/s vs Light
-	100 Damages/s vs Armored/Building
+	description                  = [[Unit Type: Tank Destroyer
+Armortype: ]] ..armortype.. [[ 
 
-	Requires +2 Power
-	Uses +2 Supply]],
+135 Damage/s vs Light
+80 Damages/s vs Armored/Building
+
+125 Damage vs Light/Armored
+70 Damage vs Building
+
+Can fire while underwater
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -56,8 +76,8 @@ local unitDef                    = {
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericPurple",
-	sightDistance                = 800,
-	SonarDistance                = 800,
+	sightDistance                = 850,
+	SonarDistance                = 850,
 	stealth			             = true,
 	seismicSignature             = 2,
 	sonarStealth		         = false,
@@ -93,8 +113,8 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "antiaircannon",
-			onlyTargetCategory   = "VTOL",
+			def                  = "medtankbeamlaser",
+			badTargetCategory    = "BUILDING WALL",
 		},
 		--[[	
 		[2]                      = {
@@ -103,12 +123,13 @@ local unitDef                    = {
 		]]--
 	},
 	customParams                 = {
+		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = "2 Power",
+		RequireTech              = power,
 		armortype                = "light",
 		nofriendlyfire	         = "1",
-		supply_cost              = 2,
+		supply_cost              = supply,
 		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
@@ -119,17 +140,62 @@ local unitDef                    = {
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weapon1Damage              = 30
-local weapon1AOE				 = 25
-
 local weaponDefs                 = {
+
+	medtankbeamlaser             = {
+		AreaOfEffect             = weapon1AOE,
+		avoidFeature             = false,
+		avoidFriendly            = false,
+		beamTime                 = 0.1,
+		collideFeature           = false,
+		collideFriendly          = false,
+		coreThickness            = 0.2,
+		duration                 = 0.1,
+		energypershot            = energycosttofire,
+		explosionGenerator       = "custom:genericshellexplosion-medium-sparks-burn",
+		fallOffRate              = 1,
+		fireStarter              = 50,
+		interceptedByShieldType  = 4,
+		impulsefactor		     = 0,
+		lineOfSight              = true,
+		largebeamlaser	         = true,
+		laserflaresize 	         = 5,
+		leadlimit			     = 15,
+		minintensity             = 1,
+		name                     = "Laser",
+		range                    = 850,
+		reloadtime               = 0.1,
+		WeaponType               = "BeamLaser",
+		rgbColor                 = "0.25 0 0.6",
+		rgbColor2                = "0.8 0.8 0.8",
+		soundTrigger             = true,
+		soundstart               = "plasma2.wav",
+		--	soundHit		     = "amphibmedtankshothit.wav",
+		scrollspeed		         = 5,
+		texture1                 = "lightning",
+		texture2                 = "laserend",
+		thickness                = 10,
+		tolerance                = 3000,
+		turret                   = true,
+		weaponVelocity           = 1000,
+		waterweapon		         = true,
+		customparams             = {
+			damagetype		     = "eamphibmedtank",  
+			
+			--Upgrades--
+			upgradeClass		 = "groundweapons",
+		}, 
+		damage                   = {
+			default              = weapon1Damage, -- multiply * 1.2 for correct dps output
+		},
+	},
+
 	antiaircannon                = {
 		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
 		collideFriendly          = false,
-		canAttackGround          = false,
 		coreThickness            = 0.4,
 		burnblow		         = true,
 		--	cegTag               = "mediumcannonweapon3",
