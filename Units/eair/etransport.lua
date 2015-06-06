@@ -7,7 +7,7 @@ local unitName                   = "etransport"
 
 local power						 = [[5 power]]
 local armortype					 = [[armored]]
-local supply					 = [[5]]
+local supply					 = [[0]]
 
 local unitDef                    = {
 
@@ -22,7 +22,7 @@ local unitDef                    = {
 	airHoverFactor	             = 0,
 	brakeRate                    = 2,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 80,
+	buildCostMetal               = 20,
 	builder                      = false,
 	buildTime                    = 2.5,
 	canAttack                    = false,
@@ -46,18 +46,18 @@ Uses +]] .. supply .. [[ Supply]],
 	energyUse                    = 0,
 	explodeAs                    = "hugeExplosionGenericRed",
 	fallSpeed                    = 1000,
-	footprintX                   = 8,
-	footprintZ                   = 8,
+	footprintX                   = 3,
+	footprintZ                   = 3,
 	hoverAttack                  = true,
 	holdSteady                   = true,
 	--  hoverAttack              = true,
 	icontype                     = "etransport",
-	maxDamage                    = 550,
+	maxDamage                    = 200,
 	maxSlope                     = 90,
 	maxVelocity                  = 18,
 	verticalSpeed		         = 30,
 	name                         = "Charter",
-	objectName                   = "etransport2.s3o",
+	objectName                   = "etransport2-small.s3o",
 	script			             = "etransport2.cob",
 	releaseHeld                  = false,
 	repairable		             = false,
@@ -65,10 +65,10 @@ Uses +]] .. supply .. [[ Supply]],
 	side                         = "GD",
 	sightDistance                = 500,
 	smoothAnim                   = true,
-	transportCapacity            = 20,
+	transportCapacity            = 2,
 	transportMass                = 10000,
 	transportSize                = 6,
-	transportUnloadMethod   	 = 1,
+	transportUnloadMethod   	 = 0,
 	turnRate                     = 5000,
 	unitname                     = "etransport",
 	sfxtypes                     = { 

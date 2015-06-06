@@ -47,7 +47,7 @@ local icontypes = {
   
   etransport = {
     bitmap='icons/support.png',
-    size=6,
+    size=2,
     radiusadjust=3,
   },
   
