@@ -83,7 +83,7 @@ Armortype: ]] ..armortype,
 		"eamphibengineer", --new
 		"eamphibbuggy", --new
 		"eamphibriot", --new
---		"eamphibaa",
+		"eamphibneedle",
 		"eamphibmedtank", --new
 		"eamphibrock", --new
 		"eamphibarty", --new

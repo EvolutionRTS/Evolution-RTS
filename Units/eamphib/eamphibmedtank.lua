@@ -42,9 +42,6 @@ local unitDef                    = {
 	description                  = [[Unit Type: Tank Destroyer
 Armortype: ]] ..armortype.. [[ 
 
-135 Damage/s vs Light
-80 Damages/s vs Armored/Building
-
 125 Damage vs Light/Armored
 70 Damage vs Building
 

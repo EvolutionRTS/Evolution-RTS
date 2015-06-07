@@ -131,9 +131,15 @@ local damageClasses = {
 			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
-			BUILDING 	= 0.5,
+			BUILDING 	= 1,
 		},
 		eamphibriot	= {
+			SIEGE		= 0.5,
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
+		},
+		eamphibneedle	= {
 			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
