@@ -5,7 +5,7 @@ local unitName                   = "etransport"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[5 power]]
+local power						 = [[0 power]]
 local armortype					 = [[armored]]
 local supply					 = [[0]]
 

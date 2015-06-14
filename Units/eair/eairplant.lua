@@ -11,7 +11,7 @@ local unitDef                         = {
 
 	activatewhenbuilt                 = true,
 	buildCostEnergy                   = 0,
-	buildCostMetal                    = 80,
+	buildCostMetal                    = 60,
 	builder                           = true,
 	buildTime                         = 2.5,
 	canBeAssisted                     = true,
