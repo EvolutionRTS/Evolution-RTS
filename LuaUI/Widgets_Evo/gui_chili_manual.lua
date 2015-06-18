@@ -7,7 +7,7 @@ function widget:GetInfo()
 		license		 	= "PD",
 		layer		 	= 99999999,
 		experimental	= false,
-		enabled	 		= true,
+		enabled	 		= false,
 	}
 end
 
