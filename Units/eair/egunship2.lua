@@ -7,7 +7,7 @@ local unitName                   = "egunship2"
 
 local power						 = [[8 power]]
 local armortype					 = [[light]]
-local supply					 = [[8]]
+local supply					 = [[4]]
 
 local weapon1Damage              = 150
 local weapon1AOE				 = 1

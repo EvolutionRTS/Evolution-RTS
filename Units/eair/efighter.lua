@@ -7,7 +7,7 @@ local unitName                   = "efighter"
 
 local power						 = [[4 power]]
 local armortype					 = [[light]]
-local supply					 = [[4]]
+local supply					 = [[2]]
 
 local weapon1Damage              = 25
 local weapon1AOE				 = 100

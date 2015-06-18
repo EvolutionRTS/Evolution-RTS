@@ -6,7 +6,7 @@ local unitName                   = "ebomber"
 --------------------------------------------------------------------------------
 local power						 = [[10 power]]
 local armortype					 = [[light]]
-local supply					 = [[10]]
+local supply					 = [[5]]
 
 local weapon1Damage              = 200
 local weapon1AOE				 = 500

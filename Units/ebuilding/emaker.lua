@@ -7,13 +7,13 @@ local unitName                    = "emaker"
 
 local armortype					 = [[building]]
 local metal						  = [[0.5]]
-local supply					 = [[5]]
+local supply					 = [[0]]
 
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 150,
+	buildCostMetal                = 250,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
