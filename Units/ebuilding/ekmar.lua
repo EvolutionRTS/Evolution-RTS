@@ -15,21 +15,20 @@ local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 4096,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 60,
+	buildCostMetal                = 20,
 	builder                       = false,
 	buildTime                     = 1,
 	canAttack                     = false,
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR WALL",
 	damageModifier                = 0.2,
-	description                   = [[Protective Turret Shield
+	description                   = [[Protective Shield
 Armortype: ]] ..armortype.. [[ 
 
 Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
 Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
 Maximum shield power is ]] .. shield1Power ..[[hp
-Shield can link with other shield units to increase charging and capacity
-Generates a Cloaking Field]],
+Shield can link with other shield units to increase charging and capacity]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGenericBlue",
