@@ -299,8 +299,8 @@ function gadget:DrawWorld()
 		glPushAttrib(GL_LINE_BITS)
 	
 		glDepthTest(true)
-		glColor(1,0,1,math.random()*0.3+0.2)
-		glLineWidth(1)
+		glColor(0,0,1,math.random()*0.3+0.2)
+		glLineWidth(3)
 		glBeginEnd(GL_LINES, DrawFunc)
 	
 		glDepthTest(false)

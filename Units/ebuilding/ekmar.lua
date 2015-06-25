@@ -8,7 +8,7 @@ local unitName                    = "ekmar"
 local armortype					 = [[building]]
 
 local shield1Power               = 2000
-local shield1PowerRegen          = 20
+local shield1PowerRegen          = 30
 local shield1PowerRegenEnergy    = shield1PowerRegen / 20
 
 local unitDef                     = {
