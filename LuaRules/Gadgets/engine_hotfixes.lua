@@ -40,7 +40,10 @@ if gadgetHandler:IsSyncedCode() then
 				local fDefID = Spring.GetFeatureDefID(fID)
 				local fDef = FeatureDefs[fDefID]
 			
-				if (not fDef.geoThermal) and (fDef.name ~= 'geovent') and (fDef.name ~= 'xelnotgawatchtower') then
+				if (not fDef.geoThermal) and (fDef.name ~= 'geovent') 
+				and (fDef.name ~= 'xelnotgawatchtower') 
+				and (fDef.name ~= 'crystalring') 
+				then
 					local fx, fy, fz = Spring.GetFeaturePosition(fID)
 					Spring.DestroyFeature(fID)
 					Spring.SpawnCEG('sparklegreen', fx, fy, fz)

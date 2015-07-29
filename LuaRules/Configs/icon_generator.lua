@@ -188,7 +188,7 @@ backgrounds = {
 --//empty  := empty model (used for fake units in CA)
 --//attempts := number of tries to scale the model to fit in the icon
 
-defaults = {border=0.05, angle=45, rot="right", clamp=-10000, scale=2, empty=false, attempts=10, wait=300, zoom=1.0, offset={0,0,0},};
+defaults = {border=0.05, angle=30, rot="right", clamp=-10000, scale=2, empty=false, attempts=10, wait=300, zoom=1.0, offset={0,0,0},};
 
 
 -----------------------------------------------------------------------
