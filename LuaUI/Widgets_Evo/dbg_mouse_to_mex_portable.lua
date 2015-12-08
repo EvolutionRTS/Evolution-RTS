@@ -1,6 +1,6 @@
 function widget:GetInfo()
   return {
-    name      = "Debug Mouse to Mexes Portable",
+    name      = "Mouse to Mexes",
     desc      = "Click to make a mex table. Alt+M to toggle. Works with any game.",
     author    = "Google Frog",
     date      = "April 28, 2012",
@@ -30,7 +30,7 @@ function widget:KeyPress(key, modifier, isRepeat)
 			if enabled then
 				for i = 1, #spots do
 					local spot = spots[i]
-					Spring.Echo("		[00] = {x = " .. floor(spot.x+0.5) .. ", z = " .. floor(spot.z+0.5) .. ", metal = false},")
+					Spring.Echo("		[] = {x = " .. floor(spot.x+0.5) .. ", z = " .. floor(spot.z+0.5) .. ", metal = 2.0},")
 				end
 				spots = {}
 			end
