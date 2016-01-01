@@ -9,7 +9,7 @@ local armortype					 = [[building]]
 local energyproduced			 = [[10]]
 local powerprovided				 = [[10 power]]
 local powerradius				 = [[800]]
-local supplygranted				 = [[50]]
+--local supplygranted				 = [[50]]
 
 local unitDef                     = {
 	activateWhenBuilt             = true,
@@ -26,9 +26,7 @@ local unitDef                     = {
 Produces +]] .. energyproduced .. [[ Energy 
 
 Provides +]] .. powerprovided .. [[ 
-Power Radius: ]] .. powerradius .. [[ 
-
-Provides +]] .. supplygranted .. [[ Supply]],
+Power Radius: ]] .. powerradius,
 	energyStorage                 = 0,
 	energyMake                    = energyproduced,
 	explodeAs                     = "hugeBuildingExplosionGenericBlueEMP",
@@ -82,7 +80,7 @@ Provides +]] .. supplygranted .. [[ Supply]],
 		ProvideTechRange          = powerradius,
 		--	RequireTech           = "1 Powergrid",
 		armortype                 = armortype,
-		supply_granted            = supplygranted,
+--		supply_granted            = supplygranted,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  

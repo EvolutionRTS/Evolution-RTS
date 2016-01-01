@@ -5,7 +5,7 @@ local unitName                   = "eamphibbuggy"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[1 power]]
+local power						 = [[2 power]]
 local armortype					 = [[light]]
 local supply					 = [[1]]
 

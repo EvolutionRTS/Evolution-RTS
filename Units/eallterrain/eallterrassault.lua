@@ -5,7 +5,7 @@ local unitName                   = "eallterrassault"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[10 power]]
+local power						 = [[20 power]]
 local armortype					 = [[siege]]
 local supply					 = [[10]]
 

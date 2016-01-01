@@ -5,7 +5,7 @@ local unitName                   = "eartytank"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[5 power]]
+local power						 = [[10 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
