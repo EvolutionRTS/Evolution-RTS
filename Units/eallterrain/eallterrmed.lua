@@ -5,7 +5,7 @@ local unitName                   = "eallterrmed"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[8 power]]
+local power						 = [[16 power]]
 local armortype					 = [[light]]
 local supply					 = [[4]]
 

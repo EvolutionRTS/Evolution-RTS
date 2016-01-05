@@ -5,7 +5,7 @@ local unitName                   = "eamphibneedle"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[6 power]]
+local power						 = [[8 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 

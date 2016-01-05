@@ -4,7 +4,7 @@
 local unitName                   = "ebomber"
 
 --------------------------------------------------------------------------------
-local power						 = [[10 power]]
+local power						 = [[18 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 

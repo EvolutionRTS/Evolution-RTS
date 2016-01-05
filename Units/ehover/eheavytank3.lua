@@ -5,7 +5,7 @@ local unitName                   = "eheavytank3"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[8 power]]
+local power						 = [[16 power]]
 local armortype					 = [[armored]]
 local supply					 = [[4]]
 

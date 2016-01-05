@@ -7,7 +7,7 @@ local unitName                   = "eartytank"
 
 local power						 = [[10 power]]
 local armortype					 = [[light]]
-local supply					 = [[5]]
+local supply					 = [[8]]
 
 local weapon1Damage              = 200
 local weapon1AOE				 = 50

@@ -7,7 +7,7 @@ local unitName                   = "emissiletank"
 
 local power						 = [[14 power]]
 local armortype					 = [[light]]
-local supply					 = [[7]]
+local supply					 = [[14]]
 
 local weapon1Damage              = 150
 local weapon1AOE				 = 100

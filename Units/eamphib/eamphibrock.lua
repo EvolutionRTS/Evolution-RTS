@@ -5,7 +5,7 @@ local unitName                   = "eamphibrock"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[10 power]]
+local power						 = [[12 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 

@@ -5,7 +5,7 @@ local unitName                   = "efighter"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[4 power]]
+local power						 = [[8 power]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 
