@@ -87,6 +87,7 @@ Armortype: ]] ..armortype,
 		"eamphibmedtank", --new
 		"eamphibrock", --new
 		"eamphibarty", --new
+		"eamphibleveler", --new
 	},
 	sounds                         = {
 		underattack                = "unitsunderattack1",

@@ -276,7 +276,27 @@ local moveDefs = {
 	  slopemod=4,
 	  heatmapping=false,
    },
-
+   TANK6 = {
+      footprintx=6,
+      footprintz=6,
+      maxslope=28,
+      maxwaterdepth=5000,
+      maxwaterslope=255,
+      badwaterslope=255,
+      crushstrength=20,
+	  depthModParams = {
+         minHeight      = 0,
+         maxHeight      = 5000,
+         maxScale       = 1.1,
+         quadraticCoeff = 0.3,
+         linearCoeff    = 0.3, -- deprecates "depthMod"
+         constantCoeff  = 0.3,
+       },
+	  minwaterdepth=10,
+	  heatmod=0.5,
+	  slopemod=4,
+	  heatmapping=false,
+   },
    HOVERTANK6 = {
       footprintx=6,
       footprintz=6,

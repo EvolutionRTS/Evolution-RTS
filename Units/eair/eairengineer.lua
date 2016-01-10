@@ -103,7 +103,7 @@ Uses +]] .. supply .. [[ Supply]],
 		"ebasefactory", --new
 		"eamphibfac",
 		"eairplant",
-		"eexperimentalfac",
+--		"eexperimentalfac",
 		"emetalextractor", --new
 		"emaker", --new
 		"esolar2", --new

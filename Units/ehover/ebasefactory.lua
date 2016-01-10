@@ -80,6 +80,7 @@ local unitDef                     = {
 		--	"efatso2", --new
 		"eartytank", --new
 		--    "ebomb",
+		"elacerator", --new
 	},
 	sounds                        = {
 		underattack               = "unitsunderattack1",

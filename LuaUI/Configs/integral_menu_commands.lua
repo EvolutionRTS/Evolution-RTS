@@ -23,7 +23,7 @@ local factories = {
 	eminifacai = {order = 3},
 	eairplant = {order = 4},
 	eairplantai = {order = 4},
-	eexperimentalfac = {order = 5},
+--	eexperimentalfac = {order = 5},
 }
 
 --Integral menu is NON-ROBUST

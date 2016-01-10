@@ -105,7 +105,7 @@ There can only be one!]],
 		"ebasefactory", --new
 		"eamphibfac",
 		"eairplant",
-		"eexperimentalfac",
+--		"eexperimentalfac",
 		"emetalextractor", --new
 		"emaker", --new
 		"esolar2", --new
