@@ -7,14 +7,14 @@ local unitName                   = "eallterranarchid"
 
 local power						 = [[28 power]]
 local armortype					 = [[armored]]
-local supply					 = [[30]]
+local supply					 = [[16]]
 
 local weapon1Damage              = 300
 local weapon1AOE				 = 10
 local weapon2Damage              = 300
 local weapon2AOE				 = 10
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
-local energycosttofire2			 = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -127,11 +127,9 @@ Uses +]] .. supply .. [[ Supply]],
 		},
 		[2]                      = {
 			def                  = "concussioncannon",
-			onlyTargetCategory   = "BUILDING",
 		},
 		[3]                      = {
 			def                  = "concussioncannon",
-			onlyTargetCategory   = "BUILDING",
 		},
 	},
 	customParams                 = {

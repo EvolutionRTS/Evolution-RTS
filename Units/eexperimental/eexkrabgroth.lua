@@ -13,8 +13,8 @@ local weapon1Damage              = 600
 local weapon1AOE				 = 10
 local weapon2Damage              = 600
 local weapon2AOE				 = 10
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
-local energycosttofire2			 = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1

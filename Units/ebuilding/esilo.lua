@@ -7,10 +7,10 @@ local unitName                    = "esilo"
 
 local armortype					 = [[building]]
 
-local weapon1Damage               = 2000
-local weapon1AOE				  = 2000
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
-local stockpiletime				 = 60
+local weapon1Damage               = 1250
+local weapon1AOE				  = 500
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+--local stockpiletime				 = 60
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -20,7 +20,7 @@ local unitDef                     = {
 
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 1000,
+	buildCostMetal                = 450,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = true,
@@ -30,9 +30,9 @@ local unitDef                     = {
 	description                   = [[Nuclear Missile Silo
 Armortype: ]] ..armortype.. [[ 
 
-]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings in a large area
+]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings
 
-Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofire / stockpiletime) .. [[/s]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -43,7 +43,7 @@ Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofi
 	iconType                      = "esilo",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 9800,
+	maxDamage                     = 4000,
 	maxSlope                      = 30,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
@@ -121,22 +121,22 @@ local weaponDefs                  = {
 		commandfire               = true,
 		craterBoost               = 0,
 		craterMult                = 0,
-		edgeeffectiveness		  = 1,
+		edgeeffectiveness		  = 0.1,
 		energypershot             = energycosttofire,
-		explosionGenerator        = "custom:NUKEDATBEWM",
+		explosionGenerator        = "custom:NUKEDATBEWMSMALL",
 		fireStarter               = 100,
 		flightTime                = 400,
 		guidance                  = true,
 		id                        = 124,
 		impulseBoost              = 0,
 		impulseFactor             = 0,
-		interceptedByShieldType   = 2,
+		interceptedByShieldType   = 4,
 		lineOfSight               = true,
 		metalpershot              = 0,
 		model                     = "enuke.s3o",
 		name                      = "Nuke",
 		range                     = 32000,
-		reloadtime                = 15,
+		reloadtime                = 60,
 		weaponType		          = "MissileLauncher",
 		selfprop                  = true,
 		smokedelay                = "0.1",
@@ -144,8 +144,8 @@ local weaponDefs                  = {
 		soundHit                  = "explosion_enormous.wav",
 		soundStart                = "nukelaunch.wav",
 		startsmoke                = "0",
-		stockpile                 = true,
-		stockpileTime             = stockpiletime,
+--		stockpile                 = true,
+--		stockpileTime             = stockpiletime,
 		startVelocity             = 10,
 		tracks                    = true,
 		turnRate                  = 3000,

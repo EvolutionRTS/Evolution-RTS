@@ -7,11 +7,11 @@ local unitName                   = "elacerator"
 
 local power						 = [[26 power]]
 local armortype					 = [[armored]]
-local supply					 = [[20]]
+local supply					 = [[13]]
 
 local weapon1Damage              = 200
 local weapon1AOE				 = 500
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1

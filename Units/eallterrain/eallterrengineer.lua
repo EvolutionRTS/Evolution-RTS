@@ -125,7 +125,6 @@ Uses +]] .. supply .. [[ Supply]],
 		"eheavyturret2", --new
 		"eartyturret",
 		"euwturret",
-		"ecruisesilo",
 		"eshieldgen",
 		"esilo",
 		"emine",

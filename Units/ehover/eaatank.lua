@@ -12,7 +12,7 @@ local supply					 = [[5]]
 local weapon1Damage              = 105
 local weapon1AOE				 = 50
 local burstProjectiles           = 4
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1) * burstProjectiles
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1) * burstProjectiles
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1

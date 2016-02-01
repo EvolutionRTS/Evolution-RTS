@@ -11,7 +11,7 @@ local supply					 = [[5]]
 
 local shield1Power               = 1500
 local shield1PowerRegen          = 15
-local shield1PowerRegenEnergy    = shield1PowerRegen / 20
+local shield1PowerRegenEnergy    = shield1PowerRegen / 10
 
 
 local unitDef                    = {

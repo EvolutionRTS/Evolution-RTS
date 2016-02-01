@@ -79,6 +79,12 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},	
+		elacerator	= {
+			SIEGE		= 0.33,
+			ARMORED		= 0.33,
+			LIGHT		= 0.33,
+			BUILDING 	= 1,
+		},
 		-- End Hovers
 			
 		-- Start All Terrains
@@ -122,6 +128,12 @@ local damageClasses = {
 			SIEGE		= 0.125,
 			ARMORED		= 0.125,
 			LIGHT		= 0.125,
+			BUILDING 	= 1,
+		},
+		eallterranarchid = {
+			SIEGE		= 0.5,
+			ARMORED		= 0.5,
+			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		-- End All Terrains
@@ -174,6 +186,12 @@ local damageClasses = {
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
+		},
+		eamphibleveler	= {
+			SIEGE		= 1,
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
 		},
 		-- End Amphibs
 			

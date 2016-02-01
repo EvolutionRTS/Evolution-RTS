@@ -14,7 +14,7 @@ local weapon1AOE				 = 50
 local weapon2Damage              = 20
 local weapon2AOE				 = 250
 
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -193,7 +193,7 @@ local weaponDefs                 = {
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-large",
-		energypershot            = weapon2Damage / 20 * ((weapon2AOE / 1000) + 1),
+		energypershot            = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1),
 		edgeEffectiveness        = 1,
 		impulse                  = "0",
 		impulseFactor            = 0,

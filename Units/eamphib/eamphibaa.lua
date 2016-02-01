@@ -11,7 +11,7 @@ local supply					 = [[4]]
 
 local weapon1Damage              = 0
 local weapon1AOE				 = 0
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -200,7 +200,7 @@ local weaponDefs                 = {
 		burnblow		         = true,
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.05,
-		energypershot            = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1),
+		energypershot            = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1),
 		explosionGenerator       = "custom:genericshellexplosion-medium-sparks-burn",
 		fallOffRate              = 1,
 		fireStarter              = 50,

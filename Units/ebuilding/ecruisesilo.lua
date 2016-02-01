@@ -9,7 +9,7 @@ local armortype					 = [[building]]
 
 local weapon1Damage              = 1250
 local weapon1AOE				 = 250
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 local stockpiletime				 = 35
 
 local function roundToFirstDecimal(energycosttofire)

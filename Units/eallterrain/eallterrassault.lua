@@ -5,13 +5,13 @@ local unitName                   = "eallterrassault"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[20 power]]
-local armortype					 = [[siege]]
-local supply					 = [[10]]
+local power						 = [[12 power]]
+local armortype					 = [[armored]]
+local supply					 = [[8]]
 
 local weapon1Damage              = 400
 local weapon1AOE				 = 1
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -52,13 +52,11 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Unit Type: Anti-Base Siege Tank
+	description                  =[[Unit Type: Anti-Base Long Range Siege Tank
 Armortype: ]] ..armortype.. [[ 
 
 400 Damage vs Buildings
 50 Damage vs Light/Armored
-
-Takes 50% less damage from Defensive turrets
 
 This unit can only fire at buildings!
 
@@ -77,7 +75,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 2000,
+	maxDamage                    = 400,
 	maxVelocity                  = 2.8,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
@@ -90,7 +88,7 @@ Uses +]] .. supply .. [[ Supply]],
 	repairable		             = false,
 	selfDestructAs               = "hugeExplosionGeneric",
 	shootme                      = "1",
-	sightDistance                = 800,
+	sightDistance                = 1500,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -167,8 +165,8 @@ local weaponDefs                 = {
 		lineOfSight              = true,
 		minintensity             = "1",
 		name                     = "Laser",
-		range                    = 750,
-		reloadtime               = 2.5,
+		range                    = 1500,
+		reloadtime               = 10,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0.5 0 1",
 		rgbColor2                = "1 1 1",
@@ -180,7 +178,7 @@ local weaponDefs                 = {
 		thickness                = 9,
 		tolerance                = 1000,
 		turret                   = true,
-		weaponVelocity           = 800,
+		weaponVelocity           = 2000,
 		customparams             = {
 			damagetype		     = "eallterrassault",  
 			

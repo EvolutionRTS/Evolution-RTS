@@ -9,12 +9,12 @@ local armortype					 = [[building]]
 
 local weapon1Damage              = 2001
 local weapon1AOE				 = 1
-local energycosttofire			 = weapon1Damage / 20 * ((weapon1AOE / 1000) + 1)
-local stockpiletime				 = 60
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+--local stockpiletime				 = 60
 
 local shield1Power               = 5000
 local shield1PowerRegen          = 50
-local shield1PowerRegenEnergy    = shield1PowerRegen / 20
+local shield1PowerRegenEnergy    = shield1PowerRegen / 10
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -23,23 +23,20 @@ end
 local unitDef                     = {
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 500,
+	buildCostMetal                = 200,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = false,
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Anti-Nuke Platform
-	Anti-Artillery base shield Facility
+	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility
 Armortype: ]] ..armortype.. [[ 
 
 Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
 Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
 Maximum shield power is ]] .. shield1Power ..[[hp
-Shield can link with other shield units to increase charging and capacity
-
-Energy cost while Anti-Nuke Beams: ]] .. roundToFirstDecimal(energycosttofire / stockpiletime) .. [[/s]],
+Shield can link with other shield units to increase charging and capacity]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -49,7 +46,7 @@ Energy cost while Anti-Nuke Beams: ]] .. roundToFirstDecimal(energycosttofire / 
 	iconType                      = "defense",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 4000,
+	maxDamage                     = 1800,
 	maxSlope                      = 30,
 	maxWaterDepth                 = 0,
 	metalStorage                  = 0,
@@ -89,10 +86,11 @@ Energy cost while Anti-Nuke Beams: ]] .. roundToFirstDecimal(energycosttofire / 
 		},
 	},
 	weapons                       = {
+-- Make sure to change the weapon numbers if the nuke interceptor weapon is ever reinstated
+--		[1]                       = {
+--			def                   = "nukeinterceptor",
+--		},
 		[1]                       = {
-			def                   = "nukeinterceptor",
-		},
-		[2]                       = {
 			def                   = "shield",
 		},
 	},
