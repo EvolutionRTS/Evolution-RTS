@@ -262,9 +262,11 @@ function updateRadarColors()
 	local radar = options.radar_radar_color.value
 	local jam = options.radar_jammer_color.value
 	Spring.SetLosViewColors(
-		{ fog[1], los[1], radar[1], jam[1]},
-		{ fog[2], los[2], radar[2], jam[2]}, 
-		{ fog[3], los[3], radar[3], jam[3]} 
+		fog,
+		los,
+		radar,
+		jam,
+		radar
 	)
 end
 

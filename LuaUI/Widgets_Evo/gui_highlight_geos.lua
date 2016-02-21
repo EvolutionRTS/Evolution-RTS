@@ -113,7 +113,7 @@ function widget:DrawInMiniMap()
 			gl.BeginEnd(GL.LINES,drawMinimapGeos,geo.x,geo.z)
 		end
 		
-		gl.LineWidth(0)
+		gl.LineWidth(0.00000000001)
 		gl.Color(1,1,1,1)
 	end
 end
