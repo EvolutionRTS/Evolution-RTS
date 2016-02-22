@@ -25,7 +25,7 @@ local modrules  = {
   
   construction = {
     constructionDecay      = true, -- defaults to true
-    constructionDecayTime  = 0.01,  -- defaults to 6.66
+    constructionDecayTime  = 0.1,  -- defaults to 6.66
     constructionDecaySpeed = 0.01,  -- defaults to 0.03
   },
 

@@ -23,7 +23,7 @@ end
 -- Command Definition
 --------------------------------------------------------------------------------
 
---local mexDefID = UnitDefNames["emetalextractor"].id
+local mexDefID = UnitDefNames["emetalextractor"].id
 
 local mexUnitDef				= UnitDefNames["emetalextractor"]
 local referenceLandMexId		= mexUnitDef.id	
