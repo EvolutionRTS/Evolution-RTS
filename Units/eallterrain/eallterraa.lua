@@ -132,7 +132,6 @@ local weapon1AOE				 = 50
 
 local weaponDefs                 = {
 	heavytankweapon              = {
-		badTargetCategory        = [[BUILDING]],
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
@@ -149,7 +148,6 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 800,

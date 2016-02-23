@@ -142,7 +142,7 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	lighttankweapon              = {
-		badTargetCategory        = [[ARMORED BUILDING]],
+		
 		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
@@ -156,7 +156,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 350,

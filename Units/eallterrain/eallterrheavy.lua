@@ -145,14 +145,14 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	heavytankweapon              = {
-		badTargetCategory        = [[BUILDING]],
+		
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 0.1,
-		beamWeapon               = true,
+		
 		coreThickness            = 0.5,
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.1,
@@ -162,7 +162,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 700,

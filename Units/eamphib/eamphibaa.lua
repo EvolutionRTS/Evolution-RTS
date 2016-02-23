@@ -157,7 +157,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
 		impulsefactor		     = 0,
-		lineOfSight              = true,
+		
 		largebeamlaser	         = true,
 		laserflaresize 	         = 5,
 		leadlimit			     = 15,
@@ -206,7 +206,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 800,

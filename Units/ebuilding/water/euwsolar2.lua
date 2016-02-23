@@ -104,7 +104,7 @@ local weaponDefs = {
 		avoidFeature       = false,
 		avoidFriendly      = false,
 		beamTime           = 0.1,
-		beamWeapon         = true,
+		
 		collideFeature     = false,
 		collideFriendly    = false,
 		rgbColor           = "0 0 1",
@@ -117,13 +117,13 @@ local weaponDefs = {
 		minintensity       = 1,
 		impulseFactor      = 0,
 		largeBeamLaser     = true,
-		lineOfSight        = true,
+		
 		name               = "fake",
 		noSelfDamage       = true,
 		range              = 650,
 		reloadtime         = 0.1,
 		WeaponType         = "BeamLaser",
-		selfprop           = true,
+		
 		soundTrigger       = true,
 		startVelocity      = 1500,
 		targetMoveError    = 0.3,

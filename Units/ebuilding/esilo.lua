@@ -126,31 +126,31 @@ local weaponDefs                  = {
 		explosionGenerator        = "custom:NUKEDATBEWMSMALL",
 		fireStarter               = 100,
 		flightTime                = 400,
-		guidance                  = true,
+		
 		id                        = 124,
 		impulseBoost              = 0,
 		impulseFactor             = 0,
 		interceptedByShieldType   = 4,
-		lineOfSight               = true,
+		
 		metalpershot              = 0,
 		model                     = "enuke.s3o",
 		name                      = "Nuke",
 		range                     = 32000,
 		reloadtime                = 60,
 		weaponType		          = "MissileLauncher",
-		selfprop                  = true,
-		smokedelay                = "0.1",
+		
+		
 		smokeTrail                = false,
 		soundHit                  = "explosion_enormous.wav",
 		soundStart                = "nukelaunch.wav",
-		startsmoke                = "0",
+		
 --		stockpile                 = true,
 --		stockpileTime             = stockpiletime,
 		startVelocity             = 10,
 		tracks                    = true,
 		turnRate                  = 3000,
 		targetable			      = 1,
-		vlaunch                   = true,
+		
 		weaponAcceleration        = 30,
 		weaponTimer               = 15,
 		weaponType                = "StarburstLauncher",

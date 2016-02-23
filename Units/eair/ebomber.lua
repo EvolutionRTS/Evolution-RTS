@@ -141,12 +141,12 @@ local weaponDefs                 = {
 		energypershot            = energycosttofire,
 		edgeEffectiveness        = 0.1,
 		fireStarter              = 70,
-		guidance                 = false,
+		
 		id                       = 136,
 		impulseBoost             = 0,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		metalpershot             = 0,
 		model                    = "missile.s3o",
 		name                     = "Rockets",
@@ -154,15 +154,15 @@ local weaponDefs                 = {
 		reloadtime               = 3,
 		weaponType		         = "MissileLauncher",  -- This causes the missile trail to go off kilter
 		--	rendertype		     = 1,
-		selfprop                 = true,
-		smokedelay               = ".1",
+		
+		
 		smokeTrail               = false,
 		soundHit                 = "unitexplodebig.wav",
 		soundHitWet				 = "subhitbomb.wav",
 		soundHitVolume	         = 10,
 		soundStart               = "bomberlaunch.wav",
 		soundStartVolume         = 10,
-		startsmoke               = "0",
+		
 		startVelocity            = 500,
 		tolerance                = 8000,
 		turnRate                 = 10000,

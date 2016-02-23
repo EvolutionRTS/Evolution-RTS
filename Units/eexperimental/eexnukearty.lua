@@ -128,14 +128,14 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	nukeartyweapon               = {
-		badTargetCategory        = [[ARMORED LIGHT]],
+		
 		accuracy                 = 1000,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		ballistic                = true,
+		
 		cegTag                   = "nukeartyshot",
 		explosionGenerator       = "custom:nukeartyexpl",
 		edgeEffectiveness        = 0.1,
@@ -149,7 +149,7 @@ local weaponDefs                 = {
 		weaponType		         = "Cannon",
 		soundHit                 = "nukeartyhit.wav",
 		soundStart               = "nukeartyshot.wav",
-		startsmoke               = "1",
+		
 		tolerance                = 2000,
 		turret                   = true,
 		weaponVelocity           = 800,

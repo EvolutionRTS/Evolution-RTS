@@ -622,7 +622,7 @@ unitDeaths = {
 SMALL_BUILDING = {
    name = "Small building",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -641,7 +641,7 @@ SMALL_BUILDING = {
 MEDIUM_BUILDING = {
    name="Medium building",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -661,7 +661,7 @@ LARGE_BUILDING = {
 
    name="Large building",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -680,7 +680,7 @@ LARGE_BUILDING = {
 ESTOR_BUILDING = {
    name="Small building",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -700,7 +700,7 @@ SMALL_UNIT = {
 
    name="Small tank",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -722,7 +722,7 @@ MEDIUM_UNIT = {
 
    name="Medium Unit",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -744,7 +744,6 @@ BIG_UNIT = {
 
    name="Big Kbot",
    weaponType		   = "Cannon",
-   ballistic=1,
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -764,7 +763,6 @@ CONSTRUCTOR = {
 
    name="con",
    weaponType		   = "Cannon",
-   ballistic=1,
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -785,7 +783,7 @@ ebombblast = {
 
    name="hoverbomb",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -809,7 +807,7 @@ krabblast = {
 
    name="krabblast",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -833,7 +831,7 @@ krabblast = {
 MEXPOP2 = {
    name="Atomic Blast Weapon",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    range=500,
    reloadtime=3.6,
@@ -841,7 +839,7 @@ MEXPOP2 = {
    AreaOfEffect=0,
    soundstart="explode5.wav",
    soundhit="explode5.wav",
-   impulse=0,
+   
    impulsefactor=0,
    explosiongenerator="custom:NUKE",
    
@@ -855,7 +853,7 @@ PYRO_BLAST = {
 
    name="Pyro Blast",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -876,7 +874,7 @@ FUSIONPOP = {
 
    name="Atomic Blast Weapon",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -900,7 +898,7 @@ POWERPLANTPOP = {
 
    name="Atomic Blast Weapon",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -925,7 +923,7 @@ GEOPOP = {
 
    name="Atomic Blast Weapon",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=480,
@@ -950,7 +948,7 @@ HUGE_UNITEX = {
 
    name="Big Kbot",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=550,
@@ -972,7 +970,7 @@ HUGE_UNIT = {
 
    name="Big Kbot",
    weaponType		   = "Cannon",
-   ballistic=1,
+   
    turret=1,
    impulseFactor      = 0,
    range=550,

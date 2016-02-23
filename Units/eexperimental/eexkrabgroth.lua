@@ -157,7 +157,7 @@ local weaponDefs                 = {
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 1,
-		beamWeapon               = true,
+		
 		cameraShake		         = 1,
 		coreThickness            = 0.5,
 		--	cegTag               = "mediumcannonweapon3",
@@ -168,7 +168,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 1000,
@@ -202,12 +202,12 @@ local weaponDefs                 = {
 		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
-		ballistic                = true,
+		
 		collideFriendly          = false,
 		collideFeature           = false,
 		cylinderTargeting        = true,
 		burnblow                 = true,
-		endsmoke                 = "1",
+		
 		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = energycosttofire2,
 		fireStarter              = 80,
@@ -215,13 +215,13 @@ local weaponDefs                 = {
 		impulseFactor            = 0.1,
 		interceptedByShieldType  = 4,
 		name                     = "Concussion Cannon",
-		pitchtolerance           = "500",
+		
 		range                    = 1000,
 		reloadtime               = 1,
 		weaponType		         = "Cannon",
 		soundHit                 = "explode2",
 		soundStart               = "krabsecondary.wav",
-		startsmoke               = "1",
+		
 		tolerance                = 500,
 		turret                   = true,
 		weaponVelocity           = 5000,

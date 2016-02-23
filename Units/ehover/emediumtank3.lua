@@ -120,13 +120,13 @@ local weapon1Damage              = 200
 
 local weaponDefs                 = {
 mediumtankcannon                 = {
-	badTargetCategory            = [[BUILDING]],
+
 	AreaOfEffect                 = 1,
 	avoidFriendly                = false,
 	avoidFeature                 = false,
 	collideFriendly              = false,
 	collideFeature               = false,
-	ballistic                    = true,
+	
 	cegTag                       = "bruisercannon",
 	explosionGenerator           = "custom:genericshellexplosion-small",
 	energypershot                = weapon1Damage / 20,
@@ -139,7 +139,7 @@ mediumtankcannon                 = {
 	weaponType		             = "Cannon",
 	soundHit                     = "mediumcannonhit.wav",
 	soundStart                   = "bruisercannon.wav",
-	startsmoke                   = "1",
+	
 	turret                       = true,
 	weaponVelocity               = 400,
 	customParams                 = {

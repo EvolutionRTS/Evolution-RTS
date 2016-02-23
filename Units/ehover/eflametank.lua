@@ -125,7 +125,7 @@ local weapon1Damage              = 25
 
 local weaponDefs                 = {
 	lightlaser                   = {
-		badTargetCategory        = [[LIGHT]],
+		
 		accuracy                 = 0,
 		AreaOfEffect             = 1,
 		avoidFeature             = false,
@@ -140,7 +140,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
 		soundstart               = "flamethrower1.wav",
-		lineOfSight              = true,
+		
 		minintensity             = 1,
 		impulseFactor            = 0,
 		name                     = "Something with Flames",

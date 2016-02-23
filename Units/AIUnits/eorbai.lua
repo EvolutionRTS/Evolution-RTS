@@ -136,7 +136,7 @@ local weaponDefs                 = {
 	aoeheal                      = {
 		AreaOfEffect             = 1000,
 		avoidFriendly            = false,
-		ballistic                = true,
+		
 		collideFriendly          = false,
 		commandfire		         = true,
 		explosionGenerator       = "custom:AREAHEALING",
@@ -148,7 +148,7 @@ local weaponDefs                 = {
 		reloadtime               = 10,
 		weaponType		         = "Cannon",
 		soundStart               = "areaheal.wav",
-		startsmoke               = "1",
+		
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {

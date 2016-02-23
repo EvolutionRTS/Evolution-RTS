@@ -123,21 +123,21 @@ local weapon1Damage              = 350
 
 local weaponDefs                 = {
 eheavyturretweapon               = {
-	badTargetCategory            = [[ARMORED LIGHT]],
+	
 	accuracy                     = 1,
 	AreaOfEffect                 = 1,
 	avoidFriendly                = false,
 	avoidFeature                 = false,
 	collideFriendly              = false,
 	collideFeature               = false,
-	ballistic                    = true,
+	
 	cegTag                       = "factorysparks",
 	collideFriendly              = false,
 	explosionGenerator           = "custom:genericshellexplosion-medium-white",
 	energypershot                = weapon1Damage / 20,
 	id                           = 71,
 	interceptedByShieldType      = 4,
-	impulse                      = "0",
+	
 	impulseBoost                 = 0,
 	impulseFactor                = 0,
 	name                         = "Plasma Cannon",
@@ -147,7 +147,7 @@ eheavyturretweapon               = {
 	soundHit                     = "eturrethit.wav",
 	soundStart                   = "eturretfire.wav",
 	tolerance                    = 5000,
-	startsmoke                   = "1",
+	
 	turret                       = true,
 	weaponVelocity               = 315,
 	customParams                 = {

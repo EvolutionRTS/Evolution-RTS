@@ -136,14 +136,14 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	heavytankweapon              = {
-		badTargetCategory        = [[BUILDING]],
+		
 		accuracy                 = 200,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		ballistic                = true,
+		
 		cegTag                   = "antiassualtshot2",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = energycosttofire,
@@ -156,7 +156,7 @@ local weaponDefs                 = {
 		weaponType		         = "Cannon",
 		soundHit                 = "42024_digifishmusic_Missile_Strike.wav",
 		soundStart               = "triotfire.wav",
-		startsmoke               = "1",
+		
 		tolerance                = 2000,
 		turret                   = true,
 		weaponVelocity           = 1500,

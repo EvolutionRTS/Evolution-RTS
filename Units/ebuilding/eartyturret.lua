@@ -111,13 +111,13 @@ local weaponDefs                  = {
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		ballistic                = true,
+		
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-large",
 		energypershot            = energycosttofire,
 		edgeEffectiveness        = 1,
-		impulse                  = "0",
+		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
 		highTrajectory	         = 1,
@@ -127,7 +127,7 @@ local weaponDefs                  = {
 		weaponType		         = "Cannon",
 		soundHit                 = "artyhit.wav",
 		soundStart               = "arty2.wav",
-		startsmoke               = "1",
+		
 		turret                   = true,
 		weaponVelocity           = 500,
 		customparams             = {

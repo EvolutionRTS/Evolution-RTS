@@ -129,7 +129,7 @@ local weaponDefs                 = {
 		edgeeffectiveness        = 0.5,
 		name                     ="hoverbomb",
 		weaponType		         = "Cannon",
-		ballistic                =1,
+		
 		turret                   =1,
 		impulseFactor            = 0,
 		range                    =100,

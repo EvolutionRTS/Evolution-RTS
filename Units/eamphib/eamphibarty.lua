@@ -139,7 +139,7 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs              = {  
 assimilatorbeamweapon         = {
-	badTargetCategory         = [[ARMORED LIGHT]],
+	
 	AreaOfEffect              = weapon1AOE,
 	avoidFeature              = false,
 	avoidFriendly             = false,
@@ -157,7 +157,7 @@ assimilatorbeamweapon         = {
 	interceptedByShieldType   = 4,
 	largeBeamLaser            = true,
 	laserflaresize 	          = 5,
-	lineOfSight               = true,
+	
 	leadlimit			      = 20,
 	minintensity              = 1,
 	name                      = "Laser",

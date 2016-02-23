@@ -131,7 +131,7 @@ local weaponDefs                 = {
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		beamTime                 = 0.1,
-		beamWeapon               = true,
+		
 		collideFeature           = false,
 		collideFriendly          = false,
 		coreThickness            = 0.1,
@@ -142,7 +142,7 @@ local weaponDefs                 = {
 		minintensity             = 1,
 		impulseFactor            = 0,
 		largeBeamLaser           = true,
-		lineOfSight              = true,
+		
 		name                     = "Light Laser",
 		noSelfDamage             = true,
 		range                    = 400,
@@ -150,7 +150,7 @@ local weaponDefs                 = {
 		WeaponType               = "BeamLaser",
 		rgbColor                 = "0 0 0.5",
 		rgbColor2                = "0.2 0.2 0.2",
-		selfprop                 = true,
+		
 		soundTrigger             = true,
 		startVelocity            = 1500,
 		targetMoveError          = 0.3,

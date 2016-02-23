@@ -145,19 +145,19 @@ local weapon2AOE				 = 250
 
 local weaponDefs                 = {
 	Artilleryweapon              = {
-		badTargetCategory        = [[ARMORED LIGHT]],
+		
 		accuracy                 = 500,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		ballistic                = true,
+		
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = energycosttofire,
-		impulse                  = "0",
+		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
 		highTrajectory	         = 0,
@@ -167,7 +167,7 @@ local weaponDefs                 = {
 		weaponType		         = "Cannon",
 		soundHit                 = "artyhit.wav",
 		soundStart               = "arty2.wav",
-		startsmoke               = "1",
+		
 		turret                   = true,
 		weaponVelocity           = 500,
 		customparams             = {
@@ -182,20 +182,20 @@ local weaponDefs                 = {
 	},
 
 	SaturationArtilleryweapon    = {
-		badTargetCategory        = [[ARMORED LIGHT]],
+		
 		accuracy                 = 750,
 		AreaOfEffect             = weapon2AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		ballistic                = true,
+		
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-large",
 		energypershot            = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1),
 		edgeEffectiveness        = 1,
-		impulse                  = "0",
+		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
 		highTrajectory	         = 1,
@@ -205,7 +205,7 @@ local weaponDefs                 = {
 		weaponType		         = "Cannon",
 		soundHit                 = "artyhit.wav",
 		soundStart               = "arty2.wav",
-		startsmoke               = "1",
+		
 		turret                   = true,
 		weaponVelocity           = 500,
 		customparams             = {

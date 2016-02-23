@@ -145,14 +145,12 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	assaulttankcannon            = {
-		badTargetCategory        = [[ARMORED LIGHT]],
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 0.1,
-		beamWeapon               = true,
 		coreThickness            = 0.6,
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.2,
@@ -162,7 +160,6 @@ local weaponDefs                 = {
 		fireStarter              = 100,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 1500,

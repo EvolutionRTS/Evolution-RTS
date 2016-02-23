@@ -141,13 +141,13 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	lightbeamlaser               = {
-		badTargetCategory        = [[ARMORED BUILDING VTOL]],
+		
 		TargetMoveError	         = 0.3,
 		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		beamTime                 = 0.1,
-		beamlaser                = true,
+		
 		collideFeature           = false,
 		collideFriendly          = false,
 		coreThickness            = 0.2,
@@ -158,7 +158,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
 		impulsefactor		     = 0.1,
-		lineOfSight              = true,
+		
 		laserflaresize 	         = 5,
 		largebeamlaser	         = true,
 		leadlimit			     = 10,

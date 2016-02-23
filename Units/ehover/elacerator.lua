@@ -133,7 +133,7 @@ local weaponDefs                 = {
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		ballistic                = true,
+		
 		cegTag                   = "nukeartyshot",
 		explosionGenerator       = "custom:nukeartyexpl",
 		edgeEffectiveness        = 0.1,
@@ -147,7 +147,7 @@ local weaponDefs                 = {
 		weaponType		         = "Cannon",
 		soundHit                 = "nukeartyhit.wav",
 		soundStart               = "nukeartyshot.wav",
-		startsmoke               = "1",
+		
 		tolerance                = 2000,
 		turret                   = true,
 		weaponVelocity           = 800,

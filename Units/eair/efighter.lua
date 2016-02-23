@@ -146,7 +146,7 @@ local weaponDefs                 = {
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		impulseFactor            = 0,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Laser",
 		paralyzer		         = true,

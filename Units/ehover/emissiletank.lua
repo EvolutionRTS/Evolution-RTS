@@ -145,7 +145,7 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	missletankweapon             = {
-		badTargetCategory        = [[LIGHT BUILDING]],
+
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
@@ -161,21 +161,21 @@ local weaponDefs                 = {
 		impulseBoost             = 0,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		model                    = "missilesmallvlaunch.s3o",
 		name                     = "Rocket",
 		range                    = 850,
 		reloadtime               = 3,
 		weaponType		         = "MissileLauncher",
-		selfprop                 = true,
-		smokedelay               = "0.1",
+		
+		
 		smokeTrail               = false,
 		soundHit                 = "explode_large.wav",
 		soundStart               = "missile_launch1.wav",
-		startsmoke               = "0",
+		
 		tracks                   = true,
 		turnrate                 = 17500,
-		vlaunch                  = true,
+		
 		weaponAcceleration       = 400,
 		weaponTimer              = 1,
 		weaponType               = "StarburstLauncher",

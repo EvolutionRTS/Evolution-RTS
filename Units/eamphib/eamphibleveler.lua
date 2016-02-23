@@ -148,7 +148,7 @@ local weaponDefs                 = {
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 0.1,
-		beamWeapon               = true,
+		
 		coreThickness            = 0.5,
 		duration                 = 0.2,
 		energypershot            = energycosttofire,
@@ -157,7 +157,7 @@ local weaponDefs                 = {
 		fireStarter              = 100,
 		interceptedByShieldType  = 4,
 		impulseFactor            = 0.1,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Anti-Tank Laser",
 		range                    = 750,
@@ -192,7 +192,7 @@ local weaponDefs                 = {
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 0.1,
-		beamWeapon               = true,
+		
 		coreThickness            = 0.5,
 		duration                 = 0.1,
 		energypershot            = 0.6,
@@ -201,7 +201,7 @@ local weaponDefs                 = {
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Machine Gun",
 		range                    = 750,

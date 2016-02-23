@@ -125,7 +125,7 @@ local weaponDefs                 = {
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 0.2,
-		beamWeapon               = true,
+		
 		coreThickness            = 0.5,
 		craterBoost              = 0,
 		craterMult               = 0,
@@ -136,7 +136,7 @@ local weaponDefs                 = {
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
 		largeBeamLaser           = true,
-		lineOfSight              = true,
+		
 		name                     = "Light Laser",
 		noSelfDamage             = true,
 		range                    = 800,
@@ -144,7 +144,7 @@ local weaponDefs                 = {
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0.1 0.5 0.2",
 		rgbColor2                = "0 1 0",
-		selfprop                 = true,
+		
 		soundHit                 = "18393_inferno_reject.wav",
 		soundStart               = "18389_inferno_medlas.wav",
 		soundTrigger             = true,

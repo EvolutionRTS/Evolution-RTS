@@ -109,11 +109,11 @@ local weaponDefs                  = {
 		collideFriendly           = false,
 		explosionGenerator        = "custom:genericshellexplosion-large-green",
 		fireStarter               = 70,
-		guidance                  = false,
+
 		id                        = 136,
 		impulsefactor	          = 0,
 		interceptedByShieldType   = 4,
-		lineOfSight               = true,
+		
 		energypershot             = weapon1Damage / 20,
 		edgeEffectiveness         = 0.1,
 		model                     = "rocket.s3o",
@@ -121,12 +121,12 @@ local weaponDefs                  = {
 		range                     = 6000,
 		reloadtime                = 35,
 		weaponType		          = "Cannon",
-		selfprop                  = true,
-		smokedelay                = ".1",
+		
+
 		smokeTrail                = false,
 		soundHit                  = "lrpchit.wav",
 		soundStart                = "lrpcshot2.wav",
-		startsmoke                = "0",
+		
 		tolerance                 = 8000,
 		turnRate                  = 4680,
 		turret                    = true,

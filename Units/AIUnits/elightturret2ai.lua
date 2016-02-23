@@ -129,7 +129,7 @@ local weaponDefs                  = {
 		impulseBoost              = 0,
 		impulseFactor             = 0,
 		interceptedByShieldType   = 4,
-		lineOfSight               = true,
+		
 		noSelfDamage              = true,
 		range                     = 600,
 		reloadtime                = 1,
@@ -137,7 +137,7 @@ local weaponDefs                  = {
 		rgbColor                  = "0.1 0.2 0.5",
 		rgbColor2                 = "0 0 1",
 		soundStart                = "jacobs.wav",
-		startsmoke                = "1",
+		
 		texture1                  = "lightning",
 		thickness                 = 10,
 		turret                    = true,

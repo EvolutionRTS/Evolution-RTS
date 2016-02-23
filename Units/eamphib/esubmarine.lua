@@ -106,7 +106,7 @@ local weaponDefs                 = {
 		AreaOfEffect             = 10,
 		avoidFriendly            = false,
 		avoidFeature             = false,
-		ballistic                = false,
+		
 		cegTag                   = "torpedotrail",
 		collideFriendly          = false,
 		cylinderTargeting        = true,

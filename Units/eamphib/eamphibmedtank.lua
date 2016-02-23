@@ -141,7 +141,7 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	medtankbeamlaser             = {
-		badTargetCategory        = [[BUILDING]],
+		
 		TargetMoveError	         = 0.3,
 		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
@@ -157,7 +157,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
 		impulsefactor		     = 0.1,
-		lineOfSight              = true,
+		
 		largebeamlaser	         = true,
 		laserflaresize 	         = 5,
 		leadlimit			     = 15,

@@ -133,23 +133,23 @@ local weaponDefs                  = {
 		canAttackGround           = false,
 		cegTag                   = "missiletrail",
 		flightTime               = 5,
-		guidance                 = true,
+		
 		tolerance                 = 1000,
 		turret                    = true,
 		impulseFactor             = 0,
-		lineOfSight              = true,
+		
 		model                    = "missilesmallvlaunch.s3o",
 		edgeeffectiveness	      = 1,
 		energypershot             = energycosttofire,
 		range                     =400,
 		reloadtime                =8,
 		weaponvelocity            =2500,
-		selfprop                 = true,
-		smokedelay               = "0.1",
+		
+		
 		smokeTrail               = false,
 		tracks                   = true,
 		turnrate                 = 200000,
-		vlaunch                  = true,
+		
 		weaponAcceleration       = 800,
 		weaponTimer              = 0.5,
 		weaponType               = "StarburstLauncher",

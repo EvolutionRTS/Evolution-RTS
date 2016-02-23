@@ -130,7 +130,7 @@ local weaponDefs                 = {
 		interceptedByShieldType  = 4,
 		model                    = "missilesmall.s3o",
 		name                     = "Underwater Torpedo",
-		pitchtolerance           = 3000,
+		
 		range                    = 1000,
 		reloadtime               = 1,
 		weaponType		         = "TorpedoLauncher",

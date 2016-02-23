@@ -139,7 +139,7 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	allterrshield                = {
-		IsShield                 = true,
+		
 		Smartshield              = true,
 		Exteriorshield           = true,
 		Visibleshield            = true,
@@ -154,9 +154,9 @@ local weaponDefs                 = {
 		Shieldgoodcolor          = "0.0 0.2 1.0",
 		Shieldbadcolor           = "1.0 0 0",
 		Shieldalpha              = 0.3,
-		ShieldRepulsor           = false,
+		
 		texture1		         = "shield4",
-		visibleShieldHit         = true,
+		
 		visibleShieldHitFrames   = 50,
 		weaponType               = [[Shield]],
 		damage                   = {

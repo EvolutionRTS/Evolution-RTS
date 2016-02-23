@@ -125,23 +125,23 @@ local weaponDefs                  = {
 		impulseBoost              = 0,
 		impulseFactor             = 0,
 		interceptedByShieldType   = 4,
-		lineOfSight               = true,
+		
 		metalpershot              = 0,
 		model                     = "ecruisemissile.s3o",
 		name                      = "Cruise Missile",
 		range                     = 6000,
 		reloadtime                = reloadtime,
 		weaponType		          = "MissileLauncher",
-		selfprop                  = true,
-		smokedelay                = "0.1",
+		
+		
 		smokeTrail                = false,
 		soundHit                  = "explode4.wav",
 		soundStart                = "cruisemissilelaunch.wav",
-		startsmoke                = "0",
+		
 		startVelocity             = 10,
 		turnRate                  = 6000,
 		tracks					  = true,
-		vlaunch                   = true,
+		
 		weaponAcceleration        = 60,
 		weaponTimer               = 5,
 		weaponType                = "StarburstLauncher",

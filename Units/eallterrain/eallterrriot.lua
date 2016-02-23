@@ -163,7 +163,7 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	riottankempweapon            = {
-		badTargetCategory        = [[ARMORED BUILDING]],
+		
 		AreaOfEffect             = weapon1AOE,
 		avoidFeature             = false,
 		avoidFriendly            = false,
@@ -178,7 +178,7 @@ local weaponDefs                 = {
 		fallOffRate              = 1,
 		fireStarter              = 100,
 		impulseFactor            = 0,
-		lineOfSight              = true,
+		
 		minintensity             = 1,
 		name                     = "Laser",
 		noexplode		         = true,
@@ -216,7 +216,7 @@ local weaponDefs                 = {
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		ballistic                = true,
+		
 		cegTag                   = "bruisercannon",
 		explosionGenerator       = "custom:genericshellexplosion-small",
 		energypershot            = energycosttofire2,
@@ -230,7 +230,7 @@ local weaponDefs                 = {
 		soundHit                 = "mediumcannonhit.wav",
 		soundStart               = "bruisercannon.wav",
 		sprayangle		         = 2000,
-		startsmoke               = "1",
+		
 		turret                   = true,
 		weaponVelocity           = 400,
 		customparams             = {

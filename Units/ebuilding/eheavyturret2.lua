@@ -118,12 +118,12 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                  = {
 	eheavyturretweapon2           = {
-		badTargetCategory         = [[BUILDING LIGHT]],
+		
 		AreaOfEffect              = weapon1AOE,
 		avoidFeature              = false,
 		avoidFriendly             = false,
 		beamTime                  = 0.1,
-		beamWeapon                = true,
+		
 		collideFeature            = false,
 		collideFriendly           = false,
 		coreThickness             = 0.6,
@@ -135,7 +135,7 @@ local weaponDefs                  = {
 		fireStarter               = 100,
 		impulseFactor             = 0,
 		interceptedByShieldType   = 4,
-		lineOfSight               = true,
+		
 		minintensity              = "1",
 		name                      = "Laser",
 		range                     = 1000,

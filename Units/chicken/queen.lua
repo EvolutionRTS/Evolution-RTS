@@ -115,12 +115,12 @@ local unitDef                    = {
 
 local weaponDefs                 = {
 	heavybeamweapon              = {
-		badTargetCategory        = [[ARMORED LIGHT]],
+		
 		AreaOfEffect             = 0,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		beamTime                 = 1,
-		beamWeapon               = true,
+		
 		cameraShake		         = 1,
 		collideFeature           = false,
 		collideFriendly          = false,
@@ -133,7 +133,7 @@ local weaponDefs                 = {
 		fireStarter              = 50,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		lineOfSight              = true,
+		
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 1500,
@@ -164,12 +164,12 @@ local weaponDefs                 = {
 		AreaOfEffect             = 150,
 		avoidFriendly            = false,
 		avoidFeature             = false,
-		ballistic                = true,
+		
 		collideFriendly          = false,
 		collideFeature           = false,
 		cylinderTargeting        = true,
 		burnblow                 = true,
-		endsmoke                 = "1",
+		
 		explosionGenerator       = "custom:genericshellexplosion-large",
 		energypershot            = 4,
 		fireStarter              = 80,
@@ -177,13 +177,13 @@ local weaponDefs                 = {
 		impulseFactor            = 0.1,
 		interceptedByShieldType  = 4,
 		name                     = "Concussion Cannon",
-		pitchtolerance           = "500",
+		
 		range                    = 1500,
 		reloadtime               = 0.5,
 		weaponType		         = "Cannon",
 		soundHit                 = "explode2",
 		soundStart               = "krabsecondary.wav",
-		startsmoke               = "1",
+		
 		tolerance                = 500,
 		turret                   = true,
 		weaponVelocity           = 5000,
@@ -207,31 +207,31 @@ local weaponDefs                 = {
 		explosionGenerator       = "custom:NUKEDATBEWM",
 		fireStarter              = 100,
 		flightTime               = 400,
-		guidance                 = true,
+		
 		id                       = 124,
 		impulseBoost             = 0,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 2,
-		lineOfSight              = true,
+		
 		metalpershot             = 0,
 		model                    = "enuke.s3o",
 		name                     = "Nuke",
 		range                    = 32000,
 		reloadtime               = 15,
 		weaponType		         = "MissileLauncher",
-		selfprop                 = true,
-		smokedelay               = "0.1",
+		
+		
 		smokeTrail               = false,
 		soundHit                 = "explosion_enormous.wav",
 		soundStart               = "nukelaunch.wav",
-		startsmoke               = "0",
+		
 		stockpile                = true,
 		stockpileTime            = 240,
 		startVelocity            = 500,
 		tracks                   = true,
 		turnRate                 = 30000,
 		targetable			     = 1,
-		vlaunch                  = true,
+		
 		weaponAcceleration       = 0,
 		weaponTimer              = 10,
 		weaponType               = "StarburstLauncher",
