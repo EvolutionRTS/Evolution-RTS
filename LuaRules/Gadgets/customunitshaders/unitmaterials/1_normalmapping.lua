@@ -20,7 +20,7 @@ local materials = {
          [2] = '$shadow',
          [3] = '$specular',
          [4] = '$reflection',
-         [5] = '%normalstex',
+         [5] = '%NORMALSTEX',
        },
    },
 }
@@ -72,7 +72,7 @@ for i=1,#UnitDefs do
   local udef = UnitDefs[i]
 
   if (udef.customParams.normalstex and VFS.FileExists(udef.customParams.normalstex)) then
-    unitMaterials[udef.name] = {"normalMappedS3o", normalstex = udef.customParams.normalstex}
+    unitMaterials[udef.name] = {"normalMappedS3o", NORMALSTEX = udef.customParams.normalstex}
 
   elseif (udef.model.type == "s3o") then
     local modelpath = udef.model.path
@@ -91,12 +91,12 @@ for i=1,#UnitDefs do
 
       -- output units without tex2
       if not tex2 then
-        Spring.Echo("CustomUnitShaders: " .. udef.name .. " no tex2")
+        Spring.Log(gadget:GetInfo().name, LOG.WARNING, "CustomUnitShaders: " .. udef.name .. " no tex2")
       end
 
       local normalstex = FindNormalmap(tex1,tex2)
       if (normalstex and not unitMaterials[udef.name]) then
-        unitMaterials[udef.name] = {"normalMappedS3o", normalstex = normalstex}
+        unitMaterials[udef.name] = {"normalMappedS3o", NORMALSTEX = normalstex}
       end
     end --if model
 
@@ -113,12 +113,12 @@ for i=1,#UnitDefs do
 
           -- output units without tex2
           if not tex2 then
-            Spring.Echo("CustomUnitShaders: " .. udef.name .. " no tex2")
+            Spring.Log(gadget:GetInfo().name, LOG.WARNING, "CustomUnitShaders: " .. udef.name .. " no tex2")
           end
 
           local normalstex = FindNormalmap(tex1,tex2)
           if (normalstex and not unitMaterials[udef.name]) then
-            unitMaterials[udef.name] = {"normalMappedS3o", normalstex = normalstex}
+            unitMaterials[udef.name] = {"normalMappedS3o", NORMALSTEX = normalstex}
           end
         end
       end
