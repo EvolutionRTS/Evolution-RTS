@@ -446,7 +446,7 @@ local mwidth, mheight = Game.mapSizeX, Game.mapSizeZ
 local averageEdgeHeight = (spGetGroundHeight(mwidth/2,0) + spGetGroundHeight(0,mheight/2) + spGetGroundHeight(mwidth/2,mheight) +spGetGroundHeight(mwidth,mheight/2))/4
 local mcx, mcz 	= mwidth / 2, mheight / 2
 local mcy 		= spGetGroundHeight(mcx, mcz)
-local maxDistY = max(mheight, mwidth) * 1
+local maxDistY = max(mheight, mwidth) * 0.30
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 local rotate_transit --switch for smoothing "rotate at mouse position instead of screen center"
