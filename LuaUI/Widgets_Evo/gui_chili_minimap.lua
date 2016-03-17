@@ -151,14 +151,14 @@ options = {
 	radar_fog_color = {
 		name = "Fog Color",
 		type = "colors",
-		value = { 0.4, 0.4, 0.4, 1},
+		value = { 0.05, 0.05, 0.05, 1},
 		OnChange =  function() updateRadarColors() end,
 		path = radar_path,
 	},
 	radar_los_color = {
 		name = "LOS Color",
 		type = "colors",
-		value = { 0.15, 0.15, 0.15, 1},
+		value = { 0.5, 0.5, 0.5, 1},
 		OnChange =  function() updateRadarColors() end,
 		path = radar_path,
 	},
@@ -256,19 +256,23 @@ options = {
 
 }
 
+
 function updateRadarColors()
-	local fog = options.radar_fog_color.value
-	local los = options.radar_los_color.value
-	local radar = options.radar_radar_color.value
-	local jam = options.radar_jammer_color.value
-	Spring.SetLosViewColors(
-		fog,
-		los,
-		radar,
-		jam,
-		radar
-	)
+--
+--	local fog = options.radar_fog_color.value
+--	local los = options.radar_los_color.value
+--	local radar = options.radar_radar_color.value
+--	local jam = options.radar_jammer_color.value
+--	Spring.SetLosViewColors(
+--		fog,
+--		los,
+--		radar,
+--		jam,
+--		radar
+--	)
+--
 end
+
 
 function setSensorState(newState)
 	local losEnabled = Spring.GetMapDrawMode() == "los"

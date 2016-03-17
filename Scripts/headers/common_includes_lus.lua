@@ -6,7 +6,12 @@ common = {
 				
 		Spring.SpawnCEG(effectName, x,y,z, dx, dy, dz)
 	end,
-
+	
+	HbotLift = function ()
+		Move(base, y_axis, 200, 200)
+		Spring.Echo("Bruh I lift")
+	end,
+	
     setSFXoccupy = function (setSFXoccupy_argument)
 		--Spring.Echo(type(setSFXoccupy_argument))
 		--Spring.Echo("common.setSFXoccupy is being called", setSFXoccupy_argument)

@@ -1,4 +1,4 @@
-base, turret, barrel1, firepoint1, dirt = piece('base', 'turret', 'barrel1', 'firepoint1', 'dirt')
+base, turret, barrel1, firepoint1, firepoint2, dirt = piece('base', 'turret', 'barrel1', 'firepoint1', 'firepoint2', 'dirt')
 local SIG_AIM = {}
 
 -- state variables
@@ -11,8 +11,8 @@ end
 
 common = include("headers/common_includes_lus.lua")
 
-function script.setSFXoccupy(setSFXoccupy_argument)
-	common.setSFXoccupy(setSFXoccupy_argument)
+function doYouEvenLift()
+	common.HbotLift()
 end
 
 function script.StartMoving()
@@ -28,7 +28,6 @@ function thrust()
 	common.DirtTrail()
 end
 
-
 local function RestoreAfterDelay()
 	Sleep(2000)
 	Turn(turret, y_axis, 0, 5)
@@ -40,9 +39,16 @@ function script.AimFromWeapon(weaponID)
 	return turret
 end
 
+local firepoints = {firepoint1, firepoint2}
+local currentFirepoint = 1
+
 function script.QueryWeapon(weaponID)
-	--Spring.Echo("QueryWeapon: FireWeapon")
-	return firepoint1
+	return firepoints[currentFirepoint]
+end
+
+function script.FireWeapon(weaponID)
+	EmitSfx (firepoints[currentFirepoint], 1024)
+	currentFirepoint = 3 - currentFirepoint
 end
 
 function script.AimWeapon(weaponID, heading, pitch)
@@ -57,13 +63,9 @@ function script.AimWeapon(weaponID, heading, pitch)
 	return true
 end
 
-function script.FireWeapon(weaponID)
-	--Spring.Echo("FireWeapon: FireWeapon")
-	EmitSfx (firepoint1, 1024)
-end
-
 function script.Killed()
 		Explode(barrel1, SFX.EXPLODE_ON_HIT)
 		Explode(turret, SFX.EXPLODE_ON_HIT)
+		Explode(base, SFX.EXPLODE_ON_HIT)
 		return 1   -- spawn ARMSTUMP_DEAD corpse / This is the equivalent of corpsetype = 1; in bos
 end

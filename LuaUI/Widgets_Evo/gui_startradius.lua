@@ -79,12 +79,13 @@ local function DrawPoints()
 
   if (sx == sxin and sy == syin and sz == szin) then
 
-      DrawGroundCircle(x, y, z, 1000, 128)  
+      DrawGroundCircle(sx, sy, sz, 1000, 128)  
 	count = count + 1
 
   else
 
-   DrawGroundCircle(sx, sy, sz, 1000, 128)  
+
+	DrawGroundCircle(sx, sy, sz, 1000, 128)  
 
   end
 

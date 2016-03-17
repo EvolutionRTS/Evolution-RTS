@@ -219,7 +219,7 @@ options = {
 		name = "Hide Tooltip for Unreclaimables",
 		type = 'bool',
 		advanced = true,
-		value = false,
+		value = true,
 		desc = 'Don\'t show the tooltip for unreclaimable features.',
 	},
 	showdrawtooltip = {
@@ -231,7 +231,7 @@ options = {
 	showterratooltip = {
 		name = "Show Terraform Tooltip",
 		type = 'bool',
-		value = true,
+		value = false,
 		desc = 'Show terraform tooltip when performing terraform commands.',
 	},
 
