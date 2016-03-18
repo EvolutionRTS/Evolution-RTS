@@ -7,13 +7,10 @@ terrainType = "terrainType"
 
 function script.Create()
 	StartThread(common.SmokeUnit, {base, turret, barrel1})
+	StartThread(doYouEvenLift)
 end
 
 common = include("headers/common_includes_lus.lua")
-
-function doYouEvenLift()
-	common.HbotLift()
-end
 
 function script.StartMoving()
    isMoving = true
@@ -23,6 +20,10 @@ end
 function script.StopMoving()
    isMoving = false
 end   
+
+function doYouEvenLift()
+	common.HbotLift()
+end
 
 function thrust()
 	common.DirtTrail()

@@ -8,7 +8,7 @@ common = {
 	end,
 	
 	HbotLift = function ()
-		Move(base, y_axis, 200, 200)
+		Move(base, y_axis, 20, 200)
 		Spring.Echo("Bruh I lift")
 	end,
 	
