@@ -17,8 +17,11 @@ local floor = math.floor
 ------------------------------------------------
 -- Variables
 ------------------------------------------------
-local enabled = false
-local spots = {}
+local enabled = true
+local markers = {}
+local mexIndex = 1
+local metal = 2.0
+local handle
 
 ------------------------------------------------
 -- Press Handling
@@ -27,13 +30,6 @@ local spots = {}
 function widget:KeyPress(key, modifier, isRepeat)
 	if modifier.alt then
 		if key == KEYSYMS.M then
-			if enabled then
-				for i = 1, #spots do
-					local spot = spots[i]
-					Spring.Echo("		[] = {x = " .. floor(spot.x+0.5) .. ", z = " .. floor(spot.z+0.5) .. ", metal = 2.0},")
-				end
-				spots = {}
-			end
 			enabled = not enabled
 		end
 	end
@@ -46,12 +42,37 @@ end
 function widget:MousePress(mx, my, button)
 	if enabled and (not Spring.IsAboveMiniMap(mx, my)) then
 		local _, pos = Spring.TraceScreenRay(mx, my, true)
-		if legalPos(pos) then	
-			spots[#spots+1] = {
-				x = pos[1],
-				z = pos[3],
-			}
-			Spring.MarkerAddPoint(pos[1],0,pos[3],#spots)
+		if legalPos(pos) then
+			if true then
+				handle:write("[" .. mexIndex .. "] = {x = " .. floor(pos[1] + 0.5) .. ", z = " .. floor(pos[3] + 0.5) .. ", metal = " .. tostring(metal) .. "},\n")
+				handle:flush()
+				markers[#markers + 1] = {pos[1], 0, pos[3]}
+				Spring.MarkerAddPoint(pos[1], 0, pos[3], mexIndex)
+				mexIndex = mexIndex + 1
+			else -- TODO: make right click remove markers
+				Spring.MarkerErasePosition (pos[1], 0, pos[3])
+			end
 		end
+	end
+end
+
+function widget:Initialize()
+	if not Spring.IsCheatingEnabled() then
+		Spring.Echo("This widget requires cheats enabled")
+		widgetHandler:RemoveWidget()
+	end
+	handle = io.open("MexSpots_" .. Game.mapName, "w")
+	if (handle == nil) then
+		widgetHandler:RemoveWidget()
+	end
+end
+
+function widget:Shutdown()
+	for _, i in pairs (markers) do
+                Spring.MarkerErasePosition (i[1], i[2], i[3])
+	end
+	if handle ~= nil then
+		io.close(handle)
+		Spring.Echo ("Writen Mex Spots To: " .. "MexSpots_" .. Game.mapName)
 	end
 end

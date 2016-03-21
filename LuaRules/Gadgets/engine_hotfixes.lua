@@ -60,6 +60,16 @@ if gadgetHandler:IsSyncedCode() then
 		end
 		return damage
 	end
+	
+	--Fix for bad movement in 102
+	--https://springrts.com/phpbb/viewtopic.php?f=12&t=34593
+	function gadget:UnitCreated(unitID, unitDefID, _, _)
+		local ud = UnitDefs[unitDefID]
+		local md = ud.moveDef
+		if (md.type ~= nil) then -- all non-flying units
+			Spring.MoveCtrl.SetGroundMoveTypeData(unitID, "turnAccel", ud.turnRate)
+		end
+	end
 
 end
 
