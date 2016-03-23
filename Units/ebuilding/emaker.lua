@@ -76,7 +76,7 @@ Uses +]] .. supply .. [[ Supply]],
 	customParams                  = {
 		iseco                     = 1,
 		needed_cover              = 8,
-		supply_cost               = supply,
+--		supply_cost               = supply,
 		death_sounds              = "generic",
 		armortype                 = armortype,
 		normalstex                = "unittextures/lego2skin_explorernormal.dds", 

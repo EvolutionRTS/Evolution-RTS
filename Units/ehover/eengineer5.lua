@@ -6,7 +6,7 @@ local unitName                   = "eengineer5"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supply					 = [[5]]
+local supply					 = [[2]]
 
 local unitDef                    = {
 

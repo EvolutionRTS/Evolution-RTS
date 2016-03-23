@@ -7,7 +7,7 @@ local unitName                    = "emetalextractor"
 
 local armortype					 = [[building]]
 local metal						 = [[0.5]] --The actual amount is set in resourcegifts gadget
-local supply					 = [[5]]
+local supply					 = [[2]]
 
 local unitDef                     = {
 

@@ -6,7 +6,7 @@ local unitName                   = "eorb"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supply					 = [[5]]
+local supply					 = [[1]]
 
 local unitDef                    = {
 
