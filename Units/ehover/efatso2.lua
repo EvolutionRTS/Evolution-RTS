@@ -112,7 +112,7 @@ local unitDef                    = {
 		armortype                = "armored", 
 		nofriendlyfire	         = "1",
 		supply_cost              = 5,
-		normalstex               = "unittextures/efatso2normal.png", 
+		normaltex               = "unittextures/efatso2normal.png", 
 		helptext                 = [[The Fatso is the pinnacle of anti-base technology. It has enough hitpoints to allow it to take a beating and keep barreling down upon base structures and defenses, however, this amazing power comes at a cost. It is incapable of properly defending itself as it's weapon is slow to recharge and it simply is too slow to outmaneuver skirmish units. Bring an escort.]],
 },
 }

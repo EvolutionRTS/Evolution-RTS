@@ -86,7 +86,7 @@ local unitDef                     = {
 		death_sounds              = "generic",
 		RequireTech               = "0 Power",
 		armortype                 = "building",
-		normalstex                = "unittextures/elrpcnormal.png", 
+		normaltex                = "unittextures/elrpcnormal.png", 
 		helptext                  = [[]],
 	},
 	useGroundDecal                = true,

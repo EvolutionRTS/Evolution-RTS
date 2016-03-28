@@ -114,7 +114,7 @@ local unitDef                    = {
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = 3,
-		normalstex               = "unittextures/eflametanknormal.png", 
+		normaltex               = "unittextures/eflametanknormal.png", 
 		helptext	             =	[[]],
 	},
 }

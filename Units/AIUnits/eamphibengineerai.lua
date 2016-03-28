@@ -133,7 +133,7 @@ local unitDef                    = {
 		death_sounds             = "generic",
 		dronespawner             = "1",
 		armortype                = "light",
-		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
 	},

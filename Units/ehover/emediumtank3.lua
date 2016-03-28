@@ -107,7 +107,7 @@ local unitDef                    = {
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = 4,
-		normalstex               = "unittextures/emediumtank3normal.png", 
+		normaltex               = "unittextures/emediumtank3normal.png", 
 		helptext	             = [[The brusier is a lightly armored tank destroyer, excellent versus raiders and other light units. Pair with light raiders and heavy tank destroyers for best results.
 		
 		It's description is a bit deceptive if you read it incorrectly. In truth, it decimates armored units. It is moderately effective vs light units and buildings.]],

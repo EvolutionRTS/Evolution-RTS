@@ -69,7 +69,7 @@ local unitDef = {
 		iseco = 1,
 		death_sounds = "generic",
 		armortype   = "BUILDING",
-		normalstex = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	= "outer_colonies",  
 	},

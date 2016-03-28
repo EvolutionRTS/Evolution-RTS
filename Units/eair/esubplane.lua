@@ -106,7 +106,7 @@ local unitDef                    = {
 		nofriendlyfire           = "1",
 		RequireTech              = "10 Power",
 		armortype                = "armored",
-		normalstex               = "unittextures/esubplanenormal.png", 
+		normaltex               = "unittextures/esubplanenormal.png", 
 	},
 }
 

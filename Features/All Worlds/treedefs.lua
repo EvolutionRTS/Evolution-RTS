@@ -6,11 +6,13 @@ local treeDefs = {}
 
 local function CreateTreeDef(type)
   treeDefs["treetype" .. type] = {
+	 name 		 = "tree",
      description = [[Tree]],
      blocking    = false,
      burnable    = true,
      reclaimable = true,
 	 upright = true,
+	 category = "vegetation",
      energy = 0,
 
      damage      = 5,

@@ -107,7 +107,7 @@ Armortype: ]] .. armortype ..[[
 		armortype                = armortype,
 		death_sounds             = "generic",
 		nofriendlyfire	         = "1",
-		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
 	},

@@ -108,7 +108,7 @@ local unitDef                  = {
 		death_sounds           = "generic",
 		RequireTech            = "4 Power",
 		armortype              = "armored",
-		normalstex             = "unittextures/armregskinnormal.png", 
+		normaltex             = "unittextures/armregskinnormal.png", 
 	},
 }
 

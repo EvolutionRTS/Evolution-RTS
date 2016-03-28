@@ -90,7 +90,7 @@ Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofi
 	customParams                  = {
 		death_sounds              = "generic",
 		armortype                 = armortype,
-		normalstex                = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
 		helptext                  = [[]],
 	},

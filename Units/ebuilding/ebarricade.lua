@@ -68,7 +68,7 @@ local unitDef                    = {
 		needed_cover             = 1,
 		death_sounds             = "generic",
 		armortype                = "building",
-		normalstex               = "unittextures/ebarricadenormal.png", 
+		normaltex               = "unittextures/ebarricadenormal.png", 
 		helptext                 = [[Organic Barricade
 
 		Regenerates Hitpoints as it takes damage. Provides cover for your units or structures.

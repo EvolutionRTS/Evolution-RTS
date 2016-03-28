@@ -116,7 +116,7 @@ Uses +]] .. supply .. [[ Supply]],
 		cancollect               = "1",
 		armortype                = armortype,
 		supply_cost              = supply,
-		normalstex               = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
 		helptext	             = [[The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combat for 5 seconds before repairs can take place.

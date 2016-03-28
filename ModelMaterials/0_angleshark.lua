@@ -35,7 +35,7 @@ end
 
 local materials = {
    shark = {
-      shader    = include(GADGET_DIR .. "UnitMaterials/Shaders/shark.lua"),
+      shader    = include("ModelMaterials/Shaders/shark.lua"),
       force     = true, --// always use the shader even when normalmapping is disabled
       usecamera = false,
       culling   = GL.BACK,

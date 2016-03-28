@@ -67,7 +67,7 @@ local materials = {
           }
         ]],
       },
-      shader    = include(GADGET_DIR .. "UnitMaterials/Shaders/default.lua"),
+      shader    = include("ModelMaterials/Shaders/default.lua"),
       force     = true,
       usecamera = false,
       culling   = GL.BACK,

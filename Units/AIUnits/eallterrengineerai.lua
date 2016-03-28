@@ -144,7 +144,7 @@ local unitDef                    = {
 		death_sounds             = "generic",
 		dronespawner             = "1",
 		armortype                = "light",
-		normalstex               = "unittextures/con_legonormal.png", 
+		normaltex               = "unittextures/con_legonormal.png", 
 	},
 }
 

@@ -147,7 +147,7 @@ Uses +]] .. supply .. [[ Supply]],
 		dronespawner             = "1",
 		armortype                = armortype,
 		supply_cost              = supply,
-		normalstex               = "unittextures/con_legonormal.png", 
+		normaltex               = "unittextures/con_legonormal.png", 
 	},
 }
 

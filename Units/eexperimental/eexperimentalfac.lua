@@ -84,7 +84,7 @@ Armortype: ]] ..armortype,
 	customParams                   = {
 		death_sounds               = "nuke",
 		armortype                  = armortype, 
-		normalstex                 = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                  = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	               = "outer_colonies",  
 		--	ProvideTech            = "1 Powergrid",
