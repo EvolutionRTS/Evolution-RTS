@@ -39,7 +39,8 @@ local materials = {
 
 local featureMaterials = {}
 
--- All feature defs that contain the string "aleppo" will be affected by it
+-- All feature defs that contain the string in ""s will be affected by it
+-- Just to point out that this is a shitty, hacky, gawdawful workaround until I can implement customparam category searching
 for id, featureDef in pairs(FeatureDefs) do
   if featureDef.name:find("bush") then
     featureMaterials[featureDef.name] = "feature_tree"
