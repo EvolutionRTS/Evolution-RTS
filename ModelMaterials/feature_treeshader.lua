@@ -41,7 +41,10 @@ local featureMaterials = {}
 
 -- All feature defs that contain the string in ""s will be affected by it
 -- Just to point out that this is a shitty, hacky, gawdawful workaround until I can implement customparam category searching
+
+-- Doing it with a table fail: http://pastebin.com/SxPpP44E
 for id, featureDef in pairs(FeatureDefs) do
+
   if featureDef.name:find("bush") then
     featureMaterials[featureDef.name] = "feature_tree"
   
@@ -50,6 +53,52 @@ for id, featureDef in pairs(FeatureDefs) do
   
   elseif featureDef.name:find("vegetation") then
     featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("baobab") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("aleppo") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("pine") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("senegal") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("palm") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("shrub") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("bloodthorn") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("birch") then
+    featureMaterials[featureDef.name] = "feature_tree"
+
+  elseif featureDef.name:find("maple") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("oak") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("fern") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("grass") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("weed") then
+    featureMaterials[featureDef.name] = "feature_tree"
+	
+  elseif featureDef.name:find("plant") then
+    featureMaterials[featureDef.name] = "feature_tree"
+  
+  elseif featureDef.name:find("palmetto") then
+    featureMaterials[featureDef.name] = "feature_tree" 
+  
   end
 end
 
