@@ -1,1 +1,3 @@
-VFS.Include("luagadgets/gadgets.lua",nil, VFS.BASE)
+if AllowUnsafeChanges then AllowUnsafeChanges("USE AT YOUR OWN PERIL") end
+
+VFS.Include("LuaRules/gadgets.lua")
