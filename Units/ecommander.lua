@@ -6,7 +6,7 @@ local unitName                   = "ecommander"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supplyGiven				 = [[14]]
+local supplyGiven				 = [[10]]
 
 local unitDef                    = {
 

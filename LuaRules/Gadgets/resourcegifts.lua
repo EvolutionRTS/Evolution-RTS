@@ -15,7 +15,7 @@ local modOptions = Spring.GetModOptions();
 
 -- Give resources to teams
 local baseIncome = 0
-local baseIncomeIncrease = 4 -- add this each 5 min
+local baseIncomeIncrease = 5 -- add this each 5 min
 local baseIncomeIncreasePeriod = 5*60*30 -- 5 min * 60 s/min * 30 frame/s
 
 local aiCheatHandicapMetal = { 
