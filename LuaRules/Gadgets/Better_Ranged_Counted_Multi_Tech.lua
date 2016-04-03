@@ -1014,24 +1014,31 @@ if (gadgetHandler:IsSyncedCode()) then
 else--unsynced
 
 	local DrawWorldTimer = nil
+	local Tech
 
+	function gadget:GameFrame(frame)
+		if frame%19==17 then
+			Tech = SYNCED.Tech
+		end
+	end
+	
 	function gadget:DrawWorld()
 
-		if Spring.IsGUIHidden() or not SYNCED.Tech then
+		if Spring.IsGUIHidden() or not Tech then
 			return
 		end
 
 		local _,cmd=Spring.GetActiveCommand()
 
 		-- Placing a unit or giving an order requiring ranged tech
-		if SYNCED.Tech.AccessionTable[cmd] then
-			for _,tech in spairs(SYNCED.Tech.AccessionTable[cmd]) do
-				if SYNCED.Tech.TechTable[tech.tech].Ranged then
+		if Tech.AccessionTable[cmd] then
+			for _,tech in spairs(Tech.AccessionTable[cmd]) do
+				if Tech.TechTable[tech.tech].Ranged then
 					DrawWorldTimer=DrawWorldTimer or Spring.GetTimer()
 					local cm=math.abs(((Spring.DiffTimers(Spring.GetTimer(),DrawWorldTimer)/.78)%2)-1)
 					RangedProviders={}
-					for _,id in sipairs(SYNCED.Tech.TechTable[tech.tech].ProvidedBy) do
-						if SYNCED.Tech.ProviderTable[id][tech.tech].range then
+					for _,id in sipairs(Tech.TechTable[tech.tech].ProvidedBy) do
+						if Tech.ProviderTable[id][tech.tech].range then
 							table.insert(RangedProviders,id)
 						end
 					end
@@ -1039,7 +1046,7 @@ else--unsynced
 						local x,y,z=Spring.GetUnitPosition(u)
 						gl.Color(cm,cm,cm,1)
 						gl.LineWidth(3)
-						gl.DrawGroundCircle(x,y,z,SYNCED.Tech.ProviderTable[Spring.GetUnitDefID(u)][tech.tech].range,24)
+						gl.DrawGroundCircle(x,y,z,Tech.ProviderTable[Spring.GetUnitDefID(u)][tech.tech].range,24)
 						gl.Color(1,1,1,1)
 						gl.LineWidth(1)
 					end
@@ -1055,7 +1062,7 @@ else--unsynced
 			table.insert(units,id)
 		end
 		for _,u in ipairs(units) do
-			local ptrange=SYNCED.Tech.ProviderRangeByIDs[Spring.GetUnitDefID(u)]
+			local ptrange=Tech.ProviderRangeByIDs[Spring.GetUnitDefID(u)]
 			if ptrange then
 				local x,y,z=Spring.GetUnitPosition(u)
 				gl.Color(0,0.2,1,1)
@@ -1067,7 +1074,7 @@ else--unsynced
 
 		-- Placing a unit providing ranged tech
 		if cmd and cmd<0 then
-			local ptrange=SYNCED.Tech.ProviderRangeByIDs[-cmd]
+			local ptrange=Tech.ProviderRangeByIDs[-cmd]
 			if ptrange then
 				local mx,my=Spring.GetMouseState()
 				local _,pos=Spring.TraceScreenRay(mx,my,true,true)
