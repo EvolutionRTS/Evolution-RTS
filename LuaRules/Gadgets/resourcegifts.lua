@@ -13,6 +13,11 @@ end
 local MEX_INCOME = 0.5 -- income of each mex
 local modOptions = Spring.GetModOptions();
 
+-- Give resources to teams
+local baseIncome = 0
+local baseIncomeIncrease = 4 -- add this each 5 min
+local baseIncomeIncreasePeriod = 5*60*30 -- 5 min * 60 s/min * 30 frame/s
+
 local aiCheatHandicapMetal = { 
 	["veryeasy"] =  5,
 	["easy"] =  10,
@@ -121,17 +126,34 @@ end
 	
 function gadget:GameFrame(n)
 
-	-- Give a trickle of resources to teams
-	if n%32 == 4 then
-		local mexIncome = getMexIncomes()
-		for _,i in ipairs(Spring.GetTeamList()) do
-			local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
-			if allyTeamID then -- don't give free stuff to GAIA
-				Spring.AddTeamResource(i,"e",1)
-				Spring.AddTeamResource(i,"m",0.5 + mexIncome[allyTeamID])
-			end
+	-- Give resources to teams
+		if (n % baseIncomeIncreasePeriod) == 3 then
+--			Spring.Echo("Time to increase income")
+--			Spring.Echo("Old baseIncome")
+--			Spring.Echo(baseIncome)
+--			Spring.Echo("baseIncomeIncrease")
+--			Spring.Echo(baseIncomeIncrease)
+			baseIncome = baseIncome + baseIncomeIncrease
+--			Spring.Echo("New baseIncome")
+--			Spring.Echo(baseIncome)
 		end
+		if (n % 30) == 4 then
+			local mexIncome = getMexIncomes()
+			
+			for _,i in ipairs(Spring.GetTeamList()) do
+						local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
+				if i ~= Spring.GetGaiaTeamID() then -- don't give free stuff to GAIA
+--						Spring.AddTeamResource(i,"e",1)
+					Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])
+--					Spring.Echo("Final baseIncome amount that is being run through AddTeamResource")
+--					Spring.Echo(baseIncome)
+--					Spring.Echo("DUN DUN DUN")
+				end
+			end
+		end 
+
 	--Give free resources to AI - Necessary for AI's to properly function
+	if n%32 == 4 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
