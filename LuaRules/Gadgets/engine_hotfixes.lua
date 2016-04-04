@@ -34,7 +34,7 @@ if gadgetHandler:IsSyncedCode() then
 		
 		--Instagibb any features that are unlucky enough to be in the build radius of new construction projects
 		if uDef.isBuilding or uDef.isFactory then
-			Spring.Echo("Wheee it spins!")
+			--Spring.Echo("Wheee it spins!")
 			local ux, uy, uz = Spring.GetUnitPosition(uID)
 			local xr, zr
 			if Spring.GetUnitBuildFacing(uID) % 2 == 0 then
