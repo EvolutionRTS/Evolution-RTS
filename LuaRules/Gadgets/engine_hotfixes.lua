@@ -20,12 +20,21 @@ if gadgetHandler:IsSyncedCode() then
 -- Callins
 ----------------------------------------------------------------
 
---Instagibb any features that are unlucky enough to be in the build radius of new construction projects
+
 	function gadget:UnitCreated(uID, uDefID, uTeam, bID)
    
 		local uDef = UnitDefs[uDefID]
+		
+		--Fix for bad movement in 102
+		--https://springrts.com/phpbb/viewtopic.php?f=12&t=34593
+		local md = uDef.moveDef
+		if (md.type ~= nil) then -- all non-flying units
+			Spring.MoveCtrl.SetGroundMoveTypeData(uID, "turnAccel", uDef.turnRate)
+		end
+		
+		--Instagibb any features that are unlucky enough to be in the build radius of new construction projects
 		if uDef.isBuilding or uDef.isFactory then
-			--Spring.Echo("Wheee it spins!")
+			Spring.Echo("Wheee it spins!")
 			local ux, uy, uz = Spring.GetUnitPosition(uID)
 			local xr, zr
 			if Spring.GetUnitBuildFacing(uID) % 2 == 0 then
@@ -59,16 +68,6 @@ if gadgetHandler:IsSyncedCode() then
 			return 0, 0
 		end
 		return damage
-	end
-	
-	--Fix for bad movement in 102
-	--https://springrts.com/phpbb/viewtopic.php?f=12&t=34593
-	function gadget:UnitCreated(unitID, unitDefID, _, _)
-		local ud = UnitDefs[unitDefID]
-		local md = ud.moveDef
-		if (md.type ~= nil) then -- all non-flying units
-			Spring.MoveCtrl.SetGroundMoveTypeData(unitID, "turnAccel", ud.turnRate)
-		end
 	end
 
 end

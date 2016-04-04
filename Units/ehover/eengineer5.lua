@@ -100,8 +100,8 @@ Uses +]] .. supply .. [[ Supply]],
 		"eamphibfac",
 		"eairplant",
 --		"eexperimentalfac",
-		"emetalextractor", --new
-		"emaker", --new
+--		"emetalextractor", --new
+--		"emaker", --new
 		"esolar2", --new
 		"emediumgen",
 		"egeothermal", --new

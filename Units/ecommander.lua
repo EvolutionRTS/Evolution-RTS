@@ -106,8 +106,8 @@ There can only be one!]],
 		"eamphibfac",
 		"eairplant",
 --		"eexperimentalfac",
-		"emetalextractor", --new
-		"emaker", --new
+--		"emetalextractor", --new
+--		"emaker", --new
 		"esolar2", --new
 		"emediumgen", --new
 		"egeothermal", --new
@@ -170,6 +170,7 @@ local weaponDefs                 = {
 		explosionScar		     = false,
 		impulseFactor            = 0,
 		name                     = "Emp Blast Weapon",
+		noSelfDamage            = true,
 		paralyzer		         = true,
 		paralyzetime	         = 5,
 		range                    = 500,
