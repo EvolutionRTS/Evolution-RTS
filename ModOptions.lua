@@ -68,6 +68,109 @@ local options= {
 		}
 	},
 	
+		key="scoremode",
+		name="Scoring Mode (Control Victory Points)",
+		desc="Defines how the game is played",
+		type="list",
+		def="countdown",
+		section="gameplayoptions",
+		items={
+			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
+			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
+			{key="tugowar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
+			{key="multidomination", name="Domination", desc="Holding all Control Points will grant 100 score, first to reach the score limit wins."},
+		}
+	},
+	{
+		key    = 'controlvictoryoptions',
+		name   = 'Control Victory Options',
+		desc   = 'Allows you to control at a granular level the individual options for Control Point Victory',
+		type   = 'section',
+	},
+	
+	{
+		key    = 'limitscore',
+		name   = 'Total Score',
+		desc   = 'Total score amount available.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 2000,
+		min    = 50,
+		max    = 5000,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	{
+		key    = 'captureradius',
+		name   = 'Capture Radius',
+		desc   = 'Radius around a point in which to capture it.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 300,
+		min    = 100,
+		max    = 500,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'capturetime',
+		name   = 'Capture Time',
+		desc   = 'Time to capture a point.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 30,
+		min    = 1,
+		max    = 60,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'capturebonus',
+		name   = 'Capture Bonus',
+		desc   = 'How much faster capture takes place by adding more units.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 0.5,
+		min    = 0,
+		max    = 10,
+		step   = 0.1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'decapspeed',
+		name   = 'De-Cap Speed',
+		desc   = 'Speed multiplier for neutralizing an enemy point.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 3,
+		min    = 0.1,
+		max    = 10,
+		step   = 0.1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'starttime',
+		name   = 'Start Time',
+		desc   = 'The time when capturing can start.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 0,
+		min    = 0,
+		max    = 300,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'dominationscoretime',
+		name   = 'Domination Score Time',
+		desc   = 'Time needed holding all points to score in multi domination.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 30,
+		min    = 1,
+		max    = 60,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
 }
 
 return options

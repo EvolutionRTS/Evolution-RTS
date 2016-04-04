@@ -10,22 +10,22 @@ function gadget:GetInfo()
    }
 end
 
-local pointMarker = FeatureDefNames.xelnotgawatchtower.id --Feature marking a point
+local pointMarker = FeatureDefNames.xelnotgawatchtower.id --Feature marking a point- This doesn't do anything atm
 
-local captureRadius = 200 --Radius around a point in which to capture it
-local captureTime = 30 --Time to capture a point
-local captureBonus = .5 --speedup from adding more units
-local decapSpeed = 3 --speed multiplier for neutralizing an enemy point
+local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 300 --Radius around a point in which to capture it
+local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 --Time to capture a point
+local captureBonus = tonumber(Spring.GetModOptions().capturebonus) or .5 --speedup from adding more units
+local decapSpeed = tonumber(Spring.GetModOptions().decapspeed) or 3 --speed multiplier for neutralizing an enemy point
 local moveSpeed = .5
 
 local startTime = tonumber(Spring.GetModOptions().starttime) or 0 --The time when capturing can start
 
-local dominationScoreTime = 30 --Time needed holding all points to score in multi domination
+local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 --Time needed holding all points to score in multi domination
 
 Spring.Echo("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ "..(Spring.GetModOptions().scoremode or "nil!"))
-if Spring.GetModOptions().scoremode == "disabled" then return false end
+--if Spring.GetModOptions().scoremode == "disabled" then return false end
 
-local limitScore = tonumber(Spring.GetModOptions().limitscore) or 500
+local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2000
 
 local scoreModes = {
    disabled = 0, --none (duh)
@@ -79,9 +79,11 @@ function gadget:Initialize()
    end
    score[gaia]=0
    local configfile,_ = string.gsub(Game.mapName, ".smf$", ".lua")
-   configfile = "LuaRules/Configs/ControlPoints/" .. configfile
+   configfile = "LuaRules/Configs/ControlPoints/cv_" .. configfile .. ".lua"
+   Spring.Echo(configfile .. " -This is the name of the control victory configfile-")
    if VFS.FileExists(configfile) then
-      points = VFS.Include(configfile)
+      local config = VFS.Include(configfile)
+	  points = config.points
       for _,p in pairs(points) do
          p.capture = 0
       end
@@ -277,10 +279,11 @@ local function DrawPoints()
          end
       end
       Color(r,g,b,1)
+	  local y = Spring.GetGroundHeight(p.x, p.z)
       DrawGroundCircle(p.x,p.y,p.z,captureRadius,30)
       if p.capture > 0 then
          PushMatrix()
-         Translate(p.x,p.y + 100,p.z)
+         Translate(p.x,y + 100,p.z)
          Billboard()
          Color(0,0,0,1)
          Rect(-26, 6, 26, -6)
