@@ -94,7 +94,7 @@ local options= {
 		desc   = 'Total score amount available.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 2000,
+		def    = 2500,
 		min    = 50,
 		max    = 5000,
 		step   = 1,  -- quantization is aligned to the def value
@@ -106,10 +106,10 @@ local options= {
 		desc   = 'Radius around a point in which to capture it.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 300,
+		def    = 500,
 		min    = 100,
-		max    = 500,
-		step   = 1,  -- quantization is aligned to the def value
+		max    = 1000,
+		step   = 25,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 		{
