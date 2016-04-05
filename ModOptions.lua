@@ -67,7 +67,7 @@ local options= {
 			{key="insane", name="Insane", desc="AI gets a gift of 100 metal every 5 seconds and a static 100 energy income."},
 		}
 	},
-	
+	{
 		key="scoremode",
 		name="Scoring Mode (Control Victory Points)",
 		desc="Defines how the game is played",
@@ -99,6 +99,7 @@ local options= {
 		max    = 5000,
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
+	},
 	{
 		key    = 'captureradius',
 		name   = 'Capture Radius',
