@@ -12,7 +12,7 @@ end
 
 local pointMarker = FeatureDefNames.xelnotgawatchtower.id --Feature marking a point- This doesn't do anything atm
 
-local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 300 --Radius around a point in which to capture it
+local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 500 --Radius around a point in which to capture it
 local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 --Time to capture a point
 local captureBonus = tonumber(Spring.GetModOptions().capturebonus) or .5 --speedup from adding more units
 local decapSpeed = tonumber(Spring.GetModOptions().decapspeed) or 3 --speed multiplier for neutralizing an enemy point
@@ -25,7 +25,7 @@ local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime)
 Spring.Echo("Control Victory Scoring Mode: "..(Spring.GetModOptions().scoremode or "Control Victory Scoring Mode Is Not Set!"))
 --if Spring.GetModOptions().scoremode == "disabled" then return false end
 
-local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2000
+local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2500
 
 local scoreModes = {
    disabled = 0, --none (duh)
