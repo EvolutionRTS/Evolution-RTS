@@ -89,7 +89,8 @@ function gadget:Initialize()
       end
       moveSpeed = 0
    else
-      local angle = math.random() * math.pi * 2
+   Spring.Echo("No Control Victory Config File Found")
+--[[      local angle = math.random() * math.pi * 2
       points = {}
       for i=1,3 do
          local angle = angle + i * math.pi * 2/3
@@ -103,7 +104,7 @@ function gadget:Initialize()
             capturer=nil,
             capture=0,
          }
-      end
+      end ]]--
    end
    _G.points = points
    _G.score = score
