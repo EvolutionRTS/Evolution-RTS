@@ -27,10 +27,10 @@ end
 --------------------------------------------------------------------------------
 
 local metalForce  = true
-local metalLevel  = 0
+local metalLevel  = 0.95
 
 local energyForce = true
-local energyLevel = 0
+local energyLevel = 0.9
 
 -- for toggling
 local prevMetal = false
