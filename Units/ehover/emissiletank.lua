@@ -117,11 +117,6 @@ Uses +]] .. supply .. [[ Supply]],
 			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT",
 		},
-		[2]                      = {
-			def                  = "missletankweapon",
-			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
-			badTargetCategory    = "BUILDING LIGHT WALL",
-		},
 	},
 	customParams                 = {
 		canbetransported 		 = "true",
