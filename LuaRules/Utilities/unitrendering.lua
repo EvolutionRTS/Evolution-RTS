@@ -61,11 +61,15 @@ local function ActivateMaterial(rendering, objectID, lod)
   if lod > rendering.curHighestLOD then
     rendering.curHighestLOD = lod
   end
-
-  if lod <= activeMats.current then
-    activeMats.current = lod
-    rendering.spSetMaterialLastLOD(objectID, "opaque", lod)
-  end
+  
+--I have no idea what the fuck this does, but commenting it out fixes errors AND fixes issues where units who cloak and then uncloak will lose their normalmaps.
+--Doesn't make ANY sense at all, Hey! Welcome to spring!
+--FFS this is fucking bullshit.
+--Forboding Angel
+--  if lod <= activeMats.current then
+--    activeMats.current = lod
+--    rendering.spSetMaterialLastLOD(objectID, "opaque", lod)
+--  end
 end
 
 
