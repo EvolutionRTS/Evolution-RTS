@@ -1,6 +1,6 @@
 function widget:GetInfo()
 	return {
-		name	= "Grabinput",
+		name	= "Grabinput Local",
 		desc	= "Enables GrabInput in Windowed mode",
 		author	= "abma",
 		date	= "2012-08-11",
@@ -11,8 +11,12 @@ function widget:GetInfo()
 end
 
 function widget:Initialize()
-	if Spring.GetConfigInt("GrabInput", 1) == 1 then
+		Spring.SendCommands("grabinput 1")
+end
+
+function widget:GameFrame(n)
+-- send grabinput every 30 seconds
+	if n%960 == 1 then
 		Spring.SendCommands("grabinput 1")
 	end
 end
-
