@@ -3,7 +3,8 @@ local includes = {
   "headers/util.lua",
   "headers/links.lua",
   "headers/backwardcompability.lua",
-  
+  "headers/unicode.lua",
+
   "handlers/debughandler.lua",
   "handlers/taskhandler.lua",
   "handlers/skinhandler.lua",
@@ -40,6 +41,7 @@ local includes = {
   "controls/combobox.lua",
   "controls/tabbaritem.lua",
   "controls/tabbar.lua",
+  "controls/tabpanel.lua",
 }
 
 local Chili = widget

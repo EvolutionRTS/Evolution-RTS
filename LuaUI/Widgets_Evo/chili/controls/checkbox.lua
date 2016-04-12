@@ -1,5 +1,18 @@
 --//=============================================================================
 
+--- Checkbox module
+
+--- Checkbox fields.
+-- Inherits from Control.
+-- @see control.Control
+-- @table Checkbox
+-- @bool[opt=true] checked checkbox checked state
+-- @string[opt="text"] caption caption to appear in the checkbox
+-- @string[opt="left"] textalign text alignment
+-- @string[opt="right"] boxalign box alignment
+-- @int[opt=10] boxsize box size
+-- @tparam {r,g,b,a} textColor text color, (default {0,0,0,1})
+-- @tparam {func1,func2,...} OnChange listener functions for checked state changes, (default {})
 Checkbox = Control:Inherit{
   classname = "checkbox",
   checked   = true,
@@ -29,6 +42,7 @@ end
 
 --//=============================================================================
 
+--- Toggles the checked state
 function Checkbox:Toggle()
   self:CallListeners(self.OnChange,not self.checked)
   self.checked = not self.checked

@@ -1,4 +1,14 @@
 --//=============================================================================
+
+--- ComboBox module
+
+--- ComboBox fields.
+-- Inherits from Control.
+-- @see control.Control
+-- @table ComboBox
+-- @tparam {"item1","item2",...} items table of items in the ComboBox, (default {"items"})
+-- @int[opt=1] selected id of the selected item
+-- @tparam {func1,func2,...} OnSelect listener functions for selected item changes, (default {})
 ComboBox = Button:Inherit{
   classname = "combobox",
   caption = 'combobox',
@@ -7,10 +17,14 @@ ComboBox = Button:Inherit{
   items = { "items" },
   selected = 1,
   OnSelect = {},
+  maxDropDownHeight = 200,
+  minDropDownHeight = 50,
+  maxDropDownWidth = 500,
+  minDropDownWidth = 50,
 }
 
 local ComboBoxWindow      = Window:Inherit{classname = "combobox_window", resizable = false, draggable = false, }
-local ComboBoxScrollPanel = ScrollPanel:Inherit{classname = "combobox_scrollpanel", horizontalScrollBar = false, }
+local ComboBoxScrollPanel = ScrollPanel:Inherit{classname = "combobox_scrollpanel", horizontalScrollbar = false, }
 local ComboBoxStackPanel  = StackPanel:Inherit{classname = "combobox_stackpanel", autosize = true, resizeItems = false, borderThickness = 0, padding = {0,0,0,0}, itemPadding = {0,0,0,0}, itemMargin = {0,0,0,0}, }
 local ComboBoxItem        = Button:Inherit{classname = "combobox_item"}
 
@@ -23,13 +37,20 @@ function ComboBox:New(obj)
   return obj
 end
 
+--- Selects an item by id
+-- @int itemIdx id of the item to be selected
 function ComboBox:Select(itemIdx)
   if (type(itemIdx)=="number") then
-    if not self.items[itemIdx] then
+    local item = self.items[itemIdx]
+    if not item then
        return
     end
     self.selected = itemIdx
-    self.caption = self.items[itemIdx]
+    self.caption = ""
+
+    if type(item) == "string" then
+        self.caption = item
+    end
     self:CallListeners(self.OnSelect, itemIdx, true)
     self:Invalidate()
   end
@@ -61,21 +82,39 @@ function ComboBox:MouseDown(...)
 
     local labels = {}
     local labelHeight = 20
+
+    local width = math.max(self.width, self.minDropDownWidth)
+    local height = 10
     for i = 1, #self.items do
-      local newBtn = ComboBoxItem:New {
-        caption = self.items[i],
-        width = '100%',
-        height = labelHeight,
-	state = {focused = (i == self.selected), selected = (i == self.selected)},
-        OnMouseUp = { function()
-          self:Select(i)
-          self:_CloseWindow()
-        end }
-      }
-      labels[#labels+1] = newBtn
+      local item = self.items[i]
+      if type(item) == "string" then
+          local newBtn = ComboBoxItem:New {
+            caption = item,
+            width = '100%',
+            height = labelHeight,
+            state = {focused = (i == self.selected), selected = (i == self.selected)},
+            OnMouseUp = { function()
+              self:Select(i)
+              self:_CloseWindow()
+            end }
+          }
+          labels[#labels+1] = newBtn
+          height = height + labelHeight
+          width = math.max(width, self.font:GetTextWidth(item))
+      else
+          labels[#labels+1] = item
+          item.OnMouseUp = { function()
+              self:Select(i)
+              self:_CloseWindow()
+          end }
+          width = math.max(width, item.width + 5)
+          height = height + item.height -- FIXME: what if this height is relative?
+      end
     end
 
-    local height = math.min(200, labelHeight * #labels)
+    height = math.max(self.minDropDownHeight, height)
+    height = math.min(self.maxDropDownHeight, height)
+    width = math.min(self.maxDropDownWidth, width)
 
     local screen = self:FindParent("screen")
     local y = sy + self.height
@@ -85,9 +124,9 @@ function ComboBox:MouseDown(...)
 
     self._dropDownWindow = ComboBoxWindow:New{
       parent = screen,
-      width  = self.width,
+      width  = width,
       height = height,
-      x = sx,
+      x = sx - (width - self.width),
       y = y,
       children = {
         ComboBoxScrollPanel:New{

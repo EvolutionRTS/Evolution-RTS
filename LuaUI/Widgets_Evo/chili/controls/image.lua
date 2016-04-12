@@ -1,5 +1,15 @@
 --//=============================================================================
 
+--- Image module
+
+--- Image fields.
+-- Inherits from Control.
+-- @see button.Button
+-- @table Image
+-- @tparam {r,g,b,a} color color, (default {1,1,1,1})
+-- @string[opt=nil] file path
+-- @bool[opt=true] keepAspect aspect should be kept
+-- @tparam {func1,func2} OnClick function listeners to be invoked on click (default {})
 Image = Button:Inherit{
   classname= "image",
 
@@ -15,6 +25,8 @@ Image = Button:Inherit{
   flip2 = true;
 
   keepAspect = true;
+
+  useRTT = false;
 
   OnClick  = {},
 }
@@ -53,26 +65,26 @@ function Image:DrawControl()
   gl.Color(self.color)
 
   if (self.keepAspect) then
-    if (self.file2) then 
+    if (self.file2) then
       TextureHandler.LoadTexture(0,self.file2,self)
       local texInfo = gl.TextureInfo(self.file2) or {xsize=1, ysize=1}
       local tw,th = texInfo.xsize, texInfo.ysize
-      _DrawTextureAspect(self.x,self.y,self.width,self.height, tw,th, self.flip2)
-    end 
-    if (self.file) then 
+      _DrawTextureAspect(0,0,self.width,self.height, tw,th, self.flip2)
+    end
+    if (self.file) then
       TextureHandler.LoadTexture(0,self.file,self)
       local texInfo = gl.TextureInfo(self.file) or {xsize=1, ysize=1}
       local tw,th = texInfo.xsize, texInfo.ysize
-      _DrawTextureAspect(self.x,self.y,self.width,self.height, tw,th, self.flip)
+      _DrawTextureAspect(0,0,self.width,self.height, tw,th, self.flip)
     end
   else
-    if (self.file2) then 
+    if (self.file2) then
       TextureHandler.LoadTexture(0,self.file2,self)
-      gl.TexRect(self.x,self.y,self.x+self.width,self.y+self.height,false,self.flip2)
-    end 
-    if (self.file) then 
+      gl.TexRect(0,0,self.width,self.height,false,self.flip2)
+    end
+    if (self.file) then
       TextureHandler.LoadTexture(0,self.file,self)
-      gl.TexRect(self.x,self.y,self.x+self.width,self.y+self.height,false,self.flip)
+      gl.TexRect(0,0,self.width,self.height,false,self.flip)
     end
   end
   gl.Texture(0,false)

@@ -90,6 +90,8 @@ skin.checkbox = {
 }
 
 skin.editbox = {
+  hintFont = table.merge({color = {1,1,1,0.7}}, skin.general.font),
+  
   backgroundColor = {0.1, 0.1, 0.1, 0.7},
   cursorColor     = {1.0, 0.7, 0.1, 0.8},
 
@@ -212,8 +214,9 @@ skin.window = {
   padding = {13, 13, 13, 13},
   hitpadding = {4, 4, 4, 4},
 
-  color = {1, 1, 1, 0.7},
   captionColor = {1, 1, 1, 0.45},
+
+  backgroundColor = {0.1, 0.1, 0.1, 0.7},
 
   boxes = {
     resize = {-21, -21, -10, -10},
