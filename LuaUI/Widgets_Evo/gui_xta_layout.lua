@@ -52,7 +52,7 @@ end
 -- for DefaultHandler
 local FrameTex   = "bitmaps/icons/frame_slate_128x96.png"
 local FrameScale     = "&0.099x0.132&"
-local PageNumTex = "bitmaps/circularthingy.tga"
+local PageNumTex = "bitmaps/frame_slate_128x96.png"
 local btns = {}
 
 if (false) then  --  disable textured buttons?
