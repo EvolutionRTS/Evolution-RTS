@@ -2003,10 +2003,10 @@ function widget:Initialize()
     real_window_corner = Window:New{
 		name   = 'real_window_corner';
 		color = {0, 0, 0, 0},
-		x = 1370;
+		right = 0;
 		bottom = 0;
         width = 550;
-		height = 350;
+		height = 220;
 		dockable = true;
 		draggable = false,
 		resizable = false,
