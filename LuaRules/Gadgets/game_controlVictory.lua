@@ -320,7 +320,7 @@ function gadget:DrawScreen(vsx, vsy)
    local frame = Spring.GetGameFrame()
    if frame / 1800 > startTime then
       local me = Spring.GetLocalAllyTeamID()
-      Text("Your Score: "..SYNCED.score[me], vsx - 280, vsy * .58, 16, "lo")
+      Text("Your Score: "..SYNCED.score[me], vsx - 280, vsy * .58, 18, "lo")
       local n = 1
       for a,s in spairs(SYNCED.score) do
          if not name[a] then
@@ -336,7 +336,7 @@ function gadget:DrawScreen(vsx, vsy)
             end
          end
          if a ~= me and a ~= gaia then
-            Text("<"..name[a].."> "..s, vsx - 240, vsy * .58 - 20 * n, 12, "l")
+            Text("<"..name[a].."> "..s, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
             n = n + 1
          end
       end
@@ -344,10 +344,10 @@ function gadget:DrawScreen(vsx, vsy)
          Text("<"..name[SYNCED.dom.dominator].."> will score a Domination in "..math.floor((SYNCED.dom.dominationTime - Spring.GetGameFrame())/30).." seconds!", vsx*.5, vsy *.7, 24, "oc")
       end
    else
-      Text("Capturing points begins in:", vsx - 280, vsy * .58, 16, "lo")
+      Text("Capturing points begins in:", vsx - 280, vsy * .58, 18, "lo")
      local timeleft = startTime * 60 - frame / 30
      timeleft = timeleft - timeleft % 1
-     Text(timeleft .. " seconds", vsx - 280, vsy * .58 - 25, 16, "lo")
+     Text(timeleft .. " seconds", vsx - 280, vsy * .58 - 25, 18, "lo")
    end
 end
 

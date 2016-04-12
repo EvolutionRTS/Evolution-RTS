@@ -364,7 +364,7 @@ local function MakeButton(container, cmd, insertItem, index)
 	if powerBlocked then overlayText = '   NO\nPOWER' end
 	if supplyBlocked then overlayText = '   NO\nSUPPLY' end
 
-	local hotkey = cmd.action and WG.crude.GetHotkey(cmd.action) or ''
+	--local hotkey = cmd.action and WG.crude.GetHotkey(cmd.action) or ''
 	
 	if (options.unitstabhotkey.value and menuChoice == 6 and selectedFac and container.i_am_sp_commands) then
 		if options.unitshotkeyrequiremeta.value then
@@ -380,9 +380,9 @@ local function MakeButton(container, cmd, insertItem, index)
 		hotkey = gridMap[container.index][index] or ''
 	end
 	
-	if not isState and hotkey ~= '' then
-		text = '\255\0\255\0' .. hotkey
-	end
+--	if not isState and hotkey ~= '' then
+--		text = '\255\0\255\0' .. hotkey
+--	end
 	
 	--count label (for factory build options)
 	if menuChoice == 6 and isBuild and buildQueueUnsorted[-cmd.id] then
@@ -413,9 +413,9 @@ local function MakeButton(container, cmd, insertItem, index)
 		tooltip = "Build Unit: " .. ud.humanName .. " - " .. ud.tooltip .. "\n"	-- for special options
 	end
 	
-	if hotkey ~= '' then
-		tooltip = tooltip .. ' (\255\0\255\0' .. hotkey .. '\008)'	
-	end
+--	if hotkey ~= '' then
+--		tooltip = tooltip .. ' (\255\0\255\0' .. hotkey .. '\008)'	
+--	end
 	
 	-- get cached menu item 
 	local item = commandButtons[cmd.id]
@@ -1204,11 +1204,11 @@ local function RemoveAction(cmd, types)
 end
 
 local function updateTabName(num, choice)
-	local hotkey = WG.crude.GetHotkey(choice.actionName)
-	if hotkey ~= '' then
-		choice.hotkeyName = choice.name ..  '(\255\0\255\0' .. hotkey .. '\008)'	
-		choice.name = choice.name ..  '(' .. hotkey .. ')'
-	end
+--	local hotkey = WG.crude.GetHotkey(choice.actionName)
+--	if hotkey ~= '' then
+--		choice.hotkeyName = choice.name ..  '(\255\0\255\0' .. hotkey .. '\008)'	
+--		choice.name = choice.name ..  '(' .. hotkey .. ')'
+--	end
 end
 
 -- INITS 

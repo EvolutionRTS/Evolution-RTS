@@ -132,7 +132,7 @@ local function CreateWindow()
 		right  = 30,
                 x      = 90,
 		caption = "0/0",
-		tooltip = [[Supply used/supply available (default 250 maximum). Build more generators to increase available supply.]],
+		tooltip = [[Supply used/supply available (default 200 maximum). Build more Supply Depots to increase available supply.]],
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
 
