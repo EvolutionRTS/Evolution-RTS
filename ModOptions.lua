@@ -78,7 +78,7 @@ local options= {
 			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
 			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
 			{key="tugowar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
-			{key="multidomination", name="Domination", desc="Holding all Control Points will grant 100 score, first to reach the score limit wins."},
+			{key="multidomination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
 		}
 	},
 	{

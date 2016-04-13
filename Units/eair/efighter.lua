@@ -141,6 +141,7 @@ local weaponDefs                 = {
 		burnblow		         = true,
 		--cegTag                   = "railgun",
 		duration                 = 0.05,
+		edgeeffectiveness		 = 0.1,
 		energypershot            = energycosttofire,
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		fallOffRate              = 1,

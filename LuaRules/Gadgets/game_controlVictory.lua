@@ -228,7 +228,7 @@ function gadget:GameFrame(f)
                   p.owner = nil
                   p.capture = 0
                end
-               score[dom.dominator] = score[dom.dominator] + 100
+               score[dom.dominator] = score[dom.dominator] + 1000
                if score[dom.dominator] >= limitScore then
                   Winner(dom.dominator)
                end
