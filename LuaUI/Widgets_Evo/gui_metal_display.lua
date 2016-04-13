@@ -16,12 +16,12 @@ Spring.SendCommands({"resbar 0"})
 local str = ""
 local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
-local posx, posy = vsx * 0.65, vsy * 0.98
+local posx, posy = vsx * 0.525, vsy * 0.98
 
 function widget:GameFrame(n)
 	local myTeamID = Spring.GetMyTeamID()
     local mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
-    str = "\255\136\197\226Metal: \255\255\135\0±" .. tostring(math.round(mp)) .. "\255\0\255\0 +" .. tostring(math.round(mi)) .. "\255\255\255\255/\255\255\0\0-" .. tostring(math.round(me)) .. "\255\255\255\255 (" .. tostring(math.round(mc)) .. "/" .. tostring(math.round(ms)) .. "\255\255\255\255)"
+    str = "\255\136\197\226Metal: \255\255\135\0± " .. tostring(math.round(mi - me)) .. "\255\0\255\0 +" .. tostring(math.round(mi)) .. "\255\255\255\255/\255\255\0\0-" .. tostring(math.round(mp)) .. "\255\255\255\255 (" .. tostring(math.round(mc)) .. "/" .. tostring(math.round(ms)) .. "\255\255\255\255)"
 end
 
 function widget:TweakMousePress(x, y, button)

@@ -16,7 +16,7 @@ Spring.SendCommands({"resbar 0"})
 local str = ""
 local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
-local posx, posy = vsx * 0.91, vsy * 0.98
+local posx, posy = vsx * 0.875, vsy * 0.98
 local maxSupply = 200
 
 function widget:GameFrame(n)

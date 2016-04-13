@@ -25,7 +25,7 @@ local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime)
 Spring.Echo("Control Victory Scoring Mode: "..(Spring.GetModOptions().scoremode or "Control Victory Scoring Mode Is Not Set!"))
 --if Spring.GetModOptions().scoremode == "disabled" then return false end
 
-local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2500
+local limitScore = tonumber(Spring.GetModOptions().limitscore) or 3500
 
 local scoreModes = {
    disabled = 0, --none (duh)
