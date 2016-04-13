@@ -13,7 +13,6 @@ end
 --Disable Default Resources Bar
 Spring.SendCommands({"resbar 0"})
 
-local myTeamID = Spring.GetMyTeamID()
 local str = ""
 local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
@@ -21,6 +20,7 @@ local posx, posy = vsx * 0.91, vsy * 0.98
 local maxSupply = 200
 
 function widget:GameFrame(n)
+	local myTeamID = Spring.GetMyTeamID()
     local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed")), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax"))
     str = "\255\0\255\0Supply: " .. "\255\255\255\255" .. su .. "/" .. sm .. " (\255\255\135\0±" .. tostring(sm - su) .. "\255\255\255\255/\255\0\255\0" .. maxSupply .. "\255\255\255\255)"
 end

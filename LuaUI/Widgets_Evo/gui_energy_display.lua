@@ -13,13 +13,13 @@ end
 --Disable Default Resources Bar
 Spring.SendCommands({"resbar 0"})
 
-local myTeamID = Spring.GetMyTeamID()
 local str = ""
 local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
 local posx, posy = vsx * 0.78, vsy * 0.98
 
 function widget:GameFrame(n)
+	local myTeamID = Spring.GetMyTeamID()
     local ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
     str = "\255\255\255\0Energy: \255\255\135\0±" .. tostring(math.round(ep)) .. "\255\0\255\0 +" .. tostring(math.round(ei)) .. "\255\255\255\255/\255\255\0\0-" .. tostring(math.round(ee)) .. "\255\255\255\255 (" .. tostring(math.round(ec)) .. "/" .. tostring(math.round(es)) .. "\255\255\255\255)"
 end
