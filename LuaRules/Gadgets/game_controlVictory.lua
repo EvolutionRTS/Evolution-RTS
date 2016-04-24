@@ -327,16 +327,32 @@ else -- UNSYNCED
 			
 			-- for all the scores with a team.
 			for teamId, teamScore in spairs(SYNCED.score) do
+				-- note to self, teamId +1 = ally team number	
+				if teamId ~= gaia then
+					for k,v in pairs(Spring.GetTeamList(teamId))do		
+						playerId = Spring.GetTeamList(teamId)[k]
+						Spring.Echo("\nteamId\n" .. teamId+1,
+									"\n[id]\n", k,
+									"\ninfo\n" .. playerId,Spring.GetPlayerInfo(playerId),
+						Spring.GetTeamColor(playerId))
+					end
+				Spring.Echo("____________________________")
+				end
 				if not playerListEntry[teamId] then
 					local playerName 		= nil
 					local r, g, b 			= Spring.GetTeamColor(Spring.GetTeamList(teamId)[1])
 					local playerTeamColor	= string.char("255",r*255,g*255,b*255)
-					if #Spring.GetPlayerList(Spring.GetTeamList(teamId)[1]) ~= 0 then
-						playerName = Spring.GetPlayerInfo(Spring.GetPlayerList(Spring.GetTeamList(a)[1])[1])
-					end
-
+					
 					playerListEntry[teamId] = {	name = "No Name",
 												color = white, }
+												
+					Spring.Echo("teamSize", Spring.GetPlayerList(Spring.GetTeamList(teamId)[1]))
+					for k,v in pairs(Spring.GetPlayerList(Spring.GetTeamList(teamId)[1]))do
+						Spring.Echo(k,v)
+					end
+					playerName = Spring.GetPlayerInfo(Spring.GetPlayerList(Spring.GetTeamList(teamId)[1])[1])
+					local teamSize = 1
+
 												
 					-- if I do not have a name, I am a computer player!
 					if playerName ~= nil then
@@ -352,11 +368,13 @@ else -- UNSYNCED
 				-- gaia player doesn't count
 				if teamId ~= gaia then
 
-					Text(playerListEntry[teamId]["color"] .."<" .. playerListEntry[teamId]["name"]	 .. "> " .. teamScore, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
+					Text(playerListEntry[teamId]["color"] .."<" ..
+						playerListEntry[teamId]["name"]	 .. "> " 
+						.. teamScore, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
 					
 					for _, team in ipairs(Spring.GetTeamList(teamId)) do
-						if Spring.GetPlayerList(team)[1] ~= nil then
-							local pn = Spring.GetPlayerInfo(Spring.GetPlayerList(team)[1]) -- Only lists first player in a team
+						if Spring.GetPlayerList(team)[team] ~= nil then
+							local pn = Spring.GetPlayerInfo(Spring.GetPlayerList(team)[team]) -- Only lists first player in a team
 							Text(pn, vsx - 220, vsy *.58 - 10 * n, 8, "lo")
 							n = n + 1
 						end
