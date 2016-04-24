@@ -318,11 +318,11 @@ else -- UNSYNCED
 	end
 	
 	local function DrawPoints()
-		local me = Spring.GetLocalAllyTeamID()
+		local teamAllyTeamID = Spring.GetLocalAllyTeamID()
 		for _, p in spairs(SYNCED.points) do
 			local r, g, b = 1, 1, 1
 			if p.owner and p.owner ~= Spring.GetGaiaTeamID() then
-				r, g, b = Spring.GetTeamColor(Spring.GetTeamList(teamId)[0]) 
+				r, g, b = Spring.GetTeamColor(Spring.GetTeamList(teamAllyTeamID)[0]) 
 			end
 			Color(r, g, b, 1)
 			local y = Spring.GetGroundHeight(p.x, p.z)
@@ -373,19 +373,19 @@ else -- UNSYNCED
 				-- note to self, allyTeamId +1 = ally team number	
 				
 					for _,teamId in pairs(Spring.GetTeamList(allyTeamId))do	
-					--	Spring.Echo("\tat team ID", teamId)
+						--Spring.Echo("\tat team ID", teamId)
 						-- gaia player doesn't count
 						if teamId ~= gaia then					
 							--Spring.Echo("allied team ID", allyTeamId, "\t", "team ID", teamId, " \tNOT GAIA")
 							local playerList 		= Spring.GetPlayerList(teamId)	
 							local r, g, b 			= Spring.GetTeamColor(teamId)
 							local playerTeamColor	= string.char("255",r*255,g*255,b*255)
-							Spring.Echo("\t\t\tplayerList", #playerList)
-							for _,v in pairs(playerList)do
-								Spring.Echo("\t\t\t\tnot player")
+							--Spring.Echo("\t\t\tplayerList", #playerList)
+							for _,playerId in pairs(playerList)do
+								--Spring.Echo("\t\t\t\tnot player")
 								Text(playerTeamColor .."<" ..
-								Spring.GetPlayerInfo(v)	 .. "> " 
-								.. teamScore .. white, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
+									Spring.GetPlayerInfo(playerId)	 .. "> " .. 
+									teamScore .. white, vsx - 240, vsy * .58 - 20 * playerId+10, 16, "lo")
 							end -- end playerId
 						end -- not gaia
 					end -- end teamId
