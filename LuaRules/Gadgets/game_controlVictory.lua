@@ -248,7 +248,6 @@ if (gadgetHandler:IsSyncedCode()) then
 		end
 	end
 
-
 	function gadget:AllowUnitCreation(unit, builder, team, x, y, z) -- TODO: fix for comshare
 		if moveSpeed == 0 then
 			for _, p in pairs(points) do
@@ -261,10 +260,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		return true
 	end
 
-
-else
-
-	-- UNSYNCED
+else -- UNSYNCED
 
 	local Text = gl.Text
 	local Color = gl.Color
@@ -281,13 +277,8 @@ else
 		local me = Spring.GetLocalAllyTeamID()
 		for _, p in spairs(SYNCED.points) do
 			local r, g, b = 1, 1, 1
-			if p.owner then
-				-- Spring.Echo(p.owner, me)
-				if p.owner == me then
-					r, g, b = 0, 1, 0
-				else
-					r, g, b = 1, 0, 0
-				end
+			if p.owner and p.owner ~= Spring.GetGaiaTeamID() then
+				r, g, b = Spring.GetTeamColor(Spring.GetTeamList(teamId)[0]) 
 			end
 			Color(r, g, b, 1)
 			local y = Spring.GetGroundHeight(p.x, p.z)
@@ -329,24 +320,27 @@ else
 	function gadget:DrawScreen(vsx, vsy)
 		local frame = Spring.GetGameFrame()
 		if frame / 1800 > startTime then
-			local me = Spring.GetLocalAllyTeamID()
-			Text("Your Score: " .. SYNCED.score[me], vsx - 280, vsy *.58, 18, "lo")
+			--local me = Spring.GetMyAllyTeamID()
+			--Text(Spring.GetPlayerInfo(Spring.GetMyPayerID()) .. ": " .. SYNCED.score[me], vsx - 280, vsy *.58, 18, "lo")
 			local n = 1
 			for a, s in spairs(SYNCED.score) do
 				if not name[a] then
-					for _, p in ipairs(Spring.GetPlayerList()) do
-						local pn, _, _, _, at = Spring.GetPlayerInfo(p)
-						if at == a then
-							name[a] = pn
-						end
-						break
-					end
-					if not name[a] or name[a] == "Opponent" then
-						name[a] = "Opponent"
+					local r, g, b = Spring.GetTeamColor(Spring.GetTeamList(a)[1])
+					if #Spring.GetPlayerList(Spring.GetTeamList(a)[1]) ~= 0 then
+						name[a] = "\255" .. r .. g .. b .. Spring.GetPlayerInfo(Spring.GetPlayerList(Spring.GetTeamList(a)[1])[1])
+					else
+						name[a] = "\255" .. r .. g .. b .. "Computer Opponent"
 					end
 				end
-				if a ~= me and a ~= gaia then
-					Text("<" .. name[a] .. "> " .. s, vsx - 240, vsy *.58 - 20 * n, 16, "lo")
+				if a ~= gaia then
+					Text("<" .. name[a] .. "> " .. s, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
+					for _, team in ipairs(Spring.GetTeamList(a)) do
+						if Spring.GetPlayerList(team)[1] ~= nil then
+							local pn = Spring.GetPlayerInfo(Spring.GetPlayerList(team)[1]) -- Only lists first player in a team
+							Text(pn, vsx - 220, vsy *.58 - 10 * n, 8, "lo")
+							n = n + 1
+						end
+					end
 					n = n + 1
 				end
 			end
