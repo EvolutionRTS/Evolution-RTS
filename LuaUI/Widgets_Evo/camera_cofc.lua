@@ -212,7 +212,7 @@ options = {
 		desc = "Controls how smooth the camera moves.",
 		type = 'number',
 		min = 0.0, max = 0.8, step = 0.1,
-		value = 0.4,
+		value = 0.1,
 	},
 	fov = {
 		name = 'Field of View (Degrees)',
@@ -446,7 +446,7 @@ local mwidth, mheight = Game.mapSizeX, Game.mapSizeZ
 local averageEdgeHeight = (spGetGroundHeight(mwidth/2,0) + spGetGroundHeight(0,mheight/2) + spGetGroundHeight(mwidth/2,mheight) +spGetGroundHeight(mwidth,mheight/2))/4
 local mcx, mcz 	= mwidth / 2, mheight / 2
 local mcy 		= spGetGroundHeight(mcx, mcz)
-local maxDistY = max(mheight, mwidth) * 0.30
+local maxDistY = 2000
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 local rotate_transit --switch for smoothing "rotate at mouse position instead of screen center"

@@ -10,6 +10,8 @@ function gadget:GetInfo()
 	}
 end
 
+local nonCapturingUnits = {"edrone",}
+
 local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
 local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 500 -- Radius around a point in which to capture it
@@ -140,25 +142,33 @@ if (gadgetHandler:IsSyncedCode()) then
 				local owner = p.owner
 				local count = 0
 				for _, u in ipairs(Spring.GetUnitsInCylinder(p.x, p.z, captureRadius)) do
-					local unitOwner = Spring.GetUnitAllyTeam(u)
-					if owner then
-						if owner == unitOwner then
-							count = 0
-							break
-						else
-							count = count + 1
+					local validUnit = true
+					for _, i in ipairs (nonCapturingUnits) do
+						if UnitDefs[Spring.GetUnitDefID(u)].name == i then
+							validUnit = false
 						end
-					else
-						if target then
-							if target == unitOwner then
-								count = count + 1
-							else
-								target = nil
+					end
+					if validUnit then
+						local unitOwner = Spring.GetUnitAllyTeam(u)
+						if owner then
+							if owner == unitOwner then
+								count = 0
 								break
+							else
+								count = count + 1
 							end
 						else
-							target = unitOwner
-							count = count + 1
+							if target then
+								if target == unitOwner then
+									count = count + 1
+								else
+									target = nil
+									break
+								end
+							else
+								target = unitOwner
+								count = count + 1
+							end
 						end
 					end
 				end
