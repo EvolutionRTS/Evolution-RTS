@@ -14,6 +14,7 @@ local nonCapturingUnits = {"edrone",}
 
 --local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
+	
 local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 500 -- Radius around a point in which to capture it
 local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 -- Time to capture a point
 local captureBonus = tonumber(Spring.GetModOptions().capturebonus) or.5 -- speedup from adding more units
@@ -70,6 +71,7 @@ if (gadgetHandler:IsSyncedCode()) then
 			end
 		end
 	end
+	
 
 	function gadget:Initialize()
 		for _, a in ipairs(Spring.GetAllyTeamList()) do
@@ -272,7 +274,49 @@ else -- UNSYNCED
 	local Rotate = gl.Rotate
 	local Rect = gl.Rect
 	local Billboard = gl.Billboard
+	local playerListEntry = {}
+	
+	-----------------------------------------------------------------------------------------
+	-- creates initial player listing 
+	-----------------------------------------------------------------------------------------
+	local function CreatePlayerList()
+		local playerEntries = {}
+		for allyTeamId, teamScore in spairs(SYNCED.score) do
+			-- note to self, allyTeamId +1 = ally team number	
+			--if allyTeamId ~= gaia then					
+			--does this allyteam have a table? if not, make one
+			if playerEntries[allyTeamId] == nil then 
+				playerEntries[allyTeamId] = {}
+					Spring.Echo("creating allyTeamId table")
+			end
+		
+			for _,teamId in pairs(Spring.GetTeamList(allyTeamId))do	
+				local playerList = Spring.GetPlayerList(teamId)	
+				-- does this team have an entry? if not, make one!
+				if playerEntries[allyTeamId][teamId] == nil then 
+					playerEntries[allyTeamId][teamId] = {}	
+					Spring.Echo("creating team table")
+				end
+				local r, g, b 			= Spring.GetTeamColor(teamId)
+				local playerTeamColor	= string.char("255",r*255,g*255,b*255)
+				for k,v in pairs(playerList)do
+					-- does this player have an entry? if not, make one!
+					if playerEntries[allyTeamId][teamId][v] == nil then 
+						playerEntries[allyTeamId][teamId][v] = {}	
+						Spring.Echo("creating player table")
+					end
+					playerEntries[allyTeamId][teamId][v]["name"] = Spring.GetPlayerInfo(v)
+					playerEntries[allyTeamId][teamId][v]["color"] = playerTeamColor
+				end -- end playerId
+			end -- end teamId
+		end -- allyTeamId
+		return playerEntries
+	end	
 
+	function gadget:Initialize()
+		playerListEntry = CreatePlayerList(playerEntries)
+	end
+	
 	local function DrawPoints()
 		local me = Spring.GetLocalAllyTeamID()
 		for _, p in spairs(SYNCED.points) do
@@ -315,8 +359,6 @@ else -- UNSYNCED
 		PopMatrix()
 	end
 
-	local playerListEntry = {}
-
 	function gadget:DrawScreen(vsx, vsy)
 		local frame = Spring.GetGameFrame()
 		if frame / 1800 > startTime then
@@ -324,69 +366,36 @@ else -- UNSYNCED
 			local dominator 		= SYNCED.dom.dominator
 			local dominationTime 	= SYNCED.dom.dominationTime
 			local white				= string.char("255","255","255","255")	
-			
+					
 			-- for all the scores with a team.
-			for teamId, teamScore in spairs(SYNCED.score) do
-				-- note to self, teamId +1 = ally team number	
-				if teamId ~= gaia then
-					for k,v in pairs(Spring.GetTeamList(teamId))do		
-						playerId = Spring.GetTeamList(teamId)[k]
-						Spring.Echo("teamId " .. teamId+1,
-									"|[id] ", k,
-									"| info " .. playerId,Spring.GetPlayerInfo(playerId),
-						Spring.GetTeamColor(playerId))
-					end
-				Spring.Echo("____________________________")
-				end
-				if not playerListEntry[teamId] then
-					local playerName 		= nil
-					local r, g, b 			= Spring.GetTeamColor(Spring.GetTeamList(teamId)[1])
-					local playerTeamColor	= string.char("255",r*255,g*255,b*255)
-					
-					playerListEntry[teamId] = {	name = "No Name",
-												color = white, }
-												
-					Spring.Echo("teamSize", Spring.GetPlayerList(Spring.GetTeamList(teamId)[1]))
-					for k,v in pairs(Spring.GetPlayerList(Spring.GetTeamList(teamId)[1]))do
-						Spring.Echo(k,v)
-					end
-					playerName = Spring.GetPlayerInfo(Spring.GetPlayerList(Spring.GetTeamList(teamId)[1])[1])
-					local teamSize = 1
-
-												
-					-- if I do not have a name, I am a computer player!
-					if playerName ~= nil then
-						playerListEntry[teamId]["name"]		= "playerName"
-						playerListEntry[teamId]["color"]	= playerTeamColor
-						
-					else
-						playerListEntry[teamId]["name"]		= "Computer Opponent"
-						playerListEntry[teamId]["color"]	= playerTeamColor
-					end
- 				end
+			for allyTeamId, teamScore in spairs(SYNCED.score) do
+				--Spring.Echo("at allied team ID", allyTeamId)
+				-- note to self, allyTeamId +1 = ally team number	
 				
-				-- gaia player doesn't count
-				if teamId ~= gaia then
+					for _,teamId in pairs(Spring.GetTeamList(allyTeamId))do	
+					--	Spring.Echo("\tat team ID", teamId)
+						-- gaia player doesn't count
+						if teamId ~= gaia then					
+							--Spring.Echo("allied team ID", allyTeamId, "\t", "team ID", teamId, " \tNOT GAIA")
+							local playerList 		= Spring.GetPlayerList(teamId)	
+							local r, g, b 			= Spring.GetTeamColor(teamId)
+							local playerTeamColor	= string.char("255",r*255,g*255,b*255)
+							Spring.Echo("\t\t\tplayerList", #playerList)
+							for _,v in pairs(playerList)do
+								Spring.Echo("\t\t\t\tnot player")
+								Text(playerTeamColor .."<" ..
+								Spring.GetPlayerInfo(v)	 .. "> " 
+								.. teamScore .. white, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
+							end -- end playerId
+						end -- not gaia
+					end -- end teamId
 
-					Text(playerListEntry[teamId]["color"] .."<" ..
-						playerListEntry[teamId]["name"]	 .. "> " 
-						.. teamScore, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
-					
-					for _, team in ipairs(Spring.GetTeamList(teamId)) do
-						if Spring.GetPlayerList(team)[team] ~= nil then
-							local pn = Spring.GetPlayerInfo(Spring.GetPlayerList(team)[team]) -- Only lists first player in a team
-							Text(pn, vsx - 220, vsy *.58 - 10 * n, 8, "lo")
-							n = n + 1
-						end
-					end
-					n = n + 1
-				end
 			end
 
 			if dominator and dominationTime > Spring.GetGameFrame() then
-				Text( playerListEntry[dominator]["color"] .. "<" .. playerListEntry[dominator] .. "> will score a Domination in " .. 
-					math.floor((dominationTime - Spring.GetGameFrame()) / 30) .. 
-					" seconds!", vsx *.5, vsy *.7, 24, "oc")
+			--	Text( playerListEntry[dominator]["color"] .. "<" .. playerListEntry[dominator] .. "> will score a --Domination in " .. 
+			--		math.floor((dominationTime - Spring.GetGameFrame()) / 30) .. 
+			--		" seconds!", vsx *.5, vsy *.7, 24, "oc")
 			end
 		else
 			Text("Capturing points begins in:", vsx - 280, vsy *.58, 18, "lo")
