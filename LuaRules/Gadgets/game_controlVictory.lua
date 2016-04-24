@@ -331,9 +331,9 @@ else -- UNSYNCED
 				if teamId ~= gaia then
 					for k,v in pairs(Spring.GetTeamList(teamId))do		
 						playerId = Spring.GetTeamList(teamId)[k]
-						Spring.Echo("\nteamId\n" .. teamId+1,
-									"\n[id]\n", k,
-									"\ninfo\n" .. playerId,Spring.GetPlayerInfo(playerId),
+						Spring.Echo("teamId " .. teamId+1,
+									"|[id] ", k,
+									"| info " .. playerId,Spring.GetPlayerInfo(playerId),
 						Spring.GetTeamColor(playerId))
 					end
 				Spring.Echo("____________________________")
