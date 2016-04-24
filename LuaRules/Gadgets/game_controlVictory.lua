@@ -12,7 +12,7 @@ end
 
 local nonCapturingUnits = {"edrone",}
 
-local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
+--local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
 local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 500 -- Radius around a point in which to capture it
 local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 -- Time to capture a point
@@ -323,17 +323,19 @@ else -- UNSYNCED
 			--local me = Spring.GetMyAllyTeamID()
 			--Text(Spring.GetPlayerInfo(Spring.GetMyPayerID()) .. ": " .. SYNCED.score[me], vsx - 280, vsy *.58, 18, "lo")
 			local n = 1
+			local teamNumber = 0
 			for a, s in spairs(SYNCED.score) do
 				if not name[a] then
 					local r, g, b = Spring.GetTeamColor(Spring.GetTeamList(a)[1])
 					if #Spring.GetPlayerList(Spring.GetTeamList(a)[1]) ~= 0 then
-						name[a] = "\255" .. r .. g .. b .. Spring.GetPlayerInfo(Spring.GetPlayerList(Spring.GetTeamList(a)[1])[1])
+						name[a] = string.char("255",r*255,g*255,b*255)
 					else
-						name[a] = "\255" .. r .. g .. b .. "Computer Opponent"
+						name[a] = string.char("255",r*255,g*255,b*255)
 					end
-				end
+ 				end
 				if a ~= gaia then
-					Text("<" .. name[a] .. "> " .. s, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
+					local teamNumber = teamNumber + 1
+					Text(name[a] .. "Team " .. teamNumber .. ": " .. s, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
 					for _, team in ipairs(Spring.GetTeamList(a)) do
 						if Spring.GetPlayerList(team)[1] ~= nil then
 							local pn = Spring.GetPlayerInfo(Spring.GetPlayerList(team)[1]) -- Only lists first player in a team
