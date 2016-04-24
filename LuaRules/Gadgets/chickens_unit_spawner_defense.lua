@@ -8,7 +8,7 @@ function gadget:GetInfo()
 		layer	 = 0,
 		enabled	 = true
 	}
-end
+d
 
 if (gadgetHandler:IsSyncedCode()) then
 -- BEGIN SYNCED

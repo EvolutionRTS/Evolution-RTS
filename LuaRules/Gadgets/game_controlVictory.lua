@@ -315,28 +315,46 @@ else -- UNSYNCED
 		PopMatrix()
 	end
 
-	local name = {}
+	local playerListEntry = {}
 
 	function gadget:DrawScreen(vsx, vsy)
 		local frame = Spring.GetGameFrame()
 		if frame / 1800 > startTime then
-			--local me = Spring.GetMyAllyTeamID()
-			--Text(Spring.GetPlayerInfo(Spring.GetMyPayerID()) .. ": " .. SYNCED.score[me], vsx - 280, vsy *.58, 18, "lo")
 			local n = 1
-			local teamNumber = 0
-			for a, s in spairs(SYNCED.score) do
-				if not name[a] then
-					local r, g, b = Spring.GetTeamColor(Spring.GetTeamList(a)[1])
-					if #Spring.GetPlayerList(Spring.GetTeamList(a)[1]) ~= 0 then
-						name[a] = string.char("255",r*255,g*255,b*255)
+			local dominator 		= SYNCED.dom.dominator
+			local dominationTime 	= SYNCED.dom.dominationTime
+			local white				= string.char("255","255","255","255")	
+			
+			-- for all the scores with a team.
+			for teamId, teamScore in spairs(SYNCED.score) do
+				if not playerListEntry[teamId] then
+					local playerName 		= nil
+					local r, g, b 			= Spring.GetTeamColor(Spring.GetTeamList(teamId)[1])
+					local playerTeamColor	= string.char("255",r*255,g*255,b*255)
+					if #Spring.GetPlayerList(Spring.GetTeamList(teamId)[1]) ~= 0 then
+						playerName = Spring.GetPlayerInfo(Spring.GetPlayerList(Spring.GetTeamList(a)[1])[1])
+					end
+
+					playerListEntry[teamId] = {	name = "No Name",
+												color = white, }
+												
+					-- if I do not have a name, I am a computer player!
+					if playerName ~= nil then
+						playerListEntry[teamId]["name"]		= "playerName"
+						playerListEntry[teamId]["color"]	= playerTeamColor
+						
 					else
-						name[a] = string.char("255",r*255,g*255,b*255)
+						playerListEntry[teamId]["name"]		= "Computer Opponent"
+						playerListEntry[teamId]["color"]	= playerTeamColor
 					end
  				end
-				if a ~= gaia then
-					local teamNumber = teamNumber + 1
-					Text(name[a] .. "Team " .. teamNumber .. ": " .. s, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
-					for _, team in ipairs(Spring.GetTeamList(a)) do
+				
+				-- gaia player doesn't count
+				if teamId ~= gaia then
+
+					Text(playerListEntry[teamId]["color"] .."<" .. playerListEntry[teamId]["name"]	 .. "> " .. teamScore, vsx - 240, vsy * .58 - 20 * n, 16, "lo")
+					
+					for _, team in ipairs(Spring.GetTeamList(teamId)) do
 						if Spring.GetPlayerList(team)[1] ~= nil then
 							local pn = Spring.GetPlayerInfo(Spring.GetPlayerList(team)[1]) -- Only lists first player in a team
 							Text(pn, vsx - 220, vsy *.58 - 10 * n, 8, "lo")
@@ -346,8 +364,11 @@ else -- UNSYNCED
 					n = n + 1
 				end
 			end
-			if SYNCED.dom.dominator and SYNCED.dom.dominationTime > Spring.GetGameFrame() then
-				Text("<" .. name[SYNCED.dom.dominator] .. "> will score a Domination in " .. math.floor((SYNCED.dom.dominationTime - Spring.GetGameFrame()) / 30) .. " seconds!", vsx *.5, vsy *.7, 24, "oc")
+
+			if dominator and dominationTime > Spring.GetGameFrame() then
+				Text( playerListEntry[dominator]["color"] .. "<" .. playerListEntry[dominator] .. "> will score a Domination in " .. 
+					math.floor((dominationTime - Spring.GetGameFrame()) / 30) .. 
+					" seconds!", vsx *.5, vsy *.7, 24, "oc")
 			end
 		else
 			Text("Capturing points begins in:", vsx - 280, vsy *.58, 18, "lo")
