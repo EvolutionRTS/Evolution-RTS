@@ -139,11 +139,11 @@ if (gadgetHandler:IsSyncedCode()) then
 			for _, a in ipairs(Spring.GetAllyTeamList()) do
 				owned[a] = 0
 			end
-			for _, p in pairs(points) do
+			for _, capturePoint in pairs(points) do
 				local target = nil
-				local owner = p.owner
+				local owner = capturePoint.owner
 				local count = 0
-				for _, u in ipairs(Spring.GetUnitsInCylinder(p.x, p.z, captureRadius)) do
+				for _, u in ipairs(Spring.GetUnitsInCylinder(capturePoint.x, capturePoint.z, captureRadius)) do
 					local validUnit = true
 					for _, i in ipairs (nonCapturingUnits) do
 						if UnitDefs[Spring.GetUnitDefID(u)].name == i then
@@ -175,36 +175,37 @@ if (gadgetHandler:IsSyncedCode()) then
 					end
 				end
 				if owner and count > 0 then
-					p.capturer = nil
-					p.capture = p.capture + (1 + captureBonus * (count - 1)) * decapSpeed
+					capturePoint.capturer = nil
+					capturePoint.capture = capturePoint.capture + (1 + captureBonus * (count - 1)) * decapSpeed
 				elseif target then
-					if p.capturer == target then
-						p.capture = p.capture + 1 + captureBonus * (count - 1)
+					if capturePoint.capturer == target then
+						capturePoint.capture = capturePoint.capture + 1 + captureBonus * (count - 1)
 					else
-						p.capturer = target
-						p.capture = 1 + captureBonus * (count - 1)
+						capturePoint.capturer = target
+						capturePoint.capture = 1 + captureBonus * (count - 1)
 					end
 				end
-				if p.capture > captureTime then
-					p.owner = p.capturer
-					p.capture = 0
+				if capturePoint.capture > captureTime then
+					capturePoint.owner = capturePoint.capturer
+					capturePoint.capture = 0
 				end
-				if p.owner then
-					owned[p.owner] = owned[p.owner] + 1
+				if capturePoint.owner then
+					--Spring.Echo(capturePoint.owner)
+					owned[capturePoint.owner] = owned[capturePoint.owner] + 1
 				end
 			end
 			if scoreMode == 1 then -- Countdown
 				for owner, count in pairs(owned) do
-					for _, a in ipairs(Spring.GetAllyTeamList()) do
-						if a ~= owner and score[a] > 0 then
-							score[a] = score[a] - count
+					for _, allyTeamId in ipairs(Spring.GetAllyTeamList()) do
+						if allyTeamId ~= owner and score[allyTeamId] > 0 then
+							score[allyTeamId] = score[allyTeamId] - count
 						end
 					end
 				end
-				for a, s in pairs(score) do
-					-- Spring.Echo("Team "..a..": "..s)
-					if s <= 0 then
-						Loser(a)
+				for allyTeamId, teamScore in pairs(score) do
+					-- Spring.Echo("Team "..allyTeamId..": "..teamScores)
+					if teamScore <= 0 then
+						Loser(allyTeamId)
 					end
 				end
 			elseif scoreMode == 2 then -- Tug o'War
@@ -216,10 +217,10 @@ if (gadgetHandler:IsSyncedCode()) then
 						end
 					end
 				end
-				for a, s in pairs(score) do
-					-- Spring.Echo("Team "..a..": "..s)
-					if s <= 0 then
-						Loser(a)
+				for allyTeamId, teamScore in pairs(score) do
+					-- Spring.Echo("Team "..allyTeamId..": "..teamScore)
+					if teamScore <= 0 then
+						Loser(allyTeamId)
 					end
 				end
 			elseif scoreMode == 3 then -- Multi Domination
@@ -236,9 +237,9 @@ if (gadgetHandler:IsSyncedCode()) then
 				end
 				if dom.dominator then
 					if dom.dominationTime <= f then
-						for _, p in pairs(points) do
-							p.owner = nil
-							p.capture = 0
+						for _, capturePoint in pairs(points) do
+							capturePoint.owner = nil
+							capturePoint.capture = 0
 						end
 						score[dom.dominator] = score[dom.dominator] + 1000
 						if score[dom.dominator] >= limitScore then
@@ -322,10 +323,10 @@ else -- UNSYNCED
 		for _, capturePoint in spairs(SYNCED.points) do
 			local r, g, b = 1, 1, 1
 			if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then
-			--Spring.Echo(capturePoint.owner)
 				r, g, b = Spring.GetTeamColor(capturePoint.owner) 
 			end
 			Color(r, g, b, 1)
+			--Spring.Echo("draw points", capturePoint.owner, r, g, b)
 			local y = Spring.GetGroundHeight(capturePoint.x, capturePoint.z)
 			DrawGroundCircle(capturePoint.x, capturePoint.y, capturePoint.z, captureRadius, 30)
 			if capturePoint.capture > 0 then
@@ -384,8 +385,8 @@ else -- UNSYNCED
 							--Spring.Echo("\t\t\tplayerList", #playerList)
 							for _,playerId in pairs(playerList)do
 								--Spring.Echo("\t\t\t\tnot player")
-								Text(playerTeamColor .."<" ..
-									Spring.GetPlayerInfo(playerId)	 .. "> " .. 
+								Text(playerTeamColor .."<" .. Spring.GetPlayerInfo(playerId) ..
+									allyTeamId.."> " .. 
 									teamScore .. white, vsx - 240, vsy * .58 - 20 * playerId+10, 16, "lo")
 							end -- end playerId
 						end -- not gaia
