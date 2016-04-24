@@ -319,22 +319,23 @@ else -- UNSYNCED
 	
 	local function DrawPoints()
 		local teamAllyTeamID = Spring.GetLocalAllyTeamID()
-		for _, p in spairs(SYNCED.points) do
+		for _, capturePoint in spairs(SYNCED.points) do
 			local r, g, b = 1, 1, 1
-			if p.owner and p.owner ~= Spring.GetGaiaTeamID() then
-				r, g, b = Spring.GetTeamColor(Spring.GetTeamList(teamAllyTeamID)[0]) 
+			if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then
+			--Spring.Echo(capturePoint.owner)
+				r, g, b = Spring.GetTeamColor(capturePoint.owner) 
 			end
 			Color(r, g, b, 1)
-			local y = Spring.GetGroundHeight(p.x, p.z)
-			DrawGroundCircle(p.x, p.y, p.z, captureRadius, 30)
-			if p.capture > 0 then
+			local y = Spring.GetGroundHeight(capturePoint.x, capturePoint.z)
+			DrawGroundCircle(capturePoint.x, capturePoint.y, capturePoint.z, captureRadius, 30)
+			if capturePoint.capture > 0 then
 				PushMatrix()
-				Translate(p.x, y + 100, p.z)
+				Translate(capturePoint.x, y + 100, capturePoint.z)
 				Billboard()
 				Color(0, 0, 0, 1)
 				Rect(-26, 6, 26, -6)
 				Color(1, 1, 0, 1)
-				Rect(-25, 5, -25 + 50 * (p.capture / captureTime), -5)
+				Rect(-25, 5, -25 + 50 * (capturePoint.capture / captureTime), -5)
 				PopMatrix()
 			end
 		end
