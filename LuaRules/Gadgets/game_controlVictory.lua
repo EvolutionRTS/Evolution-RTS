@@ -30,6 +30,8 @@ Spring.Echo("Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremod
 
 local limitScore = tonumber(Spring.GetModOptions().limitscore) or 3500
 
+local allyTeamColorSets={}
+
 local scoreModes = {
 	disabled = 0, -- none (duh)
 	countdown = 1, -- A point decreases all opponents' scores, zero means defeat
@@ -105,7 +107,7 @@ if (gadgetHandler:IsSyncedCode()) then
             velx=moveSpeed * 10 * -1 * math.cos(angle),
             velz=moveSpeed * 10 * math.sin(angle),
             owner=nil,
-            capturer=nil,
+            aggressor=nil,
             capture=0,
          }
       end ]]--
@@ -140,7 +142,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				owned[a] = 0
 			end
 			for _, capturePoint in pairs(points) do
-				local target = nil
+				local aggressor = nil
 				local owner = capturePoint.owner
 				local count = 0
 				for _, u in ipairs(Spring.GetUnitsInCylinder(capturePoint.x, capturePoint.z, captureRadius)) do
@@ -152,6 +154,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					end
 					if validUnit then
 						local unitOwner = Spring.GetUnitAllyTeam(u)
+						--Spring.Echo(unitOwner)
 						if owner then
 							if owner == unitOwner then
 								count = 0
@@ -160,33 +163,34 @@ if (gadgetHandler:IsSyncedCode()) then
 								count = count + 1
 							end
 						else
-							if target then
-								if target == unitOwner then
+							if aggressor then
+								if aggressor == unitOwner then
 									count = count + 1
 								else
-									target = nil
+									aggressor = nil
 									break
 								end
 							else
-								target = unitOwner
+								aggressor = unitOwner
 								count = count + 1
 							end
 						end
 					end
 				end
 				if owner and count > 0 then
-					capturePoint.capturer = nil
+					capturePoint.aggressor = nil
 					capturePoint.capture = capturePoint.capture + (1 + captureBonus * (count - 1)) * decapSpeed
-				elseif target then
-					if capturePoint.capturer == target then
+				elseif aggressor then
+					--Spring.Echo("capturePoint.aggressor", capturePoint.aggressor)
+					if capturePoint.aggressor == aggressor then
 						capturePoint.capture = capturePoint.capture + 1 + captureBonus * (count - 1)
 					else
-						capturePoint.capturer = target
+						capturePoint.aggressor = aggressor
 						capturePoint.capture = 1 + captureBonus * (count - 1)
 					end
 				end
 				if capturePoint.capture > captureTime then
-					capturePoint.owner = capturePoint.capturer
+					capturePoint.owner = capturePoint.aggressor
 					capturePoint.capture = 0
 				end
 				if capturePoint.owner then
@@ -218,7 +222,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					end
 				end
 				for allyTeamId, teamScore in pairs(score) do
-					-- Spring.Echo("Team "..allyTeamId..": "..teamScore)
+					--Spring.Echo("Team "..allyTeamId..": "..teamScore)
 					if teamScore <= 0 then
 						Loser(allyTeamId)
 					end
@@ -288,7 +292,7 @@ else -- UNSYNCED
 			--does this allyteam have a table? if not, make one
 			if playerEntries[allyTeamId] == nil then 
 				playerEntries[allyTeamId] = {}
-					Spring.Echo("creating allyTeamId table")
+				--	Spring.Echo("creating allyTeamId table")
 			end
 		
 			for _,teamId in pairs(Spring.GetTeamList(allyTeamId))do	
@@ -296,7 +300,7 @@ else -- UNSYNCED
 				-- does this team have an entry? if not, make one!
 				if playerEntries[allyTeamId][teamId] == nil then 
 					playerEntries[allyTeamId][teamId] = {}	
-					Spring.Echo("creating team table")
+				--	Spring.Echo("creating team table")
 				end
 				local r, g, b 			= Spring.GetTeamColor(teamId)
 				local playerTeamColor	= string.char("255",r*255,g*255,b*255)
@@ -304,13 +308,17 @@ else -- UNSYNCED
 					-- does this player have an entry? if not, make one!
 					if playerEntries[allyTeamId][teamId][v] == nil then 
 						playerEntries[allyTeamId][teamId][v] = {}	
-						Spring.Echo("creating player table")
+					--	Spring.Echo("creating player table")
 					end
+					
+				--	if Spring.Echo(playerEntries[allyTeamId][teamId][v]) then
+					--	Spring.Echo("waffles")
+					--end
 					playerEntries[allyTeamId][teamId][v]["name"] = Spring.GetPlayerInfo(v)
 					playerEntries[allyTeamId][teamId][v]["color"] = playerTeamColor
 				end -- end playerId
 			end -- end teamId
-		end -- allyTeamId
+		end -- allyTeamId		
 		return playerEntries
 	end	
 
@@ -318,27 +326,30 @@ else -- UNSYNCED
 		playerListEntry = CreatePlayerList(playerEntries)
 	end
 	
+	-- draws ground circles
 	local function DrawPoints()
 		local teamAllyTeamID = Spring.GetLocalAllyTeamID()
 		for _, capturePoint in spairs(SYNCED.points) do
-			local r, g, b = 1, 1, 1
-			if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then
-				r, g, b = Spring.GetTeamColor(capturePoint.owner) 
-			end
-			Color(r, g, b, 1)
-			--Spring.Echo("draw points", capturePoint.owner, r, g, b)
-			local y = Spring.GetGroundHeight(capturePoint.x, capturePoint.z)
-			DrawGroundCircle(capturePoint.x, capturePoint.y, capturePoint.z, captureRadius, 30)
-			if capturePoint.capture > 0 then
-				PushMatrix()
-				Translate(capturePoint.x, y + 100, capturePoint.z)
-				Billboard()
-				Color(0, 0, 0, 1)
-				Rect(-26, 6, 26, -6)
-				Color(1, 1, 0, 1)
-				Rect(-25, 5, -25 + 50 * (capturePoint.capture / captureTime), -5)
-				PopMatrix()
-			end
+				
+				local r, g, b = 1, 1, 1
+				if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then
+					r, g, b = Spring.GetTeamColor(capturePoint.owner) 
+				end
+				Color(r, g, b, 1)
+				--Spring.Echo("draw points", capturePoint.owner, r, g, b)
+				local y = Spring.GetGroundHeight(capturePoint.x, capturePoint.z)
+
+				DrawGroundCircle(capturePoint.x, capturePoint.y, capturePoint.z, captureRadius, 30)
+				if capturePoint.capture > 0 then
+					PushMatrix()
+					Translate(capturePoint.x, y + 100, capturePoint.z)
+					Billboard()
+					Color(0, 0, 0, 1)
+					Rect(-26, 6, 26, -6)
+					Color(1, 1, 0, 1)
+					Rect(-25, 5, -25 + 50 * (capturePoint.capture / captureTime), -5)
+					PopMatrix()
+				end
 		end
 		Color(1, 1, 1, 1)
 	end
@@ -378,13 +389,14 @@ else -- UNSYNCED
 						--Spring.Echo("\tat team ID", teamId)
 						-- gaia player doesn't count
 						if teamId ~= gaia then					
-							--Spring.Echo("allied team ID", allyTeamId, "\t", "team ID", teamId, " \tNOT GAIA")
+							
 							local playerList 		= Spring.GetPlayerList(teamId)	
 							local r, g, b 			= Spring.GetTeamColor(teamId)
 							local playerTeamColor	= string.char("255",r*255,g*255,b*255)
 							--Spring.Echo("\t\t\tplayerList", #playerList)
 							for _,playerId in pairs(playerList)do
 								--Spring.Echo("\t\t\t\tnot player")
+								--Spring.Echo("allied team ID", allyTeamId, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
 								Text(playerTeamColor .."<" .. Spring.GetPlayerInfo(playerId) ..
 									allyTeamId.."> " .. 
 									teamScore .. white, vsx - 240, vsy * .58 - 20 * playerId+10, 16, "lo")
