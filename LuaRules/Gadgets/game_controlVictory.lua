@@ -398,7 +398,7 @@ else -- UNSYNCED
 								--Spring.Echo("\t\t\t\tnot player")
 								--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
 								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. allyTeamID.. "): " .. white ..
-									teamScore, vsx - 260, vsy * .58 - 20 * playerId+10, 16, "lo")
+									teamScore, vsx - 280, vsy * .58 - 20 * playerId+10, 16, "lo")
 							end -- end playerId
 						end -- not gaia
 					end -- end teamId

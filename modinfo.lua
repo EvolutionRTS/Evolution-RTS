@@ -10,17 +10,13 @@
 --------------------------------------------------------------------------------
 
 return {
-  name='Evolution RTS -',
-  description='EvoRTS',
-  shortname='EvoRTS',
-  version='$VERSION',
-  mutator='Official',
-  game='Evolution RTS',
-  shortGame='EvoRTS',
-  modtype=1,
- -- depend = {"Spring Features v1.8"},
-
-  NTAI = {
-    tdfpath='EvoRTS';
-  },
+	name='Evolution RTS -',
+	description='EvoRTS',
+	shortname='EvoRTS',
+	version='$VERSION',
+	mutator='Official',
+	game='Evolution RTS',
+	shortGame='EvoRTS',
+	modtype=1,
+	depend = {"Spring Features v1.8"},
 }
