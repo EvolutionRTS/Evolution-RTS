@@ -138,8 +138,8 @@ if (gadgetHandler:IsSyncedCode()) then
 
 		if f % 30 <.1 and f / 1800 > startTime then
 			local owned = {}
-			for _, a in ipairs(Spring.GetAllyTeamList()) do
-				owned[a] = 0
+			for _, allyTeamID in ipairs(Spring.GetAllyTeamList()) do
+				owned[allyTeamID] = 0
 			end
 			for _, capturePoint in pairs(points) do
 				local aggressor = nil
@@ -200,16 +200,16 @@ if (gadgetHandler:IsSyncedCode()) then
 			end
 			if scoreMode == 1 then -- Countdown
 				for owner, count in pairs(owned) do
-					for _, allyTeamId in ipairs(Spring.GetAllyTeamList()) do
-						if allyTeamId ~= owner and score[allyTeamId] > 0 then
-							score[allyTeamId] = score[allyTeamId] - count
+					for _, allyTeamID in ipairs(Spring.GetAllyTeamList()) do
+						if allyTeamID ~= owner and score[allyTeamID] > 0 then
+							score[allyTeamID] = score[allyTeamID] - count
 						end
 					end
 				end
-				for allyTeamId, teamScore in pairs(score) do
-					-- Spring.Echo("Team "..allyTeamId..": "..teamScores)
+				for allyTeamID, teamScore in pairs(score) do
+					-- Spring.Echo("Team "..allyTeamID..": "..teamScores)
 					if teamScore <= 0 then
-						Loser(allyTeamId)
+						Loser(allyTeamID)
 					end
 				end
 			elseif scoreMode == 2 then -- Tug o'War
@@ -221,10 +221,10 @@ if (gadgetHandler:IsSyncedCode()) then
 						end
 					end
 				end
-				for allyTeamId, teamScore in pairs(score) do
-					--Spring.Echo("Team "..allyTeamId..": "..teamScore)
+				for allyTeamID, teamScore in pairs(score) do
+					--Spring.Echo("Team "..allyTeamID..": "..teamScore)
 					if teamScore <= 0 then
-						Loser(allyTeamId)
+						Loser(allyTeamID)
 					end
 				end
 			elseif scoreMode == 3 then -- Multi Domination
@@ -286,39 +286,39 @@ else -- UNSYNCED
 	-----------------------------------------------------------------------------------------
 	local function CreatePlayerList()
 		local playerEntries = {}
-		for allyTeamId, teamScore in spairs(SYNCED.score) do
-			-- note to self, allyTeamId +1 = ally team number	
-			--if allyTeamId ~= gaia then					
+		for allyTeamID, teamScore in spairs(SYNCED.score) do
+			-- note to self, allyTeamID +1 = ally team number	
+			--if allyTeamID ~= gaia then					
 			--does this allyteam have a table? if not, make one
-			if playerEntries[allyTeamId] == nil then 
-				playerEntries[allyTeamId] = {}
-				--	Spring.Echo("creating allyTeamId table")
+			if playerEntries[allyTeamID] == nil then 
+				playerEntries[allyTeamID] = {}
+				--	Spring.Echo("creating allyTeamID table")
 			end
 		
-			for _,teamId in pairs(Spring.GetTeamList(allyTeamId))do	
+			for _,teamId in pairs(Spring.GetTeamList(allyTeamID))do	
 				local playerList = Spring.GetPlayerList(teamId)	
 				-- does this team have an entry? if not, make one!
-				if playerEntries[allyTeamId][teamId] == nil then 
-					playerEntries[allyTeamId][teamId] = {}	
+				if playerEntries[allyTeamID][teamId] == nil then 
+					playerEntries[allyTeamID][teamId] = {}	
 				--	Spring.Echo("creating team table")
 				end
 				local r, g, b 			= Spring.GetTeamColor(teamId)
 				local playerTeamColor	= string.char("255",r*255,g*255,b*255)
 				for k,v in pairs(playerList)do
 					-- does this player have an entry? if not, make one!
-					if playerEntries[allyTeamId][teamId][v] == nil then 
-						playerEntries[allyTeamId][teamId][v] = {}	
+					if playerEntries[allyTeamID][teamId][v] == nil then 
+						playerEntries[allyTeamID][teamId][v] = {}	
 					--	Spring.Echo("creating player table")
 					end
 					
-				--	if Spring.Echo(playerEntries[allyTeamId][teamId][v]) then
+				--	if Spring.Echo(playerEntries[allyTeamID][teamId][v]) then
 					--	Spring.Echo("waffles")
 					--end
-					playerEntries[allyTeamId][teamId][v]["name"] = Spring.GetPlayerInfo(v)
-					playerEntries[allyTeamId][teamId][v]["color"] = playerTeamColor
+					playerEntries[allyTeamID][teamId][v]["name"] = Spring.GetPlayerInfo(v)
+					playerEntries[allyTeamID][teamId][v]["color"] = playerTeamColor
 				end -- end playerId
 			end -- end teamId
-		end -- allyTeamId		
+		end -- allyTeamID		
 		return playerEntries
 	end	
 
@@ -381,11 +381,11 @@ else -- UNSYNCED
 			local white				= string.char("255","255","255","255")	
 					
 			-- for all the scores with a team.
-			for allyTeamId, teamScore in spairs(SYNCED.score) do
-				--Spring.Echo("at allied team ID", allyTeamId)
-				-- note to self, allyTeamId +1 = ally team number	
+			for allyTeamID, teamScore in spairs(SYNCED.score) do
+				--Spring.Echo("at allied team ID", allyTeamID)
+				-- note to self, allyTeamID +1 = ally team number	
 				
-					for _,teamId in pairs(Spring.GetTeamList(allyTeamId))do	
+					for _,teamId in pairs(Spring.GetTeamList(allyTeamID))do	
 						--Spring.Echo("\tat team ID", teamId)
 						-- gaia player doesn't count
 						if teamId ~= gaia then					
@@ -396,10 +396,9 @@ else -- UNSYNCED
 							--Spring.Echo("\t\t\tplayerList", #playerList)
 							for _,playerId in pairs(playerList)do
 								--Spring.Echo("\t\t\t\tnot player")
-								--Spring.Echo("allied team ID", allyTeamId, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
-								Text(playerTeamColor .."<" .. Spring.GetPlayerInfo(playerId) ..
-									allyTeamId.."> " .. 
-									teamScore .. white, vsx - 240, vsy * .58 - 20 * playerId+10, 16, "lo")
+								--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
+								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. allyTeamID.. "): " .. 
+									teamScore .. white, vsx - 235, vsy * .58 - 20 * playerId+10, 16, "lo")
 							end -- end playerId
 						end -- not gaia
 					end -- end teamId
