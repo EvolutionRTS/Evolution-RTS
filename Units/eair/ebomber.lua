@@ -9,7 +9,7 @@ local armortype					 = [[light]]
 local supply					 = [[5]]
 
 local weapon1Damage              = 200
-local weapon1AOE				 = 500
+local weapon1AOE				 = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)

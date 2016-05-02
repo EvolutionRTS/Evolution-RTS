@@ -17,6 +17,7 @@ local nonCapturingUnits = {
 	"egunship2",
 	"etransport",
 	"edrone",
+	"ebomber",
 }
 
 --local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
