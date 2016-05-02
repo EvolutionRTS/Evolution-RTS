@@ -13,7 +13,7 @@ local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 --local stockpiletime				 = 60
 
 local shield1Power               = 2000
-local shield1PowerRegen          = 50
+local shield1PowerRegen          = 15
 local shield1PowerRegenEnergy    = shield1PowerRegen / 10
 
 local function roundToFirstDecimal(energycosttofire)
