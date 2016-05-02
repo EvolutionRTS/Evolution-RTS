@@ -19,7 +19,7 @@ local unitDef                    = {
 
 
 	acceleration                 = 0.5,
-	airStrafe                    = false,
+	airStrafe                    = true,
 	bankscale                    = "1",
 	brakeRate                    = 1,
 	buildCostEnergy              = 1,

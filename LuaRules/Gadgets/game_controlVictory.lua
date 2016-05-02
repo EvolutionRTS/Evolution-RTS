@@ -13,7 +13,7 @@ end
 local nonCapturingUnits = {
 	"eairengineer",
 	"efighter",
-	"escout",
+	--"escout",
 	"egunship2",
 	"etransport",
 	"edrone",
