@@ -7,7 +7,7 @@ local unitName                   = "eamphibleveler"
 
 local power						 = [[31 power]]
 local armortype					 = [[armored]]
-local supply					 = [[25]]
+local supply					 = [[10]]
 
 local weapon1Damage              = 250
 local weapon1AOE				 = 8

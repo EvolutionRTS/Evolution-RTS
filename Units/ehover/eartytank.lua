@@ -47,7 +47,7 @@ local unitDef                    = {
 Armortype: ]] ..armortype.. [[ 
 
 200 Damage vs Buildings
-50 Damage vs Light/Armored
+100 Damage vs Light/Armored
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 
@@ -112,11 +112,9 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "Artilleryweapon",
-			onlyTargetCategory   = "BUILDING",
 		},
 		[2]                      = {
 			def                  = "SaturationArtilleryweapon",
-			onlyTargetCategory   = "BUILDING",
 		},
 	},
 	customParams                 = {

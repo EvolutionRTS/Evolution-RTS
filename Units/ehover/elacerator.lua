@@ -7,7 +7,7 @@ local unitName                   = "elacerator"
 
 local power						 = [[26 power]]
 local armortype					 = [[armored]]
-local supply					 = [[13]]
+local supply					 = [[8]]
 
 local weapon1Damage              = 200
 local weapon1AOE				 = 500
@@ -106,7 +106,6 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "nukeartyweapon",
-			onlyTargetCategory   = "BUILDING",
 		},
 	},
 	customParams                 = {

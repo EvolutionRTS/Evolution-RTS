@@ -9,7 +9,7 @@ local power						 = [[10 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
-local weapon1Damage              = 300
+local weapon1Damage              = 100
 local weapon1AOE				 = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
@@ -42,8 +42,8 @@ local unitDef                 = {
 	description               = [["Unit Type: Laser Support Artillery
 Armortype: ]] ..armortype.. [[ 
 
-300 Damage vs Buildings
-75 Damage vs Light/Armored
+100 Damage vs Buildings
+50 Damage vs Light/Armored
 
 Can fire while underwater
 
@@ -111,7 +111,6 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                       = {
 		[1]                       = {
 		def                       = "assimilatorbeamweapon",
-		onlyTargetCategory        = "BUILDING",
 		},
 	--[[
 		[2]                       = {
@@ -162,7 +161,7 @@ assimilatorbeamweapon         = {
 	minintensity              = 1,
 	name                      = "Laser",
 	range                     = 1175,
-	reloadtime                = 9,
+	reloadtime                = 3,
 	WeaponType                = "BeamLaser",
 	soundHit                  = "amphibartyshothit.wav",
 	soundStart                = "laserbeam02.wav",

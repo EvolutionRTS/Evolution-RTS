@@ -7,12 +7,12 @@ local unitName                   = "eallterranarchid"
 
 local power						 = [[28 power]]
 local armortype					 = [[armored]]
-local supply					 = [[16]]
+local supply					 = [[12]]
 
 local weapon1Damage              = 300
 local weapon1AOE				 = 10
-local weapon2Damage              = 300
-local weapon2AOE				 = 10
+local weapon2Damage              = 25
+local weapon2AOE				 = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
 
@@ -55,8 +55,8 @@ Primary Laser:
 30 Damage/s vs Light/Armored
 
 Secondary Cannons:
-40 Damage vs Building
-4 Damage vs Light/Armored
+25 Damage vs Building
+12.5 Damage vs Light/Armored
 
 This unit can only attack buildings!
 	
@@ -108,6 +108,7 @@ Uses +]] .. supply .. [[ Supply]],
 		explosiongenerators      = {
 			"custom:gdhcannon",
 			"custom:dirtsmall",
+			"custom:flamethrowerrange500",
 			"custom:blacksmoke",
 		},
 	},
@@ -126,10 +127,10 @@ Uses +]] .. supply .. [[ Supply]],
 			onlyTargetCategory   = "BUILDING",
 		},
 		[2]                      = {
-			def                  = "concussioncannon",
+			def                  = "flamethrower",
 		},
 		[3]                      = {
-			def                  = "concussioncannon",
+			def                  = "flamethrower",
 		},
 	},
 	customParams                 = {
@@ -156,7 +157,7 @@ local weaponDefs                 = {
 		collideFeature           = false,
 		beamTime                 = 1,
 		cameraShake		         = 1,
-		coreThickness            = 0.5,
+		coreThickness            = 0.2,
 		--	cegTag               = "mediumcannonweapon3",
 		--    duration           = 0.2,
 		energypershot            = energycosttofire,
@@ -170,7 +171,7 @@ local weaponDefs                 = {
 		range                    = 1000,
 		reloadtime               = 1,
 		WeaponType               = "BeamLaser",
-		rgbColor                 = "1 0 1",
+		rgbColor                 = "1 0 0",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
 		soundstart               = "krabprimary.wav",
@@ -178,7 +179,7 @@ local weaponDefs                 = {
 		--	sweepfire		     = true,
 		texture1                 = "shot",
 		texture2                 = "empty",
-		thickness                = 9,
+		thickness                = 6,
 		tolerance                = 1000,
 		turret                   = true,
 		weaponVelocity           = 800,
@@ -223,6 +224,42 @@ local weaponDefs                 = {
 			--Upgrades--
 			upgradeClass		 = "groundweapons",
 		},
+		damage                   = {
+			default              = weapon2Damage,
+		},
+	},
+	flamethrower                 = {
+		
+		accuracy                 = 0,
+		AreaOfEffect             = weapon2AOE,
+		avoidFeature             = false,
+		avoidFriendly            = false,
+		collideFeature           = false,
+		collideFriendly          = false,
+		explosionGenerator       = "custom:burnblack",
+		coreThickness            = 0,
+		duration                 = 1,
+		energypershot            = energycosttofire2,
+		fallOffRate              = 1,
+		fireStarter              = 50,
+		interceptedByShieldType  = 4,
+		soundstart               = "flamethrower1.wav",
+		
+		minintensity             = 1,
+		impulseFactor            = 0,
+		name                     = "Something with Flames",
+		range                    = 500,
+		reloadtime               = 0.1,
+		WeaponType               = [[LaserCannon]],
+		rgbColor                 = "0 0 0",
+		rgbColor2                = "0 0 0",
+		thickness                = 0,
+		tolerance                = 1000,
+		turret                   = true,
+		weaponVelocity           = 400,
+		customparams             = {
+			damagetype		     = "eallterranarchidflame",  
+		},      
 		damage                   = {
 			default              = weapon2Damage,
 		},

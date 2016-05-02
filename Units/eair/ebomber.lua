@@ -25,9 +25,9 @@ local unitDef                    = {
 
 
 	acceleration                 = 0.5,
-	airStrafe                    = true,
+	airStrafe                    = false,
 	BadTargetCategory            = "VTOL",
-	brakeRate                    = 0.5,
+	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 55,
 	builder                      = false,
@@ -46,7 +46,7 @@ local unitDef                    = {
 Armortype: ]] ..armortype.. [[ 
 	
 200 Damage vs Buildings
-50 Damage vs Light/Armored
+150 Damage vs Light/Armored
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 
@@ -108,7 +108,7 @@ Uses +]] .. supply .. [[ Supply]],
 		[1]                      = {
 			def                  = "SBOMB",
 			noChaseCategory      = "VTOL",
-			onlyTargetCategory   = "BUILDING",
+			badTargetCategory    = "VTOL",
 		},
 	},
 	customParams                 = {

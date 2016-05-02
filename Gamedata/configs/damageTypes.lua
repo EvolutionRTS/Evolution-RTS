@@ -20,9 +20,9 @@ local damageClasses = {
 			BUILDING 	= 0.66,
 		},
 		eartytank	= {
-			SIEGE		= 0.25,
-			ARMORED		= 0.25,
-			LIGHT		= 0.25,
+			SIEGE		= 0.50,
+			ARMORED		= 0.50,
+			LIGHT		= 0.50,
 			BUILDING 	= 1,
 		},
 		ebomb	= {
@@ -125,12 +125,18 @@ local damageClasses = {
 			BUILDING 	= 0.25,
 		},
 		eallterrassault	= {
-			SIEGE		= 0.125,
-			ARMORED		= 0.125,
-			LIGHT		= 0.125,
+			SIEGE		= 0.50,
+			ARMORED		= 0.50,
+			LIGHT		= 0.50,
 			BUILDING 	= 1,
 		},
 		eallterranarchid = {
+			SIEGE		= 0.5,
+			ARMORED		= 0.5,
+			LIGHT		= 0.5,
+			BUILDING 	= 1,
+		},
+		eallterranarchidflame = {
 			SIEGE		= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
@@ -182,9 +188,9 @@ local damageClasses = {
 			BUILDING 	= 0.5,
 		},
 		eamphibarty	= {
-			SIEGE		= 0.25,
-			ARMORED		= 0.25,
-			LIGHT		= 0.25,
+			SIEGE		= 0.50,
+			ARMORED		= 0.50,
+			LIGHT		= 0.50,
 			BUILDING 	= 1,
 		},
 		eamphibleveler	= {
@@ -221,9 +227,9 @@ local damageClasses = {
 			BUILDING 	= 0.25,
 		},	
 		ebomber	= {
-			SIEGE		= 0.25,
-			ARMORED		= 0.25,
-			LIGHT		= 0.25,
+			SIEGE		= 0.75,
+			ARMORED		= 0.75,
+			LIGHT		= 0.75,
 			BUILDING 	= 1,
 		},
 		-- End Aircraft

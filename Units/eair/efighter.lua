@@ -26,9 +26,9 @@ local unitDef                    = {
 
 
 	acceleration                 = 0.5,
-	airStrafe                    = true,
+	airStrafe                    = false,
 	bankscale                    = "1",
-	brakeRate                    = 0.5,
+	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 45,
 	buildTime                    = 2.5,

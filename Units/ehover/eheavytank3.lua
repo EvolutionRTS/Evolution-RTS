@@ -159,7 +159,7 @@ local weaponDefs                 = {
 		
 		tolerance                = 2000,
 		turret                   = true,
-		weaponVelocity           = 1500,
+		weaponVelocity           = 1000,
 		customparams             = {
 			damagetype		     = "eheavytank3",  
 			

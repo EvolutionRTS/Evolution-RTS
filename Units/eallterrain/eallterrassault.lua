@@ -9,7 +9,7 @@ local power						 = [[12 power]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
 
-local weapon1Damage              = 400
+local weapon1Damage              = 134
 local weapon1AOE				 = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
@@ -55,8 +55,8 @@ local unitDef                    = {
 	description                  =[[Unit Type: Anti-Base Long Range Siege Tank
 Armortype: ]] ..armortype.. [[ 
 
-400 Damage vs Buildings
-50 Damage vs Light/Armored
+134 Damage vs Buildings
+67 Damage vs Light/Armored
 
 This unit can only fire at buildings!
 
@@ -172,7 +172,7 @@ local weaponDefs                 = {
 		soundHit                 = "assaultshothit.wav",
 		texture1                 = "shot",
 		texture2                 = "empty",
-		thickness                = 9,
+		thickness                = 3,
 		tolerance                = 1000,
 		turret                   = true,
 		weaponVelocity           = 2000,

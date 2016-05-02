@@ -178,7 +178,7 @@ local weaponDefs                 = {
 		thickness                = 9,
 		tolerance                = 1000,
 		turret                   = true,
-		weaponVelocity           = 1500,
+		weaponVelocity           = 1000,
 		customparams             = {
 			damagetype		     = "eallterrheavy",  
 			

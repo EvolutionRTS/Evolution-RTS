@@ -18,7 +18,7 @@ local unitDef                    = {
 
 
 	acceleration                 = 0.5,
-	airStrafe                    = true,
+	airStrafe                    = false,
 	airHoverFactor	             = 0,
 	brakeRate                    = 2,
 	buildCostEnergy              = 0,
