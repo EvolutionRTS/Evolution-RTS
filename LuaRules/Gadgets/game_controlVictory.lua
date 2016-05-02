@@ -397,8 +397,8 @@ else -- UNSYNCED
 							for _,playerId in pairs(playerList)do
 								--Spring.Echo("\t\t\t\tnot player")
 								--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
-								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. allyTeamID.. ")" .. white, vsx - 280, vsy * .58 - 20 * playerId+10, 16, "lo")
-								Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 20 * playerId+10, 16, "lo")
+								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. allyTeamID.. ")" .. white, vsx - 280, vsy * .58 - 38 * playerId+10, 16, "lo")
+								Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * playerId+10, 16, "lo")
 							end -- end playerId
 						end -- not gaia
 					end -- end teamId
