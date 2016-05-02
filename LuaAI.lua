@@ -9,6 +9,10 @@
 
 return {
   {
+    name = 'ShardLua',
+    desc = 'Shard by AF for Spring Lua',
+  },
+  {
     name = 'Survival Spawner: Very Easy',
     desc = 'Beginner Games'
   },

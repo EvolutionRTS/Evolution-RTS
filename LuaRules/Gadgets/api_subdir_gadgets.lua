@@ -12,7 +12,7 @@
 local SCRIPT_DIR = Script.GetName() .. '/'
 local GADGETS_DIR = SCRIPT_DIR .. 'Gadgets/'
 
-local gh = gadgetHandler.gadgetHandler
+local gh = gadgetHandler
 
 --// export GADGET_DIR, so gadgets can easily load e.g. config.lua 
 --// from the same dir where the main.lua is placed
