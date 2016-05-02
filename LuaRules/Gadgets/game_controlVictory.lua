@@ -10,7 +10,14 @@ function gadget:GetInfo()
 	}
 end
 
-local nonCapturingUnits = {"edrone",}
+local nonCapturingUnits = {
+	"eairengineer",
+	"efighter",
+	"escout",
+	"egunship2",
+	"etransport",
+	"edrone",
+}
 
 --local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
