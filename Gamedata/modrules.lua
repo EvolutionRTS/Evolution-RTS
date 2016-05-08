@@ -15,7 +15,8 @@ local modrules  = {
 --   },
 
   movement = {
-    allowAirPlanesToLeaveMap = true,  -- defaults to true
+    allowAirPlanesToLeaveMap = false,  -- defaults to true
+	allowAircraftToHitGround = false,
     allowPushingEnemyUnits   = true, -- defaults to false
     allowCrushingAlliedUnits = false, -- defaults to false
     allowUnitCollisionDamage = false, -- defaults to false
@@ -25,7 +26,7 @@ local modrules  = {
   
   construction = {
     constructionDecay      = true, -- defaults to true
-    constructionDecayTime  = 0.5,  -- defaults to 6.66
+    constructionDecayTime  = 3,  -- defaults to 6.66
     constructionDecaySpeed = 0.01,  -- defaults to 0.03
   },
 
@@ -60,13 +61,11 @@ local modrules  = {
 
 
   sensors = {
-    requireSonarUnderWater = true,  -- defaults to true
+    requireSonarUnderWater = false,  -- defaults to true
 
     los = {
       losMipLevel = 3,  -- defaults to 1
-      losMul      = 1,  -- defaults to 1
       airMipLevel = 4,  -- defaults to 2
-      airMul      = 1,  -- defaults to 1
     },
   },
 
