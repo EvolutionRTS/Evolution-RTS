@@ -15,6 +15,8 @@ Ribbon.__index = Ribbon
 
 local RibbonShader
 local widthLoc, quadsLoc
+local lastTexture1
+
 local oldPosUniform = {}
 
 local DLists = {}
@@ -42,15 +44,17 @@ Ribbon.Default = {
   layer = 1,
 
   life     = math.huge,
+  projectile = 0,
   unit     = 0,
   piece    = 0,
   width    = 1,
   size     = 24, --//max 32
   color    = {0.9,0.9,1,1},
-
+  texture1 = ":c:bitmaps/GPL/Lups/jet.bmp",
+  
   worldspace = true,
   repeatEffect = true,
-  dieGameFrame = math.huge
+  dieGameFrame = math.huge,
 }
 
 -----------------------------------------------------------------------------------------------------------------
@@ -90,7 +94,6 @@ end
 
 function Ribbon:BeginDraw()
   glUseShader(RibbonShader)
-  glTexture(0,":c:bitmaps/GPL/Lups/jet.bmp")
   glBlending(GL_SRC_ALPHA,GL_ONE)
 end
 
@@ -100,10 +103,15 @@ function Ribbon:EndDraw()
   glBlending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
   glTexture(0,false)
   glColor(1,1,1,1)
+  lastTexture1 = ""
 end
 
 
 function Ribbon:Draw()
+  if (lastTexture1~=self.texture1) then
+    glTexture(0,self.texture1)
+    lastTexture1=self.texture1
+  end
   local quads0 = self.quads0
 
   glUniform(widthLoc, self.width )
@@ -120,7 +128,12 @@ function Ribbon:Draw()
   --// insert interpolated current unit pos
   if (self.isvalid) then
     --local x,y,z = GetPiecePos(self.unit,self.piecenum)
-    local x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+    local x,y,z
+	if self.unit ~= 0 then
+	  x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+	elseif self.projectile then
+	  x,y,z = Spring.GetProjectilePosition(self.projectile)
+	end
 	if x and y and z then 
 		glUniform( oldPosUniform[quads0+1] , x,y,z )
 		
@@ -228,17 +241,27 @@ end
 -----------------------------------------------------------------------------------------------------------------
 
 function Ribbon:Update(n)
-  self.isvalid = not spGetUnitIsDead(self.unit)
+  self.isvalid = (self.unit ~= 0 and not spGetUnitIsDead(self.unit)) or (self.projectile and Spring.GetProjectileDefID(self.projectile))
 
   if (self.isvalid) then
-    local x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+    local x,y,z
+    if self.unit ~= 0 then
+      x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+	elseif self.projectile then
+	  x,y,z = Spring.GetProjectilePosition(self.projectile)
+	end
     if x and y and z then
       self.posIdx = (self.posIdx % self.size)+1
       self.oldPos[self.posIdx] = {x,y,z}
 
-      local vx,vy,vz = spGetUnitVelocity(self.unit)
+      local vx,vy,vz
+	  if self.unit ~= 0 then
+	    vx,vy,vz = spGetUnitVelocity(self.unit)
+	  elseif self.projectile then
+	    vx,vy,vz = Spring.GetProjectileVelocity(self.projectile)
+	  end
 	  if vx and vy and vz then
-	    self.blendfactor = (vx*vx+vz*vz)/30
+	    self.blendfactor = (vx*vx+vz*vz+vy*vy)/30
 	  end
     end
   else
@@ -248,7 +271,7 @@ end
 
 
 function Ribbon:Visible()
-  self.isvalid = not spGetUnitIsDead(self.unit)
+  self.isvalid = (self.unit ~= 0 and not spGetUnitIsDead(self.unit)) or (self.projectile and Spring.GetProjectileDefID(self.projectile))
   local pos = self.oldPos[self.posIdx]
   return (self.blendfactor>0) and (spIsSphereInView(pos[1],pos[2],pos[3], self.radius))
 end
@@ -286,13 +309,18 @@ end
 
 function Ribbon:CreateParticle()
   if (self.size>32) then self.size=32
-  elseif (self.size<5) then self.size=5 end
+  elseif (self.size<2) then self.size=2 end
 
   self.posIdx = 1
   self.quads0 = self.size-1
   self.blendfactor = 1
 
-  local x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+  local x,y,z 
+  if self.unit ~= 0 then
+    x,y,z = spGetUnitPiecePosDir(self.unit,self.piecenum)
+  elseif self.projectile then
+	x,y,z = Spring.GetProjectilePosition(self.projectile)
+  end
   local curpos = {x,y,z}
 
   self.oldPos = {}
@@ -300,8 +328,12 @@ function Ribbon:CreateParticle()
     self.oldPos[i] = curpos
   end
 
-  local udid  = spGetUnitDefID(self.unit)
-  self.radius = (UnitDefs[udid].speed/30.0)*self.size
+  if self.unit ~= 0 then
+    local udid  = spGetUnitDefID(self.unit)
+    self.radius = (UnitDefs[udid].speed/30.0)*self.size
+  else
+    self.radius = 10 -- TODO
+  end
 
   if (not DLists[self.quads0]) then
     DLists[self.quads0] = gl.CreateList(gl.BeginEnd,GL.QUADS,CreateDList,self.quads0)

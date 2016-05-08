@@ -66,10 +66,13 @@ local function ActivateMaterial(rendering, objectID, lod)
 --Doesn't make ANY sense at all, Hey! Welcome to spring!
 --FFS this is fucking bullshit.
 --Forboding Angel
---  if lod <= activeMats.current then
---    activeMats.current = lod
---    rendering.spSetMaterialLastLOD(objectID, "opaque", lod)
---  end
+
+--Update, this is screwed because custom unit shaders is broken as shit atm. 5-7-2016
+--Disabled CUS until it is unfucked, uncommented the block.
+  if lod <= activeMats.current then
+    activeMats.current = lod
+    rendering.spSetMaterialLastLOD(objectID, "opaque", lod)
+  end
 end
 
 

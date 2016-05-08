@@ -18,52 +18,33 @@ end
 local spGetFactoryCommands = Spring.GetFactoryCommands
 local spGetUnitCommands    = Spring.GetUnitCommands
 
-local function GetCmdTag(unitID) 
-    local cmdTag = 0
-    local cmds = spGetFactoryCommands(unitID,1)
+local function GetCmdTag(unitID)
+	local cmdTag = 0
+	local cmds = spGetFactoryCommands(unitID,1)
 	if (cmds) then
 		local cmd = cmds[1]
 		if cmd then
 			cmdTag = cmd.tag
 		end
 	end
-	if cmdTag == 0 then 
+	if cmdTag == 0 then
 		local cmds = spGetUnitCommands(unitID,1)
 		if (cmds) then
 			local cmd = cmds[1]
 			if cmd then
 				cmdTag = cmd.tag
 			end
-        end
-	end 
+		end
+	end
 	return cmdTag
-end 
-	
+end
+
 
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
 if (gadgetHandler:IsSyncedCode()) then
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
-  local registeredBuilders = {}
-  function gadget:GameFrame(...)
-	SendToUnsynced("nano_GameFrame", ...)
-  end
-
-  function gadget:UnitFinished(uid, udid)
-	if (UnitDefs[udid].isBuilder) and not registeredBuilders[uid] then
-		SendToUnsynced("nano_BuilderFinished", uid)
-		registeredBuilders[uid] = nil
-	end
-  end
-
-  function gadget:UnitDestroyed(uid, udid)
-	if (UnitDefs[udid].isBuilder) and registeredBuilders[uid] then
-		SendToUnsynced("nano_BuilderDestroyed", uid)
-		registeredBuilders[uid] = nil
-	end
-  end
-
 
   --// bw-compability
   local alreadyWarned = 0
@@ -282,22 +263,10 @@ local factionsNanoFx = {
 
 local builders = {}
 
-	local function BuilderFinished(_,unitID)
-		builders[#builders+1] = unitID
-	end
-
-	local function BuilderDestroyed(_,unitID)
-		for i=1,#builders do
-			if (builders[i] == unitID) then
-				builders[i] = builders[#builders]
-			end
-		end
-		builders[#builders] = nil
-	end
-
-	local function GameFrame(_,frame)
+	function gadget:GameFrame(frame)
 		for i=1,#builders do
 			local unitID = builders[i]
+                        
 			if ((unitID + frame) % 30 < 1) then --// only update once per second
 				local strength = Spring.GetUnitCurrentBuildPower(unitID) or 0	-- * 16
 				if (strength > 0) then
@@ -440,18 +409,33 @@ function gadget:Update()
 
 end
 
+
+
+function gadget:UnitFinished(uid, udid)
+	if (UnitDefs[udid].isBuilder) then
+		builders[#builders+1] = unitID
+	end
+end
+
+
+function gadget:UnitDestroyed(uid, udid)
+	if (UnitDefs[udid].isBuilder) then
+		for i=1,#builders do
+			if (builders[i] == unitID) then
+				builders[i] = builders[#builders]
+				builders[#builders] = nil
+			end
+		end
+	end
+end
+
+
   function gadget:Initialize()
-    gadgetHandler:AddSyncAction("nano_GameFrame", GameFrame)
-    gadgetHandler:AddSyncAction("nano_BuilderFinished", BuilderFinished)
-    gadgetHandler:AddSyncAction("nano_BuilderDestroyed", BuilderDestroyed)
     --maxEngineParticles = Spring.GetConfigInt("MaxNanoParticles", 10000)
     --Spring.SetConfigInt("MaxNanoParticles", 0)
   end
 
   function gadget:Shutdown()
-    gadgetHandler:RemoveSyncAction("nano_GameFrame")
-    gadgetHandler:RemoveSyncAction("nano_BuilderFinished")
-    gadgetHandler:RemoveSyncAction("nano_BuilderDestroyed")
     --Spring.SetConfigInt("MaxNanoParticles", maxEngineParticles)
   end
 
