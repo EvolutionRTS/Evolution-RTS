@@ -25,8 +25,7 @@ local unitDef                     = {
 
 Produces +]] .. energyproduced .. [[ Energy 
 
-Provides +]] .. powerprovided .. [[ 
-Power Radius: ]] .. powerradius,
+Provides +]] .. powerprovided,
 	energyStorage                 = 0,
 	energyMake                    = energyproduced,
 	explodeAs                     = "hugeBuildingExplosionGenericBlueEMP",
@@ -77,22 +76,22 @@ Power Radius: ]] .. powerradius,
 		needed_cover              = 5,
 		death_sounds              = "generic",
 		ProvideTech               = powerprovided,
-		ProvideTechRange          = powerradius,
+--		ProvideTechRange          = powerradius,
 		--	RequireTech           = "1 Powergrid",
 		armortype                 = armortype,
 --		supply_granted            = supplygranted,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		groundtexselectimg        = ":nc:bitmaps/power/power.png",
-		groundtexselectimg1       = ":nc:bitmaps/power/power1.png",
-		groundtexselectimg2       = ":nc:bitmaps/power/power2.png",
-		groundtexselectimg3       = ":nc:bitmaps/power/power3.png",
-		groundtexselectimg4       = ":nc:bitmaps/power/power4.png",
-		groundtexselectimg5       = ":nc:bitmaps/power/power5.png",
-		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
-		groundtexselectxsize      = 800, -- optional
-		groundtexselectzsize      = 800, -- optional
+--		groundtexselectimg        = ":nc:bitmaps/power/power.png",
+--		groundtexselectimg1       = ":nc:bitmaps/power/power1.png",
+--		groundtexselectimg2       = ":nc:bitmaps/power/power2.png",
+--		groundtexselectimg3       = ":nc:bitmaps/power/power3.png",
+--		groundtexselectimg4       = ":nc:bitmaps/power/power4.png",
+--		groundtexselectimg5       = ":nc:bitmaps/power/power5.png",
+--		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
+--		groundtexselectxsize      = 800, -- optional
+--		groundtexselectzsize      = 800, -- optional
 		helptext                  = [[]],
 	},
 	useGroundDecal                = true,

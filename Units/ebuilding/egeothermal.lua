@@ -25,8 +25,7 @@ local unitDef                     = {
 
 Produces +]] .. energyproduced .. [[ Energy 
 
-Provides +]] .. powerprovided .. [[ 
-Power Radius: ]] .. powerradius,
+Provides +]] .. powerprovided,
 	energyMake                    = energyproduced,
 	energyStorage                 = 0,
 	explodeAs                     = "largeBuildingExplosionGenericBlueEMP",
@@ -77,21 +76,21 @@ Power Radius: ]] .. powerradius,
 		needed_cover              = 2,
 		death_sounds              = "generic",
 		ProvideTech               = powerprovided,
-		ProvideTechRange          = powerradius,
+--		ProvideTechRange          = powerradius,
 		armortype                 = armortype,
 --		supply_granted            = supplygranted,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		groundtexselectimg        = ":nc:bitmaps/power/power.png",
-		groundtexselectimg1       = ":nc:bitmaps/power/power1.png",
-		groundtexselectimg2       = ":nc:bitmaps/power/power2.png",
-		groundtexselectimg3       = ":nc:bitmaps/power/power3.png",
-		groundtexselectimg4       = ":nc:bitmaps/power/power4.png",
-		groundtexselectimg5       = ":nc:bitmaps/power/power5.png",
-		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
-		groundtexselectxsize      = 600, -- optional
-		groundtexselectzsize      = 600, -- optional
+--		groundtexselectimg        = ":nc:bitmaps/power/power.png",
+--		groundtexselectimg1       = ":nc:bitmaps/power/power1.png",
+--		groundtexselectimg2       = ":nc:bitmaps/power/power2.png",
+--		groundtexselectimg3       = ":nc:bitmaps/power/power3.png",
+--		groundtexselectimg4       = ":nc:bitmaps/power/power4.png",
+--		groundtexselectimg5       = ":nc:bitmaps/power/power5.png",
+--		groundtexselectimg6       = ":nc:bitmaps/power/power6.png",
+--		groundtexselectxsize      = 600, -- optional
+--		groundtexselectzsize      = 600, -- optional
 		helptext                  = [[]],
 	},
 	useGroundDecal                = true,
