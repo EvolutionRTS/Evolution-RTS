@@ -29,6 +29,7 @@ function widget:Initialize()
 		Spring.SetConfigInt("GrassDetail",0)
 		Spring.SetConfigInt("GroundDetail",64)
 		Spring.SetConfigInt("MaxSounds",128)
+		Spring.SetConfigInt("ScrollWheelSpeed",-25)
 
 		widgetHandler:RemoveWidget()
 end

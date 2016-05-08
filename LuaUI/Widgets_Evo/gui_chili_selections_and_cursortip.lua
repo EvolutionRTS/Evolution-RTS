@@ -2003,7 +2003,7 @@ function widget:Initialize()
     real_window_corner = Window:New{
 		name   = 'real_window_corner';
 		color = {0, 0, 0, 0},
-		right = 0;
+		right = "35%";
 		bottom = 0;
         width = 550;
 		height = 220;
