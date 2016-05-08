@@ -304,7 +304,7 @@ else -- UNSYNCED
 			end
 		
 			for _,teamId in pairs(Spring.GetTeamList(allyTeamID))do	
-				local playerList = Spring.GetPlayerList(teamId)	
+				local playerList = Spring.GetPlayerList(teamId, true)	
 				-- does this team have an entry? if not, make one!
 				if playerEntries[allyTeamID][teamId] == nil then 
 					playerEntries[allyTeamID][teamId] = {}	
