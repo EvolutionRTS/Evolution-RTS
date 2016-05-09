@@ -122,7 +122,6 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "assaulttankcannon",
-			onlyTargetCategory   = "BUILDING",
 		},
 	},
 	customParams                 = {
@@ -162,7 +161,7 @@ local weaponDefs                 = {
 		interceptedByShieldType  = 4,
 		minintensity             = "1",
 		name                     = "Laser",
-		range                    = 1000,
+		range                    = 1500,
 		reloadtime               = 3,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0.5 0 1",
