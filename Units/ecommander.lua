@@ -240,7 +240,7 @@ local weaponDefs                 = {
 			death_sounds 		  = "nuke",
 		},      
 		damage                    = {
-			default               = 500,
+			default               = 1000,
 		},
 	},
 }
