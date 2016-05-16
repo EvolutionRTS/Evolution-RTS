@@ -98,7 +98,7 @@ local function SpawnStartUnit(teamID)
 		-- remove the pre-existing storage
 		--   must be done after the start unit is spawned,
 		--   otherwise the starting resources are lost!
-		Spring.SetTeamResource(teamID, "ms", tonumber(m))
+		Spring.SetTeamResource(teamID, "ms", 100000) --Use tonumber(m) to have it match the startmetal amounts
 		Spring.SetTeamResource(teamID, "m", 0)
 		Spring.AddTeamResource(teamID, "m", tonumber(m))
 	end
@@ -106,7 +106,7 @@ local function SpawnStartUnit(teamID)
 		-- remove the pre-existing storage
 		--   must be done after the start unit is spawned,
 		--   otherwise the starting resources are lost!
-		Spring.SetTeamResource(teamID, "es", tonumber(e))
+		Spring.SetTeamResource(teamID, "es", 100000) --Use tonumber(e) to have it match the startenergy amounts
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", tonumber(e))
 	end

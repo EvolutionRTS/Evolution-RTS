@@ -13,15 +13,39 @@ end
 --Disable Default Resources Bar
 Spring.SendCommands({"resbar 0"})
 
+local white = "\255\255\255\255"
+local yellow = "\255\255\255\0"
+local orange = "\255\255\135\0"
+local green = "\255\0\255\0"
+local red = "\255\255\0\0"
+local skyblue = "\255\136\197\226"
+
 local str = ""
 local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
 local posx, posy = vsx * 0.7, vsy * 0.98
 
+--Spring.GetTeamResources
+-- ( number teamID, string "metal" | "energy" ) ->
+--   nil | number currentLevel, (ec)
+--         number storage, (es)
+--         number pull, (ep)
+--         number income, (ei)
+--         number expense, (ee)
+--         number share,
+--         number sent,
+--         number received
+
 function widget:GameFrame(n)
 	local myTeamID = Spring.GetMyTeamID()
     local ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
-    str = "\255\255\255\0Energy: \255\255\135\0± " .. tostring(math.round(ei - ee)) .. "\255\0\255\0 +" .. tostring(math.round(ei)) .. "\255\255\255\255/\255\255\0\0-" .. tostring(math.round(ep)) .. "\255\255\255\255 (" .. tostring(math.round(ec)) .. "/" .. tostring(math.round(es)) .. "\255\255\255\255)"
+
+--Normal Energy Display
+--    str = yellow .. "Energy:" .. orange .. " ± " .. tostring(math.round(ei - ee)) .. green .. " +" .. tostring(math.round(ei)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep)) .. white .. " (" .. tostring(math.round(ec)) .. "/" .. tostring(math.round(es)) .. ")"
+
+--Custom Evo Energy display
+--This doesn't display the total possible amount because it is 100000 possible in storage
+    str = yellow .. "Energy:" .. orange .. " ± " .. tostring(math.round(ei - ee)) .. green .. " +" .. tostring(math.round(ei)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep)) .. white .. " (" .. tostring(math.round(ec)) .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)

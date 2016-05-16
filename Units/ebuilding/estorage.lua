@@ -6,7 +6,7 @@ local unitName                    = "estorage"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local storage					  = 25
+local storage					  = 0
 local supplygranted				  = 10
 
 local unitDef                     = {
@@ -26,8 +26,6 @@ local unitDef                     = {
 
 	corpse                        = "ammobox",
 	description                   = [[Armortype: ]] ..armortype.. [[ 
-
-Increases your Metal and Energy storage reserves by +]] .. storage .. [[ 
 	
 Provides +]] .. supplygranted .. [[ Supply]],
 	energyStorage                 = storage,
