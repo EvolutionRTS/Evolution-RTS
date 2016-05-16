@@ -13,6 +13,13 @@ end
 --Disable Default Resources Bar
 Spring.SendCommands({"resbar 0"})
 
+local white = "\255\255\255\255"
+local yellow = "\255\255\255\0"
+local orange = "\255\255\135\0"
+local green = "\255\0\255\0"
+local red = "\255\255\0\0"
+local skyblue = "\255\136\197\226"
+
 local str = ""
 local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
@@ -21,8 +28,10 @@ local maxSupply = 200
 
 function widget:GameFrame(n)
 	local myTeamID = Spring.GetMyTeamID()
+	--math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed")) -- (su)
+	--math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax")) -- (sm)
     local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed")), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax"))
-    str = "\255\0\255\0Supply: " .. "\255\255\255\255" .. su .. "/" .. sm .. " (\255\255\135\0±" .. tostring(sm - su) .. "\255\255\255\255/\255\0\255\0" .. maxSupply .. "\255\255\255\255)"
+    str = green .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)
