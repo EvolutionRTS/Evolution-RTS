@@ -7,7 +7,7 @@ local unitName                   = "edrone"
 
 local armortype					 = [[light]]
 
-local weapon1Damage              = 3
+local weapon1Damage              = 5
 local energycosttofire			 = weapon1Damage / 20
 
 local unitDef                    = {
@@ -19,7 +19,7 @@ local unitDef                    = {
 
 
 	acceleration                 = 0.5,
-	airStrafe                    = true,
+	airStrafe                    = false,
 	bankscale                    = "1",
 	brakeRate                    = 1,
 	buildCostEnergy              = 1,
