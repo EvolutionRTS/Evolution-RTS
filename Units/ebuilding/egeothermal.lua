@@ -6,7 +6,7 @@ local unitName                    = "egeothermal"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[3.5]]
+local energyproduced			 = [[7]]
 local powerprovided				 = [[7 power]]
 local powerradius				 = [[600]]
 --local supplygranted				 = [[35]]

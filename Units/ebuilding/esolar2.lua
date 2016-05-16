@@ -6,7 +6,7 @@ local unitName                    = "esolar2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[0.5]]
+local energyproduced			 = [[1]]
 local powerprovided				 = [[1 power]]
 local powerradius				 = [[400]]
 -- local supplygranted				 = [[5]]

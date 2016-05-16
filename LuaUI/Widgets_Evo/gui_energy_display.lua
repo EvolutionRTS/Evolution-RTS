@@ -45,7 +45,7 @@ function widget:GameFrame(n)
 
 --Custom Evo Energy display
 --This doesn't display the total possible amount because it is 100000 possible in storage
-    str = yellow .. "Energy:" .. orange .. " ± " .. tostring(math.round(ei - ee)) .. green .. " +" .. tostring(math.round(ei)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep)) .. white .. " (" .. tostring(math.round(ec)) .. ")"
+    str = yellow .. "Energy:" .. orange .. " ± " .. tostring(math.round(ei - ee)) .. green .. " +" .. tostring(math.round(ei)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)

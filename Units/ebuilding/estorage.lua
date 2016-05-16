@@ -6,7 +6,7 @@ local unitName                    = "estorage"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local storage					  = 0
+local storage					  = 25
 local supplygranted				  = 10
 
 local unitDef                     = {

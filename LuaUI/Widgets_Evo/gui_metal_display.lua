@@ -44,8 +44,7 @@ function widget:GameFrame(n)
 --    str = "\255\136\197\226Metal: \255\255\135\0± " .. tostring(math.round(mi - me)) .. "\255\0\255\0 +" .. tostring(math.round(mi)) .. "\255\255\255\255/\255\255\0\0-" .. tostring(math.round(mp)) .. "\255\255\255\255 (" .. tostring(math.round(mc)) .. "/" .. tostring(math.round(ms)) .. "\255\255\255\255)"
 
 --Custom Evo metal display
---This doesn't display the total possible amount because it is 100000 possible in storage
-    str = skyblue .. "Metal: " .. orange .. "± " .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. tostring(math.round(mc)) .. ")"
+    str = skyblue .. "Metal: " .. orange .. "± " .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)
