@@ -6,7 +6,7 @@ local unitName                    = "emediumgen"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[5]]
+local energyproduced			 = [[2.5]]
 local powerprovided				 = [[5 power]]
 local powerradius				 = [[500]]
 --local supplygranted				 = [[25]]
