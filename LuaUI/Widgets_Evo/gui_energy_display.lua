@@ -23,7 +23,7 @@ local skyblue = "\255\136\197\226"
 local str = ""
 local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
-local posx, posy = vsx * 0.7, vsy * 0.98
+local posx, posy = vsx - 245, vsy -40
 
 --Spring.GetTeamResources
 -- ( number teamID, string "metal" | "energy" ) ->
