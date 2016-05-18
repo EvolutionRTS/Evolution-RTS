@@ -338,6 +338,8 @@ else -- UNSYNCED
 	local function DrawPoints()
 		local teamAllyTeamID = Spring.GetLocalAllyTeamID()
 		for _, capturePoint in spairs(SYNCED.points) do
+		--Spring.Echo(capturePoint)
+		--Spring.Echo(SYNCED.points)
 				
 				local r, g, b = 1, 1, 1
 				if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then

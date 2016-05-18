@@ -112,8 +112,8 @@ function gadget:Initialize(n)
 	if ( Spring.GetModOptions().comm  == "sandbox" or Spring.GetModOptions().comm  == "feature" ) then
 
 		for _,i in ipairs(Spring.GetTeamList()) do
-			Spring.SetTeamResource(i,"e",1000000000000)
-			Spring.SetTeamResource(i,"m",1000000000000)
+			Spring.SetTeamResource(i,"e",250)
+			Spring.SetTeamResource(i,"m",100)
 		end
 	end
 	
@@ -144,7 +144,11 @@ function gadget:GameFrame(n)
 						local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
 				if i ~= Spring.GetGaiaTeamID() then -- don't give free stuff to GAIA
 --						Spring.AddTeamResource(i,"e",1)
-					Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])
+					if not (baseIncome >= 15) then
+						Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])
+					else
+						Spring.AddTeamResource(i,"m",15)
+					end
 --					Spring.Echo("Final baseIncome amount that is being run through AddTeamResource")
 --					Spring.Echo(baseIncome)
 --					Spring.Echo("DUN DUN DUN")
