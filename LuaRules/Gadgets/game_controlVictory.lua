@@ -364,22 +364,22 @@ else -- UNSYNCED
 		Color(1, 1, 1, 1)
 	end
 
+	function gadget:DrawInMiniMap()
+		PushMatrix()
+		gl.LoadIdentity()
+		Translate(0, 1, 0)
+		Scale(1 / Game.mapSizeX, 1 / Game.mapSizeZ, 1 / Game.mapSizeX)
+		Rotate(90, 1, 0, 0)
+		DrawPoints()
+		PopMatrix()
+	end
+	
 	function gadget:DrawWorld()
 		gl.DepthTest(GL.LEQUAL)
 		gl.PolygonOffset(-10, -10)
 		DrawPoints()
 		gl.DepthTest(false)
 		gl.PolygonOffset(false)
-	end
-
-	function gadget:DrawInMiniMap()
-		PushMatrix()
-		gl.LoadIdentity()
-		Translate(0, 1, 0)
-		Scale(1 / Game.mapSizeX, 1 / Game.mapSizeZ, 1)
-		Rotate(90, 1, 0, 0)
-		DrawPoints()
-		PopMatrix()
 	end
 
 	function gadget:DrawScreen(vsx, vsy)
