@@ -101,31 +101,29 @@ There can only be one!]],
 		},
 	},
 	buildoptions                 = {
-		"eminifacai", --new
-		"ebasefactoryai", --new
-		"eamphibfacai",
-		"eairplantai",
-		"eexperimentalfac",
-		"emetalextractorai", --new
-		"emaker", --new
-		"esolar2ai",
-		"emediumgenai",		--new
+		"eminifac", --new
+		"ebasefactory", --new
+		"eamphibfac",
+		"eairplant",
+--		"eexperimentalfac",
+--		"emetalextractor", --new
+--		"emaker", --new
+		"esolar2", --new
+		"emediumgen", --new
 		"egeothermal", --new
-		"efusion2ai", --new
-		"estorageai", --new
+		"efusion2", --new
+		"estorage", --new
 		"eradar2", --new
 		"ejammer2", --new
 		"ekmar",
-		"elightturret2ai", --new
-		"eheavyturret2ai", --new
+		"elightturret2", --new
+		"eheavyturret2", --new
 		"eartyturret",
 		"euwturret",
-		"ecruisesiloai",
 		"eshieldgen",
 		"esilo",
-		"emineai",
-		"eorbai",
-		"ecommanderai",
+		"emine",
+		"eorb",
 	},
 	sounds                       = {
 		underattack              = "unitsunderattack1",
