@@ -368,7 +368,7 @@ else -- UNSYNCED
 		PushMatrix()
 		gl.LoadIdentity()
 		Translate(0, 1, 0)
-		Scale(1 / Game.mapSizeX, 1 / Game.mapSizeZ, 1 / Game.mapSizeX)
+		Scale(1 / Game.mapSizeX, 1 / Game.mapSizeZ, 1 / 1000000000)  --10082.1695
 		Rotate(90, 1, 0, 0)
 		DrawPoints()
 		PopMatrix()
