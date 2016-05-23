@@ -151,8 +151,8 @@ local weaponDefs                  = {
 		turnRate                  = 3000,
 		targetable			      = 1,
 		
-		weaponAcceleration        = 30,
-		weaponTimer               = 15,
+		weaponAcceleration        = 60,
+		weaponTimer               = 5,
 		weaponType                = "StarburstLauncher",
 		weaponVelocity            = 1000,
 		customparams              = {
