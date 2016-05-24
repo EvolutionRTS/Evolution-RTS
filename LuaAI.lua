@@ -12,7 +12,7 @@ return {
     name = 'ShardLua',
     desc = 'Shard by AF for Spring Lua',
   },
-  {
+--[[  {
     name = 'Survival Spawner: Very Easy',
     desc = 'Beginner Games'
   },
@@ -31,7 +31,7 @@ return {
   {
     name = 'Survival Spawner: Very Hard',
     desc = 'Hardcore Games'
-  },
+  }, ]]--
 }
 
 

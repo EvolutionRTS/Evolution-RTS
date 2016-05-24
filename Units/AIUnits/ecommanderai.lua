@@ -6,7 +6,8 @@ local unitName                   = "ecommanderai"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supplyGiven				 = [[250]]
+local supplyGiven				 = [[200]]
+local powerprovided				 = [[50 power]]
 
 local unitDef                    = {
 
@@ -144,6 +145,7 @@ There can only be one!]],
 		iscommander              = true,
 		needed_cover             = 2,
 		supply_granted            = supplyGiven,
+		ProvideTech               = powerprovided,
 		death_sounds             = "generic",
 		cancollect               = "1",
 		armortype                = armortype,
@@ -164,13 +166,13 @@ local weaponDefs                 = {
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		explosionGenerator       = "custom:genericshellexplosion-large-blue-emp",
+		explosionGenerator       = "custom:genericshellexplosion-large",
 		tolerance                = 1000,
 		energypershot            = 0,
 		explosionScar		     = false,
 		impulseFactor            = 0,
 		name                     = "Emp Blast Weapon",
-		paralyzer		         = true,
+		--paralyzer		         = true,
 		paralyzetime	         = 5,
 		range                    = 500,
 		reloadtime               = 10,

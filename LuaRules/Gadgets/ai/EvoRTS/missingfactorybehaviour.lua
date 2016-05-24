@@ -49,7 +49,7 @@ function MissingFactoryBehaviour:Priority()
 end
 
 function MissingFactoryBehaviour:UnitDead(unit)
-	if unit:Internal():Name() == "ecommandfactory" then
+	if unit:Internal():Name() == "ebasefactory" then
 		self.build = true
 		--game:SendToConsole("missingfactory activated")
 	elseif unit:Internal():Name() == "ebasefactory" then

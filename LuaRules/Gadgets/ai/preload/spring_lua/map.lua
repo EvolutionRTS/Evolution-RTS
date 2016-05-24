@@ -21,6 +21,7 @@ map.spots = shard_include("spring_lua/metal")
 
 function map:FindClosestBuildSite(unittype, builderpos, searchradius, minimumdistance, validFunction) -- returns Position
 	-- validFunction takes a position and returns a position or nil if the position is not valid
+	validFunction = validFunction or function (position) return position end
 	searchradius = searchradius or 500
 	minimumdistance = minimumdistance or 50
 	local twicePi = math.pi * 2
@@ -40,16 +41,16 @@ function map:FindClosestBuildSite(unittype, builderpos, searchradius, minimumdis
 			local y = Spring.GetGroundHeight(x,z)
 			local buildable, position = self:CanBuildHere(unittype, {x=x, y=y, z=z})
 			if buildable then
-				if validFunction then
-					position = validFunction(position)
-					if position then return position end
-				else
-					return position
-				end
+				position = validFunction(position)
+				if position then return position end
 			end
 		end 
 	end
-	return builderpos
+	local lastDitch, lastDitchPos = self:CanBuildHere(unittype, builderpos)
+	if lastDitch then
+		lastDitchPos = validFunction(lastDitchPos)
+		if lastDitchPos then return lastDitchPos end
+	end
 end
 
 function map:CanBuildHere(unittype,position) -- returns boolean

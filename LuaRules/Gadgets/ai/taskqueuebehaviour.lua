@@ -116,6 +116,17 @@ function TaskQueueBehaviour:ProgressQueue()
 				tqb = self
 				ai.sleep:Wait({ wakeup = function() tqb:ProgressQueue() end, },value.frames)
 				return
+			elseif action == "move" then
+				self.unit:Internal():Move(value.position)
+				self.progress = false
+			elseif action == "moverelative" then
+				local upos = self.unit:Internal():GetPosition()
+				local newpos = api.Position()
+				newpos.x = upos.x + value.position.x
+				newpos.y = upos.y + value.position.y
+				newpos.z = upos.z + value.position.z
+				self.unit:Internal():Move(newpos)
+				self.progress = false
 			end
 		else
 			if type(val) == "function" then
