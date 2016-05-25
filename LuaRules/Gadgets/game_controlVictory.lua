@@ -343,7 +343,7 @@ else -- UNSYNCED
 				
 				local r, g, b = 1, 1, 1
 				if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then
-					r, g, b = Spring.GetTeamColor(capturePoint.owner) 
+					r, g, b = Spring.GetTeamColor(Spring.GetTeamList(capturePoint.owner)[1])
 					--Spring.Echo("Owner ID: " .. capturePoint.owner .. " -- Color: " .. r, g, b)
 				end
 				Color(r, g, b, 1)
