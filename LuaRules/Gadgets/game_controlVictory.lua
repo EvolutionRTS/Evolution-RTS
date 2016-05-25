@@ -343,10 +343,9 @@ else -- UNSYNCED
 				
 				local r, g, b = 1, 1, 1
 				if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then
-					capturePoint.owner = capturePoint.owner + 1
-					Spring.Echo("Owner ID: " .. capturePoint.owner)
+					--capturePoint.owner = capturePoint.owner + 1
 					r, g, b = Spring.GetTeamColor(capturePoint.owner) 
-					Spring.Echo("Owner ID: " .. capturePoint.owner .. "Color: " .. r, g, b)
+					--Spring.Echo("Owner ID: " .. capturePoint.owner .. "Color: " .. r, g, b)
 				end
 				Color(r, g, b, 1)
 				--Spring.Echo("draw points", capturePoint.owner, r, g, b)
@@ -403,7 +402,7 @@ else -- UNSYNCED
 						-- gaia player doesn't count
 						if teamId ~= gaia then					
 							
-							local playerList 		= Spring.GetPlayerList(teamId)	
+							local playerList 		= Spring.GetPlayerList(teamId - 1)	-- Added teamID - 1 to possibly fix a spring bug. If colors start appearing flipflopped, remove the - 1
 							local r, g, b 			= Spring.GetTeamColor(teamId)
 							local playerTeamColor	= string.char("255",r*255,g*255,b*255)
 							--Spring.Echo("\t\t\tplayerList", #playerList)
