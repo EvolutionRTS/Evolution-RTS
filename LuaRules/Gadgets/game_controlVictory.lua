@@ -343,7 +343,6 @@ else -- UNSYNCED
 				
 				local r, g, b = 1, 1, 1
 				if capturePoint.owner and capturePoint.owner ~= Spring.GetGaiaTeamID() then
-					capturePoint.owner = capturePoint.owner - 1
 					r, g, b = Spring.GetTeamColor(capturePoint.owner) 
 					--Spring.Echo("Owner ID: " .. capturePoint.owner .. "Color: " .. r, g, b)
 				end
@@ -410,7 +409,7 @@ else -- UNSYNCED
 								--Spring.Echo("\t\t\t\tnot player")
 								--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
 								--Spring.Echo(Spring.GetPlayerInfo(_, _, spectator))
-								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. allyTeamID.. ")" .. white, vsx - 280, vsy * .58 - 38 * playerId+10, 16, "lo")
+								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetPlayerInfo(allyTeamID).. ")" .. white, vsx - 280, vsy * .58 - 38 * playerId+10, 16, "lo")
 								Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * playerId+8, 16, "lo")
 							end -- end playerId
 						end -- not gaia
