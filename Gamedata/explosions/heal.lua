@@ -9,7 +9,7 @@ return {
       ground             = true,
       properties = {
         airdrag            = 0.7,
-        alwaysvisible      = true,
+        alwaysvisible      = false,
         colormap           = [[0.25 0.60 0.10 1.0	0 0 0 0.0]],
         directional        = true,
         emitrot            = 90,
@@ -36,7 +36,7 @@ return {
       water              = true,
       properties = {
         airdrag            = 0.7,
-        alwaysvisible      = true,
+        alwaysvisible      = false,
         colormap           = [[1 0.5 1 1	0.5 0.5 1 1	0 0 0 0.5]],
         directional        = true,
         emitrot            = 90,

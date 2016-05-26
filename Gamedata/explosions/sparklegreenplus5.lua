@@ -20,7 +20,7 @@ return {
     },
     groundflash = {
       air                = true,
-      alwaysvisible      = true,
+      alwaysvisible      = false,
       circlealpha        = 0.0,
       circlegrowth       = 8,
       flashalpha         = 0.9,
@@ -90,6 +90,7 @@ return {
 		class              	= [[CSimpleParticleSystem]],
 		
 		properties = {
+			alwaysvisible      = false,
 			sizeGrowth			= 0,
 			sizeMod				= 1,
 			pos					= [[0, 20, 0]],

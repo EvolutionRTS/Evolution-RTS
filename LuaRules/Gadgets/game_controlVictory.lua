@@ -34,7 +34,7 @@ local startTime = tonumber(Spring.GetModOptions().starttime) or 0 -- The time wh
 local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 -- Time needed holding all points to score in multi domination
 
 Spring.Echo("Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Control Victory Scoring Mode Is Not Set!"))
--- if Spring.GetModOptions().scoremode == "disabled" then return false end
+if Spring.GetModOptions().scoremode == "disabled" then return false end
 
 local limitScore = tonumber(Spring.GetModOptions().limitscore) or 3500
 
