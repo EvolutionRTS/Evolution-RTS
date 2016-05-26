@@ -224,8 +224,8 @@ if (gadgetHandler:IsSyncedCode()) then
 				for owner, count in pairs(owned) do
 					for _, a in ipairs(Spring.GetAllyTeamList()) do
 						if a ~= owner and score[a] > 0 then
-							score[a] = score[a] - count
-							score[owner] = score[owner] + count
+							score[a] = score[a] - count * 2
+							score[owner] = score[owner] + count * 2
 						end
 					end
 				end
