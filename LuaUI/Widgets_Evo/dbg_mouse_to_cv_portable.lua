@@ -1,7 +1,7 @@
 function widget:GetInfo()
   return {
     name      = "Mouse to Control Victory Points",
-    desc      = "Click to make a control points table. Alt+P to toggle. Works with any game.",
+    desc      = "Click to make a control points table. Alt+M to toggle. Works with any game.",
     author    = "Google Frog",
     date      = "April 28, 2012",
     license   = "GNU GPL, v2 or later",
@@ -29,7 +29,7 @@ local handle
 
 function widget:KeyPress(key, modifier, isRepeat)
 	if modifier.alt then
-		if key == KEYSYMS.P then
+		if key == KEYSYMS.M then
 			enabled = not enabled
 		end
 	end
