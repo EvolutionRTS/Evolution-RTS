@@ -387,7 +387,7 @@ else -- UNSYNCED
 		local frame = Spring.GetGameFrame()
 		if frame / 1800 > startTime then
 			local n = 1
-			local dominator 		= SYNCED.dom.dominator
+			local dominator 		= SYNCED.dom.dominatorwa
 			local dominationTime 	= SYNCED.dom.dominationTime
 			local white				= string.char("255","255","255","255")	
 					
@@ -401,7 +401,7 @@ else -- UNSYNCED
 						-- gaia player doesn't count
 						if teamId ~= gaia then					
 							
-							local playerList 		= Spring.GetPlayerList(teamId)	
+							local playerList 		= Spring.GetPlayerList(1,teamId)	
 							local r, g, b 			= Spring.GetTeamColor(teamId)
 							local playerTeamColor	= string.char("255",r*255,g*255,b*255)
 							--Spring.Echo("\t\t\tplayerList", #playerList)
@@ -409,7 +409,7 @@ else -- UNSYNCED
 								--Spring.Echo("\t\t\t\tnot player")
 								--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
 								--Spring.Echo(Spring.GetPlayerInfo(_, _, spectator))
-								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetTeamInfo(teamId).. ")" .. white, vsx - 280, vsy * .58 - 38 * playerId+10, 16, "lo")
+								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetTeamInfo(1,teamId) .. ")" .. white, vsx - 280, vsy * .58 - 38 * playerId+10, 16, "lo")
 								Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * playerId+8, 16, "lo")
 							end -- end playerId
 						end -- not gaia
