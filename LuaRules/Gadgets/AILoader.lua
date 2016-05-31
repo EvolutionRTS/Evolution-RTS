@@ -110,6 +110,7 @@ function gadget:Initialize()
 		-- catch up to current units
 		for _,uId in ipairs(spGetAllUnits()) do
 			self:UnitCreated(uId, Spring.GetUnitDefID(uId), Spring.GetUnitTeam(uId))
+			self:UnitFinished(uId, Spring.GetUnitDefID(uId), Spring.GetUnitTeam(uId))
 		end
 	end
 end

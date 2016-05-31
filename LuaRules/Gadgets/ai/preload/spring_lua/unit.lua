@@ -162,7 +162,10 @@ end
 
 function ShardSpringUnit:GetPosition()
 	local bpx, bpy, bpz = Spring.GetUnitPosition(self.id)
-	if not bpx then Spring.Echo(self:Name(), self.id, "nil position") end
+	if not bpx then
+		Spring.Echo(self:Name(), self.id, "nil position")
+		return
+	end
 	return {
 		x=bpx,
 		y=bpy,
