@@ -82,8 +82,21 @@ if (gadgetHandler:IsSyncedCode()) then
 		end
 	end
 	
+	-- functions to be registered as globals
+
+	local function gControlPoints()
+		return points or {}
+	end
+
+	local function gNonCapturingUnits()
+		return nonCapturingUnits or {}
+	end
+
+	-- end global-registered functions
 
 	function gadget:Initialize()
+		gadgetHandler:RegisterGlobal('ControlPoints', gControlPoints)
+		gadgetHandler:RegisterGlobal('NonCapturingUnits', gNonCapturingUnits)
 		for _, a in ipairs(Spring.GetAllyTeamList()) do
 			if scoreMode ~= 3 then
 				score[a] = limitScore
