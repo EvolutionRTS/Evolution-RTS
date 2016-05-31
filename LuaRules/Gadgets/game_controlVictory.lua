@@ -92,11 +92,16 @@ if (gadgetHandler:IsSyncedCode()) then
 		return nonCapturingUnits or {}
 	end
 
+	local function gCaptureDistance()
+		return captureRadius or 0
+	end
+
 	-- end global-registered functions
 
 	function gadget:Initialize()
 		gadgetHandler:RegisterGlobal('ControlPoints', gControlPoints)
 		gadgetHandler:RegisterGlobal('NonCapturingUnits', gNonCapturingUnits)
+		gadgetHandler:RegisterGlobal('CaptureDistance', gCaptureDistance)
 		for _, a in ipairs(Spring.GetAllyTeamList()) do
 			if scoreMode ~= 3 then
 				score[a] = limitScore
