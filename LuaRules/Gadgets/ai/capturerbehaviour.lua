@@ -29,8 +29,16 @@ function CapturerBehaviour:Init()
 	self.minDist = math.ceil( self.maxDist / 3 )
 end
 
-function CapturerBehaviour:UnitIdle()
+function CapturerBehaviour:UnitIdle(unit)
+	if not self.active then return end
 	if unit.engineID == self.unit.engineID then
+		self:GoForth()
+	end
+end
+
+function CapturerBehaviour:Update()
+	if not self.active then return end
+	if not self.nextCheck or game:Frame() == self.nextCheck then
 		self:GoForth()
 	end
 end
@@ -45,7 +53,10 @@ end
 
 function CapturerBehaviour:Activate()
 	self.active = true
-	self:GoForth()
+end
+
+function CapturerBehaviour:Deactivate()
+	self.active = false
 end
 
 function CapturerBehaviour:GoForth()
@@ -56,4 +67,5 @@ function CapturerBehaviour:GoForth()
 		self.unit:Internal():Move(movePos)
 		self.currentPoint = point
 	end
+	self.nextCheck = game:Frame() + math.random(60, 90)
 end
