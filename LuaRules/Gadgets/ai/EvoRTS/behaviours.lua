@@ -2,6 +2,7 @@
 shard_include "taskqueues"
 shard_include "taskqueuebehaviour"
 shard_include "attackerbehaviour"
+shard_include "capturerbehaviour"
 --require "missingfactorybehaviour"
 --require "engineerturretbehaviour"
 --require "autoreclaimbehaviour"
@@ -78,6 +79,9 @@ function defaultBehaviours(unit)
 	else
 		if IsAttacker(unit) then
 			table.insert(b,AttackerBehaviour)
+		end
+		if IsCapturer(unit) then
+			table.insert(b,CapturerBehaviour)
 		end
 	end
 	
