@@ -1,7 +1,9 @@
 function IsCapturer(unit)
 	local noncapturelist = {}
 	if ShardSpringLua then
-		noncapturelist = Script.LuaRules.NonCapturingUnits() or {}
+		if Script.LuaRules('NonCapturingUnits') then
+			noncapturelist = Script.LuaRules.NonCapturingUnits() or {}
+		end
 	end
 	for i = 1, #noncapturelist do
 		local name = noncapturelist[i]
@@ -38,7 +40,7 @@ end
 
 function CapturerBehaviour:Update()
 	if not self.active then return end
-	if not self.nextCheck or game:Frame() == self.nextCheck then
+	if not self.nextCheck or self.game:Frame() == self.nextCheck then
 		self:GoForth()
 	end
 end
@@ -62,10 +64,10 @@ end
 function CapturerBehaviour:GoForth()
 	local upos = self.unit:Internal():GetPosition()
 	local point = self.ai.controlpointhandler:ClosestUncapturedPoint(upos)
-	if point ~= self.currentPoint then
+	if point and point ~= self.currentPoint then
 		local movePos = RandomAway( point, math.random(self.minDist,self.maxDist) )
 		self.unit:Internal():Move(movePos)
 		self.currentPoint = point
 	end
-	self.nextCheck = game:Frame() + math.random(60, 90)
+	self.nextCheck = self.game:Frame() + math.random(60, 90)
 end
