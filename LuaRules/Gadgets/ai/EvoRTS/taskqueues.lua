@@ -19,15 +19,13 @@ local function AirOrLand()
 end
 
 local function StartFactory()
-	local r = math.random(0,3)
+	local r = math.random(0,2)
 	if r == 0 then
-			return "eairplant"
+			return "minifac"
 		elseif r == 1 then
 			return "ebasefactory"
-		elseif r == 2 then
+		else
 			return "eamphibfac"
-		else 
-			return "eminifac"
 	end
 end
 
@@ -58,7 +56,7 @@ local factory = {
 
 local firstEngineer = {
 	--{action = "wait", frames = 30}
-   AirOrLand,
+   StartFactory,
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "emediumgen",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
@@ -72,7 +70,9 @@ local firstEngineer = {
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "emediumgen",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
-   "efusion2",
+   "eorb",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "eorb",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "efusion2",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
@@ -80,11 +80,21 @@ local firstEngineer = {
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "efusion2",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
---   "ecruisesilo",
+   "efusion2",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
 }
 
 local engineers = {
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "elightturret2",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "emediumgen",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "estorage",
@@ -99,7 +109,9 @@ local engineers = {
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "emediumgen",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
-   "efusion2",
+   "eorb",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "eorb",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "efusion2",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
@@ -107,7 +119,21 @@ local engineers = {
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
    "efusion2",
    { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
---   "ecruisesilo",
+   "efusion2",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "heavyturret2",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
+   { action = "moverelative", position = {x = math.random(-750, 750), y = math.random(-750, 750), z = math.random(-750, 750)} },
+   "emine",
 }
 
 local airplant = {

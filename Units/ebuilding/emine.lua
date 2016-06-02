@@ -6,7 +6,7 @@ local unitName                    = "emine"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local supply					 = [[1]]
+--local supply					 = [[1]]
 
 local weapon1Damage              = 305
 local weapon1AOE				 = 1
@@ -107,7 +107,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 		death_sounds              = "generic",
 		nofriendlyfire	          = "1",
 		armortype                 = armortype,
-		supply_cost               = supply,
+		--supply_cost               = supply,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  

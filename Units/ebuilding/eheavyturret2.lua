@@ -6,7 +6,7 @@ local unitName                    = "eheavyturret2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local supply					 = [[5]]
+--local supply					 = [[5]]
 
 local weapon1Damage               = 300
 local weapon1AOE				  = 50
@@ -20,7 +20,7 @@ local unitDef                     = {
 
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 90,
+	buildCostMetal                = 180,
 	builder                       = false,
 	buildTime                     = 5,
 	collisionVolumeOffsets        = "0 0 0",
@@ -38,9 +38,7 @@ Armortype: ]] ..armortype.. [[
 150 Damage vs Light
 30 Damage vs Buildings
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Uses +]] .. supply .. [[ Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
@@ -97,7 +95,7 @@ Uses +]] .. supply .. [[ Supply]],
 	},
 	customParams                  = {
 		needed_cover              = 5,
-		supply_cost               = supply,
+		--supply_cost               = supply,
 		death_sounds              = "generic",
 		armortype                 = armortype, 
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
