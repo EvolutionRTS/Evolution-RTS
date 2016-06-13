@@ -140,7 +140,7 @@ function widget:ViewResize()
 end
 
 function widget:DrawWorld()
-  --if Spring.IsGUIHidden() then return end
+  if Spring.IsGUIHidden() then return end
 
   glDepthTest(true)
   glAlphaTest(GL_GREATER, 0)
