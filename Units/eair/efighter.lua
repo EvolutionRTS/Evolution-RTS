@@ -9,7 +9,7 @@ local power						 = [[8 power]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 
-local weapon1Damage              = 25
+local weapon1Damage              = 125
 local weapon1AOE				 = 100
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
@@ -66,7 +66,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleTime                     = 2200,
 	maxAcc                       = 0.25,
 	maxBank			             = 5,
-	maxDamage                    = 225,
+	maxDamage                    = 325,
 	maxSlope                     = 90,
 	maxVelocity                  = 16,
 	verticalSpeed		         = 15,
@@ -153,12 +153,12 @@ local weaponDefs                 = {
 		paralyzer		         = true,
 		paralyzetime	         = 2.5,
 		range                    = 550,
-		reloadtime               = 0.1,
+		reloadtime               = 0.5,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0 0 1",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		soundstart               = "tmediumtankfire.wav",
+		soundstart               = "18379_inferno_hilas.wav",
 		texture1                 = "shot",
 		texture2                 = "empty",
 		thickness                = 15,

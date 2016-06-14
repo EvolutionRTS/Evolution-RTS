@@ -21,7 +21,7 @@ end
 local function StartFactory()
 	local r = math.random(0,2)
 	if r == 0 then
-			return "minifac"
+			return "eminifac"
 		elseif r == 1 then
 			return "ebasefactory"
 		else
