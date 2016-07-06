@@ -1756,6 +1756,10 @@ local function MakeTooltip()
 		if type == 'unit' then
 			MakeToolTip_Unit(data, tooltip)
 			return
+		elseif type == 'feature' then
+			--if MakeToolTip_Feature(data, tooltip) then
+				--return
+			--end
 		end
 	
 		--holding meta or static tip
