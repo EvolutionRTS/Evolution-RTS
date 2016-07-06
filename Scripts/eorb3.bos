@@ -134,6 +134,7 @@ Thrust()
 
 Create()
 {
+   Move base to y-axis [8] now;
    Static_Var_3 = 0;
    Static_Var_1 = 0;
    call-script InitState();

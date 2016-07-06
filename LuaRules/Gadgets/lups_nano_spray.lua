@@ -16,35 +16,36 @@ end
 
 
 local spGetFactoryCommands = Spring.GetFactoryCommands
-local spGetCommandQueue    = Spring.GetCommandQueue
+local spGetUnitCommands    = Spring.GetUnitCommands
 
-local function GetCmdTag(unitID) 
-    local cmdTag = 0
-    local cmds = spGetFactoryCommands(unitID,1)
+local function GetCmdTag(unitID)
+	local cmdTag = 0
+	local cmds = spGetFactoryCommands(unitID,1)
 	if (cmds) then
 		local cmd = cmds[1]
 		if cmd then
 			cmdTag = cmd.tag
 		end
 	end
-	if cmdTag == 0 then 
-		local cmds = spGetCommandQueue(unitID,1)
+	if cmdTag == 0 then
+		local cmds = spGetUnitCommands(unitID,1)
 		if (cmds) then
 			local cmd = cmds[1]
 			if cmd then
 				cmdTag = cmd.tag
 			end
-        end
-	end 
+		end
+	end
 	return cmdTag
-end 
-	
+end
+
 
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
 if (gadgetHandler:IsSyncedCode()) then
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
+
   --// bw-compability
   local alreadyWarned = 0
   local function WarnDeprecated()
@@ -128,7 +129,7 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
---  ?? some basic functions ??
+--  «« some basic functions »»
 --
 
 local supportedFxs = {}
@@ -188,7 +189,7 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
---  ?? NanoSpray handling ??
+--  «« NanoSpray handling »»
 --
 
 local nanoParticles = {}
@@ -262,106 +263,92 @@ local factionsNanoFx = {
 
 local builders = {}
 
-local function BuilderFinished(unitID)
-	builders[#builders+1] = unitID
-end
+	function gadget:GameFrame(frame)
+		for i=1,#builders do
+			local unitID = builders[i]
+                        
+			if ((unitID + frame) % 30 < 1) then --// only update once per second
+				local strength = Spring.GetUnitCurrentBuildPower(unitID) or 0	-- * 16
+				if (strength > 0) then
+					local type, target, isFeature = Spring.Utilities.GetUnitNanoTarget(unitID)
 
-local function BuilderDestroyed(unitID)
-	for i=1,#builders do
-		if (builders[i] == unitID) then
-			builders[i] = builders[#builders]
-		end
-	end
-	builders[#builders] = nil
-end
+					if (target) then
+						local endpos
+						local radius = 30
+						if (type=="restore") then
+							endpos = target
+							radius = target[4]
+							target = -1
+						elseif (not isFeature) then
+							radius = (GetUnitRadius(target) or 1) * 0.80
+						else
+							radius = (GetFeatureRadius(target) or 1) * 0.80
+						end
 
-function gadget:GameFrame(frame)
-	for i=1,#builders do
-		local unitID = builders[i]
-		if ((unitID + frame) % 30 < 1) then --// only update once per second
-			local strength = (Spring.GetUnitCurrentBuildPower(unitID) or 0)*(Spring.GetUnitRulesParam(unitID, "totalEconomyChange") or 1)	-- * 16
-			if (strength > 0) then
-				local type, target, isFeature = Spring.Utilities.GetUnitNanoTarget(unitID)
+						local terraform = false
+						local inversed  = false
+						if (type=="restore") then
+							terraform = true
+						elseif (type=="reclaim") then
+							inversed  = true
+						end
 
-				if (target) then
-					local endpos
-					local radius = 30
-					if (type=="restore") then
-						endpos = target
-						radius = target[4]
-						target = -1
-					elseif (not isFeature) then
-						radius = (GetUnitRadius(target) or 1) * 0.80
-					else
-						radius = (GetFeatureRadius(target) or 1) * 0.80
-					end
+						--[[
+						if (type=="reclaim") and (strength > 0) then
+							--// reclaim is done always at full speed
+							strength = 1
+						end
+						]]--
 
-					local terraform = false
-					local inversed  = false
-					if (type=="restore") then
-						terraform = true
-					elseif (type=="reclaim") then
-						inversed  = true
-					end
+						local cmdTag = GetCmdTag(unitID)
+						local teamID = Spring.GetUnitTeam(unitID)
+						local allyID = Spring.GetUnitAllyTeam(unitID)
+						local unitDefID = Spring.GetUnitDefID(unitID)
+						local faction = GetFaction(unitDefID)
+						local teamColor = {Spring.GetTeamColor(teamID)}
+						local nanoPieces = Spring.GetUnitNanoPieces(unitID) or {}
 
-					--[[
-					if (type=="reclaim") and (strength > 0) then
-						--// reclaim is done always at full speed
-						strength = 1
-					end
-					]]--
+						for j=1,#nanoPieces do
+							local nanoPieceID = nanoPieces[j]
+							--local nanoPieceIDAlt = Spring.GetUnitScriptPiece(unitID, nanoPieceID)
+							--if (unitID+frame)%60 == 0 then
+							--	Spring.Echo("Nanopiece nums (output)", j, UnitDefs[unitDefID].name, nanoPieceID, nanoPieceIDAlt)
+							--end
 
-					local cmdTag = GetCmdTag(unitID)
-					local teamID = Spring.GetUnitTeam(unitID)
-					local allyID = Spring.GetUnitAllyTeam(unitID)
-					local unitDefID = Spring.GetUnitDefID(unitID)
-					local faction = GetFaction(unitDefID)
-					local teamColor = {Spring.GetTeamColor(teamID)}
-					local nanoPieces = Spring.GetUnitNanoPieces(unitID) or {}
+							local nanoParams = {
+								targetID     = target,
+								isFeature    = isFeature,
+								unitpiece    = nanoPieceID,
+								unitID       = unitID,
+								unitDefID    = unitDefID,
+								teamID       = teamID,
+								allyID       = allyID,
+								nanopiece    = nanoPieceID,
+								targetpos    = endpos,
+								count        = strength * 30,
+								color        = teamColor,
+								type         = type,
+								targetradius = radius,
+								terraform    = terraform,
+								inversed     = inversed,
+								cmdTag       = cmdTag, --//used to end the fx when the command is finished
+								life = 60,
+							}
 
-					for j=1,#nanoPieces do
-						local nanoPieceID = nanoPieces[j]
-						--local nanoPieceIDAlt = Spring.GetUnitScriptPiece(unitID, nanoPieceID)
-						--if (unitID+frame)%60 == 0 then
-						--	Spring.Echo("Nanopiece nums (output)", j, UnitDefs[unitDefID].name, nanoPieceID, nanoPieceIDAlt)
-						--end
+							local nanoSettings = CopyMergeTables(factionsNanoFx[faction] or factionsNanoFx.default, nanoParams)
+							ExecuteLuaCode(nanoSettings)
 
-						local nanoParams = {
-							targetID     = target,
-							isFeature    = isFeature,
-							unitpiece    = nanoPieceID,
-							unitID       = unitID,
-							unitDefID    = unitDefID,
-							teamID       = teamID,
-							allyID       = allyID,
-							nanopiece    = nanoPieceID,
-							targetpos    = endpos,
-							count        = strength * 30,
-							color        = teamColor,
-							type         = type,
-							targetradius = radius,
-							terraform    = terraform,
-							inversed     = inversed,
-							cmdTag       = cmdTag, --//used to end the fx when the command is finished
-							life = 60,
-						}
-
-						local nanoSettings = CopyMergeTables(factionsNanoFx[faction] or factionsNanoFx.default, nanoParams)
-						ExecuteLuaCode(nanoSettings)
-
-						local fxType  = nanoSettings.fxtype
-						if (not nanoParticles[unitID]) then nanoParticles[unitID] = {} end
-						local unitFxs = nanoParticles[unitID]
-						if Lups then
+							local fxType  = nanoSettings.fxtype
+							if (not nanoParticles[unitID]) then nanoParticles[unitID] = {} end
+							local unitFxs = nanoParticles[unitID]
 							unitFxs[#unitFxs+1] = Lups.AddParticles(nanoSettings.fxtype,nanoSettings)
 						end
 					end
 				end
 			end
-		end
 
-	end --//for
-end
+		end --//for
+	end
 
 
 -------------------------------------------------------------------------------------
@@ -421,31 +408,36 @@ function gadget:Update()
   end
 
 end
--------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------
-  
-local registeredBuilders = {}
+
+
 
 function gadget:UnitFinished(uid, udid)
-	if (UnitDefs[udid].isBuilder) and not registeredBuilders[uid] then
-		BuilderFinished(uid)
-		registeredBuilders[uid] = nil
+	if (UnitDefs[udid].isBuilder) then
+		builders[#builders+1] = unitID
 	end
 end
+
 
 function gadget:UnitDestroyed(uid, udid)
-	if (UnitDefs[udid].isBuilder) and registeredBuilders[uid] then
-		BuilderDestroyed(uid)
-		registeredBuilders[uid] = nil
+	if (UnitDefs[udid].isBuilder) then
+		for i=1,#builders do
+			if (builders[i] == unitID) then
+				builders[i] = builders[#builders]
+				builders[#builders] = nil
+			end
+		end
 	end
 end
 
-function gadget:Initialize()
-	for _,unitID in ipairs(Spring.GetAllUnits()) do
-		local unitDefID = Spring.GetUnitDefID(unitID)
-		gadget:UnitFinished(unitID, unitDefID)
-	end
-end
+
+  function gadget:Initialize()
+    --maxEngineParticles = Spring.GetConfigInt("MaxNanoParticles", 10000)
+    --Spring.SetConfigInt("MaxNanoParticles", 0)
+  end
+
+  function gadget:Shutdown()
+    --Spring.SetConfigInt("MaxNanoParticles", maxEngineParticles)
+  end
 
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
