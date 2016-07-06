@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
---  file:    	snd_volume_osd.lua
+--  file:    	snd_musicvolume_osd.lua
 --  brief:   	volume control OSD
 -- version: 	1.2
 --------------------------------------------------------------------------------
@@ -9,8 +9,8 @@
 
 function widget:GetInfo()
   return {
-    name      = "Volume OSD",
-    desc      = "A sound control OSD",
+    name      = "Volume OSD (Music)",
+    desc      = "A sound control OSD for Music",
     author    = "Jools",
     date      = "Mar 26, 2013",
     license   = "GNU GPL, v2 or later",
@@ -55,37 +55,37 @@ local lastVolume
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
-  volume = Spring.GetConfigInt("snd_volmaster", 60)
+  volume = Spring.GetConfigInt("snd_volmusic", 60)
 end
 
 function widget:KeyPress(key, mods, isRepeat)
-	if (key == pluskey or key == pluskey2) and (not mods.alt) and (not mods.shift) then -- KEY = Alt + pluskey
-		volume = Spring.GetConfigInt("snd_volmaster", 60)
+	if (key == pluskey or key == pluskey2) and (mods.shift) then -- KEY = Alt + pluskey
+		volume = Spring.GetConfigInt("snd_volmusic", 60)
 		volume = volume + step
 		
 		volume = math.max(volume,0)
 		volume = math.min(volume,100)
 				
 		if not lastVolume then
-			lastVolume = Spring.GetConfigInt("snd_volmaster")
+			lastVolume = Spring.GetConfigInt("snd_volmusic")
 		end
 		
-		Spring.SetConfigInt("snd_volmaster", volume)
+		Spring.SetConfigInt("snd_volmusic", volume)
 		dt = os.clock()
 		return true
 		
-	elseif (key == minuskey or key == minuskey2) and (not mods.alt) and (not mods.shift) then -- KEY = Alt + minuskey
-		volume = Spring.GetConfigInt("snd_volmaster", 60)
+	elseif (key == minuskey or key == minuskey2) and (mods.shift) then -- KEY = Alt + minuskey
+		volume = Spring.GetConfigInt("snd_volmusic", 60)
 		volume = volume - step
 		
 		volume = math.max(volume,0)
 		volume = math.min(volume,100)
 		
 		if not lastVolume then
-			lastVolume = Spring.GetConfigInt("snd_volmaster")
+			lastVolume = Spring.GetConfigInt("snd_volmusic")
 		end
 		
-		Spring.SetConfigInt("snd_volmaster", volume)
+		Spring.SetConfigInt("snd_volmusic", volume)
 		
 		dt = os.clock()
 		return true
@@ -125,7 +125,7 @@ function widget:DrawScreen()
 			end
 			myFont:Begin()
 			myFont:SetTextColor({0.5,1,0.5,alpha})
-			myFont:Print(table.concat({"Master Volume: ",volume,"%"}),x1+5,y2+5,textsize,'xs')
+			myFont:Print(table.concat({"Music Volume: ",volume,"%"}),x1+5,y2+5,textsize,'xs')
 			myFont:End()
 			
 			gl.Color(0,0,0,0.1*alpha)                          			-- draws background rectangle

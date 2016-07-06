@@ -38,16 +38,8 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Raider 
-Armortype: ]] ..armortype.. [[ 
-
-45 Damage vs Light/Armored
-60 Damage vs Building 
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Light, fast raider
+Excellent vs other small, light units]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -123,7 +115,13 @@ Uses +]] .. supply .. [[ Supply]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[]],
+		helptext                 = [[Unit Type: Raider 
+Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+
+Requires +]] .. power .. [[ 
+Uses +]] .. supply .. [[ Supply]],
 	},
 }
 

@@ -231,7 +231,7 @@ options = {
 	showterratooltip = {
 		name = "Show Terraform Tooltip",
 		type = 'bool',
-		value = true,
+		value = false,
 		desc = 'Show terraform tooltip when performing terraform commands.',
 	},
 
@@ -241,7 +241,7 @@ options = {
 	showgroupinfo = {name='Show Group Info', type='bool', value=true, OnChange = option_Deselect,
 		path = 'Settings/Interface/Selected Units Window',
 	},
-	squarepics = {name='Square Buildpics', type='bool', value=false, OnChange = option_Deselect,
+	squarepics = {name='Square Buildpics', type='bool', value=true, OnChange = option_Deselect,
 		path = 'Settings/Interface/Selected Units Window',
 	},
 }
@@ -526,7 +526,7 @@ local function AddSelectionIcon(barGrid,unitid,defid,unitids,counts)
 	local img = Image:New{
 		parent  = item;
 		tooltip = ud.humanName .. " - " .. ud.tooltip.. "\n\255\0\255\0Click: Select \nRightclick: Deselect \nAlt+Click: Select One \nCtrl+click: Select Type \nMiddle-click: Goto";
-		file2   = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(UnitDefs[defid]));
+		--file2   = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(UnitDefs[defid]));
 		file    = "#" .. defid;
 		keepAspect = true;
 		height  = 50;
@@ -1336,7 +1336,7 @@ local function UpdateBuildpic( ud, globalitem_name, unitID )
 	if not globalitems[globalitem_name] then
 		globalitems[globalitem_name] = Image:New{
 			file = "#" .. ud.id,
-			file2 = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(ud)),
+			--file2 = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(ud)),
 			keepAspect = true,
 			height  = 55,
 			width   = 55,
@@ -1359,7 +1359,7 @@ local function UpdateBuildpic( ud, globalitem_name, unitID )
 	
 	globalitems[globalitem_name].unitID = unitID
 	globalitems[globalitem_name].file = "#" .. ud.id
-	globalitems[globalitem_name].file2 = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(ud))
+	--globalitems[globalitem_name].file2 = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(ud))
 	globalitems[globalitem_name]:Invalidate()
 end
 
@@ -1539,7 +1539,7 @@ local function MakeToolTip_Feature(data, tooltip)
 			}
 			or nil,
 		main = {
-			{ name='uname', icon = iconPath, text = fullname .. ' (' .. teamColor .. playerName .. white ..')', fontSize=2, fontshadow = true, fontOutline = true, wrap = true, },
+			{ name='uname', icon = iconPath, text = fullname, fontSize=2, fontshadow = true, fontOutline = true, wrap = true, },
 			{ name='utt', text = unittooltip, wrap=true },
 			(	options.featurehp.value
 					and { name='hp', directcontrol = (tt_ud and 'hp_corpse' or 'hp_feature'), } 
@@ -1756,10 +1756,6 @@ local function MakeTooltip()
 		if type == 'unit' then
 			MakeToolTip_Unit(data, tooltip)
 			return
-		elseif type == 'feature' then
-			if MakeToolTip_Feature(data, tooltip) then
-				return
-			end
 		end
 	
 		--holding meta or static tip

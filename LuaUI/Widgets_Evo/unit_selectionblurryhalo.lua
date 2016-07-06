@@ -145,7 +145,7 @@ local resChanged = false
 
 
 --more
-local featureHoverColor = { 1, 0, 1, 1}
+local featureHoverColor = { 1, 0, 1, 0}
 local myHoverColor 	    = { 1, 1, 1, 1 }
 local allyHoverColor 	= { 0.5, 0.5, 1, 1 }
 local enemyHoverColor   = { 1, 0, 0, 1 }
