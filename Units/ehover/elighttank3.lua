@@ -39,7 +39,7 @@ local unitDef                    = {
 	category                     = "LIGHT NOTAIR RAID",
 	corpse                       = "ammobox",
 	description                  = [[Light, fast raider
-Excellent vs other small, light units]],
+Requires +]] .. power .. [[ • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -120,8 +120,7 @@ Armortype: ]] ..armortype.. [[
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+Requires +]] .. power .. [[ • Uses +]] .. supply .. [[ Supply]],
 	},
 }
 

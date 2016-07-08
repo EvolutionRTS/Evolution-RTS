@@ -3,9 +3,36 @@
 local Sounds = {
 	SoundItems = {
 	
+		riottankshotgun = {
+			--- new since 89.0
+			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
+			file = "sounds/bruisercannon.wav",
+			gainmod = 0.35,
+			pitchmod = 0.05,
+			--pitch = 0.7,
+			in3d = true,
+			maxconcurrent = 8,
+		},
+	
+		ack = {
+			--- always play on the front speaker(s)
+			file = "sounds/ack.wav",
+			in3d = "false",
+			maxconcurrent = 1,
+			gainmod = 0,
+			pitchmod = 0,
+		},
+	
 		IncomingChat = {
 			--- always play on the front speaker(s)
 			file = "sounds/beep4.wav",
+			in3d = "false",
+			maxconcurrent = 1,
+		},
+		
+		UnitSelect = {
+			--- always play on the front speaker(s)
+			file = "sounds/unitselect.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},
@@ -116,15 +143,15 @@ local Sounds = {
 		default = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
-			--gainmod = 0.35,
-			--pitchmod = 0.3,
+			gainmod = 0.35,
+			pitchmod = 0.05,
 			--pitch = 0.7,
-			--in3d = true,
+			in3d = true,
 		},
 	},
 }
 
-local files = VFS.DirList("sounds/unitdeath/")
+local files = VFS.DirList("sounds/deathsounds/")
 local t = Sounds.SoundItems
 for i=1,#files do
    local fileName = files[i]
@@ -132,7 +159,7 @@ for i=1,#files do
       file     = fileName;
       pitchmod = 0.3;
       gainmod  = 0.2;
-      maxconcurrent = 8;
+      maxconcurrent = 16;
    }
 end
 

@@ -124,7 +124,6 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "heavybeamweapon",
-			onlyTargetCategory   = "BUILDING",
 		},
 		[2]                      = {
 			def                  = "flamethrower",
