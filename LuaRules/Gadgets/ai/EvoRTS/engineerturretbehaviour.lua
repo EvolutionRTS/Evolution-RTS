@@ -6,16 +6,10 @@ function EngineerTurretBehaviour:Init()
 	self.underfire = false
 end
 
-function EngineerTurretBehaviour:UnitCreated(unit)
-end
-
-function EngineerTurretBehaviour:UnitIdle(unit)
-	if unit:Internal():ID() == self.unit:Internal():ID() then
-		if self:IsActive() then
-			self.unit:ElectBehaviour()
-		end
+function EngineerTurretBehaviour:OwnerIdle()
+	if self:IsActive() then
+		self.unit:ElectBehaviour()
 	end
-	
 end
 
 function EngineerTurretBehaviour:Update()
@@ -45,16 +39,14 @@ function EngineerTurretBehaviour:Priority()
 	return 0
 end
 
-function EngineerTurretBehaviour:UnitDead(unit)
+function EngineerTurretBehaviour:OwnerDead()
 	--
 end
 
-function EngineerTurretBehaviour:UnitDamaged(unit,attacker)
-	if unit:Internal():ID() == self.unit:Internal():ID() then
-		if not self:IsActive() then
-			self.underfire = true
-			self.unit:ElectBehaviour()
-		end
+function EngineerTurretBehaviour:OwnerDamaged(attacker)
+	if not self:IsActive() then
+		self.underfire = true
+		self.unit:ElectBehaviour()
 	end
 end
 
