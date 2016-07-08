@@ -140,14 +140,14 @@ local Sounds = {
 			looptime = 0,
 		},
 
-		default = {
+		--default = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
-			gainmod = 0.35,
-			pitchmod = 0.05,
+		--	gainmod = 0.35,
+		--	pitchmod = 0.05,
 			--pitch = 0.7,
-			in3d = true,
-		},
+		--	in3d = true,
+		--},
 	},
 }
 
