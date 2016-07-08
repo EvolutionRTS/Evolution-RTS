@@ -17,7 +17,7 @@ local Sounds = {
 		ack = {
 			--- always play on the front speaker(s)
 			file = "sounds/ack.wav",
-			in3d = "false",
+			in3d = true,
 			maxconcurrent = 1,
 			gainmod = 0,
 			pitchmod = 0,
@@ -33,14 +33,14 @@ local Sounds = {
 		UnitSelect = {
 			--- always play on the front speaker(s)
 			file = "sounds/unitselect.wav",
-			in3d = "false",
+			in3d = true,
 			maxconcurrent = 1,
 		},
 		
 		MultiSelect = {
 			--- always play on the front speaker(s)
 			file = "sounds/button9.wav",
-			in3d = "false",
+			in3d = true,
 			maxconcurrent = 1,
 		},
 		
