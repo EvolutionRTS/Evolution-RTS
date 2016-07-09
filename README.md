@@ -74,4 +74,4 @@ http://www.source.evolutionrts.info</b>
 
 Evolution RTS is a continually evolving and developing game; Come and join our community! We love having more people to talk to and play with! Pre-emptively, welcome to our community!
 
-[![Join the chat at https://gitter.im/EvolutionRTS/Evolution-RTS](https://badges.gitter.im/EvolutionRTS/Evolution-RTS.svg)](https://gitter.im/EvolutionRTS/Evolution-RTS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/EvolutionRTS/GeneralDiscussion](https://badges.gitter.im/EvolutionRTS/Evolution-RTS.svg)](https://gitter.im/EvolutionRTS/GeneralDiscussion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
