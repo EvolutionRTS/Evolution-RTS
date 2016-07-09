@@ -1,8 +1,4 @@
-if not ShardSpringLua then
-	-- globals
-	require("preload/globals")
-end
-local AI = class(AIBase)
+AI = class(AIBase)
 
 function AI:Init()
 	ai = self
@@ -110,8 +106,7 @@ function AI:UnitIdle(engineunit)
 	if engineunit == nil then
 		self.game:SendToConsole("shard-warning: idle engineunit nil")
 		return
-	end
-	
+	end	
 	for i,m in ipairs(self.modules) do
 		m:UnitIdle(engineunit)
 	end
@@ -154,11 +149,4 @@ function AI:AddModule( newmodule )
 	self[internalname] = newmodule
 	table.insert(self.modules,newmodule)
 	newmodule:Init()
-end
-
--- create and use an AI
-if ShardSpringLua then
-	return AI()
-else
-	ai = AI()
 end

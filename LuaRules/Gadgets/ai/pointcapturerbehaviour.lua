@@ -1,10 +1,5 @@
-function IsCapturer(unit)
-	local noncapturelist = {}
-	if ShardSpringLua then
-		if Script.LuaRules('NonCapturingUnits') then
-			noncapturelist = Script.LuaRules.NonCapturingUnits() or {}
-		end
-	end
+function IsPointCapturer(unit)
+	local noncapturelist = game:ControlPointNonCapturingUnits()
 	for i = 1, #noncapturelist do
 		local name = noncapturelist[i]
 		if name == unit:Internal():Name() then
@@ -14,7 +9,7 @@ function IsCapturer(unit)
 	return true
 end
 
-CapturerBehaviour = class(Behaviour)
+PointCapturerBehaviour = class(Behaviour)
 
 local function RandomAway(pos, dist, angle)
 	angle = angle or math.random() * math.pi * 2
@@ -25,27 +20,25 @@ local function RandomAway(pos, dist, angle)
 	return away
 end
 
-function CapturerBehaviour:Init()
-	self.arePoints = self.ai.controlpointhandler:ArePoints()
-	self.maxDist = math.ceil( self.ai.controlpointhandler:CaptureRadius() * 0.9 )
+function PointCapturerBehaviour:Init()
+	self.arePoints = self.game:UsesControlPoints()
+	self.maxDist = math.ceil( self.game:ControlPointCaptureRadius() * 0.9 )
 	self.minDist = math.ceil( self.maxDist / 3 )
 end
 
-function CapturerBehaviour:UnitIdle(unit)
+function PointCapturerBehaviour:OwnerIdle()
 	if not self.active then return end
-	if unit.engineID == self.unit.engineID then
-		self:GoForth()
-	end
+	self:GoForth()
 end
 
-function CapturerBehaviour:Update()
+function PointCapturerBehaviour:Update()
 	if not self.active then return end
 	if not self.nextCheck or self.game:Frame() == self.nextCheck then
 		self:GoForth()
 	end
 end
 
-function CapturerBehaviour:Priority()
+function PointCapturerBehaviour:Priority()
 	if self.arePoints then
 		return 40
 	else
@@ -53,15 +46,15 @@ function CapturerBehaviour:Priority()
 	end
 end
 
-function CapturerBehaviour:Activate()
+function PointCapturerBehaviour:Activate()
 	self.active = true
 end
 
-function CapturerBehaviour:Deactivate()
+function PointCapturerBehaviour:Deactivate()
 	self.active = false
 end
 
-function CapturerBehaviour:GoForth()
+function PointCapturerBehaviour:GoForth()
 	local upos = self.unit:Internal():GetPosition()
 	local point = self.ai.controlpointhandler:ClosestUncapturedPoint(upos)
 	if point and point ~= self.currentPoint then

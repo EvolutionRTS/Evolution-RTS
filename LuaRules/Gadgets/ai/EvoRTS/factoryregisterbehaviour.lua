@@ -4,7 +4,7 @@ function FactoryRegisterBehaviour:Init()
 	--
 end
 
-function FactoryRegisterBehaviour:UnitFinished(unit)
+function FactoryRegisterBehaviour:OwnerBuilt()
     if ai.factories ~= nil then
 		ai.factories = ai.factories + 1
 	else
@@ -12,8 +12,8 @@ function FactoryRegisterBehaviour:UnitFinished(unit)
 	end
 end
 
-function FactoryRegisterBehaviour:UnitIdle(unit)
-
+function FactoryRegisterBehaviour:OwnerIdle()
+	--
 end
 
 function FactoryRegisterBehaviour:Update()
@@ -31,7 +31,7 @@ function FactoryRegisterBehaviour:Priority()
 	return 0
 end
 
-function FactoryRegisterBehaviour:UnitDead(unit)
+function FactoryRegisterBehaviour:OwnerDead()
 	if ai.factories ~= nil then
 		ai.factories = ai.factories - 1
 	else
