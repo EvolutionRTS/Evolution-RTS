@@ -10,7 +10,7 @@ local armortype					 = [[light]]
 local supply					 = [[3]]
 
 local weapon1Damage              = 5
-local weapon1AOE				 = 1
+local weapon1AOE				 = 100
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
@@ -146,12 +146,13 @@ local weaponDefs                 = {
 		energypershot          = energycosttofire,
 		name                   = "E.M.G.",
 		range                  = 600,
-		reloadtime             = 0.1,
+		reloadtime             = 0.5,
+		projectiles			   = 5,
 		weaponType		       = "Cannon",
 		soundStart             = "tgunshipfire.wav",
 		soundTrigger           = true,
-		sprayAngle             = 0,
-		tolerance              = 1000,
+		sprayAngle             = 2000,
+		tolerance              = 10000,
 		turret                 = true,
 		weaponTimer            = 1,
 		weaponVelocity         = 1200,
