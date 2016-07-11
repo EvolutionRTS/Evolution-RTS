@@ -400,7 +400,7 @@ else -- UNSYNCED
 		gl.DepthTest(false)
 		gl.PolygonOffset(false)
 	end
-
+	
 	function gadget:DrawScreen(vsx, vsy)
 		local frame = Spring.GetGameFrame()
 		if frame / 1800 > startTime then
@@ -408,6 +408,11 @@ else -- UNSYNCED
 			local dominator 		= SYNCED.dom.dominatorwa
 			local dominationTime 	= SYNCED.dom.dominationTime
 			local white				= string.char("255","255","255","255")	
+			local incrementCounter 	= 0
+			function incremetCounterby1()
+				incrementCounter 	= incrementCounter + 1
+			end
+			
 					
 			-- for all the scores with a team.
 			for allyTeamID, teamScore in spairs(SYNCED.score) do
@@ -418,7 +423,6 @@ else -- UNSYNCED
 						--Spring.Echo("\tat team ID", teamId)
 						-- gaia player doesn't count
 						if teamId ~= gaia then					
-							
 							local playerList 		= Spring.GetPlayerList(teamId)
 							local r, g, b 			= Spring.GetTeamColor(teamId)
 							local playerTeamColor	= string.char("255",r*255,g*255,b*255)
@@ -429,8 +433,11 @@ else -- UNSYNCED
 									--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
 									--Spring.Echo(Spring.GetPlayerInfo(_, _, spectator))
 									if not spectator then
-										Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetTeamInfo(teamId) .. ")" .. white, vsx - 280, vsy * .58 - 38 * playerId+10, 16, "lo")
-										Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * playerId+8, 16, "lo")
+										--Spring.Echo(incrementCounter .. " Before incrementing")
+										Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetTeamInfo(teamId) .. ")" .. white, vsx - 280, vsy * .58 - 38 * incrementCounter, 16, "lo")
+										Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * incrementCounter, 16, "lo")
+										incremetCounterby1()
+										--Spring.Echo(incrementCounter .. " After incrementing")
 									end
 								end -- end playerId
 							
