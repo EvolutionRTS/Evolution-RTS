@@ -20,8 +20,10 @@ function BootBehaviour:Init()
 	self.unit:ElectBehaviour()
 end
 
-function BootBehaviour:OwnerBuilt()
-	self.finished = true
+function BootBehaviour:UnitBuilt(unit)
+	if unit.engineID == self.unit.engineID then
+		self.finished = true
+	end
 end
 
 function BootBehaviour:Update()

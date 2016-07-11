@@ -27,9 +27,7 @@ function ShardSpringUnitType:CanDeploy()
 end
 
 function ShardSpringUnitType:CanBuild(type)
-	if not type then
-		return self.def.buildOptions and #self.def.buildOptions > 0
-	end
+	if not type then return self.def.isBuilder end
 	-- Spring.Echo(self.def.name, "can build?", type, type:Name())
 	if not self.canBuildType then
 		self.canBuildType = {}

@@ -8,10 +8,13 @@ end
 function AutoReclaimBehaviour:UnitCreated(unit)
 end
 
-function AutoReclaimBehaviour:OwnerIdle()
-	if self:IsActive() then
-		self.unit:ElectBehaviour()
+function AutoReclaimBehaviour:UnitIdle(unit)
+	if unit:Internal():ID() == self.unit:Internal():ID() then
+		if self:IsActive() then
+			self.unit:ElectBehaviour()
+		end
 	end
+	
 end
 
 function AutoReclaimBehaviour:Update()
@@ -36,6 +39,6 @@ function AutoReclaimBehaviour:Priority()
 	return 49 + game.map:GetMapFeatures(self.unit:Internal():GetPosition(),500)
 end
 
-function AutoReclaimBehaviour:OwnerDead()
+function AutoReclaimBehaviour:UnitDead(unit)
 	--
 end

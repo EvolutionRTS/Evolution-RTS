@@ -7,10 +7,15 @@ function MissingFactoryBehaviour:Init()
 	self.build = false
 end
 
-function MissingFactoryBehaviour:OwnerIdle()
-	self.building = false
-	if self:IsActive() then
-		self.unit:ElectBehaviour()
+function MissingFactoryBehaviour:UnitCreated(unit)
+end
+
+function MissingFactoryBehaviour:UnitIdle(unit)
+	if unit:Internal():ID() == self.unit:Internal():ID() then
+		self.building = false
+		if self:IsActive() then
+			self.unit:ElectBehaviour()
+		end
 	end
 end
 
@@ -45,6 +50,9 @@ end
 
 function MissingFactoryBehaviour:UnitDead(unit)
 	if unit:Internal():Name() == "ebasefactory" then
+		self.build = true
+		--game:SendToConsole("missingfactory activated")
+	elseif unit:Internal():Name() == "ebasefactory" then
 		self.build = true
 		--game:SendToConsole("missingfactory activated")
 	end
