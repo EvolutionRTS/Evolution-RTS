@@ -100,26 +100,6 @@ function map:GetMetalSpots() -- returns a table of spot positions
 	return f
 end
 
-function map:GetControlPoints()
-	if self.controlPoints then return self.controlPoints end
-	self.controlPoints = {}
-	if Script.LuaRules('ControlPoints') then
-		local rawPoints = Script.LuaRules.ControlPoints() or {}
-		for id = 1, #rawPoints do
-			local rawPoint = rawPoints[id]
-			local cp = ShardSpringControlPoint()
-			cp:Init(rawPoint, id)
-			self.controlPoints[id] = cp
-		end
-	end
-	return self.controlPoints
-end
-
-function map:AreControlPoints()
-	local points = self:GetControlPoints()
-	return #points > 0
-end
-
 function map:MapDimensions() -- returns a Position holding the dimensions of the map
 	return {
 		x = Game.mapSizeX / 8,
@@ -159,67 +139,6 @@ end
 function map:TidalStrength() -- returns tidal strength
 	return Game.tidal
 end
-
--- DRAWING FUNCTIONS
-
-function map:DrawRectangle(pos1, pos2, color, label, filled, channel)
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawAddRectangle', pos1.x, pos1.z, pos2.x, pos2.z, color[1], color[2], color[3], color[4], label, filled, self.ai.game:GetTeamID(), channel)
-end
-
-function map:EraseRectangle(pos1, pos2, color, label, filled, channel)
-	channel = channel or 1
-	color = color or {}
-	return SendToUnsynced('ShardDrawEraseRectangle', pos1.x, pos1.z, pos2.x, pos2.z, color[1], color[2], color[3], color[4], label, filled, self.ai.game:GetTeamID(), channel)
-end
-
-function map:DrawCircle(pos, radius, color, label, filled, channel)
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawAddCircle', pos.x, pos.z, radius, color[1], color[2], color[3], color[4], label, filled, self.ai.game:GetTeamID(), channel)
-end
-
-function map:EraseCircle(pos, radius, color, label, filled, channel)
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawEraseCircle', pos.x, pos.z, radius, color[1], color[2], color[3], color[4], label, filled, self.ai.game:GetTeamID(), channel)
-end
-
-function map:DrawLine(pos1, pos2, color, label, arrow, channel)
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawAddLine', pos1.x, pos1.z, pos2.x, pos2.z, color[1], color[2], color[3], color[4], label, arrow, self.ai.game:GetTeamID(), channel)
-end
-
-function map:EraseLine(pos1, pos2, color, label, arrow, channel)
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawEraseLine', pos1.x, pos1.z, pos2.x, pos2.z, color[1], color[2], color[3], color[4], label, arrow, self.ai.game:GetTeamID(), channel)
-end
-
-function map:DrawPoint(pos, color, label, channel)
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawAddPoint', pos.x, pos.z, color[1], color[2], color[3], color[4], label, self.ai.game:GetTeamID(), channel)
-end
-
-function map:ErasePoint(pos, color, label, channel)
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawErasePoint', pos.x, pos.z, color[1], color[2], color[3], color[4], label, self.ai.game:GetTeamID(), channel)
-end
-
-function map:EraseAll(channel)
-	channel = channel or 1
-	SendToUnsynced('ShardDrawClearShapes', self.ai.game:GetTeamID(), channel)
-end
-
-function map:DisplayDrawings(onOff)
-	SendToUnsynced('ShardDrawDisplay', onOff)
-end
-
--- END DRAWING FUNCTIONS
 
 	-- game.map = map
 return map

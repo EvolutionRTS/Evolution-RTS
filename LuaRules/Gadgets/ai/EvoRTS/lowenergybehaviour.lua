@@ -6,18 +6,34 @@ function LowEnergyBehaviour:Init()
 	self.underfire = false
 end
 
-function LowEnergyBehaviour:OwnerIdle()
-	if not self:IsActive() then
-		res = game:GetResourceByName("energy")
-		if res == nil then
-			game:SendToConsole("res == nil in LowEnergyBehaviour")
+function LowEnergyBehaviour:UnitCreated(unit)
+end
+
+function LowEnergyBehaviour:UnitIdle(unit)
+	if unit:Internal():ID() == self.unit:Internal():ID() then
+
+		if not self:IsActive() then
+			res = game:GetResourceByName("energy")
+			if res == nil then
+				game:SendToConsole("res == nil in LowEnergyBehaviour")
+		else
+			if res.reserves == 0 then
+				self.underfire = true
+				self.unit:ElectBehaviour()
+			end
 		end
 	else
-		if res and res.reserves == 0 then
-			self.underfire = true
-		end
+		self.underfire = false
 		self.unit:ElectBehaviour()
 	end
+
+	end
+	if unit:Internal():ID() == self.unit:Internal():ID() then
+		if self:IsActive() then
+			self.unit:ElectBehaviour()
+		end
+	end
+
 end
 
 function LowEnergyBehaviour:Update()
@@ -47,11 +63,11 @@ function LowEnergyBehaviour:Priority()
 	return 0
 end
 
-function LowEnergyBehaviour:OwnerDead()
+function LowEnergyBehaviour:UnitDead(unit)
 	--
 end
 
-function LowEnergyBehaviour:OwnerDamaged(attacker)
+function LowEnergyBehaviour:UnitDamaged(unit,attacker)
 
 end
 

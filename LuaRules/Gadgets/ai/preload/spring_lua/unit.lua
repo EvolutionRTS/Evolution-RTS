@@ -225,19 +225,6 @@ function ShardSpringUnit:ExecuteCustomCommand(  cmdId, params_list, options, tim
 	Spring.GiveOrderToUnit(self.id, cmdId, params_list, options)
 	return 0
 end
-
-function ShardSpringUnit:DrawHighlight( color, label, channel )
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawAddUnit', self.id, color[1], color[2], color[3], color[4], label, ai.game:GetTeamID(), channel)
-end
-
-function ShardSpringUnit:EraseHighlight( color, label, channel )
-	channel = channel or 1
-	color = color or {}
-	SendToUnsynced('ShardDrawEraseUnit', self.id, color[1], color[2], color[3], color[4], label, ai.game:GetTeamID(), channel)
-end
-
 --[[
 IUnit/ engine unit objects
 	int ID()
