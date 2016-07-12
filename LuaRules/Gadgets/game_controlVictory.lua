@@ -274,7 +274,6 @@ if (gadgetHandler:IsSyncedCode()) then
 			moveSpeed = 0
 		else
 			Spring.Echo("[ControlVictory] No Control Victory Config File Found, Hiding the scoreboard.")
-			dontRenderScoreboard = true
 --[[      local angle = math.random() * math.pi * 2
       points = {}
       for i=1,3 do
@@ -555,7 +554,6 @@ else -- UNSYNCED
 	end
 	
 	function gadget:DrawScreen(vsx, vsy)
-		if dontRenderScoreboard == true then
 	-- for k,v in pairs(Spring.GetPlayerList(-1)) do Spring.Echo(k,v)
 		-- Spring.Echo("Player Info:", Spring.GetPlayerInfo(v))
 	-- end
@@ -624,7 +622,6 @@ else -- UNSYNCED
 			timeleft = timeleft - timeleft % 1
 			Text(timeleft .. " seconds", vsx - 280, vsy *.58 - 25, 18, "lo")
 		end
-		else end
 	end
 
 end
