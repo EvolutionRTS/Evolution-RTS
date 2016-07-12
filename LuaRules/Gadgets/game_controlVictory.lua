@@ -185,7 +185,7 @@ local startTime = tonumber(Spring.GetModOptions().starttime) or 0 -- The time wh
 
 local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 -- Time needed holding all points to score in multi domination
 
-Spring.Echo("Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Control Victory Scoring Mode Is Not Set!"))
+Spring.Echo("[ControlVictory] Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Control Victory Scoring Mode Is Not Set!"))
 if Spring.GetModOptions().scoremode == "disabled" then return false end
 
 local limitScore = tonumber(Spring.GetModOptions().limitscore) or 3500
@@ -264,7 +264,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		score[gaia] = 0
 		local configfile, _ = string.gsub(Game.mapName, ".smf$", ".lua")
 		configfile = "LuaRules/Configs/ControlPoints/cv_" .. configfile .. ".lua"
-		Spring.Echo(configfile .. " -This is the name of the control victory configfile-")
+		Spring.Echo("[ControlVictory] " .. configfile .. " -This is the name of the control victory configfile-")
 		if VFS.FileExists(configfile) then
 			local config = VFS.Include(configfile)
 			points = config.points
@@ -273,7 +273,8 @@ if (gadgetHandler:IsSyncedCode()) then
 			end
 			moveSpeed = 0
 		else
-			Spring.Echo("No Control Victory Config File Found")
+			Spring.Echo("[ControlVictory] No Control Victory Config File Found, Hiding the scoreboard.")
+			dontRenderScoreboard = true
 --[[      local angle = math.random() * math.pi * 2
       points = {}
       for i=1,3 do
@@ -554,6 +555,7 @@ else -- UNSYNCED
 	end
 	
 	function gadget:DrawScreen(vsx, vsy)
+		if dontRenderScoreboard == true then
 	-- for k,v in pairs(Spring.GetPlayerList(-1)) do Spring.Echo(k,v)
 		-- Spring.Echo("Player Info:", Spring.GetPlayerInfo(v))
 	-- end
@@ -622,6 +624,7 @@ else -- UNSYNCED
 			timeleft = timeleft - timeleft % 1
 			Text(timeleft .. " seconds", vsx - 280, vsy *.58 - 25, 18, "lo")
 		end
+		else end
 	end
 
 end
