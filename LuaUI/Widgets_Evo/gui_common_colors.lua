@@ -58,7 +58,7 @@ colors = {
 ]]--
 
 	{'Orange',			'#ff6600'};
-	{'Parchment',		'#FFFFC2'};
+	{'Fake Parchment',	'#ffda61'}; --More of an orangey parchment > that is parchment but it's hard ot distinguish from white --'#FFFFC2'};
 	{'Teal',			'#009B95'};
 	{'Red',				'#FF0000'};
 	{'Purple',			'#3914AF'};
