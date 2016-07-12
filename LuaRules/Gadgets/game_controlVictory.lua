@@ -402,49 +402,47 @@ else -- UNSYNCED
 	end
 	
 	function gadget:DrawScreen(vsx, vsy)
+	-- for k,v in pairs(Spring.GetPlayerList(-1)) do Spring.Echo(k,v)
+		-- Spring.Echo("Player Info:", Spring.GetPlayerInfo(v))
+	-- end
 		local frame = Spring.GetGameFrame()
 		if frame / 1800 > startTime then
 			local n = 1
 			local dominator 		= SYNCED.dom.dominatorwa
 			local dominationTime 	= SYNCED.dom.dominationTime
 			local white				= string.char("255","255","255","255")	
-			local incrementCounter 	= 0
-			function incremetCounterby1()
-				incrementCounter 	= incrementCounter + 1
-			end
+			local allyCounter = 0
 			
-					
 			-- for all the scores with a team.
 			for allyTeamID, teamScore in spairs(SYNCED.score) do
 				--Spring.Echo("at allied team ID", allyTeamID)
 				-- note to self, allyTeamID +1 = ally team number	
 				
+				local allyPrinted = false
+				if allyTeamID ~= gaia then
 					for _,teamId in pairs(Spring.GetTeamList(allyTeamID))do	
 						--Spring.Echo("\tat team ID", teamId)
 						-- gaia player doesn't count
-						if teamId ~= gaia then					
-							local playerList 		= Spring.GetPlayerList(teamId)
-							local r, g, b 			= Spring.GetTeamColor(teamId)
-							local playerTeamColor	= string.char("255",r*255,g*255,b*255)
-							--Spring.Echo("\t\t\tplayerList", #playerList)
-								for _,playerId in pairs(playerList)do
-									local _, _, spectator 		= Spring.GetPlayerInfo(playerId)
-									--Spring.Echo("\t\t\t\tnot player")
-									--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
-									--Spring.Echo(Spring.GetPlayerInfo(_, _, spectator))
-									if not spectator then
-										--Spring.Echo(incrementCounter .. " Before incrementing")
-										Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetTeamInfo(teamId) .. ")" .. white, vsx - 280, vsy * .58 - 38 * incrementCounter, 16, "lo")
-										Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * incrementCounter, 16, "lo")
-										incremetCounterby1()
-										--Spring.Echo(incrementCounter .. " After incrementing")
-									end
-								end -- end playerId
-							
-						end -- not gaia
-					end -- end teamId
-
-			end
+						local playerList 		= Spring.GetPlayerList(teamId)
+						local r, g, b 			= Spring.GetTeamColor(teamId)
+						local playerTeamColor	= string.char("255",r*255,g*255,b*255)
+						--Spring.Echo("\t\t\tplayerList", #playerList)
+						for _,playerId in pairs(playerList)do
+							local _, _, spectator = Spring.GetPlayerInfo(playerId)
+							--Spring.Echo("\t\t\t\tplayer")
+							--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
+							--Spring.Echo(Spring.GetPlayerInfo(_, _, spectator))
+							if not spectator and not allyPrinted then
+								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetTeamInfo(teamId) .. ")" .. white, vsx - 280, vsy * .58 - 38 * allyCounter, 16, "lo")
+								Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * allyCounter, 16, "lo")
+								
+								allyCounter = allyCounter + 1
+								allyPrinted = true
+							end
+						end -- end playerId
+					end -- not gaia
+				end -- end teamId
+			end -- end allyTeamID
 
 			if dominator and dominationTime > Spring.GetGameFrame() then
 			--	Text( playerListEntry[dominator]["color"] .. "<" .. playerListEntry[dominator] .. "> will score a --Domination in " .. 
