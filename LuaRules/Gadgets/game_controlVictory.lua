@@ -414,34 +414,49 @@ else -- UNSYNCED
 			local allyCounter = 0
 			
 			-- for all the scores with a team.
-			for allyTeamID, teamScore in spairs(SYNCED.score) do
+			for allyTeamID, allyScore in spairs(SYNCED.score) do
 				--Spring.Echo("at allied team ID", allyTeamID)
 				-- note to self, allyTeamID +1 = ally team number	
 				
-				local allyPrinted = false
 				if allyTeamID ~= gaia then
-					for _,teamId in pairs(Spring.GetTeamList(allyTeamID))do	
+					local allyFound = false
+					local name = "Some Bot"
+					local team = Spring.GetTeamList(allyTeamID)[1]
+					
+					for _,teamId in pairs(Spring.GetTeamList(allyTeamID))do
 						--Spring.Echo("\tat team ID", teamId)
-						-- gaia player doesn't count
-						local playerList 		= Spring.GetPlayerList(teamId)
-						local r, g, b 			= Spring.GetTeamColor(teamId)
-						local playerTeamColor	= string.char("255",r*255,g*255,b*255)
+						
+						local playerList = Spring.GetPlayerList(teamId)
 						--Spring.Echo("\t\t\tplayerList", #playerList)
 						for _,playerId in pairs(playerList)do
 							local _, _, spectator = Spring.GetPlayerInfo(playerId)
 							--Spring.Echo("\t\t\t\tplayer")
 							--Spring.Echo("allied team ID", allyTeamID, "\t", "team ID", teamId, Spring.GetPlayerInfo(playerId))
 							--Spring.Echo(Spring.GetPlayerInfo(_, _, spectator))
-							if not spectator and not allyPrinted then
-								Text(playerTeamColor .. Spring.GetPlayerInfo(playerId) .. "'s Team (" .. Spring.GetTeamInfo(teamId) .. ")" .. white, vsx - 280, vsy * .58 - 38 * allyCounter, 16, "lo")
-								Text(white .. "Score: " .. teamScore, vsx - 250, vsy * .5625 - 38 * allyCounter, 16, "lo")
-								
-								allyCounter = allyCounter + 1
-								allyPrinted = true
+							if not spectator and not allyFound then
+								name = Spring.GetPlayerInfo(playerId)
+								team = teamId
+								allyFound = true
 							end
 						end -- end playerId
-					end -- not gaia
-				end -- end teamId
+					end -- end teamId
+					
+					if allyFound == false then
+						if Spring.GetTeamLuaAI(team) == "" then
+							name = "Evil Machine"
+						else
+							name = Spring.GetTeamLuaAI(team)
+						end
+						--get AI info?
+					end
+					
+					local r, g, b = Spring.GetTeamColor(team)
+					color = string.char("255",r*255,g*255,b*255)
+					Text(color .. name .. "'s Team (" .. team .. ")" .. white, vsx - 280, vsy * .58 - 38 * allyCounter, 16, "lo")
+					Text(white .. "Score: " .. allyScore, vsx - 250, vsy * .5625 - 38 * allyCounter, 16, "lo")
+					
+					allyCounter = allyCounter + 1
+				end -- not gaia
 			end -- end allyTeamID
 
 			if dominator and dominationTime > Spring.GetGameFrame() then
