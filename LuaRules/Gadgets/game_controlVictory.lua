@@ -2,8 +2,8 @@ function gadget:GetInfo()
 	return {
 		name = "Control Victory",
 		desc = "Enables a victory through capture and hold",
-		author = "KDR_11k (David Becker)",
-		date = "2008-03-22",
+		author = "KDR_11k (David Becker), Smoth, Lurker, Forboding Angel",
+		date = "2008-03-22 -- Major update July 11th, 2016",
 		license = "Public Domain",
 		layer = 1,
 		enabled = true
