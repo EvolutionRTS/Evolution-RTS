@@ -1,3 +1,5 @@
+[![Join the chat at https://gitter.im/EvolutionRTS/GeneralDiscussion](https://badges.gitter.im/EvolutionRTS/Evolution-RTS.svg)](https://gitter.im/EvolutionRTS/GeneralDiscussion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <h1>Evolution RTS</h1>
 
 Evolution RTS is a free an Open Source RTS game designed using the Spring Engine. It has been in development for over 5 years and receives updates often. Its gameplay is designed specifically to appeal to gamers of all skill levels. The gameplay is designed around the use of unit groups, and the mixture of your unit group often will determine how successful you are in battle, as opposed to churning out hundreds of the same unit continually.
@@ -73,5 +75,3 @@ Open Source!
 http://www.source.evolutionrts.info</b>
 
 Evolution RTS is a continually evolving and developing game; Come and join our community! We love having more people to talk to and play with! Pre-emptively, welcome to our community!
-
-[![Join the chat at https://gitter.im/EvolutionRTS/GeneralDiscussion](https://badges.gitter.im/EvolutionRTS/Evolution-RTS.svg)](https://gitter.im/EvolutionRTS/GeneralDiscussion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
