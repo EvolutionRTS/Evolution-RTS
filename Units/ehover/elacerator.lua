@@ -57,7 +57,7 @@ Uses +]] .. supply .. [[ Supply]],
 	footprintX                   = 6,
 	footprintZ                   = 6,
 	fireState			         = 0,
-	highTrajectory               = 1,
+	--highTrajectory               = 1,
 	iconType                     = "assault",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
@@ -128,7 +128,7 @@ Uses +]] .. supply .. [[ Supply]],
 
 local weaponDefs                 = {
 	nukeartyweapon               = {
-		accuracy                 = 500,
+		accuracy                 = 1000,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,

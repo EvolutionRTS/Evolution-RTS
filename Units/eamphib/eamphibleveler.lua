@@ -120,7 +120,6 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "tankkillerlaser",
-			onlyTargetCategory   = "LIGHT ARMORED",
 		},
 		[2]                      = {
 			def                  = "machinegun",
