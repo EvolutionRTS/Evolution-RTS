@@ -1,3 +1,92 @@
+VFS.Include("LuaRules/Utilities/versionCompare.lua")
+local reverseCompat = not Spring.Utilities.IsCurrentVersionNewerThan(100, 0)
+
+if reverseCompat then
+
+-- $Id:$
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-- exported functions:
+-- Spring.UnitRendering.GetLODCount(unitID) -> int
+-- Spring.UnitRendering.ActivateMaterial(unitID,lod) -> nil
+-- Spring.UnitRendering.DeactivateMaterial(unitID,lod) -> nil
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+
+if (SendToUnsynced) then
+	return
+end
+
+local unit_lods = {}
+
+local origSetLODCount = Spring.UnitRendering.SetLODCount
+
+function Spring.UnitRendering.SetLODCount(unitID,lod_count)
+  unit_lods[unitID] = lod_count
+  origSetLODCount(unitID,lod_count)
+end
+
+function Spring.UnitRendering.GetLODCount(unitID)
+  return unit_lods[unitID] or 0
+end
+
+
+
+local unitActiveMats = {}
+local curHighestLOD = 0
+
+function Spring.UnitRendering.ActivateMaterial(unitID,lod)
+  local actMats = unitActiveMats[unitID]
+  if (not actMats) then
+    actMats = {current = math.huge}
+    unitActiveMats[unitID] = actMats
+  end
+
+  local lod_count = Spring.UnitRendering.GetLODCount(unitID)
+  if (lod_count < lod) then
+    Spring.UnitRendering.SetLODCount(unitID,lod)
+  end
+
+  actMats[lod] = true
+
+  if (lod > curHighestLOD) then
+    curHighestLOD = lod
+  end
+
+  if (lod <= actMats.current) then
+    actMats.current = lod
+    Spring.UnitRendering.SetMaterialLastLOD(unitID, "opaque", lod)
+  end
+end
+
+
+function Spring.UnitRendering.DeactivateMaterial(unitID,lod)
+  local actMats = unitActiveMats[unitID]
+  if (not actMats) then
+    return
+  end
+
+  actMats[lod] = nil
+
+  if (actMats.current == lod) then
+    --// detect next available material
+    for i=1,curHighestLOD do
+      if (actMats[i]) then
+        actMats.current = i
+        Spring.UnitRendering.SetMaterialLastLOD(unitID, "opaque", i)
+        return
+      end
+    end
+
+    --// none material active
+    unitActiveMats[unitID] = nil
+    Spring.UnitRendering.SetMaterialLastLOD(unitID, "opaque", 0)
+    Spring.UnitRendering.SetLODCount(unitID,0)
+  end
+end
+
+else -- reverseCompat
+
 -- $Id:$
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
@@ -50,25 +139,18 @@ local function ActivateMaterial(rendering, objectID, lod)
     activeMats = {current = math.huge}
     rendering.activeMats[objectID] = activeMats
   end
-
+  
   local lod_count = GetLODCount(rendering, objectID)
   if lod_count < lod then
     SetLODCount(rendering, objectID, lod)
   end
 
-  rendering.activeMats[lod] = true
+  activeMats[lod] = true
 
   if lod > rendering.curHighestLOD then
     rendering.curHighestLOD = lod
   end
-  
---I have no idea what the fuck this does, but commenting it out fixes errors AND fixes issues where units who cloak and then uncloak will lose their normalmaps.
---Doesn't make ANY sense at all, Hey! Welcome to spring!
---FFS this is fucking bullshit.
---Forboding Angel
 
---Update, this is screwed because custom unit shaders is broken as shit atm. 5-7-2016
---Disabled CUS until it is unfucked, uncommented the block.
   if lod <= activeMats.current then
     activeMats.current = lod
     rendering.spSetMaterialLastLOD(objectID, "opaque", lod)
@@ -131,4 +213,6 @@ end
 
 function Spring.FeatureRendering.DeactivateMaterial(featureID, lod)
   DeactivateMaterial(featureRendering, featureID, lod)
+end
+
 end
