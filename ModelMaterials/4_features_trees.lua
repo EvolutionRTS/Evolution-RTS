@@ -42,7 +42,6 @@ local featureMaterials = {}
 -- All feature defs that contain the string in ""s will be affected by it
 -- Just to point out that this is a shitty, hacky, gawdawful workaround until I can implement customparam category searching
 
--- Doing it with a table fail: http://pastebin.com/SxPpP44E
 for id, featureDef in pairs(FeatureDefs) do
 
   if featureDef.name:find("bush") then
