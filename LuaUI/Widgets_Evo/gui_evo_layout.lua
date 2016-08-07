@@ -229,7 +229,7 @@ local config = {}
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
-	widgetHandler:DisableWidget("Red Build/Order Menu")
+	--widgetHandler:DisableWidget("Red Build/Order Menu")
 	if not btns.x or not btns.y then
 		btns = {x = 5, y = 11}
 	end

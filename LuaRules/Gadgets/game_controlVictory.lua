@@ -15,6 +15,7 @@ end
 Before implementing this gadget, read this!!!
 This gadget relies on three parts:
 • control point config file which is located in luarules/configs/controlpoints/ , and it must have a filename of cv_<mapname>.lua. So, in the case of a map named "Iammas Prime -" with a version of "v01", then the name of my file would be "cv_Iammas Prime - v01.lua".
+	PLEASE NOTE: If the map config file is not found and a capture mode is selected, the gadget will generate 7 points in a circle on the map automagically.
 • config placed in luarules/configs/ called cv_nonCapturingUnits.lua
 • modoptions
 
@@ -273,22 +274,23 @@ if (gadgetHandler:IsSyncedCode()) then
 			end
 			moveSpeed = 0
 		else
-			Spring.Echo("[ControlVictory] No Control Victory Config File Found, Hiding the scoreboard.")
---[[      local angle = math.random() * math.pi * 2
-      points = {}
-      for i=1,3 do
-         local angle = angle + i * math.pi * 2/3
-         points[i] = {
-            x=mapx/2 + mapx * .4 * math.sin(angle),
-            y=0,
-            z=mapz/2 + mapz * .4 * math.cos(angle),
-            velx=moveSpeed * 10 * -1 * math.cos(angle),
-            velz=moveSpeed * 10 * math.sin(angle),
-            owner=nil,
-            aggressor=nil,
-            capture=0,
-         }
-      end ]]--
+			--Since no config file is found, we create 7 points spaced out in a circle on the map
+			local angle = math.random() * math.pi * 2
+			points = {}
+			for i=1,7 do
+				local angle = angle + i * math.pi * 2/7
+				points[i] = {
+					x=mapx/2 + mapx * .4 * math.sin(angle),
+					y=0,
+					z=mapz/2 + mapz * .4 * math.cos(angle),
+					--We can make them move around if we want to by uncommenting these lines and the ones below
+					--velx=moveSpeed * 10 * -1 * math.cos(angle),
+					--velz=moveSpeed * 10 * math.sin(angle),
+					owner=nil,
+					aggressor=nil,
+					capture=0,
+				}
+			end 
 		end
 		_G.points = points
 		_G.score = score
