@@ -15,7 +15,7 @@ function widget:GetInfo()
 	return {
 		name	= "Music Player",
 		desc	= "Plays music based on situation",
-		author	= "cake, trepan, Smoth, Licho, xponen",
+		author	= "cake, trepan, Smoth, Licho, xponen, Forboding Angel",
 		date	= "Mar 01, 2008, Aug 20 2009, Nov 23 2011",
 		license	= "GNU GPL, v2 or later",
 		layer	= 0,
@@ -26,12 +26,16 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+--Unfucked volumes finally. Instead of setting the volume in Spring.PlaySoundStream. you need to call Spring.PlaySoundStream and then immediately call Spring.SetSoundStreamVolume
+
+WG.music_volume = Spring.GetConfigInt("snd_volmusic") * 0.01
+
 local unitExceptions = include("Configs/snd_music_exception.lua")
 
 local windows = {}
 
-local WAR_THRESHOLD = 5000
-local PEACE_THRESHOLD = 1000
+local WAR_THRESHOLD = 5000000000000000
+local PEACE_THRESHOLD = 1000000000000000
 
 local musicType = 'peace'
 local dethklok = {} -- keeps track of the number of doods killed in each time frame
@@ -115,7 +119,10 @@ local function PlayNewTrack()
 		-- Spring.Echo("Song changed but unable to get the artist and title info")
 	-- end
 	curTrack = newTrack
-	Spring.PlaySoundStream(newTrack,WG.music_volume or 0.5)
+	
+	Spring.PlaySoundStream(newTrack)
+	Spring.SetSoundStreamVolume(WG.music_volume or 0.33)
+	Spring.Echo(WG.music_volume)
 	playing = true
 
 	WG.music_start_volume = WG.music_volume
@@ -278,7 +285,8 @@ function widget:GameOver()
 		track = defeatTracks[math.random(1, #defeatTracks)]
 	end
 	Spring.StopSoundStream()
-	Spring.PlaySoundStream(track,WG.music_volume or 0.5)
+	Spring.PlaySoundStream(track)
+	Spring.SetSoundStreamVolume(WG.music_volume or 0.33)
 	WG.music_start_volume = WG.music_volume
 end
 

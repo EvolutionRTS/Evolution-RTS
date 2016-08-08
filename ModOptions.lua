@@ -2,13 +2,13 @@ local options= {
 	{
 		key    = 'startingresources',
 		name   = 'Starting Resources',
-		desc   = 'Sets storage and amount of resources that players will start with',
+		desc   = 'Sets the storage and amount of resources with which each player will start',
 		type   = 'section',
 	},
 	{
 		key    = 'startmetal',
 		name   = 'Starting Metal',
-		desc   = 'Determines amount of metal and metal storage that each player will start with',
+		desc   = 'Determines the amount of metal and metal storage with which each player will start',
 		type   = 'number',
 		section= 'startingresources',
 		def    = 100,
@@ -20,7 +20,7 @@ local options= {
 	{
 		key    = 'startenergy',
 		name   = 'Starting Energy',
-		desc   = 'Determines amount of energy and energy storage that each player will start with',
+		desc   = 'Determines the amount of energy and energy storage with which each player will start',
 		type   = 'number',
 		section= 'startingresources',
 		def    = 250,
@@ -33,7 +33,7 @@ local options= {
 	{
 		key    = 'gameplayoptions',
 		name   = 'Gameplay Options',
-		desc   = 'Sets storage and amount of resources that players will start with',
+		desc   = 'Various gameplay options that will change how the game is played.',
 		type   = 'section',
 	},
 	{
@@ -169,6 +169,18 @@ local options= {
 		def    = 30,
 		min    = 1,
 		max    = 60,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'tugofwarmodifier',
+		name   = 'Tug of War Modifier',
+		desc   = 'The amount of score transfered between opponents when points are captured is multiplied by this amount.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 2,
+		min    = 0,
+		max    = 6,
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},

@@ -163,6 +163,18 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
+		{
+		key    = 'tugofwarmodifier',
+		name   = 'Tug of War Modifier',
+		desc   = 'The score transfered between opponents when points are captured is multiplied by this amount.',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 2,
+		min    = 0,
+		max    = 6,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
 
 ////
 
@@ -181,6 +193,7 @@ local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 -- Time t
 local captureBonus = tonumber(Spring.GetModOptions().capturebonus) or.5 -- speedup from adding more units
 local decapSpeed = tonumber(Spring.GetModOptions().decapspeed) or 3 -- speed multiplier for neutralizing an enemy point
 local moveSpeed =.5
+local tugofWarModifier = tonumber(Spring.GetModOptions().tugofwarmodifier) or 2 -- Radius around a point in which to capture it
 
 local startTime = tonumber(Spring.GetModOptions().starttime) or 0 -- The time when capturing can start
 
@@ -199,7 +212,7 @@ local scoreModes = {
 	tugowar = 2, -- A point steals enemy score, zero means defeat
 	multidomination = 3, -- Holding all points will grant 100 score, first to reach the score limit wins
 }
-local scoreMode = scoreModes[Spring.GetModOptions().scoremode or "countdown"]
+local scoreMode = scoreModes[Spring.GetModOptions().scoremode or "Countdown"]
 
 local _, _, _, _, _, gaia = Spring.GetTeamInfo(Spring.GetGaiaTeamID())
 local mapx, mapz = Game.mapSizeX, Game.mapSizeZ
@@ -397,7 +410,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					for _, a in ipairs(Spring.GetAllyTeamList()) do
 						if a ~= owner and score[a] > 0 then
 							score[a] = score[a] - count * 2
-							score[owner] = score[owner] + count * 2
+							score[owner] = score[owner] + count * tugofWarModifier
 						end
 					end
 				end
@@ -567,6 +580,11 @@ else -- UNSYNCED
 			local white				= string.char("255","255","255","255")	
 			local allyCounter = 0
 			local scoreMode = Spring.GetModOptions().scoremode or "Countdown"
+
+			--Make it look Pretty
+			if scoreMode == "countdown" then scoreMode = "Countdown" end
+			if scoreMode == "tugowar" then scoreMode = "Tug of War" end
+			if scoreMode == "multidomination" then scoreMode = "Domination" end
 			
 			Text(white .. "Scoring Mode: " .. scoreMode, vsx - 280, vsy * .58 - 38 * -0.75, 18, "lo")
 			
