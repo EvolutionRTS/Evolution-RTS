@@ -566,6 +566,9 @@ else -- UNSYNCED
 			local dominationTime 	= SYNCED.dom.dominationTime
 			local white				= string.char("255","255","255","255")	
 			local allyCounter = 0
+			local scoreMode = Spring.GetModOptions().scoremode or "Countdown"
+			
+			Text(white .. "Scoring Mode: " .. scoreMode, vsx - 280, vsy * .58 - 38 * -0.75, 18, "lo")
 			
 			-- for all the scores with a team.
 			for allyTeamID, allyScore in spairs(SYNCED.score) do
