@@ -228,8 +228,10 @@ function JitterParticles:Initialize()
          gl_FragColor = vec4(noiseVec,0.0,gl_FragCoord.z);
       }
     ]],
-    uniform = {
+    uniformInt = {
       noiseMap = 0,
+	},
+	uniform = {
       size  = 0,
       frame = 0,
       movCoeff = 0,
@@ -334,20 +336,20 @@ function JitterParticles:Visible()
     local ux,uy,uz = spGetUnitViewPosition(self.unit)
     posX,posY,posZ = posX+ux,posY+uy,posZ+uz
     radius = radius + spGetUnitRadius(self.unit)
-    losState = spGetUnitLosState(self.unit, LocalAllyTeamID)
+    losState = GetUnitLosState(self.unit)
   elseif (self.projectile and not self.worldspace) then
     local px,py,pz = spGetProjectilePosition(self.projectile)
     posX,posY,posZ = posX+px,posY+py,posZ+pz
   end
   if (losState==nil) then
     if (self.radar) then
-      losState = IsPosInRadar(posX,posY,posZ, LocalAllyTeamID)
+      losState = IsPosInRadar(posX,posY,posZ)
     end
     if ((not losState) and self.airLos) then
-      losState = IsPosInAirLos(posX,posY,posZ, LocalAllyTeamID)
+      losState = IsPosInAirLos(posX,posY,posZ)
     end
     if ((not losState) and self.los) then
-      losState = IsPosInLos(posX,posY,posZ, LocalAllyTeamID)
+      losState = IsPosInLos(posX,posY,posZ)
     end
   end
   return (losState)and(spIsSphereInView(posX,posY,posZ,radius))

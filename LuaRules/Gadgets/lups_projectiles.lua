@@ -13,7 +13,8 @@ function gadget:GetInfo()
 end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-local weapons = include("LuaRules/Configs/lups_projectile_fxs.lua") or {}
+local weapons = include("LuaRules/Configs/lups_projectile_fxs.lua")	--{}
+
 --[[
 for i=1,#WeaponDefs do
 	local wd = WeaponDefs[i]
@@ -57,13 +58,12 @@ end
 
 function gadget:Initialize()
 	for weaponID in pairs(weapons) do
-		Spring.Echo("bla", weaponID)
 		Script.SetWatchWeapon(weaponID, true)
 	end
 end
 
 function gadget:Shutdown()
-	for weaponID in pairs(weapons) do
+for weaponID in pairs(weapons) do
 		Script.SetWatchWeapon(weaponID, false)
 	end
 end
@@ -76,7 +76,7 @@ else
 --------------------------------------------------------------------------------
 
 local Lups
-local LupsAddParticles
+local LupsAddParticles 
 local SYNCED = SYNCED
 
 local projectiles = {}

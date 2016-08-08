@@ -191,7 +191,7 @@ function NanoParticles:Draw()
   local endPosNew = self.targetpos
   local endPosOld = self.targetposStart
   
-  if (not self.pos) or (not self.targetpos) or (not self.targetposStart) or (self.life == 0) then
+  if (not self.pos) or (not self.targetpos) or (not self.targetposStart) then
     self._dead = true
     return
   end
