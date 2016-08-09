@@ -36,11 +36,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
-	description                  = [[Unit Type: Field Medic / Construction Assistant
-Armortype: ]] ..armortype.. [[ 
-
-• Automatically repairs mobile units in the area 
-
+	description                  = [[Field Medic / Construction Assistant
 Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -119,9 +115,12 @@ Uses +]] .. supply .. [[ Supply]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
-		helptext	             = [[The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combat for 5 seconds before repairs can take place.
+		helptext	             = [[Armortype: ]] ..armortype .. [[
 		
-		The ORB will also automatically reclaim and energy cores it gets close to. This means that if you include them in your unit groups, not only do you get excellent repair, you can also turn a profit from even a bad engagement.]],
+		
+		The ORB is a field medic designed to quickly repair damaged units. It has an Area Repair ability that will repair 10 hitpoints every second to any damaged unit (including allied units) in range. Unit must be out of combat for 5 seconds before repairs can take place.
+		
+		The ORB will also automatically reclaim any energy cores it gets close to. This means that if you include them in your unit groups, not only do you get excellent repair, you can also turn a profit from even a bad engagement.]],
 		
 		-- groundtexselectimg    = ":nc:bitmaps/icons/repairzone.png",
 		-- groundtexselectxsize  = 1000, 

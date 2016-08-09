@@ -50,22 +50,8 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR RIOT",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Anti-Swarm EMP/Riot Tank
-Armortype: ]] ..armortype.. [[ 
-
-200 Paralysis Damage vs Light
-100 Paralysis Damage vs Armored/Building
-
-	• Paralyzes enemy units
-	• Projectile can hit multiple units
-
-Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
-
-Energy cost to fire EMP: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Shotgun: ]] .. roundToFirstDecimal(energycosttofire2) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Anti-Swarm EMP/Riot Tank
+Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -152,7 +138,18 @@ Uses +]] .. supply .. [[ Supply]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
-		helptext	             = [[]],
+		helptext	             = [[Armortype: ]] ..armortype.. [[ 
+
+200 Paralysis Damage vs Light
+100 Paralysis Damage vs Armored/Building
+
+	• Paralyzes enemy units
+	• Projectile can hit multiple units
+
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
+
+Energy cost to fire EMP: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Shotgun: ]] .. roundToFirstDecimal(energycosttofire2),
 	},
 }
 
@@ -179,7 +176,7 @@ local weaponDefs                 = {
 		impulseFactor            = 0,
 		
 		minintensity             = 1,
-		name                     = "Laser",
+		name                     = "EMP Blast Wave",
 		noexplode		         = true,
 		paralyzer		         = true,
 		paralyzetime	         = 2.5,
@@ -221,7 +218,7 @@ local weaponDefs                 = {
 		energypershot            = energycosttofire2,
 		interceptedByShieldType  = 4,
 		impulseFactor            = 0,
-		name                     = "Light Cannon",
+		name                     = "Shotgun",
 		projectiles		         = weapon2Projectiles,
 		range                    = 500,
 		reloadtime               = 5,

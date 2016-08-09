@@ -41,15 +41,7 @@ local unitDef                    = {
 	category                     = "ARMORED NOTAIR SUPPORT",
 	corpse                       = "ammobox",
 	description                  = [[Unit Type: Endbringer Class Low Yeild Nuclear Saturation Artillery
-Armortype: ]] ..armortype.. [[ 
-
-500 Damage vs Building
-250 Damage vs Light/Armored
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -118,7 +110,12 @@ Uses +]] .. supply .. [[ Supply]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[]],
+		helptext                 = [[Armortype: ]] ..armortype.. [[ 
+
+500 Damage vs Building
+250 Damage vs Light/Armored
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

@@ -31,7 +31,7 @@ function gadget:GetInfo()
 	}
 end
 
-local refundFactor = .5 --How much of the original price is returned
+local refundFactor = 0.5 --How much of the original price is returned
 local sellFactor = 1 --Factor for the buildtime 
 local CMD_SELL = 39867
 
@@ -44,10 +44,11 @@ local min = math.min
 
 local sellDesc = {
 	name="Sell",
-	tooltip="Sell the building for a partial refund",
+	tooltip=[[Sell a unit or building for a partial refund (Refund amount: ]] .. refundFactor .. [[).
+Click stop (or press S) to cancel the sale.]],
 	action="sell",
 	type=CMDTYPE_ICON,
-	texture="bitmaps/ui/command_buttons/cmd_sell.png",
+	--texture="bitmaps/ui/command_buttons/cmd_sell.png",
 	id=CMD_SELL,
 }
 

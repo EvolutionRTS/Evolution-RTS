@@ -35,14 +35,8 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Unit Type: Command Unit
-Armortype: ]] ..armortype.. [[ 
-
-1000 EMP Damage vs Light/Armored/Building
-
-Gives ]] ..supplyGiven.. [[ Supply
-
-There can only be one!]],
+	description                  = [[Commander Unit
+Gives ]] ..supplyGiven.. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -151,7 +145,11 @@ There can only be one!]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
-		helptext                 = [[]],
+		helptext                 = [[Armortype: ]] ..armortype.. [[ 
+
+1000 EMP Damage vs Light/Armored/Building
+
+Reclaims any energy cores within it's proximity.]],
 	},
 }
 

@@ -27,9 +27,15 @@ end
 local CMD_PRIORITY=34220
 
 local Tooltips = {
-	'Construction spending None. (Hotkey: i)',
-	'Construction spending Normal. Default - inherits low/high temporarily from unit it builds. (Hotkey: i)',
-	'Construction spending Low. Served only after high and normal priority units. (Hotkey: i)',
+	[[Construction spending: Low Priority
+ 
+Low priority constructions are only built using resources that are left over from other construction projects.]],
+	[[Construction spending: Normal Priority
+ 
+Normal priority constructions share resources evenly between one another.]],
+	[[Construction spending: High Priority
+ 
+High priority constructions will receive resources and buildpower before any other lower priority constructions.]],
 }
 local DefaultState = 1
 local CommandOrder = 123456
@@ -38,9 +44,16 @@ local CommandDesc = {
 		type        =  CMDTYPE.ICON_MODE,
 		name        = 'Priority',
 		action      = 'priority',
-		texture 	= 'bitmaps/ui/buttons/cmd_priority.png',
-		tooltip 	= Tooltips[DefaultState + 1],
-		params      = {DefaultState, 'Low','Normal','High'}
+		--texture 	= 'bitmaps/ui/buttons/cmd_priority.png',
+		tooltip 	= Tooltips[DefaultState+1],
+		params      = {DefaultState,
+[[Low
+Priority]],
+[[Normal
+Priority]],
+[[High
+Priority]]
+		}
 	}
 local StateCount = #CommandDesc.params-1
 

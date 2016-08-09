@@ -12,6 +12,18 @@ end
 
 function widget:Initialize()
 
+	-- bind sell command
+	Spring.SendCommands({
+		"unbindkeyset shift+s",
+	})
+	Spring.SendCommands("bind shift+s sell")
+
+	-- replace guard with area guard
+	Spring.SendCommands({
+		"unbindkeyset g",
+	})
+	Spring.SendCommands("bind g areaguard")
+
 	-- replace fps mode bind with capture
 	Spring.SendCommands({
 		"unbindkeyset c",

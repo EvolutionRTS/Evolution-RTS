@@ -44,15 +44,7 @@ local unitDef                    = {
 	category                     = "LIGHT NOTAIR SUPPORT",
 	corpse                       = "ammobox",
 	description                  = [[Unit Type: Artillery Support Tank
-Armortype: ]] ..armortype.. [[ 
-
-200 Damage vs Buildings
-100 Damage vs Light/Armored
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -131,7 +123,12 @@ Uses +]] .. supply .. [[ Supply]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[]],
+		helptext                 = [[Armortype: ]] ..armortype.. [[ 
+
+200 Damage vs Buildings
+100 Damage vs Light/Armored
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

@@ -37,8 +37,6 @@ local unitDef                    = {
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
 	description                  = [[Unit Type: Engineer
-Armortype: ]] .. armortype .. [[ 
-
 Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -139,8 +137,10 @@ Uses +]] .. supply .. [[ Supply]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[The Erector can build new structures, reclaim features, turn energy cores into gunship drones, and capture enemy units. Upon it's death, it emits a wave of nanoparticles that will repair 100 hitpoints to any units in proximity]],
-},
+		helptext                 = [[Armortype: ]] .. armortype .. [[ 
+
+Moving an Engineer in proximity to a Energy Core will spawn a small gunship drone from that core.]],
+	},
 }
 
 --------------------------------------------------------------------------------

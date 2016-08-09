@@ -120,7 +120,7 @@ Armortype: ]] ..armortype.. [[
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 
-Requires +]] .. power .. [[ • Uses +]] .. supply .. [[ Supply]],
+Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	},
 }
 
