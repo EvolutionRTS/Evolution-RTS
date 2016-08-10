@@ -19,7 +19,7 @@ return {
 	shortGame='EvoRTS',
 	modtype=1,
 	depend = {
-		"Spring Features v1.9",
+		"rapid://spring-features:test",
 		-- "Shard LuaAI $VERSION",
 		-- "Evolution RTS Shard LuaAI $VERSION",		
 	},
