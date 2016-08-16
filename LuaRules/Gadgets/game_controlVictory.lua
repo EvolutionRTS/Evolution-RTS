@@ -592,11 +592,11 @@ else -- UNSYNCED
 			for allyTeamID, allyScore in spairs(SYNCED.score) do
 				--Spring.Echo("at allied team ID", allyTeamID)
 				-- note to self, allyTeamID +1 = ally team number	
-				
-				if allyTeamID ~= gaia then
+				local allyTeamMembers = Spring.GetTeamList(allyTeamID)
+				if allyTeamID ~= gaia and allyTeamMembers and (#allyTeamMembers > 0) then
 					local allyFound = false
 					local name = "Some Bot"
-					local team = Spring.GetTeamList(allyTeamID)[1]
+					local team = allyTeamMembers[1]
 					
 					for _,teamId in pairs(Spring.GetTeamList(allyTeamID))do
 						--Spring.Echo("\tat team ID", teamId)
