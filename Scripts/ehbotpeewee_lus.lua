@@ -48,8 +48,8 @@ function script.QueryWeapon(weaponID)
 end
 
 function script.FireWeapon(weaponID)
-	EmitSfx (firepoints[currentFirepoint], 1024)
 	currentFirepoint = 3 - currentFirepoint
+	EmitSfx (firepoints[currentFirepoint], 1024)
 end
 
 function script.AimWeapon(weaponID, heading, pitch)

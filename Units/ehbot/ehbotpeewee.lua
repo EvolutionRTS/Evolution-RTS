@@ -11,7 +11,8 @@ local supply					 = [[3]]
 
 local weapon1Damage              = 5
 local weapon1AOE				 = 100
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local projectiles				 = 5
+local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -24,7 +25,7 @@ local unitDef                    = {
 	--**
 
 	acceleration                 = 1,
-	brakeRate                    = 0.1,
+	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 27,
 	builder                      = false,
@@ -38,16 +39,8 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Raider 
-Armortype: ]] ..armortype.. [[ 
-
-45 Damage vs Light/Armored
-60 Damage vs Building 
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Light Raider 
+Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -127,7 +120,12 @@ Uses +]] .. supply .. [[ Supply]],
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[]],
+		helptext                 = [[Armortype: ]] ..armortype.. [[ 
+ 
+45 Damage vs Light/Armored
+60 Damage vs Building 
+ 
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
@@ -139,19 +137,26 @@ local weaponDefs                 = {
 	flashweapon                = {
 		AreaOfEffect           = weapon1AOE,
 		avoidFriendly          = false,
+		avoidFeature 		   = false,
 		collideFriendly        = false,
-		rgbColor               = "0.8 0.5 0",
-		rgbColor2              = "0.5 0.5 0.5",
+		collideFeature         = false,
+		cegTag                 = "railgun",
+		rgbColor               = "0 0 1",
+		rgbColor2              = "1 1 1",
 		explosionGenerator     = "custom:genericshellexplosion-medium-sparks-burn",
 		energypershot          = energycosttofire,
+		duration			   = 0.25,
 		name                   = "E.M.G.",
+		noExplode			   = true,
 		range                  = 600,
 		reloadtime             = 0.5,
-		projectiles			   = 5,
-		weaponType		       = "Cannon",
-		soundStart             = "tgunshipfire.wav",
+		projectiles			   = projectiles,
+		weaponType		       = "LaserCannon",
+		soundStart             = "shotgun-reload.wav",
 		soundTrigger           = true,
 		sprayAngle             = 2000,
+		texture1               = "shot",
+		texture2               = "empty",
 		tolerance              = 10000,
 		turret                 = true,
 		weaponTimer            = 1,

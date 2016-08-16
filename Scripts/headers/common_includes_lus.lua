@@ -9,7 +9,7 @@ common = {
 	
 	HbotLift = function ()
 		Move(base, y_axis, 20, 200)
-		Spring.Echo("Bruh I lift")
+		--Spring.Echo("Bruh I lift")
 	end,
 	
     setSFXoccupy = function (setSFXoccupy_argument)
