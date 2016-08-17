@@ -1,7 +1,7 @@
--- UNITDEF -- ehbotthud --
+-- UNITDEF -- ehbotpyro --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ehbotrocko"
+local unitName                   = "ehbotpyro"
 
 --------------------------------------------------------------------------------
 
@@ -9,12 +9,11 @@ local power						 = [[6 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 
-local projectiles				 = 3
 local weapon1Damage              = 10
-local weapon1AOE				 = 150
+local weapon1AOE				 = 50
 --local projectiles				 = 5
 --local burst						 = 10
-local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -46,7 +45,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
-	explodeAs                    = "mediumExplosionGenericRed",
+	explodeAs                    = "mediumExplosionGenericPurple",
 	footprintX                   = 3,
 	footprintZ                   = 3,
 	--highTrajectory		   		 = 2,
@@ -63,13 +62,13 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	movementClass                = "HOVERHBOT3",
 	name                         = "Rocko",
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotrocko.s3o",
-	script						 = "ehbotrocko_lus.lua",
+	objectName                   = "ehbotpyro.s3o",
+	script						 = "ehbotpyro_lus.lua",
 	radarDistance                = 0,
 	repairable		             = false,
-	selfDestructAs               = "mediumExplosionGenericRed",
+	selfDestructAs               = "mediumExplosionGenericPurple",
 	side                         = "CORE",
-	sightDistance                = 700,
+	sightDistance                = 600,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -78,13 +77,13 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = "ehbotrocko",
+	unitname                     = "ehbotpyro",
 	upright                      = true,
 	workerTime                   = 0,
 
 	sfxtypes                     = {
 		explosiongenerators      = {
-			"custom:gdhcannon",
+			"custom:flamethrowerrange500",
 			"custom:dirt",
 			"custom:blacksmoke",
 			"custom:airfactoryhtrail",
@@ -106,7 +105,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "rockets",
+			def                  = "flamethrower",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
 			badTargetCategory    = "VTOL ARMORED WALL",
@@ -137,44 +136,38 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 local weaponDefs                 = {
-	rockets             = {
+	flamethrower                 = {
+		
+		accuracy                 = 0,
 		AreaOfEffect             = weapon1AOE,
-		avoidFriendly            = false,
 		avoidFeature             = false,
-		collideFriendly          = false,
+		avoidFriendly            = false,
 		collideFeature           = false,
-		cegTag                   = "missiletrailflashy",
-		explosionGenerator       = "custom:genericshellexplosion-medium-red",
+		collideFriendly          = false,
+		explosionGenerator       = "custom:burnblack",
+		coreThickness            = 0,
+		duration                 = 1,
 		energypershot            = energycosttofire,
-		fireStarter              = 70,
-		tracks                   = true,
-		impulseFactor            = 0,
+		fallOffRate              = 1,
+		fireStarter              = 50,
 		interceptedByShieldType  = 4,
-		model                    = "missilesmalllauncher.s3o",
-		name                     = "Rockets",
-		projectiles				 = projectiles,
-		range                    = 700,
-		reloadtime               = 1,
-		weaponType		         = "MissileLauncher",
-		smokeTrail               = false,
-		soundStart               = "rocket1.wav",
-		soundHit                 = "explode5.wav",
-		startVelocity            = 500,
-		tolerance                = 10000,
-		turnrate                 = 6000,
-		predictBoost	         = 0.5,
+		soundstart               = "flamethrower1.wav",
+		noexplode				 = true,
+		minintensity             = 1,
+		impulseFactor            = 0,
+		name                     = "Something with Flames",
+		range                    = 500,
+		reloadtime               = 0.1,
+		WeaponType               = [[LaserCannon]],
+		rgbColor                 = "0 0 0",
+		rgbColor2                = "0 0 0",
+		thickness                = 0,
+		tolerance                = 1000,
 		turret                   = true,
-		weaponAcceleration       = 50,
-		flightTime               = 5,
-		trajectoryHeight         = 1.25,
-		sprayangle		         = 5000,
-		weaponVelocity           = 2000,
+		weaponVelocity           = 400,
 		customparams             = {
-			damagetype		     = "eamphibrock",  
-
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
-		},     
+			damagetype		     = "eallterranarchidflame",  
+		},      
 		damage                   = {
 			default              = weapon1Damage,
 		},
