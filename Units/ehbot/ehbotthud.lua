@@ -79,6 +79,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	--  turnrate                 = 475,
 	unitname                     = "ehbotthud",
 	upright                      = true,
+	usePieceCollisionVolumes	 = true,
 	workerTime                   = 0,
 
 	sfxtypes                     = {

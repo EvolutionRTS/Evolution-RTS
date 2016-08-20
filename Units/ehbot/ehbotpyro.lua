@@ -78,6 +78,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
 	unitname                     = "ehbotpyro",
+	usePieceCollisionVolumes	 = true,
 	upright                      = true,
 	workerTime                   = 0,
 
