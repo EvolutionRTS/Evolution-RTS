@@ -43,7 +43,7 @@ end
 function LowEnergyBehaviour:Activate()
 	self.underfire = false
 
-	local s = self.unit:Internal():Build("esolar2")
+	local s = self.unit:Internal():Build("emediumgen")
 	if s then
 		self.active = true
 	else

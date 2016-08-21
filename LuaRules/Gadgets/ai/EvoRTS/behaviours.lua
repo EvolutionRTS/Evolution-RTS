@@ -6,7 +6,7 @@ shard_include "capturerbehaviour"
 --require "missingfactorybehaviour"
 --require "engineerturretbehaviour"
 --require "autoreclaimbehaviour"
---require "lowenergybehaviour"
+shard_include "lowenergybehaviour"
 --require "factoryregisterbehaviour"
 
 behaviours = {

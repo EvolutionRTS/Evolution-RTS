@@ -176,6 +176,7 @@ function gadget:GameFrame(n)
 		end
 	end
 
+	-- Give the AI resources according to it's difficulty Setting
 	if n%160 == 1 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
