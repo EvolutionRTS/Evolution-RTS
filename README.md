@@ -1,3 +1,5 @@
+Join our Discord community at: https://discord.gg/WUbAs2f
+
 [![Join the chat at https://gitter.im/EvolutionRTS/GeneralDiscussion](https://badges.gitter.im/EvolutionRTS/Evolution-RTS.svg)](https://gitter.im/EvolutionRTS/GeneralDiscussion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 <h1>Evolution RTS</h1>
