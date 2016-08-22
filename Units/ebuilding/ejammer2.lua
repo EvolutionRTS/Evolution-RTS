@@ -72,6 +72,16 @@ Drains -5 Energy while emitting cloaking field]],
 		armortype                 = armortype,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
+		
+		area_cloak = 1, -- Can this unit emit a cloaking field?
+		area_cloak_upkeep = 5, -- How much energy does it cost to maintain the cloaking field?
+		area_cloak_radius = 500, -- How large is the cloaking field?
+		--area_cloak_grow_rate = 200, -- When the cloaking field is turned on, how fast does the field expand to it's full size?
+		--area_cloak_shrink_rate = 200, -- When the cloaking field is turned off, how fast does the field shrink to nothingness?
+		area_cloak_decloak_distance = 150, -- How close does something have to be in order to decloak a unit within a cloaking shield?
+		area_cloak_init = false, -- Start up the cloak shield the moment the unit is built?
+		area_cloak_draw = true, -- No idea what this does
+		area_cloak_self = false, -- Does the cloak shield cloak the unit emitting it?
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
