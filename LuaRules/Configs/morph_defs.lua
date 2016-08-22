@@ -23,20 +23,100 @@ local morphDefs = {		--beginig of morphDefs
 
 local devolution = (-1 > 0)
 
-local metalCost_ecommandercloak = 250
-local timeToBuild = metalCost_ecommandercloak * 0.25
+local metalCost_ecommander = 100
+local timeToBuild_ecommander = metalCost_ecommander * 0.25
+
+local metalCost_ecommandercloak = 100
+local timeToBuild_ecommandercloak = metalCost_ecommandercloak * 0.25
+
+local metalCost_ecommandershield = 100
+local timeToBuild_ecommandershield = metalCost_ecommandershield * 0.25
+
+local metalCost_ecommanderbuild = 100
+local timeToBuild_ecommanderbuild = metalCost_ecommanderbuild * 0.25
+
+local metalCost_ecommanderfactory = 100
+local timeToBuild_ecommanderfactory = metalCost_ecommanderfactory * 0.25
 
 local morphDefs = {
-	-- ecommander = 	{
-		-- {
-			-- into = 'ecommandercloak',
-			-- time = timeToBuild,
-			-- cmdname = [[Cloaking 
--- Overseer]],
-			-- metal = metalCost_ecommandercloak,
-			-- text = 'Morph to Cloaking Overseer: Loses stun ability, gains a large cloaking field which also cloaks the Overseer.'
-		-- },
-	-- }
+	ecommander = 	{
+		{
+			into = 'ecommandercloak',
+			time = timeToBuild_ecommandercloak,
+			cmdname = [[Cloaking 
+Overseer]],
+			metal = metalCost_ecommandercloak,
+			text = 'Morph to Cloaking Overseer: Loses stun ability, gains a large cloaking field which also cloaks the Overseer.',
+		},
+		{
+			into = 'ecommandershield',
+			time = timeToBuild_ecommandershield,
+			cmdname = [[Shield
+Overseer]],
+			metal = metalCost_ecommandershield,
+			text = 'Morph to Shielded Overseer: Loses stun ability, gains a large shield which does not cost energy to maintain.',
+		},
+		{
+			into = 'ecommanderbuild',
+			time = timeToBuild_ecommanderbuild,
+			cmdname = [[Builder
+Overseer]],
+			metal = metalCost_ecommanderbuild,
+			text = 'Morph to Builder Overseer: Stun ability AOE halved, gains x2 buildpower.',
+		},
+		{
+			into = 'ecommanderfactory',
+			time = timeToBuild_ecommanderfactory,
+			cmdname = [[Factory
+Overseer]],
+			metal = metalCost_ecommanderfactory,
+			text = 'Morph to Factory Overseer: Loses stun ability, gains the ability to build all raider and riot tanks anywhere.',
+		},
+	},
+	
+	ecommandercloak = 	{
+		{
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Basic 
+Overseer]],
+			metal = metalCost_ecommander,
+			text = 'Morph back to the original Overseer.',
+		},
+	},
+	
+	ecommandershield = 	{
+		{
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Basic 
+Overseer]],
+			metal = metalCost_ecommander,
+			text = 'Morph back to the original Overseer.',
+		},
+	},
+	
+	ecommanderbuild = 	{
+		{
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Basic 
+Overseer]],
+			metal = metalCost_ecommander,
+			text = 'Morph back to the original Overseer.',
+		},
+	},
+	
+	ecommanderfactory = 	{
+		{
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Basic 
+Overseer]],
+			metal = metalCost_ecommander,
+			text = 'Morph back to the original Overseer.',
+		},
+	},
 }
 
 --

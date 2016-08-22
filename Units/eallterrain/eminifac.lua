@@ -95,7 +95,6 @@ Armortype: ]] ..armortype,
 		"eallterrassault",
 		"eallterranarchid",
 		"eallterrshield",
-		"ecommander",
 	},
 	sounds                         = {
 		underattack                = "unitsunderattack1",
