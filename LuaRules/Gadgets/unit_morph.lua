@@ -20,7 +20,7 @@ function gadget:GetInfo()
     date      = "Jan, 2008",
     license   = "GNU GPL, v2 or later",
     layer     = 1,
-    enabled   = false
+    enabled   = true
   }
 end
 local echo  = Spring.Echo
