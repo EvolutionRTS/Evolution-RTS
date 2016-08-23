@@ -6,7 +6,7 @@ local unitName                   = "eengineer5"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supply					 = [[2]]
+--local supply					 = [[2]]
 
 local unitDef                    = {
 
@@ -132,7 +132,7 @@ Uses +]] .. supply .. [[ Supply]],
 		death_sounds             = "generic",
 		dronespawner             = "1",
 		armortype                = armortype,
-		supply_cost              = supply,
+--		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  

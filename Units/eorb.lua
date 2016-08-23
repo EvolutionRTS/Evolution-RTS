@@ -6,7 +6,7 @@ local unitName                   = "eorb"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supply					 = [[1]]
+--local supply					 = [[1]]
 
 local unitDef                    = {
 
@@ -111,7 +111,7 @@ Uses +]] .. supply .. [[ Supply]],
 		death_sounds             = "generic",
 		cancollect               = "1",
 		armortype                = armortype,
-		supply_cost              = supply,
+--		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
