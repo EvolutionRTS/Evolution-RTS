@@ -63,6 +63,7 @@ Gives ]] ..supplyGiven.. [[ Supply]],
 	objectName                   = "ecommander4.s3o",
 	script			             = "ecommander3.cob",
 	radarDistance                = 0,
+	radarDistanceJam             = 400,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
@@ -147,7 +148,7 @@ Gives ]] ..supplyGiven.. [[ Supply]],
 		factionname	             = "outer_colonies",
 		helptext                 = [[Armortype: ]] ..armortype.. [[ 
 
-Generates a large cloaking field
+Generates a large cloaking and Jamming field
 
 Reclaims any energy cores within it's proximity.]],
 
