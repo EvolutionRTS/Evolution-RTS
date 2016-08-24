@@ -56,7 +56,7 @@ local unitDef                    = {
 Armortype: ]] ..armortype.. [[ 
 
 200 Damage vs Armored
-80 Damage vs Light/Building
+100 Damage vs Light/Building
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 

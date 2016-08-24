@@ -9,7 +9,7 @@ local power						 = [[18 power]]
 local armortype					 = [[armored]]
 local supply					 = [[6]]
 
-local weapon1Damage              = 100
+local weapon1Damage              = 125
 local weapon1AOE				 = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 

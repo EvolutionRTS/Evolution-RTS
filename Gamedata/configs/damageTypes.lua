@@ -103,8 +103,8 @@ local damageClasses = {
 		eallterrmed	= {
 			SIEGE		= 1,
 			ARMORED		= 1,
-			LIGHT		= 0.40,
-			BUILDING 	= 0.40,
+			LIGHT		= 0.5,
+			BUILDING 	= 0.5,
 		},	
 		eallterraa	= {
 			SIEGE		= 1,
