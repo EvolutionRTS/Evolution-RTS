@@ -36,7 +36,8 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'Single', 'Salvo'},
+	params = {'1', [[Single
+Missile]], [[Salvo]]},
     },
   },
   
@@ -46,7 +47,8 @@ return {
 	tooltip  = "Switch between Normal and Saturation Artillery",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'Normal', 'Saturation'},
+	params = {'1', [[Single
+Shot]], 'Saturation'},
     },
   },
 }
