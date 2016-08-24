@@ -47,6 +47,19 @@ local unitDef                    = {
 	cantBeTransported            = true,
 	category                     = "ARMORED NOTAIR SKIRMISHER",
 	corpse                       = "ammobox",
+
+	-- Cloaking
+
+	cancloak		             = true,
+	cloakCost		             = 0,
+	cloakCostMoving	             = 1,
+	minCloakDistance             = 150,
+	decloakOnFire	             = true,
+	decloakSpherical             = true,
+	initCloaked		             = false,
+	
+	-- End Cloaking
+	
 	description                  =[[Unit Type: Endbringer Class Base Assault Walker
 Armortype: ]] ..armortype.. [[ 
 

@@ -46,14 +46,14 @@ local unitDef                    = {
 	canMove                      = true,
 	canPatrol                    = true,
 	canstop                      = "1",
-	category                     = "ARMORED NOTAIR RIOT",
+	category                     = "LIGHT NOTAIR RIOT",
 	corpse                       = "ammobox",
 
 	-- Cloaking
 
 	cancloak		             = true,
-	cloakCost		             = 1,
-	cloakCostMoving	             = 2,
+	cloakCost		             = 0,
+	cloakCostMoving	             = 1,
 	minCloakDistance             = 70,
 	decloakOnFire	             = true,
 	decloakSpherical             = true,

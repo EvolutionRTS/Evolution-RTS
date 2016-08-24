@@ -140,11 +140,11 @@ end
 
 function unhideUnit (uID)
     --Spring.SetUnitCloak (uID, false ,false)
-	if UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature then
-		local signatureRadius = UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature
+	--if UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature then
+	--	local signatureRadius = UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature
 		--Spring.Echo(signatureRadius)
-		Spring.SetUnitSensorRadius (uID, "seismic", signatureRadius)
-	end
+		Spring.SetUnitSensorRadius (uID, "seismic", 2)
+	--end
     if not UnitDefs[Spring.GetUnitDefID(uID)].stealth then
         Spring.SetUnitStealth (uID, false)
     end

@@ -6,7 +6,7 @@ local unitName                   = "eallterrmed"
 --------------------------------------------------------------------------------
 
 local power						 = [[16 power]]
-local armortype					 = [[light]]
+local armortype					 = [[armored]]
 local supply					 = [[4]]
 
 local weapon1Damage              = 200
@@ -37,14 +37,14 @@ local unitDef                    = {
 	canMove                      = true,
 	canPatrol                    = true,
 	canstop                      = "1",
-	category                     = "LIGHT NOTAIR SKIRMISHER",
+	category                     = "ARMORED NOTAIR SKIRMISHER",
 	corpse                       = "ammobox",
 
 	-- Cloaking
 
 	cancloak		             = true,
-	cloakCost		             = 1,
-	cloakCostMoving	             = 2,
+	cloakCost		             = 0,
+	cloakCostMoving	             = 1,
 	minCloakDistance             = 70,
 	decloakOnFire	             = true,
 	decloakSpherical             = true,
