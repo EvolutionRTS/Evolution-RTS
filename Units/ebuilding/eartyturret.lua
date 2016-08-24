@@ -6,7 +6,7 @@ local unitName                    = "eartyturret"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local supply					 = [[2]]
+--local supply					 = [[2]]
 
 local weapon1Damage               = 200
 local weapon1AOE				  = 50
@@ -32,9 +32,7 @@ Armortype: ]] ..armortype.. [[
 200 Damage vs Buildings
 50 Damage vs Light/Armored
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Uses +]] .. supply .. [[ Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
@@ -83,7 +81,7 @@ Uses +]] .. supply .. [[ Supply]],
 		},
 	},
 	customParams                  = {
-		supply_cost               = supply,
+--		supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",
 		armortype                 = armortype,

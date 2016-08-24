@@ -36,8 +36,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
-	description                  = [[Field Medic / Construction Assistant
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Field Medic / Construction Assistant]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

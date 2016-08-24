@@ -88,7 +88,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	weapons                       = {
 		[1]                       = {
 			def                   = "nukemissile",
-			onlyTargetCategory    = "NOTAIR",
+			badTargetCategory    = "NOTAIR",
 		},
 	},
 	customParams                  = {

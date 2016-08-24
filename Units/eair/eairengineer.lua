@@ -42,9 +42,7 @@ local unitDef                    = {
 	corpse                       = "ammobox",
 	cruiseAlt                    = 300,
 	description                  = [[Unit Type: Engineer
-Armortype: ]] .. armortype .. [[ 
-
-Uses +]] .. supply .. [[ Supply]],
+Armortype: ]] .. armortype,
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

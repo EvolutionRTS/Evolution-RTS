@@ -36,8 +36,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
-	description                  = [[Unit Type: Engineer
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Unit Type: Engineer]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
