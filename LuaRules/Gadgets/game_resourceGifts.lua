@@ -19,19 +19,19 @@ local baseIncomeIncrease = 3 -- add this each 1cycle
 local baseIncomeIncreasePeriod = 2.5*60*30 -- x min * 60 s/min * 30 frame/s
 
 local aiCheatHandicapMetal = { 
-	["veryeasy"] =  5,
-	["easy"] =  10,
-	["medium"] =  25,
-	["hard"] =  50,
-	["insane"] =  100,
+	["veryeasy"] =  0,
+	["easy"] =  5,
+	["medium"] =  10,
+	["hard"] =  25,
+	["insane"] =  50,
 }
 
 local aiCheatHandicapEnergy = { 
-	["veryeasy"] =  5,
-	["easy"] =  10,
-	["medium"] =  25,
-	["hard"] =  50,
-	["insane"] =  100,
+	["veryeasy"] =  0,
+	["easy"] =  5,
+	["medium"] =  10,
+	["hard"] =  25,
+	["insane"] =  50,
 }
 
 if (not gadgetHandler:IsSyncedCode()) then
