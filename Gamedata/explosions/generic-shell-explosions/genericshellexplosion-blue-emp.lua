@@ -96,7 +96,6 @@ return {
         airdrag            = 0.87,
         alwaysvisible      = true,
         colormap           = [[0 0.5 1 0.05	0 0 0 0.0]], -- same as groundflash colors
-        delay              = [[10 r200]],
         directional        = false,
         emitrot            = 90,
         emitrotspread      = 5,
@@ -144,7 +143,6 @@ return {
         airdrag            = 0.87,
         alwaysvisible      = true,
         colormap           = [[0.75 0.75 1 0.05	0 0 0 0.0]],
-        delay              = [[10 r200]],
         directional        = false,
         emitrot            = 90,
         emitrotspread      = 5,
