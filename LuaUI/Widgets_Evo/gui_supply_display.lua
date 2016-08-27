@@ -26,23 +26,42 @@ local vsx, vsy = gl.GetViewSizes()
 local posx, posy = vsx - 245, vsy - 60
 local maxSupply = 200
 
+local increment = 0
+
 function widget:GameFrame(n)
 	local myTeamID = Spring.GetMyTeamID()
 	--math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed")) -- (su)
 	--math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax")) -- (sm)
     local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed")), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax"))
-	
-	if su >= sm - 10 then
-		warningColor = red
+	if su <= maxSupply * 0.95 then
+		if su >= sm * 0.9 and sm ~= maxSupply then
+			warning = true
+		else
+			warning = false
+		end
+		
+		if warning == true then
+			if increment == 0 then
+				countUp = true
+			end
+		
+			if increment < 255 and countUp == true then
+				increment = increment + 15
+			elseif increment > 0 then
+				countUp = false
+				increment = increment - 15
+			end
+			
+			warningColor = "\255\255" .. string.char (increment) .. "\0"
+
+		else
+			warningColor = green
+		end
 	else
 		warningColor = green
 	end
-	
-	if su >= maxSupply - 10 then
-		warningColor = green
-	end
-	
-    str =warningColor .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
+
+	str = warningColor .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)

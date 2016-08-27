@@ -25,6 +25,7 @@ local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
 local posx, posy = vsx - 245, vsy - 20
 
+local increment = 0
 
 --Spring.GetTeamResources
 -- ( number teamID, string "metal" | "energy" ) ->
@@ -44,13 +45,32 @@ function widget:GameFrame(n)
 --    str = "\255\136\197\226Metal: \255\255\135\0± " .. tostring(math.round(mi - me)) .. "\255\0\255\0 +" .. tostring(math.round(mi)) .. "\255\255\255\255/\255\255\0\0-" .. tostring(math.round(mp)) .. "\255\255\255\255 (" .. tostring(math.round(mc)) .. "/" .. tostring(math.round(ms)) .. "\255\255\255\255)"
 
 --Custom Evo metal display
-	if mc >= ms - 50 then
-		warningColor = red
+	local warningColor = white -- If the word "energy" displays as white, something below isn't working correctly
+	if mc >= ms * 0.8 then
+		warning = true
+	else
+		warning = false
+	end
+	
+	if warning == true then
+		if increment == 0 then
+			countUp = true
+		end
+	
+		if increment < 255 and countUp == true then
+			increment = increment + 15
+		elseif increment > 0 then
+			countUp = false
+			increment = increment - 15
+		end
+		
+		warningColor = "\255\255" .. string.char (increment) .. "\0"
+
 	else
 		warningColor = skyblue
 	end
-	
-    str = warningColor .. "Metal: " .. orange .. "± " .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
+
+	str = warningColor .. "Metal: " .. orange .. "± " .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)

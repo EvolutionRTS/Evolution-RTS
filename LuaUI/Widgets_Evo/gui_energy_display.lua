@@ -25,6 +25,8 @@ local FontSize = 15
 local vsx, vsy = gl.GetViewSizes()
 local posx, posy = vsx - 245, vsy -40
 
+local increment = 0
+
 --Spring.GetTeamResources
 -- ( number teamID, string "metal" | "energy" ) ->
 --   nil | number currentLevel, (ec)
@@ -44,8 +46,27 @@ function widget:GameFrame(n)
 --    str = yellow .. "Energy:" .. orange .. " ± " .. tostring(math.round(ei - ee)) .. green .. " +" .. tostring(math.round(ei)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep)) .. white .. " (" .. tostring(math.round(ec)) .. "/" .. tostring(math.round(es)) .. ")"
 
 --Custom Evo Energy display
-	if ec <= 75 then
-		warningColor = red
+	local warningColor = white -- If the word "energy" displays as white, something below isn't working correctly
+	if ec <= es * 0.2 then
+		warning = true
+	else
+		warning = false
+	end
+	
+	if warning == true then
+		if increment == 0 then
+			countUp = true
+		end
+	
+		if increment < 255 and countUp == true then
+			increment = increment + 15
+		elseif increment > 0 then
+			countUp = false
+			increment = increment - 15
+		end
+		
+		warningColor = "\255\255" .. string.char (increment) .. "\0"
+
 	else
 		warningColor = yellow
 	end
