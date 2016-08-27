@@ -31,7 +31,18 @@ function widget:GameFrame(n)
 	--math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed")) -- (su)
 	--math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax")) -- (sm)
     local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed")), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax"))
-    str = green .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
+	
+	if su >= sm - 10 then
+		warningColor = red
+	else
+		warningColor = green
+	end
+	
+	if su >= maxSupply - 10 then
+		warningColor = green
+	end
+	
+    str =warningColor .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)

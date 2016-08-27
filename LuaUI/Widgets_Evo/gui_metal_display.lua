@@ -44,7 +44,13 @@ function widget:GameFrame(n)
 --    str = "\255\136\197\226Metal: \255\255\135\0± " .. tostring(math.round(mi - me)) .. "\255\0\255\0 +" .. tostring(math.round(mi)) .. "\255\255\255\255/\255\255\0\0-" .. tostring(math.round(mp)) .. "\255\255\255\255 (" .. tostring(math.round(mc)) .. "/" .. tostring(math.round(ms)) .. "\255\255\255\255)"
 
 --Custom Evo metal display
-    str = skyblue .. "Metal: " .. orange .. "± " .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
+	if mc >= ms - 50 then
+		warningColor = red
+	else
+		warningColor = skyblue
+	end
+	
+    str = warningColor .. "Metal: " .. orange .. "± " .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
 end
 
 function widget:TweakMousePress(x, y, button)
