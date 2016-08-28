@@ -11,7 +11,14 @@ local damageClasses = {
 			BUILDING 	= 0.1,
 		},	
 		----------------------------------------------------------------------------			
-			
+		-- Overseers with weapons
+		ecommanderbattle	= {
+			SIEGE		= 0.5,
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
+		},
+		
 		-- Start Hovers
 		eaatank	= {
 			SIEGE		= 1,

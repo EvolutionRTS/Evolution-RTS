@@ -195,7 +195,6 @@ local weaponDefs                 = {
 		
 		coreThickness            = 0.5,
 		duration                 = 0.1,
-		energypershot            = 0.6,
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		energypershot            = energycosttofire2,
 		fallOffRate              = 1,

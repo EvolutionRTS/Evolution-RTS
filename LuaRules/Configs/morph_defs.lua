@@ -38,6 +38,9 @@ local timeToBuild_ecommanderbuild = metalCost_ecommanderbuild * 0.25
 local metalCost_ecommanderfactory = 100
 local timeToBuild_ecommanderfactory = metalCost_ecommanderfactory * 0.25
 
+local metalCost_ecommanderbattle = 100
+local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
+
 local morphDefs = {
 	ecommander = 	{
 		{
@@ -71,6 +74,14 @@ Overseer]],
 Overseer]],
 			metal = metalCost_ecommanderfactory,
 			text = 'Morph to Factory Overseer: Loses stun ability, gains the ability to build all raider and riot tanks anywhere.',
+		},
+		{
+			into = 'ecommanderbattle',
+			time = timeToBuild_ecommanderbattle,
+			cmdname = [[Battle
+Overseer]],
+			metal = metalCost_ecommanderbattle,
+			text = 'Morph to Battle Overseer: Has stun ability and a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
 		},
 	},
 	
@@ -108,6 +119,16 @@ Overseer]],
 	},
 	
 	ecommanderfactory = 	{
+		{
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Basic 
+Overseer]],
+			metal = metalCost_ecommander,
+			text = 'Morph back to the original Overseer.',
+		},
+	},
+	ecommanderbattle = 	{
 		{
 			into = 'ecommander',
 			time = timeToBuild_ecommander,
