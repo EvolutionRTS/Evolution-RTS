@@ -10,9 +10,6 @@ function widget:GetInfo()
     }
 end
 
---Disable Default Resources Bar
-Spring.SendCommands({"resbar 0"})
-
 local white = "\255\255\255\255"
 local yellow = "\255\255\255\0"
 local orange = "\255\255\135\0"
