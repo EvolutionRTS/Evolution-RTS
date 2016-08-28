@@ -155,6 +155,7 @@ local weaponDefs                 = {
 		range                    = 550,
 		reloadtime               = 0.5,
 		WeaponType               = "LaserCannon",
+		waterweapon				 = true,
 		rgbColor                 = "0 0 1",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,

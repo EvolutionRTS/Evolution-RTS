@@ -290,8 +290,8 @@ if (gadgetHandler:IsSyncedCode()) then
 			--Since no config file is found, we create 7 points spaced out in a circle on the map
 			local angle = math.random() * math.pi * 2
 			points = {}
-			for i=1,7 do
-				local angle = angle + i * math.pi * 2/7
+			for i=1,6 do
+				local angle = angle + i * math.pi * 2/6
 				points[i] = {
 					x=mapx/2 + mapx * .4 * math.sin(angle),
 					y=0,
@@ -303,7 +303,15 @@ if (gadgetHandler:IsSyncedCode()) then
 					aggressor=nil,
 					capture=0,
 				}
-			end 
+			end
+			points[7] = {
+				x=mapx/2,
+				y=0,
+				z=mapz/2, 
+				owner=nil,
+				aggressor=nil,
+				capture=0,
+			}
 		end
 		_G.points = points
 		_G.score = score
