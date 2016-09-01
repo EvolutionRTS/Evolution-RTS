@@ -41,6 +41,14 @@ local ringsDefs = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
         { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
+	[UnitDefNames.ecommanderbattle.id] = {
+        { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1500 },
+        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+    },
+	[UnitDefNames.ecommanderfactory.id] = {
+        { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
+        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+    },
 	[UnitDefNames.eorb.id] = {
         { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         { color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
