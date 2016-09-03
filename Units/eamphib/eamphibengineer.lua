@@ -5,6 +5,9 @@ local unitName                   = "eamphibengineer"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 35
+local maxDamage					  = 600
+
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
@@ -19,7 +22,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.24,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 35,
+	buildCostMetal               = buildCostMetal,
 	buildDistance                = 800,
 	builder                      = true,
 	buildTime                    = 5,
@@ -47,7 +50,7 @@ Armortype: ]] .. armortype,
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 600,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 28,
 	maxVelocity                  = 4,
 	maxReverseVelocity           = 1,
@@ -75,7 +78,7 @@ Armortype: ]] .. armortype,
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 1020,
-	unitname                     = "eamphibengineer",
+	unitname                     = unitName,
 	workerTime                   = 1,
 	capturespeed                 = 1,
 	TerraformSpeed               = 100000,

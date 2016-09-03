@@ -5,6 +5,9 @@ local unitName                   = "eartytank"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal			 = 36
+local maxDamage					 = 300
+
 local power						 = [[10 power]]
 local armortype					 = [[light]]
 local supply					 = [[8]]
@@ -31,7 +34,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.2,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 36,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -55,7 +58,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 300,
+	maxDamage                    = maxDamage,
 	maxVelocity                  = 2.3,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
@@ -125,20 +128,12 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 		factionname	             = "outer_colonies",  
 		helptext                 = [[Armortype: ]] ..armortype.. [[ 
 
-200 Damage vs Buildings
-100 Damage vs Light/Armored
-
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
 
 --------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-local weapon1Damage              = 200
-local weapon1AOE				 = 50
-local weapon2Damage              = 20
-local weapon2AOE				 = 250
 
 local weaponDefs                 = {
 	Artilleryweapon              = {

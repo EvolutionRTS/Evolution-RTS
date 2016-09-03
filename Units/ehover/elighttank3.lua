@@ -5,6 +5,9 @@ local unitName                   = "elighttank3"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal			 = 27
+local maxDamage					 = 245
+
 local power						 = [[6 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
@@ -26,7 +29,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 27,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -50,7 +53,7 @@ Requires +]] .. power .. [[ • Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 245,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 26,
 	maxVelocity                  = 5,
 	maxReverseVelocity           = 2,
@@ -118,9 +121,7 @@ Requires +]] .. power .. [[ • Uses +]] .. supply .. [[ Supply]],
 		helptext                 = [[Unit Type: Raider 
 Armortype: ]] ..armortype.. [[ 
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

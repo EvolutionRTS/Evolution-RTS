@@ -5,6 +5,9 @@ local unitName                   = "eamphibmedtank"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 53
+local maxDamage					  = 360
+
 local power						 = [[14 power]]
 local armortype					 = [[light]]
 local supply					 = [[4]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 53,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -61,7 +64,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 360,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 28,
 	maxVelocity                  = 4.5,
 	maxReverseVelocity           = 1,
@@ -87,7 +90,7 @@ Uses +]] .. supply .. [[ Supply]],
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 430,
-	unitname                     = "eamphibmedtank",
+	unitname                     = unitName,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

@@ -5,6 +5,9 @@ local unitName                   = "eallterrengineer"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 45
+local maxDamage					  = 600
+
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
@@ -19,7 +22,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 45,
+	buildCostMetal               = buildCostMetal,
 	buildDistance                = 800,
 	builder                      = true,
 	buildTime                    = 5,
@@ -61,7 +64,7 @@ Armortype: ]] .. armortype,
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 600,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,

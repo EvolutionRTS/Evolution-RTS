@@ -5,6 +5,9 @@ local unitName                   = "eallterrlight"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 22
+local maxDamage					  = 245
+
 local power						 = [[4 power]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 22,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -73,7 +76,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 245,
+	maxDamage                    = maxDamage,
 	maxVelocity                  = 5.5,
 	maxReverseVelocity           = 2,
 	turninplacespeedlimit        = 5.5,

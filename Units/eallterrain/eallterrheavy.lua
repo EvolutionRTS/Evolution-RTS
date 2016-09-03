@@ -5,6 +5,9 @@ local unitName                   = "eallterrheavy"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 64
+local maxDamage					  = 545
+
 local power						 = [[18 power]]
 local armortype					 = [[armored]]
 local supply					 = [[6]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 64,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -73,7 +76,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 545,
+	maxDamage                    = maxDamage,
 	maxVelocity                  = 2.8,
 	turninplacespeedlimit        = 2.8,
 	maxReverseVelocity           = 1,

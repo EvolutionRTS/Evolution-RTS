@@ -5,6 +5,9 @@ local unitName                   = "eamphibriot"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 23
+local maxDamage					  = 340
+
 local power						 = [[6 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
@@ -36,7 +39,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 23,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -74,7 +77,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 340,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 28,
 	maxVelocity                  = 4.4,
 	maxReverseVelocity           = 1,
@@ -84,6 +87,7 @@ Uses +]] .. supply .. [[ Supply]],
 	name                         = "Dicer",
 	noChaseCategory              = "VTOL",
 	objectName                   = "eamphibriot2.s3o",
+	script	                     = "eamphibriot.cob",
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericWhite",
@@ -99,7 +103,7 @@ Uses +]] .. supply .. [[ Supply]],
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 430,
-	unitname                     = "eamphibriot",
+	unitname                     = unitName,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

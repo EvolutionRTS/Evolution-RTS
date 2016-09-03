@@ -5,12 +5,15 @@ local unitName                    = "ebasefactory"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 460
+local maxDamage					  = 1500
+
 local unitDef                     = {
 
 	activatewhenbuilt             = false,
 	buildAngle                    = 1024,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 60,
+	buildCostMetal                = buildCostMetal,
 	builder                       = true,
 	buildTime                     = 5,
 	canAttack			          = false,
@@ -33,7 +36,7 @@ local unitDef                     = {
 	iconType                      = "factory",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 1500,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 25,
 	maxWaterDepth                 = 99999999999,
 	metalStorage                  = 0,

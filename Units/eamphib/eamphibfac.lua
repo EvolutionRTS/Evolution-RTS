@@ -5,6 +5,9 @@ local unitName                     = "eamphibfac"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 60
+local maxDamage					  = 1500
+
 local armortype					 = [[building]]
 
 local unitDef                      = {
@@ -12,7 +15,7 @@ local unitDef                      = {
 	activatewhenbuilt              = false,
 	buildAngle                     = 1024,
 	buildCostEnergy                = 0,
-	buildCostMetal                 = 60,
+	buildCostMetal                 = buildCostMetal,
 	builder                        = true,
 	buildTime                      = 5,
 	canBeAssisted                  = true,
@@ -38,7 +41,7 @@ Armortype: ]] ..armortype,
 	iconType                       = "factory",
 	idleAutoHeal                   = .5,
 	idleTime                       = 2200,
-	maxDamage                      = 1500,
+	maxDamage                      = maxDamage,
 	maxSlope                       = 25,
 	maxWaterDepth                  = 5000,
 	metalStorage                   = 0,
@@ -55,7 +58,7 @@ Armortype: ]] ..armortype,
 --	SonarDistance                  = 175,
 	smoothAnim                     = true,
 	TEDClass                       = "PLANT",
-	unitname                       = "eamphibfac",
+	unitname                       = unitName,
 	--  unitRestricted	           = 1,
 	workerTime                     = 1,
 	yardMap                        = "ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo",

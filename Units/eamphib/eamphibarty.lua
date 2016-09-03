@@ -5,6 +5,9 @@ local unitName                = "eamphibarty"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 36
+local maxDamage					  = 300
+
 local power						 = [[10 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
@@ -28,7 +31,7 @@ local unitDef                 = {
 	acceleration              = 1,
 	brakeRate                 = 0.2,
 	buildCostEnergy           = 0,
-	buildCostMetal            = 36,
+	buildCostMetal            = buildCostMetal,
 	builder                   = false,
 	buildTime                 = 5,
 	canAttack                 = true,
@@ -61,7 +64,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	leaveTracks                   = false,
-	maxDamage                     = 300,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 28,
 	maxVelocity                   = 3,
 	maxReverseVelocity            = 1,
@@ -85,7 +88,7 @@ Uses +]] .. supply .. [[ Supply]],
 	turnInPlace                   = true,
 	turnRate                      = 5000,
 	--  turnrate                  = 300,
-	unitname                      = "eamphibarty",
+	unitname                      = unitName,
 	workerTime                    = 0,
 	sfxtypes                  = { 
 	pieceExplosionGenerators  = { 

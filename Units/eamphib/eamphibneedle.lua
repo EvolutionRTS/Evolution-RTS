@@ -5,6 +5,9 @@ local unitName                   = "eamphibneedle"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 42
+local maxDamage					  = 340
+
 local power						 = [[8 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 42,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -61,7 +64,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 340,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 28,
 	maxVelocity                  = 4.9,
 	maxReverseVelocity           = 2,
@@ -85,7 +88,7 @@ Uses +]] .. supply .. [[ Supply]],
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = "eamphibneedle",
+	unitname                     = unitNeedle,
 	workerTime                   = 0,
 
 	sfxtypes                     = { 

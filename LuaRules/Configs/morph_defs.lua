@@ -41,6 +41,9 @@ local timeToBuild_ecommanderfactory = metalCost_ecommanderfactory * 0.25
 local metalCost_ecommanderbattle = 100
 local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
 
+local metalCost_t2factory = 400
+local timeToBuild_t2factory = metalCost_t2factory * 0.125
+
 local morphDefs = {
 	ecommander = 	{
 		{
@@ -138,6 +141,47 @@ Overseer]],
 			text = 'Morph back to the original Overseer.',
 		},
 	},
+	
+	ebasefactory = 	{
+		{
+			into = 'ebasefactory_t2',
+			time = timeToBuild_t2factory,
+			cmdname = [[Tech
+Lvl 2]],
+			metal = metalCost_t2factory,
+			text = 'Morph into a tech level 2 factory.',
+		},
+	},
+	eminifac = 	{
+		{
+			into = 'eminifac_t2',
+			time = timeToBuild_t2factory,
+			cmdname = [[Tech
+Lvl 2]],
+			metal = metalCost_t2factory,
+			text = 'Morph into a tech level 2 factory.',
+		},
+	},
+	eamphibfac = 	{
+		{
+			into = 'eamphibfac_t2',
+			time = timeToBuild_t2factory,
+			cmdname = [[Tech
+Lvl 2]],
+			metal = metalCost_t2factory,
+			text = 'Morph into a tech level 2 factory.',
+		},
+	},
+	eairplant = 	{
+		{
+			into = 'eairplant_t2',
+			time = timeToBuild_t2factory,
+			cmdname = [[Tech
+Lvl 2]],
+			metal = metalCost_t2factory,
+			text = 'Morph into a tech level 2 factory.',
+		},
+	},	
 }
 
 --

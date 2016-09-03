@@ -5,6 +5,9 @@ local unitName                   = "eheavytank3"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal			 = 59
+local maxDamage					 = 375
+
 local power						 = [[16 power]]
 local armortype					 = [[armored]]
 local supply					 = [[4]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.2,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 59,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -52,7 +55,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 375,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 26,
 	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 1,
@@ -119,9 +122,6 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
 		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-	
-150 Damage vs Light/Armored
-75 Damage vs Building
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},

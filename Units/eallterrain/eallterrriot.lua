@@ -5,6 +5,9 @@ local unitName                   = "eallterrriot"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 27
+local maxDamage					  = 400
+
 local power						 = [[6 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
@@ -36,7 +39,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 27,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -87,7 +90,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 400,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 180,
 	maxVelocity                  = 4.5,
 	maxReverseVelocity           = 1,

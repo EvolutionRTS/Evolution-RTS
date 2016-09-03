@@ -5,6 +5,9 @@ local unitName                   = "egunship2"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 50
+local maxDamage					  = 375
+
 local power						 = [[12 power]]
 local armortype					 = [[light]]
 local supply					 = [[4]]
@@ -29,7 +32,7 @@ local unitDef                    = {
 	airStrafe                    = false,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 50,
+	buildCostMetal               = buildCostMetal,
 	buildTime                    = 2.5,
 	canAttack                    = true,
 	canDropFlare                 = false,
@@ -68,7 +71,7 @@ Uses +]] .. supply .. [[ Supply]],
 	iconType                     = "tankdestroyer",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
-	maxDamage                    = 375,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 90,
 	maxVelocity                  = 14,
 	verticalSpeed		         = 15,
@@ -85,7 +88,7 @@ Uses +]] .. supply .. [[ Supply]],
 	sightDistance                = 800,
 	smoothAnim                   = true,
 	turnRate                     = 5000,
-	unitname                     = "egunship2",
+	unitname                     = unitName,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"deathceg3", 

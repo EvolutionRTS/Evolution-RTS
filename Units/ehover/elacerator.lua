@@ -5,6 +5,9 @@ local unitName                   = "elacerator"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			 = 200
+local maxDamage					 = 1000
+
 local power						 = [[26 power]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 0.18,
 	brakeRate                    = 0.2,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 200,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -54,7 +57,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 1000,
+	maxDamage                    = maxDamage,
 	maxVelocity                  = 2.3,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 20,
@@ -111,9 +114,6 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
 		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-
-500 Damage vs Building
-250 Damage vs Light/Armored
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},

@@ -5,6 +5,9 @@ local unitName                   = "escout"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 40
+local maxDamage					  = 160
+
 local power						 = [[2 power]]
 local armortype					 = [[light]]
 
@@ -66,7 +69,7 @@ Requires +]] .. power,
 	sightDistance                = 750,
 	smoothAnim                   = true,
 	turnRate                     = 5000,
-	unitname                     = "escout",
+	unitname                     = unitName,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

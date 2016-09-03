@@ -5,13 +5,16 @@ local unitName                        = "eairplant"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 60
+local maxDamage					  = 1500
+
 local armortype					 = [[building]]
 
 local unitDef                         = {
 
 	activatewhenbuilt                 = true,
 	buildCostEnergy                   = 0,
-	buildCostMetal                    = 60,
+	buildCostMetal                    = buildCostMetal,
 	builder                           = true,
 	buildTime                         = 2.5,
 	canBeAssisted                     = true,
@@ -35,7 +38,7 @@ Armortype: ]] .. armortype,
 	idleAutoHeal                      = .5,
 	idleTime                          = 2200,
 	levelground		                  = false,
-	maxDamage                         = 1500,
+	maxDamage                         = maxDamage,
 	maxSlope                          = 90,
 	maxWaterDepth                     = 999999,
 	metalStorage                      = 0,
@@ -51,7 +54,7 @@ Armortype: ]] .. armortype,
 	sightDistance                     = 388,
 	smoothAnim                        = true,
 	TEDClass                          = "PLANT",
-	unitname                          = "eairplant",
+	unitname                          = unitName,
 	--  unitRestricted	              = 1,
 	unitnumber                        = "83",
 	workerTime                        = 1,

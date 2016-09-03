@@ -5,6 +5,9 @@ local unitName                   = "emissiletank"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal			 = 62
+local maxDamage					 = 320
+
 local power						 = [[14 power]]
 local armortype					 = [[light]]
 local supply					 = [[14]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.2,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 62,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -52,7 +55,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 320,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 26,
 	maxVelocity                  = 2.5,
 	maxReverseVelocity           = 1,
@@ -123,9 +126,6 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
 		helptext	             = [[Armortype: ]] ..armortype.. [[ 
-
-150 Damage vs Light/Armored
-75 Damage vs Building
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},

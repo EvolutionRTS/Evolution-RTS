@@ -5,6 +5,9 @@ local unitName                   = "eairengineer"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 80
+local maxDamage					  = 450
+
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
@@ -20,7 +23,7 @@ local unitDef                    = {
 	airStrafe                    = true,
 	brakeRate                    = 0.5,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 80,
+	buildCostMetal               = buildCostMetal,
 	buildTime                    = 2.5,
 	builder                      = true,
 	buildDistance                = 600,
@@ -59,7 +62,7 @@ Armortype: ]] .. armortype,
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	maxBank 			         = 5,
-	maxDamage                    = 450,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 90,
 	maxVelocity                  = 7,
 	verticalSpeed		         = 15,
@@ -77,7 +80,7 @@ Armortype: ]] .. armortype,
 	sightDistance                = 600,
 	smoothAnim                   = true,
 	turnRate                     = 5000,
-	unitname                     = "eairengineer",
+	unitname                     = unitName,
 	unitnumber                   = "148",
 	workerTime                   = 1,
 	capturespeed                 = 1,

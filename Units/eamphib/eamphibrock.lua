@@ -5,6 +5,9 @@ local unitName                   = "eamphibrock"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 59
+local maxDamage					  = 320
+
 local power						 = [[12 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
@@ -32,7 +35,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 59,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -64,7 +67,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 320,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 28,
 	maxVelocity                  = 3.4,
 	maxReverseVelocity           = 1,
@@ -95,7 +98,7 @@ Uses +]] .. supply .. [[ Supply]],
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 430,
-	unitname                     = "eamphibrock",
+	unitname                     = unitName,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

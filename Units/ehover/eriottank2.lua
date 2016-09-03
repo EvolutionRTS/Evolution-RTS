@@ -5,6 +5,9 @@ local unitName                   = "eriottank2"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal			 = 25
+local maxDamage					 = 300
+
 local power						 = [[6 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
@@ -37,7 +40,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 25,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -62,7 +65,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 300,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 26,
 	maxVelocity                  = 4,
 	maxReverseVelocity           = 1,
@@ -139,14 +142,13 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
 		helptext	             = [[Armortype: ]] ..armortype.. [[ 
-
-200 Paralysis Damage vs Light
-100 Paralysis Damage vs Armored/Building
-
+		
+Primary fire mode
+		
 	• Paralyzes enemy units
 	• Projectile can hit multiple units
 
-Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect.
 
 Energy cost to fire EMP: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 Energy cost to fire Shotgun: ]] .. roundToFirstDecimal(energycosttofire2),

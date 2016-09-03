@@ -5,6 +5,9 @@ local unitName                   = "efighter"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 45
+local maxDamage					  = 325
+
 local power						 = [[8 power]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
@@ -30,7 +33,7 @@ local unitDef                    = {
 	bankscale                    = "1",
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 45,
+	buildCostMetal               = buildCostMetal,
 	buildTime                    = 2.5,
 	canAttack                    = true,
 	canFly                       = true,
@@ -66,7 +69,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleTime                     = 2200,
 	maxAcc                       = 0.25,
 	maxBank			             = 5,
-	maxDamage                    = 325,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 90,
 	maxVelocity                  = 16,
 	verticalSpeed		         = 15,
@@ -84,7 +87,7 @@ Uses +]] .. supply .. [[ Supply]],
 	smoothAnim                   = true,
 	sonarDistance                = 0,
 	turnRate                     = 5000,
-	unitname                     = "efighter",
+	unitname                     = unitNames,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

@@ -5,6 +5,9 @@ local unitName                   = "eallterrshield"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 28
+local maxDamage					  = 500
+
 local power						 = [[10 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
@@ -25,7 +28,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 28,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = false,
@@ -71,7 +74,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 500,
+	maxDamage                    = maxDamage,
 	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 2,
 	turninplacespeedlimit        = 4,

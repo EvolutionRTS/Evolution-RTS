@@ -5,6 +5,9 @@ local unitName                   = "eamphibleveler"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 250
+local maxDamage					  = 1250
+
 local power						 = [[31 power]]
 local armortype					 = [[armored]]
 local supply					 = [[10]]
@@ -35,7 +38,7 @@ local unitDef                    = {
 	acceleration                 = 0.18,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 250,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -74,7 +77,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 1250,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 28,
 	maxVelocity                  = 4,
 	maxReverseVelocity           = 1,
@@ -94,7 +97,7 @@ Uses +]] .. supply .. [[ Supply]],
 	seismicSignature             = 4,
 	turnInPlace                  = true,
 	turnRate                     = 5000,
-	unitname                     = "eamphibleveler",
+	unitname                     = unitName,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

@@ -5,6 +5,9 @@ local unitName                   = "etransport"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 20
+local maxDamage					  = 200
+
 local power						 = [[0 power]]
 local armortype					 = [[armored]]
 local supply					 = [[0]]
@@ -22,7 +25,7 @@ local unitDef                    = {
 	airHoverFactor	             = 0,
 	brakeRate                    = 2,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 20,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 2.5,
 	canAttack                    = false,
@@ -52,7 +55,7 @@ Uses +]] .. supply .. [[ Supply]],
 	holdSteady                   = true,
 	--  hoverAttack              = true,
 	icontype                     = "etransport",
-	maxDamage                    = 200,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 90,
 	maxVelocity                  = 18,
 	verticalSpeed		         = 30,
@@ -72,7 +75,7 @@ Uses +]] .. supply .. [[ Supply]],
 	fallSpeed 					 = 10,
 	loadingRadius				 = 220, --float
 	turnRate                     = 5000,
-	unitname                     = "etransport",
+	unitname                     = unitName,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"deathceg3", 

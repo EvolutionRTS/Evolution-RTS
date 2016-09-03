@@ -5,6 +5,9 @@ local unitName                   = "eamphibbuggy"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 18
+local maxDamage					  = 120
+
 local power						 = [[2 power]]
 local armortype					 = [[light]]
 local supply					 = [[1]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 18,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -61,7 +64,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 120,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 28,
 	maxVelocity                  = 6.0,
 	maxReverseVelocity           = 2,
@@ -86,7 +89,7 @@ Uses +]] .. supply .. [[ Supply]],
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = "eamphibbuggy",
+	unitname                     = unitName,
 	workerTime                   = 0,
 
 	sfxtypes                     = { 

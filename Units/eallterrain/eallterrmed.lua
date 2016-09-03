@@ -5,6 +5,9 @@ local unitName                   = "eallterrmed"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 44
+local maxDamage					  = 500
+
 local power						 = [[16 power]]
 local armortype					 = [[armored]]
 local supply					 = [[4]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 44,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -72,7 +75,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 500,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 180,
 	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 1,

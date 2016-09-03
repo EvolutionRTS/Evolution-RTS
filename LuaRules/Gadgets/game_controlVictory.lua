@@ -457,12 +457,10 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 	function gadget:AllowUnitCreation(unit, builder, team, x, y, z) -- TODO: fix for comshare
-		if moveSpeed == 0 then
-			for _, p in pairs(points) do
-				if x and math.sqrt((x - p.x) * (x - p.x) + (z - p.z) * (z - p.z)) < captureRadius then
-					Spring.SendMessageToPlayer(team, "Cannot build units in a control point")
-					return false
-				end
+		for _, p in pairs(points) do
+			if x and math.sqrt((x - p.x) * (x - p.x) + (z - p.z) * (z - p.z)) < captureRadius then
+				Spring.SendMessageToPlayer(team, "Cannot build units in a control point")
+				return false
 			end
 		end
 		return true

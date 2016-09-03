@@ -5,6 +5,9 @@ local unitName                   = "eengineer5"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal			 = 40
+local maxDamage					 = 600
+
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
@@ -19,7 +22,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.24,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 40,
+	buildCostMetal               = buildCostMetal,
 	buildDistance                = 800,
 	builder                      = true,
 	buildTime                    = 5,
@@ -47,7 +50,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 600,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 26,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,

@@ -4,6 +4,10 @@
 local unitName                   = "ebomber"
 
 --------------------------------------------------------------------------------
+
+local buildCostMetal 			  = 55
+local maxDamage					  = 270
+
 local power						 = [[18 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
@@ -29,7 +33,7 @@ local unitDef                    = {
 	BadTargetCategory            = "VTOL",
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 55,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 2.5,
 	canAttack                    = true,
@@ -64,7 +68,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	loopbackattack               = false,
-	maxDamage                    = 270,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 90,
 	maxVelocity                  = 11,
 	verticalSpeed		         = 15,
@@ -82,7 +86,7 @@ Uses +]] .. supply .. [[ Supply]],
 	smoothAnim                   = true,
 	stealth                      = false,
 	turnRate                     = 5000,
-	unitname                     = "ebomber",
+	unitname                     = unitName,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

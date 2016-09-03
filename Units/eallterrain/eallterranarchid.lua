@@ -5,6 +5,9 @@ local unitName                   = "eallterranarchid"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 225
+local maxDamage					  = 1500
+
 local power						 = [[28 power]]
 local armortype					 = [[armored]]
 local supply					 = [[12]]
@@ -35,7 +38,7 @@ local unitDef                    = {
 	acceleration                 = 0.18,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 225,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -89,7 +92,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 1500,
+	maxDamage                    = maxDamage,
 	maxVelocity                  = 2.5,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 80,

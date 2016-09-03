@@ -5,6 +5,9 @@ local unitName                   = "eallterrassault"
 
 --------------------------------------------------------------------------------
 
+local buildCostMetal 			  = 60
+local maxDamage					  = 400
+
 local power						 = [[12 power]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
@@ -28,7 +31,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 60,
+	buildCostMetal               = buildCostMetal,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -75,7 +78,7 @@ Uses +]] .. supply .. [[ Supply]],
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 400,
+	maxDamage                    = maxDamage,
 	maxVelocity                  = 2.4,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,

@@ -48,6 +48,54 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine4", onActive=true}},
 	},
 	
+	efighter_t2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine3", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine4", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	egunship2_t2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	ebomber_t2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	eairengineer_t2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	escout_t2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
+	},
+	
+	etransport_t2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="rengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine3", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine4", onActive=true}},
+	},
+	
 	esubplane = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="engines", onActive=true}},
 	},
@@ -70,7 +118,7 @@ effectUnitDefs = {
 --		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine8", onActive=false}},
 --	},
 	
-	esolar2 = {
+--	esolar2 = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -78,8 +126,8 @@ effectUnitDefs = {
 
 		-- {class='Bursts', options=esolarBursts},
     -- {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,32,0}, size=10, precision=22, strength   = 0.02,  repeatEffect=true}},
-  },
-	emetalextractor = {
+--  },
+--	emetalextractor = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -87,8 +135,8 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,55,0}, size=10, precision=22, strength   = 0.015,  repeatEffect=true}},
-  },
-	euwmetalextractor = {
+--  },
+--	euwmetalextractor = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -96,8 +144,8 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
  --   {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,25,0}, size=15, precision=22, strength   = 0.015,  repeatEffect=true}},
-  },
-	egeothermal = {
+--  },
+--	egeothermal = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -105,8 +153,8 @@ effectUnitDefs = {
 
 --		{class='Bursts', options=egeoBursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,26,0.0}, size=10, precision=22, strength   = 0.02,  repeatEffect=true}},
-  },
-	efusion2 = {
+--  },
+--	efusion2 = {
 --		{class='StaticParticles', options=corfusNova},
 --		{class='StaticParticles', options=corfusNova2},
 --		{class='StaticParticles', options=corfusNova3},
@@ -117,9 +165,9 @@ effectUnitDefs = {
 
 --		{class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,51,0.0}, size=23, precision=22, strength   = 0.02,  repeatEffect=true}},
-  },
+--  },
   
-	burrow = {
+--	burrow = {
 --		{class='StaticParticles', options=corfusNova},
 --		{class='StaticParticles', options=corfusNova2},
 --		{class='StaticParticles', options=corfusNova3},
@@ -130,9 +178,9 @@ effectUnitDefs = {
 
 --		{class='Bursts', options=burrowBursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,51,0.0}, size=23, precision=22, strength   = 0.02,  repeatEffect=true}},
-  },
+--  },
   
-	eminifac = {
+--	eminifac = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -140,8 +188,8 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,25,110}, size=75, precision=22, strength   = 0.015,  repeatEffect=true}},
-  },
-	ebasefactory = {
+--  },
+--	ebasefactory = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -149,8 +197,8 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={20,25,10}, size=55, precision=22, strength   = 0.015,  repeatEffect=true}},
-  },
-	eamphibfac = {
+--  },
+--	eamphibfac = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -158,8 +206,8 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,25,85}, size=60, precision=22, strength   = 0.015,  repeatEffect=true}},
-  },
-	eairplant = {
+--  },
+--	eairplant = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -167,19 +215,19 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,280,30}, size=55, precision=22, strength   = 0.015,  repeatEffect=true}},
-  },
+--  },
 
-	eexperimentalfac = {
+--	eexperimentalfac = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,50,0}, size=140, precision=22, strength   = 0.015,  repeatEffect=true}},
-  },
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,50,0}, size=140, precision=22, strength   = 0.015,  repeatEffect=true}},
+--  },
   
-	eshieldgen = {
+--	eshieldgen = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -187,9 +235,9 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1500, precision=0, strength   = 0.0025, repeatEffect=true}},
-  },
+--  },
   
-	eallterrshield = {
+--	eallterrshield = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -197,7 +245,7 @@ effectUnitDefs = {
 
 --    {class='Bursts', options=efusion2Bursts},
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=300, precision=0, strength   = 0.0025, repeatEffect=true}},
-  },
+--  },
 	
 	
 	----// FUSIONS //--------------------------
