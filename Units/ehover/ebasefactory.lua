@@ -5,7 +5,7 @@ local unitName                    = "ebasefactory"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal 			  = 460
+local buildCostMetal 			  = 60
 local maxDamage					  = 1500
 
 local unitDef                     = {
