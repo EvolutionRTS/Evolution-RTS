@@ -44,7 +44,6 @@ local unitDef                    = {
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "commnuke",
-	fireState			         = "1",
 	footprintX                   = 4,
 	footprintZ                   = 4,
 	hideDamage		             = true,

@@ -54,7 +54,7 @@ local options= {
 	
 	{
 		key="aidifficulty",
-		name="AI Difficulty",
+		name="ShardLua AI Difficulty",
 		desc="Modifies how much Shard cheats",
 		type="list",
 		def="veryeasy",
@@ -77,8 +77,8 @@ local options= {
 		items={
 			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
 			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
-			{key="tugowar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
-			{key="multidomination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
+			{key="tugofwar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
+			{key="domination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
 		}
 	},
 	{

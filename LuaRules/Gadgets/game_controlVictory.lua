@@ -68,8 +68,8 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		items={
 			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
 			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
-			{key="tugowar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
-			{key="multidomination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
+			{key="tugofwar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
+			{key="domination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
 		}
 	},
 	{
@@ -202,17 +202,17 @@ local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime)
 Spring.Echo("[ControlVictory] Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Control Victory Scoring Mode Is Not Set!"))
 if Spring.GetModOptions().scoremode == "disabled" then return false end
 
-local limitScore = tonumber(Spring.GetModOptions().limitscore) or 3500
+local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2750
 
 local allyTeamColorSets={}
 
 local scoreModes = {
 	disabled = 0, -- none (duh)
 	countdown = 1, -- A point decreases all opponents' scores, zero means defeat
-	tugowar = 2, -- A point steals enemy score, zero means defeat
-	multidomination = 3, -- Holding all points will grant 100 score, first to reach the score limit wins
+	tugofwar = 2, -- A point steals enemy score, zero means defeat
+	domination = 3, -- Holding all points will grant 100 score, first to reach the score limit wins
 }
-local scoreMode = scoreModes[Spring.GetModOptions().scoremode or "Countdown"]
+local scoreMode = scoreModes[Spring.GetModOptions().scoremode or "countdown"]
 
 local _, _, _, _, _, gaia = Spring.GetTeamInfo(Spring.GetGaiaTeamID())
 local mapx, mapz = Game.mapSizeX, Game.mapSizeZ
@@ -413,11 +413,11 @@ if (gadgetHandler:IsSyncedCode()) then
 						Loser(allyTeamID)
 					end
 				end
-			elseif scoreMode == 2 then -- Tug o'War
+			elseif scoreMode == 2 then -- Tug of War
 				for owner, count in pairs(owned) do
 					for _, a in ipairs(Spring.GetAllyTeamList()) do
 						if a ~= owner and score[a] > 0 then
-							score[a] = score[a] - count * 2
+							score[a] = score[a] - count * tugofWarModifier
 							score[owner] = score[owner] + count * tugofWarModifier
 						end
 					end
@@ -428,7 +428,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						Loser(allyTeamID)
 					end
 				end
-			elseif scoreMode == 3 then -- Multi Domination
+			elseif scoreMode == 3 then -- Domination
 				local prevDominator = dom.dominator
 				dom.dominator = nil
 				for owner, count in pairs(owned) do
@@ -589,8 +589,8 @@ else -- UNSYNCED
 
 			--Make it look Pretty
 			if scoreMode == "countdown" then scoreMode = "Countdown" end
-			if scoreMode == "tugowar" then scoreMode = "Tug of War" end
-			if scoreMode == "multidomination" then scoreMode = "Domination" end
+			if scoreMode == "tugofwar" then scoreMode = "Tug of War" end
+			if scoreMode == "domination" then scoreMode = "Domination" end
 			
 			Text(white .. "Scoring Mode: " .. scoreMode, vsx - 280, vsy * .58 - 38 * -0.75, 18, "lo")
 			
