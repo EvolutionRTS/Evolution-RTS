@@ -33,6 +33,17 @@ local resources = {
             muzzleside			= 'default/muzzleside.tga',
             muzzlefront			= 'default/muzzlefront.tga',
             largebeam			= 'default/largelaserfalloff.tga',
+		-- Put these in "ProjectileTextures"
+			--Chicken Defense effects
+			uglynovaexplo='CC/uglynovaexplo.tga',
+			orangesmoke3='GPL/smoke_orange.png',
+			sporetrail='GPL/sporetrail.tga',
+			blooddrop='PD/blooddrop.tga',
+			bloodblast='PD/bloodblast.tga',
+			bloodsplat='PD/bloodsplat.tga',
+			blooddropwhite='PD/blooddropwhite.tga',
+			bloodblastwhite='PD/bloodblastwhite.tga',
+			null='PD/null.tga',
          },
       }
    }

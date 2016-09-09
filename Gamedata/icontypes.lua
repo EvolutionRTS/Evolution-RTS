@@ -222,6 +222,35 @@ local icontypes = {
     size=1,
     radiusadjust=3,
   },
+  
+  chicken = 
+	{
+		bitmap="icons/chicken.png",
+		size=1.4,
+    },
+	chickena = 
+	{
+		bitmap="icons/chickena.png",
+		size=1.6,
+    },
+	chickenf = {
+		bitmap="icons/chickenf.png",
+		size=1.6,
+    },
+	chickens = 
+	{
+		bitmap="icons/chickens.png",
+		size=1.5,
+    },
+	chickenr = {
+		bitmap="icons/chickenr.png",
+		size=1.6,
+    },
+	chickenq = {
+		bitmap="icons/chickenq.png",
+		size=3,
+    },
+  
 }
 
 --------------------------------------------------------------------------------
