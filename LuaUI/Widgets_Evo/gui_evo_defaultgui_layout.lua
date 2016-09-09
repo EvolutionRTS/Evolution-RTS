@@ -14,14 +14,14 @@
 
 function widget:GetInfo()
   return {
-    name      = "EVO Layout",
+    name      = "EVO Default Engine Gui Layout",
     desc      = "Sets the control panel to EVO default",
     author    = "jK and trepan, mixed by lurker and DeadnightWarrior",
     date      = "Feb 3, 2008",
     license   = "GNU GPL, v2 or later",
     layer     = -10,
     handler   = true,
-    enabled   = true  --  loaded by default?
+    enabled   = false  --  loaded by default?
   }
 end
 
@@ -229,7 +229,7 @@ local config = {}
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
-	--widgetHandler:DisableWidget("Red Build/Order Menu")
+	widgetHandler:DisableWidget("Red Build/Order Menu")
 	if not btns.x or not btns.y then
 		btns = {x = 5, y = 11}
 	end

@@ -175,7 +175,7 @@ local weaponDefs                  = {
 		
 		texture1		          = "shield4",
 		
-		visibleShieldHitFrames    = 50,
+		visibleShieldHitFrames    = 1,
 		weaponType                = [[Shield]],
 		damage                    = {
 			default               = 1,

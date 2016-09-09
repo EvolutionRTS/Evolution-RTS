@@ -18,7 +18,7 @@ LUAUI_DIRNAME = 'LuaUI/'
 
 VFS.DEF_MODE = VFS.RAW_FIRST
 
-local STARTUP_FILENAME = LUAUI_DIRNAME .. 'camain.lua'
+local STARTUP_FILENAME = LUAUI_DIRNAME .. 'evomain.lua'
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -27,9 +27,9 @@ do
   -- use a versionned directory name if it exists
   local sansslash = string.sub(LUAUI_DIRNAME, 1, -2)
   local versiondir = sansslash .. '-' .. Game.version .. '/'
-  if (VFS.FileExists(versiondir  .. 'camain.lua', VFS.RAW_ONLY)) then
+  if (VFS.FileExists(versiondir  .. 'evomain.lua', VFS.RAW_ONLY)) then
     LUAUI_DIRNAME = versiondir
-    STARTUP_FILENAME = LUAUI_DIRNAME .. 'camain.lua'
+    STARTUP_FILENAME = LUAUI_DIRNAME .. 'evomain.lua'
   end
 end
 
