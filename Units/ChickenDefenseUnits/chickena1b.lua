@@ -35,7 +35,7 @@ return {
 		name = "Cockatrice",
 		noautofire = false,
 		nochasecategory = "VTOL",
-		objectname = "ChickenDefenseModels/chickena1b.s3o",
+		objectname = "ChickenDefenseModels/chickenab.s3o",
 		script = "ChickenDefenseScripts/chickenab.cob",
 		onlytargetcategory2 = "VTOL",
 		seismicsignature = 0,
