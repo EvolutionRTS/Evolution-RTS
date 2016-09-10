@@ -199,7 +199,6 @@ local startTime = tonumber(Spring.GetModOptions().starttime) or 0 -- The time wh
 
 local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 -- Time needed holding all points to score in multi domination
 
-Spring.Echo("[ControlVictory] Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Control Victory Scoring Mode Is Not Set!"))
 if Spring.GetModOptions().scoremode == "disabled" then return false end
 
 local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2750
@@ -213,6 +212,8 @@ local scoreModes = {
 	domination = 3, -- Holding all points will grant 100 score, first to reach the score limit wins
 }
 local scoreMode = scoreModes[Spring.GetModOptions().scoremode or "countdown"]
+
+Spring.Echo("[ControlVictory] Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Countdown"))
 
 local _, _, _, _, _, gaia = Spring.GetTeamInfo(Spring.GetGaiaTeamID())
 local mapx, mapz = Game.mapSizeX, Game.mapSizeZ

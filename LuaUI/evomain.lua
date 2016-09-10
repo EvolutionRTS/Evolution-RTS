@@ -40,7 +40,7 @@ include("savetable.lua")
 include("debug.lua")
 include("modfonts.lua")
 include("layout.lua")   -- contains a simple LayoutButtons()
-include("cawidgets.lua")  -- the widget handler
+include("evowidgets.lua")  -- the widget handler
 
 --------------------------------------------------------------------------------
 --
