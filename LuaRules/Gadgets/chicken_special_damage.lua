@@ -12,7 +12,8 @@ function gadget:GetInfo()
     enabled   = true  --  loaded by default?
   }
 end
-
+local scoreMode = scoreModes[Spring.GetModOptions().chickens_enabled or "disabled"]
+if Spring.GetModOptions().chickens_enabled == "disabled" then return false end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
