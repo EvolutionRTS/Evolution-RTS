@@ -46,10 +46,8 @@ for name, fd in pairs(FeatureDefs) do
 end
 
 for name, fd in pairs(FeatureDefs) do
-	if fd.name ~= "ammobox" then
-		fd.metal = 0
-		fd.energy = 0
-	end
+	fd.metal = 0
+	fd.energy = 0
 end
 
 

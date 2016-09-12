@@ -89,7 +89,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 		[1]                       = {
 			def                   = "lighteweapon",
 			badTargetCategory     = "VTOL ARMORED",
-			onlyTargetCategory    = "LIGHT VTOL ARMORED",
+			onlyTargetCategory    = "BIO LIGHT VTOL ARMORED",
 		},
 	},
 	customParams                  = {

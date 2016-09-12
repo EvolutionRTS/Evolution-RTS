@@ -97,7 +97,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	weapons                       = {
 		[1]                       = {
 			def                   = "emineboom",
-			onlyTargetCategory    = "LIGHT ARMORED",
+			onlyTargetCategory    = "BIO LIGHT ARMORED",
 			badTargetCategory	  = "DRONE VTOL",
 		},
 	},
