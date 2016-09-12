@@ -96,11 +96,11 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "eheavyturretweapon",
-			onlyTargetCategory   = "BUILDING",
+			onlyTargetCategory   = "BIO BUILDING",
 		},
 		[2]                      = {
 			def                  = "eheavyturretweapon",
-			onlyTargetCategory   = "BUILDING",
+			onlyTargetCategory   = "BIO BUILDING",
 			slaveTo              = 1,
 		},
 	},

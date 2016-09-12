@@ -138,12 +138,12 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "riottankempweapon",
-			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
+			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "WALL",
 		},
 		[2]                      = {
 			def                  = "riottankshotgun",
-			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
+			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "WALL BUILDING",
 		},
 	},

@@ -119,11 +119,11 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "tankkillerlaser",
-			onlyTargetCategory   = "LIGHT ARMORED",
+			onlyTargetCategory   = "BIO LIGHT ARMORED",
 		},
 		[2]                      = {
 			def                  = "machinegun",
-			onlyTargetCategory   = "LIGHT ARMORED",
+			onlyTargetCategory   = "BIO LIGHT ARMORED",
 		},
 	},
 	customParams                 = {

@@ -116,7 +116,7 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "eaatankantiairmissile",
-			onlytargetcategory   = "VTOL",
+			onlyTargetCategory   = "BIO VTOL",
 		},
 	},
 	customParams                 = {

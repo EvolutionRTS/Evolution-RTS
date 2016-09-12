@@ -83,7 +83,7 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "TORP",
-			OnlyTargetCategory   = "AMPHIB SUB",
+			onlyTargetCategory   = "BIO AMPHIB SUB",
 			BadTargetCategory    = "VTOL",
 			noChaseCategory      = "VTOL",
 		},

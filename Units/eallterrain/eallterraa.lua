@@ -105,7 +105,7 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "heavytankweapon",
-			onlyTargetCategory   = "VTOL",
+			onlyTargetCategory   = "BIO VTOL",
 		},
 	},
 	customParams                 = {

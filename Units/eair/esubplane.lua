@@ -94,7 +94,7 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "esubplanetorpedo",
-			OnlyTargetCategory   = "BUILDING AMPHIB",
+			onlyTargetCategory   = "BIO BUILDING AMPHIB",
 			noChaseCategory      = "VTOL",
 		},
 	},

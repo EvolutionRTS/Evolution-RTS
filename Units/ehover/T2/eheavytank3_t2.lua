@@ -106,7 +106,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "heavytankweapon",
-			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
+			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING WALL",
 		},
 	},

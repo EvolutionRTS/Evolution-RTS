@@ -15,7 +15,7 @@ return {
 		canmove = true,
 		canpatrol = true,
 		canstop = true,
-		category = "VTOL MOBILE WEAPON NOTSUB NOTSHIP NOTHOVER ALL",
+		category = "BIO VTOL", --VTOL MOBILE WEAPON NOTSUB NOTSHIP NOTHOVER ALL",
 		collide = false,
 		collisionvolumeoffsets = "0 7 -6",
 		collisionvolumescales = "48 12 22",
@@ -46,7 +46,7 @@ return {
 		smoothanim = true,
 		steeringmode = "1",
 		tedclass = "VTOL",
-		turnrate = 900,
+		turnrate = 5000,
 		unitname = "chickens3",
 		featuredefs = {
 			dead = {},

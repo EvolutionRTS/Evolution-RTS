@@ -106,7 +106,7 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "nukeartyweapon",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "BIO NOTAIR AMPHIB",
 			badTargetCategory    = "LIGHT ARMORED WALL",
 		},
 	},

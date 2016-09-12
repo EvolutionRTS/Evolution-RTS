@@ -89,15 +89,15 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "heavybeamweapon",
-			onlyTargetCategory   = "BUILDING",
+			onlyTargetCategory   = "BIO BUILDING",
 		},
 		[2]                      = {
 			def                  = "concussioncannon",
-			onlyTargetCategory   = "LIGHT ARMORED",
+			onlyTargetCategory   = "BIO LIGHT ARMORED",
 		},
 		[3]                      = {
 			def                  = "concussioncannon",
-			onlyTargetCategory   = "LIGHT ARMORED",
+			onlyTargetCategory   = "BIO LIGHT ARMORED",
 		},
 	},
 	customParams                 = {

@@ -124,12 +124,12 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                      = {
 		[1]                      = {
 			def                  = "antiarmorrockets",
-			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
+			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 		[2]                      = {
 			def                  = "antiarmorrocketssalvo",
-			onlyTargetCategory   = "LIGHT ARMORED BUILDING",
+			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 	},

@@ -95,7 +95,7 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "mediumtankcannon",
-			onlyTargetCategory   = "NOTAIR AMPHIB",
+			onlyTargetCategory   = "BIO NOTAIR AMPHIB",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 	},
