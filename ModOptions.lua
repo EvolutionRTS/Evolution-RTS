@@ -69,7 +69,7 @@ local options= {
 	},
 	{
 		key="chickens_enabled",
-		name="Enable CHicken Defense? (Requires a CHicken AI in the game!)",
+		name="Enable Chicken Defense? (Requires a Chicken AI in the game!)",
 		desc="Enables Chicken Defense",
 		type="list",
 		def="disabled",

@@ -13,8 +13,9 @@ function gadget:GetInfo()
   }
 end
 
-local scoreMode = scoreModes[Spring.GetModOptions().chickens_enabled or "disabled"]
-if Spring.GetModOptions().chickens_enabled == "disabled" then return false end
+if Spring.GetModOptions().chickens_enabled == nil or Spring.GetModOptions().chickens_enabled == "disabled" then
+	return false
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
