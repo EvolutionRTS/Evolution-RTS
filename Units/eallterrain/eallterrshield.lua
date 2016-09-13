@@ -166,7 +166,7 @@ local weaponDefs                 = {
 		Shieldintercepttype      = 4,
 		Shieldgoodcolor          = "0.0 0.2 1.0",
 		Shieldbadcolor           = "1.0 0 0",
-		Shieldalpha              = 0.3,
+		Shieldalpha              = 0.075,
 		
 		texture1		         = "shield4",
 		

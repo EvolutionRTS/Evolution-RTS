@@ -227,25 +227,45 @@ effectUnitDefs = {
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,50,0}, size=140, precision=22, strength   = 0.015,  repeatEffect=true}},
 --  },
   
---	eshieldgen = {
+	eshieldgen = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
---    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1500, precision=0, strength   = 0.0025, repeatEffect=true}},
---  },
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1500, precision=0, strength   = 0.0005, repeatEffect=true}},
+  },
   
---	eallterrshield = {
+	eallterrshield = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
---    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=300, precision=0, strength   = 0.0025, repeatEffect=true}},
---  },
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=300, precision=0, strength   = 0.00075, repeatEffect=true}},
+  },
+  
+	ekmar = {
+--    {class='StaticParticles', options=corfusNova},
+--    {class='StaticParticles', options=corfusNova2},
+--    {class='StaticParticles', options=corfusNova3},
+--    {class='StaticParticles', options=corfusNova4},
+
+--    {class='Bursts', options=efusion2Bursts},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=200, precision=0, strength   = 0.00075, repeatEffect=true}},
+  },
+  
+	ecommandershield = {
+--    {class='StaticParticles', options=corfusNova},
+--    {class='StaticParticles', options=corfusNova2},
+--    {class='StaticParticles', options=corfusNova3},
+--    {class='StaticParticles', options=corfusNova4},
+
+--    {class='Bursts', options=efusion2Bursts},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=400, precision=0, strength   = 0.00075, repeatEffect=true}},
+  },
 	
 	
 	----// FUSIONS //--------------------------
