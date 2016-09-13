@@ -94,7 +94,7 @@ return {
 				badtargetcategory = "WEAPON",
 				def = "WEAPON",
 				maindir = "0 0 1",
-				maxangledif = 120,
+				maxangledif = 180,
 			},
 		},
 	},

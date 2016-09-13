@@ -125,13 +125,13 @@ return {
 			[1] = {
 				def = "CHASEWEAPON",
 				maindir = "0 0 1",
-				onlytargetcategory = "NOTAIR",
+				onlytargetcategory = "NOTAIR LIGHT ARMORED BUILDING",
 			},
 			[2] = {
 				badtargetcategory = "VTOL",
 				def = "FLAMER",
 				maindir = "0 0 1",
-				maxangledif = 120,
+				maxangledif = 180,
 			},
 		},
 	},

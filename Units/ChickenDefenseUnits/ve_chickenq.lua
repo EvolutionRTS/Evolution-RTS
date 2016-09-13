@@ -287,7 +287,7 @@ return {
 			[5] = {
 				def = "GOO",
 				maindir = "0 0 1",
-				maxangledif = 120,
+				maxangledif = 180,
 			},
 		},
 	},

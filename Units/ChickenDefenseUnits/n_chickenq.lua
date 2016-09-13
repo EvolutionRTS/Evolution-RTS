@@ -30,7 +30,7 @@ return {
 		leavetracks = true,
 		maneuverleashlength = 2000,
 		mass = 2000000,
-		maxdamage = 600000,
+		maxdamage = 100000,
 		maxslope = 40,
 		maxvelocity = 2.7,
 		maxwaterdepth = 70,
@@ -288,7 +288,7 @@ return {
 			[5] = {
 				def = "GOO",
 				maindir = "0 0 1",
-				maxangledif = 120,
+				maxangledif = 180,
 			},
 		},
 	},
