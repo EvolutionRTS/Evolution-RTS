@@ -107,16 +107,16 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
 	},
 	
---	eairplant = {
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine1", onActive=false}},
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine2", onActive=false}},
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine3", onActive=false}},
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine4", onActive=false}},
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine5", onActive=false}},
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine6", onActive=false}},
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine7", onActive=false}},
---		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  8, length=80, piece="engine8", onActive=false}},
---	},
+	eairplant = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=false, emitVector = {0, 0, 1}}},
+	},
 	
 --	esolar2 = {
 --    {class='StaticParticles', options=corfusNova},

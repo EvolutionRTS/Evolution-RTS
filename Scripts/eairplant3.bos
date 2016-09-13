@@ -172,7 +172,7 @@ Create()
 	start-script Buildingfx(); 
 //	start-script Buildingfx2(); 
 	start-script fx();
-    start-script Thrust();
+//    start-script Thrust();
     turn engine1 to x-axis <90> now;
     turn engine2 to x-axis <90> now;
     turn engine3 to x-axis <90> now;
