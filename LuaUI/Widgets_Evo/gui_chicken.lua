@@ -14,7 +14,27 @@ function widget:GetInfo()
   }
 end
 
-if Spring.GetModOptions().chickens_enabled == nil or Spring.GetModOptions().chickens_enabled == "disabled" then
+local teams = Spring.GetTeamList()
+for i =1, #teams do
+	local luaAI = Spring.GetTeamLuaAI(teams[i])
+	if luaAI ~= "" then
+		if luaAI == "Chicken: Very Easy" or 
+		luaAI == "Chicken: Easy" or 
+		luaAI == "Chicken: Normal" or 
+		luaAI == "Chicken: Hard" or 
+		luaAI == "Chicken: Very Hard" or 
+		luaAI == "Chicken: Epic!" or 
+		luaAI == "Chicken: Custom" or 
+		luaAI == "Chicken: Survival" then
+			chickensEnabled = true
+		end
+	end
+end
+
+if chickensEnabled == true then
+	Spring.Echo("[ChickenDefense: Chicken Panel] Activated!")
+else
+	Spring.Echo("[ChickenDefense: Chicken Panel] Deactivated!")
 	return false
 end
 

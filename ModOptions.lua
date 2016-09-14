@@ -68,18 +68,6 @@ local options= {
 		}
 	},
 	{
-		key="chickens_enabled",
-		name="Enable Chicken Defense? (Requires a Chicken AI in the game!)",
-		desc="Enables Chicken Defense",
-		type="list",
-		def="disabled",
-		section="gameplayoptions",
-		items={
-			{key="disabled", name="Disabled", desc="Disable Chicken Defense"},
-			{key="enabled", name="Enabled", desc="Enable Chicken Defense"},
-		}
-	},
-	{
 		key="scoremode",
 		name="Scoring Mode (Control Victory Points)",
 		desc="Defines how the game is played",
