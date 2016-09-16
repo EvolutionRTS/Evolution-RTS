@@ -100,7 +100,7 @@ Gives ]] ..supplyGiven.. [[ Supply]],
 		"eamphibfac",
 		"eairplant",
 --		"eexperimentalfac",
---		"emetalextractor", --new
+		"emetalextractor", --new
 --		"emaker", --new
 		"esolar2", --new
 		"emediumgen", --new
