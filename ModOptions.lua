@@ -67,27 +67,27 @@ local options= {
 			{key="insane", name="Insane", desc="AI gets a gift of 100 metal every 5 seconds and a static 100 energy income."},
 		}
 	},
-	{
-		key="scoremode",
-		name="Scoring Mode (Control Victory Points)",
-		desc="Defines how the game is played",
-		type="list",
-		def="countdown",
-		section="gameplayoptions",
-		items={
-			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
-			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
-			{key="tugofwar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
-			{key="domination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
-		}
-	},
+-- Control Victory Options	
 	{
 		key    = 'controlvictoryoptions',
 		name   = 'Control Victory Options',
 		desc   = 'Allows you to control at a granular level the individual options for Control Point Victory',
 		type   = 'section',
 	},
-	
+	{
+		key="scoremode",
+		name="Scoring Mode (Control Victory Points)",
+		desc="Defines how the game is played",
+		type="list",
+		def="countdown",
+		section="controlvictoryoptions",
+		items={
+			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
+			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
+			{key="tugofwar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
+			{key="domination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
+		}
+	},	
 	{
 		key    = 'limitscore',
 		name   = 'Total Score',
@@ -161,6 +161,30 @@ local options= {
 		-- (step <= 0) means that there is no quantization
 	},
 		{
+		key    = 'metalperpoint',
+		name   = 'Metal given to each player per captured point',
+		desc   = 'Each player on an allyteam that has captured a point will receive this amount of resources per point captured per second',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 0,
+		min    = 0,
+		max    = 20,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'energyperpoint',
+		name   = 'Energy given to each player per captured point',
+		desc   = 'Each player on an allyteam that has captured a point will receive this amount of resources per point captured per second',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 0,
+		min    = 0,
+		max    = 20,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
 		key    = 'dominationscoretime',
 		name   = 'Domination Score Time',
 		desc   = 'Time needed holding all points to score in multi domination.',
@@ -184,6 +208,8 @@ local options= {
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
+-- End Control Victory Options
+	
 -- Chicken Defense Options
 	{
 		key    = 'chicken_defense_options',

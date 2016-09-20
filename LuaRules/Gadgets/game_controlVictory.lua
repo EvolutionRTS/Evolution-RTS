@@ -57,35 +57,34 @@ return nonCapturingUnits
 Here are all of the modoptions in a neat copy pastable form... Place these modoptions in modoptions.lua in your base game folder:
 
 ////
-
-	{
-		key="scoremode",
-		name="Scoring Mode (Control Victory Points)",
-		desc="Defines how the game is played",
-		type="list",
-		def="countdown",
-		section="gameplayoptions",
-		items={
-			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
-			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
-			{key="tugofwar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
-			{key="domination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
-		}
-	},
+-- Control Victory Options	
 	{
 		key    = 'controlvictoryoptions',
 		name   = 'Control Victory Options',
 		desc   = 'Allows you to control at a granular level the individual options for Control Point Victory',
 		type   = 'section',
 	},
-	
+	{
+		key="scoremode",
+		name="Scoring Mode (Control Victory Points)",
+		desc="Defines how the game is played",
+		type="list",
+		def="countdown",
+		section="controlvictoryoptions",
+		items={
+			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},
+			{key="countdown", name="Countdown", desc="A Control Point decreases all opponents' scores, zero means defeat."},
+			{key="tugofwar", name="Tug of War", desc="A Control Point steals enemy score, zero means defeat."},
+			{key="domination", name="Domination", desc="Holding all Control Points will grant 1000 score, first to reach the score limit wins."},
+		}
+	},	
 	{
 		key    = 'limitscore',
 		name   = 'Total Score',
 		desc   = 'Total score amount available.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 3500,
+		def    = 2750,
 		min    = 500,
 		max    = 5000,
 		step   = 1,  -- quantization is aligned to the def value
@@ -152,6 +151,30 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		-- (step <= 0) means that there is no quantization
 	},
 		{
+		key    = 'metalperpoint',
+		name   = 'Metal given to each player per captured point',
+		desc   = 'Each player on an allyteam that has captured a point will receive this amount of resources per point captured per second',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 0,
+		min    = 0,
+		max    = 20,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
+		key    = 'energyperpoint',
+		name   = 'Energy given to each player per captured point',
+		desc   = 'Each player on an allyteam that has captured a point will receive this amount of resources per point captured per second',
+		type   = 'number',
+		section= 'controlvictoryoptions',
+		def    = 0,
+		min    = 0,
+		max    = 20,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+		{
 		key    = 'dominationscoretime',
 		name   = 'Domination Score Time',
 		desc   = 'Time needed holding all points to score in multi domination.',
@@ -166,7 +189,7 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		{
 		key    = 'tugofwarmodifier',
 		name   = 'Tug of War Modifier',
-		desc   = 'The score transfered between opponents when points are captured is multiplied by this amount.',
+		desc   = 'The amount of score transfered between opponents when points are captured is multiplied by this amount.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
 		def    = 2,
@@ -175,7 +198,7 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
-
+-- End Control Victory Options
 ////
 
 
@@ -184,6 +207,7 @@ That's all folks!!!
 ]]--
 
 nonCapturingUnits = VFS.Include"LuaRules/Configs/cv_nonCapturingUnits.lua"
+buildableUnits = VFS.Include"LuaRules/Configs/cv_buildableUnits.lua"
 
 --local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
@@ -258,6 +282,10 @@ if (gadgetHandler:IsSyncedCode()) then
 	local function gNonCapturingUnits()
 		return nonCapturingUnits or {}
 	end
+	
+	local function gBuildableUnits()
+		return buildableUnits or {}
+	end
 
 	local function gCaptureRadius()
 		return captureRadius or 0
@@ -268,6 +296,7 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:Initialize()
 		gadgetHandler:RegisterGlobal('ControlPoints', gControlPoints)
 		gadgetHandler:RegisterGlobal('NonCapturingUnits', gNonCapturingUnits)
+		gadgetHandler:RegisterGlobal('BuildableUnits', gBuildableUnits)
 		gadgetHandler:RegisterGlobal('CaptureRadius', gCaptureRadius)
 		for _, a in ipairs(Spring.GetAllyTeamList()) do
 			if scoreMode ~= 3 then
@@ -400,6 +429,24 @@ if (gadgetHandler:IsSyncedCode()) then
 					owned[capturePoint.owner] = owned[capturePoint.owner] + 1
 				end
 			end
+
+			-- resources granted to each play on an allyteam that captures a point
+			for _, allyTeamID in ipairs(Spring.GetAllyTeamList()) do
+				local ateams = Spring.GetTeamList(allyTeamID)
+				for i = 1, #ateams do
+					local metalPerPoint = Spring.GetModOptions().metalperpoint
+					local energyPerPoint = Spring.GetModOptions().energyperpoint
+					if Spring.GetModOptions().metalperpoint == nil then
+						metalPerPoint = 0
+					end
+					if Spring.GetModOptions().energyPerPoint == nil then
+						energyPerPoint = 0
+					end
+					Spring.AddTeamResource(ateams[i], "metal", owned[allyTeamID] * metalPerPoint) -- adjust the 5
+					Spring.AddTeamResource(ateams[i], "energy", owned[allyTeamID] * energyPerPoint) -- adjust the 5
+				end
+			end
+			
 			if scoreMode == 1 then -- Countdown
 				for owner, count in pairs(owned) do
 					for _, allyTeamID in ipairs(Spring.GetAllyTeamList()) do
@@ -457,10 +504,22 @@ if (gadgetHandler:IsSyncedCode()) then
 		end
 	end
 
+-- Allow units listed in the buildableUnits config to be built in control points
+
+	local allowedBuildableUnits = {}
+	for i = 1, #buildableUnits do
+		if UnitDefNames[buildableUnits[i]] then
+			allowedBuildableUnits[UnitDefNames[buildableUnits[i]].id] = true
+		end
+	end
+
 	function gadget:AllowUnitCreation(unit, builder, team, x, y, z) -- TODO: fix for comshare
+		if allowedBuildableUnits[unit] then
+			return true
+		end
 		for _, p in pairs(points) do
 			if x and math.sqrt((x - p.x) * (x - p.x) + (z - p.z) * (z - p.z)) < captureRadius then
-				Spring.SendMessageToPlayer(team, "Cannot build units in a control point")
+				Spring.SendMessageToPlayer(team, "This unit is not allowed to be built in Control Points")
 				return false
 			end
 		end
