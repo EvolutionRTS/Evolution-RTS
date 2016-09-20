@@ -248,7 +248,7 @@ local startTime = tonumber(Spring.GetModOptions().starttime) or 0 -- The time wh
 
 local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 -- Time needed holding all points to score in multi domination
 
-if Spring.GetModOptions().scoremode == "disabled" then return false end
+if Spring.GetModOptions().scoremode == "disabled" or if Spring.GetModOptions().scoremode == nil then return false end
 
 local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2750
 
@@ -556,6 +556,7 @@ else -- UNSYNCED
 	local Text = gl.Text
 	local Color = gl.Color
 	local DrawGroundCircle = gl.DrawGroundCircle
+	local glLineWidth = gl.LineWidth
 	local PushMatrix = gl.PushMatrix
 	local PopMatrix = gl.PopMatrix
 	local Translate = gl.Translate
@@ -625,8 +626,8 @@ else -- UNSYNCED
 				Color(r, g, b, 1)
 				--Spring.Echo("draw points", capturePoint.owner, r, g, b)
 				local y = Spring.GetGroundHeight(capturePoint.x, capturePoint.z)
-
-				DrawGroundCircle(capturePoint.x, capturePoint.y, capturePoint.z, captureRadius, 30)
+				glLineWidth(2)		
+				DrawGroundCircle(capturePoint.x, capturePoint.y, capturePoint.z, captureRadius, 64)
 				if capturePoint.capture > 0 then
 					PushMatrix()
 					Translate(capturePoint.x, y + 100, capturePoint.z)
@@ -653,10 +654,10 @@ else -- UNSYNCED
 	
 	function gadget:DrawWorld()
 		gl.DepthTest(GL.LEQUAL)
-		gl.PolygonOffset(-10, -10)
+		--gl.PolygonOffset(-10, -10)
 		DrawPoints()
 		gl.DepthTest(false)
-		gl.PolygonOffset(false)
+		--gl.PolygonOffset(false)
 	end
 	
 	function gadget:DrawScreen(vsx, vsy)
