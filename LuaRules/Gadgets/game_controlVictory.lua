@@ -17,6 +17,7 @@ This gadget relies on three parts:
 • control point config file which is located in luarules/configs/controlpoints/ , and it must have a filename of cv_<mapname>.lua. So, in the case of a map named "Iammas Prime -" with a version of "v01", then the name of my file would be "cv_Iammas Prime - v01.lua".
 	PLEASE NOTE: If the map config file is not found and a capture mode is selected, the gadget will generate 7 points in a circle on the map automagically.
 • config placed in luarules/configs/ called cv_nonCapturingUnits.lua
+• config placed in luarules/configs/ called cv_buildableUnits.lua
 • modoptions
 
 The control point config is structured like this (cv_Iammas Prime - v01.lua):
@@ -38,6 +39,7 @@ return {
 ////
 
 The nonCapturingUnits.lua config file is structured like this:
+These are units that are not allowed to capture points.
 
 ////
 
@@ -51,6 +53,29 @@ local nonCapturingUnits = {
 }
 
 return nonCapturingUnits
+
+////
+
+The buildableUnits.lua config file is structured like this:
+These are units that are allowed to be built within control points.
+
+////
+
+local buildableUnits = {
+	"armamex",
+	"armmex",
+	"armmoho",
+	"armuwmex",
+	"armuwmme",
+	"corexp",
+	"cormex",
+	"cormexp",
+	"cormoho",
+	"coruwmex",
+	"coruwmme",
+}
+
+return buildableUnits
 
 ////
 
