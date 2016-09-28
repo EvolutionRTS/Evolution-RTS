@@ -166,9 +166,9 @@ local options= {
 		desc   = 'Each player on an allyteam that has captured a point will receive this amount of resources per point captured per second',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 0,
+		def    = 0.5,
 		min    = 0,
-		max    = 1,
+		max    = 5,
 		step   = 0.1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
