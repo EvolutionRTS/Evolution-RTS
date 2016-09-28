@@ -145,10 +145,11 @@ function gadget:GameFrame(n)
 						local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
 				if i ~= Spring.GetGaiaTeamID() then -- don't give free stuff to GAIA
 --						Spring.AddTeamResource(i,"e",1)
-					if not (baseIncome >= maximumBaseIncome) then
+						--Spring.Echo("maxbaseincome is:" .. maximumBaseIncome)
+					if not (baseIncome >= tonumber(maximumBaseIncome)) then
 						Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])
 					else
-						Spring.AddTeamResource(i,"m",maximumBaseIncome)
+						Spring.AddTeamResource(i,"m",tonumber(maximumBaseIncome))
 					end
 --					Spring.Echo("Final baseIncome amount that is being run through AddTeamResource")
 --					Spring.Echo(baseIncome)
