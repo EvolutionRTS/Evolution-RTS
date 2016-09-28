@@ -48,9 +48,9 @@ local options= {
 		type   = 'number',
 		section= 'startingresources',
 		def    = 2.5,
-		min    = 1,
+		min    = 0.5,
 		max    = 5,
-		step   = 1,  -- quantization is aligned to the def value
+		step   = 0.5,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 	{
