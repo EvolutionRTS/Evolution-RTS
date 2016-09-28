@@ -15,8 +15,9 @@ local modOptions = Spring.GetModOptions();
 
 -- Give resources to teams
 local baseIncome = 0
-local baseIncomeIncrease = 3 -- add this each 1cycle
-local baseIncomeIncreasePeriod = 2.5*60*30 -- x min * 60 s/min * 30 frame/s
+local baseIncomeIncrease = Spring.GetModOptions().basicincome or 3 -- add this each 1cycle
+local baseIncomeIncreasePeriod = Spring.GetModOptions().basicincomeinterval*60*30 or 2.5*60*30 -- x min * 60 s/min * 30 frame/s
+local maximumBaseIncome = Spring.GetModOptions().maxbasicincome or 15
 
 local aiCheatHandicapMetal = { 
 	["veryeasy"] =  0,
@@ -144,10 +145,10 @@ function gadget:GameFrame(n)
 						local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
 				if i ~= Spring.GetGaiaTeamID() then -- don't give free stuff to GAIA
 --						Spring.AddTeamResource(i,"e",1)
-					if not (baseIncome >= 15) then
+					if not (baseIncome >= maximumBaseIncome) then
 						Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])
 					else
-						Spring.AddTeamResource(i,"m",15)
+						Spring.AddTeamResource(i,"m",maximumBaseIncome)
 					end
 --					Spring.Echo("Final baseIncome amount that is being run through AddTeamResource")
 --					Spring.Echo(baseIncome)

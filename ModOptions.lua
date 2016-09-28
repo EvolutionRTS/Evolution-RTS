@@ -29,6 +29,42 @@ local options= {
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
+	{
+		key    = 'basicincome',
+		name   = 'Basic Metal Income',
+		desc   = 'Determines the amount of metal income you start with per second. It increases every 2.5 minutes by this amount until it hits <Maximum Basic Income> income.',
+		type   = 'number',
+		section= 'startingresources',
+		def    = 3,
+		min    = 0,
+		max    = 5,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'basicincomeinterval',
+		name   = 'Basic Metal Income Increase Interval',
+		desc   = 'Determines how often your basic metal income is increased.',
+		type   = 'number',
+		section= 'startingresources',
+		def    = 2.5,
+		min    = 1,
+		max    = 5,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'maxbasicincome',
+		name   = 'Maximum Basic Metal Income',
+		desc   = 'Determines the maximum amount that your basic metal income level can reach.',
+		type   = 'number',
+		section= 'startingresources',
+		def    = 15,
+		min    = 0,
+		max    = 30,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
 	
 	{
 		key    = 'gameplayoptions',
