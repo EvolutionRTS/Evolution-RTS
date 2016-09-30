@@ -145,7 +145,7 @@ local resChanged = false
 
 
 --more
-local featureHoverColor = { 1, 0, 1, 0}
+local featureHoverColor = { 1, 0, 1, 1}
 local myHoverColor 	    = { 1, 1, 1, 1 }
 local allyHoverColor 	= { 0.5, 0.5, 1, 1 }
 local enemyHoverColor   = { 1, 0, 0, 1 }
@@ -569,7 +569,7 @@ function widget:ViewResize(viewSizeX, viewSizeY)
     fbo = true,
   })
 
-  blurtex = gl.CreateTexture(math.floor(vsx*0.5),math.floor(vsy*0.5), {
+  blurtex = gl.CreateTexture(math.floor(vsx*1),math.floor(vsy*1), {
     border = false,
     min_filter = GL.LINEAR,
     mag_filter = GL.LINEAR,
@@ -611,4 +611,3 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
