@@ -1,4 +1,3 @@
--- $Id: cawidgets.lua 4261 2009-03-31 16:34:36Z licho $
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
@@ -6,55 +5,35 @@
 --  brief:   the widget manager, a call-in router
 --  author:  Dave Rodgers
 --
---  modified by jK and quantum
---
---  Copyright (C) 2007,2008,2009.
+--  Copyright (C) 2007.
 --  Licensed under the terms of the GNU GPL, v2 or later.
 --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- stable release?
-local isStable = false
-local resetWidgetDetailLevel = false -- has widget detail level changed
-
-local ORDER_VERSION = 8 --- change this to reset enabled/disabled widgets
-local DATA_VERSION = 9 -- change this to reset widget settings
-
-function includeZIPFirst(filename, envTable)
-  if (string.find(filename, '.h.lua', 1, true)) then
-    filename = 'Headers/' .. filename
+function pwl() -- ???  (print widget list)
+  for k,v in ipairs(widgetHandler.widgets) do
+    print(k, v.whInfo.layer, v.whInfo.name)
   end
-  return VFS.Include(LUAUI_DIRNAME .. filename, envTable, VFS.ZIP_FIRST)
 end
 
 
 include("keysym.h.lua")
 include("utils.lua")
-includeZIPFirst("system.lua")
-includeZIPFirst("cache.lua") --contain cached override for Spring.GetVisibleUnit (performance optimization). All overrides that are placed here have global reach
+include("system.lua")
+include("cache.lua") --contain cached override for Spring.GetVisibleUnit (performance optimization). All overrides that are placed here have global reach
 include("callins.lua")
 include("savetable.lua")
-include("utility_two.lua") --contain file backup function
-local myName, transmitMagic, voiceMagic, transmitLobbyMagic, MessageProcessor = include("chat_preprocess.lua") -- contain stuff that preprocess chat message for Chili Chat widgets
+
+
+local gl = gl
 
 local modShortUpper = Game.modShortName:upper()
 local ORDER_FILENAME     = LUAUI_DIRNAME .. 'Config/' .. modShortUpper .. '_order.lua'
 local CONFIG_FILENAME    = LUAUI_DIRNAME .. 'Config/' .. modShortUpper .. '_data.lua'
 local WIDGET_DIRNAME     = LUAUI_DIRNAME .. 'Widgets_Evo/'
 
-local HANDLER_BASENAME = "cawidgets.lua"
 local SELECTOR_BASENAME = 'selector.lua'
-
-do
-	local isMission = Game.modDesc:find("Mission Mutator")
-	if isMission then -- all missions will be forced to use a specific name
-		if not VFS.FileExists(ORDER_FILENAME) or not VFS.FileExists(CONFIG_FILENAME) then
-			ORDER_FILENAME     = LUAUI_DIRNAME .. 'Config/evo_order.lua' --use "evo" name when running any mission mod (provided that there's no existing config file)
-			CONFIG_FILENAME    = LUAUI_DIRNAME .. 'Config/evo_data.lua'
-		end
-	end
-end
 
 local SAFEWRAP = 1
 -- 0: disabled
@@ -64,35 +43,8 @@ local SAFEWRAP = 1
 local SAFEDRAW = false  -- requires SAFEWRAP to work
 local glPopAttrib  = gl.PopAttrib
 local glPushAttrib = gl.PushAttrib
-local pairs = pairs
-local ipairs = ipairs
+local section = 'widgets_evo.lua'
 
-do -- create backup for evo_data.lua and evo_order.lua to workaround against case of file corruption when OS crash
- 	local fileToCheck = {ORDER_FILENAME,CONFIG_FILENAME}
-	local extraText = {'-- Widget Order List  (0 disables a widget)', '-- Widget Custom Data'} --this is a header text that is appended to start of file
-	for i=1, #fileToCheck do
-		CheckLUAFileAndBackup(fileToCheck[i], extraText[i])
-	end
-end
-
--- read local widgets config
-local localWidgetsFirst = false
-local localWidgets = false
-
-if VFS.FileExists(CONFIG_FILENAME) then --check config file whether user want to use localWidgetsFirst
-  local cadata = VFS.Include(CONFIG_FILENAME)
-  if cadata and cadata["Local Widgets Config"] then
-    localWidgetsFirst = cadata["Local Widgets Config"].localWidgetsFirst
-    localWidgets = cadata["Local Widgets Config"].localWidgets
-  end
-end
-
-local VFSMODE
-VFSMODE = localWidgetsFirst and VFS.RAW_FIRST
-VFSMODE = VFSMODE or localWidgets and VFS.ZIP_FIRST
-VFSMODE = VFSMODE or VFS.ZIP
-
-local detailLevel = Spring.GetConfigInt("widgetDetailLevel", 3)
 
 --------------------------------------------------------------------------------
 
@@ -129,33 +81,41 @@ widgetHandler = {
   customCommands = {},
   inCommandsChanged = false,
 
-  autoModWidgets = false,
+  autoUserWidgets = true,
 
   actionHandler = include("actions.lua"),
-  
+
   WG = {}, -- shared table for widgets
 
   globals = {}, -- global vars/funcs
 
   mouseOwner = nil,
   ownedButton = 0,
-  
+
   tweakMode = false,
+  tweakKeys = {},
+
+  xViewSize    = 1,
+  yViewSize    = 1,
+  xViewSizeOld = 1,
+  yViewSizeOld = 1,
 }
 
 
 -- these call-ins are set to 'nil' if not used
 -- they are setup in UpdateCallIns()
 local flexCallIns = {
+  'GamePreload',
+  'GameStart',
   'GameOver',
   'GamePaused',
   'GameFrame',
   'GameSetup',
   'TeamDied',
   'TeamChanged',
-  'PlayerAdded',
   'PlayerChanged',
-  "PlayerRemoved",
+  'PlayerAdded',
+  'PlayerRemoved',
   'ShockFront',
   'WorldTooltip',
   'MapDrawCmd',
@@ -163,14 +123,16 @@ local flexCallIns = {
   'UnitCreated',
   'UnitFinished',
   'UnitFromFactory',
+  'UnitReverseBuilt',
   'UnitDestroyed',
-  'UnitExperience',
+  'RenderUnitDestroyed',
   'UnitTaken',
   'UnitGiven',
   'UnitIdle',
   'UnitCommand',
   'UnitCmdDone',
   'UnitDamaged',
+  'UnitStunned',
   'UnitEnteredRadar',
   'UnitEnteredLos',
   'UnitLeftRadar',
@@ -196,10 +158,6 @@ local flexCallIns = {
   'DrawScreenEffects',
   'DrawInMiniMap',
   'RecvSkirmishAIMessage',
-  'SelectionChanged',
-  'AddTransmitLine',
-  'AddConsoleMessage',
-  'VoiceCommand',
 }
 local flexCallInMap = {}
 for _,ci in ipairs(flexCallIns) do
@@ -223,7 +181,7 @@ local callInLists = {
   'JoyAxis',
   'JoyHat',
   'JoyButtonDown',
-  'JoyButtonUp',  
+  'JoyButtonUp',
   'IsAbove',
   'GetTooltip',
   'GroupChanged',
@@ -232,8 +190,13 @@ local callInLists = {
   'TweakMouseWheel',
   'TweakIsAbove',
   'TweakGetTooltip',
-  'GameProgress',
-  'UnsyncedHeightMapUpdate',
+  'RecvFromSynced',
+  'TextInput',
+  'DownloadQueued',
+  'DownloadStarted',
+  'DownloadFinished',
+  'DownloadFailed',
+  'DownloadProgress',
 -- these use mouseOwner instead of lists
 --  'MouseMove',
 --  'MouseRelease',
@@ -279,89 +242,49 @@ local function ripairs(t)
   return rev_iter, t, (1 + #t)
 end
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
--- helper functions
----include chat preprocess here
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-function widgetHandler:LoadOrderList()
-  local chunk, err = loadfile(ORDER_FILENAME)
-  if (chunk == nil) then
-    self.orderList = {} -- safety
-    return {}
-  else
-    local tmp = {}
-    setfenv(chunk, tmp)
-    self.orderList = chunk()
-    if (not self.orderList) then
-      self.orderList = {} -- safety
-    end
-	if (self.orderList.version or 0) < ORDER_VERSION then 
-		self.orderList = {}
-		self.orderList.version = ORDER_VERSION
-	end 
-	local detailLevel = Spring.GetConfigInt("widgetDetailLevel", 2)
-	if (self.orderList.lastWidgetDetailLevel ~= detailLevel) then
-		resetWidgetDetailLevel = true
-		self.orderList.lastWidgetDetailLevel = detailLevel
-	end 
-  end
-end
-
-
-function widgetHandler:SaveOrderList()
-  -- update the current order
-  for i,w in ipairs(self.widgets) do
-    self.orderList[w.whInfo.name] = i
-  end
-  table.save(self.orderList, ORDER_FILENAME,
-             '-- Widget Order List  (0 disables a widget)')
-end
-
-
 --------------------------------------------------------------------------------
 
 function widgetHandler:LoadConfigData()
   local chunk, err = loadfile(CONFIG_FILENAME)
-  if (chunk == nil) then
-    return {}
-  else
-    local tmp = {}
-    setfenv(chunk, tmp)
-    self.configData = chunk()
-    if (not self.configData) then
-      self.configData = {} -- safety
+  if (chunk == nil) or (chunk() == nil) or (err) then
+    if err then
+      Spring.Log(section, LOG.ERROR, err)
     end
-	if (self.configData.version or 0) < DATA_VERSION then 
-		self.configData = {}
-		self.configData.version = DATA_VERSION
-	end 
-
+    return
+  end
+  local tmp = {math = {huge = math.huge}}
+  setfenv(chunk, tmp)
+  self.orderList = chunk().order
+  self.configData = chunk().data
+  if (not self.orderList) then
+    self.orderList = {} -- safety
+  end
+  if (not self.configData) then
+    self.configData = {} -- safety
   end
 end
 
 
 function widgetHandler:SaveConfigData()
-  resetWidgetDetailLevel = false
-  self:LoadConfigData()
-  for _,w in ipairs(self.widgets) do
+--  self:LoadConfigData()
+  local filetable = {}
+  for i,w in ipairs(self.widgets) do
     if (w.GetConfigData) then
-      local ok, err = pcall(function() 
-		self.configData[w.whInfo.name] = w:GetConfigData()
-	  end)
-	  if not ok then Spring.Log(HANDLER_BASENAME, LOG.ERROR, "Failed to GetConfigData from: " .. w.whInfo.name.." ("..err..")") end 
+      self.configData[w.whInfo.name] = select(2, pcall(w.GetConfigData))
     end
+    self.orderList[w.whInfo.name] = i
   end
-  table.save(self.configData, CONFIG_FILENAME, '-- Widget Custom Data')
+  filetable.order = self.orderList
+  filetable.data = self.configData
+  table.save( filetable, CONFIG_FILENAME, '-- Widget Custom data and order, order = 0 disabled widget')
 end
 
 
 function widgetHandler:SendConfigData()
   self:LoadConfigData()
-  for _,w in ipairs(self.widgets) do
+  for i,w in ipairs(self.widgets) do
     local data = self.configData[w.whInfo.name]
     if (w.SetConfigData and data) then
       w:SetConfigData(data)
@@ -372,32 +295,77 @@ end
 
 --------------------------------------------------------------------------------
 
-function widgetHandler:Initialize()
-  if Game.modVersion:find("stable",1,true) then
-    isStable = true
+
+local function GetWidgetInfo(name, mode)
+
+  do return end -- FIXME
+
+  local lines = VFS.LoadFile(name, mode)
+
+  local infoLines = {}
+
+  for line in lines:gmatch('([^\n]*)\n') do
+    if (not line:find('^%s*%-%-')) then
+      if (line:find('[^\r]')) then
+        break -- not commented, not a blank line
+      end
+    end
+    local s, e, source = line:find('^%s*%-%-%>%>(.*)')
+    if (source) then
+      table.insert(infoLines, source)
+    end
   end
 
-  self:LoadOrderList()
+  local info = {}
+  local chunk, err = loadstring(table.concat(infoLines, '\n'))
+  if (not chunk) then
+    Spring.Log(section, LOG.INFO, 'not loading ' .. name .. ': ' .. err)
+  else
+    setfenv(chunk, info)
+    local success, err = pcall(chunk)
+    if (not success) then
+      Spring.Log(section, LOG.INFO, 'not loading ' .. name .. ': ' .. err)
+    end
+  end
+
+  for k,v in pairs(info) do
+    Spring.Log(section, LOG.INFO, name, k, 'type: ' .. type(v), '<'..tostring(v)..'>')
+  end
+end
+
+
+function widgetHandler:Initialize()
   self:LoadConfigData()
 
-  local autoModWidgets = Spring.GetConfigInt('LuaAutoModWidgets', 1)
-  self.autoModWidgets = (autoModWidgets ~= 0)
+  local autoUserWidgets = Spring.GetConfigInt('LuaAutoEnableUserWidgets', 1)
+  self.autoUserWidgets = (autoUserWidgets ~= 0)
 
   -- create the "LuaUI/Config" directory
   Spring.CreateDir(LUAUI_DIRNAME .. 'Config')
 
   local unsortedWidgets = {}
 
-  -- stuff the widgets into unsortedWidgets
-  local widgetFiles = VFS.DirList(WIDGET_DIRNAME, "*.lua", VFSMODE)
+  -- stuff the raw widgets into unsortedWidgets
+  local widgetFiles = VFS.DirList(WIDGET_DIRNAME, "*.lua", VFS.RAW_ONLY)
   for k,wf in ipairs(widgetFiles) do
-    local widget = self:LoadWidget(wf)
+    GetWidgetInfo(wf, VFS.RAW_ONLY)
+    local widget = self:LoadWidget(wf, false)
     if (widget) then
       table.insert(unsortedWidgets, widget)
     end
   end
-  
-  -- sort the widgets  
+
+  -- stuff the zip widgets into unsortedWidgets
+  local widgetFiles = VFS.DirList(WIDGET_DIRNAME, "*.lua", VFS.ZIP_ONLY)
+  for k,wf in ipairs(widgetFiles) do
+    GetWidgetInfo(wf, VFS.ZIP_ONLY)
+    local widget = self:LoadWidget(wf, true)
+    if (widget) then
+      table.insert(unsortedWidgets, widget)
+    end
+  end
+
+  -- sort the widgets
   table.sort(unsortedWidgets, function(w1, w2)
     local l1 = w1.whInfo.layer
     local l2 = w2.whInfo.layer
@@ -415,54 +383,39 @@ function widgetHandler:Initialize()
     end
   end)
 
-  -- first add the api widgets 
+  -- add the widgets
   for _,w in ipairs(unsortedWidgets) do
-    if (w.whInfo.api) then
-      widgetHandler:InsertWidget(w)
+    local name = w.whInfo.name
+    local basename = w.whInfo.basename
+    local source = self.knownWidgets[name].fromZip and "mod: " or "user:"
+    Spring.Log(section, LOG.INFO, string.format("Loading widget from %s  %-18s  <%s> ...", source, name, basename))
 
-      local name = w.whInfo.name
-      local basename = w.whInfo.basename
-      Spring.Echo(string.format("Loaded API widget:  %-18s  <%s>", name, basename))
-    end
-  end
-
-  -- add the widgets  
-  for _,w in ipairs(unsortedWidgets) do
-    if (not w.whInfo.api) then
-      widgetHandler:InsertWidget(w)
-
-      local name = w.whInfo.name
-      local basename = w.whInfo.basename
-      Spring.Echo(string.format("Loaded widget:  %-18s  <%s>", name, basename))
-    end
+    widgetHandler:InsertWidget(w)
   end
 
   -- save the active widgets, and their ordering
-  self:SaveOrderList()
   self:SaveConfigData()
 end
 
 
-function widgetHandler:LoadWidget(filename, _VFSMODE)
-  _VFSMODE = _VFSMODE or VFSMODE
+function widgetHandler:LoadWidget(filename, fromZip)
   local basename = Basename(filename)
-  local text = VFS.LoadFile(filename, _VFSMODE)
-
+  local text = VFS.LoadFile(filename)
   if (text == nil) then
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Failed to load: ' .. basename .. '  (missing file: ' .. filename ..')')
+    Spring.Log(section, LOG.ERROR, 'Failed to load: ' .. basename .. '  (missing file: ' .. filename ..')')
     return nil
   end
   local chunk, err = loadstring(text, filename)
   if (chunk == nil) then
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Failed to load: ' .. basename .. '  (' .. err .. ')')
+    Spring.Log(section, LOG.ERROR, 'Failed to load: ' .. basename .. '  (' .. err .. ')')
     return nil
   end
-  
+
   local widget = widgetHandler:NewWidget()
   setfenv(chunk, widget)
   local success, err = pcall(chunk)
   if (not success) then
-    Spring.Echo('Failed to load: ' .. basename .. '  (' .. err .. ')')
+    Spring.Log(section, LOG.ERROR, 'Failed to load: ' .. basename .. '  (' .. err .. ')')
     return nil
   end
   if (err == false) then
@@ -482,14 +435,14 @@ function widgetHandler:LoadWidget(filename, _VFSMODE)
 
   err = self:ValidateWidget(widget)
   if (err) then
-    Spring.Echo('Failed to load: ' .. basename .. '  (' .. err .. ')')
+    Spring.Log(section, LOG.ERROR, 'Failed to load: ' .. basename .. '  (' .. err .. ')')
     return nil
   end
 
   local knownInfo = self.knownWidgets[name]
   if (knownInfo) then
     if (knownInfo.active) then
-      Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Failed to load: ' .. basename .. '  (duplicate name)')
+      Spring.Log(section, LOG.ERROR, 'Failed to load: ' .. basename .. '  (duplicate name)')
       return nil
     end
   else
@@ -499,15 +452,8 @@ function widgetHandler:LoadWidget(filename, _VFSMODE)
     knownInfo.author   = widget.whInfo.author
     knownInfo.basename = widget.whInfo.basename
     knownInfo.filename = widget.whInfo.filename
-	knownInfo.alwaysStart = widget.whInfo.alwaysStart
-    knownInfo.fromZip  = true
-    if (_VFSMODE ~= VFS.ZIP) then
-      if (_VFSMODE == VFS.RAW_FIRST) then
-        knownInfo.fromZip = not VFS.FileExists(filename,VFS.RAW_ONLY)
-      else
-        knownInfo.fromZip = VFS.FileExists(filename,VFS.ZIP_ONLY)
-      end
-    end
+    knownInfo.enabled  = widget.whInfo.enabled
+    knownInfo.fromZip  = fromZip
     self.knownWidgets[name] = knownInfo
     self.knownCount = self.knownCount + 1
     self.knownChanged = true
@@ -515,34 +461,16 @@ function widgetHandler:LoadWidget(filename, _VFSMODE)
   knownInfo.active = true
 
   if (widget.GetInfo == nil) then
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Failed to load: ' .. basename .. '  (no GetInfo() call)')
+    Spring.Log(section, LOG.ERROR, 'Failed to load: ' .. basename .. '  (no GetInfo() call)')
     return nil
   end
 
   local info  = widget:GetInfo()
   local order = self.orderList[name]
-  
-  local enabled = ((order ~= nil) and (order > 0)) or
+  if (((order ~= nil) and (order > 0)) or
       ((order == nil) and  -- unknown widget
-       (info.enabled and ((not knownInfo.fromZip) or self.autoModWidgets))) or info.alwaysStart
-
-  -- experimental widget, disabled by default in stable
-  if info.experimental and isStable then
-    enabled = false
-  end
-
-  if resetWidgetDetailLevel and info.detailsDefault ~= nil then
-	if type(info.detailsDefault) == "table" then
-		enabled = info.detailsDefault[detailLevel] and true
-	elseif type(info.detailsDefault) == "number" then
-		enabled = detailLevel >= info.detailsDefault
-	elseif tonumber(info.detailsDefault) then
-		enabled = detailLevel >= tonumber(info.detailsDefault)
-	end
-  end
-			 
-  if (enabled) then
-	-- this will be an active widget
+       (info.enabled and (knownInfo.fromZip or self.autoUserWidgets)))) then
+    -- this will be an active widget
     if (order == nil) then
       self.orderList[name] = 12345  -- back of the pack
     else
@@ -554,12 +482,12 @@ function widgetHandler:LoadWidget(filename, _VFSMODE)
     return nil
   end
 
-  -- load the config data  
+  -- load the config data
   local config = self.configData[name]
   if (widget.SetConfigData and config) then
     widget:SetConfigData(config)
   end
-    
+
   return widget
 end
 
@@ -571,6 +499,7 @@ function widgetHandler:NewWidget()
     for k,v in pairs(System) do
       widget[k] = v
     end
+    widget["SendToUnsynced"] = Spring.SendToUnsynced
   else
     -- use metatable redirection
     setmetatable(widget, {
@@ -601,8 +530,6 @@ function widgetHandler:NewWidget()
     end
   end
 
-  wh.isStable = function (_) return self:isStable() end
-
   wh.UpdateCallIn = function (_, name)
     self:UpdateWidgetCallIn(name, widget)
   end
@@ -617,11 +544,18 @@ function widgetHandler:NewWidget()
     return self.actionHandler:RemoveAction(widget, cmd, types)
   end
 
+  wh.AddSyncAction = function(_, cmd, func, help)
+    return self.actionHandler:AddSyncAction(widget, cmd, func, help)
+  end
+  wh.RemoveSyncAction = function(_, cmd)
+    return self.actionHandler:RemoveSyncAction(widget, cmd)
+  end
+
   wh.AddLayoutCommand = function (_, cmd)
     if (self.inCommandsChanged) then
       table.insert(self.customCommands, cmd)
     else
-      Spring.Log(HANDLER_BASENAME, LOG.ERROR, "AddLayoutCommand() can only be used in CommandsChanged()")
+      Spring.Log(section, LOG.ERROR, "AddLayoutCommand() can only be used in CommandsChanged()")
     end
   end
 
@@ -637,45 +571,35 @@ function widgetHandler:NewWidget()
 
   wh.ConfigLayoutHandler = function(_, d) self:ConfigLayoutHandler(d) end
 
-  ----
-  widget.ProcessConsoleBuffer = function(_,_, num)	-- FIXME: probably not the least hacky way to make ProcessConsoleBuffer accessible to widgets
-    return MessageProcessor:ProcessConsoleBuffer(num)
-  end
-  ----
-  
   return widget
 end
 
 
-function widgetHandler:FinalizeWidget(widget, filename, basename)
-  local wi
+function widgetHandler:AddWidgetSyncAction(widget, cmd, func, help)
+  return self.actionHandler:AddSyncAction(widget, cmd, func, help)
+end
 
+function widgetHandler:RemoveWidgetSyncAction(widget, cmd)
+  return self.actionHandler:RemoveSyncAction(widget, cmd)
+end
+
+
+function widgetHandler:FinalizeWidget(widget, filename, basename)
+  local wi = {}
+
+  wi.filename = filename
+  wi.basename = basename
   if (widget.GetInfo == nil) then
-    wi = {}
-    wi.filename = filename
-    wi.basename = basename
     wi.name  = basename
     wi.layer = 0
   else
     local info = widget:GetInfo()
-    wi = info
-    wi.filename = filename
-    wi.basename = basename
-    wi.name     = wi.name    or basename
-    wi.layer    = wi.layer   or 0
-    wi.desc     = wi.desc    or ""
-    wi.author   = wi.author  or ""
-    wi.license  = wi.license or ""
-    wi.enabled  = wi.enabled or false
-    wi.api      = wi.api or false
-
-    -- exprimental widget
-    -- change name for separate settings and disable by default
-    if info.experimental and isStable then
-      wi.name = wi.name .. " (experimental)"
-      wi.enabled = false
-    end
-
+    wi.name    = info.name    or basename
+    wi.layer   = info.layer   or 0
+    wi.desc    = info.desc    or ""
+    wi.author  = info.author  or ""
+    wi.license = info.license or ""
+    wi.enabled = info.enabled or false
   end
 
   widget.whInfo = {}  --  a proxy table
@@ -702,28 +626,31 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local function HandleError(widget, funcName, status, ...)
-  if (status) then
-    return ...
-  end
-
-  if (funcName ~= 'Shutdown') then
-    widgetHandler:RemoveWidget(widget)
-  else
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Error in Shutdown()')
-  end
-  local name = widget.whInfo.name
-  local error_message = select(1,...)
-  Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Error in ' .. funcName ..'(): ' .. tostring(error_message))
-  Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Removed widget: ' .. name)
-  return nil
-end
-
 local function SafeWrapFuncNoGL(func, funcName)
+  local wh = widgetHandler
+
   return function(w, ...)
-    return HandleError(w, funcName, pcall(func, w, ...))
+
+    local r = { pcall(func, w, ...) }
+
+    if (r[1]) then
+      table.remove(r, 1)
+      return unpack(r)
+    else
+      if (funcName ~= 'Shutdown') then
+        widgetHandler:RemoveWidget(w)
+      else
+        Spring.Log(section, LOG.ERROR, 'Error in Shutdown()')
+      end
+      local name = w.whInfo.name
+      Spring.Log(section, LOG.ERROR, r[1])
+      Spring.Log(section, LOG.ERROR, 'Error in ' .. funcName ..'(): ' .. tostring(r[2]))
+      Spring.Log(section, LOG.ERROR, 'Removed widget: ' .. name)
+      return nil
+    end
   end
 end
+
 
 local function SafeWrapFuncGL(func, funcName)
   local wh = widgetHandler
@@ -741,11 +668,11 @@ local function SafeWrapFuncGL(func, funcName)
       if (funcName ~= 'Shutdown') then
         widgetHandler:RemoveWidget(w)
       else
-        Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Error in Shutdown()')
+        Spring.Log(section, LOG.ERROR, 'Error in Shutdown()')
       end
       local name = w.whInfo.name
-      Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Error in ' .. funcName ..'(): ' .. tostring(r[2]))
-      Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'Removed widget: ' .. name)
+      Spring.Log(section, LOG.ERROR, 'Error in ' .. funcName ..'(): ' .. tostring(r[2]))
+      Spring.Log(section, LOG.ERROR, 'Removed widget: ' .. name)
       return nil
     end
   end
@@ -770,7 +697,7 @@ local function SafeWrapWidget(widget)
     return
   elseif (SAFEWRAP == 1) then
     if (widget.GetInfo and widget.GetInfo().unsafe) then
-      Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'LuaUI: loaded unsafe widget: ' .. widget.whInfo.name)
+      Spring.LOG(section, LOG.INFO, 'LuaUI: loaded unsafe widget: ' .. widget.whInfo.name)
       return
     end
   end
@@ -844,10 +771,7 @@ function widgetHandler:RemoveWidget(widget)
 
   local name = widget.whInfo.name
   if (widget.GetConfigData) then
-    local ok, err = pcall(function() 
-	  self.configData[name] = widget:GetConfigData()
-	end)
-	if not ok then Spring.Log(HANDLER_BASENAME, LOG.ERROR, "Failed to GetConfigData: " .. name.." ("..err..")") end 
+    self.configData[name] = widget:GetConfigData()
   end
   self.knownWidgets[name].active = false
   if (widget.Shutdown) then
@@ -860,6 +784,10 @@ function widgetHandler:RemoveWidget(widget)
     ArrayRemove(self[listname..'List'], widget)
   end
   self:UpdateCallIns()
+
+  if (widget.whInfo.basename == SELECTOR_BASENAME) then
+    Spring.SendCommands({"luaui update"})
+  end
 end
 
 
@@ -875,7 +803,7 @@ function widgetHandler:UpdateCallIn(name)
   if ((#self[listName] > 0) or
       (not flexCallInMap[name]) or
       ((name == 'GotChatMsg')     and actionHandler.HaveChatAction()) or
-      ((name == 'RecvFromSynced') and actionHandler.HaveSyncAction())) then
+      ((name == 'RecvFromSynced'))) then
     -- always assign these call-ins
     local selffunc = self[name]
     _G[name] = function(...)
@@ -900,7 +828,7 @@ function widgetHandler:UpdateWidgetCallIn(name, w)
     end
     self:UpdateCallIn(name)
   else
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'UpdateWidgetCallIn: bad name: ' .. name)
+    Spring.Log(section, LOG.ERROR, 'UpdateWidgetCallIn: bad name: ' .. name)
   end
 end
 
@@ -912,7 +840,7 @@ function widgetHandler:RemoveWidgetCallIn(name, w)
     ArrayRemove(ciList, w)
     self:UpdateCallIn(name)
   else
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, 'RemoveWidgetCallIn: bad name: ' .. name)
+    Spring.Log(section, LOG.ERROR, 'RemoveWidgetCallIn: bad name: ' .. name)
   end
 end
 
@@ -924,16 +852,24 @@ function widgetHandler:UpdateCallIns()
 end
 
 
+function widgetHandler:SelectorActive()
+  for _,w in ipairs(self.widgets) do
+    if (w.whInfo.basename == SELECTOR_BASENAME) then
+      return true
+    end
+  end
+  return false
+end
 --------------------------------------------------------------------------------
 
 function widgetHandler:EnableWidget(name)
   local ki = self.knownWidgets[name]
   if (not ki) then
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, "EnableWidget(), could not find widget: " .. tostring(name))
+    Spring.Log(section, LOG.ERROR, "EnableWidget(), could not find widget: " .. tostring(name))
     return false
   end
   if (not ki.active) then
-    Spring.Echo('Loading:  '..ki.filename)
+    Spring.Log(section, LOG.INFO, 'Loading:  '..ki.filename)
     local order = widgetHandler.orderList[name]
     if (not order or (order <= 0)) then
       self.orderList[name] = 1
@@ -941,8 +877,13 @@ function widgetHandler:EnableWidget(name)
     local w = self:LoadWidget(ki.filename)
     if (not w) then return false end
     self:InsertWidget(w)
-    self:SaveOrderList()
+    self:SaveConfigData()
   end
+
+  if (not self:SelectorActive()) then
+    Spring.SendCommands({"luaui update"})
+  end
+
   return true
 end
 
@@ -950,17 +891,22 @@ end
 function widgetHandler:DisableWidget(name)
   local ki = self.knownWidgets[name]
   if (not ki) then
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, "DisableWidget(), could not find widget: " .. tostring(name))
+    Spring.Log(section, LOG.ERROR, "DisableWidget(), could not find widget: " .. tostring(name))
     return false
   end
   if (ki.active) then
     local w = self:FindWidget(name)
     if (not w) then return false end
-    Spring.Echo('Removed:  '..ki.filename)
+    Spring.Log(section, LOG.INFO, 'Removed:  '..ki.filename)
     self:RemoveWidget(w)     -- deactivate
     self.orderList[name] = 0 -- disable
-    self:SaveOrderList()
+    self:SaveConfigData()
   end
+
+  if (not self:SelectorActive()) then
+    Spring.SendCommands({"luaui update"})
+  end
+
   return true
 end
 
@@ -968,7 +914,7 @@ end
 function widgetHandler:ToggleWidget(name)
   local ki = self.knownWidgets[name]
   if (not ki) then
-    Spring.Log(HANDLER_BASENAME, LOG.ERROR, "ToggleWidget(), could not find widget: " .. tostring(name))
+    Spring.Log(section, LOG.ERROR, "ToggleWidget(), could not find widget: " .. tostring(name))
     return
   end
   if (ki.active) then
@@ -978,7 +924,7 @@ function widgetHandler:ToggleWidget(name)
   else
     -- the widget is not active, but enabled; disable it
     self.orderList[name] = 0
-    self:SaveOrderList()
+    self:SaveConfigData()
   end
   return true
 end
@@ -1065,7 +1011,7 @@ function widgetHandler:FindWidget(name)
   end
   for k,v in ipairs(self.widgets) do
     if (name == v.whInfo.name) then
-    return v,k
+      return v,k
     end
   end
   return nil
@@ -1092,7 +1038,7 @@ end
 
 
 function widgetHandler:DeregisterGlobal(owner, name)
-  if ((name == nil) or (self.globals[name] and (self.globals[name] ~= owner))) then
+  if (name == nil) then
     return false
   end
   _G[name] = nil
@@ -1136,10 +1082,11 @@ function widgetHandler:GetHourTimer()
   return hourTimer
 end
 
+
 function widgetHandler:GetViewSizes()
-  --FIXME remove
-  return gl.GetViewSizes()
+  return self.xViewSize, self.yViewSize
 end
+
 
 function widgetHandler:ForceLayout()
   forceLayout = true  --  in main.lua
@@ -1150,9 +1097,6 @@ function widgetHandler:ConfigLayoutHandler(data)
   ConfigLayoutHandler(data)
 end
 
-function widgetHandler:isStable()
-  return isStable
-end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -1161,7 +1105,6 @@ end
 --
 
 function widgetHandler:Shutdown()
-  self:SaveOrderList()
   self:SaveConfigData()
   for _,w in ipairs(self.ShutdownList) do
     w:Shutdown()
@@ -1170,9 +1113,9 @@ function widgetHandler:Shutdown()
 end
 
 function widgetHandler:Update()
-  local deltaTime = Spring.GetLastUpdateSeconds()  
+  local deltaTime = Spring.GetLastUpdateSeconds()
   -- update the hour timer
-  hourTimer = (hourTimer + deltaTime)%3600
+  hourTimer = (hourTimer + deltaTime) % 3600.0
   for _,w in ipairs(self.UpdateList) do
     w:Update(deltaTime)
   end
@@ -1182,19 +1125,18 @@ end
 
 function widgetHandler:ConfigureLayout(command)
   if (command == 'tweakgui') then
+    self.tweakKeys = {}
     self.tweakMode = true
-    Spring.Echo("LuaUI TweakMode: ON")
+    Spring.Log(section, LOG.INFO, "LuaUI TweakMode: ON")
     return true
   elseif (command == 'reconf') then
     self:SendConfigData()
     return true
   elseif (command == 'selector') then
-    for _,w in ipairs(self.widgets) do
-      if (w.whInfo.basename == SELECTOR_BASENAME) then
-        return true  -- there can only be one
-      end
+    if (self:SelectorActive()) then
+      return true  -- there can only be one
     end
-    local sw = self:LoadWidget(LUAUI_DIRNAME .. SELECTOR_BASENAME, VFS.RAW_FIRST)
+    local sw = self:LoadWidget(LUAUI_DIRNAME .. SELECTOR_BASENAME)
     self:InsertWidget(sw)
     self:RaiseWidget(sw)
     return true
@@ -1231,56 +1173,12 @@ function widgetHandler:CommandNotify(id, params, options)
   return false
 end
 
---NOTE: StringStarts() and MessageProcessor is included in "chat_preprocess.lua"
+
 function widgetHandler:AddConsoleLine(msg, priority)
-  if StringStarts(msg, transmitLobbyMagic) then -- sending to the lobby
-    return -- ignore
-  elseif StringStarts(msg, transmitMagic) then -- receiving from the lobby
-    if StringStarts(msg, voiceMagic) then
-      local tableString = string.sub(msg, string.len(voiceMagic) + 1) -- strip the magic string
-      local voiceCommandParams = Deserialize("return "..tableString) -- deserialize voice command parameters in table form      
-      for _,w in ipairs(self.VoiceCommandList) do
-        w:VoiceCommand(voiceCommandParams.commandName, voiceCommandParams)
-      end
-      return
-    else
-      for _,w in ipairs(self.AddTransmitLineList) do
-        w:AddTransmitLine(msg, priority)
-      end
-      return
-    end
-  else
-	--censor message for muted player. This is mandatory, everyone is forced to close ears to muted players (ie: if it is optional, then everyone will opt to hear muted player for spec-cheat info. Thus it will defeat the purpose of mute)
-	local newMsg = { text = msg, priority = priority }
-	MessageProcessor:ProcessConsoleLine(newMsg)
-	if newMsg.msgtype ~= 'other' and newMsg.msgtype ~= 'autohost' then 
-		local playerID_msg = newMsg.player and newMsg.player.id --retrieve playerID from message.
-		local customkeys = select(10, Spring.GetPlayerInfo(playerID_msg))
-		if customkeys and customkeys.muted then
-			local myPlayerID = Spring.GetLocalPlayerID()
-			if myPlayerID == playerID_msg then --if I am the muted, then:
-				newMsg.argument="<your message was blocked by mute>"	--remind myself that I am muted.		
-				msg = "<your message was blocked by mute>" 
-			else --if I am NOT the muted, then: delete this message
-				return
-			end
-			--TODO: improve chili_chat2 spam-filter/dedupe-detection too.
-		end
-	end
-  
-	--send message to widget:AddConsoleLine
-	for _,w in ipairs(self.AddConsoleLineList) do
-		w:AddConsoleLine(msg, priority) 
-	end
-	
-	--send message to widget:AddConsoleMessage
-	if newMsg.msgtype == 'point' or newMsg.msgtype == 'label' then
-		return -- ignore all console messages about points... those come in through the MapDrawCmd callin
-	end    
-	for _,w in ipairs(self.AddConsoleMessageList) do
-		w:AddConsoleMessage(newMsg)
-	end
+  for _,w in ipairs(self.AddConsoleLineList) do
+    w:AddConsoleLine(msg, priority)
   end
+  return
 end
 
 
@@ -1293,7 +1191,6 @@ end
 
 
 function widgetHandler:CommandsChanged()
-  widgetHandler:UpdateSelection() -- for selectionchanged
   self.inCommandsChanged = true
   self.customCommands = {}
   for _,w in ipairs(self.CommandsChangedList) do
@@ -1310,22 +1207,39 @@ end
 --
 
 
-function widgetHandler:ViewResize(viewGeometry)
-  local vsx = viewGeometry.viewSizeX
-  local vsy = viewGeometry.viewSizeY
-    
+-- generates ViewResize() calls for the widgets
+function widgetHandler:SetViewSize(vsx, vsy)
+  self.xViewSize = vsx
+  self.yViewSize = vsy
+  if ((self.xViewSizeOld ~= vsx) or
+      (self.yViewSizeOld ~= vsy)) then
+    widgetHandler:ViewResize(vsx, vsy)
+    self.xViewSizeOld = vsx
+    self.yViewSizeOld = vsy
+  end
+end
+
+
+function widgetHandler:ViewResize(vsx, vsy)
+  if (type(vsx) == 'table') then
+    vsy = vsx.viewSizeY
+    vsx = vsx.viewSizeX
+    print('real ViewResize') -- FIXME
+  end
+
   for _,w in ipairs(self.ViewResizeList) do
-    w:ViewResize(vsx, vsy, viewGeometry)
+    w:ViewResize(vsx, vsy)
   end
   return
 end
 
+
 function widgetHandler:DrawScreen()
   if (self.tweakMode) then
     gl.Color(0, 0, 0, 0.5)
-    local sx, sy, px, py = Spring.GetViewGeometry()
+    local sx, sy = self.xViewSize, self.yViewSize
     gl.Shape(GL.QUADS, {
-      {v = { px,  py }}, {v = { px+sx, py }}, {v = { px+sx, py+sy }}, {v = { px, py+sy }}
+      {v = {  0,  0 }}, {v = { sx,  0 }}, {v = { sx, sy }}, {v = {  0, sy }}
     })
     gl.Color(1, 1, 1)
   end
@@ -1410,6 +1324,7 @@ end
 
 function widgetHandler:KeyPress(key, mods, isRepeat, label, unicode)
   if (self.tweakMode) then
+    self.tweakKeys[key] = true
     local mo = self.mouseOwner
     if (mo and mo.TweakKeyPress) then
       mo:TweakKeyPress(key, mods, isRepeat, label, unicode)
@@ -1431,12 +1346,12 @@ end
 
 
 function widgetHandler:KeyRelease(key, mods, label, unicode)
-  if (self.tweakMode) then
+  if (self.tweakMode and self.tweakKeys[key] ~= nil) then
     local mo = self.mouseOwner
     if (mo and mo.TweakKeyRelease) then
       mo:TweakKeyRelease(key, mods, label, unicode)
     elseif (key == KEYSYMS.ESCAPE) then
-      Spring.Echo("LuaUI TweakMode: OFF")
+      Spring.Log(section, LOG.INFO, "LuaUI TweakMode: OFF")
       self.tweakMode = false
     end
     return true
@@ -1454,48 +1369,40 @@ function widgetHandler:KeyRelease(key, mods, label, unicode)
   return false
 end
 
+function widgetHandler:TextInput(utf8, ...)
+  if (self.tweakMode) then
+    return true
+  end
+
+  for _,w in ipairs(self.TextInputList) do
+    if (w:TextInput(utf8, ...)) then
+      return true
+    end
+  end
+  return false
+end
 
 --------------------------------------------------------------------------------
 --
 --  Mouse call-ins
 --
 
-do
-  local lastDrawFrame = 0
-  local lastx,lasty = 0,0
-  local lastWidget
-
-  local spGetDrawFrame = Spring.GetDrawFrame
-
-  -- local helper (not a real call-in)
-  function widgetHandler:WidgetAt(x, y)
-    local drawframe = spGetDrawFrame()
-    if (lastDrawFrame == drawframe)and(lastx == x)and(lasty == y) then
-      return lastWidget
-    end
-
-    lastDrawFrame = drawframe
-    lastx = x
-    lasty = y
- 
-    if (not self.tweakMode) then
-      for _,w in ipairs(self.IsAboveList) do
-        if (w:IsAbove(x, y)) then
-          lastWidget = w
-          return w
-        end
-      end
-    else
-      for _,w in ipairs(self.TweakIsAboveList) do
-        if (w:TweakIsAbove(x, y)) then
-          lastWidget = w
-          return w
-        end
+-- local helper (not a real call-in)
+function widgetHandler:WidgetAt(x, y)
+  if (not self.tweakMode) then
+    for _,w in ipairs(self.IsAboveList) do
+      if (w:IsAbove(x, y)) then
+        return w
       end
     end
-    lastWidget = nil
-    return nil
+  else
+    for _,w in ipairs(self.TweakIsAboveList) do
+      if (w:TweakIsAbove(x, y)) then
+        return w
+      end
+    end
   end
+  return nil
 end
 
 
@@ -1508,7 +1415,9 @@ function widgetHandler:MousePress(x, y, button)
     end
     for _,w in ipairs(self.MousePressList) do
       if (w:MousePress(x, y, button)) then
-        self.mouseOwner = w
+        if (not mo) then
+          self.mouseOwner = w
+        end
         return true
       end
     end
@@ -1668,22 +1577,6 @@ function widgetHandler:GameStart()
   for _,w in ipairs(self.GameStartList) do
     w:GameStart()
   end
-
-	local plist = ""
-	gaiaTeam = Spring.GetGaiaTeamID()
-	for _, teamID in ipairs(Spring.GetTeamList()) do
-		local teamLuaAI = Spring.GetTeamLuaAI(teamID)
-		if ((teamLuaAI == nil or teamLuaAI == "") and teamID ~= gaiaTeam) then
-			local _,_,_,ai,side,ally = Spring.GetTeamInfo(teamID)
-			if (not ai) then 
-				for _, pid in ipairs(Spring.GetPlayerList(teamID)) do
-					local name, active, spec = Spring.GetPlayerInfo(pid)
-					if active and not spec then plist = plist .. "," .. name end
-				end
-			end	
-		end
-	end
-	Spring.SendCommands("wbynum 255 SPRINGIE:stats,plist".. plist)
   return
 end
 
@@ -1719,18 +1612,17 @@ function widgetHandler:TeamChanged(teamID)
 end
 
 
-function widgetHandler:PlayerAdded(playerID, reason)
-  --ListMutedPlayers()
-  for _,w in ipairs(self.PlayerAddedList) do
-    w:PlayerAdded(playerID, reason)
+function widgetHandler:PlayerChanged(playerID)
+  for _,w in ipairs(self.PlayerChangedList) do
+    w:PlayerChanged(playerID)
   end
   return
 end
 
 
-function widgetHandler:PlayerChanged(playerID)
-  for _,w in ipairs(self.PlayerChangedList) do
-    w:PlayerChanged(playerID)
+function widgetHandler:PlayerAdded(playerID)
+  for _,w in ipairs(self.PlayerAddedList) do
+    w:PlayerAdded(playerID)
   end
   return
 end
@@ -1780,11 +1672,6 @@ end
 
 
 function widgetHandler:MapDrawCmd(playerID, cmdType, px, py, pz, ...)
-  local customkeys = select(10, Spring.GetPlayerInfo(playerID))
-  if customkeys and customkeys.muted then
-    return true
-  end
-  
   local retval = false
   for _,w in ipairs(self.MapDrawCmdList) do
     local takeEvent = w:MapDrawCmd(playerID, cmdType, px, py, pz, ...)
@@ -1849,6 +1736,14 @@ function widgetHandler:UnitFromFactory(unitID, unitDefID, unitTeam,
 end
 
 
+function widgetHandler:UnitReverseBuilt(unitID, unitDefID, unitTeam)
+  for _,w in ipairs(self.UnitReverseBuiltList) do
+    w:UnitReverseBuilt(unitID, unitDefID, unitTeam)
+  end
+  return
+end
+
+
 function widgetHandler:UnitDestroyed(unitID, unitDefID, unitTeam)
   for _,w in ipairs(self.UnitDestroyedList) do
     w:UnitDestroyed(unitID, unitDefID, unitTeam)
@@ -1856,12 +1751,9 @@ function widgetHandler:UnitDestroyed(unitID, unitDefID, unitTeam)
   return
 end
 
-
-function widgetHandler:UnitExperience(unitID,     unitDefID,     unitTeam,
-                                      experience, oldExperience)
-  for _,w in ipairs(self.UnitExperienceList) do
-    w:UnitExperience(unitID,     unitDefID,     unitTeam,
-                    experience, oldExperience)
+function widgetHandler:RenderUnitDestroyed(unitID, unitDefID, unitTeam)
+  for _,w in ipairs(self.RenderUnitDestroyedList) do
+    w:RenderUnitDestroyed(unitID, unitDefID, unitTeam)
   end
   return
 end
@@ -1891,19 +1783,17 @@ function widgetHandler:UnitIdle(unitID, unitDefID, unitTeam)
 end
 
 
-function widgetHandler:UnitCommand(unitID, unitDefID, unitTeam,
-                                   cmdId, cmdOpts, cmdParams)
+function widgetHandler:UnitCommand(unitID, unitDefID, unitTeam, cmdId, cmdParams, cmdOpts, cmdTag)
   for _,w in ipairs(self.UnitCommandList) do
-    w:UnitCommand(unitID, unitDefID, unitTeam,
-                  cmdId, cmdOpts, cmdParams)
+    w:UnitCommand(unitID, unitDefID, unitTeam, cmdId, cmdParams, cmdOpts, cmdTag)
   end
   return
 end
 
 
-function widgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag)
+function widgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOpts, cmdTag)
   for _,w in ipairs(self.UnitCmdDoneList) do
-    w:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag)
+    w:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOpts, cmdTag)
   end
   return
 end
@@ -1913,6 +1803,13 @@ function widgetHandler:UnitDamaged(unitID, unitDefID, unitTeam,
                                    damage, paralyzer)
   for _,w in ipairs(self.UnitDamagedList) do
     w:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer)
+  end
+  return
+end
+
+function widgetHandler:UnitStunned(unitID, unitDefID, unitTeam, stunned)
+  for _,w in ipairs(self.UnitStunnedList) do
+    w:UnitStunned(unitID, unitDefID, unitTeam, stunned)
   end
   return
 end
@@ -1942,9 +1839,9 @@ function widgetHandler:UnitLeftRadar(unitID, unitTeam)
 end
 
 
-function widgetHandler:UnitLeftLos(unitID, unitDefID, unitTeam)
+function widgetHandler:UnitLeftLos(unitID, unitTeam)
   for _,w in ipairs(self.UnitLeftLosList) do
-    w:UnitLeftLos(unitID, unitDefID, unitTeam)
+    w:UnitLeftLos(unitID, unitTeam)
   end
   return
 end
@@ -2045,6 +1942,20 @@ function widgetHandler:RecvLuaMsg(msg, playerID)
 end
 
 
+function widgetHandler:RecvFromSynced(...)
+  local retval = false
+  if (self.actionHandler:RecvFromSynced(...)) then
+    retval = true
+  end
+  for _,w in ipairs(self.RecvFromSyncedList) do
+    if (w:RecvFromSynced(...)) then
+      retval = true
+    end
+  end
+  return retval
+end
+
+
 function widgetHandler:StockpileChanged(unitID, unitDefID, unitTeam,
                                         weaponNum, oldCount, newCount)
   for _,w in ipairs(self.StockpileChangedList) do
@@ -2054,53 +1965,39 @@ function widgetHandler:StockpileChanged(unitID, unitDefID, unitTeam,
   return
 end
 
+--------------------------------------------------------------------------------
+--
+--  Download call-ins
+--
 
--- local helper (not a real call-in)
-local oldSelection = {}
-function widgetHandler:UpdateSelection()
-  local changed
-  local newSelection = Spring.GetSelectedUnits()
-  if (#newSelection == #oldSelection) then
-    for i=1, #newSelection do
-      if (newSelection[i] ~= oldSelection[i]) then -- it seems the order stays
-        changed = true
-        break
-      end                                          
-    end
-  else
-    changed = true
+function widgetHandler:DownloadStarted(id)
+  for _,w in ipairs(self.DownloadStartedList) do
+    w:DownloadStarted(id)
   end
-  if (changed) then
-    widgetHandler:SelectionChanged(newSelection)
-  end
-  oldSelection = newSelection
 end
 
-
-function widgetHandler:SelectionChanged(selectedUnits)
-  for _,w in ipairs(self.SelectionChangedList) do
-    local unitArray = w:SelectionChanged(selectedUnits)
-    if (unitArray) then
-      Spring.SelectUnitArray(unitArray)
-      break
-    end
+function widgetHandler:DownloadQueued(id)
+  for _,w in ipairs(self.DownloadQueuedList) do
+    w:DownloadQueued(id)
   end
-  return
 end
 
-
-function widgetHandler:GameProgress(frame)
-  for _,w in ipairs(self.GameProgressList) do
-    w:GameProgress(frame)
+function widgetHandler:DownloadFinished(id)
+  for _,w in ipairs(self.DownloadFinishedList) do
+    w:DownloadFinished(id)
   end
-  return
 end
 
-function widgetHandler:UnsyncedHeightMapUpdate(x1,z1,x2,z2)
-  for _,w in ipairs(self.UnsyncedHeightMapUpdateList) do
-    w:UnsyncedHeightMapUpdate(x1,z1,x2,z2)
+function widgetHandler:DownloadFailed(id, errorid)
+  for _,w in ipairs(self.DownloadFailedList) do
+    w:DownloadFailed(id, errorid)
   end
-  return
+end
+
+function widgetHandler:DownloadProgress(id, downloaded, total)
+  for _,w in ipairs(self.DownloadProgressList) do
+    w:DownloadProgress(id, downloaded, total)
+  end
 end
 
 --------------------------------------------------------------------------------

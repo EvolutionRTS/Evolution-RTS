@@ -11,25 +11,6 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
---
--- 0.75b2 compatibilty
---
-if (Spring.GetTeamColor == nil) then
-  local getTeamInfo = Spring.GetTeamInfo
-  Spring.GetTeamColor = function(teamID)
-    local _,_,_,_,_,_,r,g,b,a = getTeamInfo(teamID)
-    return r, g, b, a
-  end
-  Spring.GetTeamInfo = function(teamID)
-    local id, leader, active, isDead, isAi, side,
-          r, g, b, a, allyTeam = getTeamInfo(teamID)
-    return id, leader, active, isDead, isAi, side, allyTeam
-  end
-end
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 Spring.SendCommands({"ctrlpanel " .. LUAUI_DIRNAME .. "ctrlpanel.txt"})
 
 VFS.Include(LUAUI_DIRNAME .. 'utils.lua', utilFile)
@@ -38,9 +19,10 @@ include("setupdefs.lua")
 include("savetable.lua")
 
 include("debug.lua")
-include("modfonts.lua")
+include("fonts.lua")
 include("layout.lua")   -- contains a simple LayoutButtons()
-include("evowidgets.lua")  -- the widget handler
+include("widgets_evo.lua")  -- the widget handler
+
 
 --------------------------------------------------------------------------------
 --
@@ -63,11 +45,6 @@ end
 
 
 --------------------------------------------------------------------------------
-
-local gl = Spring.Draw  --  easier to use
-
-
--------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 --
 --  A few helper functions
@@ -124,15 +101,16 @@ function CommandNotify(id, params, options)
 end
 
 function DrawScreen(vsx, vsy)
+  widgetHandler:SetViewSize(vsx, vsy)
   return widgetHandler:DrawScreen()
 end
 
-function KeyPress(key, mods, isRepeat)
-  return widgetHandler:KeyPress(key, mods, isRepeat)
+function KeyPress(key, mods, isRepeat, label, unicode)
+  return widgetHandler:KeyPress(key, mods, isRepeat, label, unicode)
 end
 
-function KeyRelease(key, mods)
-  return widgetHandler:KeyRelease(key, mods)
+function KeyRelease(key, mods, label, unicode)
+  return widgetHandler:KeyRelease(key, mods, label, unicode)
 end
 
 function MouseMove(x, y, dx, dy, button)
