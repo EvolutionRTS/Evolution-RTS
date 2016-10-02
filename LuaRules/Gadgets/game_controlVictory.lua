@@ -249,6 +249,31 @@ buildableUnits = VFS.Include"LuaRules/Configs/cv_buildableUnits.lua"
 --local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
 
+--Make controlvictory exit if chickens are present
+
+local teams = Spring.GetTeamList()
+for i =1, #teams do
+	local luaAI = Spring.GetTeamLuaAI(teams[i])
+	if luaAI ~= "" then
+		if luaAI == "Chicken: Very Easy" or 
+		luaAI == "Chicken: Easy" or 
+		luaAI == "Chicken: Normal" or 
+		luaAI == "Chicken: Hard" or 
+		luaAI == "Chicken: Very Hard" or 
+		luaAI == "Chicken: Epic!" or 
+		luaAI == "Chicken: Custom" or 
+		luaAI == "Chicken: Survival" then
+			chickensEnabled = true
+		end
+	end
+end
+
+if chickensEnabled == true then
+	Spring.Echo("[ControlVictory] Deactivated because Chickens are present!")
+	return false
+end
+
+
 local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 500 -- Radius around a point in which to capture it
 local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 -- Time to capture a point
 local captureBonus = tonumber(Spring.GetModOptions().capturebonus) or.5 -- speedup from adding more units
@@ -1196,7 +1221,7 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 
 	function mouseEvent(x, y, button, release)
 		
-		if Spring.IsGUIHidden() then return false end
+	if Spring.IsGUIHidden() then return false end
 	  if release and draggingScoreboard ~= nil then
 	  	draggingScoreboard = nil
 	  end
