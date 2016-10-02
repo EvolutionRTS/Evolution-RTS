@@ -23,6 +23,7 @@ local metalOffset = 700
 local metalBarWidth = 340
 local width, height = metalOffset+metalBarWidth, 40
 local textOffsetX, textOffsetY = 5, 17
+local bgFlashPeriod = 45
 
 -- resource bars: ON means the bars show percentage, OFF means they simply change color depending on state
 local progressBars = true
@@ -37,18 +38,19 @@ local green = "\255\0\255\0"
 local red = "\255\255\0\0"
 local skyblue = "\255\136\197\226"
 
-local supplyStr = ""
-local energyStr = ""
-local metalStr = ""
+local supplyWarning = false
+local energyWarning = false
+local metalWarning = false
 
 -- Avoids spamming of income increased notification
 local incomeIncreased = false
+
 local increment = 0
 local vsx, vsy = gl.GetViewSizes()
 local posx, posy = vsx - width, vsy - height
 local tweakStartX, tweakStartY = 0, 0
 
--- how long before metal income changes, in seconds
+-- how long before metal income changes, in seconds (default 150s, or 2.5min)
 local metalIncomeTimer = 150
 
 
@@ -64,62 +66,17 @@ local metalIncomeTimer = 150
 --         number received
 		 
 function widget:GameFrame(n)
-	myTeamID = Spring.GetMyTeamID()
-	
-	-- Supply part
-	su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed") or 0), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0)
-	warningColor = white -- If the word "energy" displays as white, something below isn't working correctly
-	
-	if (sm < 30 and su >= sm - 5) or (sm >= 30 and su >= sm - 10) then
-		supplyWarning = true
-		warningColor = "\255\255" .. string.char (increment) .. "\0"
-	else
-		supplyWarning = false
-		warningColor = green
-	end
-	
-	supplyStr = warningColor .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
-	
-	-- Energy part
-    ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
-	warningColor = white -- If the word "energy" displays as white, something below isn't working correctly
-	
-	if ec <= es * 0.2 then
-		energyWarning = true
-		warningColor = "\255\255" .. string.char (increment) .. "\0"
-	else
-		energyWarning = false
-		warningColor = yellow
-	end
-	
-	energyStr = warningColor .. "Energy: " .. green .. "+" .. tostring(math.round(ei)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ")"
-	
-	-- Metal part
-    mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
-
-	warningColor = white -- If the word "energy" displays as white, something below isn't working correctly
-	if mc >= ms * 0.8 then
-		metalWarning = true
-		warningColor = "\255\255" .. string.char (increment) .. "\0"
-	else
-		metalWarning = false
-		warningColor = skyblue
-	end
-
-	metalStr = warningColor .. "Metal: " .. orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
-
-	
-	-- Flashing text if player messed up his eco
+	-- background flashes when the player messed up their eco
 	if supplyWarning == true or energyWarning == true or metalWarning == true then
 		if increment == 0 then
 			countUp = true
 		end
 	
-		if increment < 255 and countUp == true then
-			increment = increment + 15
+		if increment < bgFlashPeriod and countUp == true then
+			increment = increment + 1
 		elseif increment > 0 then
 			countUp = false
-			increment = increment - 15
+			increment = increment - 1
 		end
 	end
 end
@@ -164,33 +121,69 @@ function widget:SetConfigData(data)
 end
 
 function widget:DrawScreen()
+    vsx, vsy = gl.GetViewSizes()
+
+	-- check resource status first
+	myTeamID = Spring.GetMyTeamID()
+	
+	su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed") or 0), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0)
+    ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
+    mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
+	
+	if (sm < 30 and su >= sm - 5) or (sm >= 30 and su >= sm - 10) then
+		supplyWarning = true
+		bgSupplyR = 1
+		bgSupplyG = increment/bgFlashPeriod
+	else
+		supplyWarning = false
+		bgSupplyR = 0
+		bgSupplyG = 0
+	end
+	
+	energyPercentage = ec / es
+	if energyPercentage < 0.2 then
+		energyWarning = true
+		bgEnergyR = 1
+		bgEnergyG = increment/bgFlashPeriod
+	else
+		energyWarning = false
+		bgEnergyR = 0
+		bgEnergyG = 0
+	end
+	
+	metalPercentage = mc / ms
+	if metalPercentage > 0.8 then
+		metalWarning = true
+		bgMetalR = 1
+		bgMetalG = increment/bgFlashPeriod
+	else
+		metalWarning = false
+		bgMetalR = 0
+		bgMetalG = 0
+	end
+	
 	-- draw background (black / gray / black / ...)
-	gl.Color(0,0,0,0.4)
+	-- background flashes when the player messed up their eco
+	gl.Color(bgSupplyR,bgSupplyG,0,0.4)
 	gl.Rect(posx+supplyOffset,posy,posx+supplyOffset+supplyBarWidth,posy+height)
 	
 	gl.Color(0.5,0.5,0.5,0.4)
 	gl.Rect(posx+supplyOffset+supplyBarWidth,posy,posx+energyOffset,posy+height)
 	
-	gl.Color(0,0,0,0.4)
+	gl.Color(bgEnergyR,bgEnergyG,0,0.4)
 	gl.Rect(posx+energyOffset,posy,posx+energyOffset+energyBarWidth,posy+height)
 	
 	gl.Color(0.5,0.5,0.5,0.4)
 	gl.Rect(posx+energyOffset+energyBarWidth,posy,posx+metalOffset,posy+height)
 	
-	gl.Color(0,0,0,0.4)
+	gl.Color(bgMetalR,bgMetalG,0,0.4)
 	gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth,posy+height)
 	
-	myTeamID = Spring.GetMyTeamID()
-    vsx, vsy = gl.GetViewSizes()
-	
-	-- supply part
-	su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed") or 0), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0)
-	
-	-- draw resource bar
+	-- supply bar
 	r, g, b = 0, 0, 0
 	percentage = su / maxSupply
 	
-	if (sm < 30 and su >= sm - 5) or (sm >= 30 and su >= sm - 10) then
+	if supplyWarning then
 		r = 1
 	else
 		r, g, b = 0, 1, 0
@@ -208,18 +201,15 @@ function widget:DrawScreen()
 	end
 	gl.Rect(posx+supplyOffset,posy,posx+supplyBarWidth*percentage,posy+height/4)
 	
+	supplyStr = green .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
     gl.Text(supplyStr, posx+supplyOffset+textOffsetX, posy+textOffsetY, FontSize, "on")
 	
-	-- energy part
-    ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
-	
-	-- draw resource bar
+	-- energy bar
 	r, g, b = 0, 0, 0
-	percentage = ec / es
 	
-	if percentage >= 0.8 then
+	if energyPercentage > 0.8 then
 		g = 1
-	elseif percentage < 0.2 then
+	elseif energyPercentage < 0.2 then
 		r = 1
 	else
 		r, g, b = 1, 1, 0
@@ -227,24 +217,19 @@ function widget:DrawScreen()
 	
 	gl.Color(r,g,b,1)
 	if not progressBars then
-		percentage = 1
+		energyPercentage = 1
 	end
-	gl.Rect(posx+energyOffset,posy,posx+energyOffset+energyBarWidth*percentage,posy+height/4)
+	gl.Rect(posx+energyOffset,posy,posx+energyOffset+energyBarWidth*energyPercentage,posy+height/4)
 	
+	energyStr = yellow .. "Energy: " .. green .. "+" .. tostring(math.round(ei)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ")"
     gl.Text(energyStr, posx+energyOffset+textOffsetX, posy+textOffsetY, FontSize, "on")
 	
-	-----
-	
-	-- metal part
-    mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
-	
-	-- draw resource bar
+	-- metal bar
 	r, g, b = 0, 0, 0
-	percentage = mc / ms
 	
-	if percentage >= 0.8 then
+	if metalPercentage > 0.8 then
 		g = 1
-	elseif percentage < 0.2 then
+	elseif metalPercentage < 0.2 then
 		r = 1
 	else
 		r, g, b = .53, .77, .89
@@ -252,9 +237,9 @@ function widget:DrawScreen()
 	
 	gl.Color(r,g,b,1)
 	if not progressBars then
-		percentage = 1
+		metalPercentage = 1
 	end
-	gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*percentage,posy+height/4)
+	gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*metalPercentage,posy+height/4)
 	
 	-- draw metal income timer
 	timeElapsed = Spring.GetGameSeconds()
@@ -271,14 +256,13 @@ function widget:DrawScreen()
 		incomeIncreased = false
 	end
 	
+	metalStr = skyblue .. "Metal: " .. orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
     gl.Text(metalStr, posx+metalOffset+textOffsetX, posy+textOffsetY, FontSize, "on")
 end
 
 function widget:Initialize()
 	if Spring.GetModOptions().basicincomeinterval ~= nil then
 		metalIncomeTimer = tonumber(Spring.GetModOptions().basicincomeinterval) * 60
-	else
-		metalIncomeTimer = 2.5 * 60
 	end
 end
 ---------------------------------------------------------------------------------------------------------
