@@ -8,7 +8,7 @@ local unitName                   = "elighttank3"
 local buildCostMetal			 = 27
 local maxDamage					 = 245
 
-local power						 = [[6 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 

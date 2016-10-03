@@ -106,8 +106,8 @@ Gives ]] ..supplyGiven.. [[ Supply]],
 --		"eexperimentalfac",
 --		"emetalextractor", --new
 --		"emaker", --new
-		"esolar2", --new
-		"emediumgen", --new
+		--"esolar2", --new
+		--"emediumgen", --new
 		"egeothermal", --new
 		"efusion2", --new
 		"estorage", --new

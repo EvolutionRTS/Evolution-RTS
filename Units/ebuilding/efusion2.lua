@@ -7,7 +7,7 @@ local unitName                    = "efusion2"
 
 local armortype					 = [[building]]
 local energyproduced			 = [[10]]
-local powerprovided				 = [[10 power]]
+local powerprovided				 = [[1 power]]
 local powerradius				 = [[800]]
 --local supplygranted				 = [[50]]
 

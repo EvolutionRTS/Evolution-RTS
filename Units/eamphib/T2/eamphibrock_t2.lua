@@ -8,7 +8,7 @@ local unitName                   = "eamphibrock_t2"
 local buildCostMetal 			  = 59
 local maxDamage					  = 320 * 1.20
 
-local power						 = [[12 power]]
+local power						 = [[2 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 

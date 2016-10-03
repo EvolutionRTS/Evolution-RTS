@@ -8,7 +8,7 @@ local unitName                   = "eallterranarchid_t2"
 local buildCostMetal 			  = 225
 local maxDamage					  = 1500 * 1.20
 
-local power						 = [[28 power]]
+local power						 = [[3 power]]
 local armortype					 = [[armored]]
 local supply					 = [[12]]
 

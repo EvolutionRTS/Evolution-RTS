@@ -8,7 +8,7 @@ local unitName                   = "eallterrlight_t2"
 local buildCostMetal 			  = 22
 local maxDamage					  = 245 * 1.20
 
-local power						 = [[4 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 

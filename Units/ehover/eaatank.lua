@@ -5,7 +5,7 @@ local unitName                   = "eaatank"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[5 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 

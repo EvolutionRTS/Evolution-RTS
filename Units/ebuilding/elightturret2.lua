@@ -20,7 +20,7 @@ local unitDef                     = {
 
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 80,
+	buildCostMetal                = 70,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = true,
@@ -33,7 +33,7 @@ Armortype: ]] ..armortype.. [[
 
 125 Damage vs Light
 31.25 Damage vs Armored
-12.5 Damage vs Buildings
+31.25 Damage vs Buildings
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	energyStorage                 = 0,
@@ -61,7 +61,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	-- script			          = "elightturret2-script.lua",
 	selfDestructAs                = "mediumBuildingExplosionGeneric",
 	side                          = "CORE",
-	sightDistance                 = 600,
+	sightDistance                 = 850,
 	smoothAnim                    = true,
 	unitname                      = "elightturret2",
 	workerTime                    = 0,
@@ -127,7 +127,7 @@ local weaponDefs                  = {
 		interceptedByShieldType   = 4,
 		
 		noSelfDamage              = true,
-		range                     = 600,
+		range                     = 850,
 		reloadtime                = 1,
 		WeaponType                = "LightningCannon",
 		rgbColor                  = "0.1 0.2 0.5",

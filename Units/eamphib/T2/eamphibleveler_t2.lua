@@ -8,7 +8,7 @@ local unitName                   = "eamphibleveler_t2"
 local buildCostMetal 			  = 250
 local maxDamage					  = 1250 * 1.20
 
-local power						 = [[31 power]]
+local power						 = [[3 power]]
 local armortype					 = [[armored]]
 local supply					 = [[10]]
 

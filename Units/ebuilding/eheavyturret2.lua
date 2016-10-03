@@ -20,7 +20,7 @@ local unitDef                     = {
 
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 180,
+	buildCostMetal                = 160,
 	builder                       = false,
 	buildTime                     = 5,
 	collisionVolumeOffsets        = "0 0 0",
@@ -149,7 +149,7 @@ local weaponDefs                  = {
 		thickness                 = 9,
 		tolerance                 = 1000,
 		turret                    = true,
-		weaponVelocity            = 1500,
+		weaponVelocity            = 1000,
 		customparams              = {
 			damagetype		      = "eheavyturret2",  
 		}, 

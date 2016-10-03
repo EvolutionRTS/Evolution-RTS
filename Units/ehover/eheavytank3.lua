@@ -8,7 +8,7 @@ local unitName                   = "eheavytank3"
 local buildCostMetal			 = 59
 local maxDamage					 = 375
 
-local power						 = [[16 power]]
+local power						 = [[2 power]]
 local armortype					 = [[armored]]
 local supply					 = [[4]]
 
@@ -134,7 +134,6 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 local weaponDefs                 = {
 	heavytankweapon              = {
 		
-		accuracy                 = 200,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,

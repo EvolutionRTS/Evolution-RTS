@@ -8,7 +8,7 @@ local unitName                   = "egunship2_t2"
 local buildCostMetal 			  = 50
 local maxDamage					  = 375 * 1.20
 
-local power						 = [[12 power]]
+local power						 = [[2 power]]
 local armortype					 = [[light]]
 local supply					 = [[4]]
 

@@ -8,7 +8,7 @@ local unitName                   = "etransport_t2"
 local buildCostMetal 			  = 20
 local maxDamage					  = 200 * 1.20
 
-local power						 = [[0 power]]
+--local power						 = [[0 power]]
 local armortype					 = [[armored]]
 local supply					 = [[0]]
 
@@ -42,8 +42,6 @@ local unitDef                    = {
 	description                  = [[Unit Type: Fast Armored Transport
 Armortype: ]] ..armortype.. 
 [[ 
-
-Requires +]] .. power .. [[ 
 Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyUse                    = 0,
@@ -99,7 +97,7 @@ Uses +]] .. supply .. [[ Supply]],
 	customParams                 = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+--		RequireTech              = power,
 		armortype                = armortype,
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 

@@ -8,7 +8,7 @@ local unitName                   = "eamphibbuggy"
 local buildCostMetal 			  = 18
 local maxDamage					  = 120
 
-local power						 = [[2 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 local supply					 = [[1]]
 

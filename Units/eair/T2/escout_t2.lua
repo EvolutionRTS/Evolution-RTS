@@ -8,7 +8,7 @@ local unitName                   = "escout_t2"
 local buildCostMetal 			  = 40
 local maxDamage					  = 160 * 1.20
 
-local power						 = [[2 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 
 local unitDef                    = {

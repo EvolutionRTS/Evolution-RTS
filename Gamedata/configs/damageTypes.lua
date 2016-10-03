@@ -264,8 +264,8 @@ local damageClasses = {
 			
 		-- Start Buildings
 		elightturret2	= {
-			SIEGE		= 0.25,
-			ARMORED		= 0.25,
+			SIEGE		= 0.50,
+			ARMORED		= 0.50,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},

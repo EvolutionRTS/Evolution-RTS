@@ -8,7 +8,7 @@ local unitName                = "eamphibarty"
 local buildCostMetal 			  = 36
 local maxDamage					  = 300
 
-local power						 = [[10 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 

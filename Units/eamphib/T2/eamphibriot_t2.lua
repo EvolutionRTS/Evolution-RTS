@@ -8,7 +8,7 @@ local unitName                   = "eamphibriot_t2"
 local buildCostMetal 			  = 23
 local maxDamage					  = 340 * 1.20
 
-local power						 = [[6 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 

@@ -8,7 +8,7 @@ local unitName                   = "eamphibneedle_t2"
 local buildCostMetal 			  = 42
 local maxDamage					  = 340 * 1.20
 
-local power						 = [[8 power]]
+local power						 = [[1 power]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 

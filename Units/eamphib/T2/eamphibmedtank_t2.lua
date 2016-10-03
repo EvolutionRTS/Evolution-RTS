@@ -8,7 +8,7 @@ local unitName                   = "eamphibmedtank_t2"
 local buildCostMetal 			  = 53
 local maxDamage					  = 360 * 1.20
 
-local power						 = [[14 power]]
+local power						 = [[2 power]]
 local armortype					 = [[light]]
 local supply					 = [[4]]
 

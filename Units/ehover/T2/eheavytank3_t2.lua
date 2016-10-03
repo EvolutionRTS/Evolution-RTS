@@ -8,7 +8,7 @@ local unitName                   = "eheavytank3_t2"
 local buildCostMetal			 = 59
 local maxDamage					 = 375 * 1.20
 
-local power						 = [[16 power]]
+local power						 = [[2 power]]
 local armortype					 = [[armored]]
 local supply					 = [[4]]
 
