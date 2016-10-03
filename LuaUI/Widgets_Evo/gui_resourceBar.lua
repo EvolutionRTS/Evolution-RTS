@@ -24,6 +24,7 @@ local metalBarWidth = 340
 local width, height = metalOffset+metalBarWidth, 40
 local textOffsetX, textOffsetY = 5, 17
 local bgFlashPeriod = 45
+local maxBasicIncome = Spring.GetModOptions().maxbasicincome or 15
 
 -- resource bars: ON means the bars show percentage, OFF means they simply change color depending on state
 local progressBars = true
@@ -164,19 +165,19 @@ function widget:DrawScreen()
 	
 	-- draw background (black / gray / black / ...)
 	-- background flashes when the player messed up their eco
-	gl.Color(bgSupplyR,bgSupplyG,0,0.4)
+	gl.Color(bgSupplyR,bgSupplyG,0,0.6)
 	gl.Rect(posx+supplyOffset,posy,posx+supplyOffset+supplyBarWidth,posy+height)
 	
 	gl.Color(0.5,0.5,0.5,0.4)
 	gl.Rect(posx+supplyOffset+supplyBarWidth,posy,posx+energyOffset,posy+height)
 	
-	gl.Color(bgEnergyR,bgEnergyG,0,0.4)
+	gl.Color(bgEnergyR,bgEnergyG,0,0.6)
 	gl.Rect(posx+energyOffset,posy,posx+energyOffset+energyBarWidth,posy+height)
 	
 	gl.Color(0.5,0.5,0.5,0.4)
 	gl.Rect(posx+energyOffset+energyBarWidth,posy,posx+metalOffset,posy+height)
 	
-	gl.Color(bgMetalR,bgMetalG,0,0.4)
+	gl.Color(bgMetalR,bgMetalG,0,0.6)
 	gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth,posy+height)
 	
 	-- supply bar
@@ -186,7 +187,7 @@ function widget:DrawScreen()
 	if supplyWarning then
 		r = 1
 	else
-		r, g, b = 0, 1, 0
+		r, g, b = 0, 0.9, 0
 	end
 	
 	-- gray bar for locked supply, black bar for unlocked supply, last bar for used supply
@@ -208,11 +209,11 @@ function widget:DrawScreen()
 	r, g, b = 0, 0, 0
 	
 	if energyPercentage > 0.8 then
-		g = 1
+		g = 0.9
 	elseif energyPercentage < 0.2 then
 		r = 1
 	else
-		r, g, b = 1, 1, 0
+		r, g, b = 1, 0.9, 0
 	end
 	
 	gl.Color(r,g,b,1)
@@ -228,7 +229,7 @@ function widget:DrawScreen()
 	r, g, b = 0, 0, 0
 	
 	if metalPercentage > 0.8 then
-		g = 1
+		g = 0.9
 	elseif metalPercentage < 0.2 then
 		r = 1
 	else
@@ -242,18 +243,21 @@ function widget:DrawScreen()
 	gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*metalPercentage,posy+height/4)
 	
 	-- draw metal income timer
-	timeElapsed = Spring.GetGameSeconds()
-	percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
-	gl.Color(1,1,0,1)
-	gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*percentage,posy+height/10)
-	if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
-		Spring.Echo("-------------------------------------")
-		Spring.Echo("Metal income has increased!")
-		Spring.Echo("-------------------------------------")
-		incomeIncreased = true
-	end
-	if percentage > 0.5 and incomeIncreased then
-		incomeIncreased = false
+	if mi ~= maxBasicIncome then
+		timeElapsed = Spring.GetGameSeconds()
+		percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
+		gl.Color(1,0.5,0,1)
+		gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*percentage,posy+height/10)
+		if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
+			Spring.PlaySoundFile("sounds/metalincomeincrease.wav", 1)
+			Spring.Echo("-------------------------------------")
+			Spring.Echo("Metal income has increased!")
+			Spring.Echo("-------------------------------------")
+			incomeIncreased = true
+		end
+		if percentage > 0.5 and incomeIncreased then
+			incomeIncreased = false
+		end
 	end
 	
 	metalStr = skyblue .. "Metal: " .. orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
