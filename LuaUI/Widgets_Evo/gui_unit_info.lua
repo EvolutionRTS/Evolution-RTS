@@ -7,7 +7,7 @@ return {
 	date    = "August 2015",
 	license = "Dental flush",
 	layer   = -2,
-	enabled = true,
+	enabled = false,
 }
 end
 local triggerKey = 117	-- 117 = U   (+ ctrl)
