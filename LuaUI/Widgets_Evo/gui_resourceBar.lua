@@ -6,7 +6,7 @@ function widget:GetInfo()
         date = "11/4/2016", -- modified by CommonPlayer on Oct 2016
         license = "MIT X11",
         layer = 1,
-        enabled = false
+        enabled = true
     }
 end
 
