@@ -130,9 +130,9 @@ Gives ]] ..supplyGiven.. [[ Supply]],
 		},
 	},
 	weapons                      = {
---		[1]                      = {
---			def                  = "emp",
---		},
+		[1]                      = {
+			def                  = "emp",
+		},
 	},
 	customParams                 = {
 		canbetransported 		 = "true",

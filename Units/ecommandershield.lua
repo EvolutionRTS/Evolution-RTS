@@ -134,6 +134,9 @@ Gives ]] ..supplyGiven.. [[ Supply]],
 	},
 	weapons                      = {
 		[1]                      = {
+			def                  = "emp",
+		},
+		[2]                      = {
 			def                  = "shield",
 		},
 	},
@@ -160,6 +163,39 @@ Reclaims any energy cores within it's proximity.]],
 --------------------------------------------------------------------------------
 
 local weaponDefs                 = {
+	emp                          = {
+		AreaOfEffect             = 500,
+		avoidFriendly            = false,
+		avoidFeature             = false,
+		collideFriendly          = false,
+		collideFeature           = false,
+		explosionGenerator       = "custom:genericshellexplosion-large-blue-emp",
+		tolerance                = 1000,
+		energypershot            = 0,
+		explosionScar		     = false,
+		impulseFactor            = 0,
+		name                     = "Emp Blast Weapon",
+		noSelfDamage            = true,
+		paralyzer		         = true,
+		paralyzetime	         = 5,
+		range                    = 500,
+		reloadtime               = 10,
+		weaponType		         = "Cannon",
+		soundhit                 = "emp.wav",
+		size				     = 0,
+		turret                   = true,
+		weaponVelocity           = 10000,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+			
+			--Upgrades--
+			upgradeClass		 = "groundweapons",
+		},      
+		damage                   = {
+			default              = 1000,
+		},
+	},
 	shield                = {
 		
 		Smartshield              = true,

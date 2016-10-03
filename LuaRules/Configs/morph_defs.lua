@@ -52,7 +52,7 @@ local morphDefs = {
 			cmdname = [[Cloaking 
 Overseer]],
 			metal = metalCost_ecommandercloak,
-			text = 'Morph to Cloaking Overseer: Loses stun ability, gains a large cloaking field which also cloaks the Overseer.',
+			text = 'Morph to Cloaking Overseer: Gains a large cloaking field which also cloaks the Overseer.',
 		},
 		{
 			into = 'ecommandershield',
@@ -60,7 +60,7 @@ Overseer]],
 			cmdname = [[Shield
 Overseer]],
 			metal = metalCost_ecommandershield,
-			text = 'Morph to Shielded Overseer: Loses stun ability, gains a large shield which does not cost energy to maintain.',
+			text = 'Morph to Shielded Overseer: Gains a large shield which does not cost energy to maintain.',
 		},
 		{
 			into = 'ecommanderbuild',
@@ -68,7 +68,7 @@ Overseer]],
 			cmdname = [[Builder
 Overseer]],
 			metal = metalCost_ecommanderbuild,
-			text = 'Morph to Builder Overseer: Stun ability AOE halved, gains x2 buildpower.',
+			text = 'Morph to Builder Overseer: Stun ability AOE halved, Stun recharge halved, gains x2 buildpower.',
 		},
 		{
 			into = 'ecommanderfactory',
@@ -76,7 +76,7 @@ Overseer]],
 			cmdname = [[Factory
 Overseer]],
 			metal = metalCost_ecommanderfactory,
-			text = 'Morph to Factory Overseer: Loses stun ability, gains the ability to build all raider and riot tanks anywhere.',
+			text = 'Morph to Factory Overseer: Gains the ability to build all raider and riot tanks anywhere.',
 		},
 		{
 			into = 'ecommanderbattle',
@@ -84,7 +84,7 @@ Overseer]],
 			cmdname = [[Battle
 Overseer]],
 			metal = metalCost_ecommanderbattle,
-			text = 'Morph to Battle Overseer: Has stun ability and a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Morph to Battle Overseer: Stun ability recharge doubled, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
 		},
 	},
 	
