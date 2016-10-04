@@ -85,7 +85,7 @@ local unitDef                     = {
 		factionname	              = "outer_colonies",  
 		helptext                  = [[Armortype: ]] ..armortype.. [[ 
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire)]],
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

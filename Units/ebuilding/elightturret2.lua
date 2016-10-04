@@ -8,7 +8,7 @@ local unitName                    = "elightturret2"
 local armortype					 = [[building]]
 --local supply					 = [[2]]
 
-local weapon1Damage               = 125
+local weapon1Damage               = 150
 local weapon1AOE				  = 25
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
@@ -20,7 +20,7 @@ local unitDef                     = {
 
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 70,
+	buildCostMetal                = 100,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = true,
@@ -38,7 +38,7 @@ local unitDef                     = {
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	iconType                      = "defense",
-	maxDamage                     = 750,
+	maxDamage                     = 1000,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 999999,
 	metalStorage                  = 0,
@@ -54,7 +54,7 @@ local unitDef                     = {
 	-- script			          = "elightturret2-script.lua",
 	selfDestructAs                = "mediumBuildingExplosionGeneric",
 	side                          = "CORE",
-	sightDistance                 = 850,
+	sightDistance                 = 1000,
 	smoothAnim                    = true,
 	unitname                      = "elightturret2",
 	workerTime                    = 0,
@@ -122,7 +122,7 @@ local weaponDefs                  = {
 		interceptedByShieldType   = 4,
 		
 		noSelfDamage              = true,
-		range                     = 850,
+		range                     = 1000,
 		reloadtime                = 1,
 		WeaponType                = "LightningCannon",
 		rgbColor                  = "0.1 0.2 0.5",
