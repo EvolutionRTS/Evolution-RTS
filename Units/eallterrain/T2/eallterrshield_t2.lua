@@ -8,7 +8,7 @@ local unitName                   = "eallterrshield_t2"
 local buildCostMetal 			  = 28
 local maxDamage					  = 500 * 1.20
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
@@ -52,17 +52,7 @@ local unitDef                    = {
 	-- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient from a micromanagement standpoint.
 	-- End Cloaking
 
-	description                  = [[Unit Type: Shield Emitter
-Armortype: ]] ..armortype.. [[ 
-
-Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
-Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
-Maximum shield power is ]] .. shield1Power ..[[hp
-Shield can link with other shield units to increase charging and capacity
-Generates a Cloaking Field
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Shield/Cloak Field Emitter • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -128,13 +118,20 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
+Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
+Maximum shield power is ]] .. shield1Power ..[[hp
+Shield can link with other shield units to increase charging and capacity
+Generates a Cloaking Field]],
 		
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 5, -- How much energy does it cost to maintain the cloaking field?
@@ -161,7 +158,7 @@ local weaponDefs                 = {
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
 		Shieldradius             = 300,
-		Shieldpower              = shield1Power,
+		Shieldpower              = shield1tech,
 		Shieldpowerregen         = shield1PowerRegen,
 		Shieldpowerregenenergy   = shield1PowerRegenEnergy,
 		Shieldintercepttype      = 4,

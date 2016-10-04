@@ -5,7 +5,7 @@ local unitName                   = "eamphibaa"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[4]]
 
@@ -52,7 +52,7 @@ Can fire while underwater
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s 
 
-Requires +]] .. power .. [[ 
+Requires +]] .. tech .. [[ 
 Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -126,7 +126,7 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,

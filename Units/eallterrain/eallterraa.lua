@@ -39,13 +39,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Armored Dedicated Anti-Air
-	Armored
-	200 Damage vs Armored
-	132 Damage vs Light/Building
-
-	Requires +3 Power
-	Uses +3 Supply]],
+	description                  =[[Armored Dedicated Anti-Air • Uses +3 Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -119,6 +113,7 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[]],
 	},
 }
 

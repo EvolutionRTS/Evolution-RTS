@@ -31,14 +31,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Heavy Plasma Battery (Anti-Armor)
-Armortype: ]] ..armortype.. [[ 
-
-300 Damage vs Armored
-150 Damage vs Light
-30 Damage vs Buildings
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+	description                   = [[Heavy Plasma Battery (Anti-Armor)]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
@@ -101,7 +94,9 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		helptext                  = [[]],
+		helptext                  = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire)]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

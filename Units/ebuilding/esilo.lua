@@ -27,12 +27,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Nuclear Missile Silo
-Armortype: ]] ..armortype.. [[ 
-
-]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+	description                   = [[Nuclear Missile Silo]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -97,7 +92,11 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 		armortype                 = "building",
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
-		helptext                  = [[]],
+		helptext                  = [[Armortype: ]] ..armortype.. [[ 
+
+]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

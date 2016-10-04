@@ -8,7 +8,7 @@ local unitName                   = "eamphibrock"
 local buildCostMetal 			  = 59
 local maxDamage					  = 320
 
-local power						 = [[2 power]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
@@ -46,17 +46,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT AMPHIB SUPPORT",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Missile support tank
-Armortype: ]] ..armortype.. [[ 
-
-200 Damage vs Armored
-100 Damage vs Light/Building
-
-Energy cost to fire Single Shot: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Salvo: ]] .. roundToFirstDecimal(energycosttofire2) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Missile support tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -138,13 +128,17 @@ Uses +]] .. supply .. [[ Supply]],
 		canareaattack            ="1",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire Single Shot: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Salvo: ]] .. roundToFirstDecimal(energycosttofire2),
 	},
 }
 

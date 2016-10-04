@@ -22,13 +22,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR WALL",
 	damageModifier                = 0.2,
-	description                   = [[Protective Shield
-Armortype: ]] ..armortype.. [[ 
-
-Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
-Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
-Maximum shield power is ]] .. shield1Power ..[[hp
-Shield can link with other shield units to increase charging and capacity]],
+	description                   = [[Protective Shield • Shield can link with other shield units to increase charging and capacity]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGenericBlue",
@@ -88,7 +82,11 @@ Shield can link with other shield units to increase charging and capacity]],
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		helptext                  = [[]],
+		helptext                  = [[Armortype: ]] ..armortype.. [[ 
+
+Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
+Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
+Maximum shield power is ]] .. shield1Power ..[[hp]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

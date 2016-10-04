@@ -5,7 +5,7 @@ local unitName                   = "eaatank"
 
 --------------------------------------------------------------------------------
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
@@ -51,7 +51,7 @@ Armortype: ]] ..armortype.. [[
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
 
-Requires +]] .. power .. [[ 
+Requires +]] .. tech .. [[ 
 Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -123,7 +123,7 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,

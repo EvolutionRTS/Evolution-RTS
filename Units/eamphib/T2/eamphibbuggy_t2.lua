@@ -8,7 +8,7 @@ local unitName                   = "eamphibbuggy_t2"
 local buildCostMetal 			  = 18
 local maxDamage					  = 120 * 1.20
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[1]]
 
@@ -42,18 +42,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT AMPHIB RAID",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Raider
-Armortype: ]] ..armortype.. [[ 
-
-135 Damage/s vs Light/Building
-80 Damages/s vs Armored
-
-Can fire while underwater
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Light, Fast, Raider • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -128,13 +117,18 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
-		RequireTech              = "1 Power",
+		RequireTech              = tech,
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = 1,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+ 
+Can fire while underwater
+ 
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s]],
 	},
 }
 

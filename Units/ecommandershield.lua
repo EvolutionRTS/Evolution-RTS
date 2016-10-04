@@ -39,8 +39,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Commander Unit
-Gives ]] ..supplyGiven.. [[ Supply]],
+	description                  = [[Builds Units • Provides large shielding • Gives ]] ..supplyGiven.. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

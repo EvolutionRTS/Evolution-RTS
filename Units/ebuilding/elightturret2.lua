@@ -28,14 +28,7 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	collisionVolumeTest           = "1",
 	corpse                        = "ammobox",
-	description                   = [[Anti-Raid Defense Platform (Anti-Light)
-Armortype: ]] ..armortype.. [[ 
-
-125 Damage vs Light
-31.25 Damage vs Armored
-31.25 Damage vs Buildings
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+	description                   = [[Anti-Raid Defense Platform (Anti-Light)]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
@@ -100,7 +93,9 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		helptext                  = [[]],
+		helptext                  = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

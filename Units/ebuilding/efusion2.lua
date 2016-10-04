@@ -7,7 +7,7 @@ local unitName                    = "efusion2"
 
 local armortype					 = [[building]]
 local energyproduced			 = [[10]]
-local powerprovided				 = [[1 power]]
+local techprovided				 = [[1 Generator]]
 local powerradius				 = [[800]]
 --local supplygranted				 = [[50]]
 
@@ -21,11 +21,7 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Armortype: ]] ..armortype.. [[ 
-
-Produces +]] .. energyproduced .. [[ Energy 
-
-Provides +]] .. powerprovided,
+	description                   = [[Produces +]] .. energyproduced .. [[ Energy • Provides +]] .. techprovided,
 	energyStorage                 = 0,
 	energyMake                    = energyproduced,
 	explodeAs                     = "hugeBuildingExplosionGenericBlueEMP",
@@ -38,7 +34,7 @@ Provides +]] .. powerprovided,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
-	name                          = "Advanced Generator",
+	name                          = "Generator",
 	objectName                    = "efusion2.s3o",
 	onoffable 		              = false,
 	radarDistance                 = 0,
@@ -75,7 +71,7 @@ Provides +]] .. powerprovided,
 		iseco                     = 1,
 		needed_cover              = 5,
 		death_sounds              = "generic",
-		ProvideTech               = powerprovided,
+		ProvideTech               = techprovided,
 --		ProvideTechRange          = powerradius,
 		--	RequireTech           = "1 Powergrid",
 		armortype                 = armortype,

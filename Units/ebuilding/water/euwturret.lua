@@ -6,7 +6,7 @@ local unitName                       = "euwturret"
 --------------------------------------------------------------------------------
 
 local armortype						 = [[building]]
-local supply						 = [[4]]
+--local supply						 = [[4]]
 
 local weapon1Damage		             = 120
 local weapon1AOE		             = 10
@@ -28,15 +28,7 @@ local unitDef                        = {
 	category                         = "BUILDING NOTAIR",
 	collisionVolumeTest              = "1",
 	corpse                           = "ammobox",
-	description                      = [[Anti-Amphibious Defense Platform
-Armortype: ]] ..armortype.. [[ 
-
-120 Damage vs Light/Armored
-12 Damage vs Building
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Uses +]] .. supply .. [[ Supply]],
+	description                      = [[Anti-Amphibious Defense Platform]],
 	energyStorage                    = 0,
 	energyUse                        = 0,
 	explodeAs                        = "mediumBuildingExplosionGenericGreen",
@@ -96,20 +88,20 @@ Uses +]] .. supply .. [[ Supply]],
 	},
 	customParams                     = {
 		needed_cover                 = 2,
-		supply_cost                  = supply,
+--		supply_cost                  = supply,
 		death_sounds                 = "generic",
 		-- twokhotkey                = 't',
 		armortype                    = armortype,
 		normaltex                   = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                    = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	                 = "outer_colonies",  
-		helptext                     = [[]],
+		helptext                     = [[Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
-	buildingGroundDecalDecaySpeed    =30,
-	buildingGroundDecalSizeX         =6,
-	buildingGroundDecalSizeY         =6,
-	useBuildingGroundDecal           = false,
-	buildingGroundDecalType          =[[elightturret2_aoplane.dds]],
+	-- buildingGroundDecalDecaySpeed    =30,
+	-- buildingGroundDecalSizeX         =6,
+	-- buildingGroundDecalSizeY         =6,
+	-- useBuildingGroundDecal           = false,
+	-- buildingGroundDecalType          =[[elightturret2_aoplane.dds]],
 }
 
 

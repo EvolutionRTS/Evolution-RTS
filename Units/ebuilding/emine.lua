@@ -38,12 +38,7 @@ local unitDef                     = {
 	
 	-- End Cloaking
 
-	description                   = [[Anti-Tank Land Mine
-Armortype: ]] ..armortype.. [[ 
-
-Fires a projectile dealing ]] .. weapon1Damage .. [[ damage
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+	description                   = [[Air/Land Mine]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -111,7 +106,12 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		helptext                  = [[]],
+		helptext                  = [[
+Armortype: ]] ..armortype.. [[ 
+
+Fires a projectile dealing ]] .. weapon1Damage .. [[ damage
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

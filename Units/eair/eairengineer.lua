@@ -44,8 +44,7 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 300,
-	description                  = [[Unit Type: Engineer
-Armortype: ]] .. armortype,
+	description                  = [[Builds Units]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -142,6 +141,7 @@ Armortype: ]] .. armortype,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] .. armortype,
 	},
 }
 

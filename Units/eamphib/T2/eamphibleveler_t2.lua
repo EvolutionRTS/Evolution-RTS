@@ -8,7 +8,7 @@ local unitName                   = "eamphibleveler_t2"
 local buildCostMetal 			  = 250
 local maxDamage					  = 1250 * 1.20
 
-local power						 = [[3 power]]
+local tech						 = [[3 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[10]]
 
@@ -49,24 +49,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED AMPHIB SKIRMISHER",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Endbringer Class Tank Destroyer
-Armortype: ]] ..armortype.. [[ 
-
-Main Cannon:
-250 Damage vs Light/Armored
-25 Damage vs Building
-
-Secondary Machinegun:
-60 Damage/s vs Light/Armored
-6 Damage/s vs Building
-
-This unit can only attack other mobile units!
-
-Energy cost to fire Main Cannon: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Secondary Machinegun: ]] .. roundToFirstDecimal(energycosttofire2 * 10) .. [[/s 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -131,12 +114,16 @@ Uses +]] .. supply .. [[ Supply]],
 	},
 	customParams                 = {
 		death_sounds             = "nuke",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies", 
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire Main Cannon: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Secondary Machinegun: ]] .. roundToFirstDecimal(energycosttofire2 * 10) .. [[/s]],
 	},
 }
 

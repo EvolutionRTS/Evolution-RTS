@@ -8,7 +8,7 @@ local unitName                   = "eartytank"
 local buildCostMetal			 = 36
 local maxDamage					 = 300
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[8]]
 
@@ -46,8 +46,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR SUPPORT",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Artillery Support Tank
-Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Artillery Support Tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -119,7 +118,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 		canareaattack            ="1",
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,

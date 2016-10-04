@@ -8,7 +8,7 @@ local unitName                   = "eallterrheavy_t2"
 local buildCostMetal 			  = 64
 local maxDamage					  = 545 * 1.20
 
-local power						 = [[2 power]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[6]]
 
@@ -55,16 +55,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Unit Type: Armored Tank Destroyer
-Armortype: ]] ..armortype.. [[ 
-	
-100 Damage vs Light/Armored
-50 Damage vs Buildings
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  =[[Unit Type: Armored Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -133,13 +124,16 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 3,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
+		factionname	             = "outer_colonies", 
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

@@ -8,7 +8,7 @@ local unitName                   = "eallterrriot_t2"
 local buildCostMetal 			  = 27
 local maxDamage					  = 400 * 1.20
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 
@@ -64,22 +64,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Unit Type: Anti-Swarm EMP/Riot Tank
-Armortype: ]] ..armortype.. [[ 
-
-200 Paralysis Damage vs Light
-100 Paralysis Damage vs Armored/Building
-
-	• Paralyzes enemy units
-	• Projectile can hit multiple units
-
-Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
-
-Energy cost to fire EMP: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Shotgun: ]] .. roundToFirstDecimal(energycosttofire2) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Unit Type: Anti-Swarm EMP/Riot Tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -151,13 +136,22 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Paralyzes enemy units
+Projectile can hit multiple units
+
+Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
+
+Energy cost to fire EMP: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Shotgun: ]] .. roundToFirstDecimal(energycosttofire2),
 	},
 }
 

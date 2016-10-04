@@ -8,7 +8,7 @@ local unitName                   = "eallterrmed"
 local buildCostMetal 			  = 44
 local maxDamage					  = 500
 
-local power						 = [[2 power]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[4]]
 
@@ -55,16 +55,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Unit Type: Light Tank Destroyer
-Armortype: ]] ..armortype.. [[ 
-
-200 Damage vs Armored
-100 Damage vs Light/Building
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Unit Type: Light Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -131,13 +122,16 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

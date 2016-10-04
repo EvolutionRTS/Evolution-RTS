@@ -8,7 +8,7 @@ local unitName                   = "ebomber_t2"
 local buildCostMetal 			  = 55
 local maxDamage					  = 270 * 1.20
 
-local power						 = [[2 power]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
@@ -46,16 +46,7 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 140,
-	description                  = [[Unit Type: Bomber
-Armortype: ]] ..armortype.. [[ 
-	
-200 Damage vs Buildings
-150 Damage vs Light/Armored
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Unit Type: Bomber • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -119,13 +110,16 @@ Uses +]] .. supply .. [[ Supply]],
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
 		nofriendlyfire           = "1",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

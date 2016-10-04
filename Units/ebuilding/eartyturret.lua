@@ -26,13 +26,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Medium Range Artillery Turret
-Armortype: ]] ..armortype.. [[ 
-	
-200 Damage vs Buildings
-50 Damage vs Light/Armored
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+	description                   = [[Medium Range Anti-Building Artillery Turret]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
@@ -89,7 +83,9 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		helptext                  = [[]],
+		helptext                  = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire)]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

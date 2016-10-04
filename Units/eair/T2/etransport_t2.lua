@@ -8,7 +8,7 @@ local unitName                   = "etransport_t2"
 local buildCostMetal 			  = 20
 local maxDamage					  = 200 * 1.20
 
---local power						 = [[0 power]]
+--local tech						 = [[0 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[0]]
 
@@ -39,10 +39,7 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 150,
-	description                  = [[Unit Type: Fast Armored Transport
-Armortype: ]] ..armortype.. 
-[[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Fast Armored Transport • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyUse                    = 0,
 	explodeAs                    = "hugeExplosionGenericRed",
@@ -97,12 +94,13 @@ Uses +]] .. supply .. [[ Supply]],
 	customParams                 = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
---		RequireTech              = power,
+--		RequireTech              = tech,
 		armortype                = armortype,
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype,
 	},
 }
 

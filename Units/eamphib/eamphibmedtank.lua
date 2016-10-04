@@ -8,7 +8,7 @@ local unitName                   = "eamphibmedtank"
 local buildCostMetal 			  = 53
 local maxDamage					  = 360
 
-local power						 = [[2 power]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[4]]
 
@@ -42,18 +42,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT AMPHIB SKIRMISHER",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Tank Destroyer
-Armortype: ]] ..armortype.. [[ 
-
-125 Damage vs Light/Armored
-70 Damage vs Building
-
-Can fire while underwater
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -128,13 +117,21 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext 				 = [[Armortype: ]] ..armortype.. [[ 
+
+125 Damage vs Light/Armored
+70 Damage vs Building
+
+Can fire while underwater
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s]],
 	},
 }
 

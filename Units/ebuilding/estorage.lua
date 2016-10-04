@@ -25,9 +25,7 @@ local unitDef                     = {
 	collisionVolumeType           = "box",
 
 	corpse                        = "ammobox",
-	description                   = [[Armortype: ]] ..armortype.. [[ 
-	
-Provides +]] .. supplygranted .. [[ Supply]],
+	description                   = [[Provides +]] .. supplygranted .. [[ Supply]],
 	energyStorage                 = storage,
 	energyUse                     = 0,
 	explodeAs                     = "hugeBuildingExplosionGenericPurple",

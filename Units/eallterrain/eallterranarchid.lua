@@ -8,7 +8,7 @@ local unitName                   = "eallterranarchid"
 local buildCostMetal 			  = 225
 local maxDamage					  = 1500
 
-local power						 = [[3 power]]
+local tech						 = [[3 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[12]]
 
@@ -63,24 +63,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 	
-	description                  =[[Unit Type: Endbringer Class Base Assault Walker
-Armortype: ]] ..armortype.. [[ 
-
-Primary Laser:
-300 Damage/s vs Building
-30 Damage/s vs Light/Armored
-
-Secondary Cannons:
-25 Damage vs Building
-12.5 Damage vs Light/Armored
-
-This unit can only attack buildings!
-	
-Energy cost to fire Primary Laser: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Secondary Cannons: ]] .. roundToFirstDecimal(energycosttofire2) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  =[[Unit Type: Endbringer Class Base Assault Walker • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -152,12 +135,16 @@ Uses +]] .. supply .. [[ Supply]],
 	},
 	customParams                 = {
 		death_sounds             = "nuke",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+	
+Energy cost to fire Primary Laser: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+Energy cost to fire Secondary Cannons: ]] .. roundToFirstDecimal(energycosttofire2),
 	},
 }
 

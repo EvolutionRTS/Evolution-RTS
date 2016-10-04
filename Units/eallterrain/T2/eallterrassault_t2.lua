@@ -8,7 +8,7 @@ local unitName                   = "eallterrassault_t2"
 local buildCostMetal 			  = 60
 local maxDamage					  = 400 * 1.20
 
-local power						 = [[2 power]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
 
@@ -55,18 +55,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Unit Type: Anti-Base Long Range Siege Tank
-Armortype: ]] ..armortype.. [[ 
-
-150 Damage vs Buildings
-75 Damage vs Light/Armored
-
-This unit can only fire at buildings!
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  =[[Anti-Base Long Range Siege Tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -132,13 +121,18 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 4,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+This unit can only fire at buildings!
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

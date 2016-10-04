@@ -21,11 +21,7 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Armortype: ]] ..armortype.. [[ 
-
-Produces +]] .. energyproduced .. [[ Energy 
-
-Provides +]] .. powerprovided,
+	description                   = [[Produces +]] .. energyproduced .. [[ Energy • Provides +]] .. powerprovided,
 	energyMake                    = energyproduced,
 	energyStorage                 = 0,
 	explodeAs                     = "largeBuildingExplosionGenericBlueEMP",

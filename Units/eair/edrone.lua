@@ -37,10 +37,7 @@ local unitDef                    = {
 	collide                      = false,
 	--  corpse                   = "ammobox",
 	cruiseAlt                    = 100,
-	description                  = [[Gunship Drone
-Armortype: ]] .. armortype ..[[
-
-]] .. weapon1Damage .. [[ Damage vs Light/Armored/Building]],
+	description                  = [[Gunship Drone]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -110,6 +107,9 @@ Armortype: ]] .. armortype ..[[
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",   
+		helptext				 = [[Armortype: ]] .. armortype ..[[
+
+]] .. weapon1Damage .. [[ Damage vs Light/Armored/Building]],
 	},
 }
 

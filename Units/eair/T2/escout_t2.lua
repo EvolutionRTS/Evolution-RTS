@@ -8,7 +8,7 @@ local unitName                   = "escout_t2"
 local buildCostMetal 			  = 40
 local maxDamage					  = 160 * 1.20
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 
 local unitDef                    = {
@@ -35,10 +35,7 @@ local unitDef                    = {
 	collide                      = false,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 180,
-	description                  = [[Unit Type: Air Scout
-Armortype: ]] ..armortype.. [[ 
-
-Requires +]] .. power,
+	description                  = [[Air Scout/Radar Plane]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -94,11 +91,12 @@ Requires +]] .. power,
 	customParams                 = {
 		--    needed_cover       = 1,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype,
 	},
 }
 

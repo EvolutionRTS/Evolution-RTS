@@ -25,8 +25,7 @@ local unitDef                         = {
 	canstop                           = true,
 	category                          = "BUILDING NOTAIR VTOL",
 	corpse                            = "ammobox",
-	description                       = [[Place generators near this factory to unlock higher tier units
-Armortype: ]] .. armortype,
+	description                       = [[Place generators near this factory to unlock higher tier units]],
 	energyStorage                     = 0,
 	energyUse                         = 0,
 	energyMake                        = 0,

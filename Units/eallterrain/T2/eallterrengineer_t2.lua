@@ -52,8 +52,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Unit Type: Engineer
-Armortype: ]] .. armortype,
+	description                  = [[Builds Units]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

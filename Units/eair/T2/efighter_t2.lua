@@ -8,7 +8,7 @@ local unitName                   = "efighter_t2"
 local buildCostMetal 			  = 45
 local maxDamage					  = 325 * 1.20
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 
@@ -46,16 +46,7 @@ local unitDef                    = {
 	collide                      = true,
 	corpse                       = "ammobox",
 	cruiseAlt                    = 200,
-	description                  = [[Unit Type: Paralysis Gunship
-Armortype: ]] ..armortype.. [[ 
-	
-250 Damage vs Light/Armored/s
-62.5 Damage vs Building/s
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Paralysis Gunship • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -119,13 +110,16 @@ Uses +]] .. supply .. [[ Supply]],
 	customParams                 = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 

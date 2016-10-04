@@ -30,13 +30,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility
-Armortype: ]] ..armortype.. [[ 
-
-Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
-Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
-Maximum shield power is ]] .. shield1Power ..[[hp
-Shield can link with other shield units to increase charging and capacity]],
+	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility • Shield can link with other shield units to increase charging and capacity]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -100,7 +94,11 @@ Shield can link with other shield units to increase charging and capacity]],
 		ProvideTechRange          = "300",
 		armortype                 = armortype, 
 		normaltex                = "unittextures/eshieldgennormal.png", 
-		helptext                  = [[Anti-Nuke Platform / Anti-Artillery base shield Facility]],
+		helptext                  = [[Armortype: ]] ..armortype.. [[ 
+
+Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
+Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
+Maximum shield power is ]] .. shield1Power ..[[hp]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

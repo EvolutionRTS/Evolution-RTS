@@ -8,7 +8,7 @@ local unitName                   = "eriottank2"
 local buildCostMetal			 = 25
 local maxDamage					 = 300
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 
@@ -53,8 +53,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR RIOT",
 	corpse                       = "ammobox",
-	description                  = [[Anti-Swarm EMP/Riot Tank
-Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Anti-Swarm EMP/Riot Tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -134,7 +133,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,

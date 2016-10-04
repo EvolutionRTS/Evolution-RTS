@@ -8,7 +8,7 @@ local unitName                   = "elacerator_t2"
 local buildCostMetal 			 = 200
 local maxDamage					 = 1000 * 1.20
 
-local power						 = [[3 power]]
+local tech						 = [[3 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
 
@@ -43,8 +43,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR SUPPORT",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Endbringer Class Low Yeild Nuclear Saturation Artillery
-Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Low Yeild Nuclear Saturation Artillery • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -108,7 +107,7 @@ Requires +]] .. power .. [[ and Uses +]] .. supply .. [[ Supply]],
 	},
 	customParams                 = {
 		death_sounds             = "nuke",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = armortype,
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 

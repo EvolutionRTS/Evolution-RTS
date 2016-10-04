@@ -16,10 +16,7 @@ local unitDef                     = {
 	buildTime                     = 5,
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Radar Jamming Tower
-Armortype: ]] ..armortype.. [[ 
-
-Generates a Cloaking Field]],
+	description                   = [[Radar Jamming Tower • Generates a Cloaking Field]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,

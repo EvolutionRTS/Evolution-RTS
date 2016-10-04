@@ -16,8 +16,7 @@ local unitDef                     = {
 	buildTime                     = 5,
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Radar Dome/Sensor Tower
-Armortype: ]] ..armortype,
+	description                   = [[Radar Dome/Sensor Tower]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,

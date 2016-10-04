@@ -8,7 +8,7 @@ local unitName                   = "eamphibneedle_t2"
 local buildCostMetal 			  = 42
 local maxDamage					  = 340 * 1.20
 
-local power						 = [[1 power]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 
@@ -42,18 +42,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT AMPHIB RAID",
 	corpse                       = "ammobox",
-	description                  = [[Unit Type: Tank Destroyer
-Armortype: ]] ..armortype.. [[ 
-
-200 Damage/s vs Light
-100 Damages/s vs Armored/Building
-
-Can fire while underwater
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s 
-
-Requires +]] .. power .. [[ 
-Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Light Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -127,13 +116,18 @@ Uses +]] .. supply .. [[ Supply]],
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		RequireTech              = power,
+		RequireTech              = tech,
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+
+Can fire while underwater
+
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s]],
 	},
 }
 
