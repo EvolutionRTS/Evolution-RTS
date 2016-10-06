@@ -8,8 +8,8 @@ local unitName                    = "elightturret2"
 local armortype					 = [[building]]
 --local supply					 = [[2]]
 
-local weapon1Damage               = 150
-local weapon1AOE				  = 25
+local weapon1Damage               = 100
+local weapon1AOE				  = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
@@ -38,7 +38,7 @@ local unitDef                     = {
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	iconType                      = "defense",
-	maxDamage                     = 1000,
+	maxDamage                     = 1250,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 999999,
 	metalStorage                  = 0,
@@ -111,7 +111,9 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 local weaponDefs                  = {
 	lighteweapon                  = {
 		AreaOfEffect              = weapon1AOE,
+		avoidFeature              = false,
 		avoidFriendly             = false,
+		collideFeature            = false,
 		collideFriendly           = false,
 		craterBoost               = 0,
 		craterMult                = 0,
