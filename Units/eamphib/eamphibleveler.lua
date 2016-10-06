@@ -75,6 +75,7 @@ local unitDef                    = {
 	selfDestructAs               = "krabblast",
 	side                         = "CORE",
 	sightDistance                = 750,
+	sonarDistance				 = 750,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 4,
