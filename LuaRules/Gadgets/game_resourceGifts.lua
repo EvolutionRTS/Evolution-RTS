@@ -144,26 +144,28 @@ function gadget:GameFrame(n)
 --			Spring.Echo("New baseIncome")
 --			Spring.Echo(baseIncome)
 		end
-		if (n % 30) == 4 then
-			local mexIncome = getMexIncomes()
-			
-			for _,i in ipairs(Spring.GetTeamList()) do
-						local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
-				if i ~= Spring.GetGaiaTeamID() then -- don't give free stuff to GAIA
---						Spring.AddTeamResource(i,"e",1)
-						--Spring.Echo("maxbaseincome is:" .. maximumBaseIncome)
-						--Spring.Echo("base income increase period is: " .. baseIncomeIncreasePeriod)
-					if not (baseIncome >= tonumber(maximumBaseIncome)) then
-						Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])
-					else
-						Spring.AddTeamResource(i,"m",tonumber(maximumBaseIncome))
+		if Spring.GetModOptions().mincome ~= "disabled" then
+			if (n % 30) == 4 then
+				local mexIncome = getMexIncomes()
+				
+				for _,i in ipairs(Spring.GetTeamList()) do
+							local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
+					if i ~= Spring.GetGaiaTeamID() then -- don't give free stuff to GAIA
+	--						Spring.AddTeamResource(i,"e",1)
+							--Spring.Echo("maxbaseincome is:" .. maximumBaseIncome)
+							--Spring.Echo("base income increase period is: " .. baseIncomeIncreasePeriod)
+						if not (baseIncome >= tonumber(maximumBaseIncome)) then
+							Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])
+						else
+							Spring.AddTeamResource(i,"m",tonumber(maximumBaseIncome))
+						end
+	--					Spring.Echo("Final baseIncome amount that is being run through AddTeamResource")
+	--					Spring.Echo(baseIncome)
+	--					Spring.Echo("DUN DUN DUN")
 					end
---					Spring.Echo("Final baseIncome amount that is being run through AddTeamResource")
---					Spring.Echo(baseIncome)
---					Spring.Echo("DUN DUN DUN")
 				end
-			end
-		end 
+			end 
+		end
 
 	--Give free resources to AI - Necessary for AI's to properly function
 	if n%32 == 4 then

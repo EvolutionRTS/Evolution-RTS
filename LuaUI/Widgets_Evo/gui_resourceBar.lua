@@ -243,20 +243,22 @@ function widget:DrawScreen()
 	gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*metalPercentage,posy+height/4)
 	
 	-- draw metal income timer
-	if mi ~= maxBasicIncome then
-		timeElapsed = Spring.GetGameSeconds()
-		percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
-		gl.Color(1,0.5,0,1)
-		gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*percentage,posy+height/10)
-		if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
-			Spring.PlaySoundFile("sounds/metalincomeincrease.wav", 1)
-			Spring.Echo("-------------------------------------")
-			Spring.Echo("Metal income has increased!")
-			Spring.Echo("-------------------------------------")
-			incomeIncreased = true
-		end
-		if percentage > 0.5 and incomeIncreased then
-			incomeIncreased = false
+	if Spring.GetModOptions().mincome ~= "disabled" then
+		if mi ~= maxBasicIncome then
+			timeElapsed = Spring.GetGameSeconds()
+			percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
+			gl.Color(1,0.5,0,1)
+			gl.Rect(posx+metalOffset,posy,posx+metalOffset+metalBarWidth*percentage,posy+height/10)
+			if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
+				Spring.PlaySoundFile("sounds/metalincomeincrease.wav", 1)
+				Spring.Echo("-------------------------------------")
+				Spring.Echo("Metal income has increased!")
+				Spring.Echo("-------------------------------------")
+				incomeIncreased = true
+			end
+			if percentage > 0.5 and incomeIncreased then
+				incomeIncreased = false
+			end
 		end
 	end
 	
