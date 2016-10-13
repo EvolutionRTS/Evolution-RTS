@@ -34,10 +34,10 @@ local aiCheatHandicapMetal = {
 }
 
 local aiCheatHandicapEnergy = { 
-	["veryeasy"] =  0,
-	["easy"] =  5,
-	["medium"] =  10,
-	["hard"] =  25,
+	["veryeasy"] =  10,
+	["easy"] =  20,
+	["medium"] =  30,
+	["hard"] =  40,
 	["insane"] =  50,
 }
 
@@ -182,7 +182,7 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then
-				GG.TechGrant("Power",TeamID)
+				GG.TechGrant("Generator",TeamID)
 			end
 		end
 	end
