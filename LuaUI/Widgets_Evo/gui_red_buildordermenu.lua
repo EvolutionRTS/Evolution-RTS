@@ -484,20 +484,28 @@ local function UpdateGrid(g,cmds,ordertype)
 			end
 			
 			--text to show build hotkey
+			local white = "\255\255\255\255"
+			local offwhite = "\255\210\210\210"
+			local yellow = "\255\255\255\0"
+			local orange = "\255\255\135\0"
+			local green = "\255\0\255\0"
+			local red = "\255\255\0\0"
+			local skyblue = "\255\136\197\226"
+			
 			local text = g.texts[i]
 			text.px = icon.px
 			text.py = icon.py
-			local captionColor = "\255\192\192\192"
+			local captionColor = white
 			if i <= 15 then
 				if building == 0 then
-					captionColor = "\255\0\192\192"
+					captionColor = skyblue
 				end
-				text.caption = captionColor..buildLetters[buildStartKey-96].." + "..buildLetters[buildKeys[i]-96]
+				text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96]
 			elseif i <= 30 then
 				if building == 1 then
-					captionColor = "\255\0\192\192"
+					captionColor = skyblue
 				end
-				text.caption = captionColor..buildLetters[buildNextKey-96].." + "..buildLetters[buildKeys[i-15]-96]
+				text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96]
 			else
 				text.caption = nil
 			end
