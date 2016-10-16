@@ -490,16 +490,16 @@ local function UpdateGrid(g,cmds,ordertype)
 			if i <= 15 then
 				text.caption = buildLetters[buildStartKey-96].." + "..buildLetters[buildKeys[i]-96]
 				if building == 0 then
-					text.captioncolor = {0,0.8,0.8,1}
+					text.captioncolor = {0.8,0.2,0.2,1}
 				else
-					text.captioncolor = {0.8,0.8,0.8,1}
+					text.captioncolor = {0.2,0.8,0.2,1}
 				end
 			elseif i <= 30 then
 				text.caption = buildLetters[buildNextKey-96].." + "..buildLetters[buildKeys[i-15]-96]
 				if building == 1 then
-					text.captioncolor = {0,0.8,0.8,1}
+					text.captioncolor = {0.8,0.2,0.2,1}
 				else
-					text.captioncolor = {0.8,0.8,0.8,1}
+					text.captioncolor = {0.2,0.8,0.2,1}
 				end
 			else
 				text.caption = nil
