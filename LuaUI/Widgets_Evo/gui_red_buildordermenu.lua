@@ -355,7 +355,7 @@ local function CreateGrid(r)
 	sx=r.isx,sy=r.isy/4,
 	captioncolor={0.8,0.8,0.8,1},
 	caption = nil,
-	options = "n",
+	options = "on",
 	}
 	local texts = {}
 	for y=1,r.iy do
@@ -487,20 +487,17 @@ local function UpdateGrid(g,cmds,ordertype)
 			local text = g.texts[i]
 			text.px = icon.px
 			text.py = icon.py
+			local captionColor = "\255\192\192\192"
 			if i <= 15 then
-				text.caption = buildLetters[buildStartKey-96].." + "..buildLetters[buildKeys[i]-96]
 				if building == 0 then
-					text.captioncolor = {0.8,0.2,0.2,1}
-				else
-					text.captioncolor = {0.2,0.8,0.2,1}
+					captionColor = "\255\0\192\192"
 				end
+				text.caption = captionColor..buildLetters[buildStartKey-96].." + "..buildLetters[buildKeys[i]-96]
 			elseif i <= 30 then
-				text.caption = buildLetters[buildNextKey-96].." + "..buildLetters[buildKeys[i-15]-96]
 				if building == 1 then
-					text.captioncolor = {0.8,0.2,0.2,1}
-				else
-					text.captioncolor = {0.2,0.8,0.2,1}
+					captionColor = "\255\0\192\192"
 				end
+				text.caption = captionColor..buildLetters[buildNextKey-96].." + "..buildLetters[buildKeys[i-15]-96]
 			else
 				text.caption = nil
 			end
