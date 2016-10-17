@@ -494,22 +494,28 @@ local function UpdateGrid(g,cmds,ordertype)
 			
 			local s, e = string.find(cmd.tooltip, "Metal cost %d*")
 			local metalCost = string.sub(cmd.tooltip, s + 11, e)
+			local s, e = string.find(cmd.tooltip, "Energy cost %d*")
+			local energyCost = string.sub(cmd.tooltip, s + 11, e)
 			--local metalColor = "\255\136\197\226"
 			
 			local text = g.texts[i]
 			text.px = icon.px
 			text.py = icon.py
 			local captionColor = white
+			
+-- If you don't want to display the metal or energy cost on the unit buildicon, then you can disable it here
 			if i <= 15 then
 				if building == 0 then
 					captionColor = skyblue
 				end
-				text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n"..skyblue..metalCost
+				text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+				text.options = "bs"
 			elseif i <= 30 then
 				if building == 1 then
 					captionColor = skyblue
 				end
-				text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n"..skyblue..metalCost
+				text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+				text.options = "bs"
 			else
 				text.caption = nil
 			end
