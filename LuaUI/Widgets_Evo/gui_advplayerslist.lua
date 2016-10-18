@@ -236,8 +236,8 @@ local playerReadyState = {}
 local numberOfSpecs = 0
 
 --To determine faction at start
-local armcomDefID = UnitDefNames.armcom.id
-local corcomDefID = UnitDefNames.corcom.id
+-- local armcomDefID = UnitDefNames.armcom.id
+-- local corcomDefID = UnitDefNames.corcom.id
 
 --Name for absent/resigned players
 local absentName = " --- "

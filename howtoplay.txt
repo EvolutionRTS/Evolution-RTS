@@ -1,0 +1,61 @@
+/Control_Points	Section 1
+
+Control Points are spread throughout the map. The points can be captured by simply moving units into the circle. It’s very similar to how Dawn of War or Battlefield control points works. Probably more similar to Battlefield. You and your opponent(s) start with a maximum score (by default right now it is 2750). For each Control Point that your opponent controls, you will lose that many points from your score every second. There are 7 points on each map that can be captured. This causes you to need to move out as quickly as possible, and you will find that you constantly are fighting over control points. When a player reaches a score of 0, that player’s units will explode. This makes for some very intense and exciting games.
+
+Because of this, capturing and holding control points is more important than directly attacking your enemy's base. It doesn't help to nearly destroy your enemy if you lose because he was holding all of the capture points.
+
+Additionally, there are 3 Control Victory modes:
+
+/Countdown	Section 1.a
+/Tug_of_War	Section 1.b
+/Domination	Section 1.c
+
+Countdown is the game mode previously described. Both player’s score counts down until someone hits 0.
+
+Tug of war causes the points to be transferred from one player to another but with a small catch… Point values are doubled, meaning that if you own 7 points, you will receive 14 score points from your opponent every second.
+
+Domination requires that you own all of the Control Points for 30 seconds. If you accomplish this then you score 1000 points, at which point all of the Control Points capture status is reset (in other words all points go neutral after a score). First player to 3500 points wins!
+
+All of the parameters are highly configurable from the lobby, and you can change nearly everything about the gameplay with these configuration options.
+
+
+/Metal	Section 2
+
+Metal is used solely for construction projects, whether you are trying to build a turret, factory, generator, tank, aircraft, etc, Metal is what is used for that construction project. More metal income means that you can build more things simultaneously, faster. Metal income is predetermined by how far the game has progressed. You start with +3 metal income which increases by +3 every 2.5 minutes until it caps at +15 total.
+
+If your available metal is equal to your maximum metal storage amount, metal income will be ignored, wasting potential resources. However, if you have allies a percentage is spilled over to them, providing that they aren't maxed out as well. Metal storage can be increased by building Supply Depots.
+
+You can supplement your metal and energy income by reclaiming Energy Cores.
+
+
+/Energy	Section 3
+
+Energy is used specifically for utilitarian purposes. Those purposes include, Units firing, Recharging shields, Cloaking, etc.
+
+Energy is extremely important. The same buildings that provide energy also provide you with Power. The most basic reasons of why energy is so important is the fact that your units require it in order to fire their weapons. As a result, if you get in the middle of a battle and run out of energy, your units will no longer be able to fire, and that might not only cost you the battle, it might also cost you the game!
+
+Energy income is determined by how many of these generators are built. If your energy on hand is the same amount as your maximum energy storage, the energy from the energy income is wasted. However, if you have allies a percentage is spilled over to them, providing that they aren't maxed out as well, similar to the metal storage mechanic.
+
+Energy storage can be supplemented with Supply Depots. Energy storage is arguably as important or even more important than energy generation because energy is generally consumed in large bursts during battles or nuke launches as opposed to in a slow, gradual but consistent fashion like metal consumption, meaning that in peace time a high energy income is not useful.
+
+Energy can be obtained via the following buildings:
+
+Basic Generator Medium Generator Geothermal Generator Advanced Generator
+
+
+/Generators	Section 4
+
+Generators is used by factories to unlock attack units, it is provided by the same buildings that produce Energy. They are the Basic/Medium/Geothermal/Advanced Generators. Generators give Power to factories anywhere on the map and thusly can be placed anywhere.
+
+/Note	Section 4.a
+
+Geothermal Generators can only be placed on spots that have smoke coming out of it, you can find these spots easier if you click on a Geothermal Generator in the build menu. Geothermal spots will be highlighted on the minimap with a yellow X and on the map itself with a very tall yellow column. If you can place a Geothermal Generator near your start position, it is a good idea to build it rather than Basic Generators as you get to start with most units unlocked.
+
+
+/Supply	Section 5
+
+Supply is similar to population seen in other RTS games. Attack units use Supply, and thus you cannot build any more of them once you reached the Supply limit. Supply Depots also increase Metal and Energy maximum reserves by +25/+25 per Depot.
+
+In addition to increasing your army supply limit, Supply Depots are excellent tools to help buffer your Metal and Energy reserves. When your Metal and Energy reserves are full, any excess is wasted (if in a 1v1 game, otherwise it spills over to your allies in team games), so it makes a lot of sense to have a large buffer zone for your resources. It can also help with Metal stalling with large construction projects, and more importantly, it can allow you to have much greater staying power in a large battles where your units are using tons of energy in order to keep fighting.
+
+Increased supply and resource storage can be obtained via the Supply Depot building.
