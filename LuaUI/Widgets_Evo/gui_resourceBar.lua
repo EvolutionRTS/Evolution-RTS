@@ -260,7 +260,7 @@ function widget:GameFrame(frame)
 		if supplyWarning then
 			r = 1
 		else
-			r, g, b = 0, 0.9, 0
+			r, g, b = 1, 0.5, 0
 		end
 		
 		gl.Texture(barTexture)
@@ -268,7 +268,7 @@ function widget:GameFrame(frame)
 		gl.Color(0.5,0.5,0.5,1)
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth,height/6)
 		maxPercentage = sm / maxSupply
-		gl.Color(0,0,0,1)
+		gl.Color(0,1,0,1)
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth*maxPercentage,height/6)
 		gl.Color(r,g,b,1)
 		
@@ -328,7 +328,7 @@ function widget:GameFrame(frame)
 				percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
 				gl.Color(1,0.5,0,1)
 				gl.Texture(barTexture)
-				gl.TexRect(metalOffset,0,metalOffset+metalBarWidth*percentage,height/10)
+				gl.TexRect(metalOffset,0,metalOffset+metalBarWidth*percentage,height/20)
 				if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
 					Spring.PlaySoundFile("sounds/metalincomeincrease.wav", 1)
 					Spring.Echo("-------------------------------------")
