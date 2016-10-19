@@ -50,6 +50,8 @@ local incomeIncreased = false
 local increment = 0
 local vsx, vsy = gl.GetViewSizes()
 local widgetScale = 1		-- gets auto changed anyway
+local bgmargin = 12
+local bgmargin2 = 6
 local posx, posy = vsx - width, vsy - height
 local tweakStartX, tweakStartY = 0, 0
 
@@ -155,11 +157,13 @@ end
 
 -- tweaking UI position with ctrl+f11
 function widget:TweakMousePress(x, y, button)
-    if x >= posx and x < posx + width and y >= posy and y < posy + height then
+	local posxScaled = posx - (bgmargin*widgetScale) - ((vsx - posx) * (widgetScale-1))
+	local posyScaled = posy - (bgmargin*widgetScale) - ((vsy - posy) * (widgetScale-1))
+  if x >= posxScaled and x < posxScaled + ((width+bgmargin+bgmargin)*widgetScale) and y >= posyScaled and y < posyScaled + ((height+bgmargin+bgmargin)*widgetScale) then
 		tweakStartX = x - posx
 		tweakStartY = y - posy
-        return true
-    end
+    return true
+  end
 end
 
 function widget:TweakMouseMove(x, y, dx, dy, button)
@@ -177,6 +181,7 @@ function widget:TweakMouseMove(x, y, dx, dy, button)
 	if posy > vsy - height then
 		posy = vsy - height
 	end
+	generateDisplayList()
 end
 
 -- save and load
@@ -190,6 +195,7 @@ end
 function widget:SetConfigData(data)
 	posx = data.posx or posx
 	posy = data.posy or posy
+	generateDisplayList()	
 end
 
 
@@ -236,7 +242,68 @@ function widget:GameFrame(frame)
 		end
 	end
 	
-	-- regenerate display list
+	generateDisplayList2()
+end
+
+function widget:DrawScreen()
+	if displayList2 ~= nil then
+		gl.CallList(displayList)
+		gl.CallList(displayList2)
+	end
+end
+
+function widget:Initialize()
+	if Spring.GetModOptions().basicincomeinterval ~= nil then
+		metalIncomeTimer = tonumber(Spring.GetModOptions().basicincomeinterval) * 60
+	end
+end
+
+
+function widget:Shutdown()
+	if (WG['guishader_api'] ~= nil) then
+		WG['guishader_api'].RemoveRect('resources')
+	end
+	
+	if displayList ~= nil then
+		gl.DeleteList(displayList)
+		gl.DeleteList(displayList2)
+	end
+end
+---------------------------------------------------------------------------------------------------------
+
+function generateDisplayList()	
+	if displayList ~= nil then
+		gl.DeleteList(displayList)
+	end
+	displayList = gl.CreateList( function()
+				
+		-- start drawing
+		gl.PushMatrix()
+		
+		-- set position
+		gl.Translate(posx, posy, 0)
+		
+		-- apply scaling
+		gl.Translate(-((vsx - posx) * (widgetScale-1)), -((vsy - posy) * (widgetScale-1)), 0)
+		gl.Scale(widgetScale, widgetScale, 1)
+		
+		-- background
+	  gl.Color(0,0,0,0.8)
+		RectRound(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin, 10)
+		
+		-- content area
+		gl.Color(0.33,0.33,0.33,0.15)
+		RectRound(supplyOffset-bgmargin2, -bgmargin2, metalOffset+metalBarWidth+bgmargin2, height+bgmargin2,9)
+		
+		if (WG['guishader_api'] ~= nil) then
+			WG['guishader_api'].InsertRect(supplyOffset-(bgmargin*0.8), -(bgmargin*0.8), metalOffset+metalBarWidth+(bgmargin*0.8), height+(bgmargin*0.8), 'resources')
+		end
+	end)
+end
+
+
+-- regenerate display list
+function generateDisplayList2()
 	if displayList2 ~= nil then
 		gl.DeleteList(displayList2)
 	end
@@ -350,67 +417,8 @@ function widget:GameFrame(frame)
 	
   end)
 end
-
-function widget:DrawScreen()
-	if displayList2 ~= nil then
-		gl.CallList(displayList)
-		gl.CallList(displayList2)
-	end
-end
-
-function widget:Initialize()
-	if Spring.GetModOptions().basicincomeinterval ~= nil then
-		metalIncomeTimer = tonumber(Spring.GetModOptions().basicincomeinterval) * 60
-	end
-end
-
-
-function widget:Shutdown()
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('resources')
-	end
-	
-	if displayList ~= nil then
-		gl.DeleteList(displayList)
-		gl.DeleteList(displayList2)
-	end
-end
----------------------------------------------------------------------------------------------------------
-
-
 function widget:ViewResize(newX,newY)
   vsx, vsy = newX, newY
 	widgetScale = (0.66 + (vsx*vsy / 13300000))
-	
-	-- regenerate the display list
-	if displayList ~= nil then
-		gl.DeleteList(displayList)
-	end
-	displayList = gl.CreateList( function()
-				
-		-- start drawing
-		gl.PushMatrix()
-		
-		-- set position
-		gl.Translate(posx, posy, 0)
-		
-		-- apply scaling
-		gl.Translate(-((vsx - posx) * (widgetScale-1)), -((vsy - posy) * (widgetScale-1)), 0)
-		gl.Scale(widgetScale, widgetScale, 1)
-		
-		-- background
-		local bgmargin = 12
-	  gl.Color(0,0,0,0.8)
-		RectRound(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin, 10)
-		
-		-- content area
-		bgmargin = 6
-		gl.Color(0.33,0.33,0.33,0.15)
-		RectRound(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin,9)
-		
-		if (WG['guishader_api'] ~= nil) then
-			bgmargin = 10
-			WG['guishader_api'].InsertRect(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin, 'resources')
-		end
-	end)
+	generateDisplayList()
 end
