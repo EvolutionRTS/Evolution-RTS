@@ -352,8 +352,10 @@ function widget:GameFrame(frame)
 end
 
 function widget:DrawScreen()
-	gl.CallList(displayList)
-	gl.CallList(displayList2)
+	if displayList2 ~= nil then
+		gl.CallList(displayList)
+		gl.CallList(displayList2)
+	end
 end
 
 function widget:Initialize()
