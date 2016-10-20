@@ -28,7 +28,7 @@ local maxBasicIncome = Spring.GetModOptions().maxbasicincome or 15
 -- resource bars: ON means the bars show percentage, OFF means they simply change color depending on state
 local progressBars = true
 
-local maxSupply = 200
+local maxSupply = tonumber(Spring.GetModOptions().supplycap) or 200
 
 -- internal settings, do not touch
 local white = "\255\255\255\255"
