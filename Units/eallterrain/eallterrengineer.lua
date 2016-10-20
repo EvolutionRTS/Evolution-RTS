@@ -106,6 +106,7 @@ local unitDef                    = {
 		},
 	},
 	buildoptions                 = {
+		"ehbotfac",
 		"eminifac", --new
 		"ebasefactory", --new
 		"eamphibfac",

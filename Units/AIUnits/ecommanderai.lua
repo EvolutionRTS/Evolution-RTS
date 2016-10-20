@@ -102,6 +102,7 @@ There can only be one!]],
 		},
 	},
 	buildoptions                 = {
+		"ehbotfac",
 		"eminifac", --new
 		"ebasefactory", --new
 		"eamphibfac",
