@@ -221,7 +221,11 @@ function widget:DrawScreen()
 			bgSupplyG = 0
 		end
 		
+		percentage = su / maxSupply
+		if percentage > 1 then percentage = 1 end
+		
 		energyPercentage = ec / es
+		if energyPercentage > 1 then energyPercentage = 1 end
 		if energyPercentage < 0.2 then
 			energyWarning = true
 			bgEnergyR = 1
@@ -233,6 +237,7 @@ function widget:DrawScreen()
 		end
 		
 		metalPercentage = mc / ms
+		if metalPercentage > 1 then metalPercentage = 1 end
 		if metalPercentage > 0.8 then
 			metalWarning = true
 			bgMetalR = 1
@@ -242,6 +247,7 @@ function widget:DrawScreen()
 			bgMetalR = 0
 			bgMetalG = 0
 		end
+		
 		generateDisplayList2()
 	end
 	if displayList2 ~= nil then
@@ -325,7 +331,6 @@ function generateDisplayList2()
 		
 		-- supply bar
 		r, g, b = 0, 0, 0
-		percentage = su / maxSupply
 		
 		if supplyWarning then
 			r = 1
@@ -345,7 +350,6 @@ function generateDisplayList2()
 		if not progressBars then
 			percentage = 1
 		end
-
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth*percentage,height/6)
 		
 		supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
