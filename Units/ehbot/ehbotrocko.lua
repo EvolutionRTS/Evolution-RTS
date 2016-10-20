@@ -5,9 +5,9 @@ local unitName                   = "ehbotrocko"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[6 Generator]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
-local supply					 = [[3]]
+local supply					 = [[10]]
 
 local projectiles				 = 3
 local weapon1Damage              = 10
@@ -29,7 +29,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 27,
+	buildCostMetal               = 40,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -161,7 +161,7 @@ local weaponDefs                 = {
 		soundHit                 = "explode5.wav",
 		startVelocity            = 500,
 		tolerance                = 10000,
-		turnrate                 = 6000,
+		turnrate                 = 8000,
 		predictBoost	         = 0.5,
 		turret                   = true,
 		weaponAcceleration       = 50,

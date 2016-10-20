@@ -5,11 +5,11 @@ local unitName                   = "ehbotpyro"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[6 Generator]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
-local supply					 = [[3]]
+local supply					 = [[9]]
 
-local weapon1Damage              = 10
+local weapon1Damage              = 5
 local weapon1AOE				 = 50
 --local projectiles				 = 5
 --local burst						 = 10
@@ -28,7 +28,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 27,
+	buildCostMetal               = 35,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,

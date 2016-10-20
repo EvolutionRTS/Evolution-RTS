@@ -5,9 +5,9 @@ local unitName                   = "ehbotthud"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[6 Generator]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
-local supply					 = [[3]]
+local supply					 = [[7]]
 
 local weapon1Damage              = 10
 local weapon1AOE				 = 150
@@ -143,6 +143,7 @@ local weaponDefs                 = {
 		avoidFeature 		   = false,
 		collideFriendly        = false,
 		collideFeature         = false,
+		cegTag				   = "dgun",
 		--burst				   = burst,
 		--burstrate			   = 0.1,
 		explosionGenerator     = "custom:genericshellexplosion-small",

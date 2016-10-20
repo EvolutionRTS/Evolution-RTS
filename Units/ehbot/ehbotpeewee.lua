@@ -5,9 +5,9 @@ local unitName                   = "ehbotpeewee"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[6 Generator]]
+local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
-local supply					 = [[3]]
+local supply					 = [[5]]
 
 local weapon1Damage              = 5
 local weapon1AOE				 = 100
@@ -27,7 +27,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 27,
+	buildCostMetal               = 22,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
