@@ -2,7 +2,7 @@ function widget:GetInfo()
     return {
         name = "Evo Resource Display",
         desc = "Displays economy parameters",
-        author = "Code_Man, CommonPlayer",
+        author = "Code_Man, CommonPlayer, Floris",
         date = "11/4/2016", -- modified by CommonPlayer on Oct 2016
         license = "MIT X11",
         layer = 1,
@@ -54,6 +54,8 @@ local bgmargin = 12
 local bgmargin2 = 6
 local posx, posy = vsx - width, vsy - height
 local tweakStartX, tweakStartY = 0, 0
+
+local modoptMincome = Spring.GetModOptions().mincome
 
 -- how long before metal income changes, in seconds (default 150s, or 2.5min)
 local metalIncomeTimer = 150
@@ -199,9 +201,9 @@ function widget:SetConfigData(data)
 end
 
 
-function widget:GameFrame(frame)
-	if displayList2 == nil or frame % 1 == 0 then	-- run once every x gameframes
-		
+local prevGameframe = 0
+function widget:DrawScreen()
+	if Spring.GetGameFrame() ~= prevGameframe then
 		-- check resource status first
 		myTeamID = Spring.GetMyTeamID()
 		
@@ -240,12 +242,8 @@ function widget:GameFrame(frame)
 			bgMetalR = 0
 			bgMetalG = 0
 		end
+		generateDisplayList2()
 	end
-	
-	generateDisplayList2()
-end
-
-function widget:DrawScreen()
 	if displayList2 ~= nil then
 		gl.CallList(displayList)
 		gl.CallList(displayList2)
@@ -256,6 +254,7 @@ function widget:Initialize()
 	if Spring.GetModOptions().basicincomeinterval ~= nil then
 		metalIncomeTimer = tonumber(Spring.GetModOptions().basicincomeinterval) * 60
 	end
+	self:ViewResize(gl.GetViewSizes())
 end
 
 
@@ -298,6 +297,10 @@ function generateDisplayList()
 		if (WG['guishader_api'] ~= nil) then
 			WG['guishader_api'].InsertRect(supplyOffset-(bgmargin*0.8), -(bgmargin*0.8), metalOffset+metalBarWidth+(bgmargin*0.8), height+(bgmargin*0.8), 'resources')
 		end
+		
+		gl.Text(yellow .. "Energy", energyOffset+textOffsetX, textOffsetY, FontSize, "on")
+		gl.Text(green .. "Supply", supplyOffset+textOffsetX, textOffsetY, FontSize, "on")
+		gl.Text(skyblue .. "Metal", metalOffset+textOffsetX, textOffsetY, FontSize, "on")
 	end)
 end
 
@@ -310,14 +313,14 @@ function generateDisplayList2()
 	displayList2 = gl.CreateList(function ()
 		-- draw background (black / gray / black / ...)
 		-- background flashes when the player messed up their eco
-		gl.Color(bgSupplyR,bgSupplyG,0,0.5)
+		gl.Color(bgSupplyR,bgSupplyG,0,0.4)
 		gl.Texture(barTexture)
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth,height)
 		
-		gl.Color(bgEnergyR,bgEnergyG,0,0.5)
+		gl.Color(bgEnergyR,bgEnergyG,0,0.4)
 		gl.TexRect(energyOffset,0,energyOffset+energyBarWidth,height)
 
-		gl.Color(bgMetalR,bgMetalG,0,0.5)
+		gl.Color(bgMetalR,bgMetalG,0,0.4)
 		gl.TexRect(metalOffset,0,metalOffset+metalBarWidth,height)
 		
 		-- supply bar
@@ -345,8 +348,8 @@ function generateDisplayList2()
 
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth*percentage,height/6)
 		
-		supplyStr = green .. "Supply: " .. white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ")"
-	  gl.Text(supplyStr, supplyOffset+textOffsetX, textOffsetY, FontSize, "on")
+		supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
+	  gl.Text(supplyStr, supplyOffset+supplyBarWidth, textOffsetY, FontSize, "onr")
 		
 		-- energy bar
 		r, g, b = 0, 0, 0
@@ -367,8 +370,8 @@ function generateDisplayList2()
 		gl.Texture(barTexture)
 		gl.TexRect(energyOffset,0,energyOffset+energyBarWidth*energyPercentage,height/6)
 		
-		energyStr = yellow .. "Energy: " .. green .. "+" .. tostring(math.round(ei)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ")"
-	  gl.Text(energyStr, energyOffset+textOffsetX, textOffsetY, FontSize, "on")
+		energyStr = green .. "+" .. tostring(math.round(ei)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
+	  gl.Text(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
 		
 		-- metal bar
 		r, g, b = 0, 0, 0
@@ -389,7 +392,7 @@ function generateDisplayList2()
 		gl.TexRect(metalOffset,0,metalOffset+metalBarWidth*metalPercentage,height/6)
 		
 		-- draw metal income timer
-		if Spring.GetModOptions().mincome ~= "disabled" then
+		if modoptMincome ~= "disabled" then
 			if mi ~= maxBasicIncome then
 				timeElapsed = Spring.GetGameSeconds()
 				percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
@@ -409,14 +412,15 @@ function generateDisplayList2()
 			end
 		end
 		
-		metalStr = skyblue .. "Metal: " .. orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ")"
-	  gl.Text(metalStr, metalOffset+textOffsetX, textOffsetY, FontSize, "on")
+		metalStr = orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ") "
+	  gl.Text(metalStr, metalOffset+metalBarWidth, textOffsetY, FontSize, "onr")
 	    
 	  gl.Texture(false)
 		gl.PopMatrix()
 	
   end)
 end
+
 function widget:ViewResize(newX,newY)
   vsx, vsy = newX, newY
 	widgetScale = (0.66 + (vsx*vsy / 13300000))
