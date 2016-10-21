@@ -9,8 +9,8 @@ local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
-local weapon1Damage              = 5
-local weapon1AOE				 = 100
+local weapon1Damage              = 10
+local weapon1AOE				 = 250
 local projectiles				 = 5
 local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
 
@@ -141,6 +141,7 @@ local weaponDefs                 = {
 		rgbColor               = "0 0 1",
 		rgbColor2              = "1 1 1",
 		explosionGenerator     = "custom:genericshellexplosion-medium-sparks-burn",
+		edgeEffectiveness	   = 1,
 		energypershot          = energycosttofire,
 		duration			   = 0.25,
 		name                   = "E.M.G.",
