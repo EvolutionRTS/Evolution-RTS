@@ -625,6 +625,9 @@ if (gadgetHandler:IsSyncedCode()) then
 						dom.dominator = owner
 						if prevDominator ~= owner or not dom.dominationTime then
 							dom.dominationTime = f + 30 * dominationScoreTime
+							Spring.Echo([[--------------------------------------------]])
+							Spring.Echo([[A domination will be scored in 30 seconds!!!]])
+							Spring.Echo([[--------------------------------------------]])
 						end
 						break
 					end
@@ -638,6 +641,9 @@ if (gadgetHandler:IsSyncedCode()) then
 						score[dom.dominator] = score[dom.dominator] + Spring.GetModOptions().dominationscore
 						if score[dom.dominator] >= limitScore then
 							Winner(dom.dominator)
+							Spring.Echo([[-------------------------------]])
+							Spring.Echo([[A domination has been scored!!!]])
+							Spring.Echo([[-------------------------------]])
 						end
 					end
 				end
