@@ -10,7 +10,7 @@ local armortype					 = [[light]]
 local supply					 = [[5]]
 
 local weapon1Damage              = 10
-local weapon1AOE				 = 250
+local weapon1AOE				 = 10
 local projectiles				 = 5
 local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
 
@@ -144,6 +144,8 @@ local weaponDefs                 = {
 		edgeEffectiveness	   = 1,
 		energypershot          = energycosttofire,
 		duration			   = 0.25,
+		impulseFactor          = 0,
+		interceptedByShieldType  = 4,
 		name                   = "E.M.G.",
 		noExplode			   = true,
 		range                  = 300,

@@ -134,7 +134,6 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 
 local weaponDefs                 = {
 	plasmacannon                	= {
-		accuracy			   = 500,
 		AreaOfEffect           = weapon1AOE,
 		avoidFriendly          = false,
 		avoidFeature 		   = false,
@@ -148,6 +147,8 @@ local weaponDefs                 = {
 		energypershot          = energycosttofire,
 		--duration			   = 0.25,
 		highTrajectory		   = 2,
+		impulseFactor          = 0,
+		interceptedByShieldType  = 4,
 		name                   = "Plasma Cannon",
 		--noExplode			   = true,
 		range                  = 425,

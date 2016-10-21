@@ -24,25 +24,25 @@ local damageClasses = {
 			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
-			BUILDING 	= 0.75,
+			BUILDING 	= 0.5,
 		},
 		ehbotthud	= {
 			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
-			BUILDING 	= 0.75,
+			BUILDING 	= 0.5,
 		},
 		ehbotpyro	= {
 			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
-			BUILDING 	= 0.75,
+			BUILDING 	= 0.5,
 		},
 		ehbotrocko	= {
 			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
-			BUILDING 	= 0.75,
+			BUILDING 	= 0.5,
 		},
 		
 		-- Start Hovers
