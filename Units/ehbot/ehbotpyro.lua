@@ -59,7 +59,7 @@ local unitDef                    = {
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT3",
-	name                         = "Rocko",
+	name                         = "Pyro",
 	noChaseCategory              = "VTOL",
 	objectName                   = "ehbotpyro.s3o",
 	script						 = "ehbotpyro_lus.lua",
@@ -124,9 +124,6 @@ local unitDef                    = {
 		factionname	             = "outer_colonies",  
 		helptext                 = [[Armortype: ]] ..armortype.. [[ 
  
-45 Damage vs Light/Armored
-60 Damage vs Building 
- 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
@@ -166,7 +163,8 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 400,
 		customparams             = {
-			damagetype		     = "eallterranarchidflame",  
+			damagetype		     = "ehbotpyro",  
+			single_hit		 	 = true,
 		},      
 		damage                   = {
 			default              = weapon1Damage,

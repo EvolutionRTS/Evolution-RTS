@@ -122,9 +122,6 @@ local unitDef                    = {
 		factionname	             = "outer_colonies",  
 		helptext                 = [[Armortype: ]] ..armortype.. [[ 
  
-45 Damage vs Light/Armored
-60 Damage vs Building 
- 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
@@ -161,6 +158,10 @@ local weaponDefs                 = {
 		turret                 = true,
 		weaponTimer            = 1,
 		weaponVelocity         = 1200,
+		customparams             = {
+			damagetype		     = "ehbotpeewee",
+			single_hit		 	 = true,
+		},      
 		damage                   = {
 			default              = weapon1Damage,
 		},

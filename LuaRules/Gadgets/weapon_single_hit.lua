@@ -1,3 +1,10 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+if not gadgetHandler:IsSyncedCode() then
+	return
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 function gadget:GetInfo()
 	return {
 		name = "Single-Hit Weapon",
@@ -12,10 +19,7 @@ end
 
 local spGetGameFrame = Spring.GetGameFrame
 
------- SYNCED -------------------------------------------------------
-if (gadgetHandler:IsSyncedCode()) then 
-
-local isNewEngine = not (Game.version:find('91.0') and (Game.version:find('91.0.1') == nil))
+local wantedWeaponList = {}
 
 local singleHitWeapon = {}
 local singleHitUnitId = {}
@@ -24,15 +28,17 @@ local singleHitMultiWeapon = {}
 local singleHitProjectile = {}
 
 function gadget:Initialize()
-	for i=1,#WeaponDefs do
-		local wd = WeaponDefs[i]
+	for wdid = 1, #WeaponDefs do
+		local wd = WeaponDefs[wdid]
 		if wd.customParams then
 			if wd.customParams.single_hit then
 				singleHitWeapon[wd.id] = true;
+				wantedWeaponList[#wantedWeaponList + 1] = wdid
 			end
-			if isNewEngine and wd.customParams.single_hit_multi then
+			if wd.customParams.single_hit_multi then
 				Script.SetWatchWeapon(wd.id, true)
 				singleHitMultiWeapon[wd.id] = true;
+				wantedWeaponList[#wantedWeaponList + 1] = wdid
 			end
 		end
 	end
@@ -51,6 +57,9 @@ function gadget:ProjectileDestroyed(proID)
 	end
 end
 
+function gadget:UnitPreDamaged_GetWantedWeaponDef()
+	return wantedWeaponList
+end
 
 function gadget:UnitPreDamaged(unitID,unitDefID,_, damage,_, weaponDefID,attackerID,_,_, projectileID)
 	if singleHitWeapon[weaponDefID] then
@@ -68,7 +77,6 @@ function gadget:UnitPreDamaged(unitID,unitDefID,_, damage,_, weaponDefID,attacke
 				end
 			end
 			return damage 
-	
 		end
 	end
 	
@@ -83,10 +91,5 @@ function gadget:UnitPreDamaged(unitID,unitDefID,_, damage,_, weaponDefID,attacke
 		end
 		return damage 
 	end
-	
 	return damage;
 end
-
-	
-end 
------ END SYNCED ---------------------------------------------------
