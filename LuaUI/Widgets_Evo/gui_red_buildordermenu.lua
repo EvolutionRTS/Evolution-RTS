@@ -459,8 +459,14 @@ local function UpdateGrid(g,cmds,ordertype)
 				icon.texture = cmd.texture
 			end
 		end
-		if (cmd.disabled) then
-			icon.texturecolor = {0.5,0.5,0.5,1}	
+		
+		local myTeamID = Spring.GetMyTeamID()
+		local disableString = "disallowed_" .. (-cmd.id)
+		local powerBlocked = cmd.disabled
+		local supplyBlocked = Spring.GetTeamRulesParam(myTeamID, disableString) == 1
+		
+		if (powerBlocked or supplyBlocked) then
+			icon.texturecolor = {0.5,0.5,0.5,1}
 		else
 			icon.texturecolor = {1,1,1,1}
 		end
@@ -477,8 +483,8 @@ local function UpdateGrid(g,cmds,ordertype)
 		if (ordertype == 1) then --build orders
 			icon.texture = "#"..cmd.id*-1
 			if (cmd.params[1]) then
-				icon.options = "o"
-				icon.caption = "\n\n"..cmd.params[1].."        "
+				icon.options = "bs"
+				icon.caption = "\n"..cmd.params[1].."        \n"
 			else
 				icon.caption = nil
 			end
@@ -495,29 +501,35 @@ local function UpdateGrid(g,cmds,ordertype)
 			local s, e = string.find(cmd.tooltip, "Metal cost %d*")
 			local metalCost = string.sub(cmd.tooltip, s + 11, e)
 			local s, e = string.find(cmd.tooltip, "Energy cost %d*")
-			local energyCost = string.sub(cmd.tooltip, s + 11, e)
+			local energyCost = string.sub(cmd.tooltip, s + 12, e)
 			--local metalColor = "\255\136\197\226"
 			
 			local text = g.texts[i]
 			text.px = icon.px
 			text.py = icon.py
-			local captionColor = white
+			if powerBlocked then
+				text.caption = red.."\nNeed\ngenerator\n\n"
+			elseif supplyBlocked then
+				text.caption = red.."\nNeed\nsupply\n\n"
+			else
+				local captionColor = white
 			
 -- If you don't want to display the metal or energy cost on the unit buildicon, then you can disable it here
-			if i <= 15 then
-				if building == 0 then
-					captionColor = skyblue
+				if i <= 15 then
+					if building == 0 then
+						captionColor = skyblue
+					end
+					text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+					text.options = "bs"
+				elseif i <= 30 then
+					if building == 1 then
+						captionColor = skyblue
+					end
+					text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+					text.options = "bs"
+				else
+					text.caption = nil
 				end
-				text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
-				text.options = "bs"
-			elseif i <= 30 then
-				if building == 1 then
-					captionColor = skyblue
-				end
-				text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
-				text.options = "bs"
-			else
-				text.caption = nil
 			end
 		else
 			if buttonTexture ~= nil then
@@ -791,6 +803,7 @@ function widget:CommandsChanged()
 end
 local sec = 0
 local guishaderCheckInterval = 1
+local oldSupplyMax = 0
 function widget:Update(dt)
 	sec=sec+dt
 	if (sec>1/guishaderCheckInterval) then
@@ -821,6 +834,14 @@ function widget:Update(dt)
 			onNewCommands({},{}) --flush
 			updatehax2 = false
 		end
+	end
+	
+	-- updates UI when supply count changed
+	local myTeamID = Spring.GetMyTeamID()
+	local newSupplyMax = Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0
+	if oldSupplyMax ~= newSupplyMax then
+		onNewCommands(GetCommands())
+		oldSupplyMax = newSupplyMax
 	end
 end
 
