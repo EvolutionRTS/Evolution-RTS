@@ -9,8 +9,8 @@ local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[9]]
 
-local weapon1Damage              = 10
-local weapon1AOE				 = 10
+local weapon1Damage              = 7.5
+local weapon1AOE				 = 0
 --local projectiles				 = 5
 --local burst						 = 10
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
