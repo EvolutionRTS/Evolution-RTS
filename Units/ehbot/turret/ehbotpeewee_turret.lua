@@ -1,12 +1,12 @@
--- UNITDEF -- ehbotpeewee --
+-- UNITDEF -- ehbotpeewee_turret --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ehbotpeewee"
+local unitName                   = "ehbotpeewee_turret"
 
 --------------------------------------------------------------------------------
 
 local tech						 = [[1 Generator]]
-local armortype					 = [[light]]
+local armortype					 = [[armored]]
 local supply					 = [[5]]
 
 local weapon1Damage              = 25
@@ -37,30 +37,31 @@ local unitDef                    = {
 	canMove                      = true,
 	canPatrol                    = true,
 	canstop                      = "1",
-	category                     = "LIGHT NOTAIR RAID",
+	category                     = "ARMORED NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Light Raider • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Armored Anti-Raider Turret • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "smallExplosionGenericBlue",
+	floater			              = true,
 	footprintX                   = 3,
 	footprintZ                   = 3,
 	iconType                     = "raider",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 200,
+	maxDamage                    = 700,
 	maxSlope                     = 26,
-	maxVelocity                  = 4.5,
-	maxReverseVelocity           = 1,
-	maxWaterDepth                = 10,
+	maxVelocity                  = 0.001,
+	maxReverseVelocity           = 0.001,
+	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT3",
-	name                         = "PeeWee",
+	name                         = "PeeWee Turret",
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotpeewee2.s3o",
-	script						 = "ehbotpeewee_lus.lua",
+	objectName                   = "ehbotpeewee_turret.s3o",
+	script						 = "ehbotpeewee_turret_lus.lua",
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "smallExplosionGenericBlue",

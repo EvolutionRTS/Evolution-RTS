@@ -182,6 +182,52 @@ Lvl 2]],
 			text = 'Morph into a tech level 2 factory.',
 		},
 	},	
+
+	ehbotengineer = 	{
+		{
+			into = 'ehbotengineer_turret',
+			time = 20,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret.',
+		},
+	},	
+	ehbotpeewee = 	{
+		{
+			into = 'ehbotpeewee_turret',
+			time = 20,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret.',
+		},
+	},	
+	ehbotthud = 	{
+		{
+			into = 'ehbotthud_turret',
+			time = 20,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret.',
+		},
+	},	
+	ehbotsniper = 	{
+		{
+			into = 'ehbotsniper_turret',
+			time = 20,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret.',
+		},
+	},	
+	ehbotrocko = 	{
+		{
+			into = 'ehbotrocko_turret',
+			time = 20,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret.',
+		},
+	},	
 }
 
 --

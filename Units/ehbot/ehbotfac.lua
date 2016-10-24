@@ -75,7 +75,7 @@ local unitDef                     = {
 		"ehbotengineer",
 		"ehbotpeewee",
 		"ehbotthud",
-		"ehbotpyro",
+		"ehbotsniper",
 		"ehbotrocko",
 	},
 	sounds                        = {

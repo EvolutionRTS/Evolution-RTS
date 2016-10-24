@@ -1,19 +1,20 @@
--- UNITDEF -- ehbotpyro --
+-- UNITDEF -- ehbotrocko_turret --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ehbotpyro"
+local unitName                   = "ehbotrocko_turret"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[1 Generator]]
-local armortype					 = [[light]]
-local supply					 = [[9]]
+local tech						 = [[3 Generator]]
+local armortype					 = [[armored]]
+local supply					 = [[15]]
 
-local weapon1Damage              = 7.5
-local weapon1AOE				 = 0
+local burst				 		 = 10
+local weapon1Damage              = 100
+local weapon1AOE				 = 250
 --local projectiles				 = 5
 --local burst						 = 10
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * burst * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -28,7 +29,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 35,
+	buildCostMetal               = 40,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -38,13 +39,14 @@ local unitDef                    = {
 	canMove                      = true,
 	canPatrol                    = true,
 	canstop                      = "1",
-	category                     = "LIGHT NOTAIR RAID",
+	category                     = "ARMORED NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Light Raider • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Armored Tank Destroyer Artillery Turret • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
-	explodeAs                    = "mediumExplosionGenericPurple",
+	explodeAs                    = "mediumExplosionGenericRed",
+	floater			              = true,
 	footprintX                   = 3,
 	footprintZ                   = 3,
 	--highTrajectory		   		 = 2,
@@ -52,22 +54,22 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 200,
+	maxDamage                    = 750,
 	maxSlope                     = 26,
-	maxVelocity                  = 10,
-	maxReverseVelocity           = 2,
-	maxWaterDepth                = 10,
+	maxVelocity                  = 0.001,
+	maxReverseVelocity           = 0.001,
+	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT3",
-	name                         = "Pyro",
+	name                         = "Rocko Turret",
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotpyro.s3o",
-	script						 = "ehbotpyro_lus.lua",
+	objectName                   = "ehbotrocko_turret.s3o",
+	script						 = "ehbotrocko_turret_lus.lua",
 	radarDistance                = 0,
 	repairable		             = false,
-	selfDestructAs               = "mediumExplosionGenericPurple",
+	selfDestructAs               = "mediumExplosionGenericRed",
 	side                         = "CORE",
-	sightDistance                = 500,
+	sightDistance                = 1400,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -76,14 +78,14 @@ local unitDef                    = {
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = "ehbotpyro",
+	unitname                     = unitname,
 	--usePieceCollisionVolumes	 = true,
 	upright                      = true,
 	workerTime                   = 0,
 
 	sfxtypes                     = {
 		explosiongenerators      = {
-			"custom:flamethrowerrange500",
+			"custom:gdhcannon",
 			"custom:dirt",
 			"custom:blacksmoke",
 			"custom:airfactoryhtrail",
@@ -105,7 +107,7 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "flamethrower",
+			def                  = "rockets",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
 			badTargetCategory    = "VTOL ARMORED WALL",
@@ -133,41 +135,44 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 local weaponDefs                 = {
-	flamethrower                 = {
-		
-		accuracy                 = 0,
+	rockets             = {
+		accuracy				 = 1000,
 		AreaOfEffect             = weapon1AOE,
-		avoidFeature             = false,
 		avoidFriendly            = false,
-		collideFeature           = false,
+		avoidFeature             = false,
 		collideFriendly          = false,
-		edgeEffectiveness	     = 1,
-		explosionGenerator       = "custom:burnblack",
-		coreThickness            = 0,
-		duration                 = 1,
+		collideFeature           = false,
+		burst					 = burst,
+		burstrate				 = 0.2,
+		cegTag                   = "missiletrailsmall",
+		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = energycosttofire,
-		fallOffRate              = 1,
-		fireStarter              = 50,
+		fireStarter              = 70,
+		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		impulseFactor            = 0,
-		soundstart               = "flamethrower1.wav",
-		noexplode				 = true,
-		minintensity             = 1,
-		impulseFactor            = 0,
-		name                     = "Something with Flames",
-		range                    = 500,
-		reloadtime               = 0.1,
-		WeaponType               = [[LaserCannon]],
-		rgbColor                 = "0 0 0",
-		rgbColor2                = "0 0 0",
-		thickness                = 0,
-		tolerance                = 1000,
+		model                    = "missilesmalllauncher.s3o",
+		name                     = "Rockets",
+		range                    = 1400,
+		reloadtime               = 10,
+		weaponType		         = "MissileLauncher",
+		smokeTrail               = false,
+		soundStart               = "emediumtankfire2.wav",
+		soundHit                 = "explode5.wav",
+		startVelocity            = 250,
+		tolerance                = 8000,
+		turnrate                 = 0,
 		turret                   = true,
-		weaponVelocity           = 400,
+		weaponAcceleration       = 50,
+		flightTime               = 5,
+		trajectoryHeight         = 1.5,
+		weaponVelocity           = 500,
+		wobble 					 = 2000,
 		customparams             = {
-			damagetype		     = "ehbotpyro",  
-			single_hit		 	 = true,
-		},      
+			damagetype		     = "ehbotrocko",  
+
+			--Upgrades--
+			upgradeClass		 = "groundweapons",
+		},     
 		damage                   = {
 			default              = weapon1Damage,
 		},

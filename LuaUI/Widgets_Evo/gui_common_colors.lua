@@ -35,7 +35,7 @@ colors = {
 
 --[[
 	{'Coffee',			'#6F4E37'};
-	{'Teal', 			'#008080'};
+	{'Teal', 			'#009B95'};
 	{'Salmon', 			'#FA8072'};
 	{'Plum', 			'#DDA0DD'};
 	{'Aquamarine', 		'#7FFFD4'};
@@ -45,16 +45,18 @@ colors = {
 	{'NeonPink',		'#F535AA'};
 	{'Blue',			'#1144AA'};
 	{'Cyan', 			'#00FFFF'};
-	{'Parchment',		'#FFFFC2'};
+	{'Parchment',		'#ffda61'};
 	{'Indigo', 			'#4B0082'};
 	{'Red', 			'#FF0000'};
-	{'Orange', 			'#FFA500'};
+	{'Orange', 			'#ff6600'};
 	{'Lime', 			'#00FF00'};
 	{'Maroon', 			'#800000'};
 	{'DarkGreen',		'#006400'};
 	{'Green',			'#00CC00'};
 	{'Mustard', 		'#FFDB58'};
 	{'Sienna', 			'#A0522D'};
+	{'Purple',			'#3914AF'};
+	{'Pink',			'#C9007A'};
 ]]--
 
 	{'Orange',			'#ff6600'};
@@ -66,8 +68,6 @@ colors = {
 	{'Blue',			'#1144AA'};
 	{'Pink',			'#C9007A'};
 	{'Green',			'#00CC00'};
-
-	
 }
 
 local colorNames = {}

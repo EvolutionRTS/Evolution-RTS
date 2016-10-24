@@ -34,6 +34,7 @@ end
 
 local repairUnits= {
 	[UnitDefNames.eorb.id] = {radius=1000,strength=2.0},
+	[UnitDefNames.eorb.id] = {radius=500,strength=2.0},
 }
 
 local delayAfterHit=150             --Frames after a hit that no repairs will take place in

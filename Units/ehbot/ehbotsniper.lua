@@ -1,18 +1,19 @@
--- UNITDEF -- ehbotpeewee --
+-- UNITDEF -- ehbotsniper --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ehbotpeewee"
+local unitName                   = "ehbotsniper"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[1 Generator]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[light]]
-local supply					 = [[5]]
+local supply					 = [[9]]
 
-local weapon1Damage              = 25
-local weapon1AOE				 = 50
-local projectiles				 = 5
-local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
+local weapon1Damage              = 500
+local weapon1AOE				 = 0
+--local projectiles				 = 5
+--local burst						 = 10
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -27,7 +28,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 22,
+	buildCostMetal               = 35,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -39,33 +40,34 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Light Raider • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Light Tank Sniper • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
-	explodeAs                    = "smallExplosionGenericBlue",
+	explodeAs                    = "mediumExplosionGenericPurple",
 	footprintX                   = 3,
 	footprintZ                   = 3,
+	--highTrajectory		   		 = 2,
 	iconType                     = "raider",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
 	maxDamage                    = 200,
 	maxSlope                     = 26,
-	maxVelocity                  = 4.5,
+	maxVelocity                  = 2.5,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT3",
-	name                         = "PeeWee",
+	name                         = "Sniper",
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotpeewee2.s3o",
-	script						 = "ehbotpeewee_lus.lua",
+	objectName                   = "ehbotsniper.s3o",
+	script						 = "ehbotsniper_lus.lua",
 	radarDistance                = 0,
 	repairable		             = false,
-	selfDestructAs               = "smallExplosionGenericBlue",
+	selfDestructAs               = "mediumExplosionGenericPurple",
 	side                         = "CORE",
-	sightDistance                = 650,
+	sightDistance                = 900,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -103,7 +105,7 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "flashweapon",
+			def                  = "sniper",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
 			badTargetCategory    = "VTOL ARMORED WALL",
@@ -131,44 +133,88 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 local weaponDefs                 = {
-	flashweapon                = {
-		AreaOfEffect           = weapon1AOE,
-		avoidFriendly          = false,
-		avoidFeature 		   = false,
-		collideFriendly        = false,
-		collideFeature         = false,
-		cegTag                 = "railgun",
-		rgbColor               = "0 0 1",
-		rgbColor2              = "1 1 1",
-		explosionGenerator     = "custom:genericshellexplosion-medium-sparks-burn",
-		edgeEffectiveness	   = 1,
-		energypershot          = energycosttofire,
-		duration			   = 0.25,
-		impulseFactor          = 0,
-		interceptedByShieldType  = 4,
-		name                   = "E.M.G.",
-		noExplode			   = true,
-		range                  = 650,
-		reloadtime             = 0.5,
-		projectiles			   = projectiles,
-		weaponType		       = "LaserCannon",
-		soundStart             = "shotgun-reload.wav",
-		soundTrigger           = true,
-		sprayAngle             = 500,
-		texture1               = "shot",
-		texture2               = "empty",
-		tolerance              = 10000,
-		turret                 = true,
-		weaponTimer            = 1,
-		weaponVelocity         = 1200,
-		customparams             = {
-			damagetype		     = "ehbotpeewee",
-			single_hit		 	 = true,
-		},      
-		damage                   = {
-			default              = weapon1Damage,
+	sniper           = {
+		
+		AreaOfEffect              = weapon1AOE,
+		avoidFeature              = false,
+		avoidFriendly             = false,
+		beamTime                  = 0.1,
+		
+		collideFeature            = false,
+		collideFriendly           = false,
+		coreThickness             = 0.6,
+		--	cegTag                = "mediumcannonweapon3",
+		duration                  = 0.5,
+		energypershot             = energycosttofire,
+		explosionGenerator        = "custom:genericshellexplosion-medium",
+		fallOffRate               = 1,
+		fireStarter               = 100,
+		impulseFactor             = 0,
+		interceptedByShieldType   = 4,
+		
+		minintensity              = "1",
+		name                      = "Laser",
+		range                     = 900,
+		reloadtime                = 5,
+		WeaponType                = "LaserCannon",
+		rgbColor                  = "0 0.5 1",
+		rgbColor2                 = "1 1 1",
+		soundTrigger              = true,
+		soundstart                = "snipershot.wav",
+		soundHit                  = "explode5.wav",
+		texture1                  = "shot",
+		texture2                  = "empty",
+		thickness                 = 9,
+		tolerance                 = 1000,
+		turret                    = true,
+		weaponVelocity            = 3000,
+		customparams              = {
+			damagetype		      = "ehbotsniper",  
+		}, 
+		damage                    = {
+			default               = weapon1Damage,
 		},
 	},
+
+	-- flamethrower                 = {
+		
+		-- accuracy                 = 0,
+		-- AreaOfEffect             = weapon1AOE,
+		-- avoidFeature             = false,
+		-- avoidFriendly            = false,
+		-- collideFeature           = false,
+		-- collideFriendly          = false,
+		-- edgeEffectiveness	     = 1,
+		-- explosionGenerator       = "custom:burnblack",
+		-- coreThickness            = 0,
+		-- duration                 = 1,
+		-- energypershot            = energycosttofire,
+		-- fallOffRate              = 1,
+		-- fireStarter              = 50,
+		-- interceptedByShieldType  = 4,
+		-- impulseFactor            = 0,
+		-- soundstart               = "flamethrower1.wav",
+		-- noexplode				 = true,
+		-- minintensity             = 1,
+		-- impulseFactor            = 0,
+		-- name                     = "Something with Flames",
+		-- range                    = 500,
+		-- reloadtime               = 0.1,
+		-- WeaponType               = [[LaserCannon]],
+		-- rgbColor                 = "0 0 0",
+		-- rgbColor2                = "0 0 0",
+		-- thickness                = 0,
+		-- tolerance                = 1000,
+		-- turret                   = true,
+		-- weaponVelocity           = 400,
+		-- customparams             = {
+			-- damagetype		     = "ehbotpyro",  
+			-- single_hit		 	 = true,
+		-- },      
+		-- damage                   = {
+			-- default              = weapon1Damage,
+		-- },
+	-- },
 }
 unitDef.weaponDefs               = weaponDefs
 
