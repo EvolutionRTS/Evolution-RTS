@@ -9,7 +9,7 @@ local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
-local weapon1Damage              = 12.5
+local weapon1Damage              = 15
 local weapon1AOE				 = 25
 local projectiles				 = 5
 local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
@@ -52,7 +52,7 @@ local unitDef                    = {
 	leaveTracks                  = false,
 	maxDamage                    = 200,
 	maxSlope                     = 26,
-	maxVelocity                  = 4.5,
+	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
