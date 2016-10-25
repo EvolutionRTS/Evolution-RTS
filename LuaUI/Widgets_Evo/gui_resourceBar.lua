@@ -60,6 +60,9 @@ local modoptMincome = Spring.GetModOptions().mincome
 -- how long before metal income changes, in seconds (default 150s, or 2.5min)
 local metalIncomeTimer = 150
 
+-- how long before metal income stops increasing, in seconds (default 60s, or 10min, 4 times the metalIncomeTimer)
+local incomeProgressionEndTimer = metalIncomeTimer * 4 + 5
+
 
 --Spring.GetTeamResources
 -- ( number teamID, string "metal" | "energy" ) ->
@@ -260,6 +263,15 @@ function widget:Initialize()
 	if Spring.GetModOptions().basicincomeinterval ~= nil then
 		metalIncomeTimer = tonumber(Spring.GetModOptions().basicincomeinterval) * 60
 	end
+	
+	local incomePerInterval = 3
+	if Spring.GetModOptions().basicincome ~= nil then
+		incomePerInterval = Spring.GetModOptions().basicincome
+	end
+	local totalSteps = math.ceil(maxBasicIncome / incomePerInterval) - 1
+	local incomeProgressionEndTimer = totalSteps * metalIncomeTimer
+	incomeProgressionEndTimer = incomeProgressionEndTimer + 5   -- five extra seconds to ensure it ends properly
+	
 	self:ViewResize(gl.GetViewSizes())
 end
 
@@ -397,8 +409,8 @@ function generateDisplayList2()
 		
 		-- draw metal income timer
 		if modoptMincome ~= "disabled" then
-			if mi ~= maxBasicIncome then
-				timeElapsed = Spring.GetGameSeconds()
+			timeElapsed = Spring.GetGameSeconds()
+			if timeElapsed < incomeProgressionEndTimer then
 				percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
 				gl.Color(1,0.5,0,1)
 				gl.Texture(barTexture)
