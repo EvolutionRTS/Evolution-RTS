@@ -6,7 +6,7 @@ local unitName                   = "ehbotthud_turret"
 --------------------------------------------------------------------------------
 
 local tech						 = [[1 Generator]]
-local armortype					 = [[armored]]
+local armortype					 = [[building]]
 local supply					 = [[7]]
 
 local weapon1Damage              = 25
@@ -40,7 +40,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Armored Tank Destroyer Turret • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Tank Destroyer Turret • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
