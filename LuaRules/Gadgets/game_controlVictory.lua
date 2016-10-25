@@ -119,14 +119,16 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		key    = "numberofcontrolpoints",
 		name   = "Set number of Control Points on the map",
 		desc   = "Sets the number of control points on the map and scales the total score amount to match. Has no effect if Preset map configs are enabled.",		
-		type='number',
-		def="disabled",
 		section= "controlvictoryoptions",
-		def    = 7,
-		min    = 7,
-		max    = 25,
-		step   = 6,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
+		type="list",
+		def="7",
+		section= "controlvictoryoptions",
+		items={
+			{key="7", name="7", desc=""},
+			{key="13", name="13", desc=""},
+			{key="19", name="19", desc=""},
+			{key="25", name="25", desc=""},
+		}
     },
 	{
 		key    = "usemapconfig",
@@ -147,7 +149,7 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		type   = 'number',
 		section= 'controlvictoryoptions',
 		def    = 500,
-		min    = 100,
+		min    = 250,
 		max    = 1000,
 		step   = 25,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
@@ -315,7 +317,7 @@ local energyPerPoint = tonumber(Spring.GetModOptions().energyperpoint) or 0
 
 local moveSpeed =.5
 
-local numberOfControlPoints = Spring.GetModOptions().numberofcontrolpoints or 7
+local numberOfControlPoints = tonumber(Spring.GetModOptions().numberofcontrolpoints) or 7
 local startTime = tonumber(Spring.GetModOptions().starttime) or 0 -- The time when capturing can start
 local tugofWarModifier = tonumber(Spring.GetModOptions().tugofwarmodifier) or 2 -- Radius around a point in which to capture it
 

@@ -192,14 +192,16 @@ local options= {
 		key    = "numberofcontrolpoints",
 		name   = "Set number of Control Points on the map",
 		desc   = "Sets the number of control points on the map and scales the total score amount to match. Has no effect if Preset map configs are enabled.",		
-		type='number',
-		def="disabled",
 		section= "controlvictoryoptions",
-		def    = 7,
-		min    = 7,
-		max    = 25,
-		step   = 6,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
+		type="list",
+		def="7",
+		section= "controlvictoryoptions",
+		items={
+			{key="7", name="7", desc=""},
+			{key="13", name="13", desc=""},
+			{key="19", name="19", desc=""},
+			{key="25", name="25", desc=""},
+		}
     },
 	{
 		key    = "usemapconfig",
