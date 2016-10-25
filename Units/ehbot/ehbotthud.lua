@@ -9,7 +9,7 @@ local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[7]]
 
-local weapon1Damage              = 25
+local weapon1Damage              = 15
 local weapon1AOE				 = 250
 --local projectiles				 = 5
 --local burst						 = 102
@@ -153,7 +153,7 @@ local weaponDefs                 = {
 		name                   = "Plasma Cannon",
 		--noExplode			   = true,
 		range                  = 700,
-		reloadtime             = 0.25,
+		reloadtime             = 0.5,
 		--projectiles			   = projectiles,
 		weaponType		       = "Cannon",
 		soundStart             = "bruisercannon.wav",
