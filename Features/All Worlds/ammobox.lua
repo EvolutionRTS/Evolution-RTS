@@ -18,6 +18,7 @@ local featureDef	=	{
 	reclaimable				=false,
 	autoreclaimable				=false,
 	indestructible		= true,
+	smokeTime			= 0,
 --	nodrawundergray				="1.0",
 
   customParams = {

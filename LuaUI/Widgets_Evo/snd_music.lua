@@ -48,10 +48,10 @@ local fadeVol
 local curTrack	= "no name"
 local songText	= "no name"
 
-local warTracks		=	VFS.DirList('music/war/', '*.ogg')
-local peaceTracks	=	VFS.DirList('music/peace/', '*.ogg')
-local victoryTracks	=	VFS.DirList('music/victory/', '*.ogg')
-local defeatTracks	=	VFS.DirList('music/defeat/', '*.ogg')
+local warTracks		=	VFS.DirList('LuaUI/Widgets_Evo/music/war/', '*.ogg')
+local peaceTracks	=	VFS.DirList('LuaUI/Widgets_Evo/music/peace/', '*.ogg')
+local victoryTracks	=	VFS.DirList('LuaUI/Widgets_Evo/music/victory/', '*.ogg')
+local defeatTracks	=	VFS.DirList('LuaUI/Widgets_Evo/music/defeat/', '*.ogg')
 
 local firstTime = false
 local wasPaused = false

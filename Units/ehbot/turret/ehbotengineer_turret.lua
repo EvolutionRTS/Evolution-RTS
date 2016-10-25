@@ -5,7 +5,7 @@ local unitName                   = "ehbotengineer_turret"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal			 = 40
+local buildCostMetal			 = 90
 local maxDamage					 = 1100
 
 local armortype					 = [[armored]]

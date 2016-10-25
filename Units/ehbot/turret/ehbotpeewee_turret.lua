@@ -9,8 +9,8 @@ local tech						 = [[1 Generator]]
 local armortype					 = [[armored]]
 local supply					 = [[5]]
 
-local weapon1Damage              = 25
-local weapon1AOE				 = 50
+local weapon1Damage              = 12.5
+local weapon1AOE				 = 25
 local projectiles				 = 5
 local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
 
@@ -27,7 +27,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 22,
+	buildCostMetal               = 72,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
