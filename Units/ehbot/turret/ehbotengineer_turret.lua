@@ -60,6 +60,7 @@ local unitDef                    = {
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT3",
 	moveState			         = "2",
+	pushResistant				 = true,
 	name                         = "The Lifter Turret",
 	objectName                   = "ehbotengineer_turret.s3o",
 	script			             = "ehbotengineer_turret_lus.lua",

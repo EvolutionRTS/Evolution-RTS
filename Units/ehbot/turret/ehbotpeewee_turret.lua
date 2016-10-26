@@ -58,6 +58,7 @@ local unitDef                    = {
 	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT3",
+	pushResistant				 = true,
 	name                         = "A.K. Turret",
 	noChaseCategory              = "VTOL",
 	objectName                   = "ehbotpeewee_turret.s3o",
