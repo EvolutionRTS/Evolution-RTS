@@ -284,7 +284,7 @@ local options= {
 		def    = 0,
 		min    = 0,
 		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
+		step   = 0.1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 		{
@@ -296,7 +296,7 @@ local options= {
 		def    = 0,
 		min    = 0,
 		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
+		step   = 0.1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 		{

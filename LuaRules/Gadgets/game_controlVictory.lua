@@ -211,7 +211,7 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		def    = 0,
 		min    = 0,
 		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
+		step   = 0.1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 		{
@@ -223,7 +223,7 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		def    = 0,
 		min    = 0,
 		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
+		step   = 0.1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 		{
