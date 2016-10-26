@@ -11,7 +11,8 @@ local supply					 = [[15]]
 
 local burst				 		 = 10
 local weapon1Damage              = 100
-local weapon1AOE				 = 250
+local weapon1AOE				 = 50
+local reloadTime				 = 25
 --local projectiles				 = 5
 --local burst						 = 10
 local energycosttofire			 = weapon1Damage / 10 * burst * ((weapon1AOE / 1000) + 1)
@@ -109,7 +110,7 @@ local unitDef                    = {
 			def                  = "rockets",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
-			onlyTargetCategory    = "LIGHT ARMORED BUILDING",
+			onlyTargetCategory    = "NOTAIR BUILDING",
 			badTargetCategory	  = "BUILDING",
 		},
 	},
@@ -153,7 +154,7 @@ local weaponDefs                 = {
 		model                    = "missilesmalllauncher.s3o",
 		name                     = "Rockets",
 		range                    = 1400,
-		reloadtime               = 15,
+		reloadtime               = reloadTime,
 		weaponType		         = "MissileLauncher",
 		smokeTrail               = false,
 		soundStart               = "emediumtankfire2.wav",
