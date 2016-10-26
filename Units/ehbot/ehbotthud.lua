@@ -9,7 +9,7 @@ local tech						 = [[1 Generator]]
 local armortype					 = [[light]]
 local supply					 = [[7]]
 
-local weapon1Damage              = 15
+local weapon1Damage              = 75
 local weapon1AOE				 = 250
 --local projectiles				 = 5
 --local burst						 = 102
@@ -134,7 +134,6 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 
 local weaponDefs                 = {
 	plasmacannon                	= {
-		accuracy			   = 500,
 		AreaOfEffect           = weapon1AOE,
 		avoidFriendly          = false,
 		avoidFeature 		   = false,
@@ -153,7 +152,7 @@ local weaponDefs                 = {
 		name                   = "Plasma Cannon",
 		--noExplode			   = true,
 		range                  = 700,
-		reloadtime             = 0.5,
+		reloadtime             = 1,
 		--projectiles			   = projectiles,
 		weaponType		       = "Cannon",
 		soundStart             = "bruisercannon.wav",
