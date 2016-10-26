@@ -10,7 +10,7 @@ local armortype					 = [[light]]
 local supply					 = [[7]]
 
 local weapon1Damage              = 75
-local weapon1AOE				 = 250
+local weapon1AOE				 = 50
 --local projectiles				 = 5
 --local burst						 = 102
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
