@@ -122,7 +122,7 @@ local function PlayNewTrack()
 	
 	Spring.PlaySoundStream(newTrack)
 	Spring.SetSoundStreamVolume(WG.music_volume or 0.33)
-	Spring.Echo([[[Music Player] Now Playing: ]] .. string.sub(curTrack, 30, -1))
+	Spring.Echo([[[Music Player] Now Playing: ]] .. string.sub(curTrack, 31, -5))
 	Spring.Echo([[[Music Player] Music Volume is set to: ]] .. WG.music_volume .. [[ (Press Shift and the +/- keys to adjust the music volume)]])
 	playing = true
 
