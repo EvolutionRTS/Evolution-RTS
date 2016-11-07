@@ -45,7 +45,11 @@ end
 -- Gameplay Speed (Classic RTS Mode) --
 --------------------------------------------------------------------------------
 
-if modOptions and tobool(modOptions.gameplayspeed == "normal") then
+local gamePlaySpeed = modOptions.gameplayspeed or "faster"
+
+Spring.Echo("Gameplay Speed is set to " .. gamePlaySpeed)
+
+if modOptions and gamePlaySpeed == "normal" then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal
@@ -58,7 +62,7 @@ if modOptions and tobool(modOptions.gameplayspeed == "normal") then
 	end
 end
 
-if modOptions and tobool(modOptions.gameplayspeed == "fast") then
+if modOptions and gamePlaySpeed == "fast" then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal / 2
@@ -71,20 +75,13 @@ if modOptions and tobool(modOptions.gameplayspeed == "fast") then
 	end
 end
 
-if modOptions and tobool(modOptions.gameplayspeed == "faster") then
+if modOptions and gamePlaySpeed == "faster" then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
 		unitDef.buildtime = unitDef.buildcostmetal / 4
 	end
 end
 
-if modOptions then
-	if modOptions.gameplayspeed == nil then
-		Spring.Echo("Gameplay Speed is set to fastest")
-	else
-		Spring.Echo("Gameplay Speed is set to " .. modOptions.gameplayspeed)
-	end
-end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- 3dbuildrange for all none plane builders
