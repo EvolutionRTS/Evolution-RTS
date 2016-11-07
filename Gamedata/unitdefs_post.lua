@@ -49,36 +49,36 @@ local gamePlaySpeed = modOptions.gameplayspeed or "faster"
 
 Spring.Echo("Gameplay Speed is set to " .. gamePlaySpeed)
 
-if modOptions and gamePlaySpeed == "normal" then
+for id,unitDef in pairs(UnitDefs) do
+	unitDef.buildtime = unitDef.buildcostmetal / 4
+end
+
+if gamePlaySpeed == "normal" then
 	for id,unitDef in pairs(UnitDefs) do
---	Spring.Echo(unitDef.buildcostmetal)
-		unitDef.buildtime = unitDef.buildcostmetal
-	end
-	for name, unitDef in pairs(UnitDefs) do
-		if unitDef.unitname == "ecommander" then
---			Spring.Echo(unitDef.unitname)
-			unitDef.workertime = unitDef.workertime * 2
+		if unitDef.maxvelocity then
+			unitDef.maxvelocity = unitDef.maxvelocity * 0.5
+		end
+		if unitDef.maxreversevelocity then
+			unitDef.maxreversevelocity = unitDef.maxvelocity * 0.5
 		end
 	end
 end
 
-if modOptions and gamePlaySpeed == "fast" then
+if gamePlaySpeed == "fast" then
 	for id,unitDef in pairs(UnitDefs) do
---	Spring.Echo(unitDef.buildcostmetal)
-		unitDef.buildtime = unitDef.buildcostmetal / 2
-	end
-	for name, unitDef in pairs(UnitDefs) do
-		if unitDef.unitname == "ecommander" then
---			Spring.Echo(unitDef.unitname)
-			unitDef.workertime = unitDef.workertime * 2
+		if unitDef.maxvelocity then
+			unitDef.maxvelocity = unitDef.maxvelocity * 0.75
+		end
+		if unitDef.maxreversevelocity then
+			unitDef.maxreversevelocity = unitDef.maxvelocity * 0.5
 		end
 	end
 end
 
-if modOptions and gamePlaySpeed == "faster" then
+if gamePlaySpeed == "fastest" then
 	for id,unitDef in pairs(UnitDefs) do
 --	Spring.Echo(unitDef.buildcostmetal)
-		unitDef.buildtime = unitDef.buildcostmetal / 4
+		unitDef.buildtime = 5
 	end
 end
 
