@@ -118,6 +118,31 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=false, emitVector = {0, 0, 1}}},
 	},
 	
+	ehbotengineer = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotpeewee = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotthud = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotsniper = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotrocko = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
 --	esolar2 = {
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},

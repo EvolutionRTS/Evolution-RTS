@@ -1,4 +1,4 @@
-base, turret, nanos, nanopoint1, nanopoint2, dirt = piece('base', 'turret', 'nanos', 'nanopoint1', 'nanopoint2', 'dirt')
+base, turret, nanos, nanopoint1, nanopoint2, dirt, backpack, exhaust1, exhaust2 = piece('base', 'turret', 'nanos', 'nanopoint1', 'nanopoint2', 'dirt', 'backpack', 'exhaust1', 'exhaust2')
 local SIG_AIM = {}
 
 -- state variables
@@ -42,7 +42,7 @@ end
 function RestoreAfterDelay()
 	if building == false then
 		Sleep(2000)
-		Turn(turret, y_axis, 0, 5)
+		Turn(base, y_axis, 0, 5)
 	end
 end		
 
@@ -56,7 +56,7 @@ Spring.SetUnitNanoPieces(unitID, nanoPoints)
 
 function script.StartBuilding(heading, pitch)
     -- TODO: This is where you would add your unpack / point towards animation
-	Turn(turret, y_axis, heading, 100)
+	Turn(base, y_axis, heading, 100)
     SetUnitValue(COB.INBUILDSTANCE, true)
 	building = true
 	StartThread(BuildFX)
@@ -72,5 +72,6 @@ function script.Killed()
 		Explode(nanos, SFX.EXPLODE_ON_HIT)
 		Explode(turret, SFX.EXPLODE_ON_HIT)
 		Explode(base, SFX.EXPLODE_ON_HIT)
+		Explode(backpack, SFX.EXPLODE_ON_HIT)
 		return 1   -- spawn ARMSTUMP_DEAD corpse / This is the equivalent of corpsetype = 1; in bos
 end

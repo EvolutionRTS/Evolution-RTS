@@ -10,7 +10,7 @@ local armortype					 = [[light]]
 local supply					 = [[9]]
 
 local weapon1Damage              = 500
-local weapon1AOE				 = 0
+local weapon1AOE				 = 10
 --local projectiles				 = 5
 --local burst						 = 10
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
@@ -45,8 +45,8 @@ local unitDef                    = {
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "mediumExplosionGenericPurple",
-	footprintX                   = 3,
-	footprintZ                   = 3,
+	footprintX                   = 5,
+	footprintZ                   = 5,
 	--highTrajectory		   		 = 2,
 	iconType                     = "tankdestroyer",
 	idleAutoHeal                 = .5,
@@ -58,7 +58,7 @@ local unitDef                    = {
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
-	movementClass                = "HOVERHBOT3",
+	movementClass                = "HOVERHBOT5",
 	name                         = "Sniper",
 	noChaseCategory              = "VTOL",
 	objectName                   = "ehbotsniper.s3o",
@@ -108,7 +108,7 @@ local unitDef                    = {
 			def                  = "sniper",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
-			badTargetCategory    = "VTOL ARMORED WALL",
+			badTargetCategory    = "LIGHT VTOL BUILDING WALL",
 		},
 	},
 	customParams                 = {
@@ -146,7 +146,7 @@ local weaponDefs                 = {
 		--	cegTag                = "mediumcannonweapon3",
 		duration                  = 0.5,
 		energypershot             = energycosttofire,
-		explosionGenerator        = "custom:genericshellexplosion-medium",
+		explosionGenerator        = "custom:genericshellexplosion-medium-purple",
 		fallOffRate               = 1,
 		fireStarter               = 100,
 		impulseFactor             = 0,

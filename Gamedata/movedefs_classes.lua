@@ -131,6 +131,72 @@ local moveDefs = {
 	  slopemod=2,
 	  heatmapping=false,
    },
+   
+   HOVERHBOT4 = {
+      footprintx=4,
+      footprintz=4,
+      maxslope=90,
+      maxwaterdepth=10,
+      maxwaterslope=255,
+      badwaterslope=255,
+      crushstrength=20,
+	  depthModParams = {
+         minHeight      = 0,
+         maxHeight      = 0,
+         maxScale       = 1.5,
+         quadraticCoeff = 0.1,
+         linearCoeff    = 0.1, -- deprecates "depthMod"
+         constantCoeff  = 1,
+       },
+	  minwaterdepth=10,
+	  heatmod=0.5,
+	  slopemod=2,
+	  heatmapping=false,
+   },
+   
+   HOVERHBOT5 = {
+      footprintx=5,
+      footprintz=5,
+      maxslope=90,
+      maxwaterdepth=10,
+      maxwaterslope=255,
+      badwaterslope=255,
+      crushstrength=20,
+	  depthModParams = {
+         minHeight      = 0,
+         maxHeight      = 0,
+         maxScale       = 1.5,
+         quadraticCoeff = 0.1,
+         linearCoeff    = 0.1, -- deprecates "depthMod"
+         constantCoeff  = 1,
+       },
+	  minwaterdepth=10,
+	  heatmod=0.5,
+	  slopemod=2,
+	  heatmapping=false,
+   },
+   
+   HOVERHBOT6 = {
+      footprintx=6,
+      footprintz=6,
+      maxslope=90,
+      maxwaterdepth=10,
+      maxwaterslope=255,
+      badwaterslope=255,
+      crushstrength=20,
+	  depthModParams = {
+         minHeight      = 0,
+         maxHeight      = 0,
+         maxScale       = 1.5,
+         quadraticCoeff = 0.1,
+         linearCoeff    = 0.1, -- deprecates "depthMod"
+         constantCoeff  = 1,
+       },
+	  minwaterdepth=10,
+	  heatmod=0.5,
+	  slopemod=2,
+	  heatmapping=false,
+   },
 
    TANK3 = {
       footprintx=3,

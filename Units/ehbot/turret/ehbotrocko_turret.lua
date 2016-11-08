@@ -5,17 +5,17 @@ local unitName                   = "ehbotrocko_turret"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[3 Generator]]
+local tech						 = [[2 Generator]]
 local armortype					 = [[building]]
 local supply					 = [[15]]
 
-local burst				 		 = 10
+
 local weapon1Damage              = 100
-local weapon1AOE				 = 50
-local reloadTime				 = 25
+local weapon1AOE				 = 500
+local reloadTime				 = 2.5
 --local projectiles				 = 5
 --local burst						 = 10
-local energycosttofire			 = weapon1Damage / 10 * burst * ((weapon1AOE / 1000) + 1)
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -145,10 +145,8 @@ local weaponDefs                 = {
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		burst					 = burst,
-		burstrate				 = 0.2,
 		cegTag                   = "missiletrailsmall",
-		explosionGenerator       = "custom:genericshellexplosion-medium",
+		explosionGenerator       = "custom:genericshellexplosion-large-red",
 		energypershot            = energycosttofire,
 		fireStarter              = 70,
 		impulseFactor            = 0,
@@ -163,13 +161,12 @@ local weaponDefs                 = {
 		soundHit                 = "explode5.wav",
 		startVelocity            = 250,
 		tolerance                = 8000,
-		turnrate                 = 0,
+		turnrate                 = 1000,
 		turret                   = true,
-		weaponAcceleration       = 50,
+		tracks                   = true,
+		weaponAcceleration       = 100,
 		flightTime               = 5,
-		trajectoryHeight         = 1.5,
-		weaponVelocity           = 500,
-		wobble 					 = 2000,
+		weaponVelocity           = 1000,
 		customparams             = {
 			damagetype		     = "ehbotrocko",  
 
@@ -182,6 +179,7 @@ local weaponDefs                 = {
 	},
 }
 unitDef.weaponDefs               = weaponDefs
+
 
 
 --------------------------------------------------------------------------------

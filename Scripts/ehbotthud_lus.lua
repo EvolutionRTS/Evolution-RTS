@@ -1,4 +1,4 @@
-base, turret, barrel1, firepoint1, firepoint2, dirt = piece('base', 'turret', 'barrel1', 'firepoint1', 'firepoint2', 'dirt')
+base, turret, barrel1, firepoint1, firepoint2, dirt, backpack, exhaust1, exhaust2 = piece('base', 'turret', 'barrel1', 'firepoint1', 'firepoint2', 'dirt', 'backpack', 'exhaust1', 'exhaust2')
 local SIG_AIM = {}
 
 -- state variables
@@ -31,7 +31,7 @@ end
 
 local function RestoreAfterDelay()
 	Sleep(2000)
-	Turn(turret, y_axis, 0, 5)
+	Turn(base, y_axis, 0, 5)
 	Turn(barrel1, x_axis, 0, 5)
 end		
 
@@ -55,9 +55,9 @@ end
 function script.AimWeapon(weaponID, heading, pitch)
 	Signal(SIG_AIM)
 	SetSignalMask(SIG_AIM)
-	Turn(turret, y_axis, heading, 100)
+	Turn(base, y_axis, heading, 100)
 	Turn(barrel1, x_axis, -pitch, 100)
-	WaitForTurn(turret, y_axis)
+	WaitForTurn(base, y_axis)
 	WaitForTurn(barrel1, x_axis)
 	StartThread(RestoreAfterDelay)
 	--Spring.Echo("AimWeapon: FireWeapon")
@@ -68,5 +68,6 @@ function script.Killed()
 		Explode(barrel1, SFX.EXPLODE_ON_HIT)
 		Explode(turret, SFX.EXPLODE_ON_HIT)
 		Explode(base, SFX.EXPLODE_ON_HIT)
+		Explode(backpack, SFX.EXPLODE_ON_HIT)
 		return 1   -- spawn ARMSTUMP_DEAD corpse / This is the equivalent of corpsetype = 1; in bos
 end
