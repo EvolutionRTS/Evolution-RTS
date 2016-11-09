@@ -1,4 +1,11 @@
--- $Id$
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+if not gadgetHandler:IsSyncedCode() then
+	return
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 
 function gadget:GetInfo()
   return {
@@ -18,14 +25,14 @@ local spSetUnitBlocking = Spring.SetUnitBlocking
 local spGetUnitIsDead = Spring.GetUnitIsDead
 
 local noEject = {
---	[UnitDefNames["missilesilo"].id] = true,
+	-- [UnitDefNames["missilesilo"].id] = true,
+	-- [UnitDefNames["factoryship"].id] = true,
+	-- [UnitDefNames["factoryplane"].id] = true,
+	-- [UnitDefNames["factorygunship"].id] = true,
 }
 local ghostFrames = 30	--how long the unit will be ethereal
 
 local setBlocking = {} --indexed by gameframe, contains a subtable of unitIDs
-
-if (gadgetHandler:IsSyncedCode()) then
-
 
 function gadget:GameFrame(n)
 	if setBlocking[n] then	--restore blocking
@@ -44,16 +51,4 @@ function gadget:UnitFromFactory(unitID, unitDefID, teamID, builderID, builderDef
 		setBlocking[frame][unitID] = true
 		spSetUnitBlocking(unitID, false)
 	end
-end
-
---[[
-function gadget:UnitCreated(unitID, unitDefID, teamID, builderID)
-	if not builderID then return end
-	local builderDefID = spGetUnitDefID(builderID)
-	if UnitDefs[builderDefID].isFactory and not noEject[builderDefID] then
-		gadget:UnitFromFactory(unitID, unitDefID, teamID, builderID, builderDefID)
-	end
-end
-]]--
-
 end
