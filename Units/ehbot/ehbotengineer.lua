@@ -6,7 +6,8 @@ local unitName                   = "ehbotengineer"
 --------------------------------------------------------------------------------
 
 local buildCostMetal			 = 40
-local maxDamage					 = 600
+local maxDamage					 = 400
+local buildDistance				 = 800
 
 local armortype					 = [[light]]
 --local supply					 = [[2]]
@@ -23,7 +24,7 @@ local unitDef                    = {
 	brakeRate                    = 0.24,
 	buildCostEnergy              = 0,
 	buildCostMetal               = buildCostMetal,
-	buildDistance                = 800,
+	buildDistance                = buildDistance,
 	builder                      = true,
 	buildTime                    = 5,
 	CanAttack			         = false,

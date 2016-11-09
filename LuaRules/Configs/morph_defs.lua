@@ -186,7 +186,7 @@ Lvl 2]],
 	ehbotengineer = 	{
 		{
 			into = 'ehbotengineer_turret',
-			time = 20,
+			time = 12.5,
 			cmdname = [[Deploy]],
 			metal = 50,
 			text = 'Morph into a stationary turret.',
@@ -195,7 +195,7 @@ Lvl 2]],
 	ehbotpeewee = 	{
 		{
 			into = 'ehbotpeewee_turret',
-			time = 20,
+			time = 12.5,
 			cmdname = [[Deploy]],
 			metal = 50,
 			text = 'Morph into a stationary turret.',
@@ -204,7 +204,7 @@ Lvl 2]],
 	ehbotthud = 	{
 		{
 			into = 'ehbotthud_turret',
-			time = 20,
+			time = 12.5,
 			cmdname = [[Deploy]],
 			metal = 50,
 			text = 'Morph into a stationary turret.',
@@ -213,7 +213,7 @@ Lvl 2]],
 	ehbotsniper = 	{
 		{
 			into = 'ehbotsniper_turret',
-			time = 20,
+			time = 12.5,
 			cmdname = [[Deploy]],
 			metal = 50,
 			text = 'Morph into a stationary turret.',
@@ -222,7 +222,7 @@ Lvl 2]],
 	ehbotrocko = 	{
 		{
 			into = 'ehbotrocko_turret',
-			time = 20,
+			time = 12.5,
 			cmdname = [[Deploy]],
 			metal = 50,
 			text = 'Morph into a stationary turret.',
