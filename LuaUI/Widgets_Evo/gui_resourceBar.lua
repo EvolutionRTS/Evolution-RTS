@@ -193,6 +193,7 @@ function widget:TweakMouseMove(x, y, dx, dy, button)
 		posy = vsy - height
 	end
 	generateDisplayList()
+	generateDisplayList3()
 end
 
 -- save and load
@@ -207,6 +208,7 @@ function widget:SetConfigData(data)
 	posx = data.posx or posx
 	posy = data.posy or posy
 	generateDisplayList()	
+	generateDisplayList3()	
 end
 
 
@@ -262,6 +264,7 @@ function widget:DrawScreen()
 	if displayList2 ~= nil then
 		gl.CallList(displayList)
 		gl.CallList(displayList2)
+		gl.CallList(displayList3)
 	end
 end
 
@@ -290,6 +293,7 @@ function widget:Shutdown()
 	if displayList ~= nil then
 		gl.DeleteList(displayList)
 		gl.DeleteList(displayList2)
+		gl.DeleteList(displayList3)
 	end
 end
 ---------------------------------------------------------------------------------------------------------
@@ -332,8 +336,6 @@ function generateDisplayList()
 	end)
 end
 
-
--- regenerate display list
 function generateDisplayList2()
 	if displayList2 ~= nil then
 		gl.DeleteList(displayList2)
@@ -354,18 +356,6 @@ function generateDisplayList2()
 		gl.Color(bgMetalR,bgMetalG,0,0.33)
 		RectRound(metalOffset,0,metalOffset+metalBarWidth,height, 5)
 		
-		-- draw icons
-		local iconSize = 32
-	  gl.Color(1,1,1,1)
-	  gl.Texture(supplyTexture)
-	  gl.TexRect(supplyOffset+1, height-iconSize, supplyOffset+iconSize+1, height)
-	  
-	  gl.Texture(energyTexture)
-	  gl.TexRect(energyOffset+1, height-iconSize, energyOffset+iconSize+1, height)
-	  
-	  gl.Texture(metalTexture)
-	  gl.TexRect(metalOffset+1, height-iconSize, metalOffset+iconSize+1, height)
-	  
 		-- supply bar
 		r, g, b = 0, 0, 0
 		
@@ -483,13 +473,36 @@ function generateDisplayList2()
 	  gl.Text(metalStr, metalOffset+metalBarWidth, textOffsetY, FontSize, "onr")
 	    
 	  gl.Texture(false)
-		gl.PopMatrix()
 	
   end)
+end
+
+function generateDisplayList3()
+	if displayList3 ~= nil then
+		gl.DeleteList(displayList3)
+	end
+	displayList3 = gl.CreateList(function ()
+		
+		-- draw icons
+		local iconSize = 32
+	  gl.Color(1,1,1,1)
+	  gl.Texture(supplyTexture)
+	  gl.TexRect(supplyOffset+1, height-iconSize, supplyOffset+iconSize+1, height)
+	  
+	  gl.Texture(energyTexture)
+	  gl.TexRect(energyOffset+1, height-iconSize, energyOffset+iconSize+1, height)
+	  
+	  gl.Texture(metalTexture)
+	  gl.TexRect(metalOffset+1, height-iconSize, metalOffset+iconSize+1, height)
+	  
+	  
+		gl.PopMatrix()
+	end)
 end
 
 function widget:ViewResize(newX,newY)
   vsx, vsy = newX, newY
 	widgetScale = (0.72 + (vsx*vsy / 13300000))
 	generateDisplayList()
+	generateDisplayList3()
 end
