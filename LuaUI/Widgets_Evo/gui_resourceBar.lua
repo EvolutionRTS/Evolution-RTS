@@ -10,6 +10,7 @@ function widget:GetInfo()
     }
 end
 
+
 --Disable Default Resources Bar
 Spring.SendCommands({"resbar 0"})
 
@@ -39,6 +40,11 @@ local red = "\255\255\0\0"
 local skyblue = "\255\136\197\226"
 
 local barTexture = LUAUI_DIRNAME.."Images/resbar.dds"
+local barGlowCenterTexture = LUAUI_DIRNAME.."Images/barglow-center.dds"
+local barGlowEdgeTexture = LUAUI_DIRNAME.."Images/barglow-edge.dds"
+local energyTexture = LUAUI_DIRNAME.."Images/energy2.png"
+local metalTexture = LUAUI_DIRNAME.."Images/metal.png"
+local supplyTexture = LUAUI_DIRNAME.."Images/supply.png"
 
 local supplyWarning = false
 local energyWarning = false
@@ -316,9 +322,13 @@ function generateDisplayList()
 			WG['guishader_api'].InsertRect(supplyOffset-(bgmargin*0.8), -(bgmargin*0.8), metalOffset+metalBarWidth+(bgmargin*0.8), height+(bgmargin*0.8), 'resources')
 		end
 		
-		gl.Text(yellow .. "Energy", energyOffset+textOffsetX, textOffsetY, FontSize, "on")
-		gl.Text(green .. "Supply", supplyOffset+textOffsetX, textOffsetY, FontSize, "on")
-		gl.Text(skyblue .. "Metal", metalOffset+textOffsetX, textOffsetY, FontSize, "on")
+		gl.Text(yellow .. "Energy", energyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
+		gl.Text(green .. "Supply", supplyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
+		gl.Text(skyblue .. "Metal", metalOffset+textOffsetX+29, textOffsetY, FontSize, "on")
+		
+	  
+	  gl.Texture(false)
+		
 	end)
 end
 
@@ -331,16 +341,31 @@ function generateDisplayList2()
 	displayList2 = gl.CreateList(function ()
 		-- draw background (black / gray / black / ...)
 		-- background flashes when the player messed up their eco
-		gl.Color(bgSupplyR,bgSupplyG,0,0.4)
+		local glowSize = (height/6) * 3
+		local glowAlpha = 0.14
+		
+		gl.Color(bgSupplyR,bgSupplyG,0,0.33)
 		gl.Texture(barTexture)
-		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth,height)
+		RectRound(supplyOffset,0,supplyOffset+supplyBarWidth,height, 5)
 		
-		gl.Color(bgEnergyR,bgEnergyG,0,0.4)
-		gl.TexRect(energyOffset,0,energyOffset+energyBarWidth,height)
+		gl.Color(bgEnergyR,bgEnergyG,0,0.33)
+		RectRound(energyOffset,0,energyOffset+energyBarWidth,height, 5)
 
-		gl.Color(bgMetalR,bgMetalG,0,0.4)
-		gl.TexRect(metalOffset,0,metalOffset+metalBarWidth,height)
+		gl.Color(bgMetalR,bgMetalG,0,0.33)
+		RectRound(metalOffset,0,metalOffset+metalBarWidth,height, 5)
 		
+		-- draw icons
+		local iconSize = 32
+	  gl.Color(1,1,1,1)
+	  gl.Texture(supplyTexture)
+	  gl.TexRect(supplyOffset+1, height-iconSize, supplyOffset+iconSize+1, height)
+	  
+	  gl.Texture(energyTexture)
+	  gl.TexRect(energyOffset+1, height-iconSize, energyOffset+iconSize+1, height)
+	  
+	  gl.Texture(metalTexture)
+	  gl.TexRect(metalOffset+1, height-iconSize, metalOffset+iconSize+1, height)
+	  
 		-- supply bar
 		r, g, b = 0, 0, 0
 		
@@ -355,8 +380,18 @@ function generateDisplayList2()
 		gl.Color(0.5,0.5,0.5,1)
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth,height/6)
 		maxPercentage = sm / maxSupply
+		
 		gl.Color(0,1,0,1)
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth*maxPercentage,height/6)
+		
+		gl.Color(0,1,0,glowAlpha)
+		gl.Texture(barGlowCenterTexture)
+		gl.TexRect(supplyOffset,-glowSize,supplyOffset+supplyBarWidth*maxPercentage,(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(supplyOffset-glowSize-glowSize,-glowSize,supplyOffset,(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(supplyOffset+(supplyBarWidth*maxPercentage)+glowSize+glowSize,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
+		
 		gl.Color(r,g,b,1)
 		
 		if not progressBars then
@@ -386,6 +421,14 @@ function generateDisplayList2()
 		gl.Texture(barTexture)
 		gl.TexRect(energyOffset,0,energyOffset+energyBarWidth*energyPercentage,height/6)
 		
+		gl.Color(0,1,0,glowAlpha)
+		gl.Texture(barGlowCenterTexture)
+		gl.TexRect(energyOffset,-glowSize,energyOffset+energyBarWidth*energyPercentage,(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(energyOffset-glowSize-glowSize,-glowSize,energyOffset,(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(energyOffset+(energyBarWidth*energyPercentage)+glowSize+glowSize,-glowSize,energyOffset+(energyBarWidth*energyPercentage),(height/6)+glowSize)
+		
 		energyStr = green .. "+" .. tostring(math.round(ei)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
 	  gl.Text(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
 		
@@ -406,6 +449,14 @@ function generateDisplayList2()
 		end
 		gl.Texture(barTexture)
 		gl.TexRect(metalOffset,0,metalOffset+metalBarWidth*metalPercentage,height/6)
+		
+		gl.Color(0,1,0,glowAlpha)
+		gl.Texture(barGlowCenterTexture)
+		gl.TexRect(metalOffset,-glowSize,metalOffset+metalBarWidth*metalPercentage,(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(metalOffset-glowSize-glowSize,-glowSize,metalOffset,(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(metalOffset+(metalBarWidth*metalPercentage)+glowSize+glowSize,-glowSize,metalOffset+(metalBarWidth*metalPercentage),(height/6)+glowSize)
 		
 		-- draw metal income timer
 		if modoptMincome ~= "disabled" then
@@ -439,6 +490,6 @@ end
 
 function widget:ViewResize(newX,newY)
   vsx, vsy = newX, newY
-	widgetScale = (0.66 + (vsx*vsy / 13300000))
+	widgetScale = (0.72 + (vsx*vsy / 13300000))
 	generateDisplayList()
 end
