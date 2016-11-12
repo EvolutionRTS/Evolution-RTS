@@ -97,8 +97,8 @@ local pagestepped = false
 
 local buttons = { --see MouseRelease for which functions are called by which buttons
     [1] = "Reload LuaUI", 
-    [2] = "Unload ALL Widgets",
-    [3] = "Allow/Disallow User Widgets",
+    [2] = "Unload ALL Widgets (DO NOT CLICK THIS)",
+    [3] = "Allow/Disallow User Widgets (DO NOT CLICK THIS)",
     [4] = "Reset LuaUI",
     [5] = "Factory Reset LuaUI",
 }
