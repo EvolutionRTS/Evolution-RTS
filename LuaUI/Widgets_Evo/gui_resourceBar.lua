@@ -344,7 +344,7 @@ function generateDisplayList2()
 		-- draw background (black / gray / black / ...)
 		-- background flashes when the player messed up their eco
 		local glowSize = (height/6) * 3
-		local glowAlpha = 0.14
+		local glowAlpha = 0.15
 		
 		gl.Color(bgSupplyR,bgSupplyG,0,0.33)
 		gl.Texture(barTexture)
@@ -372,23 +372,23 @@ function generateDisplayList2()
 		maxPercentage = sm / maxSupply
 		
 		gl.Color(0,1,0,1)
-		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth*maxPercentage,height/6)
+		gl.TexRect(supplyOffset,0,supplyOffset+(supplyBarWidth*maxPercentage),height/6)
 		
 		gl.Color(0,1,0,glowAlpha)
-		--Disabled until Floris can fix it :-)
-		-- gl.Texture(barGlowCenterTexture)
-		-- gl.TexRect(supplyOffset,-glowSize,supplyOffset+supplyBarWidth*maxPercentage,(height/6)+glowSize)
-		-- gl.Texture(barGlowEdgeTexture)
-		-- gl.TexRect(supplyOffset-glowSize-glowSize,-glowSize,supplyOffset,(height/6)+glowSize)
-		-- gl.Texture(barGlowEdgeTexture)
-		-- gl.TexRect(supplyOffset+(supplyBarWidth*maxPercentage)+glowSize+glowSize,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
+		gl.Texture(barGlowCenterTexture)
+		gl.TexRect(supplyOffset,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(supplyOffset-glowSize-glowSize,-glowSize,supplyOffset,(height/6)+glowSize)
+		gl.Texture(barGlowEdgeTexture)
+		gl.TexRect(supplyOffset+(supplyBarWidth*maxPercentage)+glowSize+glowSize,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
+		gl.Texture(false)
 		
 		gl.Color(r,g,b,1)
 		
 		if not progressBars then
 			percentage = 1
 		end
-		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth*percentage,height/6)
+		gl.TexRect(supplyOffset,0,supplyOffset+(supplyBarWidth*percentage),height/6)
 		
 		supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
 	  gl.Text(supplyStr, supplyOffset+supplyBarWidth, textOffsetY, FontSize, "onr")
@@ -410,15 +410,16 @@ function generateDisplayList2()
 		end
 		
 		gl.Texture(barTexture)
-		gl.TexRect(energyOffset,0,energyOffset+energyBarWidth*energyPercentage,height/6)
+		gl.TexRect(energyOffset,0,energyOffset+(energyBarWidth*energyPercentage),height/6)
 		
 		gl.Color(0,1,0,glowAlpha)
 		gl.Texture(barGlowCenterTexture)
-		gl.TexRect(energyOffset,-glowSize,energyOffset+energyBarWidth*energyPercentage,(height/6)+glowSize)
+		gl.TexRect(energyOffset,-glowSize,energyOffset+(energyBarWidth*energyPercentage),(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
 		gl.TexRect(energyOffset-glowSize-glowSize,-glowSize,energyOffset,(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
 		gl.TexRect(energyOffset+(energyBarWidth*energyPercentage)+glowSize+glowSize,-glowSize,energyOffset+(energyBarWidth*energyPercentage),(height/6)+glowSize)
+		gl.Texture(false)
 		
 		energyStr = green .. "+" .. tostring(math.round(ei)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
 	  gl.Text(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
@@ -439,15 +440,16 @@ function generateDisplayList2()
 			metalPercentage = 1
 		end
 		gl.Texture(barTexture)
-		gl.TexRect(metalOffset,0,metalOffset+metalBarWidth*metalPercentage,height/6)
+		gl.TexRect(metalOffset,0,metalOffset+(metalBarWidth*metalPercentage),height/6)
 		
 		gl.Color(0,1,0,glowAlpha)
 		gl.Texture(barGlowCenterTexture)
-		gl.TexRect(metalOffset,-glowSize,metalOffset+metalBarWidth*metalPercentage,(height/6)+glowSize)
+		gl.TexRect(metalOffset,-glowSize,metalOffset+(metalBarWidth*metalPercentage),(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
 		gl.TexRect(metalOffset-glowSize-glowSize,-glowSize,metalOffset,(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
 		gl.TexRect(metalOffset+(metalBarWidth*metalPercentage)+glowSize+glowSize,-glowSize,metalOffset+(metalBarWidth*metalPercentage),(height/6)+glowSize)
+		gl.Texture(false)
 		
 		-- draw metal income timer
 		if modoptMincome ~= "disabled" then
@@ -456,7 +458,7 @@ function generateDisplayList2()
 				percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
 				gl.Color(1,0.5,0,1)
 				gl.Texture(barTexture)
-				gl.TexRect(metalOffset,0,metalOffset+metalBarWidth*percentage,height/20)
+				gl.TexRect(metalOffset,0,metalOffset+(metalBarWidth*percentage),height/20)
 				if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
 					Spring.PlaySoundFile("sounds/metalincomeincrease.wav", 1)
 					Spring.Echo("-------------------------------------")
