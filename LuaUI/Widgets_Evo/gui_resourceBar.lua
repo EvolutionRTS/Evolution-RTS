@@ -1,6 +1,6 @@
 function widget:GetInfo()
     return {
-        name = "Evo Resource Display",
+        name = "Resource Bar Display",
         desc = "Displays economy parameters",
         author = "Code_Man, CommonPlayer, Floris",
         date = "11/4/2016", -- modified by CommonPlayer on Oct 2016
@@ -375,12 +375,13 @@ function generateDisplayList2()
 		gl.TexRect(supplyOffset,0,supplyOffset+supplyBarWidth*maxPercentage,height/6)
 		
 		gl.Color(0,1,0,glowAlpha)
-		gl.Texture(barGlowCenterTexture)
-		gl.TexRect(supplyOffset,-glowSize,supplyOffset+supplyBarWidth*maxPercentage,(height/6)+glowSize)
-		gl.Texture(barGlowEdgeTexture)
-		gl.TexRect(supplyOffset-glowSize-glowSize,-glowSize,supplyOffset,(height/6)+glowSize)
-		gl.Texture(barGlowEdgeTexture)
-		gl.TexRect(supplyOffset+(supplyBarWidth*maxPercentage)+glowSize+glowSize,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
+		--Disabled until Floris can fix it :-)
+		-- gl.Texture(barGlowCenterTexture)
+		-- gl.TexRect(supplyOffset,-glowSize,supplyOffset+supplyBarWidth*maxPercentage,(height/6)+glowSize)
+		-- gl.Texture(barGlowEdgeTexture)
+		-- gl.TexRect(supplyOffset-glowSize-glowSize,-glowSize,supplyOffset,(height/6)+glowSize)
+		-- gl.Texture(barGlowEdgeTexture)
+		-- gl.TexRect(supplyOffset+(supplyBarWidth*maxPercentage)+glowSize+glowSize,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
 		
 		gl.Color(r,g,b,1)
 		
