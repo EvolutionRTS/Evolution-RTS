@@ -4,13 +4,13 @@
 
 function widget:GetInfo()
   return {
-    name      = "Chicken Panel",
-    desc      = "Shows stuff",
+    name      = "Chicken Stats Panel",
+    desc      = "Shows statics and progress whhen fighting vs Chickens",
     author    = "quantum",
     date      = "May 04, 2008",
     license   = "GNU GPL, v2 or later",
     layer     = -9, 
-    enabled   = true  --  loaded by default?
+    enabled   = false  --  loaded by default?
   }
 end
 
