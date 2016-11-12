@@ -381,8 +381,8 @@ function generateDisplayList2()
 		gl.TexRect(supplyOffset-glowSize-glowSize,-glowSize,supplyOffset,(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
 		gl.TexRect(supplyOffset+(supplyBarWidth*maxPercentage)+glowSize+glowSize,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
-		gl.Texture(false)
 		
+		gl.Texture(barTexture)
 		gl.Color(r,g,b,1)
 		
 		if not progressBars then
@@ -419,8 +419,8 @@ function generateDisplayList2()
 		gl.TexRect(energyOffset-glowSize-glowSize,-glowSize,energyOffset,(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
 		gl.TexRect(energyOffset+(energyBarWidth*energyPercentage)+glowSize+glowSize,-glowSize,energyOffset+(energyBarWidth*energyPercentage),(height/6)+glowSize)
-		gl.Texture(false)
 		
+		gl.Texture(barTexture)
 		energyStr = green .. "+" .. tostring(math.round(ei)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
 	  gl.Text(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
 		
@@ -449,7 +449,8 @@ function generateDisplayList2()
 		gl.TexRect(metalOffset-glowSize-glowSize,-glowSize,metalOffset,(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
 		gl.TexRect(metalOffset+(metalBarWidth*metalPercentage)+glowSize+glowSize,-glowSize,metalOffset+(metalBarWidth*metalPercentage),(height/6)+glowSize)
-		gl.Texture(false)
+		
+		gl.Texture(barTexture)
 		
 		-- draw metal income timer
 		if modoptMincome ~= "disabled" then
