@@ -309,7 +309,7 @@ local decapSpeed = tonumber(Spring.GetModOptions().decapspeed) or 3 -- speed mul
 local dominationScore = tonumber(Spring.GetModOptions().dominationscore) or 1000
 local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 -- Time needed holding all points to score in multi domination
 local usemapconfig = Spring.GetModOptions().usemapconfig or "disabled"
-local limitScore = tonumber(Spring.GetModOptions().limitscore) or 2750
+local limitScore = tonumber(Spring.GetModOptions().limitscore) or 3500
 
 -- These are together because they cover the same area (resourcing)
 local metalPerPoint = tonumber(Spring.GetModOptions().metalperpoint) or 0
