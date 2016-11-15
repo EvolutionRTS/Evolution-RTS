@@ -48,10 +48,12 @@ local fadeVol
 local curTrack	= "no name"
 local songText	= "no name"
 
-local warTracks		=	VFS.DirList('luaui/Widgets_EVO/music/war/', '*.ogg')
-local peaceTracks	=	VFS.DirList('luaui/Widgets_EVO/music/peace/', '*.ogg')
-local victoryTracks	=	VFS.DirList('luaui/Widgets_EVO/music/victory/', '*.ogg')
-local defeatTracks	=	VFS.DirList('luaui/Widgets_EVO/music/defeat/', '*.ogg')
+local warTracks		=	VFS.DirList('luaui/Widgets_Evo/music/war/', '*.ogg')
+local peaceTracks	=	VFS.DirList('luaui/Widgets_Evo/music/peace/', '*.ogg')
+local victoryTracks	=	VFS.DirList('luaui/Widgets_Evo/music/victory/', '*.ogg')
+local defeatTracks	=	VFS.DirList('luaui/Widgets_Evo/music/defeat/', '*.ogg')
+
+local charactersInPath = 31
 
 local firstTime = false
 local wasPaused = false
@@ -59,6 +61,7 @@ local firstFade = true
 local initSeed = 0
 local seedInitialized = false
 local gameOver = false
+local playing = true
 
 local myTeam = Spring.GetMyTeamID()
 local isSpec = Spring.GetSpectatingState() or Spring.IsReplay()
@@ -72,7 +75,14 @@ options = {
 
 local vsx, vsy   = widgetHandler:GetViewSizes()
 
+local playTex				= ":n:"..LUAUI_DIRNAME.."Images/music/play.png"
+local pauseTex				= ":n:"..LUAUI_DIRNAME.."Images/music/pause.png"
+local nextTex				= ":n:"..LUAUI_DIRNAME.."Images/music/next.png"
+local musicTex				= ":n:"..LUAUI_DIRNAME.."Images/music/music.png"
+local buttonTex				= ":n:"..LUAUI_DIRNAME.."Images/button.dds"
+local buttonHighlightTex				= ":n:"..LUAUI_DIRNAME.."Images/button-highlight.dds"
 local bgcorner				= ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
+
 local widgetScale = 1
 local glText         = gl.Text
 local glGetTextWidth = gl.GetTextWidth
@@ -194,10 +204,12 @@ function RectRound(px,py,sx,sy,cs)
 	gl.Texture(false)
 end
 
-
+local buttons = {}
 local function createList()
 	if drawlist[1] ~= nil then
 		glDeleteList(drawlist[1])
+		glDeleteList(drawlist[2])
+		glDeleteList(drawlist[3])
 	end
 	if (WG['guishader_api'] ~= nil) then
 		WG['guishader_api'].InsertRect(left, bottom, right, top,'music')
@@ -207,16 +219,25 @@ local function createList()
 		RectRound(left, bottom, right, top, 5.5*widgetScale)
 		
 		local borderPadding = 2.75*widgetScale
-		--glColor(1,1,1,0.022)
-		--RectRound(left+borderPadding, bottom+borderPadding, right-borderPadding, top-borderPadding, 4.4*widgetScale)
+		glColor(1,1,1,0.022)
+		RectRound(left+borderPadding, bottom+borderPadding, right-borderPadding, top-borderPadding, 4.4*widgetScale)
+		
+	end)
+	drawlist[2] = glCreateList( function()
+	
+		local padding = 3*widgetScale -- button background margin
+		local padding2 = 2.5*widgetScale -- inner icon padding
+		buttons['playpause'] = {left+padding, bottom+padding, left+(widgetHeight*widgetScale)-padding, top-padding}
+		buttons['next'] = {buttons['playpause'][3]+padding, bottom+padding, buttons['playpause'][3]+((widgetHeight*widgetScale)-padding), top-padding}
 		
 		-- track name
 		local textsize = 11*widgetScale
-		local maxTextWidth = 350*widgetScale
-		local textPadding = 8
-		glColor(0.3,0.3,0.3,1)
+		local textYPadding = 8*widgetScale
+		local textXPadding = 7*widgetScale
+		local maxTextWidth = right-buttons['next'][3]-textXPadding-textXPadding
+		glColor(0.45,0.45,0.45,1)
 		local text = ''
-		for i=31, #curTrack do
+		for i=charactersInPath, #curTrack do
 	    local c = string.sub(curTrack, i,i)
 			local width = glGetTextWidth(text..c)*textsize
 	    if width > maxTextWidth then
@@ -225,17 +246,75 @@ local function createList()
 	    	text = text..c
 	    end
 		end
-		glText(text, left + (textPadding*widgetScale), bottom + (textPadding*widgetScale), textsize)
+		glText('\255\135\135\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
 		
+		local button = 'playpause'
+		glColor(1,1,1,0.7)
+		glTexture(buttonTex)
+		glTexRect(buttons[button][1], buttons[button][2], buttons[button][3], buttons[button][4])
+		glColor(1,1,1,0.4)
+		if playing then
+			glTexture(pauseTex)
+		else
+			glTexture(playTex)
+		end
+		glTexRect(buttons[button][1]+padding2, buttons[button][2]+padding2, buttons[button][3]-padding2, buttons[button][4]-padding2)
+		
+		button = 'next'
+		glColor(1,1,1,0.7)
+		glTexture(buttonTex)
+		glTexRect(buttons[button][1], buttons[button][2], buttons[button][3], buttons[button][4])
+		glColor(1,1,1,0.4)
+		glTexture(nextTex)
+		glTexRect(buttons[button][1]+padding2, buttons[button][2]+padding2, buttons[button][3]-padding2, buttons[button][4]-padding2)
+		
+	end)
+	drawlist[3] = glCreateList( function()
+				
+		local borderPadding = 2.75*widgetScale
+		glColor(0,0,0,0.5)
+		RectRound(left, bottom, right, top, 5.5*widgetScale)
 		-- next button
 		
 		-- pause button
 		
 		-- volume slider
-		
 	end)
 end
 
+
+function isInBox(mx, my, box)
+    return mx > box[1] and my > box[2] and mx < box[3] and my < box[4]
+end
+
+function widget:MousePress(mx, my, mb)
+	--Spring.Echo(mb)
+	if mb == 1 and isInBox(mx, my, {left, bottom, right, top}) then
+		if mb == 1 and buttons['playpause'] ~= nil and isInBox(mx, my, {buttons['playpause'][1], buttons['playpause'][2], buttons['playpause'][3], buttons['playpause'][4]}) then
+			playing = not playing
+			Spring.PauseSoundStream()
+			createList()
+			return true
+		end
+		if mb == 1 and buttons['next'] ~= nil and isInBox(mx, my, {buttons['next'][1], buttons['next'][2], buttons['next'][3], buttons['next'][4]}) then
+			PlayNewTrack()
+			return true
+		end
+	end
+end
+
+function widget:IsAbove(mx, my)
+	if isInBox(mx, my, {left, bottom, right, top}) then
+		mouseover = true
+	end
+	return mouseover
+end
+
+function widget:GetTooltip(mx, my)
+	if widget:IsAbove(mx,my) then
+		return string.format("Music info and controls")
+	end
+end
 
 function widget:Shutdown()
 	Spring.StopSoundStream()
@@ -247,9 +326,13 @@ function widget:Shutdown()
 	for i=1,#windows do
 		(windows[i]):Dispose()
 	end
+	
+	glDeleteList(drawlist[1])
+	glDeleteList(drawlist[2])
+	glDeleteList(drawlist[3])
 end
 
-local function PlayNewTrack()
+function PlayNewTrack()
 	Spring.StopSoundStream()
 	local newTrack = previousTrack
 	repeat
@@ -277,7 +360,9 @@ local function PlayNewTrack()
 	Spring.Echo([[[Music Player] Music Volume is set to: ]] .. WG.music_volume .. [[
  
 [Music Player] Press Shift and the +/- keys to adjust the music volume]])
-	playing = true
+	if playing == false then
+		Spring.PauseSoundStream()
+	end
 
 	WG.music_start_volume = WG.music_volume
 	
@@ -364,7 +449,7 @@ function widget:Update(dt)
 				newTrackWait = 0
 			end
 		end
-        local _, _, paused = Spring.GetGameSpeed()
+    local _, _, paused = Spring.GetGameSpeed()
 		if (paused ~= wasPaused) and options.pausemusic.value then
 			Spring.PauseSoundStream()
 			wasPaused = paused
@@ -473,6 +558,32 @@ function widget:DrawScreen()
 	if drawlist[1] ~= nil then
 		glPushMatrix()
 			glCallList(drawlist[1])
+			glCallList(drawlist[2])
+			if mouseover then
+			  local mx, my, mlb = Spring.GetMouseState()
+			  local color = {1,1,1,0.25}
+			  local colorHighlight = {1,1,1,0.33}
+			  local button = 'playpause'
+				if buttons[button] ~= nil and isInBox(mx, my, {buttons[button][1], buttons[button][2], buttons[button][3], buttons[button][4]}) then
+					if mlb then
+						glColor(colorHighlight)
+					else
+						glColor(color)
+					end
+					glTexture(buttonHighlightTex)
+					glTexRect(buttons[button][1], buttons[button][2], buttons[button][3], buttons[button][4])
+				end
+				button = 'next'
+				if buttons[button] ~= nil and isInBox(mx, my, {buttons[button][1], buttons[button][2], buttons[button][3], buttons[button][4]}) then
+					if mlb then
+						glColor(colorHighlight)
+					else
+						glColor(color)
+					end
+					glTexture(buttonHighlightTex)
+					glTexRect(buttons[button][1], buttons[button][2], buttons[button][3], buttons[button][4])
+				end
+			end
 		glPopMatrix()
 		mouseover = false
 	end
@@ -489,11 +600,8 @@ end
 
 -- would be great if there is be a way to continue track where we left off after a /luaui reload
 function widget:SetConfigData(data)
-	if Spring.GetGameFrame() > 0 and data.curTrack ~= nil then
-		curTrack = data.curTrack
-		if data.playing then
-			
-		end
+	if Spring.GetGameFrame() > 0 and data.playing ~= nil then
+		playing = data.playing
 	end
 end
 

@@ -49,7 +49,7 @@ local customScale			= 1
 local customScaleStep		= 0.025
 local pointDuration    		= 40
 local cpuText				= false
-
+local drawAlliesLabel = false
 --------------------------------------------------------------------------------
 -- SPEED UPS
 --------------------------------------------------------------------------------
@@ -236,8 +236,11 @@ local playerReadyState = {}
 local numberOfSpecs = 0
 
 --To determine faction at start
--- local armcomDefID = UnitDefNames.armcom.id
--- local corcomDefID = UnitDefNames.corcom.id
+local sideOneDefID = UnitDefNames.ecommander.id
+local sideTwoDefID = UnitDefNames.ecommander.id
+
+local teamSideOne = "evorts"
+local teamSideTwo = "evorts"
 
 --Name for absent/resigned players
 local absentName = " --- "
@@ -826,21 +829,22 @@ function SetSidePics()
 	--set factions, from TeamRulesParam when possible and from initial info if not
 	teamList = Spring_GetTeamList()
 	for _, team in ipairs(teamList) do
-		local teamside
+		local teamSide
 		if Spring_GetTeamRulesParam(team, 'startUnit') then
 			local startunit = Spring_GetTeamRulesParam(team, 'startUnit')
-			if startunit == armcomDefID then 
-				teamside = "arm"
-			else
-				teamside = "core"
+			if startunit == sideOneDefID then 
+				teamSide = teamSideOne
+			end
+			if startunit == sideOneDefID then 
+				teamSide = teamSideTwo
 			end
 		else
-			_,_,_,_,teamside = Spring_GetTeamInfo(team)
+			_,_,_,_,teamSide = Spring_GetTeamInfo(team)
 		end
 	
-		if teamside then
-			sidePics[team] = imageDirectory..teamside.."_default.png"
-			sidePicsWO[team] = imageDirectory..teamside.."wo_default.png"
+		if teamSide then
+			sidePics[team] = imageDirectory..teamSide.."_default.png"
+			sidePicsWO[team] = imageDirectory..teamSide.."wo_default.png"
 		else
 			sidePics[team] = imageDirectory.."default.png"
 			sidePicsWO[team] = imageDirectory.."defaultwo.png"
@@ -1045,8 +1049,8 @@ function CreatePlayerFromTeam(teamID) -- for when we don't have a human player o
 	-- resources
 	local energy, energyStorage, energyIncome, metal, metalStorage, metalIncome = 0,1,0,1,0,0
 	if aliveAllyTeams[tallyteam] ~= nil  and  (mySpecStatus or myAllyTeamID == tallyteam) then
-		energy, energyStorage,_, energyIncome = Spring_GetTeamResources(teamID, "energy")
-		metal, metalStorage,_, metalIncome = Spring_GetTeamResources(teamID, "metal")
+		energy, energyStorage,_, energyIncome = Spring_GetTeamResources(teamID, "energy") or 0
+		metal, metalStorage,_, metalIncome = Spring_GetTeamResources(teamID, "metal") or 0
 		energy = math.floor(energy)
 		metal = math.floor(metal)
 		if energy < 0 then energy = 0 end
@@ -1203,9 +1207,13 @@ function SortAllyTeams(vOffset)
 	for allyTeamID = 0, allyTeamsCount - 1 do
 		if allyTeamID == myAllyTeamID  then
 			vOffset = vOffset + labelOffset - 3
-			table.insert(drawListOffset, vOffset)
-			table.insert(drawList, -2)  -- "Allies" label
-			vOffset = SortTeams(allyTeamID, vOffset)+2	-- Add the teams from the allyTeam		
+			if drawAlliesLabel then
+				table.insert(drawListOffset, vOffset)
+			  table.insert(drawList, -2)  -- "Allies" label
+			  vOffset = SortTeams(allyTeamID, vOffset)+2	-- Add the teams from the allyTeam
+		 else
+			  SortTeams(allyTeamID, vOffset-labelOffset)
+			end	
 			break
 		end
 	end
@@ -2545,10 +2553,9 @@ function widget:MousePress(x,y,button) --super ugly code here
 		local alt,ctrl,meta,shift = Spring.GetModKeyState() 
 		sliderPosition = 0
 		amountEM = 0
-		
 		-- spectators label onclick
 		posY = widgetPosY + widgetHeight - specsLabelOffset
-		if IsOnRect(x, y, widgetPosX + 2, posY+2, widgetPosX + widgetWidth - 2, posY + 20) then
+		if numberOfSpecs > 0 and IsOnRect(x, y, widgetPosX + 2, posY+2, widgetPosX + widgetWidth - 2, posY+20) then
 			specListShow = not specListShow
 			SetModulesPositionX() --why?
 			SortList()
