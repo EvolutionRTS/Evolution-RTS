@@ -184,9 +184,9 @@ Here are all of the modoptions in a neat copy pastable form... Place these modop
 		desc   = 'Speed multiplier for neutralizing an enemy point.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 0.50,
-		min    = 0,
-		max    = 1,
+		def    = 1,
+		min    = 1,
+		max    = 3,
 		step   = 0.01,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
@@ -304,7 +304,7 @@ end
 
 local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 500 -- Radius around a point in which to capture it
 local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 -- Time to capture a point
-local captureBonus = tonumber(Spring.GetModOptions().capturebonus) or.5 -- speedup from adding more units
+local captureBonus = tonumber(Spring.GetModOptions().capturebonus) * 0.01 or 0.05 -- speedup from adding more units
 local decapSpeed = tonumber(Spring.GetModOptions().decapspeed) or 3 -- speed multiplier for neutralizing an enemy point
 local dominationScore = tonumber(Spring.GetModOptions().dominationscore) or 1000
 local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 -- Time needed holding all points to score in multi domination
