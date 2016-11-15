@@ -8,7 +8,7 @@ local unitName                   = "emissiletank_t2"
 local buildCostMetal			 = 62
 local maxDamage					 = 320 * 1.20
 
-local tech						 = [[2 Generator]]
+local tech						 = [[tech2]]
 local armortype					 = [[light]]
 local supply					 = [[14]]
 

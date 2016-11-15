@@ -5,7 +5,7 @@ local unitName                   = "ehbotsniper"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[2 Generator]]
+local tech						 = [[tech2]]
 local armortype					 = [[light]]
 local supply					 = [[9]]
 local maxDamage					 = 300

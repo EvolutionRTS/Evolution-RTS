@@ -59,15 +59,41 @@ colors = {
 	{'Pink',			'#C9007A'};
 ]]--
 
-	{'Orange',			'#ff6600'};
-	{'Fake Parchment',	'#ffda61'}; --More of an orangey parchment > that is parchment but it's hard ot distinguish from white --'#FFFFC2'};
-	{'Teal',			'#009B95'};
-	{'Red',				'#FF0000'};
-	{'Purple',			'#3914AF'};
-	{'Yellow', 			'#FFFF00'};
-	{'Blue',			'#1144AA'};
-	{'Pink',			'#C9007A'};
-	{'Green',			'#00CC00'};
+--These are the original colors used for teams in evo
+	-- {'Orange',			'#ff6600'};
+	-- {'Fake Parchment',	'#ffda61'};
+	-- {'Teal',			'#009B95'};
+	-- {'Red',				'#FF0000'};
+	-- {'Purple',			'#3914AF'};
+	-- {'Yellow', 			'#FFFF00'};
+	-- {'Blue',			'#1144AA'};
+	-- {'Pink',			'#C9007A'};
+	-- {'Green',			'#00CC00'};
+	
+	{'Color1',			'#fe0000'};
+	{'Color2',			'#cc0098'};
+	{'Color3',			'#990099'};
+	{'Color4',			'#670099'};
+	{'Color5',			'#0051d4'};
+	{'Color6',			'#0ab4c3'};
+	{'Color7',			'#009900'};
+	{'Color8',			'#66cc00'};
+	{'Color9',			'#ffff00'};
+	{'Color10',			'#ffcc00'};
+	{'Color11',			'#fe9900'};
+	{'Color12',			'#ff6600'};
+	{'Color13',			'#9b0300'};
+	{'Color14',			'#660032'};
+	{'Color15',			'#673266'};
+	{'Color16',			'#64339c'};
+	{'Color17',			'#003399'};
+	{'Color18',			'#006766'};
+	{'Color19',			'#006600'};
+	{'Color20',			'#679801'};
+	{'Color21',			'#999a01'};
+	{'Color22',			'#cf9800'};
+	{'Color23',			'#cd6601'};
+	{'Color24',			'#9a3501'};
 }
 
 local colorNames = {}

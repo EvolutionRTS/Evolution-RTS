@@ -8,7 +8,7 @@ local unitName                   = "ebomber"
 local buildCostMetal 			  = 55
 local maxDamage					  = 270
 
-local tech						 = [[2 Generator]]
+local tech						 = [[tech2]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 

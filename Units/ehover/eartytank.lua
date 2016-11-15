@@ -8,7 +8,7 @@ local unitName                   = "eartytank"
 local buildCostMetal			 = 36
 local maxDamage					 = 300
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[8]]
 

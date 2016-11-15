@@ -15,7 +15,7 @@ local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2500,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 125,
+	buildCostMetal                = 175,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
@@ -44,7 +44,6 @@ local unitDef                     = {
 	sightDistance                 = 367,
 	smoothAnim                    = true,
 	unitname                      = "efusion2",
-	workerTime                    = 0,
 	yardMap                       = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
 
 	sfxtypes                      = { 

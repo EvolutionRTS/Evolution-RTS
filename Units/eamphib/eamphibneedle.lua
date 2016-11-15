@@ -8,7 +8,7 @@ local unitName                   = "eamphibneedle"
 local buildCostMetal 			  = 42
 local maxDamage					  = 340
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 

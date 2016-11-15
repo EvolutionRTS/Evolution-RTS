@@ -44,6 +44,12 @@ local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
 local metalCost_t2factory = 400
 local timeToBuild_t2factory = metalCost_t2factory * 0.125
 
+local metalCost_etech2 = 250
+local timeToBuild_etech2 = metalCost_etech2 * 0.25
+
+local metalCost_etech3 = 250
+local timeToBuild_etech3 = metalCost_etech3 * 0.25
+
 local morphDefs = {
 	ecommander = 	{
 		{
@@ -146,40 +152,36 @@ Overseer]],
 		{
 			into = 'ebasefactory_t2',
 			time = timeToBuild_t2factory,
-			cmdname = [[Tech
-Lvl 2]],
+			cmdname = [[Upgrade]],
 			metal = metalCost_t2factory,
-			text = 'Morph into a tech level 2 factory.',
+			text = 'Morph into an upgraded factory.',
 		},
 	},
 	eminifac = 	{
 		{
 			into = 'eminifac_t2',
 			time = timeToBuild_t2factory,
-			cmdname = [[Tech
-Lvl 2]],
+			cmdname = [[Upgrade]],
 			metal = metalCost_t2factory,
-			text = 'Morph into a tech level 2 factory.',
+			text = 'Morph into an upgraded factory.',
 		},
 	},
 	eamphibfac = 	{
 		{
 			into = 'eamphibfac_t2',
 			time = timeToBuild_t2factory,
-			cmdname = [[Tech
-Lvl 2]],
+			cmdname = [[Upgrade]],
 			metal = metalCost_t2factory,
-			text = 'Morph into a tech level 2 factory.',
+			text = 'Morph into an upgraded factory.',
 		},
 	},
 	eairplant = 	{
 		{
 			into = 'eairplant_t2',
 			time = timeToBuild_t2factory,
-			cmdname = [[Tech
-Lvl 2]],
+			cmdname = [[Upgrade]],
 			metal = metalCost_t2factory,
-			text = 'Morph into a tech level 2 factory.',
+			text = 'Morph into an upgraded factory.',
 		},
 	},	
 
@@ -226,6 +228,26 @@ Lvl 2]],
 			cmdname = [[Deploy]],
 			metal = 50,
 			text = 'Morph into a stationary turret.',
+		},
+	},	
+	
+	
+	etech1 = 	{
+		{
+			into = 'etech2',
+			time = timeToBuild_etech2,
+			cmdname = [[tech2]],
+			metal = metalCost_etech2,
+			text = 'Morph into a Tech Level 2 Facility.',
+		},
+	},	
+	etech2 = 	{
+		{
+			into = 'etech3',
+			time = timeToBuild_etech3,
+			cmdname = [[tech3]],
+			metal = metalCost_etech3,
+			text = 'Morph into a Tech Level 3 Facility.',
 		},
 	},	
 }

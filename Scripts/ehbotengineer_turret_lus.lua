@@ -9,6 +9,7 @@ function script.Create()
 	StartThread(common.SmokeUnit, {base, turret, barrel1})
 	StartThread(BuildFX)
 	building = false
+	Move(base, y_axis, -1, 50)
 end
 
 common = include("headers/common_includes_lus.lua")

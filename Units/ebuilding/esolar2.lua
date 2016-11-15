@@ -6,42 +6,36 @@ local unitName                    = "esolar2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[1]]
-local powerprovided				 = [[1 power]]
-local powerradius				 = [[400]]
+local energyproduced			 = [[5]]
+--local powerprovided				 = [[1 power]]
+--local powerradius				 = [[400]]
 -- local supplygranted				 = [[5]]
 
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 20,
+	buildCostMetal                = 90,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	damageModifier                = 0.33333,
-	description                   = [[Armortype: ]] ..armortype.. [[ 
-
-Produces +]] .. energyproduced .. [[ Energy 
-
-Provides +]] .. powerprovided .. [[ 
-Power Radius: ]] .. powerradius,
+	description                   = [[Produces +]] .. energyproduced .. [[ Energy]],
 	energyStorage                 = 0,
 	energyMake                    = energyproduced,
 	explodeAs                     = "mediumBuildingExplosionGenericBlueEMP",
-	footprintX                    = 4,
-	footprintZ                    = 4,
+	footprintX                    = 6,
+	footprintZ                    = 6,
 	icontype                      = "energy",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 800,
+	maxDamage                     = 1200,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
 	name                          = "Basic Generator",
-	objectName                    = "epowerplant.s3o",
+	objectName                    = "epowerplant6x6.s3o",
 	onoffable                     = false,
 	radarDistance                 = 0,
 	repairable		              = false,
@@ -50,7 +44,7 @@ Power Radius: ]] .. powerradius,
 	sightDistance                 = 367,
 	smoothAnim                    = true,
 	unitname                      = "esolar2",
-	yardMap                       = "oooo oooo oooo oooo",
+	yardMap                       = "oooooo oooooo oooooo oooooo oooooo oooooo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {
@@ -77,7 +71,7 @@ Power Radius: ]] .. powerradius,
 		iseco                     = 1,
 		needed_cover              = 2,
 		death_sounds              = "generic",
-		ProvideTech               = powerprovided,
+--		ProvideTech               = powerprovided,
 --		ProvideTechRange          = powerradius,
 		--	RequireTech           = "1 Powergrid",
 		armortype                 = armortype,
@@ -98,8 +92,8 @@ Power Radius: ]] .. powerradius,
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 6,
-	BuildingGroundDecalSizeY      = 6,
+	BuildingGroundDecalSizeX      = 8,
+	BuildingGroundDecalSizeY      = 8,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 --------------------------------------------------------------------------------

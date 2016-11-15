@@ -508,9 +508,9 @@ local function UpdateGrid(g,cmds,ordertype)
 			text.px = icon.px
 			text.py = icon.py
 			if powerBlocked then
-				text.caption = red.."\nNeed\ngenerator\n\n"
+				text.caption = red.."\nRequires\nTech\n\n"
 			elseif supplyBlocked then
-				text.caption = red.."\nNeed\nsupply\n\n"
+				text.caption = red.."\nNeed\nSupply\n\n"
 			else
 				local captionColor = white
 			

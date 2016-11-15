@@ -8,7 +8,7 @@ local unitName                   = "efighter"
 local buildCostMetal 			  = 45
 local maxDamage					  = 325
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 

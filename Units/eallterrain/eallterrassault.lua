@@ -8,7 +8,7 @@ local unitName                   = "eallterrassault"
 local buildCostMetal 			  = 60
 local maxDamage					  = 400
 
-local tech						 = [[2 Generator]]
+local tech						 = [[tech2]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
 

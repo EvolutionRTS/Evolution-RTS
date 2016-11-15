@@ -6,9 +6,9 @@ local unitName                   = "eallterranarchid"
 --------------------------------------------------------------------------------
 
 local buildCostMetal 			  = 225
-local maxDamage					  = 1500
+local maxDamage					  = 5500
 
-local tech						 = [[3 Generator]]
+local tech						 = [[tech3]]
 local armortype					 = [[armored]]
 local supply					 = [[12]]
 
@@ -165,7 +165,7 @@ local weaponDefs                 = {
 		--	cegTag               = "mediumcannonweapon3",
 		--    duration           = 0.2,
 		energypershot            = energycosttofire,
-		explosionGenerator       = "custom:genericshellexplosion-large-purple",
+		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		impulseFactor            = 0,

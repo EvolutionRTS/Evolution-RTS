@@ -6,9 +6,9 @@ local unitName                   = "elacerator"
 --------------------------------------------------------------------------------
 
 local buildCostMetal 			 = 200
-local maxDamage					 = 1000
+local maxDamage					 = 5000
 
-local tech						 = [[3 Generator]]
+local tech						 = [[tech3]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
 
@@ -50,7 +50,6 @@ local unitDef                    = {
 	explodeAs                    = "BIG_UNIT",
 	footprintX                   = 6,
 	footprintZ                   = 6,
-	fireState			         = 0,
 	--highTrajectory               = 1,
 	iconType                     = "assault",
 	idleAutoHeal                 = .5,
@@ -70,7 +69,7 @@ local unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "BIG_UNIT",
 	side                         = "CORE",
-	sightDistance                = 500,
+	sightDistance                = 1500,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 4,

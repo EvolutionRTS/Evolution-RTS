@@ -182,7 +182,9 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then
-				GG.TechGrant("Generator",TeamID)
+				GG.TechGrant("tech1",TeamID)
+				GG.TechGrant("tech2",TeamID)
+				GG.TechGrant("tech3",TeamID)
 			end
 		end
 	end

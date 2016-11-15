@@ -8,7 +8,7 @@ local unitName                   = "eriottank2_t2"
 local buildCostMetal			 = 25
 local maxDamage					 = 300 * 1.20
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 

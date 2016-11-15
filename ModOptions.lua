@@ -182,7 +182,7 @@ local options= {
 		desc   = 'Total score amount available.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 2750,
+		def    = 3500,
 		min    = 500,
 		max    = 5000,
 		step   = 1,  -- quantization is aligned to the def value
@@ -245,10 +245,10 @@ local options= {
 		desc   = 'How much faster capture takes place by adding more units.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 0.5,
+		def    = 0.05,
 		min    = 0,
-		max    = 10,
-		step   = 0.1,  -- quantization is aligned to the def value
+		max    = 1,
+		step   = 0.01,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 		{
@@ -257,10 +257,10 @@ local options= {
 		desc   = 'Speed multiplier for neutralizing an enemy point.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 3,
-		min    = 0.1,
-		max    = 10,
-		step   = 0.1,  -- quantization is aligned to the def value
+		def    = 0.50,
+		min    = 0,
+		max    = 1,
+		step   = 0.01,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 		{

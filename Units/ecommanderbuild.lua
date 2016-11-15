@@ -94,30 +94,27 @@ local unitDef                    = {
 		},
 	},
 	buildoptions                 = {
-		"ehbotfac",
-		"eminifac", --new
-		"ebasefactory", --new
-		"eamphibfac",
-		"eairplant",
---		"eexperimentalfac",
---		"emetalextractor", --new
---		"emaker", --new
-		--"esolar2", --new
-		--"emediumgen", --new
-		"egeothermal", --new
-		"efusion2", --new
-		"estorage", --new
-		"eradar2", --new
-		"ejammer2", --new
-		"ekmar",
-		"elightturret2", --new
-		"eheavyturret2", --new
-		"eartyturret",
-		"euwturret",
-		"eshieldgen",
-		"esilo",
-		"emine",
-		"eorb",
+		[[ehbotfac]],
+		[[eminifac]],
+		[[ebasefactory]],
+		[[eamphibfac]],
+		[[eairplant]],
+		[[etech1]],
+		[[esolar2]],
+		[[egeothermal]],
+		[[efusion2]],
+		[[estorage]],
+		[[eradar2]],
+		[[ejammer2]],
+		[[ekmar]],
+		[[elightturret2]],
+		[[eheavyturret2]],
+		[[eartyturret]],
+		[[euwturret]],
+		[[eshieldgen]],
+		[[esilo]],
+		[[emine]],
+		[[eorb]],
 	},
 	sounds                       = {
 		underattack              = "unitsunderattack1",

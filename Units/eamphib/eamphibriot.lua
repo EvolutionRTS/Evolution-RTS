@@ -8,7 +8,7 @@ local unitName                   = "eamphibriot"
 local buildCostMetal 			  = 23
 local maxDamage					  = 340
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[3]]
 

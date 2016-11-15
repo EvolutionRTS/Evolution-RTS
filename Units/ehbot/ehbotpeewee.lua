@@ -5,7 +5,7 @@ local unitName                   = "ehbotpeewee"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 local maxDamage					 = 300

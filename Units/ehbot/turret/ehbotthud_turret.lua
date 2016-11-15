@@ -5,7 +5,7 @@ local unitName                   = "ehbotthud_turret"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[building]]
 local supply					 = [[7]]
 local maxDamage					 = 325 * 3

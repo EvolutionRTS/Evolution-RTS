@@ -7,6 +7,8 @@ terrainType = "terrainType"
 
 function script.Create()
 	StartThread(common.SmokeUnit, {base, turret, barrel1})
+	Sleep(2000)
+	Move(base, y_axis, -1, 50)
 end
 
 common = include("headers/common_includes_lus.lua")

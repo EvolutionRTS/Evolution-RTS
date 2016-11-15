@@ -8,7 +8,7 @@ local unitName                   = "eallterrshield_t2"
 local buildCostMetal 			  = 28
 local maxDamage					  = 500 * 1.20
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 

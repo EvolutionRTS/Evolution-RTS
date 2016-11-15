@@ -8,7 +8,7 @@ local unitName                   = "eallterrlight"
 local buildCostMetal 			  = 22
 local maxDamage					  = 245
 
-local tech						 = [[1 Generator]]
+local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 
