@@ -274,16 +274,18 @@ return {
     },
   },
   
-  ["fusionreactionnuclearpurple"] = {
-    electricarcs1 = {
-      air                = true,
+  ["fusionreactionnuclearblue"] = {
+	electricarcs1 = {
+	  air                = true,
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      ground             = true,
+	  ground             = true,
+	  water              = true,
+      underwater         = true,
       properties = {
         airdrag            = 0.8,
         --alwaysvisible      = true,
-        colormap           = [[1.0 1.0 1.0 0.04   0.6 0 0.6 0.01  0.3 0 0.6 0.01	0 0 0 0.01]],
+        colormap           = [[1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01]],
         directional        = true,
         emitrot            = 45,
         emitrotspread      = 15,
@@ -303,14 +305,20 @@ return {
         useairlos          = false,
       },
     },
-    underwater_electricarcs1 = {
+  },
+  
+  ["fusionreactionnuclearpurple"] = {
+    electricarcs1 = {
+      air                = true,
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      underwater         = 1,
+      ground             = true,
+	  water         	 = true,
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         --alwaysvisible      = true,
-        colormap           = [[1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.2 0 0.01	0 0 0 0.01]],
+        colormap           = [[1.0 1.0 1.0 0.04   0.6 0 0.6 0.01  0.3 0 0.6 0.01	0 0 0 0.01]],
         directional        = true,
         emitrot            = 45,
         emitrotspread      = 15,
@@ -338,37 +346,12 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
+	  water         	 = true,
+	  underwater         = true,
       properties = {
         airdrag            = 0.8,
         --alwaysvisible      = true,
         colormap           = [[1.0 1.0 1.0 0.04   0 0.5 0 0.01  0 0.8 0.2 0.01	0 0 0 0.01]],
-        directional        = true,
-        emitrot            = 45,
-        emitrotspread      = 15,
-        emitvector         = [[0, 1, 0]],
-        gravity            = [[0, -0.05, 0]],
-        numparticles       = 8,
-        particlelife       = 45,
-        particlelifespread = 1,
-        particlesize       = 1,
-        particlesizespread = 0,
-        particlespeed      = 4,
-        particlespeedspread = 1,
-        pos                = [[0, 2, 0]],
-        sizegrowth         = 0.7,
-        sizemod            = 1.0,
-        texture            = [[plasmaball]],
-        useairlos          = false,
-      },
-    },
-    underwater_electricarcs1 = {
-      class              = [[CSimpleParticleSystem]],
-      count              = 1,
-      underwater         = 1,
-      properties = {
-        airdrag            = 0.8,
-        --alwaysvisible      = true,
-        colormap           = [[1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01]],
         directional        = true,
         emitrot            = 45,
         emitrotspread      = 15,
