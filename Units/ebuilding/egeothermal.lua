@@ -7,7 +7,7 @@ local unitName                    = "egeothermal"
 
 local armortype					 = [[building]]
 local energyproduced			 = [[10]]
-local techprovided				 = [[1 Generator]]
+--local techprovided				 = [[1 Generator]]
 --local powerradius				 = [[600]]
 --local supplygranted				 = [[35]]
 
@@ -21,7 +21,7 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Produces +]] .. energyproduced .. [[ Energy • Provides +]] .. techprovided,
+	description                   = [[Produces +]] .. energyproduced .. [[ Energy]],
 	energyMake                    = energyproduced,
 	energyStorage                 = 0,
 	explodeAs                     = "largeBuildingExplosionGenericBlueEMP",
@@ -71,7 +71,7 @@ local unitDef                     = {
 		iseco                     = 1,
 		needed_cover              = 2,
 		death_sounds              = "generic",
-		ProvideTech               = techprovided,
+--		ProvideTech               = techprovided,
 --		ProvideTechRange          = powerradius,
 		armortype                 = armortype,
 --		supply_granted            = supplygranted,
