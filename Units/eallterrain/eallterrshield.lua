@@ -157,13 +157,13 @@ local weaponDefs                 = {
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
 		Shieldradius             = 300,
-		Shieldpower              = shield1tech,
+		Shieldpower              = shield1Power,
 		Shieldpowerregen         = shield1PowerRegen,
 		Shieldpowerregenenergy   = shield1PowerRegenEnergy,
 		Shieldintercepttype      = 4,
 		Shieldgoodcolor          = "0.0 0.2 1.0",
 		Shieldbadcolor           = "1.0 0 0",
-		Shieldalpha              = 0.075,
+		Shieldalpha              = 0.2,
 		
 		texture1		         = "shield4",
 		
