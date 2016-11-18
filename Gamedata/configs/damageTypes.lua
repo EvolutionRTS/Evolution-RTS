@@ -242,15 +242,15 @@ local damageClasses = {
 			BUILDING 	= 1,
 		},
 		efighter	= {
-			SIEGE		= 1,
-			ARMORED		= 1,
+			SIEGE		= 0.25,
+			ARMORED		= 0.25,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},
 		egunship2	= {
 			SIEGE		= 1,
 			ARMORED		= 1,
-			LIGHT		= 1,
+			LIGHT		= 0.25,
 			BUILDING 	= 0.25,
 		},	
 		egunship2torpedo	= {

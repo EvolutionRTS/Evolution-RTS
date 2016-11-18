@@ -12,9 +12,9 @@ local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 
-local weapon1Damage              = 125
-local weapon1AOE				 = 100
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local weapon1Damage              = 12.5
+local weapon1AOE				 = 0
+local energycosttofire			 = weapon1Damage / 10
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -45,8 +45,8 @@ local unitDef                    = {
 	category                     = "LIGHT VTOL",
 	collide                      = true,
 	corpse                       = "ammobox",
-	cruiseAlt                    = 200,
-	description                  = [[Paralysis Gunship • Uses +]] .. supply .. [[ Supply]],
+	cruiseAlt                    = 100,
+	description                  = [[Light Tank Destroyer Gunship • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -74,7 +74,7 @@ local unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericWhite",
 	side                         = "ARM",
-	sightDistance                = 550,
+	sightDistance                = 500,
 	smoothAnim                   = true,
 	sonarDistance                = 0,
 	turnRate                     = 5000,
@@ -104,7 +104,7 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "aircannon",
-			badTargetCategory    = "BUILDING VTOL",
+			badTargetCategory    = "ARMORED BUILDING VTOL",
 		},
 	},
 	customParams                 = {
@@ -147,13 +147,11 @@ local weaponDefs                 = {
 		
 		minintensity             = "1",
 		name                     = "Laser",
-		paralyzer		         = true,
-		paralyzetime	         = 2.5,
-		range                    = 550,
-		reloadtime               = 0.5,
+		range                    = 500,
+		reloadtime               = 0.1,
 		WeaponType               = "LaserCannon",
 		waterweapon				 = true,
-		rgbColor                 = "0 0 1",
+		rgbColor                 = "1 0.5 0",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
 		soundstart               = "18379_inferno_hilas.wav",
@@ -162,7 +160,7 @@ local weaponDefs                 = {
 		thickness                = 15,
 		tolerance                = 10000,
 		turret                   = false,
-		weaponVelocity           = 5000,
+		weaponVelocity           = 2000,
 		customparams             = {
 			damagetype		     = "efighter",  
 		}, 
