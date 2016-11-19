@@ -18,7 +18,7 @@ function widget:GetInfo()
 		author	= "cake, trepan, Smoth, Licho, xponen, Forboding Angel, Floris",
 		date	= "Mar 01, 2008, Aug 20 2009, Nov 23 2011",
 		license	= "GNU GPL, v2 or later",
-		layer	= -3,
+		layer	= -4,
 		enabled	= true	--	loaded by default?
 	}
 end
@@ -27,8 +27,6 @@ end
 --------------------------------------------------------------------------------
 
 --Unfucked volumes finally. Instead of setting the volume in Spring.PlaySoundStream. you need to call Spring.PlaySoundStream and then immediately call Spring.SetSoundStreamVolume
-
-WG.music_volume = Spring.GetConfigInt("snd_volmusic") * 0.01
 
 local unitExceptions = include("Configs/snd_music_exception.lua")
 
@@ -79,6 +77,7 @@ local playTex				= ":n:"..LUAUI_DIRNAME.."Images/music/play.png"
 local pauseTex				= ":n:"..LUAUI_DIRNAME.."Images/music/pause.png"
 local nextTex				= ":n:"..LUAUI_DIRNAME.."Images/music/next.png"
 local musicTex				= ":n:"..LUAUI_DIRNAME.."Images/music/music.png"
+local volumeTex				= ":n:"..LUAUI_DIRNAME.."Images/music/volume.png"
 local buttonTex				= ":n:"..LUAUI_DIRNAME.."Images/button.dds"
 local buttonHighlightTex				= ":n:"..LUAUI_DIRNAME.."Images/button-highlight.dds"
 local bgcorner				= ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
@@ -107,12 +106,16 @@ local top, left, bottom, right = 0,0,0,0
 
 local shown = false
 local mouseover = false
-
+local volume
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
+	
+	volume = Spring.GetConfigInt("snd_volmaster", 100)
+	music_volume = Spring.GetConfigInt("snd_volmusic", 25)
+  
 	-- Spring.Echo(math.random(), math.random())
 	-- Spring.Echo(os.clock())
 
@@ -131,6 +134,11 @@ function widget:Initialize()
 		dethklok[i]=0
 	end
 	updatePosition()
+	
+	WG['music'] = {}
+	WG['music'].GetPosition = function()
+		return {top,left,bottom,right,widgetScale}
+	end
 end
 
 
@@ -206,6 +214,28 @@ end
 
 local buttons = {}
 local function createList()
+	
+	local padding = 3*widgetScale -- button background margin
+	local padding2 = 2.5*widgetScale -- inner icon padding
+	local volumeWidth = 50*widgetScale
+	
+	buttons['playpause'] = {left+padding, bottom+padding, left+(widgetHeight*widgetScale)-padding, top-padding}
+	
+	buttons['next'] = {buttons['playpause'][3]+padding, bottom+padding, buttons['playpause'][3]+((widgetHeight*widgetScale)-padding), top-padding}
+	
+	buttons['musicvolumeicon'] = {buttons['next'][3]+padding+padding, bottom+padding, buttons['next'][3]+((widgetHeight*widgetScale)), top-padding}
+	buttons['musicvolume'] = {buttons['musicvolumeicon'][3]+padding, bottom+padding, buttons['musicvolumeicon'][3]+padding+volumeWidth, top-padding}
+	buttons['musicvolume'][5] = buttons['musicvolume'][1] + (buttons['musicvolume'][3] - buttons['musicvolume'][1]) * (music_volume/100)
+	
+	buttons['volumeicon'] = {buttons['musicvolume'][3]+padding+padding+padding, bottom+padding, buttons['musicvolume'][3]+((widgetHeight*widgetScale)), top-padding}
+	buttons['volume'] = {buttons['volumeicon'][3]+padding, bottom+padding, buttons['volumeicon'][3]+padding+volumeWidth, top-padding}
+	buttons['volume'][5] = buttons['volume'][1] + (buttons['volume'][3] - buttons['volume'][1]) * (volume/100)
+	
+	local textsize = 11*widgetScale
+	local textYPadding = 8*widgetScale
+	local textXPadding = 7*widgetScale
+	local maxTextWidth = right-buttons['next'][3]-textXPadding-textXPadding
+		
 	if drawlist[1] ~= nil then
 		glDeleteList(drawlist[1])
 		glDeleteList(drawlist[2])
@@ -225,29 +255,6 @@ local function createList()
 	end)
 	drawlist[2] = glCreateList( function()
 	
-		local padding = 3*widgetScale -- button background margin
-		local padding2 = 2.5*widgetScale -- inner icon padding
-		buttons['playpause'] = {left+padding, bottom+padding, left+(widgetHeight*widgetScale)-padding, top-padding}
-		buttons['next'] = {buttons['playpause'][3]+padding, bottom+padding, buttons['playpause'][3]+((widgetHeight*widgetScale)-padding), top-padding}
-		
-		-- track name
-		local textsize = 11*widgetScale
-		local textYPadding = 8*widgetScale
-		local textXPadding = 7*widgetScale
-		local maxTextWidth = right-buttons['next'][3]-textXPadding-textXPadding
-		glColor(0.45,0.45,0.45,1)
-		local text = ''
-		for i=charactersInPath, #curTrack do
-	    local c = string.sub(curTrack, i,i)
-			local width = glGetTextWidth(text..c)*textsize
-	    if width > maxTextWidth then
-	    	break
-	    else
-	    	text = text..c
-	    end
-		end
-		glText('\255\135\135\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
-		
 		local button = 'playpause'
 		glColor(1,1,1,0.7)
 		glTexture(buttonTex)
@@ -270,41 +277,153 @@ local function createList()
 		
 	end)
 	drawlist[3] = glCreateList( function()
-				
-		local borderPadding = 2.75*widgetScale
-		glColor(0,0,0,0.5)
-		RectRound(left, bottom, right, top, 5.5*widgetScale)
-		-- next button
 		
-		-- pause button
+		-- track name
+		glColor(0.45,0.45,0.45,1)
+		local trackname = string.gsub(curTrack, ".ogg", "")
+		local text = ''
+		for i=charactersInPath, #trackname do
+	    local c = string.sub(trackname, i,i)
+			local width = glGetTextWidth(text..c)*textsize
+	    if width > maxTextWidth then
+	    	break
+	    else
+	    	text = text..c
+	    end
+		end
+		glText('\255\135\135\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
 		
-		-- volume slider
+	end)
+	drawlist[4] = glCreateList( function()
+		
+		---glColor(0,0,0,0.5)
+		--RectRound(left, bottom, right, top, 5.5*widgetScale)
+
+		local sliderWidth = 3.3*widgetScale
+		local sliderHeight = 3.3*widgetScale
+		local lineHeight = 0.8*widgetScale
+		local lineOutlineSize = 0.85*widgetScale
+		
+		button = 'musicvolumeicon'
+		local sliderY = buttons[button][2] + (buttons[button][4] - buttons[button][2])/2
+		glColor(0.66,0.66,0.66,1)
+		glTexture(musicTex)
+		glTexRect(buttons[button][1]+padding2, buttons[button][2]+padding2, buttons[button][3]-padding2, buttons[button][4]-padding2)
+		
+		button = 'musicvolume'
+		glColor(0,0,0,0.12)
+		RectRound(buttons[button][1]-lineOutlineSize, sliderY-lineHeight-lineOutlineSize, buttons[button][3]+lineOutlineSize, sliderY+lineHeight+lineOutlineSize, (lineHeight/2.2)*widgetScale)
+		glColor(0.45,0.45,0.45,1)
+		RectRound(buttons[button][1], sliderY-lineHeight, buttons[button][3], sliderY+lineHeight, (lineHeight/2.2)*widgetScale)
+		glColor(0,0,0,0.12)
+		RectRound(buttons[button][5]-sliderWidth-lineOutlineSize, sliderY-sliderHeight-lineOutlineSize, buttons[button][5]+sliderWidth+lineOutlineSize, sliderY+sliderHeight+lineOutlineSize, (sliderWidth/4)*widgetScale)
+		glColor(0.66,0.66,0.66,1)
+		RectRound(buttons[button][5]-sliderWidth, sliderY-sliderHeight, buttons[button][5]+sliderWidth, sliderY+sliderHeight, (sliderWidth/4)*widgetScale)
+
+
+		button = 'volumeicon'
+		glColor(0.66,0.66,0.66,1)
+		glTexture(volumeTex)
+		glTexRect(buttons[button][1]+padding2, buttons[button][2]+padding2, buttons[button][3]-padding2, buttons[button][4]-padding2)
+		
+		button = 'volume'
+		glColor(0,0,0,0.12)
+		RectRound(buttons[button][1]-lineOutlineSize, sliderY-lineHeight-lineOutlineSize, buttons[button][3]+lineOutlineSize, sliderY+lineHeight+lineOutlineSize, (lineHeight/2.2)*widgetScale)
+		glColor(0.45,0.45,0.45,1)
+		RectRound(buttons[button][1], sliderY-lineHeight, buttons[button][3], sliderY+lineHeight, (lineHeight/2.2)*widgetScale)
+		glColor(0,0,0,0.12)
+		RectRound(buttons[button][5]-sliderWidth-lineOutlineSize, sliderY-sliderHeight-lineOutlineSize, buttons[button][5]+sliderWidth+lineOutlineSize, sliderY+sliderHeight+lineOutlineSize, (sliderWidth/4)*widgetScale)
+		glColor(0.66,0.66,0.66,1)
+		RectRound(buttons[button][5]-sliderWidth, sliderY-sliderHeight, buttons[button][5]+sliderWidth, sliderY+sliderHeight, (sliderWidth/4)*widgetScale)
+		
 	end)
 end
 
-
-function isInBox(mx, my, box)
-    return mx > box[1] and my > box[2] and mx < box[3] and my < box[4]
+function getSliderValue(draggingSlider, x)
+	local sliderWidth = buttons[draggingSlider][3] - buttons[draggingSlider][1]
+	local value = (x - buttons[draggingSlider][1]) / (sliderWidth)
+	if value < 0 then value = 0 end
+	if value > 1 then value = 1 end
+	return value
 end
 
-function widget:MousePress(mx, my, mb)
-	--Spring.Echo(mb)
-	if mb == 1 and isInBox(mx, my, {left, bottom, right, top}) then
-		if mb == 1 and buttons['playpause'] ~= nil and isInBox(mx, my, {buttons['playpause'][1], buttons['playpause'][2], buttons['playpause'][3], buttons['playpause'][4]}) then
+function isInBox(mx, my, box)
+  return mx > box[1] and my > box[2] and mx < box[3] and my < box[4]
+end
+
+
+function widget:MouseMove(x, y)
+	if draggingSlider ~= nil then
+		if draggingSlider == 'musicvolume' then
+			changeMusicVolume(getSliderValue('musicvolume', x) * 100)
+		end
+		if draggingSlider == 'volume' then
+			changeVolume(getSliderValue('volume', x) * 100)
+		end
+	end
+end
+
+function widget:MousePress(x, y, button)
+	return mouseEvent(x, y, button, false)
+end
+
+function widget:MouseRelease(x, y, button)
+	return mouseEvent(x, y, button, true)
+end
+
+function changeMusicVolume(value)
+	music_volume = value
+	Spring.SetConfigInt("snd_volmusic", music_volume)
+  createList()
+end
+
+function changeVolume(value)
+	volume = value
+	Spring.SetConfigInt("snd_volmaster", volume)
+  createList()
+end
+
+function mouseEvent(x, y, button, release)
+	if Spring.IsGUIHidden() then return false end
+
+	if not release then
+		local sliderWidth = (3.3*widgetScale) -- should be same as in createlist()
+		local button = 'musicvolume'
+		if isInBox(x, y, {buttons[button][1]-sliderWidth, buttons[button][2], buttons[button][3]+sliderWidth, buttons[button][4]}) then
+			draggingSlider = button
+			changeMusicVolume(getSliderValue(button, x) * 100)
+		end
+		button = 'volume'
+		if isInBox(x, y, {buttons[button][1]-sliderWidth, buttons[button][2], buttons[button][3]+sliderWidth, buttons[button][4]}) then
+			draggingSlider = button
+			changeVolume(getSliderValue(button, x) * 100)
+		end
+	end
+	if release and draggingSlider ~= nil then
+		draggingSlider = nil
+	end
+	if button == 1 and not release and isInBox(x, y, {left, bottom, right, top}) then
+		if button == 1 and buttons['playpause'] ~= nil and isInBox(x, y, {buttons['playpause'][1], buttons['playpause'][2], buttons['playpause'][3], buttons['playpause'][4]}) then
 			playing = not playing
 			Spring.PauseSoundStream()
 			createList()
 			return true
 		end
-		if mb == 1 and buttons['next'] ~= nil and isInBox(mx, my, {buttons['next'][1], buttons['next'][2], buttons['next'][3], buttons['next'][4]}) then
+		if button == 1 and buttons['next'] ~= nil and isInBox(x, y, {buttons['next'][1], buttons['next'][2], buttons['next'][3], buttons['next'][4]}) then
 			PlayNewTrack()
 			return true
 		end
+		return true
 	end
+	
 end
-
 function widget:IsAbove(mx, my)
 	if isInBox(mx, my, {left, bottom, right, top}) then
+  	local curVolume = Spring.GetConfigInt("snd_volmaster", 100)
+  	if volume ~= curVolume then
+  		volume = curVolume
+  		createList()
+  	end
 		mouseover = true
 	end
 	return mouseover
@@ -330,6 +449,7 @@ function widget:Shutdown()
 	glDeleteList(drawlist[1])
 	glDeleteList(drawlist[2])
 	glDeleteList(drawlist[3])
+	glDeleteList(drawlist[4])
 end
 
 function PlayNewTrack()
@@ -354,18 +474,14 @@ function PlayNewTrack()
 		-- Spring.Echo("Song changed but unable to get the artist and title info")
 	-- end
 	curTrack = newTrack
-	WG.music_volume = Spring.GetConfigInt("snd_volmusic") * 0.01
+	local musicVolScaled = music_volume * 0.01	
 	Spring.PlaySoundStream(newTrack)
-	Spring.SetSoundStreamVolume(WG.music_volume or 0.33)
-	Spring.Echo([[[Music Player] Music Volume is set to: ]] .. WG.music_volume .. [[
- 
-[Music Player] Press Shift and the +/- keys to adjust the music volume]])
+	Spring.SetSoundStreamVolume(musicVolScaled or 0.33)
+	Spring.Echo([[[Music Player] Music Volume is set to: ]] .. musicVolScaled * 100)
+	Spring.Echo([[[Music Player] Master Volume is set to: ]] .. volume)
 	if playing == false then
 		Spring.PauseSoundStream()
-	end
-
-	WG.music_start_volume = WG.music_volume
-	
+	end	
 	createList()
 end
 
@@ -527,8 +643,7 @@ function widget:GameOver()
 	end
 	Spring.StopSoundStream()
 	Spring.PlaySoundStream(track)
-	Spring.SetSoundStreamVolume(WG.music_volume or 0.33)
-	WG.music_start_volume = WG.music_volume
+	Spring.SetSoundStreamVolume(music_volume or 0.33)
 end
 
 
@@ -559,8 +674,13 @@ function widget:DrawScreen()
 		glPushMatrix()
 			glCallList(drawlist[1])
 			glCallList(drawlist[2])
+		  local mx, my, mlb = Spring.GetMouseState()
+			if not mouseover and not draggingSlider or isInBox(mx, my, {buttons['playpause'][1], buttons['next'][2], buttons['next'][3], buttons['next'][4]}) then
+				glCallList(drawlist[3])
+			else
+				glCallList(drawlist[4])
+			end
 			if mouseover then
-			  local mx, my, mlb = Spring.GetMouseState()
 			  local color = {1,1,1,0.25}
 			  local colorHighlight = {1,1,1,0.33}
 			  local button = 'playpause'
@@ -595,13 +715,15 @@ function widget:GetConfigData(data)
   savedTable.curTrack	= curTrack
   savedTable.playedTime = playedTime
   savedTable.playing = playing
+  savedTable.music_volume = music_volume
   return savedTable
 end
 
 -- would be great if there is be a way to continue track where we left off after a /luaui reload
 function widget:SetConfigData(data)
-	if Spring.GetGameFrame() > 0 and data.playing ~= nil then
+	if data.playing ~= nil then
 		playing = data.playing
+		music_volume = data.music_volume
 	end
 end
 
