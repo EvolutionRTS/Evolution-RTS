@@ -12,8 +12,8 @@ local tech						 = [[tech1]]
 local armortype					 = [[light]]
 local supply					 = [[2]]
 
-local weapon1Damage              = 12.5
-local weapon1AOE				 = 0
+local weapon1Damage              = 15
+local weapon1AOE				 = 25
 local energycosttofire			 = weapon1Damage / 10
 
 local function roundToFirstDecimal(energycosttofire)
@@ -144,8 +144,8 @@ local weaponDefs                 = {
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		impulseFactor            = 0,
-		
-		minintensity             = "1",
+		fallOffRate				 = 0.1,
+		minintensity             = 1,
 		name                     = "Laser",
 		range                    = 500,
 		reloadtime               = 0.1,

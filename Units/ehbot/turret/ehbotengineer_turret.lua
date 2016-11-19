@@ -7,7 +7,7 @@ local unitName                   = "ehbotengineer_turret"
 
 local buildCostMetal			 = 90
 local maxDamage					 = 400 * 3
-local buildDistance				 = 800 * 1.5
+local buildDistance				 = 800 * 1.25
 
 local armortype					 = [[building]]
 --local supply					 = [[2]]

@@ -13,7 +13,7 @@ local maxDamage					 = 350 * 3
 
 local weapon1Damage              = 100
 local weapon1AOE				 = 500
-local weapon1Range				 = 1000 * 1.5
+local weapon1Range				 = 1000 * 1.25
 local reloadTime				 = 2.5
 --local projectiles				 = 5
 --local burst						 = 10
