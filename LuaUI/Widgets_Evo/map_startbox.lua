@@ -13,8 +13,8 @@
 
 function widget:GetInfo()
   return {
-    name      = "MiniMap Start Boxes",
-    desc      = "MiniMap Start Boxes",
+    name      = "Start Boxes",
+    desc      = "Displays Start Boxes and Start Points",
     author    = "trepan, jK",
     date      = "2007-2009",
     license   = "GNU GPL, v2 or later",
@@ -47,6 +47,24 @@ local drawGroundQuads = true
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local useThickLeterring		= true
+local heightOffset			= 50
+local fontSize				= 18
+local fontShadow			= true		-- only shows if font has a white outline
+local shadowOpacity			= 0.35
+local font = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 55, 10, 10)
+local shadowFont = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 55, 38, 1.6)
+
+local infotext = "Pick a startspot within the green area, and click the Ready button."
+local infotextFontsize = 20
+local infotextWidth = gl.GetTextWidth(infotext) * infotextFontsize
+
+local comnameList = {}
+local drawShadow = fontShadow
+local usedFontSize = fontSize
+
+local vsx,vsy = Spring.GetViewGeometry()
+
 local gl = gl  --  use a local copy for faster access
 
 local msx = Game.mapSizeX
@@ -57,6 +75,8 @@ local coneList = 0
 local startboxDListStencil = 0
 local startboxDListColor = 0
 
+local isSpec = Spring.GetSpectatingState() or Spring.IsReplay()
+
 local gaiaTeamID
 local gaiaAllyTeamID
 
@@ -64,6 +84,41 @@ local startTimer = Spring.GetTimer()
 
 local texName = LUAUI_DIRNAME .. 'Images/highlight_strip.png'
 local texScale = 512
+
+
+local GetUnitTeam        		= Spring.GetUnitTeam
+local GetTeamInfo        		= Spring.GetTeamInfo
+local GetPlayerInfo      		= Spring.GetPlayerInfo
+local GetPlayerList    		    = Spring.GetPlayerList
+local GetTeamColor       		= Spring.GetTeamColor
+local GetVisibleUnits    		= Spring.GetVisibleUnits
+local GetUnitDefID       		= Spring.GetUnitDefID
+local GetAllUnits        		= Spring.GetAllUnits
+local IsUnitInView	 	 		= Spring.IsUnitInView
+local GetCameraPosition  		= Spring.GetCameraPosition
+local GetUnitPosition    		= Spring.GetUnitPosition
+local GetFPS					= Spring.GetFPS
+
+local glPushMatrix      		= gl.PushMatrix
+local glPopMatrix       		= gl.PopMatrix
+local glDepthTest        		= gl.DepthTest
+local glAlphaTest        		= gl.AlphaTest
+local glColor            		= gl.Color
+local glText             		= gl.Text
+local glTranslate        		= gl.Translate
+local glBillboard        		= gl.Billboard
+local glDrawFuncAtUnit   		= gl.DrawFuncAtUnit
+local glDrawListAtUnit   		= gl.DrawListAtUnit
+local GL_GREATER     	 		= GL.GREATER
+local GL_SRC_ALPHA				= GL.SRC_ALPHA	
+local GL_ONE_MINUS_SRC_ALPHA	= GL.ONE_MINUS_SRC_ALPHA
+local glBlending          		= gl.Blending
+local glScale          			= gl.Scale
+
+local glCreateList				= gl.CreateList
+local glBeginEnd				= gl.BeginEnd
+local glDeleteList				= gl.DeleteList
+local glCallList				= gl.CallList
 
 --------------------------------------------------------------------------------
 
@@ -111,6 +166,51 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+
+local function createComnameList(x, y, name, teamID, color)
+	comnameList[teamID] = {}
+	comnameList[teamID]['x'] = math.floor(x)
+	comnameList[teamID]['y'] = math.floor(y)
+	comnameList[teamID]['list'] = gl.CreateList( function()
+		local outlineColor = {0,0,0,1}
+		if (color[1] + color[2]*1.35 + color[3]*0.5) < 0.8 then
+			outlineColor = {1,1,1,1}
+		end
+		if useThickLeterring then
+			if outlineColor[1] == 1 and fontShadow then
+			  glTranslate(0, -(usedFontSize/44), 0)
+			  shadowFont:Begin()
+			  shadowFont:SetTextColor({0,0,0,shadowOpacity})
+			  shadowFont:SetOutlineColor({0,0,0,shadowOpacity})
+			  shadowFont:Print(name, x, y, usedFontSize, "con")
+			  shadowFont:End()
+			  glTranslate(0, (usedFontSize/44), 0)
+			end
+			font:SetTextColor(outlineColor)
+			font:SetOutlineColor(outlineColor)
+			
+			font:Print(name, x-(usedFontSize/38), y-(usedFontSize/33), usedFontSize, "con")
+			font:Print(name, x+(usedFontSize/38), y-(usedFontSize/33), usedFontSize, "con")
+		end
+		font:Begin()
+		font:SetTextColor(color)
+		font:SetOutlineColor(outlineColor)
+		font:Print(name, x, y, usedFontSize, "con")
+		font:End()
+	end)
+end
+
+local function DrawName(x, y, name, teamID, color)
+	-- not optimal, everytime you move camera the x and y are different so it has to recreate the drawlist
+	if comnameList[teamID] == nil or comnameList[teamID]['x'] ~= math.floor(x) or comnameList[teamID]['y'] ~= math.floor(y) then		-- using floor because the x and y values had a a tiny change each frame
+		if comnameList[teamID] ~= nil then
+			gl.DeleteList(comnameList[teamID]['list'])
+		end
+		createComnameList(x, y, name, teamID, color)
+	end
+	glCallList(comnameList[teamID]['list'])
+end
+
 function widget:Initialize()
   -- only show at the beginning
   if (Spring.GetGameFrame() > 1) then
@@ -118,6 +218,11 @@ function widget:Initialize()
     return
   end
 
+  infotextList = gl.CreateList(function()
+		gl.Color(1,1,1,0.5)
+		gl.Text(infotext, 0,0, infotextFontsize, "cno")
+  end)
+  
   -- get the gaia teamID and allyTeamID
   gaiaTeamID = Spring.GetGaiaTeamID()
   if (gaiaTeamID) then
@@ -151,7 +256,7 @@ function widget:Initialize()
   if (drawGroundQuads) then
     startboxDListStencil = gl.CreateList(function()
       local minY,maxY = Spring.GetGroundExtremes()
-      minY = minY - 200; maxY = maxY + 100;
+      minY = minY - 200; maxY = maxY + 500;
       for _,at in ipairs(Spring.GetAllyTeamList()) do
         if (true or at ~= gaiaAllyTeamID) then
           local xn, zn, xp, zp = Spring.GetAllyTeamStartBox(at)
@@ -164,7 +269,7 @@ function widget:Initialize()
               gl.StencilMask(stencilBit1);
               gl.StencilFunc(GL.ALWAYS, 0, stencilBit1);
             end
-            DrawMyBox(xn,minY,zn, xp,maxY,zp)
+            DrawMyBox(xn-1,minY,zn-1, xp+1,maxY,zp+1)
 
           end
         end
@@ -173,22 +278,22 @@ function widget:Initialize()
 
     startboxDListColor = gl.CreateList(function()
       local minY,maxY = Spring.GetGroundExtremes()
-      minY = minY - 200; maxY = maxY + 100;
+      minY = minY - 200; maxY = maxY + 500;
       for _,at in ipairs(Spring.GetAllyTeamList()) do
         if (true or at ~= gaiaAllyTeamID) then
           local xn, zn, xp, zp = Spring.GetAllyTeamStartBox(at)
           if (xn and ((xn ~= 0) or (zn ~= 0) or (xp ~= msx) or (zp ~= msz))) then
 
             if (at == Spring.GetMyAllyTeamID()) then
-              gl.Color( 0, 1, 0, 0.3 )  --  green
+              gl.Color( 0, 1, 0, 0.22 )  --  green
               gl.StencilMask(stencilBit2);
               gl.StencilFunc(GL.NOTEQUAL, 0, stencilBit2);
             else
-              gl.Color( 1, 0, 0, 0.3 )  --  red
+              gl.Color( 1, 0, 0, 0.22 )  --  red
               gl.StencilMask(stencilBit1);
               gl.StencilFunc(GL.NOTEQUAL, 0, stencilBit1);
             end
-            DrawMyBox(xn,minY,zn, xp,maxY,zp)
+            DrawMyBox(xn-1,minY,zn-1, xp+1,maxY,zp+1)
 
           end
         end
@@ -198,14 +303,25 @@ function widget:Initialize()
 end
 
 
+
 function widget:Shutdown()
+  gl.DeleteList(infotextList)
   gl.DeleteList(xformList)
   gl.DeleteList(coneList)
   gl.DeleteList(startboxDListStencil)
   gl.DeleteList(startboxDListColor)
+  removeTeamLists()
 end
 
 
+function removeTeamLists()
+  for _, teamID in ipairs(Spring.GetTeamList()) do
+    if comnameList[teamID] ~= nil then
+      gl.DeleteList(comnameList[teamID]['list'])
+      comnameList[teamID] = nil
+    end
+  end
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -302,7 +418,8 @@ function widget:DrawWorld()
     local _,_,spec = Spring.GetPlayerInfo(leader)
     if ((not spec) and (teamID ~= gaiaTeamID)) then
       local x, y, z = Spring.GetTeamStartPosition(teamID)
-      if (x ~= nil and x > 0 and z > 0 and y > -500) then
+	  local isNewbie = (Spring.GetTeamRulesParam(teamID, 'isNewbie') == 1) -- =1 means the startpoint will be replaced and chosen by initial_spawn
+	  if (x ~= nil and x > 0 and z > 0 and y > -500) and not isNewbie then
         local color = GetTeamColor(teamID)
         local alpha = 0.5 + math.abs(((time * 3) % 1) - 0.5)
         gl.PushMatrix()
@@ -313,7 +430,7 @@ function widget:DrawWorld()
       end
     end
   end
-
+  
   gl.Fog(true)
 end
 
@@ -323,23 +440,35 @@ end
 function widget:DrawScreenEffects()
   -- show the names over the team start positions
   gl.Fog(false)
-  gl.BeginText()
   for _, teamID in ipairs(Spring.GetTeamList()) do
     local _,leader = Spring.GetTeamInfo(teamID)
     local name,_,spec = Spring.GetPlayerInfo(leader)
-    if ((not spec) and (teamID ~= gaiaTeamID)) then
+	local isNewbie = (Spring.GetTeamRulesParam(teamID, 'isNewbie') == 1) -- =1 means the startpoint will be replaced and chosen by initial_spawn
+    if (name ~= nil) and ((not spec) and (teamID ~= gaiaTeamID)) and not isNewbie then
       local colorStr, outlineStr = GetTeamColorStr(teamID)
       local x, y, z = Spring.GetTeamStartPosition(teamID)
       if (x ~= nil and x > 0 and z > 0 and y > -500) then
         local sx, sy, sz = Spring.WorldToScreenCoords(x, y + 120, z)
         if (sz < 1) then
-          gl.Text(colorStr .. name, sx, sy, 18, 'cs')
+          
+			DrawName(sx, sy, name, teamID, GetTeamColor(teamID))
+	
         end
       end
     end
   end
-  gl.EndText()
   gl.Fog(true)
+end
+
+
+function widget:DrawScreen()
+	if not isSpec then
+		gl.PushMatrix()
+			gl.Translate(vsx/2, vsy/6.2, 0)
+			gl.Scale(1*widgetScale, 1*widgetScale, 1)
+		  gl.CallList(infotextList)
+	  gl.PopMatrix()
+  end
 end
 
 --------------------------------------------------------------------------------
@@ -394,7 +523,8 @@ function widget:DrawInMiniMap(sx, sz)
     local _,_,spec = Spring.GetPlayerInfo(leader)
     if ((not spec) and (teamID ~= gaiaTeamID)) then
       local x, y, z = Spring.GetTeamStartPosition(teamID)
-      if (x ~= nil and x > 0 and z > 0 and y > -500) then
+	  local isNewbie = (Spring.GetTeamRulesParam(teamID, 'isNewbie') == 1) -- =1 means the startpoint will be replaced and chosen by initial_spawn
+	  if (x ~= nil and x > 0 and z > 0 and y > -500) and not isNewbie then
         local color = GetTeamColor(teamID)
         local r, g, b = color[1], color[2], color[3]
         local time = Spring.DiffTimers(Spring.GetTimer(), startTimer)
@@ -415,6 +545,13 @@ function widget:DrawInMiniMap(sx, sz)
   gl.PopMatrix()
 end
 
+
+function widget:ViewResize(x, y)
+  vsx,vsy = x,y
+  widgetScale = (0.75 + (vsx*vsy / 7500000))
+  removeTeamLists()
+  usedFontSize = fontSize/1.44 + (fontSize * ((vsx*vsy / 10000000)))
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
