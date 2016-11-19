@@ -8,8 +8,8 @@ local unitName                    = "eartyturret"
 local armortype					 = [[building]]
 --local supply					 = [[2]]
 
-local weapon1Damage               = 200
-local weapon1AOE				  = 50
+local weapon1Damage               = 250
+local weapon1AOE				  = 150
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local function roundToFirstDecimal(energycosttofire)
@@ -19,37 +19,37 @@ end
 local unitDef                     = {
 
 	buildCostEnergy               = 0,
-	buildCostMetal                = 20,
+	buildCostMetal                = 250,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = true,
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Medium Range Anti-Building Artillery Turret]],
+	description                   = [[Long Range Artillery Turret]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
 	floater			              = true,
-	footprintX                    = 5,
-	footprintZ                    = 5,
+	footprintX                    = 8,
+	footprintZ                    = 8,
 	icontype                      = "defense",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 600,
+	maxDamage                     = 2500,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 99999999999,
 	metalStorage                  = 0,
 	name                          = "Lobber",
 	noAutoFire                    = false,
-	objectName                    = "eaaturret2.s3o",
+	objectName                    = "eartyturret.s3o",
 	radarDistance                 = 0,
 	repairable		              = false,
 	selfDestructAs                = "mediumBuildingExplosionGeneric",
-	sightDistance                 = 800,
+	sightDistance                 = 500,
 	smoothAnim                    = true,
 	unitname                      = "eartyturret",
-	yardMap                       = "ooooo ooooo ooooo ooooo ooooo",
+	yardMap                       = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
 	sfxtypes                      = { 
 		pieceExplosionGenerators  = { 
 			"deathceg3", 
@@ -71,7 +71,7 @@ local unitDef                     = {
 	weapons                       = {
 		[1]                       = {
 			def                   = "artyweapon",
-			onlytargetcategory    = "BUILDING",
+			badtargetcategory    = "LIGHT ARMORED",
 		},
 	},
 	customParams                  = {
@@ -89,8 +89,8 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 7,
-	BuildingGroundDecalSizeY      = 7,
+	BuildingGroundDecalSizeX      = 10,
+	BuildingGroundDecalSizeY      = 10,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 
@@ -100,6 +100,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 
 local weaponDefs                  = {
 	artyweapon  		          = {
+		accuracy				 = 500,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
@@ -114,16 +115,15 @@ local weaponDefs                  = {
 		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		highTrajectory	         = 1,
 		name                     = "Plasma Cannon",
-		range                    = 800,
-		reloadtime               = 4,
+		range                    = 3500,
+		reloadtime               = 25,
 		weaponType		         = "Cannon",
 		soundHit                 = "artyhit.wav",
 		soundStart               = "arty2.wav",
 		
 		turret                   = true,
-		weaponVelocity           = 500,
+		weaponVelocity           = 1000,
 		customparams             = {
 			damagetype		     = "eartytank", 
 
