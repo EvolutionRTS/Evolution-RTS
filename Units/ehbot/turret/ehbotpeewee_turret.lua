@@ -8,11 +8,11 @@ local unitName                   = "ehbotpeewee_turret"
 local tech						 = [[tech1]]
 local armortype					 = [[building]]
 local supply					 = [[5]]
-local maxDamage					 = 300 * 3
+local maxDamage					 = 300 * 4
 
 local weapon1Damage              = 12.5
 local weapon1AOE				 = 25
-local weapon1Range				 = 650 * 1.25
+local weapon1Range				 = 650
 local projectiles				 = 5
 local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
 

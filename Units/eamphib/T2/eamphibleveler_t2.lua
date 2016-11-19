@@ -6,7 +6,7 @@ local unitName                   = "eamphibleveler_t2"
 --------------------------------------------------------------------------------
 
 local buildCostMetal 			  = 250
-local maxDamage					  = 1250 * 1.20
+local maxDamage					  = 3250 * 1.20
 
 local tech						 = [[tech2]]
 local armortype					 = [[armored]]
@@ -76,6 +76,7 @@ local unitDef                    = {
 	selfDestructAs               = "krabblast",
 	side                         = "CORE",
 	sightDistance                = 750,
+	sonarDistance				 = 750,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 4,

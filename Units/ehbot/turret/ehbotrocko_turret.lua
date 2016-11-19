@@ -8,12 +8,12 @@ local unitName                   = "ehbotrocko_turret"
 local tech						 = [[tech2]]
 local armortype					 = [[building]]
 local supply					 = [[15]]
-local maxDamage					 = 350 * 3
+local maxDamage					 = 350 * 4
 
 
 local weapon1Damage              = 100
 local weapon1AOE				 = 500
-local weapon1Range				 = 1000 * 1.25
+local weapon1Range				 = 1000
 local reloadTime				 = 2.5
 --local projectiles				 = 5
 --local burst						 = 10

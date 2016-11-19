@@ -8,11 +8,11 @@ local unitName                   = "ehbotsniper_turret"
 local tech						 = [[tech2]]
 local armortype					 = [[building]]
 local supply					 = [[9]]
-local maxDamage					 = 300 * 3
+local maxDamage					 = 300 * 4
 
 local weapon1Damage              = 500
 local weapon1AOE				 = 10
-local weapon1Range				 = 900 * 1.25
+local weapon1Range				 = 900
 --local projectiles				 = 5
 --local burst						 = 10
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
