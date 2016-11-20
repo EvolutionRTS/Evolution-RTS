@@ -343,8 +343,8 @@ function generateDisplayList2()
 	displayList2 = gl.CreateList(function ()
 		-- draw background (black / gray / black / ...)
 		-- background flashes when the player messed up their eco
-		local glowSize = (height/6) * 3
-		local glowAlpha = 0.15
+		local glowSize = (height/6) * 3.3
+		local glowAlpha = 0.12
 		
 		gl.Color(bgSupplyR,bgSupplyG,0,0.33)
 		gl.Texture(barTexture)
@@ -374,7 +374,7 @@ function generateDisplayList2()
 		gl.Color(0,1,0,1)
 		gl.TexRect(supplyOffset,0,supplyOffset+(supplyBarWidth*maxPercentage),height/6)
 		
-		gl.Color(0,1,0,glowAlpha)
+		gl.Color(r,g,b,glowAlpha)
 		gl.Texture(barGlowCenterTexture)
 		gl.TexRect(supplyOffset,-glowSize,supplyOffset+(supplyBarWidth*maxPercentage),(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
@@ -412,7 +412,7 @@ function generateDisplayList2()
 		gl.Texture(barTexture)
 		gl.TexRect(energyOffset,0,energyOffset+(energyBarWidth*energyPercentage),height/6)
 		
-		gl.Color(0,1,0,glowAlpha)
+		gl.Color(r,g,b,glowAlpha)
 		gl.Texture(barGlowCenterTexture)
 		gl.TexRect(energyOffset,-glowSize,energyOffset+(energyBarWidth*energyPercentage),(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
@@ -442,7 +442,7 @@ function generateDisplayList2()
 		gl.Texture(barTexture)
 		gl.TexRect(metalOffset,0,metalOffset+(metalBarWidth*metalPercentage),height/6)
 		
-		gl.Color(0,1,0,glowAlpha)
+		gl.Color(r,g,b,glowAlpha)
 		gl.Texture(barGlowCenterTexture)
 		gl.TexRect(metalOffset,-glowSize,metalOffset+(metalBarWidth*metalPercentage),(height/6)+glowSize)
 		gl.Texture(barGlowEdgeTexture)
