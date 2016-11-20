@@ -6,7 +6,7 @@ local unitName                   = "eallterranarchid_t2"
 --------------------------------------------------------------------------------
 
 local buildCostMetal 			  = 225
-local maxDamage					  = 5500 * 1.20
+local maxDamage					  = 2750 * 1.20
 
 local tech						 = [[tech3]]
 local armortype					 = [[armored]]

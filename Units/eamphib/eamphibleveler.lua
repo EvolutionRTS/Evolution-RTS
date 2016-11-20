@@ -6,7 +6,7 @@ local unitName                   = "eamphibleveler"
 --------------------------------------------------------------------------------
 
 local buildCostMetal 			  = 250
-local maxDamage					  = 3250
+local maxDamage					  = 1750
 
 local tech						 = [[tech2]]
 local armortype					 = [[armored]]

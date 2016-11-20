@@ -6,7 +6,7 @@ local unitName                   = "elacerator_t2"
 --------------------------------------------------------------------------------
 
 local buildCostMetal 			 = 200
-local maxDamage					 = 5000 * 1.20
+local maxDamage					 = 2500 * 1.20
 
 local tech						 = [[tech3]]
 local armortype					 = [[armored]]
