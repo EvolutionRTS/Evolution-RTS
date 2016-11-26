@@ -61,16 +61,16 @@ return {
       alwaysvisible      = true,
       circlealpha        = 0.6,
       circlegrowth       = 1.5,
-      flashalpha         = 0.9,
+      flashalpha         = 0.6,
       flashsize          = 200,
       ground             = true,
       ttl                = 100,
       water              = true, 
 	  underwater         = true,
       color = {
-        [1]  = 0.10999999940395,
+        [1]  = 0.50999999940395,
         [2]  = 0,
-        [3]  = 0.28999999165535,
+        [3]  = 0.68999999165535,
       },
     },
     kickedupdirt = {
@@ -249,7 +249,7 @@ return {
         numparticles       = 1,
         particlelife       = [[100]], -- same as groundflash ttl
         particlelifespread = 0,
-        particlesize       = 16, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesize       = 8, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
         particlesizespread = 1,
         particlespeed      = [[8]],
         particlespeedspread = 6,
@@ -265,16 +265,16 @@ return {
       alwaysvisible      = true,
       circlealpha        = 0.6,
       circlegrowth       = 2,
-      flashalpha         = 0.9,
+      flashalpha         = 0.6,
       flashsize          = 400,
       ground             = true,
       ttl                = 100,
       water              = true, 
 	  underwater         = true,
       color = {
-        [1]  = 0.10999999940395,
+        [1]  = 0.50999999940395,
         [2]  = 0,
-        [3]  = 0.28999999165535,
+        [3]  = 0.68999999165535,
       },
     },
     kickedupdirt = {
@@ -453,7 +453,7 @@ return {
         numparticles       = 1,
         particlelife       = [[100]], -- same as groundflash ttl
         particlelifespread = 0,
-        particlesize       = 24, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesize       = 8, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
         particlesizespread = 1,
         particlespeed      = [[8]],
         particlespeedspread = 6,
@@ -469,16 +469,16 @@ return {
       alwaysvisible      = true,
       circlealpha        = 0.6,
       circlegrowth       = 3,
-      flashalpha         = 0.9,
+      flashalpha         = 1,
       flashsize          = 600,
       ground             = true,
       ttl                = 100,
       water              = true, 
 	  underwater         = true,
       color = {
-        [1]  = 0.10999999940395,
+        [1]  = 0.50999999940395,
         [2]  = 0,
-        [3]  = 0.28999999165535,
+        [3]  = 0.68999999165535,
       },
     },
     kickedupdirt = {
@@ -657,7 +657,7 @@ return {
         numparticles       = 1,
         particlelife       = [[100]], -- same as groundflash ttl
         particlelifespread = 0,
-        particlesize       = 32, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
+        particlesize       = 8, -- groundflash flashsize 25 = 1, so if flashsize is 200, particlesize here would be 8
         particlesizespread = 1,
         particlespeed      = [[8]],
         particlespeedspread = 6,
@@ -673,16 +673,16 @@ return {
       alwaysvisible      = true,
       circlealpha        = 0.6,
       circlegrowth       = 4,
-      flashalpha         = 0.9,
+      flashalpha         = 0.6,
       flashsize          = 800,
       ground             = true,
       ttl                = 100,
       water              = true, 
 	  underwater         = true,
       color = {
-        [1]  = 0.10999999940395,
+        [1]  = 0.50999999940395,
         [2]  = 0,
-        [3]  = 0.28999999165535,
+        [3]  = 0.68999999165535,
       },
     },
     kickedupdirt = {
