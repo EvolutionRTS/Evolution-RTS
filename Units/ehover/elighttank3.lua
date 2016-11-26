@@ -138,6 +138,7 @@ local weaponDefs                 = {
 		collideFeature           = false,
 		craterBoost              = 0,
 		craterMult               = 0,
+		beamTTL					 = 10,
 		explosionGenerator       = "custom:genericshellexplosion-medium-lightning",
 		energypershot            = energycosttofire,
 		impulseBoost             = 0,
