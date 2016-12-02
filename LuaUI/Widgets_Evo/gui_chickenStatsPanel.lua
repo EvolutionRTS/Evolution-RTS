@@ -10,7 +10,7 @@ function widget:GetInfo()
     date      = "May 04, 2008",
     license   = "GNU GPL, v2 or later",
     layer     = -9, 
-    enabled   = false  --  loaded by default?
+    enabled   = true  --  loaded by default?
   }
 end
 
@@ -61,7 +61,7 @@ local math            = math
 local table           = table
 
 local displayList
-local fontHandler     = loadstring(VFS.LoadFile(LUAUI_DIRNAME.."fonts.lua"))()
+local fontHandler     = loadstring(VFS.LoadFile(LUAUI_DIRNAME.."modfonts.lua"))()
 local panelFont       = LUAUI_DIRNAME.."Fonts/FreeSansBold_14"
 local waveFont        = LUAUI_DIRNAME.."Fonts/Skrawl_40"
 local panelTexture    = ":n:"..LUAUI_DIRNAME.."Images/panel.tga"
