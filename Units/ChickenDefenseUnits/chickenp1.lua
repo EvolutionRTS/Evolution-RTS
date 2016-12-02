@@ -73,7 +73,7 @@ return {
 				name = "Claws",
 				noselfdamage = true,
 				proximitypriority = -4,
-				range = 150,
+				range = 200,
 				reloadtime = 30,
 				size = 0.00001,
 				targetborder = 1,

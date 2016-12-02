@@ -117,7 +117,7 @@ return {
 				interceptedbyshieldtype = 0,
 				name = "Claws",
 				noselfdamage = true,
-				range = 130,
+				range = 200,
 				reloadtime = 0.75,
 				size = 0,
 				soundstart = "ChickenDefenseSounds/smallchickenattack",

@@ -91,7 +91,7 @@ return {
 				name = "Blob",
 				noselfdamage = true,
 				proximitypriority = -4,
-				range = 900,
+				range = 2000,
 				reloadtime = 5,
 				rgbcolor = "0.1 0.6 1",
 				size = 8,

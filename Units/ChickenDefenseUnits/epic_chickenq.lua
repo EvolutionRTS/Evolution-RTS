@@ -159,7 +159,7 @@ return {
 				name = "Missiles",
 				noselfdamage = true,
 				proximitypriority = 3,
-				range = 900,
+				range = 2000,
 				reloadtime = 0.15,
 				smoketrail = true,
 				soundhit = "ChickenDefenseSounds/e25",
