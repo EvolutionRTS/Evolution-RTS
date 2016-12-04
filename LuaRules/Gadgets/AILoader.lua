@@ -27,6 +27,30 @@ else
 	return false
 end
 
+local teams = Spring.GetTeamList()
+for i =1, #teams do
+	local luaAI = Spring.GetTeamLuaAI(teams[i])
+	if luaAI ~= "" then
+		if luaAI == "Chicken: Very Easy" or 
+		luaAI == "Chicken: Easy" or 
+		luaAI == "Chicken: Normal" or 
+		luaAI == "Chicken: Hard" or 
+		luaAI == "Chicken: Very Hard" or 
+		luaAI == "Chicken: Epic!" or 
+		luaAI == "Chicken: Custom" or 
+		luaAI == "Chicken: Survival" then
+			chickensEnabled = true
+		end
+	end
+end
+
+if chickensEnabled == true then
+	Spring.Echo("[AI Loader] ShardLua bot has been deactivated because Chickens are present!")
+	return false
+else
+	Spring.Echo("[AI Loader] No Chickens present, ShardLua loaded.")
+end
+
 -- globals
 ShardSpringLua = true -- this is the AI Boot gadget, so we're in Spring Lua
 VFS.Include("luarules/gadgets/ai/preload/globals.lua")
