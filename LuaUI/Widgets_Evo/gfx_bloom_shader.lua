@@ -1,6 +1,6 @@
 function widget:GetInfo()
 	return {
-		name      = "Advanced Bloom Shader (Performance Heavy)",
+		name      = "Bloom Shader",
 		desc      = "Sets Spring In Bloom",
 		author    = "Floris", -- orginal bloom shader: Kloot
 		date      = "24-9-2016",
@@ -14,7 +14,7 @@ end
 -- config 
 --------------------------------------------------------------------------------
 
-local basicAlpha = 0.35
+local basicAlpha = 0.4
 
 local drawHighlights = true		-- apply extra bloom bright spots (note: quite costly)
 local highlightsAlpha = 0.5
@@ -120,7 +120,7 @@ local function SetIllumThreshold()
 	local ambientIntensity  = ra * 0.299 + ga * 0.587 + ba * 0.114
 	local diffuseIntensity  = rd * 0.299 + gd * 0.587 + bd * 0.114
 	local specularIntensity = rs * 0.299 + gs * 0.587 + bs * 0.114
-
+	--Spring.Echo(ambientIntensity..'  '..diffuseIntensity..'  '..specularIntensity)
 	illumThreshold = (0.33 * ambientIntensity) + (0.05 * diffuseIntensity) + (0.05 * specularIntensity)
 end
 
@@ -133,12 +133,12 @@ function reset()
 
 	if drawHighlights then
 		usedBasicAlpha = basicAlpha
-		drawWorldAlpha				= 0.22 - (illumThreshold*0.4) + (usedBasicAlpha/12) + (0.02 * highlightsAlpha)
-		drawWorldPreUnitAlpha = 0.22 - (illumThreshold*0.4)  + (usedBasicAlpha/6.5)  + (0.01 * highlightsAlpha)
+		drawWorldAlpha				= 0.22 - (illumThreshold*0.4) + (usedBasicAlpha/11) + (0.018 * highlightsAlpha)
+		drawWorldPreUnitAlpha = 0.2 - (illumThreshold*0.4)  + (usedBasicAlpha/6.2)  + (0.023 * highlightsAlpha)
 	else
 		usedBasicAlpha = basicAlpha
 		drawWorldAlpha = 0.05 + (usedBasicAlpha/11)
-		drawWorldPreUnitAlpha = 0.26 - (illumThreshold*0.4) + (usedBasicAlpha/6)
+		drawWorldPreUnitAlpha = 0.25 - (illumThreshold*0.4) + (usedBasicAlpha/6)
 	end
 	gl.DeleteTexture(brightTexture1 or "")
 	gl.DeleteTexture(brightTexture2 or "")
@@ -148,7 +148,7 @@ function reset()
 	end
 	gl.DeleteTexture(screenTexture or "")
 	
-	local btQuality = 4.5
+	local btQuality = 4.6		-- high value creates flickering, but lower is more expensive
 	brightTexture1 = glCreateTexture(vsx/btQuality, vsy/btQuality, {
 		fbo = true, min_filter = GL.LINEAR, mag_filter = GL.LINEAR,
 		format = GL_RGB16F_ARB, wrap_s = GL.CLAMP, wrap_t = GL.CLAMP,
@@ -158,7 +158,7 @@ function reset()
 		format = GL_RGB16F_ARB, wrap_s = GL.CLAMP, wrap_t = GL.CLAMP,
 	})
 	if drawHighlights then
-		btQuality = 3
+		btQuality = 3.2		-- high value creates flickering, but lower is more expensive
 		brightTexture3 = glCreateTexture(vsx/btQuality, vsy/btQuality, {
 			fbo = true, min_filter = GL.LINEAR, mag_filter = GL.LINEAR,
 			format = GL_RGB16F_ARB, wrap_s = GL.CLAMP, wrap_t = GL.CLAMP,
@@ -262,7 +262,6 @@ function widget:Initialize()
 				vec4 S0 = texture2D(texture0, C0);
 				vec4 S1 = texture2D(texture1, C0);
 				S1 = vec4(S1.rgb * fragMaxBrightness/max(1.0 - illuminationThreshold, 0.0001), 1.0);
-
 
 				gl_FragColor = bool(debugDraw) ? S1 : S0 + S1;
 			}
