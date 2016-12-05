@@ -72,9 +72,9 @@ local highlightImg = ":n:"..LUAUI_DIRNAME.."Images/button-highlight.dds"
 
 local iconsPerRow = 16		-- not functional yet, I doubt I will put this in
 
-local backgroundColor = {0,0,0,0.18}
-local highlightColor = {1, 0.7, 0.2, 0.35}
-local hoverColor = { 1, 1, 1, 0.22 }
+local backgroundColor = {0,0,0,0.6}
+local highlightColor = {1, 0.7, 0.2, 0.08}
+local hoverColor = { 1, 1, 1, 0.08 }
 
 local unitTypes = 0
 local countsTable = {}
