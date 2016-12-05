@@ -110,8 +110,8 @@ function gadget:GameFrame(frame)
 						resources[teamId][i] = min(resources[teamId][i] + (unitCost[unitDefId][i] or 0) * refundFactor, capacity[teamId][i])
 					end
 				else
-					local currentMetal	= Spring.GetTeamResources(teamId,"metal") -- If sell command happens as team is destroyed, gets nil instead of number for argument 1
-					local currentEnergy	= Spring.GetTeamResources(teamId,"energy")
+					local currentMetal	= Spring.GetTeamResources(teamId,"metal") or 0 -- If sell command happens as team is destroyed, gets nil instead of number for argument 1
+					local currentEnergy	= Spring.GetTeamResources(teamId,"energy") or 0
 					local unitMetal		= (UnitDefs[unitDefId].metalCost or 0) * refundFactor
 					local unitEnergy	= (UnitDefs[unitDefId].energyCost or 0) * refundFactor
 					
