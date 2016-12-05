@@ -21,6 +21,8 @@ local buildLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"
 
 local stateTexture		= LUAUI_DIRNAME.."Images/resbar.dds"
 local buttonTexture		= LUAUI_DIRNAME.."Images/button.dds"
+local barGlowCenterTexture = LUAUI_DIRNAME.."Images/barglow-center.dds"
+local barGlowEdgeTexture   = LUAUI_DIRNAME.."Images/barglow-edge.dds"
 
 local NeededFrameworkVersion = 9
 local CanvasX,CanvasY = 1272,734 --resolution in which the widget was made (for 1:1 size)
@@ -29,6 +31,8 @@ local CanvasX,CanvasY = 1272,734 --resolution in which the widget was made (for 
 --todo: build categories (eco | labs | defences | etc) basically sublists of buildcmds (maybe for regular orders too)
 
 local iconScaling = true
+local largeInfo = false
+local shortcutsInfo = true
 
 local Config = {
 	buildmenu = {
@@ -40,8 +44,8 @@ local Config = {
 		
 		roundedPercentage = 0.2,	-- 0.25 == iconsize / 4 == cornersize
 		
-		iconscale = 0.92,
-		iconhoverscale = 0.92,
+		iconscale = 0.925,
+		iconhoverscale = 0.925,
 		ispreadx=0,ispready=0, --space between icons
 		
 		margin = 5, --distance from background border
@@ -71,8 +75,8 @@ local Config = {
 		
 		roundedPercentage = 0.2,	-- 0.25 == iconsize / 4 == cornersize
 		
-		iconscale = 0.92,
-		iconhoverscale = 0.92,
+		iconscale = 0.925,
+		iconhoverscale = 0.925,
 		ispreadx=0,ispready=0,
 		
 		margin = 5,
@@ -227,16 +231,16 @@ local function CreateGrid(r)
 	}
 	
 	local mouseoverhighlight = Copy(selecthighlight,true)
-	mouseoverhighlight.color={1,1,1,0.17}
+	mouseoverhighlight.color={1,1,1,0.1}
 	mouseoverhighlight.border={1,1,1,0}
 	mouseoverhighlight.texture = LUAUI_DIRNAME.."Images/button-highlight.dds"
-	mouseoverhighlight.texturecolor={1,1,1,0.2}
+	mouseoverhighlight.texturecolor={1,1,1,0.1}
 	
 	local heldhighlight = Copy(selecthighlight,true)
-	heldhighlight.color={1,0.8,0,0.2}
+	heldhighlight.color={1,0.8,0,0.08}
 	heldhighlight.border={1,1,0,0}
 	heldhighlight.texture = LUAUI_DIRNAME.."Images/button-pushed.dds"
-	heldhighlight.texturecolor={1,0.8,0,0.2}
+	heldhighlight.texturecolor={1,0.8,0,0.08}
 	
 	local icon = {"rectangle",
 		px=0,py=0,
@@ -375,6 +379,7 @@ local function CreateGrid(r)
 		effects = background.effects,
 	}
 	local staterectangles = {}
+	local staterectanglesglow = {}
 	
 	New(selecthighlight)
 	New(mouseoverhighlight)
@@ -392,6 +397,7 @@ local function CreateGrid(r)
 		["forward"] = forward,
 		["indicator"] = indicator,
 		["staterectangles"] = staterectangles,
+		["staterectanglesglow"] = staterectanglesglow,
 		["staterect"] = staterect,
 		["texts"] = texts,
 	}
@@ -441,6 +447,11 @@ local function UpdateGrid(g,cmds,ordertype)
 	end
 	local usedstaterectangles = 0
 	
+	for i=1,#g.staterectanglesglow do
+		g.staterectanglesglow[i].active = false
+	end
+	local usedstaterectanglesglow = 0
+	
 	for i=1,#g.texts do
 		local text = g.texts[i]
 		text.caption = nil
@@ -466,7 +477,7 @@ local function UpdateGrid(g,cmds,ordertype)
 		local supplyBlocked = Spring.GetTeamRulesParam(myTeamID, disableString) == 1
 		
 		if (powerBlocked or supplyBlocked) then
-			icon.texturecolor = {0.5,0.5,0.5,1}
+			icon.texturecolor = {0.44,0.44,0.44,1}
 		else
 			icon.texturecolor = {1,1,1,1}
 		end
@@ -488,6 +499,7 @@ local function UpdateGrid(g,cmds,ordertype)
 			else
 				icon.caption = nil
 			end
+			--icon.texturecolor = {0.88,0.88,0.88,1}
 			
 			--text to show build hotkey
 			local white = "\255\255\255\255"
@@ -504,6 +516,7 @@ local function UpdateGrid(g,cmds,ordertype)
 			local energyCost = string.sub(cmd.tooltip, s + 12, e)
 			--local metalColor = "\255\136\197\226"
 			
+
 			local text = g.texts[i]
 			text.px = icon.px
 			text.py = icon.py
@@ -515,20 +528,36 @@ local function UpdateGrid(g,cmds,ordertype)
 				local captionColor = white
 			
 -- If you don't want to display the metal or energy cost on the unit buildicon, then you can disable it here
-				if i <= 15 then
-					if building == 0 then
-						captionColor = skyblue
+
+				-- redui adjusts position based on text length, so adding spaces helps us putting it at the left side of the icon
+				--local str = tostring(math.max(metalCost, energyCost))
+				--local addedSpaces = "                  "			-- too bad 1 space isnt as wide as 1 number in the used font
+				--local infoNewline = '\n'
+				--if largeInfo then
+				--	addedSpaces = "              "			-- too bad 1 space isnt as wide as 1 number in the used font
+				--	infoNewline = ''
+				--end
+				--for digit in string.gmatch(str, "%d") do
+				--  addedSpaces = string.sub(addedSpaces, 0, -2)
+				--end
+				
+				local shotcutCaption = ''
+				if shortcutsInfo then
+					if i <= 15 then
+						if building == 0 then
+							captionColor = skyblue
+						end
+						text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+						text.options = "bs"
+					elseif i <= 30 then
+						if building == 1 then
+							captionColor = skyblue
+						end
+						text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+						text.options = "bs"
+					else
+						text.caption = nil
 					end
-					text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
-					text.options = "bs"
-				elseif i <= 30 then
-					if building == 1 then
-						captionColor = skyblue
-					end
-					text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
-					text.options = "bs"
-				else
-					text.caption = nil
 				end
 			end
 		else
@@ -546,6 +575,7 @@ local function UpdateGrid(g,cmds,ordertype)
 				local py = icon.py + ((icon.sy * (1-scale))/2)
 				local sx = icon.sx * scale
 				local sy = icon.sy * scale
+				local usr = nil
 					
 				for i=1,statecount do
 					usedstaterectangles = usedstaterectangles + 1
@@ -558,33 +588,41 @@ local function UpdateGrid(g,cmds,ordertype)
 					s.active = nil --activate
 					
 					
-					local spread = 2
+					local spread = 7
 					s.sx = (sx-(spread*(statecount-1+2)))/statecount
-					s.sy = (sy/6.75)
+					s.sy = (sy/8.5)
 					s.px = px+spread + (s.sx+spread)*(i-1)
-					s.py = py + sy - s.sy -spread
+					s.py = py + sy - s.sy - spread
 					
 					--s.sx = (icon.sx-(spread*(statecount-1+2)))/statecount
 					--s.sy = (icon.sy/7)
 					--s.px = icon.px+spread + (s.sx+spread)*(i-1)
 					--s.py = icon.py + icon.sy - s.sy -spread
+					s.border = {0.22,0.22,0.22,0.8}
 					
 					if (i == curstate) then
+						usr = usedstaterectangles
 						if (statecount < 4) then
 							if (i == 1) then
-								s.color = {0.8,0,0,1}
+								s.color = {0.93,0,0,1}
+								s.border = {0.93,0,0,1}
 							elseif (i == 2) then
 								if (statecount == 3) then
-									s.color = {0.8,0.8,0,1}
+									s.color = {0.93,0.93,0,1}
+									s.border = {0.93,0.93,0,1}
 								else
-									s.color = {0,0.8,0,1}
+									s.color = {0,0.93,0,1}
+									s.border = {0,0.93,0,1}
 								end
 							elseif (i == 3) then
-								s.color = {0,0.8,0,1}
+								s.color = {0,0.93,0,1}
+								s.border = {0,0.93,0,1}
 							end
 						else
-							s.color = {0.8,0.8,0.8,1}
+							s.color = {0.93,0.93,0.93,1}
+							s.border = {0.93,0.93,0.93,1}
 						end
+						s.border[4] = 0.3
 					else
 						s.color = nil
 					end
@@ -593,6 +631,65 @@ local function UpdateGrid(g,cmds,ordertype)
 					else
 						s.texturecolor = s.color
 					end
+				end
+
+		
+				-- add glow for current state
+				if (g.staterectangles[usr] ~= nil) then
+					s = g.staterectangles[usr]
+					usedstaterectanglesglow = usedstaterectanglesglow + 1
+					local s2 = g.staterectanglesglow[usedstaterectanglesglow]
+					if (s2 == nil) then
+						s2 = New(Copy(g.staterectangles[usr],true))
+						g.staterectanglesglow[usedstaterectanglesglow] = s2
+						table.insert(g.background.movableslaves,s2)
+					end
+					
+					local glowSize = s.sy * 4.2
+					s2.sy = s.sy + glowSize + glowSize
+					s2.py = s.py - glowSize
+					s2.px = s.px
+					s2.sx = s.sx
+					s2.texture = barGlowCenterTexture
+					s2.border = {0,0,0,0}
+					s2.color = {s.color[1] * 10, s.color[2] * 10, s.color[3] * 10, 0}
+					s2.texturecolor = {s.texturecolor[1] * 10, s.texturecolor[2] * 10, s.texturecolor[3] * 10, 0.1}
+					s2.active = true
+					
+					usedstaterectanglesglow = usedstaterectanglesglow + 1
+					local s3 = g.staterectanglesglow[usedstaterectanglesglow]
+					if (s3 == nil) then
+						s3 = New(Copy(s2,true))
+						g.staterectanglesglow[usedstaterectanglesglow] = s3
+						table.insert(g.background.movableslaves,s3)
+					end
+					s3.sy = s.sy + glowSize + glowSize
+					s3.py = s.py - glowSize
+					s3.px = s.px - (glowSize * 2)
+					s3.sx = (glowSize * 2)
+					s3.texture = barGlowEdgeTexture
+					s3.border = s2.border
+					s3.color = s2.color
+					s3.texturecolor = s2.texturecolor
+					s3.active = true
+					
+					usedstaterectanglesglow = usedstaterectanglesglow + 1
+					local s4 = g.staterectanglesglow[usedstaterectanglesglow]
+					if (s4 == nil) then
+						s4 = New(Copy(s2,true))
+						g.staterectanglesglow[usedstaterectanglesglow] = s4
+						table.insert(g.background.movableslaves,s4)
+					end
+					s4.sy = s.sy + glowSize + glowSize
+					s4.py = s.py - glowSize
+					s4.px = s.px + s.sx + (glowSize * 2)
+					s4.sx = -(glowSize * 2)
+					s4.texture = barGlowEdgeTexture
+					s4.border = s2.border
+					s4.color = s2.color
+					s4.texturecolor = s2.texturecolor
+					s4.active = true
+					
 				end
 			else
 				icon.caption = " "..cmd.name.." "
@@ -642,6 +739,27 @@ function widget:TextCommand(command)
 			Spring.Echo("Build/order menu icon spacing:  disabled")
 		end
 	end
+
+	if (string.find(command, "iconinfo") == 1  and  string.len(command) == 8) then 
+		largeInfo = not largeInfo
+		--AutoResizeObjects()
+		Spring.ForceLayoutUpdate()
+		if largeInfo then
+			Spring.Echo("Build/order menu icon info:  large")
+		else
+			Spring.Echo("Build/order menu icon info:  small")
+		end
+	end
+	if (string.find(command, "iconinfokeys") == 1  and  string.len(command) == 12) then 
+		shortcutsInfo = not shortcutsInfo
+		--AutoResizeObjects()
+		Spring.ForceLayoutUpdate()
+		if shortcutsInfo then
+			Spring.Echo("Build/order menu icon shortcut info:  enabled")
+		else
+			Spring.Echo("Build/order menu icon shortcut info:  disabled")
+		end
+	end
 end
 
 function widget:Initialize()
@@ -655,6 +773,21 @@ function widget:Initialize()
 	ordermenu.page = 1
 	
 	AutoResizeObjects() --fix for displacement on crash issue
+
+	
+  WG['red_buildmenu'] = {}
+  WG['red_buildmenu'].getConfigLargeInfo = function()
+  	return largeInfo
+  end
+  WG['red_buildmenu'].getConfigShortcutsInfo = function()
+  	return shortcutsInfo
+  end
+  WG['red_buildmenu'].setConfigLargeInfo = function(value)
+  	largeInfo = value
+  end
+  WG['red_buildmenu'].setConfigShortcutsInfo = function(value)
+  	shortcutsInfo = value
+  end
 end
 
 local function onNewCommands(buildcmds,othercmds)
@@ -682,7 +815,7 @@ function widget:GetConfigData() --save config
 		Config.buildmenu.py = buildmenu.background.py * unscale
 		Config.ordermenu.px = ordermenu.background.px * unscale
 		Config.ordermenu.py = ordermenu.background.py * unscale
-		return {Config=Config, iconScaling=iconScaling}
+		return {Config=Config, iconScaling=iconScaling, largeInfo=largeInfo, shortcutsInfo=shortcutsInfo}
 	end
 end
 function widget:SetConfigData(data) --load config
@@ -693,6 +826,12 @@ function widget:SetConfigData(data) --load config
 		Config.ordermenu.py = data.Config.ordermenu.py
 		if (data.iconScaling ~= nil) then
 			iconScaling = data.iconScaling
+		end
+		if (data.largeInfo ~= nil) then
+			largeInfo = data.largeInfo
+		end
+		if (data.shortcutsInfo ~= nil) then
+			shortcutsInfo = data.shortcutsInfo
 		end
 	end
 end
@@ -848,33 +987,35 @@ end
 
 
 function widget:KeyPress(key, mods, isRepeat)
-	if building ~= -1 then
-		local buildcmds, othercmds = GetCommands()
-		local found = -1
-		for index = 1, #buildKeys do
-			if buildKeys[index] == key then
-				found = index + (15*building)
-				break
+	if shortcutsInfo then
+		if building ~= -1 then
+			local buildcmds, othercmds = GetCommands()
+			local found = -1
+			for index = 1, #buildKeys do
+				if buildKeys[index] == key then
+					found = index + (15*building)
+					break
+				end
+			end
+			if found ~= -1 and buildcmds[found] ~= nil then
+				Spring.SetActiveCommand(Spring.GetCmdDescIndex(buildcmds[found].id),1,true,false,Spring.GetModKeyState())
+			end
+			building = -1
+			onNewCommands(GetCommands())
+			return true
+		else
+			if key == buildStartKey then
+				building = 0
+				onNewCommands(GetCommands())
+				return true
+			elseif key == buildNextKey then
+				building = 1
+				onNewCommands(GetCommands())
+				return true
 			end
 		end
-		if found ~= -1 and buildcmds[found] ~= nil then
-			Spring.SetActiveCommand(Spring.GetCmdDescIndex(buildcmds[found].id),1,true,false,Spring.GetModKeyState())
-		end
-		building = -1
+		-- updates UI because hotkeys text changed color
 		onNewCommands(GetCommands())
-		return true
-	else
-		if key == buildStartKey then
-			building = 0
-			onNewCommands(GetCommands())
-			return true
-		elseif key == buildNextKey then
-			building = 1
-			onNewCommands(GetCommands())
-			return true
-		end
+		return false
 	end
-	-- updates UI because hotkeys text changed color
-	onNewCommands(GetCommands())
-	return false
 end

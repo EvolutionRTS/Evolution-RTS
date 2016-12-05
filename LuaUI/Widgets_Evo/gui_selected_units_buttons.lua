@@ -72,9 +72,9 @@ local highlightImg = ":n:"..LUAUI_DIRNAME.."Images/button-highlight.dds"
 
 local iconsPerRow = 16		-- not functional yet, I doubt I will put this in
 
-local backgroundColor = {0,0,0,0.6}
-local highlightColor = {1, 0.7, 0.2, 0.08}
-local hoverColor = { 1, 1, 1, 0.08 }
+local backgroundColor = {0,0,0,0.18}
+local highlightColor = {1, 0.7, 0.2, 0.35}
+local hoverColor = { 1, 1, 1, 0.22 }
 
 local unitTypes = 0
 local countsTable = {}
@@ -262,7 +262,7 @@ end
 function RectRound(px,py,sx,sy,cs)
 	
 	local px,py,sx,sy,cs = math.floor(px),math.floor(py),math.ceil(sx),math.ceil(sy),math.floor(cs)
-	
+	glTexture(false)
 	glRect(px+cs, py, sx-cs, sy)
 	glRect(sx-cs, py+cs, sx, sy-cs)
 	glRect(px+cs, py+cs, px, sy-cs)
