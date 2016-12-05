@@ -12,7 +12,7 @@ local tech						 = [[tech3]]
 local armortype					 = [[armored]]
 local supply					 = [[8]]
 
-local weapon1Damage              = 200 * 1.20
+local weapon1Damage              = 1000 * 1.20
 local weapon1AOE				 = 500
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
@@ -125,7 +125,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 
 local weaponDefs                 = {
 	nukeartyweapon               = {
-		accuracy                 = 1000,
+		accuracy                 = 2000,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
@@ -141,7 +141,7 @@ local weaponDefs                 = {
 		interceptedByShieldType  = 4,
 		name                     = "Light Cannon",
 		range                    = 1500,
-		reloadtime               = 0.5,
+		reloadtime               = 5,
 		weaponType		         = "Cannon",
 		soundHit                 = "nukeartyhit.wav",
 		soundStart               = "nukeartyshot.wav",

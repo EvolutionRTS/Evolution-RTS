@@ -5,7 +5,7 @@ local unitName                   = "eallterrengineer_t2"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal 			  = 45
+local buildCostMetal 			  = 40
 local maxDamage					  = 600 * 1.20
 
 local armortype					 = [[light]]
