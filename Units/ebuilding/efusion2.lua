@@ -11,11 +11,14 @@ local energyproduced			 = [[10]]
 --local powerradius				 = [[800]]
 --local supplygranted				 = [[50]]
 
+local buildCostMetal 			  = 175
+local maxDamage					  = buildCostMetal * 12.5
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2500,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 175,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
@@ -30,7 +33,7 @@ local unitDef                     = {
 	iconType                      = "energy",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 2400,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,

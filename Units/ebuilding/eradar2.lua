@@ -7,11 +7,14 @@ local unitName                    = "eradar2"
 
 local armortype					 = [[building]]
 
+local buildCostMetal 			  = 30
+local maxDamage					  = buildCostMetal * 12.5
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 16384,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 30,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 5,
 	category                      = "BUILDING NOTAIR",
@@ -28,7 +31,7 @@ local unitDef                     = {
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	isTargetingUpgrade            = false,
-	maxDamage                     = 750,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 75,
 	maxWaterDepth                 = 999999,
 	metalStorage                  = 0,

@@ -5,8 +5,8 @@ local unitName                        = "eairplant"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal 			  = 60
-local maxDamage					  = 1500
+local buildCostMetal 			  = 30
+local maxDamage					  = buildCostMetal * 12.5
 
 local armortype					 = [[building]]
 

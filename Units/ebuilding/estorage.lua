@@ -9,11 +9,14 @@ local armortype					 = [[building]]
 local storage					  = 25
 local supplygranted				  = 10
 
+local buildCostMetal 			  = 25
+local maxDamage					  = buildCostMetal * 12.5
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 8196,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 25,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
@@ -34,7 +37,7 @@ local unitDef                     = {
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	icontype                      = "storage",
-	maxDamage                     = 500,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 50,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = storage,

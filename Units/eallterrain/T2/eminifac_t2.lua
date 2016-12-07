@@ -6,7 +6,7 @@ local unitName                     = "eminifac_t2"
 --------------------------------------------------------------------------------
 
 local buildCostMetal 			  = 460
-local maxDamage					  = 7500
+local maxDamage					  = buildCostMetal * 12.5
 
 local armortype					 = [[building]]
 

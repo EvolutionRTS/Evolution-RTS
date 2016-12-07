@@ -7,11 +7,14 @@ local unitName                    = "ejammer2"
 
 local armortype					 = [[building]]
 
+local buildCostMetal 			  = 20
+local maxDamage					  = buildCostMetal * 12.5
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 16384,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 20,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 5,
 	category                      = "BUILDING NOTAIR",
@@ -26,7 +29,7 @@ local unitDef                     = {
 	iconType                      = "radarjam",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 280,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,

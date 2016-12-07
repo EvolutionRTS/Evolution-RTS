@@ -11,11 +11,14 @@ local shield1Power               = 2000
 local shield1PowerRegen          = 30
 local shield1PowerRegenEnergy    = shield1PowerRegen / 10
 
+local buildCostMetal 			  = 20
+local maxDamage					  = buildCostMetal * 12.5
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 4096,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 20,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 1,
 	canAttack                     = false,
@@ -32,7 +35,7 @@ local unitDef                     = {
 	iconType                      = "barricade",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 250,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 999999,
 	mass				          = 1000,

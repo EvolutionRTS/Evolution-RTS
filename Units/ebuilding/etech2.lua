@@ -12,11 +12,14 @@ local techprovided				 = [[tech1, tech2]]
 local tech						 = [[tech1]]
 --local supplygranted				 = [[25]]
 
+local buildCostMetal 			  = 350
+local maxDamage					  = buildCostMetal * 12.5
+
 local unitDef                     = {
 	activateWhenBuilt             = true,
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 350,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
@@ -32,7 +35,7 @@ local unitDef                     = {
 	icontype                      = "energy",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 3200,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,

@@ -20,10 +20,13 @@ local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
 end
 
+local buildCostMetal 			  = 200
+local maxDamage					  = buildCostMetal * 12.5
+
 local unitDef                     = {
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 200,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = false,
@@ -40,7 +43,7 @@ local unitDef                     = {
 	iconType                      = "defense",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 1800,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 30,
 	maxWaterDepth                 = 0,
 	metalStorage                  = 0,

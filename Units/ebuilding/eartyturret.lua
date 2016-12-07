@@ -12,6 +12,9 @@ local weapon1Damage               = 500
 local weapon1AOE				  = 150
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
+local buildCostMetal 			  = 250
+local maxDamage					  = buildCostMetal * 12.5
+
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
 end
@@ -19,7 +22,7 @@ end
 local unitDef                     = {
 
 	buildCostEnergy               = 0,
-	buildCostMetal                = 250,
+	buildCostMetal                = buildCostMetal,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack                     = true,
@@ -36,7 +39,7 @@ local unitDef                     = {
 	icontype                      = "defense",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
-	maxDamage                     = 2500,
+	maxDamage                     = maxDamage,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 99999999999,
 	metalStorage                  = 0,
