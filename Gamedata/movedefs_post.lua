@@ -27,13 +27,13 @@ myMovDef = nil
 				if ( MoveDefs[myMovDef][tagName] ~= nil ) then
 					if ( ud[tagName] ~= nil and ud[tagName] ~= MoveDefs[myMovDef][tagName] ) then
 						--Spring.Echo(tagName,ud[tagName],MoveDefs[myMovDef][tagName])
-						Spring.Echo("Warning! Unit: " .. ud.name .." Unit tag: " .. tagName .. " (".. ud[tagName] .. ") conflicts movedata (" .. MoveDefs[myMovDef][tagName] .. ")")
+						--Spring.Echo("Warning! Unit: " .. ud.name .." Unit tag: " .. tagName .. " (".. ud[tagName] .. ") conflicts movedata (" .. MoveDefs[myMovDef][tagName] .. ")")
 						ud[tagName] = MoveDefs[myMovDef][tagName]
 					end
 				end
 			end			
 		else
-			Spring.Echo("Unit: " .. ud.name .. ", Missing move class def: \"" .. ud.movementclass .. "\"")
+			--Spring.Echo("Unit: " .. ud.name .. ", Missing move class def: \"" .. ud.movementclass .. "\"")
 		end
 
 	end
