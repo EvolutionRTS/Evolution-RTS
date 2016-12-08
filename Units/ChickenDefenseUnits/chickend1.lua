@@ -72,7 +72,7 @@ return {
 				craterboost = 0,
 				cratermult = 0,
 				dance = 20,
-				explosiongenerator = "custom:NONE",
+				explosiongenerator = "custom:chickenspike-large-sparks-burn",
 				firestarter = 0,
 				flighttime = 5,
 				groundbounce = 1,

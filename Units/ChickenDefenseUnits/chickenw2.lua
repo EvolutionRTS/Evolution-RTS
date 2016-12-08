@@ -76,7 +76,7 @@ return {
 				craterboost = 0,
 				cratermult = 0,
 				edgeeffectiveness = 0,
-				explosiongenerator = "custom:dirt",
+				explosiongenerator = "custom:chickenspike-large-sparks-burn",
 				impulseboost = 1,
 				impulsefactor = 1,
 				interceptedbyshieldtype = 0,

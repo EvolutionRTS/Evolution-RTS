@@ -85,6 +85,7 @@ return {
 				range = 245,
 				reloadtime = 3.6,
 				rgbcolor = "0.3 0.5 0.6",
+				model = "ChickenDefenseModels/spike.s3o",
 				size = 8,
 				sizedecay = -0.3,
 				soundhit = "ChickenDefenseSounds/junohit2edit",

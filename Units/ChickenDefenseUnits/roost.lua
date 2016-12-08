@@ -47,20 +47,19 @@ return {
 		featuredefs = {},
 		sfxtypes = {
 			explosiongenerators = {
-				[1] = "custom:dirt2",
-				[2] = "custom:dirt3",
+				[1] = "custom:dirt",
 			},
 		},
 		weapondefs = {
 			weapon = {
 				areaofeffect = 450,
 				avoidfriendly = 0,
-				cegtag = "ASTEROIDTRAIL_Expl",
+				cegtag = "nuketrail-roost",
 				collidefriendly = 0,
 				craterboost = 0,
 				cratermult = 0,
 				edgeeffectiveness = 0,
-				explosiongenerator = "custom:COMM_EXPLOSION",
+				explosiongenerator = "custom:nukedatbewm-roost",
 				firestarter = 70,
 				flighttime = 100,
 				metalpershot = 0,

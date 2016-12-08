@@ -3,6 +3,7 @@ return {
 		areaofeffect = "16",
 		craterboost = "0",
 		cratermult = "0",
+		explosiongenerator = "custom:chickenunitexplosion-large-red",
 		impulseboost = "0",
 		impulsefactor = "0.4",
 		name = "bigbug_death",

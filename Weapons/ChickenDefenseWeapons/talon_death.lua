@@ -5,6 +5,7 @@ return {
 		cratermult = "0",
 		impulseboost = "0",
 		impulsefactor = "0.4",
+		explosiongenerator = "custom:chickenunitexplosion-small-red",
 		name = "talon_death",
 		range = "450",
 		reloadtime = "3.6",

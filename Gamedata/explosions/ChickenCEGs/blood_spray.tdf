@@ -41,7 +41,7 @@
           	ttl=18;
           	frontOffset=0;
           	sideTexture=bloodsplat;
-          	frontTexture=null;
+          	frontTexture=bloodsplat;
 		dir=-1 r2, -1 r2, -1 r2;
       	}
 		water=1;
