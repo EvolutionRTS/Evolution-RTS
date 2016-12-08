@@ -27,7 +27,7 @@ for _,mdef in pairs (moveDefine) do
 	for tagName,tagVal in pairs (tagList) do
 		tagName = string.lower(tagName)
 		if( mdef[tagName] == nil and tagVal ~=  0 ) then
-			Spring.Echo("Warning! moveDef: " .. mdef["name"] .. ", assigning default value for missing tag " .. tagName .. "(" .. tagVal .. ")")
+			--Spring.Echo("Warning! moveDef: " .. mdef["name"] .. ", assigning default value for missing tag " .. tagName .. "(" .. tagVal .. ")")
 			mdef[tagName] = tagVal
 		end
 	end		
