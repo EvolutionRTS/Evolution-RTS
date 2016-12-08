@@ -273,18 +273,6 @@ StopMoving()
 	turn lr1 to z-axis <0> speed <40> *1000/(WALK_PERIOD);
 }
 
-Thrust()
-{
-   while( TRUE )
-   {
-      if (moving)    
-      {
-              emit-sfx 1025 + 0 from dirt;
-                }
-        sleep 400;    
-   }
-}
-
 buildflame()
 {
    while( TRUE )
@@ -312,7 +300,6 @@ Create()
 	}
 	start-script SmokeUnit();
 	start-script DoTheWalking();
-//	start-script Thrust();
 	start-script buildflame();
 }
 
