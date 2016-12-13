@@ -4,7 +4,7 @@
 #define WALK_PERIOD 50
 
 
-piece	base, nanopoint1, penis, dirt, rf1, rf2, lf1, lf2, rr1, rr2, lr1, lr2, rfdirt, rrdirt, lfdirt, lrdirt;
+piece	base, nanopoint1, penis, rf1, rf2, lf1, lf2, rr1, rr2, lr1, lr2, rfdirt, rrdirt, lfdirt, lrdirt;
 
 static-var maxreloadtime, moving, bMoving, terraintype, building;
 
