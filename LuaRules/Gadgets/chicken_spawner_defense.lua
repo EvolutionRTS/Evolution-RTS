@@ -1010,8 +1010,9 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer,
       local resistPercent = (math.min(queenResistance[weaponID].damage/queenMaxHP, 0.75) + 0.2)
       if resistPercent > 0.35 then
         if queenResistance[weaponID].notify == 0 then
-          local weaponName
-          Spring.Echo("Queen is becoming resistant to " .. UnitDefs[attackerDefID].humanName .. "'s attacks (" .. weaponName .. ")")
+		  --Bruh, just because you call a variable "WeaponName" doesn't mean that it magically goes and gets the weaponname from the def
+          --local weaponName
+          Spring.Echo("The Queen is becoming resistant to " .. UnitDefs[attackerDefID].humanName .. "'s attacks!")
           queenResistance[weaponID].notify = 1
           for i = 1,12,1 do
             table.insert(spawnQueue, {burrow = queenID, unitName = "chickenw2", team = chickenTeamID})
