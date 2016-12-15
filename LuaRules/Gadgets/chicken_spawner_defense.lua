@@ -886,7 +886,7 @@ function removeFailChickens()
 				if (not attackingFeature) then
 					local dx,_,dz = GetUnitDirection(unitID)
 					local angle = math.atan2(dx,dz)
-					Spring.SpawnCEG("dirt2",x,y,z,0,0,0)
+					Spring.SpawnCEG("blood_trail",x,y,z,0,0,0)
 					if (y < -15) then
 						deathQueue[unitID] = { selfd = false, reclaimed = false }
 						chickenCount = chickenCount - 1
