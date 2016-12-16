@@ -421,7 +421,7 @@ function generateDisplayList2()
 		gl.TexRect(energyOffset+(energyBarWidth*energyPercentage)+glowSize+glowSize,-glowSize,energyOffset+(energyBarWidth*energyPercentage),(height/6)+glowSize)
 		
 		gl.Texture(barTexture)
-		energyStr = green .. "+" .. tostring(math.round(ei,1)) .. white .. " (" .. yellow .. tostring(math.round(ec,1)).. white .. "/" .. tostring(math.round(es)) .. ") "
+		energyStr = green .. "+" .. tostring(math.round(ei,1)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
 	  gl.Text(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
 		
 		-- metal bar
@@ -473,7 +473,7 @@ function generateDisplayList2()
 			end
 		end
 		
-		metalStr = orange .. "±" .. tostring(math.round(mi - me,1)) .. green .. " +" .. tostring(math.round(mi,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp,1)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ") "
+		metalStr = orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ") "
 	  gl.Text(metalStr, metalOffset+metalBarWidth, textOffsetY, FontSize, "onr")
 	    
 	  gl.Texture(false)
