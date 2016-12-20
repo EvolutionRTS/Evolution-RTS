@@ -717,9 +717,16 @@ if (gadgetHandler:IsSyncedCode()) then
 						end
 					end
 				end
-				if owner and count > 0 then
-					capturePoint.aggressor = nil
-					capturePoint.capture = capturePoint.capture + (1 + captureBonus * (count - 1)) * decapSpeed
+				if owner then
+					if count > 0 then
+						capturePoint.aggressor = nil
+						capturePoint.capture = capturePoint.capture + (1 + captureBonus * (count - 1)) * decapSpeed
+					else
+						capturePoint.capture = capturePoint.capture - decapSpeed
+						if capturePoint.capture < 0 then
+							capturePoint.capture = 0
+						end
+					end
 				elseif aggressor then
 					--Spring.Echo("capturePoint.aggressor", capturePoint.aggressor)
 					if capturePoint.aggressor == aggressor then
