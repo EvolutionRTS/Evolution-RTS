@@ -10,7 +10,7 @@ local armortype					 = [[building]]
 local supply					 = [[5]]
 local maxDamage					 = 300 * 4
 
-local weapon1Damage              = 12.5
+local weapon1Damage              = 15
 local weapon1AOE				 = 25
 local weapon1Range				 = 650
 local projectiles				 = 5
@@ -154,7 +154,7 @@ local weaponDefs                 = {
 		name                   = "E.M.G.",
 		noExplode			   = true,
 		range                  = weapon1Range,
-		reloadtime             = 0.5,
+		reloadtime             = 1,
 		projectiles			   = projectiles,
 		weaponType		       = "LaserCannon",
 		soundStart             = "shotgun-reload.wav",
