@@ -1,0 +1,196 @@
+-- UNITDEF -- EAMPHIBBUGGY_t2 --
+--------------------------------------------------------------------------------
+
+local unitName                   = "eamphibbuggy_t2"
+
+--------------------------------------------------------------------------------
+
+local buildCostMetal 			  = 18
+local maxDamage					  = 120 * 1.20
+
+local tech						 = [[tech1]]
+local armortype					 = [[light]]
+local supply					 = [[1]]
+
+local weapon1Damage              = 13.5 * 1.20
+local weapon1AOE				 = 1
+local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+
+local function roundToFirstDecimal(energycosttofire)
+    return math.floor(energycosttofire*10 + 0.5)*0.1
+end
+
+local unitDef                    = {
+
+	--mobileunit 
+	transportbyenemy             = false;
+
+	--**
+
+
+	acceleration                 = 1,
+	brakeRate                    = 0.1,
+	buildCostEnergy              = 0,
+	buildCostMetal               = buildCostMetal,
+	builder                      = false,
+	buildTime                    = 5,
+	canAttack                    = true,
+	cancollect                   = "1",
+	canGuard                     = true,
+	canMove                      = true,
+	canPatrol                    = true,
+	canstop                      = "1",
+	category                     = "LIGHT AMPHIB RAID",
+	corpse                       = "ammobox",
+	description                  = [[Light, Fast, Raider • Uses +]] .. supply .. [[ Supply]],
+	energyMake                   = 0,
+	energyStorage                = 0,
+	energyUse                    = 0,
+	explodeAs                    = "smallExplosionGenericRed",
+	footprintX                   = 2,
+	footprintZ                   = 2,
+	iconType                     = "raider",
+	idleAutoHeal                 = .5,
+	idleTime                     = 2200,
+	leaveTracks                  = false,
+	maxDamage                    = maxDamage,
+	maxSlope                     = 28,
+	maxVelocity                  = 6.0,
+	maxReverseVelocity           = 2,
+	maxWaterDepth                = 5000,
+	metalStorage                 = 0,
+	movementClass                = "TANK2",
+	name                         = "Snake Upgraded",
+	noChaseCategory              = "VTOL",
+	objectName                   = "eamphibbuggy2.s3o",
+	script			             = "eamphibbuggy_lus.lua",
+	radarDistance                = 0,
+	repairable		             = false,
+	selfDestructAs               = "smallExplosionGenericRed",
+	sightDistance                = 500,
+--	SonarDistance                = 500,
+	stealth			             = true,
+	seismicSignature             = 2,
+	sonarStealth		         = false,
+	smoothAnim                   = true,
+	--  turnInPlace              = false,
+	--  turnInPlaceSpeedLimit    = 6.0,
+	turnInPlace                  = true,
+	turnRate                     = 5000,
+	--  turnrate                 = 475,
+	unitname                     = unitName,
+	workerTime                   = 0,
+
+	sfxtypes                     = { 
+		pieceExplosionGenerators = { 
+			"deathceg3", 
+			"deathceg4", 
+		}, 
+
+		explosiongenerators      = {
+			"custom:factorysparks",
+			"custom:dirt",
+			"custom:blacksmoke",
+		},
+	},
+	sounds                       = {
+		underattack              = "unitsunderattack1",
+		ok                       = {
+			"ack",
+		},
+		select                   = {
+			"unitselect",
+		},
+	},
+	weapons                      = {
+		[1]                      = {
+			def                  = "lightbeamlaser",
+			badTargetCategory    = "ARMORED BUILDING WALL",
+		},
+		--[[	
+		[2]                      = {
+			def                  = "TORP",
+		},
+		]]--
+	},
+	customParams                 = {
+		canbetransported 		 = "true",
+		needed_cover             = 1,
+		death_sounds             = "generic",
+		RequireTech              = tech,
+		armortype                = "light",
+		nofriendlyfire	         = "1",
+		supply_cost              = 1,
+		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
+		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
+		factionname	             = "outer_colonies",  
+		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+ 
+Can fire while underwater
+ 
+Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s]],
+	},
+}
+
+
+--------------------------------------------------------------------------------
+-- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
+
+local weaponDefs                 = {
+	lightbeamlaser               = {
+		
+		TargetMoveError	         = 0.3,
+		AreaOfEffect             = weapon1AOE,
+		avoidFeature             = false,
+		avoidFriendly            = false,
+		beamTime                 = 0.1,
+		
+		collideFeature           = false,
+		collideFriendly          = false,
+		coreThickness            = 0.2,
+		duration                 = 0.1,
+		explosionGenerator       = "custom:genericshellexplosion-small-sparks-burn",
+		energypershot            = energycosttofire,
+		fallOffRate              = 1,
+		fireStarter              = 50,
+		interceptedByShieldType  = 4,
+		impulsefactor		     = 0.1,
+		
+		laserflaresize 	         = 5,
+		largebeamlaser	         = true,
+		leadlimit			     = 10,
+		minintensity             = 1,
+		name                     = "Laser",
+		range                    = 300,
+		reloadtime               = 0.1,
+		WeaponType               = "BeamLaser",
+		rgbColor                 = "0.5 0 0",
+		rgbColor2                = "0.8 0.8 0.8",
+		soundTrigger             = true,
+		soundstart               = "amphibbuggytankshothit.wav",
+		--	soundHit		     = "amphibbuggytankshothit.wav",
+		scrollspeed		         = 5,
+		texture1                 = "lightning",
+		texture2                 = "laserend",
+		thickness                = 5,
+		tolerance                = 3000,
+		turret                   = true,
+		weaponVelocity           = 1000,
+		waterweapon		         = true,
+		customparams             = {
+			damagetype		     = "eamphibbuggy",  
+			
+			--Upgrades--
+			upgradeClass		 = "groundweapons",
+		}, 
+		damage                   = {
+			default              = weapon1Damage, -- multiply * 1.2 for correct dps output
+		},
+	},
+}
+unitDef.weaponDefs               = weaponDefs
+--------------------------------------------------------------------------------
+
+return lowerkeys({ [unitName]    = unitDef })
+
+--------------------------------------------------------------------------------
