@@ -15,10 +15,19 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	local Box="ammobox"
 	local chickenEgg="chicken_egg"
+	local chickenEggB="chicken_eggb"
+	local chickenEggC="chicken_eggc"
+	local chickenEggD="chicken_eggd"
 	local BoxId
 	local eggId
+	local eggIdB
+	local eggIdC
+	local eggIdD
 	local BoxesOnMap={}
 	local eggsOnMap={}
+	local eggsOnMapB={}
+	local eggsOnMapC={}
+	local eggsOnMapD={}
 	local unitInRange={}
 	local Resources={}
 	local SpawnCEG = Spring.SpawnCEG
@@ -26,6 +35,9 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:Initialize()
 	BoxId = FeatureDefNames[Box].id
 	eggId = FeatureDefNames["chicken_egg"].id
+	eggIdB = FeatureDefNames["chicken_eggb"].id
+	eggIdC = FeatureDefNames["chicken_eggc"].id
+	eggIdD = FeatureDefNames["chicken_eggd"].id
 	--Spring.Echo(Box, BoxId)
 
 	ud = Spring.GetAllFeatures ()
@@ -35,6 +47,15 @@ if (gadgetHandler:IsSyncedCode()) then
 			end
 			if Spring.GetFeatureDefID(u) == eggId then
 				eggsOnMap[u] = 1
+			end
+			if Spring.GetFeatureDefID(u) == eggIdB then
+				eggsOnMapB[u] = 1
+			end
+			if Spring.GetFeatureDefID(u) == eggIdC then
+				eggsOnMapC[u] = 1
+			end
+			if Spring.GetFeatureDefID(u) == eggIdD then
+				eggsOnMapD[u] = 1
 			end
 		end
 	end
@@ -98,6 +119,63 @@ if (gadgetHandler:IsSyncedCode()) then
 					end
 				end
 			end
+			for chickenEggB,b in pairs(eggsOnMapB) do	
+				--Spring.Echo("Egg")
+				--Spring.Echo(eggsOnMap)
+				local eggx,eggy,eggz = Spring.GetFeaturePosition(chickenEggB)
+				local unitsInRange = Spring.GetUnitsInSphere(eggx,eggy,eggz, 500)--at x , y , z with radius 200
+				for _,unit in ipairs(unitsInRange) do
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(chickenEggB)   --- [1] is metal, [3] is energy
+						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
+						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
+						Spring.DestroyFeature(chickenEggB)
+						local fx, fy, fz = Spring.GetFeaturePosition(chickenEggB)
+						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						SpawnCEG("sparklegreenplus5", fx, fy, fz)
+						eggsOnMapB[chickenEggB] = nil
+					break
+					end
+				end
+			end
+			for chickenEggC,b in pairs(eggsOnMapC) do	
+				--Spring.Echo("Egg")
+				--Spring.Echo(eggsOnMap)
+				local eggx,eggy,eggz = Spring.GetFeaturePosition(chickenEggC)
+				local unitsInRange = Spring.GetUnitsInSphere(eggx,eggy,eggz, 500)--at x , y , z with radius 200
+				for _,unit in ipairs(unitsInRange) do
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(chickenEggC)   --- [1] is metal, [3] is energy
+						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
+						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
+						Spring.DestroyFeature(chickenEggC)
+						local fx, fy, fz = Spring.GetFeaturePosition(chickenEggC)
+						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						SpawnCEG("sparklegreenplus5", fx, fy, fz)
+						eggsOnMapC[chickenEggC] = nil
+					break
+					end
+				end
+			end
+			for chickenEggD,b in pairs(eggsOnMapD) do	
+				--Spring.Echo("Egg")
+				--Spring.Echo(eggsOnMap)
+				local eggx,eggy,eggz = Spring.GetFeaturePosition(chickenEggD)
+				local unitsInRange = Spring.GetUnitsInSphere(eggx,eggy,eggz, 500)--at x , y , z with radius 200
+				for _,unit in ipairs(unitsInRange) do
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(chickenEggD)   --- [1] is metal, [3] is energy
+						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
+						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
+						Spring.DestroyFeature(chickenEggD)
+						local fx, fy, fz = Spring.GetFeaturePosition(chickenEggD)
+						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						SpawnCEG("sparklegreenplus5", fx, fy, fz)
+						eggsOnMapD[chickenEggD] = nil
+					break
+					end
+				end
+			end
 		end
 	end
    
@@ -108,6 +186,15 @@ if (gadgetHandler:IsSyncedCode()) then
 		if (eggsOnMap[featureID]) then
 			eggsOnMap[featureID] = nil
 		end
+		if (eggsOnMapB[featureID]) then
+			eggsOnMapB[featureID] = nil
+		end
+		if (eggsOnMapC[featureID]) then
+			eggsOnMapC[featureID] = nil
+		end
+		if (eggsOnMapD[featureID]) then
+			eggsOnMapD[featureID] = nil
+		end
 	end
    
 	function gadget:FeatureCreated(featureID, allyTeam)
@@ -116,6 +203,15 @@ if (gadgetHandler:IsSyncedCode()) then
 		end
 		if (Spring.GetFeatureDefID(featureID) == eggId) then
 			eggsOnMap[featureID] = 1
+		end
+		if (Spring.GetFeatureDefID(featureID) == eggIdB) then
+			eggsOnMapB[featureID] = 1
+		end
+		if (Spring.GetFeatureDefID(featureID) == eggIdC) then
+			eggsOnMapC[featureID] = 1
+		end
+		if (Spring.GetFeatureDefID(featureID) == eggIdD) then
+			eggsOnMapD[featureID] = 1
 		end
 	end   
 end
