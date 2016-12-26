@@ -14,13 +14,132 @@ local icontypes = {
     size=1,
     radiusadjust=3,
   },
+
+  -- modifications by dmdr here
   
   raider = {
-    bitmap='icons/raider.png',
+    bitmap='icons/dmdr/dmdr_raider.png',
+    size=1.5,
+    radiusadjust=0,
+  },
+  
+    riot_lit = {
+    bitmap='icons/dmdr/dmdr_riot_lit.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+    riot_arm = {
+    bitmap='icons/dmdr/dmdr_riot_arm.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+        arty_lit = {
+    bitmap='icons/dmdr/dmdr_arty_lit.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+    arty_arm = {
+    bitmap='icons/dmdr/dmdr_arty_arm.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+      td_arm_all = {
+    bitmap='icons/dmdr/dmdr_td_ab.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+        td_arm_lit = {
+    bitmap='icons/dmdr/dmdr_td_al.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+    td_arm_arm = {
+    bitmap='icons/dmdr/dmdr_td_aa.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+    
+      td_lit_all = {
+    bitmap='icons/dmdr/dmdr_td_lb.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+        td_lit_lit = {
+    bitmap='icons/dmdr/dmdr_td_ll.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+    td_lit_arm = {
+    bitmap='icons/dmdr/dmdr_td_la.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+      mtd_lit_arm = {
+    bitmap='icons/dmdr/dmdr_mtd_la.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+        mtd_lit_all = {
+    bitmap='icons/dmdr/dmdr_mtd_lb.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+      mtd_arm_arm = {
+    bitmap='icons/dmdr/dmdr_mtd_aa.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+  scout = {
+    bitmap='icons/dmdr/dmdr_air_sct.png',
+    size=1.5,
+    radiusadjust=0,
+  },
+  
+        etransport = {
+    bitmap='icons/dmdr/dmdr_tport.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
+        air_lit = {
+    bitmap='icons/dmdr/dmdr_air_lit.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+    air_arm = {
+    bitmap='icons/dmdr/dmdr_air_arm.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+      air_bomb = {
+    bitmap='icons/dmdr/dmdr_air_bmb.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+
+    esilo = {
+    bitmap='icons/dmdr/dmdr_nuke',
     size=1,
     radiusadjust=3,
   },
 
+  
+  -- and end here
+  
   tankdestroyer = {
     bitmap='icons/tankdestroyer.png',
     size=1,
@@ -44,12 +163,14 @@ local icontypes = {
     size=1,
     radiusadjust=3,
   },
-  
+
+  --[[ see above
   etransport = {
     bitmap='icons/support.png',
-    size=2,
+    size=2.2,
     radiusadjust=3,
   },
+  ]]--
   
   commander = {
     bitmap='icons/commander.png',
@@ -69,11 +190,12 @@ local icontypes = {
     radiusadjust=3,
   },
 
+  --[[
   esilo = {
     bitmap='icons/esilo.png',
     size=1,
     radiusadjust=3,
-  },
+  }, ]]--
 
   elrpc = {
     bitmap='icons/elrpc.png',
