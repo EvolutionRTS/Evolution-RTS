@@ -55,7 +55,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Unit Type: Light Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Unit Type: Armored Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

@@ -55,7 +55,7 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Unit Type: Armored Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
+	description                  =[[Unit Type: Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -63,7 +63,7 @@ local unitDef                    = {
 	firestandorders              = "1",
 	footprintX                   = 4,
 	footprintZ                   = 4,
-	iconType                     = "tankdestroyer",
+	iconType                     = "td_arm_all",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,

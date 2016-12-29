@@ -15,132 +15,302 @@ local icontypes = {
     radiusadjust=3,
   },
 
-  -- modifications by dmdr here
+  -- modifications by dmdr start here
   
-  raider = {
-    bitmap='icons/dmdr/dmdr_raider.png',
+    
+        engineer = {
+    bitmap='icons/dmdr_orb.png',
+    size=2,
+    radiusadjust=3,
+  },
+  
+        raider = {
+    bitmap='icons/dmdr_raider.png',
     size=1.5,
     radiusadjust=0,
   },
   
-    riot_lit = {
-    bitmap='icons/dmdr/dmdr_riot_lit.png',
+        leveller = {
+    bitmap='icons/dmdr_end_lvlr.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
+        lacerator = {
+    bitmap='icons/dmdr_end_lacr.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
+        anarchid = {
+    bitmap='icons/dmdr_end_nrkd.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
+        shield_lit = {
+    bitmap='icons/dmdr_shield_mobile.png',
+    size=2.5,
+    radiusadjust=0,
+  },
+  
+  
+        riot_lit = {
+    bitmap='icons/dmdr_riot_lit.png',
     size=2.2,
     radiusadjust=0,
   },
   
-    riot_arm = {
-    bitmap='icons/dmdr/dmdr_riot_arm.png',
+        riot_arm = {
+    bitmap='icons/dmdr_riot_arm.png',
     size=2.2,
     radiusadjust=0,
   },
   
         arty_lit = {
-    bitmap='icons/dmdr/dmdr_arty_lit.png',
+    bitmap='icons/dmdr_arty_lit.png',
     size=2.2,
     radiusadjust=0,
   },
   
-    arty_arm = {
-    bitmap='icons/dmdr/dmdr_arty_arm.png',
+        arty_arm = {
+    bitmap='icons/dmdr_arty_arm.png',
     size=2.2,
     radiusadjust=0,
   },
   
-      td_arm_all = {
-    bitmap='icons/dmdr/dmdr_td_ab.png',
+        td_arm_all = {
+    bitmap='icons/dmdr_td_ab.png',
     size=2.2,
     radiusadjust=0,
   },
   
         td_arm_lit = {
-    bitmap='icons/dmdr/dmdr_td_al.png',
+    bitmap='icons/dmdr_td_al.png',
     size=2.2,
     radiusadjust=0,
   },
   
-    td_arm_arm = {
-    bitmap='icons/dmdr/dmdr_td_aa.png',
+        td_arm_arm = {
+    bitmap='icons/dmdr_td_aa.png',
     size=2.2,
     radiusadjust=0,
   },
     
-      td_lit_all = {
-    bitmap='icons/dmdr/dmdr_td_lb.png',
+        td_lit_all = {
+    bitmap='icons/dmdr_td_lb.png',
     size=2.2,
     radiusadjust=0,
   },
   
         td_lit_lit = {
-    bitmap='icons/dmdr/dmdr_td_ll.png',
+    bitmap='icons/dmdr_td_ll.png',
     size=2.2,
     radiusadjust=0,
   },
   
-    td_lit_arm = {
-    bitmap='icons/dmdr/dmdr_td_la.png',
+        td_lit_arm = {
+    bitmap='icons/dmdr_td_la.png',
     size=2.2,
     radiusadjust=0,
   },
   
       mtd_lit_arm = {
-    bitmap='icons/dmdr/dmdr_mtd_la.png',
+    bitmap='icons/dmdr_mtd_la.png',
     size=2.2,
     radiusadjust=0,
   },
   
         mtd_lit_all = {
-    bitmap='icons/dmdr/dmdr_mtd_lb.png',
+    bitmap='icons/dmdr_mtd_lb.png',
     size=2.2,
     radiusadjust=0,
   },
   
       mtd_arm_arm = {
-    bitmap='icons/dmdr/dmdr_mtd_aa.png',
+    bitmap='icons/dmdr_mtd_aa.png',
     size=2.2,
     radiusadjust=0,
   },
   
-  scout = {
-    bitmap='icons/dmdr/dmdr_air_sct.png',
+        scout = {
+    bitmap='icons/dmdr_air_sct.png',
     size=1.5,
     radiusadjust=0,
   },
   
         etransport = {
-    bitmap='icons/dmdr/dmdr_tport.png',
-    size=3,
+    bitmap='icons/dmdr_tport.png',
+    size=2.5,
     radiusadjust=0,
   },
   
         air_lit = {
-    bitmap='icons/dmdr/dmdr_air_lit.png',
+    bitmap='icons/dmdr_air_lit.png',
     size=2.2,
     radiusadjust=0,
   },
   
-    air_arm = {
-    bitmap='icons/dmdr/dmdr_air_arm.png',
+        air_arm = {
+    bitmap='icons/dmdr_air_arm.png',
     size=2.2,
     radiusadjust=0,
   },
   
-      air_bomb = {
-    bitmap='icons/dmdr/dmdr_air_bmb.png',
+        air_bomb = {
+    bitmap='icons/dmdr_air_bmb.png',
     size=2.2,
+    radiusadjust=0,
+  },
+  
+        drone = {
+    bitmap='icons/dmdr_air_all.png',
+    size=1,
+    radiusadjust=0,
+  },
+  
+        turret_lit = {
+    bitmap='icons/defense.png',
+    size=2.2,
+    radiusadjust=0,
+  },
+  
+        turret_arm = {
+    bitmap='icons/defense.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
+        turret_arty = {
+    bitmap='icons/trt_art.png',
+    size=3,
     radiusadjust=0,
   },
 
-    esilo = {
-    bitmap='icons/dmdr/dmdr_nuke',
+        esilo = {
+    bitmap='icons/dmdr_nuke.png',
+    size=4,
+    radiusadjust=0,
+  },
+
+        radar = {
+    bitmap='icons/radar.png',
+    size=3.5,
+    radiusadjust=0,
+  },
+  
+        radarjam = {
+    bitmap='icons/radarjam.png',
+    size=3.5,
+    radiusadjust=0,
+  },
+  
+        storage = {
+    bitmap='icons/support.png',
+    size=1,
+    radiusadjust=3,
+  },
+  
+        energy = {
+    bitmap='icons/dmdr_tech.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
+        generator = {
+    bitmap='icons/dmdr_energy.png',
+    size=2,
+    radiusadjust=3,
+  },
+  
+        baseshield = {
+    bitmap='icons/dmdr_shield_base.png',
+    size=3.5,
+    radiusadjust=0,
+  },
+  
+        nukeshield = {
+    bitmap='icons/dmdr_shield_nuke.png',
+    size=3.5,
+    radiusadjust=0,
+  },
+  
+  -- and end here
+
+  eco = {
+    bitmap='icons/eco.png',
+    size=1,
+    radiusadjust=3,
+  },  
+
+  air = {
+    bitmap='icons/air.png',
+    size=1,
+    radiusadjust=3,
+  },
+  factory = {
+    bitmap='icons/factory.png',
     size=1,
     radiusadjust=3,
   },
 
+  barricade = {
+    bitmap='icons/barricade.png',
+    size=1,
+    radiusadjust=3,
+  },
   
-  -- and end here
+  support = {
+    bitmap='icons/support.png',
+    size=1,
+    radiusadjust=3,
+  },
   
-  tankdestroyer = {
+  commander = {
+    bitmap='icons/commander.png',
+    size=3,
+    radiusadjust=3,
+  },
+
+
+  ORB = {
+    bitmap='icons/orb.png',
+    size=1,
+    radiusadjust=3,
+  },
+
+    
+  chicken = 
+	{
+		bitmap="icons/chicken.png",
+		size=1.4,
+    },
+	chickena = 
+	{
+		bitmap="icons/chickena.png",
+		size=1.6,
+    },
+	chickenf = {
+		bitmap="icons/chickenf.png",
+		size=1.6,
+    },
+	chickens = 
+	{
+		bitmap="icons/chickens.png",
+		size=1.5,
+    },
+	chickenr = {
+		bitmap="icons/chickenr.png",
+		size=1.6,
+    },
+	chickenq = {
+		bitmap="icons/chickenq.png",
+		size=3,
+    },
+  
+  --[[ all this stuff is redundant now, so for legibility I'm commenting it out (dmdr 271216)
+  
+    tankdestroyer = {
     bitmap='icons/tankdestroyer.png',
     size=1,
     radiusadjust=3,
@@ -158,44 +328,18 @@ local icontypes = {
     radiusadjust=3,
   },
   
-  support = {
-    bitmap='icons/support.png',
-    size=1,
-    radiusadjust=3,
-  },
-
-  --[[ see above
-  etransport = {
+  
+    etransport = {
     bitmap='icons/support.png',
     size=2.2,
     radiusadjust=3,
   },
-  ]]--
   
-  commander = {
-    bitmap='icons/commander.png',
-    size=3,
-    radiusadjust=3,
-  },
-
-  engineer = {
-    bitmap='icons/engineer.png',
-    size=1,
-    radiusadjust=3,
-  },
-
-  ORB = {
-    bitmap='icons/orb.png',
-    size=1,
-    radiusadjust=3,
-  },
-
-  --[[
   esilo = {
     bitmap='icons/esilo.png',
     size=1,
     radiusadjust=3,
-  }, ]]--
+  },
 
   elrpc = {
     bitmap='icons/elrpc.png',
@@ -297,81 +441,21 @@ local icontypes = {
     bitmap='icons/sub.png',
     size=1,
     radiusadjust=3,
-  },
-
-  defense = {
+  }, 
+  
+    defense = {
     bitmap='icons/defense.png',
     size=1,
     radiusadjust=3,
   },
-  eco = {
-    bitmap='icons/eco.png',
-    size=1,
-    radiusadjust=3,
-  },
-  storage = {
+  
+    storage = {
     bitmap='icons/storage.png',
     size=1,
     radiusadjust=3,
   },
-  energy = {
-    bitmap='icons/ecoenergy.png',
-    size=2,
-    radiusadjust=3,
-  },
-  air = {
-    bitmap='icons/air.png',
-    size=1,
-    radiusadjust=3,
-  },
-  factory = {
-    bitmap='icons/factory.png',
-    size=1,
-    radiusadjust=3,
-  },
-  radar = {
-    bitmap='icons/radar.png',
-    size=1,
-    radiusadjust=3,
-  },
-  radarjam = {
-    bitmap='icons/radarjam.png',
-    size=1,
-    radiusadjust=3,
-  },
-  barricade = {
-    bitmap='icons/barricade.png',
-    size=1,
-    radiusadjust=3,
-  },
   
-  chicken = 
-	{
-		bitmap="icons/chicken.png",
-		size=1.4,
-    },
-	chickena = 
-	{
-		bitmap="icons/chickena.png",
-		size=1.6,
-    },
-	chickenf = {
-		bitmap="icons/chickenf.png",
-		size=1.6,
-    },
-	chickens = 
-	{
-		bitmap="icons/chickens.png",
-		size=1.5,
-    },
-	chickenr = {
-		bitmap="icons/chickenr.png",
-		size=1.6,
-    },
-	chickenq = {
-		bitmap="icons/chickenq.png",
-		size=3,
-    },
+  ]]--
   
 }
 

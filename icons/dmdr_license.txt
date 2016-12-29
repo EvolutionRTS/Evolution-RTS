@@ -1,0 +1,22 @@
+All dmdr_* icons were modified from the original images by me, dmdr, except for the lightning bolts in dmdr_riot_alt/lit.png and dmdr_energy.png which were created from scratch (wow so talented).
+They were originally created for use in Forboding_Angel's open source real time strategy game 'Evolution RTS'. 
+
+https://github.com/EvolutionRTS/Evolution-RTS
+
+Source files used:
+
+https://openclipart.org/detail/29029/bullet-silhouettes
+https://openclipart.org/detail/253954/radioactive-transparent-icon
+https://openclipart.org/detail/96985/hazard-warning-sign-explosion
+https://openclipart.org/detail/239289/cartoon-cheese
+https://openclipart.org/detail/127483/triangle-equilateral
+https://openclipart.org/detail/264375/rocket-9
+https://openclipart.org/detail/180065/abomb-by-rones
+https://openclipart.org/detail/149047/pacman-hexagons
+https://openclipart.org/detail/220693/medieval-shields
+https://openclipart.org/detail/15971/adjustable-spanner-silhouette
+https://openclipart.org/detail/27178/peace-symbol
+
+Because these are all public domain images, so far as I'm concerned all of my icons so created from them are also PD. Please include the links to the source files if you do reuse these icons in a different context, however, because that's the polite thing to do.
+
+Please note, however, that any icons found in the Evolution RTS data files that are NOT prefaced with dmdr_ were created by Forboding_Angel and others and as such are NOT subject to these licensing terms! Please consult the Evolution RTS license.txt, available at the GitHub link above, for further information.
