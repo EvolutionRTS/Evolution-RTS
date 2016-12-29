@@ -8,6 +8,18 @@ KaiserJ (Lead 3d Artist (Models, Textures))
 
 Jay Sound (Sound Design http://www.impactgameaudio.com)
 
+Floris
+-UI Sex
+-ControlVictory UI
+
+CommonPlayer
+-Many fixes and enhancements
+-Proper resource bars
+-Addition of hotkeys and costs on build menu
+
+Dmdr
+-Unit Icons
+
 Music: (Current Soundtrack)
 The Enigma TNG http://theenigmatng.bandcamp.com/
 
