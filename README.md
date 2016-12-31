@@ -20,7 +20,7 @@ Control the battlefield and a level that feels the most comfortable to you, whet
 Set builders on repeat so that they repeat the orders you give infinitely until they die. Adjust builder priority in order to control the amount of resources allocated to that specific builder’s construction project.
 
 <h3>Unique Cover System allows you to easily set up ambushes</h3>
-Hide your army in rocks and foilage completely undetected and lie in wait to ambush your enemy!
+Hide your army in rocks and foliage completely undetected and lie in wait to ambush your enemy!
 
 <h3>Gameplay geared towards casual gamers in addition to hardcore rts fans, as opposed to only being fun to play at the higher levels</h3>
 Gameplay designed around being easy to learn yet hard to master. As a newbie you can be up and running in no time, and the gameplay ensures that just because you are new, you aren’t necessarily at a huge disadvantage.
