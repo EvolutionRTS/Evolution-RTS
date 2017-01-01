@@ -71,8 +71,6 @@ local unitDef                     = {
 			"gdenergy",
 		},
 	},
-	weapons                       = {
-	},
 	customParams                  = {
 		iseco                     = 1,
 		needed_cover              = 4,
