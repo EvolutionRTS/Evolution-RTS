@@ -113,7 +113,7 @@ Fires a projectile dealing ]] .. weapon1Damage .. [[ damage
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
-	useGroundDecal                = true,
+	useGroundDecal                = false,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
 	BuildingGroundDecalSizeX      = 3,
 	BuildingGroundDecalSizeY      = 3,

@@ -459,7 +459,7 @@ function generateDisplayList2()
 				percentage = timeElapsed%metalIncomeTimer/metalIncomeTimer
 				gl.Color(1,0.5,0,1)
 				gl.Texture(barTexture)
-				gl.TexRect(metalOffset,0,metalOffset+(metalBarWidth*percentage),height/20)
+				gl.TexRect(metalOffset,0,metalOffset+(metalBarWidth*percentage),height/12)
 				if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
 					Spring.PlaySoundFile("sounds/metalincomeincrease.wav", 1)
 					Spring.Echo("-------------------------------------")

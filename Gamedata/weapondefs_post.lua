@@ -11,6 +11,17 @@
 --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+
+local modOptions
+if (Spring.GetModOptions) then
+  modOptions = Spring.GetModOptions()
+end
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 --
 --  Per-unitDef weaponDefs
 --
@@ -37,6 +48,34 @@ local function tobool(val)
   end
   return false
 end
+
+-- Gameplay Speed
+-- local gamePlaySpeed = modOptions.gameplayspeed or "veryslow"
+
+-- Spring.Echo("[Gameplay Speed] Set to " .. gamePlaySpeed)
+
+-- if gamePlaySpeed == "veryslow" then
+	-- for id,weaponDef in pairs(WeaponDefs) do
+		-- if weaponDef.weaponvelocity then
+			-- Spring.Echo ("//")
+			-- Spring.Echo (weaponDef.name)
+			-- Spring.Echo (weaponDef.weaponvelocity)
+			-- weaponDef.weaponvelocity = weaponDef.weaponvelocity * 0.1
+			-- Spring.Echo ("••")
+			-- Spring.Echo (weaponDef.name)
+			-- Spring.Echo (weaponDef.weaponvelocity)
+			-- Spring.Echo ("\\")
+		-- end
+	-- end
+-- end
+
+-- if gamePlaySpeed == "slow" then
+	-- for id,weaponDef in pairs(WeaponDefs) do
+		-- if weaponDef.weaponvelocity then
+			-- weaponDef.weaponvelocity = weaponDef.weaponvelocity * 0.75
+		-- end
+	-- end
+-- end
 
 --------------------------------------------------------------------------------
 

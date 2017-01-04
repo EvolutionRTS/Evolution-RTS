@@ -45,40 +45,54 @@ end
 -- Gameplay Speed (Classic RTS Mode) --
 --------------------------------------------------------------------------------
 
-local gamePlaySpeed = modOptions.gameplayspeed or "faster"
+local gamePlaySpeed = modOptions.gameplayspeed or "veryslow"
 
-Spring.Echo("Gameplay Speed is set to " .. gamePlaySpeed)
+Spring.Echo("[Gameplay Speed] Set to " .. gamePlaySpeed)
 
 for id,unitDef in pairs(UnitDefs) do
 	unitDef.buildtime = unitDef.buildcostmetal / 4
 end
 
-if gamePlaySpeed == "normal" then
+if gamePlaySpeed == "veryslow" then
 	for id,unitDef in pairs(UnitDefs) do
 		if unitDef.maxvelocity then
 			unitDef.maxvelocity = unitDef.maxvelocity * 0.5
 		end
-		if unitDef.maxreversevelocity then
-			unitDef.maxreversevelocity = unitDef.maxvelocity * 0.5
+		if unitDef.buildcostmetal then
+			unitDef.buildcostmetal = unitDef.buildcostmetal * 1.5
+		end
+	end
+end
+
+if gamePlaySpeed == "slow" then
+	for id,unitDef in pairs(UnitDefs) do
+		if unitDef.maxvelocity then
+			unitDef.maxvelocity = unitDef.maxvelocity * 0.75
+		end
+		if unitDef.buildcostmetal then
+			unitDef.buildcostmetal = unitDef.buildcostmetal * 1.25
 		end
 	end
 end
 
 if gamePlaySpeed == "fast" then
 	for id,unitDef in pairs(UnitDefs) do
-		if unitDef.maxvelocity then
-			unitDef.maxvelocity = unitDef.maxvelocity * 0.75
-		end
-		if unitDef.maxreversevelocity then
-			unitDef.maxreversevelocity = unitDef.maxvelocity * 0.5
-		end
+--	Spring.Echo(unitDef.buildcostmetal)
+		unitDef.buildtime = 5
 	end
 end
 
-if gamePlaySpeed == "fastest" then
-	for id,unitDef in pairs(UnitDefs) do
---	Spring.Echo(unitDef.buildcostmetal)
-		unitDef.buildtime = 5
+--Set reverse velocity automatically
+for id,unitDef in pairs(UnitDefs) do
+	if unitDef.maxreversevelocity then
+		unitDef.maxreversevelocity = unitDef.maxvelocity * 0.8
+	end
+end
+
+--Override groundplate used
+for id,unitDef in pairs(UnitDefs) do
+	if unitDef.usegrounddecal == true then
+		unitDef.buildinggrounddecaltype = "groundplate.dds"
 	end
 end
 
