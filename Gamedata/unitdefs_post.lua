@@ -55,7 +55,7 @@ end
 
 if gamePlaySpeed == "veryslow" then
 	for id,unitDef in pairs(UnitDefs) do
-		if unitDef.maxvelocity then
+		if unitDef.buildcostmetal then
 			unitDef.maxvelocity = unitDef.maxvelocity * 0.5
 		end
 		if unitDef.buildcostmetal then
@@ -85,7 +85,7 @@ end
 --Set reverse velocity automatically
 for id,unitDef in pairs(UnitDefs) do
 	if unitDef.maxreversevelocity then
-		unitDef.maxreversevelocity = unitDef.maxvelocity * 0.8
+		unitDef.maxreversevelocity = unitDef.maxreversevelocity * 0.8
 	end
 end
 
