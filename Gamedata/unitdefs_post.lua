@@ -83,11 +83,11 @@ if gamePlaySpeed == "fast" then
 end
 
 --Set reverse velocity automatically
-for id,unitDef in pairs(UnitDefs) do
-	if unitDef.maxreversevelocity then
-		unitDef.maxreversevelocity = unitDef.maxreversevelocity * 0.8
+	for id,unitDef in pairs(UnitDefs) do
+		if unitDef.maxvelocity then
+			unitDef.maxreversevelocity = unitDef.maxvelocity * 0.9
+		end
 	end
-end
 
 --Override groundplate used
 for id,unitDef in pairs(UnitDefs) do
