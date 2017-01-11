@@ -129,6 +129,7 @@ local cx, cy, cz = 0,0,0;  --// camera pos
 local smoothheight = 0
 
 local paraUnits   = {};
+local UnitMorphs  = {};
 
 local barShader;
 local barDList;
@@ -773,6 +774,12 @@ function widget:Initialize()
   Spring.SendCommands({"unbind f9 showhealthbars"})
   Spring.SendCommands({"bind f9 luaui showhealthbars"})
   
+  --// link morph callins
+  widgetHandler:RegisterGlobal('MorphUpdate', MorphUpdate)
+  widgetHandler:RegisterGlobal('MorphFinished', MorphFinished)
+  widgetHandler:RegisterGlobal('MorphStart', MorphStart)
+  widgetHandler:RegisterGlobal('MorphStop', MorphStop)
+  
   init()
 end
 
@@ -784,6 +791,11 @@ function widget:Shutdown()
   Spring.SendCommands({"bind f9 showhealthbars"})
   --Spring.SendCommands({"showhealthbars 1"}) -- don't re-enable, nobody ever uses engines built in healthbars
   --Spring.SendCommands({"showrezbars 1"})
+  
+  widgetHandler:DeregisterGlobal('MorphUpdate', MorphUpdate)
+  widgetHandler:DeregisterGlobal('MorphFinished', MorphFinished)
+  widgetHandler:DeregisterGlobal('MorphStart', MorphStart)
+  widgetHandler:DeregisterGlobal('MorphStop', MorphStop)
 
   if (barShader) then
     gl.DeleteShader(barShader)
@@ -1086,9 +1098,19 @@ do
       else
         numStockpiled = false
       end
+	  
+	  --// MORPHING
+	  local morph = UnitMorphs[unitID]
+	  if morph then
+        local infotext = ''
+        if (fullText and (drawBarPercentage > 0 or dist < minPercentageDistance)) then
+            infotext = floor(morph.progress*100)..'%'
+        end
+        AddBar("morph",morph.progress,"build",infotext or '')
+	  end
 
       --// PARALYZE
-      if (emp>0.01)and(hp>0.01)and(emp<1e8) then 
+      if (emp>0.01)and(hp>0.01)and(emp<1e8)and(not morph) then 
         local stunned = GetUnitIsStunned(unitID)
         local infotext = ''
         if (stunned) then
@@ -1487,4 +1509,20 @@ function widget:TextCommand(command)
 			Spring.Echo("Healthbars:  Glow disabled")
 		end
 	end
+end
+
+function MorphUpdate(morphTable)
+  UnitMorphs = morphTable
+end
+
+function MorphStart(unitID,morphDef)
+  --return false
+end
+
+function MorphStop(unitID)
+  UnitMorphs[unitID] = nil
+end
+
+function MorphFinished(unitID)
+  UnitMorphs[unitID] = nil
 end
