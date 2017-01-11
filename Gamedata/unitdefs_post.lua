@@ -55,7 +55,7 @@ end
 
 if gamePlaySpeed == "veryslow" then
 	for id,unitDef in pairs(UnitDefs) do
-		if unitDef.buildcostmetal then
+		if unitDef.maxvelocity then
 			unitDef.maxvelocity = unitDef.maxvelocity * 0.5
 		end
 		if unitDef.buildcostmetal then
