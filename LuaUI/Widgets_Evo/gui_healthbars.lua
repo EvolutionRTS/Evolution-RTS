@@ -779,6 +779,9 @@ function widget:Initialize()
   widgetHandler:RegisterGlobal('MorphFinished', MorphFinished)
   widgetHandler:RegisterGlobal('MorphStart', MorphStart)
   widgetHandler:RegisterGlobal('MorphStop', MorphStop)
+
+  --// deactivate cheesy progress text
+  widgetHandler:RegisterGlobal('MorphDrawProgress', function() return true end)
   
   init()
 end
@@ -796,6 +799,8 @@ function widget:Shutdown()
   widgetHandler:DeregisterGlobal('MorphFinished', MorphFinished)
   widgetHandler:DeregisterGlobal('MorphStart', MorphStart)
   widgetHandler:DeregisterGlobal('MorphStop', MorphStop)
+
+  widgetHandler:DeregisterGlobal('MorphDrawProgress')
 
   if (barShader) then
     gl.DeleteShader(barShader)
