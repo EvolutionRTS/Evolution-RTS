@@ -463,6 +463,7 @@ local function UpdateGrid(g,cmds,ordertype)
 		icon.tooltip = cmd.tooltip
 		icon.active = nil --activate
 		icon.cmdname = cmd.name
+		if icon.cmdname == "Repair" then icon.cmdname = "Build" end -- hack for Evo
 		icon.cmdid = cmd.id
 		icon.texture = nil
 		if (cmd.texture) then
@@ -565,7 +566,7 @@ local function UpdateGrid(g,cmds,ordertype)
 				icon.texture = buttonTexture
 			end
 			if (cmd.type == 5) then --state cmds (fire at will, etc)
-				icon.caption = " "..(cmd.params[cmd.params[1]+2] or cmd.name).." "
+				icon.caption = " "..(cmd.params[cmd.params[1]+2] or icon.cmdname).." "
 				
 				local statecount = #cmd.params-1 --number of states for the cmd
 				local curstate = cmd.params[1]+1
@@ -692,7 +693,7 @@ local function UpdateGrid(g,cmds,ordertype)
 					
 				end
 			else
-				icon.caption = " "..cmd.name.." "
+				icon.caption = " "..icon.cmdname.." "
 			end
 		end
 	end
