@@ -307,7 +307,7 @@ buildflame()
 
 Create()
 {
-	move firepoint1 to y-axis [1000] now;
+	//move firepoint1 to y-axis [1000] now;
 	turn rf1 to y-axis <25> now;
 	turn lf1 to y-axis <-25> now;
 	turn rr1 to y-axis <-25> now;

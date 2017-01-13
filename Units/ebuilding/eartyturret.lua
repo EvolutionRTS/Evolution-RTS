@@ -8,7 +8,7 @@ local unitName                    = "eartyturret"
 local armortype					 = [[building]]
 --local supply					 = [[2]]
 
-local weapon1Damage               = 500
+local weapon1Damage               = 1000
 local weapon1AOE				  = 150
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
@@ -103,7 +103,6 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 
 local weaponDefs                  = {
 	artyweapon  		          = {
-		accuracy				 = 500,
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,

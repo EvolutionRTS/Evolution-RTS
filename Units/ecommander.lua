@@ -8,6 +8,10 @@ local unitName                   = "ecommander"
 local armortype					 = [[light]]
 local supplyGiven				 = [[10]]
 
+local weapon1Damage              = 200
+local weapon1AOE				 = 250
+local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -127,7 +131,7 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "emp",
+			def                  = "riottankempweapon",
 		},
 	},
 	customParams                 = {
@@ -153,6 +157,56 @@ Reclaims any energy cores within it's proximity.]],
 --------------------------------------------------------------------------------
 
 local weaponDefs                 = {
+
+	riottankempweapon            = {
+		
+		AreaOfEffect             = weapon1AOE,
+		avoidFeature             = false,
+		avoidFriendly            = false,
+		avoidGround				 = false,
+		collideFeature           = false,
+		collideFriendly          = false,
+		coreThickness            = 0.6,
+		--	cegTag               = "mediumcannonweapon3",
+		duration                 = 0.05,
+		edgeeffectiveness        = 0.1,
+		energypershot            = energycosttofire,
+		explosionGenerator       = "custom:genericshellexplosion-medium-lightning",
+		fallOffRate              = 1,
+		fireStarter              = 100,
+		impulseFactor            = 0,
+		
+		minintensity             = 1,
+		name                     = "EMP Blast Wave",
+		noexplode		         = true,
+		paralyzer		         = true,
+		paralyzetime	         = 5,
+		range                    = 500,
+		reloadtime               = 1,
+		WeaponType               = "LaserCannon",
+		rgbColor                 = "0 0.2 1",
+		rgbColor2                = "1 1 1",
+		soundTrigger             = true,
+		soundstart               = "fnubeamfire.wav",
+		soundHit                 = "phasegun1hit.wav",
+		texture1                 = "wave",
+		texture2                 = "empty",
+		thickness                = 40,
+		tolerance                = 1000,
+		turret                   = true,
+		weaponVelocity           = 1000,
+		customparams             = {
+			damagetype		     = "eriottank2",  
+			nofriendlyfire	     = 1,
+			
+			--Upgrades--
+			upgradeClass		 = "groundweapons",
+		}, 
+		damage                   = {
+			default              = weapon1Damage,
+		},
+	},
+
 	emp                          = {
 		AreaOfEffect             = 500,
 		avoidFriendly            = false,

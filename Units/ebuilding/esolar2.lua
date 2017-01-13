@@ -11,7 +11,7 @@ local energyproduced			 = [[5]]
 --local powerradius				 = [[400]]
 -- local supplygranted				 = [[5]]
 
-local buildCostMetal 			  = 85
+local buildCostMetal 			  = 87.5
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
