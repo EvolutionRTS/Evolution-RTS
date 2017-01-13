@@ -126,6 +126,7 @@ local function AutoResizeObjects() --autoresize v2
 end
 local function getEditedCurrentTooltip() 
 	local text = sGetCurrentTooltip() 
+	if text == "Repair: Repairs another unit" then text = "Build: Builds unfinished structures" end -- hack for Evo
 	--extract the exp value with regexp 
 	local expPattern = "Experience (%d+%.%d%d)" 
 	local currentExp = tonumber(text:match(expPattern)) 
