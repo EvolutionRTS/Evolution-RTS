@@ -21,10 +21,10 @@ local damageClasses = {
 		
 		-- Start H-Bots
 		ehbotpeewee	= {
-			SIEGE		= 0.25,
-			ARMORED		= 0.25,
+			SIEGE		= 0.5,
+			ARMORED		= 0.5,
 			LIGHT		= 1,
-			BUILDING 	= 0.25,
+			BUILDING 	= 0.5,
 		},
 		ehbotthud	= {
 			SIEGE		= 0.5,
@@ -36,13 +36,13 @@ local damageClasses = {
 			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
-			BUILDING 	= 0.25,
+			BUILDING 	= 0.5,
 		},
 		ehbotrocko	= {
 			SIEGE		= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
-			BUILDING 	= 0.25,
+			BUILDING 	= 0.5,
 		},
 		
 		-- Start Hovers
