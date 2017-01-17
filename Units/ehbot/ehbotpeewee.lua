@@ -149,7 +149,6 @@ local weaponDefs                 = {
 		impulseFactor          = 0,
 		interceptedByShieldType  = 4,
 		name                   = "E.M.G.",
-		noExplode			   = true,
 		range                  = weapon1Range,
 		reloadtime             = 1,
 		projectiles			   = projectiles,
