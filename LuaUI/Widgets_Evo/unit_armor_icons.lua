@@ -29,12 +29,49 @@ local PWUnits = {}
 local myAllyTeamID = 666
 
 
-local armoredTex = 'luaui/images/armortype/armored.png'
-local dmgTexBase = 'luaui/images/helpme/'
+local armoredTex = 'luaui/images/armortype/armored.dds'
+local dmgTexBase = 'luaui/images/damagetype/'
 local dmgTextures = {
-  eheavytank3 = dmgTexBase .. 'argh.png',
-  elighttank3 = dmgTexBase .. 'the.png',
-  emissiletank = dmgTexBase .. 'pain.png',
+	ecommanderbattle = dmgTexBase .. 'light.dds',
+	-- Start h-bots
+	ehbotpeewee = dmgTexBase .. 'light.dds', 
+	ehbotthud = dmgTexBase .. 'light.dds',
+	ehbotsniper = dmgTexBase .. 'armor.dds',
+	ehbotrocko = dmgTexBase .. 'armor.dds',
+	-- Start Hovers
+	eartytank = dmgTexBase .. 'building.dds',
+	elighttank3 = dmgTexBase .. 'light.dds',
+	eheavytank3 = dmgTexBase .. 'armor.dds',
+	emissiletank = dmgTexBase .. 'armor.dds',
+	eriottank2 = dmgTexBase .. 'light.dds',
+	eriottank2shotgun = dmgTexBase .. 'light.dds',
+	elacerator = dmgTexBase .. 'building.dds',
+	-- Start All Terrains
+	eallterrheavy = dmgTexBase .. 'armor.dds',
+	eallterrlight = dmgTexBase .. 'light.dds',
+	eallterrmed = dmgTexBase .. 'armor.dds',
+	eallterrriot = dmgTexBase .. 'light.dds',
+	eallterrriotshotgun = dmgTexBase .. 'light.dds',
+	eallterrassault = dmgTexBase .. 'building.dds',
+	eallterranarchid = dmgTexBase .. 'building.dds',
+	eallterranarchidflame = dmgTexBase .. 'building.dds',
+	-- Start Amphibs
+	eamphibbuggy = dmgTexBase .. 'light.dds',
+	eamphibriot = dmgTexBase .. 'light.dds',
+	eamphibneedle = dmgTexBase .. 'light.dds',
+	eamphibriotshotgun = dmgTexBase .. 'light.dds',
+	eamphibmedtank = dmgTexBase .. 'armor.dds',
+	eamphibrock = dmgTexBase .. 'armor.dds',
+	eamphibarty = dmgTexBase .. 'building.dds',
+	eamphibleveler = dmgTexBase .. 'armor.dds',
+	-- Start Aircraft
+	edrone = dmgTexBase .. 'light.dds',
+	efighter = dmgTexBase .. 'light.dds',
+	egunship2 = dmgTexBase .. 'armor.dds',
+	ebomber = dmgTexBase .. 'building.dds',
+	-- Start Buildings
+	elightturret2 = dmgTexBase .. 'light.dds',
+	eheavyturret2 = dmgTexBase .. 'armor.dds',
 }
 
 -------------------------------------------------------------------------------------
