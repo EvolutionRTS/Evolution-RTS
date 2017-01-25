@@ -30,6 +30,12 @@ local myAllyTeamID = 666
 
 
 local armoredTex = 'luaui/images/armortype/armored.png'
+local dmgTexBase = 'luaui/images/helpme/'
+local dmgTextures = {
+  eheavytank3 = dmgTexBase .. 'argh.png',
+  elighttank3 = dmgTexBase .. 'the.png',
+  emissiletank = dmgTexBase .. 'pain.png',
+}
 
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
@@ -43,7 +49,8 @@ function widget:Initialize()
 
   widgetHandler:RegisterGlobal("PWCreate", PWCreate)
   
-  WG.icons.SetOrder( 'armor', 1 )
+  WG.icons.SetOrder( 'dmgtype', 1 )
+  WG.icons.SetOrder( 'armor', 2 )
 
   for _,unitID in pairs( GetAllUnits() ) do
     SetArmorIcon(unitID)
@@ -68,6 +75,13 @@ function SetArmorIcon(unitID)
 		if not PWUnits[unitID] then
 			WG.icons.SetUnitIcon( unitID, {name='armor', texture=armoredTex } )
 		end
+	end
+  end
+  if ud.weapons and #ud.weapons ~= 0 then
+	local wd = WeaponDefs[ud.weapons[1].weaponDef]
+	if wd.customParams ~= nil and wd.customParams.damagetype ~= nil and
+			dmgTextures[wd.customParams.damagetype] ~= nil then
+		WG.icons.SetUnitIcon( unitID, {name='dmgtype', texture=dmgTextures[wd.customParams.damagetype] } )
 	end
   end
 end
