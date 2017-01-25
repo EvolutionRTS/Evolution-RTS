@@ -54,8 +54,8 @@ local unitHeights  = {}
 local iconOrders = {}
 local iconOrders_order = {}
 
-local iconoffset = 14
-
+local iconoffset = 14 -- vertical offset
+local iconoffsethorizontal = 0 -- horizontal offset
 
 local iconUnitTexture = {}
 local textureUnitsXshift = {}
@@ -206,7 +206,7 @@ end
 -------------------------------------------------------------------------------------
 
 local function DrawUnitFunc(xshift, yshift)
-  glTranslate(xshift,yshift,0)
+  glTranslate(xshift + iconoffsethorizontal,yshift,0)
   glBillboard()
   glTexRect(-options.iconsize.value*0.5, -9, options.iconsize.value*0.5, options.iconsize.value-9)
 end
