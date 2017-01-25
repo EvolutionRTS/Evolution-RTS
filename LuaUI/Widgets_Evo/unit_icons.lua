@@ -43,7 +43,7 @@ options = {
 	iconsize = {
 		name = 'Hovering Icon Size',
 		type = 'number',
-		value = 30, min=10, max = 40,
+		value = 15, min=10, max = 40,
 	}
 }
 
@@ -55,7 +55,7 @@ local iconOrders = {}
 local iconOrders_order = {}
 
 local iconoffset = 14 -- vertical offset
-local iconoffsethorizontal = 0 -- horizontal offset
+local iconoffsethorizontal = 28 -- horizontal offset
 
 local iconUnitTexture = {}
 local textureUnitsXshift = {}
