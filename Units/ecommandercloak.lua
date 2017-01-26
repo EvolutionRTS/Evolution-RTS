@@ -12,6 +12,57 @@ local weapon1Damage              = 200
 local weapon1AOE				 = 250
 local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
+if Spring.GetModOptions().luamex ~= "enabled" then
+	buildList = { 
+		[[ehbotfac]],
+		[[eminifac]],
+		[[ebasefactory]],
+		[[eamphibfac]],
+		[[eairplant]],
+		[[etech1]],
+		[[esolar2]],
+		[[egeothermal]],
+		[[efusion2]],
+		[[estorage]],
+		[[eradar2]],
+		[[ejammer2]],
+		[[ekmar]],
+		[[elightturret2]],
+		[[eheavyturret2]],
+		[[eartyturret]],
+		[[euwturret]],
+		[[eshieldgen]],
+		[[esilo]],
+		[[emine]],
+		[[eorb]],
+	}
+else
+	buildList = { 
+		[[ehbotfac]],
+		[[eminifac]],
+		[[ebasefactory]],
+		[[eamphibfac]],
+		[[eairplant]],
+		[[etech1]],
+		[[esolar2]],
+		[[egeothermal]],
+		[[efusion2]],
+		[[emetalextractor]],
+		[[estorage]],
+		[[eradar2]],
+		[[ejammer2]],
+		[[ekmar]],
+		[[elightturret2]],
+		[[eheavyturret2]],
+		[[eartyturret]],
+		[[euwturret]],
+		[[eshieldgen]],
+		[[esilo]],
+		[[emine]],
+		[[eorb]],
+	}
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -32,6 +83,7 @@ local unitDef                    = {
 	canBeAssisted                = true,
 	CanCapture                   = true,
 	CanRepair			         = true,
+	canRestore					 = false,
 	cancollect                   = "1",
 	canGuard                     = true,
 	canMove                      = true,
@@ -98,29 +150,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = {
-		[[ehbotfac]],
-		[[eminifac]],
-		[[ebasefactory]],
-		[[eamphibfac]],
-		[[eairplant]],
-		[[etech1]],
-		[[esolar2]],
-		[[egeothermal]],
-		[[efusion2]],
-		[[estorage]],
-		[[eradar2]],
-		[[ejammer2]],
-		[[ekmar]],
-		[[elightturret2]],
-		[[eheavyturret2]],
-		[[eartyturret]],
-		[[euwturret]],
-		[[eshieldgen]],
-		[[esilo]],
-		[[emine]],
-		[[eorb]],
-	},
+	buildoptions                 = buildList,
 	sounds                       = {
 		underattack              = "unitsunderattack1",
 		ok                       = {
@@ -136,6 +166,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		area_mex_def			 = "emetalextractor",
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,

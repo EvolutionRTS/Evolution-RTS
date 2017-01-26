@@ -1,7 +1,7 @@
--- UNITDEF -- EMETALEXTRACTOR --
+-- UNITDEF -- EMETALEXTRACTOR2 --
 --------------------------------------------------------------------------------
 
-local unitName                    = "emetalextractor"
+local unitName                    = "emetalextractor2"
 
 --------------------------------------------------------------------------------
 
@@ -39,6 +39,7 @@ local unitDef                     = {
 	metalMake                     = 0,
 	name                          = "Metal Extractor",
 	objectName                    = "emetalextractor2.s3o",
+	script						  = "emetalextractor.cob",
 	onoffable                     = true,
 	radarDistance                 = 0,
 	repairable		              = false,
@@ -47,7 +48,7 @@ local unitDef                     = {
 	side                          = "CORE",
 	sightDistance                 = 367,
 	smoothAnim                    = true,
-	unitname                      = "emetalextractor",
+	unitname                      = unitName,
 	workerTime                    = 0,
 	yardMap                       = "ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo ooooooo",
 	sfxtypes                      = { 
@@ -71,7 +72,7 @@ local unitDef                     = {
 	weapons                       = {
 	},
 	customParams                  = {
-		metal_extractor			  = 0,
+		metal_extractor			  = 0.25,
 		iseco                     = 1,
 		needed_cover              = 3,
 		death_sounds              = "generic",

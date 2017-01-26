@@ -11,6 +11,57 @@ local maxDamage					  = 450
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
+if Spring.GetModOptions().luamex ~= "enabled" then
+	buildList = { 
+		[[ehbotfac]],
+		[[eminifac]],
+		[[ebasefactory]],
+		[[eamphibfac]],
+		[[eairplant]],
+		[[etech1]],
+		[[esolar2]],
+		[[egeothermal]],
+		[[efusion2]],
+		[[estorage]],
+		[[eradar2]],
+		[[ejammer2]],
+		[[ekmar]],
+		[[elightturret2]],
+		[[eheavyturret2]],
+		[[eartyturret]],
+		[[euwturret]],
+		[[eshieldgen]],
+		[[esilo]],
+		[[emine]],
+		[[eorb]],
+	}
+else
+	buildList = { 
+		[[ehbotfac]],
+		[[eminifac]],
+		[[ebasefactory]],
+		[[eamphibfac]],
+		[[eairplant]],
+		[[etech1]],
+		[[esolar2]],
+		[[egeothermal]],
+		[[efusion2]],
+		[[emetalextractor]],
+		[[estorage]],
+		[[eradar2]],
+		[[ejammer2]],
+		[[ekmar]],
+		[[elightturret2]],
+		[[eheavyturret2]],
+		[[eartyturret]],
+		[[euwturret]],
+		[[eshieldgen]],
+		[[esilo]],
+		[[emine]],
+		[[eorb]],
+	}
+end
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -32,6 +83,7 @@ local unitDef                    = {
 	canBeAssisted                = true,
 	CanCapture                   = false,
 	CanRepair			         = true,
+	canRestore					 = false,
 	canDropFlare                 = true,
 	canFly                       = true,
 	canGuard                     = true,
@@ -98,29 +150,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = {
-		[[ehbotfac]],
-		[[eminifac]],
-		[[ebasefactory]],
-		[[eamphibfac]],
-		[[eairplant]],
-		[[etech1]],
-		[[esolar2]],
-		[[egeothermal]],
-		[[efusion2]],
-		[[estorage]],
-		[[eradar2]],
-		[[ejammer2]],
-		[[ekmar]],
-		[[elightturret2]],
-		[[eheavyturret2]],
-		[[eartyturret]],
-		[[euwturret]],
-		[[eshieldgen]],
-		[[esilo]],
-		[[emine]],
-		[[eorb]],
-	},
+	buildoptions                 = buildList,
 	sounds                       = {
 		underattack              = "unitsunderattack1",
 		ok                       = {
@@ -131,6 +161,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		area_mex_def			 = "emetalextractor",
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
 		--    airdronespawner    = "1",

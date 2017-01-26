@@ -38,6 +38,18 @@ local options= {
 		type   = 'section',
 	},
 	{
+		key    = 'luamex',
+		name   = 'Lua Mex',
+		desc   = 'Enables the use for Metal Extractors to generate income.',
+		type="list",
+		def="disabled",
+		section= "resourcing",
+		items={
+			{key="disabled", name="Disabled", desc="Turn off Metal Extractor use."},
+			{key="enabled", name="Enabled", desc="Allow Metal Extractors to be used to generate income."},
+		}
+	},
+	{
 		key    = 'mincome',
 		name   = 'Automatic Metal Income',
 		desc   = 'Determines the amount of metal income you start with per second. It increases every <Basic Metal Income Increase Interval> (2.5 minutes, is the default) by this amount until it hits <Maximum Basic Income> income.',
