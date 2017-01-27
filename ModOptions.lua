@@ -50,6 +50,18 @@ local options= {
 		}
 	},
 	{
+		key    = 'luamex_mapextractors',
+		name   = 'Map Regulated Metal Extractors',
+		desc   = 'Metal Extractors generate income based upon the map resource node settings instead of a set amount.',
+		type="list",
+		def="disabled",
+		section= "resourcing",
+		items={
+			{key="disabled", name="Disabled", desc="Don't use map based metal extractors"},
+			{key="enabled", name="Enabled", desc="Metal Extractors generate income based upon the map resource node settings instead of a set amount."},
+		}
+	},
+	{
 		key    = 'mincome',
 		name   = 'Automatic Metal Income',
 		desc   = 'Determines the amount of metal income you start with per second. It increases every <Basic Metal Income Increase Interval> (2.5 minutes, is the default) by this amount until it hits <Maximum Basic Income> income.',
