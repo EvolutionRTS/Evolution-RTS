@@ -16,16 +16,12 @@ if Spring.GetModOptions().luamex ~= "enabled" then
 	buildList = { [[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],
 	}
 end
-if Spring.GetModOptions().luamex == "enabled" and Spring.GetModOptions().luamex_mapextractors == "disabled" then
+if Spring.GetModOptions().luamex == "enabled" then
 	buildList = { 
 		[[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[emetalextractor]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],
 	}
 end
-if Spring.GetModOptions().luamex == "enabled" and Spring.GetModOptions().luamex_mapextractors == "enabled" then
-	buildList = { 
-		[[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[emetalextractor2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],
-	}
-end
+
 
 local unitDef                    = {
 

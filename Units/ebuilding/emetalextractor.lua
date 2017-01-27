@@ -11,6 +11,16 @@ local metal						 = [[0.5]] --The actual amount is set in resourcegifts gadget
 local buildCostMetal 			  = 20
 local maxDamage					  = buildCostMetal * 12.5
 
+if Spring.GetModOptions().luamex == "enabled" and Spring.GetModOptions().luamex_mapextractors == "disabled" then
+	metalMultiplier = 0
+	makesMetal		= 0.5
+end
+
+if Spring.GetModOptions().luamex == "enabled" and Spring.GetModOptions().luamex_mapextractors == "enabled" then
+	metalMultiplier = 0.25
+	makesMetal		= 0
+end
+	
 local unitDef                     = {
 
 	activateWhenBuilt             = true,
@@ -26,7 +36,7 @@ local unitDef                     = {
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
-	makesMetal                    = 0.5,
+	makesMetal                    = makesMetal,
 	footprintX                    = 7,
 	footprintZ                    = 7,
 	iconType                      = "eco",
@@ -71,7 +81,7 @@ local unitDef                     = {
 	weapons                       = {
 	},
 	customParams                  = {
-		metal_extractor			  = 0,
+		metal_extractor			  = metalMultiplier,
 		iseco                     = 1,
 		needed_cover              = 3,
 		death_sounds              = "generic",
