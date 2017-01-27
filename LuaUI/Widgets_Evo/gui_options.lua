@@ -80,7 +80,7 @@ local fullWidgetsList = {}
 local addedWidgetOptions = false
 local showPresetButtons = true
 
-local luaShaders = tonumber(Spring.GetConfigInt("LuaShaders",1) or 0)
+local luaShaders = tonumber(Spring.GetConfigInt("ForceShaders",1) or 0)
 
 
 function widget:ViewResize()
@@ -504,8 +504,8 @@ function widget:DrawScreen()
 				local rectX2 = ((screenX+screenWidth+bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
 				local rectY2 = ((screenY-screenHeight-bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
 				WG['guishader_api'].InsertRect(rectX1, rectY2, rectX2, rectY1, 'options')
-				WG['guishader_api'].setBlurIntensity(0.0017)
-				WG['guishader_api'].setScreenBlur(true)
+				--WG['guishader_api'].setBlurIntensity(0.0017)
+				--WG['guishader_api'].setScreenBlur(true)
 			end
 			showOnceMore = false
 			
@@ -583,8 +583,8 @@ function widget:DrawScreen()
 		if (WG['guishader_api'] ~= nil) then
 			local removed = WG['guishader_api'].RemoveRect('options')
 			if removed then
-				WG['guishader_api'].setBlurIntensity()
-				WG['guishader_api'].setScreenBlur(false)
+				--WG['guishader_api'].setBlurIntensity()
+			  WG['guishader_api'].setScreenBlur(false)
 			end
 		end
 	end
@@ -639,7 +639,7 @@ function applyOptionValue(i)
 			if value ~= 0 then
 				if id == 'bloom' or id == 'guishader' or id == 'xrayshader' or id == 'snow' or id == 'mapedgeextension' then
 					if luaShaders ~= 1 and not enabledLuaShaders then
-						Spring.SetConfigInt("LuaShaders", 1)
+						Spring.SetConfigInt("ForceShaders", 1)
 						enabledLuaShaders = true
 					end
 				end
@@ -695,7 +695,7 @@ function applyOptionValue(i)
 			if value > 0 then
 				widgetHandler:EnableWidget(options[i].widget)
 				if luaShaders ~= 1 and not enabledLuaShaders then
-					Spring.SetConfigInt("LuaShaders", 1)
+					Spring.SetConfigInt("ForceShaders", 1)
 					enabledLuaShaders = true
 				end
 			end
@@ -982,6 +982,7 @@ function widget:Initialize()
 		{id="projectilelights", widget="Projectile lights", name="Projectile lights", type="bool", value=widgetHandler.orderList["Projectile lights"] ~= nil and (widgetHandler.orderList["Projectile lights"] > 0), description='Projectiles are plasmaballs, it will light up the map below them'},
 		{id="lups", widget="LupsManager", name="Lups particle effects", type="bool", value=widgetHandler.orderList["LupsManager"] ~= nil and (widgetHandler.orderList["LupsManager"] > 0), description='Toggle unit particle effects: jet beams, ground flashes, fusion energy balls'},
 		{id="xrayshader", widget="XrayShader", name="Unit xray shader", type="bool", value=widgetHandler.orderList["XrayShader"] ~= nil and (widgetHandler.orderList["XrayShader"] > 0), description='Highlights all units, highlight effect dissolves on close camera range.\n\nFades out and disables at low fps\nWorks less on dark teamcolors'},
+		{id="outline", widget="Outline", name="Unit Outline (tiny)", type="bool", value=widgetHandler.orderList["Outline"] ~= nil and (widgetHandler.orderList["Outline"] > 0), description='Adds a small outline to units that make them more crisp and stand out'},
 		{id="disticon", name="Unit icon distance", type="slider", min=0, max=800, value=tonumber(Spring.GetConfigInt("UnitIconDist",1) or 800)},
 		{id="treeradius", name="Tree render distance", type="slider", min=0, max=2000, value=tonumber(Spring.GetConfigInt("TreeRadius",1) or 1000), description='Applies to SpringRTS engine default trees\n\nChanges will be applied next game'},
 		{id="particles", name="Max particles", type="slider", min=2500, max=25000, value=tonumber(Spring.GetConfigInt("MaxParticles",1) or 1000), description='Particles used for explosions, smoke, fire and missiletrails\n\nSetting a low value will mean that various effects wont show properly'},
@@ -1022,7 +1023,7 @@ function widget:Initialize()
 		end
 		if luaShaders ~= 1 then
 			if option.id == "advmapshading" or option.id == "advmodelshading" or option.id == "bloom" or option.id == "guishader" or option.id == "xrayshader" or option.id == "mapedgeextension" or option.id == "snow" then
-				option.description = 'You dont have LuaShaders enabled, we will enable it for you but...\n\nChanges will be applied next game'
+				option.description = 'You dont have shaders enabled, we will enable it for you but...\n\nChanges will be applied next game'
 			end
 		end
 		if insert then
