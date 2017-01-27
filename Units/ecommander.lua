@@ -18,7 +18,7 @@ if Spring.GetModOptions().luamex ~= "enabled" then
 end
 if Spring.GetModOptions().luamex == "enabled" then
 	buildList = { 
-		[[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[emetalextractor]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],
+		[[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],[[emetalextractor]],
 	}
 end
 
@@ -56,7 +56,6 @@ local unitDef                    = {
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "commnuke",
-	fireState			         = "1",
 	footprintX                   = 4,
 	footprintZ                   = 4,
 	hideDamage		             = true,
