@@ -12,16 +12,6 @@ local buildDistance				 = 1200
 local armortype					 = [[building]]
 --local supply					 = [[2]]
 
-if Spring.GetModOptions().luamex ~= "enabled" then
-	buildList = { [[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],[[ehbotpeewee_turret]],[[ehbotthud_turret]],[[ehbotsniper_turret]],[[ehbotrocko_turret]],
-	}
-end
-if Spring.GetModOptions().luamex == "enabled" then
-	buildList = { 
-		[[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],[[emetalextractor]],[[ehbotpeewee_turret]],[[ehbotthud_turret]],[[ehbotsniper_turret]],[[ehbotrocko_turret]],
-	}
-end
-
 local unitDef                    = {
 
 	--mobileunit 
@@ -108,7 +98,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = buildList,
+	buildoptions                 = Shared.buildListTurret,
 	sounds                       = {
 		underattack              = "unitsunderattack1",
 		ok                       = {

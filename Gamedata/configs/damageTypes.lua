@@ -164,9 +164,9 @@ local damageClasses = {
 			BUILDING 	= 1,
 		},
 		eallterranarchid = {
-			SIEGE		= 0.5,
-			ARMORED		= 0.5,
-			LIGHT		= 0.5,
+			SIEGE		= 0.25,
+			ARMORED		= 0.25,
+			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		eallterranarchidflame = {

@@ -16,15 +16,6 @@ local weapon1Damage              = 200
 local weapon1AOE				 = 250
 local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
-if Spring.GetModOptions().luamex ~= "enabled" then
-	buildList = { [[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],
-	}
-end
-if Spring.GetModOptions().luamex == "enabled" then
-	buildList = { 
-		[[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],[[emetalextractor]],
-	}
-end
 
 local unitDef                    = {
 
@@ -111,7 +102,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = buildList,
+	buildoptions                 = Shared.buildList,
 	sounds                       = {
 		underattack              = "unitsunderattack1",
 		ok                       = {

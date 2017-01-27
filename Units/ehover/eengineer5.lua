@@ -11,15 +11,6 @@ local maxDamage					 = 600
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
-if Spring.GetModOptions().luamex ~= "enabled" then
-	buildList = { [[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],
-	}
-end
-if Spring.GetModOptions().luamex == "enabled" then
-	buildList = { 
-		[[ehbotfac]],[[eminifac]],[[ebasefactory]],[[eamphibfac]],[[eairplant]],[[etech1]],[[esolar2]],[[egeothermal]],[[efusion2]],[[estorage]],[[eradar2]],[[ejammer2]],[[ekmar]],[[elightturret2]],[[eheavyturret2]],[[eartyturret]],[[euwturret]],[[eshieldgen]],[[esilo]],[[emine]],[[eorb]],[[emetalextractor]],
-	}
-end
 
 local unitDef                    = {
 
@@ -105,7 +96,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = buildList,
+	buildoptions                 = Shared.buildList,
 	sounds                       = {
 		underattack              = "unitsunderattack1",
 		ok                       = {
