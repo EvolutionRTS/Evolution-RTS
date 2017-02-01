@@ -10,7 +10,7 @@ local armortype					 = [[building]]
 local supply					 = [[5]]
 local maxDamage					 = 300 * 4
 
-local weapon1Damage              = 15
+local weapon1Damage              = 20
 local weapon1AOE				 = 25
 local weapon1Range				 = 650
 local projectiles				 = 5
