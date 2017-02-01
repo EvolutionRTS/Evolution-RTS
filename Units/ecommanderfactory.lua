@@ -98,7 +98,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = Shared.buildList,
+	buildoptions                 = Shared.buildListFactory,
 	sounds                       = {
 		underattack              = "unitsunderattack1",
 		ok                       = {

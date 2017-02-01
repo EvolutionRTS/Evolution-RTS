@@ -12,7 +12,7 @@ local tech						 = [[tech2]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 
-local weapon1Damage              = 200
+local weapon1Damage              = 300
 local weapon1AOE				 = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
@@ -51,6 +51,7 @@ local unitDef                    = {
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "hugeExplosionGeneric",
+	fireState					 = 1,
 	footprintX                   = 7,
 	footprintZ                   = 7,
 	floater                      = true,
@@ -103,7 +104,7 @@ local unitDef                    = {
 		[1]                      = {
 			def                  = "SBOMB",
 			noChaseCategory      = "VTOL",
-			badTargetCategory    = "VTOL",
+			badTargetCategory    = "VTOL LIGHT ARMORED",
 		},
 	},
 	customParams                 = {
@@ -148,7 +149,7 @@ local weaponDefs                 = {
 		metalpershot             = 0,
 		model                    = "missile.s3o",
 		name                     = "Rockets",
-		range                    = 750,
+		range                    = 900,
 		reloadtime               = 3,
 		weaponType		         = "MissileLauncher",  -- This causes the missile trail to go off kilter
 		--	rendertype		     = 1,
