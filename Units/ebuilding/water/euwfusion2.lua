@@ -8,7 +8,7 @@ local unitName = "euwfusion2"
 local unitDef = {
 	activateWhenBuilt  = true,
 	buildAngle         = 2500,
-	buildCostEnergy    = 0,
+	buildCostEnergy    = 25,
 	buildCostMetal     = 180,
 	builder            = false,
 	buildTime          = 5,
@@ -18,7 +18,7 @@ local unitDef = {
 	Provides +10 Power
 	Provides +10 Supply]],
 	energyMake         = 10,
-	energyStorage      = 0,
+	energyStorage      = 25,
 	energyUse          = 0,
 	explodeAs          = "FUSIONPOP",
 	footprintX         = 8,
