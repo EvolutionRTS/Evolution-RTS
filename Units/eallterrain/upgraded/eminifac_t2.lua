@@ -73,7 +73,7 @@ Armortype: ]] ..armortype,
 	unitname                       = unitName,
 	--  unitRestricted	           = 1,
 	workerTime                     = 1,
-	yardMap                        = "oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo oooooooccccccccooooooo",
+	yardMap                        = "oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo oooccccccccccccccccooo",
 	--  usePieceCollisionVolumes   = true,
 	sfxtypes                       = { 
 		pieceExplosionGenerators   = { 

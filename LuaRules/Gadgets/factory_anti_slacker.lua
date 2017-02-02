@@ -30,7 +30,7 @@ local noEject = {
 	-- [UnitDefNames["factoryplane"].id] = true,
 	-- [UnitDefNames["factorygunship"].id] = true,
 }
-local ghostFrames = 120	--how long the unit will be ethereal
+local ghostFrames = 360	--how long the unit will be ethereal
 
 local setBlocking = {} --indexed by gameframe, contains a subtable of unitIDs
 

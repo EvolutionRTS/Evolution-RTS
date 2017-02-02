@@ -34,6 +34,7 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       water              = true,
+	  underwater		 = true,
       properties = {
         airdrag            = 0.7,
         alwaysvisible      = false,
