@@ -194,23 +194,20 @@ function WeaponDef_Post(name, wDef)
 	-- There are 2 weapondef customparams used to control this
 	-- oldcosttofireformula = true, will result in the original formula that did not account for weapon range to be used
 	-- nocosttofire == true, will result in cost to fire being set at 0
-	
+	local weaponDefaultDamage = wDef.damage.default
+	local weaponAreaOfEffect = wDef.areaofeffect or 0
+	local weaponRange = wDef.range or 0
+	local weaponProjectiles = wDef.projectiles or 1
 	if wDef.customparams and wDef.customparams.nocosttofire == true then
 		wDef.energypershot = 0
 	elseif wDef.customparams and wDef.customparams.oldcosttofireforumula == true then
-		local weaponDefaultDamage = wDef.damage.default
-		local weaponAreaOfEffect = wDef.areaofeffect or 0
-		local weaponRange = wDef.range or 0
-		local energycosttofire = weaponDefaultDamage * 0.1 * ((weaponAreaOfEffect * 0.001) + 1)
+		local energycosttofire = weaponDefaultDamage * 0.1 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1)
 		local function roundToFirstDecimal(energycosttofire)
 			return math.floor(energycosttofire*10 + 0.5)*0.1
 		end
 		wDef.energypershot = energycosttofire	
 	else
-		local weaponDefaultDamage = wDef.damage.default
-		local weaponAreaOfEffect = wDef.areaofeffect or 0
-		local weaponRange = wDef.range or 0
-		local energycosttofire = weaponDefaultDamage * 0.05 * ((weaponAreaOfEffect * 0.001) + 1) * (weaponRange * 0.005)
+		local energycosttofire = weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1) * (weaponRange * 0.005)
 		local function roundToFirstDecimal(energycosttofire)
 			return math.floor(energycosttofire*10 + 0.5)*0.1
 		end
