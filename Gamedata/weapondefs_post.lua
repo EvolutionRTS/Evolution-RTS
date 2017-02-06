@@ -1,167 +1,41 @@
-
 --------------------------------------------------------------------------------
+-- Default Engine Weapon Definitions Post-processing
 --------------------------------------------------------------------------------
---
---  file:    weapondefs_post.lua
---  brief:   weaponDef post processing
---  author:  Dave Rodgers
---
---  Copyright (C) 2008.
---  Licensed under the terms of the GNU GPL, v2 or later.
---
---------------------------------------------------------------------------------
+-- BA stores weapondefs in the unitdef files 
+-- Here we load those defs into the WeaponDefs table
+-- Then we call alldefs_post.lua, in which post processing of defs should take place
+-- basically, DONT TOUCH this! 
 --------------------------------------------------------------------------------
 
+-- see alldefs.lua for documentation
+-- load the games _Post functions for defs, and find out if saving to custom params is wanted
+VFS.Include("gamedata/alldefs_post.lua")
+-- load functionality for saving to custom params
+VFS.Include("gamedata/post_save_to_customparams.lua")
 
-local modOptions
-if (Spring.GetModOptions) then
-  modOptions = Spring.GetModOptions()
-end
-
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
---
---  Per-unitDef weaponDefs
---
 
 local function isbool(x)   return (type(x) == 'boolean') end
 local function istable(x)  return (type(x) == 'table')   end
 local function isnumber(x) return (type(x) == 'number')  end
 local function isstring(x) return (type(x) == 'string')  end
 
-local damageClasses		= VFS.Include("gamedata/configs/damageTypes.lua")
-local damageTypes		= damageClasses.damageTypes
-local defaultClass		= damageClasses.default
-
 local function tobool(val)
-  local t = type(val)
-  if (t == 'nil') then
-    return false
-  elseif (t == 'boolean') then
-    return val
-  elseif (t == 'number') then
-    return (val ~= 0)
-  elseif (t == 'string') then
-    return ((val ~= '0') and (val ~= 'false'))
-  end
-  return false
-end
-
--- Gameplay Speed
--- local gamePlaySpeed = modOptions.gameplayspeed or "veryslow"
-
--- Spring.Echo("[Gameplay Speed] Set to " .. gamePlaySpeed)
-
--- if gamePlaySpeed == "veryslow" then
-	-- for id,weaponDef in pairs(WeaponDefs) do
-		-- if weaponDef.weaponvelocity then
-			-- Spring.Echo ("//")
-			-- Spring.Echo (weaponDef.name)
-			-- Spring.Echo (weaponDef.weaponvelocity)
-			-- weaponDef.weaponvelocity = weaponDef.weaponvelocity * 0.1
-			-- Spring.Echo ("••")
-			-- Spring.Echo (weaponDef.name)
-			-- Spring.Echo (weaponDef.weaponvelocity)
-			-- Spring.Echo ("\\")
-		-- end
-	-- end
--- end
-
--- if gamePlaySpeed == "slow" then
-	-- for id,weaponDef in pairs(WeaponDefs) do
-		-- if weaponDef.weaponvelocity then
-			-- weaponDef.weaponvelocity = weaponDef.weaponvelocity * 0.75
-		-- end
-	-- end
--- end
-
---------------------------------------------------------------------------------
-
-local function BackwardCompability(wdName,wd)
-  -- weapon reloadTime and stockpileTime were seperated in 77b1
-  if (tobool(wd.stockpile) and (wd.stockpiletime==nil)) then
-    wd.stockpiletime = wd.reloadtime
-    wd.reloadtime    = 2             -- 2 seconds
-  end
-
-	-- auto detect ota weapontypes
-	if (wd.weapontype==nil) then
-		local rendertype = tonumber(wd.rendertype) or 0
-		if (tobool(wd.dropped)) then
-			wd.weapontype = "AircraftBomb";
-		elseif (tobool(wd.vlaunch)) then
-			wd.weapontype = "StarburstLauncher";
-		elseif (tobool(wd.beamlaser)) then
-			wd.weapontype = "BeamLaser";
-		elseif (tobool(wd.isshield)) then
-			wd.weapontype = "Shield";
-		elseif (tobool(wd.waterweapon)) then
-			wd.weapontype = "TorpedoLauncher";
-		elseif (wdName:lower():find("disintegrator",1,true)) then
-			wd.weaponType = "DGun"
-		elseif (tobool(wd.lineofsight)) then
-			if (rendertype==7) then
-				wd.weapontype = "LightningCannon";
-
-			elseif (wd.model and wd.model:lower():find("laser",1,true)) then
-				wd.weapontype = "LaserCannon";
-
-			elseif (tobool(wd.beamweapon)) then
-				wd.weapontype = "LaserCannon";
-			elseif (tobool(wd.smoketrail)) then
-				wd.weapontype = "MissileLauncher";
-			elseif (rendertype==4 and tonumber(wd.color)==2) then
-				wd.weapontype = "EmgCannon";
-			elseif (rendertype==5) then
-				wd.weapontype = "Flame";
-			--elseif(rendertype==1) then
-			--  wd.weapontype = "MissileLauncher";
-			else
-				wd.weapontype = "Cannon";
-			end
-		else
-			wd.weapontype = "Cannon";
-		end
+	local t = type(val)
+	if (t == 'nil') then
+		return false
+	elseif (t == 'boolean') then
+		return val
+	elseif (t == 'number') then
+		return (val ~= 0)
+	elseif (t == 'string') then
+		return ((val ~= '0') and (val ~= 'false'))
 	end
-
-  weapondamage = tonumber(wd.damage.default)
-	if (weapondamage > 0) then
-		if (wd.customparams) then
-			local damagetypelower
-			if wd.customparams.damagetype ~=nil then
-				damagetypelower = string.lower(wd.customparams.damagetype)
-			end
-			if damagetypelower == '' or damagetypelower == nil then
-				damagetypelower = defaultClass
-			end
-			--Spring.Echo(damagetypelower)	
-			--Spring.Echo(" ")	
-			if damageTypes[damagetypelower]	then
-				for armorClass, armorMultiplier in pairs(damageTypes[damagetypelower]) do	
-					--Spring.Echo(wd.name, armorClass, weapondamage*armorMultiplier )
-					wd.damage[armorClass] = weapondamage*armorMultiplier
-				end
-			else
-				Spring.Echo("!!WARNING!! Invalid damagetype: " .. damagetypelower)	
-			end
-		end
-	end
-	--Spring.Echo("_________")
-	--Spring.Echo(wdName, wd.name)
-	--for damageClass, damageValue in pairs(wd.damage)do
-	--	Spring.Echo(damageClass, damageValue)
-	--end
-  -- 
-  if (tobool(wd.ballistic) or tobool(wd.dropped)) then
-    wd.gravityaffected = true
-  end
+	return false
 end
 
 --------------------------------------------------------------------------------
 
-local function ProcessUnitDef(udName, ud)
+local function ExtractWeaponDefs(udName, ud)
 
   local wds = ud.weapondefs
   if (not istable(wds)) then
@@ -173,7 +47,12 @@ local function ProcessUnitDef(udName, ud)
     if (isstring(wdName) and istable(wd)) then
       local fullName = udName .. '_' .. wdName
       WeaponDefs[fullName] = wd
-      wd.filename = ud.filename
+        
+      WeaponDef_Post(fullName, wd)
+
+      if SaveDefsToCustomParams then
+        MarkDefOmittedInCustomParams("WeaponDefs", fullName, wd)
+      end
     end
   end
 
@@ -201,46 +80,35 @@ local function ProcessUnitDef(udName, ud)
     local fullName = udName .. '_' .. ud.explodeas
     if (WeaponDefs[fullName]) then
       ud.explodeas = fullName
-	else
-	--You're full of shit, fuck off! This echo should be boiled alive, shot, stabbed, the boiled alive again just to make sure! Spring.Echo("Explosion def (weapon) does not exist for", udName)
     end
   end
   if (isstring(ud.selfdestructas)) then
     local fullName = udName .. '_' .. ud.selfdestructas
     if (WeaponDefs[fullName]) then
       ud.selfdestructas = fullName
-	else
-	--You're full of shit, fuck off! This echo should be boiled alive, shot, stabbed, the boiled alive again just to make sure! Spring.Echo("Self-Destruct def (weapon) does not exist for", udName)
     end
-  end
+  end  
 end
 
 --------------------------------------------------------------------------------
 
-local function ProcessWeaponDef(wdName, wd)
-	-- backward compability
-	BackwardCompability(wdName,wd)
+
+-- handle standalone weapondefs
+for name,wd in pairs(WeaponDefs) do
+    WeaponDef_Post(name,wd)
+    
+    if SaveDefsToCustomParams then
+        SaveDefToCustomParams("WeaponDefs", name, wd)    
+    end
 end
-
---------------------------------------------------------------------------------
-
--- Process the unitDefs
+  
+-- extract weapondefs from the unitdefs
 local UnitDefs = DEFS.unitDefs
-
-for udName, ud in pairs(UnitDefs) do
+for udName,ud in pairs(UnitDefs) do
   if (isstring(udName) and istable(ud)) then
-    ProcessUnitDef(udName, ud)
+    ExtractWeaponDefs(udName, ud)
   end
 end
 
-
-for wdName, wd in pairs(WeaponDefs) do
-	if (isstring(wdName) and istable(wd)) then
-		ProcessWeaponDef(wdName, wd)
-	end
-end
-
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
+-- apply mod options that need _post 
+ModOptions_Post(UnitDefs, WeaponDefs)

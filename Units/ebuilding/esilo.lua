@@ -160,6 +160,7 @@ local weaponDefs                  = {
 		customparams              = {
 			damagetype		      = "default",  
 			death_sounds 		  = "nuke",
+			oldcosttofireforumula = true,
 		},      
 		damage                    = {
 			default               = weapon1Damage,

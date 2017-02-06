@@ -185,6 +185,7 @@ local weaponDefs                 = {
 		customparams             = {
 			damagetype		     = "eriottank2",  
 			nofriendlyfire	     = 1,
+			nocosttofire		 = true,
 			
 			--Upgrades--
 			upgradeClass		 = "groundweapons",
@@ -219,6 +220,7 @@ local weaponDefs                 = {
 		customparams             = {
 			damagetype		     = "default",
 			nofriendlyfire	     = 1,
+			nocosttofire		 = true,
 			
 			--Upgrades--
 			upgradeClass		 = "groundweapons",
@@ -299,6 +301,7 @@ local weaponDefs                 = {
 		customparams              = {
 			damagetype		      = "default",  
 			death_sounds 		  = "nuke",
+			nocosttofire		  = true,
 		},      
 		damage                    = {
 			default               = 1000,
