@@ -948,10 +948,10 @@ do
           glMyText(1)
         end
 	    glColor(1,1,1,barAlpha)
-	    glText(barInfo.text,barStart,yoffset-outlineSize,4,"r")
+	    glText(barInfo.text,barStart,yoffset-outlineSize,4,"ro")
         if (drawBarTitles and barInfo.title ~= "health") then
           glColor(1,1,1,titlesAlpha)
-          glText(barInfo.title,0,yoffset-outlineSize,2.35,"cd")
+          glText(barInfo.title,0,yoffset-outlineSize,2.35,"cdo")
         end
         if (barShader) then glMyText(0) end
       end
@@ -974,7 +974,7 @@ do
         end
         if (drawBarTitles and barInfo.title ~= "health") then
           glColor(1,1,1,featureTitlesAlpha)
-          glText(barInfo.title,0,yoffset-outlineSize,2.35,"cd")
+          glText(barInfo.title,0,yoffset-outlineSize,2.35,"cdo")
         end
         if (barShader) then glMyText(0) end
       end
