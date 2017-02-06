@@ -22,10 +22,12 @@ Shared.buildList = {
 	[[eorb]],
 }
 
-if Spring.GetModOptions().luamex == "enabled" then
-	Shared.buildList [#Shared.buildList + 1] = [[emetalextractor]]
+if Spring.GetModOptions ~= nil then
+	if Spring.GetModOptions().luamex == "enabled" then
+		Shared.buildList [#Shared.buildList + 1] = [[emetalextractor]]
+	end
 end
-
+	
 local turrets = {
 	[[ehbotpeewee_turret]],
 	[[ehbotthud_turret]],
