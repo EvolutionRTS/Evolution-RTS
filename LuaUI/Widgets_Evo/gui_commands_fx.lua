@@ -2,8 +2,8 @@ function widget:GetInfo()
    return {
       name      = "Commands FX",
       desc      = "Shows commands given by allies",
-      author    = "Floris, Bluestone",
-      date      = "28 January 2015",
+      author    = "Floris (bluestone helped optimizing)",
+      date      = "20 may 2015",
       license   = "GNU GPL, v2 or later",
       layer     = 2,
       enabled   = true,
@@ -12,27 +12,10 @@ end
 
 -- future:          hotkey to show all current cmds? (like current shift+space)
 --                  handle set target
+--					quickfade on cmd cancel
 
-local spGetUnitPosition	= Spring.GetUnitPosition
-local spGetUnitCommands	= Spring.GetUnitCommands
-local spIsUnitInView = Spring.IsUnitInView
-local spIsSphereInView = Spring.IsSphereInView
-local spIsUnitIcon = Spring.IsUnitIcon
-local spValidUnitID = Spring.ValidUnitID
-local spValidFeatureID = Spring.ValidFeatureID
-local spGetFeaturePosition = Spring.GetFeaturePosition
-local spIsUnitSelected = Spring.IsUnitSelected
-local spIsGUIHidden = Spring.IsGUIHidden
-local spTraceScreenRay = Spring.TraceScreenRay
-local spIsUnitSelected = Spring.IsUnitSelected
-local spGetUnitDefID = Spring.GetUnitDefID
-local spLoadCmdColorsConfig	= Spring.LoadCmdColorsConfig
-
-local GL_SRC_ALPHA = GL.SRC_ALPHA
-local GL_ONE_MINUS_SRC_ALPHA = GL.ONE_MINUS_SRC_ALPHA
-local GL_ONE = GL.ONE
-
-local MAX_UNITS = Game.maxUnits
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 local CMD_ATTACK = CMD.ATTACK --icon unit or map
 local CMD_CAPTURE = CMD.CAPTURE --icon unit or area
@@ -53,45 +36,38 @@ local CMD_UNLOAD_UNIT = CMD.UNLOAD_UNIT -- icon map
 local CMD_UNLOAD_UNITS = CMD.UNLOAD_UNITS -- icon  unit or area
 local BUILD = -1
 
+local diag = math.diag
+local pi = math.pi
+local sin = math.sin
+local cos = math.cos
+local atan = math.atan 
+local random = math.random
+
+--------------------------------------------------------------------------------
+-- Config
 --------------------------------------------------------------------------------
 
-local commands = {}
-local minCommand = 1 -- track lowest/highest entries that need to be processed
-local minQueueCommand = 1
-local maxCommand = 0
+local drawBuildQueue			= true
+local drawLineTexture			= true
+local drawUnitHighlight 		= true
+local drawUnitHighlightSkipFPS	= 5		-- (0 to disable) skip drawing when framerate gets below this value
 
-local unitCommand = {} -- most recent key in command table of order for unitID 
-local setTarget = {} -- set targets of units
-local osClock
+local opacity      				= 1
+local duration     				= 2.6
 
-local drawBuildQueue	= true
-local drawPulse			= true
-local drawPulseAllways	= false
-local drawLineTexture	= true
+local lineWidth	   				= 7.8
+local lineOpacity				= 0.75
+local lineDuration 				= 1		-- set a value <= 1
+local lineWidthEnd				= 0.85		-- multiplier
+local lineTextureLength 		= 4
+local lineTextureSpeed  		= 2.4
 
-local opacity      		= 1
-local duration     		= 2
+local glowRadius    			= 26
+local glowDuration  			= 0.5
+local glowOpacity   			= 0.11
 
-local lineWidth	   		= 5
-local lineOpacity		= 0.85
-local lineDuration 		= 1		-- set a value <= 1
-local lineWidthEnd		= 0.5		-- multiplier (this wont affect textured lines)
-local lineTextureLength = 4.5
-local lineTextureSpeed  = 2
-
-local glowRadius    	= 32
-local glowDuration  	= 0.3
-local glowOpacity   	= 0.13
-
-local pulseRadius		= 21
-local pulseDuration 	= 0.85		-- set a value <= 1
-local pulseOpacity  	= 1
-local pulseRotateSpeed  = 1		-- not working yet
-
-
-local pulseImg			= LUAUI_DIRNAME.."Images/commandsfx/pulse.png"
-local glowImg			= LUAUI_DIRNAME.."Images/commandsfx/glow.png"
-local lineImg			= LUAUI_DIRNAME.."Images/commandsfx/line.png"
+local glowImg			= ":n:"..LUAUI_DIRNAME.."Images/commandsfx/glow.dds"
+local lineImg			= ":n:"..LUAUI_DIRNAME.."Images/commandsfx/line2.dds"
 
 
 local mapX = Game.mapSizeX
@@ -100,72 +76,89 @@ local mapZ = Game.mapSizeZ
 local CONFIG = {  
     [CMD_ATTACK] = {
         sizeMult = 1.4,
+		endSize = 0.28,
         colour = {1.00, 0.20, 0.20, 0.30},
     },
     [CMD_CAPTURE] = {
         sizeMult = 1.4,
+		endSize = 0.28,
         colour = {1.00, 1.00, 0.30, 0.30},
     },
     [CMD_FIGHT] = {
         sizeMult = 1.2,
+		endSize = 0.24,
         colour = {0.30, 0.50, 1.00, 0.25}, 
     },
     [CMD_GUARD] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.10, 0.10, 0.50, 0.25},
     },
     [CMD_LOAD_ONTO] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.30, 1.00, 1.00 ,0.25},
     },
     [CMD_LOAD_UNITS] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.30, 1.00, 1.00, 0.30},
     },
     [CMD_MANUALFIRE] = {
         sizeMult = 1.4,
+		endSize = 0.28,
         colour = {1.00, 0.00, 0.00, 0.30},
     },
     [CMD_MOVE] = {
         sizeMult = 1, 
+		endSize = 0.2,
         colour = {0.00, 1.00, 0.00, 0.25},
     },
     [CMD_PATROL] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.10, 0.10, 1.00, 0.25},
     },
     [CMD_RECLAIM] = {
         sizeMult = 1,
+		endSize = 0,
         colour = {1.00, 0.20, 1.00, 0.4},
     },
     [CMD_REPAIR] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.30, 1.00, 1.00, 0.4},
     },
     [CMD_RESTORE] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.00, 0.50, 0.00, 0.25},
     },
     [CMD_RESURRECT] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.20, 0.60, 1.00, 0.25},
     },
     --[[
     [CMD_SET_TARGET] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {1.00 ,0.75 ,1.00 ,0.25},
     },
     ]]
     [CMD_UNLOAD_UNIT] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {1.00, 1.00 ,0.00 ,0.25},
     },
     [CMD_UNLOAD_UNITS] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {1.00, 1.00 ,0.00 ,0.25},
     },
     [BUILD] = {
         sizeMult = 1,
+		endSize = 0.2,
         colour = {0.00, 1.00 ,0.00 ,0.25},    
     }
 }
@@ -173,8 +166,48 @@ local CONFIG = {
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local commands = {}
+local monitorCommands = {}
+local minCommand = 1 -- track lowest/highest entries that need to be processed
+local minQueueCommand = 1
+local maxCommand = 0
+
+local unitCommand = {} -- most recent key in command table of order for unitID 
+local osClock
+
 local UNITCONF = {}
 local shapes = {}
+
+local drawFrame = 0
+local gameframeDrawFrame = 0
+
+local spGetUnitPosition	= Spring.GetUnitPosition
+local spGetUnitCommands	= Spring.GetUnitCommands
+local spIsUnitInView = Spring.IsUnitInView
+local spIsSphereInView = Spring.IsSphereInView
+local spIsUnitIcon = Spring.IsUnitIcon
+local spValidUnitID = Spring.ValidUnitID
+local spValidFeatureID = Spring.ValidFeatureID
+local spGetFeaturePosition = Spring.GetFeaturePosition
+local spIsUnitSelected = Spring.IsUnitSelected
+local spIsGUIHidden = Spring.IsGUIHidden
+local spTraceScreenRay = Spring.TraceScreenRay
+local spIsUnitSelected = Spring.IsUnitSelected
+local spGetUnitDefID = Spring.GetUnitDefID
+local spLoadCmdColorsConfig	= Spring.LoadCmdColorsConfig
+local spGetFPS = Spring.GetFPS
+
+local GL_SRC_ALPHA = GL.SRC_ALPHA
+local GL_ONE_MINUS_SRC_ALPHA = GL.ONE_MINUS_SRC_ALPHA
+local GL_ONE = GL.ONE
+
+local MAX_UNITS = Game.maxUnits
+local find = string.find
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
 function SetUnitConf()
 	local name, shape, xscale, zscale, scale, xsize, zsize, weaponcount
 	for udid, unitDef in pairs(UnitDefs) do
@@ -225,11 +258,10 @@ function widget:Initialize()
 	--SetUnitConf()
 	
 	--spLoadCmdColorsConfig('useQueueIcons  0 ')
-	spLoadCmdColorsConfig('queueIconScale  0.75 ')
-	spLoadCmdColorsConfig('queueIconAlpha  0.4 ')
-	--spLoadCmdColorsConfig('unitBox           0.0  1.0  0.0  0.85')
+	spLoadCmdColorsConfig('queueIconScale  0.66 ')
+	spLoadCmdColorsConfig('queueIconAlpha  0.5 ')
 	
-	setCmdLineColors(0.4)
+	setCmdLineColors(0.5)
 end
 
 function widget:Shutdown()
@@ -237,26 +269,17 @@ function widget:Shutdown()
 	--spLoadCmdColorsConfig('useQueueIcons  1 ')
 	spLoadCmdColorsConfig('queueIconScale  1 ')
 	spLoadCmdColorsConfig('queueIconAlpha  1 ')
-	--spLoadCmdColorsConfig('unitBox           0.0  1.0  0.0  1.0')
 	
 	setCmdLineColors(0.7)
 end
 
 
-local pi = math.pi
-local sin = math.sin
-local cos = math.cos
-local atan = math.atan 
-local random = math.random
 
 
 local function DrawLineEnd(x1,y1,z1, x2,y2,z2, width)
 	y1 = y2
 	
-	local xDifference		= x2 - x1
-	local yDifference		= y2 - y1
-	local zDifference		= z2 - z1
-	local distance			= math.sqrt(xDifference*xDifference + yDifference*yDifference + zDifference*zDifference)
+	local distance			= diag(x2-x1, y2-y1, z2-z1) 
 	
 	-- for 2nd rounding
 	local distanceDivider = distance / (width/2.25)
@@ -297,10 +320,7 @@ end
 local function DrawLineEndTex(x1,y1,z1, x2,y2,z2, width, texLength, texOffset)
 	y1 = y2
 	
-	local xDifference		= x2 - x1
-	local yDifference		= y2 - y1
-	local zDifference		= z2 - z1
-	local distance			= math.sqrt(xDifference*xDifference + yDifference*yDifference + zDifference*zDifference)
+	local distance			= diag(x2-x1, y2-y1, z2-z1)
 	
 	-- for 2nd rounding
 	local distanceDivider = distance / (width/2.25)
@@ -360,10 +380,7 @@ end
 
 local function DrawLineTex(x1,y1,z1, x2,y2,z2, width, texLength, texOffset) -- long thin rectangle
 
-	local xDifference		= x2 - x1
-	local yDifference		= y2 - y1
-	local zDifference		= z2 - z1
-	local distance			= math.sqrt(xDifference*xDifference + yDifference*yDifference + zDifference*zDifference)
+	local distance			= diag(x2-x1, y2-y1, z2-z1)
 	
     local theta	= (x1~=x2) and atan((z2-z1)/(x2-x1)) or pi/2
     local zOffset = cos(pi-theta) * width / 2
@@ -381,7 +398,6 @@ local function DrawLineTex(x1,y1,z1, x2,y2,z2, width, texLength, texOffset) -- l
 end
 
 local function DrawGroundquad(x,y,z,size)
-
 	gl.TexCoord(0,0)
 	gl.Vertex(x-size,y,z-size)
 	gl.TexCoord(0,1)
@@ -400,14 +416,24 @@ function RemovePreviousCommand(unitID)
     end
 end
 
+function addUnitCommand(unitID, unitDefID, cmdID)
+	-- record that a command was given (note: cmdID is not used, but useful to record for debugging)
+  if string.sub(UnitDefs[unitDefID].name, 1, 7) == "critter" then return end
+  if unitID and (CONFIG[cmdID] or cmdID==CMD_INSERT or cmdID<0) then
+    local el = {ID=cmdID,time=os.clock(),unitID=unitID,draw=false,selected=spIsUnitSelected(unitID),udid=spGetUnitDefID(unitID)} -- command queue is not updated until next gameframe
+    maxCommand = maxCommand + 1
+    commands[maxCommand] = el
+  end
+end
+
+local newUnitCommands = {}
 function widget:UnitCommand(unitID, unitDefID, teamID, cmdID, _, _)
-    -- record that a command was given (note: cmdID is not used, but useful to record for debugging)
-    if unitID and (CONFIG[cmdID] or cmdID==CMD_INSERT or cmdID<0) then
-        local el = {ID=cmdID,time=os.clock(),unitID=unitID,draw=false,selected=spIsUnitSelected(unitID),udid=spGetUnitDefID(unitID)} -- command queue is not updated until next gameframe
-        maxCommand = maxCommand + 1
-        --Spring.Echo("Adding " .. maxCommand)
-        commands[maxCommand] = el
-    end
+		if newUnitCommands[unitID] == nil then		-- only process the first in queue, else when super large queue order is given widget will hog memory and crash
+    	addUnitCommand(unitID, unitDefID, cmdID)
+    	newUnitCommands[unitID] = true
+    else
+			newUnitCommands[unitID] = {unitDefID, cmdID}
+		end
 end
 
 function ExtractTargetLocation(a,b,c,d,cmdID)
@@ -433,7 +459,49 @@ function ExtractTargetLocation(a,b,c,d,cmdID)
     return x,y,z
 end
 
-function widget:GameFrame()
+function getCommandsQueue(i)
+		local q = spGetUnitCommands(commands[i].unitID,50) or {} --limit to prevent mem leak, hax etc
+	  local our_q = {}
+	  for _,cmd in ipairs(q) do
+	      if CONFIG[cmd.id] or cmd.id < 0 then
+	          if cmd.id < 0 then
+	              cmd.buildingID = -cmd.id;
+	              cmd.id = BUILD
+	              if not cmd.params[4] then
+	                  cmd.params[4] = 0 --sometimes the facing param is missing (wtf)
+	              end
+	          end
+	          our_q[#our_q+1] = cmd
+	      end
+	  end
+	  return our_q
+end
+
+local sec = 0
+local echoedSec = 0
+local updaterate = 5  -- 1 == 1 sec,  4 == 250ms,  5 == 200ms
+function widget:Update(dt)
+	sec=sec+dt
+	if math.floor(sec*updaterate)%1 == 0 and math.floor(sec*updaterate) ~= echoedSec then
+		echoedSec = math.floor(sec*updaterate)
+		-- process newly given commands
+		for i, v in pairs(newUnitCommands) do
+			if v ~= true then
+				addUnitCommand(i, v[1], v[2])
+			end
+		end
+		newUnitCommands = {}
+	end
+end
+
+function widget:GameFrame(gameFrame)
+
+	if gameFrame%2 == 0 then
+    if drawFrame == gameframeDrawFrame then 
+    	return
+    end
+		gameframeDrawFrame = drawFrame
+		
     --Spring.Echo("GameFrame: minCommand " .. minCommand .. " minQueueCommand " .. minQueueCommand .. " maxCommand " .. maxCommand)
     local i = minQueueCommand
     while (i <= maxCommand) do
@@ -444,24 +512,13 @@ function widget:GameFrame()
         unitCommand[unitID] = i
 
         -- get pruned command queue
-        local q = spGetUnitCommands(commands[i].unitID,50) or {} --limit to prevent mem leak, hax etc
-        local our_q = {}
-        local gotHighlight = false
-        for _,cmd in ipairs(q) do
-            if CONFIG[cmd.id] or cmd.id < 0 then
-                if cmd.id < 0 then
-                    cmd.buildingID = -cmd.id;
-                    cmd.id = BUILD
-                    if not cmd.params[4] then
-                        cmd.params[4] = 0 --sometimes the facing param is missing (wtf)
-                    end
-                end
-                our_q[#our_q+1] = cmd
-            end
-        end
-        
+        local our_q = getCommandsQueue(i)
+        local qsize = #our_q
         commands[i].queue = our_q
-        commands[i].queueSize = #our_q 
+        commands[i].queueSize = qsize
+        if qsize > 1 then
+        	monitorCommands[i] = qsize
+        end
         if #our_q>0 then
             commands[i].highlight = CONFIG[our_q[1].id].colour
             commands[i].draw = true
@@ -470,7 +527,7 @@ function widget:GameFrame()
         -- get location of final command
         local lastCmd = our_q[#our_q]
         if lastCmd and lastCmd.params then
-            local x,y,z = ExtractTargetLocation(lastCmd.params[1],lastCmd.params[2],lastCmd.params[3],lastCmd.params[4],lastCmd.id) 
+            local x,y,z = ExtractTargetLocation(lastCmd.params[1],lastCmd.params[2],lastCmd.params[3],lastCmd.params[4],lastCmd.id)
             if x then
                 commands[i].x = x
                 commands[i].y = y
@@ -483,6 +540,30 @@ function widget:GameFrame()
         minQueueCommand = minQueueCommand + 1
         i = i + 1
     end
+    
+		-- update queue (in case unit has reached the nearest queue coordinate)
+		if gameFrame%6 == 0 then
+		  for i, qsize in pairs(monitorCommands) do
+		    if commands[i] ~= nil then
+		    	if commands[i].draw == false then
+		    		monitorCommands[i] = nil
+		    	else
+			    	local q = spGetUnitCommands(commands[i].unitID,50) or {}
+			    	if qsize ~= #q then
+			    		local our_q = getCommandsQueue(i)
+			        commands[i].queue = our_q
+			        commands[i].queueSize = #our_q
+			        if qsize > 1 then
+			        	monitorCommands[i] = qsize
+			        else
+			      	  monitorCommands[i] = nil
+			        end
+			    	end
+			    end
+		    end
+		  end
+		end
+	end
 end
 
 local function IsPointInView(x,y,z)
@@ -492,38 +573,37 @@ local function IsPointInView(x,y,z)
     return false
 end
 
-local prevRotationOffset	= 0
-local rotationOffset		= 0
 local prevTexOffset			= 0
 local texOffset				= 0
 local prevOsClock = os.clock()
 
 function widget:DrawWorldPreUnit()
-    --Spring.Echo(maxCommand-minCommand) --EXPENSIVE! often handling hundreds of command queues at once 
-    --if spIsGUIHidden() then return end
-    
-    osClock = os.clock()
-    gl.Blending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-    gl.DepthTest(false)
-	if drawLineTexture then
-		texOffset = prevTexOffset - ((osClock - prevOsClock)*lineTextureSpeed)
-		texOffset = texOffset - math.floor(texOffset)
-		prevTexOffset = texOffset
-		rotationOffset = prevRotationOffset - ((osClock - prevOsClock)*pulseRotateSpeed)
-		rotationOffset = rotationOffset - math.floor(texOffset)
-		prevRotationOffset = rotationOffset
-    end
-	prevOsClock = os.clock()
+		drawFrame = drawFrame + 1
+	  --Spring.Echo(maxCommand-minCommand) --EXPENSIVE! often handling hundreds of command queues at once 
+	  if spIsGUIHidden() then return end
+		
+	  osClock = os.clock()
+	  gl.Blending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+	  gl.DepthTest(false)
+		if drawLineTexture then
+			texOffset = prevTexOffset - ((osClock - prevOsClock)*lineTextureSpeed)
+			texOffset = texOffset - math.floor(texOffset)
+			prevTexOffset = texOffset
+	  end
+		prevOsClock = os.clock()
     local i = minCommand
     while (i <= maxCommand) do --only draw commands that have already been processed in GameFrame
         
         local progress = (osClock - commands[i].time) / duration
         local unitID = commands[i].unitID
         
-        if progress > 1 and commands[i].processed then
+        if progress >= 1 and commands[i].processed then
             -- remove when duration has passed (also need to check if it was processed yet, because of pausing)
             --Spring.Echo("Removing " .. i)
             commands[i] = nil
+            unitCommand[unitID] = nil
+            monitorCommands[i] = nil
+            
             minCommand = minCommand + 1
             
         elseif commands[i].draw and (spIsUnitInView(unitID) or IsPointInView(commands[i].x,commands[i].y,commands[i].z)) then 				
@@ -539,91 +619,78 @@ function widget:DrawWorldPreUnit()
                 else
                     local x,y,z = Spring.GetUnitPosition(commands[i].set_target.params[1])    
                     if x then
-                        gl.BeginEnd(GL.QUADS, DrawLine, prevX,prevY,prevZ, x,y,z, lineWidth)                     
+                        gl.BeginEnd(GL.QUADS, DrawLine, prevX,prevY,prevZ, x,y,z, lineWidth)
                     end
                 end                  
             end
             ]]
             -- draw command queue
             if commands[i].queueSize > 0 and prevX then
-				local lineAlphaMultiplier  = 1 - (progress / lineDuration)
-                for j=1,commands[i].queueSize do
-                    --Spring.Echo(CMD[commands[i].queue[j].id]) --debug
-                    local X,Y,Z = ExtractTargetLocation(commands[i].queue[j].params[1], commands[i].queue[j].params[2], commands[i].queue[j].params[3], commands[i].queue[j].params[4], commands[i].queue[j].id)                                
-                    local validCoord = X and Z and X>=0 and X<=mapX and Z>=0 and Z<=mapZ
-                    -- draw
-                    if X and validCoord then
-                        -- lines
-                        local usedLineWidth = lineWidth - (progress * (lineWidth - (lineWidth * lineWidthEnd)))
-                        local lineColour = CONFIG[commands[i].queue[j].id].colour
-                        local lineAlpha = opacity * lineOpacity * (lineColour[4] * 1.5) * lineAlphaMultiplier
-                        if lineAlpha > 0 then 
-							gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
-							if drawLineTexture then
-								usedLineWidth = lineWidth
-								gl.Texture(lineImg)
-								gl.BeginEnd(GL.QUADS, DrawLineTex, prevX,prevY,prevZ, X, Y, Z, usedLineWidth, lineTextureLength, texOffset)
-								gl.Texture(false)
-							else
-								gl.BeginEnd(GL.QUADS, DrawLine, prevX,prevY,prevZ, X, Y, Z, usedLineWidth)
-							end
-							-- ghost of build queue
-							if drawBuildQueue and commands[i].queue[j].buildingID then
-								gl.PushMatrix()
-								gl.Translate(X,Y+1,Z)
-								gl.Rotate(90 * commands[i].queue[j].params[4], 0, 1, 0)
-								gl.UnitShape(commands[i].queue[j].buildingID, Spring.GetMyTeamID())
-								gl.Rotate(-90 * commands[i].queue[j].params[4], 0, 1, 0)
-								gl.Translate(-X,-Y-1,-Z)
-								gl.PopMatrix()
-							end
-							if j == 1 and not drawLineTexture then
-								-- draw startpoint rounding
-								gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
-								gl.BeginEnd(GL.QUADS, DrawLineEnd, X, Y, Z, prevX,prevY,prevZ, usedLineWidth)
-							end
-						end
-                        if j==commands[i].queueSize then
-							
-							-- draw pulse if unit was selected when the cmd was given
-							if drawPulse and commands[i].selected or drawPulseAllways then
-								local pulseProgress = 0.7 - ((progress/1.5) / pulseDuration)
-								if progress < 0.05 then
-									pulseProgress = 0.57 + ((progress/1.5) / pulseDuration)
-								end
-								local pulseAlphaMultiplier  = 1 - (progress / pulseDuration)
-								local pulseAlpha = (opacity * (lineColour[4]*1.7) * pulseAlphaMultiplier) * pulseOpacity
-								if pulseAlpha > 0.03 then
-									local pulseSize = pulseRadius/7 + ((pulseRadius / 2) * pulseProgress)
-									gl.Color(lineColour[1],lineColour[2],lineColour[3],pulseAlpha)
-									gl.Texture(pulseImg)
-									gl.BeginEnd(GL.QUADS,DrawGroundquad,X,Y,Z,pulseSize*1.5)
-									gl.Texture(false)
-								end
-							end
-							
-							-- draw endpoint rounding
-							if lineAlpha > 0 then 
-								if drawLineTexture then
-									gl.Texture(lineImg)
-									gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
-									gl.BeginEnd(GL.QUADS, DrawLineEndTex, prevX,prevY,prevZ, X, Y, Z, usedLineWidth, lineTextureLength, texOffset)
-									gl.Texture(false)
-								else
-									gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
-									gl.BeginEnd(GL.QUADS, DrawLineEnd, prevX,prevY,prevZ, X, Y, Z, usedLineWidth)
-								end
-                            end
-                            
-							-- ground glow
-                            local size = glowRadius * CONFIG[commands[i].queue[j].id].sizeMult
-							local glowAlpha = (1 - progress) * glowOpacity * opacity
-							
-							gl.Color(lineColour[1],lineColour[2],lineColour[3],glowAlpha)
-							gl.Texture(glowImg)
-							gl.BeginEnd(GL.QUADS,DrawGroundquad,X,Y,Z,size)
-							gl.Texture(false)
-							
+								local lineAlphaMultiplier  = 1 - (progress / lineDuration)
+		            for j=1,commands[i].queueSize do
+		                --Spring.Echo(CMD[commands[i].queue[j].id]) --debug
+		                local X,Y,Z = ExtractTargetLocation(commands[i].queue[j].params[1], commands[i].queue[j].params[2], commands[i].queue[j].params[3], commands[i].queue[j].params[4], commands[i].queue[j].id)
+		                local validCoord = X and Z and X>=0 and X<=mapX and Z>=0 and Z<=mapZ
+		                -- draw
+		                if X and validCoord then
+		                    -- lines
+		                    local usedLineWidth = lineWidth - (progress * (lineWidth - (lineWidth * lineWidthEnd)))
+		                    local lineColour = CONFIG[commands[i].queue[j].id].colour
+		                    local lineAlpha = opacity * lineOpacity * (lineColour[4] * 2) * lineAlphaMultiplier
+		                    if lineAlpha > 0 then 
+														gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
+														if drawLineTexture then
+															
+							                usedLineWidth = lineWidth - (progress * (lineWidth - (lineWidth * lineWidthEnd)))
+															gl.Texture(lineImg)
+															gl.BeginEnd(GL.QUADS, DrawLineTex, prevX,prevY,prevZ, X, Y, Z, usedLineWidth, lineTextureLength * (lineWidth / usedLineWidth), texOffset)
+															gl.Texture(false)
+														else
+															gl.BeginEnd(GL.QUADS, DrawLine, prevX,prevY,prevZ, X, Y, Z, usedLineWidth)
+														end
+														-- ghost of build queue
+														if drawBuildQueue and commands[i].queue[j].buildingID then
+															gl.PushMatrix()
+															gl.Translate(X,Y+1,Z)
+															gl.Rotate(90 * commands[i].queue[j].params[4], 0, 1, 0)
+															gl.UnitShape(commands[i].queue[j].buildingID, Spring.GetMyTeamID(), true, false, false)
+															gl.Rotate(-90 * commands[i].queue[j].params[4], 0, 1, 0)
+															gl.Translate(-X,-Y-1,-Z)
+															gl.PopMatrix()
+														end
+														if j == 1 and not drawLineTexture then
+															-- draw startpoint rounding
+															gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
+															gl.BeginEnd(GL.QUADS, DrawLineEnd, X, Y, Z, prevX,prevY,prevZ, usedLineWidth)
+														end
+												end
+		                    if j==commands[i].queueSize then
+									
+														-- draw endpoint rounding
+														if drawLineTexture == false and lineAlpha > 0 then 
+															if drawLineTexture then
+																gl.Texture(lineImg)
+																gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
+																gl.BeginEnd(GL.QUADS, DrawLineEndTex, prevX,prevY,prevZ, X, Y, Z, usedLineWidth, lineTextureLength, texOffset)
+																gl.Texture(false)
+															else
+																gl.Color(lineColour[1],lineColour[2],lineColour[3],lineAlpha)
+																gl.BeginEnd(GL.QUADS, DrawLineEnd, prevX,prevY,prevZ, X, Y, Z, usedLineWidth)
+															end
+		                     		end
+		                            
+														-- ground glow
+							              local size = (glowRadius * CONFIG[commands[i].queue[j].id].sizeMult) + ((glowRadius * CONFIG[commands[i].queue[j].id].endSize - glowRadius * CONFIG[commands[i].queue[j].id].sizeMult) * progress)
+														local glowAlpha = (1 - progress) * glowOpacity * opacity
+											
+														if commands[i].selected then
+															glowAlpha = glowAlpha * 2.5
+														end
+														gl.Color(lineColour[1],lineColour[2],lineColour[3],glowAlpha)
+														gl.Texture(glowImg)
+														gl.BeginEnd(GL.QUADS,DrawGroundquad,X,Y,Z,size)
+														gl.Texture(false)
+									
                         end
                         prevX, prevY, prevZ = X, Y, Z
                     end
@@ -640,24 +707,27 @@ function widget:DrawWorldPreUnit()
 end
 
 function widget:DrawWorld()
-    if spIsGUIHidden() then return end
-
+  if spIsGUIHidden() then return end
+    
+	if drawUnitHighlightSkipFPS > 0 and spGetFPS() < drawUnitHighlightSkipFPS then return end
+	
     -- highlight unit 
-    gl.DepthTest(true)
-    gl.PolygonOffset(-2, -2)
-    gl.Blending(GL_SRC_ALPHA, GL_ONE)
-    local i = minCommand
-    while (i <= maxCommand) do
-        if commands[i].draw and commands[i].highlight and not spIsUnitIcon(commands[i].unitID) then
-            local progress = (osClock - commands[i].time) / duration
-            gl.Color(commands[i].highlight[1],commands[i].highlight[2],commands[i].highlight[3],0.1*(1-progress))
-            gl.Unit(commands[i].unitID, true)
-        end
-        i = i + 1
-    end
-    gl.Blending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-    gl.PolygonOffset(false)
-    gl.DepthTest(false)
+    if drawUnitHighlight then
+		gl.DepthTest(true)
+		gl.PolygonOffset(-2, -2)
+		gl.Blending(GL_SRC_ALPHA, GL_ONE)
+		local i = minCommand
+		while (i <= maxCommand) do
+			if commands[i].draw and commands[i].highlight and not spIsUnitIcon(commands[i].unitID) then
+				local progress = (osClock - commands[i].time) / duration
+				gl.Color(commands[i].highlight[1],commands[i].highlight[2],commands[i].highlight[3],0.08*(1-progress))
+				gl.Unit(commands[i].unitID, true)
+			end
+			i = i + 1
+		end
+		gl.Blending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+		gl.PolygonOffset(false)
+		gl.DepthTest(false)
+	end
 end
-
 

@@ -5,7 +5,9 @@
 --  brief:   display estimated time of arrival for builds
 --  author:  Dave Rodgers
 --
---  Copyright (C) 2007.
+--  >> modified by: jK <<
+--
+--  Copyright (C) 2007,2008.
 --  Licensed under the terms of the GNU GPL, v2 or later.
 --
 --------------------------------------------------------------------------------
@@ -15,8 +17,8 @@ function widget:GetInfo()
   return {
     name      = "BuildETA",
     desc      = "Displays estimated time of arrival for builds",
-    author    = "trepan",
-    date      = "Feb 04, 2007",
+    author    = "trepan (modified by jK)",
+    date      = "Feb, 2008",
     license   = "GNU GPL, v2 or later",
     layer     = -1,
     enabled   = true  --  loaded by default?
@@ -26,10 +28,13 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local gl = gl  --  use a local copy for faster access
+local gl     = gl  --  use a local copy for faster access
+local Spring = Spring
+local table  = table
 
 local etaTable = {}
-
+local etaMaxDist= 10000000 -- max dist at which to draw ETA
+---------------------------
 
 --------------------------------------------------------------------------------
 
@@ -57,7 +62,7 @@ local function MakeETA(unitID,unitDefID)
     lastProg = buildProgress,
     rate     = nil,
     timeLeft = nil,
-    yoffset  = ud.height + 14 --dims.height - (dims.midy - dims.miny) + 5
+    yoffset  = ud.height+14
   }
 end
 
@@ -65,12 +70,6 @@ end
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
-  if (UnitDefs[1].height == nil) then
-    for udid, ud in ipairs(UnitDefs) do
-      ud.height = Spring.GetUnitDefDimensions(udid).radius
-    end
-  end
-
   local myUnits = Spring.GetTeamUnits(Spring.GetMyTeamID())
   for _,unitID in ipairs(myUnits) do
     local _,_,_,_,buildProgress = Spring.GetUnitHealth(unitID)
@@ -149,7 +148,7 @@ function widget:Update(dt)
       end
     end
   end
-  for _,unitID in ipairs(killTable) do
+  for _,unitID in pairs(killTable) do
     etaTable[unitID] = nil
   end
 end
@@ -158,7 +157,8 @@ end
 --------------------------------------------------------------------------------
 
 function widget:UnitCreated(unitID, unitDefID, unitTeam)
-  if (unitTeam == Spring.GetMyTeamID()) then
+  local spect,spectFull = Spring.GetSpectatingState()
+  if Spring.AreTeamsAllied(unitTeam,Spring.GetMyTeamID()) or (spect and spectFull) then
     etaTable[unitID] = MakeETA(unitID,unitDefID)
   end
 end
@@ -181,37 +181,48 @@ end
 
 --------------------------------------------------------------------------------
 
-function widget:DrawWorld()
-if not Spring.IsGUIHidden() then 
-  gl.DepthTest(true)
-
-  gl.Color(1, 1, 1)
-  --fontHandler.UseDefaultFont()
-
-  for unitID, bi in pairs(etaTable) do
-    gl.DrawFuncAtUnit(unitID, true, function(timeLeft,yoffset)
-      local etaStr
-      if (timeLeft == nil) then
-        etaStr = '\255\1\1\255???'
-      else
-        if (timeLeft > 0) then
-          etaStr = string.format('\255\1\255\1%.1f', timeLeft)
-        else
-          etaStr = string.format('\255\255\1\1%.1f', -timeLeft)
-        end
-      end
-      etaStr = "\255\255\255\1ETA\255\255\255\255:" .. etaStr
-
-      gl.Translate(0, yoffset,0)
-      gl.Billboard()
-      gl.Translate(0, 5 ,0)
-      --fontHandler.DrawCentered(etaStr)
-      gl.Text(etaStr, 0, 0, 8, "c")
-    end, bi.timeLeft,bi.yoffset)
+local function DrawEtaText(timeLeft,yoffset)
+  local etaStr
+  if (timeLeft == nil) then
+    etaStr = '\255\255\255\1ETA\255\255\255\255:\255\255\255\255???'
+  else
+    if (timeLeft > 60) then
+        etaStr = "\255\255\255\1ETA\255\255\255\255:" .. string.format('\255\1\255\1%d', timeLeft / 60) .. "m, " .. string.format('\255\1\255\1%.1f', timeLeft % 60) .. "s"
+    elseif (timeLeft > 0) then
+      etaStr = "\255\255\255\1ETA\255\255\255\255:" .. string.format('\255\1\255\1%.1f', timeLeft) .. "s"
+    else
+      etaStr = "\255\255\255\1ETA\255\255\255\255:" .. string.format('\255\255\1\1%.1f', -timeLeft) .. "s"
+    end
   end
 
-  gl.DepthTest(false)
+  gl.Translate(0, yoffset,10)
+  gl.Billboard()
+  gl.Translate(0, 5 ,0)
+  --fontHandler.DrawCentered(etaStr)
+  gl.Text(etaStr, 0, 0, 16, "co")
 end
+
+function widget:DrawWorld()
+	if Spring.IsGUIHidden() == false then 
+	  gl.DepthTest(true)
+
+	  gl.Color(1, 1, 1,0.1)
+	  --fontHandler.UseDefaultFont()
+	  local cx, cy, cz = Spring.GetCameraPosition()
+	  for unitID, bi in pairs(etaTable) do
+		local ux,uy,uz = Spring.GetUnitViewPosition(unitID)
+		if ux~=nil then
+			local dx, dy, dz = ux-cx, uy-cy, uz-cz
+			local dist = dx*dx + dy*dy + dz*dz
+			if dist < etaMaxDist then 
+				gl.DrawFuncAtUnit(unitID, false, DrawEtaText, bi.timeLeft,bi.yoffset)
+			end
+		end
+	  end
+
+	  gl.Color(1, 1, 1,1)
+	  gl.DepthTest(false)
+	end
 end
   
 
