@@ -207,7 +207,7 @@ function WeaponDef_Post(name, wDef)
 		end
 		wDef.energypershot = energycosttofire	
 	else
-		local energycosttofire = weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1) * (weaponRange * 0.005)
+		local energycosttofire = weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1) * (weaponRange * 0.001)
 		local function roundToFirstDecimal(energycosttofire)
 			return math.floor(energycosttofire*10 + 0.5)*0.1
 		end
