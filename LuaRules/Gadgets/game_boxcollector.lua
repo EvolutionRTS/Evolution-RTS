@@ -69,7 +69,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local x,y,z = Spring.GetFeaturePosition(box)
 				local unitsInRange = Spring.GetUnitsInSphere(x,y,z, 500)--at x , y , z with radius 200
 				for _,unit in ipairs(unitsInRange) do
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycorecollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
 						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(box)   --- [1] is metal, [3] is energy
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
@@ -80,16 +80,16 @@ if (gadgetHandler:IsSyncedCode()) then
 						BoxesOnMap[box] = nil
 					break
 					end
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.dronespawner and select(5, Spring.GetUnitHealth(unit)) == 1 then
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycoredronespawner and select(5, Spring.GetUnitHealth(unit)) == 1 then
 						Spring.CreateUnit("edrone", x, y, z, 0, Spring.GetUnitTeam(unit))
 						Spring.DestroyFeature(box)
 						local fx, fy, fz = Spring.GetFeaturePosition(box)
-						Spring.PlaySoundFile("sounds/dronespawner.wav", 1, fx, fy, fz)
+						Spring.PlaySoundFile("sounds/energycoredronespawner.wav", 1, fx, fy, fz)
 						SpawnCEG("sparkleorangeplus1drone", fx, fy, fz)
 						BoxesOnMap[box] = nil
 					break
 					end
-				   -- if (UnitDefs[Spring.GetUnitDefID(unit)].customParams.amphibdronespawner) then
+				   -- if (UnitDefs[Spring.GetUnitDefID(unit)].customParams.amphibenergycoredronespawner) then
 					  -- Spring.CreateUnit("eamphibdrone", x, y, z, 0, Spring.GetUnitTeam(unit))
 					  -- Spring.DestroyFeature(box)
 					  -- local fx, fy, fz = Spring.GetFeaturePosition(box)
@@ -106,7 +106,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local eggx,eggy,eggz = Spring.GetFeaturePosition(chickenEgg)
 				local unitsInRange = Spring.GetUnitsInSphere(eggx,eggy,eggz, 500)--at x , y , z with radius 200
 				for _,unit in ipairs(unitsInRange) do
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycorecollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
 						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(chickenEgg)   --- [1] is metal, [3] is energy
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
@@ -125,7 +125,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local eggx,eggy,eggz = Spring.GetFeaturePosition(chickenEggB)
 				local unitsInRange = Spring.GetUnitsInSphere(eggx,eggy,eggz, 500)--at x , y , z with radius 200
 				for _,unit in ipairs(unitsInRange) do
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycorecollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
 						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(chickenEggB)   --- [1] is metal, [3] is energy
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
@@ -144,7 +144,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local eggx,eggy,eggz = Spring.GetFeaturePosition(chickenEggC)
 				local unitsInRange = Spring.GetUnitsInSphere(eggx,eggy,eggz, 500)--at x , y , z with radius 200
 				for _,unit in ipairs(unitsInRange) do
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycorecollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
 						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(chickenEggC)   --- [1] is metal, [3] is energy
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
@@ -163,7 +163,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local eggx,eggy,eggz = Spring.GetFeaturePosition(chickenEggD)
 				local unitsInRange = Spring.GetUnitsInSphere(eggx,eggy,eggz, 500)--at x , y , z with radius 200
 				for _,unit in ipairs(unitsInRange) do
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.cancollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
+					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycorecollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
 						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(chickenEggD)   --- [1] is metal, [3] is energy
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 

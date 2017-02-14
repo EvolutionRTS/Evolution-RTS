@@ -44,7 +44,7 @@ local unitDef                    = {
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
-	cancollect                   = "1",
+	
 	--  canDgun			         = true,
 	canGuard                     = true,
 	canHover                     = true,

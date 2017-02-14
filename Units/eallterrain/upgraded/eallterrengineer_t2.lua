@@ -33,7 +33,7 @@ local unitDef                    = {
 	CanCapture                   = false,
 	CanRepair			         = true,
 	canRestore					 = false,
-	cancollect                   = "1",
+	
 	canGuard                     = true,
 	canMove                      = true,
 	canPatrol                    = true,
@@ -123,7 +123,6 @@ local unitDef                    = {
 		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
-		dronespawner             = "1",
 		armortype                = armortype,
 --		supply_cost              = supply,
 		normaltex               = "unittextures/con_legonormal.png", 

@@ -35,7 +35,7 @@ local unitDef                    = {
 	CanCapture                   = true,
 	CanRepair			         = true,
 	canRestore					 = false,
-	cancollect                   = "1",
+	
 	canGuard                     = true,
 	canMove                      = true,
 	canPatrol                    = true,
@@ -122,7 +122,7 @@ local unitDef                    = {
 		needed_cover             = 2,
 		supply_granted            = supplyGiven,
 		death_sounds             = "generic",
-		cancollect               = "1",
+		
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 

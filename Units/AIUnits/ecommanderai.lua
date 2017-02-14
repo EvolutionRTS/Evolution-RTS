@@ -29,7 +29,7 @@ local unitDef                    = {
 	canBeAssisted                = true,
 	CanCapture                   = true,
 	CanRepair			         = true,
-	cancollect                   = "1",
+	
 	canGuard                     = true,
 	canMove                      = true,
 	canPatrol                    = true,
@@ -148,7 +148,7 @@ There can only be one!]],
 		supply_granted            = supplyGiven,
 		ProvideTech               = powerprovided,
 		death_sounds             = "generic",
-		cancollect               = "1",
+		
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 

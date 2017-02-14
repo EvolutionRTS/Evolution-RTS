@@ -35,7 +35,7 @@ local unitDef                    = {
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
-	cancollect                   = "1",
+	
 	canGuard                     = true,
 	canHover                     = true,
 	canMove                      = true,

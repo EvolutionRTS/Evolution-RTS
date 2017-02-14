@@ -27,55 +27,58 @@ end
 local ringsDefs = {
     [UnitDefNames.ecommander.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
     [UnitDefNames.ecommandercloak.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
     [UnitDefNames.ecommandershield.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.ecommanderbuild.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1500 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.ecommanderbattle.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.ecommanderfactory.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.eorb.id] = {
         { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         { color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },
     },
+	[UnitDefNames.ebox.id] = {
+        { color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
+    },
 	[UnitDefNames.eengineer5.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 800 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.eamphibengineer.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 800 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.eallterrengineer.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 800 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.eairengineer.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 600 },
     },
 	[UnitDefNames.ehbotengineer.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 800 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
 	},
 	[UnitDefNames.ehbotengineer_turret.id] = {
         { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1200 },
-        { color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
+        --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },		
 	},
 }

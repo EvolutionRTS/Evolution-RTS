@@ -66,7 +66,7 @@ local unitDef                     = {
 	smoothAnim                    = true,
 	sonarDistance                 = 0,
 	seismicDistance               = 0,
-	stealth                       = false,
+	stealth                       = true,
 	unitname                      = "emine",
 	workerTime                    = 0,
 	yardMap                       = "oo oo",
@@ -98,6 +98,7 @@ local unitDef                     = {
 	},
 
 	customParams                  = {
+		decloakradiusmodifier	  = 10,
 		needed_cover              = 1,
 		death_sounds              = "generic",
 		nofriendlyfire	          = "1",

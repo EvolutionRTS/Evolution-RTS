@@ -113,7 +113,6 @@ local unitDef                    = {
 		area_mex_def			 = "emetalextractor",
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
-		--    airdronespawner    = "1",
 		armortype                = armortype,
 --		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 

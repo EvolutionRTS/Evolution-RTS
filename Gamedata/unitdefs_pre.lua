@@ -20,6 +20,7 @@ Shared.buildList = {
 	[[esilo]],
 	[[emine]],
 	[[eorb]],
+	[[ebox]],
 }
 
 if Spring.GetModOptions ~= nil then

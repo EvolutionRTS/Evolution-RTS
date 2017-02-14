@@ -8,6 +8,7 @@ terrainType = "terrainType"
 function script.Create()
 	StartThread(common.SmokeUnit, {base, turret, barrel1})
 	building = false
+	Move(base, y_axis, 5, 200)
 end
 
 common = include("headers/common_includes_lus.lua")
@@ -24,21 +25,6 @@ end
 function thrust()
 	common.DirtTrail()
 end	
-
-local nanoPoints = {'forwarddome', 'reardome'}
-
-Spring.SetUnitNanoPieces(unitID, nanoPoints)
-
-function script.StartBuilding(heading, pitch)
-    -- TODO: This is where you would add your unpack / point towards animation
-    SetUnitValue(COB.INBUILDSTANCE, true)
-	building = true
-end
-function script.StopBuilding()
-    -- TODO: This is where you would add your pack-up animation
-    SetUnitValue(COB.INBUILDSTANCE, false)
-	building = false
-end
 
 function script.Killed()
 		Explode(forwarddome, SFX.EXPLODE_ON_HIT)
