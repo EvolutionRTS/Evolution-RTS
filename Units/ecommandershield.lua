@@ -7,6 +7,7 @@ local unitName                   = "ecommandershield"
 
 local armortype					 = [[light]]
 local supplyGiven				 = [[10]]
+local techprovided				 = [[tech1]]
 
 local shield1Power               = 5000
 local shield1PowerRegen          = 25
@@ -122,6 +123,7 @@ local unitDef                    = {
 	},
 	customParams                 = {
 		area_mex_def			 = "emetalextractor",
+		ProvideTech               = techprovided,
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,

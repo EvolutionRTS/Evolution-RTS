@@ -91,10 +91,8 @@ function UnitDef_Post(name, uDef)
 	-- turn off unit collision check for planes
 	--
 
-	for name, ud in pairs(UnitDefs) do
-	  if (tobool(ud.canfly) and not tobool(ud.istransport)) then
-		ud.collide = false
-	  end
+	if (tobool(uDef.canfly) and not tobool(uDef.istransport)) then
+		uDef.collide = false
 	end
 
 
@@ -105,13 +103,11 @@ function UnitDef_Post(name, uDef)
 
 	local sqrt = math.sqrt
 
-	for name, ud in pairs(UnitDefs) do
-	  if (not ud.mincloakdistance) then
-		local fx = ud.footprintx and tonumber(ud.footprintx) or 1
-		local fz = ud.footprintz and tonumber(ud.footprintz) or 1
+	if (not uDef.mincloakdistance) then
+		local fx = uDef.footprintx and tonumber(uDef.footprintx) or 1
+		local fz = uDef.footprintz and tonumber(uDef.footprintz) or 1
 		local radius = 8 * sqrt((fx * fx) + (fz * fz))
-		ud.mincloakdistance = (radius + 48)
-	  end
+		uDef.mincloakdistance = (radius + 48)
 	end
 
 
@@ -119,29 +115,36 @@ function UnitDef_Post(name, uDef)
 	--------------------------------------------------------------------------------
 	-- Spring Kludge Removal
 	-- 
-	for name, ud in pairs(UnitDefs) do
-		ud.activateWhenBuilt  = true 
-	end
+	uDef.activateWhenBuilt  = true 
 
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	
 	--Set reverse velocity automatically
-		for id,unitDef in pairs(UnitDefs) do
-			if unitDef.maxvelocity then
-				unitDef.maxreversevelocity = unitDef.maxvelocity * 0.75
-			end
-		end
+	if uDef.maxvelocity then
+		uDef.maxreversevelocity = uDef.maxvelocity * 0.75
+	end
 
 	--Override groundplate used
-	for id,unitDef in pairs(UnitDefs) do
-		if unitDef.usegrounddecal == true then
-			unitDef.buildinggrounddecaltype = "groundplate.dds"
-		end
+	if uDef.usegrounddecal == true then
+		uDef.buildinggrounddecaltype = "groundplate.dds"
+	end
+	
+	if uDef.customparams and uDef.customparams.isupgraded == true then
+		uDef.maxdamage = uDef.maxdamage * 1.20
+	end
+	
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	-- Turn off nanospray globally
+	if uDef.shownanospray then
+		uDef.shownanospray = false
 	end
 		
 end
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- process weapondef
 function WeaponDef_Post(name, wDef)
 	
@@ -171,6 +174,10 @@ function WeaponDef_Post(name, wDef)
 				for armorClass, armorMultiplier in pairs(damageTypes[damagetypelower]) do	
 					--Spring.Echo(wd.name, armorClass, weapondamage*armorMultiplier )
 					wDef.damage[armorClass] = weapondamage*armorMultiplier
+						-- Handle upgraded units
+						if wDef.customparams and wDef.customparams.isupgraded == true then
+							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.20
+						end
 				end
 			else
 				Spring.Echo("!!WARNING!! Invalid damagetype: " .. damagetypelower)	
@@ -214,6 +221,40 @@ function WeaponDef_Post(name, wDef)
 		end
 		wDef.energypershot = energycosttofire	
 	end
+	
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	-- Set up params for Point Defense turrets
+	if wDef.customparams and wDef.customparams.ispointdefenselaser == true then
+		wDef.areaofeffect = 0
+		wDef.avoidfeature = false
+		wDef.avoidfriendly = false
+		wDef.collidefeature = false
+		wDef.collidefriendly = false
+		wDef.corethickness = 0.2
+		wDef.duration = 0.2
+		wDef.explosiongenerator = [[custom:genericshellexplosion-small-sparks-burn]]
+		wDef.falloffrate = 1
+		wDef.impulsefactor = 0
+		wDef.interceptedbyshieldtype = 4
+		wDef.minintensity = 1
+		wDef.name = [[Point Defense Laser]]
+		wDef.range = 650
+		wDef.reloadtime = 0.25
+		wDef.weapontype = [[LaserCannon]]
+		wDef.rgbcolor = [[0 0.5 1]]
+		wDef.rgbcolor2 = [[1 1 1]]
+		wDef.soundtrigger = true
+		wDef.soundstart = [[pointdefensefire.wav]]
+		wDef.texture1 = [[shot]]
+		wDef.texture2 = [[empty]]
+		wDef.thickness = 2
+		wDef.tolerance = 1000
+		wDef.turret = true
+		wDef.weaponvelocity = 1500
+		wDef.customparams.damagetype = [[pdlaser]]
+		wDef.damage.default = 6.25
+	end	
 end
 
 

@@ -25,6 +25,17 @@ local Sounds = {
 			maxconcurrent = 16,
 		},
 		
+		pdfire = {
+			--- new since 89.0
+			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
+			file = "sounds/pointdefensefire.wav",
+			gainmod = 0.35,
+			pitchmod = 0.05,
+			--pitch = 0.7,
+			in3d = true,
+			maxconcurrent = 8,
+		},
+		
 		nukeartyweaponhit = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)

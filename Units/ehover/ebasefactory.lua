@@ -72,18 +72,13 @@ local unitDef                     = {
 		},
 	},
 	buildoptions                  = {
-		"eengineer5", --new
-		"elighttank3", --new
-		--    "eflametank", --new
-		"eriottank2", --new
-		--    "emediumtank3", --new
-		"eheavytank3", --new
-		"emissiletank", --new
---		"eaatank",
-		--	"efatso2", --new
-		"eartytank", --new
-		--    "ebomb",
-		"elacerator", --new
+		"eengineer5",
+		"elighttank3",
+		"eriottank2",
+		"eheavytank3",
+		"emissiletank",
+		"eartytank",
+		"elacerator",
 	},
 	sounds                        = {
 		underattack               = "unitsunderattack1",

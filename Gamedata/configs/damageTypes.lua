@@ -9,6 +9,12 @@ local damageClasses = {
 			LIGHT		= 0.1,
 			BUILDING 	= 0.1,
 		},	
+		
+		pdlaser	= {
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
+		},
 		----------------------------------------------------------------------------			
 		-- Overseers with weapons
 		ecommanderbattle	= {

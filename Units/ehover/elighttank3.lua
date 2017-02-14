@@ -62,6 +62,7 @@ local unitDef                    = {
 	name                         = "Kite",
 	noChaseCategory              = "VTOL",
 	objectName                   = "elighttank4.s3o",
+	script						 = "elighttank3_lus.lua",
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "smallExplosionGenericBlue",

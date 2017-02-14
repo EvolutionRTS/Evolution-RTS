@@ -7,6 +7,7 @@ local unitName                   = "ecommanderbattle"
 
 local armortype					 = [[armored]]
 --local supplyGiven				 = [[10]]
+local techprovided				 = [[tech1]]
 
 local weapon1Damage              = 200
 local weapon1AOE				 = 250
@@ -123,6 +124,7 @@ local unitDef                    = {
 	},
 	customParams                 = {
 		area_mex_def			 = "emetalextractor",
+		ProvideTech               = techprovided,
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,
