@@ -78,8 +78,8 @@ local unitDef                         = {
 	buildoptions                      = {
 		"eairengineer_t2",
 		"escout_t2", --new
-		"egunship2_t2", --new
 		"efighter_t2", --new
+		"egunship2_t2", --new
 		"ebomber_t2", --new
 		"etransport_t2", --new
 

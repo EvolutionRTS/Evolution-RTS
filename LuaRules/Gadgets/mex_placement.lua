@@ -18,8 +18,6 @@ function gadget:GetInfo()
   }
 end
 
-if Spring.GetModOptions().luamex ~= "enabled" then return false end
-
 include("LuaRules/Configs/customcmds.h.lua")
 
 --------------------------------------------------------------------------------
@@ -61,6 +59,7 @@ local metalSpots = {}
 local metalSpotsByPos = {}
 
 local MEX_DISTANCE = 500
+local communism = true -- pass a modoption here or whatever
 
 --------------------------------------------------------------------------------
 -- Command Handling
@@ -167,12 +166,15 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			end
 		else
 			income = GG.IntegrateMetal(x, z)
+			spotByID[unitID] = true
 		end
 
 		if income then
 			income = income * mexDefID[unitDefID]
 			Spring.SetUnitRulesParam(unitID, "mexIncome", income, inlosTrueTable)
-			Spring.SetUnitResourcing(unitID, "cmm", income)
+			if not communism then
+				Spring.SetUnitResourcing(unitID, "cmm", income)
+			end
 		end
 	end
 end
@@ -200,3 +202,23 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 		spotByID[unitID] = nil
 	end
 end
+
+if communism then function gadget:GameFrame (n)
+	if n % 30 ~= 0 then return end
+
+	local allyteamIncomes = {}
+	for unitID in pairs (spotByID) do
+		if Spring.GetUnitIsActive (unitID) then
+			local allyteamID = select (6, Spring.GetTeamInfo (Spring.GetUnitTeam (unitID)))
+			allyteamIncomes[allyteamID] = (allyteamIncomes[allyteamID] or 0) + Spring.GetUnitRulesParam (unitID, "mexIncome")
+		end
+	end
+
+	for allyTeamID, income in pairs (allyteamIncomes) do
+		-- fixme: handle comshare
+		local teams = Spring.GetTeamList (allyTeamID)
+		for i = 1, #teams do
+			Spring.AddTeamResource (teams[i], "m", income / #teams)
+		end
+	end
+end end
