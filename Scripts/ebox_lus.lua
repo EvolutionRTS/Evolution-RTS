@@ -13,6 +13,10 @@ end
 
 common = include("headers/common_includes_lus.lua")
 
+function script.setSFXoccupy(setSFXoccupy_argument)
+	common.setSFXoccupy(setSFXoccupy_argument)
+end
+
 function script.StartMoving()
    isMoving = true
    	StartThread(thrust)
