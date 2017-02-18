@@ -24,6 +24,12 @@ local icontypes = {
     radiusadjust=3,
   },
   
+        box = {
+    bitmap='icons/dmdr_box.png',
+    size=2,
+    radiusadjust=0,
+  },
+  
         raider = {
     bitmap='icons/dmdr_raider.png',
     size=1.5,
