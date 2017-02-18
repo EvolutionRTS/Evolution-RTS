@@ -162,7 +162,7 @@ function DrawButton()
 		{v = {1, 0, 0}},
 	}
 	glShape(GL_LINE_STRIP, vertices)
-    glText("Keybinds", textMargin, textMargin, textSize, "no")
+    glText("[ Keybinds ]", textMargin, textMargin, textSize, "no")
 end
 
 -- keybind info

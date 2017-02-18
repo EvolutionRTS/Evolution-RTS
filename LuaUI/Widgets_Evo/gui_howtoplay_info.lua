@@ -172,7 +172,7 @@ function DrawButton()
 		{v = {1, 0, 0}},
 	}
 	glShape(GL_LINE_STRIP, vertices)
-    glText("How to Play", textMargin, textMargin, textSize, "no")
+    glText("[ How to Play ]", textMargin, textMargin, textSize, "no")
 end
 
 

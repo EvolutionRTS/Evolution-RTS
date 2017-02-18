@@ -58,8 +58,8 @@ local vsx, vsy = gl.GetViewSizes()
 local widgetScale = 1		-- gets auto changed anyway
 local bgmargin = 12
 local bgmargin2 = 6
-local posx, posy = vsx - width, vsy - height
-local tweakStartX, tweakStartY = 0, 0
+local posx, posy = vsx - width * 1.59, vsy - height
+local tweakStartX, tweakStartY = vsx - width * 1.59, vsy - height
 
 local modoptMincome = Spring.GetModOptions().mincome
 
