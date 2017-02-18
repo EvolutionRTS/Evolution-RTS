@@ -1,3 +1,8 @@
+local heatmapping = true
+if Spring.GetModOptions().heatmapping == "enabled" then
+	local heatmapping = true
+end
+
 local moveDefs = {
 
    TANK1 = {
@@ -17,9 +22,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
 
    HOVERTANK2 = {
@@ -39,9 +44,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
 
    NORMALTANK2 = {
@@ -61,9 +66,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
    TANK2 = {
@@ -83,9 +88,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
 
    HOVERTANK3 = {
@@ -105,9 +110,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
    HOVERHBOT3 = {
@@ -127,9 +132,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=2,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
    HOVERHBOT4 = {
@@ -149,9 +154,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=2,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
    HOVERHBOT5 = {
@@ -171,9 +176,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=2,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
    HOVERHBOT6 = {
@@ -193,9 +198,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=2,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
 
    TANK3 = {
@@ -215,9 +220,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
    ALLTERRTANK3 = {
@@ -235,9 +240,9 @@ local moveDefs = {
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
 
    HOVERTANK4 = {
@@ -257,9 +262,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
 
    TANK4 = {
@@ -279,9 +284,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    ALLTERRTANK4 = {
       footprintx=4,
@@ -298,9 +303,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
     UBOAT4 = {
       footprintx = 4,
@@ -318,9 +323,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
 
    HOVERTANK5 = {
@@ -340,9 +345,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
     ALLTERRTANK5 = {
@@ -360,9 +365,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    TANK6 = {
       footprintx=6,
@@ -381,9 +386,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    HOVERTANK6 = {
       footprintx=6,
@@ -402,9 +407,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    ORBHOVERTANK6 = {
       footprintx=6,
@@ -423,9 +428,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    ALLTERRTANK6 = {
       footprintx=6,
@@ -442,9 +447,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    COMMANDERTANK4 = {
       footprintx=4,
@@ -463,9 +468,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    EXPERIMENTALTANK10 = {
       footprintx=12,
@@ -484,9 +489,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    HOVERTANKEXPERIMENTAL9 = {
       footprintx=9,
@@ -503,9 +508,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    EXPERIMENTALTANK12 = {
       footprintx=12,
@@ -522,9 +527,9 @@ local moveDefs = {
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
-	  heatmod=0.5,
+	  heatmod=0.1,
 	  slopemod=4,
-	  heatmapping=false,
+	  heatmapping=heatmapping,
    },
    
 	CHICKENNANO = {

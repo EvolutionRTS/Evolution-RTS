@@ -179,6 +179,19 @@ local options= {
 			{key="insane", name="Insane", desc="AI gets a gift of 100 metal every 5 seconds and a static 100 energy income."},
 		}
 	},
+	{
+		key    = 'heatmapping',
+		name   = 'Heatmapped Pathfinding',
+		desc   = 'Turns heatmapping on and off in the pathfinder.',
+		type="list",
+		def="enabled",
+		section= "gameplayoptions",
+		items={
+			{key="disabled", name="Disabled", desc=""},
+			{key="enabled", name="Enabled", desc="Turns heatmapping on and off in the pathfinder."},
+		}
+	},
+	
 -- Control Victory Options	
 	{
 		key    = 'controlvictoryoptions',
