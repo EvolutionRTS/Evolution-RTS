@@ -109,6 +109,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		area_mex_def			 = "emetalextractor",
 		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
