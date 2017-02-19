@@ -58,6 +58,7 @@ local vsx, vsy = gl.GetViewSizes()
 local widgetScale = 1		-- gets auto changed anyway
 local bgmargin = 12
 local bgmargin2 = 6
+--local posx, posy = vsx - width * 1.59, vsy - height
 local posx, posy = vsx - width * 1.59, vsy - height
 local tweakStartX, tweakStartY = vsx - width * 1.59, vsy - height
 
@@ -504,7 +505,7 @@ end
 
 function widget:ViewResize(newX,newY)
   vsx, vsy = newX, newY
-	widgetScale = (0.72 + (vsx*vsy / 13300000))
+	widgetScale = (0.66 + (vsx*vsy / 9500000))
 	generateDisplayList()
 	generateDisplayList3()
 end
