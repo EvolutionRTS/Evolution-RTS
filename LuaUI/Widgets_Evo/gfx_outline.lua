@@ -20,7 +20,7 @@ function widget:GetInfo()
     date      = "Dec 06, 2007",
     license   = "GNU GPL, v2 or later",
     layer     = -10,
-    enabled   = false  --  loaded by default?
+    enabled   = true  --  loaded by default?
   }
 end
 

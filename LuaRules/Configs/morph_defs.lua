@@ -236,7 +236,8 @@ Overseer]],
 		{
 			into = 'etech2',
 			time = timeToBuild_etech2,
-			cmdname = [[tech2]],
+			cmdname = [[Tech 2
+Upgrade]],
 			metal = metalCost_etech2,
 			text = 'Morph into a Tech Level 2 Facility.',
 		},
@@ -245,7 +246,8 @@ Overseer]],
 		{
 			into = 'etech3',
 			time = timeToBuild_etech3,
-			cmdname = [[tech3]],
+			cmdname = [[Tech 3
+Upgrade]],
 			metal = metalCost_etech3,
 			text = 'Morph into a Tech Level 3 Facility.',
 		},

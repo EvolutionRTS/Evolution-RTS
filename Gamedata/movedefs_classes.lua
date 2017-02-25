@@ -1,6 +1,10 @@
-local heatmapping = true
-if Spring.GetModOptions().heatmapping == "enabled" then
-	local heatmapping = true
+if Spring.GetModOptions ~= nil then
+	local useHeatMapping = Spring.GetModOptions().heatmapping
+	if useHeatMapping ~= "disabled" then
+		heatmapping = true
+	end
+else
+	heatmapping = true
 end
 
 local moveDefs = {

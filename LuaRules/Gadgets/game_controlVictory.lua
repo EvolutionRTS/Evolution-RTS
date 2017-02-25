@@ -275,8 +275,6 @@ buildableUnits = VFS.Include"LuaRules/Configs/cv_buildableUnits.lua"
 
 --local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
-if Spring.GetModOptions().scoremode == "disabled" or Spring.GetModOptions().scoremode == nil then return false end
-
 --Make controlvictory exit if chickens are present
 
 local teams = Spring.GetTeamList()
@@ -301,26 +299,9 @@ if chickensEnabled == true then
 	return false
 end
 
-
-local captureRadius = tonumber(Spring.GetModOptions().captureradius) or 500 -- Radius around a point in which to capture it
-local captureTime = tonumber(Spring.GetModOptions().capturetime) or 30 -- Time to capture a point
-local captureBonus = tonumber(Spring.GetModOptions().capturebonus) * 0.01 or 5 -- speedup from adding more units
-local decapSpeed = tonumber(Spring.GetModOptions().decapspeed) or 3 -- speed multiplier for neutralizing an enemy point
-local dominationScore = tonumber(Spring.GetModOptions().dominationscore) or 1000
-local dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) or 30 -- Time needed holding all points to score in multi domination
-local usemapconfig = Spring.GetModOptions().usemapconfig or "disabled"
-local limitScore = tonumber(Spring.GetModOptions().limitscore) or 3500
-
--- These are together because they cover the same area (resourcing)
-local metalPerPoint = tonumber(Spring.GetModOptions().metalperpoint) or 0
-local energyPerPoint = tonumber(Spring.GetModOptions().energyperpoint) or 0
+VFS.Include("LuaRules/Configs/cv_modOptions.lua")
 
 local moveSpeed =.5
-
-local numberOfControlPoints = tonumber(Spring.GetModOptions().numberofcontrolpoints) or 7
-local startTime = tonumber(Spring.GetModOptions().starttime) or 0 -- The time when capturing can start
-local tugofWarModifier = tonumber(Spring.GetModOptions().tugofwarmodifier) or 2 -- Radius around a point in which to capture it
-
 
 --Here we mitigate potential issues caused by wonky options settings
 
