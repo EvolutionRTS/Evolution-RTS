@@ -67,6 +67,7 @@ local GL_LINE_STRIP = GL.LINE_STRIP
 
 local widgetScale = 1
 local vsx, vsy = Spring.GetViewGeometry()
+local resolutionX, resolutionY = Spring.GetScreenGeometry()
 
 local myTeamID = Spring.GetMyTeamID()
 local amNewbie = (Spring.GetTeamRulesParam(myTeamID, 'isNewbie') == 1)
@@ -103,7 +104,7 @@ local textSize		= 0.75
 local textMargin	= 0.25
 local lineWidth		= 0.0625
 
-local posX = 0.1625
+local posX = 0.15
 local posY = 0
 local showOnceMore = false		-- used because of GUI shader delay
 local buttonGL
@@ -294,12 +295,18 @@ function checkWidgets()
 	-- Darken map
 	if (WG['darkenmap'] ~= nil) then
 		table.insert(options, {id="darkenmap", name="Darken map", min=0, max=0.55, type="slider", value=WG['darkenmap'].getMapDarkness(), description='Darkens the whole map (not the units)\n\nRemembers setting per map\nUse /resetmapdarkness if you want to reset all stored map settings'})
-		table.insert(options, {id="darkenmap_darkenfeatures", name="Darken features with map", type="bool", value=WG['darkenmap'].getDarkenFeatures(), description='Darkens features (trees, wrecks, ect..) along with darken map slider above\n\nNOTE: This setting is CPU intensive because it cycles through all visible features \nand renders then another time.'})
+		if WG['darkenmap'].getDarkenFeatures ~= nil then
+			table.insert(options, {id="darkenmap_darkenfeatures", name="Darken features with map", type="bool", value=WG['darkenmap'].getDarkenFeatures(), description='Darkens features (trees, wrecks, ect..) along with darken map slider above\n\nNOTE: This setting is CPU intensive because it cycles through all visible features \nand renders then another time.'})
+		end
 	end
 	-- EnemySpotter
 	if (WG['enemyspotter'] ~= nil) then
 		table.insert(options, {id="enemyspotter_opacity", name="Enemyspotter opacity", min=0.15, max=0.4, type="slider", value=WG['enemyspotter'].getOpacity(), description='Set the opacity of the enemy-spotter rings'})
 		table.insert(options, {id="enemyspotter_highlight", name="Enemyspotter unit highlight", type="bool", value=WG['enemyspotter'].getHighlight(), description='Colorize/highlight enemy units'})
+	end
+	-- Highlight Selected Units
+	if (WG['highlightselunits'] ~= nil) then
+		table.insert(options, {id="highlightselunits_opacity", name="Selected units opacity", min=0.15, max=0.3, type="slider", value=WG['highlightselunits'].getOpacity(), description='Set the opacity of the highlight on selected units'})
 	end
 	-- Smart Select
 	if (WG['smartselect'] ~= nil) then
@@ -590,7 +597,6 @@ function widget:DrawScreen()
 	end
 end
 
-
 function applyOptionValue(i)
 	local id = options[i].id
 	if options[i].type == 'bool' then
@@ -613,8 +619,18 @@ function applyOptionValue(i)
 			Spring.SendCommands("Fullscreen "..value)
 			Spring.SetConfigInt("Fullscreen",value)
 		elseif id == 'borderless' then
-			Spring.SendCommands("WindowBorderless "..value)
 			Spring.SetConfigInt("WindowBorderless",value)
+			if value == 1 then
+				Spring.SetConfigInt("WindowPosX",0)
+				Spring.SetConfigInt("WindowPosY",0)
+				Spring.SetConfigInt("XResolutionWindowed",resolutionX)
+				Spring.SetConfigInt("YResolutionWindowed",resolutionY)
+				Spring.SetConfigInt("WindowState",0)
+			else
+				Spring.SetConfigInt("WindowPosX",0)
+				Spring.SetConfigInt("WindowPosY",0)
+				Spring.SetConfigInt("WindowState",1)
+			end
 		elseif id == 'screenedgemove' then
 			Spring.SetConfigInt("FullscreenEdgeMove",value)
 			Spring.SetConfigInt("WindowedEdgeMove",value)
@@ -691,6 +707,8 @@ function applyOptionValue(i)
 			WG['darkenmap'].setMapDarkness(value)
 		elseif id == 'enemyspotter_opacity' then
 			WG['enemyspotter'].setOpacity(value)
+		elseif id == 'highlightselunits_opacity' then
+			WG['highlightselunits'].setOpacity(value)
 		elseif id == 'bloom' then
 			if value > 0 then
 				widgetHandler:EnableWidget(options[i].widget)
@@ -958,11 +976,12 @@ function widget:Initialize()
 		fullWidgetsList[name] = data
   end
 	  
-		local bloomValue = 0
-		
+	--local bloomValue = 0
+	
+	-- if you want to add an option it should be added here, and in applyOptionValue(), if option needs shaders than see the code below the options definition
 	options = {
 		{id="fullscreen", name="Fullscreen", type="bool", value=tonumber(Spring.GetConfigInt("Fullscreen",1) or 1) == 1},
-		{id="borderless", name="Borderless", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1},
+		{id="borderless", name="Borderless window", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1, description="Changes will be applied next game. (dont forget to turn off the \'fullscreen\' option next game)"},
 		{id="screenedgemove", name="Screen edge moves camera", type="bool", value=tonumber(Spring.GetConfigInt("FullscreenEdgeMove",1) or 1) == 1, description="If mouse is close to screen edge this will move camera\n\nChanges will be applied next game"},
 		{id="hwcursor", name="Hardware cursor", type="bool", value=tonumber(Spring.GetConfigInt("hardwareCursor",1) or 1) == 1, description="When disabled: the mouse cursor refresh rate will be the same as your ingame fps"},
 		{id="fsaa", name="Anti Aliasing", type="slider", min=0, max=16, step=1, value=tonumber(Spring.GetConfigInt("FSAALevel",1) or 2), description='Changes will be applied next game'},
@@ -982,7 +1001,7 @@ function widget:Initialize()
 		{id="projectilelights", widget="Projectile lights", name="Projectile lights", type="bool", value=widgetHandler.orderList["Projectile lights"] ~= nil and (widgetHandler.orderList["Projectile lights"] > 0), description='Projectiles are plasmaballs, it will light up the map below them'},
 		{id="lups", widget="LupsManager", name="Lups particle effects", type="bool", value=widgetHandler.orderList["LupsManager"] ~= nil and (widgetHandler.orderList["LupsManager"] > 0), description='Toggle unit particle effects: jet beams, ground flashes, fusion energy balls'},
 		{id="xrayshader", widget="XrayShader", name="Unit xray shader", type="bool", value=widgetHandler.orderList["XrayShader"] ~= nil and (widgetHandler.orderList["XrayShader"] > 0), description='Highlights all units, highlight effect dissolves on close camera range.\n\nFades out and disables at low fps\nWorks less on dark teamcolors'},
-		{id="outline", widget="Outline", name="Unit Outline (tiny)", type="bool", value=widgetHandler.orderList["Outline"] ~= nil and (widgetHandler.orderList["Outline"] > 0), description='Adds a small outline to units that make them more crisp and stand out'},
+		{id="outline", widget="Outline", name="Unit Outline (tiny)", type="bool", value=widgetHandler.orderList["Outline"] ~= nil and (widgetHandler.orderList["Outline"] > 0), description='Adds a small outline to all units which makes them crisp\n\nLimits total outlined units to 1200.\nStops rendering outlines when average fps falls below 13.'},
 		{id="disticon", name="Unit icon distance", type="slider", min=0, max=800, value=tonumber(Spring.GetConfigInt("UnitIconDist",1) or 800)},
 		{id="treeradius", name="Tree render distance", type="slider", min=0, max=2000, value=tonumber(Spring.GetConfigInt("TreeRadius",1) or 1000), description='Applies to SpringRTS engine default trees\n\nChanges will be applied next game'},
 		{id="particles", name="Max particles", type="slider", min=2500, max=25000, value=tonumber(Spring.GetConfigInt("MaxParticles",1) or 1000), description='Particles used for explosions, smoke, fire and missiletrails\n\nSetting a low value will mean that various effects wont show properly'},
@@ -994,6 +1013,8 @@ function widget:Initialize()
 		{id="crossalpha", name="Mouse cross alpha", type="slider", min=0, max=1, value=tonumber(Spring.GetConfigInt("CrossAlpha",1) or 1), description='Opacity of mouse icon in center of screen when you are in camera pan mode\n\n(The\'icon\' has a dot in center with 4 arrows pointing in all directions)'},
 		{id="commandsfx", widget="Commands FX", name="Unit command FX", type="bool", value=widgetHandler.orderList["Commands FX"] ~= nil and (widgetHandler.orderList["Commands FX"] > 0), description='Shows unit target lines when you give orders\n\nThe commands from your teammates are shown as well'},
 		
+		--{id="fancyselunits", widget="Fancy Selected Units", name="Fancy Selected Units", type="bool", value=widgetHandler.orderList["Fancy Selected Units"] ~= nil and (widgetHandler.orderList["Fancy Selected Units"] > 0), description=''},
+		
 		{id="scrollspeed", name="Zoom direction/speed", type="slider", min=-45, max=45, step=1, value=tonumber(Spring.GetConfigInt("ScrollWheelSpeed",1) or 25), description='Leftside of the slider means inversed scrolling direction!\nNOTE: Having the slider centered means no mousewheel zooming at all!\n\nChanges will be applied next game'},
 		{id="sndvolmaster", name="Sound volume", type="slider", min=0, max=200, value=tonumber(Spring.GetConfigInt("snd_volmaster",1) or 100)},
 		{id="fpstimespeed", name="Display FPS, GameTime and Speed", type="bool", value=tonumber(Spring.GetConfigInt("ShowFPS",1) or 1) == 1, description='Located at the top right of the screen\n\nIndividually toggle them with /fps /clock /speed'},
@@ -1001,7 +1022,7 @@ function widget:Initialize()
 		{id="snow", widget="Snow", name="Snow", type="bool", value=widgetHandler.orderList["Snow"] ~= nil and (widgetHandler.orderList["Snow"] > 0), description='Snows at winter maps, auto reduces amount when fps gets lower and unitcount higher\n\nUse /snow to toggle snow for current map (it remembers)'},
 		{id="teamcolors", widget="Common Team Colors", name="Team colors based on a palette", type="bool", value=widgetHandler.orderList["Common Team Colors"] ~= nil and (widgetHandler.orderList["Common Team Colors"] > 0), description='Replaces lobby team colors for a color palette based one\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
 		
-		{id="camera", name="Camera", type="select", options={'fps','overhead','spring','rot overhead','free'}, value=(tonumber(Spring.GetConfigInt("CamMode",1) or 2))},
+		{id="camera", name="Camera", type="select", options={'fps','overhead','spring','rot overhead','free'}, value=(tonumber((Spring.GetConfigInt("CamMode",1)+1) or 2))},
 	}
 	
 	local processedOptions = {}
