@@ -70,6 +70,7 @@ return {
 		},
 		weapondefs = {
 			aaweapon = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 200,
 				avoidfriendly = false,
 				collidefriendly = false,
@@ -110,6 +111,7 @@ return {
 				},
 			},
 			weapon = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 42,
 				avoidfeature = 0,
 				avoidfriendly = 0,

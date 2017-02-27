@@ -73,6 +73,7 @@ return {
 		},
 		weapondefs = {
 			goo = {
+				interceptedByShieldType   = 4,
 				accuracy = 1200,
 				areaofeffect = 200,
 				avoidfeature = 0,
@@ -110,6 +111,7 @@ return {
 				},
 			},
 			melee = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 60,
 				avoidfeature = 0,
 				avoidfriendly = 0,
@@ -137,6 +139,7 @@ return {
 				},
 			},
 			spores1 = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 96,
 				avoidfriendly = 0,
 				burnblow = 1,
@@ -181,6 +184,7 @@ return {
 				},
 			},
 			spores2 = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 96,
 				avoidfeature = 0,
 				avoidfriendly = false,
@@ -225,6 +229,7 @@ return {
 				},
 			},
 			spores3 = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 64,
 				avoidfriendly = false,
 				burnblow = 1,

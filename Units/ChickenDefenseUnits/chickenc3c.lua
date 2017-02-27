@@ -68,6 +68,7 @@ return {
 		},
 		weapondefs = {
 			weapon = {
+				interceptedByShieldType   = 4,
 				accuracy = 512,
 				areaofeffect = 120,
 				avoidfeature = 0,

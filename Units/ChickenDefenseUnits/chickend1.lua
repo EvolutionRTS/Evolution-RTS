@@ -66,6 +66,7 @@ return {
 		},
 		weapondefs = {
 			weapon = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 32,
 				avoidfriendly = false,
 				collidefriendly = false,

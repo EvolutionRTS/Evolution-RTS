@@ -108,6 +108,7 @@ return {
 				},
 			},
 			weapon = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 72,
 				avoidfeature = 0,
 				avoidfriendly = 0,

@@ -75,6 +75,7 @@ return {
 		},
 		weapondefs = {
 			waterweapon = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 16,
 				avoidfriendly = 0,
 				burnblow = 1,
@@ -104,6 +105,7 @@ return {
 				},
 			},
 			weapon = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 16,
 				avoidfeature = 0,
 				avoidfriendly = 0,

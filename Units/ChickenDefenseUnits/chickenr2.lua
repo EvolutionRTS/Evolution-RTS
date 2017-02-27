@@ -65,6 +65,7 @@ return {
 		},
 		weapondefs = {
 			chaseweapon = {
+				interceptedByShieldType   = 4,
 				craterboost = 0,
 				cratermult = 0,
 				explosiongenerator = "custom:chickenspike-large-sparks-burn",

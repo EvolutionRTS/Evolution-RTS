@@ -71,6 +71,7 @@ return {
 		},
 		weapondefs = {
 			meteorlauncher = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 750,
 				avoidfriendly = 0,
 				cegtag = "nuketrail-roost",

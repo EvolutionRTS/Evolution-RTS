@@ -52,6 +52,7 @@ return {
 		},
 		weapondefs = {
 			weapon = {
+				interceptedByShieldType   = 4,
 				areaofeffect = 450,
 				avoidfriendly = 0,
 				cegtag = "nuketrail-roost",

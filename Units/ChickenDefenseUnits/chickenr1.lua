@@ -70,6 +70,7 @@ return {
 		},
 		weapondefs = {
 			goolauncher = {
+				interceptedByShieldType   = 4,
 				accuracy = 512,
 				areaofeffect = 128,
 				avoidfeature = 0,
