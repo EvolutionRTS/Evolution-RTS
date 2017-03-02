@@ -7,6 +7,7 @@ return {
 		brakerate = 0.4,
 		buildcostenergy = 3520,
 		buildcostmetal = 302,
+		buildpic = "chicken_unitpics/chickena2b.png",
 		builder = false,
 		buildtime = 22500,
 		canattack = true,

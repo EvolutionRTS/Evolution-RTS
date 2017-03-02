@@ -6,6 +6,7 @@ return {
 		buildcostenergy = 12320,
 		buildcostmetal = 396,
 		builder = false,
+		buildpic = "chicken_unitpics/chickenr3.png",
 		buildtime = 180000,
 		canattack = true,
 		canguard = true,

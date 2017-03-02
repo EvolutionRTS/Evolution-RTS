@@ -9,6 +9,7 @@ return {
 		buildcostmetal = 400,
 		builddistance = 90,
 		builder = true,
+		buildpic = "chicken_unitpics/roost.png",
 		buildtime = 7000,
 		category = "BIO",
 		collisionvolumeoffsets = "0 0 0",

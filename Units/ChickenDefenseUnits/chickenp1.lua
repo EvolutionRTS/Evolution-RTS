@@ -9,6 +9,7 @@ return {
 		buildcostmetal = 200,
 		builder = false,
 		buildpic = "",
+		buildpic = "chicken_unitpics/chickenp1.png",
 		buildtime = 5000,
 		canguard = true,
 		canmove = true,

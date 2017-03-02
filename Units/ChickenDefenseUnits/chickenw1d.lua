@@ -9,7 +9,7 @@ return {
 		buildcostenergy = 2200,
 		buildcostmetal = 72,
 		builder = false,
-		buildpic = "chicken_pidgeon.png",
+		buildpic = "chicken_unitpics/chickenw1d.png",
 		buildtime = 1100,
 		cancrash = false,
 		canfly = true,
