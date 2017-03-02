@@ -104,7 +104,7 @@ local textSize		= 0.75
 local textMargin	= 0.25
 local lineWidth		= 0.0625
 
-local posX = 0.15
+local posX = 0.1625
 local posY = 0
 local showOnceMore = false		-- used because of GUI shader delay
 local buttonGL
