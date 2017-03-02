@@ -18,7 +18,7 @@ end
 
 local unitDef                     = {
 	activateWhenBuilt             = true,
-	blocking			          = true,
+	blocking			          = false,
 	buildAngle                    = 1024,
 	buildCostEnergy               = 0,
 	buildCostMetal                = 20,
