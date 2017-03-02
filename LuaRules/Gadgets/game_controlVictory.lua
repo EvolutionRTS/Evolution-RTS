@@ -13,11 +13,19 @@ end
 --[[
 -------------------
 Before implementing this gadget, read this!!!
-This gadget relies on three parts:
+This gadget relies on a few parts:
 • control point config file which is located in luarules/configs/controlpoints/ , and it must have a filename of cv_<mapname>.lua. So, in the case of a map named "Iammas Prime -" with a version of "v01", then the name of my file would be "cv_Iammas Prime - v01.lua".
 	PLEASE NOTE: If the map config file is not found and a capture mode is selected, the gadget will generate 7 points in a circle on the map automagically.
-• config placed in luarules/configs/ called cv_nonCapturingUnits.lua
-• config placed in luarules/configs/ called cv_buildableUnits.lua
+	
+• config placed in luarules/configs/ called cv_nonCapturingUnits.lua -- What units are barred form being able to capture control points?
+• config placed in luarules/configs/ called cv_buildableUnits.lua -- What units can be built inside control points?
+	*-----------------*
+	EXTREMELY IMPORTANT!
+		In the "Buildable units" unitdefs, you need to add the building mask. By defaul the building mask in 2, but you can change it to whatever you like. The variable is declared a little ways below this comment block
+		Use the unitdef tag:
+			buildingMask = 2,
+	*-----------------*
+• config placed in luarules/configs/ called cv_modOptions.lua -- This controls options for when spring is launched and modoptions cannot be read
 • modoptions
 
 The control point config is structured like this (cv_Iammas Prime - v01.lua):
@@ -302,6 +310,7 @@ end
 VFS.Include("LuaRules/Configs/cv_modOptions.lua")
 
 local moveSpeed =.5
+local buildingMask = 2
 
 --Here we mitigate potential issues caused by wonky options settings
 
@@ -630,6 +639,26 @@ if (gadgetHandler:IsSyncedCode()) then
 		_G.points = points
 		_G.score = score
 		_G.dom = dom
+		
+		
+		-- Set building masks for control points
+		for _, capturePoint in pairs(points) do
+			local r = captureRadius
+			local mask = buildingMask
+			local r2 = r * r
+			local step = Game.squareSize * 2
+			for z = 0, 2 * r, step do -- top to bottom diameter
+				local lineLength = math.sqrt(r2 - (r - z) ^ 2)
+				for x = -lineLength, lineLength, step do
+					local squareX, squareZ = (capturePoint.x + x)/step, (capturePoint.z + z - r)/step
+					if squareX > 0 and squareZ > 0 and squareX < Game.mapSizeX/step and squareZ < Game.mapSizeZ/step then
+						Spring.SetSquareBuildingMask(squareX, squareZ, mask)
+						--Spring.MarkerAddPoint((cx + x), 0, (cz + z - r))
+					end
+				end
+			end
+		end
+		
 	end
 	
 	

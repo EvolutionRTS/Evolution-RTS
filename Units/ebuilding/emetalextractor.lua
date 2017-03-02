@@ -27,6 +27,7 @@ local unitDef                     = {
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
 	buildCostMetal                = buildCostMetal,
+	buildingMask				  = 2,
 	builder                       = false,
 	buildTime                     = 5,
 	canAttack			          = false,
