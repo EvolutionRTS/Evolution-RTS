@@ -9,6 +9,9 @@ if Spring.GetModOptions().scoremode == nil then
 end
 
 -------------------------------------------------------
+-- Use a building mask for Control Points?
+useBuildingMask = true
+-------------------------------------------------------
 
 captureRadius = tonumber(Spring.GetModOptions().captureradius) -- Radius around a point in which to capture it
 if captureRadius == nil then

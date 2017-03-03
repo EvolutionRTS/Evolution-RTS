@@ -26,6 +26,8 @@ This gadget relies on a few parts:
 			buildingMask = 0,
 			
 		BEWARE! Spring 103.0 allows for a bit field that works like this... 0 over 1, never 1 over 0. Normal ground is 1. Units are defaulted to 1.
+		
+	THE MASK CAN BE DISABLED OR ENABLED BY CHANGING THE VALUE IN cv_modOptions.lua!!!
 	*-----------------*
 • config placed in luarules/configs/ called cv_modOptions.lua -- This controls options for when spring is launched and modoptions cannot be read
 • modoptions
@@ -644,18 +646,20 @@ if (gadgetHandler:IsSyncedCode()) then
 		
 		
 		-- Set building masks for control points
-		for _, capturePoint in pairs(points) do
-			local r = captureRadius
-			local mask = buildingMask
-			local r2 = r * r
-			local step = Game.squareSize * 2
-			for z = 0, 2 * r, step do -- top to bottom diameter
-				local lineLength = math.sqrt(r2 - (r - z) ^ 2)
-				for x = -lineLength, lineLength, step do
-					local squareX, squareZ = (capturePoint.x + x)/step, (capturePoint.z + z - r)/step
-					if squareX > 0 and squareZ > 0 and squareX < Game.mapSizeX/step and squareZ < Game.mapSizeZ/step then
-						Spring.SetSquareBuildingMask(squareX, squareZ, mask)
-						--Spring.MarkerAddPoint((cx + x), 0, (cz + z - r))
+		if useBuildingMask == true then
+			for _, capturePoint in pairs(points) do
+				local r = captureRadius
+				local mask = buildingMask
+				local r2 = r * r
+				local step = Game.squareSize * 2
+				for z = 0, 2 * r, step do -- top to bottom diameter
+					local lineLength = math.sqrt(r2 - (r - z) ^ 2)
+					for x = -lineLength, lineLength, step do
+						local squareX, squareZ = (capturePoint.x + x)/step, (capturePoint.z + z - r)/step
+						if squareX > 0 and squareZ > 0 and squareX < Game.mapSizeX/step and squareZ < Game.mapSizeZ/step then
+							Spring.SetSquareBuildingMask(squareX, squareZ, mask)
+							--Spring.MarkerAddPoint((cx + x), 0, (cz + z - r))
+						end
 					end
 				end
 			end
