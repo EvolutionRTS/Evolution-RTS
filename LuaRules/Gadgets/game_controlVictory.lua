@@ -21,9 +21,11 @@ This gadget relies on a few parts:
 • config placed in luarules/configs/ called cv_buildableUnits.lua -- What units can be built inside control points?
 	*-----------------*
 	EXTREMELY IMPORTANT!
-		In the "Buildable units" unitdefs, you need to add the building mask. By defaul the building mask in 2, but you can change it to whatever you like. The variable is declared a little ways below this comment block
+		In the "Buildable units"'s unitdefs, you need to add a building mask of 0. By default the building mask is 1. The control points use a building mask of 2.
 		Use the unitdef tag:
-			buildingMask = 2,
+			buildingMask = 0,
+			
+		BEWARE! Spring 103.0 allows for a bit field that works like this... 0 over 1, never 1 over 0. Normal ground is 1. Units are defaulted to 1.
 	*-----------------*
 • config placed in luarules/configs/ called cv_modOptions.lua -- This controls options for when spring is launched and modoptions cannot be read
 • modoptions
