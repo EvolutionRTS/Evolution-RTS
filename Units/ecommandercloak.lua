@@ -68,7 +68,7 @@ local unitDef                    = {
 	objectName                   = "ecommander4.s3o",
 	script			             = "ecommander3.cob",
 	radarDistance                = 0,
-	radarDistanceJam             = 400,
+	radarDistanceJam             = 800,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
@@ -137,7 +137,7 @@ Reclaims any energy cores within it's proximity.]],
 
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 0, -- How much energy does it cost to maintain the cloaking field?
-		area_cloak_radius = 400, -- How large is the cloaking field?
+		area_cloak_radius = 800, -- How large is the cloaking field?
 		--area_cloak_grow_rate = 200, -- When the cloaking field is turned on, how fast does the field expand to it's full size?
 		--area_cloak_shrink_rate = 200, -- When the cloaking field is turned off, how fast does the field shrink to nothingness?
 		area_cloak_decloak_distance = 150, -- How close does something have to be in order to decloak a unit within a cloaking shield?

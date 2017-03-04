@@ -42,7 +42,7 @@ options = {
 	multiplier = {
 		name = "Multiplier used for base mex value",
 		type = "number",
-		value = 0.25, -- Most games will use 1 for this value as most games base mex income around a mex giving 2.0. Please not that changing this value only changes the number visually displayed underneath the mex spot. The actual multiplier is determined in the mex unitdef customparam "metal_extractor = <multiplier>,"
+		value = 0.25, -- Most games will use 1 for this value as most games base mex income around a mex giving 2.0. Please note that changing this value only changes the number visually displayed underneath the mex spot. The actual multiplier is determined in the mex unitdef customparam "metal_extractor = <multiplier>,"
 		min = 0,
 		max = 100,
 		OnChange = function() updateMexDrawList() end

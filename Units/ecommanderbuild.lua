@@ -6,7 +6,7 @@ local unitName                   = "ecommanderbuild"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supplyGiven				 = [[10]]
+--local supplyGiven				 = [[10]]
 local techprovided				 = [[tech1]]
 
 local weapon1Damage              = 200
@@ -42,7 +42,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Builds Units x2 as fast • Gives ]] ..supplyGiven.. [[ Supply]],
+	description                  = [[Builds Units x3 as fast]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -81,7 +81,7 @@ local unitDef                    = {
 	unitname                     = unitName,
 	unitRestricted	             = 1,
 	upright                      = false,
-	workerTime                   = 2,
+	workerTime                   = 3,
 	capturespeed                 = 0.25,
 	TerraformSpeed               = 100000,
 	ReclaimSpeed                 = 0,
@@ -120,7 +120,7 @@ local unitDef                    = {
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,
-		supply_granted            = supplyGiven,
+--		supply_granted            = supplyGiven,
 		death_sounds             = "generic",
 		
 		armortype                = armortype,
@@ -129,7 +129,7 @@ local unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
 		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-x2 Buildpower
+x3 Buildpower
  
 1000 EMP Damage vs Light/Armored/Building
 

@@ -45,14 +45,18 @@ for i = 1, #turrets do
 end
 
 local factory = {
-	[[ehbotpeewee]],
-	[[ehbotthud]],
-	[[eallterrlight]],
-	[[eallterrriot]],
-	[[elighttank3]],
-	[[eriottank2]],
-	[[eamphibbuggy]],
-	[[eamphibriot]],
+	[[ehbotpeewee_turret]],
+	[[ehbotthud_turret]],
+	[[ehbotsniper_turret]],
+	[[eallterrlight_t2]],
+	[[eallterrriot_t2]],
+	[[eallterrheavy_t2]],
+	[[elighttank3_t2]],
+	[[eriottank2_t2]],
+	[[eheavytank3_t2]],
+	[[eamphibbuggy_t2]],
+	[[eamphibriot_t2]],
+	[[eamphibmedtank_t2]],
 }
 
 Shared.buildListFactory = {}

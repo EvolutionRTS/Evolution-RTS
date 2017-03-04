@@ -6,7 +6,7 @@ local unitName                   = "ecommanderfactory"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supplyGiven				 = [[10]]
+local supplyGiven				 = [[25]]
 local techprovided				 = [[tech1]]
 
 local weapon1Damage              = 200
@@ -42,7 +42,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Builds Units and Raiders • Gives ]] ..supplyGiven.. [[ Supply]],
+	description                  = [[Creates buildings and mobile units • Gives ]] ..supplyGiven.. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
