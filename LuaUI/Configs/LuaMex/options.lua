@@ -62,9 +62,3 @@ options = {
 		OnChange = function() updateMexDrawList() end
 	}
 }
-
-if Spring.GetModOptions().luamex == "enabled" and Spring.GetModOptions().luamex_mapextractors == "enabled" then
-	options.drawcustomincomeamount.value = false
-else
-	options.drawcustomincomeamount.value = true
-end

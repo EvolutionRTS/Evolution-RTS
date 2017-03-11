@@ -11,15 +11,7 @@ local metal						 = [[0.5]] --The actual amount is set in resourcegifts gadget
 local buildCostMetal 			  = 20
 local maxDamage					  = buildCostMetal * 12.5
 
-if Spring.GetModOptions().luamex == "enabled" and Spring.GetModOptions().luamex_mapextractors == "disabled" then
-	metalMultiplier = 0
-	makesMetal		= 0.5
-end
-
-if Spring.GetModOptions().luamex == "enabled" and Spring.GetModOptions().luamex_mapextractors == "enabled" then
-	metalMultiplier = 0.25
-	makesMetal		= 0
-end
+local metalMultiplier = 0.25
 	
 local unitDef                     = {
 
@@ -33,11 +25,11 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Generates Metal from Resource Nodes]],
+	description                   = [[Generates Metal from Resource Nodes at the cost of -2.5 Energy/s]],
 	energyStorage                 = 0,
-	energyUse                     = 0,
+	energyUse                     = 2.5,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
-	makesMetal                    = makesMetal,
+	makesMetal                    = 0,
 	footprintX                    = 7,
 	footprintZ                    = 7,
 	iconType                      = "eco",
@@ -56,7 +48,7 @@ local unitDef                     = {
 	selfDestructAs                = "largeBuildingExplosionGenericRed",
 	selfDestructCountdown         = 1,
 	side                          = "CORE",
-	sightDistance                 = 367,
+	sightDistance                 = 200,
 	smoothAnim                    = true,
 	unitname                      = "emetalextractor",
 	workerTime                    = 0,

@@ -51,7 +51,6 @@ local unitDef                    = {
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "hugeExplosionGeneric",
-	fireState					 = 1,
 	footprintX                   = 7,
 	footprintZ                   = 7,
 	floater                      = true,
@@ -74,7 +73,7 @@ local unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "hugeExplosionGeneric",
 	side                         = "CORE",
-	sightDistance                = 900,
+	sightDistance                = 1050,
 	smoothAnim                   = true,
 	stealth                      = false,
 	turnRate                     = 5000,
@@ -102,8 +101,8 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "SBOMB",
-			noChaseCategory      = "VTOL",
+			def                  = "missile",
+			noChaseCategory      = "VTOL LIGHT ARMORED",
 			badTargetCategory    = "VTOL LIGHT ARMORED",
 		},
 	},
@@ -129,7 +128,7 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 local weaponDefs                 = {
-	SBOMB                        = {
+	missile                      = {
 		AreaOfEffect             = weapon1AOE,
 		avoidFriendly            = false,
 		avoidFeature             = false,
@@ -149,7 +148,7 @@ local weaponDefs                 = {
 		metalpershot             = 0,
 		model                    = "missile.s3o",
 		name                     = "Rockets",
-		range                    = 900,
+		range                    = 1050,
 		reloadtime               = 3,
 		weaponType		         = "MissileLauncher",  -- This causes the missile trail to go off kilter
 		--	rendertype		     = 1,

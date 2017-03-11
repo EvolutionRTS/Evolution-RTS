@@ -33,7 +33,7 @@ local options= {
 -- Resourcing
 	{
 		key    = 'resourcing',
-		name   = 'Resourcing (Mincome Options)',
+		name   = 'Resourcing Options',
 		desc   = 'Allows you to adjust how metal income is handled and how it is distributed',
 		type   = 'section',
 	},
@@ -42,23 +42,11 @@ local options= {
 		name   = 'Lua Mex',
 		desc   = 'Enables the use for Metal Extractors to generate income.',
 		type="list",
-		def="disabled",
+		def="enabled",
 		section= "resourcing",
 		items={
 			{key="disabled", name="Disabled", desc="Turn off Metal Extractor use."},
 			{key="enabled", name="Enabled", desc="Allow Metal Extractors to be used to generate income."},
-		}
-	},
-	{
-		key    = 'luamex_mapextractors',
-		name   = 'Map Regulated Metal Extractors',
-		desc   = 'Metal Extractors generate income based upon the map resource node settings instead of a set amount.',
-		type="list",
-		def="disabled",
-		section= "resourcing",
-		items={
-			{key="disabled", name="Disabled", desc="Don't use map based metal extractors"},
-			{key="enabled", name="Enabled", desc="Metal Extractors generate income based upon the map resource node settings instead of a set amount."},
 		}
 	},
 	{
@@ -190,6 +178,18 @@ local options= {
 			{key="disabled", name="Disabled", desc=""},
 			{key="enabled", name="Enabled", desc="Turns heatmapping on and off in the pathfinder."},
 		}
+	},
+	{
+		key    = 'unitheat',
+		name   = 'Unit Heat Amount',
+		desc   = 'How much heat does each unit generate when it moves through an area?',
+		type   = 'number',
+		section= 'gameplayoptions',
+		def    = 1,
+		min    = 0,
+		max    = 10,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
 	},
 	
 -- Control Victory Options	
