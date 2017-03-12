@@ -23,7 +23,7 @@ Shared.buildList = {
 	[[ebox]],
 }
 
-if Spring.GetModOptions == nil or Spring.GetModOptions().luamex == "enabled" then
+if Spring.GetModOptions == nil or Spring.GetModOptions().luamex == "disabled" then
 		Shared.buildList [#Shared.buildList + 1] = [[emetalextractor]]
 end
 	
@@ -43,23 +43,23 @@ for i = 1, #turrets do
 end
 
 local factory = {
-	[[ehbotfac_t2]],
-	[[eminifac_t2]],
-	[[ebasefactory_t2]],
-	[[eamphibfac_t2]],
-	[[eairplant_t2]],
-	[[ehbotpeewee_turret]],
-	[[ehbotthud_turret]],
-	[[ehbotsniper_turret]],
-	[[eallterrlight_t2]],
-	[[eallterrriot_t2]],
-	[[eallterrheavy_t2]],
-	[[elighttank3_t2]],
-	[[eriottank2_t2]],
-	[[eheavytank3_t2]],
-	[[eamphibbuggy_t2]],
-	[[eamphibriot_t2]],
-	[[eamphibmedtank_t2]],
+	[[ehbotfac]],
+	[[eminifac]],
+	[[ebasefactory]],
+	[[eamphibfac]],
+	[[eairplant]],
+	[[ehbotpeewee]],
+	[[ehbotthud]],
+	[[ehbotsniper]],
+	[[eallterrlight]],
+	[[eallterrriot]],
+	[[eallterrheavy]],
+	[[elighttank3]],
+	[[eriottank2]],
+	[[eheavytank3]],
+	[[eamphibbuggy]],
+	[[eamphibriot]],
+	[[eamphibmedtank]],
 }
 
 Shared.buildListFactory = {}
