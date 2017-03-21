@@ -8,7 +8,9 @@
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
 
-local reverseCompat = (Game.version:find('91.0') == 1)
+local engineVersion = (Game and Game.version) or (Engine and Engine.version) or "Engine version error"
+
+local reverseCompat = (engineVersion:find('91.0') == 1)
 
 local function IsFeatureInRange(unitID, featureID, range)
 	if reverseCompat then
@@ -105,7 +107,7 @@ function Spring.Utilities.GetUnitNanoTarget(unitID)
       end
     end
   end
-  
+
   if inRange then
     return type, target, isFeature
   else
