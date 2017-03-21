@@ -67,7 +67,8 @@ local PageNumCmd = {
   actions  = { "buildiconsfirst", "firstmenu" }
 }
 
-if (Game.version:find("0.75")==nil)or(Game.version:find("svn")) then
+local engineVersion = (Game and Game.version) or (Engine and Engine.version) or "Engine version error"
+if (engineVersion:find("0.75")==nil)or(engineVersion:find("svn")) then
   PageNumCmd.texture  = PageNumCmd.iconname
   PageNumCmd.iconname = nil
 end
@@ -106,7 +107,7 @@ local function CustomLayoutHandler(xIcons, yIcons, cmdCount, commands)
   else
     ipp = (xIcons * (yIcons + 1))
   end
-  
+
   local activePage = Spring.GetActivePage()
 
   local prevCmd = cmdCount - 1
@@ -234,7 +235,7 @@ function widget:Initialize()
 		btns = {x = 5, y = 11}
 	end
 	X, Y = Spring.GetViewGeometry()
-	local maxButSize=(1-0.097-0.31-4/Y)/btns.y-.0005 
+	local maxButSize=(1-0.097-0.31-4/Y)/btns.y-.0005
 	TweakPosX = floor((maxButSize+0.0005)*btns.x*Y*1.12)
 	TweakPosY = floor(maxButSize*btns.y*Y)
 	btnOffset, txtOffset = floor(12*Y/1200), floor(48*Y/1200)
@@ -344,7 +345,7 @@ function widget:TweakMousePress(x, y, button)
 end
 
 --load / save to config file
-function widget:SetConfigData(data) 
+function widget:SetConfigData(data)
 	if (data ~= nil) then
 		btns = data
 		if not btns.x or not btns.y then
@@ -354,7 +355,7 @@ function widget:SetConfigData(data)
 		btns = {x = 4,	y = 9,}
 	end
 end
-function widget:GetConfigData() 
+function widget:GetConfigData()
 	return btns
 end
 
