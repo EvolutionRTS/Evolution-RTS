@@ -28,7 +28,7 @@ local unitDef                     = {
 	collisionVolumeType           = "box",
 
 	corpse                        = "ammobox",
-	description                   = [[Provides +]] .. supplygranted .. [[ Supply • Provides +]] .. storage .. [[ Metal/Energy Storage]],
+	description                   = [[Provides +]] .. supplygranted .. [[ Supply • Provides +]] .. storage .. [[ Energy Storage]],
 	energyStorage                 = storage,
 	energyUse                     = 0,
 	explodeAs                     = "hugeBuildingExplosionGenericPurple",
@@ -40,7 +40,7 @@ local unitDef                     = {
 	maxDamage                     = maxDamage,
 	maxSlope                      = 50,
 	maxWaterDepth                 = 5000,
-	metalStorage                  = storage,
+	--metalStorage                  = storage,
 	name                          = "Supply/Storage Depot",
 	objectName                    = "estorage2.s3o",
 	script			              = "estorage2.cob",

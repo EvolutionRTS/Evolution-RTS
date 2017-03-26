@@ -1341,7 +1341,7 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 	
 	function drawScoreboard()
   	PushMatrix()
-			Translate(-(vsx * (uiScale-1))/2, -(vsy * (uiScale-1))/2, 0)
+		Translate(-(vsx * (uiScale-1))/2, -(vsy * (uiScale-1))/2, 0)
 	  	Scale(uiScale,uiScale,1)
 		  local x = scoreboardX --rightwards
 		  local y = scoreboardY --upwards
@@ -1370,11 +1370,11 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 			font:Print(title, x-bgMargin+(titleFontSize*0.75), y+bgMargin+8, titleFontSize, "on")
 			font:End()
 			
-			local n = 1
-			local dominator				= SYNCED.dom.dominatorwa
+			local n					= 1
+			local dominator			= SYNCED.dom.dominatorwa
 			local dominationTime	= SYNCED.dom.dominationTime
-			local white						= string.char("255","255","255","255")	
-			local allyCounter			= 0
+			local white				= string.char("255","255","255","255")	
+			local allyCounter		= 0
 			
 			-- for all the scores with a team.
 			for allyTeamID, allyScore in spairs(SYNCED.score) do
