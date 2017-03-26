@@ -23,7 +23,7 @@ Shared.buildList = {
 	[[ebox]],
 }
 
-if Spring.GetModOptions == nil or Spring.GetModOptions().luamex == "disabled" then
+if Spring.GetModOptions().luamex == "enabled" then
 		Shared.buildList [#Shared.buildList + 1] = [[emetalextractor]]
 end
 	
