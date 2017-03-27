@@ -82,7 +82,7 @@ local unitDef                      = {
 		},
 	},
 	buildoptions                   = {
-		"eamphibengineer", --new
+--		"eamphibengineer", --new
 		"eamphibbuggy", --new
 		"eamphibriot", --new
 		"eamphibneedle",

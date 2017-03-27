@@ -72,7 +72,7 @@ local unitDef                     = {
 		},
 	},
 	buildoptions                  = {
-		"eengineer5",
+--		"eengineer5",
 		"elighttank3",
 		"eriottank2",
 		"eheavytank3",

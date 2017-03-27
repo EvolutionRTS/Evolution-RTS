@@ -82,7 +82,7 @@ local unitDef                      = {
 		},
 	},
 	buildoptions                   = {
-		"eamphibengineer_t2", --new
+--		"eamphibengineer_t2", --new
 		"eamphibbuggy_t2", --new
 		"eamphibriot_t2", --new
 		"eamphibneedle_t2",

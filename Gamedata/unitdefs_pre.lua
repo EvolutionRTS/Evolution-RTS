@@ -19,6 +19,7 @@ Shared.buildList = {
 	[[eshieldgen]],
 	[[esilo]],
 	[[emine]],
+	[[eallterrengineer]],
 	[[eorb]],
 	[[ebox]],
 }

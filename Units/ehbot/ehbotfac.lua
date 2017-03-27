@@ -72,7 +72,7 @@ local unitDef                     = {
 		},
 	},
 	buildoptions                  = {
-		"ehbotengineer",
+--		"ehbotengineer",
 		"ehbotpeewee",
 		"ehbotthud",
 		"ehbotsniper",

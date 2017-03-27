@@ -89,7 +89,7 @@ Armortype: ]] ..armortype,
 		},
 	},
 	buildoptions                   = {
-		"eallterrengineer_t2", --new
+--		"eallterrengineer_t2", --new
 		"eallterrlight_t2",
 		"eallterrriot_t2",
 --		"eallterraa",

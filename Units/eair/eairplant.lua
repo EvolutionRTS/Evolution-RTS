@@ -76,7 +76,7 @@ local unitDef                         = {
 	},
 	zbuffer                           = "1",
 	buildoptions                      = {
-		"eairengineer",
+--		"eairengineer",
 		"escout", --new
 		"efighter", --new
 		"egunship2", --new
