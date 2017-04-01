@@ -7,7 +7,8 @@ local unitName                   = "ecommander"
 
 local armortype					 = [[light]]
 local supplyGiven				 = [[10]]
-local techprovided				 = [[tech1]]
+local techprovided				 = [[tech1, -overseer]]
+local techrequired				 = [[0 overseer]]
 
 local weapon1Damage              = 200
 local weapon1AOE				 = 250
@@ -79,7 +80,6 @@ local unitDef                    = {
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	unitname                     = unitName,
-	unitRestricted	             = 1,
 	upright                      = false,
 	workerTime                   = 1,
 	capturespeed                 = 0.25,
@@ -116,7 +116,8 @@ local unitDef                    = {
 	},
 	customParams                 = {
 		area_mex_def			 = "emetalextractor",
-		ProvideTech               = techprovided,
+		ProvideTech              = techprovided,
+		RequireTech				 = techrequired,
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,

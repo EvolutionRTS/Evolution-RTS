@@ -22,6 +22,7 @@ Shared.buildList = {
 	[[eallterrengineer]],
 	[[eorb]],
 	[[ebox]],
+	[[ecommander]],
 }
 
 if Spring.GetModOptions().luamex == "enabled" then
