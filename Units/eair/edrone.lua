@@ -100,6 +100,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		--    needed_cover       = 1,
 		armortype                = armortype,
 		death_sounds             = "generic",

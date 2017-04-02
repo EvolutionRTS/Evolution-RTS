@@ -110,6 +110,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		--    needed_cover       = 2,
 		canareaattack            ="1",
 		death_sounds             = "generic",

@@ -142,6 +142,7 @@ There can only be one!]],
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,

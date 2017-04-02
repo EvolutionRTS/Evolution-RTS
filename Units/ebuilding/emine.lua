@@ -98,6 +98,7 @@ local unitDef                     = {
 	},
 
 	customParams                  = {
+		unittype				  = "turret",
 		decloakradiusmodifier	  = 10,
 		needed_cover              = 1,
 		death_sounds              = "generic",

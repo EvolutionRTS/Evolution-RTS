@@ -82,6 +82,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		unittype				  = "turret",
 		canareaattack             ="1",
 		death_sounds              = "generic",
 		RequireTech               = "0 Power",

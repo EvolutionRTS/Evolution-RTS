@@ -86,6 +86,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		armortype                = armortype,
 		energycoredronespawner   = true,

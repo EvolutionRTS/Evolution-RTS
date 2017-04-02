@@ -83,6 +83,7 @@ Uses +]] .. supply .. [[ Supply]],
 		},
 	},
 	customParams                  = {
+		unittype				  = "turret",
 		supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",

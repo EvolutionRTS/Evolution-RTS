@@ -71,6 +71,7 @@ local unitDef                     = {
 	weapons                       = {
 	},
 	customParams                  = {
+		unittype				  = "building",
 		iseco                     = 1,
 		needed_cover              = 2,
 		death_sounds              = "generic",

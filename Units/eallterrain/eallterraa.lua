@@ -103,6 +103,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 3,
 		death_sounds             = "generic",

@@ -72,6 +72,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		unittype				  = "building",
 		iseco                     = 1,
 		needed_cover              = 4,
 		death_sounds              = "generic",

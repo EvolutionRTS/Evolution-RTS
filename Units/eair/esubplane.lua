@@ -100,6 +100,7 @@ local unitDef                    = {
 	},
 
 	customParams                 = {
+		unittype				  = "mobile",
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
 		twokhotkey               = 't',

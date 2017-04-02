@@ -88,6 +88,7 @@ Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofi
 		},
 	},
 	customParams                  = {
+		unittype				  = "turret",
 		death_sounds              = "generic",
 		armortype                 = armortype,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 

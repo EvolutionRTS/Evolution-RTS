@@ -112,6 +112,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		isupgraded			  	 = true,
 		canbetransported 		 = "true",
 		needed_cover             = 1,

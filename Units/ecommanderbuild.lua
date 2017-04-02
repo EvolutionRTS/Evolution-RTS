@@ -115,6 +115,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		area_mex_def			 = "emetalextractor",
 		ProvideTech              = techprovided,
 		RequireTech				 = techrequired,

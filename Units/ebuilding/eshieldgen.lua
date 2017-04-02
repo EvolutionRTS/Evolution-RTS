@@ -92,6 +92,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		unittype				  = "shield",
 		needed_cover              = 5,
 		death_sounds              = "generic",
 		ProvideTechRange          = "300",

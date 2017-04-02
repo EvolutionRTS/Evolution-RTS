@@ -94,7 +94,23 @@ function UnitDef_Post(name, uDef)
 	if uDef.canfly and not uDef.istransport then
 		uDef.collide = false
 	end
+	
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	-- Set cost multiples for mobile units vs buildings
+	--
 
+	--Mobile Units
+	if uDef.customparams and uDef.customparams.unittype == "mobile" then
+		uDef.buildcostmetal = uDef.buildcostmetal * 2
+		uDef.maxdamage = uDef.maxdamage * 2
+	end
+	
+	-- Buildings
+	if uDef.customparams and uDef.customparams.unittype == "building" then
+		uDef.buildcostmetal = uDef.buildcostmetal * 0.5
+		uDef.maxdamage = uDef.buildcostmetal * 12.5
+	end
 
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
@@ -280,8 +296,6 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		Spring.Echo("[Gameplay Speed] Set to " .. gamePlaySpeed)
 
 		for id,unitDef in pairs(UnitDefs) do
-			unitDef.buildcostmetal = unitDef.buildcostmetal * 2
-			unitDef.maxdamage = unitDef.maxdamage * 2
 			unitDef.buildtime = unitDef.buildcostmetal / 4
 		end
 

@@ -134,6 +134,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		death_sounds             = "nuke",
 		RequireTech              = tech,
 		armortype                = armortype,

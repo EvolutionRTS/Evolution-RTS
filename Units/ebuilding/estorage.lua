@@ -76,6 +76,7 @@ local unitDef                     = {
 	weapons                       = {
 	},
 	customParams                  = {
+		unittype				  = "building",
 		iseco                     = 1,
 		needed_cover              = 2,
 		supply_granted            = supplygranted,

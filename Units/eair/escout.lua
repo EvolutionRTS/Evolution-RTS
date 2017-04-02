@@ -89,6 +89,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		--    needed_cover       = 1,
 		death_sounds             = "generic",
 		RequireTech              = tech,

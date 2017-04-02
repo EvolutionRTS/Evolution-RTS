@@ -74,6 +74,7 @@ Uses +]] .. supply .. [[ Supply]],
 	weapons                       = {
 	},
 	customParams                  = {
+		unittype				  = "building",
 		iseco                     = 1,
 		needed_cover              = 8,
 --		supply_cost               = supply,

@@ -74,6 +74,7 @@ local unitDef                     = {
 	weapons                       = {
 	},
 	customParams                  = {
+		unittype				  = "building",
 		metal_extractor			  = metalMultiplier,
 		iseco                     = 1,
 		needed_cover              = 3,

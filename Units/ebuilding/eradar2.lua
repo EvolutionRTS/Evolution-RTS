@@ -69,6 +69,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		unittype				  = "building",
 		needed_cover              = 2,
 		death_sounds              = "generic",
 		armortype                 = armortype,

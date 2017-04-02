@@ -65,6 +65,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		unittype				  = "building",
 		cannotcloak               = true,
 		needed_cover              = 3,
 		death_sounds              = "generic",

@@ -91,6 +91,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		unittype				  = "turret",
 		needed_cover              = 8,
 		death_sounds              = "nuke",
 		armortype                 = "building",

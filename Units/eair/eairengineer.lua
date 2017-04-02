@@ -110,6 +110,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		area_mex_def			 = "emetalextractor",
 		--    needed_cover       = 2,
 		death_sounds             = "generic",

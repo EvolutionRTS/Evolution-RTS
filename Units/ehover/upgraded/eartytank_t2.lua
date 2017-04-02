@@ -114,6 +114,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		canareaattack            ="1",
 		needed_cover             = 3,

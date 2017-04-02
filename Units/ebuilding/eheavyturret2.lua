@@ -90,6 +90,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		unittype				  = "turret",
 		needed_cover              = 5,
 		--supply_cost               = supply,
 		death_sounds              = "generic",

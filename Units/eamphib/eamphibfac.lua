@@ -98,6 +98,7 @@ local unitDef                      = {
 		},
 	},
 	customParams                   = {
+		unittype				  = "building",
 		death_sounds               = "generic",
 		armortype                  = armortype, 
 		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 
