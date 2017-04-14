@@ -122,6 +122,7 @@ local weaponDefs                  = {
 		cegTag                    = "NUKETRAIL",
 		collideFriendly           = false,
 		collideFeature            = false,
+		commandFire				  = true,
 		craterBoost               = 0,
 		craterMult                = 0,
 		edgeeffectiveness		  = 1,

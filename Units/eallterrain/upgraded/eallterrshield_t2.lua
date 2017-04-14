@@ -154,8 +154,8 @@ local weaponDefs                 = {
 		
 		Smartshield              = true,
 		Exteriorshield           = true,
-		Visibleshield            = true,
-		Visibleshieldrepulse     = true,
+		Visibleshield            = false,
+		Visibleshieldrepulse     = false,
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
 		Shieldradius             = 300,

@@ -161,16 +161,88 @@ cafusBursts = {
 corjamtBursts = {
   layer      = -35,
   life       = math.huge,
-  piece      = "sphere",
-  rotSpeed   = 0.7,
+  piece      = "base",
+  rotSpeed   = 1,
   rotSpread  = 0,
   arc        = 50,
   arcSpread  = 0,
-  size       = 14,
-  sizeSpread = 10,
+  size       = 200,
+  sizeSpread = 50,
   texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
   --colormap   = { {1, 0.6, 1, 0.8} },
-  colormap   = { {1, 0.3, 1, 0.8} },
+  colormap   = { {0, 0, 1, 0.25} },
+  directional= true,
+  repeatEffect = true,
+  count      = 20,
+}
+
+shieldBursts200 = {
+  layer      = -35,
+  life       = math.huge,
+  piece      = "base",
+  rotSpeed   = 0.25,
+  rotSpread  = 0,
+  arc        = 50,
+  arcSpread  = 0,
+  size       = 200,
+  sizeSpread = 50,
+  texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
+  --colormap   = { {1, 0.6, 1, 0.8} },
+  colormap   = { {0.25, 0.25, 1, 0.25} },
+  directional= true,
+  repeatEffect = true,
+  count      = 20,
+}
+
+shieldBursts300 = {
+  layer      = -35,
+  life       = math.huge,
+  piece      = "base",
+  rotSpeed   = 0.25,
+  rotSpread  = 0,
+  arc        = 50,
+  arcSpread  = 0,
+  size       = 300,
+  sizeSpread = 50,
+  texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
+  --colormap   = { {1, 0.6, 1, 0.8} },
+  colormap   = { {0.25, 0.25, 1, 0.25} },
+  directional= true,
+  repeatEffect = true,
+  count      = 20,
+}
+
+shieldBursts400 = {
+  layer      = -35,
+  life       = math.huge,
+  piece      = "base",
+  rotSpeed   = 0.25,
+  rotSpread  = 0,
+  arc        = 50,
+  arcSpread  = 0,
+  size       = 400,
+  sizeSpread = 50,
+  texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
+  --colormap   = { {1, 0.6, 1, 0.8} },
+  colormap   = { {0.25, 0.25, 1, 0.25} },
+  directional= true,
+  repeatEffect = true,
+  count      = 20,
+}
+
+shieldBursts1500 = {
+  layer      = -35,
+  life       = math.huge,
+  piece      = "base",
+  rotSpeed   = 0.25,
+  rotSpread  = 0,
+  arc        = 50,
+  arcSpread  = 0,
+  size       = 1500,
+  sizeSpread = 50,
+  texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
+  --colormap   = { {1, 0.6, 1, 0.8} },
+  colormap   = { {0.25, 0.25, 1, 0.15} },
   directional= true,
   repeatEffect = true,
   count      = 20,
@@ -192,10 +264,10 @@ cafusShieldSphere = {
 efusShieldSphere = {
   layer=-35,
   life=20,
-  pos={0,51,0},
-  size=10,
-  colormap1 = { {0.9, 0.9, 1, 0.2},{0.9, 0.9, 1, 0.2},{0.9, 0.9, 1, 0.2},{0.9, 0.9, 1, 0.2} },
-  colormap2 = { {0.2, 0.2, 1, 0.2},{0.2, 0.2, 1, 0.2},{0.2, 0.2, 1, 0.2},{0.2, 0.2, 1, 0.2} },
+  pos={0,20,0},
+  size=400,
+  colormap1 = { {0.9, 0.9, 1, 0.1},{0.9, 0.9, 1, 0.1},{0.9, 0.9, 1, 0.1},{0.9, 0.9, 1, 0.1} },
+  colormap2 = { {0.2, 0.2, 1, 0.1},{0.2, 0.2, 1, 0.1},{0.2, 0.2, 1, 0.1},{0.2, 0.2, 1, 0.1} },
   repeatEffect=true
 }
 
@@ -206,6 +278,46 @@ corfusShieldSphere = {
   size=21.5,
   colormap1 = { {0.9, 0.9, 1, 0.75},{0.9, 0.9, 1, 1.0},{0.9, 0.9, 1, 1.0},{0.9, 0.9, 1, 0.75} },
   colormap2 = { {0.05, 0.35, .44, 0.7},{0.05, 0.35, .44, 0.75},{0.05, 0.35, .44, 0.75},{0.05, 0.35, .44, 0.7} },
+  repeatEffect=true
+}
+
+ShieldSphere400 = {
+  layer=-35,
+  life=20,
+  pos={0,20,0},
+  size=400,
+  colormap1 = { {0.9, 0.9, 1, 0.075} },
+  colormap2 = { {0.2, 0.2, 1, 0.075} },
+  repeatEffect=true
+}
+
+ShieldSphere200 = {
+  layer=-35,
+  life=20,
+  pos={0,20,0},
+  size=200,
+  colormap1 = { {0.9, 0.9, 1, 0.075} },
+  colormap2 = { {0.2, 0.2, 1, 0.075} },
+  repeatEffect=true
+}
+
+ShieldSphere300 = {
+  layer=-35,
+  life=20,
+  pos={0,20,0},
+  size=300,
+  colormap1 = { {0.9, 0.9, 1, 0.075} },
+  colormap2 = { {0.2, 0.2, 1, 0.075} },
+  repeatEffect=true
+}
+
+ShieldSphere1500 = {
+  layer=-35,
+  life=20,
+  pos={0,60,0},
+  size=1500,
+  colormap1 = { {0.9, 0.9, 1, 0.075} },
+  colormap2 = { {0.2, 0.2, 1, 0.075} },
   repeatEffect=true
 }
 
