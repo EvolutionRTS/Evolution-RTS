@@ -281,23 +281,13 @@ corfusShieldSphere = {
   repeatEffect=true
 }
 
-ShieldSphere400 = {
-  layer=-35,
-  life=20,
-  pos={0,20,0},
-  size=400,
-  colormap1 = { {0.9, 0.9, 1, 0.075} },
-  colormap2 = { {0.2, 0.2, 1, 0.075} },
-  repeatEffect=true
-}
-
 ShieldSphere200 = {
   layer=-35,
   life=20,
   pos={0,20,0},
   size=200,
-  colormap1 = { {0.9, 0.9, 1, 0.075} },
-  colormap2 = { {0.2, 0.2, 1, 0.075} },
+  colormap1 = { {0, 0, 1, 0.2} },
+  colormap2 = { {0.2, 0.2, 1, 0.0} },
   repeatEffect=true
 }
 
@@ -306,8 +296,18 @@ ShieldSphere300 = {
   life=20,
   pos={0,20,0},
   size=300,
-  colormap1 = { {0.9, 0.9, 1, 0.075} },
-  colormap2 = { {0.2, 0.2, 1, 0.075} },
+  colormap1 = { {0, 0, 1, 0.2} },
+  colormap2 = { {0.2, 0.2, 1, 0.0} },
+  repeatEffect=true
+}
+
+ShieldSphere400 = {
+  layer=-35,
+  life=20,
+  pos={0,20,0},
+  size=400,
+  colormap1 = { {0, 0, 1, 0.2} },
+  colormap2 = { {0.2, 0.2, 1, 0.0} },
   repeatEffect=true
 }
 
@@ -316,8 +316,8 @@ ShieldSphere1500 = {
   life=20,
   pos={0,60,0},
   size=1500,
-  colormap1 = { {0.9, 0.9, 1, 0.075} },
-  colormap2 = { {0.2, 0.2, 1, 0.075} },
+  colormap1 = { {0, 0, 1, 0.2} },
+  colormap2 = { {0.2, 0.2, 1, 0.0} },
   repeatEffect=true
 }
 

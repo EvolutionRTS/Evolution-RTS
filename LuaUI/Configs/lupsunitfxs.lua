@@ -261,7 +261,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1500, precision=0, strength   = 0.001, repeatEffect=true}},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1505, precision=0, strength   = 0.001, repeatEffect=true}},
   },
   
 	eallterrshield = {
@@ -273,7 +273,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=300, precision=0, strength   = 0.001, repeatEffect=true}},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=305, precision=0, strength   = 0.001, repeatEffect=true}},
   },
   
 	eallterrshield_t2 = {
@@ -285,7 +285,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=300, precision=0, strength   = 0.001, repeatEffect=true}},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=305, precision=0, strength   = 0.001, repeatEffect=true}},
   },
   
 	ekmar = {
@@ -297,7 +297,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=200, precision=0, strength   = 0.001, repeatEffect=true}},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=205, precision=0, strength   = 0.001, repeatEffect=true}},
   },
   
 	ecommandershield = {
@@ -309,7 +309,7 @@ effectUnitDefs = {
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=400, precision=0, strength   = 0.001, repeatEffect=true}},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=405, precision=0, strength   = 0.001, repeatEffect=true}},
   },
 	
 	

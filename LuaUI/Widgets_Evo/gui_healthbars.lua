@@ -25,8 +25,8 @@ end
 
 local barHeightOffset           = 34		 -- set value that healthbars for units that can unfold and become larger than its unitdef.height are still visible
 
-local barHeight                 = 2.4
-local barWidth                  = 12         --// (barWidth)x2 total width!!!
+local barHeight                 = 5
+local barWidth                  = 24         --// (barWidth)x2 total width!!!
 local barAlpha                  = 0.85
 local barOutlineAlpha           = 0.8
 local barInnerAlpha             = 0.5
@@ -951,7 +951,7 @@ do
 	    glText(barInfo.text,barStart,yoffset-outlineSize,4,"ro")
         if (drawBarTitles and barInfo.title ~= "health") then
           glColor(1,1,1,titlesAlpha)
-          glText(barInfo.title,0,yoffset-outlineSize,2.35,"cdo")
+          glText(barInfo.title,0,yoffset-outlineSize,4.70,"cdo")
         end
         if (barShader) then glMyText(0) end
       end
@@ -974,7 +974,7 @@ do
         end
         if (drawBarTitles and barInfo.title ~= "health") then
           glColor(1,1,1,featureTitlesAlpha)
-          glText(barInfo.title,0,yoffset-outlineSize,2.35,"cdo")
+          glText(barInfo.title,0,yoffset-outlineSize,4.70,"cdo")
         end
         if (barShader) then glMyText(0) end
       end
