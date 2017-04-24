@@ -1350,7 +1350,7 @@ do
     end
     
     --gl.Fog(false)
-    glDepthTest(true)
+    glDepthTest(false)
     --glDepthMask(true)
 
     cx, cy, cz = GetCameraPosition()

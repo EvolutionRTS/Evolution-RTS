@@ -253,7 +253,7 @@ effectUnitDefs = {
 --  },
   
 	eshieldgen = {
-	--{class='ShieldSphere',options=ShieldSphere1500},
+	{class='ShieldSphere',options=ShieldSphere1500},
 	{class='Bursts',options=shieldBursts1500},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -265,7 +265,7 @@ effectUnitDefs = {
   },
   
 	eallterrshield = {
-	--{class='ShieldSphere',options=ShieldSphere300},
+	{class='ShieldSphere',options=ShieldSphere300},
 	{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -277,7 +277,7 @@ effectUnitDefs = {
   },
   
 	eallterrshield_t2 = {
-	--{class='ShieldSphere',options=ShieldSphere300},
+	{class='ShieldSphere',options=ShieldSphere300},
 	{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -289,7 +289,7 @@ effectUnitDefs = {
   },
   
 	ekmar = {
-	--{class='ShieldSphere',options=ShieldSphere200},
+	{class='ShieldSphere',options=ShieldSphere200},
 	{class='Bursts',options=shieldBursts200},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -301,7 +301,7 @@ effectUnitDefs = {
   },
   
 	ecommandershield = {
-	--{class='ShieldSphere',options=ShieldSphere400},
+	{class='ShieldSphere',options=ShieldSphere400},
 	{class='Bursts',options=shieldBursts400},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},

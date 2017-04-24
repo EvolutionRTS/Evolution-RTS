@@ -180,7 +180,7 @@ shieldBursts200 = {
   layer      = -35,
   life       = math.huge,
   piece      = "base",
-  rotSpeed   = 0.25,
+  rotSpeed   = 0.50,
   rotSpread  = 0,
   arc        = 50,
   arcSpread  = 0,
@@ -188,7 +188,7 @@ shieldBursts200 = {
   sizeSpread = 50,
   texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
   --colormap   = { {1, 0.6, 1, 0.8} },
-  colormap   = { {0.25, 0.25, 1, 0.25} },
+  colormap   = { {1, 1, 1, 0.1} },
   directional= true,
   repeatEffect = true,
   count      = 20,
@@ -198,7 +198,7 @@ shieldBursts300 = {
   layer      = -35,
   life       = math.huge,
   piece      = "base",
-  rotSpeed   = 0.25,
+  rotSpeed   = 0.50,
   rotSpread  = 0,
   arc        = 50,
   arcSpread  = 0,
@@ -206,7 +206,7 @@ shieldBursts300 = {
   sizeSpread = 50,
   texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
   --colormap   = { {1, 0.6, 1, 0.8} },
-  colormap   = { {0.25, 0.25, 1, 0.25} },
+  colormap   = { {1, 1, 1, 0.1} },
   directional= true,
   repeatEffect = true,
   count      = 20,
@@ -216,7 +216,7 @@ shieldBursts400 = {
   layer      = -35,
   life       = math.huge,
   piece      = "base",
-  rotSpeed   = 0.25,
+  rotSpeed   = 0.50,
   rotSpread  = 0,
   arc        = 50,
   arcSpread  = 0,
@@ -224,7 +224,7 @@ shieldBursts400 = {
   sizeSpread = 50,
   texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
   --colormap   = { {1, 0.6, 1, 0.8} },
-  colormap   = { {0.25, 0.25, 1, 0.25} },
+  colormap   = { {1, 1, 1, 0.1} },
   directional= true,
   repeatEffect = true,
   count      = 20,
@@ -234,7 +234,7 @@ shieldBursts1500 = {
   layer      = -35,
   life       = math.huge,
   piece      = "base",
-  rotSpeed   = 0.25,
+  rotSpeed   = 0.50,
   rotSpread  = 0,
   arc        = 50,
   arcSpread  = 0,
@@ -242,10 +242,10 @@ shieldBursts1500 = {
   sizeSpread = 50,
   texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
   --colormap   = { {1, 0.6, 1, 0.8} },
-  colormap   = { {0.25, 0.25, 1, 0.15} },
+  colormap   = { {1, 1, 1, 0.1} },
   directional= true,
   repeatEffect = true,
-  count      = 20,
+  count      = 10,
 }
 
 ----------------------------------------------------------------------------
@@ -282,7 +282,7 @@ corfusShieldSphere = {
 }
 
 ShieldSphere200 = {
-  layer=-35,
+  layer=-34,
   life=20,
   pos={0,20,0},
   size=200,
@@ -292,7 +292,7 @@ ShieldSphere200 = {
 }
 
 ShieldSphere300 = {
-  layer=-35,
+  layer=-34,
   life=20,
   pos={0,20,0},
   size=300,
@@ -302,7 +302,7 @@ ShieldSphere300 = {
 }
 
 ShieldSphere400 = {
-  layer=-35,
+  layer=-34,
   life=20,
   pos={0,20,0},
   size=400,
@@ -312,7 +312,7 @@ ShieldSphere400 = {
 }
 
 ShieldSphere1500 = {
-  layer=-35,
+  layer=-34,
   life=20,
   pos={0,60,0},
   size=1500,
