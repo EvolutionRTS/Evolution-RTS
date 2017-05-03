@@ -137,6 +137,19 @@ local options= {
 		type   = 'section',
 	},
 	{
+		key="deathmode",
+		name="Game End Mode",
+		desc="What it takes to eliminate a team",
+		type="list",
+		def="com",
+		section="gameplayoptions",
+		items={
+			{key="neverend", name="None", desc="Teams are never eliminated"},
+			{key="com", name="Kill all enemy Commanders", desc="When a team has no Commanders left, it loses"},
+			{key="killall", name="Kill everything", desc="Every last unit must be eliminated, no exceptions!"},
+		}
+	},
+	{
 		key="gameplayspeed",
 		name="Gameplay Speed",
 		desc="Modifies buildcost and unit speed",
@@ -150,8 +163,6 @@ local options= {
 			{key="fast", name="Fast", desc="All units have a buildtime of 5 seconds, costs and speeds are 100%"},
 		}
 	},
-	
-	
 	{
 		key="aidifficulty",
 		name="ShardLua AI Difficulty",
