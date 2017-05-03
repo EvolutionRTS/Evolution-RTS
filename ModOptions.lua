@@ -145,7 +145,7 @@ local options= {
 		section="gameplayoptions",
 		items={
 			{key="neverend", name="None", desc="Teams are never eliminated"},
-			{key="com", name="Kill all enemy Commanders", desc="When a team has no Commanders left, it loses"},
+			{key="com", name="Kill all enemy Overseers", desc="When a team has no Overseers left, it loses"},
 			{key="killall", name="Kill everything", desc="Every last unit must be eliminated, no exceptions!"},
 		}
 	},
