@@ -149,7 +149,8 @@ local options= {
 			{key="killall", name="Kill everything", desc="Every last unit must be eliminated, no exceptions!"},
 		}
 	},
-	key    = "shareddynamicalliancevictory",
+	{
+		key    = "shareddynamicalliancevictory",
 		name   = "Dynamic Alliance Victory?",
 		desc   = "Should dynamic alliance teams share in a victory, or should they be forced to turn on one another?",
 		type   = "bool",
