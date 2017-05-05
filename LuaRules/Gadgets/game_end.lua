@@ -35,7 +35,7 @@ end
 -- Allyteam explosion when no coms are left (killing all remaining units of that allyteam) is implemented in teamcomends.lua
 
 -- sharedDynamicAllianceVictory is a C-like bool
-local sharedDynamicAllianceVictory = tonumber(Spring.GetModOptions().shareddynamicalliancevictory) or 0
+local sharedDynamicAllianceVictory = tonumber(Spring.GetModOptions().shareddynamicalliancevictory) or 1
 
 -- ignoreGaia is a C-like bool
 local ignoreGaia = 1
