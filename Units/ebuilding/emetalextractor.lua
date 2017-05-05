@@ -11,7 +11,8 @@ local metal						 = [[0.5]] --The actual amount is set in resourcegifts gadget
 local buildCostMetal 			  = 20
 local maxDamage					  = buildCostMetal * 12.5
 
-local metalMultiplier = 0.25
+local energyUse = tonumber(Spring.GetModOptions().mexenergyuse) or 2.5
+local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 1
 	
 local unitDef                     = {
 
@@ -27,7 +28,7 @@ local unitDef                     = {
 	corpse                        = "ammobox",
 	description                   = [[Generates Metal from Resource Nodes at the cost of -2.5 Energy/s]],
 	energyStorage                 = 0,
-	energyUse                     = 2.5,
+	energyUse                     = energyUse,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
 	makesMetal                    = 0,
 	footprintX                    = 7,

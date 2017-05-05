@@ -50,6 +50,30 @@ local options= {
 		}
 	},
 	{
+		key    = 'mexincomemultiplier',
+		name   = 'Metal Extractor Income Multiplier',
+		desc   = 'Metal spot values are multiplied by this amount. (Luamex must be enabled)',
+		type   = 'number',
+		section= 'resourcing',
+		def    = 1,
+		min    = 0.1,
+		max    = 1,
+		step   = 0.1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'mexenergyuse',
+		name   = 'Metal Extractor Energy Use',
+		desc   = 'Sets the amount of energy each metal extractor uses while producing metal. (Luamex must be enabled)',
+		type   = 'number',
+		section= 'resourcing',
+		def    = 2.5,
+		min    = 0,
+		max    = 2.5,
+		step   = 0.5,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},	
+	{
 		key    = 'mincome',
 		name   = 'Automatic Metal Income',
 		desc   = 'Determines the amount of metal income you start with per second. It increases every <Basic Metal Income Increase Interval> (2.5 minutes, is the default) by this amount until it hits <Maximum Basic Income> income.',
