@@ -52,7 +52,7 @@ local options= {
 	{
 		key    = 'mexincomemultiplier',
 		name   = 'Metal Extractor Income Multiplier',
-		desc   = 'Metal spot values are multiplied by this amount. (Luamex must be enabled)',
+		desc   = 'Metal spot values are multiplied by this percentage. (Luamex must be enabled)',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 100,
