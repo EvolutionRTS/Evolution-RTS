@@ -12,7 +12,8 @@ local buildCostMetal 			  = 20
 local maxDamage					  = buildCostMetal * 12.5
 
 local energyUse = tonumber(Spring.GetModOptions().mexenergyuse) or 2.5
-local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 1
+local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 100
+local metalMultiplier = metalMultiplier * 0.01
 	
 local unitDef                     = {
 

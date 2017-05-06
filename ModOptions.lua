@@ -55,10 +55,10 @@ local options= {
 		desc   = 'Metal spot values are multiplied by this amount. (Luamex must be enabled)',
 		type   = 'number',
 		section= 'resourcing',
-		def    = 1,
-		min    = 0.1,
-		max    = 1,
-		step   = 0.1,  -- quantization is aligned to the def value
+		def    = 100,
+		min    = 0,
+		max    = 200,
+		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 	{
