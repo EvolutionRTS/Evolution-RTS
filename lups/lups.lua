@@ -591,8 +591,7 @@ local function DrawParticlesOpaque()
     oldVsx, oldVsy = vsx, vsy
   end
 
-  -- originally true... Disabling has it's downsides, but we don't use lups enough for them to really matter
-  glDepthTest(false)
+  glDepthTest(true)
   glDepthMask(true)
   for i=-50,50 do
     Draw("Opaque",i)
@@ -604,8 +603,7 @@ end
 local function DrawParticles()
   if ( not anyFXVisible ) then return end
 
-  -- originally true... Disabling has it's downsides, but we don't use lups enough for them to really matter
-  glDepthTest(false)
+  glDepthTest(true)
 
   --// Draw() (layers: -50 upto 0)
   glAlphaTest(GL_GREATER, 0)
@@ -635,8 +633,7 @@ end
 local function DrawParticlesWater()
   if ( not anyFXVisible ) then return end
 
-  -- originally true... Disabling has it's downsides, but we don't use lups enough for them to really matter
-  glDepthTest(false)
+  glDepthTest(true)
 
   --// DrawOpaque()
   glDepthMask(true)
