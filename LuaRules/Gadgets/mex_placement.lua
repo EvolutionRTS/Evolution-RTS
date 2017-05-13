@@ -34,8 +34,9 @@ end
 local cmdMex = {
 	id      = CMD_AREA_MEX,
 	type    = CMDTYPE.ICON_AREA,
-	tooltip = 'Area Mex: Click and drag to queue metal extractors in an area.',
-	name    = 'Mex',
+	tooltip = 'Area Resource Node Generator: Click and drag to queue Resource Node Based Generators in an area.',
+	name    = [[Area
+RNG]],
 	cursor  = 'Repair',
 	action  = 'areamex',
 	params  = {}, 
@@ -59,7 +60,7 @@ local metalSpots = {}
 local metalSpotsByPos = {}
 
 local MEX_DISTANCE = 500
-local communism = true -- pass a modoption here or whatever
+local communism = false -- pass a modoption here or whatever
 
 --------------------------------------------------------------------------------
 -- Command Handling
@@ -173,7 +174,7 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			income = income * mexDefID[unitDefID]
 			Spring.SetUnitRulesParam(unitID, "mexIncome", income, inlosTrueTable)
 			if not communism then
-				Spring.SetUnitResourcing(unitID, "cmm", income)
+				Spring.SetUnitResourcing(unitID, "cme", income)
 			end
 		end
 	end
@@ -218,7 +219,7 @@ if communism then function gadget:GameFrame (n)
 		-- fixme: handle comshare
 		local teams = Spring.GetTeamList (allyTeamID)
 		for i = 1, #teams do
-			Spring.AddTeamResource (teams[i], "m", income / #teams)
+			Spring.AddTeamResource (teams[i], "e", income / #teams)
 		end
 	end
 end end

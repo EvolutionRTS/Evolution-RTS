@@ -39,20 +39,20 @@ local options= {
 	},
 	{
 		key    = 'luamex',
-		name   = 'Lua Mex',
-		desc   = 'Enables the use for Metal Extractors to generate income.',
+		name   = 'Lua Resource Node Generators',
+		desc   = 'Enables the use for Resource Node Generators to generate Energy income.',
 		type="list",
 		def="enabled",
 		section= "resourcing",
 		items={
-			{key="disabled", name="Disabled", desc="Turn off Metal Extractor use."},
-			{key="enabled", name="Enabled", desc="Allow Metal Extractors to be used to generate income."},
+			{key="disabled", name="Disabled", desc="Turn off Resource Node Generators use."},
+			{key="enabled", name="Enabled", desc="Allow Resource Node Generators to be used to generate Energy income."},
 		}
 	},
 	{
 		key    = 'mexbasecostmultiplier',
-		name   = 'Metal Extractor Base Cost',
-		desc   = 'Metal Extractors have a base cost of 250. This is a percentage adjustment. (Luamex must be enabled)',
+		name   = 'Resource Node Generators Base Cost',
+		desc   = 'Resource Node Generators have a base cost of 25. This is a percentage adjustment. (Lua Resource Node Generators must be enabled)',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 100,
@@ -63,11 +63,11 @@ local options= {
 	},
 	{
 		key    = 'mexincomemultiplier',
-		name   = 'Metal Extractor Income Multiplier',
-		desc   = 'Metal spot values are multiplied by this percentage. (Luamex must be enabled)',
+		name   = 'Resource Node Generators Income Multiplier',
+		desc   = 'Resource Node values are multiplied by this percentage. (Lua Resource Node Generators must be enabled)',
 		type   = 'number',
 		section= 'resourcing',
-		def    = 25, -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
+		def    = 100, -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
 		min    = 0,
 		max    = 200,
 		step   = 1,  -- quantization is aligned to the def value
@@ -75,8 +75,8 @@ local options= {
 	},
 	{
 		key    = 'mexenergyusemultiplier',
-		name   = 'Metal Extractor Energy Use',
-		desc   = 'Sets the percentage of energy each metal extractor uses based upon the amount that each mex provides. (Luamex must be enabled)',
+		name   = 'Resource Node Generators Energy Use',
+		desc   = 'Sets the percentage of energy each Resource Node Generators uses based upon the amount that each Resource Node provides. (Resource Node Generators must be enabled)',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 100,
