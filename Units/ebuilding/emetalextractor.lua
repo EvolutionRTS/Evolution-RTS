@@ -6,14 +6,24 @@ local unitName                    = "emetalextractor"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local metal						 = [[0.5]] --The actual amount is set in resourcegifts gadget
 
-local buildCostMetal 			  = 20
-local maxDamage					  = buildCostMetal * 12.5
+-- The math here is a bit more complicated than it should need to be mainly because the autohosts don't do well with decimal points, so first we pull numbers from 0 - 200 via the modoptions.
+-- First we want to use the raw metalmultiplier amount from modoptions to determine the energy use, so we first multiply mexenergyusemultiplier by 0.001 (to move the decimal point over an extra place). This gets us a reasonable energy cost for each mex in existence.
+-- Then metal income multiplier is multiplied by 0.1 so that we can then feed that number back to the luamex gadget which then does the actual mex spot calculations.
+-- After that we calculate the cost of the mex using 250 as a base. This base cost can be altered by changing the multiplier in modoptions.
+-- Finally, we calculate the HP of the mex based upon how much it costs.
 
-local energyUse = tonumber(Spring.GetModOptions().mexenergyuse) or 2.5
-local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 100
+-- It's a little bit overengineered, but the end result is a pretty dynamic luamex setup.
+local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 25 -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
+local energyUse = tonumber(Spring.GetModOptions().mexenergyusemultiplier) or 100
+local energyUse = energyUse * 0.001
+local energyUse = metalMultiplier * energyUse
 local metalMultiplier = metalMultiplier * 0.01
+
+local mexBaseCostMultiplier		  = tonumber(Spring.GetModOptions().mexbasecostmultiplier) or 100
+local mexBaseCost			 	  = mexBaseCostMultiplier * 2.5
+local buildCostMetal 			  = mexBaseCost * metalMultiplier
+local maxDamage					  = buildCostMetal * 12.5
 	
 local unitDef                     = {
 

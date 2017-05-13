@@ -50,9 +50,9 @@ local options= {
 		}
 	},
 	{
-		key    = 'mexincomemultiplier',
-		name   = 'Metal Extractor Income Multiplier',
-		desc   = 'Metal spot values are multiplied by this percentage. (Luamex must be enabled)',
+		key    = 'mexbasecostmultiplier',
+		name   = 'Metal Extractor Base Cost',
+		desc   = 'Metal Extractors have a base cost of 250. This is a percentage adjustment. (Luamex must be enabled)',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 100,
@@ -62,15 +62,27 @@ local options= {
 		-- (step <= 0) means that there is no quantization
 	},
 	{
-		key    = 'mexenergyuse',
-		name   = 'Metal Extractor Energy Use',
-		desc   = 'Sets the amount of energy each metal extractor uses while producing metal. (Luamex must be enabled)',
+		key    = 'mexincomemultiplier',
+		name   = 'Metal Extractor Income Multiplier',
+		desc   = 'Metal spot values are multiplied by this percentage. (Luamex must be enabled)',
 		type   = 'number',
 		section= 'resourcing',
-		def    = 2.5,
+		def    = 25, -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
 		min    = 0,
-		max    = 5,
-		step   = 0.5,  -- quantization is aligned to the def value
+		max    = 200,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'mexenergyusemultiplier',
+		name   = 'Metal Extractor Energy Use',
+		desc   = 'Sets the percentage of energy each metal extractor uses based upon the amount that each mex provides. (Luamex must be enabled)',
+		type   = 'number',
+		section= 'resourcing',
+		def    = 100,
+		min    = 0,
+		max    = 200,
+		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},	
 	{
