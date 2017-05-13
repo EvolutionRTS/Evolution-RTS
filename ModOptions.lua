@@ -42,7 +42,7 @@ local options= {
 		name   = 'Lua Mex',
 		desc   = 'Enables the use for Metal Extractors to generate income.',
 		type="list",
-		def="disabled",
+		def="enabled",
 		section= "resourcing",
 		items={
 			{key="disabled", name="Disabled", desc="Turn off Metal Extractor use."},

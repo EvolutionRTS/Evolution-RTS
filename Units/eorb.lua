@@ -7,6 +7,7 @@ local unitName                   = "eorb"
 
 local armortype					 = [[light]]
 --local supply					 = [[1]]
+local techrequired				 = [[tech2]]
 
 local unitDef                    = {
 
@@ -105,6 +106,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		RequireTech				 = techrequired,
 		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 2,

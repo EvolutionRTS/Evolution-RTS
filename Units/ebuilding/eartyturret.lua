@@ -7,6 +7,7 @@ local unitName                    = "eartyturret"
 
 local armortype					 = [[building]]
 --local supply					 = [[2]]
+local techrequired				 = [[tech3]]
 
 local weapon1Damage               = 1000
 local weapon1AOE				  = 150
@@ -78,6 +79,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		RequireTech				 = techrequired,
 		unittype				  = "turret",
 --		supply_cost               = supply,
 		needed_cover              = 1,

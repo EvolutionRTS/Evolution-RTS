@@ -7,6 +7,8 @@ local unitName                   = "ebox"
 
 local armortype					 = [[armored]]
 
+local techrequired				 = [[tech2]]
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -86,6 +88,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		RequireTech				 = techrequired,
 		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		armortype                = armortype,

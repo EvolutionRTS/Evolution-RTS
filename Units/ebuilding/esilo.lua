@@ -7,6 +7,8 @@ local unitName                    = "esilo"
 
 local armortype					 = [[building]]
 
+local techrequired				 = [[tech3]]
+
 local weapon1Damage               = 3000
 local weapon1AOE				  = 250
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
@@ -91,6 +93,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		RequireTech				 = techrequired,
 		unittype				  = "turret",
 		needed_cover              = 8,
 		death_sounds              = "nuke",

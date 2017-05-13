@@ -14,7 +14,7 @@ function widget:GetInfo()
 end
 
 --Evo Specific Check
-if Spring.GetModOptions().luamex ~= "enabled" then return false end
+if Spring.GetModOptions().luamex == "disabled" then return false end
 ------------------------------------------------------------
 
 VFS.Include("LuaRules/Configs/customcmds.h.lua")

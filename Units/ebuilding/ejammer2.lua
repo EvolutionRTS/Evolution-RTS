@@ -7,6 +7,8 @@ local unitName                    = "ejammer2"
 
 local armortype					 = [[building]]
 
+local techrequired				 = [[tech2]]
+
 local buildCostMetal 			  = 20
 local maxDamage					  = buildCostMetal * 12.5
 
@@ -65,6 +67,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		RequireTech				 = techrequired,
 		unittype				  = "building",
 		cannotcloak               = true,
 		needed_cover              = 3,

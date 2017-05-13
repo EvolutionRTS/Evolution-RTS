@@ -6,6 +6,7 @@ local unitName                    = "efusion2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
+local techrequired				 = [[tech2]]
 local energyproduced			 = [[10]]
 --local techprovided				 = [[1 Generator]]
 --local powerradius				 = [[800]]
@@ -74,9 +75,7 @@ local unitDef                     = {
 		iseco                     = 1,
 		needed_cover              = 5,
 		death_sounds              = "generic",
---		ProvideTech               = techprovided,
---		ProvideTechRange          = powerradius,
-		--	RequireTech           = "1 Powergrid",
+		RequireTech				 = techrequired,
 		armortype                 = armortype,
 --		supply_granted            = supplygranted,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 

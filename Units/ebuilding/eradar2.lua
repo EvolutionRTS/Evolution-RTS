@@ -7,6 +7,8 @@ local unitName                    = "eradar2"
 
 local armortype					 = [[building]]
 
+local techrequired				 = [[tech2]]
+
 local buildCostMetal 			  = 30
 local maxDamage					  = buildCostMetal * 12.5
 
@@ -69,6 +71,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		RequireTech				 = techrequired,
 		unittype				  = "building",
 		needed_cover              = 2,
 		death_sounds              = "generic",

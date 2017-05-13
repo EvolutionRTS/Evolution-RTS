@@ -7,6 +7,8 @@ local unitName                    = "eshieldgen"
 
 local armortype					 = [[building]]
 
+local techrequired				 = [[tech3]]
+
 local weapon1Damage              = 2001
 local weapon1AOE				 = 1
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
@@ -92,6 +94,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		RequireTech				 = techrequired,
 		unittype				  = "shield",
 		needed_cover              = 5,
 		death_sounds              = "generic",

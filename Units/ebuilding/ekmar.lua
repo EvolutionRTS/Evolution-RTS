@@ -7,6 +7,8 @@ local unitName                    = "ekmar"
 
 local armortype					 = [[building]]
 
+local techrequired				 = [[tech2]]
+
 local shield1Power               = 2000
 local shield1PowerRegen          = 30
 local shield1PowerRegenEnergy    = shield1PowerRegen / 10
@@ -79,6 +81,7 @@ local unitDef                     = {
 	},
 
 	customParams                  = {
+		RequireTech				 = techrequired,
 		unittype				  = "shield",
 		needed_cover              = 1,
 		death_sounds              = "generic",

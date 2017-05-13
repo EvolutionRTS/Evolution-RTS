@@ -8,6 +8,8 @@ local unitName                    = "eheavyturret2"
 local armortype					 = [[building]]
 --local supply					 = [[5]]
 
+local techrequired				 = [[tech2]]
+
 local weapon1Damage               = 300
 local weapon1AOE				  = 50
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
@@ -93,6 +95,7 @@ local unitDef                     = {
 		unittype				  = "turret",
 		needed_cover              = 5,
 		--supply_cost               = supply,
+		RequireTech				 = techrequired,
 		death_sounds              = "generic",
 		armortype                 = armortype, 
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
