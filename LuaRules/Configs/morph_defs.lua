@@ -41,8 +41,8 @@ local timeToBuild_ecommanderfactory = metalCost_ecommanderfactory * 0.25
 local metalCost_ecommanderbattle = 100
 local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
 
-local metalCost_t2factory = 400
-local timeToBuild_t2factory = metalCost_t2factory * 0.125
+local metalCost_factory_up1 = 400
+local timeToBuild_factory_up1 = metalCost_factory_up1 * 0.125
 
 local metalCost_etech2 = 250
 local timeToBuild_etech2 = metalCost_etech2 * 0.25
@@ -150,37 +150,37 @@ Overseer]],
 	
 	ebasefactory = 	{
 		{
-			into = 'ebasefactory_t2',
-			time = timeToBuild_t2factory,
+			into = 'ebasefactory_up1',
+			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
-			metal = metalCost_t2factory,
+			metal = metalCost_factory_up1,
 			text = 'Morph into an upgraded factory. Upgraded units have +20% Damage and Health.',
 		},
 	},
 	eminifac = 	{
 		{
 			into = 'eminifac_t2',
-			time = timeToBuild_t2factory,
+			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
-			metal = metalCost_t2factory,
+			metal = metalCost_factory_up1,
 			text = 'Morph into an upgraded factory. Upgraded units have +20% Damage and Health.',
 		},
 	},
 	eamphibfac = 	{
 		{
 			into = 'eamphibfac_t2',
-			time = timeToBuild_t2factory,
+			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
-			metal = metalCost_t2factory,
+			metal = metalCost_factory_up1,
 			text = 'Morph into an upgraded factory. Upgraded units have +20% Damage and Health.',
 		},
 	},
 	eairplant = 	{
 		{
 			into = 'eairplant_t2',
-			time = timeToBuild_t2factory,
+			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
-			metal = metalCost_t2factory,
+			metal = metalCost_factory_up1,
 			text = 'Morph into an upgraded factory. Upgraded units have +20% Damage and Health.',
 		},
 	},	

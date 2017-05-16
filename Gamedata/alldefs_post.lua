@@ -135,6 +135,15 @@ function UnitDef_Post(name, uDef)
 	
 	if uDef.customparams and uDef.customparams.isupgraded == true then
 		uDef.maxdamage = uDef.maxdamage * 1.20
+		uDef.maxvelocity = uDef.maxvelocity * 0.95
+	end
+	if uDef.customparams and uDef.customparams.isupgraded2 == true then
+		uDef.maxdamage = uDef.maxdamage * 1.35
+		uDef.maxvelocity = uDef.maxvelocity * 0.90
+	end
+	if uDef.customparams and uDef.customparams.isupgraded3 == true then
+		uDef.maxdamage = uDef.maxdamage * 1.50
+		uDef.maxvelocity = uDef.maxvelocity * 0.85
 	end
 	
 	--------------------------------------------------------------------------------
@@ -181,6 +190,12 @@ function WeaponDef_Post(name, wDef)
 						if wDef.customparams and wDef.customparams.isupgraded == true then
 							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.20
 						end
+						if wDef.customparams and wDef.customparams.isupgraded2 == true then
+							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.35
+						end
+						if wDef.customparams and wDef.customparams.isupgraded3 == true then
+							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.50
+						end
 				end
 			else
 				Spring.Echo("!!WARNING!! Invalid damagetype: " .. damagetypelower)	
@@ -196,6 +211,17 @@ function WeaponDef_Post(name, wDef)
 	
 	if (tobool(wDef.ballistic) or tobool(wDef.dropped)) then
 		wDef.gravityaffected = true
+	end
+	
+	-- Handle upgraded units weapon reload times
+	if wDef.customparams and wDef.customparams.isupgraded == true then
+		wDef.reloadtime = wDef.reloadtime * 0.85
+	end
+	if wDef.customparams and wDef.customparams.isupgraded2 == true then
+		wDef.reloadtime = wDef.reloadtime * 0.70
+	end
+	if wDef.customparams and wDef.customparams.isupgraded3 == true then
+		wDef.reloadtime = wDef.reloadtime * 0.65
 	end
 	
 	--------------------------------------------------------------------------------
@@ -229,6 +255,11 @@ function WeaponDef_Post(name, wDef)
 	--------------------------------------------------------------------------------
 	-- Set up params for Point Defense turrets
 	if wDef.customparams and wDef.customparams.ispointdefenselaser == true then
+		if wDef.customparams.primaryweaponrange ~= nil then
+			primaryWeaponRange = tonumber(wDef.customparams.primaryweaponrange)
+			else
+			primaryWeaponRange = 0
+		end
 		wDef.areaofeffect = 0
 		wDef.avoidfeature = false
 		wDef.avoidfriendly = false
@@ -242,7 +273,8 @@ function WeaponDef_Post(name, wDef)
 		wDef.interceptedbyshieldtype = 4
 		wDef.minintensity = 1
 		wDef.name = [[Point Defense Laser]]
-		wDef.range = 650
+		wDef.projectiles = 1
+		wDef.range = primaryWeaponRange
 		wDef.reloadtime = 0.25
 		wDef.weapontype = [[LaserCannon]]
 		wDef.rgbcolor = [[0 0.5 1]]
@@ -257,6 +289,7 @@ function WeaponDef_Post(name, wDef)
 		wDef.weaponvelocity = 1500
 		wDef.customparams.damagetype = [[pdlaser]]
 		wDef.damage.default = 6.25
+		wDef.energypershot = math.floor(wDef.damage.default * 0.05 * wDef.projectiles * ((wDef.areaofeffect * 0.001) + 1) * wDef.range^0.25 * 0.5 * 10 + 0.5) * 0.1
 	end	
 end
 
