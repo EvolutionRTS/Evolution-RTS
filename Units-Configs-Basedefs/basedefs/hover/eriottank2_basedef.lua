@@ -85,8 +85,6 @@ unitDef                    = {
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,
-		isupgraded2			  	 = isUpgraded2,
-		isupgraded3			  	 = isUpgraded3,
 		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 2,
@@ -144,8 +142,6 @@ weaponDefs                 = {
 		weaponVelocity           = 1000,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			isupgraded2			 = isUpgraded2,
-			isupgraded3			 = isUpgraded3,
 			damagetype		     = "eriottank2",  
 			nofriendlyfire	     = 1,
 		}, 
@@ -179,8 +175,6 @@ weaponDefs                 = {
 		weaponVelocity           = 400,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			isupgraded2			 = isUpgraded2,
-			isupgraded3			 = isUpgraded3,
 			damagetype		     = "eriottank2shotgun",  
 		},      
 		damage                   = {

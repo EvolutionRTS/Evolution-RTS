@@ -5,9 +5,7 @@ unitName = "emissiletank_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= false
-isUpgraded2	= false
-isUpgraded3	= false
+isUpgraded	= [[3]]
 
 humanName = "Droplet Upgrade 3"
 

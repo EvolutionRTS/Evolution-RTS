@@ -4,9 +4,8 @@
 unitName = "eriottank2_up3"
 
 --------------------------------------------------------------------------------
-isUpgraded	= false
-isUpgraded2	= false
-isUpgraded3	= true
+
+isUpgraded	= [[3]]
 
 humanName = "Spas Upgrade 3"
 

@@ -5,9 +5,7 @@ unitName = "elighttank3_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= false
-isUpgraded2	= true
-isUpgraded3	= false
+isUpgraded	= [[2]]
 
 humanName = "Kite Upgrade 2"
 

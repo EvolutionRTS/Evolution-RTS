@@ -78,8 +78,6 @@ unitDef                    = {
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,
-		isupgraded2			  	 = isUpgraded2,
-		isupgraded3			  	 = isUpgraded3,
 		unittype				  = "mobile",
 		death_sounds             = "nuke",
 		RequireTech              = tech,
@@ -119,8 +117,6 @@ weaponDefs                 = {
 		weaponVelocity           = 800,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			isupgraded2			 = isUpgraded2,
-			isupgraded3			 = isUpgraded3,
 			damagetype		     = "elacerator",  
 		}, 
 		damage                   = {

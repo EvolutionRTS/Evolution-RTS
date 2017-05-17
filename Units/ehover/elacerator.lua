@@ -5,9 +5,7 @@ unitName = "elacerator"
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= false
-isUpgraded2	= false
-isUpgraded3	= false
+isUpgraded	= [[0]]
 
 humanName = "Lacerator"
 

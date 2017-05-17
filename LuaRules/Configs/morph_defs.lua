@@ -41,8 +41,8 @@ local timeToBuild_ecommanderfactory = metalCost_ecommanderfactory * 0.25
 local metalCost_ecommanderbattle = 100
 local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
 
-local metalCost_factory_up1 = 400
-local timeToBuild_factory_up1 = metalCost_factory_up1 * 0.125
+local metalCost_factory_up1 = 200
+local timeToBuild_factory_up1 = metalCost_factory_up1 * 0.25
 
 local metalCost_etech2 = 250
 local timeToBuild_etech2 = metalCost_etech2 * 0.25
@@ -206,6 +206,9 @@ Overseer]],
 		},
 	},	
 
+----------------------------------------------------------
+----------------------------------------------------------
+	
 	ehbotengineer = 	{
 		{
 			into = 'ehbotengineer_turret',

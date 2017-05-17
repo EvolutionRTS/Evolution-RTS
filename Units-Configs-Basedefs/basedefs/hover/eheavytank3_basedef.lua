@@ -82,8 +82,6 @@ unitDef                    = {
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,
-		isupgraded2			  	 = isUpgraded2,
-		isupgraded3			  	 = isUpgraded3,
 		unittype				 = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 3,
@@ -120,10 +118,7 @@ weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
-			isupgraded			 = isUpgraded,
-			isupgraded2			 = isUpgraded2,
-			isupgraded3			 = isUpgraded3,
-			
+			isupgraded			 = isUpgraded,			
 			damagetype		     = "eheavytank3",  
 		},      
 		damage                   = {

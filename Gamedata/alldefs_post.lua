@@ -133,17 +133,17 @@ function UnitDef_Post(name, uDef)
 		uDef.buildinggrounddecaltype = "groundplate.dds"
 	end
 	
-	if uDef.customparams and uDef.customparams.isupgraded == true then
+	if uDef.customparams and uDef.customparams.isupgraded == "1" then
 		uDef.maxdamage = uDef.maxdamage * 1.20
-		uDef.maxvelocity = uDef.maxvelocity * 0.95
-	end
-	if uDef.customparams and uDef.customparams.isupgraded2 == true then
-		uDef.maxdamage = uDef.maxdamage * 1.35
 		uDef.maxvelocity = uDef.maxvelocity * 0.90
 	end
-	if uDef.customparams and uDef.customparams.isupgraded3 == true then
+	if uDef.customparams and uDef.customparams.isupgraded == "2" then
+		uDef.maxdamage = uDef.maxdamage * 1.35
+		uDef.maxvelocity = uDef.maxvelocity * 0.80
+	end
+	if uDef.customparams and uDef.customparams.isupgraded == "3" then
 		uDef.maxdamage = uDef.maxdamage * 1.50
-		uDef.maxvelocity = uDef.maxvelocity * 0.85
+		uDef.maxvelocity = uDef.maxvelocity * 0.70
 	end
 	
 	--------------------------------------------------------------------------------
@@ -187,13 +187,13 @@ function WeaponDef_Post(name, wDef)
 					--Spring.Echo(wd.name, armorClass, weapondamage*armorMultiplier )
 					wDef.damage[armorClass] = weapondamage*armorMultiplier
 						-- Handle upgraded units
-						if wDef.customparams and wDef.customparams.isupgraded == true then
+						if wDef.customparams and wDef.customparams.isupgraded == "1" then
 							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.20
 						end
-						if wDef.customparams and wDef.customparams.isupgraded2 == true then
+						if wDef.customparams and wDef.customparams.isupgraded == "2" then
 							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.35
 						end
-						if wDef.customparams and wDef.customparams.isupgraded3 == true then
+						if wDef.customparams and wDef.customparams.isupgraded == "3" then
 							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.50
 						end
 				end
@@ -214,13 +214,13 @@ function WeaponDef_Post(name, wDef)
 	end
 	
 	-- Handle upgraded units weapon reload times
-	if wDef.customparams and wDef.customparams.isupgraded == true then
+	if wDef.customparams and wDef.customparams.isupgraded == "1" then
 		wDef.reloadtime = wDef.reloadtime * 0.85
 	end
-	if wDef.customparams and wDef.customparams.isupgraded2 == true then
+	if wDef.customparams and wDef.customparams.isupgraded == "2" then
 		wDef.reloadtime = wDef.reloadtime * 0.70
 	end
-	if wDef.customparams and wDef.customparams.isupgraded3 == true then
+	if wDef.customparams and wDef.customparams.isupgraded == "3" then
 		wDef.reloadtime = wDef.reloadtime * 0.65
 	end
 	

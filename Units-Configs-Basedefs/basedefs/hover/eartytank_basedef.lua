@@ -83,8 +83,6 @@ unitDef                    = {
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,
-		isupgraded2			  	 = isUpgraded2,
-		isupgraded3			  	 = isUpgraded3,
 		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		canareaattack            ="1",
@@ -132,8 +130,6 @@ weaponDefs                 = {
 		weaponVelocity           = 500,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			isupgraded2			 = isUpgraded2,
-			isupgraded3			 = isUpgraded3,
 			damagetype		     = "eartytank",  
 		},  
 		damage                   = {
@@ -170,8 +166,6 @@ weaponDefs                 = {
 		weaponVelocity           = 500,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			isupgraded2			 = isUpgraded2,
-			isupgraded3			 = isUpgraded3,
 			damagetype		     = "eartytank",  
 		},  
 		damage                   = {
