@@ -5,7 +5,7 @@ unitName                    = "ebasefactory_up2"
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 830
+buildCostMetal = 510
 maxDamage = buildCostMetal * 12.5
 
 humanName = "Hover Factory Upgrade 2"
