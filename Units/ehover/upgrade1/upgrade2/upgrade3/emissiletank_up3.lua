@@ -17,7 +17,7 @@ tech = [[tech2]]
 armortype	= [[light]]
 supply = [[14]]
 
-VFS.Include("units/ehover/basedefs/emissiletank_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/emissiletank_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

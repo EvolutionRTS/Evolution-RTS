@@ -14,7 +14,7 @@ script = "ehoverfac.cob"
 
 hoverFactoryBuildList = Shared.buildListHoverFactory_up1
 
-VFS.Include("units/ehover/basedefs/ebasefactory_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/ebasefactory_basedef.lua")
 
 --------------------------------------------------------------------------------
 

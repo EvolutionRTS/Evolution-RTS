@@ -18,7 +18,7 @@ tech						 = [[tech3]]
 armortype					 = [[armored]]
 supply					 = [[8]]
 
-VFS.Include("units/ehover/basedefs/elacerator_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/elacerator_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

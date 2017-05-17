@@ -18,7 +18,7 @@ tech = [[tech2]]
 armortype = [[armored]]
 supply = [[4]]
 
-VFS.Include("units/ehover/basedefs/eheavytank3_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/eheavytank3_basedef.lua")
 	
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

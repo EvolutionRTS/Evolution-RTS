@@ -18,7 +18,7 @@ armortype = [[light]]
 supply = [[3]]
 
 
-VFS.Include("units/ehover/basedefs/eriottank2_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/eriottank2_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs--------------------------------------------------------------------------------
 

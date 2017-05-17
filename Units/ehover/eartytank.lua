@@ -18,7 +18,7 @@ tech = [[tech1]]
 armortype = [[light]]
 supply = [[8]]
 
-VFS.Include("units/ehover/basedefs/eartytank_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/eartytank_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
