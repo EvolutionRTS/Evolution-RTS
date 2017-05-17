@@ -9,6 +9,33 @@ return {
 	params = {'1', 'EMP', 'Shotgun'},
     },
   },
+  eriottank2_up1 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  eriottank2_up2 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  eriottank2_up3 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
   
   eamphibriot = {
     {
@@ -42,6 +69,36 @@ Missile]], [[Salvo]]},
   },
   
   eartytank = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between Normal and Saturation Artillery",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', [[Single
+Shot]], 'Saturation'},
+    },
+  },
+  eartytank_up1 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between Normal and Saturation Artillery",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', [[Single
+Shot]], 'Saturation'},
+    },
+  },
+  eartytank_up2 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between Normal and Saturation Artillery",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', [[Single
+Shot]], 'Saturation'},
+    },
+  },
+  eartytank_up3 = {
     {
 	name     = "Weapon type",
 	tooltip  = "Switch between Normal and Saturation Artillery",

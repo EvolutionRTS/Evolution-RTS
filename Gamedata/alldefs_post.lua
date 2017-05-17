@@ -186,16 +186,6 @@ function WeaponDef_Post(name, wDef)
 				for armorClass, armorMultiplier in pairs(damageTypes[damagetypelower]) do	
 					--Spring.Echo(wd.name, armorClass, weapondamage*armorMultiplier )
 					wDef.damage[armorClass] = weapondamage*armorMultiplier
-						-- Handle upgraded units
-						if wDef.customparams and wDef.customparams.isupgraded == "1" then
-							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.20
-						end
-						if wDef.customparams and wDef.customparams.isupgraded == "2" then
-							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.35
-						end
-						if wDef.customparams and wDef.customparams.isupgraded == "3" then
-							wDef.damage[armorClass] = wDef.damage[armorClass] * 1.50
-						end
 				end
 			else
 				Spring.Echo("!!WARNING!! Invalid damagetype: " .. damagetypelower)	
@@ -216,12 +206,15 @@ function WeaponDef_Post(name, wDef)
 	-- Handle upgraded units weapon reload times
 	if wDef.customparams and wDef.customparams.isupgraded == "1" then
 		wDef.reloadtime = wDef.reloadtime * 0.85
+		wDef.damage.default = wDef.damage.default * 1.20
 	end
 	if wDef.customparams and wDef.customparams.isupgraded == "2" then
 		wDef.reloadtime = wDef.reloadtime * 0.70
+		wDef.damage.default = wDef.damage.default * 1.35
 	end
 	if wDef.customparams and wDef.customparams.isupgraded == "3" then
 		wDef.reloadtime = wDef.reloadtime * 0.65
+		wDef.damage.default = wDef.damage.default * 1.50
 	end
 	
 	--------------------------------------------------------------------------------
