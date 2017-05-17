@@ -393,7 +393,7 @@ local function StartMorph(unitID, unitDefID, teamID, morphDef)
   -- do not allow morph for unfinsihed units
   if not isFinished(unitID) then return true end
 
-  Spring.SetUnitHealth(unitID, { paralyze = 1.0e9 })    --// turns mexes and mm off (paralyze the unit)
+  --Spring.SetUnitHealth(unitID, { paralyze = 1.0e9 })    --// turns mexes and mm off (paralyze the unit)
   Spring.SetUnitResourcing(unitID,"e",0)                --// turns solars off
   -- Spring.GiveOrderToUnit(unitID, CMD.ONOFF, { 0 }, { "alt" }) --// turns radars/jammers off
 
@@ -417,7 +417,7 @@ end
 local function StopMorph(unitID, morphData)
   morphUnits[unitID] = nil
     
-  Spring.SetUnitHealth(unitID, { paralyze = -1})
+  --Spring.SetUnitHealth(unitID, { paralyze = -1})
   local scale = morphData.progress * stopPenalty
   local unitDefID = Spring.GetUnitDefID(unitID)
 
