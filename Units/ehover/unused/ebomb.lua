@@ -1,11 +1,11 @@
 -- UNITDEF -- EBOMB --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ebomb"
+unitName                   = "ebomb"
 
 --------------------------------------------------------------------------------
 
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -121,7 +121,7 @@ local unitDef                    = {
 
 --------------------------------------------------------------------------------
 
-local weaponDefs                 = {
+weaponDefs                 = {
 	ebombboom                    = {
 		avoidFriendly            = false,
 		avoidFeature             = false,

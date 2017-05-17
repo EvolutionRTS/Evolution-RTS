@@ -1,18 +1,18 @@
--- UNITDEF -- EBASEFACTORY --
+-- UNITDEF -- EBASEFACTORY_up3 --
 --------------------------------------------------------------------------------
 
-unitName                    = "ebasefactory"
+unitName                    = "ebasefactory_up3"
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 30
+buildCostMetal = 1230
 maxDamage = buildCostMetal * 12.5
 
-humanName = "Hover Factory"
+humanName = "Hover Factory Upgrade 3"
 objectName = "ehoverfactory.s3o"
 script = "ehoverfac.cob"
 
-hoverFactoryBuildList = Shared.buildListHoverFactory
+hoverFactoryBuildList = Shared.buildListHoverFactory_up3
 
 VFS.Include("units/ehover/basedefs/ebasefactory_basedef.lua")
 

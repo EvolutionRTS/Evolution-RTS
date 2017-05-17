@@ -1,7 +1,7 @@
 -- UNITDEF -- ELIGHTTANK3 --
 --------------------------------------------------------------------------------
 
-local unitName                   = "elighttank3"
+unitName                   = "elighttank3"
 
 --------------------------------------------------------------------------------
 
@@ -14,9 +14,9 @@ humanName = "Kite"
 objectName = "elighttank4.s3o"
 script = "elighttank3_lus.lua"
 
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[3]]
+tech						 = [[tech1]]
+armortype					 = [[light]]
+supply					 = [[3]]
 
 VFS.Include("units/ehover/basedefs/elighttank3_basedef.lua")
 

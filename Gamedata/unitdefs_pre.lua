@@ -71,3 +71,43 @@ end
 for i = 1, #factory do
 	Shared.buildListFactory[#Shared.buildListFactory + 1] = factory[i]
 end
+
+-----------------------------
+-----------------------------
+--Buildlists for factories
+
+Shared.buildListHoverFactory = {
+		[[elighttank3]],
+		[[eriottank2]],
+		[[eheavytank3]],
+		[[emissiletank]],
+		[[eartytank]],
+		[[elacerator]],
+}
+
+Shared.buildListHoverFactory_up1 = {
+		[[elighttank3_up1]],
+		[[eriottank2_up1]],
+		[[eheavytank3_up1]],
+		[[emissiletank_up1]],
+		[[eartytank_up1]],
+		[[elacerator_up1]],
+}
+
+Shared.buildListHoverFactory_up2 = {
+		[[elighttank3_up2]],
+		[[eriottank2_up2]],
+		[[eheavytank3_up2]],
+		[[emissiletank_up2]],
+		[[eartytank_up2]],
+		[[elacerator_up2]],
+}
+
+Shared.buildListHoverFactory_up3 = {
+		[[elighttank3_up3]],
+		[[eriottank2_up3]],
+		[[eheavytank3_up3]],
+		[[emissiletank_up3]],
+		[[eartytank_up3]],
+		[[elacerator_up3]],
+}

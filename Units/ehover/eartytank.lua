@@ -1,7 +1,7 @@
 -- UNITDEF -- EARTYTANK --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eartytank"
+unitName                   = "eartytank"
 
 --------------------------------------------------------------------------------
 
@@ -14,9 +14,9 @@ humanName = "ShadowFury"
 objectName = "eartytank2.s3o"
 script = "eartytank2.cob"
 
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[8]]
+tech = [[tech1]]
+armortype = [[light]]
+supply = [[8]]
 
 VFS.Include("units/ehover/basedefs/eartytank_basedef.lua")
 

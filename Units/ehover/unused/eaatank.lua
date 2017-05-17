@@ -1,24 +1,24 @@
 -- UNITDEF -- EAATANK --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eaatank"
+unitName                   = "eaatank"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[5]]
+tech						 = [[tech1]]
+armortype					 = [[light]]
+supply					 = [[5]]
 
-local weapon1Damage              = 105
-local weapon1AOE				 = 50
-local burstProjectiles           = 4
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1) * burstProjectiles
+weapon1Damage              = 105
+weapon1AOE				 = 50
+burstProjectiles           = 4
+energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1) * burstProjectiles
 
-local function roundToFirstDecimal(energycosttofire)
+function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
 end
 
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -139,7 +139,7 @@ Uses +]] .. supply .. [[ Supply]],
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weaponDefs                 = {
+weaponDefs                 = {
 eaatankantiairmissile            = {
 	AreaOfEffect                 = weapon1AOE,
 	avoidFriendly                = false,

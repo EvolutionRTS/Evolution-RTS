@@ -49,7 +49,7 @@ unitDef                    = {
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = "elighttank3",
+	unitname                     = unitName,
 	upright                      = true,
 	workerTime                   = 0,
 

@@ -1,7 +1,7 @@
 -- UNITDEF -- EMISSILETANK_up1 --
 --------------------------------------------------------------------------------
 
-local unitName                   = "emissiletank_up1"
+unitName                   = "emissiletank_up1"
 
 --------------------------------------------------------------------------------
 
@@ -11,12 +11,12 @@ isUpgraded3	= false
 
 humanName = "Droplet Upgrade 1"
 
-objectName = "emissiletank2.s3o",
-script = "emissiletank2.cob",
+objectName = "emissiletank2.s3o"
+script = "emissiletank2.cob"
 
-local tech = [[tech2]]
-local armortype	= [[light]]
-local supply = [[14]]
+tech = [[tech2]]
+armortype	= [[light]]
+supply = [[14]]
 
 VFS.Include("units/ehover/basedefs/emissiletank_basedef.lua")
 

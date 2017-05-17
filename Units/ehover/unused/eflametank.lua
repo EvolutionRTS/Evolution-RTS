@@ -1,11 +1,11 @@
 -- UNITDEF -- EFLAMETANK --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eflametank"
+unitName                   = "eflametank"
 
 --------------------------------------------------------------------------------
 
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -122,9 +122,9 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage              = 25
+weapon1Damage              = 25
 
-local weaponDefs                 = {
+weaponDefs                 = {
 	lightlaser                   = {
 		
 		accuracy                 = 0,

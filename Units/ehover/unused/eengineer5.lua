@@ -1,18 +1,18 @@
 -- UNITDEF -- EENGINEER5 --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eengineer5"
+unitName                   = "eengineer5"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal			 = 40
-local maxDamage					 = 600
+buildCostMetal			 = 40
+maxDamage					 = 600
 
-local armortype					 = [[light]]
---local supply					 = [[2]]
+armortype					 = [[light]]
+--supply					 = [[2]]
 
 
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;

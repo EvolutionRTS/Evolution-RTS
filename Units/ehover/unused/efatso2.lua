@@ -1,11 +1,11 @@
 -- UNITDEF -- EFATSO2 --
 --------------------------------------------------------------------------------
 
-local unitName                   = "efatso2"
+unitName                   = "efatso2"
 
 --------------------------------------------------------------------------------
 
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -120,9 +120,9 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage              = 350
+weapon1Damage              = 350
 
-local weaponDefs                 = {
+weaponDefs                 = {
 eheavyturretweapon               = {
 	
 	accuracy                     = 1,

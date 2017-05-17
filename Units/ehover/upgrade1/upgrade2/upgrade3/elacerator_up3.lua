@@ -1,7 +1,7 @@
--- UNITDEF -- EARTYTANK_up3 --
+-- UNITDEF -- elacerator_up3 --
 --------------------------------------------------------------------------------
 
-unitName                   = "eartytank_up3"
+unitName                   = "elacerator_up3"
 
 --------------------------------------------------------------------------------
 
@@ -9,16 +9,16 @@ isUpgraded	= false
 isUpgraded2	= false
 isUpgraded3	= true
 
-humanName = "ShadowFury Upgrade 3"
+humanName = "Lacerator Upgrade 3"
 
-objectName = "eartytank2.s3o"
-script = "eartytank2.cob"
+objectName = "elacerator.s3o"
+script = "elacerator.cob"
 
-tech						 = [[tech1]]
-armortype					 = [[light]]
+tech						 = [[tech3]]
+armortype					 = [[armored]]
 supply					 = [[8]]
 
-VFS.Include("units/ehover/basedefs/eartytank_basedef.lua")
+VFS.Include("units/ehover/basedefs/elacerator_basedef.lua")
 
 unitDef.weaponDefs               = weaponDefs
 --------------------------------------------------------------------------------

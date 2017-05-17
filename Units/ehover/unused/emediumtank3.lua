@@ -1,11 +1,11 @@
 -- UNITDEF -- EMEDIUMTANK3 --
 --------------------------------------------------------------------------------
 
-local unitName                   = "emediumtank3"
+unitName                   = "emediumtank3"
 
 --------------------------------------------------------------------------------
 
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -117,9 +117,9 @@ local unitDef                    = {
 
 
 --------------------------------------------------------------------------------
-local weapon1Damage              = 200
+weapon1Damage              = 200
 
-local weaponDefs                 = {
+weaponDefs                 = {
 mediumtankcannon                 = {
 
 	AreaOfEffect                 = 1,
