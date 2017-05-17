@@ -1,7 +1,7 @@
 -- UNITDEF -- EARTYTANK_up3 --
 --------------------------------------------------------------------------------
 
-unitName                   = "eartytank_up3"
+unitName = "eartytank_up3"
 
 --------------------------------------------------------------------------------
 
@@ -14,13 +14,13 @@ humanName = "ShadowFury Upgrade 3"
 objectName = "eartytank2.s3o"
 script = "eartytank2.cob"
 
-tech						 = [[tech1]]
-armortype					 = [[light]]
-supply					 = [[8]]
+tech = [[tech1]]
+armortype = [[light]]
+supply = [[8]]
 
 VFS.Include("units/ehover/basedefs/eartytank_basedef.lua")
 
-unitDef.weaponDefs               = weaponDefs
+unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName]    = unitDef })

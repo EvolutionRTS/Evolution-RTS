@@ -1,7 +1,7 @@
 -- UNITDEF -- elacerator_up1 --
 --------------------------------------------------------------------------------
 
-unitName                   = "elacerator_up1"
+unitName = "elacerator_up1"
 
 --------------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ supply = [[8]]
 
 VFS.Include("units/ehover/basedefs/elacerator_basedef.lua")
 
-unitDef.weaponDefs               = weaponDefs
+unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName]    = unitDef })

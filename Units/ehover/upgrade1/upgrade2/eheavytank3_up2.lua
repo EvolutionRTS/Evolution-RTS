@@ -1,7 +1,7 @@
 -- UNITDEF -- EHEAVYTANK3_up2 --
 --------------------------------------------------------------------------------
 
-unitName                   = "eheavytank3_up2"
+unitName = "eheavytank3_up2"
 
 --------------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ supply = [[4]]
 
 VFS.Include("units/ehover/basedefs/eheavytank3_basedef.lua")
 	
-unitDef.weaponDefs               = weaponDefs
+unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName]    = unitDef })
