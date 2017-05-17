@@ -135,15 +135,15 @@ function UnitDef_Post(name, uDef)
 	
 	if uDef.customparams and uDef.customparams.isupgraded == "1" then
 		uDef.maxdamage = uDef.maxdamage * 1.20
-		uDef.maxvelocity = uDef.maxvelocity * 0.90
+		uDef.maxvelocity = uDef.maxvelocity * 0.95
 	end
 	if uDef.customparams and uDef.customparams.isupgraded == "2" then
 		uDef.maxdamage = uDef.maxdamage * 1.35
-		uDef.maxvelocity = uDef.maxvelocity * 0.80
+		uDef.maxvelocity = uDef.maxvelocity * 0.90
 	end
 	if uDef.customparams and uDef.customparams.isupgraded == "3" then
 		uDef.maxdamage = uDef.maxdamage * 1.50
-		uDef.maxvelocity = uDef.maxvelocity * 0.70
+		uDef.maxvelocity = uDef.maxvelocity * 0.85
 	end
 	
 	--------------------------------------------------------------------------------
