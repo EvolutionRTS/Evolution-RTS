@@ -1,41 +1,11 @@
--- UNITDEF -- EAMPHIBBUGGY_t2 --
---------------------------------------------------------------------------------
-
-local unitName                   = "eamphibbuggy_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 18
-local maxDamage					  = 120 * 1.20
-
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[1]]
-
-local weapon1Damage              = 13.5 * 1.20
-local weapon1AOE				 = 1
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
+unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 18,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
-	
 	canGuard                     = true,
 	canMove                      = true,
 	canPatrol                    = true,
@@ -53,26 +23,27 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 120,
 	maxSlope                     = 28,
 	maxVelocity                  = 6.0,
 	maxReverseVelocity           = 2,
 	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
 	movementClass                = "TANK2",
-	name                         = "Snake Upgraded",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "eamphibbuggy2.s3o",
-	script			             = "eamphibbuggy_lus.lua",
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "smallExplosionGenericRed",
 	sightDistance                = 500,
---	SonarDistance                = 500,
+	sonarDistance                = 500,
 	stealth			             = true,
 	seismicSignature             = 2,
 	sonarStealth		         = false,
 	smoothAnim                   = true,
+	transportbyenemy             = false,
 	--  turnInPlace              = false,
 	--  turnInPlaceSpeedLimit    = 6.0,
 	turnInPlace                  = true,
@@ -107,14 +78,9 @@ local unitDef                    = {
 			def                  = "lightbeamlaser",
 			badTargetCategory    = "ARMORED BUILDING WALL",
 		},
-		--[[	
-		[2]                      = {
-			def                  = "TORP",
-		},
-		]]--
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		isupgraded			  	 = isUpgraded,
 		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
@@ -125,38 +91,26 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
- 
-Can fire while underwater
- 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire * 10) .. [[/s]],
 	},
 }
 
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weaponDefs                 = {
+weaponDefs                 = {
 	lightbeamlaser               = {
-		
 		TargetMoveError	         = 0.3,
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 0,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		beamTime                 = 0.1,
-		
 		collideFeature           = false,
 		collideFriendly          = false,
 		coreThickness            = 0.2,
 		duration                 = 0.1,
 		explosionGenerator       = "custom:genericshellexplosion-small-sparks-burn",
-		energypershot            = energycosttofire,
+		energypershot            = 0,
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
 		impulsefactor		     = 0.1,
-		
 		laserflaresize 	         = 5,
 		largebeamlaser	         = true,
 		leadlimit			     = 10,
@@ -179,19 +133,11 @@ local weaponDefs                 = {
 		weaponVelocity           = 1000,
 		waterweapon		         = true,
 		customparams             = {
+			isupgraded			 = isUpgraded,
 			damagetype		     = "eamphibbuggy",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
-			default              = weapon1Damage, -- multiply * 1.2 for correct dps output
+			default              = 13.5, -- multiply * 1.2 for correct dps output
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

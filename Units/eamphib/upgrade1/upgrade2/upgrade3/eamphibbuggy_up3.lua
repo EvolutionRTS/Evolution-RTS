@@ -1,26 +1,26 @@
--- UNITDEF -- EAMPHIBROCK --
+-- UNITDEF -- EAMPHIBBUGGY_up3 --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibrock"
+unitName = "eamphibbuggy_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
-humanName = [[Spitter]]
+humanName = [[Snake Upgrade 3]]
 
-objectName = "eamphibrock4.s3o"
-script = "eamphibrock4.cob"
+objectName = "eamphibbuggy2.s3o"
+script = "eamphibbuggy_lus.lua"
 
 tech = [[tech1]]
 armortype = [[light]]
-supply = [[5]]
+supply = [[1]]
 
-VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibrock_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibbuggy_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
-return lowerkeys({ [unitName]  = unitDef })
+return lowerkeys({ [unitName]    = unitDef })
 
 --------------------------------------------------------------------------------

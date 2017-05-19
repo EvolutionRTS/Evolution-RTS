@@ -187,15 +187,35 @@ Overseer]],
 			text = 'Morph into an upgraded factory. Upgraded units have +20% Damage and Health.',
 		},
 	},
+	
 	eamphibfac = 	{
 		{
-			into = 'eamphibfac_t2',
+			into = 'eamphibfac_up1',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
-			text = 'Morph into an upgraded factory. Upgraded units have +20% Damage and Health.',
+			text = [[+20% damage/hp buff, +15% faster reload, -5% speed]],
 		},
 	},
+	eamphibfac_up1 = 	{
+		{
+			into = 'eamphibfac_up2',
+			time = timeToBuild_factory_up1,
+			cmdname = [[Upgrade]],
+			metal = metalCost_factory_up1,
+			text = [[+15% damage/hp buff, +15% faster reload, -5% speed]],
+		},
+	},
+	eamphibfac_up2 = 	{
+		{
+			into = 'eamphibfac_up3',
+			time = timeToBuild_factory_up1,
+			cmdname = [[Upgrade]],
+			metal = metalCost_factory_up1,
+			text = [[+15% damage/hp buff, +15% faster reload, -5% speed]],
+		},
+	},
+	
 	eairplant = 	{
 		{
 			into = 'eairplant_t2',

@@ -1,16 +1,4 @@
--- UNITDEF -- EAMPHIBFAC_t2 --
---------------------------------------------------------------------------------
-
-local unitName                     = "eamphibfac_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 460
-local maxDamage					  = buildCostMetal * 12.5
-
-local armortype					 = [[building]]
-
-local unitDef                      = {
+unitDef                      = {
 
 	activatewhenbuilt              = false,
 	buildAngle                     = 1024,
@@ -45,9 +33,9 @@ local unitDef                      = {
 	maxWaterDepth                  = 5000,
 	metalStorage                   = 0,
 	metalMake                      = 0,
-	name                           = "Amphibious Tank Factory Upgraded",
-	objectName                     = "eamphibfac2.s3o",
-	script			               = "eamphibfac2.cob",
+	name                           = humanName,
+	objectName                     = objectName,
+	script			               = script,
 	radarDistance                  = 0,
 	repairable		               = false,
 	selfDestructAs                 = "LARGE_BUILDING",
@@ -81,16 +69,7 @@ local unitDef                      = {
 			"custom:fusionreactionbasic",
 		},
 	},
-	buildoptions                   = {
---		"eamphibengineer_t2", --new
-		"eamphibbuggy_t2", --new
-		"eamphibriot_t2", --new
-		"eamphibneedle_t2",
-		"eamphibmedtank_t2", --new
-		"eamphibrock_t2", --new
-		"eamphibarty_t2", --new
-		"eamphibleveler_t2", --new
-	},
+	buildoptions = amphibFactoryBuildList,
 	sounds                         = {
 		underattack                = "unitsunderattack1",
 		select                     = {
@@ -100,7 +79,7 @@ local unitDef                      = {
 	customParams                   = {
 		unittype				  = "building",
 		death_sounds               = "generic",
-		armortype                  = armortype, 
+		armortype                 = "building", 
 		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                  = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	               = "outer_colonies",   
@@ -111,10 +90,3 @@ local unitDef                      = {
 		--    groundtexselectzsize = 1500, -- optional
 	},
 }
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]      = unitDef })
-
---------------------------------------------------------------------------------

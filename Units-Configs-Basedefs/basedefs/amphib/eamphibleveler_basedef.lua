@@ -1,48 +1,11 @@
--- UNITDEF -- eamphibleveler_t2 --
---------------------------------------------------------------------------------
-
-local unitName                   = "eamphibleveler_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 250
-local maxDamage					  = 1750 * 1.20
-
-local tech						 = [[tech2]]
-local armortype					 = [[armored]]
-local supply					 = [[10]]
-
-local weapon1Damage              = 250 * 1.20
-local weapon1AOE				 = 8
-local weapon2Damage              = 6 * 1.20
-local weapon2AOE				 = 8
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local function roundToFirstDecimal(energycosttofire2)
-    return math.floor(energycosttofire2*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
+unitDef                    = {
 	acceleration                 = 0.18,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 250,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
-	
 	canGuard                     = true,
 	canMove                      = true,
 	canPatrol                    = true,
@@ -60,17 +23,17 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 1750,
 	maxSlope                     = 28,
 	maxVelocity                  = 4,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
 	movementClass                = "TANK6",
-	name                         = "Leveler Upgraded",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "eamphibleveler.s3o",
-	script	                     = "eamphibleveler.cob",
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "krabblast",
@@ -80,6 +43,7 @@ local unitDef                    = {
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 4,
+	transportbyenemy             = false;
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	unitname                     = unitName,
@@ -114,7 +78,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		isupgraded			  	 = isUpgraded,
 		death_sounds             = "nuke",
 		RequireTech              = tech,
 		armortype                = armortype,
@@ -122,26 +86,17 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies", 
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
-Energy cost to fire Main Cannon: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Secondary Machinegun: ]] .. roundToFirstDecimal(energycosttofire2 * 10) .. [[/s]],
 	},
 }
 
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weaponDefs                 = {
+weaponDefs                 = {
 	tankkillerlaser              = {
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 8,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 0.1,
-		
 		coreThickness            = 0.5,
 		duration                 = 0.2,
 		energypershot            = energycosttofire,
@@ -150,7 +105,6 @@ local weaponDefs                 = {
 		fireStarter              = 100,
 		interceptedByShieldType  = 4,
 		impulseFactor            = 0.1,
-		
 		minintensity             = "1",
 		name                     = "Anti-Tank Laser",
 		range                    = 750,
@@ -167,25 +121,22 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
+			isupgraded			 = isUpgraded,
 			damagetype		     = "eamphibleveler",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 250,
 		},
 	},
 
 	machinegun                   = {
 		accuracy                 = 300,
-		AreaOfEffect             = weapon2AOE,
+		AreaOfEffect             = 8,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		beamTime                 = 0.1,
-		
 		coreThickness            = 0.5,
 		duration                 = 0.1,
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
@@ -193,7 +144,6 @@ local weaponDefs                 = {
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
-		
 		minintensity             = "1",
 		name                     = "Machine Gun",
 		range                    = 750,
@@ -210,21 +160,11 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
+			isupgraded			 = isUpgraded,
 			damagetype		     = "eamphibleveler", 
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
-			default              = weapon2Damage,
+			default              = 6,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

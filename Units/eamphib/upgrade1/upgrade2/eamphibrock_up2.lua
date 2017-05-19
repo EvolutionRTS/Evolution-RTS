@@ -1,13 +1,13 @@
--- UNITDEF -- EAMPHIBROCK --
+-- UNITDEF -- EAMPHIBROCK_up2 --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibrock"
+unitName = "eamphibrock_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[Spitter]]
+humanName = [[Spitter Upgrade 2]]
 
 objectName = "eamphibrock4.s3o"
 script = "eamphibrock4.cob"

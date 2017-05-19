@@ -1,22 +1,22 @@
--- UNITDEF -- EAMPHIBBUGGY --
+-- UNITDEF -- eamphibleveler_up1 --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibbuggy"
+unitName = "eamphibleveler_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Snake]]
+humanName = [[Leveler Upgrade 1]]
 
-objectName = "eamphibbuggy2.s3o"
-script = "eamphibbuggy_lus.lua"
+objectName = "eamphibleveler.s3o"
+script = "eamphibleveler.cob"
 
-tech = [[tech1]]
-armortype = [[light]]
-supply = [[1]]
+tech = [[tech2]]
+armortype = [[armored]]
+supply = [[10]]
 
-VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibbuggy_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibleveler_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

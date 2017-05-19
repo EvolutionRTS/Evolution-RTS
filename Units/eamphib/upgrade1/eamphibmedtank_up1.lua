@@ -1,26 +1,26 @@
--- UNITDEF -- EAMPHIBROCK --
+-- UNITDEF -- EAMPHIBMEDTANK_up1 --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibrock"
+unitName = "eamphibmedtank_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Spitter]]
+humanName = [[Razor Upgrade 1]]
 
-objectName = "eamphibrock4.s3o"
-script = "eamphibrock4.cob"
+objectName = "eamphibmedtank2.s3o"
+script = "eamphibmedtank_lus.lua"
 
 tech = [[tech1]]
 armortype = [[light]]
-supply = [[5]]
+supply = [[4]]
 
-VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibrock_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibmedtank_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
-return lowerkeys({ [unitName]  = unitDef })
+return lowerkeys({ [unitName]    = unitDef })
 
 --------------------------------------------------------------------------------

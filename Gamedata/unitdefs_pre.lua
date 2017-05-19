@@ -111,3 +111,46 @@ Shared.buildListHoverFactory_up3 = {
 		[[eartytank_up3]],
 		[[elacerator_up3]],
 }
+
+--
+--
+
+Shared.buildListAmphibFactory = {
+		[[eamphibbuggy]],
+		[[eamphibriot]],
+		[[eamphibneedle]],
+		[[eamphibmedtank]],
+		[[eamphibrock]],
+		[[eamphibarty]],
+		[[eamphibleveler]],
+}
+
+Shared.buildListAmphibFactory_up1 = {
+		[[eamphibbuggy_up1]],
+		[[eamphibriot_up1]],
+		[[eamphibneedle_up1]],
+		[[eamphibmedtank_up1]],
+		[[eamphibrock_up1]],
+		[[eamphibarty_up1]],
+		[[eamphibleveler_up1]],
+}
+
+Shared.buildListAmphibFactory_up2 = {
+		[[eamphibbuggy_up2]],
+		[[eamphibriot_up2]],
+		[[eamphibneedle_up2]],
+		[[eamphibmedtank_up2]],
+		[[eamphibrock_up2]],
+		[[eamphibarty_up2]],
+		[[eamphibleveler_up2]],
+}
+
+Shared.buildListAmphibFactory_up3 = {
+		[[eamphibbuggy_up3]],
+		[[eamphibriot_up3]],
+		[[eamphibneedle_up3]],
+		[[eamphibmedtank_up3]],
+		[[eamphibrock_up3]],
+		[[eamphibarty_up3]],
+		[[eamphibleveler_up3]],
+}

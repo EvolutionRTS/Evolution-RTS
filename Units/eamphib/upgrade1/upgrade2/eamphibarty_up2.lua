@@ -1,26 +1,26 @@
--- UNITDEF -- EAMPHIBROCK --
+-- UNITDEF -- EAMPHIBARTY_up2 --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibrock"
+unitName = "eamphibarty_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[Spitter]]
+humanName = [[Assimilator Upgrade 2]]
 
-objectName = "eamphibrock4.s3o"
-script = "eamphibrock4.cob"
+objectName = "eamphibarty2.s3o"
+script = "eamphibarty2.cob"
 
 tech = [[tech1]]
 armortype = [[light]]
 supply = [[5]]
 
-VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibrock_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibarty_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
-return lowerkeys({ [unitName]  = unitDef })
+return lowerkeys({ [unitName] = unitDef })
 
 --------------------------------------------------------------------------------

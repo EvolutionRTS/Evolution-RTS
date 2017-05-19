@@ -1,45 +1,11 @@
--- UNITDEF -- EAMPHIBROCK_t2 --
---------------------------------------------------------------------------------
-
-local unitName                   = "eamphibrock_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 59
-local maxDamage					  = 320 * 1.20
-
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[5]]
-
-local weapon1Damage              = 200 * 1.20
-local weapon1AOE				 = 1
-local weapon2Damage              = 200 * 1.20
-local weapon2AOE				 = 1
-local weapon2Burst               = 5
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-local energycosttofire2          = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1) * weapon2Burst
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
+unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 59,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
-	
 	canGuard                     = true,
 	canMove                      = true,
 	canPatrol                    = true,
@@ -57,32 +23,28 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 320,
 	maxSlope                     = 28,
 	maxVelocity                  = 3.4,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
 	movementClass                = "TANK4",
-	name                         = "Spitter Upgraded",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "eamphibrock4.s3o",
-	script			             = "eamphibrock4.cob",
-	onlytargetcategory2          = "VTOL",
-	onlytargetcategory3          = "VTOL",
-	onlytargetcategory4          = "VTOL",
-	onlytargetcategory5          = "VTOL",
-	onlytargetcategory6          = "VTOL",
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGeneric",
 	side                         = "CORE",
 	sightDistance                = 650,
---	SonarDistance                = 650,
+	sonarDistance                = 650,
 	stealth			             = true,
 	seismicSignature             = 2,
 	sonarStealth		         = false,
 	smoothAnim                   = true,
+	transportbyenemy             = false;
 	--  turnInPlace              = false,
 	--  turnInPlaceSpeedLimit    = 3.4,
 	turnInPlace                  = true,
@@ -114,17 +76,15 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "antiarmorrockets",
-			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 		[2]                      = {
 			def                  = "antiarmorrocketssalvo",
-			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		isupgraded			  	 = isUpgraded,
 		canbetransported 		 = "true",
 		canareaattack            ="1",
 		needed_cover             = 2,
@@ -135,29 +95,21 @@ local unitDef                    = {
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
-Energy cost to fire Single Shot: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Salvo: ]] .. roundToFirstDecimal(energycosttofire2),
+		factionname	             = "outer_colonies",   
 	},
 }
 
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weaponDefs                 = {
+weaponDefs                 = {
 
 	antiarmorrockets             = {
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 0,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		cegTag                   = "missiletrailsmall",
 		explosionGenerator       = "custom:genericshellexplosion-medium-red",
-		energypershot            = energycosttofire,
+		energypershot            = 0,
 		fireStarter              = 70,
 		tracks                   = true,
 		impulseFactor            = 0,
@@ -180,23 +132,21 @@ local weaponDefs                 = {
 		trajectoryHeight         = 1.5,
 		weaponVelocity           = 500,
 		customparams             = {
+			isupgraded		  	 = isUpgraded,
 			damagetype		     = "eamphibrock",  
-
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		},     
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 200,
 		},
 	},
 
 	antiarmorrocketssalvo        = {
-		AreaOfEffect             = weapon2AOE,
+		AreaOfEffect             = 0,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		burst			         = weapon2Burst,
+		burst			         = 5,
 		burstrate		         = 0.1,
 		cegTag                   = "missiletrailsmall",
 		explosionGenerator       = "custom:genericshellexplosion-medium-red",
@@ -224,21 +174,11 @@ local weaponDefs                 = {
 		sprayangle		         = 10000,
 		weaponVelocity           = 500,
 		customparams             = {
+			isupgraded		  	 = isUpgraded,
 			damagetype		     = "eamphibrock",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		},     
 		damage                   = {
-			default              = weapon2Damage,
+			default              = 200,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------
