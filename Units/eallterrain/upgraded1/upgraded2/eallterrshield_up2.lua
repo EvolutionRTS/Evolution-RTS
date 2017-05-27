@@ -7,7 +7,7 @@ unitName = "eallterrshield_up2"
 
 isUpgraded = [[2]]
 
-humanName = [[Widow]]
+humanName = [[Widow Mark III]]
 
 objectName = "eallterrshield.s3o"
 script = "eallterrshield.cob"

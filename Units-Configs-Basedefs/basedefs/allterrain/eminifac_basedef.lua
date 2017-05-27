@@ -34,9 +34,7 @@ unitDef                      = {
 	
 	-- End Cloaking
 
---	description                    = [[Build a Tech Facility to unlock units. Build Supply Depots to increase your army size.
--- Armortype: ]] ..armortype,
-	description = [[poopoo]],
+	description                    = [[Build a Tech Facility to unlock units. Build Supply Depots to increase your army size.]],
 	energyStorage                  = 0,
 	energyUse                      = 0,
 	energyMake                     = 0,

@@ -19,9 +19,15 @@ local icontypes = {
   
     
         engineer = {
+    bitmap='icons/dmdr_engi.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
+		orb = {
     bitmap='icons/dmdr_orb.png',
-    size=2,
-    radiusadjust=3,
+    size=3,
+    radiusadjust=0,
   },
   
         box = {
@@ -49,7 +55,7 @@ local icontypes = {
   },
   
         anarchid = {
-    bitmap='icons/dmdr_end_nrkd.png',
+    bitmap='icons/dmdr_end_nrkd2.png',
     size=3,
     radiusadjust=0,
   },
@@ -230,7 +236,7 @@ local icontypes = {
   },
   
         baseshield = {
-    bitmap='icons/dmdr_shield_base.png',
+    bitmap='icons/dmdr_buckler.png',
     size=3.5,
     radiusadjust=0,
   },

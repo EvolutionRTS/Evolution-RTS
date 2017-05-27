@@ -168,9 +168,9 @@ weaponDefs                 = {
 		visibleShieldHitFrames   = 1,
 		weaponType               = [[Shield]],
 		
-		customparams             = {
-			isupgraded           	 = isUpgraded,
-		},   
+--		customparams             = {
+--			isupgraded           	 = isUpgraded,
+--		},   
 		
 		damage                   = {
 			default              = 1,
