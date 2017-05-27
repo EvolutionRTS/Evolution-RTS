@@ -23,7 +23,7 @@ unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 28,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = false,
@@ -59,7 +59,7 @@ unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 500,
 	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 2,
 	turninplacespeedlimit        = 4,
@@ -69,7 +69,8 @@ unitDef                    = {
 	moveState			         = "0",
 	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "eallterrshield.s3o",
+	objectName                   = objectName,
+	script	                     = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "hugeExplosionGenericPurple",
@@ -144,7 +145,7 @@ unitDef                    = {
 
 --------------------------------------------------------------------------------
 
-local weaponDefs                 = {
+weaponDefs                 = {
 	allterrshield                = {
 		
 		Smartshield              = true,
@@ -154,9 +155,9 @@ local weaponDefs                 = {
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
 		Shieldradius             = 300,
-		Shieldpower              = shield1Power,
-		Shieldpowerregen         = shield1PowerRegen,
-		Shieldpowerregenenergy   = shield1PowerRegenEnergy,
+		Shieldpower              = 1500,
+		Shieldpowerregen         = 15,
+		Shieldpowerregenenergy   = 1.5,
 		Shieldintercepttype      = 4,
 		Shieldgoodcolor          = "0.0 0.2 1.0",
 		Shieldbadcolor           = "1.0 0 0",
@@ -166,16 +167,13 @@ local weaponDefs                 = {
 		
 		visibleShieldHitFrames   = 1,
 		weaponType               = [[Shield]],
+		
+		customparams             = {
+			isupgraded           	 = isUpgraded,
+		},   
+		
 		damage                   = {
 			default              = 1,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

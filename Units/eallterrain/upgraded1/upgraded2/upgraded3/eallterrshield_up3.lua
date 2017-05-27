@@ -1,22 +1,22 @@
--- UNITDEF -- eallterranarchid -- Anarchid --
+-- UNITDEF -- eallterrshield -- Widow --
 --------------------------------------------------------------------------------
 
-unitName = "eallterranarchid"
+unitName = "eallterrshield_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
-humanName = [[Anarchid]]
+humanName = [[Widow]]
 
-objectName = "eallterranarchid.s3o"
-script = "eallterranarchid.cob"
+objectName = "eallterrshield.s3o"
+script = "eallterrshield.cob"
 
-tech = [[tech3]]
-armortype = [[armored]]
-supply = [[12]]
+tech = [[tech1]]
+armortype = [[light]]
+supply = [[5]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrshield_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
