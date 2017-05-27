@@ -1,22 +1,22 @@
--- UNITDEF -- eallterrassault -- Anvil --
+-- UNITDEF -- eallterranarchid -- Anarchid --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterranarchid_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[Anvil]]
+humanName = [[Anarchid Mark III]]
 
-objectName = "eallterrassault.s3o"
-script = "eallterrassault.cob"
+objectName = "eallterranarchid.s3o"
+script = "eallterranarchid.cob"
 
-tech = [[tech1]]
+tech = [[tech3]]
 armortype = [[armored]]
-supply = [[8]]
+supply = [[12]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterranarchid_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

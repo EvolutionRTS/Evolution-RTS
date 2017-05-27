@@ -1,16 +1,6 @@
--- UNITDEF -- EMINIFAC_t2 --
---------------------------------------------------------------------------------
+-- ALL TERRAIN FACTORY : DEFFOS FOR INHERITING
 
-local unitName                     = "eminifac_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 460
-local maxDamage					  = buildCostMetal * 12.5
-
-local armortype					 = [[building]]
-
-local unitDef                      = {
+unitDef                      = {
 
 	activatewhenbuilt              = false,
 	buildAngle                     = 1024,
@@ -44,8 +34,9 @@ local unitDef                      = {
 	
 	-- End Cloaking
 
-	description                    = [[Build a Tech Facility to unlock units. Build Supply Depots to increase your army size.
-Armortype: ]] ..armortype,
+--	description                    = [[Build a Tech Facility to unlock units. Build Supply Depots to increase your army size.
+-- Armortype: ]] ..armortype,
+	description = [[poopoo]],
 	energyStorage                  = 0,
 	energyUse                      = 0,
 	energyMake                     = 0,
@@ -60,9 +51,9 @@ Armortype: ]] ..armortype,
 	maxWaterDepth                  = 0,
 	metalStorage                   = 0,
 	metalMake                      = 0,
-	name                           = "All-Terrain Factory Upgraded",
-	objectName                     = "eallterrfac2.s3o",
-	script			               = "eallterrfac2.cob",
+	name                           = humanName,
+	objectName                     = objectName,
+	script			               = script,
 	radarDistance                  = 0,
 	repairable		               = false,
 	selfDestructAs                 = "LARGE_BUILDING",
@@ -88,17 +79,7 @@ Armortype: ]] ..armortype,
 			"custom:fusionreactionbasic",
 		},
 	},
-	buildoptions                   = {
---		"eallterrengineer_t2", --new
-		"eallterrlight_t2",
-		"eallterrriot_t2",
---		"eallterraa",
-		"eallterrmed_t2",
-		"eallterrheavy_t2",
-		"eallterrassault_t2",
-		"eallterranarchid_t2",
-		"eallterrshield_t2",
-	},
+	buildoptions                   = AllTerrainFactoryBuildList,
 	sounds                         = {
 		underattack                = "unitsunderattack1",
 		select                     = {
@@ -108,9 +89,10 @@ Armortype: ]] ..armortype,
 	customParams                   = {
 		unittype				  = "building",
 		death_sounds               = "generic",
-		armortype                  = armortype, 
+		armortype                  = "building", 
 		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                  = "unittextures/lego2skin_explorerbucket.dds",
+		factionname					= "outer_colonies",
 		--	ProvideTech            = "1 Powergrid",
 		--    ProvideTechRange     = "1500",
 		--	groundtexselectimg     = ":nc:bitmaps/power/powergrid.png",
@@ -123,10 +105,3 @@ Armortype: ]] ..armortype,
 	BuildingGroundDecalSizeY       = 27,
 	BuildingGroundDecalDecaySpeed  = 0.9,
 }
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]      = unitDef })
-
---------------------------------------------------------------------------------

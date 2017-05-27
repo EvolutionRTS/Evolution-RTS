@@ -1,22 +1,22 @@
--- UNITDEF -- eallterrassault -- Anvil --
+-- UNITDEF -- eallterrmed -- Basher --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterrmed_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
-humanName = [[Anvil]]
+humanName = [[Basher Mark IV]]
 
-objectName = "eallterrassault.s3o"
-script = "eallterrassault.cob"
+objectName = "eallterrmed2.s3o"
+script = "eallterrmed.cob"
 
-tech = [[tech1]]
+tech = [[tech2]]
 armortype = [[armored]]
-supply = [[8]]
+supply = [[4]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrmed_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

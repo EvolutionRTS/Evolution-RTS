@@ -1,20 +1,20 @@
--- UNITDEF -- eallterrassault -- Anvil --
+-- UNITDEF -- eallterranarchid -- Anarchid --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterranarchid"
 
 --------------------------------------------------------------------------------
 
 isUpgraded = [[0]]
 
-humanName = [[Anvil]]
+humanName = [[Anarchid]]
 
-objectName = "eallterrassault.s3o"
-script = "eallterrassault.cob"
+objectName = "eallterranarchid.s3o"
+script = "eallterranarchid.cob"
 
-tech = [[tech1]]
+tech = [[tech3]]
 armortype = [[armored]]
-supply = [[8]]
+supply = [[12]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
 
