@@ -154,3 +154,46 @@ Shared.buildListAmphibFactory_up3 = {
 		[[eamphibarty_up3]],
 		[[eamphibleveler_up3]],
 }
+
+--
+--
+
+Shared.buildListAllTerrainFactory = {
+		[[eallterrlight]],
+		[[eallterrriot]],
+		[[eallterrmed]],
+		[[eallterrheavy]],
+		[[eallterrassault]],
+		[[eallterranarchid]],
+		[[eallterrshield]],
+}
+
+Shared.buildListAllTerrainFactory_up1 = {
+		[[eallterrlight_up1]],
+		[[eallterrriot_up1]],
+		[[eallterrmed_up1]],
+		[[eallterrheavy_up1]],
+		[[eallterrassault_up1]],
+		[[eallterranarchid_up1]],
+		[[eallterrshield_up1]],
+}
+
+Shared.buildListAllTerrainFactory_up2 = {
+		[[eallterrlight_up2]],
+		[[eallterrriot_up2]],
+		[[eallterrmed_up2]],
+		[[eallterrheavy_up2]],
+		[[eallterrassault_up2]],
+		[[eallterranarchid_up2]],
+		[[eallterrshield_up2]],
+}
+
+Shared.buildListAllTerrainFactory_up3 = {
+		[[eallterrlight_up3]],
+		[[eallterrriot_up3]],
+		[[eallterrmed_up3]],
+		[[eallterrheavy_up3]],
+		[[eallterrassault_up3]],
+		[[eallterranarchid_up3]],
+		[[eallterrshield_up3]],
+}

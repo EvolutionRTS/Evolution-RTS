@@ -1,22 +1,22 @@
--- UNITDEF -- eallterrassault -- Anvil --
+-- UNITDEF -- eallterrlight -- Recluse --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterrlight_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Anvil]]
+humanName = [[Recluse Mark II]]
 
-objectName = "eallterrassault.s3o"
-script = "eallterrassault.cob"
+objectName = "eallterrlight2.s3o"
+script = "eallterrlight.cob"
 
 tech = [[tech1]]
-armortype = [[armored]]
-supply = [[8]]
+armortype = [[light]]
+supply = [[2]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrlight_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

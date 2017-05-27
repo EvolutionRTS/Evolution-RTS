@@ -1,11 +1,11 @@
 -- UNITDEF -- eallterrassault -- Anvil --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterrassault_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
 humanName = [[Anvil]]
 

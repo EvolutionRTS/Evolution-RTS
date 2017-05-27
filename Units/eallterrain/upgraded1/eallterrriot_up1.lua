@@ -1,22 +1,22 @@
--- UNITDEF -- eallterrassault -- Anvil --
+-- UNITDEF -- eallterrriot -- Mossberg --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterrriot_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Anvil]]
+humanName = [[Mossberg Mark II]]
 
-objectName = "eallterrassault.s3o"
-script = "eallterrassault.cob"
+objectName = "eallterrriot2.s3o"
+script = "eallterrriot.cob"
 
 tech = [[tech1]]
-armortype = [[armored]]
-supply = [[8]]
+armortype = [[light]]
+supply = [[3]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrriot_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
