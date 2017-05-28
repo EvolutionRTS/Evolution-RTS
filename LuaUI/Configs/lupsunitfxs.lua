@@ -276,7 +276,33 @@ effectUnitDefs = {
     {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=305, precision=0, strength   = 0.001, repeatEffect=true}},
   },
   
-	eallterrshield_t2 = {
+	eallterrshield_up1 = {
+	{class='ShieldSphere',options=ShieldSphere300},
+	{class='Bursts',options=shieldBursts300},
+--    {class='StaticParticles', options=corfusNova},
+--    {class='StaticParticles', options=corfusNova2},
+--    {class='StaticParticles', options=corfusNova3},
+--    {class='StaticParticles', options=corfusNova4},
+
+--    {class='Bursts', options=efusion2Bursts},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=305, precision=0, strength   = 0.001, repeatEffect=true}},
+  },
+  
+  
+	eallterrshield_up2 = {
+	{class='ShieldSphere',options=ShieldSphere300},
+	{class='Bursts',options=shieldBursts300},
+--    {class='StaticParticles', options=corfusNova},
+--    {class='StaticParticles', options=corfusNova2},
+--    {class='StaticParticles', options=corfusNova3},
+--    {class='StaticParticles', options=corfusNova4},
+
+--    {class='Bursts', options=efusion2Bursts},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=305, precision=0, strength   = 0.001, repeatEffect=true}},
+  },
+  
+  
+	eallterrshield_up3 = {
 	{class='ShieldSphere',options=ShieldSphere300},
 	{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},

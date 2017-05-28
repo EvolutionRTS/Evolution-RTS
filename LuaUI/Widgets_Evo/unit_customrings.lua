@@ -91,7 +91,13 @@ local ringsDefs = {
 	[UnitDefNames.eallterrshield.id] = {
         { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 300 },
     },
-	[UnitDefNames.eallterrshield_t2.id] = {
+	[UnitDefNames.eallterrshield_up1.id] = {
+        { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 300 },
+    },
+	[UnitDefNames.eallterrshield_up2.id] = {
+        { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 300 },
+    },
+	[UnitDefNames.eallterrshield_up3.id] = {
         { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 300 },
     },
 }

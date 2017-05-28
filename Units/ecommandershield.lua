@@ -254,6 +254,9 @@ local weaponDefs                 = {
 		
 		visibleShieldHitFrames   = 1,
 		weaponType               = [[Shield]],
+		customparams             = {
+			nocosttofire		 = true,
+		},      
 		damage                   = {
 			default              = 1,
 		},

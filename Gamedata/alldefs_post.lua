@@ -207,14 +207,40 @@ function WeaponDef_Post(name, wDef)
 	if wDef.customparams and wDef.customparams.isupgraded == "1" then
 		wDef.reloadtime = wDef.reloadtime * 0.85
 		wDef.damage.default = wDef.damage.default * 1.20
+		if wDef.exteriorshield == true and wDef.shieldpower < 0 then
+			wDef.shieldpower = wDef.shieldpower * 1.20
+		end
 	end
 	if wDef.customparams and wDef.customparams.isupgraded == "2" then
 		wDef.reloadtime = wDef.reloadtime * 0.70
 		wDef.damage.default = wDef.damage.default * 1.35
+		if wDef.exteriorshield == true and wDef.shieldpower < 0 then
+			wDef.shieldpower = wDef.shieldpower * 1.35
+		end
 	end
 	if wDef.customparams and wDef.customparams.isupgraded == "3" then
 		wDef.reloadtime = wDef.reloadtime * 0.65
 		wDef.damage.default = wDef.damage.default * 1.50
+		if wDef.exteriorshield == true and wDef.shieldpower < 0 then
+			wDef.shieldpower = wDef.shieldpower * 1.50
+		end
+	end
+	
+	--Handle Shields
+	if wDef.customparams and wDef.customparams.isshieldupgraded == "1" then
+		if wDef.exteriorshield == true then
+			wDef.shieldpower = wDef.shieldpower * 1.20
+		end
+	end
+	if wDef.customparams and wDef.customparams.isshieldupgraded == "2" then
+		if wDef.exteriorshield == true then
+			wDef.shieldpower = wDef.shieldpower * 1.35
+		end
+	end
+	if wDef.customparams and wDef.customparams.isshieldupgraded == "3" then
+		if wDef.exteriorshield == true then
+			wDef.shieldpower = wDef.shieldpower * 1.50
+		end
 	end
 	
 	--------------------------------------------------------------------------------
@@ -242,6 +268,16 @@ function WeaponDef_Post(name, wDef)
 			return math.floor(energycosttofire*10 + 0.5)*0.1
 		end
 		wDef.energypershot = energycosttofire	
+	end
+	
+	--Set shield energy cost to recharge
+	if wDef.exteriorshield == true then
+		if wDef.customparams and wDef.customparams.nocosttofire == true then
+			wDef.shieldpowerregenenergy = 0
+		else
+			wDef.shieldpowerregenenergy = math.floor(wDef.shieldpowerregen * 0.05 * wDef.shieldradius^0.25 * 0.5 * 10 + 0.5) * 0.1
+			--Spring.Echo("Energy usage is " .. wDef.shieldpowerregenenergy)
+		end		
 	end
 	
 	--------------------------------------------------------------------------------

@@ -157,7 +157,7 @@ weaponDefs                 = {
 		Shieldradius             = 300,
 		Shieldpower              = 1500,
 		Shieldpowerregen         = 15,
-		Shieldpowerregenenergy   = 1.5,
+		Shieldpowerregenenergy   = 0,
 		Shieldintercepttype      = 4,
 		Shieldgoodcolor          = "0.0 0.2 1.0",
 		Shieldbadcolor           = "1.0 0 0",
@@ -165,15 +165,15 @@ weaponDefs                 = {
 		
 		texture1		         = "shield4",
 		
-		visibleShieldHitFrames   = 1,
+		visibleShieldHitFrames   = 0,
 		weaponType               = [[Shield]],
 		
---		customparams             = {
---			isupgraded           	 = isUpgraded,
---		},   
+		customparams             = {
+			isshieldupgraded     = isUpgraded,
+		},   
 		
 		damage                   = {
-			default              = 1,
+			default              = 0,
 		},
 	},
 }
