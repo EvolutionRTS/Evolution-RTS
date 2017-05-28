@@ -1,34 +1,29 @@
--- UNITDEF -- EALLTERRSHIELD_t2 --
+-- UNITDEF -- EALLTERRSHIELD --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eallterrshield_t2"
+-- local unitName                   = "eallterrshield"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal 			  = 28
-local maxDamage					  = 500 * 1.20
+-- local buildCostMetal 			  = 28
+-- local maxDamage					  = 500
 
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[5]]
+-- local tech						 = [[tech1]]
+-- local armortype					 = [[light]]
+-- local supply					 = [[5]]
 
-local shield1Power               = 1500 * 1.20
-local shield1PowerRegen          = 15 * 1.20
-local shield1PowerRegenEnergy    = shield1PowerRegen / 10
-
-
-local unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
+-- local shield1Power               = 1500
+-- local shield1PowerRegen          = 15
+-- local shield1PowerRegenEnergy    = shield1PowerRegen / 10
 
 
+-- local 
+
+unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 28,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = false,
@@ -64,7 +59,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 500,
 	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 2,
 	turninplacespeedlimit        = 4,
@@ -72,10 +67,10 @@ local unitDef                    = {
 	metalStorage                 = 0,
 	movementClass                = "ALLTERRTANK5",
 	moveState			         = "0",
-	name                         = "Widow Upgraded",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "eallterrshield.s3o",
-	script	                     = "eallterrshield.cob",
+	objectName                   = objectName,
+	script	                     = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "hugeExplosionGenericPurple",
@@ -83,9 +78,10 @@ local unitDef                    = {
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
+	transportbyenemy             = false;
 	turnInPlace                  = true,
 	turnRate                     = 5000,
-	unitname                     = unitName,
+	unitname                     = "eallterrshield",
 	upright			             = false,
 	workerTime                   = 0,
 	sfxtypes                     = { 
@@ -115,7 +111,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		isupgraded           	 = isUpgraded,
 		canbetransported 		 = "true",
 		needed_cover             = 3,
 		death_sounds             = "generic",
@@ -125,14 +121,14 @@ local unitDef                    = {
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+		factionname	             = "outer_colonies",
+-- 		helptext				 = [[Armortype: ]] ..armortype.. [[ 
 
-Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
-Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
-Maximum shield power is ]] .. shield1Power ..[[hp
-Shield can link with other shield units to increase charging and capacity
-Generates a Cloaking Field]],
+-- Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
+-- Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
+-- Maximum shield power is ]] .. shield1Power ..[[hp
+-- Shield can link with other shield units to increase charging and capacity
+-- Generates a Cloaking Field]],
 		
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 5, -- How much energy does it cost to maintain the cloaking field?
@@ -149,7 +145,7 @@ Generates a Cloaking Field]],
 
 --------------------------------------------------------------------------------
 
-local weaponDefs                 = {
+weaponDefs                 = {
 	allterrshield                = {
 		
 		Smartshield              = true,
@@ -159,28 +155,25 @@ local weaponDefs                 = {
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
 		Shieldradius             = 300,
-		Shieldpower              = shield1Power,
-		Shieldpowerregen         = shield1PowerRegen,
-		Shieldpowerregenenergy   = shield1PowerRegenEnergy,
+		Shieldpower              = 1500,
+		Shieldpowerregen         = 15,
+		Shieldpowerregenenergy   = 1.5,
 		Shieldintercepttype      = 4,
 		Shieldgoodcolor          = "0.0 0.2 1.0",
 		Shieldbadcolor           = "1.0 0 0",
-		Shieldalpha              = 0.3,
+		Shieldalpha              = 0.2,
 		
 		texture1		         = "shield4",
 		
-		visibleShieldHitFrames   = 50,
+		visibleShieldHitFrames   = 1,
 		weaponType               = [[Shield]],
+		
+--		customparams             = {
+--			isupgraded           	 = isUpgraded,
+--		},   
+		
 		damage                   = {
 			default              = 1,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

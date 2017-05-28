@@ -1,22 +1,22 @@
--- UNITDEF -- eallterrassault -- Anvil --
+-- UNITDEF -- eallterrshield -- Widow --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterrshield_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Anvil]]
+humanName = [[Widow Mark II]]
 
-objectName = "eallterrassault.s3o"
-script = "eallterrassault.cob"
+objectName = "eallterrshield.s3o"
+script = "eallterrshield.cob"
 
 tech = [[tech1]]
-armortype = [[armored]]
-supply = [[8]]
+armortype = [[light]]
+supply = [[5]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrshield_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

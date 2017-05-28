@@ -1,44 +1,40 @@
--- UNITDEF -- eallterranarchid_t2 --
+-- UNITDEF -- eallterranarchid --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eallterranarchid_t2"
+-- local unitName                   = "eallterranarchid"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal 			  = 225
-local maxDamage					  = 2750 * 1.20
+-- local buildCostMetal 			  = 225
+-- local maxDamage					  = 2750
 
-local tech						 = [[tech3]]
-local armortype					 = [[armored]]
-local supply					 = [[12]]
+-- local tech						 = [[tech3]]
+-- local armortype					 = [[armored]]
+-- local supply					 = [[12]]
 
-local weapon1Damage              = 300 * 1.20
-local weapon1AOE				 = 10
-local weapon2Damage              = 25 * 1.20
-local weapon2AOE				 = 1
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
+-- local weapon1Damage              = 300
+-- local weapon1AOE				 = 10
+-- local weapon2Damage              = 25
+-- local weapon2AOE				 = 1
+-- local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+-- local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
 
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
+-- local function roundToFirstDecimal(energycosttofire)
+    -- return math.floor(energycosttofire*10 + 0.5)*0.1
+-- end
 
-local function roundToFirstDecimal(energycosttofire2)
-    return math.floor(energycosttofire2*10 + 0.5)*0.1
-end
+-- local function roundToFirstDecimal(energycosttofire2)
+    -- return math.floor(energycosttofire2*10 + 0.5)*0.1
+-- end
 
-local unitDef                    = {
+-- local 
 
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
+unitDef                    = {
 
 	acceleration                 = 0.18,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 225,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -75,16 +71,16 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 2750,
 	maxVelocity                  = 2.5,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 80,
 	metalStorage                 = 0,
 	movementClass                = "ALLTERRTANK6",
-	name                         = "Anarchid Upgraded",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "eallterranarchid.s3o",
-	script	                     = "eallterranarchid.cob",
+	objectName                   = objectName,
+	script	                     = script,
 	pushResistant		         = true,
 	radarDistance                = 0,
 	repairable		             = false,
@@ -94,6 +90,7 @@ local unitDef                    = {
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 4,
+	transportbyenemy             = false;
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	unitname                     = unitName,
@@ -135,7 +132,8 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+--		unittype				  = "mobile",
+		isupgraded           	 = isUpgraded,
 		death_sounds             = "nuke",
 		RequireTech              = tech,
 		armortype                = armortype,
@@ -143,10 +141,10 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+--		helptext				 = [[Armortype: ]] ..armortype.. [[ 
 	
-Energy cost to fire Primary Laser: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
-Energy cost to fire Secondary Cannons: ]] .. roundToFirstDecimal(energycosttofire2),
+--Energy cost to fire Primary Laser: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
+--Energy cost to fire Secondary Cannons: ]] .. roundToFirstDecimal(energycosttofire2),
 	},
 }
 
@@ -154,9 +152,9 @@ Energy cost to fire Secondary Cannons: ]] .. roundToFirstDecimal(energycosttofir
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weaponDefs                 = {
+weaponDefs                 = {
 	heavybeamweapon              = {
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 10,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -166,7 +164,7 @@ local weaponDefs                 = {
 		coreThickness            = 0.2,
 		--	cegTag               = "mediumcannonweapon3",
 		--    duration           = 0.2,
-		energypershot            = energycosttofire,
+		energypershot            = 0,
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		fallOffRate              = 1,
 		fireStarter              = 50,
@@ -190,19 +188,20 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 800,
 		customparams             = {
+			isupgraded           	 = isUpgraded,
 			damagetype		     = "eallterranarchid",  
 			
 			--Upgrades--
 			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 300,
 		},
 	},
 
-	concussioncannon             = {
+	--[[ concussioncannon             = {
 		accuracy                 = 1,
-		AreaOfEffect             = weapon2AOE,
+		AreaOfEffect             = 2,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -210,7 +209,7 @@ local weaponDefs                 = {
 		cylinderTargeting        = true,
 		burnblow                 = true,
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = energycosttofire2,
+		energypershot            = 0,
 		fireStarter              = 80,
 		id                       = 1,
 		impulseFactor            = 0.1,
@@ -231,13 +230,14 @@ local weaponDefs                 = {
 			upgradeClass		 = "groundweapons",
 		},
 		damage                   = {
-			default              = weapon2Damage,
+			default              = 25,
 		},
-	},
+	}, ]]--
+	
 	flamethrower                 = {
 		
 		accuracy                 = 0,
-		AreaOfEffect             = weapon2AOE,
+		AreaOfEffect             = 1,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
@@ -264,19 +264,11 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 400,
 		customparams             = {
+			isupgraded           	 = isUpgraded,
 			damagetype		     = "eallterranarchidflame",  
 		},      
 		damage                   = {
-			default              = weapon2Damage,
+			default              = 25,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------
-

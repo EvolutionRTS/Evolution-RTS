@@ -1,22 +1,22 @@
--- UNITDEF -- eallterrassault -- Anvil --
+-- UNITDEF -- eallterrheavy -- Sledge --
 --------------------------------------------------------------------------------
 
-unitName = "eallterrassault"
+unitName = "eallterrheavy_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
-humanName = [[Anvil]]
+humanName = [[Sledge Mark IV]]
 
-objectName = "eallterrassault.s3o"
-script = "eallterrassault.cob"
+objectName = "eallterrheavy2.s3o"
+script = "eallterrheavy.cob"
 
-tech = [[tech1]]
+tech = [[tech2]]
 armortype = [[armored]]
-supply = [[8]]
+supply = [[6]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrassault_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterrheavy_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

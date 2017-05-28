@@ -1,26 +1,7 @@
--- UNITDEF -- EALLTERRMED_t2 --
+-- UNITDEF -- EALLTERRLIGHT DEFFOS FOR INHERITANCE --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eallterrmed_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 44
-local maxDamage					  = 500 * 1.20
-
-local tech						 = [[tech2]]
-local armortype					 = [[armored]]
-local supply					 = [[4]]
-
-local weapon1Damage              = 200 * 1.20
-local weapon1AOE				 = 1
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -31,7 +12,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 22,
 	builder                      = false,
 	buildTime                    = 5,
 	canAttack                    = true,
@@ -40,7 +21,7 @@ local unitDef                    = {
 	canMove                      = true,
 	canPatrol                    = true,
 	canstop                      = "1",
-	category                     = "ARMORED NOTAIR SKIRMISHER",
+	category                     = "LIGHT NOTAIR RAID",
 	corpse                       = "ammobox",
 
 	-- Cloaking
@@ -55,34 +36,33 @@ local unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Unit Type: Armored Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Unit Type: Raider • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
-	explodeAs                    = "mediumExplosionGenericPurple",
+	explodeAs                    = "smallExplosionGeneric",
+	firestandorders              = "1",
 	footprintX                   = 4,
 	footprintZ                   = 4,
-	iconType                     = "td_arm_arm",
+	iconType                     = "raider",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
-	maxSlope                     = 180,
-	maxVelocity                  = 3.5,
-	maxReverseVelocity           = 1,
-	turninplacespeedlimit        = 4,
+	maxDamage                    = 245,
+	maxVelocity                  = 5.5,
+	maxReverseVelocity           = 2,
+	turninplacespeedlimit        = 5.5,
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
-	mobilestandorders            = "1",
 	movementClass                = "ALLTERRTANK4",
-	name                         = "Basher Upgraded",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "eallterrmed2.s3o",
-	script	                     = "eallterrmed.cob",
+	objectName                   = objectName,
+	script	                     = script,
 	radarDistance                = 0,
 	repairable		             = false,
-	selfDestructAs               = "mediumExplosionGenericPurple",
-	sightDistance                = 600,
+	selfDestructAs               = "smallExplosionGeneric",
+	sightDistance                = 500,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -98,7 +78,7 @@ local unitDef                    = {
 		}, 
 
 		explosiongenerators      = {
-			"custom:gdhcannon",
+			"custom:factorysparks",
 			"custom:dirtsmall",
 			"custom:blacksmoke",
 		},
@@ -114,15 +94,14 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "mediumtankcannon",
-			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
-			badTargetCategory    = "BUILDING LIGHT WALL",
+			def                  = "lighttankweapon",
+			badTargetCategory    = "BUILDING ARMORED WALL",
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		isupgraded               = isUpgraded,
 		canbetransported 		 = "true",
-		needed_cover             = 2,
+		needed_cover             = 1,
 		death_sounds             = "generic",
 		RequireTech              = tech,
 		armortype                = armortype,
@@ -131,9 +110,9 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+--		helptext				 = [[Armortype: ]] ..armortype.. [[ 
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+-- Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
@@ -141,21 +120,18 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weaponDefs                 = {
-	mediumtankcannon             = {
+	weaponDefs                 = {
+	lighttankweapon              = {
 		
-		AreaOfEffect             = weapon1AOE,
-		avoidFriendly            = false,
+		AreaOfEffect             = 1,
 		avoidFeature             = false,
-		collideFriendly          = false,
+		avoidFriendly            = false,
 		collideFeature           = false,
-		beamTime                 = 0.1,
-		
-		coreThickness            = 0.5,
-		--	cegTag               = "mediumcannonweapon3",
+		collideFriendly          = false,
+		coreThickness            = 0.3,
 		duration                 = 0.1,
-		energypershot            = energycosttofire,
-		explosionGenerator       = "custom:genericshellexplosion",
+		energypershot            = 0,
+		explosionGenerator       = "custom:genericshellexplosion-small-blue",
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		impulseFactor            = 0,
@@ -163,37 +139,28 @@ local weaponDefs                 = {
 		
 		minintensity             = "1",
 		name                     = "Laser",
-		range                    = 600,
-		reloadtime               = 1,
+		range                    = 350,
+		reloadtime               = 0.5,
 		WeaponType               = "LaserCannon",
-		rgbColor                 = "1 0.5 0",
+		rgbColor                 = "0.5 0.8 1",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		soundstart               = "medallterrweapon.wav",
-		soundHit                 = "mediumcannonhit.wav",
+		soundstart               = "heavycannonGD.wav",
 		texture1                 = "shot",
 		texture2                 = "empty",
-		thickness                = 9,
+		thickness                = 6,
 		tolerance                = 1000,
 		turret                   = true,
-		weaponVelocity           = 1000,
+		weaponVelocity           = 2000,
 		customparams             = {
-			damagetype		     = "eallterrmed",  
+			isupgraded           = isUpgraded,
+			damagetype		     = "eallterrlight",  
 			
 			--Upgrades--
 			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 50,
 		},
 	},
-
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------
