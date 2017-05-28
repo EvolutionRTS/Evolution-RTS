@@ -159,6 +159,7 @@ local weaponDefs                 = {
 		--noExplode			   = true,
 		range                  = weapon1Range,
 		reloadtime             = 1,
+		size					 = 16,
 		--projectiles			   = projectiles,
 		weaponType		       = "Cannon",
 		soundStart             = "bruisercannon.wav",

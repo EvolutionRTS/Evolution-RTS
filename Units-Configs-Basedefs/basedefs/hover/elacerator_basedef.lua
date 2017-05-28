@@ -108,6 +108,7 @@ weaponDefs                 = {
 		name                     = "Light Cannon",
 		range                    = 1500,
 		reloadtime               = 5,
+		size					 = 16,
 		weaponType		         = "Cannon",
 		soundHit                 = "nukeartyhit.wav",
 		soundStart               = "nukeartyshot.wav",

@@ -123,6 +123,7 @@ local weaponDefs                  = {
 		name                     = "Plasma Cannon",
 		range                    = 3500,
 		reloadtime               = 25,
+		size					 = 16,
 		weaponType		         = "Cannon",
 		soundHit                 = "artyhit.wav",
 		soundStart               = "arty2.wav",

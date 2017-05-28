@@ -111,6 +111,7 @@ weaponDefs                 = {
 		name                     = unitName .. "Weapon",
 		range                    = 650,
 		reloadtime               = 1,
+		size					 = 16,
 		weaponType		         = "Cannon",
 		soundHit                 = "42024_digifishmusic_Missile_Strike.wav",
 		soundStart               = "triotfire.wav",
