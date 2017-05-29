@@ -1,17 +1,6 @@
--- UNITDEF -- ESCOUT_t2 --
+-- UNITDEF -- ESCOUT --
 --------------------------------------------------------------------------------
-
-local unitName                   = "escout_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 40
-local maxDamage					  = 160 * 1.20
-
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -54,9 +43,9 @@ local unitDef                    = {
 	verticalSpeed		         = 15,
 	maxWaterDepth                = 0,
 	metalStorage                 = 0,
-	name                         = "AirScout Upgraded",
-	objectName                   = "escout2.s3o",
-	script			             = "escout2.cob",
+	name                         = humanName,
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 1500,
 	SonarDistance                = 1500,
 	SeismicDistance	             = 1500,
@@ -89,21 +78,16 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		--	unittype				  = "mobile",
 		--    needed_cover       = 1,
+		isupgraded               = isUpgraded,
 		death_sounds             = "generic",
 		RequireTech              = tech,
 		armortype                = armortype,
+		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype,
+		--	helptext				 = [[Armortype: ]] ..armortype,
 	},
 }
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

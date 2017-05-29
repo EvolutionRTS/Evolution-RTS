@@ -1,26 +1,25 @@
--- UNITDEF -- EFIGHTER --
+-- UNITDEF -- ESCOUT --
 --------------------------------------------------------------------------------
 
-unitName = "efighter"
+unitName = "escout_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
-humanName = [[Koyote]]
+humanName = [[AirSkout v2.0]]
 
-objectName = "efighter2.s3o"
-script = "efighter2.cob"
+objectName = "escout2.s3o"
+script = "escout2.cob"
 
 
 tech = [[tech1]]
 armortype = [[light]]
-supply = [[2]]
+supply = [[0]]
 
-VFS.Include("units-configs-basedefs/basedefs/air/efighter_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/air/escout_basedef.lua")
 
-unitDef.weaponDefs = weaponDefs
-
+-- unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName] = unitDef })

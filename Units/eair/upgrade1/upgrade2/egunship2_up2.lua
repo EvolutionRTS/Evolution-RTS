@@ -1,23 +1,23 @@
--- UNITDEF -- EFIGHTER --
+-- UNITDEF -- EGUNSHIP --
 --------------------------------------------------------------------------------
 
-unitName = "efighter"
+unitName = "egunship2_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[Koyote]]
+humanName = [[Wildkat v1.2]]
 
-objectName = "efighter2.s3o"
-script = "efighter2.cob"
+objectName = "egunship3.s3o"
+script = "egunship3.cob"
 
 
-tech = [[tech1]]
+tech = [[tech2]]
 armortype = [[light]]
-supply = [[2]]
+supply = [[4]]
 
-VFS.Include("units-configs-basedefs/basedefs/air/efighter_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/air/egunship2_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 

@@ -1,26 +1,6 @@
--- UNITDEF -- EGUNSHIP2-T --
+-- UNITDEF -- EGUNSHIP2 --
 --------------------------------------------------------------------------------
-
-local unitName                   = "egunship2_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 50
-local maxDamage					  = 375 * 1.20
-
-local tech						 = [[tech2]]
-local armortype					 = [[light]]
-local supply					 = [[4]]
-
-local weapon1Damage              = 150 * 1.20
-local weapon1AOE				 = 1
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -32,7 +12,7 @@ local unitDef                    = {
 	airStrafe                    = false,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 50,
 	buildTime                    = 2.5,
 	canAttack                    = true,
 	canDropFlare                 = false,
@@ -62,16 +42,16 @@ local unitDef                    = {
 	iconType                     = "air_arm",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 375,
 	maxSlope                     = 90,
 	maxVelocity                  = 9,
 	verticalSpeed		         = 15,
 	maxWaterDepth                = 0,
 	metalStorage                 = 0,
 	moverate1                    = "8",
-	name                         = "Wildcat Upgraded",
-	objectName                   = "egunship3.s3o",
-	script			             = "egunship3.cob",
+	name                         = humanName,
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "largeExplosionGenericRed",
@@ -105,14 +85,14 @@ local unitDef                    = {
 			def                  = "gunshipweapon",
 			mainDir              = "0 0 1",
 			maxAngleDif          = 180,
-			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
-			BadTargetCategory    = "BUILDING WALL",
+			BadTargetCategory    = "LIGHT BUILDING WALL",
 			noChaseCategory      = "VTOL",
 		},
 	},
 	customParams                 = {
 		unittype				  = "mobile",
 		--    needed_cover       = 2,
+		isupgraded               = isUpgraded,
 		canareaattack            ="1",
 		death_sounds             = "generic",
 		RequireTech              = tech,
@@ -122,12 +102,12 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+		--helptext				 = [[Armortype: ]] ..armortype.. [[ 
 
-150 Damage vs Light/Armored
-75 Damage vs Building
+--150 Damage vs Light/Armored
+--75 Damage vs Building
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+--Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
@@ -135,17 +115,17 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weaponDefs                 = {
+weaponDefs                 = {
 
 	gunshipweapon             = {
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 1,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		cegTag                   = "missiletrailgunshiplesssmokey",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = energycosttofire,
+		energypershot            = 0,
 		edgeEffectiveness        = 0.1,
 		fireStarter              = 70,
 		tracks                   = true,
@@ -172,18 +152,11 @@ local weaponDefs                 = {
 		flightTime               = 5,
 		weaponVelocity           = 2000,
 		customparams             = {
+			isupgraded           = isUpgraded,
 			damagetype		     = "egunship2",  
 		},      
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 150,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

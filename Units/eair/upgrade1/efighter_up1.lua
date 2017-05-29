@@ -1,13 +1,13 @@
 -- UNITDEF -- EFIGHTER --
 --------------------------------------------------------------------------------
 
-unitName = "efighter"
+unitName = "efighter_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Koyote]]
+humanName = [[Koyote v1.1]]
 
 objectName = "efighter2.s3o"
 script = "efighter2.cob"
