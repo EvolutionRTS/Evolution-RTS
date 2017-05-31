@@ -1,25 +1,25 @@
--- UNITDEF -- ETRANSPORT --
+-- UNITDEF -- EFIGHTER --
 --------------------------------------------------------------------------------
 
-unitName = "etransport"
+unitName = "efighter_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[Kharter]]
+humanName = [[Koyote v1.2]]
 
-objectName = "etransport2-small.s3o"
-script = "etransport2.cob"
+objectName = "efighter2.s3o"
+script = "efighter2.cob"
 
 
---tech = [[tech1]]
-armortype = [[armored]]
-supply = [[0]]
+tech = [[tech1]]
+armortype = [[light]]
+supply = [[2]]
 
-VFS.Include("units-configs-basedefs/basedefs/air/etransport_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/air/efighter_basedef.lua")
 
--- unitDef.weaponDefs = weaponDefs
+unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName] = unitDef })

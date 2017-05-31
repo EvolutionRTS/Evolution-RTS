@@ -1,13 +1,13 @@
 -- UNITDEF -- ETRANSPORT --
 --------------------------------------------------------------------------------
 
-unitName = "etransport"
+unitName = "etransport_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Kharter]]
+humanName = [[Kharter v1.1]]
 
 objectName = "etransport2-small.s3o"
 script = "etransport2.cob"

@@ -1,23 +1,23 @@
--- UNITDEF -- ETRANSPORT --
+-- UNITDEF -- ESCOUT --
 --------------------------------------------------------------------------------
 
-unitName = "etransport"
+unitName = "escout_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[Kharter]]
+humanName = [[AirSkout v1.2]]
 
-objectName = "etransport2-small.s3o"
-script = "etransport2.cob"
+objectName = "escout2.s3o"
+script = "escout2.cob"
 
 
---tech = [[tech1]]
-armortype = [[armored]]
+tech = [[tech1]]
+armortype = [[light]]
 supply = [[0]]
 
-VFS.Include("units-configs-basedefs/basedefs/air/etransport_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/air/escout_basedef.lua")
 
 -- unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

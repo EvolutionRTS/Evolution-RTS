@@ -1,18 +1,6 @@
--- UNITDEF -- ETRANSPORT_t2 --
+-- UNITDEF -- ETRANSPORT --
 --------------------------------------------------------------------------------
-
-local unitName                   = "etransport_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 20
-local maxDamage					  = 200 * 1.20
-
---local tech						 = [[0 Generator]]
-local armortype					 = [[armored]]
-local supply					 = [[0]]
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -25,7 +13,7 @@ local unitDef                    = {
 	airHoverFactor	             = 0,
 	brakeRate                    = 2,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 20,
 	builder                      = false,
 	buildTime                    = 2.5,
 	canAttack                    = false,
@@ -50,13 +38,13 @@ local unitDef                    = {
 	holdSteady                   = true,
 	--  hoverAttack              = true,
 	icontype                     = "etransport",
-	maxDamage                    = maxDamage,
+	maxDamage                    = 200,
 	maxSlope                     = 90,
-	maxVelocity                  = 12,
+	maxVelocity                  = 7,
 	verticalSpeed		         = 30,
-	name                         = "Charter Upgraded",
-	objectName                   = "etransport2-small.s3o",
-	script			             = "etransport2.cob",
+	name                         = humanName,
+	objectName                   = objectName,
+	script			             = script,
 	releaseHeld                  = true,
 	repairable		             = false,
 	selfDestructAs               = "hugeExplosionGenericRed",
@@ -92,8 +80,9 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		-- unittype				  = "mobile",
 		--    needed_cover       = 2,
+		isupgraded				 = isUpgraded,
 		death_sounds             = "generic",
 --		RequireTech              = tech,
 		armortype                = armortype,
@@ -101,13 +90,6 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype,
+		--helptext				 = [[Armortype: ]] ..armortype,
 	},
 }
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

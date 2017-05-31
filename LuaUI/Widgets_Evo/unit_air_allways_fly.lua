@@ -59,12 +59,21 @@ function switchAirpadToFlyMode(unitID, unitDefID)
 	unitDefID == UnitDefNames["egunship2"].id or
 	unitDefID == UnitDefNames["escout"].id or
 	unitDefID == UnitDefNames["etransport"].id or
-	unitDefID == UnitDefNames["eairengineer_t2"].id or
-	unitDefID == UnitDefNames["ebomber_t2"].id or
-	unitDefID == UnitDefNames["efighter_t2"].id or
-	unitDefID == UnitDefNames["egunship2_t2"].id or
-	unitDefID == UnitDefNames["escout_t2"].id or
-	unitDefID == UnitDefNames["etransport_t2"].id) then
+	unitDefID == UnitDefNames["ebomber_up1"].id or
+	unitDefID == UnitDefNames["efighter_up1"].id or
+	unitDefID == UnitDefNames["egunship2_up1"].id or
+	unitDefID == UnitDefNames["escout_up1"].id or
+	unitDefID == UnitDefNames["etransport_up1"].id or
+	unitDefID == UnitDefNames["ebomber_up2"].id or
+	unitDefID == UnitDefNames["efighter_up2"].id or
+	unitDefID == UnitDefNames["egunship2_up2"].id or
+	unitDefID == UnitDefNames["escout_up2"].id or
+	unitDefID == UnitDefNames["etransport_up2"].id or	
+	unitDefID == UnitDefNames["ebomber_up3"].id or
+	unitDefID == UnitDefNames["efighter_up3"].id or
+	unitDefID == UnitDefNames["egunship2_up3"].id or
+	unitDefID == UnitDefNames["escout_up3"].id or
+	unitDefID == UnitDefNames["etransport_up3"].id) then
         spGiveOrderToUnit(unitID, CMD.IDLEMODE, { 0 }, {})
     end
 end

@@ -197,3 +197,33 @@ Shared.buildListAllTerrainFactory_up3 = {
 		[[eallterranarchid_up3]],
 		[[eallterrshield_up3]],
 }
+--
+--
+Shared.buildListAirPlant = {
+		[[escout]],
+		[[efighter]],
+		[[egunship2]],
+		[[ebomber]],
+		[[etransport]],
+}
+Shared.buildListAirPlant_up1 = {
+		[[escout_up1]],
+		[[efighter_up1]],
+		[[egunship2_up1]],
+		[[ebomber_up1]],
+		[[etransport_up1]],
+}
+Shared.buildListAirPlant_up2 = {
+		[[escout_up2]],
+		[[efighter_up2]],
+		[[egunship2_up2]],
+		[[ebomber_up2]],
+		[[etransport_up2]],
+}
+Shared.buildListAirPlant_up3 = {
+		[[escout_up3]],
+		[[efighter_up3]],
+		[[egunship2_up3]],
+		[[ebomber_up3]],
+		[[etransport_up3]],
+}

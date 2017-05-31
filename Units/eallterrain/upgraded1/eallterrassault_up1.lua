@@ -7,7 +7,7 @@ unitName = "eallterrassault_up1"
 
 isUpgraded = [[1]]
 
-humanName = [[Anvil]]
+humanName = [[Anvil Mark II]]
 
 objectName = "eallterrassault.s3o"
 script = "eallterrassault.cob"

@@ -1,26 +1,6 @@
--- UNITDEF -- EFIGHTER_t2 --
+-- UNITDEF -- EFIGHTER --
 --------------------------------------------------------------------------------
-
-local unitName                   = "efighter_t2"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 45
-local maxDamage					  = 325 * 1.20
-
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[2]]
-
-local weapon1Damage              = 15 * 1.20
-local weapon1AOE				 = 25
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -33,7 +13,7 @@ local unitDef                    = {
 	bankscale                    = "1",
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = buildCostMetal,
+	buildCostMetal               = 45,
 	buildTime                    = 2.5,
 	canAttack                    = true,
 	canFly                       = true,
@@ -45,7 +25,7 @@ local unitDef                    = {
 	category                     = "LIGHT VTOL",
 	collide                      = true,
 	corpse                       = "ammobox",
-	cruiseAlt                    = 200,
+	cruiseAlt                    = 100,
 	description                  = [[Light Tank Destroyer Gunship • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -60,25 +40,25 @@ local unitDef                    = {
 	idleTime                     = 2200,
 	maxAcc                       = 0.25,
 	maxBank			             = 5,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 325,
 	maxSlope                     = 90,
 	maxVelocity                  = 9,
 	verticalSpeed		         = 15,
 	maxWaterDepth                = 255,
 	metalStorage                 = 0,
 	moverate1                    = "8",
-	name                         = "Koyote Upgraded",
-	objectName                   = "efighter2.s3o",
-	script			             = "efighter2.cob",
+	name                         = humanName,
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericWhite",
 	side                         = "ARM",
-	sightDistance                = 550,
+	sightDistance                = 500,
 	smoothAnim                   = true,
 	sonarDistance                = 0,
 	turnRate                     = 5000,
-	unitname                     = unitNames,
+	unitname                     = unitName,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
@@ -104,12 +84,13 @@ local unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "aircannon",
-			badTargetCategory    = "BUILDING VTOL",
+			badTargetCategory    = "ARMORED BUILDING VTOL",
 		},
 	},
 	customParams                 = {
-		unittype				  = "mobile",
+		--unittype				  = "mobile",
 		--    needed_cover       = 2,
+		isupgraded               = isUpgraded,
 		death_sounds             = "generic",
 		RequireTech              = tech,
 		armortype                = armortype,
@@ -118,9 +99,9 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext				 = [[Armortype: ]] ..armortype.. [[ 
+		--helptext				 = [[Armortype: ]] ..armortype.. [[ 
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+--Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
@@ -128,9 +109,9 @@ Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 --------------------------------------------------------------------------------
 -- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
-local weaponDefs                 = {
+weaponDefs                 = {
 	aircannon   	             = {
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 25,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
@@ -140,9 +121,9 @@ local weaponDefs                 = {
 		--cegTag                   = "railgun",
 		duration                 = 0.1,
 		edgeeffectiveness		 = 1,
-		energypershot            = energycosttofire,
+		energypershot            = 0,
 		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
-		fallOffRate              = 1,
+		fallOffRate              = 0.1,
 		fireStarter              = 50,
 		impulseFactor            = 0,
 		fallOffRate				 = 0.1,
@@ -164,18 +145,11 @@ local weaponDefs                 = {
 		turret                   = false,
 		weaponVelocity           = 2000,
 		customparams             = {
-			damagetype		     = "efighter",  
+			damagetype		     = "efighter",
+			isupgraded           = isUpgraded,
 		}, 
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 15,
 		},
 	},  
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

@@ -1,20 +1,22 @@
--- UNITDEF -- EAIRPLANT_t2 --
+-- UNITDEF -- EAIRPLANT --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eairplant_t2"
+--local unitName                        = "eairplant"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal 			  = 460
-local maxDamage					  = buildCostMetal * 12.5
+--local buildCostMetal 			  = 30
+--local maxDamage					  = buildCostMetal * 12.5
 
-local armortype					 = [[building]]
+--local armortype					 = [[building]]
 
-local unitDef                         = {
+--local 
+
+unitDef                         = {
 
 	activatewhenbuilt                 = true,
 	buildCostEnergy                   = 0,
-	buildCostMetal                    = buildCostMetal,
+	buildCostMetal                    = 30,
 	builder                           = true,
 	buildTime                         = 2.5,
 	canBeAssisted                     = true,
@@ -43,9 +45,9 @@ local unitDef                         = {
 	metalStorage                      = 0,
 	metalMake                         = 0,
 	mobilestandorders                 = "1",
-	name                              = "Aircraft Plant Upgraded",
-	objectName                        = "eairplant3.s3o",
-	script			                  = "eairplant3.cob",
+	name                              = humanName,
+	objectName                        = objectName,
+	script			                  = script,
 	radarDistance                     = 0,
 	repairable		                  = false,
 	selfDestructAs                    = "LARGE_BUILDING",
@@ -75,26 +77,20 @@ local unitDef                         = {
 		},
 	},
 	zbuffer                           = "1",
-	buildoptions                      = {
---		"eairengineer_t2",
-		"escout_t2", --new
-		"efighter_t2", --new
-		"egunship2_t2", --new
-		"ebomber_t2", --new
-		"etransport_t2", --new
-
-	},
-	sounds                            = {
-		underattack                   = "unitsunderattack1",
-		select                        = {
+	
+	buildoptions                      = airPlantBuildList,
+	
+	sounds                         = {
+		underattack                = "unitsunderattack1",
+		select                     = {
 			"gdfactoryselect",
 		},
 	},
 	customParams                      = {
-		unittype				  = "building",
+		unittype				  	  = "building",
 		death_sounds                  = "generic",
-		armortype                     = armortype, 
-		normaltex                    = "unittextures/lego2skin_explorernormal.dds", 
+		armortype                     = "building", 
+		normaltex                     = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                     = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	                  = "outer_colonies",  
 		--	ProvideTech               = "1 Powergrid",
@@ -109,10 +105,3 @@ local unitDef                         = {
 	--  BuildingGroundDecalSizeY      = 20,
 	--  BuildingGroundDecalDecaySpeed = 0.9,
 }
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]         = unitDef })
-
---------------------------------------------------------------------------------
