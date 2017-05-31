@@ -5,7 +5,7 @@ unitName = "eminifac_up1"
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 30
+buildCostMetal = 270
 maxDamage = buildCostMetal * 12.5
 
 humanName = [[All-Terrain Strider Factory]]
