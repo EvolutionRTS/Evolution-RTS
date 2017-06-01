@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 42,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eamphibneedle.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,

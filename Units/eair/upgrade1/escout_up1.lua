@@ -7,7 +7,7 @@ unitName = "escout_up1"
 
 isUpgraded = [[1]]
 
-humanName = [[AirSkout v1.1]]
+humanName = [[AirSkout Mark I]]
 
 objectName = "escout2.s3o"
 script = "escout2.cob"

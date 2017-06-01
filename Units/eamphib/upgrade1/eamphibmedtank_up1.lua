@@ -7,7 +7,7 @@ unitName = "eamphibmedtank_up1"
 
 isUpgraded = [[1]]
 
-humanName = [[Razor Upgrade 1]]
+humanName = [[Razor Mark I]]
 
 objectName = "eamphibmedtank2.s3o"
 script = "eamphibmedtank_lus.lua"

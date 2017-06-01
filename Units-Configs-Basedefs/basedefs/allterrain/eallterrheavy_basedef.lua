@@ -1,27 +1,3 @@
--- UNITDEF -- EALLTERRHEAVY --
---------------------------------------------------------------------------------
-
--- local unitName                   = "eallterrheavy"
-
---------------------------------------------------------------------------------
-
--- local buildCostMetal 			  = 64
--- local maxDamage					  = 545
-
--- local tech						 = [[tech2]]
--- local armortype					 = [[armored]]
--- local supply					 = [[6]]
-
--- local weapon1Damage              = 125
--- local weapon1AOE				 = 1
--- local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
--- local function roundToFirstDecimal(energycosttofire)
-    -- return math.floor(energycosttofire*10 + 0.5)*0.1
--- end
-
--- local 
-
 unitDef                    = {
 
 	acceleration                 = 1,
@@ -30,6 +6,7 @@ unitDef                    = {
 	buildCostMetal               = 64,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eallterrheavy.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -113,12 +90,11 @@ unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "heavytankweapon",
---			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING WALL",
 		},
 	},
 	customParams                 = {
---		unittype				  = "mobile",
+		unittype				  = "mobile",
 		isupgraded           	 = isUpgraded,
 		canbetransported 		 = "true",
 		needed_cover             = 3,
@@ -130,15 +106,8 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
---		helptext				 = [[Armortype: ]] ..armortype.. [[ 
---
--- Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 	heavytankweapon              = {
@@ -179,9 +148,6 @@ weaponDefs                 = {
 		customparams             = {
 			isupgraded           	 = isUpgraded,
 			damagetype		     = "eallterrheavy",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
 			default              = 125,

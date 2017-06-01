@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 25,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eriottank2.png",
 	canAttack                    = true,
 	canGuard                     = true,
 	canHover                     = true,

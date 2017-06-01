@@ -1,19 +1,11 @@
--- UNITDEF -- EGUNSHIP2 --
---------------------------------------------------------------------------------
 unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
 	acceleration                 = 0.5,
 	airStrafe                    = false,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 50,
 	buildTime                    = 2.5,
+	buildpic					 = "egunship2.png",
 	canAttack                    = true,
 	canDropFlare                 = false,
 	canFly                       = true,
@@ -58,6 +50,7 @@ unitDef                    = {
 	side                         = "CORE",
 	sightDistance                = 800,
 	smoothAnim                   = true,
+	transportbyenemy             = false;
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	sfxtypes                     = { 
@@ -102,18 +95,8 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		--helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
---150 Damage vs Light/Armored
---75 Damage vs Building
-
---Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 

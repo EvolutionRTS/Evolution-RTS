@@ -1,13 +1,4 @@
--- UNITDEF -- EFIGHTER --
---------------------------------------------------------------------------------
 unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
 	acceleration                 = 0.5,
 	airStrafe                    = false,
 	bankscale                    = "1",
@@ -15,6 +6,7 @@ unitDef                    = {
 	buildCostEnergy              = 0,
 	buildCostMetal               = 45,
 	buildTime                    = 2.5,
+	buildpic					 = "efighter.png",
 	canAttack                    = true,
 	canFly                       = true,
 	canGuard                     = true,
@@ -57,6 +49,7 @@ unitDef                    = {
 	sightDistance                = 500,
 	smoothAnim                   = true,
 	sonarDistance                = 0,
+	transportbyenemy             = false;
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	workerTime                   = 0,
@@ -88,7 +81,7 @@ unitDef                    = {
 		},
 	},
 	customParams                 = {
-		--unittype				  = "mobile",
+		unittype				 = "mobile",
 		--    needed_cover       = 2,
 		isupgraded               = isUpgraded,
 		death_sounds             = "generic",
@@ -98,16 +91,9 @@ unitDef                    = {
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
-		--helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
---Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+		factionname	             = "outer_colonies",
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 	aircannon   	             = {

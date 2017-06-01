@@ -7,7 +7,7 @@ unitName = "egunship2_up2"
 
 isUpgraded = [[2]]
 
-humanName = [[Wildkat v1.2]]
+humanName = [[Wildkat Mark II]]
 
 objectName = "egunship3.s3o"
 script = "egunship3.cob"

@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 59,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eheavytank3.png",
 	canAttack                    = true,
 	canGuard                     = true,
 	canHover                     = true,

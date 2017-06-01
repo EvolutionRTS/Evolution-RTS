@@ -1,35 +1,3 @@
--- UNITDEF -- EALLTERRRIOT --
---------------------------------------------------------------------------------
-
--- local unitName                   = "eallterrriot"
-
---------------------------------------------------------------------------------
-
--- local buildCostMetal 			  = 27
--- local maxDamage					  = 400
-
--- local tech						 = [[tech1]]
--- local armortype					 = [[light]]
--- local supply					 = [[3]]
-
--- local weapon1Damage              = 200
--- local weapon1AOE				 = 250
--- local weapon2Damage              = 75
--- local weapon2AOE				 = 100
--- local weapon2Projectiles         = 10
--- local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
--- local energycosttofire2          = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1) * weapon2Projectiles
-
--- local function roundToFirstDecimal(energycosttofire)
---     return math.floor(energycosttofire*10 + 0.5)*0.1
--- end
--- 
--- local function roundToFirstDecimal(energycosttofire2)
---     return math.floor(energycosttofire2*10 + 0.5)*0.1
--- end
-
--- local
-
 unitDef                    = {
 
 	acceleration                 = 1,
@@ -38,6 +6,7 @@ unitDef                    = {
 	buildCostMetal               = 27,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eallterrriot.png",
 	canAttack                    = true,
 	
 	--  canDgun			         = true,
@@ -141,22 +110,8 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
-
---		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
---Paralyzes enemy units
---Projectile can hit multiple units
-
---Alternate fire mode fires 10 projectiles in a shotgun spread with a small area of effect. Reduced damage vs buildings when in shotgun mode.
-
---Energy cost to fire EMP: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
---Energy cost to fire Shotgun: ]] .. roundToFirstDecimal(energycosttofire2),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 	riottankempweapon            = {
@@ -170,7 +125,7 @@ weaponDefs                 = {
 		--	cegTag               = "mediumcannonweapon3",
 		duration                 = 0.05,
 		edgeeffectiveness        = 0.1,
-		energypershot            = energycosttofire,
+		energypershot            = 0,
 		explosionGenerator       = "custom:genericshellexplosion-medium-blue",
 		fallOffRate              = 1,
 		fireStarter              = 100,
@@ -199,9 +154,6 @@ weaponDefs                 = {
 			isupgraded           = isUpgraded,
 			damagetype		     = "eallterrriot", 
 			nofriendlyfire	     = 1,
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
 			default              = 200,
@@ -217,7 +169,7 @@ weaponDefs                 = {
 		
 		cegTag                   = "bruisercannon",
 		explosionGenerator       = "custom:genericshellexplosion-small",
-		energypershot            = energycosttofire2,
+		energypershot            = 0,
 		interceptedByShieldType  = 4,
 		impulseFactor            = 0,
 		name                     = "Light Cannon",
@@ -240,11 +192,3 @@ weaponDefs                 = {
 		},
 	},
 }
--- unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
--- return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

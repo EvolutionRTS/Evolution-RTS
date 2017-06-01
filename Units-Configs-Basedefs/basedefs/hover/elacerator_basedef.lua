@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 200,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "elacerator.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,

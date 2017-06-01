@@ -1,41 +1,11 @@
--- UNITDEF -- EALLTERRMED STUFF TO INHERIT --
---------------------------------------------------------------------------------
-
--- local unitName                   = "eallterrmed"
-
---------------------------------------------------------------------------------
-
--- local buildCostMetal 			  = 44
--- local maxDamage					  = 500
-
--- local tech						 = [[tech2]]
--- local armortype					 = [[armored]]
--- local supply					 = [[4]]
-
--- local weapon1Damage              = 200
--- local weapon1AOE				 = 1
--- local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
--- local function roundToFirstDecimal(energycosttofire)
---     return math.floor(energycosttofire*10 + 0.5)*0.1
--- end
-
--- local 
-
 unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 44,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eallterrmed.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -88,6 +58,7 @@ unitDef                    = {
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
+	transportbyenemy             = false;
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	unitname                     = "eallterrmed",
@@ -117,7 +88,6 @@ unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "mediumtankcannon",
---			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
 	},
@@ -133,16 +103,8 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		
---		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
--- Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 	mediumtankcannon             = {
@@ -183,9 +145,6 @@ weaponDefs                 = {
 		customparams             = {
 			isupgraded           = isUpgraded,
 			damagetype		     = "eallterrmed",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
 			default              = 200,
@@ -193,11 +152,3 @@ weaponDefs                 = {
 	},
 
 }
--- unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
--- return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

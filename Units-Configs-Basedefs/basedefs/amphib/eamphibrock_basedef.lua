@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 59,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eamphibrock.png",
 	canAttack                    = true,
 	canGuard                     = true,
 	canMove                      = true,

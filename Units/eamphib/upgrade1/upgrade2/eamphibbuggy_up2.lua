@@ -7,7 +7,7 @@ unitName = "eamphibbuggy_up2"
 
 isUpgraded = [[2]]
 
-humanName = [[Snake Upgrade 2]]
+humanName = [[Snake Mark II]]
 
 objectName = "eamphibbuggy2.s3o"
 script = "eamphibbuggy_lus.lua"

@@ -1,34 +1,3 @@
--- UNITDEF -- eallterranarchid --
---------------------------------------------------------------------------------
-
--- local unitName                   = "eallterranarchid"
-
---------------------------------------------------------------------------------
-
--- local buildCostMetal 			  = 225
--- local maxDamage					  = 2750
-
--- local tech						 = [[tech3]]
--- local armortype					 = [[armored]]
--- local supply					 = [[12]]
-
--- local weapon1Damage              = 300
--- local weapon1AOE				 = 10
--- local weapon2Damage              = 25
--- local weapon2AOE				 = 1
--- local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
--- local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
-
--- local function roundToFirstDecimal(energycosttofire)
-    -- return math.floor(energycosttofire*10 + 0.5)*0.1
--- end
-
--- local function roundToFirstDecimal(energycosttofire2)
-    -- return math.floor(energycosttofire2*10 + 0.5)*0.1
--- end
-
--- local 
-
 unitDef                    = {
 
 	acceleration                 = 0.18,
@@ -37,6 +6,7 @@ unitDef                    = {
 	buildCostMetal               = 225,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eallterranarchid.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -132,7 +102,7 @@ unitDef                    = {
 		},
 	},
 	customParams                 = {
---		unittype				  = "mobile",
+		unittype				  = "mobile",
 		isupgraded           	 = isUpgraded,
 		death_sounds             = "nuke",
 		RequireTech              = tech,
@@ -141,16 +111,8 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
---		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-	
---Energy cost to fire Primary Laser: ]] .. roundToFirstDecimal(energycosttofire) .. [[ 
---Energy cost to fire Secondary Cannons: ]] .. roundToFirstDecimal(energycosttofire2),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 	heavybeamweapon              = {
@@ -190,49 +152,11 @@ weaponDefs                 = {
 		customparams             = {
 			isupgraded           	 = isUpgraded,
 			damagetype		     = "eallterranarchid",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
 			default              = 300,
 		},
 	},
-
-	--[[ concussioncannon             = {
-		accuracy                 = 1,
-		AreaOfEffect             = 2,
-		avoidFriendly            = false,
-		avoidFeature             = false,
-		collideFriendly          = false,
-		collideFeature           = false,
-		cylinderTargeting        = true,
-		burnblow                 = true,
-		explosionGenerator       = "custom:genericshellexplosion-medium",
-		energypershot            = 0,
-		fireStarter              = 80,
-		id                       = 1,
-		impulseFactor            = 0.1,
-		interceptedByShieldType  = 4,
-		name                     = "Concussion Cannon",
-		range                    = 1000,
-		reloadtime               = 1,
-		weaponType		         = "Cannon",
-		soundHit                 = "explode2",
-		soundStart               = "krabsecondary.wav",
-		tolerance                = 500,
-		turret                   = true,
-		weaponVelocity           = 5000,
-		customparams             = {
-			damagetype		     = "eallterranarchid",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
-		},
-		damage                   = {
-			default              = 25,
-		},
-	}, ]]--
 	
 	flamethrower                 = {
 		
@@ -245,7 +169,7 @@ weaponDefs                 = {
 		explosionGenerator       = "custom:burnblack",
 		coreThickness            = 0,
 		duration                 = 1,
-		energypershot            = energycosttofire2,
+		energypershot            = 0,
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,

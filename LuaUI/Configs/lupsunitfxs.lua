@@ -1,5 +1,6 @@
 effectUnitDefs = {
-
+------------------
+------------------
 	efighter = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
@@ -37,6 +38,17 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
 	},
 	
+	eairplant = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=false, emitVector = {0, 0, 1}}},
+	},
+	
 	etransport = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
@@ -48,7 +60,10 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine4", onActive=true}},
 	},
 	
-	efighter_t2 = {
+------------------
+------------------
+	
+	efighter_up1 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine3", onActive=true}},
@@ -57,35 +72,28 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
 	},
 	
-	egunship2_t2 = {
+	egunship2_up1 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
 	},
 	
-	ebomber_t2 = {
+	ebomber_up1 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
 	},
 	
-	eairengineer_t2 = {
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
-	},
-	
-	escout_t2 = {
+	escout_up1 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
 	},
 	
-	etransport_t2 = {
+	etransport_up1 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="rengine1", onActive=true}},
@@ -95,6 +103,130 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine3", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine4", onActive=true}},
 	},
+	
+	eairplant_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=false, emitVector = {0, 0, 1}}},
+	},
+	
+------------------
+------------------
+	
+	efighter_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine3", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine4", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	egunship2_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	ebomber_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	escout_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
+	},
+	
+	etransport_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="rengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine3", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine4", onActive=true}},
+	},
+	
+	eairplant_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=false, emitVector = {0, 0, 1}}},
+	},
+	
+------------------
+------------------
+	
+	efighter_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine3", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine4", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	egunship2_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	ebomber_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="rengine2", onActive=true}},
+	},
+	
+	escout_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
+	},
+	
+	etransport_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="rengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine3", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="bengine4", onActive=true}},
+	},
+	
+	eairplant_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=false, emitVector = {0, 0, 1}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=false, emitVector = {0, 0, 1}}},
+	},	
+	
+------------------
+------------------
 	
 	esubplane = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="engines", onActive=true}},
@@ -107,16 +239,8 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
 	},
 	
-	eairplant = {
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=false, emitVector = {0, 0, 1}}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=false, emitVector = {0, 0, 1}}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=false, emitVector = {0, 0, 1}}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=false, emitVector = {0, 0, 1}}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=false, emitVector = {0, 0, 1}}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=false, emitVector = {0, 0, 1}}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=false, emitVector = {0, 0, 1}}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=false, emitVector = {0, 0, 1}}},
-	},
+------------------
+------------------
 	
 	ehbotengineer = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
@@ -142,6 +266,9 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
 	},
+	
+------------------
+------------------
 	
 --	esolar2 = {
 --    {class='StaticParticles', options=corfusNova},
@@ -263,6 +390,9 @@ effectUnitDefs = {
 --    {class='Bursts', options=efusion2Bursts},
     {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=1505, precision=0, strength   = 0.001, repeatEffect=true}},
   },
+
+------------------
+------------------
   
 	eallterrshield = {
 	{class='ShieldSphere',options=ShieldSphere300},
@@ -313,6 +443,9 @@ effectUnitDefs = {
 --    {class='Bursts', options=efusion2Bursts},
     {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=305, precision=0, strength   = 0.001, repeatEffect=true}},
   },
+  
+------------------
+------------------
   
 	ekmar = {
 	{class='ShieldSphere',options=ShieldSphere200},

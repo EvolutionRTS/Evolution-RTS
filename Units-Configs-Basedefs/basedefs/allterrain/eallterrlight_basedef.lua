@@ -1,20 +1,11 @@
--- UNITDEF -- EALLTERRLIGHT DEFFOS FOR INHERITANCE --
---------------------------------------------------------------------------------
-
 unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 22,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eallterrlight.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -66,6 +57,7 @@ unitDef                    = {
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
+	transportbyenemy             = false;
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	unitname                     = unitName,
@@ -110,15 +102,8 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
---		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
--- Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 	weaponDefs                 = {
 	lighttankweapon              = {
@@ -155,9 +140,6 @@ unitDef                    = {
 		customparams             = {
 			isupgraded           = isUpgraded,
 			damagetype		     = "eallterrlight",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
 			default              = 50,

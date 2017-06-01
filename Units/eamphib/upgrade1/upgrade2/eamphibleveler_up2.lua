@@ -7,7 +7,7 @@ unitName = "eamphibleveler_up2"
 
 isUpgraded = [[2]]
 
-humanName = [[Leveler Upgrade 2]]
+humanName = [[Leveler Mark II]]
 
 objectName = "eamphibleveler.s3o"
 script = "eamphibleveler.cob"

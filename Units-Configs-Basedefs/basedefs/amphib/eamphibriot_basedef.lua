@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 23,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eamphibriot.png",
 	canAttack                    = true,
 	
 	--  canDgun			         = true,

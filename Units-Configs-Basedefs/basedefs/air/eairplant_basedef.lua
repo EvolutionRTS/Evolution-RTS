@@ -1,24 +1,10 @@
--- UNITDEF -- EAIRPLANT --
---------------------------------------------------------------------------------
-
---local unitName                        = "eairplant"
-
---------------------------------------------------------------------------------
-
---local buildCostMetal 			  = 30
---local maxDamage					  = buildCostMetal * 12.5
-
---local armortype					 = [[building]]
-
---local 
-
 unitDef                         = {
-
 	activatewhenbuilt                 = true,
 	buildCostEnergy                   = 0,
 	buildCostMetal                    = 30,
 	builder                           = true,
 	buildTime                         = 2.5,
+	buildpic					 	  = "eairplant.png",
 	canBeAssisted                     = true,
 	canGuard                          = true,
 	canMove                           = true,

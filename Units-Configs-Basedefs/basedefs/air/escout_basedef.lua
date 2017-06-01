@@ -1,13 +1,4 @@
--- UNITDEF -- ESCOUT --
---------------------------------------------------------------------------------
 unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
 	acceleration                 = 0.5,
 	airStrafe                    = false,
 	brakeRate                    = 1,
@@ -15,6 +6,7 @@ unitDef                    = {
 	buildCostMetal               = 40,
 	builder                      = false,
 	buildTime                    = 2.5,
+	buildpic					 = "escout.png",
 	canFly                       = true,
 	canGuard                     = true,
 	canMove                      = true,
@@ -54,6 +46,7 @@ unitDef                    = {
 	side                         = "ARM",
 	sightDistance                = 750,
 	smoothAnim                   = true,
+	transportbyenemy             = false;
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	workerTime                   = 0,
@@ -78,7 +71,7 @@ unitDef                    = {
 		},
 	},
 	customParams                 = {
-		--	unittype				  = "mobile",
+		unittype				 = "mobile",
 		--    needed_cover       = 1,
 		isupgraded               = isUpgraded,
 		death_sounds             = "generic",
@@ -88,6 +81,5 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		--	helptext				 = [[Armortype: ]] ..armortype,
 	},
 }

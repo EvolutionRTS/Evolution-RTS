@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 250,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eamphibleveler.png",
 	canAttack                    = true,
 	canGuard                     = true,
 	canMove                      = true,

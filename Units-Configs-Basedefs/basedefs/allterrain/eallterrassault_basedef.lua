@@ -1,27 +1,3 @@
--- UNITDEF -- EALLTERRASSAULT --
---------------------------------------------------------------------------------
-
--- local unitName                   = "eallterrassault"
-
---------------------------------------------------------------------------------
-
--- local buildCostMetal 			  = 60
--- local maxDamage					  = 400
-
--- local tech						 = [[tech1]]
--- local armortype					 = [[armored]]
--- local supply					 = [[8]]
-
--- local weapon1Damage              = 150
--- local weapon1AOE				 = 1
--- local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
--- local function roundToFirstDecimal(energycosttofire)
---     return math.floor(energycosttofire*10 + 0.5)*0.1
--- end
-
--- local 
-
 unitDef                    = {
 
 	acceleration                 = 1,
@@ -30,6 +6,7 @@ unitDef                    = {
 	buildCostMetal               = 60,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eallterrassault.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -115,7 +92,7 @@ unitDef                    = {
 		},
 	},
 	customParams                 = {
--- 		unittype				  = "mobile",
+ 		unittype				  = "mobile",
 		isupgraded           	 = isUpgraded,
 		canbetransported 		 = "true",
 		needed_cover             = 4,
@@ -127,17 +104,8 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
--- 		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
--- This unit can only fire at buildings!
-
--- Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 	assaulttankcannon            = {
@@ -175,9 +143,6 @@ weaponDefs                 = {
 		customparams             = {
 			isupgraded           = isUpgraded,
 			damagetype		     = "eallterrassault",  
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
 			default              = 150,

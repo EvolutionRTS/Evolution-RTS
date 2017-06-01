@@ -5,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 62,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "emissiletank.png",
 	canAttack                    = true,
 	
 	canGuard                     = true,

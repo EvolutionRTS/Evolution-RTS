@@ -6,6 +6,7 @@ unitDef                      = {
 	buildCostMetal                 = buildCostMetal,
 	builder                        = true,
 	buildTime                      = 5,
+	buildpic					   = "eamphibfac.png",
 	canBeAssisted                  = true,
 	canGuard                       = true,
 	canMove                        = true,

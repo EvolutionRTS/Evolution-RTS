@@ -7,7 +7,7 @@ unitName = "etransport_up3"
 
 isUpgraded = [[3]]
 
-humanName = [[Kharter v2.0]]
+humanName = [[Kharter Mark III]]
 
 objectName = "etransport2-small.s3o"
 script = "etransport2.cob"

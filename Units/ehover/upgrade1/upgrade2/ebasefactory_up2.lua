@@ -8,7 +8,7 @@ unitName                    = "ebasefactory_up2"
 buildCostMetal = 510
 maxDamage = buildCostMetal * 12.5
 
-humanName = "Hover Factory Upgrade 2"
+humanName = "Hover Factory Mark II"
 objectName = "ehoverfactory.s3o"
 script = "ehoverfac.cob"
 

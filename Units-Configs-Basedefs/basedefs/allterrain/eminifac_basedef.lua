@@ -1,13 +1,13 @@
 -- ALL TERRAIN FACTORY : DEFFOS FOR INHERITING
 
 unitDef                      = {
-
 	activatewhenbuilt              = false,
 	buildAngle                     = 1024,
 	buildCostEnergy                = 0,
 	buildCostMetal                 = buildCostMetal,
 	builder                        = true,
 	buildTime                      = 5,
+	buildpic					   = "eminifac.png",
 	canBeAssisted                  = true,
 	canGuard                       = true,
 	canMove                        = true,

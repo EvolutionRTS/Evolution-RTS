@@ -6,6 +6,7 @@ unitDef                     = {
 	buildCostMetal                = buildCostMetal,
 	builder                       = true,
 	buildTime                     = 5,
+	buildpic					 = "ebasefactory.png",
 	canAttack			          = false,
 	canBeAssisted                 = true,
 	canGuard                      = true,

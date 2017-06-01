@@ -1,14 +1,4 @@
--- UNITDEF -- EBOMBER --
---------------------------------------------------------------------------------
-
 unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
 	acceleration                 = 0.5,
 	airStrafe                    = false,
 	BadTargetCategory            = "VTOL",
@@ -17,6 +7,7 @@ unitDef                    = {
 	buildCostMetal               = 55,
 	builder                      = false,
 	buildTime                    = 2.5,
+	buildpic					 = "ebomber.png",
 	canAttack                    = true,
 	canFly                       = true,
 	canGuard                     = true,
@@ -57,6 +48,7 @@ unitDef                    = {
 	sightDistance                = 1050,
 	smoothAnim                   = true,
 	stealth                      = false,
+	transportbyenemy             = false;
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	workerTime                   = 0,
@@ -88,7 +80,7 @@ unitDef                    = {
 	},
 	customParams                 = {
 		isupgraded				 = isUpgraded,
-		-- unittype				  = "mobile",
+		unittype				 = "mobile",
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
 		nofriendlyfire           = "1",
@@ -96,18 +88,11 @@ unitDef                    = {
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
 		supply_cost              = supply,
-		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies", 
---		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
--- Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
-
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
 
 weaponDefs                 = {
 	missile                      = {
@@ -132,9 +117,7 @@ weaponDefs                 = {
 		name                     = "Rockets",
 		range                    = 1050,
 		reloadtime               = 3,
-		weaponType		         = "MissileLauncher",  -- This causes the missile trail to go off kilter
-		--	rendertype		     = 1,
-		
+		weaponType		         = "MissileLauncher",		
 		
 		smokeTrail               = false,
 		soundHit                 = "unitexplodebig.wav",

@@ -1,24 +1,3 @@
--- UNITDEF -- EALLTERRSHIELD --
---------------------------------------------------------------------------------
-
--- local unitName                   = "eallterrshield"
-
---------------------------------------------------------------------------------
-
--- local buildCostMetal 			  = 28
--- local maxDamage					  = 500
-
--- local tech						 = [[tech1]]
--- local armortype					 = [[light]]
--- local supply					 = [[5]]
-
--- local shield1Power               = 1500
--- local shield1PowerRegen          = 15
--- local shield1PowerRegenEnergy    = shield1PowerRegen / 10
-
-
--- local 
-
 unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
@@ -26,6 +5,7 @@ unitDef                    = {
 	buildCostMetal               = 28,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = "eallterrshield.png",
 	canAttack                    = false,
 	
 	canGuard                     = true,
@@ -122,13 +102,6 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
--- 		helptext				 = [[Armortype: ]] ..armortype.. [[ 
-
--- Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
--- Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
--- Maximum shield power is ]] .. shield1Power ..[[hp
--- Shield can link with other shield units to increase charging and capacity
--- Generates a Cloaking Field]],
 		
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 5, -- How much energy does it cost to maintain the cloaking field?

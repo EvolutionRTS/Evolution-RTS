@@ -7,7 +7,7 @@ unitName = "eamphibneedle_up3"
 
 isUpgraded = [[3]]
 
-humanName = [[Ikinz Upgrade 3]]
+humanName = [[Ikinz Mark III]]
 
 objectName = "eamphibaa.s3o"
 script = "eamphibaa.cob"

@@ -7,7 +7,7 @@ unitName = "elighttank3_up3"
 
 isUpgraded	= [[3]]
 
-humanName = "Kite Upgrade 3"
+humanName = "Kite Mark III"
 
 objectName = "elighttank4.s3o"
 script = "elighttank3_lus.lua"

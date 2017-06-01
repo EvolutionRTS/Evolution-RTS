@@ -1,13 +1,4 @@
--- UNITDEF -- ETRANSPORT --
---------------------------------------------------------------------------------
 unitDef                    = {
-
-	--mobileunit 
-	transportbyenemy             = false;
-
-	--**
-
-
 	acceleration                 = 0.5,
 	airStrafe                    = false,
 	airHoverFactor	             = 0,
@@ -16,6 +7,7 @@ unitDef                    = {
 	buildCostMetal               = 20,
 	builder                      = false,
 	buildTime                    = 2.5,
+	buildpic					 = "etransport.png",
 	canAttack                    = false,
 	canFly                       = true,
 	canGuard                     = false,
@@ -51,6 +43,7 @@ unitDef                    = {
 	side                         = "GD",
 	sightDistance                = 500,
 	smoothAnim                   = true,
+	transportbyenemy             = false;
 	transportCapacity            = 1,
 	transportMass                = 10000,
 	transportSize                = 6,
@@ -80,16 +73,15 @@ unitDef                    = {
 		},
 	},
 	customParams                 = {
-		-- unittype				  = "mobile",
+		unittype				  = "mobile",
 		--    needed_cover       = 2,
 		isupgraded				 = isUpgraded,
 		death_sounds             = "generic",
 --		RequireTech              = tech,
 		armortype                = armortype,
 		supply_cost              = supply,
-		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		--helptext				 = [[Armortype: ]] ..armortype,
 	},
 }
