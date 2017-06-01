@@ -7,7 +7,7 @@ unitName = "eamphibrock_up3"
 
 isUpgraded = [[3]]
 
-humanName = [[Spitter Mark III]]
+humanName = [[Spitter Mark IV]]
 
 objectName = "eamphibrock4.s3o"
 script = "eamphibrock4.cob"

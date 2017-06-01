@@ -8,7 +8,7 @@ unitName = "eminifac_up1"
 buildCostMetal = 270
 maxDamage = buildCostMetal * 12.5
 
-humanName = [[All-Terrain Strider Factory]]
+humanName = [[All-Terrain Strider Factory Mark II]]
 
 objectName = "eallterrfac2.s3o"
 script = "eallterrfac2.cob"

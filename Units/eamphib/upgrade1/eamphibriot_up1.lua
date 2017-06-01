@@ -7,7 +7,7 @@ unitName = "eamphibriot_up1"
 
 isUpgraded = [[1]]
 
-humanName = [[Dicer Mark I]]
+humanName = [[Dicer Mark II]]
 
 objectName = "eamphibriot2.s3o"
 script = "eamphibriot.cob"

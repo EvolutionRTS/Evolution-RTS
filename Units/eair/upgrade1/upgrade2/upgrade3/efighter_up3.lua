@@ -7,7 +7,7 @@ unitName = "efighter_up3"
 
 isUpgraded = [[3]]
 
-humanName = [[Koyote Mark III]]
+humanName = [[Koyote Mark IV]]
 
 objectName = "efighter2.s3o"
 script = "efighter2.cob"

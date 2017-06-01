@@ -7,7 +7,7 @@ unitName = "emissiletank_up2"
 
 isUpgraded	= [[2]]
 
-humanName = "Droplet Mark II"
+humanName = [[Droplet Mark III]]
 
 objectName = "emissiletank2.s3o"
 script = "emissiletank2.cob"

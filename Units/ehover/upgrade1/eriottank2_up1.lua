@@ -7,7 +7,7 @@ unitName = "eriottank2_up1"
 
 isUpgraded	= [[1]]
 
-humanName = "Spas Mark I"
+humanName = [[Spas Mark II]]
 
 objectName = "eriottank3.s3o"
 script = "eriottank3.cob"

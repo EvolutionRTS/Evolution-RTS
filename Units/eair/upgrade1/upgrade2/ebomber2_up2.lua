@@ -7,7 +7,7 @@ unitName = "ebomber_up2"
 
 isUpgraded = [[2]]
 
-humanName = [[Kamper Mark II]]
+humanName = [[Kamper Mark III]]
 
 objectName = "ebomber2.s3o"
 script = "ebomber2.cob"

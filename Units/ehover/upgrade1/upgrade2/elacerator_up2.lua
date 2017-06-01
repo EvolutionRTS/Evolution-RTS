@@ -7,7 +7,7 @@ unitName = "elacerator_up2"
 
 isUpgraded	= [[2]]
 
-humanName = "Lacerator Mark II"
+humanName = [[Lacerator Mark III]]
 
 objectName = "elacerator.s3o"
 script = "elacerator.cob"

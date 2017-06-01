@@ -8,7 +8,7 @@ unitName = "eamphibfac_up1"
 buildCostMetal = 270
 maxDamage = buildCostMetal * 12.5
 
-humanName = [[Amphibious Tank Factory Mark I]]
+humanName = [[Amphibious Tank Factory Mark II]]
 
 objectName = "eamphibfac2.s3o"
 script = "eamphibfac2.cob"

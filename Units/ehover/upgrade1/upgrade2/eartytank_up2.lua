@@ -7,7 +7,7 @@ unitName = "eartytank_up2"
 
 isUpgraded	= [[2]]
 
-humanName = "ShadowFury Mark II"
+humanName = [[ShadowFury Mark III]]
 
 objectName = "eartytank2.s3o"
 script = "eartytank2.cob"

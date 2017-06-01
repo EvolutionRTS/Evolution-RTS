@@ -7,7 +7,7 @@ unitName = "eheavytank3_up2"
 
 isUpgraded	= [[2]]
 
-humanName = "Crusher Mark II"
+humanName = [[Crusher Mark III]]
 
 objectName = "eheavytank4.s3o"
 script = "eheavytank4_lus.lua"

@@ -8,7 +8,7 @@ unitName = "eairplant_up3"
 buildCostMetal = 750
 maxDamage = buildCostMetal * 12.5
 
-humanName = [[VTOL Factory Mark III]]
+humanName = [[VTOL Factory Mark IV]]
 
 objectName = "eairplant3.s3o"
 script = "eairplant3.cob"

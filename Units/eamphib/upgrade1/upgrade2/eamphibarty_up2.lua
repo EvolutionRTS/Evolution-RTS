@@ -7,7 +7,7 @@ unitName = "eamphibarty_up2"
 
 isUpgraded = [[2]]
 
-humanName = [[Assimilator Mark II]]
+humanName = [[Assimilator Mark III]]
 
 objectName = "eamphibarty2.s3o"
 script = "eamphibarty2.cob"

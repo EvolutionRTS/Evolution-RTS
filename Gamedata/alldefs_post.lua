@@ -332,6 +332,13 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 	if (Spring.GetModOptions) then
 	local modOptions = Spring.GetModOptions()
 
+		for id,unitDef in pairs(UnitDefs) do
+			for id,weaponDef in pairs(WeaponDefs) do
+				weaponDef.name = unitDef.name .. [[ Weapon]]
+				--Spring.Echo(weaponDef.name)
+			end
+		end
+		
 		--------------------------------------------------------------------------------
 		-- Gameplay Speed (Classic RTS Mode) --
 		--------------------------------------------------------------------------------
