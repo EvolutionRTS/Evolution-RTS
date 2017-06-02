@@ -44,11 +44,17 @@ local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
 local metalCost_factory_up1 = 240
 local timeToBuild_factory_up1 = metalCost_factory_up1 * 0.25
 
-local metalCost_etech2 = 250
+local metalCost_etech2 = 200
 local timeToBuild_etech2 = metalCost_etech2 * 0.25
 
-local metalCost_etech3 = 250
+local metalCost_etech3 = 300
 local timeToBuild_etech3 = metalCost_etech3 * 0.25
+
+--local metalCost_etech2 = 250
+--local timeToBuild_etech2 = metalCost_etech2 * 0.25
+
+--local metalCost_etech3 = 250
+--local timeToBuild_etech3 = metalCost_etech3 * 0.25
 
 local morphDefs = {
 	ecommander = 	{

@@ -13,7 +13,7 @@ objectName = "ebomber2.s3o"
 script = "ebomber2.cob"
 
 
-tech = [[tech2]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[5]]
 

@@ -7,7 +7,7 @@ local unitName                   = "ecommanderfactory"
 
 local armortype					 = [[light]]
 local supplyGiven				 = [[25]]
-local techprovided				 = [[tech1, -overseer]]
+local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
 local weapon1Damage              = 200

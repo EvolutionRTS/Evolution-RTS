@@ -13,7 +13,7 @@ objectName = "escout2.s3o"
 script = "escout2.cob"
 
 
-tech = [[tech1]]
+tech = [[tech0]]
 armortype = [[light]]
 supply = [[0]]
 

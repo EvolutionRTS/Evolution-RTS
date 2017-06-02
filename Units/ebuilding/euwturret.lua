@@ -8,6 +8,8 @@ local unitName                       = "euwturret"
 local armortype						 = [[building]]
 --local supply						 = [[4]]
 
+local techrequired				     = [[tech1]]
+
 local weapon1Damage		             = 120
 local weapon1AOE		             = 10
 local energycosttofire				 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
@@ -90,13 +92,14 @@ local unitDef                        = {
 		},
 	},
 	customParams                     = {
-		unittype				  = "turret",
+		unittype				     = "turret",
+		RequireTech				  = techrequired,
 		needed_cover                 = 2,
 --		supply_cost                  = supply,
 		death_sounds                 = "generic",
 		-- twokhotkey                = 't',
 		armortype                    = armortype,
-		normaltex                   = "unittextures/lego2skin_explorernormal.dds", 
+		normaltex                    = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                    = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	                 = "outer_colonies",  
 		helptext                     = [[Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),

@@ -12,7 +12,7 @@ humanName = [[Ikinz Mark III]]
 objectName = "eamphibaa.s3o"
 script = "eamphibaa.cob"
 
-tech = [[tech1]]
+tech = [[tech0]]
 armortype = [[light]]
 supply = [[3]]
 
