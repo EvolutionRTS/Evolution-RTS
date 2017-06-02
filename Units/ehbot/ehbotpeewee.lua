@@ -12,7 +12,7 @@ local maxDamage					 = 300
 
 local weapon1Damage              = 20
 local weapon1AOE				 = 25
-local weapon1Range				 = 650
+local weapon1Range				 = 550
 local projectiles				 = 5
 local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
 
