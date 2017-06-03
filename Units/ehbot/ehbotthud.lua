@@ -10,8 +10,8 @@ local armortype					 = [[light]]
 local supply					 = [[7]]
 local maxDamage					 = 325
 
-local weapon1Damage              = 75
-local weapon1AOE				 = 50
+local weapon1Damage              = 150
+local weapon1AOE				 = 75
 local weapon1Range				 = 800
 
 --local projectiles				 = 5
@@ -156,7 +156,7 @@ local weaponDefs                 = {
 		name                   = "Plasma Cannon",
 		--noExplode			   = true,
 		range                  = weapon1Range,
-		reloadtime             = 1,
+		reloadtime             = 2,
 		size					 = 16,
 		--projectiles			   = projectiles,
 		weaponType		       = "Cannon",
