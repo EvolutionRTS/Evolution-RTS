@@ -7,7 +7,7 @@ local unitName                   = "ebox"
 
 local armortype					 = [[armored]]
 
-local techrequired				 = [[tech2]]
+local techrequired				 = [[tech1]]
 
 local unitDef                    = {
 

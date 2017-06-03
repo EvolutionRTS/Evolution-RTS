@@ -28,7 +28,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Main Battle Tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

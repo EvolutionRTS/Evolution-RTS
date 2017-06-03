@@ -7,10 +7,10 @@ local unitName                    = "etech1"
 
 local armortype					 = [[building]]
 local energyproduced			 = [[0]]
-local techprovided				 = [[tech1]]
+local techprovided				 = [[tech0, tech1]]
 --local supplygranted				 = [[25]]
 
-local buildCostMetal 			  = 40
+local buildCostMetal 			  = 100
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {

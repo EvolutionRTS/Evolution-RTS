@@ -47,6 +47,36 @@ return {
     },
   },
   
+  eamphibriot_up1 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  
+  eamphibriot_up2 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  
+  eamphibriot_up3 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  
   eallterrriot = {
     {
 	name     = "Weapon type",
@@ -57,7 +87,70 @@ return {
     },
   },
   
+  eallterrriot_up1 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  
+  eallterrriot_up2 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  
+  eallterrriot_up3 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', 'EMP', 'Shotgun'},
+    },
+  },
+  
   eamphibrock = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', [[Single
+Missile]], [[Salvo]]},
+    },
+  },
+  
+  eamphibrock_up1 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', [[Single
+Missile]], [[Salvo]]},
+    },
+  },
+  
+  eamphibrock_up2 = {
+    {
+	name     = "Weapon type",
+	tooltip  = "Switch between EMP cannon and Shotgun Blast",
+	cob      = "WeaponType",  -- only this is required
+	type = CMDTYPE.ICON_MODE,
+	params = {'1', [[Single
+Missile]], [[Salvo]]},
+    },
+  },
+  
+  eamphibrock_up3 = {
     {
 	name     = "Weapon type",
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
@@ -110,7 +203,7 @@ Shot]], 'Saturation'},
   },
   
 ------------
-
+--[=[
   eriottank2_t2 = {
     {
 	name     = "Weapon type",
@@ -162,5 +255,5 @@ Missile]], [[Salvo]]},
 Shot]], 'Saturation'},
     },
   },
-  
+--]=]
 }

@@ -28,7 +28,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  =[[Anti-Base Long Range Siege Tank • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Self-Propelled Precision Artillery • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

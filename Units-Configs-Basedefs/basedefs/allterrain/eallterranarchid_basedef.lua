@@ -29,7 +29,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 	
-	description                  =[[Unit Type: Endbringer Class Base Assault Walker • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Endbringer Class Base Obliteration Strider • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

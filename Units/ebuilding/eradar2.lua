@@ -7,7 +7,7 @@ local unitName                    = "eradar2"
 
 local armortype					 = [[building]]
 
-local techrequired				 = [[tech2]]
+local techrequired				 = [[tech1]]
 
 local buildCostMetal 			  = 30
 local maxDamage					  = buildCostMetal * 12.5

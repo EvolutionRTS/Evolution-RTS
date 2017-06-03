@@ -5,14 +5,14 @@ local unitName                   = "ehbotpeewee"
 
 --------------------------------------------------------------------------------
 
-local tech						 = [[tech1]]
+local tech						 = [[tech0]]
 local armortype					 = [[light]]
 local supply					 = [[5]]
 local maxDamage					 = 300
 
 local weapon1Damage              = 20
 local weapon1AOE				 = 25
-local weapon1Range				 = 650
+local weapon1Range				 = 550
 local projectiles				 = 5
 local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
 
@@ -41,7 +41,7 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
 	corpse                       = "ammobox",
-	description                  = [[Light Raider • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Raider • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

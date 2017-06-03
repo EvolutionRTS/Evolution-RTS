@@ -12,7 +12,7 @@ humanName = [[Recluse]]
 objectName = "eallterrlight2.s3o"
 script = "eallterrlight.cob"
 
-tech = [[tech1]]
+tech = [[tech0]]
 armortype = [[light]]
 supply = [[2]]
 

@@ -7,7 +7,7 @@ local unitName                   = "eorb"
 
 local armortype					 = [[light]]
 --local supply					 = [[1]]
-local techrequired				 = [[tech2]]
+local techrequired				 = [[tech1]]
 
 local unitDef                    = {
 

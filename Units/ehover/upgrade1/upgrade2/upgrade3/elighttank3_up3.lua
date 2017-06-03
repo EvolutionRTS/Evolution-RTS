@@ -12,7 +12,7 @@ humanName = [[Kite Mark IV]]
 objectName = "elighttank4.s3o"
 script = "elighttank3_lus.lua"
 
-tech						 = [[tech1]]
+tech						 = [[tech0]]
 armortype					 = [[light]]
 supply					 = [[3]]
 
