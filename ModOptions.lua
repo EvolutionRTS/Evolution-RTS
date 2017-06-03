@@ -225,13 +225,13 @@ local options= {
 	{
 		key    = 'heatmapping',
 		name   = 'Heatmapped Pathfinding',
-		desc   = 'Turns heatmapping on and off in the pathfinder.',
+		desc   = 'Turns heatmapping on and off in the pathfinder. Heatmapping is multiplied by this percentage',
 		type="list",
 		def="enabled",
 		section= "gameplayoptions",
 		items={
 			{key="disabled", name="Disabled", desc=""},
-			{key="enabled", name="Enabled", desc="Turns heatmapping on and off in the pathfinder."},
+			{key="enabled", name="Enabled", desc="Turns heatmapping on and off in the pathfinder. Heatmapping is multiplied by this percentage."},
 		}
 	},
 	{
@@ -240,9 +240,9 @@ local options= {
 		desc   = 'How much heat does each unit generate when it moves through an area?',
 		type   = 'number',
 		section= 'gameplayoptions',
-		def    = 5,
+		def    = 25,
 		min    = 0,
-		max    = 10,
+		max    = 100,
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},

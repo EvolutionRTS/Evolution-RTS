@@ -4,11 +4,11 @@ if Spring.GetModOptions().heatmapping ~= nil then
 		heatmapping = true
 	end
 	
-	local unitHeat = Spring.GetModOptions().unitheat * 0.01
+	local unitHeat = Spring.GetModOptions().unitheat * 0.001
 	
 else
 	heatmapping = true
-	unitHeat = 0.05
+	unitHeat = 0.025
 end
 
 local moveDefs = {
