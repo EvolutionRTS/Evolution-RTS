@@ -11,8 +11,9 @@ local supply					 = [[7]]
 local maxDamage					 = 325
 
 local weapon1Damage              = 75
-local weapon1AOE				 = 100
-local weapon1Range				 = 600
+local weapon1AOE				 = 50
+local weapon1Range				 = 800
+
 --local projectiles				 = 5
 --local burst						 = 102
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
