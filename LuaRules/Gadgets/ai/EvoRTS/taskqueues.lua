@@ -180,7 +180,7 @@ local function orblist(brr)
 end
 
 taskqueues = {
-   ecommanderai = engineerlist,
+   ecommanderbattleai = engineerlist,
    ebasefactory = factory,
    eengineer5 = engineerlist,
    eallterrengineer = engineerlist,
