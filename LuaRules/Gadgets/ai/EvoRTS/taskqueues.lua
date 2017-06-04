@@ -55,12 +55,13 @@ local factory = {
 }
 
 local firstEngineer = {
-	--{action = "wait", frames = 30}
-   "elightturret2",
-   { action = "moverelative", position = {x = math.random(-600, 600), y = math.random(-600, 600), z = math.random(-600, 600)} },
+   { action = "wait", frames = 30}
+   { action = "moverelative", position = {x = math.random(-200, 200), y = math.random(-200, 200), z = math.random(-200, 200)} },
    "elightturret2",
    { action = "moverelative", position = {x = math.random(-600, 600), y = math.random(-600, 600), z = math.random(-600, 600)} },
    StartFactory,
+   { action = "moverelative", position = {x = math.random(-600, 600), y = math.random(-600, 600), z = math.random(-600, 600)} },
+   "elightturret2",
    { action = "moverelative", position = {x = math.random(-1000, 1000), y = math.random(-1000, 1000), z = math.random(-1000, 1000)} },
    {action = "wait", frames = 4500},
 }
