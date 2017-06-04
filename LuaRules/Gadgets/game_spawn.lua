@@ -51,7 +51,7 @@ local function GetStartUnit(teamID)
                 if boolIsAI==true then
 					Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
 					local sidedata = Spring.GetSideData()
-					startUnit = "ecommanderbattle"
+					startUnit = "ecommanderbattleai"
 					return startUnit
                 end
        
