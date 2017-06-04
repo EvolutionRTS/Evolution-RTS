@@ -55,7 +55,7 @@ local factory = {
 }
 
 local firstEngineer = {
-   { action = "wait", frames = 30}
+   --{ action = "wait", frames = 30}
    { action = "moverelative", position = {x = math.random(-200, 200), y = math.random(-200, 200), z = math.random(-200, 200)} },
    "elightturret2",
    { action = "moverelative", position = {x = math.random(-600, 600), y = math.random(-600, 600), z = math.random(-600, 600)} },
