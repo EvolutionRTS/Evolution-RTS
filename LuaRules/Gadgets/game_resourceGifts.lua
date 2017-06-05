@@ -168,7 +168,7 @@ function gadget:GameFrame(n)
 		end
 
 	--Give free resources to AI - Necessary for AI's to properly function
-	if n%32 == 4 then
+	if n%30 == 4 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then

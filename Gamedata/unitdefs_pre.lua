@@ -142,6 +142,7 @@ Shared.buildListAIOverseer = {
 	[[ehbotthud]],
 	[[ehbotsniper]],
 	[[ehbotrocko]],
+	[[eorbai]],
 }
 
 -----------------------------
