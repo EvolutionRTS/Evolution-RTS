@@ -186,9 +186,6 @@ local weaponDefs                 = {
 			damagetype		     = "eriottank2",  
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		}, 
 		damage                   = {
 			default              = weapon1Damage,

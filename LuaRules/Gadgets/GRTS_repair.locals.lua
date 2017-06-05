@@ -34,6 +34,7 @@ end
 
 local repairUnits= {
 	[UnitDefNames.eorb.id] = {radius=1000,strength=2.0},
+	[UnitDefNames.eorbai.id] = {radius=5000,strength=2.0},
 	[UnitDefNames.ehbotengineer_turret.id] = {radius=1000,strength=2.0},
 }
 
