@@ -217,13 +217,11 @@ local weaponDefs                 = {
 		size				     = 0,
 		turret                   = true,
 		weaponVelocity           = 10000,
+		waterweapon				 = true,
 		customparams             = {
 			damagetype		     = "default",
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
 		},      
 		damage                   = {
 			default              = 1000,
@@ -273,6 +271,7 @@ local weaponDefs                 = {
 		weaponTimer               = 15,
 		weaponType                = "StarburstLauncher",
 		weaponVelocity            = 1000,
+		waterweapon				 = true,
 		customparams              = {
 			damagetype		      = "default",  
 			death_sounds 		  = "nuke",
@@ -315,11 +314,10 @@ local weaponDefs                 = {
 		tolerance                = 1000,
 		turret                   = true,
 		weaponVelocity           = 1000,
+		waterweapon				 = true,
 		customparams             = {
 			damagetype		     = "ecommanderbattle", 
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
+			nocosttofire		 = true,
 		}, 
 		damage                   = {
 			default              = weapon2Damage,
