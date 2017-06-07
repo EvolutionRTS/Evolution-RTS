@@ -31,7 +31,7 @@ local unitDef                    = {
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 50,
-	builder                      = false,
+	builder                      = true,
 	buildTime                    = 5,
 	canAttack                    = true,
 	
