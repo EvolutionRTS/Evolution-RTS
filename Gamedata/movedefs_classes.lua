@@ -480,6 +480,7 @@ local moveDefs = {
 	  slopemod=4,
 	  heatmapping=heatmapping,
 	
+   },
    COMMANDERTANKAI4 = {
       footprintx=4,
       footprintz=4,
