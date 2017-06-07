@@ -479,6 +479,29 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  heatmapping=heatmapping,
+	
+   },
+   COMMANDERTANKAI4 = {
+      footprintx=4,
+      footprintz=4,
+      maxslope=26,
+      crushstrength=20,
+      maxwaterdepth=10,
+      maxwaterslope=255,
+      badwaterslope=255,
+	  depthModParams = {
+         minHeight      = 0,
+         maxHeight      = 5000,
+         maxScale       = 1.1,
+         quadraticCoeff = 0.3,
+         linearCoeff    = 0.3, -- deprecates "depthMod"
+         constantCoeff  = 0.3,
+       },
+	  minwaterdepth=10,
+	  heatmod=unitHeat,
+	  slopemod=4,
+	  heatmapping=heatmapping,
+	
    },
    EXPERIMENTALTANK10 = {
       footprintx=12,
