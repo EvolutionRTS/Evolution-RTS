@@ -1018,7 +1018,7 @@ end
 	
 	taskqueues = {
    ecommanderbattleai = engineerlist,
-   eaiturret = idlelist
+   eaiturret = idlelist,
    --ebasefactory = factory,
    --eengineer5 = engineerlist,
    eallterrengineer = engineerlist,
