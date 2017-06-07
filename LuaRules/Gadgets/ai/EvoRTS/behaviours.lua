@@ -13,6 +13,9 @@ behaviours = {
 	--eorb = {
 	--	AutoReclaimBehaviour,
 	--},
+	eaiturret = {
+		TaskQueueBehaviour
+	},
 	ebasefactory = {
 		TaskQueueBehaviour,
 		--FactoryRegisterBehaviour,
@@ -29,7 +32,7 @@ behaviours = {
 		TaskQueueBehaviour,
 		--FactoryRegisterBehaviour,
 	},
-	ecommanderai = {
+	ecommanderbattleai = {
 		TaskQueueBehaviour,
 		--LowEnergyBehaviour,
 		--EngineerTurretBehaviour,

@@ -962,6 +962,10 @@ local engineersAir = {
 	Orb,
 }
 
+local idlelist = {
+  { action = "wait", frames = 3000},
+}
+
 --local factory = {
 --}
 
@@ -1014,6 +1018,7 @@ end
 	
 	taskqueues = {
    ecommanderbattleai = engineerlist,
+   eaiturret = idlelist
    --ebasefactory = factory,
    --eengineer5 = engineerlist,
    eallterrengineer = engineerlist,
