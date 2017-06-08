@@ -1,15 +1,18 @@
--- CV Enabled/Disabled Controls
-if Spring.GetModOptions().scoremode == "disabled" then
-	return false
-end
+cvMode = Spring.GetModOptions().scoremode
 
 --Is CV Enabled when you launch spring.exe directly?
-if Spring.GetModOptions().scoremode == nil then
-	Spring.GetModOptions().scoremode = "countdown"
+if cvMode == nil then
+	cvMode = "countdown"
+end
+
+-- CV Enabled/Disabled Controls
+if cvMode == "disabled" then
+	return false
 end
 
 -------------------------------------------------------
 -- Use a building mask for Control Points?
+--If this is set to false, then any unit will be buildable in the control point
 useBuildingMask = true
 -------------------------------------------------------
 

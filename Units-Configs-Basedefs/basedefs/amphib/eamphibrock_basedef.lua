@@ -86,6 +86,7 @@ unitDef                    = {
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,
+		unittype				 = "mobile",
 		canbetransported 		 = "true",
 		canareaattack            ="1",
 		needed_cover             = 2,

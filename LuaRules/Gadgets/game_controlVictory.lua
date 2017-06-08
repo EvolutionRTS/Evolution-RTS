@@ -67,6 +67,8 @@ local nonCapturingUnits = {
 return nonCapturingUnits
 
 ////
+!!!!THIS IS NOW DEPRECATED IN LEIU OF BUILDINGMASK!!!! 
+The code has, however, been kept (commented out) in case other game developers end up having a use for it.
 
 The buildableUnits.lua config file is structured like this:
 These are units that are allowed to be built within control points.
@@ -283,9 +285,7 @@ That's all folks!!!
 ]]--
 
 nonCapturingUnits = VFS.Include"LuaRules/Configs/cv_nonCapturingUnits.lua"
-buildableUnits = VFS.Include"LuaRules/Configs/cv_buildableUnits.lua"
-
---local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
+--buildableUnits = VFS.Include"LuaRules/Configs/cv_buildableUnits.lua"
 
 --Make controlvictory exit if chickens are present
 
@@ -358,7 +358,7 @@ if scoreMode == 2 then scoreModeAsString = "Tug of War" end
 if scoreMode == 3 then scoreModeAsString = "Domination" end
 
 
-Spring.Echo("[ControlVictory] Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Countdown"))
+Spring.Echo("[ControlVictory] Control Victory Scoring Mode: " .. cvMode)
 
 local gaia = Spring.GetGaiaTeamID()
 local mapx, mapz = Game.mapSizeX, Game.mapSizeZ
@@ -843,26 +843,26 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 -- Allow units listed in the buildableUnits config to be built in control points
+-- This is deprecated in leiu of buildingMask
+	-- local allowedBuildableUnits = {}
+	-- for i = 1, #buildableUnits do
+		-- if UnitDefNames[buildableUnits[i]] then
+			-- allowedBuildableUnits[UnitDefNames[buildableUnits[i]].id] = true
+		-- end
+	-- end
 
-	local allowedBuildableUnits = {}
-	for i = 1, #buildableUnits do
-		if UnitDefNames[buildableUnits[i]] then
-			allowedBuildableUnits[UnitDefNames[buildableUnits[i]].id] = true
-		end
-	end
-
-	function gadget:AllowUnitCreation(unit, builder, team, x, y, z) -- TODO: fix for comshare
-		if allowedBuildableUnits[unit] then
-			return true
-		end
-		for _, p in pairs(points) do
-			if x and math.sqrt((x - p.x) * (x - p.x) + (z - p.z) * (z - p.z)) < captureRadius then
-				Spring.SendMessageToPlayer(team, "This unit is not allowed to be built in Control Points")
-				return false
-			end
-		end
-		return true
-	end
+	-- function gadget:AllowUnitCreation(unit, builder, team, x, y, z)
+		-- if allowedBuildableUnits[unit] then
+			-- return true
+		-- end
+		-- for _, p in pairs(points) do
+			-- if x and math.sqrt((x - p.x) * (x - p.x) + (z - p.z) * (z - p.z)) < captureRadius then
+				-- Spring.SendMessageToPlayer(team, "This unit is not allowed to be built in Control Points")
+				-- return false
+			-- end
+		-- end
+		-- return true
+	-- end
 
 else -- UNSYNCED
 	

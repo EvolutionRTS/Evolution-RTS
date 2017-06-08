@@ -73,7 +73,15 @@ function UnitDef_Post(name, uDef)
 		end
 	  end
 	end
-		
+	
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	-- Set building Mask 0 for all mobile units
+	--
+	if uDef.customparams and uDef.customparams.unittype == "mobile" then
+		uDef.buildingmask = 0
+	end	
+	
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- 3dbuildrange for all none plane builders

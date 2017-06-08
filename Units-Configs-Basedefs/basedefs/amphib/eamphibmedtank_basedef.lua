@@ -83,6 +83,7 @@ unitDef                    = {
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,
+		unittype				 = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
