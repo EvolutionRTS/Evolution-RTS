@@ -1,14 +1,4 @@
--- UNITDEF -- EHBOTFAC --
---------------------------------------------------------------------------------
-
-local unitName                    = "ehbotfac"
-
---------------------------------------------------------------------------------
-
-local buildCostMetal 			  = 30
-local maxDamage					  = buildCostMetal * 12.5
-
-local unitDef                     = {
+unitDef                     = {
 
 	activatewhenbuilt             = false,
 	buildAngle                    = 1024,
@@ -16,6 +6,7 @@ local unitDef                     = {
 	buildCostMetal                = buildCostMetal,
 	builder                       = true,
 	buildTime                     = 5,
+	buildpic					 = [[ehbotfac.png]],
 	canAttack			          = false,
 	canBeAssisted                 = true,
 	canGuard                      = true,
@@ -41,9 +32,9 @@ local unitDef                     = {
 	maxWaterDepth                 = 99999999999,
 	metalStorage                  = 0,
 	metalMake                     = 0,
-	name                          = "H-Bot Factory",
-	objectName                    = "ehbotfac.s3o",
-	script	                      = "ehbotfac.cob",
+	name                          = humanName,
+	objectName                    = objectName,
+	script			              = script,
 	radarDistance                 = 0,
 	repairable		              = false,
 	selfDestructAs                = "LARGE_BUILDING",
@@ -71,13 +62,7 @@ local unitDef                     = {
 			"custom:fusionreactionbasic",
 		},
 	},
-	buildoptions                  = {
---		"ehbotengineer",
-		"ehbotpeewee",
-		"ehbotthud",
-		"ehbotsniper",
-		"ehbotrocko",
-	},
+	buildoptions = hbotFactoryBuildList,
 	sounds                        = {
 		underattack               = "unitsunderattack1",
 		select                    = {
@@ -101,9 +86,3 @@ local unitDef                     = {
 	BuildingGroundDecalSizeY      = 20,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]     = unitDef })
-
---------------------------------------------------------------------------------

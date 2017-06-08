@@ -267,6 +267,34 @@ Overseer]],
 			text = [[+15% damage/hp buff, +15% faster reload, -5% speed]],
 		},
 	},
+	
+	ehbotfac = 	{
+		{
+			into = 'ehbotfac_up1',
+			time = timeToBuild_factory_up1,
+			cmdname = [[Upgrade]],
+			metal = metalCost_factory_up1,
+			text = [[+20% damage/hp buff, +15% faster reload, -5% speed]],
+		},
+	},
+	ehbotfac_up1 = 	{
+		{
+			into = 'ehbotfac_up2',
+			time = timeToBuild_factory_up1,
+			cmdname = [[Upgrade]],
+			metal = metalCost_factory_up1,
+			text = [[+15% damage/hp buff, +15% faster reload, -5% speed]],
+		},
+	},
+	ehbotfac_up2 = 	{
+		{
+			into = 'ehbotfac_up3',
+			time = timeToBuild_factory_up1,
+			cmdname = [[Upgrade]],
+			metal = metalCost_factory_up1,
+			text = [[+15% damage/hp buff, +15% faster reload, -5% speed]],
+		},
+	},
 
 ----------------------------------------------------------
 ----------------------------------------------------------

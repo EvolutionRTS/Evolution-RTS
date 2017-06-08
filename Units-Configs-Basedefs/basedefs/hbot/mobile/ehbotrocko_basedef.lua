@@ -1,28 +1,4 @@
--- UNITDEF -- ehbotthud --
---------------------------------------------------------------------------------
-
-local unitName                   = "ehbotrocko"
-
---------------------------------------------------------------------------------
-
-local tech						 = [[tech2]]
-local armortype					 = [[light]]
-local supply					 = [[15]]
-local maxDamage					 = 350
-
-local weapon1Damage              = 100
-local weapon1AOE				 = 500
-local weapon1Range				 = 1000
-local reloadTime				 = 2.5
---local projectiles				 = 5
---local burst						 = 10
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -34,6 +10,7 @@ local unitDef                    = {
 	buildCostMetal               = 40,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = [[ehbotrocko.png]],
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -55,22 +32,22 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 350,
 	maxSlope                     = 26,
 	maxVelocity                  = 2,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT5",
-	name                         = "Rocko",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotrocko.s3o",
-	script						 = "ehbotrocko_lus.lua",
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericRed",
 	side                         = "CORE",
-	sightDistance                = weapon1Range,
+	sightDistance                = 1000,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -79,7 +56,7 @@ local unitDef                    = {
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = unitname,
+	unitname                     = unitName,
 	--usePieceCollisionVolumes	 = true,
 	upright                      = true,
 	workerTime                   = 0,
@@ -115,6 +92,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		isupgraded			  	 = isUpgraded,
 		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 1,
@@ -126,34 +104,27 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
- 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weaponDefs                 = {
+weaponDefs                 = {
 	rockets             = {
 		accuracy				 = 1000,
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 500,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		cegTag                   = "missiletrailsmall",
 		explosionGenerator       = "custom:genericshellexplosion-large-red",
-		energypershot            = energycosttofire,
+		energypershot            = 0,
 		fireStarter              = 70,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
 		model                    = "missilesmalllauncher.s3o",
 		name                     = "Rockets",
-		range                    = weapon1Range,
-		reloadtime               = reloadTime,
+		range                    = 1000,
+		reloadtime               = 2.5,
 		weaponType		         = "MissileLauncher",
 		smokeTrail               = false,
 		soundStart               = "emediumtankfire2.wav",
@@ -167,21 +138,11 @@ local weaponDefs                 = {
 		flightTime               = 3,
 		weaponVelocity           = 1500,
 		customparams             = {
-			damagetype		     = "ehbotrocko",  
-
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
+			damagetype		     = "ehbotrocko",
+			isupgraded			  	 = isUpgraded,
 		},     
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 100,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

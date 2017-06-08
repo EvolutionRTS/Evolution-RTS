@@ -381,3 +381,29 @@ Shared.buildListAirPlant_up3 = {
 		[[ebomber_up3]],
 		[[etransport_up3]],
 }
+--
+--
+Shared.buildListHbotFactory = {
+		[[ehbotpeewee]],
+		[[ehbotthud]],
+		[[ehbotsniper]],
+		[[ehbotrocko]],
+}
+Shared.buildListHbotFactory_up1 = {
+		[[ehbotpeewee_up1]],
+		[[ehbotthud_up1]],
+		[[ehbotsniper_up1]],
+		[[ehbotrocko_up1]],
+}
+Shared.buildListHbotFactory_up2 = {
+		[[ehbotpeewee_up2]],
+		[[ehbotthud_up2]],
+		[[ehbotsniper_up2]],
+		[[ehbotrocko_up2]],
+}
+Shared.buildListHbotFactory_up3 = {
+		[[ehbotpeewee_up3]],
+		[[ehbotthud_up3]],
+		[[ehbotsniper_up3]],
+		[[ehbotrocko_up3]],
+}

@@ -1,26 +1,4 @@
--- UNITDEF -- ehbotpeewee --
---------------------------------------------------------------------------------
-
-local unitName                   = "ehbotpeewee"
-
---------------------------------------------------------------------------------
-
-local tech						 = [[tech0]]
-local armortype					 = [[light]]
-local supply					 = [[5]]
-local maxDamage					 = 300
-
-local weapon1Damage              = 20
-local weapon1AOE				 = 25
-local weapon1Range				 = 650
-local projectiles				 = 5
-local energycosttofire			 = weapon1Damage / 10 * projectiles * ((weapon1AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -32,6 +10,7 @@ local unitDef                    = {
 	buildCostMetal               = 22,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = [[ehbotpeewee.png]],
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -52,22 +31,22 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 300,
 	maxSlope                     = 26,
 	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT5",
-	name                         = "A.K.",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotpeewee2.s3o",
-	script						 = "ehbotpeewee_lus.lua",
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "smallExplosionGenericBlue",
 	side                         = "CORE",
-	sightDistance                = weapon1Range,
+	sightDistance                = 650,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -76,7 +55,7 @@ local unitDef                    = {
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = unitname,
+	unitname                     = unitName,
 	--usePieceCollisionVolumes	 = true,
 	upright                      = true,
 	workerTime                   = 0,
@@ -112,6 +91,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		isupgraded			  	 = isUpgraded,
 		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 1,
@@ -123,19 +103,12 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
- 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weaponDefs                 = {
+weaponDefs                 = {
 	flashweapon                = {
-		AreaOfEffect           = weapon1AOE,
+		AreaOfEffect           = 25,
 		avoidFriendly          = false,
 		avoidFeature 		   = false,
 		collideFriendly        = false,
@@ -145,14 +118,14 @@ local weaponDefs                 = {
 		rgbColor2              = "1 1 1",
 		explosionGenerator     = "custom:genericshellexplosion-medium-sparks-burn",
 		edgeEffectiveness	   = 1,
-		energypershot          = energycosttofire,
+		energypershot          = 0,
 		duration			   = 0.25,
 		impulseFactor          = 0,
 		interceptedByShieldType  = 4,
 		name                   = "E.M.G.",
-		range                  = weapon1Range,
+		range                  = 650,
 		reloadtime             = 1,
-		projectiles			   = projectiles,
+		projectiles			   = 5,
 		weaponType		       = "LaserCannon",
 		soundStart             = "shotgun-reload.wav",
 		soundTrigger           = true,
@@ -166,17 +139,10 @@ local weaponDefs                 = {
 		customparams             = {
 			damagetype		     = "ehbotpeewee",
 			single_hit		 	 = true,
+			isupgraded			 = isUpgraded,
 		},      
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 20,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

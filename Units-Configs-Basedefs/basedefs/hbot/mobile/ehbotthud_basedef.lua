@@ -1,28 +1,4 @@
--- UNITDEF -- ehbotthud --
---------------------------------------------------------------------------------
-
-local unitName                   = "ehbotthud"
-
---------------------------------------------------------------------------------
-
-local tech						 = [[tech1]]
-local armortype					 = [[light]]
-local supply					 = [[7]]
-local maxDamage					 = 325
-
-local weapon1Damage              = 150
-local weapon1AOE				 = 75
-local weapon1Range				 = 800
-
---local projectiles				 = 5
---local burst						 = 102
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
-
-local unitDef                    = {
+unitDef                    = {
 
 	--mobileunit 
 	transportbyenemy             = false;
@@ -34,6 +10,7 @@ local unitDef                    = {
 	buildCostMetal               = 27,
 	builder                      = false,
 	buildTime                    = 5,
+	buildpic					 = [[ehbotthud.png]],
 	canAttack                    = true,
 	
 	canGuard                     = true,
@@ -55,22 +32,22 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 325,
 	maxSlope                     = 26,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 10,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT5",
-	name                         = "Thud",
+	name                         = humanName,
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotthud.s3o",
-	script						 = "ehbotthud_lus.lua",
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGeneric",
 	side                         = "CORE",
-	sightDistance                = weapon1Range,
+	sightDistance                = 800,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -79,7 +56,7 @@ local unitDef                    = {
 	turnInPlace                  = true,
 	turnRate                     = 5000,
 	--  turnrate                 = 475,
-	unitname                     = unitname,
+	unitname                     = unitName,
 	upright                      = true,
 	--usePieceCollisionVolumes	 = true,
 	workerTime                   = 0,
@@ -115,6 +92,7 @@ local unitDef                    = {
 		},
 	},
 	customParams                 = {
+		isupgraded			  	 = isUpgraded,
 		unittype				  = "mobile",
 		canbetransported 		 = "true",
 		needed_cover             = 1,
@@ -126,19 +104,12 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
- 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 }
 
-
---------------------------------------------------------------------------------
--- Energy Per Shot Calculation is: dmg / 20 * ((aoe / 1000) + 1)
-
-local weaponDefs                 = {
+weaponDefs                 = {
 	plasmacannon                	= {
-		AreaOfEffect           = weapon1AOE,
+		AreaOfEffect           = 75,
 		avoidFriendly          = false,
 		avoidFeature 		   = false,
 		collideFriendly        = false,
@@ -148,14 +119,14 @@ local weaponDefs                 = {
 		--burstrate			   = 0.1,
 		edgeEffectiveness	   = 1,
 		explosionGenerator     = "custom:genericshellexplosion-medium",
-		energypershot          = energycosttofire,
+		energypershot          = 0,
 		--duration			   = 0.25,
 		highTrajectory		   = 2,
 		impulseFactor          = 0,
 		interceptedByShieldType  = 4,
 		name                   = "Plasma Cannon",
 		--noExplode			   = true,
-		range                  = weapon1Range,
+		range                  = 800,
 		reloadtime             = 2,
 		size					 = 16,
 		--projectiles			   = projectiles,
@@ -170,17 +141,10 @@ local weaponDefs                 = {
 		weaponVelocity         = 600,
 		customparams             = {
 			damagetype		     = "ehbotthud",
+			isupgraded			  	 = isUpgraded,
 		},      
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 150,
 		},
 	},
 }
-unitDef.weaponDefs               = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------
