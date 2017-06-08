@@ -1,4 +1,4 @@
-if Spring.GetModOptions().heatmapping ~= nil then
+if Spring.GetModOptions and Spring.GetModOptions().heatmapping ~= nil then
 	local useHeatMapping = Spring.GetModOptions().heatmapping
 	if useHeatMapping ~= "disabled" then
 		heatmapping = true
