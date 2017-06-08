@@ -146,15 +146,15 @@ end
 
 
 local function Raid1()
-	local r = math.random(0,2)  --local r = math.random(0,3)
+	local r = math.random(0,3)
 	if r == 0 then
 			return "eallterrlight_up1"
 		elseif r == 1 then
 			return "eamphibbuggy_up1"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "elighttank3_up1"
-		--else
-			--return "ehbotpeewee_up1"
+		else
+			return "ehbotpeewee_up1"
 	end
 end
 
@@ -172,15 +172,15 @@ local function EMP1()
 end
 
 local function Arty1()
-	local r = math.random(0,2)  --local r = math.random(0,3)
+	local r = math.random(0,3)
 	if r == 0 then
 			return "eallterrassault_up1"
 		elseif r == 1 then
 			return "eamphibarty_up1"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "eartytank_up1"
-		--else
-			--return "ehbotthud_up1"
+		else
+			return "ehbotthud_up1"
 	end
 end
 
@@ -198,17 +198,17 @@ local function Armor1()
 end
 
 local function Support1()
-	local r = math.random(0,2) --local r = math.random(0,4)
+	local r = math.random(0,4)
 	if r == 0 then
 			return "emissiletank_up1"
 		elseif r == 1 then
 			return "eallterrshield_up1"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "eamphibrock_up1"
-		--elseif r == 3 then
-			--return "ehbotrocko_up1"
-		--else
-			--return "ehbotsniper_up1"
+		elseif r == 3 then
+			return "ehbotrocko_up1"
+		else
+			return "ehbotsniper_up1"
 	end
 end
 
@@ -239,15 +239,15 @@ end
 
 
 local function Raid2()
-	local r = math.random(0,2)  --local r = math.random(0,3)
+	local r = math.random(0,3)
 	if r == 0 then
 			return "eallterrlight_up2"
 		elseif r == 1 then
 			return "eamphibbuggy_up2"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "elighttank3_up2"
-		--else
-			--return "ehbotpeewee_up2"
+		else
+			return "ehbotpeewee_up2"
 	end
 end
 
@@ -265,15 +265,15 @@ local function EMP2()
 end
 
 local function Arty2()
-	local r = math.random(0,2)  --local r = math.random(0,3)
+	local r = math.random(0,3)
 	if r == 0 then
 			return "eallterrassault_up2"
 		elseif r == 1 then
 			return "eamphibarty_up2"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "eartytank_up2"
-		--else
-			--return "ehbotthud_up2"
+		else
+			return "ehbotthud_up2"
 	end
 end
 
@@ -291,17 +291,17 @@ local function Armor2()
 end
 
 local function Support2()
-	local r = math.random(0,2) --local r = math.random(0,4)
+	local r = math.random(0,4)
 	if r == 0 then
 			return "emissiletank_up2"
 		elseif r == 1 then
 			return "eallterrshield_up2"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "eamphibrock_up2"
-		--elseif r == 3 then
-			--return "ehbotrocko_up2"
-		--else
-			--return "ehbotsniper_up2"
+		elseif r == 3 then
+			return "ehbotrocko_up2"
+		else
+			return "ehbotsniper_up2"
 	end
 end
 
@@ -332,15 +332,15 @@ end
 
 
 local function Raid3()
-	local r = math.random(0,2)  --local r = math.random(0,3)
+	local r = math.random(0,3)
 	if r == 0 then
 			return "eallterrlight_up3"
 		elseif r == 1 then
 			return "eamphibbuggy_up3"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "elighttank3_up3"
-		--else
-			--return "ehbotpeewee_up3"
+		else
+			return "ehbotpeewee_up3"
 	end
 end
 
@@ -358,15 +358,15 @@ local function EMP3()
 end
 
 local function Arty3()
-	local r = math.random(0,2)  --local r = math.random(0,3)
+	local r = math.random(0,3)
 	if r == 0 then
 			return "eallterrassault_up3"
 		elseif r == 1 then
 			return "eamphibarty_up3"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "eartytank_up3"
-		--else
-			--return "ehbotthud_up3"
+		else
+			return "ehbotthud_up3"
 	end
 end
 
@@ -384,17 +384,17 @@ local function Armor3()
 end
 
 local function Support3()
-	local r = math.random(0,2) --local r = math.random(0,4)
+	local r = math.random(0,4)
 	if r == 0 then
 			return "emissiletank_up3"
 		elseif r == 1 then
 			return "eallterrshield_up3"
-		else --if r == 2 then
+		elseif r == 2 then
 			return "eamphibrock_up3"
-		--elseif r == 3 then
-			--return "ehbotrocko_up3"
-		--else
-			--return "ehbotsniper_up3"
+		elseif r == 3 then
+			return "ehbotrocko_up3"
+		else
+			return "ehbotsniper_up3"
 	end
 end
 
@@ -1518,20 +1518,20 @@ local function engineerlist(beh)
 			ai.engineerfirst = true
 			return firstEngineerSpider
 			end
-		else --if r == 5 then
+		elseif r == 5 then
 			if ai.engineerfirst == true then
 			return engineersHover
 			else
 			ai.engineerfirst = true
 			return firstEngineerHover
 			end
-		--else
-			--if ai.engineerfirst == true then
-			--return engineersHBot
-			--else
-			--ai.engineerfirst = true
-			--return firstEngineerHBot
-			--end
+		else
+			if ai.engineerfirst == true then
+			return engineersHBot
+			else
+			ai.engineerfirst = true
+			return firstEngineerHBot
+			end
 		end
 end
 
