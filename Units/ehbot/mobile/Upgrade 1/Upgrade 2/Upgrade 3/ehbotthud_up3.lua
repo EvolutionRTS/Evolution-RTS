@@ -5,7 +5,7 @@ unitName = "ehbotthud_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[1]]
+isUpgraded = [[3]]
 
 humanName = [[Thud MK IV]]
 

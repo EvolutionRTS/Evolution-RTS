@@ -5,7 +5,7 @@ unitName = "ehbotrocko_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[1]]
+isUpgraded = [[2]]
 
 humanName = [[Rocko MKIII]]
 
