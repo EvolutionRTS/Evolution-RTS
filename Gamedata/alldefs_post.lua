@@ -317,7 +317,7 @@ function WeaponDef_Post(name, wDef)
 		wDef.rgbcolor = [[0 0.5 1]]
 		wDef.rgbcolor2 = [[1 1 1]]
 		wDef.soundtrigger = true
-		wDef.soundstart = [[pointdefensefire.wav]]
+		wDef.soundstart = [[weapons/pointdefensefire.wav]]
 		wDef.texture1 = [[shot]]
 		wDef.texture2 = [[empty]]
 		wDef.thickness = 2

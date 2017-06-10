@@ -125,8 +125,8 @@ local weaponDefs                  = {
 		
 
 		smokeTrail                = false,
-		soundHit                  = "lrpchit.wav",
-		soundStart                = "lrpcshot2.wav",
+		soundHit                  = "explosions/lrpchit.wav",
+		soundStart                = "weapons/lrpcshot2.wav",
 		
 		tolerance                 = 8000,
 		turnRate                  = 4680,

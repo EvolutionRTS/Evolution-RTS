@@ -119,7 +119,7 @@ function gadget:GameFrame(frame)
 					Spring.SetTeamResource(teamId, "m", currentMetal + unitMetal)
 					Spring.SetTeamResource(teamId, "e", currentEnergy + unitEnergy)
 					Spring.SpawnCEG('salvage', ux, uy, uz)
-					Spring.PlaySoundFile('sounds/chaching.wav', 5, ux, uy, uz)
+					Spring.PlaySoundFile('sounds/miscfx/chaching.wav', 5, ux, uy, uz)
 				end
 			end
 		end

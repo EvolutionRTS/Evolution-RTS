@@ -120,10 +120,10 @@ weaponDefs                 = {
 		weaponType		         = "MissileLauncher",		
 		
 		smokeTrail               = false,
-		soundHit                 = "unitexplodebig.wav",
-		soundHitWet				 = "subhitbomb.wav",
+		soundHit                 = "explosions/unitexplodebig.wav",
+		soundHitWet				 = "explosions/subhitbomb.wav",
 		soundHitVolume	         = 10,
-		soundStart               = "bomberlaunch.wav",
+		soundStart               = "weapons/bomberlaunch.wav",
 		soundStartVolume         = 10,
 		
 		startVelocity            = 500,

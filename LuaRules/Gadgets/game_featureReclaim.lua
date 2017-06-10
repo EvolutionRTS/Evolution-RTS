@@ -28,7 +28,7 @@ if gadgetHandler:IsSyncedCode() then
 			Spring.DestroyFeature(featureID)
 			Spring.AddTeamResource(builderTeam, "e", 10)
 			local fx, fy, fz = GetFeaturePosition(featureID)
-			Spring.PlaySoundFile("sounds/reclaimed.wav", 1, fx, fy, fz)
+			Spring.PlaySoundFile("sounds/miscfx/reclaimed.wav", 1, fx, fy, fz)
 			SpawnCEG("sparklegreenplus10energy", fx, fy, fz)
 		end
 		return false

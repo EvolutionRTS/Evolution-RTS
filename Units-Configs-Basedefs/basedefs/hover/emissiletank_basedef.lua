@@ -129,8 +129,8 @@ weaponDefs                 = {
 		
 		
 		smokeTrail               = false,
-		soundHit                 = "explode_large.wav",
-		soundStart               = "missile_launch1.wav",
+		soundHit                 = "explosions/explode_large.wav",
+		soundStart               = "weapons/missile_launch1.wav",
 		
 		tracks                   = true,
 		turnrate                 = 17500,

@@ -125,8 +125,8 @@ weaponDefs                 = {
 		reloadtime               = 5,
 		size					 = 16,
 		weaponType		         = "Cannon",
-		soundHit                 = "artyhit.wav",
-		soundStart               = "arty2.wav",
+		soundHit                 = "explosions/artyhit.wav",
+		soundStart               = "weapons/arty2.wav",
 		
 		turret                   = true,
 		weaponVelocity           = 500,
@@ -162,8 +162,8 @@ weaponDefs                 = {
 		range                    = 1300,
 		reloadtime               = 0.5,
 		weaponType		         = "Cannon",
-		soundHit                 = "artyhit.wav",
-		soundStart               = "arty2.wav",
+		soundHit                 = "explosions/artyhit.wav",
+		soundStart               = "weapons/arty2.wav",
 		
 		turret                   = true,
 		weaponVelocity           = 500,

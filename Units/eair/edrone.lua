@@ -146,8 +146,8 @@ local weaponDefs                 = {
 		rgbColor                 = "0.1 0.5 0.2",
 		rgbColor2                = "0 1 0",
 		
-		soundHit                 = "18393_inferno_reject.wav",
-		soundStart               = "18389_inferno_medlas.wav",
+		soundHit                 = "weapons/18393_inferno_reject.wav",
+		soundStart               = "weapons/18389_inferno_medlas.wav",
 		soundTrigger             = true,
 		startVelocity            = 1000,
 		targetMoveError          = 0,

@@ -49,10 +49,10 @@ alarmTimes["position"]			= {}
 local spamBlock					= false
 
 ----------------------------------------------------------------------------
-local cloak1 = "sounds/cloak.wav"
-local decloak1 = "sounds/cloak.wav"
-local cloak2 = "sounds/cloak.wav"
-local decloak2 = "sounds/cloak.wav"
+local cloak1 = "sounds/miscfx/cloak.wav"
+local decloak1 = "sounds/miscfx/cloak.wav"
+local cloak2 = "sounds/miscfx/cloak.wav"
+local decloak2 = "sounds/miscfx/cloak.wav"
 
 local CD1 = "sounds/selfdcountdown/count1.wav"
 local CD2 = "sounds/selfdcountdown/count2.wav"
@@ -60,8 +60,8 @@ local CD3 = "sounds/selfdcountdown/count3.wav"
 local CD4 = "sounds/selfdcountdown/count4.wav"
 local CD5 = "sounds/selfdcountdown/count5.wav"
 local CD6 = "sounds/selfdcountdown/count6.wav"
-local cancel = "sounds/cancel2.wav"
-local movefailed = "sounds/cantdo4.wav"
+local cancel = "sounds/ui/cancel2.wav"
+local movefailed = "sounds/ui/cantdo4.wav"
 
 local ADUnits = {}
 local CMD_SELFD = CMD.SELFD
@@ -244,9 +244,9 @@ function widget:UnitDamaged (unitID, unitDefID, unitTeam, damage, paralyzer, wea
 
 		local snd 
 		if isCommander then
-			snd = 'sounds/warning2.wav'
+			snd = 'sounds/miscfx/warning2.wav'
 		else
-			snd = 'sounds/warning1.wav'
+			snd = 'sounds/miscfx/warning1.wav'
 		end
 		-- ALL units have volume = 1.0 in unitdef. Some units, such as critters and DT:s have no volume, making the widget fail on nil index.
 		-- this was the previous lookup code for volume: udef.sounds.underattack[1].volume

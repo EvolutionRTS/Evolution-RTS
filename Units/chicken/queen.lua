@@ -142,9 +142,9 @@ local weaponDefs                 = {
 		rgbColor                 = "1 0 0",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		soundstart               = "krabprimary.wav",
+		soundstart               = "weapons/krabprimary.wav",
 		sweepfire			     = true,
-		--    soundHit           = "mediumcannonhit.wav",
+		--    soundHit           = "explosions/mediumcannonhit.wav",
 		--	sweepfire		     = true,
 		texture1                 = "shot",
 		texture2                 = "empty",
@@ -182,7 +182,7 @@ local weaponDefs                 = {
 		reloadtime               = 0.5,
 		weaponType		         = "Cannon",
 		soundHit                 = "explode2",
-		soundStart               = "krabsecondary.wav",
+		soundStart               = "weapons/krabsecondary.wav",
 		
 		tolerance                = 500,
 		turret                   = true,
@@ -222,8 +222,8 @@ local weaponDefs                 = {
 		
 		
 		smokeTrail               = false,
-		soundHit                 = "explosion_enormous.wav",
-		soundStart               = "nukelaunch.wav",
+		soundHit                 = "explosions/explosion_enormous.wav",
+		soundStart               = "weapons/nukelaunch.wav",
 		
 		stockpile                = true,
 		stockpileTime            = 240,

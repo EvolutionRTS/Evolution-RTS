@@ -171,8 +171,8 @@ local weaponDefs                 = {
 		rgbColor                 = "0 0.2 1",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		soundstart               = "fnubeamfire.wav",
-		soundHit                 = "phasegun1hit.wav",
+		soundstart               = "weapons/fnubeamfire.wav",
+		soundHit                 = "explosions/phasegun1hit.wav",
 		texture1                 = "wave",
 		texture2                 = "empty",
 		thickness                = 40,
@@ -210,7 +210,7 @@ local weaponDefs                 = {
 		range                    = 500,
 		reloadtime               = 10,
 		weaponType		         = "Cannon",
-		soundhit                 = "emp.wav",
+		soundhit                 = "explosions/emp.wav",
 		size				     = 0,
 		turret                   = true,
 		weaponVelocity           = 10000,
@@ -256,8 +256,8 @@ local weaponDefs                 = {
 		
 		
 		smokeTrail                = false,
-		soundHit                  = "explosion_enormous.wav",
-		soundStart                = "nukelaunch.wav",
+		soundHit                  = "explosions/explosion_enormous.wav",
+		soundStart                = "weapons/nukelaunch.wav",
 		
 --		stockpile                 = true,
 --		stockpileTime             = stockpiletime,
