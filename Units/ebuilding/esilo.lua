@@ -148,8 +148,8 @@ local weaponDefs                  = {
 		
 		
 		smokeTrail                = false,
-		soundHit                  = "explosion_enormous.wav",
-		soundStart                = "nukelaunch.wav",
+		soundHit                  = "explosions/explosion_enormous.wav",
+		soundStart                = "weapons/nukelaunch.wav",
 		
 --		stockpile                 = true,
 --		stockpileTime             = stockpiletime,

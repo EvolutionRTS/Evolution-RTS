@@ -140,7 +140,7 @@ weaponDefs                 = {
 		fallOffRate              = 1,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
-		soundstart               = "flamethrower1.wav",
+		soundstart               = "weapons/flamethrower1.wav",
 		
 		minintensity             = 1,
 		impulseFactor            = 0,

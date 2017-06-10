@@ -6,7 +6,7 @@ local Sounds = {
 		riottankshotgun = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
-			file = "sounds/bruisercannon.wav",
+			file = "sounds/weapons/bruisercannon.wav",
 			gainmod = 0.35,
 			pitchmod = 0.05,
 			--pitch = 0.7,
@@ -17,7 +17,7 @@ local Sounds = {
 		ehbotpeeweeshotgun = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
-			file = "sounds/shotgun-reload.wav",
+			file = "sounds/weapons/shotgun-reload.wav",
 			gainmod = 0.35,
 			pitchmod = 0.05,
 			--pitch = 0.7,
@@ -28,7 +28,7 @@ local Sounds = {
 		pdfire = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
-			file = "sounds/pointdefensefire.wav",
+			file = "sounds/weapons/pointdefensefire.wav",
 			gainmod = 0.35,
 			pitchmod = 0.05,
 			--pitch = 0.7,
@@ -39,7 +39,7 @@ local Sounds = {
 		nukeartyweaponhit = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
-			file = "sounds/nukeartyhit.wav",
+			file = "sounds/explosions/nukeartyhit.wav",
 			gainmod = 0.35,
 			pitchmod = 0.05,
 			--pitch = 0.7,
@@ -49,7 +49,7 @@ local Sounds = {
 	
 		ack = {
 			--- always play on the front speaker(s)
-			file = "sounds/ack.wav",
+			file = "sounds/ui/ack.wav",
 			in3d = true,
 			maxconcurrent = 1,
 			gainmod = 0,
@@ -58,21 +58,21 @@ local Sounds = {
 	
 		IncomingChat = {
 			--- always play on the front speaker(s)
-			file = "sounds/beep4.wav",
+			file = "sounds/ui/beep4.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},
 		
 		UnitSelect = {
 			--- always play on the front speaker(s)
-			file = "sounds/unitselect.wav",
+			file = "sounds/miscfx/unitselect.wav",
 			in3d = true,
 			maxconcurrent = 1,
 		},
 		
 		MultiSelect = {
 			--- always play on the front speaker(s)
-			file = "sounds/button9.wav",
+			file = "sounds/ui/button9.wav",
 			in3d = true,
 			maxconcurrent = 1,
 		},
@@ -80,7 +80,7 @@ local Sounds = {
 		MapPoint = {
 			--- respect where the point was set, but don't attuenuate in distace
 			--- also, when moving the camera, don't pitch it
-			file = "sounds/beep6.wav",
+			file = "sounds/ui/beep6.wav",
 			rolloff = 0,
 			dopplerscale = 0,
 			maxconcurrent = 1,
@@ -88,42 +88,42 @@ local Sounds = {
 		
 		factory = {
 			--- always play on the front speaker(s)
-			file = "sounds/gdfactoryselect.wav",
+			file = "sounds/miscfx/gdfactoryselect.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},
 		
 		energy = {
 			--- always play on the front speaker(s)
-			file = "sounds/gdenergy.wav",
+			file = "sounds/miscfx/gdenergy.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},
 		
 		mex = {
 			--- always play on the front speaker(s)
-			file = "sounds/gdmex.wav",
+			file = "sounds/miscfx/gdmex.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},
 		
 		radar = {
 			--- always play on the front speaker(s)
-			file = "sounds/unitselect.wav",
+			file = "sounds/miscfx/unitselect.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},
 		
 		mobileunit = {
 			--- always play on the front speaker(s)
-			file = "sounds/unitselect.wav",
+			file = "sounds/miscfx/unitselect.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},
 		
 		turret = {
 			--- always play on the front speaker(s)
-			file = "sounds/turretselect.wav",
+			file = "sounds/miscfx/turretselect.wav",
 			in3d = "false",
 			maxconcurrent = 1,
 		},

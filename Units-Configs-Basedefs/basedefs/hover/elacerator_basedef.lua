@@ -111,8 +111,8 @@ weaponDefs                 = {
 		reloadtime               = 5,
 		size					 = 16,
 		weaponType		         = "Cannon",
-		soundHit                 = "nukeartyhit.wav",
-		soundStart               = "nukeartyshot.wav",
+		soundHit                 = "explosions/nukeartyhit.wav",
+		soundStart               = "weapons/nukeartyshot.wav",
 		
 		tolerance                = 2000,
 		turret                   = true,

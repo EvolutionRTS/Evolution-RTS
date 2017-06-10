@@ -125,8 +125,8 @@ local weaponDefs                  = {
 		reloadtime               = 25,
 		size					 = 16,
 		weaponType		         = "Cannon",
-		soundHit                 = "artyhit.wav",
-		soundStart               = "arty2.wav",
+		soundHit                 = "explosions/artyhit.wav",
+		soundStart               = "weapons/arty2.wav",
 		
 		turret                   = true,
 		weaponVelocity           = 1000,

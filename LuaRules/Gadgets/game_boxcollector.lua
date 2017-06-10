@@ -75,7 +75,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
 						Spring.DestroyFeature(box)
 						local fx, fy, fz = Spring.GetFeaturePosition(box)
-						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 						SpawnCEG("sparklegreenplus5", fx, fy, fz)
 						BoxesOnMap[box] = nil
 					break
@@ -84,7 +84,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						Spring.CreateUnit("edrone", x, y, z, 0, Spring.GetUnitTeam(unit))
 						Spring.DestroyFeature(box)
 						local fx, fy, fz = Spring.GetFeaturePosition(box)
-						Spring.PlaySoundFile("sounds/energycoredronespawner.wav", 1, fx, fy, fz)
+						Spring.PlaySoundFile("sounds/miscfx/energycoredronespawner.wav", 1, fx, fy, fz)
 						SpawnCEG("sparkleorangeplus1drone", fx, fy, fz)
 						BoxesOnMap[box] = nil
 					break
@@ -93,7 +93,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					  -- Spring.CreateUnit("eamphibdrone", x, y, z, 0, Spring.GetUnitTeam(unit))
 					  -- Spring.DestroyFeature(box)
 					  -- local fx, fy, fz = Spring.GetFeaturePosition(box)
-					  -- Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+					  -- Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 					  -- SpawnCEG("sparklegreen", fx, fy, fz)
 					  -- BoxesOnMap[box] = nil
 				  -- break
@@ -112,7 +112,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
 						Spring.DestroyFeature(chickenEgg)
 						local fx, fy, fz = Spring.GetFeaturePosition(chickenEgg)
-						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 						SpawnCEG("sparklegreenplus5", fx, fy, fz)
 						eggsOnMap[chickenEgg] = nil
 					break
@@ -131,7 +131,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
 						Spring.DestroyFeature(chickenEggB)
 						local fx, fy, fz = Spring.GetFeaturePosition(chickenEggB)
-						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 						SpawnCEG("sparklegreenplus5", fx, fy, fz)
 						eggsOnMapB[chickenEggB] = nil
 					break
@@ -150,7 +150,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
 						Spring.DestroyFeature(chickenEggC)
 						local fx, fy, fz = Spring.GetFeaturePosition(chickenEggC)
-						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 						SpawnCEG("sparklegreenplus5", fx, fy, fz)
 						eggsOnMapC[chickenEggC] = nil
 					break
@@ -169,7 +169,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5) 
 						Spring.DestroyFeature(chickenEggD)
 						local fx, fy, fz = Spring.GetFeaturePosition(chickenEggD)
-						Spring.PlaySoundFile("sounds/boxcollection.wav", 1, fx, fy, fz)
+						Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 						SpawnCEG("sparklegreenplus5", fx, fy, fz)
 						eggsOnMapD[chickenEggD] = nil
 					break

@@ -148,7 +148,7 @@ local weaponDefs                 = {
 		range                    = 50,
 		reloadtime               = 10,
 		weaponType		         = "Cannon",
-		soundStart               = "areaheal.wav",
+		soundStart               = "miscfx/areaheal.wav",
 		
 		turret                   = true,
 		weaponVelocity           = 1000,

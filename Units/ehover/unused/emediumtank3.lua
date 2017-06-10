@@ -138,8 +138,8 @@ mediumtankcannon                 = {
 	range                        = 600,
 	reloadtime                   = 1.0,
 	weaponType		             = "Cannon",
-	soundHit                     = "mediumcannonhit.wav",
-	soundStart                   = "bruisercannon.wav",
+	soundHit                     = "explosions/mediumcannonhit.wav",
+	soundStart                   = "weapons/bruisercannon.wav",
 	
 	turret                       = true,
 	weaponVelocity               = 400,

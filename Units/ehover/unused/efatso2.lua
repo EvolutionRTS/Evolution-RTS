@@ -145,8 +145,8 @@ eheavyturretweapon               = {
 	range                        = 750,
 	reloadtime                   = 1.25,
 	weaponType		             = "Cannon",
-	soundHit                     = "eturrethit.wav",
-	soundStart                   = "eturretfire.wav",
+	soundHit                     = "explosions/eturrethit.wav",
+	soundStart                   = "weapons/eturretfire.wav",
 	tolerance                    = 5000,
 	
 	turret                       = true,

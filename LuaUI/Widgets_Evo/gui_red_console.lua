@@ -13,7 +13,7 @@ end
 local NeededFrameworkVersion = 8
 local CanvasX,CanvasY = 1280,734 --resolution in which the widget was made (for 1:1 size)
 --1272,734 == 1280,768 windowed
-local SoundIncomingChat  = 'sounds/beep4.wav'
+local SoundIncomingChat  = 'sounds/ui/beep4.wav'
 local SoundIncomingChatVolume = 1.0
 
 local gameOver = false

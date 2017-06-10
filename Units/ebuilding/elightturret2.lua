@@ -137,7 +137,7 @@ local weaponDefs                  = {
 		WeaponType                = "LightningCannon",
 		rgbColor                  = "0.1 0.2 0.5",
 		rgbColor2                 = "0 0 1",
-		soundStart                = "jacobs.wav",
+		soundStart                = "weapons/jacobs.wav",
 		
 		texture1                  = "lightning",
 		thickness                 = 10,

@@ -135,8 +135,8 @@ local weaponDefs                  = {
 		
 		
 		smokeTrail                = false,
-		soundHit                  = "explode4.wav",
-		soundStart                = "cruisemissilelaunch.wav",
+		soundHit                  = "explosions/explode4.wav",
+		soundStart                = "weapons/cruisemissilelaunch.wav",
 		
 		stockpile                 = true,
 		stockpileTime             = stockpiletime,
