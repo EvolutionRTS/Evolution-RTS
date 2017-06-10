@@ -13,7 +13,7 @@ humanName = [[H-Bot Factory]]
 objectName = "ehbotfac.s3o"
 script = "ehbotfac.cob"
 
-hbotFactoryBuildList = Shared.buildListHbotFactory_up1
+hbotFactoryBuildList = Shared.buildListHbotFactory
 
 VFS.Include("units-configs-basedefs/basedefs/hbot/mobile/ehbotfac_basedef.lua")
 
