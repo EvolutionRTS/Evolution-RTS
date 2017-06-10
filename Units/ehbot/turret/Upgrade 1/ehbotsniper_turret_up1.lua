@@ -1,22 +1,22 @@
--- UNITDEF -- ehbotpeewee_turret --
+-- UNITDEF -- ehbotsniper_turret --
 --------------------------------------------------------------------------------
 
-unitName = [[ehbotpeewee_turret]]
+unitName = [[ehbotsniper_turret_up1]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[A.K. (Deployed)]]
+humanName = [[Sniper Mk II (Deployed)]]
 
-objectName = [[ehbotpeewee_turret.s3o]]
-script = [[ehbotpeewee_turret_lus.lua]]
+objectName = [[ehbotsniper_turret.s3o]]
+script = [[ehbotsniper_turret_lus.lua]]
 
-tech = [[tech0]]
+tech = [[tech2]]
 armortype = [[building]]
-supply = [[5]]
+supply = [[9]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/hbot/turret/ehbotpeewee_turret_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/hbot/turret/ehbotsniper_turret_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

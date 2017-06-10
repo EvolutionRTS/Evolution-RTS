@@ -1,22 +1,22 @@
--- UNITDEF -- ehbotpeewee_turret --
+-- UNITDEF -- ehbotrocko_turret --
 --------------------------------------------------------------------------------
 
-unitName = [[ehbotpeewee_turret]]
+unitName = [[ehbotrocko_turret_up2]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[A.K. (Deployed)]]
+humanName = [[Rocko Mk III (Deployed)]]
 
-objectName = [[ehbotpeewee_turret.s3o]]
-script = [[ehbotpeewee_turret_lus.lua]]
+objectName = [[ehbotrocko_turret.s3o]]
+script = [[ehbotrocko_turret_lus.lua]]
 
-tech = [[tech0]]
+tech = [[tech2]]
 armortype = [[building]]
-supply = [[5]]
+supply = [[15]]
 
-VFS.Include("Units-Configs-Basedefs/basedefs/hbot/turret/ehbotpeewee_turret_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/hbot/turret/ehbotrocko_turret_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

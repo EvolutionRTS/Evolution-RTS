@@ -344,7 +344,250 @@ Overseer]],
 			text = 'Morph into a stationary turret that gains 4x health.',
 		},
 	},	
+
+----------------------------------------------------------
+----------------------------------------------------------
 	
+	ehbotpeewee_up1 = 	{
+		{
+			into = 'ehbotpeewee_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotthud_up1 = 	{
+		{
+			into = 'ehbotthud_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotsniper_up1 = 	{
+		{
+			into = 'ehbotsniper_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotrocko_up1 = 	{
+		{
+			into = 'ehbotrocko_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	ehbotpeewee_up2 = 	{
+		{
+			into = 'ehbotpeewee_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotthud_up2 = 	{
+		{
+			into = 'ehbotthud_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotsniper_up2 = 	{
+		{
+			into = 'ehbotsniper_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotrocko_up2 = 	{
+		{
+			into = 'ehbotrocko_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	ehbotpeewee_up3 = 	{
+		{
+			into = 'ehbotpeewee_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotthud_up3 = 	{
+		{
+			into = 'ehbotthud_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotsniper_up3 = 	{
+		{
+			into = 'ehbotsniper_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotrocko_up3 = 	{
+		{
+			into = 'ehbotrocko_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},
+	
+
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	ehbotpeewee_turret = 	{
+		{
+			into = 'ehbotpeewee_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotthud_turret = 	{
+		{
+			into = 'ehbotthud_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotsniper_turret = 	{
+		{
+			into = 'ehbotsniper_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotrocko_turret = 	{
+		{
+			into = 'ehbotrocko_turret_up1',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},
+
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	ehbotpeewee_turret_up1 = 	{
+		{
+			into = 'ehbotpeewee_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotthud_turret_up1 = 	{
+		{
+			into = 'ehbotthud_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotsniper_turret_up1 = 	{
+		{
+			into = 'ehbotsniper_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotrocko_turret_up1 = 	{
+		{
+			into = 'ehbotrocko_turret_up2',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},
+
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	ehbotpeewee_turret_up2 = 	{
+		{
+			into = 'ehbotpeewee_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotthud_turret_up2 = 	{
+		{
+			into = 'ehbotthud_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotsniper_turret_up2 = 	{
+		{
+			into = 'ehbotsniper_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotrocko_turret_up2 = 	{
+		{
+			into = 'ehbotrocko_turret_up3',
+			time = 12.5,
+			cmdname = [[Deploy]],
+			metal = 50,
+			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},
+	
+----------------------------------------------------------
+----------------------------------------------------------
 	
 	etech1 = 	{
 		{

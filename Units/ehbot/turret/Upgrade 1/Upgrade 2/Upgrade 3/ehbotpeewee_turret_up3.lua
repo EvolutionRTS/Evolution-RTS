@@ -1,13 +1,13 @@
 -- UNITDEF -- ehbotpeewee_turret --
 --------------------------------------------------------------------------------
 
-unitName = [[ehbotpeewee_turret]]
+unitName = [[ehbotpeewee_turret_up3]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
-humanName = [[A.K. (Deployed)]]
+humanName = [[A.K. Mk IV (Deployed)]]
 
 objectName = [[ehbotpeewee_turret.s3o]]
 script = [[ehbotpeewee_turret_lus.lua]]
