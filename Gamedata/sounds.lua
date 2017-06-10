@@ -184,16 +184,16 @@ local Sounds = {
 	},
 }
 
-local files = VFS.DirList("sounds/deathsounds/")
+local files = VFS.DirList("sounds/deathsounds/generic/")
 local t = Sounds.SoundItems
 for i=1,#files do
    local fileName = files[i]
    t[fileName] = {
       file     = fileName;
       pitchmod = 0.3;
-      gainmod  = 0.2;
+      --gainmod  = 0.2;
       maxconcurrent = 16;
-	  rolloff = 1,
+	  rolloff = 2,
 	  dopplerscale = 2,
    }
 end
@@ -205,7 +205,7 @@ for i=1,#files do
    t[fileName] = {
       file     = fileName;
       pitchmod = 0.2;
-      gainmod  = 0.2;
+      --gainmod  = 0.2;
       maxconcurrent = 32;
 	  rolloff = 2,
 	  dopplerscale = 1.5,
