@@ -74,6 +74,11 @@ function UnitDef_Post(name, uDef)
 	  end
 	end
 	
+	-- Allow all unit to see planes high above
+	-- This ties in with the global Cylinder Targetting
+	-- Default airsightdistance is sightdistance * 1.5
+	uDef.airsightdistance = uDef.sightdistance * 2
+	
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- Set building Mask 0 for all mobile units
@@ -141,19 +146,6 @@ function UnitDef_Post(name, uDef)
 		uDef.buildinggrounddecaltype = "groundplate.dds"
 	end
 	
-	if uDef.customparams and uDef.customparams.isupgraded == "1" then
-		uDef.maxdamage = uDef.maxdamage * 1.20
-		uDef.maxvelocity = uDef.maxvelocity * 0.95
-	end
-	if uDef.customparams and uDef.customparams.isupgraded == "2" then
-		uDef.maxdamage = uDef.maxdamage * 1.35
-		uDef.maxvelocity = uDef.maxvelocity * 0.90
-	end
-	if uDef.customparams and uDef.customparams.isupgraded == "3" then
-		uDef.maxdamage = uDef.maxdamage * 1.50
-		uDef.maxvelocity = uDef.maxvelocity * 0.85
-	end
-	
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- Turn off nanospray globally
@@ -168,124 +160,17 @@ end
 -- process weapondef
 function WeaponDef_Post(name, wDef)
 	
+	-- Cylinder Targeting for everything
+	wDef.cylindertargeting = 128
+	
 	-- weapon reloadTime and stockpileTime were seperated in 77b1
 	if (tobool(wDef.stockpile) and (wDef.stockpiletime==nil)) then
 		wDef.stockpiletime = wDef.reloadtime
 		--wDef.reloadtime    = 2             -- 2 seconds
 	end
 	
-	local damageClasses		= VFS.Include("gamedata/configs/damageTypes.lua")
-	local damageTypes		= damageClasses.damageTypes
-	local defaultClass		= damageClasses.default
-	
-	weapondamage = tonumber(wDef.damage.default)
-	if (weapondamage > 0) then
-		if (wDef.customparams) then
-			local damagetypelower
-			if wDef.customparams.damagetype ~=nil then
-				damagetypelower = string.lower(wDef.customparams.damagetype)
-			end
-			if damagetypelower == '' or damagetypelower == nil then
-				damagetypelower = defaultClass
-			end
-			--Spring.Echo(damagetypelower)	
-			--Spring.Echo(" ")	
-			if damageTypes[damagetypelower]	then
-				for armorClass, armorMultiplier in pairs(damageTypes[damagetypelower]) do	
-					--Spring.Echo(wd.name, armorClass, weapondamage*armorMultiplier )
-					wDef.damage[armorClass] = weapondamage*armorMultiplier
-				end
-			else
-				Spring.Echo("!!WARNING!! Invalid damagetype: " .. damagetypelower)	
-			end
-		end
-	end
-	--Spring.Echo("_________")
-	--Spring.Echo(wDefName, wDef.name)
-	--for damageClass, damageValue in pairs(wDef.damage)do
-	--	Spring.Echo(damageClass, damageValue)
-	--end
-	-- 
-	
 	if (tobool(wDef.ballistic) or tobool(wDef.dropped)) then
 		wDef.gravityaffected = true
-	end
-	
-	-- Handle upgraded units weapon reload times
-	if wDef.customparams and wDef.customparams.isupgraded == "1" then
-		wDef.reloadtime = wDef.reloadtime * 0.85
-		wDef.damage.default = wDef.damage.default * 1.20
-		if wDef.exteriorshield == true and wDef.shieldpower < 0 then
-			wDef.shieldpower = wDef.shieldpower * 1.20
-		end
-	end
-	if wDef.customparams and wDef.customparams.isupgraded == "2" then
-		wDef.reloadtime = wDef.reloadtime * 0.70
-		wDef.damage.default = wDef.damage.default * 1.35
-		if wDef.exteriorshield == true and wDef.shieldpower < 0 then
-			wDef.shieldpower = wDef.shieldpower * 1.35
-		end
-	end
-	if wDef.customparams and wDef.customparams.isupgraded == "3" then
-		wDef.reloadtime = wDef.reloadtime * 0.65
-		wDef.damage.default = wDef.damage.default * 1.50
-		if wDef.exteriorshield == true and wDef.shieldpower < 0 then
-			wDef.shieldpower = wDef.shieldpower * 1.50
-		end
-	end
-	
-	--Handle Shields
-	if wDef.customparams and wDef.customparams.isshieldupgraded == "1" then
-		if wDef.exteriorshield == true then
-			wDef.shieldpower = wDef.shieldpower * 1.20
-		end
-	end
-	if wDef.customparams and wDef.customparams.isshieldupgraded == "2" then
-		if wDef.exteriorshield == true then
-			wDef.shieldpower = wDef.shieldpower * 1.35
-		end
-	end
-	if wDef.customparams and wDef.customparams.isshieldupgraded == "3" then
-		if wDef.exteriorshield == true then
-			wDef.shieldpower = wDef.shieldpower * 1.50
-		end
-	end
-	
-	--------------------------------------------------------------------------------
-	--------------------------------------------------------------------------------
-	-- Set energy cost to fire automatically
-	-- There are 2 weapondef customparams used to control this
-	-- oldcosttofireformula = true, will result in the original formula that did not account for weapon range to be used
-	-- nocosttofire == true, will result in cost to fire being set at 0
-	local weaponDefaultDamage = wDef.damage.default
-	local weaponAreaOfEffect = wDef.areaofeffect or 0
-	local weaponRange = wDef.range or 0
-	local weaponProjectiles = wDef.projectiles or 1
-	if wDef.customparams and wDef.customparams.nocosttofire == true then
-		wDef.energypershot = 0
-	elseif wDef.customparams and wDef.customparams.oldcosttofireforumula == true then
-		local energycosttofire = weaponDefaultDamage * 0.1 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1)
-		local function roundToFirstDecimal(energycosttofire)
-			return math.floor(energycosttofire*10 + 0.5)*0.1
-		end
-		wDef.energypershot = energycosttofire	
-	else
-	--energycosttofire = weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001)  + 1) * weaponRange^0.5 * 0.1
-		local energycosttofire = weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001)  + 1) * weaponRange^0.25 * 0.5
-		local function roundToFirstDecimal(energycosttofire)
-			return math.floor(energycosttofire*10 + 0.5)*0.1
-		end
-		wDef.energypershot = energycosttofire	
-	end
-	
-	--Set shield energy cost to recharge
-	if wDef.exteriorshield == true then
-		if wDef.customparams and wDef.customparams.nocosttofire == true then
-			wDef.shieldpowerregenenergy = 0
-		else
-			wDef.shieldpowerregenenergy = math.floor(wDef.shieldpowerregen * 0.05 * wDef.shieldradius^0.25 * 0.5 * 10 + 0.5) * 0.1
-			--Spring.Echo("Energy usage is " .. wDef.shieldpowerregenenergy)
-		end		
 	end
 	
 	--------------------------------------------------------------------------------
@@ -339,6 +224,135 @@ end
 function ModOptions_Post (UnitDefs, WeaponDefs)
 	if (Spring.GetModOptions) then
 	local modOptions = Spring.GetModOptions()
+	
+		--------------------------------------------------------------------------------
+		-- Process Upgrades --
+		--------------------------------------------------------------------------------
+	
+		for id,uDef in pairs(UnitDefs) do
+			-- Handle upgraded units HP and Max Speed
+			if uDef.customparams and uDef.customparams.isupgraded == "1" then
+				uDef.maxdamage = uDef.maxdamage * 1.20
+				uDef.maxvelocity = uDef.maxvelocity * 0.95
+			end
+			if uDef.customparams and uDef.customparams.isupgraded == "2" then
+				uDef.maxdamage = uDef.maxdamage * 1.35
+				uDef.maxvelocity = uDef.maxvelocity * 0.90
+			end
+			if uDef.customparams and uDef.customparams.isupgraded == "3" then
+				uDef.maxdamage = uDef.maxdamage * 1.50
+				uDef.maxvelocity = uDef.maxvelocity * 0.85
+			end
+		end
+	
+		for id,wDef in pairs(WeaponDefs) do
+			-- Handle upgraded units weapon reload times
+			if wDef.customparams and wDef.customparams.isupgraded == "1" then
+				wDef.reloadtime = wDef.reloadtime * 0.85
+				wDef.damage.default = wDef.damage.default * 1.20
+				if wDef.exteriorshield == true and wDef.shieldpower < 0 then
+					wDef.shieldpower = wDef.shieldpower * 1.20
+				end
+			end
+			if wDef.customparams and wDef.customparams.isupgraded == "2" then
+				wDef.reloadtime = wDef.reloadtime * 0.70
+				wDef.damage.default = wDef.damage.default * 1.35
+				if wDef.exteriorshield == true and wDef.shieldpower < 0 then
+					wDef.shieldpower = wDef.shieldpower * 1.35
+				end
+			end
+			if wDef.customparams and wDef.customparams.isupgraded == "3" then
+				wDef.reloadtime = wDef.reloadtime * 0.65
+				wDef.damage.default = wDef.damage.default * 1.50
+				if wDef.exteriorshield == true and wDef.shieldpower < 0 then
+					wDef.shieldpower = wDef.shieldpower * 1.50
+				end
+			end
+			
+			--Handle Shields
+			if wDef.customparams and wDef.customparams.isshieldupgraded == "1" then
+				if wDef.exteriorshield == true then
+					wDef.shieldpower = wDef.shieldpower * 1.20
+				end
+			end
+			if wDef.customparams and wDef.customparams.isshieldupgraded == "2" then
+				if wDef.exteriorshield == true then
+					wDef.shieldpower = wDef.shieldpower * 1.35
+				end
+			end
+			if wDef.customparams and wDef.customparams.isshieldupgraded == "3" then
+				if wDef.exteriorshield == true then
+					wDef.shieldpower = wDef.shieldpower * 1.50
+				end
+			end
+	
+		--------------------------------------------------------------------------------
+		--------------------------------------------------------------------------------
+		
+		--------------------------------------------------------------------------------
+		-- Process Armortypes --
+		--------------------------------------------------------------------------------
+		
+			local damageClasses		= VFS.Include("gamedata/configs/damageTypes.lua")
+			local damageTypes		= damageClasses.damageTypes
+			local defaultClass		= damageClasses.default
+			
+			weapondamage = tonumber(wDef.damage.default)
+			if (weapondamage > 0) then
+				if (wDef.customparams) then
+					local damagetypelower
+					if wDef.customparams.damagetype ~=nil then
+						damagetypelower = string.lower(wDef.customparams.damagetype)
+					end
+					if damagetypelower == '' or damagetypelower == nil then
+						damagetypelower = defaultClass
+					end
+					--Spring.Echo(damagetypelower)	
+					--Spring.Echo(" ")	
+					if damageTypes[damagetypelower]	then
+						for armorClass, armorMultiplier in pairs(damageTypes[damagetypelower]) do	
+							--Spring.Echo(wd.name, armorClass, weapondamage*armorMultiplier )
+							wDef.damage[armorClass] = weapondamage*armorMultiplier
+						end
+					else
+						Spring.Echo("!!WARNING!! Invalid damagetype: " .. damagetypelower)	
+					end
+				end
+			end
+			
+			--------------------------------------------------------------------------------
+			--------------------------------------------------------------------------------
+			-- Set energy cost to fire automatically
+			-- There are 2 weapondef customparams used to control this
+			-- oldcosttofireformula = true, will result in the original formula that did not account for weapon range to be used
+			-- nocosttofire == true, will result in cost to fire being set at 0
+			local weaponDefaultDamage = wDef.damage.default
+			local weaponAreaOfEffect = wDef.areaofeffect or 0
+			local weaponRange = wDef.range or 0
+			local weaponProjectiles = wDef.projectiles or 1
+			if wDef.customparams and wDef.customparams.nocosttofire == true then
+				wDef.energypershot = 0
+			elseif wDef.customparams and wDef.customparams.oldcosttofireforumula == true then
+				local energycosttofire = math.floor(weaponDefaultDamage * 0.1 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1)*10 + 0.5)*0.1
+				wDef.energypershot = energycosttofire	
+			else
+			--energycosttofire = weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001)  + 1) * weaponRange^0.5 * 0.1
+				local energycosttofire = math.floor(weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001)  + 1) * weaponRange^0.25 * 0.5*10 + 0.5)*0.1
+				wDef.energypershot = energycosttofire	
+			end
+			
+			--Set shield energy cost to recharge
+			if wDef.exteriorshield == true then
+				if wDef.customparams and wDef.customparams.nocosttofire == true then
+					wDef.shieldpowerregenenergy = 0
+				else
+					wDef.shieldpowerregenenergy = math.floor(wDef.shieldpowerregen * 0.05 * wDef.shieldradius^0.25 * 0.5 * 10 + 0.5) * 0.1
+					--Spring.Echo("Energy usage is " .. wDef.shieldpowerregenenergy)
+				end		
+			end
+		end
+		--------------------------------------------------------------------------------
+		--------------------------------------------------------------------------------
 
 		for id,unitDef in pairs(UnitDefs) do
 			for id,weaponDef in pairs(WeaponDefs) do
