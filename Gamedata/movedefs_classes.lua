@@ -1,13 +1,13 @@
 if Spring.GetModOptions and Spring.GetModOptions().heatmapping ~= nil then
 	local useHeatMapping = Spring.GetModOptions().heatmapping
-	if useHeatMapping ~= "disabled" then
+	if useHeatMapping ~= "enabled" then
 		heatmapping = true
 	end
 	
 	local unitHeat = Spring.GetModOptions().unitheat * 0.001
 	
 else
-	heatmapping = true
+	heatmapping = false
 	unitHeat = 0.025
 end
 

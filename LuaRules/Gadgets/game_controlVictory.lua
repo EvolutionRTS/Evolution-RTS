@@ -1301,7 +1301,7 @@ else -- UNSYNCED
 			-- textarea
 			
 			local infotext = offwhite .. [[Controlpoints are spread across the map. They can be captured by moving units into the circles.
-Note that you can only build certain units inside them (e.g. Metal Extractors).
+Note that you can only build certain units inside them (e.g. Metal Extractors/Resource Node Generators).
  
 There are 3 modes (Current mode is ]] .. yellow .. scoreModeAsString .. offwhite .. [[):
 - Countdown:  Your score counts down until zero based upon how many points your enemy owns.

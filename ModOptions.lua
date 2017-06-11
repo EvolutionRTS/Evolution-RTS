@@ -227,7 +227,7 @@ local options= {
 		name   = 'Heatmapped Pathfinding',
 		desc   = 'Turns heatmapping on and off in the pathfinder. Heatmapping is multiplied by this percentage',
 		type="list",
-		def="enabled",
+		def="disabled",
 		section= "gameplayoptions",
 		items={
 			{key="disabled", name="Disabled", desc=""},
