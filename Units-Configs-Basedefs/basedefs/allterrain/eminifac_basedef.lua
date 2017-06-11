@@ -79,9 +79,9 @@ unitDef                      = {
 	},
 	buildoptions                   = AllTerrainFactoryBuildList,
 	sounds                         = {
-		underattack                = "unitsunderattack1",
+		underattack                = "other/unitsunderattack1",
 		select                     = {
-			"gdfactoryselect",
+			"other/gdfactoryselect",
 		},
 	},
 	customParams                   = {

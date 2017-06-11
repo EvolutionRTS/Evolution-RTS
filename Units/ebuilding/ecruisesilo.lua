@@ -77,9 +77,9 @@ Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofi
 		},
 	},
 	sounds                        = {
-		underattack               = "unitsunderattack1",
+		underattack               = "other/unitsunderattack1",
 		select                    = {
-			"turretselect",
+			"other/turretselect",
 		},
 	},
 	weapons                       = {

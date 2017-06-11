@@ -66,9 +66,9 @@ local unitDef                     = {
 	},
 
 	sounds                        = {
-		underattack               = "unitsunderattack1",
+		underattack               = "other/unitsunderattack1",
 		select                    = {
-			"gdenergy",
+			"other/gdenergy",
 		},
 	},
 	customParams                  = {

@@ -71,9 +71,9 @@ Uses +]] .. supply .. [[ Supply]],
 		},
 	},
 	sounds                        = {
-		underattack               = "unitsunderattack1",
+		underattack               = "other/unitsunderattack1",
 		select                    = {
-			"turretselect",
+			"other/turretselect",
 		},
 	},
 	weapons                       = {

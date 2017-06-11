@@ -100,7 +100,7 @@ local unitDef                    = {
 	},
 	buildoptions                 = Shared.buildListTurret,
 	sounds                       = {
-		underattack              = "unitsunderattack1",
+		underattack              = "other/unitsunderattack1",
 		ok                       = {
 			"ack",
 		},
