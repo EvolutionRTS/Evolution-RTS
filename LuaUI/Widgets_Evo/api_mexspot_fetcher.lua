@@ -13,7 +13,7 @@ function widget:GetInfo()
   }
 end
 
-if Spring.GetModOptions().luamex ~= "enabled" then return false end
+if Spring.GetModOptions().luamex == "disabled" then return false end
 
 local spGetGameRulesParam = Spring.GetGameRulesParam
 
