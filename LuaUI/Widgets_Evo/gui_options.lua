@@ -649,6 +649,8 @@ function applyOptionValue(i)
 			WG['enemyspotter'].setHighlight(options[i].value)
 		elseif id == 'smartselect_includebuildings' then
 			WG['smartselect'].setIncludeBuildings(options[i].value)
+		elseif id == 'resourceprompts' then
+			Spring.SetConfigInt("evo_resourceprompts",value)
 		end
 		
 		if options[i].widget ~= nil then
@@ -1023,6 +1025,8 @@ function widget:Initialize()
 		{id="teamcolors", widget="Player Color Palette", name="Team colors based on a palette", type="bool", value=widgetHandler.orderList["Player Color Palette"] ~= nil and (widgetHandler.orderList["Player Color Palette"] > 0), description='Replaces lobby team colors for a color palette based one\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
 		
 		{id="camera", name="Camera", type="select", options={'fps','overhead','spring','rot overhead','free'}, value=(tonumber((Spring.GetConfigInt("CamMode",1)+1) or 2))},
+		
+		{id="resourceprompts", name="Audio/Visual Resource Prompts", type="bool", value=tonumber(Spring.GetConfigInt("evo_resourceprompts",1) or 1) == 1, description="If enabled, messages will be sent to the chat as well as audio cues when your resources need attention"},
 	}
 	
 	local processedOptions = {}

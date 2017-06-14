@@ -33,10 +33,10 @@ local maxSupply = tonumber(Spring.GetModOptions().supplycap) or 200
 
 -- internal settings, do not touch
 local white = "\255\255\255\255"
-local yellow = "\255\255\255\0"
-local orange = "\255\255\135\0"
-local green = "\255\0\255\0"
-local red = "\255\255\0\0"
+local yellow = "\255\255\255\1"
+local orange = "\255\255\135\1"
+local green = "\255\0\255\1"
+local red = "\255\255\0\1"
 local skyblue = "\255\136\197\226"
 
 local barTexture = LUAUI_DIRNAME.."Images/resbar.dds"
@@ -70,6 +70,9 @@ local metalIncomeTimer = 150
 -- how long before metal income stops increasing, in seconds (default 60s, or 10min, 4 times the metalIncomeTimer)
 local incomeProgressionEndTimer = metalIncomeTimer * 4 + 5
 
+local resourcePrompts = Spring.GetConfigInt("evo_resourceprompts")
+
+local myPlayerID = Spring.GetMyPlayerID()
 
 --Spring.GetTeamResources
 -- ( number teamID, string "metal" | "energy" ) ->
@@ -160,7 +163,34 @@ function widget:GameFrame(n)
 	
 		if increment < bgFlashPeriod and countUp == true then
 			increment = increment + 1
+			if energyWarning == true then
+				
+			end
 		elseif increment > 0 then
+			if energyWarning == true then
+				if n%900 == 4 then
+					if resourcePrompts ~= 0 then
+						Spring.PlaySoundFile("sounds/ui/additionalgenerators.wav", 1)
+						Spring.Echo([[You must construct additional generators so that your units can fire their weapons!]])
+					end
+				end
+			end
+			if metalWarning == true then
+				if n%1800 == 4 then
+					if resourcePrompts ~= 0 then
+						Spring.PlaySoundFile("sounds/ui/useyourmetal.wav", 1)
+						Spring.Echo([[You are excessing metal! Consider using O.R.B.s to build units faster and spend metal more effectively!]])
+					end
+				end
+			end
+			if supplyWarning == true then
+				if n%700 == 4 then
+					if resourcePrompts ~= 0 then
+						Spring.PlaySoundFile("sounds/ui/constructadditionalpylons.wav", 1)
+						Spring.Echo([[You have no more available supply, build supply depots in order to increase the size of your army!]])
+					end
+				end
+			end
 			countUp = false
 			increment = increment - 1
 		end
@@ -223,7 +253,7 @@ function widget:DrawScreen()
 	    ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
 	    mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
 		
-		if (sm < 30 and su >= sm - 5) or (sm >= 30 and su >= sm - 10) then
+		if (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95) then
 			supplyWarning = true
 			bgSupplyR = 1
 			bgSupplyG = increment/bgFlashPeriod
@@ -462,8 +492,10 @@ function generateDisplayList2()
 				gl.Texture(barTexture)
 				gl.TexRect(metalOffset,0,metalOffset+(metalBarWidth*percentage),height/12)
 				if percentage == 0 and timeElapsed > 0 and (not incomeIncreased) then
-					Spring.PlaySoundFile("sounds/ui/metalincomeincrease.wav", 1)
-					Spring.Echo("Metal income has increased!")
+					if resourcePrompts ~= 0 then
+						Spring.PlaySoundFile("sounds/ui/metalincomeincrease.wav", 1)
+						Spring.Echo("Metal income has increased!")
+					end
 					incomeIncreased = true
 				end
 				if percentage > 0.5 and incomeIncreased then
