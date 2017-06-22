@@ -666,7 +666,7 @@ function applyOptionValue(i)
 				widgetHandler:DisableWidget(options[i].widget)
 			end
 			if id == "teamcolors" then
-      	Spring.SendCommands("luarules reloadluaui")	-- cause several widgets are still using old colors
+				Spring.SendCommands("luarules reloadluaui")	-- cause several widgets are still using old colors
 			end
 		end
 	
@@ -745,8 +745,27 @@ function applyOptionValue(i)
 			elseif value == 5 then 
 				Spring.SendCommands('viewfree')
 			end
+		elseif id == 'gfxsetting' then
+			Spring.SetConfigInt("evo_autogfxsettings",(1))
+			if value == 1 then 
+				Spring.SetConfigInt("evo_autogfxsettings",(value))
+			elseif value == 2 then 
+				Spring.SetConfigInt("evo_autogfxsettings",(value))
+			elseif value == 3 then 
+				Spring.SetConfigInt("evo_autogfxsettings",(value))
+			elseif value == 4 then 
+				Spring.SetConfigInt("evo_autogfxsettings",(value))
+			elseif value == 5 then 
+				Spring.SetConfigInt("evo_autogfxsettings",(value))
+			elseif value == 6 then 
+				Spring.SetConfigInt("evo_autogfxsettings",(value))
+			end
 		elseif id == 'cursor' then
 			WG['cursors'].setcursor(options[i].options[value])
+		end
+		
+		if id == "gfxsetting" then
+			Spring.SendCommands("luarules reloadluaui")	-- cause several widgets are still using old colors
 		end
 	end
 	
@@ -1026,7 +1045,9 @@ function widget:Initialize()
 		
 		{id="camera", name="Camera", type="select", options={'fps','overhead','spring','rot overhead','free'}, value=(tonumber((Spring.GetConfigInt("CamMode",1)+1) or 2))},
 		
-		{id="resourceprompts", name="Audio/Visual Resource Prompts", type="bool", value=tonumber(Spring.GetConfigInt("evo_resourceprompts",1) or 1) == 1, description="If enabled, messages will be sent to the chat as well as audio cues when your resources need attention"},
+		{id="resourceprompts", name="Audio/Visual Resource Prompts", type="bool", value=tonumber(Spring.GetConfigInt("evo_resourceprompts",1) or 1) == 1, description="If enabled, messages will be sent to the chat as well as\naudio cues when your resources need attention"},
+		
+		{id="gfxsetting", name="Graphics Settings", type="select", options={'Off','Ultra Low','Low','Medium','High','Ultra High'}, value=(tonumber(Spring.GetConfigInt("evo_autogfxsettings",1) or 1)), description="Automatic Graphics Settings. Requires engine restart to take effect."},
 	}
 	
 	local processedOptions = {}

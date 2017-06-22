@@ -10,7 +10,7 @@ function gadget:GetInfo()
     date      = "2016",
     license   = "CC0",
     layer     = -3,
-    enabled   = false--  loaded by default?
+    enabled   = true--  loaded by default?
   }
 end
 
@@ -134,12 +134,14 @@ end
 --***vielleicht lieber setunitlosstate?
 function hideUnit (uID)
 	Spring.SetUnitSensorRadius (uID, "seismic", 0)
-	--Spring.SetUnitCloak (uID, 2 ,false)
+	--Spring.Echo(Spring.GetUnitStates(uID)["cloak"])
+	Spring.SetUnitCloak (uID, 2 ,false)
 	Spring.SetUnitStealth (uID, true)
 end
 
 function unhideUnit (uID)
-    --Spring.SetUnitCloak (uID, false ,false)
+    Spring.SetUnitCloak (uID, false ,false)
+	--Spring.Echo(Spring.GetUnitStates(uID)["cloak"])
 	if UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature then
 		local signatureRadius = UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature
 		--Spring.Echo(signatureRadius)

@@ -6,11 +6,18 @@ function widget:GetInfo()
 		date	= "01-21-2014",
 		license	= "GPL v2 or later",
 		layer	= 5,
-		enabled	= false
+		enabled	= true
 	}
 end
 
+gfxSetting = tonumber(Spring.GetConfigInt("evo_autogfxsettings"))
+if gfxSetting ~= 4 then
+	return false
+end
+
 function widget:Initialize()
+		Spring.Echo([[Graphics Settings set to Medium]])
+
 		Spring.SendCommands("advmapshading 1")
 		Spring.SendCommands("advmodelshading 1")
 		Spring.SendCommands("dynamicsky 0")
@@ -30,7 +37,8 @@ function widget:Initialize()
 		Spring.SetConfigInt("GroundDetail",64)
 		Spring.SetConfigInt("MaxSounds",128)
 		Spring.SetConfigInt("ScrollWheelSpeed",-25)
+		
+		Spring.SetConfigString("EdgeMoveWidth", "0.005")
 
 		widgetHandler:RemoveWidget()
 end
-
