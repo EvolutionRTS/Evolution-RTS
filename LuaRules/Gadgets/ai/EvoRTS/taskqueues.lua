@@ -1455,7 +1455,11 @@ end
 --end
 	
 	taskqueues = {
-   ecommanderbattleai = engineerlist,
+   ecommanderbattleaiveasy = engineerlist,
+   ecommanderbattleaieasy = engineerlist,
+   ecommanderbattleaimedium = engineerlist,
+   ecommanderbattleaihard = engineerlist,
+   ecommanderbattleaiinsane = engineerlist,
    eaiturret = idlelist,
    --ebasefactory = factory,
    --eengineer5 = engineerlist,

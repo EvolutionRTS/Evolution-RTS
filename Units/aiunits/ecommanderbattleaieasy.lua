@@ -1,7 +1,7 @@
 -- UNITDEF -- ECOMMANDERBATTLEAI --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ecommanderbattleai"
+local unitName                   = "ecommanderbattleaieasy"
 
 --------------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ local unitDef                    = {
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT ARMORED",
 	description                  = [[Builds Units • Provides support in battles]],
-	energyMake                   = 40,
+	energyMake                   = 10,
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "commnuke",
@@ -85,7 +85,7 @@ local unitDef                    = {
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	upright                      = false,
-	workerTime                   = 10,
+	workerTime                   = 1.5,
 	capturespeed                 = 0.25,
 	TerraformSpeed               = 100000,
 	ReclaimSpeed                 = 0,
