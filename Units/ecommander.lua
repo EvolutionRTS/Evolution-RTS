@@ -130,11 +130,6 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-
-1000 EMP Damage vs Light/Armored/Building
-
-Reclaims any energy cores within it's proximity.]],
 	},
 }
 
