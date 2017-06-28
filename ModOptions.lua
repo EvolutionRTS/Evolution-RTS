@@ -215,11 +215,11 @@ local options= {
 		def="veryeasy",
 		section="gameplayoptions",
 		items={
-			{key="veryeasy", name="Very Easy", desc="AI gets a gift of 5 metal every 5 seconds and a static 5 energy income."},
-			{key="easy", name="Easy", desc="AI gets a gift of 10 metal every 5 seconds and a static 10 energy income."},
-			{key="medium", name="Medium", desc="AI gets a gift of 25 metal every 5 seconds and a static 25 energy income."},
-			{key="hard", name="Hard", desc="AI gets a gift of 50 metal every 5 seconds and a static 50 energy income."},
-			{key="insane", name="Insane", desc="AI gets a gift of 100 metal every 5 seconds and a static 100 energy income."},
+			{key="veryeasy", name="Very Easy", desc="Very Easy AI"},
+			{key="easy", name="Easy", desc="Easy AI"},
+			{key="medium", name="Medium", desc="Medium AI"},
+			{key="hard", name="Hard", desc="Hard AI"},
+			{key="insane", name="Insane", desc="Very Hard AI"},
 		}
 	},
 	{

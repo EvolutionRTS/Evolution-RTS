@@ -27,10 +27,10 @@ local maximumBaseIncome = Spring.GetModOptions().maxbasicincome or 15
 
 local aiCheatHandicapMetal = { 
 	["veryeasy"] =  0,
-	["easy"] =  5,
-	["medium"] =  10,
-	["hard"] =  25,
-	["insane"] =  50,
+	["easy"] =  0,
+	["medium"] =  0,
+	["hard"] =  5,
+	["insane"] =  25,
 }
 
 local aiCheatHandicapEnergy = { 
@@ -190,7 +190,7 @@ function gadget:GameFrame(n)
 		end
 	end
 
-	-- Give the AI resources according to it's difficulty Setting
+	--Give the AI resources according to it's difficulty Setting
 	if n%160 == 1 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
