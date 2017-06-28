@@ -1,9 +1,34 @@
 -- UNITDEF -- ECOMMANDERBATTLEAI --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ecommanderbattleaieasy"
+local unitName                   = "ecommanderbattleai"
 
 --------------------------------------------------------------------------------
+if Spring.GetModOptions().aidifficulty == nil then
+	Spring.GetModOptions().aidifficulty = "veryeasy"
+end
+
+if Spring.GetModOptions().aidifficulty == "veryeasy" then
+	local description                = [[Very Easy AI • Builds Units • Provides support in battles]],
+	local energyMake				 = 5
+	local workerTime				 = 0.75
+elseif Spring.GetModOptions().aidifficulty == "easy" then
+	local description                = [[Easy AI • Builds Units • Provides support in battles]],
+	local energyMake				 = 10
+	local workerTime				 = 1.5
+elseif Spring.GetModOptions().aidifficulty == "medium" then
+	local description                = [[Medium AI • Builds Units • Provides support in battles]],
+	local energyMake				 = 20
+	local workerTime				 = 2.5
+elseif Spring.GetModOptions().aidifficulty == "hard" then
+	local description                = [[Hard AI • Builds Units • Provides support in battles]],
+	local energyMake				 = 40
+	local workerTime				 = 4
+elseif Spring.GetModOptions().aidifficulty == "insane" then
+	local description                = [[Insane AI • Builds Units • Provides support in battles]],
+	local energyMake				 = 40
+	local workerTime				 = 10
+end
 
 local armortype					 = [[armored]]
 local supplyGiven				 = [[200]]
@@ -47,8 +72,8 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT ARMORED",
-	description                  = [[Builds Units • Provides support in battles]],
-	energyMake                   = 10,
+	description                  = description,
+	energyMake                   = energyMake,
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "commnuke",
@@ -85,7 +110,7 @@ local unitDef                    = {
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	upright                      = false,
-	workerTime                   = 1.5,
+	workerTime                   = workerTime,
 	capturespeed                 = 0.25,
 	TerraformSpeed               = 100000,
 	ReclaimSpeed                 = 0,

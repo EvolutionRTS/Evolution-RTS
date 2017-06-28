@@ -33,6 +33,7 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
 local modOptions = Spring.GetModOptions()
  
 function IsTeamAI(teamID)
@@ -44,29 +45,15 @@ local function GetStartUnit(teamID)
         -- get the team startup info
         local side = select(5, Spring.GetTeamInfo(teamID))
         local startUnit
-	    local aicommanderdifficulty = { 
-			["veryeasy"] =  "ecommanderbattleaiveasy",
-			["easy"] =  "ecommanderbattleaieasy",
-			["medium"] =  "ecommanderbattleaimedium",
-			["hard"] =  "ecommanderbattleaihard",
-			["insane"] =  "ecommanderbattleaiinsane",
-		}
-		local aicommanderecho = { 
-			["veryeasy"] =  "Initialized Very Easy AI, Have Fun!",
-			["easy"] =  "Initialized Easy AI, Have Fun!",
-			["medium"] =  "Initialized Medium AI, Good Luck and Have Fun!",
-			["hard"] =  "Initialized Hard AI, Well, Good Luck!",
-			["insane"] =  "Initialized Insane AI... R.I.P.",
-		}
-			
-			boolIsAI= IsTeamAI(teamID)
+       
+        boolIsAI= IsTeamAI(teamID)
+       
                 if boolIsAI==true then
-					Spring.Echo (aicommanderecho[modOptions.aidifficulty or "veryeasy"])
+					Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
 					local sidedata = Spring.GetSideData()
-					startUnit = aicommanderdifficulty[modOptions.aidifficulty or "veryeasy"]
+					startUnit = "ecommanderbattleai"
 					return startUnit
                 end
-
        
         if (side == "") then
                 -- startscript didn't specify a side for this team
