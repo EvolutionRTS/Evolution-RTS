@@ -4,30 +4,32 @@
 local unitName                   = "ecommanderbattleai"
 
 --------------------------------------------------------------------------------
-if Spring.GetModOptions().aidifficulty == nil then
-	Spring.GetModOptions().aidifficulty = "veryeasy"
-end
+aiDifficulty = Spring.GetModOptions().aidifficulty
 
-if Spring.GetModOptions().aidifficulty == "veryeasy" then
-	local description                = [[Very Easy AI • Builds Units • Provides support in battles]]
-	local energyMake				 = 5
-	local workerTime				 = 0.75
-elseif Spring.GetModOptions().aidifficulty == "easy" then
-	local description                = [[Easy AI • Builds Units • Provides support in battles]]
-	local energyMake				 = 10
-	local workerTime				 = 1.5
-elseif Spring.GetModOptions().aidifficulty == "medium" then
-	local description                = [[Medium AI • Builds Units • Provides support in battles]]
-	local energyMake				 = 20
-	local workerTime				 = 2.5
-elseif Spring.GetModOptions().aidifficulty == "hard" then
-	local description                = [[Hard AI • Builds Units • Provides support in battles]]
-	local energyMake				 = 40
-	local workerTime				 = 4
-elseif Spring.GetModOptions().aidifficulty == "insane" then
-	local description                = [[Insane AI • Builds Units • Provides support in battles]]
-	local energyMake				 = 40
-	local workerTime				 = 10
+if aiDifficulty == nil then
+	aiDifficulty = "veryeasy"
+end
+--Spring.Echo("AI difficulty is set to: " .. aiDifficulty)
+if aiDifficulty == "veryeasy" then
+	description                = [[Very Easy AI • Builds Units • Provides support in battles]]
+	energyMake				 = 5
+	workerTime				 = 0.75
+elseif aiDifficulty == "easy" then
+	description                = [[Easy AI • Builds Units • Provides support in battles]]
+	energyMake				 = 10
+	workerTime				 = 1.5
+elseif aiDifficulty == "medium" then
+	description                = [[Medium AI • Builds Units • Provides support in battles]]
+	energyMake				 = 20
+	workerTime				 = 2.5
+elseif aiDifficulty == "hard" then
+	description                = [[Hard AI • Builds Units • Provides support in battles]]
+	energyMake				 = 40
+	workerTime				 = 4
+elseif aiDifficulty == "insane" then
+	description                = [[Insane AI • Builds Units • Provides support in battles]]
+	energyMake				 = 40
+	workerTime				 = 10
 end
 
 local armortype					 = [[armored]]
@@ -47,7 +49,7 @@ local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
 local unitDef                    = {
 
 	--mobileunit 
-	transportbyenemy             = false; 
+	transportbyenemy             = false,
 
 	--**
 
