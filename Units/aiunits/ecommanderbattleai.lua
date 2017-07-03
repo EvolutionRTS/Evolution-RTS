@@ -9,23 +9,23 @@ if Spring.GetModOptions().aidifficulty == nil then
 end
 
 if Spring.GetModOptions().aidifficulty == "veryeasy" then
-	local description                = [[Very Easy AI • Builds Units • Provides support in battles]],
+	local description                = [[Very Easy AI • Builds Units • Provides support in battles]]
 	local energyMake				 = 5
 	local workerTime				 = 0.75
 elseif Spring.GetModOptions().aidifficulty == "easy" then
-	local description                = [[Easy AI • Builds Units • Provides support in battles]],
+	local description                = [[Easy AI • Builds Units • Provides support in battles]]
 	local energyMake				 = 10
 	local workerTime				 = 1.5
 elseif Spring.GetModOptions().aidifficulty == "medium" then
-	local description                = [[Medium AI • Builds Units • Provides support in battles]],
+	local description                = [[Medium AI • Builds Units • Provides support in battles]]
 	local energyMake				 = 20
 	local workerTime				 = 2.5
 elseif Spring.GetModOptions().aidifficulty == "hard" then
-	local description                = [[Hard AI • Builds Units • Provides support in battles]],
+	local description                = [[Hard AI • Builds Units • Provides support in battles]]
 	local energyMake				 = 40
 	local workerTime				 = 4
 elseif Spring.GetModOptions().aidifficulty == "insane" then
-	local description                = [[Insane AI • Builds Units • Provides support in battles]],
+	local description                = [[Insane AI • Builds Units • Provides support in battles]]
 	local energyMake				 = 40
 	local workerTime				 = 10
 end
