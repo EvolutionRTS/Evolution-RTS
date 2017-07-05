@@ -49,7 +49,7 @@ unitDef                      = {
 	unitname                       = unitName,
 	--  unitRestricted	           = 1,
 	workerTime                     = 1,
-	yardMap                        = "ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo ccccccccoooooooo",
+	yardMap                        = "yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo yyyyyyyyoooooooo",
 	--  usePieceCollisionVolumes   = true,
 
 	useGroundDecal                 = true,

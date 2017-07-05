@@ -110,6 +110,15 @@ function UnitDef_Post(name, uDef)
 
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
+	-- Set building start sound for all builders
+	--
+	
+	if uDef.builder == true and uDef.sounds then
+		uDef.sounds.build = "miscfx/buildstart.wav"
+	end
+	
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
 	-- Calculate mincloakdistance based on unit footprint size
 	--
 

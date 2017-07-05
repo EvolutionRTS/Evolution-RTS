@@ -101,6 +101,7 @@ local unitDef                    = {
 	},
 	buildoptions                 = Shared.buildListFactory,
 	sounds                       = {
+		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",
 		ok                       = {
 			"ack",

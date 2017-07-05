@@ -3,6 +3,17 @@
 local Sounds = {
 	SoundItems = {
 	
+		build = {
+			--- new since 89.0
+			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
+			file = "sounds/miscfx/buildstart.wav",
+			--gainmod = 0.35,
+			pitchmod = 0.05,
+			--pitch = 0.7,
+			in3d = true,
+			maxconcurrent = 1,
+		},
+	
 		riottankshotgun = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
@@ -75,6 +86,7 @@ local Sounds = {
 			file = "sounds/ui/button9.wav",
 			in3d = true,
 			maxconcurrent = 1,
+			gain = 0.25,
 		},
 		
 		MapPoint = {
@@ -195,6 +207,7 @@ for i=1,#files do
       maxconcurrent = 16;
 	  rolloff = 2,
 	  dopplerscale = 2,
+	  in3d = true,
    }
 end
 
@@ -209,6 +222,7 @@ for i=1,#files do
       maxconcurrent = 16;
 	  rolloff = 2,
 	  dopplerscale = 2,
+	  in3d = true,
    }
 end
 
@@ -223,6 +237,7 @@ for i=1,#files do
       maxconcurrent = 32;
 	  rolloff = 2,
 	  dopplerscale = 1.5,
+	  in3d = true,
    }
 end
 

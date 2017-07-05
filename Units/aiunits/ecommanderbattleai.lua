@@ -133,6 +133,7 @@ local unitDef                    = {
 	},
 	buildoptions                 = Shared.buildListAIOverseer,
 	sounds                       = {
+		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",
 		ok                       = {
 			"ack",

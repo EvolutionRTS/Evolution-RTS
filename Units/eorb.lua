@@ -97,6 +97,7 @@ local unitDef                    = {
 		},
 	},
 	sounds                       = {
+		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",
 		ok                       = {
 			"ack",
