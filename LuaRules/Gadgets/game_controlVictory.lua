@@ -690,7 +690,7 @@ if (gadgetHandler:IsSyncedCode()) then
       end
    end ]]--
 
-		if f % 30 <.1 and f / 1800 > startTime then
+		if f % 30 <.1 and f / 30 > startTime then
 			local owned = {}
 			for _, allyTeamID in ipairs(Spring.GetAllyTeamList()) do
 				owned[allyTeamID] = 0
@@ -1446,7 +1446,12 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 	  end
 	  
 		local frame = Spring.GetGameFrame()
-		if frame / 1800 > startTime then
+		if frame / 30 > startTime then
+			if controlPointPromptPlayed ~= true then
+				Spring.PlaySoundFile("sounds/ui/controlpointscanbecaptured.wav", 1)
+				Spring.Echo([[Control Points may now be captured!]])
+				controlPointPromptPlayed = true
+			end			
 		  if scoreboardList == nil or frame%15==0 then
 		  	if scoreboardList ~= nil then
 		  		gl.DeleteList(scoreboardList)
@@ -1476,7 +1481,7 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
   		end
 		else
 			Text("Capturing points begins in:", vsx - 280, vsy *.58, 18, "lo")
-			local timeleft = startTime * 60 - frame / 30
+			local timeleft = startTime - frame / 30
 			timeleft = timeleft - timeleft % 1
 			Text(timeleft .. " seconds", vsx - 280, vsy *.58 - 25, 18, "lo")
 		end

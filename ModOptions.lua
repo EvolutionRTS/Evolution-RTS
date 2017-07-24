@@ -358,10 +358,10 @@ local options= {
 		{
 		key    = 'starttime',
 		name   = 'Start Time',
-		desc   = 'The time when capturing can start.',
+		desc   = 'Number of seconds until control points can be captured.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 0,
+		def    = 150,
 		min    = 0,
 		max    = 300,
 		step   = 1,  -- quantization is aligned to the def value

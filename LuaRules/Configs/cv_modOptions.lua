@@ -76,7 +76,7 @@ end
 
 startTime = tonumber(Spring.GetModOptions().starttime) -- The time when capturing can start
 if startTime == nil then
-	startTime = 0
+	startTime = 150
 end
 
 tugofWarModifier = tonumber(Spring.GetModOptions().tugofwarmodifier) -- Radius around a point in which to capture it
