@@ -223,6 +223,18 @@ local options= {
 		}
 	},
 	{
+		key    = 'shardchicken',
+		name   = 'Shard use Chickens',
+		desc   = 'Shard is building Chickens instead of Robots',
+		type="list",
+		def="disabled",
+		section= "gameplayoptions",
+		items={
+			{key="disabled", name="Disabled", desc="Chicken Mode disabled"},
+			{key="enabled", name="Enabled", desc="Chicken Mode enabled"},
+		}
+	},
+	{
 		key    = 'heatmapping',
 		name   = 'Heatmapped Pathfinding',
 		desc   = 'Turns heatmapping on and off in the pathfinder. Heatmapping is multiplied by this percentage',

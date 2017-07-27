@@ -5,11 +5,11 @@ return {
 		attackrunlength = 32,
 		bmcode = "1",
 		brakerate = 0.4,
-		buildcostenergy = 4550,
+		buildcostenergy = 1,
 		buildcostmetal = 212,
 		builder = false,
 		buildpic = "chicken_unitpics/chickenf1.png",
-		buildtime = 6250,
+		buildtime = 1,
 		canattack = true,
 		canfly = true,
 		canguard = true,
@@ -100,6 +100,9 @@ return {
 			[1] = {
 				def = "WEAPON",
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

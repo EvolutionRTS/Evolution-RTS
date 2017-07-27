@@ -6,11 +6,11 @@ return {
 		bankscale = "1",
 		bmcode = "1",
 		brakerate = 0.2,
-		buildcostenergy = 2200,
+		buildcostenergy = 1,
 		buildcostmetal = 72,
 		builder = false,
 		buildpic = "chicken_unitpics/chickenw1.png",
-		buildtime = 1300,
+		buildtime = 1,
 		cancrash = false,
 		canfly = true,
 		canguard = true,
@@ -107,6 +107,9 @@ return {
 				maindir = "0 0 1",
 				maxangledif = 180,
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

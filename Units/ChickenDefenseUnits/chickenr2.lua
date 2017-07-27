@@ -5,11 +5,11 @@ return {
 		autoheal = 50,
 		bmcode = "1",
 		brakerate = 0.7,
-		buildcostenergy = 15000,
+		buildcostenergy = 1,
 		buildcostmetal = 250,
 		builder = false,
 		buildpic = "chicken_unitpics/chickenr2.png",
-		buildtime = 3000,
+		buildtime = 1,
 		canguard = true,
 		canmove = true,
 		canpatrol = true,
@@ -136,6 +136,9 @@ return {
 				maxangledif = 180,
 				onlytargetcategory = "NOTAIR LIGHT ARMORED BUILDING",
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

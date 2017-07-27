@@ -5,11 +5,11 @@ return {
 		autoheal = 40,
 		bmcode = "1",
 		brakerate = 0.4,
-		buildcostenergy = 3520,
+		buildcostenergy = 1,
 		buildcostmetal = 302,
 		buildpic = "chicken_unitpics/chickena2b.png",
 		builder = false,
-		buildtime = 22500,
+		buildtime = 1,
 		canattack = true,
 		canguard = true,
 		canmove = true,
@@ -152,6 +152,9 @@ return {
 				def = "AAWEAPON",
 				onlytargetcategory = "VTOL",
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

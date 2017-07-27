@@ -3,11 +3,11 @@ return {
 		acceleration = 1.5,
 		bmcode = "1",
 		brakerate = 1.25,
-		buildcostenergy = 174,
+		buildcostenergy = 1,
 		buildcostmetal = 174,
 		builder = false,
 		buildpic = "chicken_unitpics/chickens1.png",
-		buildtime = 2500,
+		buildtime = 1,
 		canattack = true,
 		canguard = true,
 		canmove = true,
@@ -147,6 +147,9 @@ return {
 				maindir = "0 0 1",
 				maxangledif = 160,
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

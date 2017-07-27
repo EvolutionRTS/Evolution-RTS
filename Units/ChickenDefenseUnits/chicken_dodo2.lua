@@ -5,11 +5,11 @@ return {
 		autoheal = 135,
 		bmcode = "1",
 		brakerate = 0.2,
-		buildcostenergy = 9000,
+		buildcostenergy = 1,
 		buildcostmetal = 350,
 		builder = false,
 		buildpic = "chicken_unitpics/chicken_dodo2.png",
-		buildtime = 15000,
+		buildtime = 1,
 		canguard = true,
 		canhover = "1",
 		canmove = true,
@@ -74,6 +74,9 @@ return {
 				[2] = "custom:blood_explode",
 				[3] = "custom:dirt",
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

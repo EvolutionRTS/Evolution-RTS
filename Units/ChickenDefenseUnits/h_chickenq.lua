@@ -5,11 +5,11 @@ return {
 		autoheal = 40,
 		bmcode = "1",
 		brakerate = 2,
-		buildcostenergy = 2000000,
+		buildcostenergy = 1,
 		buildcostmetal = 50000,
 		builder = false,
 		buildpic = "chicken_unitpics/h_chickenq.png",
-		buildtime = 1000000,
+		buildtime = 1,
 		canattack = true,
 		canguard = true,
 		canmove = true,
@@ -297,6 +297,9 @@ return {
 				maindir = "0 0 1",
 				maxangledif = 180,
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

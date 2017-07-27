@@ -5,6 +5,24 @@ local unitName                   = "eaiturret"
 
 --------------------------------------------------------------------------------
 
+shardChicken = Spring.GetModOptions().shardchicken
+
+if shardChicken == nil then
+	shardChicken = "disabled"
+end
+
+if shardChicken == "disabled" then
+	objectName                  = "ehbotthud.s3o",
+	script						= "ehbotthud_lus.lua",
+	movementClass				= "HOVERHBOT3"
+	elseif shardChicken == "enabled" then
+	objectName 					= "ChickenDefenseModels/tube.s3o",
+	script 						= "ChickenDefenseScripts/chickend1.cob",
+	movementClass				= "HOVERHBOT3"
+end
+
+--------------------------------------------------------------------------------
+
 local tech						 = [[tech1]]
 local armortype					 = [[building]]
 local supply					 = [[0]]
@@ -61,12 +79,12 @@ local unitDef                    = {
 	maxReverseVelocity           = .5,
 	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
-	movementClass                = "HOVERHBOT3",
+	movementClass                = movementClass,
 	pushResistant				 = false,
 	name                         = "AI Defence",
 	noChaseCategory              = "VTOL",
-	objectName                   = "ehbotthud.s3o",
-	script						 = "ehbotthud_lus.lua",
+	objectName                   = objectName,
+	script						 = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGeneric",
