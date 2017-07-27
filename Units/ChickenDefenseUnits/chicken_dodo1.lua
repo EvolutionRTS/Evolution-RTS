@@ -75,5 +75,8 @@ return {
 				[3] = "custom:dirt",
 			},
 		},
+		customparams = {
+			unittype = "mobile",
+		},
 	},
 }

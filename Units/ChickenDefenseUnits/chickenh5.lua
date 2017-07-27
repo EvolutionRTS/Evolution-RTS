@@ -152,5 +152,8 @@ return {
 				onlytargetcategory = "NOTAIR LIGHT ARMORED BUILDING",
 			},
 		},
+		customparams = {
+			unittype = "mobile",
+		},
 	},
 }

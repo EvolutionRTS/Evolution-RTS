@@ -101,5 +101,8 @@ return {
 				def = "WEAPON",
 			},
 		},
+		customparams = {
+			unittype = "mobile",
+		},
 	},
 }

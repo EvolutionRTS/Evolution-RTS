@@ -153,5 +153,8 @@ return {
 				onlytargetcategory = "VTOL",
 			},
 		},
+		customparams = {
+			unittype = "mobile",
+		},
 	},
 }

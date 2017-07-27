@@ -31,6 +31,22 @@ elseif aiDifficulty == "insane" then
 	energyMake				 = 40
 	workerTime				 = 10
 end
+-- Chicken Shard mode overseer changer
+shardChicken = Spring.GetModOptions().shardchicken
+
+if shardChicken == nil then
+	shardChicken = "disabled"
+end
+
+if shardChicken == "disabled" then
+	objectName					= "ecommander4-battle.s3o"
+	script						= "ecommander4-battle.cob"
+	movementClass				= "COMMANDERTANKAI4"
+	elseif shardChicken == "enabled" then
+	objectName					= "ChickenDefenseModels/brain_bug.s3o"
+	script						= "ChickenDefenseScripts/chickenh5.cob"
+	movementClass				= "CHICKENHKBOT2"
+end
 
 local armortype					 = [[armored]]
 local supplyGiven				 = [[200]]
@@ -93,12 +109,12 @@ local unitDef                    = {
 	maxWaterDepth                = 5000,
 	metalmake                    = 0,
 	metalStorage                 = 0,
-	movementClass                = "COMMANDERTANKAI4",
+	movementClass                = movementClass,
 	moveState			         = "0",
 	name                         = "The Battle Overseer (AI)",
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
-	objectName                   = "ecommander4-battle.s3o",
-	script			             = "ecommander4-battle.cob",
+	objectName                   = objectName,
+	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",

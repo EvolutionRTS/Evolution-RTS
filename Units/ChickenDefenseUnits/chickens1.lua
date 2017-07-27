@@ -148,5 +148,8 @@ return {
 				maxangledif = 160,
 			},
 		},
+		customparams = {
+			unittype = "mobile",
+		},
 	},
 }

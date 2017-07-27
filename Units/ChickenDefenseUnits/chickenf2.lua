@@ -6,7 +6,7 @@ return {
 		bmcode = "1",
 		brakerate = 0.4,
 		buildcostenergy = 1,
-		buildcostmetal = 50,
+		buildcostmetal = 5,
 		builder = false,
 		buildpic = "chicken_unitpics/chickenf2.png",
 		buildtime = 1,
@@ -101,6 +101,9 @@ return {
 			[1] = {
 				def = "WEAPON",
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }

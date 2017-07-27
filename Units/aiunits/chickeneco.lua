@@ -25,6 +25,7 @@ return {
 		defaultmissiontype = "Standby",
 		description = "Chicken Healer",
 		energymake = 500,
+		energystorage = 2000,
 		explodeas = "WEAVER_DEATH",
 		floater = false,
 		footprintx = 1,
@@ -40,7 +41,7 @@ return {
 		maxslope = 18,
 		maxvelocity = 1,
 		maxwaterdepth = 5000,
-		metalstorage = 1000,
+		metalstorage = 2000,
 		mobilestandorders = 1,
 		movementclass = "CHICKENHKBOT2",
 		name = "Weaver",
@@ -79,6 +80,9 @@ return {
 				[2] = "custom:blood_explode",
 				[3] = "custom:dirt",
 			},
+		},
+		customparams = {
+			unittype = "mobile",
 		},
 	},
 }
