@@ -87,6 +87,7 @@ attackerlist = {
 	---------------------------- Chickens
 	"chicken_dodo1",
 	"chicken_dodo2",
+	"chicken1",
 	"chicken1b",
 	"chicken1c",
 	"chicken1x",
@@ -106,7 +107,6 @@ attackerlist = {
 	"chickenc3c",
 	"chickenf1",
 	"chickenf1b",
-	"chickenf2",
 	"chickenh1",
 	"chickenh1b",
 	"chickenh2",
