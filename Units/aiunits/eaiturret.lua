@@ -12,12 +12,12 @@ if shardChicken == nil then
 end
 
 if shardChicken == "disabled" then
-	objectName                  = "ehbotthud.s3o",
-	script						= "ehbotthud_lus.lua",
+	objectName                  = "ehbotthud.s3o"
+	script						= "ehbotthud_lus.lua"
 	movementClass				= "HOVERHBOT3"
 	elseif shardChicken == "enabled" then
-	objectName 					= "ChickenDefenseModels/tube.s3o",
-	script 						= "ChickenDefenseScripts/chickend1.cob",
+	objectName 					= "ChickenDefenseModels/tube.s3o"
+	script 						= "ChickenDefenseScripts/chickend1.cob"
 	movementClass				= "HOVERHBOT3"
 end
 

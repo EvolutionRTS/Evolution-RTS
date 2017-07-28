@@ -6,7 +6,7 @@ return {
 		bmcode = "1",
 		brakerate = 0.2,
 		buildcostenergy = 1,
-		buildcostmetal = 128,
+		buildcostmetal = 20,
 		builder = false,
 		buildtime = 1,
 		buildpic = "chicken_unitpics/chicken_dodo1.png",

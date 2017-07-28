@@ -5,38 +5,44 @@ local unitName                   = "ecommanderbattleai"
 
 --------------------------------------------------------------------------------
 aiDifficulty = Spring.GetModOptions().aidifficulty
+shardChicken = Spring.GetModOptions().shardchicken
 
 if aiDifficulty == nil then
 	aiDifficulty = "veryeasy"
 end
---Spring.Echo("AI difficulty is set to: " .. aiDifficulty)
-if aiDifficulty == "veryeasy" then
-	description                = [[Very Easy AI • Builds Units • Provides support in battles]]
-	energyMake				 = 5
-	workerTime				 = 0.75
-elseif aiDifficulty == "easy" then
-	description                = [[Easy AI • Builds Units • Provides support in battles]]
-	energyMake				 = 10
-	workerTime				 = 1.5
-elseif aiDifficulty == "medium" then
-	description                = [[Medium AI • Builds Units • Provides support in battles]]
-	energyMake				 = 20
-	workerTime				 = 2.5
-elseif aiDifficulty == "hard" then
-	description                = [[Hard AI • Builds Units • Provides support in battles]]
-	energyMake				 = 40
-	workerTime				 = 4
-elseif aiDifficulty == "insane" then
-	description                = [[Insane AI • Builds Units • Provides support in battles]]
-	energyMake				 = 40
-	workerTime				 = 10
-end
--- Chicken Shard mode overseer changer
-shardChicken = Spring.GetModOptions().shardchicken
 
 if shardChicken == nil then
 	shardChicken = "disabled"
 end
+--Spring.Echo("AI difficulty is set to: " .. aiDifficulty)
+
+if shardChicken == "enabled" then
+	description				 = [[Chicken Overseer, builds chickens]]
+	energyMake				 = 500
+	workerTime				 = 100
+elseif shardChicken == "disabled" then
+		if aiDifficulty == "veryeasy" then
+			description                = [[Very Easy AI • Builds Units • Provides support in battles]]
+			energyMake				 = 5
+			workerTime				 = 0.75
+		elseif aiDifficulty == "easy" then
+			description                = [[Easy AI • Builds Units • Provides support in battles]]
+			energyMake				 = 10
+			workerTime				 = 1.5
+		elseif aiDifficulty == "medium" then
+			description                = [[Medium AI • Builds Units • Provides support in battles]]
+			energyMake				 = 20
+			workerTime				 = 2.5
+		elseif aiDifficulty == "hard" then
+			description                = [[Hard AI • Builds Units • Provides support in battles]]
+			energyMake				 = 40
+			workerTime				 = 4
+		elseif aiDifficulty == "insane" then
+			description                = [[Insane AI • Builds Units • Provides support in battles]]
+			energyMake				 = 40
+			workerTime				 = 10
+		end
+	end
 
 if shardChicken == "disabled" then
 	objectName					= "ecommander4-battle.s3o"
@@ -115,12 +121,12 @@ local unitDef                    = {
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
 	objectName                   = objectName,
 	script			             = script,
-	radarDistance                = 0,
+	radarDistance                = 500000,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
 	showNanoSpray                = true,
-	sightDistance                = 550,
+	sightDistance                = 500000,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,

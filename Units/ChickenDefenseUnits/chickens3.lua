@@ -5,7 +5,7 @@ return {
 		autoheal = 7,
 		brakerate = 3.5,
 		buildcostenergy = 1,
-		buildcostmetal = 72,
+		buildcostmetal = 50,
 		builder = false,
 		buildpic = "chicken_pidgeon.png",
 		buildpic = "chicken_unitpics/chickens3.png",

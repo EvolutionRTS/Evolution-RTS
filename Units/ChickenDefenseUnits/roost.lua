@@ -6,7 +6,7 @@ return {
 		bmcode = "0",
 		brakerate = 0,
 		buildcostenergy = 1,
-		buildcostmetal = 400,
+		buildcostmetal = 1,
 		builddistance = 90,
 		builder = true,
 		buildpic = "chicken_unitpics/roost.png",

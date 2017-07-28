@@ -1475,236 +1475,425 @@ end
    --eminifac = allterrfactory,
    --eorb = orblist,
 	}
+----------------------------------------------------------
+	
 elseif shardChicken == "enabled" then
 
+local function CLight()
+	local r = math.random(0,5)
+	if r == 0 then
+			return "chicken_dodo1"
+		elseif r == 1 then
+			return "chicken1d"
+		elseif r == 2 then
+			return "chicken1c"
+		elseif r == 3 then
+			return "chicken1b"
+		elseif r == 4 then
+			return "chicken1"
+		else
+			return "chickeneco"
+	end
+end
+
+local function CMedium()
+	local r = math.random(0,12)
+	if r == 0 then
+			return "chicken_dodo2"
+		elseif r == 1 then
+			return "chicken1z"
+		elseif r == 2 then
+			return "chicken1y"
+		elseif r == 3 then
+			return "chicken1x"
+		elseif r == 4 then
+			return "chickena1"
+		elseif r == 5 then
+			return "chickena1b"
+		elseif r == 6 then
+			return "chickena1c"
+		elseif r == 7 then
+			return "chickenc3b"
+		elseif r == 8 then
+			return "chickenc3"
+		elseif r == 9 then
+			return "chickenc3c"
+		elseif r == 10 then
+			return "chickenh4"
+		elseif r == 11 then
+			return "chickens1"
+		else
+			return "chickeneco"
+	end
+end
+
+local function CHeavy()
+	local r = math.random(0,12)
+	if r == 0 then
+			return "chicken2"
+		elseif r == 1 then
+			return "chicken2b"
+		elseif r == 2 then
+			return "chickena2b"
+		elseif r == 3 then
+			return "chickena2"
+		elseif r == 4 then
+			return "chickenh3"
+		elseif r == 5 then
+			return "chickenh2"
+		elseif r == 6 then
+			return "chickenc1"
+		elseif r == 7 then
+			return "chickenc2"
+		elseif r == 8 then
+			return "chickenp1"
+		elseif r == 9 then
+			return "chickenr1"
+		elseif r == 10 then
+			return "chickenr2"
+		elseif r == 11 then
+			return "chickens2"
+		else
+			return "chickeneco"
+	end
+end
+
+local function CBirdLight()
+	local r = math.random(0,4)
+	if r == 0 then
+			return "chickenw1d"
+		elseif r == 1 then
+			return "chickenw1"
+		elseif r == 2 then
+			return "chickenw1c"
+		elseif r == 3 then
+			return "chickenw1b"
+		else
+			return "chickenf2"
+	end
+end
+
+local function CBirdHeavy()
+	local r = math.random(0,4)
+	if r == 0 then
+			return "chickenf1"
+		elseif r == 1 then
+			return "chickenf1b"
+		elseif r == 2 then
+			return "chickens3"
+		elseif r == 3 then
+			return "chickenw2"
+		else
+			return "chickenf2"
+	end
+end
+
+local function CEnd()
+	local r = math.random(0,5)
+	if r == 0 then
+			return "chickenr3"
+		elseif r == 1 then
+			return "ve_chickenq"
+		elseif r == 2 then
+			return "e_chickenq"
+		elseif r == 3 then
+			return "n_chickenq"
+		elseif r == 4 then
+			return "h_chickenq"
+		else
+			return "vh_chickenq"
+	end
+end
+
+-------------------------------------------------------------------------------
+
 local chickenbuilderstart = {
-"eaiturret",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"eaiturret",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"eaiturret",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chickeneco",
-"chicken1d",
-"chickeneco",
-"chickeneco",
-"eaiturret",
-"chickeneco",
-"chicken1d",
-"chickeneco",
-"chickeneco",
-"chicken1d",
-"eaiturret",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chicken1d",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chickeneco",
-"chickeneco",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chicken1",
-"chickeneco",
-"chickeneco",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chickeneco",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chickeneco",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chickeneco",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chicken1z",
-"chickeneco",
-"chickena1",
-"chickena1b",
-"chickena1c",
-"chickeneco",
-"chickena1",
-"chickena1b",
-"chickena1c",
-"chickeneco",
-"chickena1",
-"chickena1b",
-"chickena1c",
-"chickeneco",
-"chickena1",
-"chickena1b",
-"chickena1c",
-"chickeneco",
-"chickena1",
-"chickena1b",
-"chickena1c",
-"chickeneco",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenf2",
-"chickenw1b",
-"chickeneco",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickeneco",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickeneco",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickeneco",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickeneco",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenw1b",
-"chickenc3c",
-"chickenc3c",
-"chickenc3c",
-"chickenc3c",
-"chickenc3c",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenp1",
+	"eaiturret",
+	"eaiturret",
+	"eaiturret",
+	"eaiturret",
+	"eaiturret",
+	"eaiturret",
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CMedium,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdLight,
 }
 
 local chickenbuilderend = {
-"chickenc2",
-"chickeneco",
-"chickenp1",
-"chickeneco",
-"chickenr1",
-"chickeneco",
-"chickenf2",
-"chickeneco",
-"chickens2",
-"chickeneco",
-"chickenf1",
-"chickeneco",
-"chickens3",
-"chickeneco",
-"chickenw2",
-"chickeneco",
-"chickenw1b",
-"chickeneco",
-"chickenc1",
-"chickeneco",
-"chickena2b",
-"chickeneco",
-"chicken2b",
-"chickeneco",
-"chicken_dodo2",
-"chickeneco",
+	CHeavy,
+	CHeavy,
+	CHeavy,
+	CBirdHeavy,
 }
 
 local idlelist = {
