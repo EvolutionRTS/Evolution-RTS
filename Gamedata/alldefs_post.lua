@@ -124,16 +124,13 @@ function UnitDef_Post(name, uDef)
 
 	local sqrt = math.sqrt
 
-	if uDef.cancloak == true then
-		local fx = uDef.footprintx and tonumber(uDef.footprintx) or 1
-		local fz = uDef.footprintz and tonumber(uDef.footprintz) or 1
-		local radius = 8 * sqrt((fx * fx) + (fz * fz))
-		if uDef.customparams and uDef.customparams.decloakradiusmodifier then
-			uDef.mincloakdistance = (radius * uDef.customparams.decloakradiusmodifier)
-		else
-			uDef.mincloakdistance = (radius * 6)
-		end
-		
+	local fx = uDef.footprintx and tonumber(uDef.footprintx) or 1
+	local fz = uDef.footprintz and tonumber(uDef.footprintz) or 1
+	local radius = 8 * sqrt((fx * fx) + (fz * fz))
+	if uDef.customparams and uDef.customparams.decloakradiusmodifier then
+		uDef.mincloakdistance = (radius * uDef.customparams.decloakradiusmodifier)
+	else
+		uDef.mincloakdistance = (radius * 6)
 	end
 
 	--------------------------------------------------------------------------------
