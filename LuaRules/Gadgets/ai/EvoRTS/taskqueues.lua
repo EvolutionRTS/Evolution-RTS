@@ -15,33 +15,6 @@ end
 
 if shardChicken == "disabled" then
 
-
---local function AirOrLand()
-	--local r = math.random(0,4)
-	--if r == 0 then
-			--return "eairplant"
-		--elseif r == 1 then
-			--return "ebasefactory"
-		--elseif r == 2 then
-			--return "eamphibfac"
-		--elseif r == 3 then
-			--return "eminifac"
-		--else
-			--return "ehbotfac"
-	--end
---end
-
---local function StartFactory()
-	--local r = math.random(0,2)
-	--if r == 0 then
-			--return "eminifac"
-		--elseif r == 1 then
-			--return "ebasefactory"
-		--else
-			--return "eamphibfac"
-	--end
---end
-
 local function Orb()
 	return "eorbai"
 end
@@ -58,700 +31,18 @@ local function Turret()
 	return "eaiturret"
 end
 
--------------------------------------------------------- Upgrade 0
-
-
-local function Raid()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrlight"
-		elseif r == 1 then
-			return "eamphibbuggy"
-		elseif r == 2 then
-			return "ehbotpeewee"
-		else
-			return "elighttank3"
-	end
-end
-
-local function EMP()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrriot"
-		elseif r == 1 then
-			return "eamphibriot"
-		elseif r == 2 then
-			return "eriottank2"
-		else
-			return "eamphibneedle"
-	end
-end
-
-local function Arty()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrassault"
-		elseif r == 1 then
-			return "ehbotthud"
-		elseif r == 2 then
-			return "eartytank"
-		else
-			return "eamphibarty"
-	end
-end
-
-local function Armor()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eamphibmedtank"
-		elseif r == 1 then
-			return "eallterrmed"
-		elseif r == 2 then
-			return "eallterrheavy"
-		else
-			return "eheavytank3"
-	end
-end
-
-local function Support()
-	local r = math.random(0,4)
-	if r == 0 then
-			return "emissiletank"
-		elseif r == 1 then
-			return "ehbotsniper"
-		elseif r == 2 then
-			return "eamphibrock"
-		elseif r == 3 then
-			return "ehbotrocko"
-		else
-			return "eallterrshield"
-	end
-end
-
-local function End()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "eallterranarchid"
-		elseif r == 1 then
-			return "eamphibleveler"
-		else
-			return "elacerator"
-	end
-end
-
-local function Air()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "ebomber"
-		elseif r == 1 then
-			return "efighter"
-		else
-			return "egunship2"
-	end
-end
-
-
---------------------------------------------------- Upgrade 1
-
-
-local function Raid1()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrlight_up1"
-		elseif r == 1 then
-			return "eamphibbuggy_up1"
-		elseif r == 2 then
-			return "elighttank3_up1"
-		else
-			return "ehbotpeewee_up1"
-	end
-end
-
-local function EMP1()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrriot_up1"
-		elseif r == 1 then
-			return "eamphibriot_up1"
-		elseif r == 2 then
-			return "eriottank2_up1"
-		else
-			return "eamphibneedle_up1"
-	end
-end
-
-local function Arty1()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrassault_up1"
-		elseif r == 1 then
-			return "eamphibarty_up1"
-		elseif r == 2 then
-			return "eartytank_up1"
-		else
-			return "ehbotthud_up1"
-	end
-end
-
-local function Armor1()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eamphibmedtank_up1"
-		elseif r == 1 then
-			return "eallterrmed_up1"
-		elseif r == 2 then
-			return "eallterrheavy_up1"
-		else
-			return "eheavytank3_up1"
-	end
-end
-
-local function Support1()
-	local r = math.random(0,4)
-	if r == 0 then
-			return "emissiletank_up1"
-		elseif r == 1 then
-			return "eallterrshield_up1"
-		elseif r == 2 then
-			return "eamphibrock_up1"
-		elseif r == 3 then
-			return "ehbotrocko_up1"
-		else
-			return "ehbotsniper_up1"
-	end
-end
-
-local function End1()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "eallterranarchid_up1"
-		elseif r == 1 then
-			return "eamphibleveler_up1"
-		else
-			return "elacerator_up1"
-	end
-end
-
-local function Air1()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "ebomber_up1"
-		elseif r == 1 then
-			return "efighter_up1"
-		else
-			return "egunship2_up1"
-	end
-end
-
-
--------------------------------------------------- Upgrade 2
-
-
-local function Raid2()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrlight_up2"
-		elseif r == 1 then
-			return "eamphibbuggy_up2"
-		elseif r == 2 then
-			return "elighttank3_up2"
-		else
-			return "ehbotpeewee_up2"
-	end
-end
-
-local function EMP2()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrriot_up2"
-		elseif r == 1 then
-			return "eamphibriot_up2"
-		elseif r == 2 then
-			return "eriottank2_up2"
-		else
-			return "eamphibneedle_up2"
-	end
-end
-
-local function Arty2()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrassault_up2"
-		elseif r == 1 then
-			return "eamphibarty_up2"
-		elseif r == 2 then
-			return "eartytank_up2"
-		else
-			return "ehbotthud_up2"
-	end
-end
-
-local function Armor2()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eamphibmedtank_up2"
-		elseif r == 1 then
-			return "eallterrmed_up2"
-		elseif r == 2 then
-			return "eallterrheavy_up2"
-		else
-			return "eheavytank3_up2"
-	end
-end
-
-local function Support2()
-	local r = math.random(0,4)
-	if r == 0 then
-			return "emissiletank_up2"
-		elseif r == 1 then
-			return "eallterrshield_up2"
-		elseif r == 2 then
-			return "eamphibrock_up2"
-		elseif r == 3 then
-			return "ehbotrocko_up2"
-		else
-			return "ehbotsniper_up2"
-	end
-end
-
-local function End2()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "eallterranarchid_up2"
-		elseif r == 1 then
-			return "eamphibleveler_up2"
-		else
-			return "elacerator_up2"
-	end
-end
-
-local function Air2()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "ebomber_up2"
-		elseif r == 1 then
-			return "efighter_up2"
-		else
-			return "egunship2_up2"
-	end
-end
-
-
------------------------------------------------- Upgrade 3
-
-
-local function Raid3()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrlight_up3"
-		elseif r == 1 then
-			return "eamphibbuggy_up3"
-		elseif r == 2 then
-			return "elighttank3_up3"
-		else
-			return "ehbotpeewee_up3"
-	end
-end
-
-local function EMP3()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrriot_up3"
-		elseif r == 1 then
-			return "eamphibriot_up3"
-		elseif r == 2 then
-			return "eriottank2_up3"
-		else
-			return "eamphibneedle_up3"
-	end
-end
-
-local function Arty3()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eallterrassault_up3"
-		elseif r == 1 then
-			return "eamphibarty_up3"
-		elseif r == 2 then
-			return "eartytank_up3"
-		else
-			return "ehbotthud_up3"
-	end
-end
-
-local function Armor3()
-	local r = math.random(0,3)
-	if r == 0 then
-			return "eamphibmedtank_up3"
-		elseif r == 1 then
-			return "eallterrmed_up3"
-		elseif r == 2 then
-			return "eallterrheavy_up3"
-		else
-			return "eheavytank3_up3"
-	end
-end
-
-local function Support3()
-	local r = math.random(0,4)
-	if r == 0 then
-			return "emissiletank_up3"
-		elseif r == 1 then
-			return "eallterrshield_up3"
-		elseif r == 2 then
-			return "eamphibrock_up3"
-		elseif r == 3 then
-			return "ehbotrocko_up3"
-		else
-			return "ehbotsniper_up3"
-	end
-end
-
-local function End3()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "eallterranarchid_up3"
-		elseif r == 1 then
-			return "eamphibleveler_up3"
-		else
-			return "elacerator_up3"
-	end
-end
-
-local function Air3()
-	local r = math.random(0,2)
-	if r == 0 then
-			return "ebomber_up3"
-		elseif r == 1 then
-			return "efighter_up3"
-		else
-			return "egunship2_up3"
-	end
-end
-
 ---------------------------------------------------------------- QUEUES
 
-local firstEngineerRaid = {
-   Turret,
-   Turret,
-   Turret,
-   Turret,
-   Orb,
-   Scout,
-   Scout,
-   Scout,
-   Scout,
-   Scout,
-   Orb,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Orb,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Orb,
-   Orb,
-   Scout,
-   Raid,
-   Raid,
-   Raid,
-   Box,
-   Orb,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Turret,
-   Turret,
-   Scout1,
-   Air1,
-   Orb,
-   Scout1,
-   Air1,
-   Orb,
-   Raid1,
-   EMP1,
-   Raid1,
-   Raid1,
-   Orb,
-   Raid1,
-   EMP1,
-   Raid1,
-   Raid1,
-   Orb,
-   Orb,
-   Air1,
-   Raid1,
-   EMP1,
-   Raid1,
-   Box,
-   Orb,
-   Raid1,
-   EMP1,
-   Raid1,
-   Raid1,
-   EMP1,
-   Box,
-   Orb,
-   Scout1,
-   Air1,
-   Orb,
-   Scout1,
-   Air1,
-   Orb,
-   Raid1,
-   EMP1,
-   Raid1,
-   Raid1,
-   Orb,
-   Raid1,
-   Turret,
-   Turret,
-   Air2,
-   Orb,
-   Air2,
-   Air2,
-   Orb,
-   Raid2,
-   Air2,
-   Arty2,
-   Raid2,
-   Orb,
-   EMP2,
-   Raid2,
-   Arty2,
-   Raid2,
-   Orb,
-   Orb,
-   Scout2,
-   Raid2,
-   Raid2,
-   Arty2,
-   Box,
-   Orb,
-   Raid2,
-   EMP2,
-   Arty2,
-   Raid2,
-   Raid2,
-   Box,
-   Orb,
-   Air3,
-   Air3,
-   Orb,
-   Air3,
-   Air3,
-   Orb,
-   Armor3,
-   Air3,
-   Arty3,
-   Armor3,
-   Orb,
-   EMP3,
-   Armor3,
-   Arty3,
-   Armor3,
-   Orb,
-   Orb,
-   Scout3,
-   Armor3,
-   Armor3,
-   Arty3,
-   Box,
-   Orb,
-   Armor3,
-   EMP3,
-   Arty3,
-   Armor3,
-   Armor3,
-   Box,
-   End3,
-   End3,
-}
-
-local firstEngineerTechPush = {
-   Turret,
-   Turret,
-   Turret,
-   Turret,
-   Orb,
-   Orb,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Orb,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Box,
-   Orb,
-   Orb,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Orb,
-   Raid,
-   Raid,
-   Raid,
-   Raid,
-   Box,
-   Raid1,
-   Raid1,
-   Raid1,
-   EMP1,
-   Arty1,
-   Orb,
-   Orb,
-   Armor1,
-   Armor1,
-   Raid2,
-   Raid2,
-   Armor1,
-   Armor1,
-   Raid1,
-   Armor1,
-   Box,
-   Raid1,
-   Raid1,
-   Raid1,
-   EMP1,
-   Arty1,
-   Orb,
-   Orb,
-   Armor1,
-   Armor1,
-   Raid2,
-   Raid2,
-   Armor1,
-   Armor1,
-   Raid1,
-   Armor1,
-   Box,
-   Armor2,
-   Orb,
-   Armor2,
-   Armor2,
-   Armor2,
-   Orb,
-   Armor2,
-   Support2,
-   Arty2,
-   Armor2,
-   Orb,
-   Armor2,
-   Orb,
-   Armor3,
-   Armor2,
-   Orb,
-   Armor3,
-   Support3,
-   Arty3,
-   Orb,
-}
-
-local firstEngineerAir = {
-   Turret,
-   Turret,
-   Turret,
-   Turret,
-   Orb,
-   Orb,
-   Scout,
-   Scout,
-   Scout,
-   Scout,
-   Air,
-   Scout,
-   Scout,
-   Scout,
-   Orb,
-   Air,
-   Air,
-   Air,
-   Orb,
-   Air,
-   Air,
-   Box,
-   Orb,
-   Orb,
-   Scout,
-   Scout,
-   Scout,
-   Scout,
-   Air,
-   Air,
-   Air,
-   Air,
-   Air,
-   Air,
-   Box,
-   Air,
-   Air,
-   Air,
-   Air,
-   Air,
-   Orb,
-   Orb,
-   Air1,
-   Turret,
-   Turret,
-   Air1,
-   Orb,
-   Air1,
-   Air1,
-   Orb,
-   Air1,
-   Orb,
-   Air1,
-   Air1,
-   Air1,
-   Box,
-   Air,
-   Air,
-   Air,
-   Air,
-   Air,
-   Orb,
-   Orb,
-   Air1,
-   Air1,
-   Air1,
-   Orb,
-   Air1,
-   Air1,
-   Orb,
-   Air1,
-   Air1,
-   Air1,
-   Box,
-   Air2,
-   Orb,
-   Air2,
-   Air2,
-   Air2,
-   Orb,
-   Air2,
-   Air2,
-   Air2,
-   Air2,
-   Orb,
-   Air2,
-   Air3,
-   Orb,
-   Air2,
-   Air3,
-   Air3,
-   Air3,
-}
 
 local firstEngineerAmphibious = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Turret,
 	Turret,
@@ -843,6 +134,14 @@ local firstEngineerAmphibious = {
 }
 
 local firstEngineerHover = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Turret,
 	Turret,
@@ -934,6 +233,14 @@ local firstEngineerHover = {
 }
 
 local firstEngineerSpider = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Turret,
 	Turret,
@@ -1025,6 +332,14 @@ local firstEngineerSpider = {
 }
 
 local firstEngineerHBot = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Turret,
 	Turret,
@@ -1115,142 +430,15 @@ local firstEngineerHBot = {
 	Orb,
 }
 
-local engineersTechPush = {
-	Turret,
-	Orb,
-	Armor3,
-	Support3,
-	Armor3,
-	End3,
-	Armor3,
-	Armor3,
-	Box,
-	Armor3,
-	Support3,
-	Armor3,
-	End3,
-	Armor3,
-	Armor3,
-	Orb,
-	Orb,
-	Orb,
-}
-
-local engineersRaid = {
-	Turret,
-	Orb,
-	Arty3,
-    Arty3,
-    Arty3,
-	Orb,
-    Arty3,
-    Arty3,
-	Arty3,
-	Arty3,
-	Box,
-	Arty3,
-   Orb,
-	Arty3,
-	Arty3,
-   Orb,
-	Arty3,
-	Orb,
-	Arty3,
-	Arty3,
-	Arty3,
-    Orb,
-	Air3,
-	Air3,
-	Air3,
-	Air3,
-    Air3,
-	Air3,
-	Orb,
-	Air3,
-	Air3,
-	Orb,
-	Armor3,
-	Turret,
-    Armor3,
-    Armor3,
-	Orb,
-    Armor3,
-    Armor3,
-	Armor3,
-	Armor3,
-	Box,
-	Armor3,
-	Armor3,
-	Armor3,
-	Armor3,
-	Orb,
-	Armor3,
-	Armor3,
-	Armor3,
-    Orb,
-	Support3,
-	Support3,
-	Support3,
-	Support3,
-    Support3,
-	Support3,
-	Orb,
-	Support3,
-	Support3,
-	Orb,
-	Armor3,
-    Support3,
-    Arty3,
-	Orb,
-    Armor3,
-    Armor3,
-	Support3,
-	Armor3,
-	Box,
-	Armor3,
-	Arty3,
-	Armor3,
-	Armor3,
-	Orb,
-	Armor3,
-	Support3,
-	Armor3,
-    Orb,
-	End3,
-	End3,
-	End3,
-	End3,
-    End3,
-	End3,
-	Orb,
-	End3,
-	End3,
-}
-
-local engineersAir = {
-	Turret,
-	Orb,
-	Air3,
-	Air3,
-   	Orb,
-	Air3,
-	End3,
-	Air3,
-	Air3,
-	Box,
-	Air3,
-	Air3,
-  	 Orb,
-	Air3,
-	End3,
-	Air3,
-	Air3,
-	Orb,
-	Orb,
-	Orb,
-}
-
 local engineersAmphibious = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Orb,
 	Box,
@@ -1285,6 +473,14 @@ local engineersAmphibious = {
 }
 
 local engineersHover = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Orb,
 	Box,
@@ -1319,6 +515,14 @@ local engineersHover = {
 }
 
 local engineersSpider = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Orb,
 	Box,
@@ -1353,6 +557,14 @@ local engineersSpider = {
 }
 
 local engineersHBot = {
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
+	"escout_up3",
 	Turret,
 	Orb,
 	Box,
@@ -1406,43 +618,22 @@ local idlelist = {
 
 
 local function engineerlist(beh)
-   local r = math.random(0,5)    --local r = math.random(0,6)
-	  if r == 0 then
-		if ai.engineerfirst == true then
-			return engineersRaid
-			else
-			ai.engineerfirst = true
-			return firstEngineerRaid
-			end
-		elseif r == 1 then
-			if ai.engineerfirst == true then
-			return engineersTechPush
-			else
-			ai.engineerfirst = true
-			return firstEngineerTechPush
-			end
-		elseif r == 2 then
-			if ai.engineerfirst == true then
-			return engineersAir
-			else
-			ai.engineerfirst = true
-			return firstEngineerAir
-			end
-		elseif r == 3 then
+   local r = math.random(0,3)
+		if r == 0 then
 			if ai.engineerfirst == true then
 			return engineersAmphibious
 			else
 			ai.engineerfirst = true
 			return firstEngineerAmphibious
 			end
-		elseif r == 4 then
+		elseif r == 1 then
 			if ai.engineerfirst == true then
 			return engineersSpider
 			else
 			ai.engineerfirst = true
 			return firstEngineerSpider
 			end
-		elseif r == 5 then
+		elseif r == 2 then
 			if ai.engineerfirst == true then
 			return engineersHover
 			else
@@ -1457,11 +648,6 @@ local function engineerlist(beh)
 			return firstEngineerHBot
 			end
 		end
-end
-	--local function orblist(brr)
-    --return orbs
---end
-	
 	taskqueues = {
    ecommanderbattleai = engineerlist,
    eaiturret = idlelist,
@@ -1475,425 +661,550 @@ end
    --eminifac = allterrfactory,
    --eorb = orblist,
 	}
+end
 ----------------------------------------------------------
 	
 elseif shardChicken == "enabled" then
 
-local function CLight()
-	local r = math.random(0,5)
-	if r == 0 then
-			return "chicken_dodo1"
-		elseif r == 1 then
-			return "chicken1d"
-		elseif r == 2 then
-			return "chicken1c"
-		elseif r == 3 then
-			return "chicken1b"
-		elseif r == 4 then
-			return "chicken1"
-		else
-			return "chickeneco"
-	end
-end
-
-local function CMedium()
-	local r = math.random(0,12)
-	if r == 0 then
-			return "chicken_dodo2"
-		elseif r == 1 then
-			return "chicken1z"
-		elseif r == 2 then
-			return "chicken1y"
-		elseif r == 3 then
-			return "chicken1x"
-		elseif r == 4 then
-			return "chickena1"
-		elseif r == 5 then
-			return "chickena1b"
-		elseif r == 6 then
-			return "chickena1c"
-		elseif r == 7 then
-			return "chickenc3b"
-		elseif r == 8 then
-			return "chickenc3"
-		elseif r == 9 then
-			return "chickenc3c"
-		elseif r == 10 then
-			return "chickenh4"
-		elseif r == 11 then
-			return "chickens1"
-		else
-			return "chickeneco"
-	end
-end
-
-local function CHeavy()
-	local r = math.random(0,12)
-	if r == 0 then
-			return "chicken2"
-		elseif r == 1 then
-			return "chicken2b"
-		elseif r == 2 then
-			return "chickena2b"
-		elseif r == 3 then
-			return "chickena2"
-		elseif r == 4 then
-			return "chickenh3"
-		elseif r == 5 then
-			return "chickenh2"
-		elseif r == 6 then
-			return "chickenc1"
-		elseif r == 7 then
-			return "chickenc2"
-		elseif r == 8 then
-			return "chickenp1"
-		elseif r == 9 then
-			return "chickenr1"
-		elseif r == 10 then
-			return "chickenr2"
-		elseif r == 11 then
-			return "chickens2"
-		else
-			return "chickeneco"
-	end
-end
-
-local function CBirdLight()
-	local r = math.random(0,4)
-	if r == 0 then
-			return "chickenw1d"
-		elseif r == 1 then
-			return "chickenw1"
-		elseif r == 2 then
-			return "chickenw1c"
-		elseif r == 3 then
-			return "chickenw1b"
-		else
-			return "chickenf2"
-	end
-end
-
-local function CBirdHeavy()
-	local r = math.random(0,4)
-	if r == 0 then
-			return "chickenf1"
-		elseif r == 1 then
-			return "chickenf1b"
-		elseif r == 2 then
-			return "chickens3"
-		elseif r == 3 then
-			return "chickenw2"
-		else
-			return "chickenf2"
-	end
-end
-
-local function CEnd()
-	local r = math.random(0,5)
-	if r == 0 then
-			return "chickenr3"
-		elseif r == 1 then
-			return "ve_chickenq"
-		elseif r == 2 then
-			return "e_chickenq"
-		elseif r == 3 then
-			return "n_chickenq"
-		elseif r == 4 then
-			return "h_chickenq"
-		else
-			return "vh_chickenq"
-	end
-end
-
--------------------------------------------------------------------------------
-
+----------------------------------------------------------
 local chickenbuilderstart = {
-	"eaiturret",
-	"eaiturret",
-	"eaiturret",
-	"eaiturret",
-	"eaiturret",
-	"eaiturret",
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CMedium,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdLight,
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"eaiturret",
+"eaiturret",
+"eaiturret",
+"eaiturret",
+"eaiturret",
+"eaiturret",
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo1", 		-- Kamikaze Bomb MK1
+"chicken1d", 			-- Swarm MK1
+"chicken1c", 			-- Swarm MK2
+"chicken1b", 			-- Swarm MK3
+"chicken1", 			-- Swarm MK4
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken_dodo2", 		-- Kamikaze Bomb MK2
+"chicken1z", 			-- Swarm MK5
+"chicken1y", 			-- Swarm MK6
+"chicken1x", 			-- Swarm MK7
+"chickena1",			-- Tank MK1
+"chickena1b",			-- Tank MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickena1c",			-- Tank MK1
+"chickenc3b",			-- Spider MK1
+"chickenc3",			-- Spider MK2
+"chickenc3c",			-- Spider MK3
+"chickenh4",			-- Fast Swarm
+"chickens1",			-- Spiker MK1
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenw1d",			-- Air Spiker MK1
+"chickenw1",			-- Air Spiker MK2
+"chickenw1c",			-- Air Spiker MK2
+"chickenw1b",			-- Air Spiker MK3
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
 }
 
 local chickenbuilderend = {
-	CHeavy,
-	CHeavy,
-	CHeavy,
-	CBirdHeavy,
+"eaiturret",
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"eaiturret",			
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chicken2", 			-- Swarm MK8
+"chicken2b", 			-- Swarm MK9
+"chickena2b",			-- Tank MK2
+"chickena2",			-- Tank MK3
+"chickenh3",			-- Tank MK4
+"chickenh2",			-- Tank MK5
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenc1",			-- Spider MK4
+"chickenc2",			-- Spider MK5
+"chickenp1",			-- Flamer
+"chickenr1",			-- Artilery MK1
+"chickenr2",			-- Artilery MK2
+"chickens2",			-- Spiker MK2
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
+"chickenf1",			-- Bomber MK1
+"chickenf1b",			-- Bomber MK2
+"chickens3",			-- Assault Spiker
+"chickenw2",			-- Fighter
+"chickeneco", 			-- Power Source
+"chickeneco", 			-- Power Source
 }
 
 local idlelist = {
@@ -1908,8 +1219,6 @@ local function engineerlist(beh)
 			return chickenbuilderstart
 			end
 	end
-
-
 	taskqueues = {
    ecommanderbattleai = engineerlist,
    eaiturret = idlelist,
@@ -1924,3 +1233,5 @@ local function engineerlist(beh)
    --eorb = orblist,
 	}
 end
+
+
