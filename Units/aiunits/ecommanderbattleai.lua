@@ -17,30 +17,36 @@ end
 --Spring.Echo("AI difficulty is set to: " .. aiDifficulty)
 
 if shardChicken == "enabled" then
-	description				 = [[Chicken Overseer, builds chickens]]
-	energyMake				 = 500
-	workerTime				 = 100
+			description				 = [[Chicken Overseer, builds chickens]]
+			energyMake				 = 500
+			workerTime			 	 = 10
+			maxDamage 				 = 50000		
 elseif shardChicken == "disabled" then
 		if aiDifficulty == "veryeasy" then
-			description                = [[Very Easy AI • Builds Units • Provides support in battles]]
+			description              = [[Very Easy AI • Builds Units • Provides support in battles]]
 			energyMake				 = 5
 			workerTime				 = 0.75
+			maxDamage				 = 5000
 		elseif aiDifficulty == "easy" then
 			description                = [[Easy AI • Builds Units • Provides support in battles]]
 			energyMake				 = 10
 			workerTime				 = 1.5
+			maxDamage				 = 7500
 		elseif aiDifficulty == "medium" then
 			description                = [[Medium AI • Builds Units • Provides support in battles]]
 			energyMake				 = 20
 			workerTime				 = 2.5
+			maxDamage 				 = 10000
 		elseif aiDifficulty == "hard" then
 			description                = [[Hard AI • Builds Units • Provides support in battles]]
 			energyMake				 = 40
 			workerTime				 = 4
+			maxDamage				 = 20000
 		elseif aiDifficulty == "insane" then
 			description                = [[Insane AI • Builds Units • Provides support in battles]]
 			energyMake				 = 40
 			workerTime				 = 10
+			maxDamage 				 = 50000
 		end
 	end
 
@@ -108,7 +114,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 10000,
+	maxDamage                    = maxDamage,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -121,12 +127,12 @@ local unitDef                    = {
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
 	objectName                   = objectName,
 	script			             = script,
-	radarDistance                = 5000,
+	radarDistance                = 1000,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
 	showNanoSpray                = true,
-	sightDistance                = 5000,
+	sightDistance                = 1000,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
