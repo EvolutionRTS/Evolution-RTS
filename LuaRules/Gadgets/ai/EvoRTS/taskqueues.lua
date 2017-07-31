@@ -5,7 +5,7 @@ Task Queues!
 math.randomseed( os.time() )
 math.random(); math.random(); math.random()
 
----------------------------------------------RNG Functions for AI
+--------------------------------------------- Functions for AI
 
 shardChicken = Spring.GetModOptions().shardchicken
 
@@ -648,6 +648,7 @@ local function engineerlist(beh)
 			return firstEngineerHBot
 			end
 		end
+	end
 	taskqueues = {
    ecommanderbattleai = engineerlist,
    eaiturret = idlelist,
@@ -661,7 +662,6 @@ local function engineerlist(beh)
    --eminifac = allterrfactory,
    --eorb = orblist,
 	}
-end
 ----------------------------------------------------------
 	
 elseif shardChicken == "enabled" then
