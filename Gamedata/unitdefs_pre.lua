@@ -5,6 +5,7 @@ Shared.buildList = {
 	[[eamphibfac]],
 	[[eairplant]],
 	[[etech1]],
+	[[emetalextractor]],
 	[[esolar2]],
 	[[egeothermal]],
 	[[efusion2]],
@@ -24,10 +25,6 @@ Shared.buildList = {
 	[[ebox]],
 	[[ecommander]],
 }
-
-if Spring.GetModOptions and Spring.GetModOptions().luamex ~= "disabled" then
-		Shared.buildList [#Shared.buildList + 1] = [[emetalextractor]]
-end
 	
 local turrets = {
 	[[ehbotpeewee_turret]],

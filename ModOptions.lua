@@ -38,21 +38,9 @@ local options= {
 		type   = 'section',
 	},
 	{
-		key    = 'luamex',
-		name   = 'Lua Resource Node Generators',
-		desc   = 'Enables the use for Resource Node Generators to generate Energy income.',
-		type="list",
-		def="enabled",
-		section= "resourcing",
-		items={
-			{key="disabled", name="Disabled", desc="Turn off Resource Node Generators use."},
-			{key="enabled", name="Enabled", desc="Allow Resource Node Generators to be used to generate Energy income."},
-		}
-	},
-	{
 		key    = 'mexbasecostmultiplier',
 		name   = 'Resource Node Generators Base Cost',
-		desc   = 'Resource Node Generators have a base cost of 25. This is a percentage adjustment. (Lua Resource Node Generators must be enabled)',
+		desc   = 'Resource Node Generators have a base cost of 25. This is a percentage adjustment.',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 100,
@@ -64,7 +52,7 @@ local options= {
 	{
 		key    = 'mexincomemultiplier',
 		name   = 'Resource Node Generators Income Multiplier',
-		desc   = 'Resource Node values are multiplied by this percentage. (Lua Resource Node Generators must be enabled)',
+		desc   = 'Resource Node values are multiplied by this percentage.',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 100, -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
@@ -76,7 +64,7 @@ local options= {
 	{
 		key    = 'mexenergyusemultiplier',
 		name   = 'Resource Node Generators Energy Use',
-		desc   = 'Sets the percentage of energy each Resource Node Generators uses based upon the amount that each Resource Node provides. (Resource Node Generators must be enabled)',
+		desc   = 'Sets the percentage of energy each Resource Node Generators uses based upon the amount that each Resource Node provides.',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 0,
