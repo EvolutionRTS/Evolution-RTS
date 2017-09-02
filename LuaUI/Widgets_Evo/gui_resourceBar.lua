@@ -536,7 +536,9 @@ function generateDisplayList3()
 end
 
 function widget:ViewResize(newX,newY)
-  vsx, vsy = newX, newY
+	vsx, vsy = newX, newY
+	posx, posy = vsx - width * 1.59, vsy - height - 10
+	tweakStartX, tweakStartY = vsx - width * 1.59, vsy - height
 	widgetScale = (0.66 + (vsx*vsy / 9500000))
 	generateDisplayList()
 	generateDisplayList3()

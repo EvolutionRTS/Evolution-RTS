@@ -100,12 +100,12 @@ function widget:GameStart()
 end
 
 -- button
-local textSize		= 0.75
+local textSize		= 1
 local textMargin	= 0.25
 local lineWidth		= 0.0625
 
-local posX = 0.1625
-local posY = 0
+local posX = 0.947
+local posY = 0.965
 local showOnceMore = false		-- used because of GUI shader delay
 local buttonGL
 local startPosX = posX
@@ -185,7 +185,7 @@ function DrawButton()
 		{v = {1, 0, 0}},
 	}
 	glShape(GL_LINE_STRIP, vertices)
-  glText("[ Options ]", textMargin, textMargin, textSize, "no")
+  glText("[Options]", textMargin, textMargin, textSize, "no")
 end
 	
 function lines(str)
