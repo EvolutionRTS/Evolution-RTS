@@ -139,10 +139,10 @@ weaponDefs                 = {
 		customparams             = {
 			damagetype		     = "ehbotpeewee",
 			single_hit		 	 = true,
-			isupgraded			  	 = isUpgraded,
+			isupgraded			 = isUpgraded,
 		},      
 		damage                   = {
-			default              = 20,
+			default              = 15,
 		},
 	},
 }
