@@ -5,7 +5,7 @@
 function gadget:GetInfo()
   return {
     name      = "Unit Take Cover",
-    desc      = "Units gain stealth and seismic signatures are removed when in the presence of features on the map",
+    desc      = "Units gain cloak when in the presence of features on the map",
     author    = "knorke, Forboding Angel",
     date      = "2016",
     license   = "CC0",
@@ -133,23 +133,11 @@ end
 
 --***vielleicht lieber setunitlosstate?
 function hideUnit (uID)
-	Spring.SetUnitSensorRadius (uID, "seismic", 0)
-	--Spring.Echo(Spring.GetUnitStates(uID)["cloak"])
 	Spring.SetUnitCloak (uID, 2 ,false)
-	Spring.SetUnitStealth (uID, true)
 end
 
 function unhideUnit (uID)
     Spring.SetUnitCloak (uID, false ,false)
-	--Spring.Echo(Spring.GetUnitStates(uID)["cloak"])
-	if UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature then
-		local signatureRadius = UnitDefs[Spring.GetUnitDefID(uID)].seismicSignature
-		--Spring.Echo(signatureRadius)
-		Spring.SetUnitSensorRadius (uID, "seismic", signatureRadius)
-	end
-    if not UnitDefs[Spring.GetUnitDefID(uID)].stealth then
-        Spring.SetUnitStealth (uID, false)
-    end
 end
 
 
