@@ -14,7 +14,7 @@ script = "ehbotpeewee_lus.lua"
 
 tech = [[tech0]]
 armortype = [[light]]
-supply = [[5]]
+supply = [[6]]
 
 VFS.Include("units-configs-basedefs/basedefs/hbot/mobile/ehbotpeewee_basedef.lua")
 
