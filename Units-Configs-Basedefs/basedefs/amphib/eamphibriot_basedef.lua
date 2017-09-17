@@ -150,34 +150,34 @@ weaponDefs                 = {
 	},
 
 	riottankshotgun              = {
-		AreaOfEffect             = 100,
+		AreaOfEffect             = 250,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
 		
 		cegTag                   = "bruisercannon",
-		explosionGenerator       = "custom:genericshellexplosion-small",
+		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = 0,
 		interceptedByShieldType  = 4,
 		impulseFactor            = 0,
-		name                     = "Light Cannon",
-		projectiles		         = 10,
-		range                    = 400,
+		name                     = "Shotgun",
+		--projectiles		     = 10,
+		range                    = 500,
 		reloadtime               = 5,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/mediumcannonhit.wav",
 		soundStart               = "weapons/bruisercannon.wav",
-		sprayangle		         = 2000,
+		--sprayangle		         = 2000,
 		
 		turret                   = true,
 		weaponVelocity           = 400,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eallterrriotshotgun",  
+			damagetype		     = "eriottank2shotgun",  
 		},      
 		damage                   = {
-			default              = 75,
+			default              = 300,
 		},
 	},
 }
