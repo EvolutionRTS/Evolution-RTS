@@ -14,7 +14,7 @@ local armortype					 = [[building]]
 -- Finally, we calculate the HP of the mex based upon how much it costs.
 
 -- It's a little bit overengineered, but the end result is a pretty dynamic luamex setup.
-local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 100 -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
+local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 50 -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
 local energyUse = tonumber(Spring.GetModOptions().mexenergyusemultiplier) or 0
 local energyUse = energyUse * 0.001
 local energyUse = metalMultiplier * energyUse
@@ -37,7 +37,7 @@ local unitDef                     = {
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
 	corpse                        = "ammobox",
-	description                   = [[Generates Energy from Resource Nodes]],
+	description                   = [[Generates Metal from Resource Nodes]],
 	energyStorage                 = 0,
 	energyUse                     = energyUse,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
@@ -52,7 +52,7 @@ local unitDef                     = {
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
 	metalMake                     = 0,
-	name                          = "Resource Node Generator",
+	name                          = "Metal Extractor",
 	objectName                    = "emetalextractor2.s3o",
 	onoffable                     = true,
 	radarDistance                 = 0,

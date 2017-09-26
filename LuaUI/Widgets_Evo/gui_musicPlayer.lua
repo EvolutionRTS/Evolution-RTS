@@ -89,8 +89,15 @@ local volume
 function widget:Initialize()
 	
 	volume = Spring.GetConfigInt("snd_volmaster", 100)
+	
+	musicInitialValue = Spring.GetConfigInt("evo_musicInitialValue", 0)
+	if musicInitialValue ~= 1 then
+		Spring.SetConfigInt("snd_volmusic", 20)
+		Spring.SetConfigInt("evo_musicInitialValue", 1)
+	end
+	
 	music_volume = Spring.GetConfigInt("snd_volmusic", 20)
-
+	
 	if #tracks == 0 then 
 		Spring.Echo("[Music Player] No music was found, Shutting Down")
 		widgetHandler:RemoveWidget()

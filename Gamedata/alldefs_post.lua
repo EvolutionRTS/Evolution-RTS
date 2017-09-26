@@ -376,6 +376,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		Spring.Echo("[Gameplay Speed] Set to " .. gamePlaySpeed)
 
 		for id,unitDef in pairs(UnitDefs) do
+			unitDef.buildcostmetal = unitDef.buildcostmetal * 2
 			unitDef.buildtime = unitDef.buildcostmetal / 4
 		end
 

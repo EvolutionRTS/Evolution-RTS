@@ -39,8 +39,8 @@ local options= {
 	},
 	{
 		key    = 'mexbasecostmultiplier',
-		name   = 'Resource Node Generators Base Cost',
-		desc   = 'Resource Node Generators have a base cost of 25. This is a percentage adjustment.',
+		name   = 'Metal Extractor Base Cost',
+		desc   = 'Metal Extractors have a base cost of 25. This is a percentage adjustment.',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 100,
@@ -51,11 +51,11 @@ local options= {
 	},
 	{
 		key    = 'mexincomemultiplier',
-		name   = 'Resource Node Generators Income Multiplier',
+		name   = 'Metal Extractors Income Multiplier',
 		desc   = 'Resource Node values are multiplied by this percentage.',
 		type   = 'number',
 		section= 'resourcing',
-		def    = 100, -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
+		def    = 50, -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
 		min    = 0,
 		max    = 200,
 		step   = 1,  -- quantization is aligned to the def value
@@ -63,8 +63,8 @@ local options= {
 	},
 	{
 		key    = 'mexenergyusemultiplier',
-		name   = 'Resource Node Generators Energy Use',
-		desc   = 'Sets the percentage of energy each Resource Node Generators uses based upon the amount that each Resource Node provides.',
+		name   = 'Metal Extractors Energy Use',
+		desc   = 'Sets the percentage of energy each Metal Extractors uses based upon the amount that each Resource Node provides.',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 0,
@@ -91,7 +91,7 @@ local options= {
 		desc   = 'Determines the amount of metal income you start with per second. It increases every <Basic Metal Income Increase Interval> (2.5 minutes, is the default) by this amount until it hits <Maximum Basic Income> income.',
 		type   = 'number',
 		section= 'resourcing',
-		def    = 3,
+		def    = 1,
 		min    = 0,
 		max    = 5,
 		step   = 1,  -- quantization is aligned to the def value
@@ -115,7 +115,7 @@ local options= {
 		desc   = 'Determines the maximum amount that your basic metal income level can reach.',
 		type   = 'number',
 		section= 'resourcing',
-		def    = 15,
+		def    = 5,
 		min    = 0,
 		max    = 30,
 		step   = 1,  -- quantization is aligned to the def value
@@ -259,7 +259,7 @@ local options= {
 		name="Scoring Mode (Control Victory Points)",
 		desc="Defines how the game is played",
 		type="list",
-		def="countdown",
+		def="disabled",
 		section="controlvictoryoptions",
 		items={
 			{key="disabled", name="Disabled", desc="Disable Control Points as a victory condition."},

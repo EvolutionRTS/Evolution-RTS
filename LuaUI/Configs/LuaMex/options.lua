@@ -1,4 +1,4 @@
-local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 100  -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
+local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 50  -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
 local metalMultiplier = metalMultiplier * 0.01
 
 options = {

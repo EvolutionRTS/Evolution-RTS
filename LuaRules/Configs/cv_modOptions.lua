@@ -2,7 +2,7 @@ cvMode = Spring.GetModOptions().scoremode
 
 --Is CV Enabled when you launch spring.exe directly?
 if cvMode == nil then
-	cvMode = "countdown"
+	cvMode = "disabled"
 end
 
 -- CV Enabled/Disabled Controls

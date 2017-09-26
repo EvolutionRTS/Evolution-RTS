@@ -300,6 +300,13 @@ function widget:DrawScreen()
 end
 
 function widget:Initialize()
+
+	promptInitialValue = Spring.GetConfigInt("evo_promptInitialValue", 0)
+	if promptInitialValue ~= 1 then
+		Spring.SetConfigInt("evo_resourceprompts", 1)
+		Spring.SetConfigInt("evo_promptInitialValue", 1)
+	end
+
 	if Spring.GetModOptions().basicincomeinterval ~= nil then
 		metalIncomeTimer = tonumber(Spring.GetModOptions().basicincomeinterval) * 60
 	end
