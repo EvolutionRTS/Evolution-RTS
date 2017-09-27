@@ -6,14 +6,14 @@ local unitName                    = "eartyturret"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
---local supply					 = [[2]]
+local supply					 = [[30]]
 local techrequired				 = [[tech3]]
 
 local weapon1Damage               = 1000
-local weapon1AOE				  = 150
+local weapon1AOE				  = 500
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
-local buildCostMetal 			  = 250
+local buildCostMetal 			  = 500
 local maxDamage					  = buildCostMetal * 12.5
 
 local function roundToFirstDecimal(energycosttofire)
@@ -81,7 +81,7 @@ local unitDef                     = {
 	customParams                  = {
 		RequireTech				 = techrequired,
 		unittype				  = "turret",
---		supply_cost               = supply,
+		supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",
 		armortype                 = armortype,
@@ -114,7 +114,7 @@ local weaponDefs                  = {
 		
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
-		explosionGenerator       = "custom:genericshellexplosion-large",
+		explosionGenerator       = "custom:NUKEDATBEWMSMALL",
 		energypershot            = energycosttofire,
 		edgeEffectiveness        = 1,
 		
@@ -122,7 +122,7 @@ local weaponDefs                  = {
 		interceptedByShieldType  = 4,
 		name                     = "Plasma Cannon",
 		range                    = 3500,
-		reloadtime               = 25,
+		reloadtime               = 40,
 		size					 = 16,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/artyhit.wav",

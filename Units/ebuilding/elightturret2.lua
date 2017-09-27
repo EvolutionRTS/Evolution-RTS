@@ -6,7 +6,7 @@ local unitName                    = "elightturret2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
---local supply					 = [[2]]
+local supply					 = [[3]]
 
 local techrequired				 = [[tech1]]
 
@@ -33,7 +33,7 @@ local unitDef                     = {
 	category                      = "BUILDING NOTAIR",
 	collisionVolumeTest           = "1",
 	corpse                        = "ammobox",
-	description                   = [[Anti-Raid Defense Platform (Anti-Light)]],
+	description                   = [[Anti-Raid Defense Platform (Anti-Light) • Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "mediumBuildingExplosionGeneric",
@@ -94,7 +94,7 @@ local unitDef                     = {
 		unittype				  = "turret",
 		RequireTech				  = techrequired,
 		needed_cover              = 2,
-		--supply_cost               = supply,
+		supply_cost               = supply,
 		death_sounds              = "generic",
 		armortype                 = armortype,
 		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 

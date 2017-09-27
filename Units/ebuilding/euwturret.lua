@@ -6,7 +6,7 @@ local unitName                       = "euwturret"
 --------------------------------------------------------------------------------
 
 local armortype						 = [[building]]
---local supply						 = [[4]]
+local supply						 = [[2]]
 
 local techrequired				     = [[tech1]]
 
@@ -33,7 +33,7 @@ local unitDef                        = {
 	category                         = "BUILDING NOTAIR",
 	collisionVolumeTest              = "1",
 	corpse                           = "ammobox",
-	description                      = [[Anti-Amphibious Defense Platform]],
+	description                      = [[Anti-Amphibious Defense Platform • Uses +]] .. supply .. [[ Supply]],
 	energyStorage                    = 0,
 	energyUse                        = 0,
 	explodeAs                        = "mediumBuildingExplosionGenericGreen",
@@ -95,7 +95,7 @@ local unitDef                        = {
 		unittype				     = "turret",
 		RequireTech				  = techrequired,
 		needed_cover                 = 2,
---		supply_cost                  = supply,
+		supply_cost                  = supply,
 		death_sounds                 = "generic",
 		-- twokhotkey                = 't',
 		armortype                    = armortype,

@@ -6,11 +6,11 @@ local unitName                    = "esilo"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-
+local supply					 = [[50]]
 local techrequired				 = [[tech3]]
 
 local weapon1Damage               = 3000
-local weapon1AOE				  = 250
+local weapon1AOE				  = 1500
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 --local stockpiletime				 = 60
 
@@ -18,7 +18,7 @@ local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
 end
 
-local buildCostMetal 			  = 450
+local buildCostMetal 			  = 750
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -48,7 +48,7 @@ local unitDef                     = {
 	maxSlope                      = 30,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
-	name                          = "Eradicator: Surgical Nuclear Strike Facility",
+	name                          = [[Eradicator: Nuclear Strike Facility • Uses +]] .. supply .. [[ Supply]],
 	objectName                    = "esilo2.s3o",
 	onlytargetcategory2           = "NOTAIR",
 	onlytargetcategory3           = "NOTAIR",
@@ -96,6 +96,7 @@ local unitDef                     = {
 		RequireTech				 = techrequired,
 		unittype				  = "turret",
 		needed_cover              = 8,
+		supply_cost               = supply,
 		death_sounds              = "nuke",
 		armortype                 = "building",
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
@@ -130,7 +131,7 @@ local weaponDefs                  = {
 		craterMult                = 0,
 		edgeeffectiveness		  = 1,
 		energypershot             = energycosttofire,
-		explosionGenerator        = "custom:NUKEDATBEWMSMALL",
+		explosionGenerator        = "custom:NUKEDATBEWM",
 		fireStarter               = 100,
 		flightTime                = 400,
 		
@@ -143,7 +144,7 @@ local weaponDefs                  = {
 		model                     = "enuke.s3o",
 		name                      = "Nuke",
 		range                     = 32000,
-		reloadtime                = 60,
+		reloadtime                = 200,
 		weaponType		          = "MissileLauncher",
 		
 		

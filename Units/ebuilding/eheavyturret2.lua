@@ -6,7 +6,7 @@ local unitName                    = "eheavyturret2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
---local supply					 = [[5]]
+local supply					 = [[5]]
 
 local techrequired				 = [[tech2]]
 
@@ -36,7 +36,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Heavy Plasma Battery (Anti-Armor)]],
+	description                   = [[Heavy Plasma Battery (Anti-Armor) • Uses +]] .. supply .. [[ Supply]],
 	energyStorage                 = 0,
 	energyUse                     = 0,
 	explodeAs                     = "largeBuildingExplosionGenericRed",
@@ -94,7 +94,7 @@ local unitDef                     = {
 	customParams                  = {
 		unittype				  = "turret",
 		needed_cover              = 5,
-		--supply_cost               = supply,
+		supply_cost               = supply,
 		RequireTech				 = techrequired,
 		death_sounds              = "generic",
 		armortype                 = armortype, 

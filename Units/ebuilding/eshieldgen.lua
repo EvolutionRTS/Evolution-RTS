@@ -6,7 +6,7 @@ local unitName                    = "eshieldgen"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-
+local supply					 = [[20]]
 local techrequired				 = [[tech3]]
 
 local weapon1Damage              = 2001
@@ -15,14 +15,14 @@ local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 --local stockpiletime				 = 60
 
 local shield1Power               = 4000
-local shield1PowerRegen          = 30
+local shield1PowerRegen          = 50
 local shield1PowerRegenEnergy    = shield1PowerRegen / 10
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
 end
 
-local buildCostMetal 			  = 200
+local buildCostMetal 			  = 450
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -35,7 +35,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility • Shield can link with other shield units to increase charging and capacity]],
+	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility • Shield can link with other shield units to increase charging and capacity • Uses +]] .. supply .. [[ Supply]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -96,6 +96,7 @@ local unitDef                     = {
 	customParams                  = {
 		RequireTech				 = techrequired,
 		unittype				  = "shield",
+		supply_cost               = supply,
 		needed_cover              = 5,
 		death_sounds              = "generic",
 		ProvideTechRange          = "300",
@@ -167,7 +168,7 @@ local weaponDefs                  = {
 		Exteriorshield            = true,
 		Visibleshield             = false,
 		Visibleshieldrepulse      = false,
-		ShieldStartingPower       = 0,
+		ShieldStartingPower       = 3001,
 		Shieldenergyuse           = 0,
 		Shieldradius              = 1500,
 		Shieldpower               = shield1Power,
