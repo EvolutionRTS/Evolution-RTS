@@ -131,7 +131,7 @@ local weaponDefs                  = {
 		craterMult                = 0,
 		edgeeffectiveness		  = 1,
 		energypershot             = energycosttofire,
-		explosionGenerator        = "custom:NUKEDATBEWM",
+		explosionGenerator        = "custom:nukedatbewm",
 		fireStarter               = 100,
 		flightTime                = 400,
 		
