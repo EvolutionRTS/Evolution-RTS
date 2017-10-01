@@ -14,7 +14,7 @@ script = "elacerator.cob"
 
 tech = [[tech3]]
 armortype = [[armored]]
-supply = [[8]]
+supply = [[25]]
 
 VFS.Include("units-configs-basedefs/basedefs/hover/elacerator_basedef.lua")
 

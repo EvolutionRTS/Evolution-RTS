@@ -14,7 +14,7 @@ script = "eallterranarchid.cob"
 
 tech = [[tech3]]
 armortype = [[armored]]
-supply = [[12]]
+supply = [[35]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterranarchid_basedef.lua")
 
