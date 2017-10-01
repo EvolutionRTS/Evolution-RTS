@@ -7,7 +7,7 @@ local unitName                    = "eshieldgen"
 
 local armortype					 = [[building]]
 local supply					 = [[20]]
-local techrequired				 = [[tech3]]
+local techrequired				 = [[tech2]]
 
 local weapon1Damage              = 2001
 local weapon1AOE				 = 1
