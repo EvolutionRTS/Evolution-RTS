@@ -44,7 +44,7 @@ local unitDef                     = {
 	maxSlope                      = 60,
 	maxWaterDepth                 = 99999999999,
 	metalStorage                  = 0,
-	name                          = "Lobber",
+	name                          = "Lobster",
 	noAutoFire                    = false,
 	objectName                    = "eartyturret.s3o",
 	radarDistance                 = 0,
@@ -75,7 +75,7 @@ local unitDef                     = {
 	weapons                       = {
 		[1]                       = {
 			def                   = "artyweapon",
-			badtargetcategory    = "LIGHT ARMORED",
+			badtargetcategory    = "LIGHT ARMORED VTOL",
 		},
 	},
 	customParams                  = {
@@ -111,6 +111,8 @@ local weaponDefs                  = {
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
+		
+		commandFire				 = true,
 		
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
