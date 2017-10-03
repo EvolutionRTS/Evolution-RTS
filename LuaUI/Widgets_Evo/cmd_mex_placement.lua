@@ -121,7 +121,7 @@ VFS.Include("LuaUI/Configs/LuaMex/options.lua")
 local circleOptions = {
 	enabled							= true,
 	animating						= true,	-- its only rotation, but will cost more performance
-	alwaysshow					= false,
+	alwaysshow					= true,
 	innersize						= 40,		-- outersize-innersize = circle width
 	outersize						= 43,		-- outersize-innersize = circle width
 	circlePieces				= 24,

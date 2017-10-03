@@ -44,7 +44,7 @@ function widget:MousePress(mx, my, button)
 		local _, pos = Spring.TraceScreenRay(mx, my, true)
 		if legalPos(pos) then
 			if true then
-				handle:write("[" .. mexIndex .. "] = {x = " .. floor(pos[1] + 0.5) .. ", z = " .. floor(pos[3] + 0.5) .. ", metal = " .. tostring(metal) .. "},\n")
+				handle:write("{x = " .. floor(pos[1] + 0.5) .. ", z = " .. floor(pos[3] + 0.5) .. ", metal = " .. tostring(metal) .. "},\n")
 				handle:flush()
 				markers[#markers + 1] = {pos[1], 0, pos[3]}
 				Spring.MarkerAddPoint(pos[1], 0, pos[3], mexIndex)
