@@ -4,7 +4,7 @@ shard_include "taskqueuebehaviour"
 shard_include "attackerbehaviour"
 --shard_include "capturerbehaviour"
 --require "missingfactorybehaviour"
---require "engineerturretbehaviour"
+shard_include "engineerturretbehaviour"
 --require "autoreclaimbehaviour"
 --shard_include "lowenergybehaviour"
 --require "factoryregisterbehaviour"
@@ -61,6 +61,9 @@ behaviours = {
 		--EngineerTurretBehaviour,
 		--LowEnergyBehaviour,
 	},
+	--eaimexer = {
+		--EngineerTurretBehaviour,
+	--},
 }
 
 function defaultBehaviours(unit)

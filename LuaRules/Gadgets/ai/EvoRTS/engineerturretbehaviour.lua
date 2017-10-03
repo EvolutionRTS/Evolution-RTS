@@ -2,7 +2,7 @@ EngineerTurretBehaviour = class(Behaviour)
 
 function EngineerTurretBehaviour:Init()
 	--
-	self.active = false
+	self.active = true
 	self.underfire = false
 end
 
@@ -25,7 +25,7 @@ end
 function EngineerTurretBehaviour:Activate()
 	self.underfire = false
 	
-	local s = self.unit:Internal():Build("elightturret2")
+	local s = self.unit:Internal():Build("emetalextractor")
 	if s then
 		self.active = true
 	else
@@ -34,8 +34,14 @@ function EngineerTurretBehaviour:Activate()
 end
 
 function EngineerTurretBehaviour:Deactivate()
-	self.active = false
 	self.underfire = false
+	
+	local s = self.unit:Internal():Build("emetalextractor")
+	if s then
+		self.active = true
+	else
+		self.unit:ElectBehaviour()
+	end
 end
 
 function EngineerTurretBehaviour:Priority()

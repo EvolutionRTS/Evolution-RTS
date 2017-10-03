@@ -35,14 +35,8 @@ end
 
 
 local firstEngineerAmphibious = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Turret,
 	Turret,
@@ -134,14 +128,8 @@ local firstEngineerAmphibious = {
 }
 
 local firstEngineerHover = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Turret,
 	Turret,
@@ -233,14 +221,8 @@ local firstEngineerHover = {
 }
 
 local firstEngineerSpider = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Turret,
 	Turret,
@@ -332,14 +314,8 @@ local firstEngineerSpider = {
 }
 
 local firstEngineerHBot = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Turret,
 	Turret,
@@ -430,15 +406,102 @@ local firstEngineerHBot = {
 	Orb,
 }
 
+local firstEngineerAir = {
+	Orb,
+	Orb,
+	Turret,
+	Turret,
+	Turret,
+	Turret,
+	Orb,
+	Orb,
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	Orb,
+	Orb,
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	"efighter",
+	Orb,
+	Box,
+	"efighter_up1",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter",
+	Orb,
+	Orb,
+	"efighter_up1",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter",
+	"efighter",
+	"efighter",
+	Orb,
+	Turret,
+	Box,
+	"efighter_up2",
+	"efighter_up2",
+	"efighter_up2",
+	"efighter_up2",
+	"efighter",
+	"efighter",
+	"efighter",
+	"egunship2_up1",
+	"egunship2",
+	Orb,
+	Orb,
+	"egunship2",
+	"efighter_up2",
+	"egunship2",
+	"efighter_up2",
+	"efighter_up1",
+	"efighter_up1",
+	"efighter_up1",
+	"egunship2_up1",
+	"egunship2_up1",
+	Orb,
+	Box,
+	"egunship2_up1",
+	"efighter_up3",
+	"egunship2_up1",
+	"efighter_up3",
+	"efighter_up2",
+	"efighter_up2",
+	"efighter_up2",
+	"egunship2_up2",
+	"egunship2_up2",
+	Orb,
+}
+
 local engineersAmphibious = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Orb,
 	Box,
@@ -473,14 +536,8 @@ local engineersAmphibious = {
 }
 
 local engineersHover = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Orb,
 	Box,
@@ -515,14 +572,8 @@ local engineersHover = {
 }
 
 local engineersSpider = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Orb,
 	Box,
@@ -557,14 +608,8 @@ local engineersSpider = {
 }
 
 local engineersHBot = {
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
-	"escout_up3",
+	Orb,
+	Orb,
 	Turret,
 	Orb,
 	Box,
@@ -589,6 +634,37 @@ local engineersHBot = {
 	"ehbotthud_up3",
 	"ehbotrocko_up3",
 	"ehbotsniper_up3",
+	Orb,
+	Box,
+}
+
+local engineersAir = {
+	Orb,
+	Orb,
+	Turret,
+	Orb,
+	Box,
+	"egunship2_up3",
+	"efighter_up3",
+	"egunship2_up3",
+	"efighter_up3",
+	"efighter_up3",
+	"efighter_up3",
+	"efighter_up3",
+	"egunship2_up3",
+	"egunship2_up3",
+	Orb,
+	Orb,
+	Box,
+	"egunship2_up3",
+	"efighter_up3",
+	"egunship2_up3",
+	"efighter_up3",
+	"efighter_up3",
+	"efighter_up3",
+	"efighter_up3",
+	"egunship2_up3",
+	"egunship2_up3",
 	Orb,
 	Box,
 }
@@ -618,7 +694,7 @@ local idlelist = {
 
 
 local function engineerlist(beh)
-   local r = math.random(0,3)
+   local r = math.random(0,4)
 		if r == 0 then
 			if ai.engineerfirst == true then
 			return engineersAmphibious
@@ -640,18 +716,26 @@ local function engineerlist(beh)
 			ai.engineerfirst = true
 			return firstEngineerHover
 			end
-		else
+		elseif r == 3 then
 			if ai.engineerfirst == true then
 			return engineersHBot
 			else
 			ai.engineerfirst = true
 			return firstEngineerHBot
 			end
+		else
+			if ai.engineerfirst == true then
+			return engineersAir
+			else
+			ai.engineerfirst = true
+			return firstEngineerAir
+			end
 		end
 	end
 	taskqueues = {
    ecommanderbattleai = engineerlist,
    eaiturret = idlelist,
+   eaimexer = mexer,
    --ebasefactory = factory,
    --eengineer5 = engineerlist,
    eallterrengineer = engineerlist,
