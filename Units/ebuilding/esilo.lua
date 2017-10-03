@@ -6,8 +6,9 @@ local unitName                    = "esilo"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local supply					 = [[50]]
-local techrequired				 = [[tech3]]
+--local supply					 = [[50]]
+local techprovided				 = [[-nukesilo]]
+local techrequired				 = [[tech3, 1 nukesilo]]
 
 local weapon1Damage               = 3000
 local weapon1AOE				  = 1500
@@ -48,7 +49,7 @@ local unitDef                     = {
 	maxSlope                      = 30,
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
-	name                          = [[Eradicator: Nuclear Strike Facility • Uses +]] .. supply .. [[ Supply]],
+	name                          = [[Eradicator: Nuclear Strike Facility]],
 	objectName                    = "esilo2.s3o",
 	onlytargetcategory2           = "NOTAIR",
 	onlytargetcategory3           = "NOTAIR",
@@ -93,10 +94,11 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		ProvideTech              = techprovided,
 		RequireTech				 = techrequired,
 		unittype				  = "turret",
 		needed_cover              = 8,
-		supply_cost               = supply,
+		--supply_cost               = supply,
 		death_sounds              = "nuke",
 		armortype                 = "building",
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 

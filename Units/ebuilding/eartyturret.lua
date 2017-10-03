@@ -6,7 +6,7 @@ local unitName                    = "eartyturret"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local supply					 = [[30]]
+local supply					 = [[15]]
 local techrequired				 = [[tech3]]
 
 local weapon1Damage               = 1000

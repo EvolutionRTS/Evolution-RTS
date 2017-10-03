@@ -7,7 +7,7 @@ local unitName                    = "etech2"
 
 local armortype					 = [[building]]
 local energyproduced			 = [[0]]
-local techprovided				 = [[tech0, tech1, tech2]]
+local techprovided				 = [[tech0, tech1, tech2, 1 baseshield]]
 
 local tech						 = [[tech1]]
 --local supplygranted				 = [[25]]

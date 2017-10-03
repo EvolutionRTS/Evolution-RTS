@@ -6,8 +6,9 @@ local unitName                    = "eshieldgen"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local supply					 = [[20]]
-local techrequired				 = [[tech2]]
+--local supply					 = [[20]]
+local techprovided				 = [[-baseshield]]
+local techrequired				 = [[tech2, 1 baseshield]]
 
 local weapon1Damage              = 2001
 local weapon1AOE				 = 1
@@ -35,7 +36,7 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 	corpse                        = "ammobox",
-	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility • Shield can link with other shield units to increase charging and capacity • Uses +]] .. supply .. [[ Supply]],
+	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility • Shield can link with other shield units to increase charging and capacity]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -94,12 +95,13 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
+		ProvideTech              = techprovided,
 		RequireTech				 = techrequired,
 		unittype				  = "shield",
-		supply_cost               = supply,
+		--supply_cost               = supply,
 		needed_cover              = 5,
 		death_sounds              = "generic",
-		ProvideTechRange          = "300",
+		--ProvideTechRange          = "300",
 		armortype                 = armortype, 
 		normaltex                = "unittextures/eshieldgennormal.png", 
 		helptext                  = [[Armortype: ]] ..armortype.. [[ 
@@ -170,7 +172,7 @@ local weaponDefs                  = {
 		Visibleshieldrepulse      = false,
 		ShieldStartingPower       = 3001,
 		Shieldenergyuse           = 0,
-		Shieldradius              = 1500,
+		Shieldradius              = 2000,
 		Shieldpower               = shield1Power,
 		Shieldpowerregen          = shield1PowerRegen,
 		Shieldpowerregenenergy    = shield1PowerRegenEnergy,
