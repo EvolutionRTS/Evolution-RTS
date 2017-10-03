@@ -1,22 +1,22 @@
--- UNITDEF -- EHEAVYTURRET2 --
+-- UNITDEF -- EUWTURRET_up3 --
 --------------------------------------------------------------------------------
 
-unitName = [[eheavyturret2]]
+unitName = [[euwturret_up3]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= [[0]]
+isUpgraded	= [[3]]
 
-humanName = [[Immolator]]
+humanName = [[Rooter Mark IV]]
 
-objectName = [[eheavyturret3.s3o]]
-script = [[eheavyturret2.cob]]
+objectName = [[euwturret.s3o]]
+script = [[euwturret.cob]]
 
-tech = [[tech2]]
+tech = [[tech1]]
 armortype = [[building]]
-supply = [[5]]
+supply = [[2]]
 
-VFS.Include("units-configs-basedefs/basedefs/buildings/eheavyturret2_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/buildings/euwturret_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

@@ -239,15 +239,21 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			-- Handle upgraded units HP and Max Speed
 			if uDef.customparams and uDef.customparams.isupgraded == "1" then
 				uDef.maxdamage = uDef.maxdamage * 1.20
-				uDef.maxvelocity = uDef.maxvelocity * 0.95
+				if uDef.maxvelocity then
+					uDef.maxvelocity = uDef.maxvelocity * 0.95
+				end
 			end
 			if uDef.customparams and uDef.customparams.isupgraded == "2" then
 				uDef.maxdamage = uDef.maxdamage * 1.35
-				uDef.maxvelocity = uDef.maxvelocity * 0.90
+				if uDef.maxvelocity then
+					uDef.maxvelocity = uDef.maxvelocity * 0.90
+				end
 			end
 			if uDef.customparams and uDef.customparams.isupgraded == "3" then
 				uDef.maxdamage = uDef.maxdamage * 1.50
-				uDef.maxvelocity = uDef.maxvelocity * 0.85
+				if uDef.maxvelocity then
+					uDef.maxvelocity = uDef.maxvelocity * 0.85
+				end
 			end
 		end
 	
@@ -371,59 +377,23 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		-- Gameplay Speed (Classic RTS Mode) --
 		--------------------------------------------------------------------------------
 
-		local gamePlaySpeed = modOptions.gameplayspeed or "normal"
-
-		Spring.Echo("[Gameplay Speed] Set to " .. gamePlaySpeed)
-
 		for id,unitDef in pairs(UnitDefs) do
 			unitDef.buildcostmetal = unitDef.buildcostmetal * 2
 			unitDef.buildtime = unitDef.buildcostmetal / 4
-		end
-
-		if gamePlaySpeed == "veryslow" then
-			for id,unitDef in pairs(UnitDefs) do
-				if unitDef.maxvelocity then
-					unitDef.maxvelocity = unitDef.maxvelocity * 0.5
+			
+			-- Set building Hitpoints
+			if unitDef.customparams then
+				if unitDef.customparams.unittype == "building" then
+					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
 				end
-				if unitDef.buildcostmetal then
-					unitDef.buildcostmetal = unitDef.buildcostmetal * 1.5
+				if unitDef.customparams.unittype == "turret" then
+					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
 				end
-			end
-			for id,weaponDef in pairs(WeaponDefs) do
-				if weaponDef.weaponvelocity then
-					--Spring.Echo ("//")
-					--Spring.Echo (weaponDef.name)
-					--Spring.Echo (weaponDef.weaponvelocity)
-					weaponDef.weaponvelocity = weaponDef.weaponvelocity * 0.5
-					--Spring.Echo ("••")
-					--Spring.Echo (weaponDef.name)
-					--Spring.Echo (weaponDef.weaponvelocity)
-					--Spring.Echo ("\\")
+				if unitDef.customparams.unittype == "shield" then
+					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
 				end
 			end
-		end
-
-		if gamePlaySpeed == "slow" then
-			for id,unitDef in pairs(UnitDefs) do
-				if unitDef.maxvelocity then
-					unitDef.maxvelocity = unitDef.maxvelocity * 0.75
-				end
-				if unitDef.buildcostmetal then
-					unitDef.buildcostmetal = unitDef.buildcostmetal * 1.25
-				end
-			end
-			for id,weaponDef in pairs(WeaponDefs) do
-				if weaponDef.weaponvelocity then
-					weaponDef.weaponvelocity = weaponDef.weaponvelocity * 0.75
-				end
-			end
-		end
-
-		if gamePlaySpeed == "fast" then
-			for id,unitDef in pairs(UnitDefs) do
-		--	Spring.Echo(unitDef.buildcostmetal)
-				unitDef.buildtime = 5
-			end
+			
 		end
 	end
 end

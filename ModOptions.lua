@@ -182,20 +182,6 @@ local options= {
 		section= "gameplayoptions",
     },
 	{
-		key="gameplayspeed",
-		name="Gameplay Speed",
-		desc="Modifies buildcost and unit speed",
-		type="list",
-		def="normal",
-		section="gameplayoptions",
-		items={
-			{key="veryslow", name="Very Slow", desc="Unit costs are increased by 50% and unit speeds decreased by 50%"},
-			{key="slow", name="Slow", desc="Unit costs are increased by 25% and unit speeds decreased by 25%"},
-			{key="normal", name="Normal", desc="Costs and unit speeds are 100%"},
-			{key="fast", name="Fast", desc="All units have a buildtime of 5 seconds, costs and speeds are 100%"},
-		}
-	},
-	{
 		key="aidifficulty",
 		name="ShardLua AI Difficulty",
 		desc="Modifies how much Shard cheats",

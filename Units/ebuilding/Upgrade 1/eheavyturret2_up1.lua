@@ -1,13 +1,13 @@
--- UNITDEF -- EHEAVYTURRET2 --
+-- UNITDEF -- EHEAVYTURRET2_up1 --
 --------------------------------------------------------------------------------
 
-unitName = [[eheavyturret2]]
+unitName = [[eheavyturret2_up1]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= [[0]]
+isUpgraded	= [[1]]
 
-humanName = [[Immolator]]
+humanName = [[Immolator Mark II]]
 
 objectName = [[eheavyturret3.s3o]]
 script = [[eheavyturret2.cob]]

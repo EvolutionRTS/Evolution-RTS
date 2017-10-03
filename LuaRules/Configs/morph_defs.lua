@@ -299,6 +299,93 @@ Overseer]],
 ----------------------------------------------------------
 ----------------------------------------------------------
 	
+	elightturret2 = 	{
+		{
+			into = 'elightturret2_up1',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+20% damage/hp buff, +15% faster reload]],
+		},
+	},	
+	elightturret2_up1 = 	{
+		{
+			into = 'elightturret2_up2',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+		},
+	},
+	elightturret2_up2 = 	{
+		{
+			into = 'elightturret2_up3',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+		},
+	},
+
+	eheavyturret2 = 	{
+		{
+			into = 'eheavyturret2_up1',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+20% damage/hp buff, +15% faster reload]],
+		},
+	},	
+	eheavyturret2_up1 = 	{
+		{
+			into = 'eheavyturret2_up2',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+		},
+	},
+	eheavyturret2_up2 = 	{
+		{
+			into = 'eheavyturret2_up3',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+		},
+	},
+	
+	euwturret = 	{
+		{
+			into = 'euwturret_up1',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+20% damage/hp buff, +15% faster reload]],
+		},
+	},	
+	euwturret_up1 = 	{
+		{
+			into = 'euwturret_up2',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+		},
+	},
+	euwturret_up2 = 	{
+		{
+			into = 'euwturret_up3',
+			time = 12.5,
+			cmdname = [[upgrade]],
+			metal = 50,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+		},
+	},
+	
+----------------------------------------------------------
+----------------------------------------------------------
+	
 	ehbotengineer = 	{
 		{
 			into = 'ehbotengineer_turret',
