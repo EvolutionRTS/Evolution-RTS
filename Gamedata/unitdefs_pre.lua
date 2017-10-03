@@ -71,7 +71,6 @@ end
 
 Shared.buildListAIOverseer = {
 	------------- Basic
-	[[eaimexer]],
 	[[eaiturret]],
 	[[ehbotfac]],
 	[[eminifac]],
