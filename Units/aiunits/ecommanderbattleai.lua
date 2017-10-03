@@ -24,27 +24,27 @@ if shardChicken == "enabled" then
 elseif shardChicken == "disabled" then
 		if aiDifficulty == "veryeasy" then
 			description              = [[Very Easy AI • Builds Units • Provides support in battles]]
-			energyMake				 = 5
+			energyMake				 = 20
 			workerTime				 = 0.75
 			maxDamage				 = 5000
 		elseif aiDifficulty == "easy" then
 			description                = [[Easy AI • Builds Units • Provides support in battles]]
-			energyMake				 = 10
+			energyMake				 = 40
 			workerTime				 = 1.5
 			maxDamage				 = 7500
 		elseif aiDifficulty == "medium" then
 			description                = [[Medium AI • Builds Units • Provides support in battles]]
-			energyMake				 = 20
+			energyMake				 = 60
 			workerTime				 = 2.5
 			maxDamage 				 = 10000
 		elseif aiDifficulty == "hard" then
 			description                = [[Hard AI • Builds Units • Provides support in battles]]
-			energyMake				 = 40
+			energyMake				 = 100
 			workerTime				 = 4
 			maxDamage				 = 20000
 		elseif aiDifficulty == "insane" then
 			description                = [[Insane AI • Builds Units • Provides support in battles]]
-			energyMake				 = 40
+			energyMake				 = 100
 			workerTime				 = 10
 			maxDamage 				 = 50000
 		end
@@ -119,8 +119,8 @@ local unitDef                    = {
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
-	metalmake                    = 0,
-	metalStorage                 = 0,
+	metalmake                    = 5,
+	metalStorage                 = 9500,
 	movementClass                = movementClass,
 	moveState			         = "0",
 	name                         = "The Battle Overseer (AI)",
