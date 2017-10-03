@@ -169,7 +169,7 @@ function widget:GameFrame(n)
 		elseif increment > 0 then
 			if energyWarning == true then
 				if n%900 == 4 then
-					if resourcePrompts ~= 0 then
+					if resourcePrompts == 1 then
 						Spring.PlaySoundFile("sounds/ui/additionalgenerators.wav", 1)
 						Spring.Echo([[You must construct additional generators so that your units can fire their weapons!]])
 					end
@@ -177,7 +177,7 @@ function widget:GameFrame(n)
 			end
 			if metalWarning == true then
 				if n%1800 == 4 then
-					if resourcePrompts ~= 0 then
+					if resourcePrompts == 1 then
 						Spring.PlaySoundFile("sounds/ui/useyourmetal.wav", 1)
 						Spring.Echo([[You are excessing metal! Consider using O.R.B.s to build units faster and spend metal more effectively!]])
 					end
@@ -185,7 +185,7 @@ function widget:GameFrame(n)
 			end
 			if supplyWarning == true then
 				if n%700 == 4 then
-					if resourcePrompts ~= 0 then
+					if resourcePrompts == 1 then
 						Spring.PlaySoundFile("sounds/ui/constructadditionalpylons.wav", 1)
 						Spring.Echo([[You have no more available supply, build supply depots in order to increase the size of your army!]])
 					end
