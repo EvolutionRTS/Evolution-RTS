@@ -236,13 +236,13 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			
 		-- Set building Hitpoints
 			if unitDef.customparams then
-				if unitDef.customparams.unittype == "building" and unitDef.customparams.isupgraded == nil then
+				if unitDef.customparams.unittype == "building" then
 					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
 				end
-				if unitDef.customparams.unittype == "turret" and unitDef.customparams.isupgraded == nil then
+				if unitDef.customparams.unittype == "turret" then
 					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
 				end
-				if unitDef.customparams.unittype == "shield" and unitDef.customparams.isupgraded == nil then
+				if unitDef.customparams.unittype == "shield" then
 					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
 				end
 			end
