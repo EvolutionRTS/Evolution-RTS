@@ -231,6 +231,23 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 	if (Spring.GetModOptions) then
 	local modOptions = Spring.GetModOptions()
 	
+		for id,unitDef in pairs(UnitDefs) do
+			unitDef.buildcostmetal = unitDef.buildcostmetal * 2
+			
+		-- Set building Hitpoints
+			if unitDef.customparams then
+				if unitDef.customparams.unittype == "building" and unitDef.customparams.isupgraded == nil then
+					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
+				end
+				if unitDef.customparams.unittype == "turret" and unitDef.customparams.isupgraded == nil then
+					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
+				end
+				if unitDef.customparams.unittype == "shield" and unitDef.customparams.isupgraded == nil then
+					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
+				end
+			end
+		end
+	
 		--------------------------------------------------------------------------------
 		-- Process Upgrades --
 		--------------------------------------------------------------------------------
@@ -378,22 +395,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		--------------------------------------------------------------------------------
 
 		for id,unitDef in pairs(UnitDefs) do
-			unitDef.buildcostmetal = unitDef.buildcostmetal * 2
-			unitDef.buildtime = unitDef.buildcostmetal / 4
-			
-			-- Set building Hitpoints
-			if unitDef.customparams then
-				if unitDef.customparams.unittype == "building" then
-					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
-				end
-				if unitDef.customparams.unittype == "turret" then
-					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
-				end
-				if unitDef.customparams.unittype == "shield" then
-					unitDef.maxdamage = unitDef.buildcostmetal * 12.5
-				end
-			end
-			
+			unitDef.buildtime = unitDef.buildcostmetal / 4			
 		end
 	end
 end
