@@ -35,7 +35,7 @@ elseif shardChicken == "disabled" then
 		elseif aiDifficulty == "medium" then
 			description                = [[Medium AI • Builds Units • Provides support in battles]]
 			energyMake				 = 60
-			workerTime				 = 2.5
+			workerTime				 = 3
 			maxDamage 				 = 10000
 		elseif aiDifficulty == "hard" then
 			description                = [[Hard AI • Builds Units • Provides support in battles]]
@@ -119,7 +119,7 @@ local unitDef                    = {
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
-	metalmake                    = 5,
+	metalmake                    = 1,
 	metalStorage                 = 9500,
 	movementClass                = movementClass,
 	moveState			         = "0",
