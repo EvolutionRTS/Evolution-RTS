@@ -9,6 +9,34 @@ local armortype					 = [[light]]
 --local supply					 = [[1]]
 local techrequired				 = [[tech1]]
 
+aiDifficulty = Spring.GetModOptions().aidifficulty
+
+if aiDifficulty == nil then
+	aiDifficulty = "veryeasy"
+end
+
+if aiDifficulty == "veryeasy" then
+			energyMake				 = 5
+			metalMake				 = 1
+	elseif aiDifficulty == "easy" then
+			energyMake				 = 10
+			metalMake				 = 2
+	elseif aiDifficulty == "medium" then
+			energyMake				 = 15
+			metalMake				 = 3
+	elseif aiDifficulty == "hard" then
+			energyMake				 = 20
+			metalMake				 = 4
+	elseif aiDifficulty == "insane" then
+			energyMake				 = 25
+			metalMake				 = 5
+end
+
+
+
+
+
+
 local unitDef                    = {
 
 	--mobileunit 
@@ -20,7 +48,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.24,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 30,
+	buildCostMetal               = 20,
 	buildDistance                = 800,
 	builder                      = false,
 	buildTime                    = 5,
@@ -38,8 +66,8 @@ local unitDef                    = {
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
 	description                  = [[Field Medic / Power Generator / Energy Core Reclamation]],
-	energyMake                   = 10,
-	energyStorage                = 20,
+	energyMake                   = energyMake,
+	energyStorage                = 300,
 	energyUse                    = 0,
 	explodeAs                    = "mediumExplosionGenericGreen",
 	footprintX                   = 6,
@@ -54,7 +82,7 @@ local unitDef                    = {
 	maxVelocity                  = 2,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
-	metalmake                    = 5,
+	metalmake                    = metalMake,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT5",
 	moveState			         = "2",
@@ -112,7 +140,7 @@ local unitDef                    = {
 		canbetransported 		 = "true",
 		needed_cover             = 2,
 		death_sounds             = "generic",
-		energycorecollect        = true,
+		energycorecollect        = false,
 		armortype                = armortype,
 --		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 

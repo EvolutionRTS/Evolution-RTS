@@ -19,33 +19,33 @@ end
 if shardChicken == "enabled" then
 			description				 = [[Chicken Overseer, builds chickens]]
 			energyMake				 = 500
-			workerTime			 	 = 10
+			workerTime			 	 = 5.25
 			maxDamage 				 = 50000		
 elseif shardChicken == "disabled" then
 		if aiDifficulty == "veryeasy" then
 			description              = [[Very Easy AI • Builds Units • Provides support in battles]]
-			energyMake				 = 20
-			workerTime				 = 0.75
-			maxDamage				 = 5000
+			energyMake				 = 10
+			workerTime				 = 5.25
+			maxDamage				 = 10000
 		elseif aiDifficulty == "easy" then
 			description                = [[Easy AI • Builds Units • Provides support in battles]]
-			energyMake				 = 40
-			workerTime				 = 1.5
-			maxDamage				 = 7500
+			energyMake				 = 20
+			workerTime				 = 5.25
+			maxDamage				 = 15000
 		elseif aiDifficulty == "medium" then
 			description                = [[Medium AI • Builds Units • Provides support in battles]]
-			energyMake				 = 60
-			workerTime				 = 3
-			maxDamage 				 = 10000
+			energyMake				 = 40
+			workerTime				 = 5.25
+			maxDamage 				 = 20000
 		elseif aiDifficulty == "hard" then
 			description                = [[Hard AI • Builds Units • Provides support in battles]]
-			energyMake				 = 100
-			workerTime				 = 4
-			maxDamage				 = 20000
+			energyMake				 = 60
+			workerTime				 = 5.25
+			maxDamage				 = 25000
 		elseif aiDifficulty == "insane" then
 			description                = [[Insane AI • Builds Units • Provides support in battles]]
 			energyMake				 = 100
-			workerTime				 = 10
+			workerTime				 = 5.25
 			maxDamage 				 = 50000
 		end
 	end
@@ -62,7 +62,7 @@ end
 
 local armortype					 = [[armored]]
 local supplyGiven				 = [[200]]
-local techprovided				 = [[tech0, tech1, tech2, tech3, -overseer]]
+local techprovided				 = [[tech0, tech1, tech2, tech3, 1 baseshield, -overseer]]
 local techrequired				 = [[0 overseer]]
 
 local weapon1Damage              = 200
