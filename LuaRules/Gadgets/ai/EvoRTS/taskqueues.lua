@@ -778,6 +778,7 @@ local defender = {
 	"emine",
 	"emine",
 	"emine",
+	"ehbotengineer",
 	"eshieldgen",
 }
 --local factory = {
