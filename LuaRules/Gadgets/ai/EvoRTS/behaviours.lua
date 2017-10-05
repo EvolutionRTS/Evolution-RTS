@@ -1,5 +1,5 @@
 
-controlPoints = Spring.GetModOptions().controlvictoryoptions
+controlPoints = Spring.GetModOptions().scoremode
 
 if controlPoints == nil then
 	controlPoints = "disabled"
