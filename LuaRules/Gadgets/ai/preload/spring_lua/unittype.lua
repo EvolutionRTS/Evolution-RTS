@@ -44,5 +44,6 @@ function ShardSpringUnitType:WeaponCount()
 end
 
 function ShardSpringUnitType:Extractor()
-	return self.def.extractsMetal > 0
+	--return self.def.extractsMetal > 0
+	return self.def.customParams.metal_extractor > 0
 end
