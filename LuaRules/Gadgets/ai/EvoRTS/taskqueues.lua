@@ -742,8 +742,8 @@ local idlelist = {
 }
 
 local defender = {
-	"emetalextractor",
 	"emine",
+	{ action = "wait", frames = 3000},
 }
 --local factory = {
 --}

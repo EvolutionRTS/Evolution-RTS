@@ -22,18 +22,18 @@ end
 
 function MetalSpotHandler:ClosestFreeSpot(unittype,position)
 	local pos = nil
-	local bestDistance = 0
+	local bestDistance = 1
 
 	spotCount = game.map:SpotCount()
 	for i,v in ipairs(self.spots) do
 		local p = v
 		local dist = distance(position,p)
---		if dist < bestDistance then
+		if dist < bestDistance then
 			if game.map:CanBuildHere(unittype,p) then
 				bestDistance = dist
 				pos = p
 			end
---		end
+		end
 	end
 	return pos
 end
