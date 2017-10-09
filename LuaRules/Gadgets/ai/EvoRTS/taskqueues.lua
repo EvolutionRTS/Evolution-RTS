@@ -71,8 +71,8 @@ local overseerlistfirst = {
 local overseerlist = {
 	"elifterai",
 	{ action = "wait", frames = 20000},
-	RandomFac
-	RandomT3
+	RandomFac,
+	RandomT3,
 }
 
 local lifterlist = {
