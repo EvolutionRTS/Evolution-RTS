@@ -66,23 +66,14 @@ local idlelist = {
 
 local overseerlistfirst = {
 	"elifterai",
-	{ action = "wait", frames = 10000},
-	RandomFac,
-	{ action = "wait", frames = 10000},
 }
 
 local overseerlist = {
 	"elifterai",
-	{ action = "wait", frames = 10000},
-	RandomFac,
-	{ action = "wait", frames = 10000},
-	RandomT3,
-	{ action = "wait", frames = 999999},
 }
 
 local lifterlist = {
-	"elifterai",
-	"egeothermal",
+	"emetalextractor",
 	"emetalextractor",
 	"emine",
 	"eturretlightai",
@@ -95,6 +86,8 @@ local lifterlist = {
 	"ekmar",
 	"ejammer2",
 	"eturretheavyai",	
+	RandomFac,
+	RandomT3,
 }
 
 ---------------------------------------------FACTORY QUEUES
