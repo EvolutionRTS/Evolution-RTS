@@ -10,7 +10,8 @@ function MetalSpotHandler:internalName()
 end
 
 function MetalSpotHandler:Init()
-	self.spots = game.map:GetMetalSpots()
+	--self.spots = game.map:GetMetalSpots()
+	self.spots = GG.metalSpots
 end
 
 function distance(pos1,pos2)
