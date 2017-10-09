@@ -70,7 +70,31 @@ for i = 1, #factory do
 end
 
 Shared.buildListAIOverseer = {
+	-------------- Unit Factories
+	[[eairfacai_up0]],
+	[[eairfacai_up1]],
+	[[eairfacai_up2]],
+	[[eairfacai_up3]],
+	[[eallterrfacai_up0]],
+	[[eallterrfacai_up1]],
+	[[eallterrfacai_up2]],
+	[[eallterrfacai_up3]],
+	[[eamphifacai_up0]],
+	[[eamphifacai_up1]],
+	[[eamphifacai_up2]],
+	[[eamphifacai_up3]],
+	[[ehbotfacai_up0]],
+	[[ehbotfacai_up1]],
+	[[ehbotfacai_up2]],
+	[[ehbotfacai_up3]],
+	[[ehoverfacai_up0]],
+	[[ehoverfacai_up1]],
+	[[ehoverfacai_up2]],
+	[[ehoverfacai_up3]],
 	------------- Basic
+	[[eantinukeai]],
+	[[elobberai]],
+	[[esiloai]],
 	[[eturretheavyai]],
 	[[eturretlightai]],
 	[[emetalextractor]],
