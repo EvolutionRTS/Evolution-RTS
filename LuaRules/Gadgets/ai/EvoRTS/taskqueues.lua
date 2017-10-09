@@ -70,20 +70,22 @@ local overseerlistfirst = {
 
 local overseerlist = {
 	"elifterai",
-	{ action = "wait", frames = 20000},
+	{ action = "wait", frames = 10000},
 	RandomFac,
 	RandomT3,
 }
 
 local lifterlist = {
 	"emetalextractor",
+	"emetalextractor",
 	"emine",
-	"eturretlightai",
 	"emetalextractor",
 	"elifterai",
 	"eturretlightai",
+	"eturretlightai",
 	"esolar2",
 	"efusion2",
+	"estorage",
 	"estorage",
 	"estorage",
 	"ekmar",
