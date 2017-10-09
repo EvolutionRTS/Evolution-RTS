@@ -35,10 +35,8 @@ end
 
 
 local firstEngineerAmphibious = {
-	Orb,
-	Orb,
-	Orb,
 	"elifterai",
+	{ action = "wait", frames = 3000},
 	Orb,
 	Orb,
 	Turret,
@@ -140,10 +138,8 @@ local firstEngineerAmphibious = {
 }
 
 local firstEngineerHover = {
-	Orb,
-	Orb,
-	Orb,
 	"elifterai",
+	{ action = "wait", frames = 3000},
 	Orb,
 	Orb,
 	Turret,
@@ -245,10 +241,8 @@ local firstEngineerHover = {
 }
 
 local firstEngineerSpider = {
-	Orb,
-	Orb,
-	Orb,
 	"elifterai",
+	{ action = "wait", frames = 3000},
 	Orb,
 	Orb,
 	Turret,
@@ -350,10 +344,8 @@ local firstEngineerSpider = {
 }
 
 local firstEngineerHBot = {
-	Orb,
-	Orb,
-	Orb,
 	"elifterai",
+	{ action = "wait", frames = 3000},
 	Orb,
 	Orb,
 	Turret,
@@ -455,10 +447,8 @@ local firstEngineerHBot = {
 }
 
 local firstEngineerAir = {
-	Orb,
-	Orb,
-	Orb,
 	"elifterai",
+	{ action = "wait", frames = 3000},
 	Orb,
 	Orb,
 	Turret,
@@ -741,9 +731,26 @@ local idlelist = {
 	{ action = "wait", frames = 3000},
 }
 
-local defender = {
+local buildlifter = {
+	"elifterai",
+	{ action = "wait", frames = 10000},
+}
+
+local lifterlist = {
+	"elifterai",
+	"egeothermal",
+	"emetalextractor",
 	"emine",
-	{ action = "wait", frames = 3000},
+	"eturretlightai",
+	"emetalextractor",
+	"eturretlightai",
+	"esolar2",
+	"efusion2",
+	"estorage",
+	"ekmar",
+	"ejammer2",
+	"eturretheavyai",
+	
 }
 --local factory = {
 --}
@@ -805,9 +812,9 @@ local function engineerlist(beh)
 		end
 	end
 	taskqueues = {
-   ecommanderbattleai = engineerlist,
+   ecommanderbattleai = buildlifter,
    eaiturret = idlelist,
-   elifterai = defender,
+   elifterai = lifterlist,
    --ebasefactory = factory,
    --eengineer5 = engineerlist,
    eallterrengineer = engineerlist,

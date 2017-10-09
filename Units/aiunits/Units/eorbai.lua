@@ -15,22 +15,22 @@ if aiDifficulty == nil then
 	aiDifficulty = "veryeasy"
 end
 
-if aiDifficulty == "veryeasy" then
-			energyMake				 = 5
-			metalMake				 = 0.5
-	elseif aiDifficulty == "easy" then
-			energyMake				 = 10
-			metalMake				 = 1
-	elseif aiDifficulty == "medium" then
-			energyMake				 = 15
-			metalMake				 = 1.5
-	elseif aiDifficulty == "hard" then
-			energyMake				 = 20
-			metalMake				 = 2
-	elseif aiDifficulty == "insane" then
-			energyMake				 = 25
-			metalMake				 = 4
-end
+--if aiDifficulty == "veryeasy" then
+			--energyMake				 = 5
+			--metalMake				 = 0.5
+	--elseif aiDifficulty == "easy" then
+			--energyMake				 = 10
+			--metalMake				 = 1
+	--elseif aiDifficulty == "medium" then
+			--energyMake				 = 15
+			--metalMake				 = 1.5
+	--elseif aiDifficulty == "hard" then
+			--energyMake				 = 20
+			--metalMake				 = 2
+	--elseif aiDifficulty == "insane" then
+			--energyMake				 = 25
+			--metalMake				 = 4
+--end
 
 
 
@@ -164,7 +164,7 @@ local unitDef                    = {
 local weaponDefs                 = {
 
 	aoeheal                      = {
-		AreaOfEffect             = 1000,
+		AreaOfEffect             = 100,
 		avoidFriendly            = false,
 		
 		collideFriendly          = false,

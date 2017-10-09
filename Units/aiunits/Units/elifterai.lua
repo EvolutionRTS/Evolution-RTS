@@ -7,7 +7,7 @@ local unitName                   = "elifterai"
 
 local buildCostMetal			 = 40
 local maxDamage					 = 400
-local buildDistance				 = 800
+local buildDistance				 = 600
 
 local armortype					 = [[light]]
 --local supply					 = [[2]]
@@ -60,7 +60,7 @@ local unitDef                    = {
 	maxWaterDepth                = 10,
 	metalmake                    = 0,
 	metalStorage                 = 0,
-	movementClass                = "COMMANDERTANKAI4",
+	movementClass                = "HOVERHBOT6",
 	moveState			         = "2",
 	name                         = "The Lifter",
 	objectName                   = "ehbotengineer2.s3o",
@@ -97,7 +97,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = Shared.buildList,
+	buildoptions                 = Shared.buildListAIOverseer,
 	sounds                       = {
 		underattack              = "other/unitsunderattack1",
 		ok                       = {

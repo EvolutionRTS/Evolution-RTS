@@ -22,7 +22,7 @@ end
 
 function MetalSpotHandler:ClosestFreeSpot(unittype,position)
 	local pos = nil
-	local bestDistance = 1
+	local bestDistance = 50000
 
 	spotCount = game.map:SpotCount()
 	for i,v in ipairs(self.spots) do

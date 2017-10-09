@@ -45,5 +45,5 @@ end
 
 function ShardSpringUnitType:Extractor()
 	--return self.def.extractsMetal > 0
-	return self.def.makesMetal > 0
+	return self.def.customParams.metal_extractor
 end
