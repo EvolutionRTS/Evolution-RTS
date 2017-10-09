@@ -66,52 +66,49 @@ local idlelist = {
 
 local overseerlistfirst = {
 	"elifterai",
+	RandomFac,
 }
 
 local overseerlist = {
 	"elifterai",
-	{ action = "wait", frames = 10000},
 	RandomFac,
 	RandomT3,
 }
 
 local lifterlist = {
-	"emetalextractor",
+	"elifterai",
+	"egeothermal",
 	"emetalextractor",
 	"emine",
-	"emetalextractor",
-	"elifterai",
 	"eturretlightai",
+	"emetalextractor",
 	"eturretlightai",
 	"esolar2",
 	"efusion2",
 	"estorage",
 	"estorage",
-	"estorage",
 	"ekmar",
 	"ejammer2",
 	"eturretheavyai",	
-	RandomFac,
 }
 
 ---------------------------------------------FACTORY QUEUES
 ------------------------AIR FACTORY
 ------------UPGRADE 0
 local eairfacaiup0 = {
-	"ebomber",
+	"ebomber2",
 	"efighter",
 	"egunship2",
-	"ebomber",
+	"ebomber2",
 	"efighter",
 	"egunship2",
-	"ebomber",
+	"ebomber2",
 	"efighter",
 	"egunship2",
-	"ebomber",
+	"ebomber2",
 	"efighter",
 	"egunship2",
-	"eairfacai_up1",
-	"elifterai",
+	"eairfacai_up1"
 }
 ------------UPGRADE 1
 local eairfacaiup1 = {
@@ -128,7 +125,6 @@ local eairfacaiup1 = {
 	"efighter_up1",
 	"egunship2_up1",
 	"eairfacai_up2",
-	"elifterai",
 }
 ------------UPGRADE 2
 local eairfacaiup2 = {
@@ -145,7 +141,6 @@ local eairfacaiup2 = {
 	"efighter_up2",
 	"egunship2_up2",
 	"eairfacai_up3",
-	"elifterai",
 }
 ------------UPGRADE 3
 local eairfacaiup3 = {
@@ -161,7 +156,6 @@ local eairfacaiup3 = {
 	"ebomber2_up3",
 	"efighter_up3",
 	"egunship2_up3",
-	"elifterai",
 }
 
 ------------------------ALL TERRAIN FACTORY
@@ -183,7 +177,6 @@ local eallterrfacaiup0 = {
 	"eallterrmed",
 	"eallterrheavy",
 	"eallterrfacai_up1",
-	"elifterai",
 }
 ------------UPGRADE 1
 local eallterrfacaiup1 = {
@@ -203,7 +196,6 @@ local eallterrfacaiup1 = {
 	"eallterrmed_up1",
 	"eallterrheavy_up1",
 	"eallterrfacai_up2",
-	"elifterai",
 }
 ------------UPGRADE 2
 local eallterrfacaiup2 = {
@@ -223,7 +215,6 @@ local eallterrfacaiup2 = {
 	"eallterrmed_up2",
 	"eallterrheavy_up2",
 	"eallterrfacai_up3",
-	"elifterai",
 }
 ------------UPGRADE 3
 local eallterrfacaiup3 = {
@@ -242,7 +233,6 @@ local eallterrfacaiup3 = {
 	"eallterrassault_up3",
 	"eallterrmed_up3",
 	"eallterrheavy_up3",
-	"elifterai",
 }
 
 ------------------------AMPHIBIOUS FACTORY
@@ -267,7 +257,6 @@ local eamphifacaiup0 = {
 	"eamphibmedtank",
 	"eamphibrock",
 	"eamphifacai_up1",
-	"elifterai",
 }
 ------------UPGRADE 1
 local eamphifacaiup1 = {
@@ -290,7 +279,6 @@ local eamphifacaiup1 = {
 	"eamphibmedtank_up1",
 	"eamphibrock_up1",
 	"eamphifacai_up2",
-	"elifterai",
 }
 ------------UPGRADE 2
 local eamphifacaiup2 = {
@@ -313,7 +301,6 @@ local eamphifacaiup2 = {
 	"eamphibmedtank_up2",
 	"eamphibrock_up2",
 	"eamphifacai_up3",
-	"elifterai",
 }
 ------------UPGRADE 3
 local eamphifacaiup3 = {
@@ -335,7 +322,6 @@ local eamphifacaiup3 = {
 	"eamphibarty_up3",
 	"eamphibmedtank_up3",
 	"eamphibrock_up3",
-	"elifterai",
 }
 
 ------------------------HBOT FACTORY
@@ -354,7 +340,6 @@ local ehbotfacaiup0 = {
 	"ehbotsniper",
 	"ehbotrocko",
 	"ehbotfacai_up1",
-	"elifterai",
 }
 ------------UPGRADE 1
 local ehbotfacaiup1 = {
@@ -371,7 +356,6 @@ local ehbotfacaiup1 = {
 	"ehbotsniper_up1",
 	"ehbotrocko_up1",
 	"ehbotfacai_up2",
-	"elifterai",
 }
 ------------UPGRADE 2
 local ehbotfacaiup2 = {
@@ -388,7 +372,6 @@ local ehbotfacaiup2 = {
 	"ehbotsniper_up2",
 	"ehbotrocko_up2",
 	"ehbotfacai_up3",
-	"elifterai",
 }
 ------------UPGRADE 3
 local ehbotfacaiup3 = {
@@ -404,7 +387,6 @@ local ehbotfacaiup3 = {
 	"ehbotthud_up3",
 	"ehbotsniper_up3",
 	"ehbotrocko_up3",
-	"elifterai",
 }
 
 ------------------------HOVER FACTORY
@@ -426,7 +408,6 @@ local ehoverfacaiup0 = {
 	"eheavytank3",
 	"emissiletank",
 	"ehoverfacai_up1",
-	"elifterai",
 }
 ------------UPGRADE 1
 local ehoverfacaiup1 = {
@@ -446,7 +427,6 @@ local ehoverfacaiup1 = {
 	"eheavytank3_up1",
 	"emissiletank_up1",
 	"ehoverfacai_up2",
-	"elifterai",
 }
 ------------UPGRADE 2
 local ehoverfacaiup2 = {
@@ -466,7 +446,6 @@ local ehoverfacaiup2 = {
 	"eheavytank3_up2",
 	"emissiletank_up2",
 	"ehoverfacai_up3",
-	"elifterai",
 }
 ------------UPGRADE 3
 local ehoverfacaiup3 = {
@@ -485,7 +464,6 @@ local ehoverfacaiup3 = {
 	"eartytank_up3",
 	"eheavytank3_up3",
 	"emissiletank_up3",
-	"elifterai",
 }
 -----------------------------------------------------
 --local factory = {
@@ -1119,5 +1097,4 @@ local function engineerlist(beh)
    --eorb = orblist,
 	}
 end
-
 
