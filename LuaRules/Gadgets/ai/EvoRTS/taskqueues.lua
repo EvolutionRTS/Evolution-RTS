@@ -77,6 +77,7 @@ local overseerlist = {
 	RandomFac,
 	{ action = "wait", frames = 10000},
 	RandomT3,
+	{ action = "wait", frames = 999999},
 }
 
 local lifterlist = {
@@ -100,16 +101,16 @@ local lifterlist = {
 ------------------------AIR FACTORY
 ------------UPGRADE 0
 local eairfacaiup0 = {
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
 	"eairfacai_up1"
