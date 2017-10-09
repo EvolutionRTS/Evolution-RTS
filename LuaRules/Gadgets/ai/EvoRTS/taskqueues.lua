@@ -80,7 +80,7 @@ local lifterlist = {
 	"emine",
 	"eturretlightai",
 	"emetalextractor",
-	"elifterai"
+	"elifterai",
 	"eturretlightai",
 	"esolar2",
 	"efusion2",
