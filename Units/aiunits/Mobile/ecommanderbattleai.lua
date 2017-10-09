@@ -25,27 +25,27 @@ elseif shardChicken == "disabled" then
 		if aiDifficulty == "veryeasy" then
 			description              = [[Very Easy AI • Builds Units • Provides support in battles]]
 			energyMake				 = 5
-			workerTime				 = 4
+			workerTime				 = 1
 			maxDamage				 = 10000
 		elseif aiDifficulty == "easy" then
 			description                = [[Easy AI • Builds Units • Provides support in battles]]
 			energyMake				 = 10
-			workerTime				 = 5
+			workerTime				 = 1
 			maxDamage				 = 15000
 		elseif aiDifficulty == "medium" then
 			description                = [[Medium AI • Builds Units • Provides support in battles]]
 			energyMake				 = 15
-			workerTime				 = 10
+			workerTime				 = 1
 			maxDamage 				 = 20000
 		elseif aiDifficulty == "hard" then
 			description                = [[Hard AI • Builds Units • Provides support in battles]]
 			energyMake				 = 20
-			workerTime				 = 20
+			workerTime				 = 1
 			maxDamage				 = 25000
 		elseif aiDifficulty == "insane" then
 			description                = [[Insane AI • Builds Units • Provides support in battles]]
 			energyMake				 = 50
-			workerTime				 = 50
+			workerTime				 = 1
 			maxDamage 				 = 50000
 		end
 	end
