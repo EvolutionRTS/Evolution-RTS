@@ -71,13 +71,16 @@ local overseerlistfirst = {
 
 local overseerlist = {
 	"elifterai",
-	RandomFac,
 	RandomT3,
+	"estorage",
+	"estorage",
 }
 
 local lifterlist = {
 	"elifterai",
 	"egeothermal",
+	Orb,
+	Scout,
 	"emetalextractor",
 	"emine",
 	"eturretlightai",
@@ -89,71 +92,73 @@ local lifterlist = {
 	"estorage",
 	"ekmar",
 	"ejammer2",
-	"eturretheavyai",	
+	"eturretheavyai",
+	Box,
+	RandomFac,	
 }
 
 ---------------------------------------------FACTORY QUEUES
 ------------------------AIR FACTORY
 ------------UPGRADE 0
 local eairfacaiup0 = {
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
-	"ebomber2",
+	"ebomber",
 	"efighter",
 	"egunship2",
 	"eairfacai_up1"
 }
 ------------UPGRADE 1
 local eairfacaiup1 = {
-	"ebomber2_up1",
+	"ebomber_up1",
 	"efighter_up1",
 	"egunship2_up1",
-	"ebomber2_up1",
+	"ebomber_up1",
 	"efighter_up1",
 	"egunship2_up1",
-	"ebomber2_up1",
+	"ebomber_up1",
 	"efighter_up1",
 	"egunship2_up1",
-	"ebomber2_up1",
+	"ebomber_up1",
 	"efighter_up1",
 	"egunship2_up1",
 	"eairfacai_up2",
 }
 ------------UPGRADE 2
 local eairfacaiup2 = {
-	"ebomber2_up2",
+	"ebomber_up2",
 	"efighter_up2",
 	"egunship2_up2",
-	"ebomber2_up2",
+	"ebomber_up2",
 	"efighter_up2",
 	"egunship2_up2",
-	"ebomber2_up2",
+	"ebomber_up2",
 	"efighter_up2",
 	"egunship2_up2",
-	"ebomber2_up2",
+	"ebomber_up2",
 	"efighter_up2",
 	"egunship2_up2",
 	"eairfacai_up3",
 }
 ------------UPGRADE 3
 local eairfacaiup3 = {
-	"ebomber2_up3",
+	"ebomber_up3",
 	"efighter_up3",
 	"egunship2_up3",
-	"ebomber2_up3",
+	"ebomber_up3",
 	"efighter_up3",
 	"egunship2_up3",
-	"ebomber2_up3",
+	"ebomber_up3",
 	"efighter_up3",
 	"egunship2_up3",
-	"ebomber2_up3",
+	"ebomber_up3",
 	"efighter_up3",
 	"egunship2_up3",
 }

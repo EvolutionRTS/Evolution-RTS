@@ -15,22 +15,22 @@ if aiDifficulty == nil then
 	aiDifficulty = "veryeasy"
 end
 
---if aiDifficulty == "veryeasy" then
-			--energyMake				 = 5
-			--metalMake				 = 0.5
-	--elseif aiDifficulty == "easy" then
-			--energyMake				 = 10
-			--metalMake				 = 1
-	--elseif aiDifficulty == "medium" then
-			--energyMake				 = 15
-			--metalMake				 = 1.5
-	--elseif aiDifficulty == "hard" then
-			--energyMake				 = 20
-			--metalMake				 = 2
-	--elseif aiDifficulty == "insane" then
-			--energyMake				 = 25
-			--metalMake				 = 4
---end
+if aiDifficulty == "veryeasy" then
+			energyMake				 = 1
+			metalMake				 = 0.5
+	elseif aiDifficulty == "easy" then
+			energyMake				 = 1
+			metalMake				 = 0.5
+	elseif aiDifficulty == "medium" then
+			energyMake				 = 1
+			metalMake				 = 1
+	elseif aiDifficulty == "hard" then
+			energyMake				 = 1
+			metalMake				 = 1.5
+	elseif aiDifficulty == "insane" then
+			energyMake				 = 1
+			metalMake				 = 4
+end
 
 
 
@@ -48,7 +48,7 @@ local unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 0.24,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 20,
+	buildCostMetal               = 10,
 	buildDistance                = 800,
 	builder                      = false,
 	buildTime                    = 5,
@@ -67,7 +67,7 @@ local unitDef                    = {
 	category                     = "LIGHT NOTAIR SUPPORT",
 	description                  = [[Field Medic / Power Generator / Energy Core Reclamation]],
 	energyMake                   = energyMake,
-	energyStorage                = 300,
+	energyStorage                = 100,
 	energyUse                    = 0,
 	explodeAs                    = "mediumExplosionGenericGreen",
 	footprintX                   = 6,
