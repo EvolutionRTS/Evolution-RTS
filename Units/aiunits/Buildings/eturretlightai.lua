@@ -5,7 +5,7 @@ unitName = [[eturretlightai]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= [[1]]
+isUpgraded	= [[0]]
 
 humanName = [[Lightning Rod]]
 

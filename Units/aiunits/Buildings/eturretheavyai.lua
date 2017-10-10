@@ -5,7 +5,7 @@ unitName = [[eturretheavyai]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= [[1]]
+isUpgraded	= [[0]]
 
 humanName = [[Immolator Mark]]
 

@@ -31,16 +31,16 @@ local function Turret()
 	return "eaiturret"
 end
 
-local function RandomT3()
-   local r = math.random(0,2)
-		if r == 0 then
-			return "eantinukeai"
-		elseif r == 1 then
-			return "esiloai"
-		elseif r == 2 then
-			return "elobberai"
-		end
-	end
+--local function RandomT3()
+   --local r = math.random(0,2)
+		--if r == 0 then
+			--return "eantinukeai"
+		--elseif r == 1 then
+			--return "esiloai"
+		--elseif r == 2 then
+			--return "elobberai"
+		--end
+	--end
 
 local function RandomFac()
    local r = math.random(0,4)
@@ -65,13 +65,19 @@ local idlelist = {
 }
 
 local overseerlistfirst = {
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"eturretlightai",
 	"elifterai",
 	RandomFac,
 }
 
 local overseerlist = {
 	"elifterai",
-	RandomT3,
+	"eantinukeai",
+	"esiloai",
+	"elobberai",
 }
 
 local lifterlist = {
@@ -80,18 +86,20 @@ local lifterlist = {
 	Orb,
 	"emetalextractor",
 	"emine",
-	"eturretlightai",
 	"emetalextractor",
 	"eturretlightai",
+	"ekmar",
 	"esolar2",
 	"efusion2",
 	"estorage",
 	"estorage",
-	"ekmar",
 	"ejammer2",
+	"esolar2",
+	"etech1",
 	"eturretheavyai",
+	"ekmar",
 	Box,
-	RandomFac,	
+	RandomFac,
 }
 
 ---------------------------------------------FACTORY QUEUES
