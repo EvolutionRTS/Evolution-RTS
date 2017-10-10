@@ -11,7 +11,7 @@ local techrequired				 = [[tech3]]
 
 local weapon1Damage               = 1000
 local weapon1AOE				  = 500
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+--local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local buildCostMetal 			  = 500
 local maxDamage					  = buildCostMetal * 12.5
@@ -117,7 +117,7 @@ local weaponDefs                  = {
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:NUKEDATBEWMSMALL",
-		energypershot            = energycosttofire,
+		energypershot            = 50,
 		edgeEffectiveness        = 1,
 		
 		impulseFactor            = 0,

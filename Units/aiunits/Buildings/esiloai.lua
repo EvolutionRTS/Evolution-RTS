@@ -14,11 +14,11 @@ local weapon1AOE				  = 1500
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 --local stockpiletime				 = 60
 
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
+--local function roundToFirstDecimal(energycosttofire)
+    --return math.floor(energycosttofire*10 + 0.5)*0.1
+--end
 
-local buildCostMetal 			  = 1250
+local buildCostMetal 			  = 500
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -131,7 +131,7 @@ local weaponDefs                  = {
 		craterBoost               = 0,
 		craterMult                = 0,
 		edgeeffectiveness		  = 1,
-		energypershot             = energycosttofire,
+		energypershot             = 50,
 		explosionGenerator        = "custom:nukedatbewm",
 		fireStarter               = 100,
 		flightTime                = 400,
