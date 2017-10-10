@@ -106,7 +106,7 @@ local unitDef                     = {
 
 ]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings
 
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+Energy cost to fire: ]]
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

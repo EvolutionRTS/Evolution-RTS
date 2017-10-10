@@ -89,9 +89,7 @@ local unitDef                     = {
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
-		helptext                  = [[Armortype: ]] ..armortype.. [[ 
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
+		helptext                  = [[Armortype: ]] ..armortype..
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

@@ -30,8 +30,8 @@ attackerlist = {
 	"ehbotsniper",
 	"ehbotthud",
 	"ebox",
-	"eaimexer",
 	"eorbai",
+	"eaimexer",
 	"escout",
 	-------------- Upgrade 1
     "elighttank3_up1",

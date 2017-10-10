@@ -72,15 +72,12 @@ local overseerlistfirst = {
 local overseerlist = {
 	"elifterai",
 	RandomT3,
-	"estorage",
-	"estorage",
 }
 
 local lifterlist = {
-	"elifterai",
 	"egeothermal",
+	"elifterai",
 	Orb,
-	Scout,
 	"emetalextractor",
 	"emine",
 	"eturretlightai",
