@@ -253,4 +253,18 @@ for i=1,#files do
    }
 end
 
+local files = VFS.DirList("LuaUI/Widgets_Evo/")
+local t = Sounds.SoundItems
+for i=1,#files do
+   local fileName = files[i]
+   t[fileName] = {
+      file     = fileName;
+      pitchmod = 0;
+      gainmod  = 0;
+	  dopplerscale = 0,
+	  rolloff = 0,
+      maxconcurrent = 1;
+   }
+end
+
 return Sounds
