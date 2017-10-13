@@ -85,16 +85,26 @@ local idlelist = {
 	"emetalextractor",
 	"eturretlightai",
 	"elifterai",
-	RandomFac,
+	"elifterai",
+	"elifterai",
 	}
 		
 local overseerordersnuke = {
 		"elifterai",
 		"eantinukeai",
 		"elifterai",
-		"esiloai",
 		"elifterai",
 		"elobberai",
+		"elifterai",
+		"elifterai",
+		"elobberai",
+		"elifterai",
+		"elifterai",
+		"elobberai",
+		"elifterai",
+		"elifterai",
+		"elobberai",
+		"esilo",
 	}
 local overseerordersnonuke = {
 		"elifterai",

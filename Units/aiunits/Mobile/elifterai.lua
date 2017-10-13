@@ -21,7 +21,7 @@ local armortype					 = [[light]]
 	if aiDifficulty == "easy" then
 		workerTime				 = 1
 	elseif aiDifficulty == "hard" then
-		workerTime				 = 1.5
+		workerTime				 = 1
 	end
 
 local unitDef                    = {
