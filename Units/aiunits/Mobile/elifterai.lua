@@ -12,6 +12,17 @@ local buildDistance				 = 600
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
+	aiDifficulty = Spring.GetModOptions().aidifficulty
+	
+	if aiDifficulty == nil then
+		aiDifficulty = "easy"
+	end
+
+	if aiDifficulty == "easy" then
+		workerTime				 = 1
+	elseif aiDifficulty == "hard" then
+		workerTime				 = 3
+	end
 
 local unitDef                    = {
 
@@ -28,6 +39,7 @@ local unitDef                    = {
 	buildDistance                = buildDistance,
 	builder                      = true,
 	buildTime                    = 5,
+	capturable		             = false,
 	CanAttack			         = false,
 	CanAssist			         = true,
 	canBeAssisted                = true,
@@ -80,7 +92,7 @@ local unitDef                    = {
 	--  turnrate                 = 1020,
 	unitname                     = unitName,
 	upright                      = true,
-	workerTime                   = 1,
+	workerTime                   = workerTime,
 	capturespeed                 = 1,
 	TerraformSpeed               = 100000,
 	ReclaimSpeed                 = 0,

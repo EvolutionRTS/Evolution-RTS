@@ -27,6 +27,7 @@ local unitDef                    = {
 	buildTime                    = 2.5,
 	builder                      = true,
 	buildDistance                = 600,
+	capturable		             = false,
 	canAttack                    = false,
 	CanAssist			         = true,
 	canBeAssisted                = true,

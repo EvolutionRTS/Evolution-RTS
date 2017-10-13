@@ -7,10 +7,20 @@ math.random(); math.random(); math.random()
 
 --------------------------------------------- Functions for AI
 
+aiUnits = Spring.GetModOptions().aiunits
+aiNukes = Spring.GetModOptions().ainukes
 shardChicken = Spring.GetModOptions().shardchicken
 
 if shardChicken == nil then
 	shardChicken = "disabled"
+end
+
+if aiUnits == nil then
+	aiUnits = "enabled"
+end
+
+if aiNukes == nil then
+	aiNukes = "enabled"
 end
 
 if shardChicken == "disabled" then
@@ -43,19 +53,24 @@ end
 	--end
 
 local function RandomFac()
-   local r = math.random(0,4)
-		if r == 0 then
-			return "eairfacai_up0"
-		elseif r == 1 then
-			return "eallterrfacai_up0"
-		elseif r == 2 then
-			return "eamphifacai_up0"
-		elseif r == 3 then
-			return "ehbotfacai_up0"
-		elseif r == 4 then
-			return "ehoverfacai_up0"
+		if aiUnits == "enabled" then
+		  local r = math.random(0,4)
+			if r == 0 then
+				return "eairfacai_up0"
+			elseif r == 1 then
+				return "eallterrfacai_up0"
+			elseif r == 2 then
+				return "eamphifacai_up0"
+			elseif r == 3 then
+				return "ehbotfacai_up0"
+			elseif r == 4 then
+				return "ehoverfacai_up0"
+			end
+		elseif aiUnits == "disabled" then
+				return "elifterai"	
 		end
-	end
+end
+
 
 ---------------------------------------------------------------- QUEUES
 
@@ -64,26 +79,33 @@ local idlelist = {
 	{ action = "wait", frames = 3000},
 }
 
-local overseerlistfirst = {
+	local overseerlistfirst = {
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
 	"eturretlightai",
 	"elifterai",
 	RandomFac,
-}
-
-local overseerlist = {
-	"elifterai",
-	"eantinukeai",
-	"esiloai",
-	"elobberai",
-}
+	}
+		
+local overseerordersnuke = {
+		"elifterai",
+		"eantinukeai",
+		"elifterai",
+		"esiloai",
+		"elifterai",
+		"elobberai",
+	}
+local overseerordersnonuke = {
+		"elifterai",
+		"elifterai",
+		"elifterai",
+		"eantinukeai",
+	}
 
 local lifterlist = {
 	"egeothermal",
 	"elifterai",
-	Orb,
 	"emetalextractor",
 	"emine",
 	"emetalextractor",
@@ -98,6 +120,7 @@ local lifterlist = {
 	"etech1",
 	"eturretheavyai",
 	"ekmar",
+	Orb,
 	Box,
 	RandomFac,
 }
@@ -498,7 +521,11 @@ local ehoverfacaiup3 = {
 
 local function overseerqueue()
 	if ai.engineerfirst == true then
-		return overseerlist
+		if aiNukes == "enabled" then
+			return overseerordersnuke
+		else
+			return overseerordersnonuke
+		end
 	else
 		ai.engineerfirst = true
 		return overseerlistfirst

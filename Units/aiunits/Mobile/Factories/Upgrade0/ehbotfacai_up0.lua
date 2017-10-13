@@ -12,7 +12,6 @@ local buildDistance				 = 800
 local armortype					 = [[light]]
 --local supply					 = [[2]]
 
-
 local unitDef                    = {
 
 	--mobileunit 
@@ -28,6 +27,7 @@ local unitDef                    = {
 	buildDistance                = buildDistance,
 	builder                      = true,
 	buildTime                    = 5,
+	capturable		             = false,
 	CanAttack			         = false,
 	CanAssist			         = true,
 	canBeAssisted                = true,

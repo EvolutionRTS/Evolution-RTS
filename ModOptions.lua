@@ -30,6 +30,65 @@ local options= {
 		-- (step <= 0) means that there is no quantization
 	},
 
+-- Shard AI Options
+	{
+		key    = 'aioptions',
+		name   = 'Shard AI Options',
+		desc   = 'Allows you to adjust ShardLua settings',
+		type   = 'section',
+	},
+	{
+		key="aidifficulty",
+		name="ShardLua AI Difficulty",
+		desc="Modifies how much Shard cheats",
+		type="list",
+		def="easy",
+		section="aioptions",
+		items={
+			--{key="veryeasy", name="Very Easy", desc="Very Easy AI"},
+			{key="easy", name="Easy", desc="Basic AI that isn't cheating (well, still does, but have no real advantage over player)"},
+			--{key="medium", name="Medium", desc="Medium AI"},
+			{key="hard", name="Hard", desc="Hard AI that have infinite resources and inscreased buildspeed"},
+			--{key="insane", name="Insane", desc="Very Hard AI"},
+		}
+	},
+	{
+		key    = 'ainukes',
+		name   = 'AI use Nukes and Lobbers',
+		desc   = 'AI use Nukes and Lobbers',
+		type="list",
+		def="enabled",
+		section= "aioptions",
+		items={
+			{key="disabled", name="Disabled", desc="Cries in Defending"},
+			{key="enabled", name="Enabled", desc="Laughs in Nukes"},
+		}
+	},
+	{
+		key    = 'aiunits',
+		name   = 'AI use Units to attack you',
+		desc   = 'AI use Units to attack you',
+		type="list",
+		def="enabled",
+		section= "aioptions",
+		items={
+			{key="disabled", name="Disabled", desc="Cries in Defending"},
+			{key="enabled", name="Enabled", desc="Laughs in Attacks"},
+		}
+	},
+	{
+		key    = 'shardchicken',
+		name   = 'Shard use Chickens (4fun only)',
+		desc   = 'Shard is building Chickens instead of Robots',
+		type="list",
+		def="disabled",
+		section= "aioptions",
+		items={
+			{key="disabled", name="Disabled", desc="Chicken Mode disabled"},
+			{key="enabled", name="Enabled", desc="Chicken Mode enabled"},
+		}
+	},
+	
 -- Resourcing
 	{
 		key    = 'resourcing',
@@ -181,33 +240,6 @@ local options= {
 		def    = true,
 		section= "gameplayoptions",
     },
-	{
-		key="aidifficulty",
-		name="ShardLua AI Difficulty",
-		desc="Modifies how much Shard cheats",
-		type="list",
-		def="veryeasy",
-		section="gameplayoptions",
-		items={
-			{key="veryeasy", name="Very Easy", desc="Very Easy AI"},
-			{key="easy", name="Easy", desc="Easy AI"},
-			{key="medium", name="Medium", desc="Medium AI"},
-			{key="hard", name="Hard", desc="Hard AI"},
-			{key="insane", name="Insane", desc="Very Hard AI"},
-		}
-	},
-	{
-		key    = 'shardchicken',
-		name   = 'Shard use Chickens',
-		desc   = 'Shard is building Chickens instead of Robots',
-		type="list",
-		def="disabled",
-		section= "gameplayoptions",
-		items={
-			{key="disabled", name="Disabled", desc="Chicken Mode disabled"},
-			{key="enabled", name="Enabled", desc="Chicken Mode enabled"},
-		}
-	},
 	{
 		key    = 'heatmapping',
 		name   = 'Heatmapped Pathfinding',

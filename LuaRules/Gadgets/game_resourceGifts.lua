@@ -26,19 +26,19 @@ end
 local maximumBaseIncome = Spring.GetModOptions().maxbasicincome or 5
 
 local aiCheatHandicapMetal = { 
-	["veryeasy"] =  0,
+	--["veryeasy"] =  0,
 	["easy"] =  0,
-	["medium"] =  0,
-	["hard"] =  5,
-	["insane"] =  25,
+	--["medium"] =  0,
+	["hard"] =  0,
+	--["insane"] =  25,
 }
 
 local aiCheatHandicapEnergy = { 
-	["veryeasy"] =  10,
-	["easy"] =  20,
-	["medium"] =  30,
-	["hard"] =  40,
-	["insane"] =  50,
+	--["veryeasy"] =  10,
+	["easy"] =  0,
+	--["medium"] =  30,
+	["hard"] =  0,
+	--["insane"] =  50,
 }
 
 if (not gadgetHandler:IsSyncedCode()) then
@@ -172,7 +172,7 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"e", aiCheatHandicapEnergy[modOptions.aidifficulty or "veryeasy"])
+				Spring.AddTeamResource(TeamID,"e", aiCheatHandicapEnergy[modOptions.aidifficulty or "easy"])
 			end
 		end
 	end
@@ -195,7 +195,7 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"m", aiCheatHandicapMetal[modOptions.aidifficulty or "veryeasy"])
+				Spring.AddTeamResource(TeamID,"m", aiCheatHandicapMetal[modOptions.aidifficulty or "easy"])
 			end
 		end
 	end

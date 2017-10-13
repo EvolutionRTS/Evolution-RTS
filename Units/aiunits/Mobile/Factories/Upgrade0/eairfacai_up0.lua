@@ -10,7 +10,7 @@ local maxDamage					  = 450
 
 local armortype					 = [[light]]
 --local supply					 = [[2]]
-
+	
 local unitDef                    = {
 
 	--mobileunit 
@@ -27,6 +27,7 @@ local unitDef                    = {
 	buildTime                    = 2.5,
 	builder                      = true,
 	buildDistance                = 600,
+	capturable		             = false,
 	canAttack                    = false,
 	CanAssist			         = true,
 	canBeAssisted                = true,

@@ -9,34 +9,6 @@ local armortype					 = [[light]]
 --local supply					 = [[1]]
 local techrequired				 = [[tech1]]
 
-aiDifficulty = Spring.GetModOptions().aidifficulty
-
-if aiDifficulty == nil then
-	aiDifficulty = "veryeasy"
-end
-
-if aiDifficulty == "veryeasy" then
-			energyMake				 = 1
-			metalMake				 = 0.5
-	elseif aiDifficulty == "easy" then
-			energyMake				 = 1
-			metalMake				 = 0.5
-	elseif aiDifficulty == "medium" then
-			energyMake				 = 1
-			metalMake				 = 1
-	elseif aiDifficulty == "hard" then
-			energyMake				 = 1
-			metalMake				 = 1.5
-	elseif aiDifficulty == "insane" then
-			energyMake				 = 1
-			metalMake				 = 4
-end
-
-
-
-
-
-
 local unitDef                    = {
 
 	--mobileunit 
@@ -66,8 +38,8 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
-	description                  = [[Field Medic / Power Generator / Energy Core Reclamation]],
-	energyMake                   = energyMake,
+	description                  = [[Field Medic / Energy Core Reclamation]],
+	energyMake                   = 0,
 	energyStorage                = 100,
 	energyUse                    = 0,
 	explodeAs                    = "mediumExplosionGenericGreen",
@@ -83,7 +55,7 @@ local unitDef                    = {
 	maxVelocity                  = 2,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
-	metalmake                    = metalMake,
+	metalmake                    = 0,
 	metalStorage                 = 0,
 	movementClass                = "HOVERHBOT5",
 	moveState			         = "2",

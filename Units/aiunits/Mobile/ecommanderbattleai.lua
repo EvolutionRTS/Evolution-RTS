@@ -8,7 +8,7 @@ aiDifficulty = Spring.GetModOptions().aidifficulty
 shardChicken = Spring.GetModOptions().shardchicken
 
 if aiDifficulty == nil then
-	aiDifficulty = "veryeasy"
+	aiDifficulty = "easy"
 end
 
 if shardChicken == nil then
@@ -19,34 +19,22 @@ end
 if shardChicken == "enabled" then
 			description				 = [[Chicken Overseer, builds chickens]]
 			energyMake				 = 500
+			metalMake				 = 1000
 			workerTime			 	 = 100
 			maxDamage 				 = 50000		
 elseif shardChicken == "disabled" then
-		if aiDifficulty == "veryeasy" then
-			description              = [[Very Easy AI • Builds Units • Provides support in battles]]
-			energyMake				 = 5
-			workerTime				 = 1
-			maxDamage				 = 10000
-		elseif aiDifficulty == "easy" then
+		if aiDifficulty == "easy" then
 			description                = [[Easy AI • Builds Units • Provides support in battles]]
-			energyMake				 = 10
+			energyMake				 = 0
+			metalMake				 = 0
 			workerTime				 = 1
-			maxDamage				 = 15000
-		elseif aiDifficulty == "medium" then
-			description                = [[Medium AI • Builds Units • Provides support in battles]]
-			energyMake				 = 15
-			workerTime				 = 1
-			maxDamage 				 = 20000
+			maxDamage				 = 20000
 		elseif aiDifficulty == "hard" then
 			description                = [[Hard AI • Builds Units • Provides support in battles]]
-			energyMake				 = 20
-			workerTime				 = 1
-			maxDamage				 = 25000
-		elseif aiDifficulty == "insane" then
-			description                = [[Insane AI • Builds Units • Provides support in battles]]
 			energyMake				 = 50
-			workerTime				 = 1
-			maxDamage 				 = 50000
+			metalMake				 = 1000
+			workerTime				 = 2
+			maxDamage				 = 100000
 		end
 	end
 
@@ -119,7 +107,7 @@ local unitDef                    = {
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
-	metalmake                    = 1,
+	metalmake                    = metalMake,
 	metalStorage                 = 9500,
 	movementClass                = movementClass,
 	moveState			         = "0",

@@ -27,6 +27,7 @@ unitDef                    = {
 	buildDistance                = 800,
 	builder                      = true,
 	buildTime                    = 5,
+	capturable		             = false,
 	CanAttack			         = false,
 	CanAssist			         = true,
 	canBeAssisted                = true,
