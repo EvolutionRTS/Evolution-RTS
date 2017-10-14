@@ -32,7 +32,7 @@ elseif shardChicken == "disabled" then
 		elseif aiDifficulty == "hard" then
 			description                = [[Hard AI • Builds Units • Provides support in battles]]
 			energyMake				 = 50
-			metalMake				 = 1000
+			metalMake				 = 100
 			workerTime				 = 2
 			maxDamage				 = 100000
 		end
