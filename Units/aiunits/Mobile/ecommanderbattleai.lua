@@ -41,7 +41,7 @@ elseif shardChicken == "disabled" then
 if shardChicken == "disabled" then
 	objectName					= "ecommander4-battle.s3o"
 	script						= "ecommander4-battle.cob"
-	movementClass				= "COMMANDERTANKAI4"
+	movementClass				= "COMMANDERTANK4"
 	elseif shardChicken == "enabled" then
 	objectName					= "ChickenDefenseModels/brain_bug.s3o"
 	script						= "ChickenDefenseScripts/chickenh5.cob"

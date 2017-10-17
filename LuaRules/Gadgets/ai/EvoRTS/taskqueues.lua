@@ -25,32 +25,36 @@ end
 
 if shardChicken == "disabled" then
 
-local function Orb()
+function Orb()
 	return "eorbai"
 end
 
-local function Box()
+function Box()
 	return "ebox"
 end
 
-local function Scout()
+function Scout()
 	return "escout_up3"
 end
 
-local function Turret()
+function Turret()
 	return "eaiturret"
 end
 
-local function RandomT3()
-   local r = math.random(0,5)
-		if 	   r == 0 then
-			return "esiloai"
-		elseif r >= 1 then
-			return "elobberai"
-		end
+function RandomT3()
+	if aiNukes == "enabled" then
+		local r = math.random(0,5)
+			if 	   r == 0 then
+				return "esiloai"
+			elseif r >= 1 then
+				return "elobberai"
+			end
+	else
+				return "elifterai"
 	end
+end
 
-local function RandomFac()
+function RandomFac()
 		if aiUnits == "enabled" then
 		  local r = math.random(0,4)
 			if r == 0 then
@@ -69,6 +73,70 @@ local function RandomFac()
 		end
 end
 
+---------------------------------------------------------------- LIFTER QUEUES
+
+ function RandomLift()
+   local r = math.random(0,20)
+		if 	   r <= 2 then
+			return "elifterai"
+		elseif r == 3 then
+			return "emine"
+		elseif r == 4 then
+			return "eturretlightai"
+		elseif r == 5 then
+			return "ekmar"
+		elseif r == 6 then
+			return "esolar2"
+		elseif r == 7 then
+			return "efusion2"
+		elseif r == 8 then
+			return "estorage"
+		elseif r == 9 then
+			return "ejammer2"
+		elseif r == 10 then
+			return "eturretheavyai"
+		elseif r == 11 then
+			return "eorbai"
+		elseif r == 12 then
+			return "ebox"
+		elseif r == 13 then
+			return "escout_up3"	
+		elseif r == 14 then
+		if aiNukes == "enabled" then
+			local n = math.random(0,10)
+				if 	   n == 0 then
+					return "esiloai"
+				elseif n == 1 then
+					return "elobberai"
+				else
+					return "ekmar"
+				end
+			else
+				return "elifterai"
+		end
+		elseif r == 15 then
+			if aiUnits == "enabled" then
+				local f = math.random(0,8)
+				if f == 0 then
+					return "eairfacai_up0"
+				elseif f == 1 then
+					return "eallterrfacai_up0"
+				elseif f == 2 then
+					return "eamphifacai_up0"
+				elseif f == 3 then
+					return "ehbotfacai_up0"
+				elseif f == 4 then
+					return "ehoverfacai_up0"
+				else 
+					return "estorage"
+			end
+			elseif aiUnits == "disabled" then
+					return "elifterai"	
+			end
+		else
+			return "emetalextractor"		
+		end
+end
 
 ---------------------------------------------------------------- QUEUES
 
@@ -80,6 +148,10 @@ local idlelist = {
 	local overseerlistfirst = {
 	"elifterai",
 	"elifterai",
+	"elifterai",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
@@ -94,7 +166,6 @@ local idlelist = {
 	"emine",
 	"ekmar",
 	"elifterai",
-	RandomFac,
 	}
 		
 local overseerordersnuke = {
@@ -102,22 +173,22 @@ local overseerordersnuke = {
 		"emine",
 		"ekmar",
 		"elifterai",
-		"elobberai",
+		RandomT3,
 		"emine",
 		"ekmar",
 		"elifterai",
-		"elobberai",
+		RandomT3,
 		"emine",
 		"ekmar",
 		"elifterai",
-		"elobberai",
+		RandomT3,
 		"emine",
 		"ekmar",
 		"elifterai",
-		"elobberai",
+		RandomT3,
 		"emine",
 		"ekmar",
-		"esilo",
+		RandomT3,
 		"emine",
 		"ekmar",
 	}
@@ -130,46 +201,7 @@ local overseerordersnonuke = {
 	}
 
 local lifterlist = {
-	"egeothermal",
-	"emetalextractor",
-	"emine",
-	"emetalextractor",
-	"eturretlightai",
-	"emetalextractor",
-	"ekmar",
-	"emine",
-	"emetalextractor",
-	"esolar2",
-	"emetalextractor",
-	"elifterai",
-	"emetalextractor",
-	"efusion2",
-	"emine",
-	"emetalextractor",
-	"estorage",
-	"emetalextractor",
-	"eturretlightai",
-	"emetalextractor",
-	"estorage",
-	"emetalextractor",
-	"ejammer2",
-	"emetalextractor",
-	"esolar2",
-	"emine",
-	"emetalextractor",
-	"etech1",
-	"emine",
-	"emetalextractor",
-	"eturretheavyai",
-	"emetalextractor",
-	"ekmar",
-	"emine",
-	"emetalextractor",
-	Orb,
-	Box,
-	RandomFac,
-	"elifterai",
-	RandomT3,
+	RandomLift,
 }
 
 ---------------------------------------------FACTORY QUEUES
@@ -192,6 +224,7 @@ local eairfacaiup0 = {
 	"ebomber",
 	"ebomber",
 	"ebomber",
+	"elifterai",
 	"eairfacai_up1"
 }
 ------------UPGRADE 1
@@ -212,6 +245,7 @@ local eairfacaiup1 = {
 	"ebomber_up1",
 	"ebomber_up1",
 	"ebomber_up1",
+	"elifterai",
 	"eairfacai_up2",
 }
 ------------UPGRADE 2
@@ -232,6 +266,7 @@ local eairfacaiup2 = {
 	"ebomber_up2",
 	"ebomber_up2",
 	"ebomber_up2",
+	"elifterai",
 	"eairfacai_up3",
 }
 ------------UPGRADE 3
@@ -258,6 +293,7 @@ local eallterrfacaiup0 = {
 	"eallterrassault",
 	"eallterrassault",
 	"eallterrassault",
+	"elifterai",
 	"eallterrfacai_up1",
 }
 ------------UPGRADE 1
@@ -278,6 +314,7 @@ local eallterrfacaiup1 = {
 	"eallterrassault_up1",
 	"eallterrassault_up1",
 	"eallterrassault_up1",
+	"elifterai",
 	"eallterrfacai_up2",
 }
 ------------UPGRADE 2
@@ -298,6 +335,7 @@ local eallterrfacaiup2 = {
 	"eallterrassault_up2",
 	"eallterrassault_up2",
 	"eallterrassault_up2",
+	"elifterai",
 	"eallterrfacai_up3",
 }
 ------------UPGRADE 3
@@ -324,6 +362,7 @@ local eamphifacaiup0 = {
 	"eamphibarty",
 	"eamphibarty",
 	"eamphibarty",
+	"elifterai",
 	"eamphifacai_up1",
 }
 ------------UPGRADE 1
@@ -344,6 +383,7 @@ local eamphifacaiup1 = {
 	"eamphibarty_up1",
 	"eamphibarty_up1",
 	"eamphibarty_up1",
+	"elifterai",
 	"eamphifacai_up2",
 }
 ------------UPGRADE 2
@@ -364,6 +404,7 @@ local eamphifacaiup2 = {
 	"eamphibarty_up2",
 	"eamphibarty_up2",
 	"eamphibarty_up2",
+	"elifterai",
 	"eamphifacai_up3",
 }
 ------------UPGRADE 3
@@ -388,6 +429,7 @@ local ehbotfacaiup0 = {
 	"ehbotrocko",
 	"ehbotsniper",
 	"ehbotrocko",
+	"elifterai",
 	"ehbotfacai_up1",
 }
 ------------UPGRADE 1
@@ -406,6 +448,7 @@ local ehbotfacaiup1 = {
 	"ehbotrocko_up1",
 	"ehbotsniper_up1",
 	"ehbotrocko_up1",
+	"elifterai",
 	"ehbotfacai_up2",
 }
 ------------UPGRADE 2
@@ -424,6 +467,7 @@ local ehbotfacaiup2 = {
 	"ehbotrocko_up2",
 	"ehbotsniper_up2",
 	"ehbotrocko_up2",
+	"elifterai",
 	"ehbotfacai_up3",
 }
 ------------UPGRADE 3
@@ -452,6 +496,7 @@ local ehoverfacaiup0 = {
 	"eartytank",
 	"eartytank",
 	"eartytank",
+	"elifterai",
 	"ehoverfacai_up1",
 }
 ------------UPGRADE 1
@@ -472,6 +517,7 @@ local ehoverfacaiup1 = {
 	"eartytank_up1",
 	"eartytank_up1",
 	"eartytank_up1",
+	"elifterai",
 	"ehoverfacai_up2",
 }
 ------------UPGRADE 2
@@ -493,6 +539,7 @@ local ehoverfacaiup2 = {
 	"eartytank_up2",
 	"eartytank_up2",
 	"eartytank_up2",
+	"elifterai",
 	"ehoverfacai_up3",
 }
 ------------UPGRADE 3
