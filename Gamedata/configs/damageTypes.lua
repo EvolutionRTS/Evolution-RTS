@@ -226,8 +226,8 @@ local damageClasses = {
 			BUILDING 	= 0.25,
 		},	
 		ebomber	= {
-			ARMORED		= 0.75,
-			LIGHT		= 0.75,
+			ARMORED		= 0.33,
+			LIGHT		= 0.33,
 			BUILDING 	= 1,
 		},
 		-- End Aircraft
