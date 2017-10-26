@@ -7,9 +7,14 @@ math.random(); math.random(); math.random()
 
 --------------------------------------------- Functions for AI
 
-aiUnits = Spring.GetModOptions().aiunits
-aiNukes = Spring.GetModOptions().ainukes
-shardChicken = Spring.GetModOptions().shardchicken
+local aiUnits = Spring.GetModOptions().aiunits
+local aiNukes = Spring.GetModOptions().ainukes
+local shardChicken = Spring.GetModOptions().shardchicken
+
+local spGetTeamUnits = Spring.GetTeamUnits
+local spGetUnitDefID = Spring.GetUnitDefID
+
+--Spring.GetGameSeconds() -- checking gametime
 
 if shardChicken == nil then
 	shardChicken = "disabled"
@@ -42,19 +47,25 @@ function Turret()
 end
 
 function RandomT3()
-	if aiNukes == "enabled" then
-		local r = math.random(0,5)
-			if 	   r == 0 then
-				return "esiloai"
-			elseif r >= 1 then
-				return "elobberai"
-			end
+	if Spring.GetGameSeconds() >= 900 then
+		if aiNukes == "enabled" then
+			local r = math.random(0,5)
+				if 	   r == 0 then
+					Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
+					return "esiloai"
+				elseif r >= 1 then
+					Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
+					return "elobberai"
+				end
+		else
+					return "elifterai"	
+		end
 	else
-				return "elifterai"
+					return "esolar2"
 	end
 end
-
 function RandomFac()
+	if Spring.GetGameSeconds() >= 600 then
 		if aiUnits == "enabled" then
 		  local r = math.random(0,4)
 			if r == 0 then
@@ -71,8 +82,10 @@ function RandomFac()
 		elseif aiUnits == "disabled" then
 				return "elifterai"	
 		end
+	else
+				return "esolar2"
+	end
 end
-
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
@@ -102,36 +115,42 @@ end
 		elseif r == 13 then
 			return "escout_up3"	
 		elseif r == 14 then
-		if aiNukes == "enabled" then
-			local n = math.random(0,10)
-				if 	   n == 0 then
-					return "esiloai"
-				elseif n == 1 then
-					return "elobberai"
+			if Spring.GetGameSeconds() >= 900 then
+				if aiNukes == "enabled" then
+				local r = math.random(0,5)
+					if 	   r == 0 then
+						Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
+						return "esiloai"
+					elseif r >= 1 then
+						Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
+						return "elobberai"
+					end
 				else
-					return "ekmar"
+						return "elifterai"	
 				end
 			else
-				return "elifterai"
-		end
+						return "esolar2"
+			end		
 		elseif r == 15 then
-			if aiUnits == "enabled" then
-				local f = math.random(0,8)
-				if f == 0 then
-					return "eairfacai_up0"
-				elseif f == 1 then
-					return "eallterrfacai_up0"
-				elseif f == 2 then
-					return "eamphifacai_up0"
-				elseif f == 3 then
-					return "ehbotfacai_up0"
-				elseif f == 4 then
-					return "ehoverfacai_up0"
-				else 
-					return "estorage"
-			end
-			elseif aiUnits == "disabled" then
-					return "elifterai"	
+			if Spring.GetGameSeconds() >= 600 then
+				if aiUnits == "enabled" then
+				local r = math.random(0,4)
+					if r == 0 then
+						return "eairfacai_up0"
+					elseif r == 1 then
+						return "eallterrfacai_up0"
+					elseif r == 2 then
+						return "eamphifacai_up0"
+					elseif r == 3 then
+						return "ehbotfacai_up0"
+					elseif r == 4 then
+						return "ehoverfacai_up0"
+					end
+				elseif aiUnits == "disabled" then
+						return "elifterai"	
+				end
+			else
+						return "esolar2"
 			end
 		else
 			return "emetalextractor"		
@@ -147,11 +166,12 @@ local idlelist = {
 
 	local overseerlistfirst = {
 	"emetalextractor",
-	"emetalextractor",
+	"esolar2",
 	"emetalextractor",
 	"elifterai",
+	"esolar2",
 	"emetalextractor",
-	"emetalextractor",
+	"esolar2",
 	"emetalextractor",
 	"elifterai",
 	"elifterai",
@@ -169,25 +189,42 @@ local overseerordersnuke = {
 		"eantinukeai",
 		"emine",
 		"ekmar",
+		"eturretlightai",
+		"eturretheavyai",
 		"elifterai",
 		RandomT3,
+		"esolar2",
 		"emine",
 		"ekmar",
+		"eturretlightai",
+		"eturretheavyai",
 		"elifterai",
 		RandomT3,
+		"esolar2",
 		"emine",
 		"ekmar",
+		"eturretlightai",
+		"eturretheavyai",
 		"elifterai",
 		RandomT3,
+		"esolar2",
 		"emine",
 		"ekmar",
+		"eturretlightai",
+		"eturretheavyai",
 		"elifterai",
 		RandomT3,
+		"esolar2",
 		"emine",
 		"ekmar",
+		"eturretlightai",
+		"eturretheavyai",
 		RandomT3,
+		"esolar2",
 		"emine",
 		"ekmar",
+		"eturretlightai",
+		"eturretheavyai",
 	}
 local overseerordersnonuke = {
 		"elifterai",
