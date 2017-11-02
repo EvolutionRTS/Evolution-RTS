@@ -7,12 +7,21 @@ math.random(); math.random(); math.random()
 
 --------------------------------------------- Functions for AI
 
+local aiDifficulty = Spring.GetModOptions().aidifficulty
 local aiUnits = Spring.GetModOptions().aiunits
 local aiNukes = Spring.GetModOptions().ainukes
 local shardChicken = Spring.GetModOptions().shardchicken
 
-local spGetTeamUnits = Spring.GetTeamUnits
-local spGetUnitDefID = Spring.GetUnitDefID
+--<local function GetNukeCount(teamID)
+	--local aiUnitsTab = Spring.GetTeamUnits(teamID)
+		--for i = 1, #aiUnitsTab do
+			--Spring.Echo(Spring.GetUnitDefID(aiUnitsTab[i]))
+		--end
+ 
+-->end
+
+--local spGetTeamUnits = Spring.GetTeamUnits
+--local spGetUnitDefID = Spring.GetUnitDefID
 
 --Spring.GetGameSeconds() -- checking gametime
 
@@ -26,6 +35,10 @@ end
 
 if aiNukes == nil then
 	aiNukes = "enabled"
+end
+
+if aiDifficulty == nil then
+	aiDifficulty = "easy"
 end
 
 if shardChicken == "disabled" then
@@ -61,29 +74,52 @@ function RandomT3()
 					return "elifterai"	
 		end
 	else
-					return "esolar2"
+					return "eturretlightai"
 	end
 end
 function RandomFac()
-	if Spring.GetGameSeconds() >= 600 then
-		if aiUnits == "enabled" then
-		  local r = math.random(0,4)
-			if r == 0 then
-				return "eairfacai_up0"
-			elseif r == 1 then
-				return "eallterrfacai_up0"
-			elseif r == 2 then
-				return "eamphifacai_up0"
-			elseif r == 3 then
-				return "ehbotfacai_up0"
-			elseif r == 4 then
-				return "ehoverfacai_up0"
+	if aiDifficulty == "easy" then
+		if Spring.GetGameSeconds() >= 600 then
+			if aiUnits == "enabled" then
+			local r = math.random(0,4)
+				if r == 0 then
+					return "eairfacai_up0"
+				elseif r == 1 then
+					return "eallterrfacai_up0"
+				elseif r == 2 then
+					return "eamphifacai_up0"
+				elseif r == 3 then
+					return "ehbotfacai_up0"
+				elseif r == 4 then
+					return "ehoverfacai_up0"
+				end
+			elseif aiUnits == "disabled" then
+					return "elifterai"	
 			end
-		elseif aiUnits == "disabled" then
-				return "elifterai"	
+		else
+					return "eturretlightai"
 		end
-	else
-				return "esolar2"
+	elseif aiDifficulty == "hard" then
+		if Spring.GetGameSeconds() >= 300 then
+			if aiUnits == "enabled" then
+			local r = math.random(0,4)
+				if r == 0 then
+					return "eairfacai_up0"
+				elseif r == 1 then
+					return "eallterrfacai_up0"
+				elseif r == 2 then
+					return "eamphifacai_up0"
+				elseif r == 3 then
+					return "ehbotfacai_up0"
+				elseif r == 4 then
+					return "ehoverfacai_up0"
+				end
+			elseif aiUnits == "disabled" then
+					return "elifterai"	
+			end
+		else
+					return "eturretlightai"
+		end
 	end
 end
 ---------------------------------------------------------------- LIFTER QUEUES
