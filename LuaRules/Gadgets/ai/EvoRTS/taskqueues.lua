@@ -78,6 +78,9 @@ function RandomT3()
 	end
 end
 function RandomFac()
+	--Spring.Echo("[Shard] AI Difficulty is set to " .. aiDifficulty)
+	--Spring.Echo("[Shard] Current gamesecond is " .. Spring.GetGameSeconds())
+	--Spring.Echo("[Shard] Units are " .. aiUnits)
 	if aiDifficulty == "easy" then
 		if Spring.GetGameSeconds() >= 600 then
 			if aiUnits == "enabled" then
@@ -125,7 +128,7 @@ end
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
-   local r = math.random(0,20)
+   local r = math.random(0,25)
 		if 	   r <= 2 then
 			return "elifterai"
 		elseif r == 3 then
@@ -168,25 +171,51 @@ end
 						return "esolar2"
 			end		
 		elseif r == 15 then
-			if Spring.GetGameSeconds() >= 600 then
-				if aiUnits == "enabled" then
-				local r = math.random(0,4)
-					if r == 0 then
-						return "eairfacai_up0"
-					elseif r == 1 then
-						return "eallterrfacai_up0"
-					elseif r == 2 then
-						return "eamphifacai_up0"
-					elseif r == 3 then
-						return "ehbotfacai_up0"
-					elseif r == 4 then
-						return "ehoverfacai_up0"
-					end
-				elseif aiUnits == "disabled" then
-						return "elifterai"	
+		--Spring.Echo("[Shard] AI Difficulty is set to " .. aiDifficulty)
+		--Spring.Echo("[Shard] Current gamesecond is " .. Spring.GetGameSeconds())
+		--Spring.Echo("[Shard] Units are " .. aiUnits)
+			if aiDifficulty == "easy" then
+				if Spring.GetGameSeconds() >= 600 then
+					if aiUnits == "enabled" then
+					local r = math.random(0,4)
+						if r == 0 then
+							return "eairfacai_up0"
+						elseif r == 1 then
+							return "eallterrfacai_up0"
+						elseif r == 2 then
+							return "eamphifacai_up0"
+						elseif r == 3 then
+							return "ehbotfacai_up0"
+						elseif r == 4 then
+							return "ehoverfacai_up0"
+						end
+						elseif aiUnits == "disabled" then
+							return "elifterai"	
+						end
+				else
+						return "eturretlightai"
 				end
-			else
-						return "esolar2"
+			elseif aiDifficulty == "hard" then
+				if Spring.GetGameSeconds() >= 300 then
+					if aiUnits == "enabled" then
+					local r = math.random(0,4)
+						if r == 0 then
+							return "eairfacai_up0"
+						elseif r == 1 then
+							return "eallterrfacai_up0"
+						elseif r == 2 then
+							return "eamphifacai_up0"
+						elseif r == 3 then
+							return "ehbotfacai_up0"
+						elseif r == 4 then
+							return "ehoverfacai_up0"
+						end
+				elseif aiUnits == "disabled" then
+							return "elifterai"	
+					end
+				else
+						return "eturretlightai"
+				end
 			end
 		else
 			return "emetalextractor"		
@@ -202,9 +231,11 @@ local idlelist = {
 
 	local overseerlistfirst = {
 	"emetalextractor",
-	"esolar2",
+	"emetalextractor",
 	"emetalextractor",
 	"elifterai",
+	"esolar2",
+	"emetalextractor",
 	"esolar2",
 	"emetalextractor",
 	"esolar2",
