@@ -34,7 +34,7 @@ local sbyte = string.byte
 local sreverse = string.reverse
 local mmax = math.max
 local glGetTextWidth = gl.GetTextWidth
-local sGetPlayerRoster = Spring.GetPlayerRoster
+local sGetPlayerRoster = GetPlayerRoster
 local sGetTeamColor = Spring.GetTeamColor
 local sGetMyAllyTeamID = Spring.GetMyAllyTeamID
 local sGetModKeyState = Spring.GetModKeyState
@@ -111,6 +111,28 @@ local function RedUIchecks()
 	end
 	IncludeRedUIFrameworkFunctions()
 	return true
+end
+
+local function GetPlayerRoster()
+PlayerRoster = {}
+	if Engine and Engine.version then
+	PlayerList = Spring.GetPlayerList()
+	for ct,playerID in pairs(PlayerList) do
+		PlayerInfo = {Spring.GetPlayerInfo(playerID)}
+		PlayerRoster[ct] = {}
+		PlayerRoster[ct][1] = PlayerInfo[1]
+		PlayerRoster[ct][2] = playerID
+		PlayerRoster[ct][3] = PlayerInfo[4]
+		PlayerRoster[ct][4] = PlayerInfo[5]
+		PlayerRoster[ct][5] = PlayerInfo[3]
+		PlayerRoster[ct][6] = PlayerInfo[7]
+		PlayerRoster[ct][7] = PlayerInfo[6]
+		-- Spring.Echo(PlayerInfo)
+	end
+	return PlayerRoster
+	else
+	return Spring.GetPlayerRoster()
+	end
 end
 
 local function AutoResizeObjects() --autoresize v2
@@ -416,7 +438,7 @@ local function processLine(line,g,cfg,newlinecolor)
 	
 	g.vars.nextupdate = 0
 
-	local roster = sGetPlayerRoster()
+	local roster = GetPlayerRoster()
 	--[[DEBUG
 	for i,el in pairs(roster) do
 		if i==1 then
@@ -462,7 +484,11 @@ local function processLine(line,g,cfg,newlinecolor)
 			text = ssub(line,3)
             if ssub(line,1,3) == "> <" then --player speaking in battleroom
                 local i = sfind(ssub(line,4,slen(line)), ">")
-                name = ssub(line,4,i+2)
+				if (i) then
+					name = ssub(line,4,i+2)
+				else
+					name = "unknown"
+				end
             end
 		end		
     end
