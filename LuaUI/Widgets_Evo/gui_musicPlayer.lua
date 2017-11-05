@@ -194,11 +194,11 @@ local function createList()
 	
 	buttons['musicvolumeicon'] = {buttons['next'][3]+padding+padding, bottom+padding, buttons['next'][3]+((widgetHeight*widgetScale)), top-padding}
 	buttons['musicvolume'] = {buttons['musicvolumeicon'][3]+padding, bottom+padding, buttons['musicvolumeicon'][3]+padding+volumeWidth, top-padding}
-	buttons['musicvolume'][5] = buttons['musicvolume'][1] + (buttons['musicvolume'][3] - buttons['musicvolume'][1]) * (music_volume/100)
+	buttons['musicvolume'][5] = buttons['musicvolume'][1] + (buttons['musicvolume'][3] - buttons['musicvolume'][1]) * (music_volume/200)
 	
 	buttons['volumeicon'] = {buttons['musicvolume'][3]+padding+padding+padding, bottom+padding, buttons['musicvolume'][3]+((widgetHeight*widgetScale)), top-padding}
 	buttons['volume'] = {buttons['volumeicon'][3]+padding, bottom+padding, buttons['volumeicon'][3]+padding+volumeWidth, top-padding}
-	buttons['volume'][5] = buttons['volume'][1] + (buttons['volume'][3] - buttons['volume'][1]) * (volume/100)
+	buttons['volume'][5] = buttons['volume'][1] + (buttons['volume'][3] - buttons['volume'][1]) * (volume/200)
 	
 	local textsize = 11*widgetScale
 	local textYPadding = 8*widgetScale
@@ -324,10 +324,10 @@ end
 function widget:MouseMove(x, y)
 	if draggingSlider ~= nil then
 		if draggingSlider == 'musicvolume' then
-			changeMusicVolume(getSliderValue('musicvolume', x) * 100)
+			changeMusicVolume(getSliderValue('musicvolume', x) * 200)
 		end
 		if draggingSlider == 'volume' then
-			changeVolume(getSliderValue('volume', x) * 100)
+			changeVolume(getSliderValue('volume', x) * 200)
 		end
 	end
 end
@@ -360,12 +360,12 @@ function mouseEvent(x, y, button, release)
 		local button = 'musicvolume'
 		if isInBox(x, y, {buttons[button][1]-sliderWidth, buttons[button][2], buttons[button][3]+sliderWidth, buttons[button][4]}) then
 			draggingSlider = button
-			changeMusicVolume(getSliderValue(button, x) * 100)
+			changeMusicVolume(getSliderValue(button, x) * 200)
 		end
 		button = 'volume'
 		if isInBox(x, y, {buttons[button][1]-sliderWidth, buttons[button][2], buttons[button][3]+sliderWidth, buttons[button][4]}) then
 			draggingSlider = button
-			changeVolume(getSliderValue(button, x) * 100)
+			changeVolume(getSliderValue(button, x) * 200)
 		end
 	end
 	if release and draggingSlider ~= nil then
@@ -388,7 +388,7 @@ function mouseEvent(x, y, button, release)
 end
 function widget:IsAbove(mx, my)
 	if isInBox(mx, my, {left, bottom, right, top}) then
-  	local curVolume = Spring.GetConfigInt("snd_volmaster", 100)
+  	local curVolume = Spring.GetConfigInt("snd_volmaster", 200)
   	if volume ~= curVolume then
   		volume = curVolume
   		createList()
