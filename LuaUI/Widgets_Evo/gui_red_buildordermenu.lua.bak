@@ -187,45 +187,6 @@ local function AutoResizeObjects() --autoresize v2
 	end
 end
 
-
-local function esc(x)
-   return (x:gsub('%%', '%%%%')
-            :gsub('^%^', '%%^')
-            :gsub('%$$', '%%$')
-            :gsub('%(', '%%(')
-            :gsub('%)', '%%)')
-            :gsub('%.', '%%.')
-            :gsub('%[', '%%[')
-            :gsub('%]', '%%]')
-            :gsub('%*', '%%*')
-            :gsub('%+', '%%+')
-            :gsub('%-', '%%-')
-            :gsub('%?', '%%?'))
-end
-
-function wrap(str, limit)
-	limit = limit or 72
-	local here = 1
-	local buf = ""
-	local t = {}
-	str:gsub("(%s*)()(%S+)()",
-		function(sp, st, word, fi)
-			if fi-here > limit then
-				--# Break the line
-				here = st
-				table.insert(t, buf)
-				buf = word
-			else
-				buf = buf..sp..word  --# Append
-			end
-		end)
-	--# Tack on any leftovers
-	if(buf ~= "") then
-		table.insert(t, buf)
-	end
-	return t
-end
-
 local function CreateGrid(r)
 
 	local background2 = {"rectanglerounded",
