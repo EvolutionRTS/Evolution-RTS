@@ -24,12 +24,17 @@ local buttonTexture		= LUAUI_DIRNAME.."Images/button.dds"
 local barGlowCenterTexture = LUAUI_DIRNAME.."Images/barglow-center.dds"
 local barGlowEdgeTexture   = LUAUI_DIRNAME.."Images/barglow-edge.dds"
 
+local sound_queue_add = LUAUI_DIRNAME .. 'Sounds/buildbar_add.wav'
+local sound_queue_rem = LUAUI_DIRNAME .. 'Sounds/buildbar_rem.wav'
+local sound_button = LUAUI_DIRNAME .. 'Sounds/buildbar_waypoint.wav'
+
 local NeededFrameworkVersion = 9
 local CanvasX,CanvasY = 1272,734 --resolution in which the widget was made (for 1:1 size)
 --1272,734 == 1280,768 windowed
 
 --todo: build categories (eco | labs | defences | etc) basically sublists of buildcmds (maybe for regular orders too)
 
+local playSounds = true
 local iconScaling = true
 local largeInfo = false
 local shortcutsInfo = true
@@ -485,9 +490,15 @@ local function UpdateGrid(g,cmds,ordertype)
 		
 		icon.mouseclick = {
 			{1,function(mx,my,self)
+				if playSounds then
+					Spring.PlaySoundFile(sound_queue_add, 0.75, 'ui')
+				end
 				Spring.SetActiveCommand(Spring.GetCmdDescIndex(cmd.id),1,true,false,Spring.GetModKeyState())
 			end},
 			{3,function(mx,my,self)
+				if playSounds then
+					Spring.PlaySoundFile(sound_queue_rem, 0.75, 'ui')
+				end
 				Spring.SetActiveCommand(Spring.GetCmdDescIndex(cmd.id),3,false,true,Spring.GetModKeyState())
 			end},
 		}
@@ -712,6 +723,9 @@ local function UpdateGrid(g,cmds,ordertype)
 					g.page = 1
 				end
 				UpdateGrid(g,cmds,ordertype)
+				if playSounds then
+					Spring.PlaySoundFile(sound_button, 0.6, 'ui')
+				end
 			end},
 		}
 		g.backward.mouseclick={
@@ -721,6 +735,9 @@ local function UpdateGrid(g,cmds,ordertype)
 					g.page = g.pagecount
 				end
 				UpdateGrid(g,cmds,ordertype)
+				if playSounds then
+					Spring.PlaySoundFile(sound_button, 0.6, 'ui')
+				end
 			end},
 		}
 		g.backward.active = nil --activate
@@ -767,6 +784,16 @@ function widget:TextCommand(command)
 			Spring.Echo("Build/order menu icon shortcut info:  disabled")
 		end
 	end
+	if (string.find(command, "buildmenusounds") == 1  and  string.len(command) == 15) then
+		playSounds = not playSounds
+		--AutoResizeObjects()
+		Spring.ForceLayoutUpdate()
+		if playSounds then
+			Spring.Echo("Build/order menu sounds:  enabled")
+		else
+			Spring.Echo("Build/order menu sounds:  disabled")
+		end
+	end
 end
 
 function widget:Initialize()
@@ -790,11 +817,19 @@ function widget:Initialize()
   	return shortcutsInfo
   end
   WG['red_buildmenu'].setConfigLargeInfo = function(value)
-  	largeInfo = value
+    largeInfo = value
   end
+  WG['red_buildmenu'].getConfigPlaySounds = function()
+    return playSounds
+  end
+
   WG['red_buildmenu'].setConfigShortcutsInfo = function(value)
   	shortcutsInfo = value
   end
+
+	WG['red_buildmenu'].setConfigPlaySounds = function(value)
+		playSounds = value
+	end
 end
 
 local function onNewCommands(buildcmds,othercmds)
@@ -822,7 +857,7 @@ function widget:GetConfigData() --save config
 		Config.buildmenu.py = buildmenu.background.py * unscale
 		Config.ordermenu.px = ordermenu.background.px * unscale
 		Config.ordermenu.py = ordermenu.background.py * unscale
-		return {Config=Config, iconScaling=iconScaling, largeInfo=largeInfo, shortcutsInfo=shortcutsInfo}
+		return {Config=Config, iconScaling=iconScaling, largeInfo=largeInfo, shortcutsInfo=shortcutsInfo, playSounds=playSounds}
 	end
 end
 function widget:SetConfigData(data) --load config
@@ -839,6 +874,9 @@ function widget:SetConfigData(data) --load config
 		end
 		if (data.shortcutsInfo ~= nil) then
 			shortcutsInfo = data.shortcutsInfo
+		end
+		if (data.playSounds ~= nil) then
+			playSounds = data.playSounds
 		end
 	end
 end
@@ -1010,6 +1048,9 @@ function widget:KeyPress(key, mods, isRepeat)
 				end
 			end
 			if found ~= -1 and buildcmds[found] ~= nil then
+				if playSounds then
+					Spring.PlaySoundFile(sound_queue_add, 0.75, 'ui')
+				end
 				Spring.SetActiveCommand(Spring.GetCmdDescIndex(buildcmds[found].id),1,true,false,Spring.GetModKeyState())
 			end
 			building = -1
