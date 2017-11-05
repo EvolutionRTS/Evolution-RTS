@@ -10,6 +10,10 @@ function gadget:GetInfo()
 	}
 end
 
+if Spring.GetModOptions() == nil or Spring.GetModOptions().scoremode == nil or Spring.GetModOptions().scoremode == "disabled" then
+	return
+end
+
 --[[
 -------------------
 Before implementing this gadget, read this!!!
