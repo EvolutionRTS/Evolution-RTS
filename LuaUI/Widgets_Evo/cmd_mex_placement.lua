@@ -697,6 +697,8 @@ local function DoLine(x1, y1, z1, x2, y2, z2)
 end
 
 function widget:DrawWorldPreUnit()
+	if Spring.IsGUIHidden() then return end
+
 	-- Check command is to build a mex
 	local _, cmdID = spGetActiveCommand()
 	local peruse = spGetGameFrame() < 1 or spGetMapDrawMode() == 'metal'
@@ -741,7 +743,8 @@ function widget:DrawWorldPreUnit()
 end
 
 function widget:DrawWorld()
-	
+	if Spring.IsGUIHidden() then return end
+
 	-- Check command is to build a mex
 	local _, cmdID = spGetActiveCommand()
 	local peruse = spGetGameFrame() < 1 or spGetMapDrawMode() == 'metal'

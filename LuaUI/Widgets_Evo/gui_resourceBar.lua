@@ -341,7 +341,7 @@ function generateDisplayList()
 		gl.DeleteList(displayList)
 	end
 	displayList = gl.CreateList( function()
-				
+
 		-- start drawing
 		gl.PushMatrix()
 		
@@ -353,7 +353,7 @@ function generateDisplayList()
 		gl.Scale(widgetScale, widgetScale, 1)
 		
 		-- background
-	  gl.Color(0,0,0,0.8)
+	  	gl.Color(0,0,0,0.8)
 		RectRound(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin, 10)
 		
 		-- content area
@@ -363,12 +363,11 @@ function generateDisplayList()
 		if (WG['guishader_api'] ~= nil) then
 			WG['guishader_api'].InsertRect(supplyOffset-(bgmargin*0.8), -(bgmargin*0.8), metalOffset+metalBarWidth+(bgmargin*0.8), height+(bgmargin*0.8), 'resources')
 		end
-		
+
 		gl.Text(yellow .. "Energy", energyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
 		gl.Text(green .. "Supply", supplyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
 		gl.Text(skyblue .. "Metal", metalOffset+textOffsetX+29, textOffsetY, FontSize, "on")
-		
-	  
+
 	  gl.Texture(false)
 		
 	end)
@@ -382,7 +381,7 @@ function generateDisplayList2()
 		-- draw background (black / gray / black / ...)
 		-- background flashes when the player messed up their eco
 		local glowSize = (height/6) * 3.3
-		local glowAlpha = 0.12
+		local glowAlpha = 0.1
 		
 		gl.Color(bgSupplyR,bgSupplyG,0,0.33)
 		gl.Texture(barTexture)
@@ -402,7 +401,7 @@ function generateDisplayList2()
 		else
 			r, g, b = 1, 0.5, 0
 		end
-		
+
 		gl.Texture(barTexture)
 		-- gray bar for locked supply, black bar for unlocked supply, last bar for used supply
 		gl.Color(0.5,0.5,0.5,1)
