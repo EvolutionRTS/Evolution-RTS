@@ -111,7 +111,7 @@ options = {
 }
 
 local finiGroup = {}
-local myTeam
+local myTeam = Spring.GetMyTeamID()
 local selUnitDefs = {}
 local loadGroups = true
 local createdFrame = {}
@@ -137,40 +137,48 @@ local GetGameFrame		= Spring.GetGameFrame
 local IsGuiHidden		= Spring.IsGUIHidden
 local Echo				= Spring.Echo
 
- 	function printDebug( value )
- 		if ( debug ) then Echo( value )
- 		end
- 	end
+function printDebug( value )
+	if ( debug ) then Echo( value ) end
+end
 
-function widget:Initialize() 
-	local _, _, spec, team = Spring.GetPlayerInfo(Spring.GetMyPlayerID())
-	if spec then
-		widgetHandler:RemoveWidget()
-		return false
-	end
-	myTeam = team
+function widget:PlayerChanged(playerID)
+    if Spring.GetSpectatingState() then
+        widgetHandler:RemoveWidget()
+    end
+    myTeam = Spring.GetMyTeamID()
+end
+
+function widget:Initialize()
+    if Spring.IsReplay() or Spring.GetGameFrame() > 0 then
+        widget:PlayerChanged()
+    end
+	myTeam = Spring.GetMyTeamID()
+end
+
+function widget:GameStart()
+    widget:PlayerChanged()
 end
 
 function widget:DrawWorld()
-if not IsGuiHidden() then
-	local existingGroups = GetGroupList()
-	if options.groupnumbers.value then
-		for inGroup, _ in pairs(existingGroups) do
-			units = GetGroupUnits(inGroup)
-			for _, unit in ipairs(units) do
-				if Spring.IsUnitInView(unit) then
-					local ux, uy, uz = Spring.GetUnitViewPosition(unit)
-					gl.PushMatrix()
-					gl.Translate(ux, uy, uz)
-					gl.Billboard()
-					gl.Color(textColor)--unused anyway when gl.Text have option 's' (and b & w)
-					gl.Text("" .. inGroup, 30.0, -10.0, textSize, "cns")
-					gl.PopMatrix()
+	if not IsGuiHidden() then
+		local existingGroups = GetGroupList()
+		if options.groupnumbers.value then
+			for inGroup, _ in pairs(existingGroups) do
+				units = GetGroupUnits(inGroup)
+				for _, unit in ipairs(units) do
+					if Spring.IsUnitInView(unit) then
+						local ux, uy, uz = Spring.GetUnitViewPosition(unit)
+						gl.PushMatrix()
+						gl.Translate(ux, uy, uz)
+						gl.Billboard()
+						gl.Color(textColor)--unused anyway when gl.Text have option 's' (and b & w)
+						gl.Text("" .. inGroup, 20.0, -10.0, textSize, "cns")
+						gl.PopMatrix()
+					end
 				end
 			end
 		end
-	else end
-end
+	end
 end
 
 function widget:UnitFinished(unitID, unitDefID, unitTeam)
