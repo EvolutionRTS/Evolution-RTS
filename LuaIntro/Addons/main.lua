@@ -25,6 +25,19 @@ end
 local font = gl.LoadFont("FreeSansBold.otf", 70, 22, 1.15)
 
 function DrawRectRound(px,py,sx,sy,cs)
+
+	local csx = cs
+	local csy = cs
+	if sx-px < (cs*2) then
+		csx = (sx-px)/2
+		if csx < 0 then csx = 0 end
+	end
+	if sy-py < (cs*2) then
+		csy = (sy-py)/2
+		if csy < 0 then csy = 0 end
+	end
+	cs = math.min(csx, csy)
+
 	gl.TexCoord(0.8,0.8)
 	gl.Vertex(px+cs, py, 0)
 	gl.Vertex(sx-cs, py, 0)
@@ -117,8 +130,8 @@ function addon.DrawLoadScreen()
 	local loadvalue = 0.2 + (math.max(0, loadProgress) * 0.6)
 	
 	--bar bg
-	local paddingW = 0.004 * (vsy/vsx)
 	local paddingH = 0.004
+	local paddingW = paddingH * (vsy/vsx)
 	gl.Color(0.06,0.06,0.06,0.8)
 	RectRound(0.2-paddingW,0.1-paddingH,0.8+paddingW,0.15+paddingH,0.007)
 	
