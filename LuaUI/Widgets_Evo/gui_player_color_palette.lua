@@ -13,6 +13,9 @@ end
 local randomize = false					-- randomize player colors
 local offsetstartcolor = true		-- when false it will always use red as start color, when true it starts with an offset towards center of rgb hue palette more in effect with small playernumbers
 
+local GaiaTeam = Spring.GetGaiaTeamID()
+local GaiaTeamColor = {255,0,0 }
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -50,7 +53,7 @@ local function GetColor(i, teams)
 	local h = 0
 	--if i > (teams * 0.33) then l = 0.7 end
 	--if i > (teams * 0.66) then l = 0.3 end
-	if teams > 12 then
+	if teams > 10 then
 		if i%3==0 then
 			l = 0.88
 		end
@@ -58,7 +61,7 @@ local function GetColor(i, teams)
 			l = 0.25
 		end
 	else
-		if teams > 8 then
+		if teams > 6 then
 			if i%2==0 then
 				l = 0.8
 			end
@@ -71,14 +74,14 @@ local function GetColor(i, teams)
 	local r,g,b = 0,0,0
 	local hueteams = teams
 	local useHueRGB = true
-	if teams > 9 then
+	if teams > 7 then
 		hueteams = hueteams - 1
 		if i == teams then
 			r,g,b = 0.5, 0.5, 0.5
 			useHueRGB = false
 		end
 	end
-	if teams > 13 then
+	if teams > 11 then
 		hueteams = hueteams - 1
 	 	if i == teams-1 then
 			r,g,b = 0.9, 0.9, 0.9
@@ -125,16 +128,20 @@ local function SetNewTeamColors()
 	local i = 0
 	for _, allyID in ipairs(allyTeamList) do
 		for _, teamID in ipairs(Spring.GetTeamList(allyID)) do
-			if randomize then
-				i = GetShuffledNumber(i, numteams)
+			if teamID == GaiaTeam then
+				Spring.SetTeamColor(teamID, GaiaTeamColor[1],GaiaTeamColor[2],GaiaTeamColor[3])
 			else
-				i = i + 1
+				if randomize then
+					i = GetShuffledNumber(i, numteams)
+				else
+					i = i + 1
+				end
+				local r,g,b = GetColor(i, numteams, numallyteams)
+
+				local _, playerID = Spring.GetTeamInfo(teamID)
+				local name = playerID and Spring.GetPlayerInfo(playerID) or 'noname'
+				Spring.SetTeamColor(teamID, r,g,b)
 			end
-			local r,g,b = GetColor(i, numteams, numallyteams)
-			
-			local _, playerID = Spring.GetTeamInfo(teamID)
-			local name = playerID and Spring.GetPlayerInfo(playerID) or 'noname'
-			Spring.SetTeamColor(teamID, r,g,b)
 		end
 	end
 end
