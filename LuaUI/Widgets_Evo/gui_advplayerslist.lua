@@ -137,6 +137,8 @@ local pics = {
 	resourcesPic    = imageDirectory.."res.png",
 	resbarPic       = imageDirectory.."resbar.png",
 	resbarBgPic     = imageDirectory.."resbarBg.png",
+    barGlowCenterPic= imageDirectory.."barglow-center.dds",
+    barGlowEdgePic	= imageDirectory.."barglow-edge.dds",
 
 	cpuPingPic      = imageDirectory.."cpuping.dds",
 	specPic         = imageDirectory.."spec.png",
@@ -209,6 +211,10 @@ local myLastCameraState
 --------------------------------------------------------------------------------
 -- 
 --------------------------------------------------------------------------------
+
+local playSounds = true
+local buttonclick = LUAUI_DIRNAME .. 'Sounds/buildbar_waypoint.wav'
+local sliderdrag = LUAUI_DIRNAME .. 'Sounds/buildbar_rem.wav'
 
 local lastActivity = {}
 local lastFpsData = {}
@@ -789,22 +795,33 @@ function widget:Initialize()
 	WG['advplayerlist_api'].GetLockPlayerID = function()
 		return lockPlayerID
 	end
+    WG['advplayerlist_api'].SetLockPlayerID = function(playerID)
+        if playerID ~= nil then
+            lockPlayerID = lockPlayerID
+        else
+            lockPlayerID = nil
+            if myLastCameraState ~= nil then
+                SetCameraState(myLastCameraState, transitionTime)
+            end
+        end
+    end
 end
 
-function widget:GameStart()
-	
-	mySpecStatus,_,_ = Spring.GetSpectatingState()
-	if mySpecStatus then 
-		specListShow = true
-	else
-		specListShow = false
+function widget:GameFrame(n)
+	if n > 0 and not gameStarted then
+		mySpecStatus,_,_ = Spring.GetSpectatingState()
+		if mySpecStatus then
+			specListShow = true
+		else
+			specListShow = false
+		end
+
+		gameStarted = true
+		SetSidePics()
+		InitializePlayers()
+		SetOriginalColourNames()
+		SortList()
 	end
-	
-	gameStarted = true
-	SetSidePics()
-	InitializePlayers()
-	SetOriginalColourNames()
-	SortList()
 end
 
 
@@ -873,7 +890,7 @@ function GetAllPlayers()
 		for _,playerID in ipairs(teamPlayers) do
 			player[playerID] = CreatePlayer(playerID)
 		end
-		playerSpecs[i] = true
+		playerSpecs[i] = true		-- (this isnt correct when team consists of only AI)
 	end
 	specPlayers = Spring_GetTeamList()
 	for _,playerID in ipairs(specPlayers) do
@@ -1318,7 +1335,7 @@ end
 
 function SortSpecs(vOffset)
 	-- Adds specs to the draw list
-	local playersList = Spring_GetPlayerList(_,true)
+	local playersList = Spring_GetPlayerList(-1,true)
 	local noSpec = true
 	for _,playerID in ipairs(playersList) do
 		_,active,spec = Spring_GetPlayerInfo(playerID)
@@ -1380,16 +1397,16 @@ function widget:DrawScreen()
 	local scaleDiffY = -((widgetPosY*widgetScale)-widgetPosY)/widgetScale
 	gl.Scale(widgetScale,widgetScale,0)
 	gl.Translate(scaleDiffX,scaleDiffY,0)
-	
+
 	
 	-- update lists frequently if there is mouse interaction
 	local NeedUpdate = false 
 	local mouseX,mouseY = Spring_GetMouseState()
 	if (mouseX > widgetPosX + m_name.posX + m_name.width - 5) and (mouseX < widgetPosX + widgetWidth) and (mouseY > widgetPosY - 16) and (mouseY < widgetPosY + widgetHeight) then
 		local DrawFrame = Spring_GetDrawFrame()
-		local GameFrame = Spring_GetGameFrame()
-		if PrevGameFrame == nil then PrevGameFrame = GameFrame end
-		if (DrawFrame%5==0) or (GameFrame>PrevGameFrame+1) then
+		local CurGameFrame = Spring_GetGameFrame()
+		if PrevGameFrame == nil then PrevGameFrame = CurGameFrame end
+		if (DrawFrame%5==0) or (CurGameFrame>PrevGameFrame+1) then
 			--Echo(DrawFrame)
 			NeedUpdate = true
 		end
@@ -1398,7 +1415,7 @@ function widget:DrawScreen()
 	if NeedUpdate then
 		--Spring.Echo("DS APL update")
 		CreateLists()
-		PrevGameFrame = GameFrame
+		PrevGameFrame = CurGameFrame
 	end
 	
 	-- draws the background
@@ -1450,7 +1467,7 @@ end
 --  Background gllist
 ---------------------------------------------------------------------------------------------------
 
-local function DrawRectRound(px,py,sx,sy,cs)
+local function DrawRectRound(px,py,sx,sy,cs,ignoreBorder)
 	gl.TexCoord(0.8,0.8)
 	gl.Vertex(px+cs, py, 0)
 	gl.Vertex(sx-cs, py, 0)
@@ -1470,7 +1487,7 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	local offset = 0.05		-- texture offset, because else gaps could show
 	
 	-- top left
-	if py+((sy-py)*widgetScale) >= vsy-backgroundMargin or px <= backgroundMargin then o = 0.5 else o = offset end
+	if (py+((sy-py)*widgetScale) >= vsy-backgroundMargin or px <= backgroundMargin) and ignoreBorder == nil then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, sy, 0)
 	gl.TexCoord(o,1-o)
@@ -1480,7 +1497,7 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	gl.TexCoord(1-o,o)
 	gl.Vertex(px, sy-cs, 0)
 	-- top right
-	if py+((sy-py)*widgetScale) >= vsy-backgroundMargin or (px+((sx-px)*widgetScale)) >= vsx-backgroundMargin then o = 0.5 else o = offset end
+	if (py+((sy-py)*widgetScale) >= vsy-backgroundMargin or (px+((sx-px)*widgetScale)) >= vsx-backgroundMargin) and ignoreBorder == nil  then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, py, 0)
 	gl.TexCoord(o,1-o)
@@ -1490,7 +1507,7 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	gl.TexCoord(1-o,o)
 	gl.Vertex(px, py+cs, 0)
 	-- bottom left
-	if py <= backgroundMargin or px <= backgroundMargin then o = 0.5 else o = offset end
+	if (py <= backgroundMargin or px <= backgroundMargin) and ignoreBorder == nil  then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, py, 0)
 	gl.TexCoord(o,1-o)
@@ -1500,7 +1517,7 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	gl.TexCoord(1-o,o)
 	gl.Vertex(sx, py+cs, 0)
 	-- bottom right
-	if py <= backgroundMargin or (px+((sx-px)*widgetScale)) >= vsx-backgroundMargin then o = 0.5 else o = offset end
+	if (py <= backgroundMargin or (px+((sx-px)*widgetScale)) >= vsx-backgroundMargin) and ignoreBorder == nil  then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, sy, 0)
 	gl.TexCoord(o,1-o)
@@ -1510,9 +1527,9 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	gl.TexCoord(1-o,o)
 	gl.Vertex(sx, sy-cs, 0)
 end
-function RectRound(px,py,sx,sy,cs)		-- (coordinates work differently than the RectRound func in other widgets)
+function RectRound(px,py,sx,sy,cs,ignoreBorder)		-- (coordinates work differently than the RectRound func in other widgets)
 	gl.Texture(bgcorner)
-	gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs)
+	gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs,ignoreBorder)
 	gl.Texture(false)
 end
 
@@ -1543,7 +1560,7 @@ function CreateBackground()
 		
 		local padding = 2.75
 		gl_Color(1,1,1,0.022)
-		RectRound(BLcornerX+padding,BLcornerY+padding,TRcornerX-padding,TRcornerY-padding,padding)
+		RectRound(BLcornerX+padding,BLcornerY+padding,TRcornerX-padding,TRcornerY-padding,padding,true)
 		
 		--DrawRect(BLcornerX,BLcornerY,TRcornerX,TRcornerY)
 		-- draws highlight (top and left sides)
@@ -1954,13 +1971,36 @@ function DrawResources(energy, energyStorage, metal, metalStorage, posY)
 	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 7, m_resources.posX + widgetPosX + paddingLeft + barWidth, posY + 5)	
 	gl_Color(1,1,1,1)
 	gl_Texture(pics["resbarPic"])
-	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 7, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + 5)	
-	gl_Color(1,1,0,0.14)
+	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 7, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + 5)
+
+    if ((barWidth/metalStorage)*metal) > 0.8 then
+        local glowsize = 12
+        gl_Color(1,1,1.2,0.033)
+        gl_Texture(pics["barGlowCenterPic"])
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 7+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + 5-glowsize)
+
+        gl_Texture(pics["barGlowEdgePic"])
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft-(glowsize*1.8), posY + 7+glowsize, m_resources.posX + widgetPosX + paddingLeft, posY + 5-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal)+(glowsize*1.8), posY + 7+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + 5-glowsize)
+    end
+
+    gl_Color(1,1,0,0.14)
 	gl_Texture(pics["resbarBgPic"])
 	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 11, m_resources.posX + widgetPosX + paddingLeft + barWidth, posY + 9)	
 	gl_Color(1,1,0,1)
 	gl_Texture(pics["resbarPic"])
-	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 11, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + 9)	
+	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 11, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + 9)
+
+    if ((barWidth/energyStorage)*energy) > 0.8 then
+        local glowsize = 12
+        gl_Color(1,1,0.2,0.033)
+        gl_Texture(pics["barGlowCenterPic"])
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 11+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + 9-glowsize)
+
+        gl_Texture(pics["barGlowEdgePic"])
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft-(glowsize*1.8), posY + 11+glowsize, m_resources.posX + widgetPosX + paddingLeft, posY + 9-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy)+(glowsize*1.8), posY + 11+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + 9-glowsize)
+    end
 end
 
 function DrawChips(playerID, posY)
@@ -2395,7 +2435,7 @@ function PingCpuTip(mouseX, pingLvl, cpuLvl, fps, system, name)
 			tipText = "FPS: "..fps.."    "..tipText
 		end
 		if system ~= nil then 
-			tipText = "\255\000\000\000"..name.."\n\255\255\255\255"..tipText.."\n"..system
+			tipText = "\255\000\000\000"..name.."\n\255\233\180\180"..tipText.."\n\255\240\240\240"..system
 		end
 	end
 end
@@ -2414,6 +2454,13 @@ function PointTip(mouseX)
 end
 
 
+function stringToLines(str)
+  local t = {}
+  local function helper(line) table.insert(t, line) return "" end
+  helper((str:gsub("(.-)\r?\n", helper)))
+  return t
+end
+
 	
 function DrawTip(mouseX, mouseY)
 	
@@ -2425,38 +2472,45 @@ function DrawTip(mouseX, mouseY)
 	
 	text = tipText --this is needed because we're inside a gllist
 	if text ~= nil then
-		local tw = (14*gl_GetTextWidth(text) + 16)*widgetScale
+		local fontSize = 14*widgetScale
+		local tw = fontSize*gl_GetTextWidth(text) + (20*widgetScale)
 		local _, lines = string.gsub(text, "\n", "")
 		lines = lines + 1
-		local th = (((14*widgetScale) * lines) + (13*widgetScale))
 		
-		--Spring.Echo(lines)
+		local lineHeight = fontSize + (fontSize/4.5)
+		local th = lineHeight * lines + (fontSize*0.75)
+		
 		if right ~= true then tw = -tw end
 		local oldWidgetScale = widgetScale
 		widgetScale = 1
 
 		local bottomY = mouseY-(th-(26*oldWidgetScale))
 		local ycorrection = 0
-		if bottomY < 0 then ycorrection = 8-bottomY end
+		if bottomY < 0 then ycorrection = (15*widgetScale)-bottomY end
 		
-		gl_Color(0.7,0.7,0.7,0.7)
-		RectRound(mouseX-tw,bottomY+ycorrection,mouseX,mouseY+(26*oldWidgetScale)+ycorrection,4.5*oldWidgetScale)
+		local padding = -1.8*oldWidgetScale
+		gl_Color(0.8,0.8,0.8,0.75)
+		RectRound(mouseX-tw+padding, bottomY+ycorrection+padding, mouseX-padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding,4.5*oldWidgetScale)
 		
-		local padding = 1.8*oldWidgetScale
-		gl_Color(0,0,0,0.22)
+		padding = 0*oldWidgetScale
+		gl_Color(0,0,0,0.28)
 		RectRound(mouseX-tw+padding, bottomY+ycorrection+padding, mouseX-padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding, 3.5*oldWidgetScale)
 		
 		widgetScale = oldWidgetScale
-		--gl_Rect(mouseX-tw,mouseY,mouseX,mouseY+(30*widgetScale)) 
-		gl_Color(1,1,1,1)
-		if right == true then
-			gl_Text(text,mouseX+(8*widgetScale)-tw,mouseY+(8*widgetScale)+ycorrection, (14*widgetScale), "o")
-		else
-			gl_Text(text,mouseX+(8*widgetScale),mouseY+(8*widgetScale)+ycorrection, (14*widgetScale), "o")
+	
+		-- draw text
+		local textLines = stringToLines(text)
+		th = 0
+		gl.BeginText()
+		for i, line in ipairs(textLines) do
+			gl_Text('\255\244\244\244'..line, mouseX+(8*widgetScale)-tw, mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
+			th = th - lineHeight
 		end
+		gl.EndText()
 	end
 	tipText = nil
-	
+
+	gl.Color(1,1,1,1)
 	gl.Scale(widgetScale,widgetScale,0)
 	gl.Translate(scaleDiffX,scaleDiffY,0)
 end
@@ -2746,8 +2800,12 @@ function widget:MouseMove(x,y,dx,dy,button)
 		sliderPosition = (y-sliderOrigin) * (1/widgetScale)
 		if sliderPosition < 0 then sliderPosition = 0 end
 		if sliderPosition > 39 then sliderPosition = 39 end
-		
+        local prevAmountEM = amountEM
 		UpdateResources()
+        if playSounds and (lastSliderSound == nil or os.clock() - lastSliderSound > 0.05) and amountEM ~= prevAmountEM then
+            lastSliderSound = os.clock()
+            Spring.PlaySoundFile(sliderdrag, 0.3, 'ui')
+        end
 	end
 end
 
