@@ -12,8 +12,8 @@ local unitDef	=	{
 ]],
 	objectName			= "ammobox2.s3o",		-- for christmas: 'xmasball.3so'
 	script 				= 'energycore.lua',		-- for christmas: 'xmasball.lua'
-	collisionvolumeoffsets = "0 0 0",
-	collisionvolumescales = "10 10 10",
+	collisionvolumeoffsets = "0 6 0",
+	collisionvolumescales = "12 12 12",
 	collisionvolumetype = "Box",
 	footprintx			= 1,
 	footprintz			= 1,
