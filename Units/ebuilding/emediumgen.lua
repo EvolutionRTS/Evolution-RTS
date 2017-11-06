@@ -20,7 +20,6 @@ local unitDef                     = {
 	buildTime                     = 5,
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR ECO",
-	corpse                        = "ammobox",
 	damageModifier                = 0.33333,
 	description                   = [[Armortype: ]] ..armortype.. [[ 
 
@@ -85,7 +84,8 @@ Provides +]] .. powerprovided,
 --		supply_granted            = supplygranted,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	              = "outer_colonies",  
+		factionname	              = "outer_colonies",
+		corpse                   = "energycore",
 --		groundtexselectimg        = ":nc:bitmaps/power/power.png",
 --		groundtexselectimg1       = ":nc:bitmaps/power/power1.png",
 --		groundtexselectimg2       = ":nc:bitmaps/power/power2.png",

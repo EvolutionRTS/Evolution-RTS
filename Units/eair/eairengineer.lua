@@ -43,7 +43,6 @@ local unitDef                    = {
 	canstop                      = true,
 	category                     = "LIGHT VTOL",
 	collide                      = true,
-	corpse                       = "ammobox",
 	cruiseAlt                    = 300,
 	description                  = [[Builds Units]],
 	energyMake                   = 0,
@@ -120,6 +119,7 @@ local unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
 		helptext				 = [[Armortype: ]] .. armortype,
+		corpse                   = "energycore",
 	},
 }
 

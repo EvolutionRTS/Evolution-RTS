@@ -24,7 +24,6 @@ local unitDef                  = {
 	canstop                    = "1",
 	category                   = "ARMORED NOTAIR",
 	copyright                  = "Copyright 1997 Humongous Entertainment. All rights reserved.",
-	corpse                     = "ammobox",
 	defaultmissiontype         = "Standby",
 	description                = "Assault Tank Upgrade 2",
 	designation                = "",
@@ -107,7 +106,8 @@ local unitDef                  = {
 		death_sounds           = "generic",
 		RequireTech            = "4 Power",
 		armortype              = "armored",
-		normaltex             = "unittextures/armregskinnormal.png", 
+		normaltex             = "unittextures/armregskinnormal.png",
+		corpse                   = "energycore",
 	},
 }
 

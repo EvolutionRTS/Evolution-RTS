@@ -21,8 +21,6 @@ unitDef                      = {
 	collisionVolumeTest            = 1,
 	collisionVolumeType            = "box",
 
-	corpse                         = "ammobox",
-
 	-- Cloaking
 
 	cancloak		               = true,
@@ -91,6 +89,7 @@ unitDef                      = {
 		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                  = "unittextures/lego2skin_explorerbucket.dds",
 		factionname					= "outer_colonies",
+		corpse                   = "energycore",
 		--	ProvideTech            = "1 Powergrid",
 		--    ProvideTechRange     = "1500",
 		--	groundtexselectimg     = ":nc:bitmaps/power/powergrid.png",

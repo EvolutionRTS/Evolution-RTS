@@ -13,7 +13,6 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
-	corpse                       = "ammobox",
 
 	-- Cloaking
 
@@ -102,7 +101,8 @@ unitDef                    = {
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
+		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }
 

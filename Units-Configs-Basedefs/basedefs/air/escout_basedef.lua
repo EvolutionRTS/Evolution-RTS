@@ -14,7 +14,6 @@ unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT VTOL",
 	collide                      = false,
-	corpse                       = "ammobox",
 	cruiseAlt                    = 135,
 	description                  = [[Air Scout/Radar Plane]],
 	energyMake                   = 0,
@@ -80,6 +79,7 @@ unitDef                    = {
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
+		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }

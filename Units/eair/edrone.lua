@@ -35,7 +35,6 @@ local unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT VTOL DRONE",
 	collide                      = false,
-	--  corpse                   = "ammobox",
 	cruiseAlt                    = 100,
 	description                  = [[Gunship Drone]],
 	energyMake                   = 0,
@@ -107,7 +106,7 @@ local unitDef                    = {
 		nofriendlyfire	         = "1",
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",   
+		factionname	             = "outer_colonies",
 		helptext				 = [[Armortype: ]] .. armortype ..[[
 
 ]] .. weapon1Damage .. [[ Damage vs Light/Armored/Building]],

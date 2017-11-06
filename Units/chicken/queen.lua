@@ -21,7 +21,6 @@ local unitDef                    = {
 	canstop                      = "1",
 	cantBeTransported            = true,
 	category                     = "ARMORED NOTAIR SKIRMISHER",
-	corpse                       = "ammobox",
 	description                  =[[Primary Laser:
 	600 Damage/s vs Building
 	60 Damage/s vs Light/Armored
@@ -106,7 +105,8 @@ local unitDef                    = {
 		armortype                = "armored",
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
+		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }
 

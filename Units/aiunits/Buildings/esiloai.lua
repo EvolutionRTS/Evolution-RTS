@@ -31,7 +31,6 @@ local unitDef                     = {
 	canAttack                     = true,
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
-	corpse                        = "ammobox",
 	description                   = [[Nuclear Missile Silo]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
@@ -101,7 +100,8 @@ local unitDef                     = {
 		death_sounds              = "nuke",
 		armortype                 = "building",
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
-		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
+		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
+		corpse                   = "energycore",
 		helptext                  = [[Armortype: ]] ..armortype.. [[ 
 
 ]] .. weapon1Damage .. [[ Damage vs Light/Armored/Buildings

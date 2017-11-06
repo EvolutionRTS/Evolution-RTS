@@ -18,7 +18,6 @@ local unitDef                     = {
 	buildTime                     = 5,
 	canAttack			          = false,
 	category                      = "BUILDING NOTAIR",
-	corpse                        = "ammobox",
 	damageModifier                = 0.5,
 	description                   = [[Armortype: ]] ..armortype.. [[ 
 
@@ -84,6 +83,7 @@ Uses +]] .. supply .. [[ Supply]],
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
 		factionname	              = "outer_colonies",
 		helptext                  = [[]],
+		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

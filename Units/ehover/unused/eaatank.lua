@@ -41,7 +41,6 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR SUPPORT",
-	corpse                       = "ammobox",
 	defaultmissiontype           = "Standby",
 	description                  = [[Unit Type: Anti-Air Support Tank
 Armortype: ]] ..armortype.. [[ 
@@ -130,7 +129,8 @@ Uses +]] .. supply .. [[ Supply]],
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies", 
+		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 		helptext	             = [[]],
 },
 }

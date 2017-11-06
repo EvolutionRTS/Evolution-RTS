@@ -27,7 +27,6 @@ local unitDef                     = {
 	collisionVolumeTest           = 1,
 	collisionVolumeType           = "box",
 
-	corpse                        = "ammobox",
 	description                   = [[Provides +]] .. supplygranted .. [[ Supply • Provides +]] .. storage .. [[ Energy Storage]],
 	energyStorage                 = storage,
 	energyUse                     = 0,
@@ -86,6 +85,7 @@ local unitDef                     = {
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
 		helptext                  = [[]],
+		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

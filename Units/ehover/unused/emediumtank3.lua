@@ -27,7 +27,6 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR SKIRMISHER",
-	corpse                       = "ammobox",
 	description                  = [[Light Tank Destroyer
 	Light
 	200 Damage vs Armored
@@ -108,7 +107,8 @@ unitDef                    = {
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = 4,
-		normaltex               = "unittextures/emediumtank3normal.png", 
+		normaltex               = "unittextures/emediumtank3normal.png",
+		corpse                   = "energycore",
 		helptext	             = [[The brusier is a lightly armored tank destroyer, excellent versus raiders and other light units. Pair with light raiders and heavy tank destroyers for best results.
 		
 		It's description is a bit deceptive if you read it incorrectly. In truth, it decimates armored units. It is moderately effective vs light units and buildings.]],

@@ -26,7 +26,6 @@ local unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT SUB",
-	corpse                       = "ammobox",
 	description                  = "Anti-Amphibious Submarine",
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -93,7 +92,8 @@ local unitDef                    = {
 		canbetransported 		 = "true",
 		death_sounds             = "generic",
 		armortype                = "light",
-		normaltex               = "unittextures/esubplanenormal.png", 
+		normaltex               = "unittextures/esubplanenormal.png",
+		corpse                   = "energycore",
 	},
 
 }

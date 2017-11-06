@@ -15,7 +15,6 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RIOT",
-	corpse                       = "ammobox",
 
 	-- Cloaking
 
@@ -29,7 +28,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[EMP/Riot Tank • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[EMP/Riot Tank ï¿½ Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -111,6 +110,7 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }
 

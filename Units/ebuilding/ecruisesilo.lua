@@ -27,7 +27,6 @@ local unitDef                     = {
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
 
-	corpse                        = "ammobox",
 	description                   = [[Long Range Tactical Cruise Missile
 Armortype: ]] ..armortype.. [[ 
 
@@ -94,6 +93,7 @@ Energy cost while stockpiling missiles: ]] .. roundToFirstDecimal(energycosttofi
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds", 
 		helptext                  = [[]],
+		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

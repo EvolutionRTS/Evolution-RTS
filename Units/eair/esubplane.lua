@@ -32,7 +32,6 @@ local unitDef                    = {
 	--Collision Volumes... Because the engine devs are silly.
 	collisionVolumeScales        = [[35 35 35]],
 	--End Collision volumes
-	corpse                       = "ammobox",
 	cruiseAlt                    = 350,
 	description                  = "Stealth Sonar Plane - Can morph into a submarine",
 	energyMake                   = 0,
@@ -107,7 +106,8 @@ local unitDef                    = {
 		nofriendlyfire           = "1",
 		RequireTech              = "10 Power",
 		armortype                = "armored",
-		normaltex               = "unittextures/esubplanenormal.png", 
+		normaltex               = "unittextures/esubplanenormal.png",
+		corpse                   = "energycore",
 	},
 }
 

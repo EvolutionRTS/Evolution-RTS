@@ -10,7 +10,6 @@ unitDef                        = {
 	canstop                          = "1",
 	category                         = "BUILDING NOTAIR",
 	collisionVolumeTest              = "1",
-	corpse                           = "ammobox",
 	description                      = [[Anti-Amphibious Defense Platform • Uses +]] .. supply .. [[ Supply]],
 	energyStorage                    = 0,
 	energyUse                        = 0,
@@ -81,7 +80,8 @@ unitDef                        = {
 		armortype                    = armortype,
 		normaltex                    = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                    = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	                 = "outer_colonies", 
+		factionname	                 = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }
 

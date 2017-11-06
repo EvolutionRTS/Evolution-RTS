@@ -20,7 +20,6 @@ local unitDef                     = {
 	builder                       = false,
 	buildTime                     = 5,
 	category                      = "BUILDING NOTAIR",
-	corpse                        = "ammobox",
 	description                   = [[Radar Jamming Tower • Generates a Cloaking Field]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
@@ -75,6 +74,7 @@ local unitDef                     = {
 		armortype                 = armortype,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
+		corpse                   = "energycore",
 		
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 5, -- How much energy does it cost to maintain the cloaking field?

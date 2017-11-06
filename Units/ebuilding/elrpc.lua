@@ -21,7 +21,6 @@ local unitDef                     = {
 	collisionVolumeTest           = 1,
 	collisionVolumeType           = "box",
 
-	corpse                        = "ammobox",
 	description                   = [[Long Range Plasma Cannon - 100e Per Shot
 	Building
 	2000 Damage vs Buildings
@@ -89,6 +88,7 @@ local unitDef                     = {
 		armortype                 = "building",
 		normaltex                = "unittextures/elrpcnormal.png", 
 		helptext                  = [[]],
+		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

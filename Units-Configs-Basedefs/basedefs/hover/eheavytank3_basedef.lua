@@ -13,8 +13,7 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR SKIRMISHER",
-	corpse                       = "ammobox",
-	description                  = [[Main Battle Tank • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Main Battle Tank ï¿½ Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -93,7 +92,8 @@ unitDef                    = {
 		supply_cost              = supply,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
+		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	}
 }
 

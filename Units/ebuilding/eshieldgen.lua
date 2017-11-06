@@ -35,7 +35,6 @@ local unitDef                     = {
 	canAttack                     = false,
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
-	corpse                        = "ammobox",
 	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility • Shield can link with other shield units to increase charging and capacity]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
@@ -103,7 +102,8 @@ local unitDef                     = {
 		death_sounds              = "generic",
 		--ProvideTechRange          = "300",
 		armortype                 = armortype, 
-		normaltex                = "unittextures/eshieldgennormal.png", 
+		normaltex                = "unittextures/eshieldgennormal.png",
+		corpse                   = "energycore",
 		helptext                  = [[Armortype: ]] ..armortype.. [[ 
 
 Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s

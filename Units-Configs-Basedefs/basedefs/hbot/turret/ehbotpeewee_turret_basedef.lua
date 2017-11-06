@@ -13,7 +13,6 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "BUILDING NOTAIR",
-	corpse                       = "ammobox",
 	description                  = [[Anti-Raider Turret • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -100,7 +99,8 @@ unitDef                    = {
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
+		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }
 

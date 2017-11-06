@@ -13,8 +13,7 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR SUPPORT",
-	corpse                       = "ammobox",
-	description                  = [[Self-Propelled Saturation Artillery • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Self-Propelled Saturation Artillery ï¿½ Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -95,7 +94,8 @@ unitDef                    = {
 		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",  
+		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }
 

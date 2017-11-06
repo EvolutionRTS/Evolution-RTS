@@ -14,18 +14,11 @@ end
 if (gadgetHandler:IsSyncedCode()) then
 
     local blockingEnergycores = {}
-    local energycoreDefID = FeatureDefNames['ammobox'].id
     local energycoreUnitDefID = UnitDefNames['energycore'].id
-    local gaiaTeam = Spring.GetGaiaTeamID()
-
-    function gadget:FeatureCreated(featureID, allyTeam)
-        if Spring.GetFeatureDefID(featureID) == energycoreDefID then
-            Spring.DestroyFeature(featureID)
-        end
-    end
+    --local gaiaTeam = Spring.GetGaiaTeamID()
 
     function gadget:UnitDestroyed(unitID, unitDefID, teamID, attackerID, attackerDefID, attackerTeamID)
-        if UnitDefs[unitDefID].wreckName ~= nil and UnitDefs[unitDefID].wreckName == 'ammobox' then
+        if UnitDefs[unitDefID].customParams ~= nil and UnitDefs[unitDefID].customParams.corpse ~= nil and UnitDefs[unitDefID].customParams.corpse == 'energycore' then
             local x,y,z = Spring.GetUnitPosition(unitID)
             local unitID = Spring.CreateUnit(energycoreUnitDefID, x,y,z, 0, teamID)
         end

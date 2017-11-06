@@ -40,7 +40,6 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "LIGHT NOTAIR SUPPORT",
-	corpse                       = "ammobox",
 
 	-- Cloaking
 
@@ -126,7 +125,8 @@ local unitDef                    = {
 		death_sounds             = "generic",
 		armortype                = armortype,
 --		supply_cost              = supply,
-		normaltex               = "unittextures/con_legonormal.png", 
+		normaltex               = "unittextures/con_legonormal.png",
+		corpse                   = "energycore",
 	},
 }
 

@@ -16,7 +16,6 @@ unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT VTOL",
 	collide                      = true,
-	corpse                       = "ammobox",
 	cruiseAlt                    = 75,
 	description                  = [[Light Gunship • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
@@ -92,6 +91,7 @@ unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
+		corpse                   = "energycore",
 	},
 }
 

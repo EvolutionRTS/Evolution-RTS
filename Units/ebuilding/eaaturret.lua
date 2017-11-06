@@ -25,7 +25,6 @@ local unitDef                     = {
 	canAttack                     = true,
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
-	corpse                        = "ammobox",
 	description                   = [[Anti-Air Flak Turret
 Armortype: ]] ..armortype.. [[ 
 
@@ -93,6 +92,7 @@ Uses +]] .. supply .. [[ Supply]],
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  
 		helptext                  = [[]],
+		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

@@ -13,20 +13,17 @@ end
 if (gadgetHandler:IsSyncedCode()) then
 ---synced----
 
-	local Box="ammobox"
 	local Energycore="energycore"
+	local EnergyCoreId
+	local EnergycoresOnMap={}
 	local chickenEgg="chicken_egg"
 	local chickenEggB="chicken_eggb"
 	local chickenEggC="chicken_eggc"
 	local chickenEggD="chicken_eggd"
-	local BoxId
-	local EnergyCoreId
 	local eggId
 	local eggIdB
 	local eggIdC
 	local eggIdD
-	local BoxesOnMap={}
-	local EnergycoresOnMap={}
 	local eggsOnMap={}
 	local eggsOnMapB={}
 	local eggsOnMapC={}
@@ -36,13 +33,13 @@ if (gadgetHandler:IsSyncedCode()) then
 	local SpawnCEG = Spring.SpawnCEG
 
 	function gadget:Initialize()
-	BoxId = FeatureDefNames[Box].id
-	EnergycoreId = UnitDefNames[Energycore].id
-	eggId = FeatureDefNames["chicken_egg"].id
-	eggIdB = FeatureDefNames["chicken_eggb"].id
-	eggIdC = FeatureDefNames["chicken_eggc"].id
-	eggIdD = FeatureDefNames["chicken_eggd"].id
-	--Spring.Echo(Box, BoxId)
+		--BoxId = FeatureDefNames[Box].id
+		EnergycoreId = UnitDefNames[Energycore].id
+		eggId = FeatureDefNames["chicken_egg"].id
+		eggIdB = FeatureDefNames["chicken_eggb"].id
+		eggIdC = FeatureDefNames["chicken_eggc"].id
+		eggIdD = FeatureDefNames["chicken_eggd"].id
+		--Spring.Echo(Box, BoxId)
 
 		ud = Spring.GetAllFeatures ()
 		for n,u in pairs(ud) do
@@ -74,43 +71,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:GameFrame(f)
 	--Spring.Echo(eggsOnMap)
 		if f%10 == 1 then
-			for box,b in pairs(BoxesOnMap) do
-				--Spring.Echo("Box")
-				--Spring.Echo(BoxesOnMap)
-				local x,y,z = Spring.GetFeaturePosition(box)
-				local unitsInRange = Spring.GetUnitsInSphere(x,y,z, 500)--at x , y , z with radius 200
-				for _,unit in ipairs(unitsInRange) do
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycorecollect and select(5, Spring.GetUnitHealth(unit)) == 1 then
-						--local remM, maxM, remE, maxE, left = Spring.GetFeatureResources(box)   --- [1] is metal, [3] is energy
-						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "m", 5)
-						Spring.AddTeamResource(Spring.GetUnitTeam(unit) , "e", 5)
-						Spring.DestroyFeature(box)
-						local fx, fy, fz = Spring.GetFeaturePosition(box)
-						Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
-						SpawnCEG("sparklegreenplus5", fx, fy, fz)
-						BoxesOnMap[box] = nil
-						break
-					end
-					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycoredronespawner and select(5, Spring.GetUnitHealth(unit)) == 1 then
-						Spring.CreateUnit("edrone", x, y, z, 0, Spring.GetUnitTeam(unit))
-						Spring.DestroyFeature(box)
-						local fx, fy, fz = Spring.GetFeaturePosition(box)
-						Spring.PlaySoundFile("sounds/miscfx/energycoredronespawner.wav", 1, fx, fy, fz)
-						SpawnCEG("sparkleorangeplus1drone", fx, fy, fz)
-						BoxesOnMap[box] = nil
-						break
-					end
-					-- if (UnitDefs[Spring.GetUnitDefID(unit)].customParams.amphibenergycoredronespawner) then
-					-- Spring.CreateUnit("eamphibdrone", x, y, z, 0, Spring.GetUnitTeam(unit))
-					-- Spring.DestroyFeature(box)
-					-- local fx, fy, fz = Spring.GetFeaturePosition(box)
-					-- Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
-					-- SpawnCEG("sparklegreen", fx, fy, fz)
-					-- BoxesOnMap[box] = nil
-					-- break
-					-- end
-				end
-			end
 			for box,b in pairs(EnergycoresOnMap) do
 				--Spring.Echo("Box")
 				--Spring.Echo(BoxesOnMap)
@@ -125,7 +85,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						local fx, fy, fz = Spring.GetUnitPosition(box)
 						Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 						SpawnCEG("sparklegreenplus5", fx, fy, fz)
-						BoxesOnMap[box] = nil
+						EnergycoresOnMap[box] = nil
 						break
 					end
 					if UnitDefs[Spring.GetUnitDefID(unit)].customParams.energycoredronespawner and select(5, Spring.GetUnitHealth(unit)) == 1 then
@@ -134,7 +94,7 @@ if (gadgetHandler:IsSyncedCode()) then
 						local fx, fy, fz = Spring.GetUnitPosition(box)
 						Spring.PlaySoundFile("sounds/miscfx/energycoredronespawner.wav", 1, fx, fy, fz)
 						SpawnCEG("sparkleorangeplus1drone", fx, fy, fz)
-						BoxesOnMap[box] = nil
+						EnergycoresOnMap[box] = nil
 						break
 					end
 					-- if (UnitDefs[Spring.GetUnitDefID(unit)].customParams.amphibenergycoredronespawner) then
@@ -143,7 +103,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					-- local fx, fy, fz = Spring.GetUnitPosition(box)
 					-- Spring.PlaySoundFile("sounds/miscfx/boxcollection.wav", 1, fx, fy, fz)
 					-- SpawnCEG("sparklegreen", fx, fy, fz)
-					-- BoxesOnMap[box] = nil
+					-- EnergycoresOnMap[box] = nil
 					-- break
 					-- end
 				end
@@ -228,9 +188,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
    
 	function gadget:FeatureDestroyed(featureID, _)
-		if (BoxesOnMap[featureID]) then
-			BoxesOnMap[featureID] = nil
-		end
 		if (eggsOnMap[featureID]) then
 			eggsOnMap[featureID] = nil
 		end
@@ -246,9 +203,6 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
    
 	function gadget:FeatureCreated(featureID, allyTeam)
-		if (Spring.GetFeatureDefID(featureID) == BoxId) then
-			BoxesOnMap[featureID] = 1
-		end
 		if (Spring.GetFeatureDefID(featureID) == eggId) then
 			eggsOnMap[featureID] = 1
 		end

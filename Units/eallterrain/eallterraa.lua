@@ -25,7 +25,6 @@ local unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "ARMORED NOTAIR SKIRMISHER",
-	corpse                       = "ammobox",
 
 	-- Cloaking
 
@@ -115,6 +114,7 @@ local unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
 		helptext				 = [[]],
+		corpse                   = "energycore",
 	},
 }
 

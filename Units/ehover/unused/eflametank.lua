@@ -27,7 +27,6 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
-	corpse                       = "ammobox",
 	description                  = [[Flamethrower Raider
 	Light
 	200 Damage/s vs Buildings
@@ -115,7 +114,8 @@ unitDef                    = {
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = 3,
-		normaltex               = "unittextures/eflametanknormal.png", 
+		normaltex               = "unittextures/eflametanknormal.png",
+		corpse                   = "energycore",
 		helptext	             =	[[]],
 	},
 }
