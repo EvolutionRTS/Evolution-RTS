@@ -44,7 +44,7 @@ if (gadgetHandler:IsSyncedCode()) then
 	    wantedList[#wantedList + 1] = wd.id
       elseif normalShockwave then
 	    hasShockwave[wd.id] = {
-			life = 23*life, 
+			life = 17*life,
 			speed = speed,
 			growth = (wd.damageAreaOfEffect*1.1)/20*speed
 		}
