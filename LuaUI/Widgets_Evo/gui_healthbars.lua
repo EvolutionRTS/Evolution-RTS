@@ -55,7 +55,7 @@ local featureReclaimVisibility  = true      -- draw feature bars for reclaimed f
 
 local addGlow                   = false      -- adds a small subtle glow around the value of a bar	(has issues with overlapping bars)
 local glowSize					= outlineSize*6
-local glowAlpha					= 0.17
+local glowAlpha					= 0.15
 
 local minPercentageDistance     = 120000     -- always show health percentage text below this distance
 local infoDistance              = 800000
@@ -116,6 +116,13 @@ local barColors = {
   resurrect = { 1.00,0.50,0.00,barValueAlpha },
   reclaim   = { 0.75,0.75,0.75,barValueAlpha },
 }
+
+local ignoreUnits = {}
+for udefID,def in ipairs(UnitDefs) do
+  if def.customParams['nohealthbars'] then
+    ignoreUnits[udefID] = true
+  end
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -1020,6 +1027,7 @@ do
   local ci
 
   function DrawUnitInfos(unitID,unitDefID, ud)
+    if ignoreUnits[unitDefID] ~= nil then return end
     if (not customInfo[unitDefID]) then
       customInfo[unitDefID] = {
         height        = ud.height+barHeightOffset,

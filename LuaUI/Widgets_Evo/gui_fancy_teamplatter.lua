@@ -36,7 +36,13 @@ local circleDivs                        = 12      -- how precise circle? octagon
 local circleOpacity                     = 0.5
 local innerSize                         = 1.35    -- circle scale compared to unit radius
 local outerSize                         = 1.5    -- outer fade size compared to circle scale (1 = no outer fade)
-                                        
+
+local ignoreUnits = {}
+for udefID,def in ipairs(UnitDefs) do
+   if def.customParams['nohealthbars'] then
+      ignoreUnits[udefID] = true
+   end
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -168,9 +174,10 @@ function widget:DrawWorldPreUnit()
    if #visibleUnits then
       for i=1, #visibleUnits do
          local unitID = visibleUnits[i]
+         local unitDefIDValue = spGetUnitDefID(unitID)
+         if ignoreUnits[unitDefIDValue] then break end
          local teamID = spGetUnitTeam(unitID)
          if circlePolys[teamID] ~= nil then
-            local unitDefIDValue = spGetUnitDefID(unitID)
             if (unitDefIDValue) then
                local radius = GetUnitDefRealRadius(unitDefIDValue) * circleSize
                if (radius) then
