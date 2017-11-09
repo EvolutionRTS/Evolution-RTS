@@ -43,10 +43,10 @@ local FADE_TIME = 5
 local overrideParam = {r = 1, g = 1, b = 1, radius = 200}
 local doOverride = false
 
-local globalLightMult = 5
+local globalLightMult = 3
 local globalRadiusMult = 1.3
-local globalLightMultLaser = 1.35
-local globalRadiusMultLaser = 1.35	-- gets applied on top op globalRadiusMult
+local globalLightMultLaser = 1.3
+local globalRadiusMultLaser = 1.3	-- gets applied on top op globalRadiusMult
 
 local gibParams = {r = 0.145*globalLightMult, g = 0.1*globalLightMult, b = 0.05*globalLightMult, radius = 75*globalRadiusMult, gib = true}
 
@@ -475,53 +475,56 @@ local function GetProjectileLights(beamLights, beamLightCount, pointLights, poin
 	return beamLights, beamLightCount, pointLights, pointLightCount
 end
 
-
 local weaponConf = {}
-for i=1, #WeaponDefs do
-	local customParams = WeaponDefs[i].customParams or {}
-	if customParams.expl_light_skip == nil then
-		local params = {}
-		--local maxDamage = 0
-		--for armortype, value in pairs(WeaponDefs[i].damages) do
-		--	maxDamage = math.max(maxDamage, value)
-		--end
-		--local dmgBonus = math.sqrt(math.sqrt(math.sqrt(maxDamage)))
-		params.r, params.g, params.b = 1, 0.8, 0.4
-		params.radius = (WeaponDefs[i].damageAreaOfEffect*4.5)
-		params.orgMult = 0.35 + (params.radius/2400)
-		params.life = 14*(0.8+ params.radius/1200)
+function loadWeaponDefs()
+	weaponConf = {}
+	for i=1, #WeaponDefs do
+		local customParams = WeaponDefs[i].customParams or {}
+		if customParams.expl_light_skip == nil then
+			local params = {}
+			--local maxDamage = 0
+			--for armortype, value in pairs(WeaponDefs[i].damages) do
+			--	maxDamage = math.max(maxDamage, value)
+			--end
+			--local dmgBonus = math.sqrt(math.sqrt(math.sqrt(maxDamage)))
+			params.r, params.g, params.b = 1, 0.8, 0.4
+			params.radius = (WeaponDefs[i].damageAreaOfEffect*4.5) * globalRadiusMult
+			params.orgMult = (0.35 + (params.radius/2400)) * globalLightMult
+			params.life = 14*(0.8+ params.radius/1200)
 
-		if customParams.expl_light_color then
-			local colorList = Split(customParams.expl_light_color, " ")
-			params.r = colorList[1]
-			params.g = colorList[2]
-			params.b = colorList[3]
-		end
+			if customParams.expl_light_color then
+				local colorList = Split(customParams.expl_light_color, " ")
+				params.r = colorList[1]
+				params.g = colorList[2]
+				params.b = colorList[3]
+			end
 
-		if customParams.expl_light_opacity ~= nil then
-			params.orgMult = customParams.expl_light_opacity
-		end
+			if customParams.expl_light_opacity ~= nil then
+				params.orgMult = customParams.expl_light_opacity * globalLightMult
+			end
 
-		if customParams.expl_light_multiplier ~= nil then
-			params.orgMult = params.orgMult * customParams.expl_light_multiplier
-		end
+			if customParams.expl_light_multiplier ~= nil then
+				params.orgMult = params.orgMult * customParams.expl_light_multiplier
+			end
 
-		if customParams.expl_light_radius then
-			params.radius = tonumber(customParams.expl_light_radius)
-		end
-		if customParams.expl_light_radius_mult then
-			params.radius = params.radius * tonumber(customParams.expl_light_radius_mult)
-		end
-		if customParams.expl_light_life then
-			params.life = tonumber(customParams.expl_light_life)
-		end
-		if customParams.expl_light_life_mult then
-			params.life = params.life * tonumber(customParams.expl_light_life_mult)
-		end
+			if customParams.expl_light_radius then
+				params.radius = tonumber(customParams.expl_light_radius) * globalRadiusMult
+			end
+			if customParams.expl_light_radius_mult then
+				params.radius = params.radius * tonumber(customParams.expl_light_radius_mult)
+			end
+			if customParams.expl_light_life then
+				params.life = tonumber(customParams.expl_light_life)
+			end
+			if customParams.expl_light_life_mult then
+				params.life = params.life * tonumber(customParams.expl_light_life_mult)
+			end
 
-		weaponConf[i] = params
+			weaponConf[i] = params
+		end
 	end
 end
+loadWeaponDefs()
 
 -- function called by explosion_lights gadget
 function GadgetWeaponExplosion(px, py, pz, weaponID, ownerID)
@@ -546,9 +549,69 @@ end
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
+	loadWeaponDefs()
+
 	widgetHandler:RegisterGlobal('GadgetWeaponExplosion', GadgetWeaponExplosion)
 	if WG.DeferredLighting_RegisterFunction then
 		WG.DeferredLighting_RegisterFunction(GetProjectileLights)
 		projectileLightTypes = GetLightsFromUnitDefs()
+	end
+
+	WG['lighteffects'] = {}
+	WG['lighteffects'].getGlobalBrightness = function()
+		return globalLightMult
+	end
+	WG['lighteffects'].getGlobalRadius = function()
+		return globalRadiusMult
+	end
+	WG['lighteffects'].getGlobalBrightness = function()
+		return globalLightMultLaser
+	end
+	WG['lighteffects'].getLaserRadius = function()
+		return globalRadiusMultLaser
+	end
+	WG['lighteffects'].setGlobalBrightness = function(value)
+		globalLightMult = value
+		projectileLightTypes = GetLightsFromUnitDefs()
+		loadWeaponDefs()
+	end
+	WG['lighteffects'].setGlobalRadius = function(value)
+		globalRadiusMult = value
+		projectileLightTypes = GetLightsFromUnitDefs()
+		loadWeaponDefs()
+	end
+	WG['lighteffects'].setLaserBrightness = function(value)
+		globalLightMultLaser = value
+		projectileLightTypes = GetLightsFromUnitDefs()
+	end
+	WG['lighteffects'].setLaserRadius = function(value)
+		globalRadiusMultLaser = value
+		projectileLightTypes = GetLightsFromUnitDefs()
+	end
+
+end
+
+
+function widget:GetConfigData(data)
+	savedTable = {}
+	savedTable.globalLightMult = globalLightMult
+	savedTable.globalRadiusMult = globalRadiusMult
+	savedTable.globalLightMultLaser = globalLightMultLaser
+	savedTable.globalRadiusMultLaser = globalRadiusMultLaser
+	return savedTable
+end
+
+function widget:SetConfigData(data)
+	if data.globalLightMult ~= nil then
+		globalLightMult = data.globalLightMult
+	end
+	if data.globalRadiusMult ~= nil then
+		globalRadiusMult = data.globalRadiusMult
+	end
+	if data.globalLightMultLaser ~= nil then
+		globalLightMultLaser = data.globalLightMultLaser
+	end
+	if data.globalRadiusMultLaser ~= nil then
+		globalRadiusMultLaser = data.globalRadiusMultLaser
 	end
 end
