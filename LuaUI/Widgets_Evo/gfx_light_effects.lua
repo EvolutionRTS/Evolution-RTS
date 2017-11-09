@@ -43,7 +43,7 @@ local FADE_TIME = 5
 local overrideParam = {r = 1, g = 1, b = 1, radius = 200}
 local doOverride = false
 
-local globalLightMult = 1.25
+local globalLightMult = 5
 local globalRadiusMult = 1.3
 local globalLightMultLaser = 1.35
 local globalRadiusMultLaser = 1.35	-- gets applied on top op globalRadiusMult

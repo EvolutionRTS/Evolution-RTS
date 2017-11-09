@@ -315,7 +315,7 @@ end
 --------------------------------------------------------------------------------
 
 local function DrawAoE(tx, ty, tz, aoe, ee, alphaMult, offset)
-  glLineWidth(aoeLineWidthMult * aoe / mouseDistance)
+  glLineWidth(aoeLineWidthMult * aoe / mouseDistance + 0.00001)
   
   for i=1,numAoECircles do
     local proportion = i / (numAoECircles + 1)
