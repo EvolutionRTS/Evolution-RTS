@@ -234,6 +234,10 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		for id,unitDef in pairs(UnitDefs) do
 			unitDef.buildcostmetal = unitDef.buildcostmetal * 2
 			
+			if unitDef.customparams.corpse == "energycore" then
+				unitDef.corpse = "ammobox"
+			end
+			
 		-- Set building Hitpoints
 			if unitDef.customparams then
 				if unitDef.customparams.unittype == "building" then

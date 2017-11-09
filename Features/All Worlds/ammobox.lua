@@ -1,10 +1,10 @@
 local objectname= "ammobox" 
 local featureDef	=	{
 	name			= "ammobox",
-	description				=[[Energy Core
-	• Can be reclaimed for 5 Metal and 5 Energy by moving an O.R.B. in range
-	
-	• Can be converted to MidKnight Gunship Drone by moving a B.O.X. in range
+	description				=[[Energy Core (Dropped from destroyed units):
+	 
+Can be reclaimed for 5 Metal and 5 Energy by moving an O.R.B. in range
+Can be converted to MidKnight Gunship Drone by moving a B.O.X. in range
 ]],
 	object				="ammobox2.s3o",
 	footprintx				=1,
@@ -19,6 +19,7 @@ local featureDef	=	{
 	autoreclaimable				=false,
 	indestructible		= true,
 	smokeTime			= 0,
+	upright				= false,
 --	nodrawundergray				="1.0",
 
   customParams = {

@@ -46,6 +46,7 @@ local unitDef	=	{
 		provide_cover = 0,
 		nohealthbars = true,
 		needed_cover = 99999999,
+		cannotcloak = true,
 	},
 
 } 
