@@ -49,7 +49,7 @@ local unitDef                     = {
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	levelground                   = false,
-	maxDamage                     = 10,
+	maxDamage                     = 100,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 0,
 	metalStorage                  = 0,
@@ -98,7 +98,7 @@ local unitDef                     = {
 	},
 
 	customParams                  = {
-		unittype				  = "turret",
+		unittype				  = "landmine",
 		decloakradiusmodifier	  = 10,
 		needed_cover              = 1,
 		death_sounds              = "generic",
