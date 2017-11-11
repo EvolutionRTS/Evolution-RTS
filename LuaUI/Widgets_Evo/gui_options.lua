@@ -862,7 +862,7 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SetConfigInt("AdvSky",value)
 		elseif id == 'daynight' then
 			Spring.SetConfigInt("DynamicSun",value)
-			Spring.SetConfigString("DynamicSunMinElevation", "0.3")
+			Spring.SetConfigString("DynamicSunMinElevation", "0.1")
 		elseif id == 'shadows' then
 			Spring.SendCommands("Shadows "..value)
 		elseif id == 'vsync' then
