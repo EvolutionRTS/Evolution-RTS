@@ -115,6 +115,7 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 0,
 		advsky = false,
+		daynight = false,
 		outline = false,
 		guishader = false,
 		shadows = false,
@@ -138,6 +139,7 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 200,
 		advsky = false,
+		daynight = false,
 		outline = false,
 		guishader = false,
 		shadows = false,
@@ -161,6 +163,7 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 400,
 		advsky = false,
+		daynight = false,
 		outline = false,
 		guishader = false,
 		shadows = false,
@@ -184,6 +187,7 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 800,
 		advsky = true,
+		daynight = true,
 		outline = true,
 		guishader = true,
 		shadows = true,
@@ -207,6 +211,7 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 800,
 		advsky = true,
+		daynight = true,
 		outline = true,
 		guishader = true,
 		shadows = true,
@@ -855,6 +860,9 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SetConfigInt("AdvModelShading",value)
 		elseif id == 'advsky' then
 			Spring.SetConfigInt("AdvSky",value)
+		elseif id == 'daynight' then
+			Spring.SetConfigInt("DynamicSun",value)
+			Spring.SetConfigString("DynamicSunMinElevation", "0.3")
 		elseif id == 'shadows' then
 			Spring.SendCommands("Shadows "..value)
 		elseif id == 'vsync' then
@@ -1471,6 +1479,7 @@ function init()
 		{id="grassdetail", group="gfx", name="Grass", type="slider", min=0, max=10, step=1, value=tonumber(Spring.GetConfigInt("GrassDetail",1) or 5), description='Amount of grass rendered\n\nChanges will be applied next game'},
 		{id="treeradius", group="gfx", name="Tree render distance", type="slider", min=0, max=2000, step=50, value=tonumber(Spring.GetConfigInt("TreeRadius",1) or 1000), description='Applies to SpringRTS engine default trees\n\nChanges will be applied next game'},
 		{id="advsky", group="gfx", name="Advanced sky", type="bool", value=tonumber(Spring.GetConfigInt("AdvSky",1) or 1) == 1, description='Enables high resolution clouds\n\nChanges will be applied next game'},
+		{id="daynight", group="gfx", name="Day/Night Cycles", type="bool", value=tonumber(Spring.GetConfigInt("DynamicSun",1) or 1) == 1, description='Enables Day/Night Cycles\n\nChanges will be applied next game'},
 		{id="snow", group="gfx", widget="Snow", name="Snow", type="bool", value=GetWidgetToggleValue("Snow"), description='Snows at winter maps, auto reduces amount when fps gets lower and unitcount higher\n\nUse /snow to toggle snow for current map (it remembers)'},
 
 		-- SND
