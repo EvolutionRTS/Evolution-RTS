@@ -5,9 +5,11 @@ unitName = [[eturretheavyai]]
 
 --------------------------------------------------------------------------------
 
+buildCostMetal = 160
+
 isUpgraded	= [[0]]
 
-humanName = [[Immolator Mark]]
+humanName = [[Immolator Mark AI]]
 
 objectName = [[eheavyturret3.s3o]]
 script = [[eheavyturret2.cob]]

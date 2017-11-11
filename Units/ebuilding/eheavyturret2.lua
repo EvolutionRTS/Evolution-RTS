@@ -5,6 +5,8 @@ unitName = [[eheavyturret2]]
 
 --------------------------------------------------------------------------------
 
+buildCostMetal = 160
+
 isUpgraded	= [[0]]
 
 humanName = [[Immolator]]

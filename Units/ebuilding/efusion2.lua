@@ -7,10 +7,7 @@ local unitName                    = "efusion2"
 
 local armortype					 = [[building]]
 local techrequired				 = [[tech2]]
-local energyproduced			 = [[10]]
---local techprovided				 = [[1 Generator]]
---local powerradius				 = [[800]]
---local supplygranted				 = [[50]]
+local energyproduced			 = [[20]]
 
 local buildCostMetal 			  = 175
 local maxDamage					  = buildCostMetal * 12.5

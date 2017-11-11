@@ -5,6 +5,8 @@ unitName = [[elightturret2]]
 
 --------------------------------------------------------------------------------
 
+buildCostMetal = 100
+
 isUpgraded	= [[0]]
 
 humanName = [[Lightning Rod]]

@@ -19,7 +19,7 @@ local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
 end
 
-local buildCostMetal 			  = 1250
+local buildCostMetal 			  = 1750
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {

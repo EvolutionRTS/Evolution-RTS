@@ -5,6 +5,8 @@ unitName = [[elightturret2_up1]]
 
 --------------------------------------------------------------------------------
 
+buildCostMetal = 200
+
 isUpgraded	= [[1]]
 
 humanName = [[Lightning Rod Mark II]]

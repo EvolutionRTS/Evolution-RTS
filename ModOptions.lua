@@ -97,18 +97,6 @@ local options= {
 		type   = 'section',
 	},
 	{
-		key    = 'mexbasecostmultiplier',
-		name   = 'Metal Extractor Base Cost',
-		desc   = 'Metal Extractors have a base cost of 25. This is a percentage adjustment.',
-		type   = 'number',
-		section= 'resourcing',
-		def    = 100,
-		min    = 0,
-		max    = 200,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
-	},
-	{
 		key    = 'mexincomemultiplier',
 		name   = 'Metal Extractors Income Multiplier',
 		desc   = 'Resource Node values are multiplied by this percentage.',
@@ -120,18 +108,6 @@ local options= {
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
-	{
-		key    = 'mexenergyusemultiplier',
-		name   = 'Metal Extractors Energy Use',
-		desc   = 'Sets the percentage of energy each Metal Extractors uses based upon the amount that each Resource Node provides.',
-		type   = 'number',
-		section= 'resourcing',
-		def    = 0,
-		min    = 0,
-		max    = 200,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
-	},	
 	{
 		key    = 'mincome',
 		name   = 'Automatic Metal Income',

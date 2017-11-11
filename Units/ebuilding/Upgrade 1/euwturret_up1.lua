@@ -5,6 +5,8 @@ unitName = [[euwturret_up1]]
 
 --------------------------------------------------------------------------------
 
+buildCostMetal = 80
+
 isUpgraded	= [[1]]
 
 humanName = [[Rooter Mark II]]
