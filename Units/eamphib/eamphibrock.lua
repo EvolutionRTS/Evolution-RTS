@@ -12,7 +12,7 @@ humanName = [[Spitter]]
 objectName = "eamphibrock4.s3o"
 script = "eamphibrock4.cob"
 
-tech = [[tech1]]
+tech = [[tech2]]
 armortype = [[light]]
 supply = [[5]]
 
