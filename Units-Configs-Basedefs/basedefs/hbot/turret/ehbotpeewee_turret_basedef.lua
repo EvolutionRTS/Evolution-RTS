@@ -142,7 +142,7 @@ weaponDefs                 = {
 			isupgraded			 = isUpgraded,
 		},      
 		damage                   = {
-			default              = 15,
+			default              = 10,
 		},
 	},
 }
