@@ -41,7 +41,7 @@ local timeToBuild_ecommanderfactory = metalCost_ecommanderfactory * 0.25
 local metalCost_ecommanderbattle = 100
 local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
 
-local metalCost_factory_up1 = 240
+local metalCost_factory_up1 = 600
 local timeToBuild_factory_up1 = metalCost_factory_up1 * 0.25
 
 local metalCost_etech2 = 200
