@@ -7,8 +7,8 @@ local unitName                    = "eshieldgen"
 
 local armortype					 = [[building]]
 --local supply					 = [[20]]
-local techprovided				 = [[-baseshield]]
-local techrequired				 = [[tech2, 1 baseshield]]
+--local techprovided				 = [[-baseshield]]
+local techrequired				 = [[tech2]]
 
 local weapon1Damage              = 2001
 local weapon1AOE				 = 1
@@ -94,7 +94,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
-		ProvideTech              = techprovided,
+		--ProvideTech              = techprovided,
 		RequireTech				 = techrequired,
 		unittype				  = "shield",
 		--supply_cost               = supply,

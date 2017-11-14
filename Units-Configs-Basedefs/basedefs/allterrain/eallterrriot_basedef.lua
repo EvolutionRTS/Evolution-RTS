@@ -28,7 +28,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[EMP/Riot Tank � Uses +]] .. supply .. [[ Supply]],
+	description                  = [[EMP/Riot Tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

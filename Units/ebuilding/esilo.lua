@@ -7,8 +7,8 @@ local unitName                    = "esilo"
 
 local armortype					 = [[building]]
 --local supply					 = [[50]]
-local techprovided				 = [[-nukesilo]]
-local techrequired				 = [[tech3, 1 nukesilo]]
+--local techprovided				 = [[-nukesilo]]
+local techrequired				 = [[tech3]]
 
 local weapon1Damage               = 3000
 local weapon1AOE				  = 1500
@@ -93,7 +93,7 @@ local unitDef                     = {
 		},
 	},
 	customParams                  = {
-		ProvideTech              = techprovided,
+		--ProvideTech              = techprovided,
 		RequireTech				 = techrequired,
 		unittype				  = "turret",
 		needed_cover              = 8,
