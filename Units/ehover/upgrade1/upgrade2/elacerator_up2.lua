@@ -12,9 +12,10 @@ humanName = [[Lacerator Mark III]]
 objectName = "elacerator.s3o"
 script = "elacerator.cob"
 
-tech = [[tech3]]
+techprovided = [[-1 endbringer]]
+tech = [[tech3, 1 endbringer]]
 armortype = [[armored]]
-supply = [[25]]
+--supply = [[25]]
 
 VFS.Include("units-configs-basedefs/basedefs/hover/elacerator_basedef.lua")
 

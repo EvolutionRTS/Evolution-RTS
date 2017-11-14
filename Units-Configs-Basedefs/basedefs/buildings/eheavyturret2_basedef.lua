@@ -1,7 +1,7 @@
 unitDef                     = {
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = buildCostMetal,
+	buildCostMetal                = 160,
 	builder                       = false,
 	buildTime                     = 5,
 	buildpic					  = "eheavyturret2.png",

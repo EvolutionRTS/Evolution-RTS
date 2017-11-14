@@ -12,9 +12,10 @@ humanName = [[Leveler Mark III]]
 objectName = "eamphibleveler.s3o"
 script = "eamphibleveler.cob"
 
-tech = [[tech3]]
+techprovided = [[-1 endbringer]]
+tech = [[tech3, 1 endbringer]]
 armortype = [[armored]]
-supply = [[30]]
+--supply = [[30]]
 
 VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibleveler_basedef.lua")
 

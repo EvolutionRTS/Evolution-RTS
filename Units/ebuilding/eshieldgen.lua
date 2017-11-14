@@ -10,18 +10,13 @@ local armortype					 = [[building]]
 --local techprovided				 = [[-baseshield]]
 local techrequired				 = [[tech2]]
 
-local weapon1Damage              = 2001
+local weapon1Damage              = 3001
 local weapon1AOE				 = 1
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 --local stockpiletime				 = 60
 
 local shield1Power               = 7000
 local shield1PowerRegen          = 50
 local shield1PowerRegenEnergy    = shield1PowerRegen / 10
-
-local function roundToFirstDecimal(energycosttofire)
-    return math.floor(energycosttofire*10 + 0.5)*0.1
-end
 
 local buildCostMetal 			  = 450
 local maxDamage					  = buildCostMetal * 12.5
@@ -35,7 +30,7 @@ local unitDef                     = {
 	canAttack                     = false,
 	canstop                       = "1",
 	category                      = "BUILDING NOTAIR",
-	description                   = [[Anti-Nuke \ Anti-Artillery Base Shield Facility • Shield can link with other shield units to increase charging and capacity]],
+	description                   = [[Anti-Nuke Defense Facility]],
 	energyMake                    = 0,
 	energyStorage                 = 0,
 	energyUse                     = 0,
@@ -63,7 +58,7 @@ local unitDef                     = {
 	sightDistance                 = 600,
 	smoothAnim                    = true,
 	unitlimit                     = "2",
-	unitname                      = "eshieldgen",
+	unitname                      = unitName,
 	workerTime                    = 0,
 	yardMap                       = "ooooo ooooo ooooo ooooo ooooo",
 
@@ -86,12 +81,12 @@ local unitDef                     = {
 	},
 	weapons                       = {
 -- Make sure to change the weapon numbers if the nuke interceptor weapon is ever reinstated
---		[1]                       = {
---			def                   = "nukeinterceptor",
---		},
 		[1]                       = {
-			def                   = "shield",
+			def                   = "nukeinterceptor",
 		},
+--		[1]                       = {
+--			def                   = "shield",
+--		},
 	},
 	customParams                  = {
 		--ProvideTech              = techprovided,
@@ -104,11 +99,6 @@ local unitDef                     = {
 		armortype                 = armortype, 
 		normaltex                = "unittextures/eshieldgennormal.png",
 		corpse                   = "energycore",
-		helptext                  = [[Armortype: ]] ..armortype.. [[ 
-
-Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
-Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
-Maximum shield power is ]] .. shield1Power ..[[hp]],
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
@@ -129,13 +119,13 @@ local weaponDefs                  = {
 		beamTime                  = 5,
 		collideFeature            = false,
 		collideFriendly           = false,
-		coverage			      = 2500,
-		rgbColor                  = "0 0 0.5",
+		coverage			      = 2000,
+		rgbColor                  = "0.5 0.5 0",
 		rgbColor2                 = "0.5 0.5 0.5",
 		coreThickness             = 0.5,
 		duration                  = 0.4,
 		explosionGenerator        = "custom:genericshellexplosion-large-blue",
-		energypershot             = energycosttofire,
+		energypershot             = 0,
 		fallOffRate               = 0.1,
 		fireStarter               = 50,
 		interceptor			      = 1,
@@ -145,13 +135,13 @@ local weaponDefs                  = {
 		
 		minintensity              = 1,
 		name                      = "Laser",
-		range                     = 2500,
-		reloadtime                = 5,
+		range                     = 2000,
+		reloadtime                = 170,
 		WeaponType                = "BeamLaser",
 		soundStart                = "weapons/antinukelaser.wav",
 		soundTrigger              = true,
-		stockpile			      = true,
-		stockpiletime		      = stockpiletime,
+		--stockpile			      = true,
+		--stockpiletime		      = stockpiletime,
 		texture1                  = "lightning",
 		texture2                  = "laserend",
 		thickness                 = 20,

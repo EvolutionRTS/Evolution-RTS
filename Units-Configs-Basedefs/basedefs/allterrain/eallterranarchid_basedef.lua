@@ -3,7 +3,7 @@ unitDef                    = {
 	acceleration                 = 0.18,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 1250,
+	buildCostMetal               = 1750,
 	builder                      = false,
 	buildTime                    = 5,
 	buildpic					 = "eallterranarchid.png",
@@ -28,7 +28,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 	
-	description                  = [[Endbringer Class Base Obliteration Strider • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Endbringer Class Obliteration Strider]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -76,7 +76,7 @@ unitDef                    = {
 		explosiongenerators      = {
 			"custom:gdhcannon",
 			"custom:dirtsmall",
-			"custom:flamethrowerrange500",
+			"custom:flamethrowerrange750",
 			"custom:blacksmoke",
 		},
 	},
@@ -104,9 +104,10 @@ unitDef                    = {
 		unittype				  = "mobile",
 		isupgraded           	 = isUpgraded,
 		death_sounds             = "nuke",
+		ProvideTech              = techprovided,
 		RequireTech              = tech,
 		armortype                = armortype,
-		supply_cost              = supply,
+		--supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
@@ -154,14 +155,14 @@ weaponDefs                 = {
 			damagetype		     = "eallterranarchid",  
 		}, 
 		damage                   = {
-			default              = 300,
+			default              = 440,
 		},
 	},
 	
 	flamethrower                 = {
 		
 		accuracy                 = 0,
-		AreaOfEffect             = 1,
+		AreaOfEffect             = 10,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
@@ -178,7 +179,7 @@ weaponDefs                 = {
 		minintensity             = 1,
 		impulseFactor            = 0,
 		name                     = "Something with Flames",
-		range                    = 500,
+		range                    = 750,
 		reloadtime               = 0.1,
 		WeaponType               = [[LaserCannon]],
 		rgbColor                 = "0 0 0",
@@ -192,7 +193,7 @@ weaponDefs                 = {
 			damagetype		     = "eallterranarchidflame",  
 		},      
 		damage                   = {
-			default              = 25,
+			default              = 6,
 		},
 	},
 }

@@ -102,8 +102,8 @@ local damageClasses = {
 			BUILDING 	= 0.25,
 		},	
 		elacerator	= {
-			ARMORED		= 0.33,
-			LIGHT		= 0.33,
+			ARMORED		= 1,
+			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		-- End Hovers
@@ -145,13 +145,13 @@ local damageClasses = {
 			BUILDING 	= 1,
 		},
 		eallterranarchid = {
-			ARMORED		= 0.25,
-			LIGHT		= 0.25,
+			ARMORED		= 1,
+			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		eallterranarchidflame = {
-			ARMORED		= 0.5,
-			LIGHT		= 0.5,
+			ARMORED		= 1,
+			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		-- End All Terrains
@@ -200,7 +200,7 @@ local damageClasses = {
 		eamphibleveler	= {
 			ARMORED		= 1,
 			LIGHT		= 1,
-			BUILDING 	= 0.5,
+			BUILDING 	= 1,
 		},
 		-- End Amphibs
 			

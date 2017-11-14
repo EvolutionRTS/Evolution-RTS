@@ -82,14 +82,6 @@ local ringsDefs = {
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },		
 	},
 	-- Shield Units
-	[UnitDefNames.eshieldgen.id] = {
-        { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 2000 },
-		{ color = {1, 0, 0, 0.5}, lineWidth = 2, radius = 1500 },
-    },
-	[UnitDefNames.eantinukeai.id] = {
-        { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 2000 },
-		{ color = {1, 0, 0, 0.5}, lineWidth = 2, radius = 1500 },
-    },
 	[UnitDefNames.ekmar.id] = {
         { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 200 },
     },

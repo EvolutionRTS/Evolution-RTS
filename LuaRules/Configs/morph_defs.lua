@@ -50,13 +50,13 @@ local timeToBuild_etech2 = metalCost_etech2 * 0.25
 local metalCost_etech3 = 2000
 local timeToBuild_etech3 = metalCost_etech3 * 0.25
 
-local metalCost_elightturret2 = 200
+local metalCost_elightturret2 = 75
 local timeToBuild_elightturret2 = metalCost_elightturret2 * 0.25
 
-local metalCost_eheavyturret2 = 320
+local metalCost_eheavyturret2 = 125
 local timeToBuild_eheavyturret2 = metalCost_eheavyturret2 * 0.25
 
-local metalCost_euwturret = 80
+local metalCost_euwturret = 50
 local timeToBuild_euwturret = metalCost_euwturret * 0.25
 
 local metalCost_emetalextractor_up1 = 600

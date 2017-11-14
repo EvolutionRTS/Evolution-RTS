@@ -12,9 +12,10 @@ humanName = [[Anarchid Mark II]]
 objectName = "eallterranarchid.s3o"
 script = "eallterranarchid.cob"
 
-tech = [[tech3]]
+techprovided = [[-1 endbringer]]
+tech = [[tech3, 1 endbringer]]
 armortype = [[armored]]
-supply = [[35]]
+--supply = [[35]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterranarchid_basedef.lua")
 
