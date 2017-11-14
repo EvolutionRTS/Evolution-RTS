@@ -12,7 +12,7 @@ humanName = [[Razor]]
 objectName = "eamphibmedtank2.s3o"
 script = "eamphibmedtank_lus.lua"
 
-tech = [[tech1]]
+tech = [[tech2]]
 armortype = [[light]]
 supply = [[4]]
 

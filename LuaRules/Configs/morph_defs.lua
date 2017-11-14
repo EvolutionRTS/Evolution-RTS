@@ -5,7 +5,7 @@ local morphDefs = {		--beginig of morphDefs
 	unitname = {		--unit being morphed
 		into = 'newunitname',		--unit in that will morphing unit morph into
 		time = 12,			--time required to complete morph process (in seconds)
-		require = 'requnitname',	--unit requnitname must be present in team for morphing to be enabled
+		--require = 'requnitname',	--unit requnitname must be present in team for morphing to be enabled
 		metal = 10,			--required metal for morphing process     note: if you ommit M and/or E costs, morph costs the
 		energy = 10,			--required energy for morphing process		difference in costs between unitname and newunitname
 		xp = 0.07,			--required experience for morphing process (will be deduced from unit xp after morph, default=0)
@@ -41,13 +41,13 @@ local timeToBuild_ecommanderfactory = metalCost_ecommanderfactory * 0.25
 local metalCost_ecommanderbattle = 100
 local timeToBuild_ecommanderbattle = metalCost_ecommanderbattle * 0.25
 
-local metalCost_factory_up1 = 240
+local metalCost_factory_up1 = 600
 local timeToBuild_factory_up1 = metalCost_factory_up1 * 0.25
 
-local metalCost_etech2 = 200
+local metalCost_etech2 = 600
 local timeToBuild_etech2 = metalCost_etech2 * 0.25
 
-local metalCost_etech3 = 300
+local metalCost_etech3 = 2000
 local timeToBuild_etech3 = metalCost_etech3 * 0.25
 
 local metalCost_elightturret2 = 200
@@ -167,7 +167,7 @@ Overseer]],
 	emetalextractor = 	{
 		{
 			into = 'emetalextractor_up1',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_emetalextractor_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_emetalextractor_up1,
@@ -181,7 +181,7 @@ Overseer]],
 	ebasefactory = 	{
 		{
 			into = 'ebasefactory_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -191,7 +191,7 @@ Overseer]],
 	ebasefactory_up1 = 	{
 		{
 			into = 'ebasefactory_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -201,7 +201,7 @@ Overseer]],
 	ebasefactory_up2 = 	{
 		{
 			into = 'ebasefactory_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -212,7 +212,7 @@ Overseer]],
 	eminifac = 	{
 		{
 			into = 'eminifac_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -222,7 +222,7 @@ Overseer]],
 	eminifac_up1 = 	{
 		{
 			into = 'eminifac_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -232,7 +232,7 @@ Overseer]],
 	eminifac_up2 = 	{
 		{
 			into = 'eminifac_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -243,7 +243,7 @@ Overseer]],
 	eamphibfac = 	{
 		{
 			into = 'eamphibfac_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -253,7 +253,7 @@ Overseer]],
 	eamphibfac_up1 = 	{
 		{
 			into = 'eamphibfac_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -263,7 +263,7 @@ Overseer]],
 	eamphibfac_up2 = 	{
 		{
 			into = 'eamphibfac_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -274,7 +274,7 @@ Overseer]],
 	eairplant = 	{
 		{
 			into = 'eairplant_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -284,7 +284,7 @@ Overseer]],
 	eairplant_up1 = 	{
 		{
 			into = 'eairplant_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -294,7 +294,7 @@ Overseer]],
 	eairplant_up2 = 	{
 		{
 			into = 'eairplant_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -305,7 +305,7 @@ Overseer]],
 	ehbotfac = 	{
 		{
 			into = 'ehbotfac_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -315,7 +315,7 @@ Overseer]],
 	ehbotfac_up1 = 	{
 		{
 			into = 'ehbotfac_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -325,7 +325,7 @@ Overseer]],
 	ehbotfac_up2 = 	{
 		{
 			into = 'ehbotfac_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_factory_up1,
 			cmdname = [[Upgrade]],
 			metal = metalCost_factory_up1,
@@ -339,7 +339,7 @@ Overseer]],
 	elightturret2 = 	{
 		{
 			into = 'elightturret2_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_elightturret2,
 			cmdname = [[upgrade]],
 			metal = metalCost_elightturret2,
@@ -349,7 +349,7 @@ Overseer]],
 	elightturret2_up1 = 	{
 		{
 			into = 'elightturret2_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_elightturret2,
 			cmdname = [[upgrade]],
 			metal = metalCost_elightturret2,
@@ -359,7 +359,7 @@ Overseer]],
 	elightturret2_up2 = 	{
 		{
 			into = 'elightturret2_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_elightturret2,
 			cmdname = [[upgrade]],
 			metal = metalCost_elightturret2,
@@ -370,7 +370,7 @@ Overseer]],
 	eheavyturret2 = 	{
 		{
 			into = 'eheavyturret2_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_eheavyturret2,
 			cmdname = [[upgrade]],
 			metal = metalCost_eheavyturret2,
@@ -380,7 +380,7 @@ Overseer]],
 	eheavyturret2_up1 = 	{
 		{
 			into = 'eheavyturret2_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_eheavyturret2,
 			cmdname = [[upgrade]],
 			metal = metalCost_eheavyturret2,
@@ -390,7 +390,7 @@ Overseer]],
 	eheavyturret2_up2 = 	{
 		{
 			into = 'eheavyturret2_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_eheavyturret2,
 			cmdname = [[upgrade]],
 			metal = metalCost_eheavyturret2,
@@ -401,7 +401,7 @@ Overseer]],
 	euwturret = 	{
 		{
 			into = 'euwturret_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = timeToBuild_euwturret,
 			cmdname = [[upgrade]],
 			metal = metalCost_euwturret,
@@ -411,7 +411,7 @@ Overseer]],
 	euwturret_up1 = 	{
 		{
 			into = 'euwturret_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = timeToBuild_euwturret,
 			cmdname = [[upgrade]],
 			metal = metalCost_euwturret,
@@ -421,7 +421,7 @@ Overseer]],
 	euwturret_up2 = 	{
 		{
 			into = 'euwturret_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = timeToBuild_euwturret,
 			cmdname = [[upgrade]],
 			metal = metalCost_euwturret,
@@ -605,7 +605,7 @@ Overseer]],
 	ehbotpeewee_turret = 	{
 		{
 			into = 'ehbotpeewee_turret_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -615,7 +615,7 @@ Overseer]],
 	ehbotthud_turret = 	{
 		{
 			into = 'ehbotthud_turret_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -625,7 +625,7 @@ Overseer]],
 	ehbotsniper_turret = 	{
 		{
 			into = 'ehbotsniper_turret_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -635,7 +635,7 @@ Overseer]],
 	ehbotrocko_turret = 	{
 		{
 			into = 'ehbotrocko_turret_up1',
-			require = 'etech1',
+			--require = 'etech1',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -649,7 +649,7 @@ Overseer]],
 	ehbotpeewee_turret_up1 = 	{
 		{
 			into = 'ehbotpeewee_turret_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -659,7 +659,7 @@ Overseer]],
 	ehbotthud_turret_up1 = 	{
 		{
 			into = 'ehbotthud_turret_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -669,7 +669,7 @@ Overseer]],
 	ehbotsniper_turret_up1 = 	{
 		{
 			into = 'ehbotsniper_turret_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -679,7 +679,7 @@ Overseer]],
 	ehbotrocko_turret_up1 = 	{
 		{
 			into = 'ehbotrocko_turret_up2',
-			require = 'etech2',
+			--require = 'etech2',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -693,7 +693,7 @@ Overseer]],
 	ehbotpeewee_turret_up2 = 	{
 		{
 			into = 'ehbotpeewee_turret_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -703,7 +703,7 @@ Overseer]],
 	ehbotthud_turret_up2 = 	{
 		{
 			into = 'ehbotthud_turret_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -713,7 +713,7 @@ Overseer]],
 	ehbotsniper_turret_up2 = 	{
 		{
 			into = 'ehbotsniper_turret_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
@@ -723,7 +723,7 @@ Overseer]],
 	ehbotrocko_turret_up2 = 	{
 		{
 			into = 'ehbotrocko_turret_up3',
-			require = 'etech3',
+			--require = 'etech3',
 			time = 12.5,
 			cmdname = [[Upgrade]],
 			metal = 50,
