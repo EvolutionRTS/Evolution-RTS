@@ -238,6 +238,18 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				unitDef.corpse = "ammobox"
 			end
 			
+		--Shield handling
+		if unitDef.weapondefs then
+			for _, weaponDef in pairs(unitDef.weapondefs) do
+				if weaponDef.weapontype == "Shield" then
+					unitDef.customparams.shield_radius = weaponDef.shieldradius
+					unitDef.customparams.shield_power = weaponDef.shieldpower
+					unitDef.customparams.shield_rate = (weaponDef.customparams or {}).shield_rate or weaponDef.shieldpowerregen
+					break
+				end
+			end
+		end			
+			
 		-- Set building Hitpoints
 			if unitDef.customparams then
 				if unitDef.customparams.unittype == "building" then
