@@ -11,6 +11,7 @@ local aiDifficulty = Spring.GetModOptions().aidifficulty
 local aiUnits = Spring.GetModOptions().aiunits
 local aiNukes = Spring.GetModOptions().ainukes
 local shardChicken = Spring.GetModOptions().shardchicken
+spGetTeamResources = Spring.GetTeamResources
 
 --<local function GetNukeCount(teamID)
 	--local aiUnitsTab = Spring.GetTeamUnits(teamID)
@@ -64,10 +65,10 @@ function RandomT3()
 		if aiNukes == "enabled" then
 			local r = math.random(0,5)
 				if 	   r == 0 then
-					Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
+					--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
 					return "esiloai"
 				elseif r >= 1 then
-					Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
+					--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 					return "elobberai"
 				end
 		else
@@ -128,10 +129,12 @@ end
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
-   local r = math.random(0,25)
-		if 	   r <= 2 then
-			return "elifterai"
-		elseif r == 3 then
+   local storedmetal = spGetTeamResources(thisAI.id,"metal") 
+	if storedmetal >= 100 then
+		return "elifterai"
+	else
+	local r = math.random(0,25)
+		if r <= 3 then
 			return "emine"
 		elseif r == 4 then
 			return "eturretlightai"
@@ -158,10 +161,10 @@ end
 				if aiNukes == "enabled" then
 				local r = math.random(0,5)
 					if 	   r == 0 then
-						Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
+						--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
 						return "esiloai"
 					elseif r >= 1 then
-						Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
+						--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 						return "elobberai"
 					end
 				else
@@ -220,6 +223,7 @@ end
 		else
 			return "emetalextractor"		
 		end
+end
 end
 
 ---------------------------------------------------------------- QUEUES
