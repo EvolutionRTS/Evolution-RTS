@@ -11,19 +11,10 @@ local aiDifficulty = Spring.GetModOptions().aidifficulty
 local aiUnits = Spring.GetModOptions().aiunits
 local aiNukes = Spring.GetModOptions().ainukes
 local shardChicken = Spring.GetModOptions().shardchicken
+spGetTeamUnitsSorted = Spring.GetTeamUnitsSorted
+spGetUnitDefID = Spring.GetUnitDefID
 spGetTeamResources = Spring.GetTeamResources
-
---<local function GetNukeCount(teamID)
-	--local aiUnitsTab = Spring.GetTeamUnits(teamID)
-		--for i = 1, #aiUnitsTab do
-			--Spring.Echo(Spring.GetUnitDefID(aiUnitsTab[i]))
-		--end
- 
--->end
-
---local spGetTeamUnits = Spring.GetTeamUnits
---local spGetUnitDefID = Spring.GetUnitDefID
-
+spGetTeamUnitDefCount = Spring.GetTeamUnitDefCount
 --Spring.GetGameSeconds() -- checking gametime
 
 if shardChicken == nil then
@@ -44,36 +35,21 @@ end
 
 if shardChicken == "disabled" then
 
-function Orb()
-	return "eorbai"
-end
-
-function Box()
-	return "ebox"
-end
-
-function Scout()
-	return "escout_up3"
-end
-
-function Turret()
-	return "eaiturret"
-end
-
 function RandomT3()
 	if Spring.GetGameSeconds() >= 900 then
 		local r = math.random(0,5)
-			if 	   r == 0 then
+			if 	   r == 0 and storedenergy >= 750 then
 				--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
 				return "esiloai"
-			elseif r >= 1 then
+			elseif r >= 1 and storedenergy >= 750 then
 				--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 				return "elobberai"
-			end	
+			end
 	else
 		return "escout_up3"
-	end	
+	end
 end
+
 function RandomFac()
 	--Spring.Echo("[Shard] AI Difficulty is set to " .. aiDifficulty)
 	--Spring.Echo("[Shard] Current gamesecond is " .. Spring.GetGameSeconds())
@@ -94,7 +70,7 @@ function RandomFac()
 					return "ehoverfacai_up0"
 				end
 			elseif aiUnits == "disabled" then
-					return "elifterai"	
+					return "elifterai"
 			end
 		else
 					return "eturretlightai"
@@ -115,7 +91,7 @@ function RandomFac()
 					return "ehoverfacai_up0"
 				end
 			elseif aiUnits == "disabled" then
-					return "elifterai"	
+					return "elifterai"
 			end
 		else
 					return "eturretlightai"
@@ -125,11 +101,23 @@ end
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
-   local storedmetal = spGetTeamResources(thisAI.id,"metal") 
+
+	local storedmetal = spGetTeamResources(thisAI.id,"metal")
+	local storedenergy = spGetTeamResources(thisAI.id,"energy")
+
 	if storedmetal >= 490 then
 		return "elifterai"
+	elseif storedmetal <= 10 then
+		return "emetalextractor"
+	elseif storedenergy <= 50 then
+		local r = math.random(0,5)
+			if r == 0 then
+				return "efusion2"
+			else
+				return "esolar2"
+			end
 	else
-	local r = math.random(0,25)
+	local r = math.random(0,13)
 		if r <= 3 then
 			return "emine"
 		elseif r == 4 then
@@ -137,40 +125,36 @@ end
 		elseif r == 5 then
 			return "ekmar"
 		elseif r == 6 then
-			return "esolar2"
-		elseif r == 7 then
-			return "efusion2"
-		elseif r == 8 then
 			return "estorage"
-		elseif r == 9 then
+		elseif r == 7 then
 			return "ejammer2"
-		elseif r == 10 then
+		elseif r == 8 then
 			return "eturretheavyai"
-		elseif r == 11 then
+		elseif r == 9 then
 			return "eorbai"
-		elseif r == 12 then
+		elseif r == 10 then
 			return "ebox"
-		elseif r == 13 then
-			return "escout_up3"	
-		elseif r == 14 then
+		elseif r == 11 then
+			return "escout_up3"
+		elseif r == 12 then
 			if Spring.GetGameSeconds() >= 900 then
 				local r = math.random(0,5)
-					if 	   r == 0 then
+					if 	   r == 0 and storedenergy >= 750 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
 						return "esiloai"
-					elseif r >= 1 then
+					elseif r >= 1 and storedenergy >= 400 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 						return "elobberai"
-					end	
+					end
 			else
 				return "escout_up3"
-			end		
-		elseif r == 15 then
+			end
+		elseif r == 13 then
 		--Spring.Echo("[Shard] AI Difficulty is set to " .. aiDifficulty)
 		--Spring.Echo("[Shard] Current gamesecond is " .. Spring.GetGameSeconds())
 		--Spring.Echo("[Shard] Units are " .. aiUnits)
 			if aiDifficulty == "easy" then
-				if Spring.GetGameSeconds() >= 600 then
+				if Spring.GetGameSeconds() >= 900 then
 					if aiUnits == "enabled" then
 					local r = math.random(0,4)
 						if r == 0 then
@@ -185,13 +169,13 @@ end
 							return "ehoverfacai_up0"
 						end
 						elseif aiUnits == "disabled" then
-							return "elifterai"	
+							return "elifterai"
 						end
 				else
 						return "eturretlightai"
 				end
 			elseif aiDifficulty == "hard" then
-				if Spring.GetGameSeconds() >= 300 then
+				if Spring.GetGameSeconds() >= 600 then
 					if aiUnits == "enabled" then
 					local r = math.random(0,4)
 						if r == 0 then
@@ -206,22 +190,30 @@ end
 							return "ehoverfacai_up0"
 						end
 				elseif aiUnits == "disabled" then
-							return "elifterai"	
+							return "elifterai"
 					end
 				else
 						return "eturretlightai"
 				end
 			end
-		else
-			return "emetalextractor"		
 		end
 end
 end
 
 function RandomOverseer()
-local storedmetal = spGetTeamResources(thisAI.id,"metal") 
+
+	local storedmetal = spGetTeamResources(thisAI.id,"metal")
+	local storedenergy = spGetTeamResources(thisAI.id,"energy")
+
 	if storedmetal >= 490 then
 		return "elifterai"
+	elseif storedenergy <= 50 then
+		local r = math.random(0,5)
+			if r == 0 then
+				return "efusion2"
+			else
+				return "esolar2"
+			end
 	else
 	local r = math.random(0,17)
 		if r <= 3 then
@@ -243,7 +235,7 @@ local storedmetal = spGetTeamResources(thisAI.id,"metal")
 					elseif r >= 1 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 						return "elobberai"
-					end	
+					end
 			else
 				return "escout_up3"
 			end
@@ -256,8 +248,8 @@ local storedmetal = spGetTeamResources(thisAI.id,"metal")
 		end
 	end
 end
-	
-		
+
+
 
 ---------------------------------------------------------------- QUEUES
 
@@ -270,27 +262,10 @@ local idlelist = {
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"elifterai",
-	"esolar2",
-	"emetalextractor",
-	"esolar2",
-	"emetalextractor",
-	"esolar2",
-	"emetalextractor",
-	"elifterai",
-	"elifterai",
-	"eturretlightai",
-	"emine",
-	"ekmar",
-	"emine",
-	"ekmar",
-	"emine",
-	"ekmar",
 	"elifterai",
 	}
-		
+
+
 local overseerorders = {
 	RandomOverseer,
 }
@@ -670,7 +645,7 @@ local function overseerqueue()
 		return overseerlistfirst
 	end
 end
-	
+
 taskqueues = {
     ---builders
 	ecommanderbattleai = overseerqueue,
@@ -703,7 +678,7 @@ taskqueues = {
 	---
 }
 ----------------------------------------------------------
-	
+
 elseif shardChicken == "enabled" then
 
 ----------------------------------------------------------
@@ -1209,7 +1184,7 @@ local chickenbuilderend = {
 "chicken2", 			-- Swarm MK8
 "chicken2b", 			-- Swarm MK9
 "chickena2b",			-- Tank MK2
-"eaiturret",			
+"eaiturret",
 "chickena2",			-- Tank MK3
 "chickenh3",			-- Tank MK4
 "chickenh2",			-- Tank MK5
