@@ -101,15 +101,15 @@ end
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
+	Spring.Echo([[AI is using ]] .. Spring.GetTeamRulesParam(thisAI.id, "supplyUsed") .. [[ supply]])
+	local mc, ms = Spring.GetTeamResources(thisAI.id, "metal")
+	local ec, es = Spring.GetTeamResources(thisAI.id, "energy")
 
-	local storedmetal = spGetTeamResources(thisAI.id,"metal")
-	local storedenergy = spGetTeamResources(thisAI.id,"energy")
-
-	if storedmetal >= 490 then
+	if mc >= 490 then
 		return "elifterai"
-	elseif storedmetal <= 10 then
+	elseif mc <= 10 then
 		return "emetalextractor"
-	elseif storedenergy <= 50 then
+	elseif ec <= 50 then
 		local r = math.random(0,5)
 			if r == 0 then
 				return "efusion2"
@@ -139,10 +139,10 @@ end
 		elseif r == 12 then
 			if Spring.GetGameSeconds() >= 900 then
 				local r = math.random(0,5)
-					if 	   r == 0 and storedenergy >= 750 then
+					if 	   r == 0 and es >= 750 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
 						return "esiloai"
-					elseif r >= 1 and storedenergy >= 400 then
+					elseif r >= 1 and es >= 400 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 						return "elobberai"
 					end
@@ -202,12 +202,12 @@ end
 
 function RandomOverseer()
 
-	local storedmetal = spGetTeamResources(thisAI.id,"metal")
-	local storedenergy = spGetTeamResources(thisAI.id,"energy")
+	local mc, ms = Spring.GetTeamResources(thisAI.id, "metal")
+	local ec, es = Spring.GetTeamResources(thisAI.id, "energy")
 
-	if storedmetal >= 490 then
+	if mc >= 490 then
 		return "elifterai"
-	elseif storedenergy <= 50 then
+	elseif ec <= 50 then
 		local r = math.random(0,5)
 			if r == 0 then
 				return "efusion2"
@@ -229,10 +229,10 @@ function RandomOverseer()
 		elseif r == 14 then
 			if Spring.GetGameSeconds() >= 900 then
 				local r = math.random(0,5)
-					if 	   r == 0 then
+					if 	   r == 0 and es >= 750 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
 						return "esiloai"
-					elseif r >= 1 then
+					elseif r >= 1 and es >= 400 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 						return "elobberai"
 					end
@@ -639,7 +639,7 @@ local ehoverfacaiup3 = {
 
 local function overseerqueue()
 	if ai.engineerfirst == true then
-		return overseerorders
+		return lifterlist
 	else
 		ai.engineerfirst = true
 		return overseerlistfirst
@@ -697,12 +697,6 @@ local chickenbuilderstart = {
 "chicken1", 			-- Swarm MK4
 "chickeneco", 			-- Power Source
 "chickeneco", 			-- Power Source
-"eaiturret",
-"eaiturret",
-"eaiturret",
-"eaiturret",
-"eaiturret",
-"eaiturret",
 "chicken_dodo1", 		-- Kamikaze Bomb MK1
 "chicken1d", 			-- Swarm MK1
 "chicken1c", 			-- Swarm MK2
@@ -1164,7 +1158,6 @@ local chickenbuilderstart = {
 }
 
 local chickenbuilderend = {
-"eaiturret",
 "chicken2", 			-- Swarm MK8
 "chicken2b", 			-- Swarm MK9
 "chickena2b",			-- Tank MK2
@@ -1184,7 +1177,6 @@ local chickenbuilderend = {
 "chicken2", 			-- Swarm MK8
 "chicken2b", 			-- Swarm MK9
 "chickena2b",			-- Tank MK2
-"eaiturret",
 "chickena2",			-- Tank MK3
 "chickenh3",			-- Tank MK4
 "chickenh2",			-- Tank MK5
@@ -1236,7 +1228,6 @@ local function engineerlist(beh)
 	end
 	taskqueues = {
    ecommanderbattleai = engineerlist,
-   eaiturret = idlelist,
    --ebasefactory = factory,
    --eengineer5 = engineerlist,
    eallterrengineer = engineerlist,

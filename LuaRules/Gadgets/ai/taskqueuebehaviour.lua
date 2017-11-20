@@ -156,7 +156,8 @@ function TaskQueueBehaviour:ProgressQueue()
 						self.progress = true
 					end
 				else
-					game:SendToConsole("Cannot build:"..value..", couldnt grab the unit type from the engine")
+						--throws an error, commenting out until i figure out what's wrong--
+					--game:SendToConsole("Cannot build:"..value..", couldnt grab the unit type from the engine")
 					self.progress = true
 				end
 			else
