@@ -9,7 +9,7 @@ math.random(); math.random(); math.random()
 
 local aiDifficulty = Spring.GetModOptions().aidifficulty
 local aiUnits = Spring.GetModOptions().aiunits
-local aiNukes = Spring.GetModOptions().ainukes
+--local aiNukes = Spring.GetModOptions().ainukes
 local shardChicken = Spring.GetModOptions().shardchicken
 spGetTeamResources = Spring.GetTeamResources
 
@@ -34,9 +34,9 @@ if aiUnits == nil then
 	aiUnits = "enabled"
 end
 
-if aiNukes == nil then
-	aiNukes = "enabled"
-end
+--if aiNukes == nil then
+	--aiNukes = "enabled"
+--end
 
 if aiDifficulty == nil then
 	aiDifficulty = "easy"
@@ -62,21 +62,17 @@ end
 
 function RandomT3()
 	if Spring.GetGameSeconds() >= 900 then
-		if aiNukes == "enabled" then
-			local r = math.random(0,5)
-				if 	   r == 0 then
-					--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
-					return "esiloai"
-				elseif r >= 1 then
-					--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
-					return "elobberai"
-				end
-		else
-					return "elifterai"	
-		end
+		local r = math.random(0,5)
+			if 	   r == 0 then
+				--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
+				return "esiloai"
+			elseif r >= 1 then
+				--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
+				return "elobberai"
+			end	
 	else
-					return "eturretlightai"
-	end
+		return "escout_up3"
+	end	
 end
 function RandomFac()
 	--Spring.Echo("[Shard] AI Difficulty is set to " .. aiDifficulty)
@@ -130,7 +126,7 @@ end
 
  function RandomLift()
    local storedmetal = spGetTeamResources(thisAI.id,"metal") 
-	if storedmetal >= 100 then
+	if storedmetal >= 490 then
 		return "elifterai"
 	else
 	local r = math.random(0,25)
@@ -158,7 +154,6 @@ end
 			return "escout_up3"	
 		elseif r == 14 then
 			if Spring.GetGameSeconds() >= 900 then
-				if aiNukes == "enabled" then
 				local r = math.random(0,5)
 					if 	   r == 0 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
@@ -166,12 +161,9 @@ end
 					elseif r >= 1 then
 						--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
 						return "elobberai"
-					end
-				else
-						return "elifterai"	
-				end
+					end	
 			else
-						return "esolar2"
+				return "escout_up3"
 			end		
 		elseif r == 15 then
 		--Spring.Echo("[Shard] AI Difficulty is set to " .. aiDifficulty)
@@ -226,6 +218,47 @@ end
 end
 end
 
+function RandomOverseer()
+local storedmetal = spGetTeamResources(thisAI.id,"metal") 
+	if storedmetal >= 490 then
+		return "elifterai"
+	else
+	local r = math.random(0,17)
+		if r <= 3 then
+			return "emine"
+		elseif r > 3 and r <= 6 then
+			return "ekmar"
+		elseif r > 6 and r <= 9 then
+			return "eturretlightai"
+		elseif r > 9 and r <= 12 then
+			return "eturretheavyai"
+		elseif r == 13 then
+			return "eshieldgen"
+		elseif r == 14 then
+			if Spring.GetGameSeconds() >= 900 then
+				local r = math.random(0,5)
+					if 	   r == 0 then
+						--Spring.Echo([[WARNING! ShardAI is now building an Nuke Silo!!!]])
+						return "esiloai"
+					elseif r >= 1 then
+						--Spring.Echo([[WARNING! ShardAI is now building an Long Range Artillery!!!]])
+						return "elobberai"
+					end	
+			else
+				return "escout_up3"
+			end
+		elseif r == 15 then
+			return "ejammer2"
+		elseif r == 16 then
+			return "estorage"
+		elseif r == 17 then
+			return "escout_up3"
+		end
+	end
+end
+	
+		
+
 ---------------------------------------------------------------- QUEUES
 
 
@@ -234,6 +267,8 @@ local idlelist = {
 }
 
 	local overseerlistfirst = {
+	"emetalextractor",
+	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
@@ -256,54 +291,9 @@ local idlelist = {
 	"elifterai",
 	}
 		
-local overseerordersnuke = {
-		"eantinukeai",
-		"emine",
-		"ekmar",
-		"eturretlightai",
-		"eturretheavyai",
-		"elifterai",
-		RandomT3,
-		"esolar2",
-		"emine",
-		"ekmar",
-		"eturretlightai",
-		"eturretheavyai",
-		"elifterai",
-		RandomT3,
-		"esolar2",
-		"emine",
-		"ekmar",
-		"eturretlightai",
-		"eturretheavyai",
-		"elifterai",
-		RandomT3,
-		"esolar2",
-		"emine",
-		"ekmar",
-		"eturretlightai",
-		"eturretheavyai",
-		"elifterai",
-		RandomT3,
-		"esolar2",
-		"emine",
-		"ekmar",
-		"eturretlightai",
-		"eturretheavyai",
-		RandomT3,
-		"esolar2",
-		"emine",
-		"ekmar",
-		"eturretlightai",
-		"eturretheavyai",
-	}
-local overseerordersnonuke = {
-		"elifterai",
-		"elifterai",
-		"eantinukeai",
-		"emine",
-		"ekmar",
-	}
+local overseerorders = {
+	RandomOverseer,
+}
 
 local lifterlist = {
 	RandomLift,
@@ -674,11 +664,7 @@ local ehoverfacaiup3 = {
 
 local function overseerqueue()
 	if ai.engineerfirst == true then
-		if aiNukes == "enabled" then
-			return overseerordersnuke
-		else
-			return overseerordersnonuke
-		end
+		return overseerorders
 	else
 		ai.engineerfirst = true
 		return overseerlistfirst
