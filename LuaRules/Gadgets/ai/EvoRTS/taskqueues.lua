@@ -101,7 +101,7 @@ end
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
-	Spring.Echo([[AI is using ]] .. Spring.GetTeamRulesParam(thisAI.id, "supplyUsed") .. [[ supply]])
+	--Spring.Echo([[AI is using ]] .. Spring.GetTeamRulesParam(thisAI.id, "supplyUsed") .. [[ supply]])
 	local mc, ms = Spring.GetTeamResources(thisAI.id, "metal")
 	local ec, es = Spring.GetTeamResources(thisAI.id, "energy")
 
@@ -639,7 +639,7 @@ local ehoverfacaiup3 = {
 
 local function overseerqueue()
 	if ai.engineerfirst == true then
-		return lifterlist
+		return overseerorders
 	else
 		ai.engineerfirst = true
 		return overseerlistfirst
