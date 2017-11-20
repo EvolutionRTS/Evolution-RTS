@@ -9,7 +9,7 @@ math.random(); math.random(); math.random()
 
 local aiDifficulty = Spring.GetModOptions().aidifficulty
 local aiUnits = Spring.GetModOptions().aiunits
---local aiNukes = Spring.GetModOptions().ainukes
+local aiNukes = Spring.GetModOptions().ainukes
 local shardChicken = Spring.GetModOptions().shardchicken
 spGetTeamResources = Spring.GetTeamResources
 
@@ -34,9 +34,9 @@ if aiUnits == nil then
 	aiUnits = "enabled"
 end
 
---if aiNukes == nil then
-	--aiNukes = "enabled"
---end
+if aiNukes == nil then
+	aiNukes = "enabled"
+end
 
 if aiDifficulty == nil then
 	aiDifficulty = "easy"
