@@ -379,17 +379,17 @@ effectUnitDefs = {
 --    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,50,0}, size=140, precision=22, strength   = 0.015,  repeatEffect=true}},
 --  },
   
-	eshieldgen = {
-	{class='ShieldSphere',options=ShieldSphere2000},
-	{class='Bursts',options=shieldBursts2000},
+--	eshieldgen = {
+--	{class='ShieldSphere',options=ShieldSphere2000},
+--	{class='Bursts',options=shieldBursts2000},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=2005, precision=0, strength   = 0.001, repeatEffect=true}},
-  },
+--    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,60,0.0}, size=2005, precision=0, strength   = 0.001, repeatEffect=true}},
+--  },
 	
 	eantinukeai = {
 	{class='ShieldSphere',options=ShieldSphere2000},
