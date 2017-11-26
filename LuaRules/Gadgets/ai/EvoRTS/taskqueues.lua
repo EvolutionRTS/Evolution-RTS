@@ -6,7 +6,6 @@ math.randomseed( os.time() )
 math.random(); math.random(); math.random()
 
 --------------------------------------------- Functions for AI
-
 local aiDifficulty = Spring.GetModOptions().aidifficulty
 local aiUnits = Spring.GetModOptions().aiunits
 local aiNukes = Spring.GetModOptions().ainukes
@@ -102,8 +101,8 @@ end
 
  function RandomLift()
 	--Spring.Echo([[AI is using ]] .. Spring.GetTeamRulesParam(thisAI.id, "supplyUsed") .. [[ supply]])
-	local mc, ms = Spring.GetTeamResources(thisAI.id, "metal")
-	local ec, es = Spring.GetTeamResources(thisAI.id, "energy")
+	local mc, ms = Spring.GetTeamResources(ai.id, "metal")
+	local ec, es = Spring.GetTeamResources(ai.id, "energy")
 
 	if mc >= 490 then
 		return "elifterai"
@@ -202,8 +201,8 @@ end
 
 function RandomOverseer()
 
-	local mc, ms = Spring.GetTeamResources(thisAI.id, "metal")
-	local ec, es = Spring.GetTeamResources(thisAI.id, "energy")
+	local mc, ms = Spring.GetTeamResources(ai.id, "metal")
+	local ec, es = Spring.GetTeamResources(ai.id, "energy")
 
 	if mc >= 490 then
 		return "elifterai"
