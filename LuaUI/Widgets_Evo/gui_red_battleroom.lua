@@ -1,8 +1,13 @@
+-- disable as clipLine is very slow on headless
+if (Spring.GetConfigInt('Headless', 0) ~= 0) then
+   return false
+end
+
 function widget:GetInfo()
 	return {
-	name      = "Red Console", --version 4.1
+	name      = "Red Console (Battle and autohosts)", --version 4.1
 	desc      = "Requires Red UI Framework",
-	author    = "Regret",
+	author    = "Regret + Doo edit",
 	date      = "29 may 2015",
 	license   = "GNU GPL, v2 or later",
 	layer     = 0,
@@ -10,9 +15,10 @@ function widget:GetInfo()
 	handler   = true, --can use widgetHandler:x()
 	}
 end
+local vsx, vsy = gl.GetViewSizes()
+local widgetScale = (1 + (vsx*vsy / 4000000))
+
 local NeededFrameworkVersion = 8
-local CanvasX,CanvasY = 1280,734 --resolution in which the widget was made (for 1:1 size)
---1272,734 == 1280,768 windowed
 local SoundIncomingChat  = 'sounds/ui/beep4.wav'
 local SoundIncomingChatVolume = 1.0
 
@@ -43,22 +49,22 @@ local sGetMyPlayerID = Spring.GetMyPlayerID
 
 local Config = {
 	console = {
-		px = 375,py = 35, --default start position
-		sx = 516, --background size
+		px = vsx*0.3,py = vsy*0.05, --default start position
+		sx = vsx*0.4, --background size
 		
-		fontsize = 11.7,
+		fontsize = 10*widgetScale,
 		
-		minlines = 1, --minimal number of lines to display
-		maxlines = 6,
-		maxlinesScrollmode = 10,
+		minlines = 3, --minimal number of lines to display
+		maxlines = 3,
+		maxlinesScrollmode = 3,
 		
 		maxage = 30, --max time for a message to be displayed, in seconds
 		
-		margin = 7, --distance from background border
+		margin = 7*widgetScale, --distance from background border
 		
 		fadetime = 0.25, --fade effect time, in seconds
-		fadedistance = 100, --distance from cursor at which console shows up when empty
-		
+		fadedistance = 1*widgetScale, --distance from cursor at which console shows up when empty
+
 		filterduplicates = true, --group identical lines, f.e. ( 5x Nickname: blahblah)
 		
 		--note: transparency for text not supported yet
@@ -70,7 +76,7 @@ local Config = {
 		cmisctext = {0.78,0.78,0.78,1}, --everything else
 		cgametext = {0.4,1,1,1}, --server (autohost) chat
 		
-		cbackground = {0,0,0,0.19},
+		cbackground = {0,0,0,0.0},
 		cborder = {0,0,0,0},
 		
 		dragbutton = {2,3}, --middle mouse button
@@ -137,8 +143,8 @@ end
 
 local function AutoResizeObjects() --autoresize v2
 	if (LastAutoResizeX==nil) then
-		LastAutoResizeX = CanvasX
-		LastAutoResizeY = CanvasY
+		LastAutoResizeX = vsx
+		LastAutoResizeY = vsy
 	end
 	local lx,ly = LastAutoResizeX,LastAutoResizeY
 	local vsx,vsy = Screen.vsx,Screen.vsy
@@ -454,35 +460,131 @@ local function processLine(line,g,cfg,newlinecolor)
 	local names = {}
 	for i=1,#roster do
 		names[roster[i][1]] = {roster[i][4],roster[i][5],roster[i][3],roster[i][2]}
+		-- Spring.Echo(roster[i][3])
+		-- if roster[i][3] == Spring.GetMyPlayerID() then
+		-- Spring.Echo(Spring.GetMyPlayerID())
+		-- myname = roster[i][1]
+		-- end
 	end
-	
 	local name = ""
 	local text = ""
 	local linetype = 0 --other
+	if Initialized == true then
+	ignoreThisMessage = false
+	else
+	ignoreThisMessage = false
+	end
+    local playSound = false
 	
-	local ignoreThisMessage = false
+	if sfind(line, "My player ID is") and sfind(line, regID) and not nameregistered then
+	-- Spring.SendCommands("say Registration ID found")
+	registermyname = true
+	ignoreThisMessage = true
+	end
 	
 	if (not newlinecolor) then
 		if (names[ssub(line,2,(sfind(line,"> ") or 1)-1)] ~= nil) then
+				ignoreThisMessage = true
 			linetype = 1 --playermessage
 			name = ssub(line,2,sfind(line,"> ")-1)
 			text = ssub(line,slen(name)+4)
+		if ssub(text,1,1) == "!" then
+			ignoreThisMessage = true
+				if myname and myname == name then
+				waitbotanswer = true
+				end
+		end
 		elseif (names[ssub(line,2,(sfind(line,"] ") or 1)-1)] ~= nil) then
+				ignoreThisMessage = true
 			linetype = 2 --spectatormessage
 			name = ssub(line,2,sfind(line,"] ")-1)
 			text = ssub(line,slen(name)+4)
+		if ssub(text,1,1) == "!" then
+			ignoreThisMessage = true
+			-- Spring.Echo(name)
+			-- Spring.Echo(myname)
+				if myname and myname == name then
+				waitbotanswer = true
+				end
+		end
 		elseif (names[ssub(line,2,(sfind(line,"(replay)") or 3)-3)] ~= nil) then
+				ignoreThisMessage = true
 			linetype = 2 --spectatormessage
 			name = ssub(line,2,sfind(line,"(replay)")-3)
 			text = ssub(line,slen(name)+13)
+		if ssub(text,1,1) == "!" then
+			ignoreThisMessage = true
+				if myname and myname == name then
+				waitbotanswer = true
+				end
+		end
 		elseif (names[ssub(line,1,(sfind(line," added point: ") or 1)-1)] ~= nil) then
+				ignoreThisMessage = true
 			linetype = 3 --playerpoint
 			name = ssub(line,1,sfind(line," added point: ")-1)
 			text = ssub(line,slen(name.." added point: ")+1)
 		elseif (ssub(line,1,1) == ">") then
 			linetype = 4 --gamemessage
+			playSound = true
 			text = ssub(line,3)
+			if sfind(text, "Invalid command" )or sfind(line, "not a valid") or sfind(text, "you cannot") or sfind(text, "You are not allowed") or (sfind(text, "Invalid") and sfind(text, "you are not allowed to vote for command")) or sfind(text, "Unable to") or sfind(text, "Could not find") or sfind(text, "Ringing") or sfind(text, " is no one to ring") then
+				ignoreThisMessage = true
+				playSound = false
+				if waitbotanswer then
+				playSound = true
+				ignoreThisMessage = false
+				waitbotanswer = nil
+				if sfind(text, myname) then
+				ignoreThisMessage = false
+				playSound = true
+				end
+				end
+			end
+			if sfind(text, "BAAlphatest1") then
+				playSound = true
+			text = ssub(text, sfind(text, "BAAlphatest1") + 15)
+			end
+			if sfind(text, "Ticot") then
+				playSound = true
+			text = ssub(text, sfind(text, "Ticot") + 8)
+			end
+			if sfind(text, "Pirateur") then
+				playSound = true
+			text = ssub(text, sfind(text, "Pirateur") + 11)
+			end
+			if sfind(text, "OverKillHost1") then
+				playSound = true
+			text = ssub(text, sfind(text, "OverKillHost1") + 15)
+			end
+			if sfind(text, "Pirine") then
+			playSound = true
+			text = ssub(text, sfind(text, "Pirine") + 9)
+			end
+			
+			--PROCESSS VOTES HERE--
+			if sfind(text, "called a vote for command") then
+				-- vote start: "Didgeri[doo] called a vote for command "bKick Didgeri[doo]" [!vote y, !vote n, !vote b]"
+				local command = ssub(text, sfind(text,"called a vote for command") + 27, sfind(text, '" ')-1)
+				local user = ssub(text, 1, sfind(text,"called a vote for command")-1)
+				text = user.." started vote: "..command
+			elseif sfind(text, "Vote for command") then
+				-- vote end: "Vote for command "xxx" passed."
+				status = ssub(text, sfind(text, '" ')+2,sfind(text, '" ')+7)
+				text = "Vote "..status.."."
+			-- elseif sfind(text, [[Vote in progress: ]]) then
+				-- vote progress :"Vote in progress: "bKick Didgeri[doo]" [y:0/2, n:1/2] (39s remaining)"
+				-- local votes = ssub(text,sfind(text, [[y:]]), sfind(text, [[\(]])-1)
+				-- local timeremaining = ssub(text,sfind(text, [[ \(]]) + 2, sfind(text, [[ remaining]])-1)
+				-- text = "Vote: "..votes..", "..timeremaining.." seconds left."
+			end			
+			
+			-- Will have to insert a basic autohosts list here, for now it's just available on tests hosts so let's not bother too much.
+			
             if ssub(line,1,3) == "> <" then --player speaking in battleroom
+					ignoreThisMessage = true
+			if ssub(text,1,1) == "!" then
+				ignoreThisMessage = true
+		end
                 local i = sfind(ssub(line,4,slen(line)), ">")
 				if (i) then
 					name = ssub(line,4,i+2)
@@ -493,40 +595,52 @@ local function processLine(line,g,cfg,newlinecolor)
 		end		
     end
 	
+	if registermyname and not nameregistered then
+	myname = name
+	registermyname = false
+	nameregistered = true
+	ignoreThisMessage = true 
+	-- Spring.SendCommands("wByNum "..regID.." Registered as "..myname)
+	end
+	
 	-- filter shadows config changes
 	if sfind(line,"^Set \"shadows\" config(-)parameter to ") then
 		ignoreThisMessage = true
 	end
 	
-	
-	-- filter Sync error when its a spectator
-	if sfind(line,"^Sync error for ") then
-		name = ssub(line,16,sfind(line," in frame ")-1)
-		if names[name] ~= nil and names[name][2] ~= nil and names[name][2] and sGetMyPlayerID() ~= names[name][4] then	-- when spec
-			ignoreThisMessage = true
-		end
+	if sfind(line,"->") then
+		ignoreThisMessage = true
 	end
 	
+	
 	-- filter Sync error when its a spectator
-	if sfind(line,"^Error: %[DESYNC WARNING%] ") then
-		name = ssub(line,sfind(line," %(")+2,sfind(line,"%) ")-1)
-		if names[name] ~= nil and names[name][2] ~= nil and names[name][2] and sGetMyPlayerID() ~= names[name][4] then	-- when spec
-			ignoreThisMessage = true
-		end
-	end
+	--if sfind(line,"^Sync error for ") then
+	--	name = ssub(line,16,sfind(line," in frame ")-1)
+	--	if names[name] ~= nil and names[name][2] ~= nil and names[name][2] and sGetMyPlayerID() ~= names[name][4] then	-- when spec
+	--		ignoreThisMessage = true
+	--	end
+	--end
+	
+	-- filter Sync error when its a spectator
+	--if sfind(line,"^Error: %[DESYNC WARNING%] ") then
+	--	name = ssub(line,sfind(line," %(")+2,sfind(line,"%) ")-1)
+	--	if names[name] ~= nil and names[name][2] ~= nil and names[name][2] and sGetMyPlayerID() ~= names[name][4] then	-- when spec
+	--		ignoreThisMessage = true
+	--	end
+	--end
 	
 	-- filter Connection attempts
-	if sfind(line,"^Connection attempt from ") then
-		name = ssub(line,25)
-		lastConnectionAttempt = name
-	  ignoreThisMessage = true
-	end
+	--if sfind(line,"^Connection attempt from ") then
+	--	name = ssub(line,25)
+	--	lastConnectionAttempt = name
+	--  ignoreThisMessage = true
+	--end
 	
 	-- filter Connection established
-	if sfind(line," Connection established") then
-		name = lastConnectionAttempt
-	  ignoreThisMessage = true
-	end
+	--if sfind(line," Connection established") then
+	--	name = lastConnectionAttempt
+	--  ignoreThisMessage = true
+	--end
 	
 	
 	if linetype==0 then
@@ -561,7 +675,7 @@ local function processLine(line,g,cfg,newlinecolor)
 	local MyAllyTeamID = sGetMyAllyTeamID()
 	local textcolor = nil
 	
-    local playSound = false
+
 	if (linetype==1) then --playermessage
 		local c = cfg.cothertext
 		local misccolor = convertColor(c[1],c[2],c[3])
@@ -646,7 +760,10 @@ local function processLine(line,g,cfg,newlinecolor)
 		g.vars.consolehistory = {}
 	end
 	local history = g.vars.consolehistory	
-
+	
+	if not Initialized then
+	ignoreThisMessage = false
+	end
 
 	if (not ignoreThisMessage) then		--mute--
 		local lineID = #history+1	
@@ -656,7 +773,7 @@ local function processLine(line,g,cfg,newlinecolor)
             spPlaySoundFile( SoundIncomingChat, SoundIncomingChatVolume, nil, "ui" )
         end
 	end
-
+	onelinedone = true
 	return history[#history]
 end
 
@@ -765,12 +882,12 @@ local function updateconsole(g,cfg)
 		g.background.active = false
 		g.lines.active = false
 		g.vars._empty = true
-		g.background.sy = (cfg.minlines*g.lines.fontsize + (g.lines.px-g.background.px)*2 ) -cfg.margin
+		g.background.sy = (cfg.minlines*g.lines.fontsize + (g.lines.px-g.background.px)*2 ) -(cfg.margin/3.5)
 	else
 		g.background.active = nil --activate
 		g.lines.active = nil --activate
 		g.vars._empty = nil
-		g.background.sy = (count*g.lines.fontsize + (g.lines.px-g.background.px)*2 ) -cfg.margin
+		g.background.sy = (count*g.lines.fontsize + (g.lines.px-g.background.px)*2 ) -(cfg.margin/3.5)
 	end
 	
 	g.lines.caption = display
@@ -778,6 +895,7 @@ local function updateconsole(g,cfg)
 end
 
 function widget:Initialize()
+regID = tostring(Spring.GetMyPlayerID())
 	PassedStartupCheck = RedUIchecks()
 	if (not PassedStartupCheck) then return end
 	
@@ -807,6 +925,13 @@ end
 function widget:Update()
 	updateconsole(console,Config.console)
 	AutoResizeObjects()
+if not Initialized then
+	if onelinedone == true then
+Initialized = true
+regID = tostring(Spring.GetMyPlayerID())
+Spring.SendCommands("wByNum "..regID.." My player ID is "..regID)
+end
+end
 end
 
 --save/load stuff
@@ -814,15 +939,14 @@ end
 function widget:GetConfigData() --save config
 	if (PassedStartupCheck) then
 		local vsy = Screen.vsy
-		local unscale = CanvasY/vsy --needed due to autoresize, stores unresized variables
-		Config.console.px = console.background.px * unscale
-		Config.console.py = console.background.py * unscale
+		Config.console.px = console.background.px
+		Config.console.py = console.background.py
 		return {Config=Config}
 	end
 end
 function widget:SetConfigData(data) --load config
 	if (data.Config ~= nil) then
-		Config.console.px = data.Config.console.px
-		Config.console.py = data.Config.console.py
+		--Config.console.px = data.Config.console.px
+		--Config.console.py = data.Config.console.py
 	end
 end
