@@ -402,6 +402,10 @@ function checkWidgets()
 		end
 		table.insert(options, {id="cursor", group="control", name="Cursor", type="select", options=cursorsets, value=cursor})
 	end
+	-- Icon adjuster
+	if (WG['iconadjuster'] ~= nil) then
+		table.insert(options, {id="iconadjuster", group="gfx", name="Unit icon scale", min=0.8, max=1.2, step=0.05, type="slider", value=WG['iconadjuster'].getScale(), description='Sets radar/unit icon size\n\n(Used for unit icon distance and minimap icons)'})
+	end
 	-- Darken map
 	if (WG['darkenmap'] ~= nil) then
 		table.insert(options, {id="darkenmap", group="gfx", name="Darken map", min=0, max=0.5, step=0.01, type="slider", value=WG['darkenmap'].getMapDarkness(), description='Darkens the whole map (not the units)\n\nRemembers setting per map\nUse /resetmapdarkness if you want to reset all stored map settings'})
@@ -463,10 +467,10 @@ function DrawWindow()
 		checkWidgets()
 	end
 
-  local x = screenX --rightwards
-  local y = screenY --upwards
+	local x = screenX --rightwards
+	local y = screenY --upwards
 	-- background
-  gl.Color(0,0,0,0.8)
+	gl.Color(0,0,0,0.8)
 	RectRound(x-bgMargin,y-screenHeight-bgMargin,x+screenWidth+bgMargin,y+bgMargin,8, 0,1,1,1)
 	-- content area
 	gl.Color(0.33,0.33,0.33,0.15)
@@ -676,7 +680,8 @@ function widget:Update(dt)
 				changes = true
 			end
 		end
-		if changes then
+		local widgetDataChanges = loadWidgetConfigData()
+		if changes or widgetDataChanges then
 			if windowList then
 				gl.DeleteList(windowList)
 			end
@@ -1025,6 +1030,8 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SendCommands("cross "..tonumber(Spring.GetConfigInt("CrossSize",1) or 10).." "..value)
 		elseif id == 'darkenmap' then
 			WG['darkenmap'].setMapDarkness(value)
+		elseif id == 'iconadjuster' then
+			WG['iconadjuster'].setScale(value)
 		elseif id == 'lighteffects_brightness' then
 			if WG['lighteffects'] ~= nil then
 				WG['lighteffects'].setGlobalBrightness(value)
@@ -1436,13 +1443,62 @@ function GetWidgetToggleValue(widgetname)
 	end
 end
 
+
+function loadWidgetConfigData()
+	local changes = false
+	if widgetHandler.configData.EnemySpotter ~= nil and widgetHandler.configData.EnemySpotter.spotterOpacity ~= nil then
+		if options[getOptionByID("enemyspotter_opacity")].value ~= widgetHandler.configData.EnemySpotter.spotterOpacity then
+			options[getOptionByID("enemyspotter_opacity")].value = widgetHandler.configData.EnemySpotter.spotterOpacity
+			changes = true
+		end
+	end
+	if widgetHandler.configData.EnemySpotter ~= nil and widgetHandler.configData.EnemySpotter.useXrayHighlight ~= nil then
+		if options[getOptionByID("enemyspotter_highlight")].value ~= widgetHandler.configData.EnemySpotter.useXrayHighlight then
+			options[getOptionByID("enemyspotter_highlight")].value = widgetHandler.configData.EnemySpotter.useXrayHighlight
+			changes = true
+		end
+	end
+
+	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLightMult ~= nil then
+		if options[getOptionByID("lighteffects_brightness")].value ~= widgetHandler.configData["Light Effects"].globalLightMult then
+			options[getOptionByID("lighteffects_brightness")].value = widgetHandler.configData["Light Effects"].globalLightMult
+			changes = true
+		end
+	end
+	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLightMult ~= nil then
+		if options[getOptionByID("lighteffects_radius")].value ~= widgetHandler.configData["Light Effects"].globalRadiusMult then
+			options[getOptionByID("lighteffects_radius")].value = widgetHandler.configData["Light Effects"].globalRadiusMult
+			changes = true
+		end
+	end
+	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLightMultLaser ~= nil then
+		if options[getOptionByID("lighteffects_laserbrightness")].value ~= widgetHandler.configData["Light Effects"].globalLightMultLaser then
+			options[getOptionByID("lighteffects_laserbrightness")].value = widgetHandler.configData["Light Effects"].globalLightMultLaser
+			changes = true
+		end
+	end
+	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalRadiusMultLaser ~= nil then
+		if options[getOptionByID("lighteffects_laserradius")].value ~= widgetHandler.configData["Light Effects"].globalRadiusMultLaser then
+			options[getOptionByID("lighteffects_laserradius")].value = widgetHandler.configData["Light Effects"].globalRadiusMultLaser
+			changes = true
+		end
+	end
+	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLifeMult ~= nil then
+		if options[getOptionByID("lighteffects_life")].value ~= widgetHandler.configData["Light Effects"].globalLifeMult then
+			options[getOptionByID("lighteffects_life")].value = widgetHandler.configData["Light Effects"].globalLifeMult
+			changes = true
+		end
+	end
+	return changes
+end
+
 function init()
 	-- if you want to add an option it should be added here, and in applyOptionValue(), if option needs shaders than see the code below the options definition
 	optionGroups = {
 		{id='preset', name='Preset'},
 		{id='gfx', name='Graphics'},
-		{id='snd', name='Sound'},
 		{id='control', name='Control'},
+		{id='snd', name='Sound'},
 		{id='ui', name='Interface'},
 		{id='game', name='Game'},
 	}
@@ -1476,7 +1532,7 @@ function init()
 		{id="lups", group="gfx", widget="LupsManager", name="Lups particle/shader effects", type="bool", value=GetWidgetToggleValue("LupsManager"), description='Toggle unit particle effects: jet beams, ground flashes, fusion energy balls'},
 		
 		{id="lighteffects", group="gfx", name="Light Effects", type="bool", value=GetWidgetToggleValue("Light Effects"), description='Adds lights to projectiles, lasers and explosions.\n\nRequires shaders.'},
-		{id="lighteffects_life", group="gfx", name=widgetOptionColor.."   lifetime", min=0.25, max=1, step=0.05, type="slider", value=1, description='lifetime of explosion lights'},
+		{id="lighteffects_life", group="gfx", name=widgetOptionColor.."   lifetime", min=0.25, max=1, step=0.05, type="slider", value=0.6, description='lifetime of explosion lights'},
 		{id="lighteffects_brightness", group="gfx", name=widgetOptionColor.."   brightness", min=1, max=5, step=0.1, type="slider", value=2.5, description='Set the brightness of the lights'},
 		{id="lighteffects_radius", group="gfx", name=widgetOptionColor.."   radius  (gpu intensive)", min=1, max=2, step=0.1, type="slider", value=1.2, description='Set the radius of the lights\n\nWARNING: the bigger the radius the heavier on the GPU'},
 		{id="lighteffects_laserbrightness", group="gfx", name=widgetOptionColor.."   laser brightness", min=0.4, max=2, step=0.1, type="slider", value=1.2, description='laser lights brightness RELATIVE to global light brightness set above'},
@@ -1492,6 +1548,7 @@ function init()
 		{id="advsky", group="gfx", name="Advanced sky", type="bool", value=tonumber(Spring.GetConfigInt("AdvSky",1) or 1) == 1, description='Enables high resolution clouds\n\nChanges will be applied next game'},
 		{id="daynight", group="gfx", name="Day/Night Cycles", type="bool", value=tonumber(Spring.GetConfigInt("DynamicSun",1) or 1) == 1, description='Enables Day/Night Cycles\n\nChanges will be applied next game'},
 		{id="snow", group="gfx", widget="Snow", name="Snow", type="bool", value=GetWidgetToggleValue("Snow"), description='Snows at winter maps, auto reduces amount when fps gets lower and unitcount higher\n\nUse /snow to toggle snow for current map (it remembers)'},
+		{id="disticon", group="gfx", name="Unit icon distance", type="slider", min=0, max=800, step=10, value=tonumber(Spring.GetConfigInt("UnitIconDist",1) or 800)},
 
 		-- SND
 		{id="sndvolmaster", group="snd", name="Master volume", type="slider", min=0, max=200, step=2, value=tonumber(Spring.GetConfigInt("snd_volmaster",1) or 100)},
@@ -1512,7 +1569,6 @@ function init()
 		{id="screenedgemove", group="control", name="Screen edge moves camera", type="bool", value=tonumber(Spring.GetConfigInt("FullscreenEdgeMove",1) or 1) == 1, description="If mouse is close to screen edge this will move camera\n\nChanges will be applied next game"},
 
 		-- UI
-		{id="disticon", group="ui", name="Unit icon distance", type="slider", min=0, max=800, step=10, value=tonumber(Spring.GetConfigInt("UnitIconDist",1) or 800)},
 		{id="teamcolors", group="ui", widget="Player Color Palette", name="Team colors based on a palette", type="bool", value=GetWidgetToggleValue("Player Color Palette"), description='Replaces lobby team colors for a color palette based one\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
 		{id="autoquit", group="ui", widget="Autoquit", name="Auto quit", type="bool", value=GetWidgetToggleValue("Autoquit"), description='Automatically quits after the game ends.\n...unless the mouse has been moved within a few seconds.'},
 
@@ -1565,28 +1621,7 @@ function init()
 		options[getOptionByID('vsync')] = nil
 	end
 
-	if widgetHandler.configData.EnemySpotter ~= nil and widgetHandler.configData.EnemySpotter.spotterOpacity ~= nil then
-		options[getOptionByID("enemyspotter_opacity")].value = widgetHandler.configData.EnemySpotter.spotterOpacity
-	end
-	if widgetHandler.configData.EnemySpotter ~= nil and widgetHandler.configData.EnemySpotter.useXrayHighlight ~= nil then
-		options[getOptionByID("enemyspotter_highlight")].value = widgetHandler.configData.EnemySpotter.useXrayHighlight
-	end
-
-	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLightMult ~= nil then
-		options[getOptionByID("lighteffects_brightness")].value = widgetHandler.configData["Light Effects"].globalLightMult
-	end
-	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLightMult ~= nil then
-		options[getOptionByID("lighteffects_radius")].value = widgetHandler.configData["Light Effects"].globalRadiusMult
-	end
-	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLightMultLaser ~= nil then
-		options[getOptionByID("lighteffects_laserbrightness")].value = widgetHandler.configData["Light Effects"].globalLightMultLaser
-	end
-	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalRadiusMultLaser ~= nil then
-		options[getOptionByID("lighteffects_laserradius")].value = widgetHandler.configData["Light Effects"].globalRadiusMultLaser
-	end
-	if widgetHandler.configData["Light Effects"] ~= nil and widgetHandler.configData["Light Effects"].globalLifeMult ~= nil then
-		options[getOptionByID("lighteffects_life")].value = widgetHandler.configData["Light Effects"].globalLifeMult
-	end
+	loadWidgetConfigData()
 
 	if WG['red_buildmenu'] == nil or WG['red_buildmenu'].getConfigShortcutsInfo == nil then
 		options[getOptionByID('buildmenushortcuts')] = nil
