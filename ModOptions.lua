@@ -57,7 +57,7 @@ local options= {
 		name   = 'AI is spamming chat with debug values',
 		desc   = 'AI is spamming chat with debug values',
 		type="list",
-		def="enabled",
+		def="disabled",
 		section= "aioptions",
 		items={
 			{key="disabled", name="Disabled", desc="Clean Chat"},
