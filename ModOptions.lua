@@ -53,39 +53,15 @@ local options= {
 		}
 	},
 	{
-		key    = 'ainukes',
-		name   = 'AI use Nukes and Lobbers',
-		desc   = 'AI use Nukes and Lobbers',
+		key    = 'aidebug',
+		name   = 'AI is spamming chat with debug values',
+		desc   = 'AI is spamming chat with debug values',
 		type="list",
 		def="enabled",
 		section= "aioptions",
 		items={
-			{key="disabled", name="Disabled", desc="Cries in Defending"},
-			{key="enabled", name="Enabled", desc="Laughs in Nukes"},
-		}
-	},
-	{
-		key    = 'aiunits',
-		name   = 'AI use Units to attack you',
-		desc   = 'AI use Units to attack you',
-		type="list",
-		def="enabled",
-		section= "aioptions",
-		items={
-			{key="disabled", name="Disabled", desc="Cries in Defending"},
-			{key="enabled", name="Enabled", desc="Laughs in Attacks"},
-		}
-	},
-	{
-		key    = 'shardchicken',
-		name   = 'Shard use Chickens (4fun only)',
-		desc   = 'Shard is building Chickens instead of Robots',
-		type="list",
-		def="disabled",
-		section= "aioptions",
-		items={
-			{key="disabled", name="Disabled", desc="Chicken Mode disabled"},
-			{key="enabled", name="Enabled", desc="Chicken Mode enabled"},
+			{key="disabled", name="Disabled", desc="Clean Chat"},
+			{key="enabled", name="Enabled", desc="Cries in Spam"},
 		}
 	},
 	

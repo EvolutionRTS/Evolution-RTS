@@ -1,13 +1,13 @@
 -- UNITDEF -- ELIGHTTURRET2_up1 --
 --------------------------------------------------------------------------------
 
-unitName = [[eturretlightai]]
+unitName = [[eturretlightai_up3]]
 
 --------------------------------------------------------------------------------
 
 buildCostMetal = 100
 
-isUpgraded	= [[0]]
+isUpgraded	= [[3]]
 
 humanName = [[Lightning Rod Mark AI]]
 

@@ -1,24 +1,24 @@
--- UNITDEF -- ELIGHTTURRET2_up1 --
+-- UNITDEF -- EHEAVYTURRET2_up1 --
 --------------------------------------------------------------------------------
 
-unitName = [[eturretlightai]]
+unitName = [[eturretheavyai_up3]]
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 100
+buildCostMetal = 160
 
-isUpgraded	= [[0]]
+isUpgraded	= [[3]]
 
-humanName = [[Lightning Rod Mark AI]]
+humanName = [[Immolator Mark AI]]
 
-objectName = [[elightturret3.s3o]]
-script = [[elightturret2.cob]]
+objectName = [[eheavyturret3.s3o]]
+script = [[eheavyturret2.cob]]
 
-tech = [[tech1]]
+tech = [[tech2]]
 armortype = [[building]]
 supply = [[0]]
 
-VFS.Include("units-configs-basedefs/basedefs/buildings/elightturret2_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/buildings/eheavyturret2_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

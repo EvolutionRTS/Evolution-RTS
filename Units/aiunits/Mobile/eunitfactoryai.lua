@@ -1,17 +1,16 @@
--- UNITDEF -- EALLTERRENGINEER --
+-- UNITDEF -- EAIRENGINEER --
 --------------------------------------------------------------------------------
 
-local unitName                   = "eallterrfacai_up1"
+local unitName                   = "eunitfactoryai"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal 			  = 40
-local maxDamage					  = 600
+local buildCostMetal 			  = 80
+local maxDamage					  = 450
 
 local armortype					 = [[light]]
 --local supply					 = [[2]]
-
-
+	
 local unitDef                    = {
 
 	--mobileunit 
@@ -20,77 +19,69 @@ local unitDef                    = {
 	--**
 
 
-	acceleration                 = 1,
-	brakeRate                    = 1,
+	acceleration                 = 0.5,
+	airStrafe                    = true,
+	brakeRate                    = 0.5,
 	buildCostEnergy              = 0,
 	buildCostMetal               = buildCostMetal,
-	buildDistance                = 800,
+	buildTime                    = 2.5,
 	builder                      = true,
-	buildTime                    = 5,
+	buildDistance                = 600,
 	capturable		             = false,
-	CanAttack			         = false,
+	canAttack                    = false,
 	CanAssist			         = true,
 	canBeAssisted                = true,
 	CanCapture                   = false,
 	CanRepair			         = true,
 	canRestore					 = false,
-	
+	canDropFlare                 = true,
+	canFly                       = true,
 	canGuard                     = true,
+	canLoopbackAttack            = true,
 	canMove                      = true,
 	canPatrol                    = true,
 	canreclaim		             = false,
 	canstop                      = true,
-	category                     = "LIGHT NOTAIR SUPPORT",
-
-	-- Cloaking
-
-	cancloak		             = true,
-	cloakCost		             = 0,
-	cloakCostMoving	             = 1,
-	minCloakDistance             = 70,
-	decloakOnFire	             = true,
-	decloakSpherical             = true,
-	initCloaked		             = false,
-	
-	-- End Cloaking
-
+	category                     = "LIGHT VTOL",
+	collide                      = true,
+	cruiseAlt                    = 300,
 	description                  = [[Builds Units]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "mediumExplosionGenericGreen",
+	flareDelay                   = 0.1,
+	flareDropVector              = "0 0 -1",
+	flareefficieny               = "0.3",
+	flareReload                  = 3,
+	floater                      = true,
 	footprintX                   = 4,
 	footprintZ                   = 4,
+	hoverAttack                  = true,
 	iconType                     = "engineer",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
-	levelground                  = true,
+	maxBank 			         = 5,
 	maxDamage                    = maxDamage,
-	maxSlope                     = 180,
-	maxVelocity                  = 3,
-	maxReverseVelocity           = 1,
-	turninplacespeedlimit        = 3,
-	maxWaterDepth                = 5000,
-	metalmake                    = 0,
+	maxSlope                     = 90,
+	maxVelocity                  = 7,
+	verticalSpeed		         = 15,
+	maxWaterDepth                = 0,
 	metalStorage                 = 0,
-	mobilestandorders            = "1",
-	movementClass                = "COMMANDERTANK4",
+	moverate1                    = "8",
 	moveState			         = "2",
-	name                         = "The Architect",
-	objectName                   = "eallterrengineer2.s3o",
-	script						 = "eallterrengineer1.cob",
+	name                         = "Unit Factory Mark AI",
+	objectName                   = "eairengineer2.s3o",
+	script			             = "eairengineer2.cob",
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericGreen",
 	showNanoSpray                = true,
-	sightDistance                = 500,
+	sightDistance                = 600,
 	smoothAnim                   = true,
-	stealth			             = true,
-	seismicSignature             = 2,
-	turnInPlace                  = true,
 	turnRate                     = 5000,
-	unitname                     = "eallterrengineer",
-	unitnumber                   = "20",
+	unitname                     = unitName,
+	unitnumber                   = "148",
 	workerTime                   = 1,
 	capturespeed                 = 1,
 	TerraformSpeed               = 100000,
@@ -103,8 +94,8 @@ local unitDef                    = {
 		}, 
 
 		explosiongenerators      = {
+			"custom:jethtrail",
 			"custom:nanoorb",
-			"custom:dirtsmall",
 			"custom:blacksmoke",
 		},
 	},
@@ -121,13 +112,15 @@ local unitDef                    = {
 	customParams                 = {
 		unittype				  = "mobile",
 		area_mex_def			 = "emetalextractor",
-		canbetransported 		 = "true",
-		needed_cover             = 1,
+		--    needed_cover       = 2,
 		death_sounds             = "generic",
 		armortype                = armortype,
 --		supply_cost              = supply,
-		normaltex               = "unittextures/con_legonormal.png",
+		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
+		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
+		factionname	             = "outer_colonies",
 		corpse                   = "energycore",
+		helptext				 = [[Armortype: ]] .. armortype,
 	},
 }
 
