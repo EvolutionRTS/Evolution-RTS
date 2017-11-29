@@ -3,7 +3,21 @@ Attackers!
 ]]--
 
 attackerlist = {
-    "elighttank3",
+    ------------- Endbringers
+	"eallterranarchid",
+	"eallterranarchid_up1",
+	"eallterranarchid_up2",
+	"eallterranarchid_up3",
+	"eamphibleveler",
+	"eamphibleveler_up1",
+	"eamphibleveler_up2",
+	"eamphibleveler_up3",
+	"elacerator",
+	"elacerator_up1",
+	"elacerator_up2",
+	"elacerator_up3",
+	------------- Basic
+	"elighttank3",
     "eamphibbuggy",
     "eallterrlight",
     "efighter",
