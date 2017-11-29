@@ -223,10 +223,12 @@ function RandomOverseer()
 		else
 			return "eunitfactoryai"
 		end
+	elseif mc <= 10 then
+		return "emetalextractor"
 	elseif es < Spring.GetGameSeconds()/2 then
 		return "estorage"
 	else
-		if Spring.GetGameSeconds() <= 300 then 
+		if Spring.GetGameSeconds() <= 200 then 
 			if ec <= 50 then
 				return "esolar2"
 			else
@@ -234,7 +236,7 @@ function RandomOverseer()
 			end
 		
 		------- Reached Tech 1
-		elseif Spring.GetGameSeconds() > 300 and Spring.GetGameSeconds() <= 600 then 
+		elseif Spring.GetGameSeconds() > 200 and Spring.GetGameSeconds() <= 500 then 
 			if ec <= 50 then
 				return "esolar2"
 			else
@@ -253,7 +255,7 @@ function RandomOverseer()
 			end
 		
 		------- Reached Tech 2 MK 2
-		elseif Spring.GetGameSeconds() > 600 and Spring.GetGameSeconds() <= 1000 then 
+		elseif Spring.GetGameSeconds() > 500 and Spring.GetGameSeconds() <= 1000 then 
 			if ec <= 50 then
 				return "efusion2"
 			else
