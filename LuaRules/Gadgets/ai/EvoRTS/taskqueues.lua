@@ -223,12 +223,12 @@ function RandomOverseer()
 		else
 			return "eunitfactoryai"
 		end
-	elseif mc <= 10 then
-		return "emetalextractor"
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
 	else
 		if Spring.GetGameSeconds() <= 200 then 
+			elseif mc <= 10 then
+				return "emetalextractor"
 			if ec <= 50 then
 				return "esolar2"
 			else
