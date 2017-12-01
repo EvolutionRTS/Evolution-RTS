@@ -36,7 +36,10 @@ local buttons = {}
 local previousTrack = ''
 local curTrack	= "no name"
 
-local tracks = VFS.DirList('luaui/Widgets_Evo/music/', '*.ogg')
+local peaceTracks = VFS.DirList('luaui/Widgets_Evo/music/peace', '*.ogg')
+local warTracks = VFS.DirList('luaui/Widgets_Evo/music/war', '*.ogg')
+
+local tracks = peaceTracks
 
 local charactersInPath = 25
 
@@ -82,6 +85,8 @@ local top, left, bottom, right = 0,0,0,0
 local shown = false
 local mouseover = false
 local volume
+
+local unitDeathCount = 0
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -416,8 +421,45 @@ function widget:Shutdown()
 	end
 end
 
+function widget:UnitDestroyed(unitID)
+	unitDeathCount = unitDeathCount + 1
+end
+
+function widget:GameFrame(n)	
+	if n%450 == 4 then
+		unitDeathCount = unitDeathCount * 0.5
+	end
+	
+end
+
 function PlayNewTrack()
 	Spring.StopSoundStream()
+	local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
+	Spring.Echo(dynamicMusic)
+	if dynamicMusic == nil then
+		dynamicMusic = 1
+	end
+	
+	if dynamicMusic == 0 then
+		Spring.Echo("Choosing a random track")
+		r = math.random(0,1)
+		if r == 0 then
+			tracks = peaceTracks
+		else
+			tracks = warTracks
+		end
+	end
+	
+	if dynamicMusic == 1 then
+		--Spring.Echo("Unit Death Count is (Gameframe): " .. unitDeathCount)
+		if unitDeathCount <= 6 then
+			tracks = peaceTracks
+			--Spring.Echo("Current tracklist is : Peace Tracks")
+		else
+			tracks = warTracks
+			--Spring.Echo("Current tracklist is : War Tracks")
+		end
+	end
 	local newTrack = previousTrack
 	repeat
 		newTrack = tracks[math.random(1, #tracks)]
@@ -460,7 +502,6 @@ function widget:Update(dt)
 		end
 	end
 end
-
 
 function updatePosition(force)
 	if (WG['advplayerlist_api'] ~= nil) then
