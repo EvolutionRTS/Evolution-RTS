@@ -43,7 +43,7 @@ local Tech3 = "etech3"
 
  function RandomLift()
 	--Locals
-	local mc, ms = Spring.GetTeamResources(ai.id, "metal")
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es = Spring.GetTeamResources(ai.id, "energy")
 	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
 	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
@@ -57,6 +57,7 @@ local Tech3 = "etech3"
 		Spring.Echo([[--Resources:]])
 		Spring.Echo([[AI is using ]] .. su ..[[/]] .. sm .. [[ supply!]])
 		Spring.Echo([[AI have ]] .. math.ceil(mc) ..[[/]] .. ms .. [[ metal and ]] .. math.ceil(ec) .. [[/]] .. es .. [[ energy!]])
+		Spring.Echo([[AI Metal Income is ]] .. mi.. [[ / -]] .. me )
 	else
 	end
 	
@@ -70,7 +71,7 @@ local Tech3 = "etech3"
 		else
 			return "eunitfactoryai"
 		end
-	elseif mc <= 10 then
+	elseif mc <= 10 or mi <= me then
 		return "emetalextractor"
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
@@ -196,7 +197,7 @@ end
 
 function RandomOverseer()
 	--Locals
-	local mc, ms = Spring.GetTeamResources(ai.id, "metal")
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es = Spring.GetTeamResources(ai.id, "energy")
 	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
 	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
@@ -227,7 +228,7 @@ function RandomOverseer()
 		return "estorage"
 	else
 		if Spring.GetGameSeconds() <= 200 then 
-			if mc <= 10 then
+			if mc <= 10 or mi <= me then
 				return "emetalextractor"
 			elseif ec <= 50 then
 				return "esolar2"
@@ -349,7 +350,7 @@ end
 
 function RandomUnit()
 	--Locals
-	local mc, ms = Spring.GetTeamResources(ai.id, "metal")
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es = Spring.GetTeamResources(ai.id, "energy")
 	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
 	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
