@@ -89,6 +89,8 @@ local unitDef                     = {
 		[1]                       = {
 			def                   = "nukemissile",
 			badTargetCategory    = "LIGHT ARMORED",
+			onlyTargetCategory    = "BUILDING",
+			
 		},
 	},
 	customParams                  = {
