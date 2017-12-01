@@ -81,7 +81,7 @@ return {
 				explosiongenerator = "custom:chickenspike-large-sparks-burn",
 				impulseboost = 0,
 				impulsefactor = 0.4,
-				interceptedbyshieldtype = 0,
+				interceptedbyshieldtype = 4,
 				model = "ChickenDefenseModels/spike.s3o",
 				name = "Spike",
 				noselfdamage = true,

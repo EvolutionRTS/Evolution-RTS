@@ -117,7 +117,7 @@ return {
 				explosiongenerator = "custom:chickenspike-large-sparks-burn",
 				impulseboost = 1,
 				impulsefactor = 2.2,
-				interceptedbyshieldtype = 0,
+				interceptedbyshieldtype = 4,
 				name = "Claws",
 				noselfdamage = true,
 				range = 200,

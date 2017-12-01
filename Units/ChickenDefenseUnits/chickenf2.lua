@@ -83,7 +83,7 @@ return {
 				explosiongenerator = "",
 				impulseboost = 1,
 				impulsefactor = 1,
-				interceptedbyshieldtype = 0,
+				interceptedbyshieldtype = 4,
 				model = "ChickenDefenseModels/chickeneggred.s3o",
 				mygravity = 0.5,
 				name = "GooBombs",

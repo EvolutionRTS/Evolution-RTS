@@ -82,7 +82,7 @@ return {
 				explosiongenerator = "custom:gundam_MISSILE_EXPLOSION",
 				impulseboost = 1,
 				impulsefactor = 1,
-				interceptedbyshieldtype = 0,
+				interceptedbyshieldtype = 4,
 				model = "ChickenDefenseModels/chickeneggyellow.s3o",
 				name = "GooBombs",
 				noselfdamage = true,
