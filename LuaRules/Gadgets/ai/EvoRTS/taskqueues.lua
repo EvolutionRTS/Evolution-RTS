@@ -72,7 +72,7 @@ local Tech3 = "etech3"
 		end
 	elseif mc <= 10 then
 		return "emetalextractor"
-	elseif es < Spring.GetGameSeconds()/2 then
+	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
 	else
 		if Spring.GetGameSeconds() <= 300 then 
@@ -225,7 +225,7 @@ function RandomOverseer()
 		end
 	elseif mc <= 10 then
 		return "emetalextractor"
-	elseif es < Spring.GetGameSeconds()/2 then
+	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
 	else
 		if Spring.GetGameSeconds() <= 200 then 
