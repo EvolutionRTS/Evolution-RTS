@@ -459,7 +459,7 @@ function RandomUnit()
 
 			elseif Spring.GetGameSeconds() > 1000 and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
 				
-			local r = math.random(0,11)
+			local r = math.random(0,9)
 				if r == 0 then
 					return "eheavytank3_up2"
 				elseif r == 1 then
@@ -495,7 +495,7 @@ function RandomUnit()
 
 			elseif Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
 				
-			local r = math.random(0,11)
+			local r = math.random(0,9)
 				if r == 0 then
 					return "eheavytank3_up3"
 				elseif r == 1 then
