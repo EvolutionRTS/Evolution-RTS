@@ -66,7 +66,7 @@ end
 		else
 			return "eunitfactoryai"
 		end
-	elseif mc <= 10 or mi <= me*2 then
+	elseif mc <= 10 or mi*2 <= me then
 		return "emetalextractor"
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
@@ -223,7 +223,7 @@ function RandomOverseer()
 		return "estorage"
 	else
 		if Spring.GetGameSeconds() <= 200 then 
-			if mc <= 10 or mi <= me*2 then
+			if mc <= 10 or mi*2 <= me then
 				return "emetalextractor"
 			elseif ec <= 50 then
 				return "esolar2"
