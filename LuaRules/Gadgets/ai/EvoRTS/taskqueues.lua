@@ -36,9 +36,7 @@ if aiDifficulty == nil then
 	aiDifficulty = "easy"
 end
 
-local Tech1 = "etech1"
-local Tech2 = "etech2"
-local Tech3 = "etech3"
+local TechEndbringer = GG.TechCheck("endbringer", ai.id)
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
@@ -58,10 +56,9 @@ local Tech3 = "etech3"
 		Spring.Echo([[AI is using ]] .. su ..[[/]] .. sm .. [[ supply!]])
 		Spring.Echo([[AI have ]] .. math.ceil(mc) ..[[/]] .. ms .. [[ metal and ]] .. math.ceil(ec) .. [[/]] .. es .. [[ energy!]])
 		Spring.Echo([[AI Metal Income is ]] .. mi.. [[ / -]] .. me )
+		Spring.Echo(GG.TechCheck("endbringer", ai.id) )
 	else
 	end
-	
-	
 	
 	------- Tech 0 - Very Early Game
 	if mc >= 490 then
@@ -71,7 +68,7 @@ local Tech3 = "etech3"
 		else
 			return "eunitfactoryai"
 		end
-	elseif mc <= 10 or mi <= me then
+	elseif mc <= 10 or mi <= me*2 then
 		return "emetalextractor"
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
@@ -228,7 +225,7 @@ function RandomOverseer()
 		return "estorage"
 	else
 		if Spring.GetGameSeconds() <= 200 then 
-			if mc <= 10 or mi <= me then
+			if mc <= 10 or mi <= me*2 then
 				return "emetalextractor"
 			elseif ec <= 50 then
 				return "esolar2"
@@ -482,11 +479,18 @@ function RandomUnit()
 				elseif r == 8 then
 					return "eamphibmedtank_up2"
 				elseif r == 9 then
-					return "eamphibleveler_up2"
-				elseif r == 10 then
-					return "eallterranarchid_up2"
-				elseif r == 11 then
-					return "elacerator_up2"
+					if TechEndbringer == "true" then
+					local r = math.random(0,2)
+						if r == 0 then
+							return "eamphibleveler_up2"
+						elseif r == 1 then
+							return "eallterranarchid_up2"
+						elseif r == 2 then
+							return "elacerator_up2"
+						end
+					else
+						return "ebox"
+					end
 				end	
 
 			elseif Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
@@ -511,11 +515,18 @@ function RandomUnit()
 				elseif r == 8 then
 					return "eamphibmedtank_up3"
 				elseif r == 9 then
-					return "eamphibleveler_up3"
-				elseif r == 10 then
-					return "eallterranarchid_up3"
-				elseif r == 11 then
-					return "elacerator_up3"
+					if TechEndbringer == "true" then
+					local r = math.random(0,2)
+						if r == 0 then
+							return "eamphibleveler_up3"
+						elseif r == 1 then
+							return "eallterranarchid_up3"
+						elseif r == 2 then
+							return "elacerator_up3"
+						end
+					else
+						return "ebox"
+					end
 				end	
 			end
 		else

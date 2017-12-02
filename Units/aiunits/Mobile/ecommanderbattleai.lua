@@ -50,7 +50,7 @@ end
 
 local armortype					 = [[armored]]
 local supplyGiven				 = [[500]]
-local techprovided				 = [[tech0, tech1, tech2, tech3, 1 baseshield, -overseer, 999 endbringer]]
+local techprovided				 = [[tech0, tech1, tech2, tech3, 1 baseshield, -overseer, 3 endbringer]]
 local techrequired				 = [[0 overseer]]
 
 local weapon1Damage              = 200
