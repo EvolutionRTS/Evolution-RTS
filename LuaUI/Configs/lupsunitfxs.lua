@@ -459,15 +459,15 @@ effectUnitDefs = {
 ------------------
   
 	ekmar = {
-	{class='ShieldSphere',options=ShieldSphere200},
-	{class='Bursts',options=shieldBursts200},
+	{class='ShieldSphere',options=ShieldSphere400},
+	{class='Bursts',options=shieldBursts400},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
 --    {class='StaticParticles', options=corfusNova4},
 
 --    {class='Bursts', options=efusion2Bursts},
-    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=205, precision=0, strength   = 0.001, repeatEffect=true}},
+    {class='ShieldJitter', options={delay=0,life=math.huge, pos={0,20,0.0}, size=405, precision=0, strength   = 0.001, repeatEffect=true}},
   },
   
 	ecommandershield = {

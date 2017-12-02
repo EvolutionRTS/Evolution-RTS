@@ -13,7 +13,7 @@ local shield1Power               = 2000
 local shield1PowerRegen          = 30
 local shield1PowerRegenEnergy    = shield1PowerRegen / 10
 
-local buildCostMetal 			  = 20
+local buildCostMetal 			  = 50
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -88,12 +88,7 @@ local unitDef                     = {
 		armortype                 = armortype,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	              = "outer_colonies",  
-		helptext                  = [[Armortype: ]] ..armortype.. [[ 
-
-Shield recharges at a rate of ]] .. shield1PowerRegen .. [[hp/s
-Energy cost for regeneration: ]] .. shield1PowerRegenEnergy .. [[/s
-Maximum shield power is ]] .. shield1Power ..[[hp]],
+		factionname	              = "outer_colonies",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
@@ -114,7 +109,7 @@ local weaponDefs                  = {
 		Visibleshieldrepulse      = false,
 		ShieldStartingPower       = 0,
 		Shieldenergyuse           = 0,
-		Shieldradius              = 200,
+		Shieldradius              = 400,
 		Shieldpower               = shield1Power,
 		Shieldpowerregen          = shield1PowerRegen,
 		Shieldpowerregenenergy    = shield1PowerRegenEnergy,
