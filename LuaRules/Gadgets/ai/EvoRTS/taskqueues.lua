@@ -35,8 +35,6 @@ end
 if aiDifficulty == nil then
 	aiDifficulty = "easy"
 end
-
-local TechEndbringer = GG.TechCheck("endbringer", ai.id)
 ---------------------------------------------------------------- LIFTER QUEUES
 
  function RandomLift()
@@ -479,7 +477,7 @@ function RandomUnit()
 				elseif r == 8 then
 					return "eamphibmedtank_up2"
 				elseif r == 9 then
-					if TechEndbringer == "true" then
+					if GG.TechCheck("endbringer", ai.id) == "true" then
 					local r = math.random(0,2)
 						if r == 0 then
 							return "eamphibleveler_up2"
@@ -515,7 +513,7 @@ function RandomUnit()
 				elseif r == 8 then
 					return "eamphibmedtank_up3"
 				elseif r == 9 then
-					if TechEndbringer == "true" then
+					if GG.TechCheck("endbringer", ai.id) == "true" then
 					local r = math.random(0,2)
 						if r == 0 then
 							return "eamphibleveler_up3"
