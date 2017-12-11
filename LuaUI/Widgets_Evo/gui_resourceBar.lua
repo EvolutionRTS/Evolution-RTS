@@ -22,7 +22,7 @@ local energyOffset = 350
 local energyBarWidth = 340
 local metalOffset = 700
 local metalBarWidth = 340
-local width, height = metalOffset+metalBarWidth, 40
+local width, height = metalOffset+metalBarWidth+supplyBarWidth, 40
 local textOffsetX, textOffsetY = 5, 17
 local bgFlashPeriod = 45
 local maxBasicIncome = Spring.GetModOptions().maxbasicincome or 15
@@ -543,7 +543,7 @@ end
 
 function widget:ViewResize(newX,newY)
 	vsx, vsy = newX, newY
-	posx, posy = vsx - width * 1.59, vsy - height - 10
+	posx, posy = (vsx - width)/2, vsy - height - 10
 	tweakStartX, tweakStartY = vsx - width * 1.59, vsy - height
 	widgetScale = (0.66 + (vsx*vsy / 9500000))
 	generateDisplayList()
