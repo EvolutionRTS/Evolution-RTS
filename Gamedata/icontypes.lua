@@ -42,6 +42,12 @@ local icontypes = {
     radiusadjust=0,
   },
   
+        krow = {
+    bitmap='icons/dmdr_end_krow.png',
+    size=3,
+    radiusadjust=0,
+  },
+  
         leveller = {
     bitmap='icons/dmdr_end_lvlr.png',
     size=3,

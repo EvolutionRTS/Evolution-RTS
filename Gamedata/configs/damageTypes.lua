@@ -230,6 +230,11 @@ local damageClasses = {
 			LIGHT		= 0.33,
 			BUILDING 	= 1,
 		},
+		ekrow	= {
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 1,
+		},
 		-- End Aircraft
 			
 		-- Start Experimentals

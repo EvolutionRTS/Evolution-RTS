@@ -417,6 +417,7 @@ Shared.buildListAirPlant = {
 		[[efighter]],
 		[[egunship2]],
 		[[ebomber]],
+		[[ekrow]],
 		[[etransport]],
 }
 Shared.buildListAirPlant_up1 = {
@@ -424,6 +425,7 @@ Shared.buildListAirPlant_up1 = {
 		[[efighter_up1]],
 		[[egunship2_up1]],
 		[[ebomber_up1]],
+		[[ekrow_up1]],
 		[[etransport_up1]],
 }
 Shared.buildListAirPlant_up2 = {
@@ -431,6 +433,7 @@ Shared.buildListAirPlant_up2 = {
 		[[efighter_up2]],
 		[[egunship2_up2]],
 		[[ebomber_up2]],
+		[[ekrow_up2]],
 		[[etransport_up2]],
 }
 Shared.buildListAirPlant_up3 = {
@@ -438,6 +441,7 @@ Shared.buildListAirPlant_up3 = {
 		[[efighter_up3]],
 		[[egunship2_up3]],
 		[[ebomber_up3]],
+		[[ekrow_up3]],
 		[[etransport_up3]],
 }
 --
