@@ -183,9 +183,6 @@ function gadget:GameFrame(n)
 			local teamNum,leader,isDead,isAiTeam,side,allyTeam,teamCustomOptions = Spring.GetTeamInfo(TeamID)
 			if isAiTeam then
 				GG.TechGrant("tech0",TeamID)
-				GG.TechGrant("tech1",TeamID)
-				GG.TechGrant("tech2",TeamID)
-				GG.TechGrant("tech3",TeamID)
 			end
 		end
 	end

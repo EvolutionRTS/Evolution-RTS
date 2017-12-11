@@ -16,6 +16,10 @@ attackerlist = {
 	"elacerator_up1",
 	"elacerator_up2",
 	"elacerator_up3",
+	"ekrow",
+	"ekrow_up1",
+	"ekrow_up2",
+	"ekrow_up3",
 	------------- Basic
 	"elighttank3",
     "eamphibbuggy",

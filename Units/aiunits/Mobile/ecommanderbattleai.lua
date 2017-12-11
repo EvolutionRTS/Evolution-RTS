@@ -49,8 +49,8 @@ if shardChicken == "disabled" then
 end
 
 local armortype					 = [[armored]]
-local supplyGiven				 = [[500]]
-local techprovided				 = [[tech0, tech1, tech2, tech3, 1 baseshield, -overseer, 3 endbringer]]
+local supplyGiven				 = [[10]]
+local techprovided				 = [[tech0, 1 tech0ai]]
 local techrequired				 = [[0 overseer]]
 
 local weapon1Damage              = 200

@@ -70,8 +70,18 @@ end
 		return "emetalextractor"
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
+	elseif su >= sm-20 and sm ~= 200 then
+		return "estorage"
+	
+	elseif GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech0ai", ai.id) == true then
+		return "etech1ai"
+	elseif GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false then
+		return "etech2ai"
+	elseif GG.TechCheck("tech3", ai.id) == false and GG.TechCheck("tech2ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == false then
+		return "etech3ai"
+		
 	else
-		if Spring.GetGameSeconds() <= 300 then 
+		if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
 			if ec <= 50 then
 				return "esolar2"
 			else
@@ -79,7 +89,7 @@ end
 			end
 		
 		------- Reached Tech 1
-		elseif Spring.GetGameSeconds() > 300 and Spring.GetGameSeconds() <= 600 then 
+		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
 			if ec <= 50 then
 				return "esolar2"
 			else
@@ -98,7 +108,7 @@ end
 			end
 		
 		------- Reached Tech 2 MK 2
-		elseif Spring.GetGameSeconds() > 600 and Spring.GetGameSeconds() <= 1000 then 
+		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then 
 			if ec <= 50 then
 				return "efusion2"
 			else
@@ -125,7 +135,7 @@ end
 			end
 			
 		------- Reached Tech 3 MK 3
-		elseif Spring.GetGameSeconds() > 1000 and Spring.GetGameSeconds() <= 1300 then 
+		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1500 then 
 			if ec <= 50 then
 				return "efusion2"
 			else
@@ -156,7 +166,7 @@ end
 			end
 		
 		------- Reached MK 4
-		elseif Spring.GetGameSeconds() > 1300 then
+		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1500 then
 			if ec <= 50 then
 				return "efusion2"
 			else
@@ -219,6 +229,14 @@ function RandomOverseer()
 		else
 			return "eunitfactoryai"
 		end
+	
+	elseif GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech0ai", ai.id) == true then
+		return "etech1ai"
+	elseif GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false then
+		return "etech2ai"
+	elseif GG.TechCheck("tech3", ai.id) == false and GG.TechCheck("tech2ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == false then
+		return "etech3ai"
+	
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
 	else
@@ -232,7 +250,7 @@ function RandomOverseer()
 			end
 		
 		------- Reached Tech 1
-		elseif Spring.GetGameSeconds() > 200 and Spring.GetGameSeconds() <= 500 then 
+		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
 			if ec <= 50 then
 				return "esolar2"
 			else
@@ -251,7 +269,7 @@ function RandomOverseer()
 			end
 		
 		------- Reached Tech 2 MK 2
-		elseif Spring.GetGameSeconds() > 500 and Spring.GetGameSeconds() <= 1000 then 
+		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then 
 			if ec <= 50 then
 				return "efusion2"
 			else
@@ -278,7 +296,7 @@ function RandomOverseer()
 			end
 			
 		------- Reached Tech 3 MK 3
-		elseif Spring.GetGameSeconds() > 1000 and Spring.GetGameSeconds() <= 1300 then 
+		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1500 then 
 			if ec <= 50 then
 				return "efusion2"
 			else
@@ -309,7 +327,7 @@ function RandomOverseer()
 			end
 		
 		------- Reached MK 4
-		elseif Spring.GetGameSeconds() > 1300 then
+		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1500 then
 			if ec <= 50 then
 				return "efusion2"
 			else
@@ -371,7 +389,7 @@ function RandomUnit()
 		end
 	else
 		if su <= sm-20 then
-			if Spring.GetGameSeconds() <= 300 then ------- Tech 0 - Very Early Game
+			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Tech 0 - Very Early Game
 			local r = math.random(0,9)
 				if r == 0 then
 					return "eallterrlight"
@@ -395,7 +413,7 @@ function RandomUnit()
 					return "ehbotpeewee"
 				end
 			
-			elseif Spring.GetGameSeconds() > 300 and Spring.GetGameSeconds() <= 600 then ------- Reached Tech 1
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 1
 			
 			local r = math.random(0,15)
 				if r == 0 then
@@ -432,7 +450,7 @@ function RandomUnit()
 					return "ehbotthud"
 				end
 			
-			elseif Spring.GetGameSeconds() > 600 and Spring.GetGameSeconds() <= 1000 then ------- Reached Tech 2 MK 2
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 2 MK 2
 
 			local r = math.random(0,8)
 				if r == 0 then
@@ -455,7 +473,7 @@ function RandomUnit()
 					return "eamphibmedtank_up1"
 				end	
 
-			elseif Spring.GetGameSeconds() > 1000 and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
 				
 			local r = math.random(0,9)
 				if r == 0 then
@@ -477,21 +495,23 @@ function RandomUnit()
 				elseif r == 8 then
 					return "eamphibmedtank_up2"
 				elseif r == 9 then
-					if GG.TechCheck("endbringer", ai.id) == "true" then
-					local r = math.random(0,2)
+					if GG.TechCheck("endbringer", ai.id) == true then
+					local r = math.random(0,3)
 						if r == 0 then
 							return "eamphibleveler_up2"
 						elseif r == 1 then
 							return "eallterranarchid_up2"
 						elseif r == 2 then
 							return "elacerator_up2"
+						elseif r == 3 then
+							return "ekrow_up2"
 						end
 					else
 						return "ebox"
 					end
 				end	
 
-			elseif Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
 				
 			local r = math.random(0,9)
 				if r == 0 then
@@ -513,14 +533,16 @@ function RandomUnit()
 				elseif r == 8 then
 					return "eamphibmedtank_up3"
 				elseif r == 9 then
-					if GG.TechCheck("endbringer", ai.id) == "true" then
-					local r = math.random(0,2)
+					if GG.TechCheck("endbringer", ai.id) == true then
+					local r = math.random(0,3)
 						if r == 0 then
 							return "eamphibleveler_up3"
 						elseif r == 1 then
 							return "eallterranarchid_up3"
 						elseif r == 2 then
 							return "elacerator_up3"
+						elseif r == 3 then
+							return "ekrow_up2"
 						end
 					else
 						return "ebox"
@@ -528,7 +550,7 @@ function RandomUnit()
 				end	
 			end
 		else
-			return "eorbai"
+			return "edrone"
 		end
 	end
 end
@@ -543,7 +565,12 @@ local idlelist = {
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
+	"emetalextractor",
 	"elifterai",
+	"elifterai",
+	"elifterai",
+	"esolar2",
+	"esolar2",
 	"eunitfactoryai",
 	}
 
