@@ -74,6 +74,7 @@ Shared.buildListAIOverseer = {
 	[[etech1ai]],
 	[[etech2ai]],
 	[[etech3ai]],
+	[[emetalextractor_up1]],
 	[[eunitfactoryai]],
 	[[eantinukeai]],
 	[[elobberai]],
