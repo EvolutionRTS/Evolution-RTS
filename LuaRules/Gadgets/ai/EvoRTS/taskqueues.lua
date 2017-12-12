@@ -116,25 +116,30 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r = math.random(0,8)
-				if r == 0 then
-					return "emine"
-				elseif r == 1 then
-					return "eradar2"
-				elseif r == 2 then
-					return "eturretlightai"
-				elseif r == 3 then
-					return "eorbai"
-				elseif r == 4 then
-					return "ebox"
-				elseif r == 5 then
-					return "eturretheavyai"
-				elseif r == 6 then
-					return "ejammer2"
-				elseif r == 7 then
-					return "ekmar"
-				elseif r == 8 then
-					return "eshieldgen"	
+				local r = math.random(0,7)
+				local r2 = math.random(0,100)
+				if r2 ~= 0 then
+					if r == 0 then
+						return "emine"
+					elseif r == 1 then
+						return "eradar2"
+					elseif r == 2 then
+						return "eturretlightai"
+					elseif r == 3 then
+						return "eorbai"
+					elseif r == 4 then
+						return "ebox"
+					elseif r == 5 then
+						return "eturretheavyai"
+					elseif r == 6 then
+						return "ejammer2"
+					elseif r == 7 then
+						return "ekmar"
+					elseif r == 8 then
+						return "eshieldgen"	
+					end
+				else
+					return "eshieldgen"
 				end
 			end
 			
@@ -289,25 +294,30 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r = math.random(0,8)
-				if r == 0 then
-					return "emine"
-				elseif r == 1 then
-					return "eradar2"
-				elseif r == 2 then
-					return "eturretlightai"
-				elseif r == 3 then
-					return "eorbai"
-				elseif r == 4 then
-					return "ebox"
-				elseif r == 5 then
-					return "eturretheavyai"
-				elseif r == 6 then
-					return "ejammer2"
-				elseif r == 7 then
-					return "ekmar"
-				elseif r == 8 then
-					return "eshieldgen"	
+				local r = math.random(0,7)
+				local r2 = math.random(0,100)
+				if r2 ~= 0 then
+					if r == 0 then
+						return "emine"
+					elseif r == 1 then
+						return "eradar2"
+					elseif r == 2 then
+						return "eturretlightai"
+					elseif r == 3 then
+						return "eorbai"
+					elseif r == 4 then
+						return "ebox"
+					elseif r == 5 then
+						return "eturretheavyai"
+					elseif r == 6 then
+						return "ejammer2"
+					elseif r == 7 then
+						return "ekmar"
+					elseif r == 8 then
+						return "eshieldgen"	
+					end
+				else
+					return "eshieldgen"
 				end
 			end
 			
@@ -595,11 +605,11 @@ local idlelist = {
 	local overseerlistfirst = {
 	"emetalextractor",
 	"emine",
-	"emetalextractor",
+	"elifterai",
 	"emine",
-	"emetalextractor",
+	"esolar2",
 	"emine",
-	"emetalextractor",
+	"eunitfactoryai",
 	"emine",
 	"elifterai",
 	"emine",
