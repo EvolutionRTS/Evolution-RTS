@@ -31,7 +31,7 @@ unitDef                    = {
 	idleTime                     = 2200,
 	maxAcc                       = 0.25,
 	maxBank			             = 5,
-	maxDamage                    = 325,
+	maxDamage                    = 406,
 	maxSlope                     = 90,
 	maxVelocity                  = 9,
 	verticalSpeed		         = 15,
@@ -135,7 +135,7 @@ weaponDefs                 = {
 			isupgraded           = isUpgraded,
 		}, 
 		damage                   = {
-			default              = 15,
+			default              = 20,
 		},
 	},  
 }

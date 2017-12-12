@@ -217,7 +217,7 @@ local damageClasses = {
 		},
 		egunship2	= {
 			ARMORED		= 1,
-			LIGHT		= 0.25,
+			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},	
 		egunship2torpedo	= {
