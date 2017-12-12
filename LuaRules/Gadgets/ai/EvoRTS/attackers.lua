@@ -51,6 +51,7 @@ attackerlist = {
 	"eorbai",
 	"eaimexer",
 	"escout",
+	"eallterrshield",
 	-------------- Upgrade 1
     "elighttank3_up1",
     "eamphibbuggy_up1",
@@ -77,6 +78,7 @@ attackerlist = {
 	"ehbotsniper_up1",
 	"ehbotthud_up1",
 	"escout_up1",
+	"eallterrshield_up1",
 	--------------- Upgrade 2
     "elighttank3_up2",
     "eamphibbuggy_up2",
@@ -103,6 +105,7 @@ attackerlist = {
 	"ehbotsniper_up2",
 	"ehbotthud_up2",
 	"escout_up2",
+	"eallterrshield_up2",
 	----------------------------- Upgrade 3
     "elighttank3_up3",
     "eamphibbuggy_up3",
@@ -129,6 +132,7 @@ attackerlist = {
 	"ehbotsniper_up3",
 	"ehbotthud_up3",
 	"escout_up3",
+	"eallterrshield_up3",
 	---------------------------- Chickens
 	"chicken_dodo1",
 	"chicken_dodo2",
