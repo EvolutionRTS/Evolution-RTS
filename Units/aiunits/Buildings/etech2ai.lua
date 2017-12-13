@@ -12,7 +12,7 @@ local techprovided				 = [[tech0, tech1, tech2, 1 tech2ai, -1 tech1ai]]
 local tech						 = [[tech1, tech1ai]]
 --local supplygranted				 = [[25]]
 
-local buildCostMetal 			  = 700
+local buildCostMetal 			  = 500
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
