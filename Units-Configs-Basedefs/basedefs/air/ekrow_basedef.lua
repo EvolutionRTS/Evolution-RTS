@@ -118,7 +118,7 @@ weaponDefs                 = {
 		minintensity             = 1,
 		name                     = "Laser",
 		range                    = 750,
-		reloadtime               = 4,
+		reloadtime               = 10,
 		WeaponType               = "LaserCannon",
 		waterweapon				 = true,
 		rgbColor                 = "0.7 0.7 1",
@@ -137,7 +137,7 @@ weaponDefs                 = {
 			isupgraded           = isUpgraded,
 		}, 
 		damage                   = {
-			default              = 1200,
+			default              = 2500,
 		},
 	},  
 }
