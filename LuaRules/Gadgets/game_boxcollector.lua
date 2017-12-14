@@ -62,7 +62,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	function gadget:GameFrame(f)
 	--Spring.Echo(eggsOnMap)
-		if f%10 == 1 then
+		if f%30 == 4 then
 			for box,b in pairs(BoxesOnMap) do
 				--Spring.Echo("Box")
 				--Spring.Echo(BoxesOnMap)
