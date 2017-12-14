@@ -76,6 +76,7 @@ unitDef                    = {
 		[1]                      = {
 			def                  = "aircannon",
 			noChaseCategory      = "VTOL LIGHT ARMORED",
+			badTargetCategory    = "VTOL LIGHT ARMORED",
 		},
 	},
 	customParams                 = {
@@ -113,12 +114,12 @@ weaponDefs                 = {
 		fallOffRate              = 0.1,
 		fireStarter              = 50,
 		impulseFactor            = 0,
-		fallOffRate				 = 0.1,
+		fallOffRate				 = 0,
 		interceptedByShieldType  = 4,
 		minintensity             = 1,
 		name                     = "Laser",
 		range                    = 750,
-		reloadtime               = 10,
+		reloadtime               = 5,
 		WeaponType               = "LaserCannon",
 		waterweapon				 = true,
 		rgbColor                 = "0.7 0.7 1",
@@ -137,7 +138,7 @@ weaponDefs                 = {
 			isupgraded           = isUpgraded,
 		}, 
 		damage                   = {
-			default              = 2500,
+			default              = 1250,
 		},
 	},  
 }

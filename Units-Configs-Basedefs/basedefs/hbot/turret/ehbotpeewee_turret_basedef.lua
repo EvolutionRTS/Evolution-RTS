@@ -117,6 +117,7 @@ weaponDefs                 = {
 		explosionGenerator     = "custom:genericshellexplosion-medium-sparks-burn",
 		edgeEffectiveness	   = 1,
 		energypershot          = 0,
+		fallOffRate            = 0,
 		duration			   = 0.25,
 		impulseFactor          = 0,
 		interceptedByShieldType  = 4,
