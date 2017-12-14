@@ -546,7 +546,7 @@ function RandomUnit()
 								return "ekrow_up2"
 							end
 						else
-							return "edrone"
+							return "escout_up3"
 						end
 					end	
 				
@@ -587,12 +587,12 @@ function RandomUnit()
 								return "ekrow_up3"
 							end
 						else
-							return "edrone"
+							return "escout_up3"
 						end
 					end
 				end	
 		else
-			return "edrone"
+			return "escout_up3"
 		end
 	end
 ---------------------------------------------------------------- QUEUES
