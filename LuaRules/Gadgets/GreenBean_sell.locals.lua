@@ -32,7 +32,7 @@ function gadget:GetInfo()
 end
 
 local refundFactor = 0.5 --How much of the original price is returned
-local sellFactor = 1 --Factor for the buildtime 
+local sellFactor = 30 --Factor for the buildtime with original equation -- With set amount of time equation, this is the number of seconds it takes to sell something
 local CMD_SELL = 39867
 
 if (gadgetHandler:IsSyncedCode()) then
@@ -63,7 +63,8 @@ function gadget:AllowCommand(u, ud, team, cmd, param, opt)
 	if cmd == CMD_SELL then
 		if not UnitDefs[ud].customParams.nosale then
 			if not saleTime[u] then
-				saleTime[u]=GetGameFrame() + UnitDefs[ud].buildTime * 32 * sellFactor
+				--saleTime[u]=GetGameFrame() + UnitDefs[ud].buildTime * 32 * sellFactor -- Original equation
+				saleTime[u]=GetGameFrame() + (sellFactor * 30) -- New set amount of time equation
 			elseif opt.right then
 				saleTime[u]=nil
 			end
