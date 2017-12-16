@@ -59,9 +59,9 @@ end
 	end
 	
 	------- Tech 0 - Very Early Game
-	if mc >= 490 then
-		r = math.random(0,5)
-		if r >= 1 then
+	if mc >= 450 then
+		r = math.random(0,1)
+		if r == 0 then
 			return "elifterai"
 		else
 			return "eunitfactoryai"
@@ -243,9 +243,9 @@ function RandomOverseer()
 	
 	
 	------- Tech 0 - Very Early Game
-	if mc >= 490 then
-		r = math.random(0,5)
-		if r >= 1 then
+	if mc >= 450 then
+		r = math.random(0,1)
+		if r == 0 then
 			return "elifterai"
 		else
 			return "eunitfactoryai"
@@ -295,7 +295,7 @@ function RandomOverseer()
 				return "efusion2"
 			else
 				local r = math.random(0,7)
-				local r2 = math.random(0,100)
+				local r2 = math.random(0,70)
 				if r2 ~= 0 then
 					if r == 0 then
 						return "emine"
@@ -326,7 +326,7 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,100)
+				local r2 = math.random(0,70)
 				if r2 ~= 0 then
 					local r = math.random(0,7)
 					if r == 0 then
@@ -362,7 +362,7 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,100)
+				local r2 = math.random(0,70)
 				if r2 ~= 0 then
 					local r = math.random(0,7)
 					if r == 0 then
@@ -416,12 +416,18 @@ function RandomUnit()
 	else
 	end
 
-	if mc >= 490 then
-		r = math.random(0,5)
-		if r >= 1 then
+	if mc >= 450 then
+		r = math.random(0,1)
+		if r == 0 then
 			return "elifterai"
 		else
 			return "eunitfactoryai"
+		end
+	elseif mc <= 10 or mi*2 <= me then
+		if GG.TechCheck("tech3", ai.id) == false then
+			return "emetalextractor"
+		else 
+			return "emetalextractor_up1"
 		end
 	elseif su <= sm-20 then
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Tech 0 - Very Early Game
@@ -511,7 +517,7 @@ function RandomUnit()
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
 				
 			
-				local r2 = math.random(0,100)
+				local r2 = math.random(0,70)
 				if r2 ~= 0 then	
 					local r = math.random(0,8)
 					if r == 0 then
@@ -552,7 +558,7 @@ function RandomUnit()
 				
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
 				
-				local r2 = math.random(0,100)
+				local r2 = math.random(0,70)
 				if r2 ~= 0 then
 					local r = math.random(0,8)
 					if r == 0 then
