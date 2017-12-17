@@ -97,7 +97,7 @@ end
 			if ec <= 50 then
 				return "esolar2"
 			else
-				local r = math.random(0,4)
+				local r = math.random(0,3)
 				if r == 0 then
 					return "emine"
 				elseif r == 1 then
@@ -106,8 +106,6 @@ end
 					return "eturretlightai"
 				elseif r == 3 then
 					return "eorbai"
-				elseif r == 4 then
-					return "ebox"
 				end
 			end
 		
@@ -116,7 +114,7 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r = math.random(0,7)
+				local r = math.random(0,6)
 				local r2 = math.random(0,100)
 				if r2 ~= 0 then
 					if r == 0 then
@@ -128,15 +126,11 @@ end
 					elseif r == 3 then
 						return "eorbai"
 					elseif r == 4 then
-						return "ebox"
-					elseif r == 5 then
 						return "eturretheavyai"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ejammer2"
-					elseif r == 7 then
+					elseif r == 6 then
 						return "ekmar"
-					elseif r == 8 then
-						return "eshieldgen"	
 					end
 				else
 					return "eshieldgen"
@@ -150,7 +144,7 @@ end
 			else
 				local r2 = math.random(0,100)
 				if r2 ~= 0 then
-					local r = math.random(0,7)
+					local r = math.random(0,6)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -160,12 +154,10 @@ end
 					elseif r == 3 then
 						return "eorbai"
 					elseif r == 4 then
-						return "ebox"
-					elseif r == 5 then
 						return "eturretheavyai"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ejammer2"
-					elseif r == 7 then
+					elseif r == 6 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
@@ -187,7 +179,7 @@ end
 			else
 				local r2 = math.random(0,100)
 				if r2 ~= 0 then
-					local r = math.random(0,7)
+					local r = math.random(0,6)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -197,12 +189,10 @@ end
 					elseif r == 3 then
 						return "eorbai"
 					elseif r == 4 then
-						return "ebox"
-					elseif r == 5 then
 						return "eturretheavyai_up3"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ejammer2"
-					elseif r == 7 then
+					elseif r == 6 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
@@ -275,7 +265,7 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "esolar2"
 			else
-				local r = math.random(0,4)
+				local r = math.random(0,3)
 				if r == 0 then
 					return "emine"
 				elseif r == 1 then
@@ -284,8 +274,6 @@ function RandomOverseer()
 					return "eturretlightai"
 				elseif r == 3 then
 					return "eorbai"
-				elseif r == 4 then
-					return "ebox"
 				end
 			end
 		
@@ -294,7 +282,7 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r = math.random(0,7)
+				local r = math.random(0,6)
 				local r2 = math.random(0,70)
 				if r2 ~= 0 then
 					if r == 0 then
@@ -306,15 +294,11 @@ function RandomOverseer()
 					elseif r == 3 then
 						return "eorbai"
 					elseif r == 4 then
-						return "ebox"
-					elseif r == 5 then
 						return "eturretheavyai"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ejammer2"
-					elseif r == 7 then
+					elseif r == 6 then
 						return "ekmar"
-					elseif r == 8 then
-						return "eshieldgen"	
 					end
 				else
 					return "eshieldgen"
@@ -328,7 +312,7 @@ function RandomOverseer()
 			else
 				local r2 = math.random(0,70)
 				if r2 ~= 0 then
-					local r = math.random(0,7)
+					local r = math.random(0,6)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -338,12 +322,10 @@ function RandomOverseer()
 					elseif r == 3 then
 						return "eorbai"
 					elseif r == 4 then
-						return "ebox"
-					elseif r == 5 then
 						return "eturretheavyai"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ejammer2"
-					elseif r == 7 then
+					elseif r == 6 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
@@ -364,7 +346,7 @@ function RandomOverseer()
 			else
 				local r2 = math.random(0,70)
 				if r2 ~= 0 then
-					local r = math.random(0,7)
+					local r = math.random(0,6)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -374,12 +356,10 @@ function RandomOverseer()
 					elseif r == 3 then
 						return "eorbai"
 					elseif r == 4 then
-						return "ebox"
-					elseif r == 5 then
 						return "eturretheavyai_up3"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ejammer2"
-					elseif r == 7 then
+					elseif r == 6 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
