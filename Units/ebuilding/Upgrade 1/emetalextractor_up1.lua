@@ -6,7 +6,7 @@ unitName = [[emetalextractor_up1]]
 --------------------------------------------------------------------------------
 
 metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 50 -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
-metalMultiplier = metalMultiplier * 2.5
+metalMultiplier = metalMultiplier * 4
 metalMultiplier = metalMultiplier * 0.01
 
 buildCostMetal = 300
