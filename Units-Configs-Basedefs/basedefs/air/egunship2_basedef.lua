@@ -1,6 +1,7 @@
 unitDef                    = {
 	acceleration                 = 0.5,
 	airStrafe                    = false,
+	airHoverFactor				 = 0,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 110,
@@ -52,6 +53,7 @@ unitDef                    = {
 	transportbyenemy             = false;
 	turnRate                     = 5000,
 	unitname                     = unitName,
+	upright						 = true,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"deathceg3", 
@@ -117,7 +119,7 @@ weaponDefs                 = {
 		interceptedByShieldType  = 4,
 		model                    = "missilesmalllauncher.s3o",
 		name                     = "Rockets",
-		range                    = 420,
+		range                    = 280,
 		reloadtime               = 1,
 		weaponType		         = "MissileLauncher",
 		waterweapon				 = true,

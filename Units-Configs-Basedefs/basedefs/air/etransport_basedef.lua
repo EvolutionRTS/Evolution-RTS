@@ -51,6 +51,7 @@ unitDef                    = {
 	loadingRadius				 = 220, --float
 	turnRate                     = 5000,
 	unitname                     = unitName,
+	upright						 = true,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"deathceg3", 

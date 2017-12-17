@@ -1,8 +1,8 @@
 unitDef                    = {
 	acceleration                 = 0.5,
 	airStrafe                    = false,
+	airHoverFactor				 = 0,
 	BadTargetCategory            = "VTOL",
-	bankingAllowed				 = false,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 1750,
@@ -51,6 +51,7 @@ unitDef                    = {
 	transportbyenemy             = false;
 	turnRate                     = 5000,
 	unitname                     = unitName,
+	upright						 = true,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 

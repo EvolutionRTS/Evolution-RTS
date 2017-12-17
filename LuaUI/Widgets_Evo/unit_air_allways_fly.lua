@@ -73,10 +73,10 @@ function switchAirpadToFlyMode(unitID, unitDefID)
 	unitDefID == UnitDefNames["efighter_up3"].id or
 	unitDefID == UnitDefNames["egunship2_up3"].id or
 	unitDefID == UnitDefNames["escout_up3"].id or
-	unitDefID == UnitDefNames["etransport_up3"].id) then
-	unitDefID == UnitDefNames["ekrow"].id) then
-	unitDefID == UnitDefNames["ekrow_up1"].id) then
-	unitDefID == UnitDefNames["ekrow_up2"].id) then
+	unitDefID == UnitDefNames["etransport_up3"].id or
+	unitDefID == UnitDefNames["ekrow"].id or
+	unitDefID == UnitDefNames["ekrow_up1"].id or
+	unitDefID == UnitDefNames["ekrow_up2"].id or
 	unitDefID == UnitDefNames["ekrow_up3"].id) then
         spGiveOrderToUnit(unitID, CMD.IDLEMODE, { 0 }, {})
     end

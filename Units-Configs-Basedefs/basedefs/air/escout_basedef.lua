@@ -1,6 +1,7 @@
 unitDef                    = {
 	acceleration                 = 0.5,
 	airStrafe                    = false,
+	airHoverFactor				 = 0,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 40,
@@ -48,6 +49,7 @@ unitDef                    = {
 	transportbyenemy             = false;
 	turnRate                     = 5000,
 	unitname                     = unitName,
+	upright						 = true,
 	workerTime                   = 0,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
