@@ -63,7 +63,7 @@ end
 		r = math.random(0,3)
 		if r <= 1 then
 			return "eunitfactoryai"
-		elseif r == 2
+		elseif r == 2 then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -239,7 +239,7 @@ function RandomOverseer()
 		r = math.random(0,3)
 		if r <= 1 then
 			return "eunitfactoryai"
-		elseif r == 2
+		elseif r == 2 then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -403,7 +403,7 @@ function RandomUnit()
 		r = math.random(0,3)
 		if r <= 1 then
 			return "eunitfactoryai"
-		elseif r == 2
+		elseif r == 2 then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then

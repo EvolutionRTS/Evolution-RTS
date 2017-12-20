@@ -37,7 +37,6 @@ local repairUnits= {
 	[UnitDefNames.eorb_up1.id] = {radius=650,strength=2.0},
 	[UnitDefNames.eorb_up2.id] = {radius=800,strength=3.0},
 	[UnitDefNames.eorb_up3.id] = {radius=1000,strength=4.0},
-	[UnitDefNames.eorbai.id] = {radius=1000,strength=2.0},
 	[UnitDefNames.ehbotengineer_turret.id] = {radius=1000,strength=2.0},
 }
 
