@@ -59,7 +59,7 @@ end
 	end
 	
 	------- Tech 0 - Very Early Game
-	if mc >= 450 then
+	if mc >= ms - 25 then
 		r = math.random(0,1)
 		if r == 0 then
 			return "elifterai"
@@ -105,7 +105,7 @@ end
 				elseif r == 2 then
 					return "eturretlightai"
 				elseif r == 3 then
-					return "eorbai"
+					return "eorb_up1"
 				end
 			end
 		
@@ -124,7 +124,7 @@ end
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorbai"
+						return "eorb_up2"
 					elseif r == 4 then
 						return "eturretheavyai"
 					elseif r == 5 then
@@ -152,7 +152,7 @@ end
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorbai"
+						return "eorb_up3"
 					elseif r == 4 then
 						return "eturretheavyai"
 					elseif r == 5 then
@@ -187,7 +187,7 @@ end
 					elseif r == 2 then
 						return "eturretlightai_up3"
 					elseif r == 3 then
-						return "eorbai"
+						return "eorb_up3"
 					elseif r == 4 then
 						return "eturretheavyai_up3"
 					elseif r == 5 then
@@ -233,7 +233,7 @@ function RandomOverseer()
 	
 	
 	------- Tech 0 - Very Early Game
-	if mc >= 450 then
+	if mc >= ms - 25 then
 		r = math.random(0,1)
 		if r == 0 then
 			return "elifterai"
@@ -273,7 +273,7 @@ function RandomOverseer()
 				elseif r == 2 then
 					return "eturretlightai"
 				elseif r == 3 then
-					return "eorbai"
+					return "eorb_up1"
 				end
 			end
 		
@@ -292,7 +292,7 @@ function RandomOverseer()
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorbai"
+						return "eorb_up2"
 					elseif r == 4 then
 						return "eturretheavyai"
 					elseif r == 5 then
@@ -320,7 +320,7 @@ function RandomOverseer()
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorbai"
+						return "eorb_up3"
 					elseif r == 4 then
 						return "eturretheavyai"
 					elseif r == 5 then
@@ -354,7 +354,7 @@ function RandomOverseer()
 					elseif r == 2 then
 						return "eturretlightai_up3"
 					elseif r == 3 then
-						return "eorbai"
+						return "eorb_up3"
 					elseif r == 4 then
 						return "eturretheavyai_up3"
 					elseif r == 5 then
@@ -396,7 +396,7 @@ function RandomUnit()
 	else
 	end
 
-	if mc >= 450 then
+	if mc >= ms - 25 then
 		r = math.random(0,1)
 		if r == 0 then
 			return "elifterai"

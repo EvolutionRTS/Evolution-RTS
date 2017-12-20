@@ -71,6 +71,9 @@ end
 
 Shared.buildListAIOverseer = {
 	------------- Basic
+	[[eorb_up1]],
+	[[eorb_up2]],
+	[[eorb_up3]],
 	[[etech1ai]],
 	[[etech2ai]],
 	[[etech3ai]],

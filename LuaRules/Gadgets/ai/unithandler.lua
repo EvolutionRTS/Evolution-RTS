@@ -74,7 +74,7 @@ end
 
 function UnitHandler:UnitDamaged(engineUnit,attacker,damage)
 	local u = self:AIRepresentation(engineUnit)
-	local a -- = self:AIRepresentation(attacker)
+	--local a -- = self:AIRepresentation(attacker)
 	for k,v in pairs(self.myUnits) do
 		v:UnitDamaged(u,a,damage)
 	end

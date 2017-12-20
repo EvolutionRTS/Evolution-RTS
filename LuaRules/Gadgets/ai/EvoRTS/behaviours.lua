@@ -25,11 +25,17 @@ end
 --require "factoryregisterbehaviour"
 
 behaviours = {
-	--eorb = {
-	--	AutoReclaimBehaviour,
-	--},
-	eaiturret = {
-		TaskQueueBehaviour
+	eorb = {
+		AttackerBehaviour,
+	},
+	eorb_up1 = {
+		AttackerBehaviour,
+	},
+	eorb_up2 = {
+		AttackerBehaviour,
+	},
+	eorb_up3 = {
+		AttackerBehaviour,
 	},
 	ebasefactory = {
 		TaskQueueBehaviour,
