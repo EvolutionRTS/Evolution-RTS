@@ -51,7 +51,7 @@ local glMultiTexCoord = gl.MultiTexCoord
 local glCallList = gl.CallList
 
 function ShieldSphereParticle:BeginDraw()
-  gl.DepthMask(false)
+  gl.DepthMask(true)
   gl.UseShader(shieldShader)
   gl.Culling(GL.FRONT)
 end
