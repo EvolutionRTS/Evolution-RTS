@@ -403,7 +403,7 @@ effectUnitDefs = {
 --  },
 	
 	eantinukeai = {
-	{class='ShieldSphere',options=ShieldSphere2000},
+	--{class='ShieldSphere',options=ShieldSphere2000},
 	{class='Bursts',options=shieldBursts2000},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -417,7 +417,7 @@ effectUnitDefs = {
 ------------------
   
 	eallterrshield = {
-	{class='ShieldSphere',options=ShieldSphere300},
+	--{class='ShieldSphere',options=ShieldSphere300},
 	{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -429,7 +429,7 @@ effectUnitDefs = {
   },
   
 	eallterrshield_up1 = {
-	{class='ShieldSphere',options=ShieldSphere300},
+	--{class='ShieldSphere',options=ShieldSphere300},
 	{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -442,7 +442,7 @@ effectUnitDefs = {
   
   
 	eallterrshield_up2 = {
-	{class='ShieldSphere',options=ShieldSphere300},
+	--{class='ShieldSphere',options=ShieldSphere300},
 	{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -455,7 +455,7 @@ effectUnitDefs = {
   
   
 	eallterrshield_up3 = {
-	{class='ShieldSphere',options=ShieldSphere300},
+	--{class='ShieldSphere',options=ShieldSphere300},
 	{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -470,7 +470,7 @@ effectUnitDefs = {
 ------------------
   
 	ekmar = {
-	{class='ShieldSphere',options=ShieldSphere400},
+	--{class='ShieldSphere',options=ShieldSphere400},
 	{class='Bursts',options=shieldBursts400},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
@@ -482,7 +482,7 @@ effectUnitDefs = {
   },
   
 	ecommandershield = {
-	{class='ShieldSphere',options=ShieldSphere400},
+	--{class='ShieldSphere',options=ShieldSphere400},
 	{class='Bursts',options=shieldBursts400},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},

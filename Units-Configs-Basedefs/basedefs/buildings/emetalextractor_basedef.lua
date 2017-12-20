@@ -47,7 +47,7 @@ unitDef                     = {
 
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactionnuclear",
+			primaryCEG,
 			"custom:skyhatelaser",
 		},
 	},

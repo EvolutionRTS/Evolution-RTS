@@ -12,6 +12,8 @@ metalMultiplier = metalMultiplier * 0.01
 buildCostMetal = 300
 energyUse = 0
 
+primaryCEG = "custom:fusionreactionnuclearpurple"
+
 humanName = [[Metal Extractor Mk II]]
 
 objectName = [[emetalextractor2.s3o]]

@@ -62,6 +62,9 @@ local timeToBuild_euwturret = energyCost_euwturret * 0.20
 local energyCost_emetalextractor_up1 = 1200
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
 
+local energyCost_eorb = 600
+local timeToBuild_eorb = energyCost_eorb * 0.10
+
 
 local morphDefs = {
 	ecommander = 	{
@@ -856,6 +859,47 @@ Upgrade]],
 			text = 'Morph into a Tech Level 3 Facility.',
 		},
 	},	
+	
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	eorb = 	{
+		{
+			into = 'eorb_up1',
+			--require = 'etech1',
+			time = timeToBuild_eorb,
+			cmdname = [[upgrade]],
+			energy = energyCost_eorb,
+			metal = 0,
+			text = [[+15% hp buff, 2x Buildspeed, 2x Healing Rate, Larger BuildRange/HealRange]],
+			require = [[tech1]],
+		},
+	},	
+	eorb_up1 = 	{
+		{
+			into = 'eorb_up2',
+			--require = 'etech1',
+			time = timeToBuild_eorb,
+			cmdname = [[upgrade]],
+			energy = energyCost_eorb,
+			metal = 0,
+			text = [[+15% hp buff, 2x Buildspeed, 2x Healing Rate, Larger BuildRange/HealRange]],
+			require = [[tech2]],
+		},
+	},	
+	eorb_up2 = 	{
+		{
+			into = 'eorb_up3',
+			--require = 'etech1',
+			time = timeToBuild_eorb,
+			cmdname = [[upgrade]],
+			energy = energyCost_eorb,
+			metal = 0,
+			text = [[+15% hp buff, 2x Buildspeed, 2x Healing Rate, Larger BuildRange/HealRange]],
+			require = [[tech3]],
+		},
+	},	
+	
 }
 
 --

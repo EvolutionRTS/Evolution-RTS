@@ -441,7 +441,7 @@ function PlayNewTrack()
 	end
 	
 	if dynamicMusic == 0 then
-		Spring.Echo("Choosing a random track")
+		--Spring.Echo("Choosing a random track")
 		r = math.random(0,1)
 		if r == 0 then
 			tracks = peaceTracks

@@ -27,8 +27,9 @@ local unitDef                     = {
 	collisionVolumeTest           = 1,
 	collisionVolumeType           = "box",
 
-	description                   = [[Provides +]] .. supplygranted .. [[ Supply • Provides +]] .. storage .. [[ Energy Storage]],
+	description                   = [[Provides +]] .. supplygranted .. [[ Supply • Provides +]] .. storage .. [[ Metal/Energy Storage]],
 	energyStorage                 = storage,
+	metalStorage                 = storage,
 	energyUse                     = 0,
 	explodeAs                     = "smallBuildingExplosionGenericPurple",
 	footprintX                    = 4,

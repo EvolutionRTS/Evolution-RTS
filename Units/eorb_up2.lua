@@ -1,18 +1,18 @@
 --------------------------------------------------------------------------------
 
-unitName = [[eorb]]
+unitName = [[eorb_up2]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= [[0]]
+isUpgraded	= [[2]]
 
-humanName = [[O.R.B. MK I]]
+humanName = [[O.R.B. MK III]]
 
 objectName = [[eorb4.s3o]]
 script = [[eorb3.cob]]
 
-workerTime = 0.5
-buildDistance = 500
+workerTime = 1.5
+buildDistance = 700
 
 tech = [[tech0]]
 armortype = [[light]]
