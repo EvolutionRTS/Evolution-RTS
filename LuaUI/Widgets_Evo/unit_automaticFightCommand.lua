@@ -32,7 +32,7 @@ local targetUnits = {"eorb", "eorb_up1", "eorb_up2", "eorb_up3"}
 
 local function IsTargetUnit(ud)
 	--Spring.Echo(targetUnits)
-	return ud and ud.name == targetUnits
+	return ud and targetUnits[ud.name]
 end
 
 
