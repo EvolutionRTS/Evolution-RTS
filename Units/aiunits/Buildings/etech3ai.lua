@@ -7,7 +7,7 @@ local unitName                    = "etech3ai"
 
 local armortype					 = [[building]]
 local energyproduced			 = [[0]]
-local techprovided				 = [[tech0, tech1, tech2, tech3, 3 endbringer, -1 tech2ai]]
+local techprovided				 = [[tech0, tech1, tech2, tech3, 1000 endbringer, -1 tech2ai]]
 
 local tech						 = [[tech2, tech2ai]]
 --local supplygranted				 = [[25]]

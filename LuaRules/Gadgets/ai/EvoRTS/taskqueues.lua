@@ -59,12 +59,22 @@ end
 	end
 	
 	------- Tech 0 - Very Early Game
-	if mc >= ms - 25 then
-		r = math.random(0,1)
-		if r == 0 then
+	if mc >= ms - ms*0.20 then
+		r = math.random(0,3)
+		if r <= 1 then
+			return "eunitfactoryai"
+		elseif r == 2
 			return "elifterai"
 		else
-			return "eunitfactoryai"
+			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb_up1"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb_up2"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
+				return "eorb_up3"
+			end
 		end
 	elseif mc <= 10 or mi*2 <= me then
 		if GG.TechCheck("tech3", ai.id) == false then
@@ -97,15 +107,13 @@ end
 			if ec <= 50 then
 				return "esolar2"
 			else
-				local r = math.random(0,3)
+				local r = math.random(0,2)
 				if r == 0 then
 					return "emine"
 				elseif r == 1 then
 					return "eradar2"
 				elseif r == 2 then
 					return "eturretlightai"
-				elseif r == 3 then
-					return "eorb_up1"
 				end
 			end
 		
@@ -114,8 +122,8 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r = math.random(0,6)
-				local r2 = math.random(0,100)
+				local r = math.random(0,5)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then
 					if r == 0 then
 						return "emine"
@@ -124,12 +132,10 @@ end
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorb_up2"
-					elseif r == 4 then
 						return "eturretheavyai"
-					elseif r == 5 then
+					elseif r == 4 then
 						return "ejammer2"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ekmar"
 					end
 				else
@@ -142,9 +148,9 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,100)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then
-					local r = math.random(0,6)
+					local r = math.random(0,5)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -152,12 +158,10 @@ end
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorb_up3"
-					elseif r == 4 then
 						return "eturretheavyai"
-					elseif r == 5 then
+					elseif r == 4 then
 						return "ejammer2"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
@@ -177,9 +181,9 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,100)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then
-					local r = math.random(0,6)
+					local r = math.random(0,5)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -187,12 +191,10 @@ end
 					elseif r == 2 then
 						return "eturretlightai_up3"
 					elseif r == 3 then
-						return "eorb_up3"
-					elseif r == 4 then
 						return "eturretheavyai_up3"
-					elseif r == 5 then
+					elseif r == 4 then
 						return "ejammer2"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
@@ -233,14 +235,23 @@ function RandomOverseer()
 	
 	
 	------- Tech 0 - Very Early Game
-	if mc >= ms - 25 then
-		r = math.random(0,1)
-		if r == 0 then
+	if mc >= ms - ms*0.20 then
+		r = math.random(0,3)
+		if r <= 1 then
+			return "eunitfactoryai"
+		elseif r == 2
 			return "elifterai"
 		else
-			return "eunitfactoryai"
+			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb_up1"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb_up2"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
+				return "eorb_up3"
+			end
 		end
-	
 	elseif GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech0ai", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
 		return "etech1ai"
 	elseif GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -265,15 +276,13 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "esolar2"
 			else
-				local r = math.random(0,3)
+				local r = math.random(0,2)
 				if r == 0 then
 					return "emine"
 				elseif r == 1 then
 					return "eradar2"
 				elseif r == 2 then
 					return "eturretlightai"
-				elseif r == 3 then
-					return "eorb_up1"
 				end
 			end
 		
@@ -282,8 +291,8 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r = math.random(0,6)
-				local r2 = math.random(0,70)
+				local r = math.random(0,5)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then
 					if r == 0 then
 						return "emine"
@@ -292,12 +301,10 @@ function RandomOverseer()
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorb_up2"
-					elseif r == 4 then
 						return "eturretheavyai"
-					elseif r == 5 then
+					elseif r == 4 then
 						return "ejammer2"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ekmar"
 					end
 				else
@@ -310,9 +317,9 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,70)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then
-					local r = math.random(0,6)
+					local r = math.random(0,5)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -320,12 +327,10 @@ function RandomOverseer()
 					elseif r == 2 then
 						return "eturretlightai"
 					elseif r == 3 then
-						return "eorb_up3"
-					elseif r == 4 then
 						return "eturretheavyai"
-					elseif r == 5 then
+					elseif r == 4 then
 						return "ejammer2"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
@@ -344,9 +349,9 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,70)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then
-					local r = math.random(0,6)
+					local r = math.random(0,5)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -354,12 +359,10 @@ function RandomOverseer()
 					elseif r == 2 then
 						return "eturretlightai_up3"
 					elseif r == 3 then
-						return "eorb_up3"
-					elseif r == 4 then
 						return "eturretheavyai_up3"
-					elseif r == 5 then
+					elseif r == 4 then
 						return "ejammer2"
-					elseif r == 6 then
+					elseif r == 5 then
 						return "ekmar"
 					end
 				elseif r2 == 0 then
@@ -396,12 +399,22 @@ function RandomUnit()
 	else
 	end
 
-	if mc >= ms - 25 then
-		r = math.random(0,1)
-		if r == 0 then
+	if mc >= ms - ms*0.20 then
+		r = math.random(0,3)
+		if r <= 1 then
+			return "eunitfactoryai"
+		elseif r == 2
 			return "elifterai"
 		else
-			return "eunitfactoryai"
+			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb_up1"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
+				return "eorb_up2"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
+				return "eorb_up3"
+			end
 		end
 	elseif mc <= 10 or mi*2 <= me then
 		if GG.TechCheck("tech3", ai.id) == false then
@@ -497,7 +510,7 @@ function RandomUnit()
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
 				
 			
-				local r2 = math.random(0,70)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then	
 					local r = math.random(0,8)
 					if r == 0 then
@@ -538,7 +551,7 @@ function RandomUnit()
 				
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
 				
-				local r2 = math.random(0,70)
+				local r2 = math.random(0,50)
 				if r2 ~= 0 then
 					local r = math.random(0,8)
 					if r == 0 then
