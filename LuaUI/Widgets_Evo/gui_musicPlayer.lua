@@ -429,9 +429,9 @@ end
 function widget:GameFrame(n)    
     if n%150 == 4 then
         unitDeathCount = unitDeathCount * 0.75
-        Spring.Echo(unitDeathCount)
+        Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
     end
-    if n%15 == 4 then
+    if n%10 == 1 then
 		if dynamicMusic == 1 then
 			if tracks == peaceTracks and unitDeathCount >= 7 then
 				fadelvl = fadelvl - 0.05
