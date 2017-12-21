@@ -199,9 +199,9 @@ for _, teamID in ipairs(teams) do
   local teamLuaAI = GetTeamLuaAI(teamID)
   if (teamLuaAI and teamLuaAI ~= "") then
     luaAI = teamLuaAI
-    if (modes[teamLuaAI] > highestLevel) then -- get chicken ai with highest level
-      highestLevel = modes[teamLuaAI]
-    end
+    --if (modes[teamLuaAI] > highestLevel) then -- get chicken ai with highest level
+      --highestLevel = modes[teamLuaAI]
+    --end
     chickenTeamID = teamID
     computerTeams[teamID] = true
   else
