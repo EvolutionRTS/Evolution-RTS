@@ -44,7 +44,9 @@ local hitOpacityMult = {1.2, 1.5, 1.5}
 local HIT_DURATION = 2
 function GetShieldColor(unitID, self)
 	local _, charge = Spring.GetUnitShieldState(unitID)
-	local frac = math.max(0, math.min(1, charge/(self.shieldCapacity or 10000)))
+	if charge ~= nil then
+		local frac = math.max(0, math.min(1, charge/(self.shieldCapacity or 10000)))
+	end
 	local col1 = MergeShieldColor(self.colormap1, frac)
 	local col2 = self.colormap2 and MergeShieldColor(self.colormap2, frac)
 	

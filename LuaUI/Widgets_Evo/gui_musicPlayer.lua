@@ -87,6 +87,7 @@ local mouseover = false
 local volume
 
 local unitDeathCount = 0
+local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
