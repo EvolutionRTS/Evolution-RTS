@@ -432,10 +432,10 @@ function widget:GameFrame(n)
         Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
     end
 	local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
-    if n%30 == 4 then
+    if n%15 == 4 then
 		if dynamicMusic == 1 then
 			if tracks == peaceTracks and unitDeathCount >= 4 then
-				fadelvl = fadelvl - 0.025
+				fadelvl = fadelvl - 0.05
 				Spring.SetSoundStreamVolume(fadelvl)
 				if fadelvl <= 0.01 then
 					PlayNewTrack()
@@ -443,7 +443,7 @@ function widget:GameFrame(n)
 				end
 			end
 			if tracks == warTracks and unitDeathCount < 4 then
-				fadelvl = fadelvl - 0.025
+				fadelvl = fadelvl - 0.05
 				Spring.SetSoundStreamVolume(fadelvl)
 				if fadelvl <= 0.01 then
 					PlayNewTrack()
