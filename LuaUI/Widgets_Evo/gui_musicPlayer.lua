@@ -432,30 +432,32 @@ function widget:GameFrame(n)
         Spring.Echo(unitDeathCount)
     end
     if n%15 == 4 then
-        if tracks == peaceTracks and unitDeathCount >= 7 then
-            fadelvl = fadelvl - 0.05
-            Spring.SetSoundStreamVolume(fadelvl)
-            if fadelvl <= 0.01 then
-                PlayNewTrack()
-                fadelvl = music_volume * 0.01
-            end
-        end
-        if tracks == warTracks and unitDeathCount < 7 then
-            fadelvl = fadelvl - 0.05
-            Spring.SetSoundStreamVolume(fadelvl)
-            if fadelvl <= 0.01 then
-                PlayNewTrack()
-                fadelvl = music_volume * 0.01
-            end
-        end
-        if tracks == peaceTracks and unitDeathCount < 7 and fadelvl < music_volume * 0.01 then
-            fadelvl = fadelvl + 0.1
-            Spring.SetSoundStreamVolume(fadelvl)
-        end
-        if tracks == warTracks and unitDeathCount >= 7 and fadelvl < music_volume * 0.01 then
-            fadelvl = fadelvl + 0.1
-            Spring.SetSoundStreamVolume(fadelvl)
-        end
+		if dynamicMusic == 1 then
+			if tracks == peaceTracks and unitDeathCount >= 7 then
+				fadelvl = fadelvl - 0.05
+				Spring.SetSoundStreamVolume(fadelvl)
+				if fadelvl <= 0.01 then
+					PlayNewTrack()
+					fadelvl = music_volume * 0.01
+				end
+			end
+			if tracks == warTracks and unitDeathCount < 7 then
+				fadelvl = fadelvl - 0.05
+				Spring.SetSoundStreamVolume(fadelvl)
+				if fadelvl <= 0.01 then
+					PlayNewTrack()
+					fadelvl = music_volume * 0.01
+				end
+			end
+			if tracks == peaceTracks and unitDeathCount < 7 and fadelvl < music_volume * 0.01 then
+				fadelvl = fadelvl + 0.1
+				Spring.SetSoundStreamVolume(fadelvl)
+			end
+			if tracks == warTracks and unitDeathCount >= 7 and fadelvl < music_volume * 0.01 then
+				fadelvl = fadelvl + 0.1
+				Spring.SetSoundStreamVolume(fadelvl)
+			end
+		end
     end
 end
 
