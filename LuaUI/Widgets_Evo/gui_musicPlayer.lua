@@ -425,11 +425,37 @@ function widget:UnitDestroyed(unitID)
 	unitDeathCount = unitDeathCount + 1
 end
 
-function widget:GameFrame(n)	
-	if n%450 == 4 then
-		unitDeathCount = unitDeathCount * 0.5
-	end
-	
+function widget:GameFrame(n)    
+    if n%150 == 4 then
+        unitDeathCount = unitDeathCount * 0.75
+        Spring.Echo(unitDeathCount)
+    end
+    if n%15 == 4 then
+        if tracks == peaceTracks and unitDeathCount >= 7 then
+            fadelvl = fadelvl - 0.05
+            Spring.SetSoundStreamVolume(fadelvl)
+            if fadelvl <= 0.01 then
+                PlayNewTrack()
+                fadelvl = music_volume * 0.01
+            end
+        end
+        if tracks == warTracks and unitDeathCount < 7 then
+            fadelvl = fadelvl - 0.05
+            Spring.SetSoundStreamVolume(fadelvl)
+            if fadelvl <= 0.01 then
+                PlayNewTrack()
+                fadelvl = music_volume * 0.01
+            end
+        end
+        if tracks == peaceTracks and unitDeathCount < 7 and fadelvl < music_volume * 0.01 then
+            fadelvl = fadelvl + 0.1
+            Spring.SetSoundStreamVolume(fadelvl)
+        end
+        if tracks == warTracks and unitDeathCount >= 7 and fadelvl < music_volume * 0.01 then
+            fadelvl = fadelvl + 0.1
+            Spring.SetSoundStreamVolume(fadelvl)
+        end
+    end
 end
 
 function PlayNewTrack()
