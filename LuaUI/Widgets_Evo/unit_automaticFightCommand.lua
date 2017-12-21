@@ -28,11 +28,10 @@ local hmsz = Game.mapSizeZ/2
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local targetUnits = {"eorb", "eorb_up1", "eorb_up2", "eorb_up3"}
+local targetUnits = {eorb = true, eorb_up1 = true, eorb_up2 = true, eorb_up3 = true}
 
 local function IsTargetUnit(ud)
-	--Spring.Echo(targetUnits)
-	return ud and targetUnits[ud.name]
+    return ud and targetUnits[ud.name]
 end
 
 
