@@ -360,15 +360,10 @@ function AirJet:Visible()
   if (self.unit and not self.worldspace) then
     losState = GetUnitLosState(self.unit)
     local ux,uy,uz = spGetUnitViewPosition(self.unit)
-    if ux then
+	if ux then
+      posX,posY,posZ = posX+ux,posY+uy,posZ+uz
       radius = radius + (spGetUnitRadius(self.unit) or 30)
-      if self.noIconDraw then
-        if not Spring.IsUnitVisible(self.unit, radius, self.noIconDraw) then
-          return false
-        end
-      end
-      posX,posY,posZ = posX+ux,posY+uy,posZ+uz  
-    end
+	end
   end
   if (losState==nil) then
     if (self.radar) then

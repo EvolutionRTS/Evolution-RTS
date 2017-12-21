@@ -132,7 +132,7 @@ end
 
 function GroundFlash:Visible()
   if (self.unit) then
-    return Spring.IsUnitVisible(self.unit, 0, self.noIconDraw)
+    return Spring.IsUnitVisible(self.unit)
   end
   local pos   = self.pos
   local radius= self.size*2.5
