@@ -14,10 +14,6 @@ local weapon1Damage              = 3001
 local weapon1AOE				 = 1
 --local stockpiletime				 = 60
 
-local shield1Power               = 7000
-local shield1PowerRegen          = 50
-local shield1PowerRegenEnergy    = shield1PowerRegen / 10
-
 local buildCostMetal 			  = 450
 local maxDamage					  = buildCostMetal * 12.5
 
@@ -80,18 +76,14 @@ local unitDef                     = {
 		},
 	},
 	weapons                       = {
--- Make sure to change the weapon numbers if the nuke interceptor weapon is ever reinstated
 		[1]                       = {
 			def                   = "nukeinterceptor",
 		},
---		[1]                       = {
---			def                   = "shield",
---		},
 	},
 	customParams                  = {
 		--ProvideTech              = techprovided,
 		RequireTech				 = techrequired,
-		unittype				  = "shield",
+		unittype				  = "building",
 		--supply_cost               = supply,
 		needed_cover              = 5,
 		death_sounds              = "generic",
@@ -151,32 +143,6 @@ local weaponDefs                  = {
 		waterweapon		          = true,
 		damage                    = {
 			default               = weapon1Damage,
-		},
-	},
-
-	shield                        = {
-		
-		Smartshield               = true,
-		Exteriorshield            = true,
-		Visibleshield             = false,
-		Visibleshieldrepulse      = false,
-		ShieldStartingPower       = 3001,
-		Shieldenergyuse           = 0,
-		Shieldradius              = 2000,
-		Shieldpower               = shield1Power,
-		Shieldpowerregen          = shield1PowerRegen,
-		Shieldpowerregenenergy    = shield1PowerRegenEnergy,
-		Shieldintercepttype       = 4,
-		Shieldgoodcolor           = "0.0 0.2 1.0",
-		Shieldbadcolor            = "1.0 0 0",
-		Shieldalpha               = 0.2,
-		
-		texture1		          = "shield4",
-		
-		visibleShieldHitFrames    = 1,
-		weaponType                = [[Shield]],
-		damage                    = {
-			default               = 1,
 		},
 	},
 }
