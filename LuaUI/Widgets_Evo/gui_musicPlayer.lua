@@ -428,7 +428,7 @@ end
 
 function widget:GameFrame(n)    
     if n%150 == 4 then
-        unitDeathCount = unitDeathCount * 0.75
+        unitDeathCount = unitDeathCount * 0.90
         Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
     end
 	local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
