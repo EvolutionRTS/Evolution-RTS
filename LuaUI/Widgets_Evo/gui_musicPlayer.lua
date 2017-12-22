@@ -86,6 +86,7 @@ local shown = false
 local mouseover = false
 local volume
 
+local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
 local unitDeathCount = 0
 local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 
@@ -427,44 +428,31 @@ function widget:UnitDestroyed(unitID)
 end
 
 function widget:GameFrame(n)    
-    if n%150 == 4 then
-        unitDeathCount = unitDeathCount * 0.90
-        Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
-    end
-	local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
-    if n%15 == 4 then
+    if n%450 == 4 then
+        unitDeathCount = unitDeathCount * 0.5
 		if dynamicMusic == 1 then
-			if tracks == peaceTracks and unitDeathCount >= 4 then
-				fadelvl = fadelvl - 0.05
-				Spring.SetSoundStreamVolume(fadelvl)
-				if fadelvl <= 0.01 then
-					PlayNewTrack()
-					fadelvl = music_volume * 0.01
-				end
-			end
-			if tracks == warTracks and unitDeathCount < 4 then
-				fadelvl = fadelvl - 0.05
-				Spring.SetSoundStreamVolume(fadelvl)
-				if fadelvl <= 0.01 then
-					PlayNewTrack()
-					fadelvl = music_volume * 0.01
-				end
-			end
-			if tracks == peaceTracks and unitDeathCount < 4 and fadelvl < music_volume * 0.01 then
-				fadelvl = fadelvl + 0.1
-				Spring.SetSoundStreamVolume(fadelvl)
-			end
-			if tracks == warTracks and unitDeathCount >= 4 and fadelvl < music_volume * 0.01 then
-				fadelvl = fadelvl + 0.1
-				Spring.SetSoundStreamVolume(fadelvl)
+			Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
+			if tracks == peaceTracks and unitDeathCount >= 7 then
+				PlayNewTrack()
+			elseif tracks == warTracks and unitDeathCount <= 6 then
+				PlayNewTrack()
 			end
 		end
     end
 end
 
+function EightiesFadeOut()
+	fadelvl = fadelvl - 0.005	
+	while(fadelvl >= 0.02) do
+		fadelvl = fadelvl - 0.005
+		Spring.SetSoundStreamVolume(fadelvl)
+	end
+	fadelvl = music_volume * 0.01
+end
+
 function PlayNewTrack()
+	EightiesFadeOut()
 	Spring.StopSoundStream()
-	local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
 	Spring.Echo(dynamicMusic)
 	if dynamicMusic == nil then
 		dynamicMusic = 1
