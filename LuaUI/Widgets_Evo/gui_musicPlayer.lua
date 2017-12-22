@@ -86,9 +86,7 @@ local shown = false
 local mouseover = false
 local volume
 
-local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
 local unitDeathCount = 0
-local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -427,32 +425,16 @@ function widget:UnitDestroyed(unitID)
 	unitDeathCount = unitDeathCount + 1
 end
 
-function widget:GameFrame(n)    
-    if n%450 == 4 then
-        unitDeathCount = unitDeathCount * 0.5
-		if dynamicMusic == 1 then
-			Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
-			if tracks == peaceTracks and unitDeathCount >= 7 then
-				PlayNewTrack()
-			elseif tracks == warTracks and unitDeathCount <= 6 then
-				PlayNewTrack()
-			end
-		end
-    end
-end
-
-function EightiesFadeOut()
-	fadelvl = fadelvl - 0.005	
-	while(fadelvl >= 0.02) do
-		fadelvl = fadelvl - 0.005
-		Spring.SetSoundStreamVolume(fadelvl)
+function widget:GameFrame(n)	
+	if n%450 == 4 then
+		unitDeathCount = unitDeathCount * 0.5
 	end
-	fadelvl = music_volume * 0.01
+	
 end
 
 function PlayNewTrack()
-	EightiesFadeOut()
 	Spring.StopSoundStream()
+	local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
 	Spring.Echo(dynamicMusic)
 	if dynamicMusic == nil then
 		dynamicMusic = 1
@@ -470,7 +452,7 @@ function PlayNewTrack()
 	
 	if dynamicMusic == 1 then
 		--Spring.Echo("Unit Death Count is (Gameframe): " .. unitDeathCount)
-		if unitDeathCount <= 3 then
+		if unitDeathCount <= 6 then
 			tracks = peaceTracks
 			--Spring.Echo("Current tracklist is : Peace Tracks")
 		else
