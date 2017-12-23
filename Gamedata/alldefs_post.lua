@@ -234,9 +234,10 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		for id,unitDef in pairs(UnitDefs) do
 			unitDef.buildcostmetal = unitDef.buildcostmetal * 2
 			
-			if unitDef.customparams.corpse == "energycore" then
-				unitDef.corpse = "ammobox"
-			end
+			--Disabled due to boxcollector cpu costs
+			-- if unitDef.customparams.corpse == "energycore" then
+				-- unitDef.corpse = "ammobox"
+			-- end
 			
 		--Shield handling
 		if unitDef.weapondefs then
