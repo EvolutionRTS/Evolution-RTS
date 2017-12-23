@@ -19,7 +19,7 @@ function widget:GetInfo()
 		date	= "november 2016",
 		license	= "GNU GPL, v2 or later",
 		layer	= -4,
-		enabled	= true	--	loaded by default?
+		enabled	= false	--	loaded by default?
 	}
 end
 
@@ -86,8 +86,21 @@ local shown = false
 local mouseover = false
 local volume
 
+local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
+local interruptMusic = Spring.GetConfigInt("evo_interruptmusic", 1)
 local unitDeathCount = 0
+local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
+local fadeOut = false
 
+--Assume that if it isn't set, dynamic music is true
+if dynamicMusic == nil then
+	dynamicMusic = 1
+end
+
+--Assume that if it isn't set, interrupt music is true
+if interruptMusic == nil then
+	interruptMusic = 1
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -425,20 +438,45 @@ function widget:UnitDestroyed(unitID)
 	unitDeathCount = unitDeathCount + 1
 end
 
-function widget:GameFrame(n)	
-	if n%450 == 4 then
-		unitDeathCount = unitDeathCount * 0.5
+function widget:GameFrame(n)    
+    if n%50 == 4 then
+		if dynamicMusic == 1 then
+			unitDeathCount = unitDeathCount * 0.95
+			--Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
+			if unitDeathCount <= 0.1 then
+				unitDeathCount = 0
+			end
+			if interruptMusic == 1 then
+				if tracks == peaceTracks and unitDeathCount >= 7 then
+					fadeOut = true
+				elseif tracks == warTracks and unitDeathCount <= 3 then
+					fadeOut = true
+				end
+			end
+		end
+    end
+	if n%10 == 1 then
+		if interruptMusic == 1 then
+			if dynamicMusic == 1 then
+				if fadeOut == true and fadelvl >= 0.01 then
+					fadelvl = fadelvl - 0.05
+					Spring.SetSoundStreamVolume(fadelvl)
+				else
+					fadeOut = false
+				end
+				if fadeOut == false and fadelvl <= 0.005 then
+					fadelvl = music_volume * 0.01
+					PlayNewTrack()
+					--Spring.Echo("Playing a new song now")
+				end
+			end
+		end
 	end
-	
 end
 
 function PlayNewTrack()
 	Spring.StopSoundStream()
-	local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
-	Spring.Echo(dynamicMusic)
-	if dynamicMusic == nil then
-		dynamicMusic = 1
-	end
+	--Spring.Echo(dynamicMusic)
 	
 	if dynamicMusic == 0 then
 		--Spring.Echo("Choosing a random track")
@@ -452,7 +490,7 @@ function PlayNewTrack()
 	
 	if dynamicMusic == 1 then
 		--Spring.Echo("Unit Death Count is (Gameframe): " .. unitDeathCount)
-		if unitDeathCount <= 6 then
+		if unitDeathCount <= 3 then
 			tracks = peaceTracks
 			--Spring.Echo("Current tracklist is : Peace Tracks")
 		else
