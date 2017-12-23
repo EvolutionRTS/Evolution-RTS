@@ -432,6 +432,7 @@ function widget:Shutdown()
 	for i=1,#drawlist do
 		glDeleteList(drawlist[i])
 	end
+	WG['music'] = nil
 end
 
 function widget:UnitDestroyed(unitID)
@@ -446,6 +447,9 @@ function widget:GameFrame(n)
 			if unitDeathCount <= 0.1 then
 				unitDeathCount = 0
 			end
+			if unitDeathCount > 30 then
+				unitDeathCount = 30
+			end
 			if interruptMusic == 1 then
 				if tracks == peaceTracks and unitDeathCount >= 7 then
 					fadeOut = true
@@ -453,9 +457,6 @@ function widget:GameFrame(n)
 					fadeOut = true
 				end
 			end
-		end
-		if unitDeathCount > 30 then
-			unitDeathCount = 30
 		end
    end
 	if n%10 == 1 then
