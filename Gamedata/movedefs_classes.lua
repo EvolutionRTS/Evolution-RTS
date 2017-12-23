@@ -1,14 +1,7 @@
-if Spring.GetModOptions and Spring.GetModOptions().heatmapping ~= nil then
-	local useHeatMapping = Spring.GetModOptions().heatmapping
-	if useHeatMapping ~= "enabled" then
-		heatmapping = true
-	end
-	
-	local unitHeat = Spring.GetModOptions().unitheat * 0.001
-	
+if Spring.GetModOptions and Spring.GetModOptions().unitheat ~= nil then
+	unitHeat = Spring.GetModOptions().unitheat * 0.0001
 else
-	heatmapping = false
-	unitHeat = 0.025
+	unitHeat = 0.0042
 end
 
 local moveDefs = {
@@ -32,7 +25,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
 
    HOVERTANK2 = {
@@ -54,7 +46,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
 
    NORMALTANK2 = {
@@ -76,7 +67,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    
    TANK2 = {
@@ -98,7 +88,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
 
    HOVERTANK3 = {
@@ -120,7 +109,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    
    HOVERHBOT3 = {
@@ -142,7 +130,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=2,
-	  heatmapping=heatmapping,
    },
    
    HOVERHBOT4 = {
@@ -164,7 +151,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=2,
-	  heatmapping=heatmapping,
    },
    
    HOVERHBOT5 = {
@@ -186,7 +172,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=2,
-	  heatmapping=heatmapping,
    },
    
    HOVERHBOT6 = {
@@ -208,7 +193,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=2,
-	  heatmapping=heatmapping,
    },
 
    TANK3 = {
@@ -230,7 +214,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    
    ALLTERRTANK3 = {
@@ -250,7 +233,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
 
    HOVERTANK4 = {
@@ -272,7 +254,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
 
    TANK4 = {
@@ -294,7 +275,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    ALLTERRTANK4 = {
       footprintx=4,
@@ -313,7 +293,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
     UBOAT4 = {
       footprintx = 4,
@@ -333,7 +312,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
 
    HOVERTANK5 = {
@@ -355,7 +333,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    
     ALLTERRTANK5 = {
@@ -375,7 +352,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    TANK6 = {
       footprintx=6,
@@ -396,7 +372,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    HOVERTANK6 = {
       footprintx=6,
@@ -417,7 +392,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    ORBHOVERTANK6 = {
       footprintx=6,
@@ -438,7 +412,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    ALLTERRTANK6 = {
       footprintx=6,
@@ -457,7 +430,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    COMMANDERTANK4 = {
       footprintx=4,
@@ -478,8 +450,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
-	
    },
    COMMANDERTANKAI4 = {
       footprintx=4,
@@ -500,8 +470,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
-	
    },
    EXPERIMENTALTANK10 = {
       footprintx=12,
@@ -522,7 +490,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    HOVERTANKEXPERIMENTAL9 = {
       footprintx=9,
@@ -541,7 +508,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    EXPERIMENTALTANK12 = {
       footprintx=12,
@@ -560,7 +526,6 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
-	  heatmapping=heatmapping,
    },
    
 	CHICKENNANO = {
@@ -634,14 +599,21 @@ local moveDefs = {
 
 -- convert from map format to the expected array format
 
-local moveDefsArray = {}
+local array = {}
 local i = 1
 for k,v in pairs(moveDefs) do
-	moveDefsArray[i] = v
+	v.heatmapping = false -- disable heatmapping
+	v.allowRawMovement = true
+	array[i] = v
 	v.name = k
 	i = i + 1
 end
 
 
-return moveDefsArray
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
+return array
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
