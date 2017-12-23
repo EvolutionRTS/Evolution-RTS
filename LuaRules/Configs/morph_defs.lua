@@ -62,7 +62,7 @@ local timeToBuild_euwturret = energyCost_euwturret * 0.20
 local energyCost_emetalextractor_up1 = 1200
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
 
-local energyCost_eorb = 600
+local energyCost_eorb = 300
 local timeToBuild_eorb = energyCost_eorb * 0.10
 
 
