@@ -84,7 +84,7 @@ end
 		end
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
-	elseif su >= sm-20 and sm ~= 200 then
+	elseif su >= sm-20 and sm ~= 400 then
 		return "estorage"
 	
 	elseif GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech0ai", ai.id) == true then
@@ -417,11 +417,7 @@ function RandomUnit()
 			end
 		end
 	elseif mc <= 10 or mi*2 <= me then
-		if GG.TechCheck("tech3", ai.id) == false then
-			return "emetalextractor"
-		else 
-			return "emetalextractor_up1"
-		end
+		return "elifterai"
 	elseif su <= sm-20 then
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Tech 0 - Very Early Game
 			local r = math.random(0,9)

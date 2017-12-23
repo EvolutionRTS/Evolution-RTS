@@ -454,7 +454,10 @@ function widget:GameFrame(n)
 				end
 			end
 		end
-    end
+		if unitDeathCount > 30 then
+			unitDeathCount = 30
+		end
+   end
 	if n%10 == 1 then
 		if interruptMusic == 1 then
 			if dynamicMusic == 1 then
