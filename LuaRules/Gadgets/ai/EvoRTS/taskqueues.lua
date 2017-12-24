@@ -416,13 +416,6 @@ function RandomUnit()
 				return "eorb_up3"
 			end
 		end
-	elseif mc <= 10 or mi*2 <= me then
-		local r = math.random(0,1)
-		if r == 0 then
-			return "eorb"
-		elseif r == 1 then
-			return { action = "wait", frames = 500}
-		end
 	elseif su <= sm-20 then
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Tech 0 - Very Early Game
 			local r = math.random(0,9)
