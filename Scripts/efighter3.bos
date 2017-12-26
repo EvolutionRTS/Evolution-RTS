@@ -106,14 +106,15 @@ AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to d
 { 
 	signal SIG_AIM; 
 	set-signal-mask SIG_AIM; 
-	turn turret1 to y-axis heading speed <225>;
-	turn turret2 to y-axis heading speed <225>;
-	turn barrel1 to x-axis <0> - pitch speed <150>; 
-	turn barrel2 to x-axis <0> - pitch speed <150>;
-	wait-for-turn turret1 around y-axis;
-	wait-for-turn turret2 around y-axis;
-	wait-for-turn barrel1 around x-axis;  
-	wait-for-turn barrel2 around x-axis;
+	turn turret1 to y-axis heading speed <1000>;
+	turn turret2 to y-axis heading speed <1000>;
+	turn barrel1 to x-axis <0> - pitch speed <1000>; 
+	turn barrel2 to x-axis <0> - pitch speed <1000>;
+	//I'm betting that precisely no one is going to notice that it fires a moment before the barrel actually aims
+	//wait-for-turn turret1 around y-axis;
+	//wait-for-turn turret2 around y-axis;
+	//wait-for-turn barrel1 around x-axis;  
+	//wait-for-turn barrel2 around x-axis;
 	start-script RestoreAfterDelay(); 
 	return (1); 
 } 
