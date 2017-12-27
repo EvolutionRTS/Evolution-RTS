@@ -597,6 +597,10 @@ local idlelist = {
 
 	local overseerlistfirst = {
 	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
 	"emine",
 	"elifterai",
 	"emine",
