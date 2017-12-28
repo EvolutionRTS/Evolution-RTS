@@ -6,7 +6,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   eriottank2_up1 = {
@@ -15,7 +15,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   eriottank2_up2 = {
@@ -24,7 +24,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   eriottank2_up3 = {
@@ -33,7 +33,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -43,7 +43,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -53,7 +53,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -63,7 +63,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -73,7 +73,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -83,7 +83,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -93,7 +93,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -103,7 +103,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -113,7 +113,7 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', 'EMP', 'Shotgun'},
+	params = {'1', 'Activate EMP', 'Activate Shotgun'},
     },
   },
   
@@ -123,8 +123,8 @@ return {
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Missile]], [[Salvo]]},
+	params = {'1', [[Activate Single
+Missile]], [[Activate Salvo]]},
     },
   },
   
@@ -134,8 +134,8 @@ Missile]], [[Salvo]]},
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Missile]], [[Salvo]]},
+	params = {'1', [[Activate Single
+Missile]], [[Activate Salvo]]},
     },
   },
   
@@ -145,8 +145,8 @@ Missile]], [[Salvo]]},
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Missile]], [[Salvo]]},
+	params = {'1', [[Activate Single
+Missile]], [[Activate Salvo]]},
     },
   },
   
@@ -156,8 +156,8 @@ Missile]], [[Salvo]]},
 	tooltip  = "Switch between EMP cannon and Shotgun Blast",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Missile]], [[Salvo]]},
+	params = {'1', [[Activate Single
+Missile]], [[Activate Salvo]]},
     },
   },
   
@@ -167,8 +167,8 @@ Missile]], [[Salvo]]},
 	tooltip  = "Switch between Normal and Saturation Artillery",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Shot]], 'Saturation'},
+	params = {'1', [[Activate Single
+Shot]], 'Activate Saturation'},
     },
   },
   eartytank_up1 = {
@@ -177,8 +177,8 @@ Shot]], 'Saturation'},
 	tooltip  = "Switch between Normal and Saturation Artillery",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Shot]], 'Saturation'},
+	params = {'1', [[Activate Single
+Shot]], 'Activate Saturation'},
     },
   },
   eartytank_up2 = {
@@ -187,8 +187,8 @@ Shot]], 'Saturation'},
 	tooltip  = "Switch between Normal and Saturation Artillery",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Shot]], 'Saturation'},
+	params = {'1', [[Activate Single
+Shot]], 'Activate Saturation'},
     },
   },
   eartytank_up3 = {
@@ -197,8 +197,8 @@ Shot]], 'Saturation'},
 	tooltip  = "Switch between Normal and Saturation Artillery",
 	cob      = "WeaponType",  -- only this is required
 	type = CMDTYPE.ICON_MODE,
-	params = {'1', [[Single
-Shot]], 'Saturation'},
+	params = {'1', [[Activate Single
+Shot]], 'Activate Saturation'},
     },
   },
   
