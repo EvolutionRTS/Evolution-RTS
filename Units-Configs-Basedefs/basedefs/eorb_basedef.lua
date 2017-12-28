@@ -13,6 +13,7 @@ unitDef                    = {
 	buildDistance                = buildDistance,
 	builder                      = true,
 	buildTime                    = 5,
+	buildPic					 = "eorb.png",
 	CanAttack			         = false,
 	CanAssist			         = true,
 	CanBeAssisted		         = true,

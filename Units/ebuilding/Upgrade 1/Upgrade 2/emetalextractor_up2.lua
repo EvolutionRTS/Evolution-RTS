@@ -1,24 +1,25 @@
--- UNITDEF -- EMETALEXTRACTOR --
+-- UNITDEF -- EMETALEXTRACTOR_up2 --
 --------------------------------------------------------------------------------
 
-unitName = [[emetalextractor]]
+unitName = [[emetalextractor_up2]]
 
 --------------------------------------------------------------------------------
 
 metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 50 -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
+metalMultiplier = metalMultiplier * 3
 metalMultiplier = metalMultiplier * 0.01
 
-buildCostMetal = 20
+buildCostMetal = 200
 energyUse = 0
 
-primaryCEG = "custom:fusionreactionnuclear"
+primaryCEG = "custom:fusionreactionnuclearpurple"
 
-humanName = [[Metal Extractor]]
+humanName = [[Metal Extractor Mk III]]
 
 objectName = [[emetalextractor2.s3o]]
 script = [[emetalextractor.cob]]
 
-tech = [[tech0]]
+tech = [[tech2]]
 armortype = [[building]]
 
 VFS.Include("units-configs-basedefs/basedefs/buildings/emetalextractor_basedef.lua")

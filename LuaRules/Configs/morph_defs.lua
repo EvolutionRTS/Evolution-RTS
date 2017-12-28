@@ -59,7 +59,7 @@ local timeToBuild_eheavyturret2 = energyCost_eheavyturret2 * 0.10
 local energyCost_euwturret = 100
 local timeToBuild_euwturret = energyCost_euwturret * 0.20
 
-local energyCost_emetalextractor_up1 = 1200
+local energyCost_emetalextractor_up1 = 400
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
 
 local energyCost_eorb = 300
@@ -185,8 +185,32 @@ Overseer]],
 			cmdname = [[Upgrade]],
 			energy = energyCost_emetalextractor_up1,
 			metal = 0,
-			text = [[x4 Metal Extraction rate]],
+			text = [[x2 Metal Extraction rate]],
+			require = [[tech1]],
+		},
+	},
+	emetalextractor_up1 = 	{
+		{
+			into = 'emetalextractor_up2',
+			--require = 'etech2',
+			time = timeToBuild_emetalextractor_up1,
+			cmdname = [[Upgrade]],
+			energy = energyCost_emetalextractor_up1,
+			metal = 0,
+			text = [[x3 Metal Extraction rate]],
 			require = [[tech2]],
+		},
+	},
+	emetalextractor_up2 = 	{
+		{
+			into = 'emetalextractor_up3',
+			--require = 'etech2',
+			time = timeToBuild_emetalextractor_up1,
+			cmdname = [[Upgrade]],
+			energy = energyCost_emetalextractor_up1,
+			metal = 0,
+			text = [[x4 Metal Extraction rate]],
+			require = [[tech3]],
 		},
 	},
 	
