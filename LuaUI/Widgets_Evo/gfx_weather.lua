@@ -98,10 +98,10 @@ end
 end
 
 function widget:UnitDamaged(_,_,_,da)
--- if da >= 1500 then 
--- da = 1500
--- end
--- b = b + da
+	if da >= 1500 then 
+		da = 1500
+	end
+	b = b + da
 end
 sunframe = 0
 function widget:Update(dt)
@@ -166,8 +166,12 @@ end
 
 -- Spring.Echo((1-p)*shadowDensity)
 newshadowDensity = (1-p)*shadowDensity
+
 newdiffuse.r, newdiffuse.g, newdiffuse.b = diffuse.r*(1-p)*(1-w)*(1-rain) + 0.035*1*p*(1-w)*(1-rain) + 0.23*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), diffuse.g*(1-p)*(1-w)*(1-rain)+0.035*1*p*(1-w)*(1-rain)+ 0.07*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), diffuse.b*(1-p)*(1-w)*(1-rain)+0.07*1*p*(1-w)*(1-rain)+ 0.035*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w)
-newambient.r, newambient.g, newambient.b = ambient.r, ambient.g, ambient.b
+
+--newambient.r, newambient.g, newambient.b = ambient.r, ambient.g, ambient.b --This line prevents the ground from becoming pitch black
+newambient.r, newambient.g, newambient.b = ambient.r*(1-p)*(1-w)*(1-rain)+ 0.15*1*p*(1-w)*(1-rain)+ 0.69*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), ambient.g*(1-p)*(1-rain)*(1-w)+0.30*1*p*(1-rain)*(1-w)+ 0.30*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), ambient.b*(1-p)*(1-w)*(1-rain)+0.65*1*p*(1-w)*(1-rain)+ 0.15*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w)
+
 newspecular.r, newspecular.g, newspecular.b = specular.r*(1-p)*(1-w)+0.2*0.60*1*p*(1-w)*(1-rain) + 0.5*rain*(1-p)*(1-w), specular.g*(1-p)*(1-w)+0.2*0.60*1*p*(1-w)*(1-rain) + 0.5*rain*(1-p)*(1-w), specular.b*(1-p)*(1-w)+0.2*1*1*p*(1-w)*(1-rain) + 0.5*rain*(1-p)*(1-w)
 
 newfogStart = 1-(math.max(rain, w))
