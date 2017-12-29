@@ -77,11 +77,15 @@ end
 			end
 		end
 	elseif mc <= 10 or mi*2 <= me then
-		if GG.TechCheck("tech3", ai.id) == false then
-			return "emetalextractor"
-		else 
-			return "emetalextractor_up1"
-		end
+			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "emetalextractor"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+				return "emetalextractor_up1"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
+				return "emetalextractor_up2"
+			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
+				return "emetalextractor_up3"
+			end
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
 	elseif su >= sm-20 and sm ~= 400 then
