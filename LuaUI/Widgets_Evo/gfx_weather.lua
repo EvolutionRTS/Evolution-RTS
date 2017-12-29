@@ -105,7 +105,7 @@ function widget:UnitDamaged(_,_,_,da)
 end
 sunframe = 0
 function widget:Update(dt)
-sunframe = sunframe + dt * 0.25
+sunframe = sunframe + dt * 0.15
 lightningcolor = 0
 if n == nil or n == 150 then
 n = 1
