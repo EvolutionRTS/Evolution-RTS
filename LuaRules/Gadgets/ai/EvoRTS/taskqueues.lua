@@ -532,7 +532,7 @@ function RandomUnit()
 					end
 				elseif r2 == 0 then
 						if GG.TechCheck("endbringer", ai.id) == true then
-						local r = math.random(0,3)
+						local r = math.random(0,4)
 							if r == 0 then
 								return "eamphibleveler_up2"
 							elseif r == 1 then
@@ -541,6 +541,8 @@ function RandomUnit()
 								return "elacerator_up2"
 							elseif r == 3 then
 								return "ekrow_up2"
+							elseif r == 4 then
+								return "ehbotkarganneth_up2"
 							end
 						else
 							return "escout_up3"
@@ -582,6 +584,8 @@ function RandomUnit()
 								return "elacerator_up3"
 							elseif r == 3 then
 								return "ekrow_up3"
+							elseif r == 4 then
+								return "ehbotkarganneth_up3"
 							end
 						else
 							return "escout_up3"

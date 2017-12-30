@@ -152,6 +152,7 @@ Shared.buildListAIOverseer = {
 	[[eorbai]],
 	[[ekrow]],
 	[[edrone]],
+	[[ehbotkarganneth]],
 	----------------- Upgrade 1
 	[[elighttank3_up1]],
 	[[eriottank2_up1]],
@@ -183,6 +184,7 @@ Shared.buildListAIOverseer = {
 	[[ehbotsniper_up1]],
 	[[ehbotrocko_up1]],
 	[[ekrow_up1]],
+	[[ehbotkarganneth_up1]],
 	----------------- Upgrade 2
 	[[elighttank3_up2]],
 	[[eriottank2_up2]],
@@ -214,6 +216,7 @@ Shared.buildListAIOverseer = {
 	[[ehbotsniper_up2]],
 	[[ehbotrocko_up2]],
 	[[ekrow_up2]],
+	[[ehbotkarganneth_up2]],
 	----------------- Upgrade 3
 	[[elighttank3_up3]],
 	[[eriottank2_up3]],
@@ -245,6 +248,7 @@ Shared.buildListAIOverseer = {
 	[[ehbotsniper_up3]],
 	[[ehbotrocko_up3]],
 	[[ekrow_up3]],
+	[[ehbotkarganneth_up3]],
 	----------------- Chickens
 	[[chickeneco]],
 	[[chicken_dodo1]],
