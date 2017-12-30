@@ -41,7 +41,7 @@ local yOffset = -32-usedFontSize
 -- Speedups
 ------------------------------------------------------------------------------------
 
-local bgcorner				= LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgcorner				= "LuaUI/Images/bgcorner.png"
 local glColor = gl.Color
 local glText = gl.Text
 local glRect = gl.Rect
@@ -86,6 +86,7 @@ function widget:Shutdown()
 		    WG['guishader_api'].RemoveRect('tooltip_'..name)
         end
 	end
+	WG['tooltip'] = nil
 end
 
 function init()

@@ -34,7 +34,7 @@ end
 
 local vsx, vsy   = widgetHandler:GetViewSizes()
 
-local bgcorner				= ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgcorner				= ":n:LuaUI/Images/bgcorner.png"
 
 local widgetScale = 1
 local glText         = gl.Text
@@ -185,7 +185,7 @@ local function createList()
 		WG['guishader_api'].InsertRect(left, bottom, right, top, 'displayinfo')
 	end
 	drawlist[1] = glCreateList( function()
-		glColor(0, 0, 0, 0.6)
+		glColor(0, 0, 0, 0.66)
 		RectRound(left, bottom, right, top, 5.5*widgetScale)
 		
 		local borderPadding = 2.75*widgetScale
@@ -207,6 +207,7 @@ function widget:Shutdown()
 	Spring.SendCommands("fps 1")
 	Spring.SendCommands("clock 1")
 	Spring.SendCommands("speed 1")
+	WG['displayinfo'] = nil
 end
 
 local passedTime = 0

@@ -232,7 +232,7 @@ local function createList()
 		WG['guishader_api'].InsertRect(left, bottom, right, top,'music')
 	end
 	drawlist[1] = glCreateList( function()
-		glColor(0, 0, 0, 0.6)
+		glColor(0, 0, 0, 0.66)
 		RectRound(left, bottom, right, top, 5.5*widgetScale)
 		
 		local borderPadding = 2.75*widgetScale

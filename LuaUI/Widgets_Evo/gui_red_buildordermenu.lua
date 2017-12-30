@@ -19,14 +19,14 @@ local buildNextKey = 110
 local buildKeys = {113, 119, 101, 114, 116, 97, 115, 100, 102, 103, 122, 120, 99, 118, 98}
 local buildLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
 
-local stateTexture		= LUAUI_DIRNAME.."Images/resbar.dds"
-local buttonTexture		= LUAUI_DIRNAME.."Images/button.dds"
-local barGlowCenterTexture = LUAUI_DIRNAME.."Images/barglow-center.dds"
-local barGlowEdgeTexture   = LUAUI_DIRNAME.."Images/barglow-edge.dds"
+local stateTexture		     = "LuaUI/Images/resbar.dds"
+local buttonTexture		     = "LuaUI/Images/button.dds"
+local barGlowCenterTexture = "LuaUI/Images/barglow-center.dds"
+local barGlowEdgeTexture   = "LuaUI/Images/barglow-edge.dds"
 
-local sound_queue_add = LUAUI_DIRNAME .. 'Sounds/buildbar_add.wav'
-local sound_queue_rem = LUAUI_DIRNAME .. 'Sounds/buildbar_rem.wav'
-local sound_button = LUAUI_DIRNAME .. 'Sounds/buildbar_waypoint.wav'
+local sound_queue_add = 'LuaUI/Sounds/buildbar_add.wav'
+local sound_queue_rem = 'LuaUI/Sounds/buildbar_rem.wav'
+local sound_button = 'LuaUI/Sounds/buildbar_waypoint.wav'
 
 local NeededFrameworkVersion = 9
 local CanvasX,CanvasY = 1272,734 --resolution in which the widget was made (for 1:1 size)
@@ -38,12 +38,21 @@ local playSounds = true
 local iconScaling = true
 local largeInfo = false
 local shortcutsInfo = true
+local highlightscale = true
+local drawPrice = true
 local drawTooltip = true
+local drawBigTooltip = false
+local largePrice = true
+local shortcutsInfo = false
+local oldUnitpics = false
+
+local vsx, vsy = gl.GetViewSizes()
+local widgetScale = (1 + (vsx*vsy / 7500000))
 
 local Config = {
 	buildmenu = {
 		menuname = "buildmenu",
-		px = -0.5,py = CanvasY - 415, --default start position
+		px = 0,py = CanvasY - 415, --default start position
 		
 		isx = 45,isy = 40, --icon size
 		ix = 5,iy = 8, --icons x/y
@@ -56,14 +65,14 @@ local Config = {
 		
 		margin = 5, --distance from background border
 		
-		padding = 4, -- for border effect
-		color2 = {1,1,1,0.022}, -- for border effect
+		padding = 4*widgetScale, -- for border effect
+		color2 = {1,1,1,0.025}, -- for border effect
 		
 		fadetime = 0.14, --fade effect time, in seconds
 		fadetimeOut = 0.022, --fade effect time, in seconds
 		
 		ctext = {1,1,1,1}, --color {r,g,b,alpha}
-		cbackground = {0,0,0,0.6},
+		cbackground = {0,0,0,0.66},
 		cborder = {0,0,0,1},
 		cbuttonbackground = {0.1,0.1,0.1,1},
 		dragbutton = {2,3}, --middle mouse button
@@ -74,7 +83,7 @@ local Config = {
 	
 	ordermenu = {
 		menuname = "ordermenu",
-		px = -0.5,py = CanvasY - 415 - 145,
+		px = 0,py = CanvasY - 415 - 145,
 		
 		isx = 45,isy = 33,
 		ix = 5,iy = 4,
@@ -87,14 +96,14 @@ local Config = {
 		
 		margin = 5,
 		
-		padding = 4, -- for border effect
-		color2 = {1,1,1,0.022}, -- for border effect
+		padding = 4*widgetScale, -- for border effect
+		color2 = {1,1,1,0.025}, -- for border effect
 		
 		fadetime = 0.14,
 		fadetimeOut = 0.022, --fade effect time, in seconds
 		
 		ctext = {1,1,1,1},
-		cbackground = {0,0,0,0.6},
+		cbackground = {0,0,0,0.66},
 		cborder = {0,0,0,1},
 		cbuttonbackground={0.1,0.1,0.1,1},
 		
@@ -104,6 +113,14 @@ local Config = {
 		},
 	},
 }
+
+
+function widget:ViewResize(newX,newY)
+	vsx, vsy = gl.GetViewSizes()
+	widgetScale = (1 + (vsx*vsy / 7500000))
+	Config.buildmenu.padding = 3*widgetScale
+	Config.ordermenu.padding = 3*widgetScale
+end
 
 local guishaderEnabled = WG['guishader_api'] or false
 
@@ -187,7 +204,6 @@ local function AutoResizeObjects() --autoresize v2
 	end
 end
 
-
 local function esc(x)
    return (x:gsub('%%', '%%%%')
             :gsub('^%^', '%%^')
@@ -262,12 +278,12 @@ local function CreateGrid(r)
 		roundedsize = math.floor(r.isy*r.roundedPercentage),
 		px=0,py=0,
 		sx=r.isx,sy=r.isy,
-		iconscale=(iconScaling and r.iconscale or 1),
+		iconscale=(iconScaling and ((not highlightscale and r.menuname == "buildmenu") or r.menuname ~= "buildmenu") and r.iconscale or 1),
 		color={1,0,0,0.26},
 		border={0.8,0,0,0},
 		glone=0.12,
-		texture = LUAUI_DIRNAME.."Images/button-pushed.dds",
-		texturecolor={1,0,0,0.18},
+		texture = "LuaUI/Images/button-pushed.dds",
+		texturecolor={1,0,0,0.15},
 		
 		active=false,
 		onupdate=function(self)
@@ -276,16 +292,16 @@ local function CreateGrid(r)
 	}
 	
 	local mouseoverhighlight = Copy(selecthighlight,true)
-	mouseoverhighlight.color={1,1,1,0.1}
+	mouseoverhighlight.color={1,1,1,0.08}
 	mouseoverhighlight.border={1,1,1,0}
-	mouseoverhighlight.texture = LUAUI_DIRNAME.."Images/button-highlight.dds"
-	mouseoverhighlight.texturecolor={1,1,1,0.1}
+	mouseoverhighlight.texture = "LuaUI/Images/button-highlight.dds"
+	mouseoverhighlight.texturecolor={1,1,1,0.08}
 	
 	local heldhighlight = Copy(selecthighlight,true)
-	heldhighlight.color={1,0.8,0,0.08}
+	heldhighlight.color={1,0.75,0,0.06}
 	heldhighlight.border={1,1,0,0}
-	heldhighlight.texture = LUAUI_DIRNAME.."Images/button-pushed.dds"
-	heldhighlight.texturecolor={1,0.8,0,0.08}
+	heldhighlight.texture = "LuaUI/Images/button-pushed.dds"
+	heldhighlight.texturecolor={1,0.75,0,0.06}
 	
 	local icon = {"rectangle",
 		px=0,py=0,
@@ -305,7 +321,26 @@ local function CreateGrid(r)
 		mouseheld={
 			{1,function(mx,my,self)
 				self.iconscale=(iconScaling and self.iconhoverscale or 1)
-				heldhighlight.iconscale=(iconScaling and self.iconhoverscale or 1)
+				--if self.texture ~= nil and string.sub(self.texture, 1, 1) == '#' then
+				--	heldhighlight.iconscale = (iconScaling and ((not highlightscale and r.menuname == "buildmenu") or r.menuname ~= "buildmenu") and self.iconhoverscale or 1)
+				--else
+				--	heldhighlight.iconscale = self.iconscale
+				--end
+				heldhighlight.iconscale = self.iconscale
+				heldhighlight.color={1,0.75,0,0.06}
+				heldhighlight.px = self.px
+				heldhighlight.py = self.py
+				heldhighlight.active = nil
+			end},
+			{3,function(mx,my,self)
+				self.iconscale=(iconScaling and self.iconhoverscale or 1)
+				--if self.texture ~= nil and string.sub(self.texture, 1, 1) == '#' then
+				--	heldhighlight.iconscale = (iconScaling and ((not highlightscale and r.menuname == "buildmenu") or r.menuname ~= "buildmenu") and self.iconhoverscale or 1)
+				--else
+				--	heldhighlight.iconscale = self.iconscale
+				--end
+				heldhighlight.iconscale = self.iconscale
+				heldhighlight.color={1,0.2,0,0.06}
 				heldhighlight.px = self.px
 				heldhighlight.py = self.py
 				heldhighlight.active = nil
@@ -316,7 +351,11 @@ local function CreateGrid(r)
 			{1,function(mx,my,self)
 				if r.menuname == "buildmenu" then
 					self.iconscale=(iconScaling and self.iconhoverscale or 1)
-					heldhighlight.iconscale=(iconScaling and self.iconhoverscale or 1)
+					if self.texture ~= nil and string.sub(self.texture, 1, 1) == '#' then
+						heldhighlight.iconscale = (iconScaling and ((not highlightscale and r.menuname == "buildmenu") or r.menuname ~= "buildmenu") and self.iconhoverscale or 1)
+					else
+						heldhighlight.iconscale = self.iconscale
+					end
 					heldhighlight.px = self.px
 					heldhighlight.py = self.py
 					heldhighlight.active = nil
@@ -335,7 +374,18 @@ local function CreateGrid(r)
 				if self.texture ~= nil and string.sub(self.texture, 1, 1) == '#' then
 					local udefid =  tonumber(string.sub(self.texture, 2))
 					local text = "\255\215\255\215"..UnitDefs[udefid].humanName.."\n\255\240\240\240"
-					text = text..UnitDefs[udefid].tooltip
+					if drawBigTooltip and UnitDefs[udefid].customParams.description_long ~= nil then
+						local lines = wrap(UnitDefs[udefid].customParams.description_long, 58)
+						local description = ''
+						local newline = ''
+						for i, line in ipairs(lines) do
+							description = description..newline..line
+							newline = '\n'
+						end
+						text = text..description
+					else
+						text = text..UnitDefs[udefid].tooltip
+					end
 					WG['tooltip'].ShowTooltip('redui_buildmenu', text)
 			 		tt = string.gsub(tt, esc("Build: "..UnitDefs[udefid].humanName.." - "..UnitDefs[udefid].tooltip).."\n", "")
 				end
@@ -361,6 +411,7 @@ local function CreateGrid(r)
 		onupdate=function(self)
 			local _,_,_,curcmdname = sGetActiveCommand()
 			self.iconscale= (iconScaling and self.iconnormalscale or 1)
+			--selecthighlight.iconscale = (iconScaling and ((not highlightscale and r.menuname == "buildmenu") or r.menuname ~= "buildmenu") and self.iconhoverscale or 1)
 			selecthighlight.iconscale = (iconScaling and self.iconhoverscale or 1)
 			if (curcmdname ~= nil) then
 				if (self.cmdname == curcmdname) then
@@ -380,10 +431,10 @@ local function CreateGrid(r)
 	New(background2)
 	
 	local backward = New(Copy(icon,true))
-	backward.texture = LUAUI_DIRNAME.."Images/backward.dds"
+	backward.texture = "LuaUI/Images/backward.dds"
 
 	local forward = New(Copy(icon,true))
-	forward.texture = LUAUI_DIRNAME.."Images/forward.dds"
+	forward.texture = "LuaUI/Images/forward.dds"
 	
 	local indicator = New({"rectangle",
 		px=0,py=0,
@@ -416,11 +467,11 @@ local function CreateGrid(r)
 	end
 	
 	local text = {"rectangle",
-	px,py = 0, 0,
-	sx=r.isx,sy=r.isy,
-	captioncolor={0.8,0.8,0.8,1},
-	caption = nil,
-	options = "on",
+		px,py = 0, 0,
+		sx=r.isx,sy=r.isy,
+		captioncolor={0.8,0.8,0.8,1},
+		caption = nil,
+		options = "on",
 	}
 	local texts = {}
 	for y=1,r.iy do
@@ -559,7 +610,7 @@ local function UpdateGrid(g,cmds,ordertype)
 			end},
 		}
 		
-		if (ordertype == 1) then --build orders
+		if (ordertype == 1) then --build icons
 			icon.texture = "#"..cmd.id*-1
 			if (cmd.params[1]) then
 				icon.options = "bs"
@@ -571,7 +622,7 @@ local function UpdateGrid(g,cmds,ordertype)
 			
 			--text to show build hotkey
 			local white = "\255\255\255\255"
-			local offwhite = "\255\210\210\210"
+			local offwhite = "\255\222\222\222"
 			local yellow = "\255\255\255\0"
 			local orange = "\255\255\135\0"
 			local green = "\255\0\255\0"
@@ -719,7 +770,7 @@ local function UpdateGrid(g,cmds,ordertype)
 						table.insert(g.background.movableslaves,s2)
 					end
 					
-					local glowSize = s.sy * 4.2
+					local glowSize = s.sy * 4.4
 					s2.sy = s.sy + glowSize + glowSize
 					s2.py = s.py - glowSize
 					s2.px = s.px
@@ -727,7 +778,7 @@ local function UpdateGrid(g,cmds,ordertype)
 					s2.texture = barGlowCenterTexture
 					s2.border = {0,0,0,0}
 					s2.color = {s.color[1] * 10, s.color[2] * 10, s.color[3] * 10, 0}
-					s2.texturecolor = {s.texturecolor[1] * 10, s.texturecolor[2] * 10, s.texturecolor[3] * 10, 0.07}
+					s2.texturecolor = {s.texturecolor[1] * 10, s.texturecolor[2] * 10, s.texturecolor[3] * 10, 0.06}
 					s2.active = true
 					
 					usedstaterectanglesglow = usedstaterectanglesglow + 1
@@ -819,7 +870,6 @@ function widget:TextCommand(command)
 			Spring.Echo("Build/order menu icon spacing:  disabled")
 		end
 	end
-
 	if (string.find(command, "icontooltip") == 1  and  string.len(command) == 11) then
 		drawTooltip = not drawTooltip
 		--AutoResizeObjects()
@@ -885,6 +935,9 @@ function widget:Initialize()
   WG['red_buildmenu'].getConfigShortcutsInfo = function()
   	return shortcutsInfo
   end
+	WG['red_buildmenu'].getConfigPlaySounds = function()
+		return playSounds
+	end
   WG['red_buildmenu'].setConfigLargeInfo = function(value)
     largeInfo = value
   end
@@ -894,11 +947,9 @@ function widget:Initialize()
   WG['red_buildmenu'].getConfigPlaySounds = function()
     return playSounds
   end
-
   WG['red_buildmenu'].setConfigShortcutsInfo = function(value)
   	shortcutsInfo = value
   end
-
 	WG['red_buildmenu'].setConfigPlaySounds = function(value)
 		playSounds = value
 	end
@@ -929,7 +980,7 @@ function widget:GetConfigData() --save config
 		Config.buildmenu.py = buildmenu.background.py * unscale
 		Config.ordermenu.px = ordermenu.background.px * unscale
 		Config.ordermenu.py = ordermenu.background.py * unscale
-		return {Config=Config, iconScaling=iconScaling, largeInfo=largeInfo, drawTooltip=drawTooltip, shortcutsInfo=shortcutsInfo, playSounds=playSounds}
+		return {Config=Config, iconScaling=iconScaling, drawPrice=drawPrice, drawTooltip=drawTooltip, drawBigTooltip=drawBigTooltip, largePrice=largePrice, oldUnitpics=oldUnitpics, shortcutsInfo=shortcutsInfo, playSounds=playSounds}
 	end
 end
 function widget:SetConfigData(data) --load config
@@ -938,14 +989,20 @@ function widget:SetConfigData(data) --load config
 		Config.buildmenu.py = data.Config.buildmenu.py
 		Config.ordermenu.px = data.Config.ordermenu.px
 		Config.ordermenu.py = data.Config.ordermenu.py
+		if (data.drawPrice ~= nil) then
+			drawPrice = data.drawPrice
+		end
+		if (data.drawTooltip ~= nil) then
+			drawTooltip = data.drawTooltip
+		end
+		if (data.drawTooltip ~= nil) then
+			drawBigTooltip = data.drawBigTooltip
+		end
 		if (data.iconScaling ~= nil) then
 			iconScaling = data.iconScaling
 		end
 		if (data.largeInfo ~= nil) then
 			largeInfo = data.largeInfo
-		end
-		if (data.drawTooltip ~= nil) then
-			drawTooltip = data.drawTooltip
 		end
 		if (data.shortcutsInfo ~= nil) then
 			shortcutsInfo = data.shortcutsInfo
@@ -973,6 +1030,7 @@ function widget:Shutdown()
 		widgetHandler:ConfigLayoutHandler(true)
 		Spring.ForceLayoutUpdate()
 	end
+	WG['red_buildmenu'] = nil
 end
 local function GetCommands()
 	local hiddencmds = {
@@ -982,6 +1040,9 @@ local function GetCommands()
 		[8] = true, --squadwait
 		[7] = true, --deathwait
 		[6] = true, --timewait
+		[39812] = true, --raw move
+		[34922] = true, -- set unit target
+		--[34923] = true, -- set target
 	}
 	local buildcmds = {}
 	local statecmds = {}
@@ -1026,6 +1087,7 @@ local function GetCommands()
 	
 	return buildcmds,othercmds
 end
+
 local hijackattempts = 0
 local layoutping = 54352 --random number
 local function hijacklayout()
@@ -1040,7 +1102,8 @@ local function hijacklayout()
 		widgetHandler.commands.n = cmdCount
 		widgetHandler:CommandsChanged() --call widget:CommandsChanged()
 		local iconList = {[1337]=9001}
-		return "", xIcons, yIcons, {}, {}, {}, {}, {}, {}, {}, iconList
+		local custom_cmdz = widgetHandler.customCommands
+		return "", xIcons, yIcons, {}, custom_cmdz, {}, {}, {}, {}, {}, iconList
 	end
 	widgetHandler:ConfigLayoutHandler(dummylayouthandler) --override default build/ordermenu layout
 	Spring.ForceLayoutUpdate()

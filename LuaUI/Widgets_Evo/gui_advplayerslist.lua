@@ -100,11 +100,11 @@ local gl_GetTextHeight  = gl.GetTextHeight
 -- IMAGES
 --------------------------------------------------------------------------------
 
-local imageDirectory  = ":n:"..LUAUI_DIRNAME.."Images/advplayerslist/"
+local imageDirectory  = ":n:LuaUI/Images/advplayerslist/"
 
 local flagsDirectory  = imageDirectory.."flags/"
 
-local bgcorner        = ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgcorner        = "LuaUI/Images/bgcorner.png"
 
 local pics = {
 	chipPic         = imageDirectory.."chip.dds",
@@ -829,6 +829,7 @@ function widget:Shutdown()
 	if (WG['guishader_api'] ~= nil) then
 		WG['guishader_api'].RemoveRect('advplayerlist')
 	end
+	WG['advplayerlist_api'] = nil
 	widgetHandler:DeregisterGlobal('CameraBroadcastEvent')
 	widgetHandler:DeregisterGlobal('ActivityEvent')
   widgetHandler:DeregisterGlobal('FpsEvent')
@@ -1009,7 +1010,7 @@ function CreatePlayer(playerID)
 		ping             = tping,
 		cpu              = tcpu,
 		country          = tcountry,
-		tdead            = false,
+		dead             = false,
 		spec             = tspec,
 		ai               = false,
 		energy           = energy,
@@ -1026,8 +1027,9 @@ function CreatePlayerFromTeam(teamID) -- for when we don't have a human player o
 	
 	local _,_, isDead, isAI, tside, tallyteam = Spring_GetTeamInfo(teamID)
 	local tred, tgreen, tblue                 = Spring_GetTeamColor(teamID)
-	local tname, ttotake, tdead, tskill
-	
+	local tname, ttotake, tskill
+	local tdead = true
+
 	if isAI then
 	
 		local version
@@ -1125,7 +1127,7 @@ end
 
 function GetDark(red,green,blue)                  	
 	-- Determines if the player color is dark (i.e. if a white outline for the sidePic is needed)
-	if red*1.2 + green*1.1 + blue*0.8 < 0.9 then return true end
+	if red + green*1.2 + blue*0.4 < 0.8 then return true end
 	return false
 end
 
@@ -1259,6 +1261,7 @@ function SortAllyTeams(vOffset)
 	return vOffset
 end
 
+local deadPlayerHeightReduction = 10
 function SortTeams(allyTeamID, vOffset)
 	-- Adds teams to the draw list (own team first)
 	--(teams are not visible as such unless they are empty or AI)
@@ -1269,7 +1272,11 @@ function SortTeams(allyTeamID, vOffset)
 	for _,teamID in ipairs(teamsList) do
 			table.insert(drawListOffset, vOffset)
 			table.insert(drawList, -1)
-			vOffset = SortPlayers(teamID,allyTeamID,vOffset) -- adds players form the team 
+			vOffset = SortPlayers(teamID,allyTeamID,vOffset) -- adds players form the team
+            local _,_, isDead, _, _, _ = Spring_GetTeamInfo(teamID)
+            if isDead then
+                vOffset = vOffset - (deadPlayerHeightReduction/2)
+            end
 	end
 	
 	return vOffset
@@ -1321,7 +1328,7 @@ function SortPlayers(teamID,allyTeamID,vOffset)
 	
 	-- add no player token if no player found in this team at this point
 	if noPlayer == true then
-		vOffset = vOffset + playerOffset
+		vOffset = vOffset + playerOffset - (deadPlayerHeightReduction/2)
 		table.insert(drawListOffset, vOffset)
 		table.insert(drawList, 64 + teamID)  -- no players team
 		player[64 + teamID].posY = vOffset
@@ -1555,11 +1562,11 @@ function CreateBackground()
 	end
 	
 	Background = gl_CreateList(function()
-		gl_Color(0,0,0,0.6)
+		gl_Color(0,0,0,0.66)
 		RectRound(BLcornerX,BLcornerY,TRcornerX,TRcornerY,6)
 		
 		local padding = 2.75
-		gl_Color(1,1,1,0.022)
+		gl_Color(1,1,1,0.025)
 		RectRound(BLcornerX+padding,BLcornerY+padding,TRcornerX-padding,TRcornerY-padding,padding,true)
 		
 		--DrawRect(BLcornerX,BLcornerY,TRcornerX,TRcornerY)
@@ -1827,7 +1834,7 @@ function DrawPlayer(playerID, leader, vOffset, mouseX, mouseY)
 			end
 			gl_Color(red,green,blue,1)
 			if m_ID.active == true then
-				DrawID(team, posY, dark)
+				DrawID(team, posY, dark, dead)
 			end
 			if m_skill.active == true then
 				DrawSkill(skill, posY, dark, name)
@@ -1862,7 +1869,7 @@ function DrawPlayer(playerID, leader, vOffset, mouseX, mouseY)
 				local ms = player[playerID].metalStorage
 				local mi = player[playerID].metalIncome
 				if es > 0 then
-					DrawResources(e, es, m, ms, posY)
+					DrawResources(e, es, m, ms, posY, dead)
 					if tipY == true then ResourcesTip(mouseX, e, es, ei, m, ms, mi) end
 				end
 			end
@@ -1962,44 +1969,57 @@ function DrawChatButton(posY)
 	DrawRect(m_chat.posX + widgetPosX + 1, posY, m_chat.posX + widgetPosX + 17, posY + 16)	
 end
 
-function DrawResources(energy, energyStorage, metal, metalStorage, posY)
+function DrawResources(energy, energyStorage, metal, metalStorage, posY, dead)
 	local paddingLeft = 2
 	local paddingRight = 2
 	local barWidth = m_resources.width - paddingLeft - paddingRight
+	local y1Offset = 7
+	local y2Offset = 5
+	if dead then
+		y1Offset = 7.4
+		y2Offset = 6
+	end
 	gl_Color(1,1,1,0.14)
 	gl_Texture(pics["resbarBgPic"])
-	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 7, m_resources.posX + widgetPosX + paddingLeft + barWidth, posY + 5)	
+	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + barWidth, posY + y2Offset)
 	gl_Color(1,1,1,1)
 	gl_Texture(pics["resbarPic"])
-	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 7, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + 5)
+	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + y2Offset)
 
     if ((barWidth/metalStorage)*metal) > 0.8 then
         local glowsize = 12
         gl_Color(1,1,1.2,0.033)
         gl_Texture(pics["barGlowCenterPic"])
-        DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 7+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + 5-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + y2Offset-glowsize)
 
         gl_Texture(pics["barGlowEdgePic"])
-        DrawRect(m_resources.posX + widgetPosX + paddingLeft-(glowsize*1.8), posY + 7+glowsize, m_resources.posX + widgetPosX + paddingLeft, posY + 5-glowsize)
-        DrawRect(m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal)+(glowsize*1.8), posY + 7+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + 5-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft-(glowsize*1.8), posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft, posY + y2Offset-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal)+(glowsize*1.8), posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + y2Offset-glowsize)
     end
 
+	if not dead then
+		y1Offset = 11
+		y2Offset = 9
+	else
+		y1Offset = 10
+		y2Offset = 8.6
+	end
     gl_Color(1,1,0,0.14)
 	gl_Texture(pics["resbarBgPic"])
-	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 11, m_resources.posX + widgetPosX + paddingLeft + barWidth, posY + 9)	
+	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + barWidth, posY + y2Offset)
 	gl_Color(1,1,0,1)
 	gl_Texture(pics["resbarPic"])
-	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 11, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + 9)
+	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + y2Offset)
 
     if ((barWidth/energyStorage)*energy) > 0.8 then
         local glowsize = 12
         gl_Color(1,1,0.2,0.033)
         gl_Texture(pics["barGlowCenterPic"])
-        DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + 11+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + 9-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + y2Offset-glowsize)
 
         gl_Texture(pics["barGlowEdgePic"])
-        DrawRect(m_resources.posX + widgetPosX + paddingLeft-(glowsize*1.8), posY + 11+glowsize, m_resources.posX + widgetPosX + paddingLeft, posY + 9-glowsize)
-        DrawRect(m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy)+(glowsize*1.8), posY + 11+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + 9-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft-(glowsize*1.8), posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft, posY + y2Offset-glowsize)
+        DrawRect(m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy)+(glowsize*1.8), posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + y2Offset-glowsize)
     end
 end
 
@@ -2190,7 +2210,7 @@ function DrawName(name, team, posY, dark, playerID)
 		xPadding = 16
 		DrawState(playerID, m_name.posX + widgetPosX, posY)
 	end
-	if (nameColourR + nameColourG*1.35 + nameColourB*0.5) < 0.8 then
+	if (nameColourR + nameColourG*1.2 + nameColourB*0.4) < 0.8 then
 		gl_Text(colourNames(team) .. nameText, m_name.posX + widgetPosX + 3 + xPadding, posY + 4, 14, "o") -- draws name
 	else
 		gl_Color(0,0,0,0.45)
@@ -2214,10 +2234,10 @@ function DrawSmallName(name, team, posY, dark, playerID, alpha)
 			textindent = 0
 		end
 		local nameColourR,nameColourG,nameColourB,nameColourA = 1,1,1,1
-		
-		if playerSpecs[playerID] ~= nil then 
+
+		if playerSpecs[playerID] ~= nil then
 			nameColourR,nameColourG,nameColourB,nameColourA = Spring_GetTeamColor(team)
-			if (nameColourR + nameColourG*1.35 + nameColourB*0.5) < 0.75 then
+			if (nameColourR + nameColourG*1.2 + nameColourB*0.4) < 0.8 then
 				gl_Text(colourNames(team) .. name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "o")
 			else
 				gl_Color(0,0,0,0.3)
@@ -2237,17 +2257,28 @@ function DrawSmallName(name, team, posY, dark, playerID, alpha)
 	end
 end
 
-function DrawID(playerID, posY, dark)
+function DrawID(playerID, posY, dark, dead)
 	local spacer = ""
 	if playerID < 10 then
 		spacer = " "
 	end
-	--gl_Text(colourNames(playerID) .. " ".. playerID .. "", m_ID.posX + widgetPosX+4.5, posY + 5, 11, "o") 
-	gl_Color(0,0,0,0.6)
-	gl_Text(spacer .. playerID .. "", m_ID.posX + widgetPosX+4.5, posY + 4.1, 11, "n") 
-	gl_Color(1,1,1,0.5)
-	gl_Text(spacer .. playerID .. "", m_ID.posX + widgetPosX+4.5, posY + 5, 11, "n") 
-
+	local fontSize = 11
+	local deadspace = 0
+	if dead then
+		fontSize = 8
+		deadspace = 1.5
+		gl_Color(0,0,0,0.4)
+	else
+		gl_Color(0,0,0,0.6)
+	end
+	--gl_Text(colourNames(playerID) .. " ".. playerID .. "", m_ID.posX + widgetPosX+4.5, posY + 5, 11, "o")
+	gl_Text(spacer .. playerID .. "", m_ID.posX + deadspace + widgetPosX+4.5, posY + 4.1, fontSize, "n")
+	if dead then
+		gl_Color(1,1,1,0.33)
+	else
+		gl_Color(1,1,1,0.5)
+	end
+	gl_Text(spacer .. playerID .. "", m_ID.posX + deadspace + widgetPosX+4.5, posY + 5, fontSize, "n")
 	gl_Color(1,1,1)
 end
 
@@ -2903,6 +2934,10 @@ local function DrawTweakButtons()
 	local localBottom   = widgetPosY + widgetHeight - 28
 	local localOffset   = 1 --see func above, these track how far right we've got TODO: pass values
 	
+	gl_Color(0,0,0,0.5)
+	RectRound(localLeft-3, localBottom + 8, localLeft + widgetWidth+3, localBottom + 30, 5, true)
+	
+	gl_Color(1,1,1,1)
 	--if localLeft + minSize > vsx then localLeft = vsx - minSize end 
 	if localBottom < 0 then localBottom = 0 end
 	

@@ -11,16 +11,24 @@ function widget:GetInfo()
 	handler   = true, --can use widgetHandler:x()
 	}
 end
+local vsx, vsy = gl.GetViewSizes()
+
 local rescalevalue = 1.26
-local buttonScale = 0.5
+local buttonScale = 2
 local NeededFrameworkVersion = 8
-local CanvasX,CanvasY = 1272/rescalevalue,734/rescalevalue --resolution in which the widget was made (for 1:1 size)
+--local CanvasX,CanvasY = 1272/rescalevalue,734/rescalevalue --resolution in which the widget was made (for 1:1 size)
+local CanvasX,CanvasY = vsx,vsy --resolution in which the widget was made (for 1:1 size)
 --1272,734 == 1280,768 windowed
+
+local widgetScale = (1 + (vsx*vsy / 7500000))
+
+local maxSx = CanvasX*0.275
+local maxSy = CanvasY*0.23
 
 local Config = {
 	minimap = {
-		px = -0.5,py = -0.5, --default start position
-		sx = math.min(135*Game.mapX/Game.mapY,270),sy = 135, --background size
+		px = 0,py = 0, --default start position
+		sx = math.min(maxSy*(Game.mapX/Game.mapY), maxSx), sy = maxSy, --background size
 		
 		bsx = 15,bsy = 15, --button size
 
@@ -35,7 +43,7 @@ local Config = {
 		
 		cborder = {0,0,0,0},
 		cbackground = {0,0,0,0.55},
-		cbordersize = 3.5,
+		cbordersize = 2.25*widgetScale,
 		
 		dragbutton = {1}, --left mouse button
 		tooltip = {
@@ -49,6 +57,14 @@ local sSendCommands = Spring.SendCommands
 local sGetMiniMapGeometry = Spring.GetMiniMapGeometry
 local sGetCameraState = Spring.GetCameraState
 local sceduleMinimapGeometry = false
+
+
+function widget:ViewResize(newX,newY)
+	vsx, vsy = gl.GetViewSizes()
+	widgetScale = (1 + (vsx*vsy / 7500000))
+	Config.minimap.cbordersize = 2.25*widgetScale
+end
+
 
 local function IncludeRedUIFrameworkFunctions()
 	New = WG.Red.New(widget)
@@ -341,6 +357,7 @@ function widget:Update()
 end
 
 function widget:DrawScreen()
+
 	if (rMinimap.active ~= nil) then
 		return
 	end

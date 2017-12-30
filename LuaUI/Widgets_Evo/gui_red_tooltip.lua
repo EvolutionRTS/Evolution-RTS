@@ -17,6 +17,8 @@ local CanvasX,CanvasY = 1280,734 --resolution in which the widget was made (for 
 
 --todo: sy adjustment
 
+local vsx, vsy = gl.GetViewSizes()
+local widgetScale = (1 + (vsx*vsy / 7500000))
 local Config = {
 	tooltip = {
 		px = -0.5,py = CanvasY-82, --default start position
@@ -24,12 +26,12 @@ local Config = {
 		
 		fontsize = 10.5,
 		
-		padding = 4,
-		color2 = {1,1,1,0.022},
+		padding = 3*widgetScale,
+		color2 = {1,1,1,0.025},
 		
 		margin = 11, --distance from background border
 		
-		cbackground = {0,0,0,0.6}, --color {r,g,b,alpha}
+		cbackground = {0,0,0,0.66}, --color {r,g,b,alpha}
 		cborder = {0,0,0,0.2},
 		
 		dragbutton = {2,3}, --middle mouse button
@@ -310,16 +312,16 @@ function widget:GetConfigData() --save config
 	if (PassedStartupCheck) then
 		local vsy = Screen.vsy
 		local unscale = CanvasY/vsy --needed due to autoresize, stores unresized variables
-		Config.tooltip.px = tooltip.background.px * unscale
-		Config.tooltip.py = tooltip.background.py * unscale
+		--Config.tooltip.px = tooltip.background.px * unscale
+		--Config.tooltip.py = tooltip.background.py * unscale
 		Config.tooltip.unitCounterEnabled = Config.tooltip.unitCounterEnabled
 		return {Config=Config}
 	end
 end
 function widget:SetConfigData(data) --load config
 	if (data.Config ~= nil) then
-		Config.tooltip.px = data.Config.tooltip.px
-		Config.tooltip.py = data.Config.tooltip.py
+		--Config.tooltip.px = data.Config.tooltip.px
+		--Config.tooltip.py = data.Config.tooltip.py
 		Config.tooltip.unitCounterEnabled = data.Config.tooltip.unitCounterEnabled
 	end
 end

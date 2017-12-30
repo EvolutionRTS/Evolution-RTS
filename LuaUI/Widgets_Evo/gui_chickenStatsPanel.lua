@@ -14,6 +14,9 @@ function widget:GetInfo()
   }
 end
 
+local customScale = 1
+local widgetScale = customScale
+
 local teams = Spring.GetTeamList()
 for i =1, #teams do
 	local luaAI = Spring.GetTeamLuaAI(teams[i])
@@ -61,10 +64,10 @@ local math            = math
 local table           = table
 
 local displayList
-local fontHandler     = loadstring(VFS.LoadFile(LUAUI_DIRNAME.."modfonts.lua"))()
-local panelFont       = LUAUI_DIRNAME.."Fonts/FreeSansBold_14"
-local waveFont        = LUAUI_DIRNAME.."Fonts/Skrawl_40"
-local panelTexture    = ":n:"..LUAUI_DIRNAME.."Images/panel.tga"
+local fontHandler     = loadstring(VFS.LoadFile("LuaUI/modfonts.lua"))()
+local panelFont       = "LuaUI/Fonts/FreeSansBold_14"
+local waveFont        = "LuaUI/Fonts/Skrawl_40"
+local panelTexture    = ":n:LuaUI/Images/panel.tga"
 
 local viewSizeX, viewSizeY = 0,0
 local w               = 300
@@ -214,10 +217,9 @@ local function MakeCountString(type, showbreakdown)
   end
 end
 
-
 local function updatePos(x, y)
-  x1 = math.min(viewSizeX-w/2,x)
-  y1 = math.min(viewSizeY-h/2,y)
+  x1 = math.min((viewSizeX*0.94)-(w*widgetScale)/2,x)
+  y1 = math.min((viewSizeY*0.89)-(h*widgetScale)/2,y)
   updatePanel = true
 end
 
@@ -234,6 +236,7 @@ end
 local function CreatePanelDisplayList()
   gl.PushMatrix()
   gl.Translate(x1, y1, 0)
+  gl.Scale(widgetScale, widgetScale, 1)
   gl.CallList(displayList)
   fontHandler.DisableCache()
   fontHandler.UseFont(panelFont)
@@ -423,8 +426,8 @@ end
 
 function widget:MousePress(x, y, button)
   if (enabled and 
-       x > x1 and x < x1 + w and
-       y > y1 and y < y1 + h) then
+       x > x1 and x < x1 + (w*widgetScale) and
+       y > y1 and y < y1 + (h*widgetScale)) then
     capture = true
     moving  = true
   end
@@ -446,9 +449,17 @@ function widget:ViewResize(vsx, vsy)
   x1 = math.floor(x1 - viewSizeX)
   y1 = math.floor(y1 - viewSizeY)
   viewSizeX, viewSizeY = vsx, vsy
-  x1 = viewSizeX + x1
-  y1 = viewSizeY + y1
+  widgetScale = (0.75 + (viewSizeX*viewSizeY / 10000000)) * customScale
+  x1 = viewSizeX + x1+((x1/2) * (widgetScale-1))
+  y1 = viewSizeY + y1+((y1/2) * (widgetScale-1))
 end
+
+
+local widgetScale = 1
+local vsx, vsy = Spring.GetViewGeometry()
+
+local changelogLines = {}
+local totalChangelogLines = 0
 
 
 --------------------------------------------------------------------------------

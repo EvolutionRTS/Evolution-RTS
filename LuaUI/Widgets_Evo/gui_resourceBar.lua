@@ -353,7 +353,7 @@ function generateDisplayList()
 		gl.Scale(widgetScale, widgetScale, 1)
 		
 		-- background
-	  	gl.Color(0,0,0,0.8)
+	  	gl.Color(0,0,0,0.77)
 		RectRound(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin, 10)
 		
 		-- content area
