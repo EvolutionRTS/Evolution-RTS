@@ -575,7 +575,7 @@ function RandomUnit()
 					end
 				elseif r2 == 0 then
 					if GG.TechCheck("endbringer", ai.id) == true then
-						local r = math.random(0,3)
+						local r = math.random(0,4)
 							if r == 0 then
 								return "eamphibleveler_up3"
 							elseif r == 1 then
