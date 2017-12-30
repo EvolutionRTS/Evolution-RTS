@@ -194,6 +194,27 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=2,
    },
+   
+   HOVERHBOT8 = {
+      footprintx=8,
+      footprintz=8,
+      maxslope=90,
+      maxwaterdepth=10,
+      maxwaterslope=255,
+      badwaterslope=255,
+      crushstrength=20,
+	  depthModParams = {
+         minHeight      = 0,
+         maxHeight      = 0,
+         maxScale       = 1.5,
+         quadraticCoeff = 0.1,
+         linearCoeff    = 0.1, -- deprecates "depthMod"
+         constantCoeff  = 1,
+       },
+	  minwaterdepth=10,
+	  heatmod=unitHeat,
+	  slopemod=2,
+   },
 
    TANK3 = {
       footprintx=3,

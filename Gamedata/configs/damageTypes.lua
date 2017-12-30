@@ -44,6 +44,11 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
+		ehbotkarganneth	= {
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 1,
+		},
 		
 		-- Start Hovers
 		eaatank	= {

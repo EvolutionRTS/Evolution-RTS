@@ -469,22 +469,26 @@ Shared.buildListHbotFactory = {
 		[[ehbotthud]],
 		[[ehbotsniper]],
 		[[ehbotrocko]],
+		[[ehbotkarganneth]],
 }
 Shared.buildListHbotFactory_up1 = {
 		[[ehbotpeewee_up1]],
 		[[ehbotthud_up1]],
 		[[ehbotsniper_up1]],
 		[[ehbotrocko_up1]],
+		[[ehbotkarganneth_up1]],
 }
 Shared.buildListHbotFactory_up2 = {
 		[[ehbotpeewee_up2]],
 		[[ehbotthud_up2]],
 		[[ehbotsniper_up2]],
 		[[ehbotrocko_up2]],
+		[[ehbotkarganneth_up2]],
 }
 Shared.buildListHbotFactory_up3 = {
 		[[ehbotpeewee_up3]],
 		[[ehbotthud_up3]],
 		[[ehbotsniper_up3]],
 		[[ehbotrocko_up3]],
+		[[ehbotkarganneth_up3]],
 }

@@ -57,7 +57,7 @@ local energyCost_eheavyturret2 = 250
 local timeToBuild_eheavyturret2 = energyCost_eheavyturret2 * 0.10
 
 local energyCost_euwturret = 100
-local timeToBuild_euwturret = energyCost_euwturret * 0.20
+local timeToBuild_euwturret = energyCost_euwturret * 0.10
 
 local energyCost_emetalextractor_up1 = 400
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
@@ -568,6 +568,16 @@ Overseer]],
 			text = 'Morph into a stationary turret that gains 4x health.',
 		},
 	},	
+	ehbotkarganneth = 	{
+		{
+			into = 'ehbotkarganneth_turret',
+			time = 40,
+			cmdname = [[Deploy]],
+			energy = 400,
+			metal = 0,
+			text = 'Morph into a stationary turret that gains 2x health.',
+		},
+	},	
 
 ----------------------------------------------------------
 ----------------------------------------------------------
@@ -610,6 +620,16 @@ Overseer]],
 			energy = 50,
 			metal = 0,
 			text = 'Morph into a stationary turret that gains 4x health.',
+		},
+	},	
+	ehbotkarganneth_up1 = 	{
+		{
+			into = 'ehbotkarganneth_turret_up1',
+			time = 40,
+			cmdname = [[Deploy]],
+			energy = 400,
+			metal = 0,
+			text = 'Morph into a stationary turret that gains 2x health.',
 		},
 	},	
 
@@ -656,6 +676,16 @@ Overseer]],
 			text = 'Morph into a stationary turret that gains 4x health.',
 		},
 	},	
+	ehbotkarganneth_up2 = 	{
+		{
+			into = 'ehbotkarganneth_turret_up2',
+			time = 40,
+			cmdname = [[Deploy]],
+			energy = 400,
+			metal = 0,
+			text = 'Morph into a stationary turret that gains 2x health.',
+		},
+	},	
 
 ----------------------------------------------------------
 ----------------------------------------------------------
@@ -700,6 +730,16 @@ Overseer]],
 			text = 'Morph into a stationary turret that gains 4x health.',
 		},
 	},
+	ehbotkarganneth_up3 = 	{
+		{
+			into = 'ehbotkarganneth_turret_up3',
+			time = 40,
+			cmdname = [[Deploy]],
+			energy = 400,
+			metal = 0,
+			text = 'Morph into a stationary turret that gains 2x health.',
+		},
+	},	
 	
 
 ----------------------------------------------------------
@@ -753,6 +793,17 @@ Overseer]],
 			require = [[tech1]],
 		},
 	},
+	ehbotkarganneth_turret = 	{
+		{
+			into = 'ehbotkarganneth_turret_up1',
+			time = 80,
+			cmdname = [[Upgrade]],
+			energy = 800,
+			metal = 0,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+			require = [[endbringer]],
+		},
+	},	
 
 ----------------------------------------------------------
 ----------------------------------------------------------
@@ -805,6 +856,17 @@ Overseer]],
 			require = [[tech2]],
 		},
 	},
+	ehbotkarganneth_turret_up1 = 	{
+		{
+			into = 'ehbotkarganneth_turret_up2',
+			time = 80,
+			cmdname = [[Upgrade]],
+			energy = 800,
+			metal = 0,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+			require = [[endbringer]],
+		},
+	},	
 
 ----------------------------------------------------------
 ----------------------------------------------------------
@@ -857,6 +919,17 @@ Overseer]],
 			require = [[tech3]],
 		},
 	},
+	ehbotkarganneth_turret_up2 = 	{
+		{
+			into = 'ehbotkarganneth_turret_up3',
+			time = 80,
+			cmdname = [[Upgrade]],
+			energy = 800,
+			metal = 0,
+			text = [[+15% damage/hp buff, +15% faster reload]],
+			require = [[endbringer]],
+		},
+	},	
 	
 ----------------------------------------------------------
 ----------------------------------------------------------
