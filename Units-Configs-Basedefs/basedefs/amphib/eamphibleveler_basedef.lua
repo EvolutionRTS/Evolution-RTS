@@ -61,7 +61,7 @@ unitDef                    = {
 		},
 	},
 	sounds                       = {
-		underattack              = "other/unitsunderattack1",
+		underattack              = "other/UnitsUnderattack1.wav",
 		ok                       = {
 			"ack",
 		},
