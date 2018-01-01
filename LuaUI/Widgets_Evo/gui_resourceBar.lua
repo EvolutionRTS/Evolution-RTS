@@ -55,7 +55,7 @@ local incomeIncreased = false
 
 local increment = 0
 local vsx, vsy = gl.GetViewSizes()
-local widgetScale = 1		-- gets auto changed anyway
+local widgetScale = (0.66 + (vsx*vsy / 9500000))		-- gets auto changed anyway
 local bgmargin = 12
 local bgmargin2 = 6
 --local posx, posy = vsx - width * 1.59, vsy - height
@@ -354,9 +354,9 @@ function generateDisplayList()
 		
 		-- set position
 		gl.Translate(posx, posy, 0)
-		
+
 		-- apply scaling
-		gl.Translate(-((vsx - posx) * (widgetScale-1)), -((vsy - posy) * (widgetScale-1)), 0)
+		gl.Translate(-(width*widgetScale)/3, -((height+bgmargin-2) * (widgetScale-1)), 0)
 		gl.Scale(widgetScale, widgetScale, 1)
 		
 		-- background
@@ -550,9 +550,11 @@ end
 
 function widget:ViewResize(newX,newY)
 	vsx, vsy = newX, newY
-	posx, posy = (vsx - width)/2, vsy - height - 10
-	tweakStartX, tweakStartY = vsx - width * 1.59, vsy - height
 	widgetScale = (0.66 + (vsx*vsy / 9500000))
+	--posx, posy = (vsx - width)/2, vsy - height - 10
+	posx, posy = (vsx/2), vsy - (height+bgmargin-2)
+	tweakStartX, tweakStartY = vsx - width * 1.59, vsy - height
+	--tweakStartX, tweakStartY = vsx - ((width * 1.59)*widgetScale), vsy - (height*widgetScale)
 	generateDisplayList()
 	generateDisplayList3()
 end
