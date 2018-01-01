@@ -70,8 +70,6 @@ local metalIncomeTimer = 150
 -- how long before metal income stops increasing, in seconds (default 60s, or 10min, 4 times the metalIncomeTimer)
 local incomeProgressionEndTimer = metalIncomeTimer * 4 + 5
 
-local resourcePrompts = Spring.GetConfigInt("evo_resourceprompts")
-
 local myPlayerID = Spring.GetMyPlayerID()
 
 --Spring.GetTeamResources
@@ -155,6 +153,15 @@ function RectRound(px,py,sx,sy,cs, tl,tr,br,bl)		-- (coordinates work differentl
 end
 
 function widget:GameFrame(n)
+	if n%450 == 4 then
+		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
+
+		--Assume that if it isn't set, resourcePrompts is true
+		if resourcePrompts == nil then
+			resourcePrompts = 1
+		end
+	end
+
 	-- background flashes when the player messed up their eco
 	if supplyWarning == true or energyWarning == true or metalWarning == true then
 		if increment == 0 then
@@ -300,12 +307,6 @@ function widget:DrawScreen()
 end
 
 function widget:Initialize()
-
-	promptInitialValue = Spring.GetConfigInt("evo_promptInitialValue", 0)
-	if promptInitialValue ~= 1 then
-		Spring.SetConfigInt("evo_resourceprompts", 1)
-		Spring.SetConfigInt("evo_promptInitialValue", 1)
-	end
 
 	if Spring.GetModOptions().basicincomeinterval ~= nil then
 		metalIncomeTimer = tonumber(Spring.GetModOptions().basicincomeinterval) * 60

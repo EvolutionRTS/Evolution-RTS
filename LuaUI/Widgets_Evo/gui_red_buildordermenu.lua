@@ -43,7 +43,6 @@ local drawPrice = true
 local drawTooltip = true
 local drawBigTooltip = false
 local largePrice = true
-local shortcutsInfo = false
 local oldUnitpics = false
 
 local vsx, vsy = gl.GetViewSizes()
