@@ -48,6 +48,12 @@ local oldUnitpics = false
 local vsx, vsy = gl.GetViewSizes()
 local widgetScale = (1 + (vsx*vsy / 7500000))
 
+local buildPicHelp = Spring.GetConfigInt("evo_buildpichelp", 1)
+--Assume that if it isn't set, buildPicHelp is true
+if buildPicHelp == nil then
+	buildPicHelp = 1
+end
+
 local Config = {
 	buildmenu = {
 		menuname = "buildmenu",
@@ -112,8 +118,6 @@ local Config = {
 		},
 	},
 }
-local buildPicHelp = 1
-
 
 function widget:ViewResize(newX,newY)
 	vsx, vsy = gl.GetViewSizes()
@@ -953,12 +957,6 @@ function widget:Initialize()
 	WG['red_buildmenu'].setConfigPlaySounds = function(value)
 		playSounds = value
 	end
-	
-	buildPicHelp = Spring.GetConfigInt("evo_buildpichelp", 1)
-	--Assume that if it isn't set, buildPicHelp is true
-	if buildPicHelp == nil then
-		buildPicHelp = 1
-	end
 end
 
 local function onNewCommands(buildcmds,othercmds)
@@ -1232,12 +1230,26 @@ end
 function widget:DrawScreen()
 	if buildPicHelp ~= 1 then return end
 	
+	--Legend for quick reference
+
+	-- c currentLevel,
+	-- s storage,
+	-- p pull,
+	-- i income,
+	-- e expense,
+	-- sh share,
+	-- se sent,
+	-- r received
+	
 	-- copied from "gui_resourceBar.lua"
 	local myTeamID = Spring.GetMyTeamID()
 	local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed") or 0), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0)
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
 	local supplyWarning = (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95)
 	local energyWarning = ec / es < 0.2
+	local metalLowWarning = mc / ms < 0.2
+	local metalHighWarning = mc / ms > 0.9
 	
 	local icons = buildmenu.icons
 	for i=1,#icons do
@@ -1247,6 +1259,10 @@ function widget:DrawScreen()
 				setBrightness(supplyWarning, icon)
 			elseif icon.cmdname == "esolar2" or icon.cmdname == "egeothermal" or icon.cmdname == "efusion2" then
 				setBrightness(energyWarning, icon)
+			elseif icon.cmdname == "emetalextractor" then
+				setBrightness(metalLowWarning, icon)
+			elseif icon.cmdname == "eorb" then
+				setBrightness(metalHighWarning, icon)
 			end
 		end
 	end
