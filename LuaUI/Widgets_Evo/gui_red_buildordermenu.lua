@@ -112,6 +112,7 @@ local Config = {
 		},
 	},
 }
+local buildPicHelp = 1
 
 
 function widget:ViewResize(newX,newY)
@@ -952,6 +953,12 @@ function widget:Initialize()
 	WG['red_buildmenu'].setConfigPlaySounds = function(value)
 		playSounds = value
 	end
+	
+	buildPicHelp = Spring.GetConfigInt("evo_buildpichelp", 1)
+	--Assume that if it isn't set, buildPicHelp is true
+	if buildPicHelp == nil then
+		buildPicHelp = 1
+	end
 end
 
 local function onNewCommands(buildcmds,othercmds)
@@ -1211,5 +1218,36 @@ function widget:KeyPress(key, mods, isRepeat)
 		-- updates UI because hotkeys text changed color
 		onNewCommands(GetCommands())
 		return false
+	end
+end
+-- highlights stuff for new players
+local function setBrightness(condition, icon)
+	if condition then
+		local brightness = Spring.GetGameFrame() % 60 / 60
+		if brightness < 0.5 then brightness = 0.5 + brightness -- lighter
+		else brightness = 1.5 - brightness end -- dimmer
+		icon.border = {brightness, brightness, 0, 1}
+	else icon.border = {0, 0, 0, 0} end
+end
+function widget:DrawScreen()
+	if buildPicHelp ~= 1 then return end
+	
+	-- copied from "gui_resourceBar.lua"
+	local myTeamID = Spring.GetMyTeamID()
+	local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed") or 0), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0)
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
+	local supplyWarning = (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95)
+	local energyWarning = ec / es < 0.2
+	
+	local icons = buildmenu.icons
+	for i=1,#icons do
+		local icon = icons[i]
+		if icon.active == nil then
+			if icon.cmdname == "estorage" then
+				setBrightness(supplyWarning, icon)
+			elseif icon.cmdname == "esolar2" or icon.cmdname == "egeothermal" or icon.cmdname == "efusion2" then
+				setBrightness(energyWarning, icon)
+			end
+		end
 	end
 end
