@@ -54,6 +54,8 @@ if buildPicHelp == nil then
 	buildPicHelp = 1
 end
 
+local maxSupply = tonumber(Spring.GetModOptions().supplycap) or 400
+
 local Config = {
 	buildmenu = {
 		menuname = "buildmenu",
