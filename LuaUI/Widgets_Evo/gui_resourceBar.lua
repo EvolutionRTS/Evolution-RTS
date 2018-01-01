@@ -29,7 +29,7 @@ local maxBasicIncome = Spring.GetModOptions().maxbasicincome or 15
 -- resource bars: ON means the bars show percentage, OFF means they simply change color depending on state
 local progressBars = true
 
-local maxSupply = tonumber(Spring.GetModOptions().supplycap) or 200
+local maxSupply = tonumber(Spring.GetModOptions().supplycap) or 400
 
 -- internal settings, do not touch
 local white = "\255\255\255\255"
@@ -154,12 +154,18 @@ end
 
 function widget:GameFrame(n)
 	if n%450 == 4 then
+		local _, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
 		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
 
 		--Assume that if it isn't set, resourcePrompts is true
 		if resourcePrompts == nil then
 			resourcePrompts = 1
 		end
+		
+		if spectator == true then
+			resourcePrompts = 0
+		end
+		--Spring.Echo(resourcePrompts)
 	end
 
 	-- background flashes when the player messed up their eco

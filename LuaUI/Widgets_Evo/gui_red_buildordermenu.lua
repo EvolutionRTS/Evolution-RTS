@@ -1218,17 +1218,26 @@ function widget:KeyPress(key, mods, isRepeat)
 		return false
 	end
 end
+
+function widget:GameFrame(n)
+	if n%450 == 4 then
+		_, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
+	end
+end
+
 -- highlights stuff for new players
 local function setBrightness(condition, icon)
-	if condition then
+	if condition and spectator == false then
 		local brightness = Spring.GetGameFrame() % 60 / 60
 		if brightness < 0.5 then brightness = 0.5 + brightness -- lighter
 		else brightness = 1.5 - brightness end -- dimmer
 		icon.border = {brightness, brightness, 0, 1}
-	else icon.border = {0, 0, 0, 0} end
+	else
+		icon.border = {0, 0, 0, 0}
+	end
 end
 function widget:DrawScreen()
-	if buildPicHelp ~= 1 then return end
+	if buildPicHelp == 1 then
 	
 	--Legend for quick reference
 
@@ -1252,17 +1261,18 @@ function widget:DrawScreen()
 	local metalHighWarning = mc / ms > 0.9
 	
 	local icons = buildmenu.icons
-	for i=1,#icons do
-		local icon = icons[i]
-		if icon.active == nil then
-			if icon.cmdname == "estorage" then
-				setBrightness(supplyWarning, icon)
-			elseif icon.cmdname == "esolar2" or icon.cmdname == "egeothermal" or icon.cmdname == "efusion2" then
-				setBrightness(energyWarning, icon)
-			elseif icon.cmdname == "emetalextractor" then
-				setBrightness(metalLowWarning, icon)
-			elseif icon.cmdname == "eorb" then
-				setBrightness(metalHighWarning, icon)
+		for i=1,#icons do
+			local icon = icons[i]
+			if icon.active == nil then
+				if icon.cmdname == "estorage" then
+					setBrightness(supplyWarning, icon)
+				elseif icon.cmdname == "esolar2" or icon.cmdname == "egeothermal" or icon.cmdname == "efusion2" then
+					setBrightness(energyWarning, icon)
+				elseif icon.cmdname == "emetalextractor" then
+					setBrightness(metalLowWarning, icon)
+				elseif icon.cmdname == "eorb" then
+					setBrightness(metalHighWarning, icon)
+				end
 			end
 		end
 	end
