@@ -10,10 +10,13 @@ local aiDifficulty = Spring.GetModOptions().aidifficulty
 local aiUnits = Spring.GetModOptions().aiunits
 local aiNukes = Spring.GetModOptions().ainukes
 local aiDebug = Spring.GetModOptions().aidebug
-spGetTeamUnitsSorted = Spring.GetTeamUnitsSorted
-spGetUnitDefID = Spring.GetUnitDefID
-spGetTeamResources = Spring.GetTeamResources
-spGetTeamUnitDefCount = Spring.GetTeamUnitDefCount
+local spGetTeamUnitsSorted = Spring.GetTeamUnitsSorted
+local spGetUnitDefID = Spring.GetUnitDefID
+local spGetTeamResources = Spring.GetTeamResources
+local spGetTeamUnitDefCount = Spring.GetTeamUnitDefCount
+local spGetTeamInfo = Spring.GetTeamInfo
+local spGetTeamStartPosition = Spring.GetTeamStartPosition
+local spGetAllyTeamStartBox = Spring.GetAllyTeamStartBox
 --Spring.GetGameSeconds() -- checking gametime
 
 if aiDebug == nil then
@@ -127,7 +130,7 @@ end
 				return "efusion2"
 			else
 				local r = math.random(0,5)
-				local r2 = math.random(0,50)
+				local r2 = math.random(0,30)
 				if r2 ~= 0 then
 					if r == 0 then
 						return "emine"
@@ -152,7 +155,7 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,50)
+				local r2 = math.random(0,15)
 				if r2 ~= 0 then
 					local r = math.random(0,5)
 					if r == 0 then
@@ -185,7 +188,7 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,50)
+				local r2 = math.random(0,5)
 				if r2 ~= 0 then
 					local r = math.random(0,5)
 					if r == 0 then
@@ -321,7 +324,7 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,50)
+				local r2 = math.random(0,40)
 				if r2 ~= 0 then
 					local r = math.random(0,5)
 					if r == 0 then
@@ -353,7 +356,7 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,50)
+				local r2 = math.random(0,30)
 				if r2 ~= 0 then
 					local r = math.random(0,5)
 					if r == 0 then
@@ -603,7 +606,8 @@ local idlelist = {
 	{ action = "wait", frames = 3000},
 }
 
-	local overseerlistfirst = {
+local overseerlistfirst = {
+	"elifterai",
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
@@ -628,9 +632,8 @@ local idlelist = {
 	"emine",
 	"eunitfactoryai",
 	"emine",
-	}
-
-
+}
+	
 local overseerorders = {
 	RandomOverseer,
 	RandomOverseer,
