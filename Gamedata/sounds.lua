@@ -140,6 +140,13 @@ local Sounds = {
 			maxconcurrent = 1,
 		},
 		
+		turret = {
+			--- always play on the front speaker(s)
+			file = "sounds/miscfx/heal.wav",
+			in3d = "true",
+			maxconcurrent = 1,
+		},
+		
 		--ExampleSound = {
 			--- some things you can do with this file
 

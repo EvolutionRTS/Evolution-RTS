@@ -214,11 +214,11 @@ local factionsNanoFx = {
     alpha       = 0.27,
     size        = 6,
     sizeSpread  = 6,
-    sizeGrowth  = 0.65,
+    sizeGrowth  = 0.75,
     rotSpeed    = 0.1,
     rotSpread   = 360,
     texture     = "bitmaps/Other/Poof.png",
-    particles   = 1.2,
+    particles   = 0.5,
   },
   --[[arm = {
     fxtype      = "NanoParticles",

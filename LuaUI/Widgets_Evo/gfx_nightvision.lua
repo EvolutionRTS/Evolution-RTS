@@ -104,9 +104,13 @@ end
 function widget:GameFrame()
 	tablesuncolors = {}
 	tablesuncolors = {gl.GetSun("ambient")}
-	if (tablesuncolors[1] + tablesuncolors[2] + tablesuncolors[3] <= 0.25) and Initialized == false then
+	if (tablesuncolors[1] + tablesuncolors[2] + tablesuncolors[3] <= 0.5) and Initialized == false then
+		Spring.PlaySoundFile("sounds/miscfx/nightvision_activated.wav", 0.5) 
+		Spring.Echo("Nightvision Activated")
 		widget:Initialize()
-	elseif (tablesuncolors[1] + tablesuncolors[2] + tablesuncolors[3] > 0.25) and Initialized == true then
+	elseif (tablesuncolors[1] + tablesuncolors[2] + tablesuncolors[3] > 0.5) and Initialized == true then
+		Spring.PlaySoundFile("sounds/miscfx/nightvision_deactivated.wav", 0.5)
+		Spring.Echo("Nightvision De-Activated")
 		widget:Shutdown()
 		Initialized = false
 	end
