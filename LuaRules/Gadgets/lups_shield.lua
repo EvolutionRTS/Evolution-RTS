@@ -51,6 +51,8 @@ local myAllyTeamID = spGetMyAllyTeamID()
 local shieldUnits = IterableMap.New()
 local startup = true
 
+local stunnedUnits = {}
+
 local function GetVisibleSearch(x, z, search)
 	if not x then
 		return false
@@ -130,9 +132,10 @@ end
 
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 	RemoveUnit(unitID)
+	stunnedUnits[unitID] = nil
 end
 
-function gadget:UnitCreated(unitID, unitDefID, unitTeam)
+function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 	if shieldUnitDefs[unitDefID] then
 		AddUnit(unitID, unitDefID)
 	end
@@ -155,14 +158,27 @@ function gadget:GameFrame(n)
 		for i = 1, #allUnits do
 			local unitID = allUnits[i]
 			local unitDefID = Spring.GetUnitDefID(unitID)
-			gadget:UnitCreated(unitID, unitDefID)
+			gadget:UnitFinished(unitID, unitDefID)
 		end
 		startup = false
 	end
+
 	if n%UPDATE_PERIOD == 0 then
 		local _, fullview = spGetSpectatingState()
 		for unitID, unitData in shieldUnits.Iterator() do
+			if Spring.GetUnitIsStunned(unitID) then
+				RemoveUnit(unitID)
+				stunnedUnits[unitID] = Spring.GetUnitDefID(unitID)
+			end
 			UpdateVisibility(unitID, unitData, fullview)
 		end
+
+		for unitID, unitDefID in pairs(stunnedUnits) do
+			if not Spring.GetUnitIsStunned(unitID) then
+				AddUnit(unitID, unitDefID)
+				stunnedUnits[unitID] = nil
+			end
+		end
 	end
+
 end
