@@ -213,8 +213,8 @@ local myLastCameraState
 --------------------------------------------------------------------------------
 
 local playSounds = true
-local buttonclick = LUAUI_DIRNAME .. 'Sounds/buildbar_waypoint.wav'
-local sliderdrag = LUAUI_DIRNAME .. 'Sounds/buildbar_rem.wav'
+local buttonclick = 'LuaUI/Sounds/buildbar_waypoint.wav'
+local sliderdrag = 'LuaUI/Sounds/buildbar_rem.wav'
 
 local lastActivity = {}
 local lastFpsData = {}
@@ -703,7 +703,7 @@ function SystemEvent(playerID, system)
   local lines, length = 0, 0
   local function helper(line) lines=lines+1; if string.len(line) then length = string.len(line) end return "" end
 	helper((system:gsub("(.-)\r?\n", helper)))
-  if lines <= 7 and length <= 60 then
+  if lines <= 9 and length <= 64 then
   	lastSystemData[playerID] = system
   end
 end
@@ -747,7 +747,7 @@ end]]--
 
 function widget:Initialize()
 	--widgetHandler:RegisterGlobal('getPlayerScores', RecvPlayerScores)
-	widgetHandler:RegisterGlobal('CameraBroadcastEvent', CameraBroadcastEvent)
+  widgetHandler:RegisterGlobal('CameraBroadcastEvent', CameraBroadcastEvent)
   widgetHandler:RegisterGlobal('ActivityEvent', ActivityEvent)
   widgetHandler:RegisterGlobal('FpsEvent', FpsEvent)
   widgetHandler:RegisterGlobal('SystemEvent', SystemEvent)
@@ -797,7 +797,7 @@ function widget:Initialize()
 	end
     WG['advplayerlist_api'].SetLockPlayerID = function(playerID)
         if playerID ~= nil then
-            lockPlayerID = lockPlayerID
+            lockPlayerID = playerID
         else
             lockPlayerID = nil
             if myLastCameraState ~= nil then
