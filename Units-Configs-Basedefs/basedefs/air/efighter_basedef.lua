@@ -119,6 +119,7 @@ weaponDefs                 = {
 		tolerance                = 10000,
 		turret                   = true,
 		weaponVelocity           = 1000,
+		waterweapon				 = true,
 		customparams             = {
 			damagetype		     = "efighter",
 			isupgraded           = isUpgraded,

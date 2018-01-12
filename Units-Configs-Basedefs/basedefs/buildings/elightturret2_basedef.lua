@@ -1,7 +1,7 @@
 unitDef                     = {
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 100,
+	buildCostMetal                = 50,
 	builder                       = false,
 	buildTime                     = 5,
 	buildpic					  = "elightturret2.png",

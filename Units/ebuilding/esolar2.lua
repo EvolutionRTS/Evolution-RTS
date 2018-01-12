@@ -6,9 +6,9 @@ local unitName                    = "esolar2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[10]]
+local energyproduced			 = [[5]]
 
-local buildCostMetal 			  = 100
+local buildCostMetal 			  = 50
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {

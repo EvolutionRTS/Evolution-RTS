@@ -21,9 +21,9 @@ local unitDef                     = {
 	blocking			          = false,
 	buildAngle                    = 1024,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 20,
+	buildCostMetal                = 10,
 	builder                       = false,
-	buildTime                     = 20,
+	buildTime                     = 5,
 	category                      = "BUILDING NOTAIR",
 
 	-- Cloaking
