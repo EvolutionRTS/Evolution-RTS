@@ -112,6 +112,7 @@ Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
 			text = 'Morph to Battle Overseer: Stun ability recharge doubled, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			require = [[tech1]],
 		},
 	},
 	
