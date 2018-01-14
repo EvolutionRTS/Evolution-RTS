@@ -38,6 +38,7 @@ local repairUnits= {
 	[UnitDefNames.eorb_up2.id] = {radius=800,strength=3.0},
 	[UnitDefNames.eorb_up3.id] = {radius=1000,strength=4.0},
 	[UnitDefNames.ehbotengineer_turret.id] = {radius=1000,strength=2.0},
+	[UnitDefNames.ecommander.id] = {radius=300,strength=4.0},
 }
 
 local delayAfterHit=150             --Frames after a hit that no repairs will take place in
@@ -133,7 +134,7 @@ function gadget:GameFrame(f)
 								if x then
 									local h = spGetUnitHeight(t)
 									Spring.SpawnCEG("heal", x, y+h, z)
-									Spring.PlaySoundFile("sounds/miscfx/heal.wav", 0.5, x, y, z) 
+									Spring.PlaySoundFile("sounds/miscfx/heal.wav", 0.2, x, y, z) 
 								--	Spring.AddTeamResource(UnitTeam,"e",-5)
 								end
 							end

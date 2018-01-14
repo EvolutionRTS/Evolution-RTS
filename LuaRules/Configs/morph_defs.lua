@@ -67,7 +67,212 @@ local timeToBuild_eorb = energyCost_eorb * 0.10
 
 
 local morphDefs = {
-	ecommander = 	{
+	ecommander = {
+		{
+		into = 'ecommandercloak',
+		time = timeToBuild_ecommandercloak,
+		cmdname = [[Cloaking 
+Overseer]],
+			energy = energyCost_ecommandercloak,
+			metal = 0,
+			text = 'Morph to Cloaking Overseer: Gains a large cloaking field which also cloaks the Overseer.',
+		},
+		{
+			into = 'ecommandershield',
+			time = timeToBuild_ecommandershield,
+			cmdname = [[Shield
+Overseer]],
+			energy = energyCost_ecommandershield,
+			metal = 0,
+			text = 'Morph to Shielded Overseer: Gains a large shield which does not cost energy to maintain.',
+		},
+		{
+			into = 'ecommanderbuild',
+			time = timeToBuild_ecommanderbuild,
+			cmdname = [[Builder
+Overseer]],
+			energy = energyCost_ecommanderbuild,
+			metal = 0,
+			text = 'Morph to Builder Overseer: Stun ability AOE halved, Stun recharge halved, gains x3 buildpower.',
+		},
+		{
+			into = 'ecommanderfactory',
+			time = timeToBuild_ecommanderfactory,
+			cmdname = [[Factory
+Overseer]],
+			energy = energyCost_ecommanderfactory,
+			metal = 0,
+			text = 'Morph to Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 3x buildpower.',
+		},
+		{
+			into = 'ecommanderbattle',
+			time = timeToBuild_ecommanderbattle,
+			cmdname = [[Battle
+Overseer]],
+			energy = energyCost_ecommanderbattle,
+			metal = 0,
+			text = 'Morph to Battle Overseer: Loses EMP ability, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			require = [[tech1]],
+		},
+	},
+	
+	ecommandercloak = {
+	    {
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Healer 
+Overseer]],
+			energy = energyCost_ecommander,
+			metal = 0,
+			text = 'Morph to Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+		},
+		{
+			into = 'ecommandershield',
+			time = timeToBuild_ecommandershield,
+			cmdname = [[Shield
+Overseer]],
+			energy = energyCost_ecommandershield,
+			metal = 0,
+			text = 'Morph to Shielded Overseer: Gains a large shield which does not cost energy to maintain.',
+		},
+		{
+			into = 'ecommanderbuild',
+			time = timeToBuild_ecommanderbuild,
+			cmdname = [[Builder
+Overseer]],
+			energy = energyCost_ecommanderbuild,
+			metal = 0,
+			text = 'Morph to Builder Overseer: Stun ability AOE halved, Stun recharge halved, gains x3 buildpower.',
+		},
+		{
+			into = 'ecommanderfactory',
+			time = timeToBuild_ecommanderfactory,
+			cmdname = [[Factory
+Overseer]],
+			energy = energyCost_ecommanderfactory,
+			metal = 0,
+			text = 'Morph to Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 3x buildpower.',
+		},
+		{
+			into = 'ecommanderbattle',
+			time = timeToBuild_ecommanderbattle,
+			cmdname = [[Battle
+Overseer]],
+			energy = energyCost_ecommanderbattle,
+			metal = 0,
+			text = 'Morph to Battle Overseer: Loses EMP ability, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			require = [[tech1]],
+		},
+	},
+	
+	ecommandershield = {
+	    {
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Healer 
+Overseer]],
+			energy = energyCost_ecommander,
+			metal = 0,
+			text = 'Morph to Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+		},
+		{
+			into = 'ecommandercloak',
+			time = timeToBuild_ecommandercloak,
+			cmdname = [[Cloaking 
+Overseer]],
+			energy = energyCost_ecommandercloak,
+			metal = 0,
+			text = 'Morph to Cloaking Overseer: Gains a large cloaking field which also cloaks the Overseer.',
+		},
+		{
+			into = 'ecommanderbuild',
+			time = timeToBuild_ecommanderbuild,
+			cmdname = [[Builder
+Overseer]],
+			energy = energyCost_ecommanderbuild,
+			metal = 0,
+			text = 'Morph to Builder Overseer: Stun ability AOE halved, Stun recharge halved, gains x3 buildpower.',
+		},
+		{
+			into = 'ecommanderfactory',
+			time = timeToBuild_ecommanderfactory,
+			cmdname = [[Factory
+Overseer]],
+			energy = energyCost_ecommanderfactory,
+			metal = 0,
+			text = 'Morph to Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 3x buildpower.',
+		},
+		{
+			into = 'ecommanderbattle',
+			time = timeToBuild_ecommanderbattle,
+			cmdname = [[Battle
+Overseer]],
+			energy = energyCost_ecommanderbattle,
+			metal = 0,
+			text = 'Morph to Battle Overseer: Loses EMP ability, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			require = [[tech1]],
+		},
+	},
+	
+	ecommanderbuild = {
+	    {
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Healer 
+Overseer]],
+			energy = energyCost_ecommander,
+			metal = 0,
+			text = 'Morph to Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+		},
+		{
+			into = 'ecommandercloak',
+			time = timeToBuild_ecommandercloak,
+			cmdname = [[Cloaking 
+Overseer]],
+			energy = energyCost_ecommandercloak,
+			metal = 0,
+			text = 'Morph to Cloaking Overseer: Gains a large cloaking field which also cloaks the Overseer.',
+		},
+		{
+			into = 'ecommandershield',
+			time = timeToBuild_ecommandershield,
+			cmdname = [[Shield
+Overseer]],
+			energy = energyCost_ecommandershield,
+			metal = 0,
+			text = 'Morph to Shielded Overseer: Gains a large shield which does not cost energy to maintain.',
+		},
+		{
+			into = 'ecommanderfactory',
+			time = timeToBuild_ecommanderfactory,
+			cmdname = [[Factory
+Overseer]],
+			energy = energyCost_ecommanderfactory,
+			metal = 0,
+			text = 'Morph to Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 3x buildpower.',
+		},
+		{
+			into = 'ecommanderbattle',
+			time = timeToBuild_ecommanderbattle,
+			cmdname = [[Battle
+Overseer]],
+			energy = energyCost_ecommanderbattle,
+			metal = 0,
+			text = 'Morph to Battle Overseer: Loses EMP ability, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			require = [[tech1]],
+		},
+	},
+	
+	ecommanderfactory = {
+	    {
+			into = 'ecommander',
+			time = timeToBuild_ecommander,
+			cmdname = [[Healer 
+Overseer]],
+			energy = energyCost_ecommander,
+			metal = 0,
+			text = 'Morph to Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+		},
 		{
 			into = 'ecommandercloak',
 			time = timeToBuild_ecommandercloak,
@@ -93,16 +298,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbuild,
 			metal = 0,
-			text = 'Morph to Builder Overseer: Stun ability AOE halved, Stun recharge halved, gains x2 buildpower.',
-		},
-		{
-			into = 'ecommanderfactory',
-			time = timeToBuild_ecommanderfactory,
-			cmdname = [[Factory
-Overseer]],
-			energy = energyCost_ecommanderfactory,
-			metal = 0,
-			text = 'Morph to Factory Overseer: Gains the ability to build all raider and riot tanks anywhere.',
+			text = 'Morph to Builder Overseer: Stun ability AOE halved, Stun recharge halved, gains x3 buildpower.',
 		},
 		{
 			into = 'ecommanderbattle',
@@ -111,67 +307,55 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
-			text = 'Morph to Battle Overseer: Stun ability recharge doubled, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Morph to Battle Overseer: Loses EMP ability, gains a machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
 			require = [[tech1]],
 		},
 	},
-	
-	ecommandercloak = 	{
-		{
+	ecommanderbattle = {
+	    {
 			into = 'ecommander',
 			time = timeToBuild_ecommander,
-			cmdname = [[Basic 
+			cmdname = [[Healer 
 Overseer]],
 			energy = energyCost_ecommander,
 			metal = 0,
-			text = 'Morph back to the original Overseer.',
+			text = 'Morph to Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
 		},
-	},
-	
-	ecommandershield = 	{
 		{
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Basic 
+			into = 'ecommandercloak',
+			time = timeToBuild_ecommandercloak,
+			cmdname = [[Cloaking 
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommandercloak,
 			metal = 0,
-			text = 'Morph back to the original Overseer.',
+			text = 'Morph to Cloaking Overseer: Gains a large cloaking field which also cloaks the Overseer.',
 		},
-	},
-	
-	ecommanderbuild = 	{
 		{
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Basic 
+			into = 'ecommandershield',
+			time = timeToBuild_ecommandershield,
+			cmdname = [[Shield
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommandershield,
 			metal = 0,
-			text = 'Morph back to the original Overseer.',
+			text = 'Morph to Shielded Overseer: Gains a large shield which does not cost energy to maintain.',
 		},
-	},
-	
-	ecommanderfactory = 	{
 		{
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Basic 
+			into = 'ecommanderbuild',
+			time = timeToBuild_ecommanderbuild,
+			cmdname = [[Builder
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommanderbuild,
 			metal = 0,
-			text = 'Morph back to the original Overseer.',
+			text = 'Morph to Builder Overseer: Stun ability AOE halved, Stun recharge halved, gains x3 buildpower.',
 		},
-	},
-	ecommanderbattle = 	{
 		{
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Basic 
+			into = 'ecommanderfactory',
+			time = timeToBuild_ecommanderfactory,
+			cmdname = [[Factory
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommanderfactory,
 			metal = 0,
-			text = 'Morph back to the original Overseer.',
+			text = 'Morph to Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 3x buildpower.',
 		},
 	},
 	

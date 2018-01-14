@@ -5,7 +5,7 @@ local unitName                   = "ecommandercloak"
 
 --------------------------------------------------------------------------------
 
-local armortype					 = [[light]]
+local armortype				 = [[light]]
 local supplyGiven				 = [[10]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
@@ -140,7 +140,7 @@ Reclaims any energy cores within it's proximity.]],
 
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 0, -- How much energy does it cost to maintain the cloaking field?
-		area_cloak_radius = 800, -- How large is the cloaking field?
+		area_cloak_radius = 1000, -- How large is the cloaking field?
 		--area_cloak_grow_rate = 200, -- When the cloaking field is turned on, how fast does the field expand to it's full size?
 		--area_cloak_shrink_rate = 200, -- When the cloaking field is turned off, how fast does the field shrink to nothingness?
 		area_cloak_decloak_distance = 150, -- How close does something have to be in order to decloak a unit within a cloaking shield?

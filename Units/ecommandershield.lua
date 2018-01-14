@@ -1,17 +1,17 @@
--- UNITDEF -- ECOMMANDERCLOAK --
+-- UNITDEF -- ECOMMANDERSHIELD --
 --------------------------------------------------------------------------------
 
 local unitName                   = "ecommandershield"
 
 --------------------------------------------------------------------------------
 
-local armortype					 = [[light]]
+local armortype				 = [[armored]]
 local supplyGiven				 = [[10]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
 local shield1Power               = 5000
-local shield1PowerRegen          = 25
+local shield1PowerRegen          = 40
 local shield1PowerRegenEnergy    = 0
 
 local weapon1Damage              = 200
@@ -242,7 +242,7 @@ local weaponDefs                 = {
 		Visibleshieldrepulse     = false,
 		ShieldStartingPower      = 0,
 		Shieldenergyuse          = 0,
-		Shieldradius             = 400,
+		Shieldradius             = 500,
 		Shieldpower              = shield1Power,
 		Shieldpowerregen         = shield1PowerRegen,
 		Shieldpowerregenenergy   = shield1PowerRegenEnergy,

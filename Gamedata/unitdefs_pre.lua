@@ -59,6 +59,9 @@ local factory = {
 	[[eamphibbuggy]],
 	[[eamphibriot]],
 	[[eamphibmedtank]],
+	[[escout]],
+	[[efighter]],
+	[[egunship2]],
 }
 
 Shared.buildListFactory = {}

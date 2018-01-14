@@ -5,7 +5,7 @@ local unitName                   = "ecommanderbattle"
 
 --------------------------------------------------------------------------------
 
-local armortype					 = [[armored]]
+local armortype				 = [[armored]]
 --local supplyGiven				 = [[10]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
@@ -139,11 +139,6 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-
-Has stun ability and a machinegun that does heavy damage to Light units.
-
-Reclaims any energy cores within it's proximity.]],
 	},
 }
 
@@ -322,10 +317,9 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
-			damagetype		     = "ecommanderbattle", 
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
+			damagetype		      = "ecommanderbattle", 
+
+			nocosttofire		    = true,
 		}, 
 		damage                   = {
 			default              = weapon2Damage,
