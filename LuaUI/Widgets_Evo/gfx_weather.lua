@@ -167,8 +167,11 @@ function widget:Update(dt)
     -- Spring.Echo((1-p)*shadowDensity)
     newshadowDensity = (1-p)*shadowDensity
     newdiffuse.r, newdiffuse.g, newdiffuse.b = diffuse.r*(1-p)*(1-w)*(1-rain) + 0.035*1*p*(1-w)*(1-rain) + 0.23*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), diffuse.g*(1-p)*(1-w)*(1-rain)+0.035*1*p*(1-w)*(1-rain)+ 0.07*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), diffuse.b*(1-p)*(1-w)*(1-rain)+0.07*1*p*(1-w)*(1-rain)+ 0.035*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w)
-    --newambient.r, newambient.g, newambient.b = ambient.r, ambient.g, ambient.b -- Use this if it gets too dark
-    newambient.r, newambient.g, newambient.b = ambient.r*(1-p)*(1-w)*(1-rain)+ 0.15*1*p*(1-w)*(1-rain)+ 0.69*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), ambient.g*(1-p)*(1-rain)*(1-w)+0.30*1*p*(1-rain)*(1-w)+ 0.30*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), ambient.b*(1-p)*(1-w)*(1-rain)+0.65*1*p*(1-w)*(1-rain)+ 0.15*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w)
+    
+	newambient.r, newambient.g, newambient.b = ambient.r, ambient.g, ambient.b -- Use this if it gets too dark
+    
+	--newambient.r, newambient.g, newambient.b = ambient.r*(1-p)*(1-w)*(1-rain)+ 0.15*1*p*(1-w)*(1-rain)+ 0.69*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), ambient.g*(1-p)*(1-rain)*(1-w)+0.30*1*p*(1-rain)*(1-w)+ 0.30*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w), ambient.b*(1-p)*(1-w)*(1-rain)+0.65*1*p*(1-w)*(1-rain)+ 0.15*w*(1-p)*(1-rain) + 0.5*rain*(1-p)*(1-w)  -- This is better, but sometimes it gets pitch black
+	
     newspecular.r, newspecular.g, newspecular.b = specular.r*(1-p)*(1-w)+0.2*0.60*1*p*(1-w)*(1-rain) + 0.5*rain*(1-p)*(1-w), specular.g*(1-p)*(1-w)+0.2*0.60*1*p*(1-w)*(1-rain) + 0.5*rain*(1-p)*(1-w), specular.b*(1-p)*(1-w)+0.2*1*1*p*(1-w)*(1-rain) + 0.5*rain*(1-p)*(1-w)
 
     newfogStart = 1-(math.max(rain, w))
