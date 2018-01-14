@@ -23,6 +23,7 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local barScale                  = 1
 local barHeightOffset           = 34		 -- set value that healthbars for units that can unfold and become larger than its unitdef.height are still visible
 
 local barHeight                 = 5
@@ -45,6 +46,7 @@ local drawFeatureBarPercentage  = 0	            -- true:  commanders always will
 local choppedCornerSize         = 0.45
 local outlineSize               = 0.75
 local drawFullHealthBars        = false
+local unitHpThreshold           = 0.99
 
 local drawFeatureHealth         = true
 local featureTitlesAlpha        = featureBarAlpha * titlesAlpha/barAlpha
@@ -193,8 +195,9 @@ function drawBarGl()
     heightAddition = outlineSize
   end
   -- add glow
+  gl.PushMatrix()
+  gl.Scale(barScale,barScale,barScale)
   if addGlow then
-	
     gl.BeginEnd(GL.QUADS,function()
       -- bottom mid piece
       gl.Vertex(-barWidth,       (barHeight/2),  0,                   -2);
@@ -433,6 +436,7 @@ function drawBarGl()
       gl.Vertex(barWidth,barHeight,0,         1);
     end)
   end
+  gl.PopMatrix()
   
 end
 
@@ -667,7 +671,10 @@ function init()
 
   --// create bar shader
   if (gl.CreateShader) then
-  
+
+    if (barShader) then
+      gl.DeleteShader(barShader)
+    end
     barShader = gl.CreateShader({
     
       vertex = [[
@@ -687,7 +694,6 @@ function init()
              gl_Position   = ftransform();
              //return;			-- commenting out this line fixes glitchy healthbars on intel gfx
            }
-
            vec4 vertex = gl_Vertex;
            if (vertex.w==1) {
              gl_FrontColor = gl_Color;
@@ -756,9 +762,13 @@ function init()
 			glowAlpha = glowAlpha,
 		},
     });
-	
-	
+
+
     if (barShader) then
+      if (barDList) then
+        gl.DeleteList(barDList)
+        gl.DeleteList(barFeatureDList)
+      end
       barDList         = gl.CreateList(drawBarGl)
       barFeatureDList  = gl.CreateList(drawFeatureBarGl)
     end
@@ -792,6 +802,16 @@ function widget:Initialize()
   --// deactivate cheesy progress text
   widgetHandler:RegisterGlobal('MorphDrawProgress', function() return true end)
   
+
+  WG['healthbars'] = {}
+  WG['healthbars'].getScale = function()
+    return barScale
+  end
+  WG['healthbars'].setScale = function(value)
+    barScale = value
+    init()
+  end
+
   init()
 end
 
@@ -953,6 +973,9 @@ do
       local barInfo = bars[i]
       DrawUnitBar(yoffset,barInfo.progress,barInfo.color)
       if (fullText) then
+
+        gl.PushMatrix()
+        gl.Scale(barScale,barScale,barScale)
         if (barShader) then 
           glMyText(1)
         end
@@ -963,6 +986,7 @@ do
           glText(barInfo.title,0,yoffset-outlineSize,4.70,"cdo")
         end
         if (barShader) then glMyText(0) end
+        gl.PopMatrix()
       end
       yoffset = yoffset - barHeightL
     end
@@ -1028,6 +1052,7 @@ do
 
   function DrawUnitInfos(unitID,unitDefID, ud)
     if ignoreUnits[unitDefID] ~= nil then return end
+
     if (not customInfo[unitDefID]) then
       customInfo[unitDefID] = {
         height        = ud.height+barHeightOffset,
@@ -1073,7 +1098,7 @@ do
       end
 
       --// HEALTH
-      if (health) and ((drawFullHealthBars)or(hp<1)) and ((build==1)or(build-hp>=0.01)) then
+      if (health) and ((drawFullHealthBars)or(hp<unitHpThreshold)) and ((build==1)or(build-hp>=0.01)) then
         hp100 = hp*100; hp100 = hp100 - hp100%1; --//same as floor(hp*100), but 10% faster
         if (hp100<0) then hp100=0 elseif (hp100>100) then hp100=100 end
         if (drawFullHealthBars)or(hp100<100) and not (hp<0) then
@@ -1359,19 +1384,16 @@ do
       return
     end
     
-    --gl.Fog(false)
-    glDepthTest(false)
-    --glDepthMask(true)
-
     cx, cy, cz = GetCameraPosition()
 	
-    
     --if the camera is too far up, higher than maxDistance on smoothmesh, dont even call any visibility checks or nothing 
     local smoothheight=GetSmoothMeshHeight(cx,cz) --clamps x and z
     if ((cy-smoothheight)^2 < maxUnitDistance) then 
-            
-      --gl.Fog(false)
-      --glDepthTest(true)
+    
+      if not addGlow then 
+		glDepthTest(true)	-- enabling this will make healthbars opague to other healthbars or mapmarks and lups?, will remain transparant to world. will be serious issue if glow is enabled
+      end
+      
       glDepthMask(true)
       
       if (barShader) then gl.UseShader(barShader); glMyText(0); end
@@ -1382,7 +1404,7 @@ do
         unitID    = visibleUnits[i]
         unitDefID = GetUnitDefID(unitID)
 	    unitDef   = UnitDefs[unitDefID or -1]
-        if (unitDef) then
+        if unitDef then
           DrawUnitInfos(unitID, unitDefID, unitDef)
         end
       end
@@ -1393,7 +1415,7 @@ do
         drawFeatureInfo = true
       end
       local wx, wy, wz, dx, dy, dz, dist, featureInfo, resurrect, reclaimLeft
-      
+
       if drawFeatureInfo or (featureResurrectVisibility or featureReclaimVisibility) then
         for i=1,#visibleFeatures do
           featureInfo = visibleFeatures[i]
@@ -1491,6 +1513,7 @@ end --//end do
 
 function widget:GetConfigData(data)
     savedTable = {}
+    savedTable.barScale				            = barScale
     savedTable.drawBarPercentage				= drawBarPercentage
     savedTable.alwaysDrawBarPercentageForComs	= alwaysDrawBarPercentageForComs
     savedTable.addGlow							= addGlow
@@ -1499,10 +1522,11 @@ function widget:GetConfigData(data)
 end
 
 function widget:SetConfigData(data)
-    if data.drawBarPercentage ~= nil    									then  drawBarPercentage	= data.drawBarPercentage end
-    if data.alwaysDrawBarPercentageForComs ~= nil  							then  alwaysDrawBarPercentageForComs = data.alwaysDrawBarPercentageForComs end
-    if data.addGlow ~= nil													then  addGlow = data.addGlow end
-    if data.currentOption ~= nil  and  OPTIONS[data.currentOption] ~= nil	then  currentOption = data.currentOption end
+  barScale = data.barScale or barScale
+  drawBarPercentage = data.drawBarPercentage or drawBarPercentage
+  alwaysDrawBarPercentageForComs = data.alwaysDrawBarPercentageForComs or alwaysDrawBarPercentageForComs
+  addGlow = data.addGlow or addGlow
+  currentOption = data.currentOption or currentOption
 end
 
 function widget:TextCommand(command)

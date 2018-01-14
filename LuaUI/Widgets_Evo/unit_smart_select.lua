@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 --
 --  file:    unit_smart_select.lua
---  version: 1.3
+--  version: 1.36
 --  brief:   Selects units as you drag over them and provides selection modifier hotkeys
 --  original author: Ryan Hileman (aegis)
 --
@@ -15,7 +15,7 @@
 function widget:GetInfo()
 	return {
 		name      = "SmartSelect",
-		desc      = "Selects units as you drag over them and provides selection modifier hotkeys",
+		desc      = "Selects units as you drag over them. (SHIFT: select all, Z: same type, SPACE: new idle units, CTRL: invert selection) /selectionmode toggles filtering buildings in selection",
 		author    = "aegis",
 		date      = "Jan 2, 2011",
 		license   = "Public Domain",
@@ -30,15 +30,18 @@ end
 
 -- whether to select buildings when mobile units are inside selection rectangle
 local selectBuildingsWithMobile = false
+local includeNanosAsMobile = true
 
 -- only select new units identical to those already selected
 local sameSelectKey = 'z'
+
+-- only select new idle units
+local idleSelectKey = 'space'
 
 -----------------------------------------------------------------
 -- manually generated locals because I don't have trepan's script
 -----------------------------------------------------------------
 local GetTimer = Spring.GetTimer
-local DiffTimers = Spring.DiffTimers
 local GetMouseState = Spring.GetMouseState
 local GetModKeyState = Spring.GetModKeyState
 local GetKeyState = Spring.GetKeyState
@@ -55,14 +58,15 @@ local GetSelectedUnits = Spring.GetSelectedUnits
 local GetUnitsInRectangle = Spring.GetUnitsInRectangle
 local SelectUnitArray = Spring.SelectUnitArray
 local GetActiveCommand = Spring.GetActiveCommand
+local GetUnitTeam = Spring.GetUnitTeam
 
 local GetGroundHeight = Spring.GetGroundHeight
 local GetMiniMapGeometry = Spring.GetMiniMapGeometry
-local GetMiniMapDualScreen = Spring.GetMiniMapDualScreen
 local IsAboveMiniMap = Spring.IsAboveMiniMap
 
 local GetUnitDefID = Spring.GetUnitDefID
 local GetUnitPosition = Spring.GetUnitPosition
+local GetUnitCommands = Spring.GetUnitCommands
 
 local UnitDefs = UnitDefs
 local min = math.min
@@ -74,11 +78,15 @@ local glLineWidth = gl.LineWidth
 local glDepthTest = gl.DepthTest
 local glBeginEnd = gl.BeginEnd
 local GL_LINE_STRIP = GL.LINE_STRIP
+
+local GaiaTeamID  = Spring.GetGaiaTeamID()
+
 -----------------------------------------------------------------
 -- end function locals ------------------------------------------
 -----------------------------------------------------------------
 
 sameSelectKey = Spring.GetKeyCode(sameSelectKey)
+idleSelectKey = Spring.GetKeyCode(idleSelectKey)
 local minimapOnLeft = (Spring.GetMiniMapDualScreen() == "left")
 
 local combatFilter, builderFilter, buildingFilter, mobileFilter
@@ -92,9 +100,8 @@ local minimapRect
 
 local lastCoords
 local lastMeta
+local filtered
 
-local lastUpdate = GetTimer()
-local spectating = false
 local myPlayerID
 
 local function sort(v1, v2)
@@ -103,14 +110,6 @@ local function sort(v1, v2)
 	else
 		return v1, v2
 	end
-end
-
-local function GetUnitsInArbitraryRectangle(x1, z1, x2, z2, team)
-	x1, x2 = sort(x1, x2)
-	z1, z2 = sort(z1, z2)
-
-	local units = GetUnitsInRectangle(x1, z1, x2, z2, team)
-	return units
 end
 
 
@@ -172,6 +171,7 @@ function widget:MousePress(x, y, button)
 		referenceScreenCoords = {x, y}
 		lastMeta = nil
 		lastSelection = nil
+		filtered = false
 
 		if (IsAboveMiniMap(x, y)) then
 			referenceCoords = {0, 0, 0}
@@ -184,6 +184,39 @@ function widget:MousePress(x, y, button)
 		end
 	end
 end
+
+function widget:TextCommand(command)
+    if (string.find(command, "selectionmode") == 1  and  string.len(command) == 13) then 
+		selectBuildingsWithMobile = not selectBuildingsWithMobile
+		if selectBuildingsWithMobile then
+			Spring.Echo("SmartSelect: Selects whatever comes under selection rectangle.")
+		else
+			Spring.Echo("SmartSelect: Ignores buildings if it can select mobile units.")
+		end
+	end
+    if (string.find(command, "selectionnanos") == 1  and  string.len(command) == 14) then 
+		includeNanosAsMobile = not includeNanosAsMobile
+		init()
+		if includeNanosAsMobile then
+			Spring.Echo("SmartSelect: Treats nanos like mobile units and wont exclude them")
+		else
+			Spring.Echo("SmartSelect: Stops treating nanos as if they are mobile units")
+		end
+	end
+end
+
+function widget:GetConfigData(data)
+    savedTable = {}
+    savedTable.selectBuildingsWithMobile = selectBuildingsWithMobile
+    savedTable.includeNanosAsMobile = includeNanosAsMobile
+    return savedTable
+end
+
+function widget:SetConfigData(data)
+    if data.selectBuildingsWithMobile ~= nil 	then  selectBuildingsWithMobile	= data.selectBuildingsWithMobile end
+    if data.includeNanosAsMobile ~= nil 	then  includeNanosAsMobile	= data.includeNanosAsMobile end
+end
+
 
 function widget:Update()
 	--[[
@@ -206,6 +239,7 @@ function widget:Update()
 			end
 
 			local sameSelect = GetKeyState(sameSelectKey)
+			local idleSelect = GetKeyState(idleSelectKey)
 			
 			local sameLast = (referenceScreenCoords ~= nil) and (x == referenceScreenCoords[1] and y == referenceScreenCoords[2])
 			if (sameLast and lastCoords == referenceCoords) then
@@ -225,15 +259,39 @@ function widget:Update()
 			local team = (playing and GetMyTeamID())
 			if (r ~= nil and IsAboveMiniMap(r[1], r[2])) then
 				local mx, my = max(px, min(px+sx, x)), max(py, min(py+sy, y))
-				mouseSelection = GetUnitsInMinimapRectangle(r[1], r[2], x, y, team)
+				mouseSelection = GetUnitsInMinimapRectangle(r[1], r[2], x, y, nil)
 			else
 				local d = referenceCoords
 				local x1, y1 = WorldToScreenCoords(d[1], d[2], d[3])
-				mouseSelection = GetUnitsInScreenRectangle(x, y, x1, y1, team)
+				mouseSelection = GetUnitsInScreenRectangle(x, y, x1, y1, nil)
 			end
+			originalMouseSelection = mouseSelection
+
+			
+			-- filter gaia units
+			local filteredselection = {}
+			for i=1, #mouseSelection do
+				if GetUnitTeam(mouseSelection[i]) ~= GaiaTeamID then
+					table.insert(filteredselection, mouseSelection[i])
+				end
+			end
+			mouseSelection = filteredselection
+			filteredselection = nil
 			
 			local newSelection = {}
 			local uid, udid, udef, tmp
+
+			if (idleSelect) then
+				tmp = {}
+				for i=1, #mouseSelection do
+					uid = mouseSelection[i]
+					udid = GetUnitDefID(uid)
+					if (mobileFilter[udid] or builderFilter[udid]) and (#GetUnitCommands(uid, 1) == 0) then
+						tmp[#tmp+1] = uid
+					end
+				end
+				mouseSelection = tmp
+			end
 
 			if (sameSelect) and (#referenceSelection > 0) then
 				-- only select new units identical to those already selected
@@ -247,6 +305,7 @@ function widget:Update()
 				end
 				mouseSelection = tmp
 			end
+
 
 			if (alt) then
 				-- only select mobile combat units
@@ -301,6 +360,7 @@ function widget:Update()
 				newSelection = referenceSelection
 			end
 
+
 			if (ctrl) then
 				-- deselect units inside the selection rectangle, if we already had units selected
 				local negative = {}
@@ -320,20 +380,20 @@ function widget:Update()
 				newSelection = tmp
 				SelectUnitArray(newSelection)
 			elseif (shift) then
-				--Spring.Echo('shift')
 				-- append units inside selection rectangle to current selection
 				SelectUnitArray(newSelection)
 				SelectUnitArray(mouseSelection, true)
 			elseif (#mouseSelection > 0) then
 				-- select units inside selection rectangle
 				SelectUnitArray(mouseSelection)
-			elseif (alt == false) then
+			elseif (#originalMouseSelection > 0) and (#mouseSelection == 0) then
+				SelectUnitArray({})
+			else
 				-- keep current selection while dragging until more things are selected
 				SelectUnitArray(referenceSelection)
 				lastSelection = nil
 				return
 			end
-
 			lastSelection = GetSelectedUnits()
 		elseif (lastSelection ~= nil) then
 			SelectUnitArray(lastSelection)
@@ -351,27 +411,43 @@ function widget:Update()
 	end
 end
 
-function widget:Initialize()
+function init()
 	myPlayerID = GetMyPlayerID()
 	combatFilter = {}
 	builderFilter = {}
 	buildingFilter = {}
 	mobileFilter = {}
-
+	
 	for udid, udef in pairs(UnitDefs) do
-		local mobile = (udef.canMove and udef.speed > 0.000001)
+		local mobile = (udef.canMove and udef.speed > 0.000001) or (includeNanosAsMobile and (UnitDefs[udid].name == "armnanotc" or UnitDefs[udid].name == "cornanotc" or UnitDefs[udid].name == "armnanotcplat" or UnitDefs[udid].name == "cornanotcplat"))
 		local builder = (udef.canReclaim and udef.reclaimSpeed > 0) or
-						(udef.isBuilder and udef.buildSpeed > 0) or
+						--(udef.builder and udef.buildSpeed > 0) or					-- udef.builder = deprecated it seems
 						(udef.canResurrect and udef.resurrectSpeed > 0) or
 						(udef.canRepair and udef.repairSpeed > 0)
 		local building = (mobile == false)
 		local combat = (builder == false) and (mobile == true) and (#udef.weapons > 0)
-
+		
 		combatFilter[udid] = combat
 		builderFilter[udid] = builder
 		buildingFilter[udid] = building
 		mobileFilter[udid] = mobile
 	end
+end
+
+function widget:Shutdown()
+	WG['smartselect'] = nil
+end
+
+function widget:Initialize()
+
+  WG['smartselect'] = {}
+  WG['smartselect'].getIncludeBuildings = function()
+  	return selectBuildingsWithMobile
+  end
+  WG['smartselect'].setIncludeBuildings = function(value)
+  	selectBuildingsWithMobile = value
+  end
+	init()
 end
 
 local function DrawRectangle(r)
@@ -388,7 +464,6 @@ function widget:DrawWorld()
 		glColor(1, 1, 1, 1)
 		glLineWidth(1.0)
 		glDepthTest(false)
-
 		glBeginEnd(GL_LINE_STRIP, DrawRectangle, minimapRect)
 	end
 end
