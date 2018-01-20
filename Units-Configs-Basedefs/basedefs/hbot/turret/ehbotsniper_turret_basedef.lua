@@ -26,7 +26,7 @@ unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 1200,
+	maxDamage                    = 600,
 	maxSlope                     = 26,
 	maxVelocity                  = 0.001,
 	maxReverseVelocity           = 0.001,
@@ -84,8 +84,8 @@ unitDef                    = {
 			def                  = "sniper",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
-			onlyTargetCategory    = "LIGHT ARMORED BIO",
-			badTargetCategory    = "LIGHT",
+			onlyTargetCategory    = "LIGHT ARMORED BIO BUILDING",
+			badTargetCategory    = "LIGHT BUILDING",
 		},
 	},
 	customParams                 = {

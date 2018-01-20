@@ -74,21 +74,22 @@ local unitDef                     = {
 	weapons                       = {
 		[1]                       = {
 			def                   = "artyweapon",
-			badtargetcategory    = "LIGHT ARMORED VTOL",
+			badtargetcategory     = "LIGHT ARMORED VTOL",
+            onlyTargetCategory    = "BUILDING",
 		},
 	},
 	customParams                  = {
-		RequireTech				 = techrequired,
-		unittype				  = "turret",
+		RequireTech				  = techrequired,
+		unittype				  = "turret",%
 		--supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",
 		armortype                 = armortype,
-		nofriendlyfire	          = "1",
-		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
+		nofriendlyfire	           = "1",
+		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",
-		corpse                   = "energycore",
+		corpse                    = "energycore",
 		helptext                  = [[Armortype: ]] ..armortype.. [[ 
 
 Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
@@ -112,10 +113,8 @@ local weaponDefs                  = {
 		collideFriendly          = false,
 		collideFeature           = false,
 		
-		commandFire				 = true,
-		
 		cegTag                   = "artyshot2",
-		avoidNeutral	         = false,
+		avoidNeutral	            = false,
 		explosionGenerator       = "custom:NUKEDATBEWMSMALL",
 		energypershot            = energycosttofire,
 		edgeEffectiveness        = 1,

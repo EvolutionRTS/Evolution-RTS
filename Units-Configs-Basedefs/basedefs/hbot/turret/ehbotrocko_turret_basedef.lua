@@ -26,7 +26,7 @@ unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 1400,
+	maxDamage                    = 700,
 	maxSlope                     = 26,
 	maxVelocity                  = 0.001,
 	maxReverseVelocity           = 0.001,
@@ -84,7 +84,8 @@ unitDef                    = {
 			def                  = "rockets",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
-			onlyTargetCategory    = "LIGHT ARMORED BIO",
+			onlyTargetCategory    = "LIGHT ARMORED BIO BUILDING",
+			badTargetCategory    = "BUILDING",
 		},
 	},
 	customParams                 = {
