@@ -50,7 +50,7 @@ local unitDef                     = {
 	seismicDistance               = 2500,
 	unitname                      = "eradar2",
 	workerTime                    = 0,
-	yardMap                       = "oooooo oooooo oooooo oooooo",
+	yardMap                       = "oooooo oooooo oooooo oooooo oooooo oooooo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {

@@ -65,7 +65,7 @@ local unitDef                     = {
 	unitlimit                     = "2",
 	unitname                      = "esilo",
 	workerTime                    = 0,
-	yardMap                       = "oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo",
+	yardMap                       = "oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo oooooooooooooooo",
 
 	sfxtypes                      = { 
 		pieceExplosionGenerators  = { 
