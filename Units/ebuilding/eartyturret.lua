@@ -80,7 +80,7 @@ local unitDef                     = {
 	},
 	customParams                  = {
 		RequireTech				  = techrequired,
-		unittype				  = "turret",%
+		unittype				  = "turret",
 		--supply_cost               = supply,
 		needed_cover              = 1,
 		death_sounds              = "generic",
