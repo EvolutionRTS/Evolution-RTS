@@ -39,6 +39,7 @@ local repairUnits= {
 	[UnitDefNames.eorb_up3.id] = {radius=1000,strength=4.0},
 	[UnitDefNames.ehbotengineer_turret.id] = {radius=1000,strength=2.0},
 	[UnitDefNames.ecommander.id] = {radius=300,strength=4.0},
+	[UnitDefNames.ecommanderbattleai.id] = {radius=1000,strength=10.0},
 }
 
 local delayAfterHit=150             --Frames after a hit that no repairs will take place in
