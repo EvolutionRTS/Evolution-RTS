@@ -550,7 +550,7 @@ function PlayNewTrack()
 	curTrack = newTrack
 	local musicVolScaled = music_volume * 0.01	
 	Spring.PlaySoundStream(newTrack)
-	if dynamicMusic == 1 then
+	if interruptMusic == 1 then
 		fadelvl = 0
 	else
 		fadelvl = music_volume * 0.01
