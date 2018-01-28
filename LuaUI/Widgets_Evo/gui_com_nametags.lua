@@ -80,7 +80,7 @@ local function GetCommAttributes(unitID, unitDefID)
     return nil
   end
   local players = GetPlayerList(team)
-  local name = (#players>0) and GetPlayerInfo(players[1]) or 'Robert Paulson'
+  local name = (#players>0) and GetPlayerInfo(players[1]) or 'Evil Machine'
   for _,pID in ipairs(players) do
     local pname,active,spec = GetPlayerInfo(pID)
     if active and not spec then
