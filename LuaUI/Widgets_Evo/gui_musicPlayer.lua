@@ -455,9 +455,9 @@ function widget:GameFrame(n)
 			totalTime = math.floor(totalTime)
 			--Spring.Echo("Current Track Time: ".. playedTime .. "/" .. totalTime)
 			
-			--if playedTime > totalTime then	-- both zero means track stopped in 8
-				--PlayNewTrack()
-			--end
+			if playedTime >= totalTime then	-- both zero means track stopped in 8
+				PlayNewTrack()
+			end
 			
 		if dynamicMusic == 1 then
 			unitDeathCount = unitDeathCount - 10
