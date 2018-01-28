@@ -476,13 +476,13 @@ function widget:GameFrame(n)
 					fadeOut = true
 				elseif tracks == introTrack and Spring.GetGameFrame() > 1 then
 					PlayNewTrack()
-				elseif tracks == peaceTracks and unitDeathCount > 500 then
+				elseif tracks == peaceTracks and unitDeathCount > 200 then
 					fadeOut = true
-				elseif tracks == warTracks and unitDeathCount <= 500 then
+				elseif tracks == warTracks and unitDeathCount <= 200 then
 					fadeOut = true
-				elseif tracks == peaceTracks and unitDeathCount <= 500 then
+				elseif tracks == peaceTracks and unitDeathCount <= 200 then
 					fadeOut = false
-				elseif tracks == warTracks and unitDeathCount > 500 then
+				elseif tracks == warTracks and unitDeathCount > 200 then
 					fadeOut = false
 				end
 			end
@@ -533,10 +533,10 @@ function PlayNewTrack()
 		if Spring.GetGameFrame() <= 1 then
 			tracks = introTrack
 			--Spring.Echo("Current tracklist is : Intro Track")
-		elseif unitDeathCount <= 500 then
+		elseif unitDeathCount <= 200 then
 			tracks = peaceTracks
 			--Spring.Echo("Current tracklist is : Peace Tracks")
-		elseif unitDeathCount > 500 then
+		elseif unitDeathCount > 200 then
 			tracks = warTracks
 			--Spring.Echo("Current tracklist is : War Tracks")
 		end
