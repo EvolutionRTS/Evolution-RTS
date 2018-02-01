@@ -467,10 +467,11 @@ function widget:GameFrame(n)
 			end
 			if unitDeathCount > 500 then
 				unitDeathCount = unitDeathCount - 4
-			if unitDeathCount > 1000 then
-				unitDeathCount = unitDeathCount - 100
-				if unitDeathCount > 3000 then
-					unitDeathCount = unitDeathCount - 500
+				if unitDeathCount > 1000 then
+					unitDeathCount = unitDeathCount - 100
+					if unitDeathCount > 3000 then
+						unitDeathCount = unitDeathCount - 500
+					end
 				end
 			end
 			if interruptMusic == 1 then
