@@ -460,11 +460,13 @@ function widget:GameFrame(n)
 			end
 			
 		if dynamicMusic == 1 then
-			unitDeathCount = unitDeathCount - 10
+			unitDeathCount = unitDeathCount - 4
 			--Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
-			if unitDeathCount <= 50 then
+			if unitDeathCount <= 1 then
 				unitDeathCount = 0
 			end
+			if unitDeathCount > 500 then
+				unitDeathCount = unitDeathCount - 4
 			if unitDeathCount > 1000 then
 				unitDeathCount = unitDeathCount - 100
 				if unitDeathCount > 3000 then
