@@ -115,10 +115,10 @@ local unitDef                    = {
 		},
 	},
 	weapons                      = {
+		-- [1]                      = {
+			-- def                  = "riottankempweapon",
+		-- },
 		[1]                      = {
-			def                  = "riottankempweapon",
-		},
-		[2]                      = {
 			def                  = "shield",
 		},
 	},
