@@ -13,7 +13,7 @@ objectName = "efighter3.s3o"
 script = "efighter3.cob"
 
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[2]]
 
