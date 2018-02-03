@@ -75,7 +75,7 @@ local unitDef                     = {
 		[1]                       = {
 			def                   = "artyweapon",
 			badtargetcategory     = "LIGHT ARMORED VTOL",
-            onlyTargetCategory    = "BUILDING",
+            onlyTargetCategory    = "BUILDING BIO",
 		},
 	},
 	customParams                  = {
