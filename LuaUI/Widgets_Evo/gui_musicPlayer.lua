@@ -455,10 +455,6 @@ function widget:GameFrame(n)
 			totalTime = math.floor(totalTime)
 			--Spring.Echo("Current Track Time: ".. playedTime .. "/" .. totalTime)
 			
-			if playedTime >= totalTime then	-- both zero means track stopped in 8
-				PlayNewTrack()
-			end
-			
 		if dynamicMusic == 1 then
 			unitDeathCount = unitDeathCount - 4
 			--Spring.Echo("[Music Player] Unit Death Count is currently: ".. unitDeathCount)
@@ -475,10 +471,10 @@ function widget:GameFrame(n)
 				end
 			end
 			if interruptMusic == 1 then
-				if playedTime > totalTime - music_volume * 0.10 then
+				if playedTime > totalTime - music_volume * 0.10 and tracks ~= introTracks then
 					fadeOut = true
 				elseif tracks == introTrack and Spring.GetGameFrame() > 1 then
-					PlayNewTrack()
+					fadeOut = true
 				elseif tracks == peaceTracks and unitDeathCount > 200 then
 					fadeOut = true
 				elseif tracks == warTracks and unitDeathCount <= 200 then
@@ -553,7 +549,7 @@ function PlayNewTrack()
 	curTrack = newTrack
 	local musicVolScaled = music_volume * 0.01	
 	Spring.PlaySoundStream(newTrack)
-	if interruptMusic == 1 then
+	if interruptMusic == 1 and tracks ~= introTrack then
 		fadelvl = 0
 	else
 		fadelvl = music_volume * 0.01
@@ -574,6 +570,15 @@ function widget:Update(dt)
 		PlayNewTrack()
 		firstTime = true -- pop this cherry
 	end
+	
+	local playedTime, totalTime = Spring.GetSoundStreamTime()
+			playedTime = math.floor(playedTime)
+			totalTime = math.floor(totalTime)
+			--Spring.Echo("Current Track Time: ".. playedTime .. "/" .. totalTime)
+			
+			if playedTime >= totalTime then	-- both zero means track stopped in 8
+				PlayNewTrack()
+			end
 	
 	
 	if (pauseWhenPaused and Spring.GetGameSeconds()>=0) then
