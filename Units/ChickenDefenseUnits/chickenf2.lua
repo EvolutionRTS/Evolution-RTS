@@ -31,7 +31,7 @@ return {
 		footprintx = 3,
 		footprintz = 3,
 		hidedamage = 1,
-		icontype = "chickenf",
+		icontype = "scout",
 		idleautoheal = 15,
 		idletime = 900,
 		maneuverleashlength = "20000",

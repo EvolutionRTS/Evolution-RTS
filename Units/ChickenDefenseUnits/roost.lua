@@ -20,7 +20,7 @@ return {
 		explodeas = "ROOST_DEATH",
 		footprintx = 2,
 		footprintz = 2,
-		icontype = "special",
+		icontype = "energy",
 		idleautoheal = 10,
 		idletime = 90,
 		isairbase = true,

@@ -26,7 +26,7 @@ return {
 		extractsmetal = 0.001,
 		footprintx = 1,
 		footprintz = 1,
-		icontype = "defense",
+		icontype = "turret_lit",
 		idleautoheal = 15,
 		idletime = 300,
 		levelground = false,

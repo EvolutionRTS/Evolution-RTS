@@ -29,7 +29,7 @@ return {
 		footprintx = 3,
 		footprintz = 3,
 		hidedamage = 1,
-		icontype = "chicken",
+		icontype = "chickencommander",
 		leavetracks = true,
 		maneuverleashlength = 640,
 		mass = 3000,

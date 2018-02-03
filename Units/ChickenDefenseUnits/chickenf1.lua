@@ -31,7 +31,7 @@ return {
 		footprintx = 3,
 		footprintz = 3,
 		hidedamage = 1,
-		icontype = "chickenf",
+		icontype = "air_bomb",
 		idleautoheal = 5,
 		idletime = 0,
 		maneuverleashlength = "20000",

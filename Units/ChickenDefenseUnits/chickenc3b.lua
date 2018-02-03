@@ -23,7 +23,7 @@ return {
 		explodeas = "BUG_DEATH",
 		footprintx = 2,
 		footprintz = 2,
-		icontype = "chickenr",
+		icontype = "raider",
 		leavetracks = true,
 		maneuverleashlength = "640",
 		mass = 89,

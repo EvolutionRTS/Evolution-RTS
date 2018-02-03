@@ -25,7 +25,7 @@ return {
 		footprintz = 3,
 		hidedamage = 1,
 		hightrajectory = 1,
-		icontype = "chickenr",
+		icontype = "arty_arm",
 		idleautoheal = 20,
 		idletime = 300,
 		leavetracks = true,

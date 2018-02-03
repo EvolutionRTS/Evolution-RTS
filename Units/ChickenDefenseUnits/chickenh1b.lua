@@ -31,7 +31,7 @@ return {
 		footprintx = 1,
 		footprintz = 1,
 		hidedamage = 1,
-		icontype = "builder",
+		icontype = "orb",
 		kamikaze = true,
 		kamikazedistance = 60,
 		leavetracks = true,

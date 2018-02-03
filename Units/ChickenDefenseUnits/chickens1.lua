@@ -24,7 +24,7 @@ return {
 		floater = false,
 		footprintx = 2,
 		footprintz = 2,
-		icontype = "chickens",
+		icontype = "td_lit_lit",
 		idleautoheal = 18,
 		idletime = 20,
 		leavetracks = true,

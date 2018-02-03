@@ -325,6 +325,14 @@ local icontypes = {
 		bitmap="icons/chickenq.png",
 		size=3,
     },
+	chikenqueen = {
+		bitmap='icons/dmdr_end_nrkd2.png',
+		size=8,
+	},
+	chickencommander = {
+		bitmap='icons/commander.png',
+		size=3,
+	},
   
   --[[ all this stuff is redundant now, so for legibility I'm commenting it out (dmdr 271216)
   

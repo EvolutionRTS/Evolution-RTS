@@ -25,7 +25,7 @@ return {
 		explodeas = "BIGBUG_DEATH",
 		footprintx = 3,
 		footprintz = 3,
-		icontype = "chickena",
+		icontype = "td_arm_all",
 		leavetracks = true,
 		maneuverleashlength = "640",
 		mass = 3000,

@@ -23,7 +23,7 @@ return {
 		explodeas = "WEAVER_DEATH",
 		footprintx = 3,
 		footprintz = 3,
-		icontype = "chicken",
+		icontype = "td_lit_all",
 		leavetracks = true,
 		maneuverleashlength = "640",
 		mass = 600,

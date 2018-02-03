@@ -30,7 +30,7 @@ return {
 		footprintz = 1,
 		hidedamage = 1,
 		hoverattack = true,
-		icontype = "chickenf",
+		icontype = "air_arm",
 		idleautoheal = 2,
 		idletime = 0,
 		mass = 280,

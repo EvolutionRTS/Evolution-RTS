@@ -24,7 +24,7 @@ return {
 		floater = false,
 		footprintx = 1.5,
 		footprintz = 1.5,
-		icontype = "chicken",
+		icontype = "raider",
 		leavetracks = true,
 		maneuverleashlength = 640,
 		mass = 30,

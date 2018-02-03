@@ -28,7 +28,7 @@ return {
 		footprintx = 1,
 		footprintz = 1,
 		hidedamage = 1,
-		icontype = "chicken",
+		icontype = "raider",
 		kamikaze = true,
 		kamikazedistance = 40,
 		leavetracks = true,

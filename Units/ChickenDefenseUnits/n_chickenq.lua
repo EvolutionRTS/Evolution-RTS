@@ -27,7 +27,7 @@ return {
 		explodeas = "QUEEN_DEATH",
 		footprintx = 3,
 		footprintz = 3,
-		icontype = "chickenq",
+		icontype = "chikenqueen",
 		leavetracks = true,
 		maneuverleashlength = 2000,
 		mass = 2000000,
