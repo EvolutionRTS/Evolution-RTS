@@ -15,7 +15,7 @@ function widget:GetInfo()
 	return {
 		name	= "Music Player",
 		desc	= "Plays music and offers volume controls",
-		author	= "Forboding Angel, Floris",
+		author	= "Forboding Angel, Floris, Damgam",
 		date	= "november 2016",
 		license	= "GNU GPL, v2 or later",
 		layer	= -4,
