@@ -489,10 +489,9 @@ function widget:GameFrame(n)
 				fadeOut = true
 			end
 		end
-   end
-	if n%10 == 1 then
+
 		if fadeOut == true and fadelvl >= 0.01 then
-			fadelvl = fadelvl - 0.05
+			fadelvl = fadelvl - 0.02
 			Spring.SetSoundStreamVolume(fadelvl)
 		else
 			fadeOut = false
@@ -502,7 +501,7 @@ function widget:GameFrame(n)
 			PlayNewTrack()
 			--Spring.Echo("Playing a new song now")
 		end
-	end
+   end
 end
 
 function PlayNewTrack()
