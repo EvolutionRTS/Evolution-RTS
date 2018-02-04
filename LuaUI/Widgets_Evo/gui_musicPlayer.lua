@@ -443,6 +443,8 @@ end
 function widget:GameFrame(n)    
     if n%5 == 4 then
 		--This is a little messy, but we need to be able to update these values on the fly so I see no better way
+		music_volume = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
+		
 		dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
 		interruptMusic = Spring.GetConfigInt("evo_interruptmusic", 1)
 		
@@ -501,11 +503,20 @@ function widget:GameFrame(n)
 			PlayNewTrack()
 			--Spring.Echo("Playing a new song now")
 		end
+		
+		if fadeIn == true and fadelvl <= music_volume and Spring.GetGameFrame() >= 1 then
+			fadelvl = fadelvl + 0.02
+			Spring.SetSoundStreamVolume(fadelvl)
+		else
+			fadeIn = false
+		end
    end
 end
 
 function PlayNewTrack()
 	Spring.StopSoundStream()
+	fadelvl = 0
+	fadeIn = true
 	--Spring.Echo(dynamicMusic)
 	
 	if dynamicMusic == 0 then
