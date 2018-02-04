@@ -38,7 +38,23 @@ local curTrack	= "no name"
 
 local peaceTracks = VFS.DirList('luaui/Widgets_Evo/music/peace', '*.ogg')
 local warTracks = VFS.DirList('luaui/Widgets_Evo/music/war', '*.ogg')
-local introTrack = VFS.DirList('luaui/Widgets_Evo/music/intro', '*.ogg')
+local introTracks = VFS.DirList('luaui/Widgets_Evo/music/intro', '*.ogg')
+
+--We check to make sure that we can function properly without crashing due to missing music tracks
+local next = next
+if next(peaceTracks) == nil then
+	Spring.Echo("[Music Player] No Peace tracks were found (you must have at least 2)! Add some and try again!")
+	return false
+end
+
+if next(warTracks) == nil then
+	Spring.Echo("[Music Player] No War tracks were found (you must have at least 2)! Add some and try again!")
+	return false
+end
+
+if next(introTracks) == nil then
+	introTracks = nil
+end
 
 local tracks = peaceTracks
 
@@ -473,7 +489,7 @@ function widget:GameFrame(n)
 			if interruptMusic == 1 then
 				if playedTime > totalTime - music_volume * 0.10 and tracks ~= introTracks then
 					fadeOut = true
-				elseif tracks == introTrack and Spring.GetGameFrame() > 1 then
+				elseif tracks == introTracks and introTracks ~= nil and Spring.GetGameFrame() > 1 then
 					fadeOut = true
 				elseif tracks == peaceTracks and unitDeathCount > 200 then
 					fadeOut = true
@@ -529,8 +545,8 @@ function PlayNewTrack()
 	
 	if dynamicMusic == 1 then
 			--Spring.Echo("Unit Death Count is (Gameframe): " .. unitDeathCount)
-		if Spring.GetGameFrame() <= 1 then
-			tracks = introTrack
+		if Spring.GetGameFrame() <= 1 and introTracks ~= nil then
+			tracks = introTracks
 			--Spring.Echo("Current tracklist is : Intro Track")
 		elseif unitDeathCount <= 200 then
 			tracks = peaceTracks
@@ -549,7 +565,7 @@ function PlayNewTrack()
 	curTrack = newTrack
 	local musicVolScaled = music_volume * 0.01	
 	Spring.PlaySoundStream(newTrack)
-	if interruptMusic == 1 and tracks ~= introTrack then
+	if interruptMusic == 1 and tracks ~= introTracks then
 		fadelvl = 0
 	else
 		fadelvl = music_volume * 0.01
