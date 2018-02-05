@@ -129,6 +129,10 @@ function widget:Initialize()
 	
 	music_volume = Spring.GetConfigInt("snd_volmusic", 20)
 	
+	if Spring.GetGameFrame() == 0 then
+		PlayNewTrack()
+	end
+	
 	if #tracks == 0 then 
 		Spring.Echo("[Music Player] No music was found, Shutting Down")
 		widgetHandler:RemoveWidget()
@@ -410,10 +414,15 @@ function mouseEvent(x, y, button, release)
 			return true
 		end
 		if button == 1 and buttons['next'] ~= nil and isInBox(x, y, {buttons['next'][1], buttons['next'][2], buttons['next'][3], buttons['next'][4]}) then
-			if fadeIn ~= true and fadeOut ~= true then	
-				fadeOut = true
-				fadelvl = music_volume_percentage
-			--PlayNewTrack()
+			if fadeIn ~= true and fadeOut ~= true then
+				if Spring.GetGameFrame() >= 1 then
+					fadeOut = true
+					fadelvl = music_volume_percentage
+					--PlayNewTrack()
+				end
+			end
+			if Spring.GetGameFrame() == 0 then
+				PlayNewTrack()
 			end
 			return true
 		end
@@ -504,7 +513,12 @@ function widget:GameFrame(n)
 			--Spring.Echo("Total time is :" .. totalTime)
 			if playedTime > totalTime - music_volume * 0.05 then
 				--Spring.Echo("Fading out now!")
-				fadeOut = true
+				if Spring.GetGameFrame() >= 1 then
+					fadeOut = true
+				end
+				if Spring.GetGameFrame() == 0 then
+					PlayNewTrack()
+				end
 			end
 		end
 
@@ -582,8 +596,13 @@ function widget:Update(dt)
 	end
 	
 	if (not firstTime) then
-		fadelvl = 0
-		fadeOut = true
+		if Spring.GetGameFrame() >= 1 then
+			fadelvl = 0
+			fadeOut = true
+		end
+		if Spring.GetGameFrame() == 0 then
+			PlayNewTrack()
+		end
 		firstTime = true -- pop this cherry
 	end
 	
@@ -592,8 +611,13 @@ function widget:Update(dt)
 	totalTime = math.floor(totalTime)
 	
 	if playedTime >= totalTime then	-- both zero means track stopped in 8
-		fadelvl = 0
-		fadeOut = true
+		if Spring.GetGameFrame() >= 1 then
+			fadelvl = 0
+			fadeOut = true
+		end
+		if Spring.GetGameFrame() == 0 then
+			PlayNewTrack()
+		end
 	end
 	
 	if (pauseWhenPaused and Spring.GetGameSeconds()>=0) then
