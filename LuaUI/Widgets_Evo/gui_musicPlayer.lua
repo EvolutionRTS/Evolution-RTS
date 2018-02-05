@@ -39,6 +39,18 @@ local curTrack	= "no name"
 local peaceTracks = VFS.DirList('luaui/Widgets_Evo/music/peace', '*.ogg')
 local warTracks = VFS.DirList('luaui/Widgets_Evo/music/war', '*.ogg')
 
+--We check to make sure that we can function properly without crashing due to missing music tracks
+local next = next
+if next(peaceTracks) == nil then
+	Spring.Echo("[Music Player] No Peace tracks were found (you must have at least 2)! Add some and try again!")
+	return false
+end
+
+if next(warTracks) == nil then
+	Spring.Echo("[Music Player] No War tracks were found (you must have at least 2)! Add some and try again!")
+	return false
+end
+
 local tracks = peaceTracks
 
 local charactersInPath = 25
@@ -107,6 +119,7 @@ end
 function widget:Initialize()
 	
 	volume = Spring.GetConfigInt("snd_volmaster", 100)
+	music_volume_percentage = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 	
 	musicInitialValue = Spring.GetConfigInt("evo_musicInitialValue", 0)
 	if musicInitialValue ~= 1 then
@@ -212,11 +225,11 @@ local function createList()
 	
 	buttons['musicvolumeicon'] = {buttons['next'][3]+padding+padding, bottom+padding, buttons['next'][3]+((widgetHeight*widgetScale)), top-padding}
 	buttons['musicvolume'] = {buttons['musicvolumeicon'][3]+padding, bottom+padding, buttons['musicvolumeicon'][3]+padding+volumeWidth, top-padding}
-	buttons['musicvolume'][5] = buttons['musicvolume'][1] + (buttons['musicvolume'][3] - buttons['musicvolume'][1]) * (music_volume/200)
+	buttons['musicvolume'][5] = buttons['musicvolume'][1] + (buttons['musicvolume'][3] - buttons['musicvolume'][1]) * (music_volume/100)
 	
 	buttons['volumeicon'] = {buttons['musicvolume'][3]+padding+padding+padding, bottom+padding, buttons['musicvolume'][3]+((widgetHeight*widgetScale)), top-padding}
 	buttons['volume'] = {buttons['volumeicon'][3]+padding, bottom+padding, buttons['volumeicon'][3]+padding+volumeWidth, top-padding}
-	buttons['volume'][5] = buttons['volume'][1] + (buttons['volume'][3] - buttons['volume'][1]) * (volume/200)
+	buttons['volume'][5] = buttons['volume'][1] + (buttons['volume'][3] - buttons['volume'][1]) * (volume/100)
 	
 	local textsize = 11*widgetScale
 	local textYPadding = 8*widgetScale
@@ -342,10 +355,10 @@ end
 function widget:MouseMove(x, y)
 	if draggingSlider ~= nil then
 		if draggingSlider == 'musicvolume' then
-			changeMusicVolume(getSliderValue('musicvolume', x) * 200)
+			changeMusicVolume(getSliderValue('musicvolume', x) * 100)
 		end
 		if draggingSlider == 'volume' then
-			changeVolume(getSliderValue('volume', x) * 200)
+			changeVolume(getSliderValue('volume', x) * 100)
 		end
 	end
 end
@@ -378,12 +391,12 @@ function mouseEvent(x, y, button, release)
 		local button = 'musicvolume'
 		if isInBox(x, y, {buttons[button][1]-sliderWidth, buttons[button][2], buttons[button][3]+sliderWidth, buttons[button][4]}) then
 			draggingSlider = button
-			changeMusicVolume(getSliderValue(button, x) * 200)
+			changeMusicVolume(getSliderValue(button, x) * 100)
 		end
 		button = 'volume'
 		if isInBox(x, y, {buttons[button][1]-sliderWidth, buttons[button][2], buttons[button][3]+sliderWidth, buttons[button][4]}) then
 			draggingSlider = button
-			changeVolume(getSliderValue(button, x) * 200)
+			changeVolume(getSliderValue(button, x) * 100)
 		end
 	end
 	if release and draggingSlider ~= nil then
@@ -397,8 +410,11 @@ function mouseEvent(x, y, button, release)
 			return true
 		end
 		if button == 1 and buttons['next'] ~= nil and isInBox(x, y, {buttons['next'][1], buttons['next'][2], buttons['next'][3], buttons['next'][4]}) then
-			fadeOut = true
+			if fadeIn ~= true and fadeOut ~= true then	
+				fadeOut = true
+				fadelvl = music_volume_percentage
 			--PlayNewTrack()
+			end
 			return true
 		end
 		return true
@@ -407,7 +423,7 @@ function mouseEvent(x, y, button, release)
 end
 function widget:IsAbove(mx, my)
 	if isInBox(mx, my, {left, bottom, right, top}) then
-  	local curVolume = Spring.GetConfigInt("snd_volmaster", 200)
+  	local curVolume = Spring.GetConfigInt("snd_volmaster", 100)
   	if volume ~= curVolume then
   		volume = curVolume
   		createList()
@@ -443,7 +459,7 @@ end
 function widget:GameFrame(n)    
     if n%5 == 4 then
 		--This is a little messy, but we need to be able to update these values on the fly so I see no better way
-		music_volume = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
+		music_volume_percentage = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 		
 		dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
 		interruptMusic = Spring.GetConfigInt("evo_interruptmusic", 1)
@@ -486,37 +502,41 @@ function widget:GameFrame(n)
 			
 		if totalTime ~= nil then
 			--Spring.Echo("Total time is :" .. totalTime)
-			if playedTime > totalTime - music_volume * 0.10 then
+			if playedTime > totalTime - music_volume * 0.05 then
 				--Spring.Echo("Fading out now!")
 				fadeOut = true
 			end
 		end
 
 		if fadeOut == true and fadelvl >= 0.01 then
-			fadelvl = fadelvl - 0.02
+			fadelvl = fadelvl - 0.05
+			--Spring.Echo(fadelvl)
 			Spring.SetSoundStreamVolume(fadelvl)
 		else
 			fadeOut = false
 		end
 		if fadeOut == false and fadelvl <= 0.005 then
-			fadelvl = music_volume * 0.01
+			fadelvl = music_volume_percentage * 0.01
 			PlayNewTrack()
 			--Spring.Echo("Playing a new song now")
 		end
 		
-		if fadeIn == true and fadelvl <= music_volume and Spring.GetGameFrame() >= 1 then
-			fadelvl = fadelvl + 0.02
+		if fadeIn == true and fadelvl <= music_volume_percentage then
+			fadelvl = fadelvl + 0.05
+			--Spring.Echo(fadelvl)
 			Spring.SetSoundStreamVolume(fadelvl)
 		else
 			fadeIn = false
 		end
-   end
+    end
 end
 
 function PlayNewTrack()
 	Spring.StopSoundStream()
-	fadelvl = 0
-	fadeIn = true
+	if Spring.GetGameFrame() >= 1 then
+		fadelvl = 0
+		fadeIn = true
+	end
 	--Spring.Echo(dynamicMusic)
 	
 	if dynamicMusic == 0 then
@@ -561,7 +581,8 @@ function widget:Update(dt)
 	end
 	
 	if (not firstTime) then
-		PlayNewTrack()
+		fadelvl = 0
+		fadeOut = true
 		firstTime = true -- pop this cherry
 	end
 	
@@ -570,7 +591,8 @@ function widget:Update(dt)
 	totalTime = math.floor(totalTime)
 	
 	if playedTime >= totalTime then	-- both zero means track stopped in 8
-		PlayNewTrack()
+		fadelvl = 0
+		fadeOut = true
 	end
 	
 	if (pauseWhenPaused and Spring.GetGameSeconds()>=0) then
