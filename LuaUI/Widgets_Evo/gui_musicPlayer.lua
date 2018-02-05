@@ -456,8 +456,8 @@ function widget:UnitDamaged(_, _, _, damage)
 	warMeter = warMeter + damage
 end
 
-function widget:GameFrame(n)    
-    if n%5 == 4 then
+function widget:GameFrame(n)
+	if n%30 == 4 then
 		--This is a little messy, but we need to be able to update these values on the fly so I see no better way
 		music_volume_percentage = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 		
@@ -472,8 +472,9 @@ function widget:GameFrame(n)
 		--Assume that if it isn't set, interrupt music is true
 		if interruptMusic == nil then
 			interruptMusic = 1
-		end
-		
+		end	
+	end
+    if n%5 == 4 then
 		if dynamicMusic == 1 then
 			--Spring.Echo("[Music Player] Unit Death Count is currently: ".. warMeter)
 			if warMeter <= 1 then
@@ -495,7 +496,6 @@ function widget:GameFrame(n)
 		end
 		
 		--80's fadeout when a track is almost finished
-		
 		local playedTime, totalTime = Spring.GetSoundStreamTime()
 		playedTime = math.floor(playedTime)
 		totalTime = math.floor(totalTime)
@@ -508,6 +508,7 @@ function widget:GameFrame(n)
 			end
 		end
 
+		--This has become the preferred handler of playing new tracks instead of calling the PlayNewTrack() function, set fadeOut = true
 		if fadeOut == true and fadelvl >= 0.01 then
 			fadelvl = fadelvl - 0.05
 			--Spring.Echo(fadelvl)
