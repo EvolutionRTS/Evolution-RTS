@@ -129,10 +129,6 @@ function widget:Initialize()
 	
 	music_volume = Spring.GetConfigInt("snd_volmusic", 20)
 	
-	if Spring.GetGameFrame() == 0 then
-		PlayNewTrack()
-	end
-	
 	if #tracks == 0 then 
 		Spring.Echo("[Music Player] No music was found, Shutting Down")
 		widgetHandler:RemoveWidget()
