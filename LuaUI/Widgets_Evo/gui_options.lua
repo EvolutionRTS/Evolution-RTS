@@ -101,6 +101,7 @@ local luaShaders = tonumber(Spring.GetConfigInt("ForceShaders",1) or 0)
 local presetNames = {'lowest','low','medium','high','ultra'}	-- defined so these get listed in the right order
 local presets = {
 	lowest = {
+		fsaa = 0,
 		bloom = false,
 		bloomhighlights = false,
 		water = 1,
@@ -126,6 +127,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	low = {
+		fsaa = 0,
 		bloom = false,
 		bloomhighlights = false,
 		water = 2,
@@ -151,6 +153,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	medium = {
+		fsaa = 2,
 		bloom = true,
 		bloomhighlights = false,
 		water = 3,
@@ -176,6 +179,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	high = {
+		fsaa = 4,
 		bloom = true,
 		bloomhighlights = false,
 		water = 3,
@@ -201,6 +205,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	ultra = {
+		fsaa = 8,
 		bloom = true,
 		bloomhighlights = true,
 		water = 3,
