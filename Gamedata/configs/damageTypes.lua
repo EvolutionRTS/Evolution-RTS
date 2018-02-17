@@ -211,8 +211,8 @@ local damageClasses = {
 			
 		-- Start Aircraft
 		edrone	= {
-			ARMORED		= 1,
-			LIGHT		= 1,
+			ARMORED		= 0.50,
+			LIGHT		= 0.50,
 			BUILDING 	= 1,
 		},
 		eraider	= {

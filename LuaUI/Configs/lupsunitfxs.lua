@@ -1,6 +1,13 @@
 effectUnitDefs = {
 ------------------
 ------------------
+	edrone = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
+	},
+
 	efighter = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine2", onActive=true}},
@@ -32,6 +39,13 @@ effectUnitDefs = {
 	},
 	
 	escout = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
+	},
+	
+	eraider = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
@@ -73,6 +87,12 @@ effectUnitDefs = {
 	
 ------------------
 ------------------
+	edrone_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
+	},
 	
 	efighter_up1 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
@@ -104,6 +124,24 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
 	},
 	
+	eraider_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
+	},
+	
+	ekrow_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
 	etransport_up1 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
@@ -128,6 +166,12 @@ effectUnitDefs = {
 	
 ------------------
 ------------------
+	edrone_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
+	},
 	
 	efighter_up2 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
@@ -159,6 +203,24 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
 	},
 	
+	eraider_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
+	},
+	
+	ekrow_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
 	etransport_up2 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
@@ -183,6 +245,12 @@ effectUnitDefs = {
 	
 ------------------
 ------------------
+	edrone_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
+	},
 	
 	efighter_up3 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=25, piece="fengine1", onActive=true}},
@@ -214,6 +282,24 @@ effectUnitDefs = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
 	},
 	
+	eraider_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="fengine2", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine1", onActive=true}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="rengine2", onActive=true}},
+	},
+	
+	ekrow_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine2", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine3", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine4", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine5", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine6", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine7", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  16, length=60, piece="engine8", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
 	etransport_up3 = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=40, piece="fengine2", onActive=true}},
@@ -241,13 +327,6 @@ effectUnitDefs = {
 	
 	esubplane = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  4, length=35, piece="engines", onActive=true}},
-	},
-
-	edrone = {
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine1", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="fengine2", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine1", onActive=true}},
-		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=20, piece="rengine2", onActive=true}},
 	},
 	
 ------------------

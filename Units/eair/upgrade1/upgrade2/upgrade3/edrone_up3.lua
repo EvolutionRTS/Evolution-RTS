@@ -1,13 +1,13 @@
--- UNITDEF -- EDRONE --
+-- UNITDEF -- EDRONE_up3 --
 --------------------------------------------------------------------------------
 
-unitName = "edrone"
+unitName = "edrone_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[3]]
 
-humanName = [[Mosquito]]
+humanName = [[Mosquito MK IV]]
 
 objectName = "edrone2.s3o"
 script = "edrone2.cob"

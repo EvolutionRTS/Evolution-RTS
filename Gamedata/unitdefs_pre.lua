@@ -59,8 +59,8 @@ local factory = {
 	[[eamphibbuggy]],
 	[[eamphibriot]],
 	[[eamphibmedtank]],
-	[[escout]],
-	[[efighter]],
+	[[edrone]],
+	[[eraider]],
 	[[egunship2]],
 }
 
@@ -434,7 +434,8 @@ Shared.buildListAllTerrainFactory_up3 = {
 --
 --
 Shared.buildListAirPlant = {
-		[[escout]],
+		[[edrone]],
+		[[eraider]],
 		[[efighter]],
 		[[egunship2]],
 		[[ebomber]],
@@ -442,7 +443,8 @@ Shared.buildListAirPlant = {
 		[[etransport]],
 }
 Shared.buildListAirPlant_up1 = {
-		[[escout_up1]],
+		[[edrone_up1]],
+		[[eraider_up1]],
 		[[efighter_up1]],
 		[[egunship2_up1]],
 		[[ebomber_up1]],
@@ -450,7 +452,8 @@ Shared.buildListAirPlant_up1 = {
 		[[etransport_up1]],
 }
 Shared.buildListAirPlant_up2 = {
-		[[escout_up2]],
+		[[edrone_up2]],
+		[[eraider_up2]],
 		[[efighter_up2]],
 		[[egunship2_up2]],
 		[[ebomber_up2]],
@@ -458,7 +461,8 @@ Shared.buildListAirPlant_up2 = {
 		[[etransport_up2]],
 }
 Shared.buildListAirPlant_up3 = {
-		[[escout_up3]],
+		[[edrone_up3]],
+		[[eraider_up3]],
 		[[efighter_up3]],
 		[[egunship2_up3]],
 		[[ebomber_up3]],

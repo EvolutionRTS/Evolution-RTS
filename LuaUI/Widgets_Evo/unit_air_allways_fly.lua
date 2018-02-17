@@ -55,9 +55,16 @@ function switchAirpadToFlyMode(unitID, unitDefID)
     if (unitDefID == UnitDefNames["eairengineer"].id or
 	unitDefID == UnitDefNames["ebomber"].id or
 	unitDefID == UnitDefNames["edrone"].id or
+	unitDefID == UnitDefNames["edrone_up1"].id or
+	unitDefID == UnitDefNames["edrone_up2"].id or
+	unitDefID == UnitDefNames["edrone_up3"].id or
 	unitDefID == UnitDefNames["efighter"].id or
 	unitDefID == UnitDefNames["egunship2"].id or
 	unitDefID == UnitDefNames["escout"].id or
+	unitDefID == UnitDefNames["eraider"].id or
+	unitDefID == UnitDefNames["eraider_up1"].id or
+	unitDefID == UnitDefNames["eraider_up2"].id or
+	unitDefID == UnitDefNames["eraider_up3"].id or
 	unitDefID == UnitDefNames["etransport"].id or
 	unitDefID == UnitDefNames["ebomber_up1"].id or
 	unitDefID == UnitDefNames["efighter_up1"].id or
