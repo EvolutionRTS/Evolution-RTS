@@ -215,6 +215,11 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
+		eraider	= {
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
+		},
 		efighter	= {
 			ARMORED		= 0.25,
 			LIGHT		= 1,

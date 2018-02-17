@@ -3,12 +3,15 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece base, turret, barrel1, firepoint1, engine1, engine2, engine3, engine4, engine5, engine6, engine7, engine8;
+piece base, frontengines, fengine1, fengine2, rearengines, rengine1, rengine2, turret, barrel1, firepoint1;
 
-static-var  moving, flames, shooting_num;
+static-var  moving, flames;
+
+#define jethtrail 1024+0
 
 // Signal definitions
 #define SIG_AIM 2
+
 
 SmokeUnit(healthpercent, sleeptime, smoketype)
 {
@@ -37,13 +40,17 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
    }
 }
 
+
 Thrust()
 {
    while( TRUE )
    {
       if (moving)    
       {
-              spin base around y-axis speed <50.005495>;
+              emit-sfx jethtrail from fengine1;
+              emit-sfx jethtrail from fengine2;
+              emit-sfx jethtrail from rengine1;
+              emit-sfx jethtrail from rengine2;
                 }
         sleep 5;    
    }
@@ -59,11 +66,31 @@ StopMoving()
         moving=0; 
 }
 
+MoveRate0()
+{
+	flames=0;
+ 	turn frontengines to x-axis <-90.000000> speed <150.000000>;
+ 	turn rearengines to x-axis <-90.000000> speed <150.000000>;
+}
+MoveRate1()
+{
+	flames=0;
+ 	turn frontengines to x-axis <-70.005495> speed <150.000000>;
+ 	turn rearengines to x-axis <-70.005495> speed <150.000000>;
+}
+MoveRate2()
+{
+	flames=1;
+ 	turn frontengines to x-axis <0.000000> speed <150.000000>;
+ 	turn rearengines to x-axis <0.000000> speed <150.000000>;
+}
+
 Create()
    {
+//      start-script Thrust();
         start-script SmokeUnit();
    }
-
+   
 RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
 { 
 	sleep 3000; 
@@ -102,6 +129,6 @@ Killed(severity, corpsetype) // how it explodes
 { 
 	corpsetype = 1; 
 	explode base type EXPLODE_ON_HIT;
-	explode turret type EXPLODE_ON_HIT;
-	explode barrel1 type EXPLODE_ON_HIT;
+	explode frontengines type EXPLODE_ON_HIT;
+	explode rearengines type EXPLODE_ON_HIT;
 } 

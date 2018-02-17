@@ -274,6 +274,37 @@ return {
     },
   },
   
+  ["fusionreactionnuclearorange"] = {
+    electricarcs1 = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      properties = {
+        airdrag            = 0.8,
+        --alwaysvisible      = true,
+        colormap           = [[1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01]],
+        directional        = true,
+        emitrot            = 45,
+        emitrotspread      = 15,
+        emitvector         = [[0, 1, 0]],
+        gravity            = [[0, -0.02, 0]],
+        numparticles       = 2,
+        particlelife       = 45,
+        particlelifespread = 1,
+        particlesize       = 1,
+        particlesizespread = 0,
+        particlespeed      = 2,
+        particlespeedspread = 1,
+        pos                = [[0, 2, 0]],
+        sizegrowth         = 1.2,
+        sizemod            = 1.0,
+        texture            = [[plasmaball]],
+        useairlos          = false,
+      },
+    },
+  },
+  
   ["fusionreactionnuclearblue"] = {
 	electricarcs1 = {
 	  air                = true,
