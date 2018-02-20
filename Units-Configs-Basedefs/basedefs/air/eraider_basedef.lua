@@ -123,7 +123,7 @@ weaponDefs                 = {
 			damagetype		     = "eraider",  
 		}, 
 		damage                   = {
-			default              = 15,
+			default              = 30,
 		},
 	},
 }
