@@ -115,14 +115,14 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 0,
 		advsky = false,
-		daynight = false,
+		timecyclesweathereffects = false,
 		outline = false,
 		guishader = false,
 		shadows = false,
 		advmapshading = false,
 		advmodelshading = false,
 		decals = 0,
-		grounddetail = 60,
+		grounddetail = 64,
 		darkenmap_darkenfeatures = false,
 		enemyspotter_highlight = false,
 	},
@@ -141,14 +141,14 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 200,
 		advsky = false,
-		daynight = false,
+		timecyclesweathereffects = false,
 		outline = false,
 		guishader = false,
 		shadows = false,
 		advmapshading = true,
 		advmodelshading = true,
 		decals = 0,
-		grounddetail = 90,
+		grounddetail = 64,
 		darkenmap_darkenfeatures = false,
 		enemyspotter_highlight = false,
 	},
@@ -167,14 +167,14 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 400,
 		advsky = false,
-		daynight = false,
+		timecyclesweathereffects = false,
 		outline = false,
 		guishader = false,
 		shadows = false,
 		advmapshading = true,
 		advmodelshading = true,
 		decals = 1,
-		grounddetail = 140,
+		grounddetail = 64,
 		darkenmap_darkenfeatures = false,
 		enemyspotter_highlight = false,
 	},
@@ -193,14 +193,14 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 800,
 		advsky = true,
-		daynight = true,
+		timecyclesweathereffects = false,
 		outline = true,
 		guishader = true,
 		shadows = true,
 		advmapshading = true,
 		advmodelshading = true,
 		decals = 2,
-		grounddetail = 180,
+		grounddetail = 64,
 		darkenmap_darkenfeatures = false,
 		enemyspotter_highlight = false,
 	},
@@ -219,14 +219,14 @@ local presets = {
 		grassdetail = 0,
 		treeradius = 800,
 		advsky = true,
-		daynight = true,
+		timecyclesweathereffects = false,
 		outline = true,
 		guishader = true,
 		shadows = true,
 		advmapshading = true,
 		advmodelshading = true,
 		decals = 3,
-		grounddetail = 200,
+		grounddetail = 64,
 		darkenmap_darkenfeatures = true,
 		enemyspotter_highlight = true,
 	},
@@ -822,9 +822,9 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SetConfigInt("AdvModelShading",value)
 		elseif id == 'advsky' then
 			Spring.SetConfigInt("AdvSky",value)
-		elseif id == 'daynight' then
-			Spring.SetConfigInt("DynamicSun",value)
-			Spring.SetConfigString("DynamicSunMinElevation", "0.1")
+		elseif id == 'timecyclesweathereffects' then
+			Spring.SetConfigInt("evo_timecyclesweathereffects",value)
+			Spring.SendCommands("luarules reloadluaui")
 		elseif id == 'shadows' then
 			Spring.SendCommands("Shadows "..value)
 		elseif id == 'vsync' then
@@ -1733,12 +1733,12 @@ function init()
 
 		-- only one of these shadow options are shown, depending if "Shadow Quality Manager" widget is active
 		{id="shadows", group="gfx", name="Shadows", type="bool", value=tonumber(Spring.GetConfigInt("Shadows",1) or 1) == 1, description='Shadow detail is currently controlled by "Shadow Quality Manager" widget\n...this widget will auto reduce detail when fps gets low.\n\nShadows requires "Advanced map shading" option to be enabled'},
-		{id="shadowslider", group="gfx", name="Shadows", type="slider", min=1500, max=6000, step=500, value=tonumber(Spring.GetConfigInt("ShadowMapSize",1) or 2000), description='Set shadow detail\nSlider positioned the very left means shadows will be disabled\n\nShadows requires "Advanced map shading" option to be enabled'},
+		{id="shadowslider", group="gfx", name="Shadows", type="slider", min=2048, max=8192, step=500, value=tonumber(Spring.GetConfigInt("ShadowMapSize",1) or 2048), description='Set shadow detail\nSlider positioned the very left means shadows will be disabled\n\nShadows requires "Advanced map shading" option to be enabled'},
 
 		{id="decals", group="gfx", name="Ground decals", type="slider", min=0, max=5, step=1, value=tonumber(Spring.GetConfigInt("GroundDecals",1) or 1), description='Set how long map decals will stay.\n\nDecals are ground scars, footsteps/tracks and shading under buildings'},
-		{id="grounddetail", group="gfx", name="Ground detail", type="slider", min=60, max=200, step=1, value=tonumber(Spring.GetConfigInt("GroundDetail",1) or 1), description='Set how detailed the map mesh/model is'},
+		{id="grounddetail", group="gfx", name="Ground detail", type="slider", min=32, max=200, step=1, value=tonumber(Spring.GetConfigInt("GroundDetail",1) or 64), description='Set how detailed the map mesh/model is'},
 		{id="mapedgeextension", group="gfx", widget="Map Edge Extension", name="Map edge extension", type="bool", value=GetWidgetToggleValue("Map Edge Extension"), description='Mirrors the map at screen edges and darkens and decolorizes them\n\nEnable shaders for best result'},
-		{id="grassdetail", group="gfx", name="Grass", type="slider", min=0, max=10, step=1, value=tonumber(Spring.GetConfigInt("GrassDetail",1) or 5), description='Amount of grass rendered\n\nChanges will be applied next game'},
+		{id="grassdetail", group="gfx", name="Grass", type="slider", min=0, max=10, step=1, value=tonumber(Spring.GetConfigInt("GrassDetail",0) or 0), description='Amount of grass rendered\n\nChanges will be applied next game'},
 		{id="water", group="gfx", name="Water type", type="select", options={'basic','reflective','dynamic','reflective&refractive','bump-mapped'}, value=(tonumber(Spring.GetConfigInt("Water",1) or 1)+1)},
 
 		{id="bloom", group="gfx", widget="Bloom Shader", name="Bloom", type="bool", value=GetWidgetToggleValue("Bloom Shader"), description='Bloom will make the map and units glow'},
@@ -1759,14 +1759,14 @@ function init()
 
 		{id="outline", group="gfx", widget="Outline", name="Unit outline", type="bool", value=GetWidgetToggleValue("Outline"), description='Adds a small outline to all units which makes them crisp\n\nLimits total outlined units to 1200.\nStops rendering outlines when average fps falls below 13.'},
 		{id="xrayshader", group="gfx", widget="XrayShader", name="Unit xray shader", type="bool", value=GetWidgetToggleValue("XrayShader"), description='Highlights all units, highlight effect dissolves on close camera range.\n\nFades out and disables at low fps\nWorks less on dark teamcolors'},
-		{id="particles", group="gfx", name="Max particles", type="slider", min=5000, max=25000, step=500, value=tonumber(Spring.GetConfigInt("MaxParticles",1) or 1000), description='Particles used for explosions, smoke, fire and missiletrails\n\nSetting a low value will mean that various effects wont show properly'},
+		{id="particles", group="gfx", name="Max particles", type="slider", min=5000, max=25000, step=500, value=tonumber(Spring.GetConfigInt("MaxParticles",1) or 10000), description='Particles used for explosions, smoke, fire and missiletrails\n\nSetting a low value will mean that various effects wont show properly'},
 		{id="nanoparticles", group="gfx", name="Max nano particles", type="slider", min=500, max=5000, step=100, value=tonumber(Spring.GetConfigInt("MaxNanoParticles",1) or 500), description='NOTE: Nano particles are more expensive regarding the CPU'},
 
 		{id="iconadjuster", group="gfx", name="Unit icon scale", min=0.8, max=1.2, step=0.05, type="slider", value=1, description='Sets radar/unit icon size\n\n(Used for unit icon distance and minimap icons)'},
-		{id="disticon", group="gfx", name="Icon render distance", type="slider", min=0, max=800, step=10, value=tonumber(Spring.GetConfigInt("UnitIconDist",1) or 800)},
+		{id="disticon", group="gfx", name="Icon render distance", type="slider", min=0, max=800, step=10, value=tonumber(Spring.GetConfigInt("UnitIconDist",1) or 300)},
 		{id="treeradius", group="gfx", name="Tree render distance", type="slider", min=0, max=2000, step=50, value=tonumber(Spring.GetConfigInt("TreeRadius",1) or 1000), description='Applies to SpringRTS engine default trees\n\nChanges will be applied next game'},
 
-		{id="daynight", group="gfx", name="Day/Night Cycles", type="bool", value=tonumber(Spring.GetConfigInt("DynamicSun",1) or 1) == 1, description='Enables Day/Night Cycles\n\nChanges will be applied next game'},
+		{id="timecyclesweathereffects", group="gfx", name="Day/Night/Weather Cycles", type="bool", value=tonumber(Spring.GetConfigInt("evo_timecyclesweathereffects",0) or 0) == 1, description='Enables Day/Night Cycles and Weather Effects\n\nTHIS IS HIGHLY EXPERIMENTAL!!! *Could Cause Crashes on older hardware!!!*\n*NOTE* This will cause all widgets to reload'},
 		{id="snow", group="gfx", widget="Snow", name="Snow", type="bool", value=GetWidgetToggleValue("Snow"), description='Snow widget (By default.. maps with wintery names have snow applied)'},
 		{id="snowmap", group="gfx", name=widgetOptionColor.."   enabled on this map", type="bool", value=true, description='It will remember what you toggled for every map\n\n\(by default: maps with wintery names have this toggled)'},
 		{id="snowautoreduce", group="gfx", name=widgetOptionColor.."   auto reduce", type="bool", value=true, description='Automaticly reduce snow when average FPS gets lower\n\n(re-enabling this needs time to readjust  to average fps again'},
@@ -1784,7 +1784,7 @@ function init()
 		{id="sndvolbattle", group="snd", name="Battle volume", type="slider", min=0, max=100, step=2, value=tonumber(Spring.GetConfigInt("snd_volbattle",1) or 100)},
 		{id="sndvolui", group="snd", name="Interface volume", type="slider", min=0, max=100, step=2, value=tonumber(Spring.GetConfigInt("snd_volui",1) or 100)},
 		{id="sndvolunitreply", group="snd", name="Unit reply volume", type="slider", min=0, max=100, step=2, value=tonumber(Spring.GetConfigInt("snd_volunitreply",1) or 100)},
-		{id="sndvolmusic", group="snd", name="Music volume", type="slider", min=0, max=100, step=2, value=tonumber(Spring.GetConfigInt("snd_volmusic",1) or 100)},
+		{id="sndvolmusic", group="snd", name="Music volume", type="slider", min=0, max=100, step=2, value=tonumber(Spring.GetConfigInt("snd_volmusic",1) or 20)},
 		{id="dynamicmusic", group="snd", name="Dynamic Music", type="bool", value=tonumber(Spring.GetConfigInt("evo_dynamicmusic",1) or 1) == 1, description="If enabled, Music trackks will dynamically switch between war and peace depending on what is going on at that moment."},
 		{id="interruptmusic", group="snd", name="Dynamic Music Interruption", type="bool", value=tonumber(Spring.GetConfigInt("evo_interruptmusic",1) or 1) == 1, description="If enabled, Music tracks will fade out and switch from peace to war \nand vice versa at that moment instead of allowing the entire peace or war track to finish first."},
 		--{id="sndairabsorption", group="snd", name="Air absorption", type="slider", min=0, max=0.5, step=0.01, value=tonumber(Spring.GetConfigInt("snd_airAbsorption",1) or.1)},
@@ -1793,7 +1793,7 @@ function init()
 		-- CONTROL
 		{id="camera", group="control", name="Camera", type="select", options={'fps','overhead','spring','rot overhead','free'}, value=(tonumber((Spring.GetConfigInt("CamMode",1)+1) or 2))},
 		{id="camerashake", group="control", widget="CameraShake", name="Camera shake", type="bool", value=GetWidgetToggleValue("CameraShake"), description='Shakes camera on explosions'},
-		{id="scrollspeed", group="control", name="Zoom direction/speed", type="slider", min=-45, max=45, step=1, value=tonumber(Spring.GetConfigInt("ScrollWheelSpeed",1) or 25), description='Leftside of the slider means inversed scrolling direction!\nNOTE: Having the slider centered means no mousewheel zooming at all!'},
+		{id="scrollspeed", group="control", name="Zoom direction/speed", type="slider", min=-45, max=45, step=1, value=tonumber(Spring.GetConfigInt("ScrollWheelSpeed",1) or -25), description='Leftside of the slider means inversed scrolling direction!\nNOTE: Having the slider centered means no mousewheel zooming at all!'},
 
 		{id="hwcursor", group="control", name="Hardware cursor", type="bool", value=tonumber(Spring.GetConfigInt("hardwareCursor",1) or 1) == 1, description="When disabled: the mouse cursor refresh rate will be the same as your ingame fps"},
 		{id="crossalpha", group="control", name="Mouse cross alpha", type="slider", min=0, max=1, step=0.05, value=tonumber(Spring.GetConfigString("CrossAlpha",1) or 1), description='Opacity of mouse icon in center of screen when you are in camera pan mode\n\n(The\'icon\' has a dot in center with 4 arrows pointing in all directions)'},
