@@ -141,6 +141,9 @@ local weaponDefs                  = {
 		turret                    = true,
 		weaponVelocity            = 1500,
 		waterweapon		          = true,
+		customparams             = {
+			nofriendlyfire	     = 1,
+			nocosttofire		 = true,
 		damage                    = {
 			default               = weapon1Damage,
 		},
