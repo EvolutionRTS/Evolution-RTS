@@ -492,9 +492,9 @@ function widget:GameFrame(n)
 				warMeter = warMeter - 3
 			end
 			if interruptMusic == 1 then
-				if tracks == peaceTracks and warMeter >= 200 then
+				if tracks == peaceTracks and warMeter >= 200 and fadeIn == false and fadeOut == false then
 					fadeOut = true
-				elseif tracks == warTracks and warMeter <= 0 then
+				elseif tracks == warTracks and warMeter <= 0 and fadeIn == false and fadeOut == false  then
 					fadeOut = true
 				end
 			end
