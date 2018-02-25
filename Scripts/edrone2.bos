@@ -3,7 +3,7 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece base, firepoint1, frontengines, fengine1, fengine2, rearengines, rengine1, rengine2;
+piece base, firepoint1, frontengines, fengine1, fengine2, rearengines, rengine1, rengine2, turret, barrel1;
 
 static-var  moving, flames;
 
@@ -84,25 +84,38 @@ MoveRate2()
  	turn rearengines to x-axis <0.000000> speed <150.000000>;
 }
 
+RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
+{ 
+	sleep 3000; 
+	turn turret to y-axis <0> speed <60>;
+	turn barrel1 to x-axis <0> speed <30>;  
+} 
+
 AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
-{
-signal SIG_AIM; 
-set-signal-mask SIG_AIM;
-return (1); 
+{ 
+	signal SIG_AIM; 
+	set-signal-mask SIG_AIM; 
+	turn turret to y-axis heading speed <500>;
+	turn barrel1 to x-axis <0> - pitch speed <500>; 
+	wait-for-turn turret around y-axis;
+	wait-for-turn barrel1 around x-axis;  
+	start-script RestoreAfterDelay(); 
+	return (1); 
 } 
 
 FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
 { 
+emit-sfx 1024 + 0 from firepoint1;
 } 
 
 AimFromWeapon1(piecenum) // where it aims the weapon from 
 { 
-piecenum = base; 
+	piecenum = turret; 
 } 
 
 QueryWeapon1(piecenum) // where the shot is called from 
 { 
-piecenum = firepoint1; 
+	piecenum = firepoint1;  
 } 
 
 Create()
