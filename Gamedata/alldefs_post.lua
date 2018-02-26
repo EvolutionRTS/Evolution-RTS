@@ -158,7 +158,13 @@ function UnitDef_Post(name, uDef)
 	if uDef.shownanospray then
 		uDef.shownanospray = false
 	end
-		
+	
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	-- Turn off Chicken Egg drops
+	if uDef.corpse == "chicken_egg" then
+		uDef.corpse = nil
+	end
 end
 
 --------------------------------------------------------------------------------
