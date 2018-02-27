@@ -49,7 +49,7 @@ return {
 		objectname = "ChickenDefenseModels/chicken_droneb.s3o",
 		script = "ChickenDefenseScripts/chickenh1b.cob",
 		reclaimspeed = 400,
-		repairspeed = 2,
+		repairspeed = 1.5,
 		seismicsignature = 1,
 		selfdestructas = "WEAVER_DEATH",
 		side = "THUNDERBIRDS",
