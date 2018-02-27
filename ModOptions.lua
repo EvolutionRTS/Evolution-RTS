@@ -411,11 +411,12 @@ local options= {
 	{
 		key="mo_queendifficulty",
 		name="Queen Difficulty",
-		desc="How hard doth the Chicken Queen",
+		desc="How hard is the Chicken Queen?",
 		type="list",
-		def="n_chickenq",
+		def="automatic",
 		section="chicken_defense_options",
 		items={
+			{key="automatic", name="Automatic", desc="Automatically chooses queen difficulty based upon overall Chickens difficulty"},
 			{key="ve_chickenq", name="Very Easy", desc="Cakewalk"},
 			{key="e_chickenq", name="Easy", desc="Somewhat Challenging"},
 			{key="n_chickenq", name="Normal", desc="A Good Challenge"},

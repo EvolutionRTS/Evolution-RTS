@@ -1,3 +1,33 @@
+queenChoice = Spring.GetModOptions().mo_queendifficulty or "automatic"
+Spring.Echo(queenChoice)
+if queenChoice == "automatic" or queenChoice == nil then
+	local teams = Spring.GetTeamList()
+	for i =1, #teams do
+		local luaAI = Spring.GetTeamLuaAI(teams[i])
+		if luaAI == "Chicken: Very Easy" then
+			queenName = "ve_chickenq"
+		elseif luaAI == "Chicken: Easy" then 
+			queenName = "e_chickenq"
+		elseif luaAI == "Chicken: Normal" then
+			queenName = "n_chickenq"
+		elseif luaAI == "Chicken: Hard" then 
+			queenName = "h_chickenq"
+		elseif luaAI == "Chicken: Very Hard" then
+			queenName = "vh_chickenq"
+		elseif luaAI == "Chicken: Epic!" then
+			queenName = "epic_chickenq"
+		elseif luaAI == "Chicken: Custom" then
+			queenName = "n_chickenq"
+		elseif luaAI == "Chicken: Survival" then
+			queenName = "n_chickenq"
+		end
+	end
+else
+	queenName = Spring.GetModOptions().mo_queendifficulty or "n_chickenq"
+end
+
+Spring.Echo(queenName)
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 maxChicken           = tonumber(Spring.GetModOptions().mo_maxchicken) or 400
@@ -10,7 +40,6 @@ spawnSquare          = 90       -- size of the chicken spawn square centered on 
 spawnSquareIncrement = 2         -- square size increase for each unit spawned
 burrowName           = "roost"   -- burrow unit name
 maxAge               = 300      -- default chicken die at this age, seconds
-queenName            = Spring.GetModOptions().mo_queendifficulty or "n_chickenq"
 burrowDef            = UnitDefNames[burrowName].id
 defenderChance       = 0.375      -- probability of spawning a single turret
 maxTurrets           = 3   		 -- Max Turrets per burrow
