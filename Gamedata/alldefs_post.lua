@@ -163,7 +163,7 @@ function UnitDef_Post(name, uDef)
 	--------------------------------------------------------------------------------
 	-- Turn off Chicken Egg drops
 	if uDef.corpse == "chicken_egg" then
-		uDef.corpse = nil
+		uDef.corpse = ""
 	end
 end
 
