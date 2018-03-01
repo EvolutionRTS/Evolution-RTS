@@ -100,7 +100,7 @@ return {
 				sizedecay = 0,
 				soundhit = "ChickenDefenseSounds/e16",
 				soundstart = "ChickenDefenseSounds/bigchickenroar",
-				sprayangle = 4096,
+				sprayangle = 6000,
 				tolerance = 5000,
 				turret = true,
 				weapontimer = 0.2,
