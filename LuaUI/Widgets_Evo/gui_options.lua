@@ -256,7 +256,7 @@ local textMargin	= 0.25
 local lineWidth		= 0.0625
 
 local posX = 0.947
-local posY = 0.965
+local posY = 0.970
 local buttonGL
 local startPosX = posX
 
@@ -328,14 +328,15 @@ end
 
 function DrawButton()
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
-	RectRound(0,0,4.5,1.05,0.25, 2,2,0,0)
+	gl.Color(0,0,0,0.8) 
+	RectRound(-1,-0.5,5.5,1.5,0.25, 2,2,2,2)
 	local vertices = {
 		{v = {0, 1, 0}},
 		{v = {0, 0, 0}},
 		{v = {1, 0, 0}},
 	}
 	glShape(GL_LINE_STRIP, vertices)
-  glText("[ Options ]", textMargin, textMargin, textSize, "no")
+  glText("Settings", textMargin, textMargin, textSize, "nos")
 end
 	
 function lines(str)
