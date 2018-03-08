@@ -3,16 +3,16 @@
 --
 
 function widget:GetInfo()
-    return {
-        name      = "GFX Fog",
-        version   = 3,
-        desc      = "Fog Drawing widget",
-        author    = "trepan, user, aegis, jK, widget adaptation by Doo",
-        date      = "2008-2011",
-        license   = "GNU GPL, v2 or later",
-        layer     = 1,
-        enabled   = true
-    }
+  return {
+    name      = "GFX Fog",
+    version   = 3,
+    desc      = "Fog Drawing widget",
+    author    = "trepan, user, aegis, jK, widget adaptation by Doo",
+    date      = "2008-2011",
+    license   = "GNU GPL, v2 or later",
+    layer     = 1,
+    enabled   = true
+  }
 end
 
 local timeCyclesWeatherEffects = Spring.GetConfigInt("evo_timecyclesweathereffects", 0)
@@ -25,59 +25,59 @@ end
 -- Config
 mapcfg = {}
 mapcfg.custom = {
-    fog = {
-        color    = {gl.GetAtmosphere("fogColor")},
-        height   = tostring((1-gl.GetAtmosphere("fogStart"))*100).."%", --// allows either absolue sizes or in percent of map's MaxHeight
-        fogatten = 0.00125,
+		fog = {
+			color    = {gl.GetAtmosphere("fogColor")},
+			height   = tostring((1-gl.GetAtmosphere("fogStart"))*100).."%", --// allows either absolute sizes or in percent of map's MaxHeight
+			fogatten = 0.00125,
 
-    }
-}
-GroundFogDefs = {}
+		}
+		}
+GroundFogDefs = {}		
 local GroundFogDefs = mapcfg.custom.fog
 
 function GetConfig()
-    mapcfg = {}
-    mapcfg.custom = {
-        fog = {
-            color    = {gl.GetAtmosphere("fogColor")},
-            height   = tostring((1-gl.GetAtmosphere("fogStart"))*100).."%", --// allows either absolue sizes or in percent of map's MaxHeight
-            fogatten = 0.00125,
-        }
-    }
-    GroundFogDefs = {}
-    GroundFogDefs = mapcfg.custom.fog
-    if GroundFogDefs then
-        if (GroundFogDefs.height == "auto") then
-            local min,max = Spring.GetGroundExtremes()
-            GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
-        elseif (GroundFogDefs.height:match("(%d+)%%")) then
-            local min,max = Spring.GetGroundExtremes()
-            local percent = GroundFogDefs.height:match("(%d+)%%")
-            GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
-        end
-    end
+mapcfg = {}
+mapcfg.custom = {
+		fog = {
+			color    = {gl.GetAtmosphere("fogColor")},
+			height   = tostring((1-gl.GetAtmosphere("fogStart"))*100).."%", --// allows either absolute sizes or in percent of map's MaxHeight
+			fogatten = 0.00125,
+		}
+		}
+GroundFogDefs = {}		
+GroundFogDefs = mapcfg.custom.fog
+if GroundFogDefs then
+if (GroundFogDefs.height == "auto") then
+	local min,max = Spring.GetGroundExtremes() 
+	GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
+elseif (GroundFogDefs.height:match("(%d+)%%")) then
+	local min,max = Spring.GetGroundExtremes() 
+	local percent = GroundFogDefs.height:match("(%d+)%%")
+	GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
+end
+end
 
-    fogHeight    = GroundFogDefs.height
-    fogColor     = GroundFogDefs.color
-    fogAtten     = GroundFogDefs.fogatten
-    fr,fg,fb     = unpack(fogColor)
+fogHeight    = GroundFogDefs.height
+fogColor     = GroundFogDefs.color
+fogAtten     = GroundFogDefs.fogatten
+fr,fg,fb     = unpack(fogColor)
 
-    assert(type(fogHeight) == "number")
-    assert(type(fr) == "number")
-    assert(type(fg) == "number")
-    assert(type(fb) == "number")
-    assert(type(fogAtten) == "number")
+assert(type(fogHeight) == "number")
+assert(type(fr) == "number")
+assert(type(fg) == "number")
+assert(type(fb) == "number")
+assert(type(fogAtten) == "number")
 end
 
 if GroundFogDefs then
-    if (GroundFogDefs.height == "auto") then
-        local min,max = Spring.GetGroundExtremes()
-        GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
-    elseif (GroundFogDefs.height:match("(%d+)%%")) then
-        local min,max = Spring.GetGroundExtremes()
-        local percent = GroundFogDefs.height:match("(%d+)%%")
-        GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
-    end
+if (GroundFogDefs.height == "auto") then
+	local min,max = Spring.GetGroundExtremes() 
+	GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
+elseif (GroundFogDefs.height:match("(%d+)%%")) then
+	local min,max = Spring.GetGroundExtremes() 
+	local percent = GroundFogDefs.height:match("(%d+)%%")
+	GroundFogDefs.height = max * (1-gl.GetAtmosphere("fogStart"))
+end
 end
 
 fogHeight    = GroundFogDefs.height
@@ -163,10 +163,10 @@ local GLSLRenderer = true
 local forceNonGLSL = false -- force using the non-GLSL renderer
 local post83 = false
 do
-    post83 = true
+	post83 = true
 end
 if (forceNonGLSL) then
-    GLSLRenderer = false
+	GLSLRenderer = false
 end
 
 
@@ -196,28 +196,28 @@ local uniformViewPrjInv
 ----a simple plane, very complete, would look good with shadows, reflex and stuff.
 
 local function DrawPlaneModel()
-    local layers = (fogHeight - (gnd_min+50)) / 50
+  local layers = (fogHeight - (gnd_min+50)) / 50
 
-    glColor(fr,fg,fb,50*fogAtten)
-    glDepthTest(true)
-    glBlending(true)
+  glColor(fr,fg,fb,50*fogAtten)
+  glDepthTest(true)
+  glBlending(true)
 
-    glBeginEnd(GL_QUADS,function()
-        for h = gnd_min+50,fogHeight,50 do
-            local l = -mx*4
-            local r = mx + mx*4
-            local t = -mz*4
-            local b = mz + mz*4
-            glVertex(l, h, t)
-            glVertex(r, h, t)
-            glVertex(r, h, b)
-            glVertex(l, h, b)
-        end
-    end)
+  glBeginEnd(GL_QUADS,function()
+    for h = gnd_min+50,fogHeight,50 do
+      local l = -mx*4
+      local r = mx + mx*4
+      local t = -mz*4
+      local b = mz + mz*4
+      glVertex(l, h, t)
+      glVertex(r, h, t)
+      glVertex(r, h, b)
+      glVertex(l, h, b)
+    end
+  end)
 
-    glDepthTest(false)
-    glBlending(false)
-    glColor(1,1,1,1)
+  glDepthTest(false)
+  glBlending(false)
+  glColor(1,1,1,1)
 end
 
 
@@ -226,22 +226,22 @@ end
 -- fog rendering
 
 local function FogSlices()
-    local h = 8*(math.sin(time()/1.2)) + 30*(math.sin(time()/7.3)) - 30
-    glPushMatrix()
-    glTranslate(0,h,0)
-    glCallList(fog)
-    glPopMatrix()
+	local h = 8*(math.sin(time()/1.2)) + 30*(math.sin(time()/7.3)) - 30
+	glPushMatrix()
+		glTranslate(0,h,0)
+			glCallList(fog)
+	glPopMatrix()
 end
 
 local function FogFullscreen()
-    local camY = select(2, spGetCameraPosition())
-    local inFogH = fogHeight - camY
+	local camY = select(2, spGetCameraPosition())
+	local inFogH = fogHeight - camY
 
-    if (inFogH > fogHeight * 0.1) then
-        glColor(fr,fg,fb, math.min(0.8, inFogH * fogAtten))
-        glRect(0,0,vsx,vsy)
-        glColor(1,1,1,1)
-    end
+	if (inFogH > fogHeight * 0.1) then
+		glColor(fr,fg,fb, math.min(0.8, inFogH * fogAtten))
+		glRect(0,0,vsx,vsy)
+		glColor(1,1,1,1)
+	end
 end
 
 
@@ -249,27 +249,28 @@ end
 --------------------------------------------------------------------------------
 
 function widget:ViewResize()
-    vsx, vsy = gl.GetViewSizes()
-    if (Spring.GetMiniMapDualScreen()=='left') then
-        vsx=vsx/2;
-    end
-    if (Spring.GetMiniMapDualScreen()=='right') then
-        vsx=vsx/2
-    end
+	vsx, vsy = gl.GetViewSizes()
+	if (Spring.GetMiniMapDualScreen()=='left') then
+		vsx=vsx/2;
+	end
+	if (Spring.GetMiniMapDualScreen()=='right') then
+		vsx=vsx/2
+	end
 
-    if (depthTexture) then
-        glDeleteTexture(depthTexture)
-    end
+	if (depthTexture) then
+		glDeleteTexture(depthTexture)
+		depthTexture = nil
+	end
 
-    depthTexture = glCreateTexture(vsx, vsy, {
-        format = GL_DEPTH_COMPONENT24,
-        min_filter = GL_NEAREST,
-        mag_filter = GL_NEAREST,
-    })
+	depthTexture = glCreateTexture(vsx, vsy, {
+		format = GL_DEPTH_COMPONENT24,
+		min_filter = GL_NEAREST,
+		mag_filter = GL_NEAREST,
+	})
 
-    if (depthTexture == nil) then
-        spEcho("Removing fog widget, bad depth texture")
-    end
+	if (depthTexture == nil) then
+		spEcho("Removing fog widget, bad depth texture")
+	end
 end
 
 widget:ViewResize()
@@ -343,11 +344,11 @@ local fragSrc = ([[
 
 
 if (post83) then
-    fragSrc = '#define USE_INVERSEMATRIX\n' .. fragSrc
+  fragSrc = '#define USE_INVERSEMATRIX\n' .. fragSrc
 end
 
 if (debugGfx) then
-    fragSrc = '#define DEBUG_GFX\n' .. fragSrc
+  fragSrc = '#define DEBUG_GFX\n' .. fragSrc
 end
 
 
@@ -355,59 +356,60 @@ end
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
-    GetConfig()
-    if (enabled) then
-        if ((not forceNonGLSL) and Spring.GetMiniMapDualScreen()~='left') then --FIXME dualscreen
-            if (not glCreateShader) then
-                spEcho("Shaders not found, reverting to non-GLSL widget")
-                GLSLRenderer = false
-        else
-            depthShader = glCreateShader({
-                vertex = vertSrc,
-                fragment = fragSrc,
-                uniformInt = {
-                    tex0 = 0,
-                },
-            })
-            Spring.Echo(depthShader)
+GetConfig()
+	if (enabled) then
+		if ((not forceNonGLSL) and Spring.GetMiniMapDualScreen()~='left') then --FIXME dualscreen
+			if (not glCreateShader) then
+				spEcho("Shaders not found, reverting to non-GLSL widget")
+				GLSLRenderer = false
+			else
 
-            if (not depthShader) then
-                spEcho(glGetShaderLog())
-                spEcho("Bad shader, reverting to non-GLSL widget.")
-                GLSLRenderer = false
-            else
-                uniformEyePos       = glGetUniformLocation(depthShader, 'eyePos')
-                uniformNoise        = glGetUniformLocation(depthShader, 'noise')
-                uniformViewPrjInv   = glGetUniformLocation(depthShader, 'viewProjectionInv')
-            end
-        end
-        else
-            GLSLRenderer = false
-        end
-        if (not GLSLRenderer) then
-            fog = glCreateList(DrawPlaneModel)
-        end
-    else
+	if depthShader then
+		gl.DeleteShader(depthShader)
+		depthShader = nil
+	end
 
-    end
+				depthShader = glCreateShader({
+					vertex = vertSrc,
+					fragment = fragSrc,
+					uniformInt = {
+						tex0 = 0,
+					},
+				})
+				Spring.Echo(depthShader)
+
+				if (not depthShader) then
+					spEcho(glGetShaderLog())
+					spEcho("Bad shader, reverting to non-GLSL widget.")
+					GLSLRenderer = false
+				else
+					uniformEyePos       = glGetUniformLocation(depthShader, 'eyePos')
+					uniformNoise        = glGetUniformLocation(depthShader, 'noise')
+					uniformViewPrjInv   = glGetUniformLocation(depthShader, 'viewProjectionInv')
+				end
+			end
+		else
+			GLSLRenderer = false
+		end
+		if (not GLSLRenderer) then
+			if (fog) then
+		gl.DeleteList(fog)
+		fog = nil
+	end
+
+			fog = glCreateList(DrawPlaneModel)
+		end
+	else
+
+	end
 end
 frame = 0
 function widget:Update()
-    if frame%30 == 0 then
-        GetConfig()
-        if (fog) then
-            gl.DeleteList(fog)
-            fog = nil
-        end
-        if (dl) then
-            gl.DeleteList(dl)
-            dl = nil
-        end
-        if depthShader then
-            gl.DeleteShader(depthShader)
-            depthShader = nil
-        end
-        vertSrc = [[
+if frame%30 == 0 then
+GetConfig()
+	vertSrc = nil
+	fragSrc = nil
+vertSrc = [[
 
   void main(void)
   {
@@ -416,7 +418,7 @@ function widget:Update()
   }
 ]]
 
-        fragSrc = ([[
+fragSrc = ([[
   const float fogAtten  = %f;
   const float fogHeight = %f;
   const vec3 fogColor   = vec3(%f, %f, %f);
@@ -470,60 +472,63 @@ function widget:Update()
     gl_FragColor.rgb += 0.030 * rand(seed);
   }
 ]]):format(fogAtten, fogHeight, fogColor[1], fogColor[2], fogColor[3])
-        if (post83) then
-            fragSrc = '#define USE_INVERSEMATRIX\n' .. fragSrc
-        end
-        if (debugGfx) then
-            fragSrc = '#define DEBUG_GFX\n' .. fragSrc
-        end
-        if (enabled) then
-            if ((not forceNonGLSL) and Spring.GetMiniMapDualScreen()~='left') then --FIXME dualscreen
-                if (not glCreateShader) then
-                    spEcho("Shaders not found, reverting to non-GLSL widget")
-                    GLSLRenderer = false
-            else
-                depthShader = glCreateShader({
-                    vertex = vertSrc,
-                    fragment = fragSrc,
-                    uniformInt = {
-                        tex0 = 0,
-                    },
-                })
-                Spring.Echo(depthShader)
+if (post83) then
+  fragSrc = '#define USE_INVERSEMATRIX\n' .. fragSrc
+end
+if (debugGfx) then
+  fragSrc = '#define DEBUG_GFX\n' .. fragSrc
+end
+	if (enabled) then
+		if ((not forceNonGLSL) and Spring.GetMiniMapDualScreen()~='left') then --FIXME dualscreen
+			if (not glCreateShader) then
+				spEcho("Shaders not found, reverting to non-GLSL widget")
+				GLSLRenderer = false
+			else
+				depthShader = glCreateShader({
+					vertex = vertSrc,
+					fragment = fragSrc,
+					uniformInt = {
+						tex0 = 0,
+					},
+				})
+				if (not depthShader) then
+					spEcho(glGetShaderLog())
+					spEcho("Bad shader, reverting to non-GLSL widget.")
+					GLSLRenderer = false
+				else
+					uniformEyePos       = glGetUniformLocation(depthShader, 'eyePos')
+					uniformNoise        = glGetUniformLocation(depthShader, 'noise')
+					uniformViewPrjInv   = glGetUniformLocation(depthShader, 'viewProjectionInv')
+				end
+			end
+		else
+			GLSLRenderer = false
+		end
+		if (not GLSLRenderer) then
+			if (fog) then
+		gl.DeleteList(fog)
+		fog = nil
+	end
 
-                if (not depthShader) then
-                    spEcho(glGetShaderLog())
-                    spEcho("Bad shader, reverting to non-GLSL widget.")
-                    GLSLRenderer = false
-                else
-                    uniformEyePos       = glGetUniformLocation(depthShader, 'eyePos')
-                    uniformNoise        = glGetUniformLocation(depthShader, 'noise')
-                    uniformViewPrjInv   = glGetUniformLocation(depthShader, 'viewProjectionInv')
-                end
-            end
-            else
-                GLSLRenderer = false
-            end
-            if (not GLSLRenderer) then
-                fog = glCreateList(DrawPlaneModel)
-            end
-        else
+			fog = glCreateList(DrawPlaneModel)
+		end
+	else
 
-        end
-    end
-    frame = frame + 1
+	end
+end
+frame = frame + 1
 end
 
 
 
 
 function widget:Shutdown()
-    if (GLSLRenderer) then
-        glDeleteTexture(depthTexture)
-        if (glDeleteShader) then
-            glDeleteShader(depthShader)
-        end
+  if (GLSLRenderer) then
+    glDeleteTexture(depthTexture)
+    if (glDeleteShader) then
+      glDeleteShader(depthShader)
     end
+  end
 end
 
 
@@ -534,49 +539,49 @@ end
 --
 
 local function cross(a, b)
-    return {
-        (a[2] * b[3]) - (a[3] * b[2]),
-        (a[3] * b[1]) - (a[1] * b[3]),
-        (a[1] * b[2]) - (a[2] * b[1])
-    }
+  return {
+    (a[2] * b[3]) - (a[3] * b[2]),
+    (a[3] * b[1]) - (a[1] * b[3]),
+    (a[1] * b[2]) - (a[2] * b[1])
+  }
 end
 
 local function add(a, b)
-    return {
-        a[1] * b[1],
-        a[2] * b[2],
-        a[3] * b[3]
-    }
+  return {
+    a[1] * b[1],
+    a[2] * b[2],
+    a[3] * b[3]
+  }
 end
 
 local function dot(a, b)
-    return (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3])
+  return (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3])
 end
 
 
 local function normalize(a)
-    local len = math.sqrt((a[1] * a[1]) + (a[2] * a[2]) + (a[3] * a[3]))
-    if (len == 0.0) then
-        return a
-    end
-    a[1] = a[1] / len
-    a[2] = a[2] / len
-    a[3] = a[3] / len
-    return { a[1], a[2], a[3] }
+  local len = math.sqrt((a[1] * a[1]) + (a[2] * a[2]) + (a[3] * a[3]))
+  if (len == 0.0) then
+    return a
+  end
+  a[1] = a[1] / len
+  a[2] = a[2] / len
+  a[3] = a[3] / len
+  return { a[1], a[2], a[3] }
 end
 
 
 local function scale(a, s)
-    a[1] = a[1] * s
-    a[2] = a[2] * s
-    a[3] = a[3] * s
-    return { a[1], a[2], a[3] }
+  a[1] = a[1] * s
+  a[2] = a[2] * s
+  a[3] = a[3] * s
+  return { a[1], a[2], a[3] }
 end
 
 
 
 local function fract(x)
-    return select(2, math.modf(x,1))
+	return select(2, math.modf(x,1))
 end
 
 
@@ -585,84 +590,89 @@ end
 local dl
 
 local function DrawFogNew()
-    GetConfig()
-    --//FIXME handle dualscreen correctly!
+	GetConfig()
+	--//FIXME handle dualscreen correctly!
 
-    -- copy the depth buffer
-    if (depthTexture) then
-        glDeleteTexture(depthTexture)
-        depthTexture = nil
-    end
+	-- copy the depth buffer
+	if (depthTexture) then
+		glDeleteTexture(depthTexture)
+		depthTexture = nil
+	end
+	
+	depthTexture = glCreateTexture(vsx, vsy, {
+		format = GL_DEPTH_COMPONENT24,
+		min_filter = GL_NEAREST,
+		mag_filter = GL_NEAREST,
+	})
+	
+	glCopyToTexture(depthTexture, 0, 0, 0, 0, vsx, vsy) --FIXME scale down?
 
-    depthTexture = glCreateTexture(vsx, vsy, {
-        format = GL_DEPTH_COMPONENT24,
-        min_filter = GL_NEAREST,
-        mag_filter = GL_NEAREST,
-    })
+	-- setup the shader and its uniform values
+	
+	glUseShader(depthShader)
 
-    glCopyToTexture(depthTexture, 0, 0, 0, 0, vsx, vsy) --FIXME scale down?
+	-- set uniforms
+	local cpx, cpy, cpz = spGetCameraPosition()
+	glUniform(uniformEyePos, cpx, cpy, cpz)
 
-    -- setup the shader and its uniform values
+	local noise1 = (spGetDrawFrame() / 2521) % 1 -- why 2521? it's prime ;)
+	glUniform(uniformNoise, noise1 + fract(cpx), noise1 + fract(cpz))
 
-    glUseShader(depthShader)
+	if (post83) then
+		glUniformMatrix(uniformViewPrjInv,  "viewprojectioninverse")
+	end
+	if dl then
+	gl.DeleteList(dl)
+	dl = nil
+	end
+	if (not dl) then
+		dl = gl.CreateList(function()
+			-- render a full screen quad
+			glTexture(0, depthTexture)
+			glTexture(0, false)
+			gl.TexRect(-1, -1, 1, 1, 0, 0, 1, 1)
 
-    -- set uniforms
-    local cpx, cpy, cpz = spGetCameraPosition()
-    glUniform(uniformEyePos, cpx, cpy, cpz)
+			--// finished
+			glUseShader(0)
+		end)
+	end
 
-    local noise1 = (spGetDrawFrame() / 2521) % 1 -- why 2521? it's prime ;)
-    glUniform(uniformNoise, noise1 + fract(cpx), noise1 + fract(cpz))
-
-    if (post83) then
-        glUniformMatrix(uniformViewPrjInv,  "viewprojectioninverse")
-    end
-    if dl then
-        gl.DeleteList(dl)
-        dl = nil
-    end
-    if (not dl) then
-        dl = gl.CreateList(function()
-            -- render a full screen quad
-            glTexture(0, depthTexture)
-            glTexture(0, false)
-            gl.TexRect(-1, -1, 1, 1, 0, 0, 1, 1)
-
-            --// finished
-            glUseShader(0)
-        end)
-    end
-
-    glCallList(dl)
+	glCallList(dl)
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 function widget:DrawWorld()
-    GetConfig()
-    if (GLSLRenderer) then
-        if (debugGfx) then glBlending(GL_SRC_ALPHA, GL_ONE) end
-        depthShader = glCreateShader({
-            vertex = vertSrc,
-            fragment = fragSrc,
-            uniformInt = {
-                tex0 = 0,
-            },
-        })
-        uniformEyePos       = glGetUniformLocation(depthShader, 'eyePos')
-        uniformNoise        = glGetUniformLocation(depthShader, 'noise')
-        uniformViewPrjInv   = glGetUniformLocation(depthShader, 'viewProjectionInv')
-        DrawFogNew()
-        if (debugGfx) then glBlending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) end
-    else
-        FogSlices()
-    end
+	GetConfig()
+	if (GLSLRenderer) then
+		if (debugGfx) then glBlending(GL_SRC_ALPHA, GL_ONE) end
+	if depthShader then
+		gl.DeleteShader(depthShader)
+		depthShader = nil
+	end
+
+						depthShader = glCreateShader({
+					vertex = vertSrc,
+					fragment = fragSrc,
+					uniformInt = {
+						tex0 = 0,
+					},
+				})
+									uniformEyePos       = glGetUniformLocation(depthShader, 'eyePos')
+					uniformNoise        = glGetUniformLocation(depthShader, 'noise')
+					uniformViewPrjInv   = glGetUniformLocation(depthShader, 'viewProjectionInv')
+		DrawFogNew()
+		if (debugGfx) then glBlending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) end
+	else
+		FogSlices()
+	end
 end
 
 if (not GLSLRenderer) then
-    function widget:DrawScreenEffects()
-        FogFullscreen()
-    end
+	function widget:DrawScreenEffects()
+		FogFullscreen()
+	end
 end
 
 --------------------------------------------------------------------------------
