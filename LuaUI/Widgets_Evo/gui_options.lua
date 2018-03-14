@@ -991,6 +991,8 @@ function applyOptionValue(i, skipRedrawWindow)
 			end
 		elseif id == 'resourceprompts' then
 			Spring.SetConfigInt("evo_resourceprompts",value)
+		elseif id == 'simplifiedresourcebar' then
+			Spring.SetConfigInt("evo_simplifiedresourcebar",value)
 		elseif id == 'buildpichelp' then
 			Spring.SetConfigInt("evo_buildpichelp",value)
 		elseif id == 'dynamicmusic' then
@@ -1823,6 +1825,7 @@ function init()
 		{id="buildpichelp", group="ui", name="Flashing Buildpic Help", type="bool", value=tonumber(Spring.GetConfigInt("evo_buildpichelp",1) or 1) == 1, description="Flashes relevant build menu items when resources are in a crisis situation"},
 
 		{id="resourceprompts", group="ui", name="Audio/Visual Resource Prompts", type="bool", value=tonumber(Spring.GetConfigInt("evo_resourceprompts",1) or 1) == 1, description="If enabled, messages will be sent to the chat as well as\naudio cues when your resources need attention"},
+		{id="simplifiedresourcebar", group="ui", name="Simplified Resource Bar", type="bool", value=tonumber(Spring.GetConfigInt("evo_simplifiedresourcebar",1) or 1) == 1, description="Removes extra information from the resource bar"},
 
 		--{id="fancyselunits", group="gfx", widget="Fancy Selected Units", name="Fancy Selected Units", type="bool", value=GetWidgetToggleValue("Fancy Selected Units"), description=''},
 

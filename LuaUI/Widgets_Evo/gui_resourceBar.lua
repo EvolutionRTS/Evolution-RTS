@@ -50,6 +50,8 @@ local supplyWarning = false
 local energyWarning = false
 local metalWarning = false
 
+simplifiedResourceBar = Spring.GetConfigInt("evo_simplifiedresourcebar", 1)
+
 -- Avoids spamming of income increased notification
 local incomeIncreased = false
 
@@ -156,6 +158,7 @@ function widget:GameFrame(n)
 	if n%450 == 4 then
 		local _, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
 		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
+		simplifiedResourceBar = Spring.GetConfigInt("evo_simplifiedresourcebar", 1)
 
 		--Assume that if it isn't set, resourcePrompts is true
 		if resourcePrompts == nil then
@@ -381,6 +384,10 @@ function generateDisplayList()
 end
 
 function generateDisplayList2()
+	local energyIncomeColor = green
+	local metalIncomeColor = green
+	local energyPosNeg = "+"
+	local metalPosNeg = "+"
 	if displayList2 ~= nil then
 		gl.DeleteList(displayList2)
 	end
@@ -434,8 +441,21 @@ function generateDisplayList2()
 		end
 		gl.TexRect(supplyOffset,0,supplyOffset+(supplyBarWidth*percentage),height/6)
 		
-		supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
-	  gl.Text(supplyStr, supplyOffset+supplyBarWidth, textOffsetY, FontSize, "onr")
+		if simplifiedResourceBar == 1 then
+			if su < (sm * 0.50) then
+				supplyUsedColor = green
+			elseif su > (sm * 0.50) then
+				supplyUsedColor = orange
+				if su >= (sm * 0.75) then
+					supplyUsedColor = red
+				end
+			end
+			supplyStr = supplyUsedColor .. su .. white .. "/" .. sm .. " "
+		else
+			supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
+		end
+		gl.Text(supplyStr, supplyOffset+supplyBarWidth, textOffsetY, FontSize, "onr")
+		
 		
 		-- energy bar
 		r, g, b = 0, 0, 0
@@ -465,7 +485,19 @@ function generateDisplayList2()
 		gl.TexRect(energyOffset+(energyBarWidth*energyPercentage)+glowSize+glowSize,-glowSize,energyOffset+(energyBarWidth*energyPercentage),(height/6)+glowSize)
 		
 		gl.Texture(barTexture)
-		energyStr = green .. "+" .. tostring(math.round(ei,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep,1)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
+		
+		if simplifiedResourceBar == 1 then
+			if ei > ep then
+				energyIncomeColor = green
+				energyPosNeg = "+"
+			else
+				energyIncomeColor = red
+				energyPosNeg = ""
+			end
+			energyStr = energyIncomeColor .. energyPosNeg .. tostring(math.round(ei - ep,1)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
+		else
+			energyStr = green .. "+" .. tostring(math.round(ei,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep,1)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
+		end
 	  gl.Text(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
 		
 		-- metal bar
@@ -517,7 +549,18 @@ function generateDisplayList2()
 			end
 		end
 		
-		metalStr = orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ") "
+		if simplifiedResourceBar == 1 then
+			if mi > mp then
+				metalIncomeColor = green
+				metalPosNeg = "+"
+			else
+				metalIncomeColor = red
+				metalPosNeg = ""
+			end
+			metalStr = metalIncomeColor .. metalPosNeg .. tostring(math.round(mi - mp,1)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ") "
+		else
+			metalStr = orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ") "
+		end
 	  gl.Text(metalStr, metalOffset+metalBarWidth, textOffsetY, FontSize, "onr")
 	    
 	  gl.Texture(false)
