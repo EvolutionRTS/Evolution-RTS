@@ -34,7 +34,7 @@ local spSetTeamRulesParam = Spring.SetTeamRulesParam
 --------------------------------------------------------------------------------
 -- Configuration
 
-local SUPPLY_CAP = tonumber(Spring.GetModOptions().supplycap) or 200
+local SUPPLY_CAP = tonumber(Spring.GetModOptions().supplycap) or 400
 local INTRINSIC_SUPPLY = tonumber(Spring.GetModOptions().intrinsicsupply) or 0
 
 --------------------------------------------------------------------------------

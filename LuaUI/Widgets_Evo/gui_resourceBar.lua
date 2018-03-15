@@ -388,6 +388,7 @@ function generateDisplayList2()
 	local metalIncomeColor = green
 	local energyPosNeg = "+"
 	local metalPosNeg = "+"
+	local supplyAvailableColor = white
 	if displayList2 ~= nil then
 		gl.DeleteList(displayList2)
 	end
@@ -450,7 +451,15 @@ function generateDisplayList2()
 					supplyUsedColor = red
 				end
 			end
-			supplyStr = supplyUsedColor .. su .. white .. "/" .. sm .. " "
+			if sm < maxSupply * 0.50 then
+				supplyAvailableColor = orange
+			elseif sm < maxSupply then
+				supplyAvailableColor = yellow
+			elseif sm == maxSupply then
+				supplyAvailableColor = green
+			end
+			
+			supplyStr = supplyUsedColor .. su .. white .. "/" .. supplyAvailableColor .. sm .. " "
 		else
 			supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
 		end
