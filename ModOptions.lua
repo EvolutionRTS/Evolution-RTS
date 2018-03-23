@@ -73,6 +73,18 @@ local options= {
 		type   = 'section',
 	},
 	{
+		key    = 'metalextractorcommunism',
+		name   = 'Metal Extractor Communism',
+		desc   = 'If enabled, then all metal income from Metal Extractors is split between allies. This means that it does not matter which ally owns the metal extractor, the entire team will benefit.',
+		type="list",
+		def="enabled",
+		section= "resourcing",
+		items={
+			{key="disabled", name="Disabled", desc="Turn off Metal Extractor Communism"},
+			{key="enabled", name="Enabled", desc="Metal Extractor income is split between allies."},
+		}
+	},
+	{
 		key    = 'mexincomemultiplier',
 		name   = 'Metal Extractors Income Multiplier',
 		desc   = 'Resource Node values are multiplied by this percentage.',
