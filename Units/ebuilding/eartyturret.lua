@@ -10,7 +10,7 @@ local armortype					 = [[building]]
 local techrequired				 = [[tech3]]
 
 local weapon1Damage               = 1000
-local weapon1AOE				  = 500
+local weapon1AOE				  = 50
 local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 local buildCostMetal 			  = 500
