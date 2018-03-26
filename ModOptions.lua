@@ -77,11 +77,11 @@ local options= {
 		name   = 'Metal Extractor Communism',
 		desc   = 'If enabled, then all metal income from Metal Extractors is split between allies. This means that it does not matter which ally owns the metal extractor, the entire team will benefit.',
 		type="list",
-		def="enabled",
+		def="disabled",
 		section= "resourcing",
 		items={
-			{key="disabled", name="Disabled", desc="Turn off Metal Extractor Communism"},
-			{key="enabled", name="Enabled", desc="Metal Extractor income is split between allies."},
+			{key="disabled", name="Disabled", desc="Metal Extractor income will NOT be split between allies."},
+			{key="enabled", name="Enabled", desc="Metal Extractor income will be split between allies."},
 		}
 	},
 	{

@@ -60,10 +60,10 @@ local metalSpots = {}
 local metalSpotsByPos = {}
 
 local MEX_DISTANCE = 500
-local communism = true
+local communism = false
 
-metalCommunism = Spring.GetModOptions().metalextractorcommunism or "Enabled"
-if metalCommunism ~= "Disabled" then
+metalCommunism = Spring.GetModOptions().metalextractorcommunism or "disabled"
+if metalCommunism == "enabled" then
 	communism = true -- pass a modoption here or whatever
 else
 	communism = false
