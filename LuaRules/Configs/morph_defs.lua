@@ -65,6 +65,9 @@ local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
 local energyCost_eorb = 300
 local timeToBuild_eorb = energyCost_eorb * 0.10
 
+local energyCost_eartyturret = 800
+local timeToBuild_eartyturret = energyCost_eartyturret * 0.10
+
 
 local morphDefs = {
 	ecommander = {
@@ -700,6 +703,42 @@ Overseer]],
 			energy = energyCost_euwturret,
 			metal = 0,
 			text = [[+15% damage/hp buff, +15% faster reload]],
+			require = [[tech3]],
+		},
+	},
+	eartyturret = 	{
+		{
+			into = 'eartyturret_up1',
+			--require = 'etech1',
+			time = timeToBuild_eartyturret,
+			cmdname = [[Evolve]],
+			energy = energyCost_eartyturret,
+			metal = 0,
+			text = [[+20% damage/hp buff, +15% faster reload, Increased AOE]],
+			require = [[tech3]],
+		},
+	},	
+	eartyturret_up1 = 	{
+		{
+			into = 'eartyturret_up2',
+			--require = 'etech2',
+			time = timeToBuild_eartyturret,
+			cmdname = [[Evolve]],
+			energy = energyCost_eartyturret,
+			metal = 0,
+			text = [[+20% damage/hp buff, +15% faster reload, Increased AOE]],
+			require = [[tech3]],
+		},
+	},
+	eartyturret_up2 = 	{
+		{
+			into = 'eartyturret_up3',
+			--require = 'etech3',
+			time = timeToBuild_eartyturret,
+			cmdname = [[Evolve]],
+			energy = energyCost_eartyturret,
+			metal = 0,
+			text = [[+20% damage/hp buff, +15% faster reload, Increased AOE]],
 			require = [[tech3]],
 		},
 	},

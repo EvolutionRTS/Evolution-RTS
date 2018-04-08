@@ -1,18 +1,18 @@
--- UNITDEF -- EARTYTURRET --
+-- UNITDEF -- EARTYTURRET_up2 --
 --------------------------------------------------------------------------------
 
-unitName = [[eartyturret]]	
+unitName = [[eartyturret_up2]]	
 	
-isUpgraded = [[0]]
+isUpgraded = [[2]]
 
-humanName = [[Lobster]]
+humanName = [[Lobster MK III]]
 objectName = [[eartyturret.s3o]]
 script = [[eartyturret.cob]]
 
 tech = [[tech3]]
 armortype = [[building]]
 
-AreaOfEffect = 0
+AreaOfEffect = 400
 
 VFS.Include("units-configs-basedefs/basedefs/buildings/eartyturret_basedef.lua")
 
