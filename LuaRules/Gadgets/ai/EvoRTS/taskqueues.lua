@@ -43,10 +43,17 @@ end
 ---------------------------------------------------------------- LIFTER QUEUES
  
  function MoveToStartLocation()
-	if spGetAllyTeamStartBox(ai.allyId) ~= nil then
+		
+	Spring.Echo([[AI ID ]] .. ai.id .. [[ ]])
+	Spring.Echo([[AI allyID ]] .. ai.allyId .. [[ ]])
+	
+	if spGetAllyTeamStartBox(ai.allyId) ~= 0 then
 		local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(ai.allyId)
+		Spring.Echo([[AI startxmin ]] .. startxmin .. [[ ]])
+		Spring.Echo([[AI startzmin ]] .. startzmin .. [[ ]])
+		Spring.Echo([[AI startxmax ]] .. startxmax .. [[ ]])
+		Spring.Echo([[AI startzmax ]] .. startzmax .. [[ ]])
 		return { action = "move", position = {x = math.random(startxmin, startxmax), y = math.random(-200, 200), z = math.random(startzmin, startzmax)} }
-
 	else
 		return { action = "wait", frames = 1}
 	end
@@ -55,7 +62,7 @@ end
  
  function BuildMex()
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	if mc <= ms*0.5 or mi*2 <= me then
+	if mc <= ms*0.5 then
 		return "emetalextractor"
 	else
 		return { action = "wait", frames = 150}
@@ -154,7 +161,7 @@ end
 					elseif r == 3 then
 						return "eturretheavyai"
 					elseif r == 4 then
-						return "ejammer2"
+						return "ejammerai"
 					elseif r == 5 then
 						return "ekmar"
 					end
@@ -180,7 +187,7 @@ end
 					elseif r == 3 then
 						return "eturretheavyai"
 					elseif r == 4 then
-						return "ejammer2"
+						return "ejammerai"
 					elseif r == 5 then
 						return "ekmar"
 					end
@@ -213,7 +220,7 @@ end
 					elseif r == 3 then
 						return "eturretheavyai_up3"
 					elseif r == 4 then
-						return "ejammer2"
+						return "ejammerai"
 					elseif r == 5 then
 						return "ekmar"
 					end
@@ -323,7 +330,7 @@ function RandomOverseer()
 					elseif r == 3 then
 						return "eturretheavyai"
 					elseif r == 4 then
-						return "ejammer2"
+						return "ejammerai"
 					elseif r == 5 then
 						return "ekmar"
 					end
@@ -349,7 +356,7 @@ function RandomOverseer()
 					elseif r == 3 then
 						return "eturretheavyai"
 					elseif r == 4 then
-						return "ejammer2"
+						return "ejammerai"
 					elseif r == 5 then
 						return "ekmar"
 					end
@@ -381,7 +388,7 @@ function RandomOverseer()
 					elseif r == 3 then
 						return "eturretheavyai_up3"
 					elseif r == 4 then
-						return "ejammer2"
+						return "ejammerai"
 					elseif r == 5 then
 						return "ekmar"
 					end
