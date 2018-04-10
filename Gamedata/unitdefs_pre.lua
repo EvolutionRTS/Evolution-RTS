@@ -74,6 +74,7 @@ end
 
 Shared.buildListAIOverseer = {
 	------------- Basic
+	[[ejammerai]],
 	[[eorb_up1]],
 	[[eorb_up2]],
 	[[eorb_up3]],

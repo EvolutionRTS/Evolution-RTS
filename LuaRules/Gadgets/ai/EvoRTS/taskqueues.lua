@@ -47,7 +47,7 @@ end
 	Spring.Echo([[AI ID ]] .. ai.id .. [[ ]])
 	Spring.Echo([[AI allyID ]] .. ai.allyId .. [[ ]])
 	
-	if spGetAllyTeamStartBox(ai.allyId) ~= 0 then
+	if spGetAllyTeamStartBox(ai.allyId) ~= nil then
 		local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(ai.allyId)
 		Spring.Echo([[AI startxmin ]] .. startxmin .. [[ ]])
 		Spring.Echo([[AI startzmin ]] .. startzmin .. [[ ]])
