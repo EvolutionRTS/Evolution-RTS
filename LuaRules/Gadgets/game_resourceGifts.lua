@@ -188,10 +188,18 @@ function gadget:GameFrame(n)
 	end
 
 	--Give the AI resources according to it's difficulty Setting
-	if n%160 == 1 then
+	if n%30 == 1 then
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
+				local aimexamount = Spring.GetTeamUnitDefCount(TeamID, UnitDefNames.emetalextractor.id)
+					if GG.TechCheck("tech1", TeamID) == true then
+						Spring.AddTeamResource(TeamID,"m", aimexamount)
+					elseif GG.TechCheck("tech2", TeamID) == true then
+						Spring.AddTeamResource(TeamID,"m", aimexamount*2)
+					elseif GG.TechCheck("tech3", TeamID) == true then
+						Spring.AddTeamResource(TeamID,"m", aimexamount*3)
+					end
 				Spring.AddTeamResource(TeamID,"m", aiCheatHandicapMetal[modOptions.aidifficulty or "easy"])
 			end
 		end

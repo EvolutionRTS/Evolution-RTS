@@ -38,8 +38,31 @@ end
 if aiDifficulty == nil then
 	aiDifficulty = "easy"
 end
----------------------------------------------------------------- LIFTER QUEUES
 
+
+---------------------------------------------------------------- LIFTER QUEUES
+ 
+ function MoveToStartLocation()
+	if spGetAllyTeamStartBox(ai.allyId) ~= nil then
+		local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(ai.allyId)
+		return { action = "move", position = {x = math.random(startxmin, startxmax), y = math.random(-200, 200), z = math.random(startzmin, startzmax)} }
+
+	else
+		return { action = "wait", frames = 1}
+	end
+end
+
+ 
+ function BuildMex()
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
+	if mc <= ms*0.5 or mi*2 <= me then
+		return "emetalextractor"
+	else
+		return { action = "wait", frames = 150}
+	end
+end
+ 
+ 
  function RandomLift()
 	--Locals
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
@@ -79,16 +102,6 @@ end
 				return "eorb_up3"
 			end
 		end
-	elseif mc <= 10 or mi*2 <= me then
-			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "emetalextractor"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "emetalextractor_up1"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
-				return "emetalextractor_up2"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
-				return "emetalextractor_up3"
-			end
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
 	elseif su >= sm-20 and sm ~= 400 then
@@ -607,11 +620,7 @@ local idlelist = {
 }
 
 local overseerlistfirst = {
-	"elifterai",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
+	MoveToStartLocation,
 	"emetalextractor",
 	"emine",
 	"elifterai",
@@ -643,9 +652,7 @@ local overseerorders = {
 }
 
 local lifterlist = {
-	RandomLift,
-	RandomLift,
-	RandomLift,
+	BuildMex,
 	RandomLift,
 	"emine",
 }
