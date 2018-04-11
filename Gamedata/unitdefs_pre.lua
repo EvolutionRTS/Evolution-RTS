@@ -124,6 +124,8 @@ Shared.buildListAIOverseer = {
 	[[eamphibfac]],
 	[[eairplant]],
 	----------------- Upgrade 0
+	[[eraider]],
+	[[edrone]],
 	[[elighttank3]],
 	[[eriottank2]],
 	[[eheavytank3]],
@@ -158,6 +160,8 @@ Shared.buildListAIOverseer = {
 	[[edrone]],
 	[[ehbotkarganneth]],
 	----------------- Upgrade 1
+	[[eraider_up1]],
+	[[edrone_up1]],
 	[[elighttank3_up1]],
 	[[eriottank2_up1]],
 	[[eheavytank3_up1]],
@@ -190,6 +194,8 @@ Shared.buildListAIOverseer = {
 	[[ekrow_up1]],
 	[[ehbotkarganneth_up1]],
 	----------------- Upgrade 2
+	[[eraider_up2]],
+	[[edrone_up2]],
 	[[elighttank3_up2]],
 	[[eriottank2_up2]],
 	[[eheavytank3_up2]],
@@ -222,6 +228,8 @@ Shared.buildListAIOverseer = {
 	[[ekrow_up2]],
 	[[ehbotkarganneth_up2]],
 	----------------- Upgrade 3
+	[[eraider_up3]],
+	[[edrone_up3]],
 	[[elighttank3_up3]],
 	[[eriottank2_up3]],
 	[[eheavytank3_up3]],

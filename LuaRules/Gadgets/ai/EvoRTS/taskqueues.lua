@@ -39,33 +39,50 @@ if aiDifficulty == nil then
 	aiDifficulty = "easy"
 end
 
-
+local WaitRNG = math.random(0,500)
 ---------------------------------------------------------------- LIFTER QUEUES
  
- function MoveToStartLocation()
-		
-	Spring.Echo([[AI ID ]] .. ai.id .. [[ ]])
-	Spring.Echo([[AI allyID ]] .. ai.allyId .. [[ ]])
+ --function MoveToStartLocation()
 	
-	if spGetAllyTeamStartBox(ai.allyId) ~= nil then
-		local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(ai.allyId)
-		Spring.Echo([[AI startxmin ]] .. startxmin .. [[ ]])
-		Spring.Echo([[AI startzmin ]] .. startzmin .. [[ ]])
-		Spring.Echo([[AI startxmax ]] .. startxmax .. [[ ]])
-		Spring.Echo([[AI startzmax ]] .. startzmax .. [[ ]])
-		return { action = "move", position = {x = math.random(startxmin, startxmax), y = math.random(-200, 200), z = math.random(startzmin, startzmax)} }
-	else
-		return { action = "wait", frames = 1}
-	end
-end
+	--local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(ai.allyId)
+	--local px = math.random(startxmin, startxmax)
+	--local pz = math.random(startzmin, startzmax)
+	--local py = 0
+	
+	--Spring.Echo([[AI startxmin ]] .. startxmin .. [[ ]])
+	--Spring.Echo([[AI startzmin ]] .. startzmin .. [[ ]])
+	--Spring.Echo([[AI startxmax ]] .. startxmax .. [[ ]])
+	--Spring.Echo([[AI startzmax ]] .. startzmax .. [[ ]])
+	
+	--local spawnposx, _, spawnposz = spGetTeamStartPosition(ai.id)
+	--local sx = spawnposx
+	--local sz = spawnposz
+	
+	--Spring.Echo([[AI spawnx ]] .. sx .. [[ ]])
+	--Spring.Echo([[AI spawnz ]] .. sz .. [[ ]])
+	
+	--mx = sx - px
+	--mz = sz - pz
+	--my = 0
 
- 
+	--local x = mx
+	--local y = my
+	--local z = mz
+	
+	--Spring.Echo([[AI startlocationx ]] .. mx .. [[ ]])
+	--Spring.Echo([[AI startlocationz ]] .. mz .. [[ ]])
+	
+	--Spring.Echo([[AI ID ]] .. ai.id .. [[ ]])
+	--Spring.Echo([[AI allyID ]] .. ai.allyId .. [[ ]])
+
+--end
+
  function BuildMex()
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	if mc <= ms*0.5 then
 		return "emetalextractor"
 	else
-		return { action = "wait", frames = 150}
+		return
 	end
 end
  
@@ -93,10 +110,8 @@ end
 	--Spring.SendMessageToPlayer(0, "Hello World!")
 	------- Tech 0 - Very Early Game
 	if mc >= ms - ms*0.20 then
-		local r = math.random(0,3)
-		if r <= 1 then
-			return "eunitfactoryai"
-		elseif r == 2 then
+		local r = math.random(0,5)
+		if r == 0 then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -263,10 +278,8 @@ function RandomOverseer()
 	
 	------- Tech 0 - Very Early Game
 	if mc >= ms - ms*0.20 then
-		local r = math.random(0,3)
-		if r <= 1 then
-			return "eunitfactoryai"
-		elseif r == 2 then
+		local r = math.random(0,5)
+		if r == 0 then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -427,10 +440,8 @@ function RandomUnit()
 	end
 
 	if mc >= ms - ms*0.20 then
-		local r = math.random(0,3)
-		if r <= 1 then
-			return "eunitfactoryai"
-		elseif r == 2 then
+		local r = math.random(0,5)
+		if r == 0 then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -457,7 +468,7 @@ function RandomUnit()
 				elseif r == 4 then
 					return "efighter"
 				elseif r == 5 then
-					return "escout"
+					return "edrone"
 				elseif r == 6 then
 					return "eamphibarty"
 				elseif r == 7 then
@@ -470,7 +481,7 @@ function RandomUnit()
 			
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 1
 			
-			local r = math.random(0,15)
+			local r = math.random(0,16)
 				if r == 0 then
 					return "eallterrlight"
 				elseif r == 1 then
@@ -482,7 +493,7 @@ function RandomUnit()
 				elseif r == 4 then
 					return "efighter"
 				elseif r == 5 then
-					return "escout"
+					return "edrone"
 				elseif r == 6 then
 					return "eamphibarty"
 				elseif r == 7 then
@@ -503,6 +514,8 @@ function RandomUnit()
 					return "eallterrriot"
 				elseif r == 15 then
 					return "ehbotthud"
+				elseif r == 16 then
+					return "eraider"
 				end
 			
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 2 MK 2
@@ -519,7 +532,7 @@ function RandomUnit()
 				elseif r == 4 then
 					return "egunship2_up1"
 				elseif r == 5 then
-					return "escout_up1"
+					return "eraider_up1"
 				elseif r == 6 then
 					return "eamphibrock_up1"
 				elseif r == 7 then
@@ -545,7 +558,7 @@ function RandomUnit()
 					elseif r == 4 then
 						return "egunship2_up2"
 					elseif r == 5 then
-						return "escout_up2"
+						return "eraider_up2"
 					elseif r == 6 then
 						return "eamphibrock_up2"
 					elseif r == 7 then
@@ -568,7 +581,7 @@ function RandomUnit()
 								return "ehbotkarganneth_up2"
 							end
 						else
-							return "escout_up3"
+							return "eorb_up2"
 						end
 					end	
 				
@@ -588,7 +601,7 @@ function RandomUnit()
 					elseif r == 4 then
 						return "egunship2_up3"
 					elseif r == 5 then
-						return "escout_up3"
+						return "eraider_up3"
 					elseif r == 6 then
 						return "eamphibrock_up3"
 					elseif r == 7 then
@@ -611,15 +624,16 @@ function RandomUnit()
 								return "ehbotkarganneth_up3"
 							end
 						else
-							return "escout_up3"
+							return "eorb_up3"
 						end
 					end
 				end	
 		else
-			return "escout_up3"
+			return "eorb"
 		end
 	end
 ---------------------------------------------------------------- QUEUES
+
 
 
 local idlelist = {
@@ -627,26 +641,32 @@ local idlelist = {
 }
 
 local overseerlistfirst = {
-	MoveToStartLocation,
+	--{ action = "moverelative", position = {x = mx, y = my, z = mz} },
+	{ action = "wait", frames = WaitRNG},
 	"emetalextractor",
-	"emine",
+	"emetalextractor",
+	"emetalextractor",
 	"elifterai",
-	"emine",
-	"esolar2",
-	"emine",
-	"eunitfactoryai",
-	"emine",
+	"emetalextractor",
 	"elifterai",
-	"emine",
+	"elifterai",
 	"elifterai",
 	"emine",
 	"elifterai",
 	"emine",
 	"esolar2",
 	"emine",
+	"emine",
+	"elifterai",
+	"emine",
+	"elifterai",
+	"emine",
+	"elifterai",
+	"emine",
 	"esolar2",
 	"emine",
-	"eunitfactoryai",
+	"esolar2",
+	"emine",
 	"emine",
 }
 	
@@ -659,21 +679,14 @@ local overseerorders = {
 }
 
 local lifterlist = {
-	BuildMex,
 	RandomLift,
+	RandomUnit,
 	"emine",
+	BuildMex,
 }
 
 local unitsqueue = {
 	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	"emine",
 }
 -----------------------------------------------------
 --local factory = {
