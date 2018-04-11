@@ -20,6 +20,10 @@ attackerlist = {
 	"ekrow_up1",
 	"ekrow_up2",
 	"ekrow_up3",
+	"ehbotkarganneth",
+	"ehbotkarganneth_up1",
+	"ehbotkarganneth_up2",
+	"ehbotkarganneth_up3",
 	------------- Basic
 	"eraider",
 	"edrone",
