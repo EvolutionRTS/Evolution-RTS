@@ -466,16 +466,14 @@ function RandomUnit()
 				elseif r == 3 then
 					return "eartytank"
 				elseif r == 4 then
-					return "efighter"
-				elseif r == 5 then
 					return "edrone"
-				elseif r == 6 then
+				elseif r == 5 then
 					return "eamphibarty"
-				elseif r == 7 then
+				elseif r == 6 then
 					return "eamphibriot"
-				elseif r == 8 then
+				elseif r == 7 then
 					return "eamphibbuggy"
-				elseif r == 9 then
+				elseif r == 8 then
 					return "ehbotpeewee"
 				end
 			
