@@ -109,7 +109,7 @@ end
 	end
 	--Spring.SendMessageToPlayer(0, "Hello World!")
 	------- Tech 0 - Very Early Game
-	if mc >= ms - ms*0.20 then
+	if mc >= ms - ms*0.10 then
 		local r = math.random(0,5)
 		if r == 0 then
 			return "elifterai"
@@ -456,7 +456,7 @@ function RandomUnit()
 		end
 	elseif su <= sm-20 then
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Tech 0 - Very Early Game
-			local r = math.random(0,9)
+			local r = math.random(0,8)
 				if r == 0 then
 					return "eallterrlight"
 				elseif r == 1 then
