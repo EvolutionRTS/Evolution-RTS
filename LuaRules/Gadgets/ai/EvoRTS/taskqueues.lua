@@ -80,7 +80,9 @@ local WaitRNG = math.random(0,500)
  function BuildMex()
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local aimexamount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id)
-	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id) * 60 <= Spring.GetGameSeconds()  then
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
+		return "elifterai"
+	elseif aimexamount * 60 <= Spring.GetGameSeconds()  then
 		return "emetalextractor"
 	else
 		return
@@ -110,8 +112,16 @@ end
 	end
 	--Spring.SendMessageToPlayer(0, "Hello World!")
 	------- Tech 0 - Very Early Game
-	if mc >= ms - ms*0.10 then
-		local r = math.random(0,3)
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
+		return "elifterai"
+	elseif ec <= 50 then
+		if GG.TechCheck("tech2", ai.id) == false then
+			return "esolar2"
+		else
+			return "efusion2"
+		end
+	elseif mc >= ms - ms*0.10 then
+		local r = math.random(0,6)
 		if r == 0 then
 			return "elifterai"
 		else
@@ -278,8 +288,16 @@ function RandomOverseer()
 	
 	
 	------- Tech 0 - Very Early Game
-	if mc >= ms - ms*0.20 then
-		local r = math.random(0,5)
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
+		return "elifterai"
+	elseif ec <= 50 then
+		if GG.TechCheck("tech2", ai.id) == false then
+			return "esolar2"
+		else
+			return "efusion2"
+		end
+	elseif mc >= ms - ms*0.20 then
+		local r = math.random(0,6)
 		if r == 0 then
 			return "elifterai"
 		else
@@ -440,8 +458,10 @@ function RandomUnit()
 	else
 	end
 
-	if mc >= ms - ms*0.20 then
-		local r = math.random(0,3)
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
+		return "elifterai"
+	elseif mc >= ms - ms*0.20 then
+		local r = math.random(0,6)
 		if r == 0 then
 			return "elifterai"
 		else
@@ -639,6 +659,9 @@ local idlelist = {
 
 local overseerlistfirst = {
 	--{ action = "moverelative", position = {x = mx, y = my, z = mz} },
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
 	"elifterai",
 	"esolar2",
 	"esolar2",
