@@ -642,7 +642,6 @@ local idlelist = {
 
 local overseerlistfirst = {
 	--{ action = "moverelative", position = {x = mx, y = my, z = mz} },
-	{ action = "wait", frames = WaitRNG},
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
