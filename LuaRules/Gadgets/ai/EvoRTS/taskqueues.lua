@@ -79,7 +79,8 @@ local WaitRNG = math.random(0,500)
 
  function BuildMex()
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	if mc <= ms*0.5 then
+	local aimexamount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id)
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id) * 60 <= Spring.GetGameSeconds()  then
 		return "emetalextractor"
 	else
 		return
