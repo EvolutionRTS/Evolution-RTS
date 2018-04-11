@@ -76,10 +76,10 @@ unitDef                    = {
 			def                  = "Artilleryweapon",
 			badTargetCategory    = "VTOL",
 		},
-		[2]                      = {
-			def                  = "SaturationArtilleryweapon",
-			badTargetCategory    = "VTOL",
-		},
+		-- [2]                      = {
+			-- def                  = "SaturationArtilleryweapon",
+			-- badTargetCategory    = "VTOL",
+		-- },
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,

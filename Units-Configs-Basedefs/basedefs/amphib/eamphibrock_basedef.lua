@@ -78,10 +78,10 @@ unitDef                    = {
 			def                  = "antiarmorrockets",
 			badTargetCategory    = "BUILDING LIGHT WALL",
 		},
-		[2]                      = {
-			def                  = "antiarmorrocketssalvo",
-			badTargetCategory    = "BUILDING LIGHT WALL",
-		},
+		-- [2]                      = {
+			-- def                  = "antiarmorrocketssalvo",
+			-- badTargetCategory    = "BUILDING LIGHT WALL",
+		-- },
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,

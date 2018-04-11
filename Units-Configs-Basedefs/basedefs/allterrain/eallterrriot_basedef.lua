@@ -91,11 +91,11 @@ unitDef                    = {
 			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "WALL",
 		},
-		[2]                      = {
-			def                  = "riottankshotgun",
-			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
-			badTargetCategory    = "WALL BUILDING",
-		},
+		-- [2]                      = {
+			-- def                  = "riottankshotgun",
+			-- onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
+			-- badTargetCategory    = "WALL BUILDING",
+		-- },
 	},
 	customParams                 = {
 		isupgraded               = isUpgraded,

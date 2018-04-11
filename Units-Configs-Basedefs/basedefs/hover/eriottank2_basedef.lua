@@ -78,10 +78,10 @@ unitDef                    = {
 			def                  = "riottankempweapon",
 			badTargetCategory    = "WALL",
 		},
-		[2]                      = {
-			def                  = "riottankshotgun",
-			badTargetCategory    = "WALL BUILDING",
-		},
+		-- [2]                      = {
+			-- def                  = "riottankshotgun",
+			-- badTargetCategory    = "WALL BUILDING",
+		-- },
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,

@@ -93,7 +93,7 @@ unitDef                    = {
 
 weaponDefs                 = {
 	airraider               = {
-		AreaOfEffect             = 50,
+		AreaOfEffect             = 100,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -101,6 +101,7 @@ weaponDefs                 = {
 		colorMap				 = "1 0.5 1 1	1 0.5 1 1	1 0.5 1 1	1 0.5 1 0.01",
 		stages					 = 1,
 		cegTag                   = "airraidershot",
+		edgeeffectiveness        = 1,
 		explosionGenerator       = "custom:genericshellexplosion-medium-blue",
 		energypershot            = 0,
 		impulseFactor            = 0,
