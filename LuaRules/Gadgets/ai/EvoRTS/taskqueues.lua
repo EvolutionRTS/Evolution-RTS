@@ -578,7 +578,7 @@ function RandomUnit()
 								return "ehbotkarganneth_up2"
 							end
 						else
-							return "eorb_up2"
+							return "elifterai"
 						end
 					end	
 				
@@ -621,12 +621,12 @@ function RandomUnit()
 								return "ehbotkarganneth_up3"
 							end
 						else
-							return "eorb_up3"
+							return "elifterai"
 						end
 					end
 				end	
 		else
-			return "eorb"
+			return "elifterai"
 		end
 	end
 ---------------------------------------------------------------- QUEUES
