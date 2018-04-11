@@ -639,31 +639,9 @@ local idlelist = {
 
 local overseerlistfirst = {
 	--{ action = "moverelative", position = {x = mx, y = my, z = mz} },
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
 	"elifterai",
-	"emetalextractor",
-	"elifterai",
-	"elifterai",
-	"elifterai",
-	"emine",
-	"elifterai",
-	"emine",
 	"esolar2",
-	"emine",
-	"emine",
-	"elifterai",
-	"emine",
-	"elifterai",
-	"emine",
-	"elifterai",
-	"emine",
 	"esolar2",
-	"emine",
-	"esolar2",
-	"emine",
-	"emine",
 }
 	
 local overseerorders = {
