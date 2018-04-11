@@ -110,7 +110,7 @@ end
 	--Spring.SendMessageToPlayer(0, "Hello World!")
 	------- Tech 0 - Very Early Game
 	if mc >= ms - ms*0.10 then
-		local r = math.random(0,5)
+		local r = math.random(0,3)
 		if r == 0 then
 			return "elifterai"
 		else
@@ -440,7 +440,7 @@ function RandomUnit()
 	end
 
 	if mc >= ms - ms*0.20 then
-		local r = math.random(0,5)
+		local r = math.random(0,3)
 		if r == 0 then
 			return "elifterai"
 		else
