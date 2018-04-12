@@ -468,21 +468,6 @@ function RandomUnit()
 
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
 		return "elifterai"
-	elseif mc >= ms - ms*0.20 then
-		local r = math.random(0,6)
-		if r == 0 then
-			return "elifterai"
-		else
-			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up1"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up2"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
-				return "eorb_up3"
-			end
-		end
 	elseif su <= sm-20 then
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Tech 0 - Very Early Game
 			local r = math.random(0,8)
