@@ -108,7 +108,7 @@ weaponDefs                  = {
 		WeaponType                = "LightningCannon",
 		rgbColor                  = "0.1 0.2 0.5",
 		rgbColor2                 = "0 0 1",
-		soundStart                = "weapons/jacobs.wav",
+		soundStart                = "weapons/lightning-metal-hit.wav",
 		
 		texture1                  = "lightning",
 		thickness                 = 10,
