@@ -82,10 +82,18 @@ local WaitRNG = math.random(0,500)
 	local aimexamount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id)
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
 		return "elifterai"
-	elseif aimexamount * 60 <= Spring.GetGameSeconds()  then
-		return "emetalextractor"
-	else
-		return
+	elseif aiDifficulty == "easy" then
+		if aimexamount * 60 <= Spring.GetGameSeconds()  then
+			return "emetalextractor"
+		else
+			return
+		end
+	elseif aiDifficulty == "hard" then
+		if aimexamount * 30 <= Spring.GetGameSeconds()  then
+			return "emetalextractor"
+		else
+			return
+		end
 	end
 end
  
