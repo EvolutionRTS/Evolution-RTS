@@ -125,7 +125,7 @@ end
 			return "efusion2"
 		end
 	elseif mc >= ms - ms*0.10 then
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*300 < Spring.GetGameSeconds() then
+		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*180 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -583,10 +583,13 @@ function RandomUnit()
 								return "ehbotkarganneth_up2"
 							end
 						else
-							return "elifterai"
+							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*300 < Spring.GetGameSeconds() then
+								return "elifterai"
+							else
+								return "eorb_up3"
+							end
 						end
-					end	
-				
+					end
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
 				
 				local r2 = math.random(0,50)
@@ -626,12 +629,28 @@ function RandomUnit()
 								return "ehbotkarganneth_up3"
 							end
 						else
-							return "elifterai"
+							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*300 < Spring.GetGameSeconds() then
+								return "elifterai"
+							else
+								return "eorb_up3"
+							end
 						end
 					end
 				end	
 		else
-			return "elifterai"
+			if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*180 < Spring.GetGameSeconds() then
+				return "elifterai"
+			else
+				if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+					return "eorb"
+				elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+					return "eorb_up1"
+				elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
+					return "eorb_up2"
+				elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
+					return "eorb_up3"
+			end
+		end
 		end
 	end
 ---------------------------------------------------------------- QUEUES
@@ -658,6 +677,7 @@ local overseerorders = {
 	RandomOverseer,
 	RandomOverseer,
 	"emine",
+	"elifterai",
 }
 
 local lifterlist = {
