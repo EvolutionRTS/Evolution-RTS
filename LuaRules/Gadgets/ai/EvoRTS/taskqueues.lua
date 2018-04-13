@@ -80,9 +80,7 @@ local WaitRNG = math.random(0,500)
  function BuildMex()
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local aimexamount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id)
-	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
-		return "elifterai"
-	elseif aiDifficulty == "easy" then
+	if aiDifficulty == "easy" then
 		if aimexamount * 60 <= Spring.GetGameSeconds()  then
 			return "emetalextractor"
 		else
@@ -120,17 +118,14 @@ end
 	end
 	--Spring.SendMessageToPlayer(0, "Hello World!")
 	------- Tech 0 - Very Early Game
-	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
-		return "elifterai"
-	elseif ec <= 50 then
+	if ec <= 50 then
 		if GG.TechCheck("tech2", ai.id) == false then
 			return "esolar2"
 		else
 			return "efusion2"
 		end
 	elseif mc >= ms - ms*0.10 then
-		local r = math.random(0,6)
-		if r == 0 then
+		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*300 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -296,17 +291,14 @@ function RandomOverseer()
 	
 	
 	------- Tech 0 - Very Early Game
-	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
-		return "elifterai"
-	elseif ec <= 50 then
+	if ec <= 50 then
 		if GG.TechCheck("tech2", ai.id) == false then
 			return "esolar2"
 		else
 			return "efusion2"
 		end
 	elseif mc >= ms - ms*0.20 then
-		local r = math.random(0,6)
-		if r == 0 then
+		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
 			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
