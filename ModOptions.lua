@@ -73,6 +73,18 @@ local options= {
 		type   = 'section',
 	},
 	{
+		key    = 'mexlayout',
+		name   = 'Default Metal Spot Layout',
+		desc   = 'If enabled, the default layout for metal spots will be used, if disabled, the metal spots defined by the map will be used.',
+		type="list",
+		def="enabled",
+		section= "resourcing",
+		items={
+			{key="disabled", name="Disabled", desc="Use the Metal Map Layout defined in the map"},
+			{key="enabled", name="Enabled", desc="Default Metal Map Layout"},
+		}
+	},
+	{
 		key    = 'metalextractorcommunism',
 		name   = 'Metal Extractor Communism',
 		desc   = 'If enabled, then all metal income from Metal Extractors is split between allies. This means that it does not matter which ally owns the metal extractor, the entire team will benefit.',
