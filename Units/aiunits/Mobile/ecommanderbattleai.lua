@@ -15,7 +15,7 @@ if shardChicken == nil then
 	shardChicken = "disabled"
 end
 --Spring.Echo("AI difficulty is set to: " .. aiDifficulty)
-
+-- This should be done in game_resourceGifts.lua using modoptions so that we can have default settings but users can modify to change hardness as needed
 if shardChicken == "enabled" then
 			description				 = [[Chicken Overseer, builds chickens]]
 			energyMake				 = 500
