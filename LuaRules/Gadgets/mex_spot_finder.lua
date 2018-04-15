@@ -21,9 +21,9 @@ local MAPSIDE_METALMAP = "mapconfig/map_metal_layout.lua"
 
 local defaultMexMap = Spring.GetModOptions().mexlayout or "enabled"
 if defaultMexMap == "enabled" then
-	local GAMESIDE_METALMAP = "LuaRules/Configs/MetalSpots/" .. ("defaultLayout") .. ".lua"
+	GAMESIDE_METALMAP = "LuaRules/Configs/MetalSpots/" .. ("defaultLayout") .. ".lua"
 else
-	local GAMESIDE_METALMAP = "LuaRules/Configs/MetalSpots/" .. (Game.mapName or "") .. ".lua"
+	GAMESIDE_METALMAP = "LuaRules/Configs/MetalSpots/" .. (Game.mapName or "") .. ".lua"
 end
 
 local DEFAULT_MEX_INCOME = 2
