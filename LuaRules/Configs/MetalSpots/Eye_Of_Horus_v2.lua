@@ -3,7 +3,7 @@ local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
 
 local size = math.min(mapx, mapz)
 local r = {size * 0.25, size * 0.5, size * 0.75, size * 0.95}
-local pointsPerLayer = {12, 10, 6, 12}
+local pointsPerLayer = {5, 10, 15, 20}
 local m = {1, 1.33, 1.66, 2}
 --
 local results = {}
