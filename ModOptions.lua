@@ -46,11 +46,35 @@ local options= {
 		section="aioptions",
 		items={
 			--{key="veryeasy", name="Very Easy", desc="Very Easy AI"},
-			{key="easy", name="Easy", desc="Basic AI that isn't cheating (well, still does, but have no real advantage over player)"},
+			{key="easy", name="Easy", desc="Basic AI that isn't cheating (well, still does, but has no real advantage over player)"},
 			--{key="medium", name="Medium", desc="Medium AI"},
-			{key="hard", name="Hard", desc="Hard AI that have infinite resources and inscreased buildspeed"},
+			{key="hard", name="Hard", desc="Hard AI that gets extra resources and increased buildspeed"},
 			--{key="insane", name="Insane", desc="Very Hard AI"},
 		}
+	},
+	{
+		key    = 'aimetalhandicap',
+		name   = 'Shard Metal Handicap',
+		desc   = 'Determines the amount of extra metal given to Shard',
+		type   = 'number',
+		section= 'aioptions',
+		def    = 0,
+		min    = 0,
+		max    = 20,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'aienergyhandicap',
+		name   = 'Shard Metal Handicap',
+		desc   = 'Determines the amount of extra metal given to Shard',
+		type   = 'number',
+		section= 'aioptions',
+		def    = 0,
+		min    = 0,
+		max    = 20,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
 	},
 	{
 		key    = 'aidebug',

@@ -25,21 +25,16 @@ end
 
 local maximumBaseIncome = Spring.GetModOptions().maxbasicincome or 5
 
-local aiCheatHandicapMetal = { 
-	--["veryeasy"] =  0,
-	["easy"] =  0,
-	--["medium"] =  0,
-	["hard"] =  0,
-	--["insane"] =  25,
-}
+local aiDifficulty = Spring.GetModOptions().aidifficulty or "easy"
 
-local aiCheatHandicapEnergy = { 
-	--["veryeasy"] =  10,
-	["easy"] =  0,
-	--["medium"] =  30,
-	["hard"] =  0,
-	--["insane"] =  50,
-}
+local aiCheatHandicapMetal = Spring.GetModOptions().aimetalhandicap or 0
+local aiCheatHandicapEnergy = Spring.GetModOptions().aienergyhandicap or 0
+
+-- This is kind of a funky way to do this but the handicap will allow players to make it harder
+if aiDifficulty == "hard" then
+	aiCheatHandicapMetal = aiCheatHandicapMetal + 20
+	aiCheatHandicapEnergy = aiCheatHandicapEnergy + 20
+end
 
 if (not gadgetHandler:IsSyncedCode()) then
 	return -- No Unsynced
@@ -172,7 +167,7 @@ function gadget:GameFrame(n)
 		for _,TeamID in ipairs(Spring.GetTeamList()) do
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
-				Spring.AddTeamResource(TeamID,"e", aiCheatHandicapEnergy[modOptions.aidifficulty or "easy"])
+				Spring.AddTeamResource(TeamID,"e", aiCheatHandicapEnergy)
 			end
 		end
 	end
@@ -193,14 +188,14 @@ function gadget:GameFrame(n)
 			local isAiTeam = select(4, Spring.GetTeamInfo(TeamID))
 			if isAiTeam then
 				local aimexamount = Spring.GetTeamUnitDefCount(TeamID, UnitDefNames.emetalextractor.id)
-					if GG.TechCheck("tech3", TeamID) == true then
-						Spring.AddTeamResource(TeamID,"m", aimexamount*3)
-					elseif GG.TechCheck("tech2", TeamID) == true then
-						Spring.AddTeamResource(TeamID,"m", aimexamount*2)
-					elseif GG.TechCheck("tech1", TeamID) == true then
-						Spring.AddTeamResource(TeamID,"m", aimexamount)
-					end
-				Spring.AddTeamResource(TeamID,"m", aiCheatHandicapMetal[modOptions.aidifficulty or "easy"])
+				if GG.TechCheck("tech3", TeamID) == true then
+					Spring.AddTeamResource(TeamID,"m", aimexamount*3)
+				elseif GG.TechCheck("tech2", TeamID) == true then
+					Spring.AddTeamResource(TeamID,"m", aimexamount*2)
+				elseif GG.TechCheck("tech1", TeamID) == true then
+					Spring.AddTeamResource(TeamID,"m", aimexamount)
+				end
+				Spring.AddTeamResource(TeamID,"m", aiCheatHandicapMetal)
 			end
 		end
 	end
