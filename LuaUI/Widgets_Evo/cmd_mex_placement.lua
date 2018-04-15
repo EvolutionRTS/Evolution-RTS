@@ -696,7 +696,7 @@ local function DoLine(x1, y1, z1, x2, y2, z2)
     gl.Vertex(x2, y2, z2)
 end
 
-function widget:DrawWorld()
+function widget:DrawWorldPreUnit()
 	if Spring.IsGUIHidden() then return end
 
 	-- Check command is to build a mex
