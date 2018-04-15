@@ -20,14 +20,6 @@ end
 local MAPSIDE_METALMAP = "mapconfig/map_metal_layout.lua"
 local defaultMexMap = Spring.GetModOptions().mexlayout or "enabled"
 
---Quick little dirty fix for maps that aren't square
-if Game.mapSizeX == Game.mapSizeZ and defaultMexMap == "enabled" then
-	defaultMexMap = "enabled"
-else
-	defaultMexMap = "disabled"
-end
-
-
 if defaultMexMap == "enabled" then
 	GAMESIDE_METALMAP = "LuaRules/Configs/MetalSpots/" .. ("defaultLayout") .. ".lua"
 else
