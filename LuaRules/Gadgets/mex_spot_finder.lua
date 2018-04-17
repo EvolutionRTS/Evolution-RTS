@@ -19,7 +19,8 @@ end
 ------------------------------------------------------------
 local MAPSIDE_METALMAP = "mapconfig/map_metal_layout.lua"
 local defaultMexMap = Spring.GetModOptions().mexlayout or "enabled"
-
+Spring.Echo("[Mexspot Finder] The current gameID is:")
+Spring.Echo(Game.gameID)
 if defaultMexMap == "enabled" then
 	GAMESIDE_METALMAP = "LuaRules/Configs/MetalSpots/" .. ("defaultLayout") .. ".lua"
 else
