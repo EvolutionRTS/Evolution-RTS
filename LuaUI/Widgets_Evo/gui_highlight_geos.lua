@@ -44,7 +44,7 @@ local function PillarVerts(x, y, z)
 	gl.Color(1, 1, 0, 1)
 	gl.Vertex(x, y, z)
 	gl.Color(1, 1, 0, 0)
-	gl.Vertex(x, y + 1000, z)
+	gl.Vertex(x, y + 500, z)
 end
 
 local geos = {}
@@ -73,21 +73,22 @@ function widget:Shutdown()
 end
 
 function widget:DrawWorld()
+	if Spring.IsGUIHidden() then return end
 	
 	local _, cmdID = spGetActiveCommand()
 	drawGeos = spGetMapDrawMode() == 'metal' or -geoDefID == cmdID or spGetGameFrame() < 1 or (WG.GetWidgetOption and WG.GetWidgetOption('Chili Minimap','Settings/Interface/Map','alwaysDisplayMexes').value)
 	
-	if drawGeos then
+	--if drawGeos then
 		
 		if not geoDisplayList then
 			geoDisplayList = gl.CreateList(HighlightGeos)
 		end
 		
-		glLineWidth(20)
+		glLineWidth(2)
 		glDepthTest(true)
 		glCallList(geoDisplayList)
 		glLineWidth(1)
-	end
+	--end
 end
 
 local function drawMinimapGeos(x,z)
@@ -99,7 +100,7 @@ end
 
 function widget:DrawInMiniMap()
 
-	if drawGeos then
+	--if drawGeos then
 	
 		gl.LoadIdentity()
 		gl.Translate(0,1,0)
@@ -115,5 +116,5 @@ function widget:DrawInMiniMap()
 		
 		gl.LineWidth(0.00000000001)
 		gl.Color(1,1,1,1)
-	end
+	--end
 end

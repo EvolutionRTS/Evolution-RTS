@@ -726,19 +726,20 @@ function widget:DrawWorldPreUnit()
 				end
 			end
 			
+			-- Draw the amounts
+			gl.DepthTest(true)
+			gl.DepthMask(true)
+			if not circleOptions.enabled then
+				glCallList(mainMexDrawList)
+			end
+			glCallList(mainMexValueDrawList)
+
+			gl.DepthTest(false)
+			gl.DepthMask(false)
+			--
+			
 			DrawMexList()
 		end
-	end
-	if drawMexSpots then
-		gl.DepthTest(true)
-		gl.DepthMask(true)
-		if not circleOptions.enabled then
-			glCallList(mainMexDrawList)
-		end
-		glCallList(mainMexValueDrawList)
-
-		gl.DepthTest(false)
-		gl.DepthMask(false)
 	end
 end
 
@@ -802,7 +803,7 @@ end
 
 function widget:DrawInMiniMap()
 
-	if drawMexSpots then
+	--if drawMexSpots then
 		local specatate = spGetSpectatingState()
 		
 		glLoadIdentity()
@@ -832,6 +833,6 @@ function widget:DrawInMiniMap()
 		glLineWidth(1.0)
 		glColor(1,1,1,1)
 		
-	end
+	--end
 
 end
