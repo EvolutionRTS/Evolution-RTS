@@ -11,6 +11,10 @@ local rng = math.random(0,1)
 
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "layout1"
 
+if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshitifukedup protection
+	mexRandomLayout = "layout1"
+end
+
 if mexRandomLayout == "layout1" then
 	-- most normal layout
 	-- max metal ~49.1

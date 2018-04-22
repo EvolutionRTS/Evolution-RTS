@@ -113,7 +113,7 @@ local options= {
 		name   = 'Metal Spot Layout to use',
 		desc   = 'This allows you to choose between the different metal spot layouts that are available.',
 		type="list",
-		def="enabled",
+		def="layout1",
 		section= "resourcing",
 		items={
 			{key="layout1", name="Layout 1", desc="Most uniform layout. Max metal ~49.1, Max metal spots 56."},
