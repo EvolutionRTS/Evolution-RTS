@@ -7,16 +7,22 @@ local size = math.max(mapx, mapz)
 
 --
 
-function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, metalPerPoint)
+function f(x)
+	if x < 0.6 then return 0.5 + math.pow((0.6 - x) / 0.6, 2) * 1.5
+	elseif x < 0.8 then return (x - 0.6) / 0.4 + 0.5
+	elseif x <= 1 then return 1 end
+	return 0
+end
+function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method)
 	--[[
 	method 1: object rotated 180 degrees around centre to produce image
 	method 2: object mirrored around horizontal line passing through centre to produce image
 	method 3: object mirrored around vertical line passing through centre to produce image
 	]]
 	local positions = {}
-	--positions[1] = {x = padding, z = padding, metal = metalPerPoint}
-	--positions[2] = {x = sizeX - padding, z = sizeY - padding, metal = metalPerPoint}
-	if includeCentre then positions[#positions + 1] = {x = sizeX * 0.5, z = sizeY * 0.5, metal = metalPerPoint} end
+	--positions[1] = {x = padding, z = padding}
+	--positions[2] = {x = sizeX - padding, z = sizeY - padding}
+	if includeCentre then positions[#positions + 1] = {x = sizeX * 0.5, z = sizeY * 0.5} end
 	for i = 1, numPointsPerSide do
 		local newPoint = {0, 0}
 		local done = false
@@ -64,11 +70,23 @@ function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSe
 			end
 		end
 		if numIterations == howManyTriesBeforeGiveUp then logFailures = logFailures + 1 end
-		positions[#positions + 1] = {x = newPoint[1], z = newPoint[2], metal = metalPerPoint}
-		positions[#positions + 1] = {x = newPoint[3], z = newPoint[4], metal = metalPerPoint}
+		positions[#positions + 1] = {x = newPoint[1], z = newPoint[2]}
+		positions[#positions + 1] = {x = newPoint[3], z = newPoint[4]}
 	end
 	--table.remove(positions, 1)
 	--table.remove(positions, 1)
+	
+	local ratioX, ratioY = 1, 1
+	if sizeX > sizeY then ratioY = sizeX / sizeY
+	elseif sizeY > sizeX then ratioX = sizeY / sizeX end
+	local sizeMax = math.max(sizeX, sizeY)
+	for i = 1, #positions do
+		local dx = sizeMax * 0.5 - positions[i][1] * ratioX
+		local dy = sizeMax * 0.5 - positions[i][2] * ratioY
+		local r = math.sqrt(dx * dx + dy * dy)
+		positions[i].metal = f(r / (sizeX * math.sqrt(2) / 2))
+	end
+	
 	return positions
 end
 
@@ -172,7 +190,7 @@ if not randomMirrored then
 		end
 	end
 else
-	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, metalPerPoint)
+	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method)
 end
 
 Spring.Echo("Here are the resulting locations")
