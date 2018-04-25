@@ -98,7 +98,7 @@ local MAP_SIZE_Z = Game.mapSizeZ
 local MAP_SIZE_Z_SCALED = MAP_SIZE_Z / METAL_MAP_SQUARE_SIZE
 
 local allyMexColor = {[1] = {0, 1, 1, 0.7}, [2] = {0, 1, 1, 1}}
-local neutralMexColor = {[1] = {1.0, 1.0, 1.0, 0.7}, [2] = {1.0, 1.0, 1.0, 1}}
+local neutralMexColor = {[1] = {0.53, 0.77, 0.89, 1}, [2] = {0.53, 0.77, 0.89, 1}}
 local enemyMexColor = {[1] = {1, 0, 0, 0.7}, [2] = {1, 0, 0, 1}}
 
 local allyTeams = {}	-- [id] = {team1, team2, ...}
@@ -124,11 +124,11 @@ local circleOptions = {
 	alwaysshow					= true,
 	innersize						= 40,		-- outersize-innersize = circle width
 	outersize						= 43,		-- outersize-innersize = circle width
-	circlePieces				= 24,
+	circlePieces				= 3,
 	circlePieceDetail		= 1,
 	circleSpaceUsage		= 0.45,
 	circleInnerOffset		= 0.42,
-	rotationSpeed				= 2.5,
+	rotationSpeed				= 5,
 }
 
 -------------------------------------------------------------------------------------
