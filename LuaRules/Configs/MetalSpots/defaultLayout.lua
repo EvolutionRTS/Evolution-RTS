@@ -168,14 +168,14 @@ if not randomMirrored then
 	for i = 1, #pointsPerLayer do
 
 		local angle = angleOffset[i] + math.pi * 2 * 1 / pointsPerLayer[i]
-		local currX, currZ = mapx + r[i] * math.cos(angle) * size * ratioX, mapz + r[i] * math.sin(angle) * size * ratioY
+		local currX, currZ = mapx + r[i] * math.cos(angle) * size * ratioX, mapz + r[i] * math.sin(angle) * size * ratioZ
 
 		for j = 2, pointsPerLayer[i] + 1 do
 			results[lengResults] = {x = currX, z = currZ, metal = m[i]}
 			lengResults = lengResults + 1
 			
 			angle = angleOffset[i] + math.pi * 2 * j / pointsPerLayer[i]
-			nextX, nextZ = mapx + r[i] * math.cos(angle) * size * ratioX, mapz + r[i] * math.sin(angle) * size * ratioY
+			nextX, nextZ = mapx + r[i] * math.cos(angle) * size * ratioX, mapz + r[i] * math.sin(angle) * size * ratioZ
 			
 			local numParts = pointsBetweenVertices[i] + 1
 			for k = 1, pointsBetweenVertices[i] do
@@ -191,13 +191,6 @@ if not randomMirrored then
 	end
 else
 	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method)
-end
-
-Spring.Echo("Here are the resulting locations")
-for i = 1, lengResults - 1 do
-    for k, v in pairs(results[i]) do
-        Spring.Echo(i .. "." .. k .. ": " .. v)
-    end
 end
 
 return {
