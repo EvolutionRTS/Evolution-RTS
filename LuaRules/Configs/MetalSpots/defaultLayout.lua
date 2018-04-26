@@ -42,6 +42,9 @@ function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSe
 			elseif method == 3 then
 				newPoint[3] = sizeX - newPoint[1]
 				newPoint[4] = newPoint[2]
+			elseif method == 4 then
+				newPoint[3] = sizeX - newPoint[2]
+				newPoint[4] = sizeY - newPoint[1]
 			end
 			for j = 1, #positions do
 				-- check new point vs existing points
