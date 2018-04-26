@@ -81,8 +81,8 @@ function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSe
 	elseif sizeY > sizeX then ratioX = sizeY / sizeX end
 	local sizeMax = math.max(sizeX, sizeY)
 	for i = 1, #positions do
-		local dx = sizeMax * 0.5 - positions[i][1] * ratioX
-		local dy = sizeMax * 0.5 - positions[i][2] * ratioY
+		local dx = sizeMax * 0.5 - positions[i].x * ratioX
+		local dy = sizeMax * 0.5 - positions[i].z * ratioY
 		local r = math.sqrt(dx * dx + dy * dy)
 		positions[i].metal = f(r / (sizeX * math.sqrt(2) / 2))
 	end
