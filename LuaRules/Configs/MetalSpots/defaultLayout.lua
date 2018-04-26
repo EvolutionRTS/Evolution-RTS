@@ -156,8 +156,8 @@ if mexRandomLayout == "demo2" then
 end
 
 --
+local results = {}
 if not randomMirrored then
-	local results = {}
 	local lengResults = 1
 	local ratioX, ratioZ = 1, 1
 	if mapx > mapz then
