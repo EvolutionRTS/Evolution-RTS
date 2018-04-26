@@ -92,7 +92,7 @@ end
 
 local rng = math.random(0,1)
 
-local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "layout1"
+local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "demo2"
 
 if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshitifukedup protection
 	mexRandomLayout = "layout1"
@@ -149,7 +149,7 @@ if mexRandomLayout == "demo2" then
 	pointRadius = 100 -- TODO: change this into how big a metal circle is
 	extraSeparationBetweenPoints = 50
 	howManyTriesBeforeGiveUp = 100
-	numPointsPerSide = 15
+	numPointsPerSide = 30
 	includeCentre = false
 	method = 1
 	metalPerPoint = 1

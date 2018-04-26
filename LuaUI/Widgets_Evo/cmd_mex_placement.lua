@@ -660,7 +660,7 @@ function DrawMexList()
 				glRotate(currentRotationAngleOpposite,0,1,0)
 				glRotate(180,1,0,0)
 				glColor(0,0,0,0.4)
-				glScale(1.21,1,1.21)
+				glScale(1.75,1,1.75)
 				glCallList(circleList)
 				mexColor[4] = 0.47
 				glColor(mexColor)
@@ -820,12 +820,21 @@ function widget:DrawInMiniMap()
 			
 			glLighting(false)
 
-			glColor(0,0,0,0.66)
-			glLineWidth(((spot.metal > 0 and spot.metal) or 0.1)*2.0)
+			--Static minimap mex marker locations
+			glColor(0,0,0,1)
+			glLineWidth(3)
 			glDrawGroundCircle(x, 0, z, MINIMAP_DRAW_SIZE, 32)
-			glLineWidth((spot.metal > 0 and spot.metal) or 0.1)
+			glLineWidth(2)
 			mexColor[4] = 0.85
 			glColor(mexColor)
+			
+			--This is for mex circles on the minimap that denote the amount that mexes give (hard to see)
+			-- glColor(0,0,0,0.66)
+			-- glLineWidth(((spot.metal > 0 and spot.metal) or 0.1)*5.0)
+			-- glDrawGroundCircle(x, 0, z, MINIMAP_DRAW_SIZE, 32)
+			-- glLineWidth(((spot.metal > 0 and spot.metal)*2) or 0.1)
+			-- mexColor[4] = 0.85
+			-- glColor(mexColor)
 			
 			glDrawGroundCircle(x, 0, z, MINIMAP_DRAW_SIZE, 32)
 		end
