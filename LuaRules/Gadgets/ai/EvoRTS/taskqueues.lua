@@ -646,12 +646,21 @@ function RandomUnit()
 					end
 				end	
 		else
-			--local Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai.id) = htc
-			--local Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai_up3.id) = ht3c
-			--local Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) = ltc
-			--local Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) = lt3c
-			--local Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emine.id) = minec
-				if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emine.id) > Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) and GG.TechCheck("tech1", ai.id) then
+				if mc >= ms - ms*0.20 then
+					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
+						return "elifterai"
+					else
+						if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+							return "eorb"
+						elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
+							return "eorb_up1"
+						elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
+							return "eorb_up2"
+						elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
+							return "eorb_up3"
+						end
+					end
+				elseif Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emine.id) > Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) and GG.TechCheck("tech1", ai.id) then
 					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) > Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai_up3.id) and GG.TechCheck("tech2", ai.id) then
 						if GG.TechCheck("tech3", ai.id) then
 							return "eturretheavyai_up3"
