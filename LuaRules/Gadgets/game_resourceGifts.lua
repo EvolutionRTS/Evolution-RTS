@@ -189,11 +189,11 @@ function gadget:GameFrame(n)
 			if isAiTeam then
 				local aimexamount = Spring.GetTeamUnitDefCount(TeamID, UnitDefNames.emetalextractor.id)
 				if GG.TechCheck("tech3", TeamID) == true then
-					Spring.AddTeamResource(TeamID,"m", aimexamount*3)
-				elseif GG.TechCheck("tech2", TeamID) == true then
-					Spring.AddTeamResource(TeamID,"m", aimexamount*2)
-				elseif GG.TechCheck("tech1", TeamID) == true then
 					Spring.AddTeamResource(TeamID,"m", aimexamount)
+				elseif GG.TechCheck("tech2", TeamID) == true then
+					Spring.AddTeamResource(TeamID,"m", aimexamount*0.66)
+				elseif GG.TechCheck("tech1", TeamID) == true then
+					Spring.AddTeamResource(TeamID,"m", aimexamount*0.33)
 				end
 				Spring.AddTeamResource(TeamID,"m", aiCheatHandicapMetal)
 			end
