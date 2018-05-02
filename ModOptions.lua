@@ -113,15 +113,48 @@ local options= {
 		name   = 'Metal Spot Layout to use',
 		desc   = 'This allows you to choose between the different metal spot layouts that are available.',
 		type="list",
-		def="demo2",
+		def="standard",
 		section= "resourcing",
 		items={
-			{key="layout1", name="Layout 1", desc="Most uniform layout. Max metal ~49.1, Max metal spots 56."},
-			{key="layout2", name="Layout 2", desc="Less uniform, more clustered layout. Max metal ~50, Max metal spots 56."},
-			{key="layout3", name="Layout 3", desc="The Pitchfork! Dense metal layout with lower output per metal spot. Max metal ~51.1, Max metal spots 94."},
-			{key="demo", name="demo", desc=""},
-			{key="demo2", name="demo 2", desc=""},
+			{key="standard", name="Standard", desc="Random placing that is mirrored. Has various methods for different map shapes and is more careful with metal spot placement."},
+			{key="ffa", name="Free For All", desc=""},
+			{key="legacy1", name="Legacy 1", desc="Most uniform layout. Max metal ~49.1, Max metal spots 56."},
+			{key="legacy2", name="Legacy 2", desc="Less uniform, more clustered layout. Max metal ~50, Max metal spots 56."},
+			{key="legacy3", name="Legacy 3", desc="The Pitchfork! Dense metal layout with lower output per metal spot. Max metal ~51.1, Max metal spots 94."},
+			{key="legacy4", name="Legacy 4", desc=""},
 		}
+	},
+	{
+		key    = 'maximummexelevationdifference',
+		name   = 'Standard Metal Spot Layout: Maximum elevation difference for Metal Spot locations',
+		desc   = 'This is used as an attempt to avoid placement on cliffs (only works on Standard Metal Spot Layout)',
+		type   = 'number',
+		section= 'resourcing',
+		def    = 50,
+		min    = 0,
+		max    = 200,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = "allowmexesinwater",
+		name   = "Standard Metal Spot Layout: Allow metal spots to be placed in water?",
+		desc   = "Should metal spots be placed in water? Sometimes turning this off can be beneficial if the water on a map does damage. (only works on Standard Metal Spot Layout)",
+		type   = "bool",
+		def    = true,
+		section= "resourcing",
+    },
+	{
+		key    = 'mexspotsperside',
+		name   = 'Standard Metal Spot Layout: How many metal spots per side?',
+		desc   = 'This defines how many metal spots will be placed on each side of the map. This number will have a multiplier attached based upon how many players are in the game. (only works on Standard Metal Spot Layout)',
+		type   = 'number',
+		section= 'resourcing',
+		def    = 30,
+		min    = 10,
+		max    = 100,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
 	},
 	{
 		key    = 'metalextractorcommunism',

@@ -1,10 +1,3 @@
-numteamID = Spring.GetTeamList(teamID)
-teamIDCount = 0
-for _ in pairs(numteamID) do teamIDCount = teamIDCount + 1 end
-
-Spring.Echo("Number of teamIDs")
-Spring.Echo(teamIDCount)
-
 --math.randomseed(Game.GameID) -- This only works in 104+
 math.random(); math.random(); math.random()
 local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
@@ -14,10 +7,40 @@ local size = math.max(mapx, mapz)
 
 --
 
+--Get the number of teamIDs in this game and store it in teamIDCount
+numteamID = Spring.GetTeamList(teamID)
+teamIDCount = 0
+for _ in pairs(numteamID) do teamIDCount = teamIDCount + 1 end
+
+Spring.Echo("[Default Mex Layout] Number of teamIDs in this match:")
+Spring.Echo(teamIDCount)
+--
+
+local allowMexesInWater = Spring.GetModOptions().allowmexesinwater or true
+local maxMexElevationDiff = Spring.GetModOptions().maximummexelevationdifference or 50
+local mexSpotsPerSide = Spring.GetModOptions().mexspotsperside or 30
+local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
+
+if allowMexesInWater == nil then -- This is just an oshitifukedup protection
+	allowMexesInWater = true
+end
+
+if maxMexElevationDiff  nil then -- This is just an oshitifukedup protection
+	maxMexElevationDiff = 50
+end
+
+if mexSpotsPerSide  nil then -- This is just an oshitifukedup protection
+	mexSpotsPerSide = 30
+end
+
+if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshitifukedup protection
+	mexRandomLayout = "standard"
+end
+
 local sGetGroundHeight = Spring.GetGroundHeight
 local mexSideHalved = 70 -- mex is a square of side 140 units
 local slopeCheckMinDistance = 35
-local function checkSlope(x, z, tolerance, allowWater)
+local function checkSlope(x, z, tolerance, allowMexesInWater)
 	local heightMap = {}
 	local leng = 0
 	for i = -mexSideHalved, mexSideHalved, slopeCheckMinDistance do
@@ -29,7 +52,7 @@ local function checkSlope(x, z, tolerance, allowWater)
 	local highest = math.max(unpack(heightMap))
 	local lowest = math.min(unpack(heightMap))
 	local result = highest - lowest
-	return result <= tolerance and (allowWater or lowest > 0)
+	return result <= tolerance and (allowMexesInWater or lowest > 0)
 end
 
 local function f(x)
@@ -38,7 +61,7 @@ local function f(x)
 	elseif x <= 1 then return 1 end
 	return 0
 end
-local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
+local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowMexesInWater)
 	--[[
 	method 1: object rotated 180 degrees around centre to produce image
 	method 2: object mirrored around horizontal line passing through centre to produce image
@@ -77,8 +100,8 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 				newPoint[4] = newPoint[1]
 			end
 			-- check slope of new point and mirror
-			done = checkSlope(newPoint[1], newPoint[2], 50, allowWater)
-			done = done and checkSlope(newPoint[3], newPoint[4], 50, allowWater)
+			done = checkSlope(newPoint[1], newPoint[2], maxMexElevationDiff, allowMexesInWater)
+			done = done and checkSlope(newPoint[3], newPoint[4], maxMexElevationDiff, allowMexesInWater)
 			for j = 1, #positions do
 				-- check new point vs existing points
 				local dx = newPoint[1] - positions[j].x
@@ -126,15 +149,7 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 	return positions
 end
 
-local rng = math.random(0,1)
-
-local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "demo2"
-
-if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshitifukedup protection
-	mexRandomLayout = "layout1"
-end
-
-if mexRandomLayout == "layout1" then
+if mexRandomLayout == "legacy1" then
 	-- most normal layout
 	-- max metal ~49.1
 	-- Max spots 56
@@ -146,7 +161,7 @@ if mexRandomLayout == "layout1" then
 	m = {2, 1.66, 1.33, 1.5}
 end
 
-if mexRandomLayout == "layout2" then
+if mexRandomLayout == "legacy2" then
 -- Bit more random/clustered
 -- max metal ~50
 -- Max spots 56
@@ -158,7 +173,7 @@ if mexRandomLayout == "layout2" then
 	m = {2, 1.75, 1.50, 1.33, 1.25, 2}
 end
 
-if mexRandomLayout == "layout3" then
+if mexRandomLayout == "legacy3" then
 -- The Pitchfork
 -- max metal ~51.1
 -- Max spots 94
@@ -170,7 +185,7 @@ if mexRandomLayout == "layout3" then
 	m = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1.2}
 end
 
-if mexRandomLayout == "demo" then
+if mexRandomLayout == "legacy4" then
 	randomMirrored = false
 	r = {0.25, 0.5, 0.85}
 	pointsPerLayer = {3, 4, 8}
@@ -179,16 +194,16 @@ if mexRandomLayout == "demo" then
 	m = {1, 1, 1}
 end
 
-if mexRandomLayout == "demo2" then
+if mexRandomLayout == "standard" then
 	randomMirrored = true
 	padding = 50
 	pointRadius = 100 -- TODO: change this into how big a metal circle is
 	extraSeparationBetweenPoints = 50
 	howManyTriesBeforeGiveUp = 100
-	numPointsPerSide = 30
+	numPointsPerSide = mexSpotsPerSide
 	includeCentre = false
 	method = 1
-	allowWater = true
+	allowMexesInWater = true
 	--metalPerPoint = 1
 end
 
@@ -227,7 +242,7 @@ if not randomMirrored then
 		end
 	end
 else
-	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
+	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowMexesInWater)
 end
 
 return {
