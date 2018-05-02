@@ -8,7 +8,7 @@ local size = math.max(mapx, mapz)
 --
 
 --Get the number of teamIDs in this game and store it in teamIDCount
-numteamID = Spring.GetTeamList(teamID)
+numteamID = Spring.GetPlayerList(teamID)
 teamIDCount = 0
 for _ in pairs(numteamID) do teamIDCount = teamIDCount + 1 end
 
@@ -25,11 +25,11 @@ if allowMexesInWater == nil then -- This is just an oshitifukedup protection
 	allowMexesInWater = true
 end
 
-if maxMexElevationDiff  nil then -- This is just an oshitifukedup protection
+if maxMexElevationDiff == nil then -- This is just an oshitifukedup protection
 	maxMexElevationDiff = 50
 end
 
-if mexSpotsPerSide  nil then -- This is just an oshitifukedup protection
+if mexSpotsPerSide == nil then -- This is just an oshitifukedup protection
 	mexSpotsPerSide = 30
 end
 
