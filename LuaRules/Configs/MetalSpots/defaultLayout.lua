@@ -18,6 +18,8 @@ function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSe
 	method 1: object rotated 180 degrees around centre to produce image
 	method 2: object mirrored around horizontal line passing through centre to produce image
 	method 3: object mirrored around vertical line passing through centre to produce image
+	method 4: object mirrored around diagonal line going from NE to SW to produce image
+	method 5: object mirrored around diagonal line going from NW to SE to produce image
 	]]
 	local positions = {}
 	--positions[1] = {x = padding, z = padding}
@@ -45,6 +47,9 @@ function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSe
 			elseif method == 4 then
 				newPoint[3] = sizeX - newPoint[2]
 				newPoint[4] = sizeY - newPoint[1]
+			elseif method == 5 then
+				newPoint[3] = newPoint[2]
+				newPoint[4] = newPoint[1]
 			end
 			for j = 1, #positions do
 				-- check new point vs existing points
