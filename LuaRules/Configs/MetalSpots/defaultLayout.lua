@@ -70,8 +70,8 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 				newPoint[4] = newPoint[1]
 			end
 			-- check slope of new point and mirror
-			done = checkSlope(newPoint[1], newPoint[2], 30, allowWater)
-			done = done and checkSlope(newPoint[3], newPoint[4], 30, allowWater)
+			done = checkSlope(newPoint[1], newPoint[2], 50, allowWater)
+			done = done and checkSlope(newPoint[3], newPoint[4], 50, allowWater)
 			for j = 1, #positions do
 				-- check new point vs existing points
 				local dx = newPoint[1] - positions[j].x
@@ -181,7 +181,7 @@ if mexRandomLayout == "demo2" then
 	numPointsPerSide = 30
 	includeCentre = false
 	method = 1
-	allowWater = false
+	allowWater = true
 	--metalPerPoint = 1
 end
 
