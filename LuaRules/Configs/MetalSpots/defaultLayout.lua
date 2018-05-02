@@ -207,6 +207,19 @@ if mexRandomLayout == "standard" then
 	--metalPerPoint = 1
 end
 
+if mexRandomLayout == "ffa" then
+	local numVertices = teamIDCount
+	if teamIDCount <= 2 then numVertices = 4 end -- can't have a polygon with less than 3 sides
+	randomMirrored = false
+	r = {0.12, 0.25, 0.50, 0.75, 0.88, 0.88, 0.88}
+	pointsPerLayer = {numVertices, numVertices, numVertices, numVertices, numVertices, numVertices, numVertices}
+	local theta = -math.pi / 2
+	local offset = math.pi / 14
+	angleOffset = {theta, theta, theta, theta, theta, theta - offset, theta + offset}
+	pointsBetweenVertices = {0, 0, 1, 0, 0, 0, 0}
+	m = {1, 1, 1, 1, 1, 1, 1}
+end
+
 --
 local results = {}
 if not randomMirrored then
