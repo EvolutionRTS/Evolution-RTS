@@ -7,13 +7,31 @@ local size = math.max(mapx, mapz)
 
 --
 
-function f(x)
+local sGetGroundHeight = Spring.GetGroundHeight
+local mexSideHalved = 70 -- mex is a square of side 140 units
+local slopeCheckMinDistance = 35
+local function checkSlope(x, z, tolerance, allowWater)
+	local heightMap = {}
+	local leng = 0
+	for i = -mexSideHalved, mexSideHalved, slopeCheckMinDistance do
+		for j = -mexSideHalved, mexSideHalved, slopeCheckMinDistance do
+			leng = leng + 1
+			heightMap[leng] = sGetGroundHeight(x + i, z + j)
+		end
+	end
+	local highest = math.max(unpack(heightMap))
+	local lowest = math.min(unpack(heightMap))
+	local result = highest - lowest
+	return result <= tolerance and (allowWater or lowest > 0)
+end
+
+local function f(x)
 	if x < 0.6 then return 0.5 + math.pow((0.6 - x) / 0.6, 2) * 1.5
 	elseif x < 0.8 then return (x - 0.6) / 0.4 + 0.5
 	elseif x <= 1 then return 1 end
 	return 0
 end
-function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method)
+local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
 	--[[
 	method 1: object rotated 180 degrees around centre to produce image
 	method 2: object mirrored around horizontal line passing through centre to produce image
@@ -51,6 +69,9 @@ function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSe
 				newPoint[3] = newPoint[2]
 				newPoint[4] = newPoint[1]
 			end
+			-- check slope of new point and mirror
+			done = checkSlope(newPoint[1], newPoint[2], 50, allowWater)
+			done = done and checkSlope(newPoint[3], newPoint[4], 50, allowWater)
 			for j = 1, #positions do
 				-- check new point vs existing points
 				local dx = newPoint[1] - positions[j].x
@@ -74,7 +95,7 @@ function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSe
 			local dy = newPoint[2] - newPoint[4]
 			if dx * dx + dy * dy < minSeparation * minSeparation then
 				done = false
-				logCollisions = logCollisions + 1
+				--logCollisions = logCollisions + 1
 			end
 		end
 		if numIterations == howManyTriesBeforeGiveUp then logFailures = logFailures + 1 end
@@ -160,7 +181,8 @@ if mexRandomLayout == "demo2" then
 	numPointsPerSide = 30
 	includeCentre = false
 	method = 1
-	metalPerPoint = 1
+	allowWater = true
+	--metalPerPoint = 1
 end
 
 --
@@ -198,7 +220,7 @@ if not randomMirrored then
 		end
 	end
 else
-	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method)
+	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
 end
 
 return {
