@@ -1,3 +1,10 @@
+numteamID = Spring.GetTeamList(teamID)
+teamIDCount = 0
+for _ in pairs(numteamID) do teamIDCount = teamIDCount + 1 end
+
+Spring.Echo("Number of teamIDs")
+Spring.Echo(teamIDCount)
+
 --math.randomseed(Game.GameID) -- This only works in 104+
 math.random(); math.random(); math.random()
 local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
