@@ -24,8 +24,8 @@ Spring.Echo(teamIDCount)
 --
 
 local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
-local maxMexElevationDiff = Spring.GetModOptions().maximummexelevationdifference or 50
-local mexSpotsPerSide = Spring.GetModOptions().mexspotsperside or 30
+local maxMexElevationDiff = tonumber(Spring.GetModOptions().maximummexelevationdifference) or 50
+local mexSpotsPerSide = tonumber(Spring.GetModOptions().mexspotsperside) or 30
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
 
 if placeMexesInWater == "enabled" or placeMexesInWater == "" or placeMexesInWater == nil then -- This is just an oshitifukedup protection
