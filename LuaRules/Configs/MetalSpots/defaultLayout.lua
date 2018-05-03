@@ -151,11 +151,14 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 	if sizeX > sizeY then ratioY = sizeX / sizeY
 	elseif sizeY > sizeX then ratioX = sizeY / sizeX end
 	local sizeMax = math.max(sizeX, sizeY)
+	if teamIDCount > 8 then
+		metalMultiplier = 8
+	end
 	for i = 1, #positions do
 		local dx = sizeMax * 0.5 - positions[i].x * ratioX
 		local dy = sizeMax * 0.5 - positions[i].z * ratioY
 		local r = math.sqrt(dx * dx + dy * dy)
-		positions[i].metal = f(r / (sizeX * math.sqrt(2) / 2))
+		positions[i].metal = f(r / (sizeX * math.sqrt(2) * (metalMultiplier * 0.5))
 	end
 	
 	return positions
@@ -194,7 +197,7 @@ if mexRandomLayout == "legacy3" then
 	pointsPerLayer = {3,5,3,9,3,11,13,7,19,21}
 	angleOffset = {math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4}
 	pointsBetweenVertices = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-	m = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1.2}
+	m = {2, 1.9, 1.7, 1.5, 1.4, 1, 1.1, 1.25, 1.4, 1.5}
 end
 
 if mexRandomLayout == "legacy4" then
