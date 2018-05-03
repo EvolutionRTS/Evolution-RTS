@@ -6,7 +6,7 @@ local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
 local size = math.max(mapx, mapz)
 
 --
-Spring.Echo("Map size is " .. mapx)
+Spring.Echo("[Default Mex Layout] Map size is: " .. mapx + mapz)
 local players = Spring.GetPlayerList()
 local count = 0
 for i = 1, #players do
@@ -19,8 +19,7 @@ Spring.SetGameRulesParam("peopleCount", count)
 
 teamIDCount = Spring.GetGameRulesParam("peopleCount")
 
-Spring.Echo("[Default Mex Layout] Number of teamIDs in this match:")
-Spring.Echo(teamIDCount)
+Spring.Echo("[Default Mex Layout] Number of teamIDs in this match: " .. teamIDCount)
 --
 
 local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
@@ -214,8 +213,16 @@ if mexRandomLayout == "legacy4" then
 end
 
 if mexRandomLayout == "standard" then
-	if mapx < 4000 and mapz <4000 then
+	if mapx + mapz <= 4096 then --8
 		ppsModifier = 0.5
+	elseif mapx + mapz <= 8192 then --16
+		ppsModifier = 1
+	elseif mapx + mapz <= 10240 then --20
+		ppsModifier = 1.5
+	elseif mapx + mapz <= 12288 then --24
+		ppsModifier = 2
+	elseif mapx + mapz <= 14336 then --28
+		ppsModifier = 2.5
 	else
 		ppsModifier = 1
 	end
