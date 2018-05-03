@@ -217,7 +217,7 @@ if mexRandomLayout == "ffa" then
 	local offset = math.pi / 14
 	angleOffset = {theta, theta, theta, theta, theta, theta - offset, theta + offset}
 	pointsBetweenVertices = {0, 0, 1, 0, 0, 0, 0}
-	m = {1, 0.9, 0.8, 0.7, 0.5, 0.75, 1}
+	m = {2, 1.66, 1.33, 1.25, 1, 1.5, 2}
 end
 
 --
