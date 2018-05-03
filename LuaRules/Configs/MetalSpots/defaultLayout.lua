@@ -209,7 +209,7 @@ end
 
 if mexRandomLayout == "ffa" then
 	local numVertices = teamIDCount
-	if teamIDCount <= 2 then numVertices = 4 end -- can't have a polygon with less than 3 sides
+	if teamIDCount <= 2 then numVertices = 3 end -- can't have a polygon with less than 3 sides
 	randomMirrored = false
 	r = {0.12, 0.25, 0.50, 0.75, 0.88, 0.88, 0.88}
 	pointsPerLayer = {numVertices, numVertices, numVertices, numVertices, numVertices, numVertices, numVertices}
@@ -217,7 +217,7 @@ if mexRandomLayout == "ffa" then
 	local offset = math.pi / 14
 	angleOffset = {theta, theta, theta, theta, theta, theta - offset, theta + offset}
 	pointsBetweenVertices = {0, 0, 1, 0, 0, 0, 0}
-	m = {1, 1, 1, 1, 1, 1, 1}
+	m = {1, 0.9, 0.8, 0.7, 0.5, 0.75, 1}
 end
 
 --
