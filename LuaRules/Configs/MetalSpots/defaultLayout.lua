@@ -16,14 +16,14 @@ Spring.Echo("[Default Mex Layout] Number of teamIDs in this match:")
 Spring.Echo(teamIDCount)
 --
 
-local allowMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
+local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
 local maxMexElevationDiff = Spring.GetModOptions().maximummexelevationdifference or 50
 local mexSpotsPerSide = Spring.GetModOptions().mexspotsperside or 30
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
 
-if allowMexesInWater == "enabled" or allowMexesInWater == "" or allowMexesInWater == nil then -- This is just an oshitifukedup protection
+if placeMexesInWater == "enabled" or placeMexesInWater == "" or placeMexesInWater == nil then -- This is just an oshitifukedup protection
 	allowMexesInWater = true
-elseif allowMexesInWater == "disabled" then
+elseif placeMexesInWater == "disabled" then
 	allowMexesInWater = false
 end
 
@@ -39,10 +39,13 @@ if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshit
 	mexRandomLayout = "standard"
 end
 
+Spring.Echo("[Default Mex Layout] Can we put mexes in water?")
+Spring.Echo(allowMexesInWater)
+
 local sGetGroundHeight = Spring.GetGroundHeight
 local mexSideHalved = 70 -- mex is a square of side 140 units
 local slopeCheckMinDistance = 35
-local function checkSlope(x, z, tolerance, allowMexesInWater)
+local function checkSlope(x, z, tolerance, allowWater)
 	local heightMap = {}
 	local leng = 0
 	for i = -mexSideHalved, mexSideHalved, slopeCheckMinDistance do
@@ -54,7 +57,7 @@ local function checkSlope(x, z, tolerance, allowMexesInWater)
 	local highest = math.max(unpack(heightMap))
 	local lowest = math.min(unpack(heightMap))
 	local result = highest - lowest
-	return result <= tolerance and (allowMexesInWater or lowest > 0)
+	return result <= tolerance and (allowWater or lowest > 0)
 end
 
 local function f(x)
@@ -63,7 +66,7 @@ local function f(x)
 	elseif x <= 1 then return 1 end
 	return 0
 end
-local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowMexesInWater)
+local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
 	--[[
 	method 1: object rotated 180 degrees around centre to produce image
 	method 2: object mirrored around horizontal line passing through centre to produce image
@@ -102,8 +105,8 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 				newPoint[4] = newPoint[1]
 			end
 			-- check slope of new point and mirror
-			done = checkSlope(newPoint[1], newPoint[2], maxMexElevationDiff, allowMexesInWater)
-			done = done and checkSlope(newPoint[3], newPoint[4], maxMexElevationDiff, allowMexesInWater)
+			done = checkSlope(newPoint[1], newPoint[2], maxMexElevationDiff, allowWater)
+			done = done and checkSlope(newPoint[3], newPoint[4], maxMexElevationDiff, allowWater)
 			for j = 1, #positions do
 				-- check new point vs existing points
 				local dx = newPoint[1] - positions[j].x
@@ -205,7 +208,7 @@ if mexRandomLayout == "standard" then
 	numPointsPerSide = mexSpotsPerSide
 	includeCentre = false
 	method = 1
-	allowMexesInWater = true
+	allowWater = allowMexesInWater
 	--metalPerPoint = 1
 end
 
@@ -257,7 +260,7 @@ if not randomMirrored then
 		end
 	end
 else
-	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowMexesInWater)
+	results = makePositionsRandomMirrored(Game.mapSizeX, Game.mapSizeZ, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
 end
 
 return {
