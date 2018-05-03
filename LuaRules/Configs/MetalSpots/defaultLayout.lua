@@ -21,8 +21,10 @@ local maxMexElevationDiff = Spring.GetModOptions().maximummexelevationdifference
 local mexSpotsPerSide = Spring.GetModOptions().mexspotsperside or 30
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
 
-if allowMexesInWater ~= "disabled" then -- This is just an oshitifukedup protection
+if allowMexesInWater == "enabled" or allowMexesInWater == "" or allowMexesInWater == nil then -- This is just an oshitifukedup protection
 	allowMexesInWater = true
+elseif allowMexesInWater == "disabled" then
+	allowMexesInWater = false
 end
 
 if maxMexElevationDiff == nil then -- This is just an oshitifukedup protection
