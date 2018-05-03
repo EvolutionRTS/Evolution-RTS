@@ -6,7 +6,7 @@ local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
 local size = math.max(mapx, mapz)
 
 --
-
+Spring.Echo("Map size is " .. mapx)
 local players = Spring.GetPlayerList()
 local count = 0
 for i = 1, #players do
@@ -151,14 +151,18 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 	if sizeX > sizeY then ratioY = sizeX / sizeY
 	elseif sizeY > sizeX then ratioX = sizeY / sizeX end
 	local sizeMax = math.max(sizeX, sizeY)
-	if teamIDCount > 8 then
+	if teamIDCount < 2 then
+		metalMultiplier = 2
+	elseif teamIDCount > 8 then
 		metalMultiplier = 8
+	else
+		metalMultiplier = teamIDCount
 	end
 	for i = 1, #positions do
 		local dx = sizeMax * 0.5 - positions[i].x * ratioX
 		local dy = sizeMax * 0.5 - positions[i].z * ratioY
 		local r = math.sqrt(dx * dx + dy * dy)
-		positions[i].metal = f(r / (sizeX * math.sqrt(2) * (metalMultiplier * 0.5))
+		positions[i].metal = f(r / (sizeX * math.sqrt(2) * (metalMultiplier * 0.5)))
 	end
 	
 	return positions
@@ -210,12 +214,17 @@ if mexRandomLayout == "legacy4" then
 end
 
 if mexRandomLayout == "standard" then
+	if mapx < 4000 and mapz <4000 then
+		ppsModifier = 0.5
+	else
+		ppsModifier = 1
+	end
 	randomMirrored = true
 	padding = 50
 	pointRadius = 100 -- TODO: change this into how big a metal circle is
 	extraSeparationBetweenPoints = 50
 	howManyTriesBeforeGiveUp = 100
-	numPointsPerSide = mexSpotsPerSide
+	numPointsPerSide = mexSpotsPerSide * ppsModifier
 	includeCentre = false
 	method = 1
 	allowWater = allowMexesInWater
