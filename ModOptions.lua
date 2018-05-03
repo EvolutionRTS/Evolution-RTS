@@ -137,13 +137,17 @@ local options= {
 		-- (step <= 0) means that there is no quantization
 	},
 	{
-		key    = "allowmexesinwater",
-		name   = "Standard Metal Spot Layout: Allow metal spots to be placed in water?",
-		desc   = "Should metal spots be placed in water? Sometimes turning this off can be beneficial if the water on a map does damage. (only works on Standard Metal Spot Layout)",
-		type   = "bool",
-		def    = true,
+		key    = 'allowmexesinwater',
+		name   = 'Standard Metal Spot Layout: Allow metal spots to be placed in water?',
+		desc   = 'Should metal spots be placed in water? Sometimes turning this off can be beneficial if the water on a map does damage. (only works on Standard Metal Spot Layout)',
+		type="list",
+		def="enabled",
 		section= "resourcing",
-    },
+		items={
+			{key="disabled", name="Disabled", desc="Disallow metal spots being placed in water."},
+			{key="enabled", name="Enabled", desc="Allow metal spots to be placed in water."},
+		}
+	},
 	{
 		key    = 'mexspotsperside',
 		name   = 'Standard Metal Spot Layout: How many metal spots per side?',

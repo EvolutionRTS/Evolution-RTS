@@ -16,12 +16,12 @@ Spring.Echo("[Default Mex Layout] Number of teamIDs in this match:")
 Spring.Echo(teamIDCount)
 --
 
-local allowMexesInWater = Spring.GetModOptions().allowmexesinwater or true
+local allowMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
 local maxMexElevationDiff = Spring.GetModOptions().maximummexelevationdifference or 50
 local mexSpotsPerSide = Spring.GetModOptions().mexspotsperside or 30
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
 
-if allowMexesInWater == nil then -- This is just an oshitifukedup protection
+if allowMexesInWater ~= "disabled" then -- This is just an oshitifukedup protection
 	allowMexesInWater = true
 end
 
