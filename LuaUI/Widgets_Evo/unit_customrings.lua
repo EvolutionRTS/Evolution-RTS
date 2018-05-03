@@ -138,6 +138,7 @@ function widget:UnitCreated(uId, uDefId)
 end
 
 function widget:DrawWorldPreUnit()
+	if Spring.IsGUIHidden() then return end
     for uId, rings in pairs(ringedUnits) do
 		if (Spring.IsUnitAllied(uId)and Spring.IsUnitSelected(uId)) then
 			local ux, uy, uz = Spring.GetUnitPosition(uId)

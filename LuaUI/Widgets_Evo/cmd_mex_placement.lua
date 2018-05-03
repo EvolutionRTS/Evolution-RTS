@@ -50,6 +50,7 @@ local glText             = gl.Text
 local glGetTextWidth     = gl.GetTextWidth
 local glPolygonMode      = gl.PolygonMode
 local glDrawGroundCircle = gl.DrawGroundCircle
+local glDrawCircle
 local glUnitShape        = gl.UnitShape
 local glDepthTest        = gl.DepthTest
 local glLighting         = gl.Lighting
@@ -612,7 +613,7 @@ function calcMainMexDrawList(valuesonly)
 					-- Draws the metal spot's base income "south" of the metal spot
 					glRotate(270,1,0,0)
 	  				glColor(1,1,1)
-					glTranslate(x,-z-52-options.size.value, y)
+					glTranslate(x,-z-70-options.size.value, y)
 					
 					font:Begin()
 					font:SetTextColor(1,1,1)
@@ -647,24 +648,24 @@ function DrawMexList()
 			
 			glPushMatrix()	
 				glTranslate(x,y,z)
-				glColor(0,0,0,0.75)
+				glColor(0,0,0,1)
 				glRotate(currentRotationAngle,0,1,0)
-				glScale(1.04,1,1.04)
+				glScale(0.9,1,0.9)
 				glCallList(circleList)
-				mexColor[4] = 1
+				mexColor[4] = 0.8
 				glColor(mexColor)
-				glScale(1/1.04,1,1/1.04)
+				glScale(0.9,1,0.9)
 				glCallList(circleList)
 				glRotate(-currentRotationAngle,0,1,0)
 				
 				glRotate(currentRotationAngleOpposite,0,1,0)
 				glRotate(180,1,0,0)
-				glColor(0,0,0,0.4)
-				glScale(1.75,1,1.75)
+				glColor(0,0,0,1)
+				glScale(2.5,1,2.5)
 				glCallList(circleList)
-				mexColor[4] = 0.47
+				mexColor[4] = 0.8
 				glColor(mexColor)
-				glScale(1/1.04,1,1/1.04)
+				glScale(0.9,0.9,0.9)
 				glCallList(circleList)
 				glTranslate(-x,-y,-z)
 				glRotate(-currentRotationAngleOpposite,0,1,0)
@@ -801,15 +802,17 @@ function widget:DrawWorld()
 	gl.Color(1, 1, 1, 1)
 end
 
-function widget:DrawInMiniMap()
+function widget:DrawInMiniMap(minimapX, minimapY)
+
+		if not glDrawCircle then
+			glDrawCircle = gl.Utilities.DrawCircle
+		end
 
 	--if drawMexSpots then
 		local specatate = spGetSpectatingState()
 		
-		glLoadIdentity()
-		glTranslate(0,1,0)
-		glScale(mapXinv , -mapZinv, 1)
-		glRotate(270,1,0,0)
+		glTranslate(0,minimapY,0)
+		glScale(minimapX/mapX, -minimapY/mapZ, 1)
 
 		for i = 1, #WG.metalSpots do
 			local spot = WG.metalSpots[i]
@@ -822,9 +825,9 @@ function widget:DrawInMiniMap()
 
 			--Static minimap mex marker locations
 			glColor(0,0,0,1)
-			glLineWidth(3)
-			glDrawGroundCircle(x, 0, z, MINIMAP_DRAW_SIZE, 32)
-			glLineWidth(2)
+			glLineWidth(2.5)
+			glDrawCircle(x, z, MINIMAP_DRAW_SIZE)
+			glLineWidth(1.75)
 			mexColor[4] = 0.85
 			glColor(mexColor)
 			
@@ -836,7 +839,7 @@ function widget:DrawInMiniMap()
 			-- mexColor[4] = 0.85
 			-- glColor(mexColor)
 			
-			glDrawGroundCircle(x, 0, z, MINIMAP_DRAW_SIZE, 32)
+			glDrawCircle(x, z, MINIMAP_DRAW_SIZE)
 		end
 
 		glLineWidth(1.0)

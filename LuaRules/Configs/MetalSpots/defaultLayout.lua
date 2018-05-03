@@ -7,10 +7,17 @@ local size = math.max(mapx, mapz)
 
 --
 
---Get the number of teamIDs in this game and store it in teamIDCount
-numteamID = Spring.GetPlayerList(teamID)
-teamIDCount = 0
-for _ in pairs(numteamID) do teamIDCount = teamIDCount + 1 end
+local players = Spring.GetPlayerList()
+local count = 0
+for i = 1, #players do
+    local playerID = players[i]
+    if not select(3, Spring.GetPlayerInfo(playerID)) then
+        count = count + 1
+    end
+end
+Spring.SetGameRulesParam("peopleCount", count)
+
+teamIDCount = Spring.GetGameRulesParam("peopleCount")
 
 Spring.Echo("[Default Mex Layout] Number of teamIDs in this match:")
 Spring.Echo(teamIDCount)
