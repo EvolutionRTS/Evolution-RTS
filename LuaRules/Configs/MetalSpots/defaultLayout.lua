@@ -66,11 +66,15 @@ local function checkSlope(x, z, tolerance, allowWater)
 	return result <= tolerance and (allowWater or lowest > 0)
 end
 
+local function mathRound(x)
+	return math.floor(x + 0.5)
+end
 local function f(x)
-	if x < 0.6 then return 0.5 + math.pow((0.6 - x) / 0.6, 2) * 1.5
-	elseif x < 0.8 then return (x - 0.6) / 0.4 + 0.5
-	elseif x <= 1 then return 1 end
-	return 0
+	result = 0
+	if x < 0.6 then result = 0.5 + math.pow((0.6 - x) / 0.6, 2) * 1.5
+	elseif x < 0.8 then result = (x - 0.6) / 0.4 + 0.5
+	elseif x <= 1 then result = 1 end
+	return mathRound(result / 0.05) * 0.05
 end
 local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
 	--[[
@@ -176,7 +180,7 @@ if mexRandomLayout == "legacy1" then
 	pointsPerLayer = {10, 11, 15, 20}
 	angleOffset = {math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4}
 	pointsBetweenVertices = {0, 0, 0, 0}
-	m = {2, 1.66, 1.33, 1.5}
+	--m = {2, 1.66, 1.33, 1.5}
 end
 
 if mexRandomLayout == "legacy2" then
@@ -188,7 +192,7 @@ if mexRandomLayout == "legacy2" then
 	pointsPerLayer = {3, 6, 8, 10, 14, 15}
 	angleOffset = {math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4}
 	pointsBetweenVertices = {0, 0, 0, 0, 0, 0}
-	m = {2, 1.75, 1.50, 1.33, 1.25, 2}
+	--m = {2, 1.75, 1.50, 1.33, 1.25, 2}
 end
 
 if mexRandomLayout == "legacy3" then
@@ -200,7 +204,7 @@ if mexRandomLayout == "legacy3" then
 	pointsPerLayer = {3,5,3,9,3,11,13,7,19,21}
 	angleOffset = {math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4, math.pi / 4}
 	pointsBetweenVertices = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-	m = {2, 1.9, 1.7, 1.5, 1.4, 1, 1.1, 1.25, 1.4, 1.5}
+	--m = {2, 1.9, 1.7, 1.5, 1.4, 1, 1.1, 1.25, 1.4, 1.5}
 end
 
 if mexRandomLayout == "legacy4" then
@@ -209,7 +213,7 @@ if mexRandomLayout == "legacy4" then
 	pointsPerLayer = {3, 4, 8}
 	angleOffset = {-math.pi / 2, 0, math.pi / 8}
 	pointsBetweenVertices = {1, 0, 2}
-	m = {1, 1, 1}
+	--m = {1, 1, 1}
 end
 
 if mexRandomLayout == "standard" then
@@ -248,7 +252,14 @@ if mexRandomLayout == "ffa" then
 	local offset = math.pi / 14
 	angleOffset = {theta, theta, theta, theta, theta, theta - offset, theta + offset}
 	pointsBetweenVertices = {0, 0, 1, 0, 0, 0, 0}
-	m = {2, 1.66, 1.33, 1.25, 1, 1.5, 2}
+	--m = {2, 1.66, 1.33, 1.25, 1, 1.5, 2}
+end
+
+if r and not m then
+	m = {}
+	for i = 1, #r do
+		m[i] = f(r[i])
+	end
 end
 
 --
