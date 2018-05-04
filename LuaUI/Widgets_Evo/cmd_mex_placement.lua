@@ -120,16 +120,16 @@ options_order = { 'drawicons', 'size', 'specPlayerColours', 'rounding'}
 VFS.Include("LuaUI/Configs/LuaMex/options.lua")
 
 local circleOptions = {
-	enabled							= true,
-	animating						= true,	-- its only rotation, but will cost more performance
-	alwaysshow					= true,
-	innersize						= 40,		-- outersize-innersize = circle width
-	outersize						= 43,		-- outersize-innersize = circle width
-	circlePieces				= 3,
+	enabled					= true,
+	animating				= true,	-- its only rotation, but will cost more performance
+	alwaysshow				= true,
+	innersize				= 40,		-- outersize-innersize = circle width
+	outersize				= 43,		-- outersize-innersize = circle width
+	circlePieces			= 3,
 	circlePieceDetail		= 1,
 	circleSpaceUsage		= 0.45,
 	circleInnerOffset		= 0.42,
-	rotationSpeed				= 5,
+	rotationSpeed			= 5,
 }
 
 -------------------------------------------------------------------------------------
@@ -652,8 +652,9 @@ function DrawMexList()
 				glRotate(currentRotationAngle,0,1,0)
 				glScale(0.9,1,0.9)
 				glCallList(circleList)
-				mexColor[4] = 0.8
-				glColor(mexColor)
+				--mexColor[4] = 0.8
+				--glColor(mexColor)
+				glColor(1,1,1,spot.metal * 0.5)
 				glScale(0.9,1,0.9)
 				glCallList(circleList)
 				glRotate(-currentRotationAngle,0,1,0)
@@ -663,8 +664,9 @@ function DrawMexList()
 				glColor(0,0,0,1)
 				glScale(2.5,1,2.5)
 				glCallList(circleList)
-				mexColor[4] = 0.8
-				glColor(mexColor)
+				--mexColor[4] = 0.8
+				--glColor(mexColor)
+				glColor(0.53, 0.77, 0.89, 1)
 				glScale(0.9,0.9,0.9)
 				glCallList(circleList)
 				glTranslate(-x,-y,-z)
