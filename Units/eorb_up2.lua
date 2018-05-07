@@ -11,7 +11,7 @@ humanName = [[O.R.B. MK III]]
 objectName = [[eorb4.s3o]]
 script = [[eorb3.cob]]
 
-workerTime = 1.5
+workerTime = 1.66
 buildDistance = 700
 
 tech = [[tech0]]
