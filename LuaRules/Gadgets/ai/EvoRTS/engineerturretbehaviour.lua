@@ -25,7 +25,7 @@ end
 function EngineerTurretBehaviour:Activate()
 	self.underfire = false
 	
-	local s = self.unit:Internal():Build("emetalextractor")
+	local s = self.unit:Internal():Build("emine")
 	if s then
 		self.active = true
 	else
@@ -36,7 +36,7 @@ end
 function EngineerTurretBehaviour:Deactivate()
 	self.underfire = false
 	
-	local s = self.unit:Internal():Build("emetalextractor")
+	local s = self.unit:Internal():Build("emine")
 	if s then
 		self.active = true
 	else
@@ -46,7 +46,7 @@ end
 
 function EngineerTurretBehaviour:Priority()
 	if self.underfire == true  then
-		return 110
+		return 150
 	end
 	return 0
 end

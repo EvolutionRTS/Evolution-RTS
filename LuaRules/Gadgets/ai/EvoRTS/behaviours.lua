@@ -10,12 +10,14 @@ if controlPoints == "disabled" then
 	shard_include(  "taskqueuebehaviour" )
 	shard_include(  "attackerbehaviour" )
 	shard_include(  "bootbehaviour" )
+	--shard_include(  "engineerturretbehaviour"  )
 	else
 	shard_include(  "taskqueues" )
 	shard_include(  "taskqueuebehaviour" )
 	shard_include(  "attackerbehaviour" )
 	shard_include(  "bootbehaviour" )
 	shard_include(  "capturerbehaviour" )
+	--shard_include(  "engineerturretbehaviour"  )
 end
 
 --shard_include "capturerbehaviour"

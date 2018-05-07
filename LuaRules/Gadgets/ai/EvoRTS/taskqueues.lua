@@ -646,7 +646,9 @@ function RandomUnit()
 					end
 				end	
 		else
-				if mc >= ms - ms*0.20 then
+				if es < Spring.GetGameSeconds()*0.5 then
+					return "estorage"
+				elseif mc >= ms - ms*0.20 then
 					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
 						return "elifterai"
 					else
