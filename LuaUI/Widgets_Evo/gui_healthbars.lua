@@ -1146,7 +1146,7 @@ do
         if (fullText and (drawBarPercentage > 0 or dist < minPercentageDistance)) then
             infotext = floor(morph.progress*100)..'%'
         end
-        AddBar("morph",morph.progress,"build",infotext or '')
+        AddBar("Evolving",morph.progress,"build",infotext or '')
 	  end
 
       --// PARALYZE
