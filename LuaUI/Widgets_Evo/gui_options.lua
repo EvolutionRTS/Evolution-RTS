@@ -1824,7 +1824,7 @@ function init()
 		{id="buildmenubigtooltip", group="ui", name=widgetOptionColor.."   extensive unit info", type="bool", value=(WG['red_buildmenu']~=nil and WG['red_buildmenu'].getConfigUnitBigTooltip~=nil and WG['red_buildmenu'].getConfigUnitBigTooltip()), description='Displays elaborative unit description when availible'},
 		{id="buildpichelp", group="ui", name="Flashing Buildpic Help", type="bool", value=tonumber(Spring.GetConfigInt("evo_buildpichelp",1) or 1) == 1, description="Flashes relevant build menu items when resources are in a crisis situation"},
 
-		{id="resourceprompts", group="ui", name="Audio/Visual Resource Prompts", type="bool", value=tonumber(Spring.GetConfigInt("evo_resourceprompts",1) or 1) == 1, description="If enabled, messages will be sent to the chat as well as\naudio cues when your resources need attention"},
+		{id="resourceprompts", group="ui", name="Audio/Visual Helper Prompts", type="bool", value=tonumber(Spring.GetConfigInt("evo_resourceprompts",1) or 1) == 1, description="If enabled, messages will be sent to the chat as well as\naudio cues when your resources need attention"},
 		{id="simplifiedresourcebar", group="ui", name="Simplified Resource Bar", type="bool", value=tonumber(Spring.GetConfigInt("evo_simplifiedresourcebar",1) or 1) == 1, description="Removes extra information from the resource bar"},
 
 		--{id="fancyselunits", group="gfx", widget="Fancy Selected Units", name="Fancy Selected Units", type="bool", value=GetWidgetToggleValue("Fancy Selected Units"), description=''},

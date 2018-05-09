@@ -60,7 +60,7 @@ local options= {
 		section= 'aioptions',
 		def    = 0,
 		min    = 0,
-		max    = 100,
+		max    = 20,
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
