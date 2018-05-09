@@ -1555,7 +1555,7 @@ end
 function widget:GameFrame(n)
 	if n%30 == 1 then
 		notificationTimeout = notificationTimeout - 1
-		Spring.Echo(notificationTimeout)
+		--Spring.Echo(notificationTimeout)
 	end
 	if n%450 == 4 then
 		local _, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
