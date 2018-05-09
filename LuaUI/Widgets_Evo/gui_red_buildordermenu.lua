@@ -18,6 +18,8 @@ local buildStartKey = 98
 local buildNextKey = 110
 local buildKeys = {113, 119, 101, 114, 116, 97, 115, 100, 102, 103, 122, 120, 99, 118, 98}
 local buildLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
+local highlightedIcons = {}
+local highlightedIconsLeng = 0
 
 local stateTexture		     = "LuaUI/Images/resbar.dds"
 local buttonTexture		     = "LuaUI/Images/button.dds"
@@ -1234,6 +1236,9 @@ local function setBrightness(condition, icon)
 		if brightness < 0.5 then brightness = 0.5 + brightness -- lighter
 		else brightness = 1.5 - brightness end -- dimmer
 		icon.border = {brightness, brightness, 0, 1}
+		
+		highlightedIconsLeng = highlightedIconsLeng + 1
+		highlightedIcons[highlightedIconsLeng] = icon
 	else
 		icon.border = {0, 0, 0, 0}
 	end
@@ -1241,28 +1246,34 @@ end
 function widget:DrawScreen()
 	if buildPicHelp == 1 then
 	
-	--Legend for quick reference
+		--Legend for quick reference
 
-	-- c currentLevel,
-	-- s storage,
-	-- p pull,
-	-- i income,
-	-- e expense,
-	-- sh share,
-	-- se sent,
-	-- r received
-	
-	-- copied from "gui_resourceBar.lua"
-	local myTeamID = Spring.GetMyTeamID()
-	local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed") or 0), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0)
-	local ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
-	local mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
-	local supplyWarning = (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95)
-	local energyWarning = ec / es < 0.2
-	local metalLowWarning = mc / ms < 0.2
-	local metalHighWarning = mc / ms > 0.9
-	
-	local icons = buildmenu.icons
+		-- c currentLevel,
+		-- s storage,
+		-- p pull,
+		-- i income,
+		-- e expense,
+		-- sh share,
+		-- se sent,
+		-- r received
+
+		-- copied from "gui_resourceBar.lua"
+		local myTeamID = Spring.GetMyTeamID()
+		local su, sm = math.round(Spring.GetTeamRulesParam(myTeamID, "supplyUsed") or 0), math.round(Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0)
+		local ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
+		local mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
+		local supplyWarning = (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95)
+		local energyWarning = ec / es < 0.2
+		local metalLowWarning = mc / ms < 0.2
+		local metalHighWarning = mc / ms > 0.9
+
+		for i = 1, #highlightedIcons do
+			highlightedIcons[i].border = {0, 0, 0, 0}
+		end
+		highlightedIcons = {}
+		highlightedIconsLeng = 0
+
+		local icons = buildmenu.icons
 		for i=1,#icons do
 			local icon = icons[i]
 			if icon.active == nil then
