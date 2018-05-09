@@ -75,6 +75,8 @@ local walls = {dragonsteeth=true,dragonsteeth_core=true,fortification=true,forti
 local stockpileH = 24
 local stockpileW = 12
 
+local notificationTimeout = 0
+
 
 local OPTIONS = {}
 OPTIONS[1] = {
@@ -1550,6 +1552,28 @@ function widget:TextCommand(command)
 	end
 end
 
+function widget:GameFrame(n)
+	if n%30 == 1 then
+		notificationTimeout = notificationTimeout - 1
+		Spring.Echo(notificationTimeout)
+	end
+	if n%450 == 4 then
+		local _, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
+		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
+
+		--Assume that if it isn't set, resourcePrompts is true
+		if resourcePrompts == nil then
+			resourcePrompts = 1
+		end
+		
+		if spectator == true then
+			resourcePrompts = 0
+		end
+		--Spring.Echo(resourcePrompts)
+	end
+end
+
+
 function MorphUpdate(morphTable)
   UnitMorphs = morphTable
 end
@@ -1563,5 +1587,14 @@ function MorphStop(unitID)
 end
 
 function MorphFinished(unitID)
-  UnitMorphs[unitID] = nil
+	if notificationTimeout > 0 then
+		UnitMorphs[unitID] = nil
+	else
+		if resourcePrompts == 1 then
+			Spring.PlaySoundFile("sounds/ui/evolutionfinished.wav", 1)
+		end
+		Spring.Echo("Your unit(s) have finished Evolving")
+		notificationTimeout = 10
+		UnitMorphs[unitID] = nil
+	end
 end
