@@ -27,7 +27,7 @@ function widget:UnitDestroyed(unitID,unitDefID,teamID)
 	end
 	
 	local queue = spGetFullBuildQueue(unitID)
-	if queue[1] then table.insert(DestroyedsHasQueue, {u=unitID,x=x,z=z,t=teamID,queue=queue}) end
+	if queue[1] and UnitDefs[unitDefID].isFactory then table.insert(DestroyedsHasQueue, {u=unitID,x=x,z=z,t=teamID,queue=queue}) end
 end
 
 function widget:UnitCreated(unitID,unitDefID,teamID)
