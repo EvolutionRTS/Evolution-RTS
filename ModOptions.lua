@@ -161,6 +161,18 @@ local options= {
 		-- (step <= 0) means that there is no quantization
 	},
 	{
+		key    = 'dynamicmexoutput',
+		name   = 'Should metal spot output values be dynamic?',
+		desc   = 'Uses a sine to determine metal spot values based upon distance from the edge of the map and distance to the center.',
+		type="list",
+		def="disabled",
+		section= "resourcing",
+		items={
+			{key="disabled", name="Disabled", desc="All metal spot output values will be set to 1.0"},
+			{key="enabled", name="Enabled", desc="All metal spot output values will be automatically calculated"},
+		}
+	},
+	{
 		key    = 'metalextractorcommunism',
 		name   = 'Metal Extractor Communism',
 		desc   = 'If enabled, then all metal income from Metal Extractors is split between allies. This means that it does not matter which ally owns the metal extractor, the entire team will benefit.',

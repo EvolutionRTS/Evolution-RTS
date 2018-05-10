@@ -26,6 +26,7 @@ local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
 local maxMexElevationDiff = tonumber(Spring.GetModOptions().maximummexelevationdifference) or 50
 local mexSpotsPerSide = tonumber(Spring.GetModOptions().mexspotsperside) or 30
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
+local dynamicMexOutput = Spring.GetModOptions().dynamicmexoutput or "disabled"
 
 if placeMexesInWater == "enabled" or placeMexesInWater == "" or placeMexesInWater == nil then -- This is just an oshitifukedup protection
 	allowMexesInWater = true
@@ -43,6 +44,10 @@ end
 
 if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshitifukedup protection
 	mexRandomLayout = "standard"
+end
+
+if dynamicMexOutput == "" or dynamicMexOutput == nil then -- This is just an oshitifukedup protection
+	dynamicMexOutput = "disabled"
 end
 
 Spring.Echo("[Default Mex Layout] Can we put mexes in water?")
@@ -74,7 +79,11 @@ local function f(x)
 	if x < 0.6 then result = 0.5 + math.pow((0.6 - x) / 0.6, 2) * 1.5
 	elseif x < 0.8 then result = (x - 0.6) / 0.4 + 0.5
 	elseif x <= 1 then result = 1 end
-	return mathRound(result / 0.05) * 0.05
+	if dynamicMexOutput == "disabled" then
+		return 1
+	else
+		return mathRound(result / 0.05) * 0.05
+	end
 end
 local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, extraSeparationBetweenPoints, howManyTriesBeforeGiveUp, numPointsPerSide, includeCentre, method, allowWater)
 	--[[
