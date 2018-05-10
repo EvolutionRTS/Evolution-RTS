@@ -39,7 +39,7 @@ function widget:GameFrame(frameNum)
 	local ToReSelect={}
 	
 	for _,c in ipairs(Createds) do
-		Spring.Echo("#DesQuee" .. #DestroyedsHasQueue)
+		--Spring.Echo("#DesQuee" .. #DestroyedsHasQueue)
 		for _,d in ipairs(DestroyedsHasQueue) do
 			if c.x==d.x and c.z==d.z and c.t==d.t then
 				for i = 1, #d.queue do
@@ -52,7 +52,7 @@ function widget:GameFrame(frameNum)
 						if uDefName then
 							for _ = 1, v do Spring.GiveOrderToUnit(c.u, -uDefName.id, {}, 0) end
 							--Spring.Echo(UnitDefs[k].name .. "___" .. v)
-							Spring.Echo(uDefName.id)
+							--Spring.Echo(uDefName.id)
 						end
 					end
 				end
