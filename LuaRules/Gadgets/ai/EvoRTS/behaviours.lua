@@ -10,6 +10,7 @@ if controlPoints == "disabled" then
 	shard_include(  "taskqueuebehaviour" )
 	shard_include(  "attackerbehaviour" )
 	shard_include(  "bootbehaviour" )
+	--shard_include(	"morphbehaviour"	)
 	--shard_include(  "engineerturretbehaviour"  )
 	else
 	shard_include(  "taskqueues" )
@@ -17,6 +18,7 @@ if controlPoints == "disabled" then
 	shard_include(  "attackerbehaviour" )
 	shard_include(  "bootbehaviour" )
 	shard_include(  "capturerbehaviour" )
+	--shard_include(	"morphbehaviour"	)
 	--shard_include(  "engineerturretbehaviour"  )
 end
 
@@ -27,14 +29,20 @@ end
 --require "factoryregisterbehaviour"
 
 behaviours = {
+	emetalextractor = {
+		MorphBehaviour,
+	},
 	eorb = {
 		AttackerBehaviour,
+		MorphBehaviour,
 	},
 	eorb_up1 = {
 		AttackerBehaviour,
+		MorphBehaviour,
 	},
 	eorb_up2 = {
 		AttackerBehaviour,
+		MorphBehaviour,
 	},
 	eorb_up3 = {
 		AttackerBehaviour,
@@ -93,6 +101,7 @@ function defaultBehaviours(unit)
 	b = {}
 	
 	u = unit:Internal()
+	--table.insert(b,MorphBehaviour)
 	if u:CanBuild() then
 		table.insert(b,TaskQueueBehaviour)
 		if u:CanMove() then
