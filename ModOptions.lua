@@ -37,21 +37,6 @@ local options= {
 		desc   = 'Allows you to adjust ShardLua settings',
 		type   = 'section',
 	},
-	--{
-		--key="aidifficulty",
-		--name="ShardLua AI Difficulty",
-		--desc="Modifies how much Shard cheats",
-		--type="list",
-		--def="easy",
-		--section="aioptions",
-		--items={
-			--{key="veryeasy", name="Very Easy", desc="Very Easy AI"},
-			--{key="easy", name="Easy", desc="Basic AI that isn't cheating (well, still does, but has no real advantage over player)"},
-			--{key="medium", name="Medium", desc="Medium AI"},
-			--{key="hard", name="Hard", desc="Hard AI that gets extra resources and increased buildspeed"},
-			--{key="insane", name="Insane", desc="Very Hard AI"},
-		--}
-	--},
 	{
 		key    = 'aimetalhandicap',
 		name   = 'Shard Metal Handicap',
@@ -147,18 +132,6 @@ local options= {
 			{key="disabled", name="Disabled", desc="Disallow metal spots being placed in water."},
 			{key="enabled", name="Enabled", desc="Allow metal spots to be placed in water."},
 		}
-	},
-	{
-		key    = 'mexspotsperside',
-		name   = 'Standard Metal Spot Layout: How many metal spots per side?',
-		desc   = 'This defines how many metal spots will be placed on each side of the map. This number will have a multiplier attached based upon how many players are in the game. (only works on Standard Metal Spot Layout)',
-		type   = 'number',
-		section= 'resourcing',
-		def    = 30,
-		min    = 10,
-		max    = 100,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
 	},
 	{
 		key    = 'dynamicmexoutput',

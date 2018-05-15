@@ -24,7 +24,6 @@ Spring.Echo("[Default Mex Layout] Number of teamIDs in this match: " .. teamIDCo
 
 local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
 local maxMexElevationDiff = tonumber(Spring.GetModOptions().maximummexelevationdifference) or 50
-local mexSpotsPerSide = tonumber(Spring.GetModOptions().mexspotsperside) or 30
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
 local dynamicMexOutput = Spring.GetModOptions().dynamicmexoutput or "disabled"
 
@@ -36,10 +35,6 @@ end
 
 if maxMexElevationDiff == nil then -- This is just an oshitifukedup protection
 	maxMexElevationDiff = 50
-end
-
-if mexSpotsPerSide == nil then -- This is just an oshitifukedup protection
-	mexSpotsPerSide = 30
 end
 
 if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshitifukedup protection
@@ -226,25 +221,21 @@ if mexRandomLayout == "legacy4" then
 end
 
 if mexRandomLayout == "standard" then
-	if mapx + mapz <= 4096 then --8
-		ppsModifier = 0.5
-	elseif mapx + mapz <= 8192 then --16
-		ppsModifier = 1
-	elseif mapx + mapz <= 10240 then --20
-		ppsModifier = 1.5
-	elseif mapx + mapz <= 12288 then --24
-		ppsModifier = 2
-	elseif mapx + mapz <= 14336 then --28
-		ppsModifier = 2.5
-	else
-		ppsModifier = 1
+	if teamIDCount <= 2 then
+		mexSpotsPerSide = 20
+	elseif teamIDCount > 2 and teamIDCount <= 4 then
+		mexSpotsPerSide = 40
+	elseif teamIDCount > 4 and teamIDCount <= 6 then
+		mexSpotsPerSide = 60
+	elseif teamIDCount > 6 then
+		mexSpotsPerSide = 80
 	end
 	randomMirrored = true
 	padding = 50
 	pointRadius = 100 -- TODO: change this into how big a metal circle is
 	extraSeparationBetweenPoints = 50
 	howManyTriesBeforeGiveUp = 100
-	numPointsPerSide = mexSpotsPerSide * ppsModifier
+	numPointsPerSide = mexSpotsPerSide
 	includeCentre = false
 	method = 1
 	allowWater = allowMexesInWater
