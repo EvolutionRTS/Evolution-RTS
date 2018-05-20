@@ -51,7 +51,7 @@ local spGetCameraPosition    = Spring.GetCameraPosition
 local spWorldToScreenCoords  = Spring.WorldToScreenCoords
 
 
-local glowImg			= ":n:LuaUI/Images/glow.dds"
+local glowImg			= ":n:LuaUI/Images/glow2.dds"
 local beamGlowImg = "LuaUI/Images/barglow-center.dds"
 local beamGlowEndImg = "LuaUI/Images/barglow-edge.dds"
 
@@ -283,7 +283,7 @@ function widget:Initialize()
 	
 	if (glCreateShader == nil) then
 		Spring.Echo('Deferred Rendering requires shader support!') 
-		widgetHandler:RemoveWidget()
+		widgetHandler:RemoveWidget(self)
 		return
 	end
 	
@@ -292,14 +292,14 @@ function widget:Initialize()
 
 	if (Spring.GetConfigString("AllowDeferredMapRendering") == '0' or Spring.GetConfigString("AllowDeferredModelRendering") == '0') then
 		Spring.Echo('Deferred Rendering (gfx_deferred_rendering.lua) requires  AllowDeferredMapRendering and AllowDeferredModelRendering to be enabled in springsettings.cfg!') 
-		widgetHandler:RemoveWidget()
+		widgetHandler:RemoveWidget(self)
 		return
 	end
 	if ((not forceNonGLSL) and Spring.GetMiniMapDualScreen() ~= 'left') then --FIXME dualscreen
 		if (not glCreateShader) then
 			spEcho("gfx_deferred_rendering.lua: Shaders not found, removing self.")
 			GLSLRenderer = false
-			widgetHandler:RemoveWidget()
+			widgetHandler:RemoveWidget(self)
 		else
 			depthPointShader = depthPointShader or glCreateShader({
 				defines = {
@@ -322,7 +322,7 @@ function widget:Initialize()
 				spEcho(glGetShaderLog())
 				spEcho("gfx_deferred_rendering.lua: Bad depth point shader, removing self.")
 				GLSLRenderer = false
-				widgetHandler:RemoveWidget()
+				widgetHandler:RemoveWidget(self)
 			else
 				lightposlocPoint       = glGetUniformLocation(depthPointShader, "lightpos")
 				lightcolorlocPoint     = glGetUniformLocation(depthPointShader, "lightcolor")
@@ -351,7 +351,7 @@ function widget:Initialize()
 				spEcho(glGetShaderLog())
 				spEcho("gfx_deferred_rendering.lua: Bad depth beam shader, removing self.")
 				GLSLRenderer = false
-				widgetHandler:RemoveWidget()
+				widgetHandler:RemoveWidget(self)
 			else
 				lightposlocBeam       = glGetUniformLocation(depthBeamShader, 'lightpos')
 				lightpos2locBeam      = glGetUniformLocation(depthBeamShader, 'lightpos2')
@@ -491,16 +491,15 @@ function widget:DrawWorld()
 	local lights = pointLights
 	glBlending(GL.SRC_ALPHA, GL.ONE)
 	gl.Texture(glowImg)
+	local size = 1
 	for i = 1, pointLightCount do
 		local light = lights[i]
 		local param = light.param
 		if param.gib == nil and param.type == "Cannon"then
-			size = param.glowradius * 0.28
+			size = param.glowradius * 0.44
 			gl.PushMatrix()
 				local colorMultiplier = 1 / math.max(param.r, param.g, param.b)
-				local glowOpacity = 0.013 + (size/32000)
-				if glowOpacity > 0.027 then glowOpacity = 0.027 end
-				gl.Color(param.r*colorMultiplier, param.g*colorMultiplier, param.b*colorMultiplier, glowOpacity)
+				gl.Color(param.r*colorMultiplier, param.g*colorMultiplier, param.b*colorMultiplier, 0.02 + (size/3300))
 				gl.Translate(light.px, light.py, light.pz)
 				gl.Billboard(true)
 				gl.TexRect(-(size/2), -(size/2), (size/2), (size/2))
@@ -516,7 +515,7 @@ end
 function widget:DrawScreenEffects()
 	if not (GLSLRenderer) then
 		Spring.Echo('Removing deferred rendering widget: failed to use GLSL shader')
-		widgetHandler:RemoveWidget()
+		widgetHandler:RemoveWidget(self)
 		return
 	end
 	
