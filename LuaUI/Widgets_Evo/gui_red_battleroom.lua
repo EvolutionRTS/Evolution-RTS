@@ -19,7 +19,7 @@ local vsx, vsy = gl.GetViewSizes()
 local widgetScale = (1 + (vsx*vsy / 4000000))
 
 local NeededFrameworkVersion = 8
-local SoundIncomingChat  = 'sounds/ui/beep4.wav'
+local SoundIncomingChat  = 'beep4'
 local SoundIncomingChatVolume = 1.0
 
 local gameOver = false
@@ -435,12 +435,6 @@ local function convertColor(r,g,b)
 end
 
 local function processLine(line,g,cfg,newlinecolor)
-	if (g.vars.browsinghistory) then
-		if (g.vars.historyoffset == nil) then
-			g.vars.historyoffset = 0
-		end
-		g.vars.historyoffset = g.vars.historyoffset + 1
-	end
 	
 	g.vars.nextupdate = 0
 
@@ -766,10 +760,16 @@ local function processLine(line,g,cfg,newlinecolor)
 	end
 
 	if (not ignoreThisMessage) then		--mute--
+	if (g.vars.browsinghistory) then
+		if (g.vars.historyoffset == nil) then
+			g.vars.historyoffset = 0
+		end
+		g.vars.historyoffset = g.vars.historyoffset + 1
+	end
 		local lineID = #history+1	
 		history[#history+1] = {line,clock(),lineID,textcolor,linetype}
         
-        if ( playSound ) then
+        if ( playSound and not Spring.IsGUIHidden() ) then
             spPlaySoundFile( SoundIncomingChat, SoundIncomingChatVolume, nil, "ui" )
         end
 	end

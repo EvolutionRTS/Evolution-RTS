@@ -19,7 +19,7 @@ local vsx, vsy = gl.GetViewSizes()
 local widgetScale = (1 + (vsx*vsy / 4000000))
 
 local NeededFrameworkVersion = 8
-local SoundIncomingChat  = 'sounds/ui/beep4.wav'
+local SoundIncomingChat  = 'beep4'
 local SoundIncomingChatVolume = 1.0
 
 local gameOver = false
@@ -47,17 +47,20 @@ local sGetModKeyState = Spring.GetModKeyState
 local spPlaySoundFile = Spring.PlaySoundFile
 local sGetMyPlayerID = Spring.GetMyPlayerID
 
+local fontsize = 11.5
+local fontsizeMultiplier = 1
+
 local Config = {
 	console = {
 		px = vsx*0.3,py = vsy*0.105, --default start position
 		sx = vsx*0.4, --background size
 		
-		fontsize = 11.5*widgetScale,
+		fontsize = fontsize*widgetScale,
 		
 		minlines = 2, --minimal number of lines to display
 		maxlines = 6,
 		maxlinesScrollmode = 10,
-		
+
 		maxage = 60, --max time for a message to be displayed, in seconds
 		
 		margin = 7*widgetScale, --distance from background border
@@ -435,12 +438,7 @@ local function convertColor(r,g,b)
 end
 
 local function processLine(line,g,cfg,newlinecolor)
-	if (g.vars.browsinghistory) then
-		if (g.vars.historyoffset == nil) then
-			g.vars.historyoffset = 0
-		end
-		g.vars.historyoffset = g.vars.historyoffset + 1
-	end
+
 	
 	g.vars.nextupdate = 0
 
@@ -466,15 +464,15 @@ local function processLine(line,g,cfg,newlinecolor)
 	local text = ""
 	local linetype = 0 --other
 	if Initialized == true then
-	ignoreThisMessage = true
+		ignoreThisMessage = true
 	else
-	ignoreThisMessage = false
+		ignoreThisMessage = false
 	end
 	
 	if sfind(line, "My player ID is") and sfind(line, regID) and not nameregistered then
-	-- Spring.SendCommands("say Registration ID found")
-	registermyname = true
-	ignoreThisMessage = true
+		-- Spring.SendCommands("say Registration ID found")
+		registermyname = true
+		ignoreThisMessage = true
 	end
 	
 	if (not newlinecolor) then
@@ -694,10 +692,16 @@ local function processLine(line,g,cfg,newlinecolor)
 
 
 	if (not ignoreThisMessage == true) then		--mute--
+		if (g.vars.browsinghistory) then
+		if (g.vars.historyoffset == nil) then
+			g.vars.historyoffset = 0
+		end
+		g.vars.historyoffset = g.vars.historyoffset + 1
+	end
 		local lineID = #history+1	
 		history[#history+1] = {line,clock(),lineID,textcolor,linetype}
         
-        if ( playSound ) and (not ignoreThisMessage == true) then
+        if ( playSound ) and (not ignoreThisMessage == true) and not Spring.IsGUIHidden() then
             spPlaySoundFile( SoundIncomingChat, SoundIncomingChatVolume, nil, "ui" )
         end
 	end
@@ -823,7 +827,7 @@ local function updateconsole(g,cfg)
 end
 
 function widget:Initialize()
-regID = tostring(Spring.GetMyPlayerID())
+	regID = tostring(Spring.GetMyPlayerID())
 	PassedStartupCheck = RedUIchecks()
 	if (not PassedStartupCheck) then return end
 	
@@ -831,6 +835,27 @@ regID = tostring(Spring.GetMyPlayerID())
 	Spring.SendCommands("console 0")
 	Spring.SendCommands('inputtextgeo 0.26 0.73 0.02 0.028')
 	AutoResizeObjects()
+
+	WG['red_chatonlyconsole'] = {}
+	WG['red_chatonlyconsole'].getMaxLines = function()
+		return Config.console.maxlines
+	end
+	WG['red_chatonlyconsole'].setMaxLines = function(value)
+		Config.console.maxlines = value
+		if console ~= nil and console.vars ~= nil then
+			console.vars._forceupdate = true
+		end
+	end
+	WG['red_chatonlyconsole'].getFontsize = function()
+		return fontsizeMultiplier
+	end
+	WG['red_chatonlyconsole'].setFontsize = function(value)
+		fontsizeMultiplier = value
+		Config.console.fontsize = fontsize*widgetScale*fontsizeMultiplier
+		if console ~= nil and console.vars ~= nil then
+			console.lines.fontsize = Config.console.fontsize
+		end
+	end
 end
 
 function widget:GameOver()
@@ -840,10 +865,10 @@ end
 function widget:Shutdown()
 	Initialized = false
 	Spring.SendCommands("console 1")
+	WG['red_chatonlyconsole'] = nil
 end
 
 function widget:AddConsoleLine(lines,priority)
-	-- widget:Initialize()
 	lines = lines:match('^\[f=[0-9]+\] (.*)$') or lines
 	local textcolor
 	for line in lines:gmatch("[^\n]+") do
@@ -856,28 +881,43 @@ function widget:Update()
 	updateconsole(console,Config.console)
 	AutoResizeObjects()
 	if not Initialized == true then
-	if onelinedone == true then
-	regID = tostring(Spring.GetMyPlayerID())
-Spring.SendCommands("wByNum "..regID.." My player ID is "..regID)
-	Initialized = true
+		if onelinedone == true then
+			regID = tostring(Spring.GetMyPlayerID())
+			Spring.SendCommands("wByNum "..regID.." My player ID is "..regID)
+			Initialized = true
+		end
 	end
-	end
+end
 
+function widget:ViewResize()
+	vsx,vsy = Spring.GetViewGeometry()
+	widgetScale = (1 + (vsx*vsy / 4000000))
+	Config.console.fontsize = fontsize*fontsizeMultiplier*widgetScale
+	if console ~= nil and console.vars ~= nil then
+		console.vars._forceupdate = true
+	end
 end
 
 --save/load stuff
 --currently only position
 function widget:GetConfigData() --save config
-	if (PassedStartupCheck) then
+	if (console ~= nil) then
 		local vsy = Screen.vsy
 		Config.console.px = console.background.px
 		Config.console.py = console.background.py
-		return {Config=Config}
+		return {Config=Config, fontsizeMultiplier=fontsizeMultiplier}
 	end
 end
 function widget:SetConfigData(data) --load config
 	if (data.Config ~= nil) then
 		--Config.console.px = data.Config.console.px
 		--Config.console.py = data.Config.console.py
+		if data.Config.console.maxlines ~= nil then
+			Config.console.maxlines = data.Config.console.maxlines
+		end
+		if data.fontsizeMultiplier ~= nil then
+			fontsizeMultiplier = data.fontsizeMultiplier
+			Config.console.fontsize = fontsize*fontsizeMultiplier*widgetScale
+		end
 	end
 end
