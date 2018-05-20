@@ -224,11 +224,11 @@ if mexRandomLayout == "standard" then
 	if teamIDCount <= 2 then
 		mexSpotsPerSide = 20
 	elseif teamIDCount > 2 and teamIDCount <= 4 then
-		mexSpotsPerSide = 40
+		mexSpotsPerSide = 25
 	elseif teamIDCount > 4 and teamIDCount <= 6 then
-		mexSpotsPerSide = 60
+		mexSpotsPerSide = 30
 	elseif teamIDCount > 6 then
-		mexSpotsPerSide = 80
+		mexSpotsPerSide = 35
 	end
 	randomMirrored = true
 	padding = 50
