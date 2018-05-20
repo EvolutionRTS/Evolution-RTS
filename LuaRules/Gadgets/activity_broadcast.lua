@@ -1,8 +1,8 @@
 
 function gadget:GetInfo()
 	return {
-		name	= "FPS Broadcast",
-		desc	= "Broadcasts FramesPerSecond",
+		name	= "Activity Broadcast",
+		desc	= "Checks if there is keyboard/mouse activity or camera changes",
 		author	= "Floris",
 		date	= "July,2016",
 		layer	= 0,
@@ -20,7 +20,6 @@ local sendPacketEvery	= 2
 -- synced
 --------------------------------------------------------------------------------
 if gadgetHandler:IsSyncedCode() then
-
 	local charset = {}  do -- [0-9a-zA-Z]
 		for c = 48, 57  do table.insert(charset, string.char(c)) end
 		for c = 65, 90  do table.insert(charset, string.char(c)) end
@@ -33,11 +32,11 @@ if gadgetHandler:IsSyncedCode() then
 	end
 
 	local validation = randomString(2)
-	_G.validationFps = validation
+	_G.validationActivity = validation
 
 	function gadget:RecvLuaMsg(msg, playerID)
-		if msg:sub(1,1)=="@" and msg:sub(2,3)==validation then
-			SendToUnsynced("fpsBroadcast",playerID,tonumber(msg:sub(4)))
+		if msg:sub(1,1)=="^" and msg:sub(2,3)==validation then
+			SendToUnsynced("activityBroadcast",playerID)
 			return true
 		end
 	end
@@ -47,40 +46,62 @@ else
 	-- unsynced
 	--------------------------------------------------------------------------------
 
-	local GetLastUpdateSeconds= Spring.GetLastUpdateSeconds
-	local SendLuaRulesMsg			= Spring.SendLuaRulesMsg
-	local GetFPS							= Spring.GetFPS
+	local GetMouseState					= Spring.GetMouseState
+	local GetLastUpdateSeconds	= Spring.GetLastUpdateSeconds
+	local SendLuaRulesMsg				= Spring.SendLuaRulesMsg
+	local GetCameraState				= Spring.GetCameraState
 	
-	local updateTimer					= 0
-	local avgFps							= GetFPS()
-	local numframes						= 0
-	local validation = SYNCED.validationFps
-
+	local activity							= false
+	local old_mx,old_my					= 0,0
+	local updateTimer						= 0
+	local prevCameraState				= GetCameraState()
+	local validation = SYNCED.validationActivity
+	
 	function gadget:Initialize()
-		gadgetHandler:AddSyncAction("fpsBroadcast", handleFpsEvent)
+		gadgetHandler:AddSyncAction("activityBroadcast", handleActivityEvent)
 	end
-
+	
 	function gadget:Shutdown()
-		gadgetHandler:RemoveSyncAction("fpsBroadcast")
+		gadgetHandler:RemoveSyncAction("activityBroadcast")
 	end
-
-	function handleFpsEvent(_,playerID,fps)
-		if Script.LuaUI("FpsEvent") then
-			Script.LuaUI.FpsEvent(playerID,fps)
+	
+	function handleActivityEvent(_,playerID)
+		if Script.LuaUI("ActivityEvent") then
+			Script.LuaUI.ActivityEvent(playerID)
 		end
 	end
-
+	
 	function gadget:Update()
 		updateTimer = updateTimer + GetLastUpdateSeconds()
-		if numFrames == nil then numFrames = 0 end
-		numFrames = numFrames + 1
-		avgFps = ((avgFps*(numFrames-1))+GetFPS()) / numFrames
 		if updateTimer > sendPacketEvery then
-			SendLuaRulesMsg("@"..validation..math.floor(avgFps+0.5))
+			-- mouse
+			local mx,my = GetMouseState()
+			if mx ~= old_mx or my ~= old_my then
+				old_mx,old_my = mx,my
+				activity = true
+			end
+			-- camera
+			local cameraState = GetCameraState()
+			if not activity then 
+					for i,stateindex in pairs(cameraState) do
+					if stateindex ~= prevCameraState[i] then
+						activity = true
+						break
+					end
+				end
+			end
+			prevCameraState = cameraState
+			
+			if activity then
+				SendLuaRulesMsg("^"..validation)
+			end
+			activity = false
 			updateTimer = 0
-			avgFps = 0
-			numFrames = 0
 		end
+	end
+	
+	function gadget:KeyPress(key, mods, isRepeat)
+		activity = true
 	end
 
 end
