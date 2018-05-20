@@ -46,7 +46,7 @@ local generalSize 				= 30		-- overall size
 local generalOpacity 			= 0.8		-- overall opacity
 local generalDuration			= 1.2		-- overall duration
 
-local imageDir					= ":n:"..LUAUI_DIRNAME.."Images/"
+local imageDir					= ":n:LuaUI/Images/"
 
 local types = {
 	leftclick = {
@@ -166,6 +166,8 @@ function widget:Update()
 end
 
 function widget:DrawWorldPreUnit()
+  if Spring.IsGUIHidden() then return end
+  
 	local osClock = os.clock()
 	local camX, camY, camZ = spGetCameraPosition()
 	gl.Blending(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)
