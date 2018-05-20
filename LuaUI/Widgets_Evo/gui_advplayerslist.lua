@@ -15,7 +15,7 @@ function widget:GetInfo()
 		desc      = "Playerlist. Use tweakmode (ctrl+F11) to customize.",
 		author    = "Marmoth. (spiced up by Floris)",
 		date      = "25 april 2015",
-		version   = "19.0",
+		version   = "21.0",
 		license   = "GNU GPL, v2 or later",
 		layer     = -4,
 		enabled   = true,  --  loaded by default?
@@ -40,6 +40,8 @@ end
 -- v17	 (Floris): Added alliances display and button and /cputext option
 -- v18	 (Floris): Player system shown on tooltip + added FPS counter + replaced allycursor data with activity gadget data (all these features need gadgets too)
 -- v19   (Floris): added player resource bars
+-- v20   (Floris): added /alwayshidespecs + fixed drawing when playerlist is at the leftside of the screen
+-- v21   (Floris): added toggle LoS and /specfullview when camera tracking a player
 
 --------------------------------------------------------------------------------
 -- Widget Scale
@@ -50,6 +52,10 @@ local customScaleStep		= 0.025
 local pointDuration    		= 40
 local cpuText				= false
 local drawAlliesLabel = false
+local alwaysHideSpecs = false
+local lockcameraHideEnemies = false --true
+local lockcameraLos = false --true
+
 --------------------------------------------------------------------------------
 -- SPEED UPS
 --------------------------------------------------------------------------------
@@ -191,8 +197,8 @@ local now             = 0
 -- LockCamera variables
 --------------------------------------------------------------------------------
 
-local transitionTime	= 2 --how long it takes the camera to move
-local listTime			= 15 --how long back to look for recent broadcasters
+local transitionTime	= 1 --how long it takes the camera to move when trackign a player
+local listTime			= 14 --how long back to look for recent broadcasters
 
 local myPlayerID = Spring.GetMyPlayerID()
 local lockPlayerID
@@ -219,6 +225,7 @@ local sliderdrag = 'LuaUI/Sounds/buildbar_rem.wav'
 local lastActivity = {}
 local lastFpsData = {}
 local lastSystemData = {}
+local lastGpuMemData = {}
 
 --------------------------------------------------------------------------------
 -- Tooltip
@@ -233,7 +240,7 @@ local tipText
 -- local player info
 local myAllyTeamID
 local myTeamID
-local mySpecStatus,_,_ = Spring.GetSpectatingState()
+local mySpecStatus,fullView,_ = Spring.GetSpectatingState()
 
 --General players/spectator count and tables
 local player = {}
@@ -549,7 +556,6 @@ m_seespec = {
 }
 
 
-
 local specsLabelOffset = 0
 local teamsizeVersusText = ""
 
@@ -677,6 +683,22 @@ end
 
 local function LockCamera(playerID)
 	if playerID and playerID ~= myPlayerID and playerID ~= lockPlayerID then
+		if lockcameraHideEnemies and not select(3,Spring_GetPlayerInfo(playerID)) then
+			if not fullView then
+				sceduledSpecFullView = 1
+				Spring.SendCommands("specfullview")
+			else
+				sceduledSpecFullView = 2
+				Spring.SendCommands("specfullview")
+			end
+			if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()~="los" then
+				Spring.SendCommands("togglelos")
+			end
+		elseif lockcameraHideEnemies and select(3,Spring_GetPlayerInfo(playerID)) then
+			if not fullView then
+				Spring.SendCommands("specfullview")
+			end
+		end
 		lockPlayerID = playerID
 		myLastCameraState = myLastCameraState or GetCameraState()
 		local info = lastBroadcasts[lockPlayerID]
@@ -688,14 +710,25 @@ local function LockCamera(playerID)
 			SetCameraState(myLastCameraState, transitionTime)
 			myLastCameraState = nil
 		end
+		if lockcameraHideEnemies and lockPlayerID and not select(3,Spring_GetPlayerInfo(lockPlayerID)) then
+			if not fullView then
+				Spring.SendCommands("specfullview")
+			end
+			if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()=="los" then
+				Spring.SendCommands("togglelos")
+			end
+		end
 		lockPlayerID = nil
 	end
 	UpdateRecentBroadcasters()
 end
 
+function GpuMemEvent(playerID, percentage)
+	lastGpuMemData[playerID] = percentage
+end
 
 function FpsEvent(playerID, fps)
-  lastFpsData[playerID] = fps
+	lastFpsData[playerID] = fps
 end
 	
 function SystemEvent(playerID, system)
@@ -746,16 +779,17 @@ end
 end]]--
 
 function widget:Initialize()
-	--widgetHandler:RegisterGlobal('getPlayerScores', RecvPlayerScores)
+  --widgetHandler:RegisterGlobal('getPlayerScoresAdvplayerslist', RecvPlayerScores)
   widgetHandler:RegisterGlobal('CameraBroadcastEvent', CameraBroadcastEvent)
   widgetHandler:RegisterGlobal('ActivityEvent', ActivityEvent)
   widgetHandler:RegisterGlobal('FpsEvent', FpsEvent)
+  widgetHandler:RegisterGlobal('GpuMemEvent', GpuMemEvent)
   widgetHandler:RegisterGlobal('SystemEvent', SystemEvent)
 	UpdateRecentBroadcasters()
 	
-	mySpecStatus,_,_ = Spring.GetSpectatingState()
+	mySpecStatus,fullView,_ = Spring.GetSpectatingState()
 	if Spring.GetGameFrame() <= 0 then
-		if mySpecStatus then 
+		if mySpecStatus and not alwaysHideSpecs then
 			specListShow = true
 		else
 			specListShow = false
@@ -792,25 +826,53 @@ function widget:Initialize()
 		
 		return {top,left,bottom,right,widgetScale}
 	end
-	WG['advplayerlist_api'].GetLockPlayerID = function()
-		return lockPlayerID
-	end
-    WG['advplayerlist_api'].SetLockPlayerID = function(playerID)
-        if playerID ~= nil then
-            lockPlayerID = playerID
-        else
-            lockPlayerID = nil
-            if myLastCameraState ~= nil then
-                SetCameraState(myLastCameraState, transitionTime)
-            end
-        end
+    WG['advplayerlist_api'].GetLockPlayerID = function()
+        return lockPlayerID
     end
+    WG['advplayerlist_api'].SetLockPlayerID = function(playerID)
+		LockCamera(playerID)
+	end
+	WG['advplayerlist_api'].GetLockHideEnemies = function()
+		return lockcameraHideEnemies
+	end
+	WG['advplayerlist_api'].SetLockHideEnemies = function(value)
+		lockcameraHideEnemies = value
+		if lockPlayerID and not select(3,Spring_GetPlayerInfo(lockPlayerID)) then
+			if not lockcameraHideEnemies then
+				if not fullView then
+					Spring.SendCommands("specfullview")
+					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()=="los" then
+						Spring.SendCommands("togglelos")
+					end
+				end
+			else
+				if fullView then
+					Spring.SendCommands("specfullview")
+					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()~="los" then
+						Spring.SendCommands("togglelos")
+					end
+				end
+			end
+		end
+	end
+	WG['advplayerlist_api'].GetLockLos = function()
+		return lockcameraLos
+	end
+	WG['advplayerlist_api'].SetLockLos = function(value)
+		lockcameraLos = value
+		if lockcameraHideEnemies and mySpecStatus and lockPlayerID and not select(3,Spring_GetPlayerInfo(lockPlayerID)) then
+			if lockcameraLos and Spring.GetMapDrawMode()~="los" then
+				Spring.SendCommands("togglelos")
+			elseif not lockcameraLos and Spring.GetMapDrawMode()=="los" then
+				Spring.SendCommands("togglelos")
+			end
+		end
+	end
 end
 
 function widget:GameFrame(n)
 	if n > 0 and not gameStarted then
-		mySpecStatus,_,_ = Spring.GetSpectatingState()
-		if mySpecStatus then
+		if mySpecStatus and not alwaysHideSpecs then
 			specListShow = true
 		else
 			specListShow = false
@@ -832,8 +894,21 @@ function widget:Shutdown()
 	WG['advplayerlist_api'] = nil
 	widgetHandler:DeregisterGlobal('CameraBroadcastEvent')
 	widgetHandler:DeregisterGlobal('ActivityEvent')
-  widgetHandler:DeregisterGlobal('FpsEvent')
-  widgetHandler:DeregisterGlobal('SystemEvent')
+	widgetHandler:DeregisterGlobal('FpsEvent')
+	widgetHandler:DeregisterGlobal('GpuMemEvent')
+	widgetHandler:DeregisterGlobal('SystemEvent')
+	if ShareSlider then
+		gl_DeleteList(ShareSlider)
+	end
+	if MainList then
+		gl_DeleteList(MainList)
+	end
+	if Background then
+		gl_DeleteList(Background)
+	end
+	if lockPlayerID and mySpecStatus and Spring.GetMapDrawMode()=="los" then
+		Spring.SendCommands("togglelos")
+	end
 end
 
 
@@ -1650,7 +1725,6 @@ function CreateMainList(tip)
 	if MainList then
 		gl_DeleteList(MainList)
 	end
-	
 	MainList = gl_CreateList(function()
 		drawTipText = nil
 		for i, drawObject in ipairs(drawList) do
@@ -1894,7 +1968,7 @@ function DrawPlayer(playerID, leader, vOffset, mouseX, mouseY)
 	if m_cpuping.active == true then
 		if cpuLvl ~= nil then                              -- draws CPU usage and ping icons (except AI and ghost teams)
 			DrawPingCpu(pingLvl,cpuLvl,posY,spec,1,cpu,lastFpsData[playerID])
-			if tipY == true then PingCpuTip(mouseX, ping, cpu, lastFpsData[playerID], lastSystemData[playerID], name) end
+			if tipY == true then PingCpuTip(mouseX, ping, cpu, lastFpsData[playerID], lastGpuMemData[playerID], lastSystemData[playerID], name) end
 		end
 	end
 	
@@ -1926,7 +2000,7 @@ end
 function DrawTakeSignal(posY)
 
 	if blink == true then -- Draws a blinking rectangle if the player of the same team left (/take option)
-		if right == true then
+		if right then
 			gl_Color(0.7,0.7,0.7)
 			gl_Texture(pics["arrowPic"])
 			DrawRect(widgetPosX - 14, posY, widgetPosX, posY + 16)
@@ -1987,8 +2061,8 @@ function DrawResources(energy, energyStorage, metal, metalStorage, posY, dead)
 	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + y2Offset)
 
     if ((barWidth/metalStorage)*metal) > 0.8 then
-        local glowsize = 12
-        gl_Color(1,1,1.2,0.033)
+        local glowsize = 11
+        gl_Color(1,1,1.2,0.04)
         gl_Texture(pics["barGlowCenterPic"])
         DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + y2Offset-glowsize)
 
@@ -2012,8 +2086,8 @@ function DrawResources(energy, energyStorage, metal, metalStorage, posY, dead)
 	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + y2Offset)
 
     if ((barWidth/energyStorage)*energy) > 0.8 then
-        local glowsize = 12
-        gl_Color(1,1,0.2,0.033)
+        local glowsize = 11
+        gl_Color(1,1,0.2,0.04)
         gl_Texture(pics["barGlowCenterPic"])
         DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + y2Offset-glowsize)
 
@@ -2362,10 +2436,10 @@ function DrawPoint(posY,pointtime)
 		leftPosX = widgetPosX + widgetWidth
 		gl_Color(1,0,0,pointtime/pointDuration)
 		gl_Texture(pics["arrowPic"])
-		DrawRect(leftPosX + 158, posY, leftPosX + 2, posY + 14)
+		DrawRect(leftPosX + 18, posY, leftPosX + 2, posY + 14)
 		gl_Color(1,1,1,pointtime/pointDuration)
 		gl_Texture(pics["pointPic"])
-		DrawRect(leftPosX + 33, posY-1, leftPosX + 17, posY + 15)	
+		DrawRect(leftPosX + 33, posY-1, leftPosX + 17, posY + 15)
 	end
 	gl_Color(1,1,1,1)
 end
@@ -2445,12 +2519,12 @@ function ResourcesTip(mouseX, e, es, ei, m, ms, mi)
 		if m >= 10000 then e = math.floor(m/1000).."k" end
 		if ei >= 10000 then ei = math.floor(ei/1000).."k" end
 		if mi >= 10000 then ei = math.floor(mi/1000).."k" end
-		tipText = "\255\255\255\000+"..ei.."\n"..e.."\n\255\255\255\255"..m.."\n+"..mi
+		tipText = "\255\255\255\000+"..ei.."\n\255\255\255\000"..e.."\n\255\255\255\255"..m.."\n\255\255\255\255+"..mi
 	end
 end
 
 
-function PingCpuTip(mouseX, pingLvl, cpuLvl, fps, system, name)
+function PingCpuTip(mouseX, pingLvl, cpuLvl, fps, gpumem, system, name)
 	if mouseX >= widgetPosX + (m_cpuping.posX + 13) * widgetScale and mouseX <=  widgetPosX + (m_cpuping.posX + 23) * widgetScale  then
 		if pingLvl < 2000 then
 			pingLvl = pingLvl.." ms"
@@ -2464,6 +2538,9 @@ function PingCpuTip(mouseX, pingLvl, cpuLvl, fps, system, name)
 		tipText = "Cpu: "..cpuLvl.."%"
 		if fps ~= nil then 
 			tipText = "FPS: "..fps.."    "..tipText
+		end
+		if gpumem ~= nil then
+			tipText = tipText.."    Gpu mem: "..gpumem.."%"
 		end
 		if system ~= nil then 
 			tipText = "\255\000\000\000"..name.."\n\255\233\180\180"..tipText.."\n\255\240\240\240"..system
@@ -2510,8 +2587,7 @@ function DrawTip(mouseX, mouseY)
 		
 		local lineHeight = fontSize + (fontSize/4.5)
 		local th = lineHeight * lines + (fontSize*0.75)
-		
-		if right ~= true then tw = -tw end
+
 		local oldWidgetScale = widgetScale
 		widgetScale = 1
 
@@ -2520,13 +2596,24 @@ function DrawTip(mouseX, mouseY)
 		if bottomY < 0 then ycorrection = (15*widgetScale)-bottomY end
 		
 		local padding = -1.8*oldWidgetScale
-		gl_Color(0.8,0.8,0.8,0.75)
-		RectRound(mouseX-tw+padding, bottomY+ycorrection+padding, mouseX-padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding,4.5*oldWidgetScale)
-		
-		padding = 0*oldWidgetScale
-		gl_Color(0,0,0,0.28)
-		RectRound(mouseX-tw+padding, bottomY+ycorrection+padding, mouseX-padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding, 3.5*oldWidgetScale)
-		
+
+		local xoffset = -15*oldWidgetScale
+		if right then
+			gl_Color(0.8,0.8,0.8,0.75)
+			RectRound(mouseX-tw+padding+xoffset, bottomY+ycorrection+padding, mouseX+xoffset-padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding, 4.5*oldWidgetScale)
+
+			padding = 0*oldWidgetScale
+			gl_Color(0,0,0,0.28)
+			RectRound(mouseX-tw+padding+xoffset, bottomY+ycorrection+padding, mouseX+xoffset-padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding, 3.5*oldWidgetScale)
+		else
+			xoffset = 22*oldWidgetScale
+			gl_Color(0.8,0.8,0.8,0.75)
+			RectRound(mouseX+padding+xoffset, bottomY+ycorrection+padding, mouseX+tw+xoffset-padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding, 4.5*oldWidgetScale)
+
+			padding = 0*oldWidgetScale
+			gl_Color(0,0,0,0.28)
+			RectRound(mouseX+padding+xoffset, bottomY+ycorrection+padding, mouseX+tw+xoffset+padding, (mouseY+(26*oldWidgetScale)+ycorrection)-padding, 3.5*oldWidgetScale)
+		end
 		widgetScale = oldWidgetScale
 	
 		-- draw text
@@ -2534,7 +2621,12 @@ function DrawTip(mouseX, mouseY)
 		th = 0
 		gl.BeginText()
 		for i, line in ipairs(textLines) do
-			gl_Text('\255\244\244\244'..line, mouseX+(8*widgetScale)-tw, mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
+
+			if right then
+				gl_Text('\255\244\244\244'..line, mouseX+xoffset+(8*widgetScale)-tw, mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
+			else
+				gl_Text('\255\244\244\244'..line, mouseX+xoffset+(8*widgetScale), mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
+			end
 			th = th - lineHeight
 		end
 		gl.EndText()
@@ -3128,7 +3220,10 @@ function widget:GetConfigData(data)      -- save
 			lockPlayerID       = lockPlayerID,
 			specListShow       = specListShow,
 			gameFrame          = Spring.GetGameFrame(),
-			lastSystemData     = lastSystemData
+			lastSystemData     = lastSystemData,
+			alwaysHideSpecs    = alwaysHideSpecs,
+			--lockcameraHideEnemies = lockcameraHideEnemies,
+			--lockcameraLos      = lockcameraLos,
 		}
 		
 		return settings
@@ -3139,11 +3234,23 @@ function widget:SetConfigData(data)      -- load
 	if data.customScale ~= nil then
 		customScale = data.customScale
 	end
-	
+
 	if data.specListShow ~= nil then
 		specListShow = data.specListShow
 	end
-	
+
+	if data.alwaysHideSpecs ~= nil then
+		alwaysHideSpecs = data.alwaysHideSpecs
+	end
+
+	if data.lockcameraHideEnemies ~= nil then
+		--lockcameraHideEnemies = data.lockcameraHideEnemies
+	end
+
+	if data.lockcameraLos ~= nil then
+		--lockcameraLos = data.lockcameraLos
+	end
+
 	--view
 	if data.expandDown ~= nil and data.widgetRight ~= nil then
 		expandDown   = data.expandDown
@@ -3178,6 +3285,23 @@ function widget:SetConfigData(data)      -- load
 	end
 	if data.lockPlayerID ~= nil and Spring.GetGameFrame()>0 then
 		lockPlayerID = data.lockPlayerID
+		if lockPlayerID and not select(3,Spring_GetPlayerInfo(lockPlayerID)) then
+			if not lockcameraHideEnemies then
+				if not fullView then
+					Spring.SendCommands("specfullview")
+					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()=="los" then
+						Spring.SendCommands("togglelos")
+					end
+				end
+			else
+				if fullView then
+					Spring.SendCommands("specfullview")
+					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()~="los" then
+						Spring.SendCommands("togglelos")
+					end
+				end
+			end
+		end
 	end
 	if data.cpuText ~= nil then
 		cpuText = data.cpuText
@@ -3222,8 +3346,17 @@ function widget:SetConfigData(data)      -- load
 end
 
 function widget:TextCommand(command)
-	if (string.find(command, "cputext") == 1  and  string.len(command) == 7) then 
+	if (string.find(command, "cputext") == 1  and  string.len(command) == 7) then
 		cpuText = not cpuText
+	end
+	if (string.find(command, "alwayshidespecs") == 1  and  string.len(command) == 15) then
+		alwaysHideSpecs = not alwaysHideSpecs
+		if alwaysHideSpecs then
+			Spring.Echo("AdvPlayersList: always hiding specs")
+			specListShow = false
+		else
+			Spring.Echo("AdvPlayersList: not always hiding specs")
+		end
 	end
 end
 
@@ -3385,7 +3518,19 @@ function widget:Update(delta) --handles takes & related messages
 	totalTime = totalTime + delta 
 	timeCounter = timeCounter + delta
 	curFrame = Spring_GetGameFrame()
-	
+	mySpecStatus,fullView,_ = Spring.GetSpectatingState()
+
+	if sceduledSpecFullView ~= nil then	-- this is needed else the minimap/world doesnt update properly
+		Spring.SendCommands("specfullview")
+		sceduledSpecFullView = sceduledSpecFullView - 1
+		if sceduledSpecFullView == 0 then
+			sceduledSpecFullView = nil
+		end
+	end
+
+	if lockPlayerID ~= nil then
+		Spring.SetCameraState(Spring.GetCameraState(), transitionTime)
+	end
 	
 	if energyPlayer ~= nil or metalPlayer ~= nil then
 		CreateShareSlider()
