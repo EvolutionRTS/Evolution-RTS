@@ -395,8 +395,8 @@ function generateDisplayList2()
 	displayList2 = gl.CreateList(function ()
 		-- draw background (black / gray / black / ...)
 		-- background flashes when the player messed up their eco
-		local glowSize = (height/6) * 4.4
-		local glowAlpha = 0.11
+		local glowSize = (height/6) * 5
+		local glowAlpha = 0.15
 		
 		gl.Color(bgSupplyR,bgSupplyG,0,0.33)
 		gl.Texture(barTexture)
