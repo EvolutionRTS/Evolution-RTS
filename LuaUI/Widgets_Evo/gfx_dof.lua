@@ -4,7 +4,7 @@
 function widget:GetInfo()
   return {
     name      = "Depth of Field",
-    desc      = "f10 toggles on/off,   ctrl+] or [ to change intensity,   /dofQuality #",
+    desc      = "f8 toggles on/off,   ctrl+] or [ to change intensity,   /dofQuality #",
     author    = "jK, Satirik (shortcuts: BD & Floris)",
     date      = "March, 2013",
     license   = "GNU GPL, v2 or later",
@@ -17,7 +17,7 @@ end
 options = {
 	fadeInOut = 2,		-- seconds
 	shortcuts = {
-		toggle = 'f10',
+		toggle = 'f8',
 		intensityIncrease = 'Ctrl+]',
 		intensityDecrease = 'Ctrl+[',
 	},
@@ -119,7 +119,7 @@ function widget:ViewResize(viewSizeX, viewSizeY)
 
   if (screencopy == nil) then
     Spring.Echo("Depth of Field: texture error")
-    widgetHandler:RemoveWidget()
+    widgetHandler:RemoveWidget(self)
     return false
   end
 end
@@ -146,19 +146,19 @@ end
 local function CheckHardware()
   if (not canCTT) then
     Spring.Echo("Depth of Field: your hardware is missing the necessary CopyToTexture feature")
-    widgetHandler:RemoveWidget()
+    widgetHandler:RemoveWidget(self)
     return false
   end
 
   if (not canRTT) then
     Spring.Echo("Depth of Field: your hardware is missing the necessary RenderToTexture feature")
-    widgetHandler:RemoveWidget()
+    widgetHandler:RemoveWidget(self)
     return false
   end
 
   if (not canShader) then
     Spring.Echo("Depth of Field: your hardware does not support shaders")
-    widgetHandler:RemoveWidget()
+    widgetHandler:RemoveWidget(self)
     return false
   end
 
@@ -233,7 +233,14 @@ function widget:Initialize()
   
   widgetHandler:AddAction("dofQuality", dofQuality, nil, "t")
   widgetHandler:AddAction("dofIntensity", dofIntensity, nil, "t")
-  
+
+  WG['dof'] = {}
+  WG['dof'].getIntensity = function()
+      return options.intensity.value
+  end
+  WG['dof'].setIntensity = function(value)
+      options.intensity.value = value
+  end
   
   dofShader = gl.CreateShader({
     fragment = [[
@@ -324,7 +331,7 @@ function widget:Initialize()
   -- debug?
   if (screencopy == nil) then
     Spring.Echo("Depth of Field: texture error")
-    widgetHandler:RemoveWidget()
+    widgetHandler:RemoveWidget(self)
     return false
   end
 
@@ -343,6 +350,7 @@ end
 
 
 function widget:Shutdown()
+  WG['dof'] = nil
   Spring.SendCommands({"DofEnable 0"})
   widgetHandler:RemoveAction("DofEnable", DofEnable)
   
