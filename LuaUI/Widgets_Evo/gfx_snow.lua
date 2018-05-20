@@ -39,7 +39,7 @@ local fpsDifference 			= (maxFps-minFps)/particleSteps		-- fps difference need b
 
 local snowTexFolder = "LuaUI/Images/snow/"
 
-local snowKeywords = {'snow','frozen','cold','winter','ice','icy','arctic','frost','melt','glacier','mosh_pit','blindside','northernmountains','amarante'}
+local snowKeywords = {'snow','frozen','cold','winter','ice','icy','arctic','frost','melt','glacier','mosh_pit','blindside','northernmountains','amarante','cervino'}
 
 local snowMaps = {}
 
@@ -167,6 +167,7 @@ local startOsClock = os.clock()
 
 function widget:Shutdown()
 	removeSnow()
+	WG['snow'] = nil
 end
 
 function removeSnow()
@@ -227,7 +228,7 @@ function init()
 	
 	if (glCreateShader == nil) then
 		Spring.Echo("[Snow widget:Initialize] no shader support")
-		widgetHandler:RemoveWidget()
+		widgetHandler:RemoveWidget(self)
 		return
 	end
 
@@ -281,7 +282,7 @@ function init()
 	if (shader == nil) then
 		Spring.Echo("[Snow widget:Initialize] particle shader compilation failed")
 		Spring.Echo(glGetShaderLog())
-		widgetHandler:RemoveWidget()
+		widgetHandler:RemoveWidget(self)
 		return
 	end
 	
@@ -322,7 +323,9 @@ function widget:Initialize()
 	end
 	WG['snow'].setMultiplier = function(value)
 		customParticleMultiplier = value
-		CreateParticleLists()
+		if enabled or widgetDisabledSnow  then
+			CreateParticleLists()
+		end
 	end
 	WG['snow'].setAutoReduce = function(value)
 		autoReduce = value
@@ -439,6 +442,7 @@ function widget:GameFrame(gameFrame)
 end
 
 function widget:Shutdown()
+	enabled = false
 	if drawinfolist ~= nil then
 		gl.DeleteList(drawinfolist)
 	end
