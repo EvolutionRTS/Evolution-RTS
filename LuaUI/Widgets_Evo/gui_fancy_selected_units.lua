@@ -976,15 +976,18 @@ function widget:GetConfigData(data)
 	savedTable.baseOpacity						= OPTIONS.defaults.baseOpacity
 	savedTable.teamcolorOpacity					= OPTIONS.defaults.teamcolorOpacity
 	savedTable.showSecondLine					= OPTIONS.defaults.showSecondLine
+	savedTable.version							= 1.1
 
     return savedTable
 end
 
 function widget:SetConfigData(data)
-    currentOption								= data.currentOption			or currentOption
-	OPTIONS.defaults.spotterOpacity				= data.spotterOpacity			or OPTIONS.defaults.spotterOpacity
-	OPTIONS.defaults.baseOpacity				= data.baseOpacity				or OPTIONS.defaults.baseOpacity
-	OPTIONS.defaults.teamcolorOpacity			= data.teamcolorOpacity			or OPTIONS.defaults.teamcolorOpacity
-	OPTIONS.defaults.showSecondLine				= data.showSecondLine			or OPTIONS.defaults.showSecondLine
+	if data.version and data.version >= 1.1 then
+		currentOption								= data.currentOption			or currentOption
+		OPTIONS.defaults.spotterOpacity				= data.spotterOpacity			or OPTIONS.defaults.spotterOpacity
+		OPTIONS.defaults.baseOpacity				= data.baseOpacity				or OPTIONS.defaults.baseOpacity
+		OPTIONS.defaults.teamcolorOpacity			= data.teamcolorOpacity			or OPTIONS.defaults.teamcolorOpacity
+		OPTIONS.defaults.showSecondLine				= data.showSecondLine			or OPTIONS.defaults.showSecondLine
+	end
 end
 
