@@ -443,6 +443,7 @@ function generateDisplayList2()
 		gl.TexRect(supplyOffset,0,supplyOffset+(supplyBarWidth*percentage),height/6)
 		
 		if simplifiedResourceBar == 1 then
+			supplyUsedColor = green
 			if su < (sm * 0.50) then
 				supplyUsedColor = green
 			elseif su > (sm * 0.50) then
