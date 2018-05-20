@@ -46,9 +46,27 @@ local drawTooltip = true
 local drawBigTooltip = false
 local largePrice = true
 local oldUnitpics = false
+local largeUnitIcons = false
 
 local vsx, vsy = gl.GetViewSizes()
 local widgetScale = (1 + (vsx*vsy / 7500000))
+
+local normalUnitIconSize = {
+	isx = 45,isy = 40, --icon size
+	ix = 5,iy = 8, --icons x/y
+}
+local largeUnitIconSize = {
+	isx = 50,isy = 45, --icon size
+	ix = 5,iy = 7, --icons x/y
+}
+local normalOrderIconSize = {
+	isx = 45,isy = 33, --icon size
+	ix = 5,iy = 4, --icons x/y
+}
+local largeOrderIconSize = {
+	isx = 50,isy = 33, --icon size
+	ix = 5,iy = 4, --icons x/y
+}
 
 local buildPicHelp = Spring.GetConfigInt("evo_buildpichelp", 1)
 --Assume that if it isn't set, buildPicHelp is true
@@ -99,8 +117,8 @@ local Config = {
 		
 		roundedPercentage = 0.2,	-- 0.25 == iconsize / 4 == cornersize
 		
-		iconscale = 0.925,
-		iconhoverscale = 0.925,
+		iconscale = 0.93,
+		iconhoverscale = 0.93,
 		ispreadx=0,ispready=0,
 		
 		margin = 5,
@@ -122,6 +140,7 @@ local Config = {
 		},
 	},
 }
+
 
 function widget:ViewResize(newX,newY)
 	vsx, vsy = gl.GetViewSizes()
@@ -778,7 +797,7 @@ local function UpdateGrid(g,cmds,ordertype)
 						table.insert(g.background.movableslaves,s2)
 					end
 					
-					local glowSize = s.sy * 4.4
+					local glowSize = s.sy * 6
 					s2.sy = s.sy + glowSize + glowSize
 					s2.py = s.py - glowSize
 					s2.px = s.px
@@ -786,7 +805,7 @@ local function UpdateGrid(g,cmds,ordertype)
 					s2.texture = barGlowCenterTexture
 					s2.border = {0,0,0,0}
 					s2.color = {s.color[1] * 10, s.color[2] * 10, s.color[3] * 10, 0}
-					s2.texturecolor = {s.texturecolor[1] * 10, s.texturecolor[2] * 10, s.texturecolor[3] * 10, 0.06}
+					s2.texturecolor = {s.texturecolor[1] * 10, s.texturecolor[2] * 10, s.texturecolor[3] * 10, 0.11}
 					s2.active = true
 					
 					usedstaterectanglesglow = usedstaterectanglesglow + 1
@@ -920,15 +939,52 @@ function widget:TextCommand(command)
 	end
 end
 
+function tableMerge(t1, t2)
+	for k,v in pairs(t2) do
+		if type(v) == "table" then
+			if type(t1[k] or false) == "table" then
+				tableMerge(t1[k] or {}, t2[k] or {})
+			else
+				t1[k] = v
+			end
+		else
+			t1[k] = v
+		end
+	end
+	return t1
+end
+
+function deepcopy(orig)
+	local orig_type = type(orig)
+	local copy
+	if orig_type == 'table' then
+		copy = {}
+		for orig_key, orig_value in next, orig, nil do
+			copy[deepcopy(orig_key)] = deepcopy(orig_value)
+		end
+		setmetatable(copy, deepcopy(getmetatable(orig)))
+	else -- number, string, boolean, etc
+		copy = orig
+	end
+	return copy
+end
+
 function widget:Initialize()
 	PassedStartupCheck = RedUIchecks()
 	if (not PassedStartupCheck) then return end
-	
+
+	if largeUnitIcons then
+		Config.buildmenu = tableMerge(deepcopy(Config.buildmenu), deepcopy(largeUnitIconSize))
+		Config.ordermenu = tableMerge(deepcopy(Config.ordermenu), deepcopy(largeOrderIconSize))
+	else
+		Config.buildmenu = tableMerge(deepcopy(Config.buildmenu), deepcopy(normalUnitIconSize))
+		Config.ordermenu = tableMerge(deepcopy(Config.ordermenu), deepcopy(normalOrderIconSize))
+	end
+
 	ordermenu = CreateGrid(Config.ordermenu)
-	buildmenu = CreateGrid(Config.buildmenu)		-- the list with the largest grid must be last or it will get buggy with mousehovers
-	
-	buildmenu.page = 1
 	ordermenu.page = 1
+	buildmenu = CreateGrid(Config.buildmenu)
+	buildmenu.page = 1
 	
 	AutoResizeObjects() --fix for displacement on crash issue
 
@@ -945,7 +1001,10 @@ function widget:Initialize()
   end
 	WG['red_buildmenu'].getConfigPlaySounds = function()
 		return playSounds
-	end
+  end
+  WG['red_buildmenu'].getConfigLargeUnitIcons = function()
+  	return largeUnitIcons
+  end
   WG['red_buildmenu'].setConfigLargeInfo = function(value)
     largeInfo = value
   end
@@ -960,7 +1019,11 @@ function widget:Initialize()
   end
 	WG['red_buildmenu'].setConfigPlaySounds = function(value)
 		playSounds = value
-	end
+  end
+  WG['red_buildmenu'].setConfigLargeUnitIcons = function(value)
+	largeUnitIcons = value
+	Spring.SendCommands("luarules reloadluaui")
+  end
 end
 
 local function onNewCommands(buildcmds,othercmds)
@@ -988,7 +1051,7 @@ function widget:GetConfigData() --save config
 		Config.buildmenu.py = buildmenu.background.py * unscale
 		Config.ordermenu.px = ordermenu.background.px * unscale
 		Config.ordermenu.py = ordermenu.background.py * unscale
-		return {Config=Config, iconScaling=iconScaling, drawPrice=drawPrice, drawTooltip=drawTooltip, drawBigTooltip=drawBigTooltip, largePrice=largePrice, oldUnitpics=oldUnitpics, shortcutsInfo=shortcutsInfo, playSounds=playSounds}
+		return {Config=Config, iconScaling=iconScaling, drawPrice=drawPrice, drawTooltip=drawTooltip, drawBigTooltip=drawBigTooltip, largePrice=largePrice, oldUnitpics=oldUnitpics, shortcutsInfo=shortcutsInfo, playSounds=playSounds, largeUnitIcons=largeUnitIcons}
 	end
 end
 function widget:SetConfigData(data) --load config
@@ -1014,6 +1077,9 @@ function widget:SetConfigData(data) --load config
 		end
 		if (data.shortcutsInfo ~= nil) then
 			shortcutsInfo = data.shortcutsInfo
+		end
+		if (data.largeUnitIcons ~= nil) then
+			largeUnitIcons = data.largeUnitIcons
 		end
 		if (data.playSounds ~= nil) then
 			playSounds = data.playSounds
@@ -1069,14 +1135,15 @@ local function GetCommands()
 			(cmd.type ~= 18) and
 			(cmd.type ~= 17)
 			) then
-				if ((cmd.type == 20) --build building
-				or (ssub(cmd.action,1,10) == "buildunit_")) then
+				if (((cmd.type == 20) --build building
+				or (ssub(cmd.action,1,10) == "buildunit_"))) and (cmd["disabled"] ~= true) then
+
 					buildcmdscount = buildcmdscount + 1
 					buildcmds[buildcmdscount] = cmd
-				elseif (cmd.type == 5) then
+				elseif (cmd.type == 5) and (cmd["disabled"] ~= true) then
 					statecmdscount = statecmdscount + 1
 					statecmds[statecmdscount] = cmd
-				else
+				elseif (cmd["disabled"] ~= true) then
 					othercmdscount = othercmdscount + 1
 					othercmds[othercmdscount] = cmd
 				end
