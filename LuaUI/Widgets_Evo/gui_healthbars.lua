@@ -67,6 +67,13 @@ local maxUnitDistance           = 11000000  --max squared distance at which any 
 
 local minReloadTime             = 4 --// in seconds
 
+local destructableFeature = {}
+local drawnFeature = {}
+for i = 1, #FeatureDefs do
+	destructableFeature[i] = FeatureDefs[i].destructable
+	drawnFeature[i] = (FeatureDefs[i].drawTypeString=="model") 
+end
+
 local drawStunnedOverlay = true
 
 --// this table is used to shows the hp of perimeter defence, and filter it for default wreckages
@@ -152,7 +159,8 @@ local barFeatureDList;
 --// speedup (there are a lot more localizations, but they are in limited scope cos we are running out of upvalues)
 local glColor         = gl.Color
 local glMyText        = gl.FogCoord
-local floor           = math.floor
+local floor     			= math.floor
+local sub 						= string.sub
 local GetUnitDefID    = Spring.GetUnitDefID
 local glDepthTest     = gl.DepthTest 
 
@@ -685,7 +693,7 @@ function init()
         #define progress gl_MultiTexCoord2.x
         #define offset   gl_MultiTexCoord2.y
         
-		uniform float glowAlpha;
+        uniform float glowAlpha;
 
         void main()
         {
@@ -1052,10 +1060,11 @@ do
   local customInfo = {}
   local ci
 
-  function DrawUnitInfos(unitID,unitDefID, ud)
+  function DrawUnitInfos(unitID,unitDefID)
     if ignoreUnits[unitDefID] ~= nil then return end
 
     if (not customInfo[unitDefID]) then
+	  local ud = UnitDefs[unitDefID]
       customInfo[unitDefID] = {
         height        = ud.height+barHeightOffset,
         maxShield     = ud.shieldPower,
@@ -1401,13 +1410,12 @@ do
       if (barShader) then gl.UseShader(barShader); glMyText(0); end
 
       --// draw bars of units
-      local unitID,unitDefID,unitDef
+      local unitID,unitDefID
       for i=1,#visibleUnits do
         unitID    = visibleUnits[i]
         unitDefID = GetUnitDefID(unitID)
-	    unitDef   = UnitDefs[unitDefID or -1]
-        if unitDef then
-          DrawUnitInfos(unitID, unitDefID, unitDef)
+        if unitDefID then
+          DrawUnitInfos(unitID, unitDefID)
         end
       end
 
@@ -1422,10 +1430,10 @@ do
         for i=1,#visibleFeatures do
           featureInfo = visibleFeatures[i]
           if featureResurrectVisibility then
-            _,_,resurrect = GetFeatureHealth(featureInfo[4])
+            resurrect = select(3,GetFeatureHealth(featureInfo[4]))
           end
           if featureReclaimVisibility then
-            _,_,_,_,reclaimLeft = GetFeatureResources(featureInfo[4])
+            reclaimLeft = select(5,GetFeatureResources(featureInfo[4]))
           end
           if drawFeatureInfo or (featureResurrectVisibility and resurrect and resurrect > 0) or (featureReclaimVisibility and reclaimLeft and reclaimLeft < 1) then
             wx, wy, wz = featureInfo[1],featureInfo[2],featureInfo[3]
@@ -1466,15 +1474,12 @@ do
   local sec1 = 0
   local sec2 = 0
 
-  local videoFrame   = 0
-
   function widget:Update(dt)
+    gameFrame = GetGameFrame()
+    
     sec=sec+dt
     blink = (sec%1)<0.5
 
-    gameFrame = GetGameFrame()
-
-    videoFrame = videoFrame+1
     sec1=sec1+dt
     if (sec1>1/4) and ((cy-smoothheight)^2 < maxUnitDistance) then
       sec1 = 0
@@ -1486,23 +1491,21 @@ do
       sec2 = 0
       visibleFeatures = GetVisibleFeatures(-1,nil,false,false)
       local cnt = #visibleFeatures
-      local featureID,featureDefID,featureDef
-      for i=cnt,1,-1 do  --TODO:  this is very inefficient 
-        featureID    = visibleFeatures[i]
-        featureDefID = GetFeatureDefID(featureID) or -1
-        featureDef   = FeatureDefs[featureDefID]
-        --// filter trees and none destructable features
-        if (featureDef)and(featureDef.destructable)and(
-           (featureDef.drawTypeString=="model")or(select(5,GetFeatureResources(featureID))<1)
-        ) then
-          local fx,fy,fz = GetFeaturePosition(featureID)
-          visibleFeatures[i] = {fx,fy,fz, featureID, featureDefID}
-        else
-          visibleFeatures[i] = visibleFeatures[cnt]
-          visibleFeatures[cnt] = nil
-          cnt = cnt-1
-        end
-      end
+      local featureID,featureDefID
+
+	 for i=cnt,1,-1 do
+	   featureID    = visibleFeatures[i]
+	   featureDefID = GetFeatureDefID(featureID) or -1
+	   --// filter trees and none destructable features
+	   if destructableFeature[featureDefID] and (drawnFeature[featureDefID] or (select(5,GetFeatureResources(featureID))<1)) then
+	     local fx,fy,fz = GetFeaturePosition(featureID)
+	     visibleFeatures[i] = {fx,fy,fz, featureID, featureDefID}
+	   else
+	     visibleFeatures[i] = visibleFeatures[cnt]
+	     visibleFeatures[cnt] = nil
+	     cnt = cnt-1
+	   end
+	  end
     end
 
   end
