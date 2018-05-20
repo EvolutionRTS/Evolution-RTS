@@ -410,6 +410,14 @@ local function GetProjectileLights(beamLights, beamLightCount, pointLights, poin
 				else -- point type
 					if not (lightParams.groundHeightLimit and lightParams.groundHeightLimit < (y - math.max(Spring.GetGroundHeight(y, y), 0))) then
 						local drawParams = GetProjectileLight(lightParams, pID, x, y, z)
+						if lightParams.radius2 ~= nil then
+							local dirX,dirY,dirZ = Spring.GetProjectileDirection(pID)
+							if dirX == 0 and dirZ == 0 then
+								drawParams.param.radius = lightParams.radius1
+							else
+								drawParams.param.radius = lightParams.radius2
+							end
+						end
 						pointLightCount = pointLightCount + 1
 						pointLights[pointLightCount] = drawParams
 						if projectileDrawParams then
@@ -464,6 +472,7 @@ local function GetProjectileLights(beamLights, beamLightCount, pointLights, poin
 	-- add explosion lights
 	for i, params in pairs(explosionLights) do
 		local progress = 1-((frame-params.frame)/params.life)
+		progress = ((progress * (progress*progress)) + (progress*1.4)) / 2.4
 		params.colMult = params.orgMult * progress
 		if params.colMult <= 0 then
 			explosionLights[i] = nil
@@ -535,15 +544,21 @@ loadWeaponDefs()
 -- function called by explosion_lights gadget
 function GadgetWeaponExplosion(px, py, pz, weaponID, ownerID)
 	if weaponConf[weaponID] ~= nil then
-		local params = {param={type='explosion'}}
-		params.param.r, params.param.g, params.param.b = weaponConf[weaponID].r, weaponConf[weaponID].g, weaponConf[weaponID].b
-		params.life = weaponConf[weaponID].life
-		params.orgMult = weaponConf[weaponID].orgMult
-		params.param.radius = weaponConf[weaponID].radius
-
-		params.frame = Spring.GetGameFrame()
-		params.px, params.py, params.pz = px, py, pz
-		params.py = params.py + 16 + (params.param.radius/35)
+		local params = {
+			life = weaponConf[weaponID].life,
+			orgMult = weaponConf[weaponID].orgMult,
+			frame = Spring.GetGameFrame(),
+			px = px,
+			py = py + 16 + (weaponConf[weaponID].radius/35),
+			pz = pz,
+			param = {
+				type = 'explosion',
+				r = weaponConf[weaponID].r,
+				g = weaponConf[weaponID].g,
+				b = weaponConf[weaponID].b,
+				radius = weaponConf[weaponID].radius,
+			},
+		}
 
 		--Spring.Echo(UnitDefs[unitDefID].name..'    '..params.orgMult)
 		explosionLightsCount = explosionLightsCount + 1
@@ -553,6 +568,10 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+function widget:Shutdown()
+	WG['lighteffects'] = nil
+end
 
 function widget:Initialize()
 	loadWeaponDefs()
@@ -606,13 +625,14 @@ end
 
 
 function widget:GetConfigData(data)
-	savedTable = {}
-	savedTable.globalLightMult = globalLightMult
-	savedTable.globalRadiusMult = globalRadiusMult
-	savedTable.globalLightMultLaser = globalLightMultLaser
-	savedTable.globalRadiusMultLaser = globalRadiusMultLaser
-	savedTable.globalLifeMult = globalLifeMult
-	savedTable.resetted = 1
+	local savedTable = {
+		globalLightMult = globalLightMult,
+		globalRadiusMult = globalRadiusMult,
+		globalLightMultLaser = globalLightMultLaser,
+		globalRadiusMultLaser = globalRadiusMultLaser,
+		globalLifeMult = globalLifeMult,
+		resetted = 1,
+	}
 	return savedTable
 end
 
