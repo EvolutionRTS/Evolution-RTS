@@ -4,7 +4,7 @@ local versionNumber = "2.03"
 
 function widget:GetInfo()
 	return {
-		name      = "Ally Selected Units ",
+		name      = "Ally Selected Units",
 		desc      = "Shows units selected by teammates [v" .. string.format("%s", versionNumber ) .. "]",
 		author    = "very_bad_soldier",
 		date      = "August 1, 2008",
@@ -36,7 +36,6 @@ local spIsSphereInView  	= Spring.IsSphereInView
 local spGetSpectatingState	= Spring.GetSpectatingState
 local spGetGameSeconds		= Spring.GetGameSeconds
 local spIsGUIHidden			= Spring.IsGUIHidden
-local glDrawGroundCircle 	= gl.DrawGroundCircle
 local glColor               = gl.Color
 local glDepthTest           = gl.DepthTest
 local glUnitShape			= gl.UnitShape
@@ -52,15 +51,17 @@ local glBeginEnd			= gl.BeginEnd
 local glScale				= gl.Scale
 local glVertex              = gl.Vertex
 local glCallList   			= gl.CallList
+local glDrawListAtUnit      = gl.DrawListAtUnit
 
 local GL_LINE_LOOP			= GL.LINE_LOOP
 
 local spec = false
+local showGui = false
 
 ----------------------------------------------------------------
 
 local scaleMultiplier			= 1.05
-local maxAlpha					= 0.4
+local maxAlpha					= 0.45
 local hotFadeTime				= 0.25
 local lockTeamUnits				= false --disallow selection of units selected by teammates
 local showAlly					= true 		--also show allies (besides coop)
@@ -82,14 +83,14 @@ playerColorPool[6] = { 1.0, 0.0, 1.0 }
 playerColorPool[7] = { 1.0, 0.0, 0.0 }
 playerColorPool[8] = { 1.0, 0.0, 0.0 }
 
-local xRelPos, yRelPos		= 0.8, 0.8	-- (only used here for now)
+local xRelPos, yRelPos		= 0.835, 0.88	-- (only used here for now)
 local vsx, vsy				= gl.GetViewSizes()
 local xPos, yPos            = xRelPos*vsx, yRelPos*vsy
 
 local panelWidth = 200;
 local panelHeight = 55;
 
-local bgcorner = ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgcorner = "LuaUI/Images/bgcorner.png"
 local sizeMultiplier = 1
 
 --Internals------------------------------------------------------
@@ -103,18 +104,19 @@ local circleLinesCoop
 local circleLinesAlly
 local lockPlayerID
 
--- preferred to keep these values the same as other widgets
-local rectangleFactor		= 3.3
-local scalefaktor			= 2.9
 local unitConf ={}
 ------------------------------------------------------------------
 
 
 
 function SetUnitConf()
+	-- preferred to keep these values the same as other widgets
+	local scaleFactor = 2.6
+	local rectangleFactor = 3.25
+
 	for udid, unitDef in pairs(UnitDefs) do
 		local xsize, zsize = unitDef.xsize, unitDef.zsize
-		local scale = scalefaktor*( xsize^2 + zsize^2 )^0.5
+		local scale = scaleFactor*( xsize^2 + zsize^2 )^0.5
 		local shape, xscale, zscale
 		
 		if (unitDef.isBuilding or unitDef.isFactory or unitDef.speed==0) then
@@ -122,11 +124,19 @@ function SetUnitConf()
 			xscale, zscale = rectangleFactor * xsize, rectangleFactor * zsize
 		elseif (unitDef.isAirUnit) then
 			shape = 'triangle'
-			xscale, zscale = scale, scale
+			xscale, zscale = scale*1.07, scale*1.07
+		elseif (unitDef.modCategories["ship"]) then
+			shape = 'circle'
+			xscale, zscale = scale*0.82, scale*0.82
 		else
 			shape = 'circle'
 			xscale, zscale = scale, scale
 		end
+
+		local radius = Spring.GetUnitDefDimensions(udid).radius
+		xscale = (xscale*0.7) + (radius/5)
+		zscale = (zscale*0.7) + (radius/5)
+
 		unitConf[udid] = {shape=shape, xscale=xscale, zscale=zscale}
 	end
 end
@@ -144,13 +154,36 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal('selectedUnitsClear', selectedUnitsClear)
 	widgetHandler:RegisterGlobal('selectedUnitsAdd', selectedUnitsAdd)
 	spec = spGetSpectatingState()
+
+	WG['allyselectedunits'] = {}
+    WG['allyselectedunits'].getOpacity = function()
+        return maxAlpha
+    end
+    WG['allyselectedunits'].setOpacity = function(value)
+        maxAlpha = value
+    end
+    WG['allyselectedunits'].getSelectPlayerUnits = function()
+        return selectPlayerUnits
+    end
+    WG['allyselectedunits'].setSelectPlayerUnits = function(value)
+        selectPlayerUnits = value
+        Spring.Echo(selectPlayerUnits)
+    end
 end
 
 function widget:Shutdown()
 	widgetHandler:DeregisterGlobal('selectedUnitsRemove')
 	widgetHandler:DeregisterGlobal('selectedUnitsClear')
 	widgetHandler:DeregisterGlobal('selectedUnitsAdd')
-	gl.DeleteList(circleLines)
+	if guiList ~= nil then
+		gl.DeleteList(guiList)
+	end
+	if circleLinesCoop ~= nil then
+		gl.DeleteList(circleLinesCoop)
+	end
+	if circleLinesAlly ~= nil then
+		gl.DeleteList(circleLinesAlly)
+	end
 	if (WG['guishader_api'] ~= nil) then
 		WG['guishader_api'].RemoveRect('allyselectedunits')
 	end
@@ -195,7 +228,7 @@ function widget:PlayerChanged(playerID)
 		spec = true
 		setPlayerColours()
 		if not showAsSpectator then
-			widgetHandler:RemoveWidget()
+			widgetHandler:RemoveWidget(self)
 			return
 		end
 	end
@@ -233,7 +266,7 @@ function widget:CommandsChanged( id, params, options )
 	end
 end
 
-function widget:UnitDestroyed(unitID, attacker )
+function widget:UnitDestroyed(unitID)
 	hotUnits[ unitID ] = nil
 	
 	for playerID, selUnits in pairs( playerSelectedUnits ) do
@@ -374,8 +407,11 @@ function selectPlayerSelectedUnits(playerID)
 	Spring.SelectUnitArray(units)
 end
 
-function widget:DrawScreen()
-	if lockPlayerID ~= nil then
+local function createGuiList()
+	if guiList ~= nil then
+		gl.DeleteList(guiList)
+	end
+	guiList = gl.CreateList(function()
 		glColor(0, 0, 0, 0.6)
 		RectRound(xPos, yPos, xPos + (panelWidth*sizeMultiplier), yPos + (panelHeight*sizeMultiplier), 8*sizeMultiplier)
 		glColor(1, 1, 1, 1)
@@ -385,97 +421,9 @@ function widget:DrawScreen()
 		if (WG['guishader_api'] ~= nil) then
 			WG['guishader_api'].InsertRect(xPos, yPos, xPos + (panelWidth*sizeMultiplier), yPos + (panelHeight*sizeMultiplier), 'allyselectedunits')
 		end
-	else
-		if (WG['guishader_api'] ~= nil) then
-			WG['guishader_api'].RemoveRect('allyselectedunits')
-		end
-	end
+	end)
 end
 
-local function DrawRectRound(px,py,sx,sy,cs)
-	gl.TexCoord(0.8,0.8)
-	gl.Vertex(px+cs, py, 0)
-	gl.Vertex(sx-cs, py, 0)
-	gl.Vertex(sx-cs, sy, 0)
-	gl.Vertex(px+cs, sy, 0)
-	
-	gl.Vertex(px, py+cs, 0)
-	gl.Vertex(px+cs, py+cs, 0)
-	gl.Vertex(px+cs, sy-cs, 0)
-	gl.Vertex(px, sy-cs, 0)
-	
-	gl.Vertex(sx, py+cs, 0)
-	gl.Vertex(sx-cs, py+cs, 0)
-	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.Vertex(sx, sy-cs, 0)
-	
-	local offset = 0.07		-- texture offset, because else gaps could show
-	local o = offset
-	-- top left
-	--if py <= 0 or px <= 0 then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(px, py+cs, 0)
-	-- top right
-	--if py <= 0 or sx >= vsx then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(sx, py+cs, 0)
-	-- bottom left
-	--if sy >= vsy or px <= 0 then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(px, sy-cs, 0)
-	-- bottom right
-	--if sy >= vsy or sx >= vsx then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(sx, sy-cs, 0)
-end
-
-
-function RectRound(px,py,sx,sy,cs)
-	local px,py,sx,sy,cs = math.floor(px),math.floor(py),math.ceil(sx),math.ceil(sy),math.floor(cs)
-	
-	gl.Texture(bgcorner)
-	gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs)
-	gl.Texture(false)
-end
-
-function drawCheckbox(x, y, state, text)
-    glPushMatrix()
-    glTranslate(x, y, 0)
-    glColor(1, 1, 1, 0.2)
-    RectRound(0, 0, 16*sizeMultiplier, 16*sizeMultiplier, 3*sizeMultiplier)
-    glColor(1, 1, 1, 1)
-    if state then
-        glTexture('LuaUI/Images/tick.png')
-        glTexRect(0, 0, 16*sizeMultiplier, 16*sizeMultiplier)
-        glTexture(false)
-    end
-    glText(text, 23*sizeMultiplier, 4*sizeMultiplier, 12*sizeMultiplier, "n")
-    glPopMatrix()
-end
 
 function widget:DrawWorldPreUnit()
 	if spIsGUIHidden() then return end
@@ -483,6 +431,13 @@ function widget:DrawWorldPreUnit()
 	DrawSelectedUnits()
 	DrawHotUnits()
 end
+
+--local vsx,vsy = Spring.GetViewGeometry()
+--local lineScale = (0.75 + (vsx*vsy / 7500000))
+--function widget:ViewResize()
+--	local vsx,vsy = Spring.GetViewGeometry()
+--	lineScale = (0.75 + (vsx*vsy / 7500000))
+--end
 
 function DrawSelectedUnits()
 	glColor(0.0, 1.0, 0.0, 1.0)
@@ -494,23 +449,27 @@ function DrawSelectedUnits()
 		if lockPlayerID == nil or lockPlayerID ~= playerID or (lockPlayerID == playerID and not selectPlayerUnits) then
 			if selUnits["todraw"] then
 				glColor( playerColors[ playerID ][1],  playerColors[ playerID ][2],  playerColors[ playerID ][3], maxAlpha)  
-				for unitId, defRadius in pairs( selUnits["units"] ) do
-					local x, y, z = spGetUnitBasePosition(unitId)
+				for unitID, defRadius in pairs( selUnits["units"] ) do
+					local x, y, z = spGetUnitBasePosition(unitID)
 					local inView = false
 					if ( z ~= nil ) then --checking z should be enough insteady of x,y,z
 						inView = spIsSphereInView( x, y, z, defRadius )
 					end
 					if ( inView ) then
-						local lines = circleLinesAlly
+						--glPushMatrix()
+						--glTranslate( x, y, z)
+						--glScale( defRadius, 1, defRadius)
+						--if ( selUnits["coop"] == true and not spec) then
+						--	glCallList(circleLinesCoop)
+						--else
+						--	glCallList(circleLinesAlly)
+						--end
+						--glPopMatrix()
 						if ( selUnits["coop"] == true and not spec) then
-							lines = circleLinesCoop
+							glDrawListAtUnit(unitID, circleLinesCoop, false, defRadius,defRadius,defRadius)
+						else
+							glDrawListAtUnit(unitID, circleLinesAlly, false, defRadius,defRadius,defRadius)
 						end
-
-						glPushMatrix()
-						glTranslate( x, y, z)
-						glScale( defRadius, 1, defRadius)
-						glCallList(lines)
-						glPopMatrix()
 					end
 				end
 			end
@@ -578,55 +537,161 @@ function DrawHotUnits()
 end
 
 
-function widget:IsAbove(mx, my)
-	if lockPlayerID == nil then return end
-	return mx > xPos and my > yPos and mx < xPos + (panelWidth*sizeMultiplier) and my < yPos + (panelHeight*sizeMultiplier)
-end
-
-function widget:MousePress(mx, my, mb)
-	if lockPlayerID ~= nil then
-		if mb == 1 then
-			if mx > xPos + (12*sizeMultiplier) and my > yPos + (10*sizeMultiplier) and mx < (xPos + ((panelWidth - 12)*sizeMultiplier)) and my < (yPos + ((10 + 16)*sizeMultiplier)) then
-				selectPlayerUnits = not selectPlayerUnits
-			end
-			if lockPlayerID ~= nil and widget:IsAbove(mx,my) then
-				return false
-			end
-		end
-	end
-end
-
-function widget:TweakMousePress(mx, my, mb)
-    if lockPlayerID ~= nil and (mb == 2 or mb == 3) and widget:IsAbove(mx,my) then
-        return true
-    end
-end 
-
-function widget:TweakMouseMove(mx, my, dx, dy)
-    if xPos + dx >= -1 and xPos + (panelWidth*sizeMultiplier) + dx - 1 <= vsx then
-		xRelPos = xRelPos + dx/vsx
-	end
-    if yPos + dy >= -1 and yPos + (panelHeight*sizeMultiplier) + dy - 1<= vsy then 
-		yRelPos = yRelPos + dy/vsy
-	end
-	xPos, yPos = xRelPos * vsx,yRelPos * vsy
-end
 
 function widget:GetConfigData()
     return {
+		maxAlpha = maxAlpha,
         selectPlayerUnits = selectPlayerUnits,
-        xRelPos = xRelPos, yRelPos = yRelPos
+        xRelPos = xRelPos, yRelPos = yRelPos,
+        version = 1.1
     }
 end
 
 function widget:SetConfigData(data)
-	if data.selectPlayerUnits ~= nil then
-		selectPlayerUnits = data.selectPlayerUnits
-	end
-	if data.xRelPos ~= nil then
-		xRelPos = data.xRelPos or xRelPos
-		yRelPos = data.yRelPos or yRelPos
-		xPos = xRelPos * vsx
-		yPos = yRelPos * vsy
-	end
+    if data.version ~= nil and data.version == 1.1 then
+        maxAlpha = data.maxAlpha or maxAlpha
+        selectPlayerUnits = data.selectPlayerUnits or selectPlayerUnits
+        xRelPos = data.xRelPos or xRelPos
+        yRelPos = data.yRelPos or yRelPos
+        xPos = xRelPos * vsx
+        yPos = yRelPos * vsy
+    end
+end
+
+
+
+
+if showGui then
+    function widget:DrawScreen()
+        if lockPlayerID ~= nil then
+            if not guiList then
+                createGuiList()
+            end
+            glCallList(guiList)
+        else
+            if (WG['guishader_api'] ~= nil) then
+                WG['guishader_api'].RemoveRect('allyselectedunits')
+            end
+        end
+    end
+
+    local function DrawRectRound(px,py,sx,sy,cs)
+        gl.TexCoord(0.8,0.8)
+        gl.Vertex(px+cs, py, 0)
+        gl.Vertex(sx-cs, py, 0)
+        gl.Vertex(sx-cs, sy, 0)
+        gl.Vertex(px+cs, sy, 0)
+
+        gl.Vertex(px, py+cs, 0)
+        gl.Vertex(px+cs, py+cs, 0)
+        gl.Vertex(px+cs, sy-cs, 0)
+        gl.Vertex(px, sy-cs, 0)
+
+        gl.Vertex(sx, py+cs, 0)
+        gl.Vertex(sx-cs, py+cs, 0)
+        gl.Vertex(sx-cs, sy-cs, 0)
+        gl.Vertex(sx, sy-cs, 0)
+
+        local offset = 0.07		-- texture offset, because else gaps could show
+        local o = offset
+        -- top left
+        --if py <= 0 or px <= 0 then o = 0.5 else o = offset end
+        gl.TexCoord(o,o)
+        gl.Vertex(px, py, 0)
+        gl.TexCoord(o,1-o)
+        gl.Vertex(px+cs, py, 0)
+        gl.TexCoord(1-o,1-o)
+        gl.Vertex(px+cs, py+cs, 0)
+        gl.TexCoord(1-o,o)
+        gl.Vertex(px, py+cs, 0)
+        -- top right
+        --if py <= 0 or sx >= vsx then o = 0.5 else o = offset end
+        gl.TexCoord(o,o)
+        gl.Vertex(sx, py, 0)
+        gl.TexCoord(o,1-o)
+        gl.Vertex(sx-cs, py, 0)
+        gl.TexCoord(1-o,1-o)
+        gl.Vertex(sx-cs, py+cs, 0)
+        gl.TexCoord(1-o,o)
+        gl.Vertex(sx, py+cs, 0)
+        -- bottom left
+        --if sy >= vsy or px <= 0 then o = 0.5 else o = offset end
+        gl.TexCoord(o,o)
+        gl.Vertex(px, sy, 0)
+        gl.TexCoord(o,1-o)
+        gl.Vertex(px+cs, sy, 0)
+        gl.TexCoord(1-o,1-o)
+        gl.Vertex(px+cs, sy-cs, 0)
+        gl.TexCoord(1-o,o)
+        gl.Vertex(px, sy-cs, 0)
+        -- bottom right
+        --if sy >= vsy or sx >= vsx then o = 0.5 else o = offset end
+        gl.TexCoord(o,o)
+        gl.Vertex(sx, sy, 0)
+        gl.TexCoord(o,1-o)
+        gl.Vertex(sx-cs, sy, 0)
+        gl.TexCoord(1-o,1-o)
+        gl.Vertex(sx-cs, sy-cs, 0)
+        gl.TexCoord(1-o,o)
+        gl.Vertex(sx, sy-cs, 0)
+    end
+
+    function RectRound(px,py,sx,sy,cs)
+        local px,py,sx,sy,cs = math.floor(px),math.floor(py),math.ceil(sx),math.ceil(sy),math.floor(cs)
+
+        gl.Texture(bgcorner)
+        gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs)
+        gl.Texture(false)
+    end
+
+    function drawCheckbox(x, y, state, text)
+        glPushMatrix()
+        glTranslate(x, y, 0)
+        glColor(1, 1, 1, 0.2)
+        RectRound(0, 0, 16*sizeMultiplier, 16*sizeMultiplier, 3*sizeMultiplier)
+        glColor(1, 1, 1, 1)
+        if state then
+            glTexture('LuaUI/Images/tick.png')
+            glTexRect(0, 0, 16*sizeMultiplier, 16*sizeMultiplier)
+            glTexture(false)
+        end
+        glText(text, 23*sizeMultiplier, 4*sizeMultiplier, 12*sizeMultiplier, "n")
+        glPopMatrix()
+    end
+
+    function widget:IsAbove(mx, my)
+        if lockPlayerID == nil then return end
+        return mx > xPos and my > yPos and mx < xPos + (panelWidth*sizeMultiplier) and my < yPos + (panelHeight*sizeMultiplier)
+    end
+
+    function widget:MousePress(mx, my, mb)
+        if lockPlayerID ~= nil then
+            if mb == 1 then
+                if mx > xPos + (12*sizeMultiplier) and my > yPos + (10*sizeMultiplier) and mx < (xPos + ((panelWidth - 12)*sizeMultiplier)) and my < (yPos + ((10 + 16)*sizeMultiplier)) then
+                    selectPlayerUnits = not selectPlayerUnits
+                    createGuiList()
+                end
+                if lockPlayerID ~= nil and widget:IsAbove(mx,my) then
+                    return false
+                end
+            end
+        end
+    end
+
+    function widget:TweakMousePress(mx, my, mb)
+        if lockPlayerID ~= nil and (mb == 2 or mb == 3) and widget:IsAbove(mx,my) then
+            return true
+        end
+    end
+
+    function widget:TweakMouseMove(mx, my, dx, dy)
+        if xPos + dx >= -1 and xPos + (panelWidth*sizeMultiplier) + dx - 1 <= vsx then
+            xRelPos = xRelPos + dx/vsx
+        end
+        if yPos + dy >= -1 and yPos + (panelHeight*sizeMultiplier) + dy - 1<= vsy then
+            yRelPos = yRelPos + dy/vsy
+        end
+        xPos, yPos = xRelPos * vsx,yRelPos * vsy
+        createGuiList()
+    end
 end
