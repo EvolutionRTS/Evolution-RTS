@@ -830,8 +830,9 @@ function widget:DrawInMiniMap(minimapX, minimapY)
 			glLineWidth(2.5)
 			glDrawCircle(x, z, MINIMAP_DRAW_SIZE)
 			glLineWidth(1.75)
-			mexColor[4] = 0.85
-			glColor(mexColor)
+			--mexColor[4] = 0.85
+			--glColor(mexColor)
+			glColor(0.53, 0.77, 0.89, 1)
 			
 			--This is for mex circles on the minimap that denote the amount that mexes give (hard to see)
 			-- glColor(0,0,0,0.66)
