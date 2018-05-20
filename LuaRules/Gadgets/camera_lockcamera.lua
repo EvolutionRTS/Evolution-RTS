@@ -18,7 +18,8 @@ end
 ------------------------------------------------
 
 --broadcast
-local broadcastPeriod = 1 --will send packet in this interval (s)
+
+local broadcastPeriod = 0.5 --will send packet in this interval (s)
 
 ------------------------------------------------
 --speedups
@@ -54,22 +55,52 @@ local vfsPackU8 = VFS.PackU8
 local vfsPackF32 = VFS.PackF32
 local vfsUnpackU8 = VFS.UnpackU8
 local vfsUnpackF32 = VFS.UnpackF32
+local allowBroadcast = true
 
 ------------------------------------------------
 --const
 ------------------------------------------------
 local PACKET_HEADER = "="
 local PACKET_HEADER_LENGTH = strLen(PACKET_HEADER)
-
-
+local numBroadcasts = {}
+local maxNumBroadcasts = 20
+local plannedGameFrame = 1
 if gadgetHandler:IsSyncedCode() then
 
+	local charset = {}  do -- [0-9a-zA-Z]
+		for c = 48, 57  do table.insert(charset, string.char(c)) end
+		for c = 65, 90  do table.insert(charset, string.char(c)) end
+		for c = 97, 122 do table.insert(charset, string.char(c)) end
+	end
+	local function randomString(length)
+		if not length or length <= 0 then return '' end
+		--math.randomseed(os.clock()^5)
+		return randomString(length - 1) .. charset[math.random(1, #charset)]
+	end
+
+	local validation = randomString(2)
+	_G.validationCam = validation
+
 	function gadget:RecvLuaMsg(msg, playerID)
-		if strSub(msg, 1, PACKET_HEADER_LENGTH) ~= PACKET_HEADER then
+		if strSub(msg, 1, PACKET_HEADER_LENGTH) ~= PACKET_HEADER or strSub(msg, 1+PACKET_HEADER_LENGTH, 1+PACKET_HEADER_LENGTH+1) ~= validation then
 			return
 		end
-		SendToUnsynced("cameraBroadcast",playerID,msg)
-		return true
+		if numBroadcasts[playerID] == nil then
+			numBroadcasts[playerID] = 0
+		end
+		numBroadcasts[playerID] = numBroadcasts[playerID] + 1
+		if numBroadcasts[playerID] < maxNumBroadcasts then
+
+			SendToUnsynced("cameraBroadcast",playerID,msg)
+			return true
+		end
+	end
+
+	function gadget:GameFrame(gf)
+		if gf >= plannedGameFrame then
+			plannedGameFrame = gf + (broadcastPeriod*30)
+			maxNumBroadcasts = maxNumBroadcasts + 1
+		end
 	end
 else
 	local totalTime = 0
@@ -80,6 +111,9 @@ else
 	local CAMERA_IDS = GetCameraNames()
 	local CAMERA_NAMES = {}
 	local CAMERA_STATE_FORMATS = {}
+
+	local validation = SYNCED.validationCam
+
 	------------------------------------------------
 	--H4X
 	------------------------------------------------
@@ -191,8 +225,7 @@ else
 		local cameraID = CAMERA_IDS[name]
 
 		if not stateFormat or not cameraID then return nil end
-
-		local result = PACKET_HEADER .. CustomPackU8(cameraID) .. CustomPackU8(s.mode)
+		local result = PACKET_HEADER .. validation .. CustomPackU8(cameraID) .. CustomPackU8(s.mode)
 
 		for i=1, #stateFormat do
 			local num = s[stateFormat[i]]
@@ -204,7 +237,7 @@ else
 	end
 
 	local function PacketToCameraState(p)
-		local offset = PACKET_HEADER_LENGTH + 1
+		local offset = PACKET_HEADER_LENGTH + 1 + 2
 		local cameraID = CustomUnpackU8(p, offset)
 		local mode = CustomUnpackU8(p, offset + 1)
 		local name = CAMERA_NAMES[cameraID]
@@ -212,7 +245,6 @@ else
 		if not (cameraID and mode and name and stateFormat) then
 			return nil
 		end
-
 		local result = {
 			name = name,
 			mode = mode,
@@ -260,7 +292,7 @@ else
 	function gadget:Initialize()
 		gadgetHandler:AddSyncAction("cameraBroadcast", handleCameraBroadcastEvent)
 	end
-	
+
 	function gadget:Shutdown()
 		SendLuaRulesMsg(PACKET_HEADER)
 		gadgetHandler:RemoveSyncAction("cameraBroadcast")
@@ -293,6 +325,10 @@ else
     end
 
 	function gadget:Update()
+		if Spring.GetGameFrame() == 0 then
+			return
+		end
+
 		local dt = GetLastUpdateSeconds()
 		totalTime = totalTime + dt 
 		timeSinceBroadcast = timeSinceBroadcast + dt
