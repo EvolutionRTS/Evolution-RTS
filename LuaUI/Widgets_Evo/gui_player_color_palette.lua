@@ -1,12 +1,13 @@
 function widget:GetInfo()
 	return {
 		name = "Player Color Palette",
-		desc = "Applies an evenly distributed color palette among players. Toggle randomized colors with /shufflecolors, order by hue with /ordercolors",
+		desc = "Applies an evenly distributed color palette among players. Toggle randomized colors with",
 		author = "Floris",
 		date = "March 2017",
 		license = "GPL v2",
 		layer = -10001,
 		enabled = true,
+		handler = true,
 	}
 end
 
@@ -16,6 +17,13 @@ local useSameTeamColors = false
 
 local GaiaTeam = Spring.GetGaiaTeamID()
 local GaiaTeamColor = {255,0,0 }
+
+local myTeamID = Spring.GetMyTeamID()
+
+local singleTeams = false
+if #Spring.GetTeamList()-1  ==  #Spring.GetAllyTeamList()-1 then
+	singleTeams = true
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -54,17 +62,31 @@ local function GetColor(i, teams)
 	local h = 0
 	--if i > (teams * 0.33) then l = 0.7 end
 	--if i > (teams * 0.66) then l = 0.3 end
-	if teams > 10 then
-		if i%3==0 then
+	if teams > 16 then
+		if i%4==0 then
 			l = 0.88
 		end
-		if i%3==2 then
-			l = 0.25
+		if i%4==1 then
+			l = 0.46
+		end
+
+		if i%4==2 then
+			l = 0.7
+		end
+		if i%4==3 then
+			l = 0.32
+		end
+	elseif teams > 10 then
+		if i%2==0 then
+			l = 0.78
+		end
+		if i%2==1 then
+			l = 0.44
 		end
 	else
 		if teams > 6 then
 			if i%2==0 then
-				l = 0.8
+				l = 0.77
 			end
 			if i%2==1 then
 				l = 0.42
@@ -89,10 +111,10 @@ local function GetColor(i, teams)
 			useHueRGB = false
 		end
 	end
-	if teams > 15 then
+	if teams > 19 then
 		hueteams = hueteams - 1
 		if i == teams-2 then
-			r,g,b = 0, 0, 0
+			r,g,b = 0.15, 0.15, 0.15
 			useHueRGB = false
 		end
 	end
@@ -144,7 +166,19 @@ local function SetNewTeamColors()
 					end
 					r,g,b = GetColor(i, numteams)
 				else
-					r,g,b = GetColor(i, numallyteams)
+					if singleTeams then
+						r,g,b = GetColor(i, numallyteams)
+					elseif teamID == myTeamID then
+						r,g,b = GetColor(i, numallyteams)
+						r = (r * 1.25) + 0.3
+						g = (g * 1.25) + 0.3
+						b = (b * 1.25) + 0.3
+					else
+						r,g,b = GetColor(i, numallyteams)
+						r = r * 0.9
+						g = g * 0.9
+						b = b * 0.9
+					end
 				end
 
 				local _, playerID = Spring.GetTeamInfo(teamID)
@@ -161,6 +195,15 @@ local function ResetOldTeamColors()
 	end
 end
 
+-- cause several widgets are still using old colors
+function reloadWidgets()
+	if not useSameTeamColors then
+		if widgetHandler.orderList["Ecostats"] ~= 0 then
+			widgetHandler:DisableWidget("Ecostats")
+			widgetHandler:EnableWidget("Ecostats")
+		end
+	end
+end
 
 function ordercolors(_,_,params)
 	local oldRandomize = randomize
@@ -168,16 +211,26 @@ function ordercolors(_,_,params)
 	if oldRandomize == randomize then
 		Spring.Echo("Player Color Palette:  Player colors are already ordered by hue")
 	else
-  	SetNewTeamColors()
-  	Spring.SendCommands("luarules reloadluaui")	-- cause several widgets are still using old colors
-  end
+		SetNewTeamColors()
+		reloadWidgets()
+	end
 end
 
 function shufflecolors(_,_,params)
 	randomize = true
 	SetNewTeamColors()
-	Spring.SendCommands("luarules reloadluaui")	-- cause several widgets are still using old colors
+	reloadWidgets()
 end
+
+
+function widget:Update(dt)
+	if useSameTeamColors and myTeamID ~= Spring.GetMyTeamID() then
+		myTeamID = Spring.GetMyTeamID()
+		SetNewTeamColors()
+		reloadWidgets()
+	end
+end
+
 
 function widget:Initialize()
 	WG['playercolorpalette'] = {}
@@ -194,12 +247,9 @@ function widget:Initialize()
 	WG['playercolorpalette'].setSameTeamColors = function(value)
 		useSameTeamColors = value
 		SetNewTeamColors()
-		Spring.SendCommands("luarules reloadluaui")	-- cause several widgets are still using old colors
+		reloadWidgets()
 	end
-  
-	widgetHandler:AddAction("shufflecolors", shufflecolors, nil, "t")
-	widgetHandler:AddAction("ordercolors", ordercolors, nil, "t")
-  
+
 	SetNewTeamColors()
 end
 
@@ -224,3 +274,4 @@ function widget:SetConfigData(data)
 		useSameTeamColors = data.useSameTeamColors
 	end
 end
+
