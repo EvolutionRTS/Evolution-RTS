@@ -10,7 +10,8 @@ function MetalSpotHandler:internalName()
 end
 
 function MetalSpotHandler:Init()
-	self.spots = self.game.map:GetMetalSpots()
+	--self.spots = game.map:GetMetalSpots()
+	self.spots = GG.metalSpots
 end
 
 function distance(pos1,pos2)
@@ -22,7 +23,7 @@ end
 
 function MetalSpotHandler:ClosestFreeSpot(unittype,position)
 	local pos = nil
-	local bestDistance = 10000
+	local bestDistance = 50000
 
 	spotCount = self.game.map:SpotCount()
 	for i,v in ipairs(self.spots) do

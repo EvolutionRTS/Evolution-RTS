@@ -26,8 +26,15 @@ function ShardSpringUnitType:CanDeploy()
 	return false
 end
 
+function ShardSpringUnitType:IsFactory()
+	-- what does deploy mean for Spring?
+	return self.def.isFactory
+end
+
 function ShardSpringUnitType:CanBuild(type)
-	if not type then return self.def.isBuilder end
+	if not type then
+		return self.def.buildOptions and #self.def.buildOptions > 0
+	end
 	-- Spring.Echo(self.def.name, "can build?", type, type:Name())
 	if not self.canBuildType then
 		self.canBuildType = {}
@@ -44,6 +51,5 @@ function ShardSpringUnitType:WeaponCount()
 end
 
 function ShardSpringUnitType:Extractor()
-	--return self.def.extractsMetal > 0
 	return self.def.customParams.metal_extractor
 end

@@ -1,43 +1,27 @@
 
-controlPoints = Spring.GetModOptions().scoremode
-
-if controlPoints == nil then
-	controlPoints = "disabled"
-end
-
-if controlPoints == "disabled" then
-	shard_include(  "taskqueues" )
-	shard_include(  "taskqueuebehaviour" )
-	shard_include(  "attackerbehaviour" )
-	shard_include(  "bootbehaviour" )
-	else
-	shard_include(  "taskqueues" )
-	shard_include(  "taskqueuebehaviour" )
-	shard_include(  "attackerbehaviour" )
-	shard_include(  "bootbehaviour" )
-	shard_include(  "capturerbehaviour" )
-end
+shard_include(  "taskqueues" )
+shard_include(  "taskqueuebehaviour" )
+shard_include(  "attackerbehaviour" )
+shard_include(  "pointcapturerbehaviour" )
+shard_include(  "bootbehaviour" )
 
 behaviours = { }
 
-function defaultBehaviours(unit)
+function defaultBehaviours(unit, ai)
 	b = {}
+	if unit == nil then
+		return b
+	end
 	u = unit:Internal()
 	table.insert(b, BootBehaviour )
 	if u:CanBuild() then
 		table.insert(b,TaskQueueBehaviour)
 	else
-		if controlPoints == "disabled" then
-			if IsAttacker(unit) then
-				table.insert(b,AttackerBehaviour)
-			end
-		else
-			if IsAttacker(unit) then
-				table.insert(b,AttackerBehaviour)
-			end
-			if IsCapturer(unit) then
-				table.insert(b,CapturerBehaviour)
-			end
+		if IsPointCapturer(unit, ai) then
+			table.insert(b,PointCapturerBehaviour)
+		end
+		if IsAttacker(unit) then
+			table.insert(b,AttackerBehaviour)
 		end
 	end
 	return b

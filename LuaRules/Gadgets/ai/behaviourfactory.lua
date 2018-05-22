@@ -6,8 +6,9 @@ function BehaviourFactory:Init()
 	--
 end
 
-function BehaviourFactory:AddBehaviours(unit, ai)
+function BehaviourFactory:AddBehaviours(unit)
 	if unit == nil then
+		self.game:SendToConsole("Warning: Shard BehaviourFactory:AddBehaviours was asked to provide behaviours to a nil unit")
 		return
 	end
 	-- add behaviours here
@@ -18,8 +19,8 @@ function BehaviourFactory:AddBehaviours(unit, ai)
 	end
 	for i,behaviour in ipairs(b) do
 		t = behaviour()
-		t:SetUnit(unit)
 		t:SetAI(ai)
+		t:SetUnit(unit)
 		t:Init()
 		unit:AddBehaviour(t)
 	end

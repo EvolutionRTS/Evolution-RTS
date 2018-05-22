@@ -114,6 +114,11 @@ function ShardSpringUnit:MoveAndFire(p)
 	return true
 end
 
+function ShardSpringUnit:MoveAndPatrol(p)
+	Spring.GiveOrderToUnit( self.id, CMD.PATROL, { p.x, p.y, p.z }, {} )
+	return true
+end
+
 
 function ShardSpringUnit:Build(t, p) -- IUnitType*
 	if type(t) == "string" then
@@ -121,7 +126,10 @@ function ShardSpringUnit:Build(t, p) -- IUnitType*
 		-- t = ai.game:GetTypeByName(t)
 		t = game:GetTypeByName(t)
 	end
-	if not p then p = self:GetPosition() end
+	if not p then
+		p = self:GetPosition()
+	end
+	p.y = Spring.GetGroundHeight( p.x,p.z )
 	Spring.GiveOrderToUnit( self.id, -t:ID(), { p.x, p.y, p.z }, {} )
 	return true
 end
@@ -225,6 +233,19 @@ function ShardSpringUnit:ExecuteCustomCommand(  cmdId, params_list, options, tim
 	Spring.GiveOrderToUnit(self.id, cmdId, params_list, options)
 	return 0
 end
+
+function ShardSpringUnit:DrawHighlight( color, label, channel )
+	channel = channel or 1
+	color = color or {}
+	SendToUnsynced('ShardDrawAddUnit', self.id, color[1], color[2], color[3], color[4], label, ai.game:GetTeamID(), channel)
+end
+
+function ShardSpringUnit:EraseHighlight( color, label, channel )
+	channel = channel or 1
+	color = color or {}
+	SendToUnsynced('ShardDrawEraseUnit', self.id, color[1], color[2], color[3], color[4], label, ai.game:GetTeamID(), channel)
+end
+
 --[[
 IUnit/ engine unit objects
 	int ID()

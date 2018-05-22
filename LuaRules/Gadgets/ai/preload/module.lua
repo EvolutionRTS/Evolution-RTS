@@ -8,8 +8,8 @@ function Module:internalName()
 	return "module"
 end
 
-function Module:SetAI(ai)
-	self.ai = ai
-	self.game = ai.game
-	self.map = ai.map
+function Module:EchoDebug(...)
+	if self.DebugEnabled then
+		self.game:SendToConsole(self.game:GetTeamID(), self:Name(), ...)
+	end
 end

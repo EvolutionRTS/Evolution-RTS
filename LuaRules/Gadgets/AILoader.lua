@@ -4,29 +4,43 @@ function gadget:GetInfo()
       desc = "Shard by AF for Spring Lua",
       author = "eronoobos, based on gadget by raaar, and original AI by AF",
       date = "April 2016",
-      license = "whatever",
+      license = "GPL",
       layer = 999999,
       enabled = true,
    }
 end
 
+local teams = Spring.GetTeamList()
+for i =1, #teams do
+	local luaAI = Spring.GetTeamLuaAI(teams[i])
+	if luaAI ~= "" then
+		if luaAI == "DAI" then
+			shardEnabled = true
+		end
+	end
+end
+
+if shardEnabled == true then
+	Spring.Echo("[AI Loader] ShardLua bot Activated!")
+else
+	Spring.Echo("[AI Loader] ShardLua bot Deactivated!")
+	return false
+end
+
+local teams = Spring.GetTeamList()
+
 -- globals
 ShardSpringLua = true -- this is the AI Boot gadget, so we're in Spring Lua
-VFS.Include("luarules/gadgets/ai/preload/globals.lua")
+VFS.Include("luarules/gadgets/ai/boot.lua")
 
 -- fake os object
-os = shard_include("spring_lua/fakeos")
+--os = shard_include("spring_lua/fakeos")
 
 -- missing math function
 function math.mod(number1, number2)
 	return number1 % number2
 end
 math.fmod = math.mod
-
-shard_include("behaviourfactory")
-shard_include("unit")
-shard_include("module")
-shard_include("modules")
 
 -- Shard object
 Shard = shard_include("spring_lua/shard")
@@ -35,7 +49,7 @@ Shard.AIsByTeamID = {}
 local AIs = Shard.AIs
 
 -- fake api object
-api = shard_include("spring_lua/fakeapi")
+--api = shard_include("spring_lua/fakeapi")
 
 -- localization
 local spEcho = Spring.Echo
@@ -62,21 +76,24 @@ function gadget:Initialize()
 
 	local numberOfmFAITeams = 0
 	local teamList = spGetTeamList()
+	spEcho( "k9: ailoader gadget go!")
 
 	for i=1,#teamList do
 		local id = teamList[i]
 		local _,_,_,isAI,side,allyId = spGetTeamInfo(id)
-        
+
 		--spEcho("Player " .. teamList[i] .. " is " .. side .. " AI=" .. tostring(isAI))
 
 		---- adding AI
+		spEcho( "K9: Is AI?")
 		if (isAI) then
+			spEcho( "K9: IT IS AI")
 			local aiInfo = spGetTeamLuaAI(id)
-			if (string.sub(aiInfo,1,8) == "ShardLua") then
+			if (string.sub(aiInfo,1,8) == "DAI") then
 				numberOfmFAITeams = numberOfmFAITeams + 1
-				spEcho("Player " .. teamList[i] .. " is " .. aiInfo)
+				spEcho("Moomin Player " .. teamList[i] .. " is " .. aiInfo)
 				-- add AI object
-				thisAI = VFS.Include("LuaRules/Gadgets/ai/AI.lua")
+				thisAI = ShardAI()
 				thisAI.id = id
 				thisAI.allyId = allyId
 				-- thisAI:Init()
@@ -85,6 +102,8 @@ function gadget:Initialize()
 			else
 				spEcho("Player " .. teamList[i] .. " is another type of lua AI!")
 			end
+		else
+			spEcho( "K9: IS NOT AI!?")
 		end
 	end
 
@@ -115,7 +134,7 @@ function gadget:Initialize()
 	end
 end
 
-function gadget:GameStart() 
+function gadget:GameStart()
     -- Initialise AIs
     for _,thisAI in ipairs(AIs) do
         local _,_,_,isAI,side = spGetTeamInfo(thisAI.id)
@@ -127,11 +146,11 @@ function gadget:GameStart()
 end
 
 
-function gadget:GameFrame(n) 
+function gadget:GameFrame(n)
 
 	-- for each AI...
     for _,thisAI in ipairs(AIs) do
-        
+
         -- update sets of unit ids : own, friendlies, enemies
 		thisAI.ownUnitIds = {}
         thisAI.friendlyUnitIds = {}
@@ -148,8 +167,8 @@ function gadget:GameFrame(n)
         	else
         		thisAI.enemyUnitIds[uId] = true
         	end
-        end 
-	
+        end
+
 		-- run AI game frame update handlers
 		prepareTheAI(thisAI)
 		thisAI:Update()
@@ -157,7 +176,7 @@ function gadget:GameFrame(n)
 end
 
 
-function gadget:UnitCreated(unitId, unitDefId, teamId, builderId) 
+function gadget:UnitCreated(unitId, unitDefId, teamId, builderId)
 	-- for each AI...
 	local unit = Shard:shardify_unit(unitId)
     for _,thisAI in ipairs(AIs) do
@@ -169,7 +188,7 @@ function gadget:UnitCreated(unitId, unitDefId, teamId, builderId)
 	end
 end
 
-function gadget:UnitDestroyed(unitId, unitDefId, teamId, attackerId, attackerDefId, attackerTeamId) 
+function gadget:UnitDestroyed(unitId, unitDefId, teamId, attackerId, attackerDefId, attackerTeamId)
 	-- for each AI...
 	local unit = Shard:shardify_unit(unitId)
 	if unit then
@@ -193,11 +212,11 @@ function gadget:UnitDamaged(unitId, unitDefId, unitTeamId, damage, paralyzer, we
 	    	prepareTheAI(thisAI)
 	    	thisAI:UnitDamaged(unit, attackerUnit, damageObj)
 			-- thisAI:UnitDamaged(unitId, unitDefId, unitTeamId, attackerId, attackerDefId, attackerTeamId)
-		end	
+		end
 	end
 end
 
-function gadget:UnitIdle(unitId, unitDefId, teamId) 
+function gadget:UnitIdle(unitId, unitDefId, teamId)
 	-- for each AI...
 	local unit = Shard:shardify_unit(unitId)
 	if unit then
@@ -210,7 +229,7 @@ function gadget:UnitIdle(unitId, unitDefId, teamId)
 end
 
 
-function gadget:UnitFinished(unitId, unitDefId, teamId) 
+function gadget:UnitFinished(unitId, unitDefId, teamId)
 	-- for each AI...
 	local unit = Shard:shardify_unit(unitId)
 	if unit then
@@ -222,7 +241,7 @@ function gadget:UnitFinished(unitId, unitDefId, teamId)
 	end
 end
 
-function gadget:UnitTaken(unitId, unitDefId, teamId, newTeamId) 
+function gadget:UnitTaken(unitId, unitDefId, teamId, newTeamId)
 	local unit = Shard:shardify_unit(unitId)
 	if unit then
 	    for _,thisAI in ipairs(AIs) do
@@ -233,7 +252,7 @@ function gadget:UnitTaken(unitId, unitDefId, teamId, newTeamId)
 	end
 end
 
-function gadget:UnitGiven(unitId, unitDefId, teamId, oldTeamId) 
+function gadget:UnitGiven(unitId, unitDefId, teamId, oldTeamId)
 	local unit = Shard:shardify_unit(unitId)
 	if unit then
 	    for _,thisAI in ipairs(AIs) do
@@ -266,10 +285,23 @@ end
 --UNSYNCED CODE
 else
 
+	function gadget:Initialize()
+		Spring.Echo("Shard AI unsync gadget init")
+		gadgetHandler:AddSyncAction("shard_debug_position", handleShardDebugPosEvent)
+	end
 
+	function gadget:Shutdown()
+		Spring.Echo("Shard AI unsync gadget shutdown")
+		gadgetHandler:RemoveSyncAction("shard_debug_position")
+	end
 
-
+	function handleShardDebugPosEvent(_,x,z,col)
+		Spring.Echo("handleShardDebugPosEvent 1")
+		if Script.LuaUI("shard_debug_position") then
+			Spring.Echo("handleShardDebugPosEvent 2")
+			Script.LuaUI.shard_debug_position(x,z,col)
+			Spring.Echo("handleShardDebugPosEvent 3")
+		end
+	end
 
 end
-
-

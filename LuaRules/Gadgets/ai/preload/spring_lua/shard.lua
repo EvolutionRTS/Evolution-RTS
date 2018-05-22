@@ -44,10 +44,10 @@ function Shard:shardify_unittype( unitDefID )
 	return self.unittypesByID[unitDefID]
 end
 
-function Shard:shardify_damage( damage, weaponDefId, paralyzer )
-	local sharddamage = ShardSpringDamage()
-	sharddamage:Init(damage, weaponDefId, paralyzer)
-	return sharddamage
+function Shard:shardify_damage( damage, weaponDefID, paralyzer, projectileID, engineAttacker )
+ 	local sharddamage = ShardSpringDamage()
+	sharddamage:Init(damage, weaponDefID, paralyzer, projectileID, engineAttacker)
+ 	return sharddamage
 end
 
 function Shard:shardify_feature( featureID )
