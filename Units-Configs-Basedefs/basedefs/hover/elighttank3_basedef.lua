@@ -104,7 +104,7 @@ unitDef                    = {
 weaponDefs                 = {
 	lighttankweapon              = {
 		
-		AreaOfEffect             = 0,
+		AreaOfEffect             = 25,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -114,6 +114,7 @@ weaponDefs                 = {
 		beamTTL					 = 10,
 		explosionGenerator       = "custom:genericshellexplosion-medium-lightning",
 		energypershot            = 0,
+		edgeeffectiveness		 = 1,
 		impulseBoost             = 0,
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,

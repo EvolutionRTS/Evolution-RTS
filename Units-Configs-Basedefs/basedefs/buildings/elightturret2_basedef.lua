@@ -98,6 +98,7 @@ weaponDefs                  = {
 		beamTTL					  = 10,
 		explosionGenerator        = "custom:genericshellexplosion-medium-lightning",
 		energypershot             = 0,
+		edgeeffectiveness		  = 1,
 		impulseBoost              = 0,
 		impulseFactor             = 0,
 		interceptedByShieldType   = 4,
