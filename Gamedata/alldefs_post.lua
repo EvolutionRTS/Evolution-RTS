@@ -104,8 +104,8 @@ function UnitDef_Post(name, uDef)
 	-- turn off unit collision check for planes
 	--
 
-	if uDef.canfly and not uDef.istransport then
- 		uDef.collide = false
+	if uDef.canfly then --and not uDef.istransport
+ 		uDef.collide = true
   	end
 
 	--------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ function UnitDef_Post(name, uDef)
 	--
 	
 	if uDef.builder == true and uDef.sounds then
-		uDef.sounds.build = "miscfx/buildstart.wav"
+		uDef.sounds.build = "miscfx/buildstart-mechanical.wav"
 	end
 	
 	--------------------------------------------------------------------------------
