@@ -88,7 +88,7 @@ unitDef                     = {
 
 weaponDefs                  = {
 	lighteweapon                  = {
-		AreaOfEffect              = 0,
+		AreaOfEffect              = 25,
 		avoidFeature              = false,
 		avoidFriendly             = false,
 		collideFeature            = false,
