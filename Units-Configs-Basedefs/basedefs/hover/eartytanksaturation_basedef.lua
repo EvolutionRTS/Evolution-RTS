@@ -13,7 +13,7 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR SUPPORT",
-	description                  = [[Self-Propelled Long-Range Artillery • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Self-Propelled Long-Range Saturation Artillery • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -73,8 +73,8 @@ unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "Artilleryweapon",
-			badTargetCategory    = "VTOL",
+			def                  = "SaturationArtilleryweapon",
+			badTargetCategory    = "VTOL LIGHT ARMORED BIO",
 		},
 		-- [2]                      = {
 			-- def                  = "SaturationArtilleryweapon",
@@ -103,10 +103,9 @@ unitDef                    = {
 --------------------------------------------------------------------------------
 
 weaponDefs                 = {
-	Artilleryweapon              = {
+	SaturationArtilleryweapon    = {
 		
-		accuracy                 = 500,
-		AreaOfEffect             = 50,
+		AreaOfEffect             = 200,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -114,19 +113,23 @@ weaponDefs                 = {
 		
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
-		explosionGenerator       = "custom:genericshellexplosion-small",
+		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = 0,
+		
+		burst					 = 5,
+		burstRate				 = 0.25,
 		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
-		highTrajectory	         = 0,
+		--highTrajectory	         = 1,
+		size					 = 16,
 		name                     = "Plasma Cannon",
 		range                    = 1300,
-		reloadtime               = 5,
-		size					 = 16,
+		reloadtime               = 30,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/artyhit.wav",
 		soundStart               = "weapons/arty2.wav",
+		sprayAngle				 = 1500,
 		
 		turret                   = true,
 		weaponVelocity           = 500,
@@ -136,43 +139,6 @@ weaponDefs                 = {
 		},  
 		damage                   = {
 			default              = 200,
-		},
-	},
-
-	SaturationArtilleryweapon    = {
-		
-		accuracy                 = 750,
-		AreaOfEffect             = 250,
-		avoidFriendly            = false,
-		avoidFeature             = false,
-		collideFriendly          = false,
-		collideFeature           = false,
-		
-		cegTag                   = "artyshot2",
-		avoidNeutral	         = false,
-		explosionGenerator       = "custom:genericshellexplosion-large",
-		energypershot            = 0,
-		edgeEffectiveness        = 1,
-		
-		impulseFactor            = 0,
-		interceptedByShieldType  = 4,
-		highTrajectory	         = 1,
-		size					 = 16,
-		name                     = "Plasma Cannon",
-		range                    = 1300,
-		reloadtime               = 0.5,
-		weaponType		         = "Cannon",
-		soundHit                 = "explosions/artyhit.wav",
-		soundStart               = "weapons/arty2.wav",
-		
-		turret                   = true,
-		weaponVelocity           = 500,
-		customparams             = {
-			isupgraded			 = isUpgraded,
-			damagetype		     = "eartytank",  
-		},  
-		damage                   = {
-			default              = 20,
 		},
 	},
 }

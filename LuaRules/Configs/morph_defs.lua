@@ -68,6 +68,14 @@ local timeToBuild_eorb = energyCost_eorb * 0.10
 local energyCost_eartyturret = 800
 local timeToBuild_eartyturret = energyCost_eartyturret * 0.10
 
+local energyCost_ehbotturret = 300
+local timeToBuild_ehbotturret = energyCost_ehbotturret * 0.10
+
+local energyCost_eartytanksauration = 300
+local timeToBuild_eartytanksauration = energyCost_eartytanksauration * 0.10
+
+local energyCost_karganneth = 1200
+local timeToBuild_karganneth = energyCost_karganneth * 0.10
 
 local morphDefs = {
 	ecommander = {
@@ -749,9 +757,9 @@ Overseer]],
 	ehbotengineer = 	{
 		{
 			into = 'ehbotengineer_turret',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -759,9 +767,9 @@ Overseer]],
 	ehbotpeewee = 	{
 		{
 			into = 'ehbotpeewee_turret',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -769,9 +777,9 @@ Overseer]],
 	ehbotthud = 	{
 		{
 			into = 'ehbotthud_turret',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -779,9 +787,9 @@ Overseer]],
 	ehbotsniper = 	{
 		{
 			into = 'ehbotsniper_turret',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -789,9 +797,9 @@ Overseer]],
 	ehbotrocko = 	{
 		{
 			into = 'ehbotrocko_turret',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -799,23 +807,84 @@ Overseer]],
 	ehbotkarganneth = 	{
 		{
 			into = 'ehbotkarganneth_turret',
-			time = 40,
+			time = timeToBuild_karganneth,
 			cmdname = [[Deploy]],
-			energy = 400,
+			energy = energyCost_karganneth,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 2x health.',
 		},
 	},	
-
+-- And back again
+	ehbotengineer_turret = 	{
+		{
+			into = 'ehbotengineer',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotpeewee_turret = 	{
+		{
+			into = 'ehbotpeewee',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotthud_turret = 	{
+		{
+			into = 'ehbotthud',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotsniper_turret = 	{
+		{
+			into = 'ehbotsniper',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotrocko_turret = 	{
+		{
+			into = 'ehbotrocko',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotkarganneth_turret = 	{
+		{
+			into = 'ehbotkarganneth',
+			time = timeToBuild_karganneth,
+			cmdname = [[Retract]],
+			energy = energyCost_karganneth,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	
 ----------------------------------------------------------
 ----------------------------------------------------------
 	
 	ehbotpeewee_up1 = 	{
 		{
 			into = 'ehbotpeewee_turret_up1',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -823,9 +892,9 @@ Overseer]],
 	ehbotthud_up1 = 	{
 		{
 			into = 'ehbotthud_turret_up1',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -833,9 +902,9 @@ Overseer]],
 	ehbotsniper_up1 = 	{
 		{
 			into = 'ehbotsniper_turret_up1',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -843,9 +912,9 @@ Overseer]],
 	ehbotrocko_up1 = 	{
 		{
 			into = 'ehbotrocko_turret_up1',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -853,11 +922,62 @@ Overseer]],
 	ehbotkarganneth_up1 = 	{
 		{
 			into = 'ehbotkarganneth_turret_up1',
-			time = 40,
+			time = timeToBuild_karganneth,
 			cmdname = [[Deploy]],
-			energy = 400,
+			energy = energyCost_karganneth,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 2x health.',
+		},
+	},	
+-- And back again
+	ehbotpeewee_turret_up1 = 	{
+		{
+			into = 'ehbotpeewee_up1',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotthud_turret_up1 = 	{
+		{
+			into = 'ehbotthud_up1',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotsniper_turret_up1 = 	{
+		{
+			into = 'ehbotsniper_up1',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotrocko_turret_up1 = 	{
+		{
+			into = 'ehbotrocko_up1',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotkarganneth_turret_up1 = 	{
+		{
+			into = 'ehbotkarganneth_up1',
+			time = timeToBuild_karganneth,
+			cmdname = [[Retract]],
+			energy = energyCost_karganneth,
+			metal = 0,
+			text = 'Retract to mobile state.',
 		},
 	},	
 
@@ -867,9 +987,9 @@ Overseer]],
 	ehbotpeewee_up2 = 	{
 		{
 			into = 'ehbotpeewee_turret_up2',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -877,9 +997,9 @@ Overseer]],
 	ehbotthud_up2 = 	{
 		{
 			into = 'ehbotthud_turret_up2',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -887,9 +1007,9 @@ Overseer]],
 	ehbotsniper_up2 = 	{
 		{
 			into = 'ehbotsniper_turret_up2',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -897,9 +1017,9 @@ Overseer]],
 	ehbotrocko_up2 = 	{
 		{
 			into = 'ehbotrocko_turret_up2',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -907,11 +1027,62 @@ Overseer]],
 	ehbotkarganneth_up2 = 	{
 		{
 			into = 'ehbotkarganneth_turret_up2',
-			time = 40,
+			time = timeToBuild_karganneth,
 			cmdname = [[Deploy]],
-			energy = 400,
+			energy = energyCost_karganneth,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 2x health.',
+		},
+	},	
+-- And back again
+	ehbotpeewee_turret_up2 = 	{
+		{
+			into = 'ehbotpeewee_up2',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotthud_turret_up2 = 	{
+		{
+			into = 'ehbotthud_up2',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotsniper_turret_up2 = 	{
+		{
+			into = 'ehbotsniper_up2',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotrocko_turret_up2 = 	{
+		{
+			into = 'ehbotrocko_up2',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
+			metal = 0,
+			text = 'Retract to mobile state.',
+		},
+	},	
+	ehbotkarganneth_turret_up2 = 	{
+		{
+			into = 'ehbotkarganneth_up2',
+			time = timeToBuild_karganneth,
+			cmdname = [[Retract]],
+			energy = energyCost_karganneth,
+			metal = 0,
+			text = 'Retract to mobile state.',
 		},
 	},	
 
@@ -921,9 +1092,9 @@ Overseer]],
 	ehbotpeewee_up3 = 	{
 		{
 			into = 'ehbotpeewee_turret_up3',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -931,9 +1102,9 @@ Overseer]],
 	ehbotthud_up3 = 	{
 		{
 			into = 'ehbotthud_turret_up3',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -941,9 +1112,9 @@ Overseer]],
 	ehbotsniper_up3 = 	{
 		{
 			into = 'ehbotsniper_turret_up3',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -951,9 +1122,9 @@ Overseer]],
 	ehbotrocko_up3 = 	{
 		{
 			into = 'ehbotrocko_turret_up3',
-			time = 12.5,
+			time = timeToBuild_ehbotturret,
 			cmdname = [[Deploy]],
-			energy = 50,
+			energy = energyCost_ehbotturret,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 4x health.',
 		},
@@ -961,201 +1132,62 @@ Overseer]],
 	ehbotkarganneth_up3 = 	{
 		{
 			into = 'ehbotkarganneth_turret_up3',
-			time = 40,
+			time = timeToBuild_karganneth,
 			cmdname = [[Deploy]],
-			energy = 400,
+			energy = energyCost_karganneth,
 			metal = 0,
 			text = 'Evolve into a stationary turret that gains 2x health.',
 		},
 	},	
-	
-
-----------------------------------------------------------
-----------------------------------------------------------
-	
-	ehbotpeewee_turret = 	{
+-- And back again
+	ehbotpeewee_turret_up3 = 	{
 		{
-			into = 'ehbotpeewee_turret_up1',
-			--require = 'etech1',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
+			into = 'ehbotpeewee_up3',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
 			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech1]],
+			text = 'Retract to mobile state.',
 		},
 	},	
-	ehbotthud_turret = 	{
+	ehbotthud_turret_up3 = 	{
 		{
-			into = 'ehbotthud_turret_up1',
-			--require = 'etech1',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
+			into = 'ehbotthud_up3',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
 			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech1]],
+			text = 'Retract to mobile state.',
 		},
 	},	
-	ehbotsniper_turret = 	{
+	ehbotsniper_turret_up3 = 	{
 		{
-			into = 'ehbotsniper_turret_up1',
-			--require = 'etech1',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
+			into = 'ehbotsniper_up3',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
 			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech1]],
+			text = 'Retract to mobile state.',
 		},
 	},	
-	ehbotrocko_turret = 	{
+	ehbotrocko_turret_up3 = 	{
 		{
-			into = 'ehbotrocko_turret_up1',
-			--require = 'etech1',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
+			into = 'ehbotrocko_up3',
+			time = timeToBuild_ehbotturret,
+			cmdname = [[Retract]],
+			energy = energyCost_ehbotturret,
 			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech1]],
+			text = 'Retract to mobile state.',
 		},
 	},
-	ehbotkarganneth_turret = 	{
+	ehbotkarganneth_turret_up3 = 	{
 		{
-			into = 'ehbotkarganneth_turret_up1',
-			time = 80,
-			cmdname = [[Evolve]],
-			energy = 800,
+			into = 'ehbotkarganneth_up3',
+			time = timeToBuild_karganneth,
+			cmdname = [[Retract]],
+			energy = energyCost_karganneth,
 			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[endbringer]],
-		},
-	},	
-
-----------------------------------------------------------
-----------------------------------------------------------
-	
-	ehbotpeewee_turret_up1 = 	{
-		{
-			into = 'ehbotpeewee_turret_up2',
-			--require = 'etech2',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech2]],
-		},
-	},	
-	ehbotthud_turret_up1 = 	{
-		{
-			into = 'ehbotthud_turret_up2',
-			--require = 'etech2',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech2]],
-		},
-	},	
-	ehbotsniper_turret_up1 = 	{
-		{
-			into = 'ehbotsniper_turret_up2',
-			--require = 'etech2',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech2]],
-		},
-	},	
-	ehbotrocko_turret_up1 = 	{
-		{
-			into = 'ehbotrocko_turret_up2',
-			--require = 'etech2',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech2]],
-		},
-	},
-	ehbotkarganneth_turret_up1 = 	{
-		{
-			into = 'ehbotkarganneth_turret_up2',
-			time = 80,
-			cmdname = [[Evolve]],
-			energy = 800,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[endbringer]],
-		},
-	},	
-
-----------------------------------------------------------
-----------------------------------------------------------
-	
-	ehbotpeewee_turret_up2 = 	{
-		{
-			into = 'ehbotpeewee_turret_up3',
-			--require = 'etech3',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech3]],
-		},
-	},	
-	ehbotthud_turret_up2 = 	{
-		{
-			into = 'ehbotthud_turret_up3',
-			--require = 'etech3',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech3]],
-		},
-	},	
-	ehbotsniper_turret_up2 = 	{
-		{
-			into = 'ehbotsniper_turret_up3',
-			--require = 'etech3',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech3]],
-		},
-	},	
-	ehbotrocko_turret_up2 = 	{
-		{
-			into = 'ehbotrocko_turret_up3',
-			--require = 'etech3',
-			time = 12.5,
-			cmdname = [[Evolve]],
-			energy = 50,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech3]],
-		},
-	},
-	ehbotkarganneth_turret_up2 = 	{
-		{
-			into = 'ehbotkarganneth_turret_up3',
-			time = 80,
-			cmdname = [[Evolve]],
-			energy = 800,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[endbringer]],
+			text = 'Retract to mobile state.',
 		},
 	},	
 	
@@ -1224,6 +1256,58 @@ Evolution]],
 			require = [[tech3]],
 		},
 	},	
+	
+----------------------------------------------------------
+----------------------------------------------------------
+
+	eartytank = 	{
+		{
+			into = 'eartytank_saturation',
+			--require = 'etech1',
+			time = timeToBuild_eartytanksauration,
+			cmdname = [[Evolve]],
+			energy = energyCost_eartytanksauration,
+			metal = 0,
+			text = [[HellFury Long-Range Saturation Artillery]],
+			require = [[tech2]],
+		},
+	},
+	eartytank_up1 = 	{
+		{
+			into = 'eartytank_saturation_up1',
+			--require = 'etech1',
+			time = timeToBuild_eartytanksauration,
+			cmdname = [[Evolve]],
+			energy = energyCost_eartytanksauration,
+			metal = 0,
+			text = [[HellFury Long-Range Saturation Artillery]],
+			require = [[tech2]],
+		},
+	},
+	eartytank_up2 = 	{
+		{
+			into = 'eartytank_saturation_up2',
+			--require = 'etech1',
+			time = timeToBuild_eartytanksauration,
+			cmdname = [[Evolve]],
+			energy = energyCost_eartytanksauration,
+			metal = 0,
+			text = [[HellFury Long-Range Saturation Artillery]],
+			require = [[tech2]],
+		},
+	},
+	eartytank_up3 = 	{
+		{
+			into = 'eartytank_saturation_up3',
+			--require = 'etech1',
+			time = timeToBuild_eartytanksauration,
+			cmdname = [[Evolve]],
+			energy = energyCost_eartytanksauration,
+			metal = 0,
+			text = [[HellFury Long-Range Saturation Artillery]],
+			require = [[tech2]],
+		},
+	},
 	
 }
 

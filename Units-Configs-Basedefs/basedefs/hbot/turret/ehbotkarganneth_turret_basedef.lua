@@ -13,7 +13,7 @@ unitDef                    = {
 	buildTime                    = 5,
 	buildpic					 = [[ehbotkarganneth_turret.png]],
 	canAttack                    = true,
-	
+	cantBeTransported			 = true,
 	canGuard                     = true,
 	canHover                     = true,
 	canMove                      = true,

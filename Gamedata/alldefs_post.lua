@@ -390,15 +390,16 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			local weaponAreaOfEffect = wDef.areaofeffect or 0
 			local weaponRange = wDef.range or 0
 			local weaponProjectiles = wDef.projectiles or 1
+			local weaponBurst = wDef.burst or 1
 			if wDef.customparams and wDef.customparams.nocosttofire == true then
 				wDef.energypershot = 0
 			elseif wDef.customparams and wDef.customparams.oldcosttofireforumula == true then
 				local energycosttofire = math.floor(weaponDefaultDamage * 0.1 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1)*10 + 0.5)*0.1
-				wDef.energypershot = energycosttofire	
+				wDef.energypershot = energycosttofire * weaponBurst
 			else
 			--energycosttofire = weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001)  + 1) * weaponRange^0.5 * 0.1
 				local energycosttofire = math.floor(weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001)  + 1) * weaponRange^0.25 * 0.5*10 + 0.5)*0.1
-				wDef.energypershot = energycosttofire	
+				wDef.energypershot = energycosttofire * weaponBurst
 			end
 			
 			--Set shield energy cost to recharge
