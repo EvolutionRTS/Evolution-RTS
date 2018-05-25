@@ -40,9 +40,9 @@ local damageClasses = {
 			BUILDING 	= 0.5,
 		},
 		ehbotrocko	= {
-			ARMORED		= 0.25,
-			LIGHT		= 0.25,
-			BUILDING 	= 1,
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
 		},
 		ehbotkarganneth	= {
 			ARMORED		= 1,

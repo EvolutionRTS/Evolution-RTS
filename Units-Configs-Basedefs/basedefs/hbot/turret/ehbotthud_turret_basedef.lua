@@ -84,8 +84,8 @@ unitDef                    = {
 			def                  = "plasmacannon",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
-			onlyTargetCategory    = "LIGHT ARMORED BIO BUILDING",
-			badTargetCategory    = "VTOL ARMORED WALL BUILDING",
+			onlyTargetCategory    = "LIGHT ARMORED BIO",
+			badTargetCategory    = "VTOL ARMORED WALL",
 		},
 	},
 	customParams                 = {

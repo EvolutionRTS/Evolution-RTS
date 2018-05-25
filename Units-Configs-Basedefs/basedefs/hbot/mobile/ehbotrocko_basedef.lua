@@ -19,7 +19,7 @@ unitDef                    = {
 	canPatrol                    = true,
 	canstop                      = "1",
 	category                     = "LIGHT NOTAIR RAID",
-	description                  = [[Long-Range Structure Decimation Artillery • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Long-Range Light Main Battle Tank • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -87,8 +87,7 @@ unitDef                    = {
 			def                  = "rockets",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
-			onlyTargetCategory    = "BUILDING LIGHT ARMORED BIO",
-			badTargetCategory    = "LIGHT ARMORED BIO",
+			badTargetCategory	  = "BUILDING",
 		},
 	},
 	customParams                 = {
