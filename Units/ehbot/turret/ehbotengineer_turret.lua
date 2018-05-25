@@ -9,7 +9,7 @@ local buildCostMetal			 = 90
 local maxDamage					 = 400 * 4
 local buildDistance				 = 1500
 
-local armortype					 = [[building]]
+local armortype					 = [[light]]
 --local supply					 = [[2]]
 
 local unitDef                    = {

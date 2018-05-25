@@ -13,7 +13,7 @@ objectName = [[ehbotthud_turret.s3o]]
 script = [[ehbotthud_turret_lus.lua]]
 
 tech = [[tech1]]
-armortype = [[building]]
+armortype = [[light]]
 supply = [[7]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/hbot/turret/ehbotthud_turret_basedef.lua")
