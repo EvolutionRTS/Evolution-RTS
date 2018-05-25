@@ -172,7 +172,7 @@ local Sounds = {
 			maxconcurrent = 1,
 		},
 		
-		turret = {
+		healing = {
 			--- always play on the front speaker(s)
 			file = "sounds/miscfx/heal.wav",
 			in3d = "true",
