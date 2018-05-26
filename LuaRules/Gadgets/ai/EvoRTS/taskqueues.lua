@@ -552,10 +552,6 @@ function RandomUnit()
 				end	
 
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
-				
-			
-				local r2 = math.random(0,50)
-				if r2 ~= 0 then	
 					local r = math.random(0,8)
 					if r == 0 then
 						return "eheavytank3_up2"
@@ -575,28 +571,6 @@ function RandomUnit()
 						return "emissiletank_up2"
 					elseif r == 8 then
 						return "eamphibmedtank_up2"
-					end
-				elseif r2 == 0 then
-						if GG.TechCheck("endbringer", ai.id) == true then
-						local r = math.random(0,4)
-							if r == 0 then
-								return "eamphibleveler_up2"
-							elseif r == 1 then
-								return "eallterranarchid_up2"
-							elseif r == 2 then
-								return "elacerator_up2"
-							elseif r == 3 then
-								return "ekrow_up2"
-							elseif r == 4 then
-								return "ehbotkarganneth_up2"
-							end
-						else
-							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
-								return "elifterai"
-							else
-								return "eorb_up3"
-							end
-						end
 					end
 			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
 				
