@@ -62,8 +62,8 @@ function AttackerBehaviour:AttackCell(cell)
 			p.z = startPosz
 		else
 			p = api.Position()
-			p.x = ((startBoxMinX + startBoxMaxX)*0.5) + math.random(0,1000) - math.random(0,1000)
-			p.z = ((startBoxMinZ + startBoxMaxZ)*0.5) + math.random(0,1000) - math.random(0,1000)
+			p.x = math.random(startBoxMinX, startBoxMaxX)
+			p.z = math.random(startBoxMinZ, startBoxMaxZ)
 		end
 		
 		p.y = startPosy

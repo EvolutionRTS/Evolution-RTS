@@ -42,7 +42,7 @@ end
 local WaitRNG = math.random(0,500)
 ---------------------------------------------------------------- LIFTER QUEUES
  
- --function MoveToStartLocation()
+ --function MoveToStartLocation( taskqueuebehaviour )
 	
 	--local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(ai.allyId)
 	--local px = math.random(startxmin, startxmax)
@@ -65,16 +65,16 @@ local WaitRNG = math.random(0,500)
 	--mz = sz - pz
 	--my = 0
 
-	--local x = mx
-	--local y = my
-	--local z = mz
+	--local x = px
+	--local z = pz
+	--local y = py
 	
 	--Spring.Echo([[AI startlocationx ]] .. mx .. [[ ]])
 	--Spring.Echo([[AI startlocationz ]] .. mz .. [[ ]])
 	
 	--Spring.Echo([[AI ID ]] .. ai.id .. [[ ]])
 	--Spring.Echo([[AI allyID ]] .. ai.allyId .. [[ ]])
-
+	--return action = "move", position = {x = px, y = py, z = pz},
 --end
 
  function BuildMex()
@@ -672,7 +672,6 @@ local assistqueue = {
 }
 
 local overseerlistfirst = {
-	--{ action = "moverelative", position = {x = mx, y = my, z = mz} },
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
