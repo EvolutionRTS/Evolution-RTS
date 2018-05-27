@@ -98,7 +98,7 @@ local WaitRNG = math.random(0,500)
 		if aimexamount * 15 <= Spring.GetGameSeconds()  then
 			return "emetalextractor"
 		else
-			return
+			return "elrpc"
 		end
 	end
 end
