@@ -38,6 +38,8 @@ function AttackerBehaviour:AttackCell(cell)
 	local currenthealth = unit:GetHealth()
 	local maxhealth = unit:GetMaxHealth()
 	local startPosx, startPosy, startPosz = Spring.GetTeamStartPosition(self.ai.id)
+	local startBoxMinX, startBoxMinZ, startBoxMaxX, startBoxMaxZ = Spring.GetAllyTeamStartBox(self.ai.allyId)
+	--attack
 	if currenthealth >= maxhealth then
 		p = api.Position()
 		p.x = cell.posx
@@ -51,10 +53,11 @@ function AttackerBehaviour:AttackCell(cell)
 		else
 			self.unit:ElectBehaviour()
 		end
+	--retreat
 	else
 		p = api.Position()
-		p.x = startPosx
-		p.z = startPosz
+		p.x = ((startBoxMinX + startBoxMaxX)*0.5) + math.random(0,1000) - math.random(0,1000)
+		p.z = ((startBoxMinZ + startBoxMaxZ)*0.5) + math.random(0,1000) - math.random(0,1000)
 		p.y = startPosy
 		self.target = p
 		self.attacking = false
