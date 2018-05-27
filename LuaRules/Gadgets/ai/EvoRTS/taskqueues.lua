@@ -668,7 +668,7 @@ local idlelist = {
 }
 
 local assistqueue = {
-	{ action = "patrolrelative", position = {x = 10, y = 0, z = 10} },
+	{ action = "patrolrelative", position = {x = 100, y = 0, z = 100} },
 }
 
 local overseerlistfirst = {
