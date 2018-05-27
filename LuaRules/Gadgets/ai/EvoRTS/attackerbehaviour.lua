@@ -53,8 +53,8 @@ function AttackerBehaviour:AttackCell(cell)
 		end
 	else
 		p = api.Position()
-		p.x = startPosx + math.random(0,1000) - math.random(0,1000)
-		p.z = startPosz + math.random(0,1000) - math.random(0,1000)
+		p.x = startPosx
+		p.z = startPosz
 		p.y = startPosy
 		self.target = p
 		self.attacking = false
