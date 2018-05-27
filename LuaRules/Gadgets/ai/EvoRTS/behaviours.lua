@@ -33,19 +33,19 @@ behaviours = {
 		MorphBehaviour,
 	},
 	eorb = {
-		AttackerBehaviour,
+		TaskQueueBehaviour,
 		MorphBehaviour,
 	},
 	eorb_up1 = {
-		AttackerBehaviour,
+		TaskQueueBehaviour,
 		MorphBehaviour,
 	},
 	eorb_up2 = {
-		AttackerBehaviour,
+		TaskQueueBehaviour,
 		MorphBehaviour,
 	},
 	eorb_up3 = {
-		AttackerBehaviour,
+		TaskQueueBehaviour,
 	},
 	ebasefactory = {
 		TaskQueueBehaviour,

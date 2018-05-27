@@ -655,7 +655,6 @@ function RandomUnit()
 				end
 		end
 	end
-
 ---Factories:
 
 
@@ -666,6 +665,10 @@ function RandomUnit()
 
 local idlelist = {
 	{ action = "wait", frames = 3000},
+}
+
+local assistqueue = {
+	{ action = "patrolrelative", position = {x = 10, y = 0, z = 10} },
 }
 
 local overseerlistfirst = {
@@ -734,6 +737,9 @@ taskqueues = {
 	ecommanderbattleai = overseerqueue,
     elifterai = lifterlist,
 	eunitfactoryai = unitsqueue,
-	
+	eorb = assistqueue,
+	eorb_up1 = assistqueue,
+	eorb_up2 = assistqueue,
+	eorb_up3 = assistqueue,
 }
 ----------------------------------------------------------
