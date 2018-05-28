@@ -14,10 +14,39 @@ AttackerBehaviour = class(Behaviour)
 function AttackerBehaviour:Init()
 	--self.ai.game:SendToConsole("attacker!")
 	--self.game:AddMarker({ x = startPosx, y = startPosy, z = startPosz }, "my start position")
+	CMD.MOVE_STATE = 50
+end
+
+function AttackerBehaviour:Update()
+	local unitID = self.unit:Internal().id
+	-- Spring.Echo(unitID)
+	local myRange = Spring.GetUnitMaxRange(unitID)
+	local closestUnit = Spring.GetUnitNearestEnemy(unitID, myRange)
+	local allyTeamID = self.ai.allyId
+	if Spring.GetGameFrame() % 15 == 4 then
+		if closestUnit and (Spring.IsUnitInLos(closestUnit, allyTeamID)) then
+			local enemyRange = Spring.GetUnitMaxRange(closestUnit)
+			if myRange > enemyRange then
+				local ex,ey,ez = Spring.GetUnitPosition(closestUnit)
+				local ux,uy,uz = Spring.GetUnitPosition(unitID)
+				local pointDis = Spring.GetUnitSeparation(unitID,closestUnit)
+				local dis = 120
+				local f = dis/pointDis
+				if (pointDis+dis > Spring.GetUnitMaxRange(unitID)) then
+				  f = (Spring.GetUnitMaxRange(unitID)-pointDis)/pointDis
+				end
+				local cx = ux+(ux-ex)*f
+				local cy = uy
+				local cz = uz+(uz-ez)*f
+				self.unit:Internal():ExecuteCustomCommand(CMD.MOVE, {cx, cy, cz})
+			end
+		end
+	end
 end
 
 function AttackerBehaviour:OwnerBuilt()
 	self.ai.attackhandler:AddRecruit(self)
+	self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 2 }, {})
 	self.attacking = true
 	self.active = true
 end
@@ -41,7 +70,7 @@ function AttackerBehaviour:AttackCell(cell)
 	local startBoxMinX, startBoxMinZ, startBoxMaxX, startBoxMaxZ = Spring.GetAllyTeamStartBox(self.ai.allyId)
 	local ec, es = Spring.GetTeamResources(ai.id, "energy")
 	--attack
-	if currenthealth >= maxhealth and ec >= es - es*0.60 then
+	if (currenthealth >= maxhealth or currenthealth > 3000) and ec >= es - es*0.80 then
 		p = api.Position()
 		p.x = cell.posx
 		p.z = cell.posz
