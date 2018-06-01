@@ -197,7 +197,7 @@ local teams = GetTeamList()
 local highestLevel = 0
 for _, teamID in ipairs(teams) do
   local teamLuaAI = GetTeamLuaAI(teamID)
-  if (teamLuaAI and string.find(teamLuaAI, "Chicken:"))) then
+  if (teamLuaAI and string.find(teamLuaAI, "Chicken:")) then
     luaAI = teamLuaAI
     if (modes[teamLuaAI] > highestLevel) then -- get chicken ai with highest level
       highestLevel = modes[teamLuaAI]
