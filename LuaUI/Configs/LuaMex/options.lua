@@ -1,6 +1,3 @@
-local metalMultiplier = tonumber(Spring.GetModOptions().mexincomemultiplier) or 100  -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
-local metalMultiplier = metalMultiplier * 0.01
-
 options = {
 
 	drawincome = {
@@ -45,7 +42,7 @@ options = {
 	multiplier = {
 		name = "Multiplier used for base mex value",
 		type = "number",
-		value = metalMultiplier, -- Most games will use 1 for this value as most games base mex income around a mex giving 2.0. Please note that changing this value only changes the number visually displayed underneath the mex spot. The actual multiplier is determined in the mex unitdef customparam "metal_extractor = <multiplier>,"
+		value = 1, -- Most games will use 1 for this value as most games base mex income around a mex giving 2.0. Please note that changing this value only changes the number visually displayed underneath the mex spot. The actual multiplier is determined in the mex unitdef customparam "metal_extractor = <multiplier>,"
 		min = 0,
 		max = 100,
 		OnChange = function() updateMexDrawList() end

@@ -39,7 +39,8 @@ end
 function widget:DrawGenesis()
 	if files == nil then 
 		files = {}
-		--AddDir("LuaUI/Images")
+		AddDir("UnitTextures")
+		AddDir("unitpics")
 		AddDir("icons")
 	else 
 		if (UnitDefs[i]) then

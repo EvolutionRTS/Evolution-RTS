@@ -158,18 +158,6 @@ local options= {
 		}
 	},
 	{
-		key    = 'mexincomemultiplier',
-		name   = 'Metal Extractors Income Multiplier',
-		desc   = 'Resource Node values are multiplied by this percentage.',
-		type   = 'number',
-		section= 'resourcing',
-		def    = 100, -- Make sure to change this default number in the luamex config options, mex unitdef, and in modoptions
-		min    = 0,
-		max    = 200,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
-	},
-	{
 		key    = 'mincome',
 		name   = 'Automatic Metal Income',
 		desc   = 'Determines the amount of metal income you start with per second. It increases every <Basic Metal Income Increase Interval> (2.5 minutes, is the default) by this amount until it hits <Maximum Basic Income> income.',
