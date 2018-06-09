@@ -146,6 +146,18 @@ local options= {
 		}
 	},
 	{
+		key    = 'mexspotspersidemultiplier',
+		name   = 'Metal spot per side percentage modifier',
+		desc   = 'This is a percentage modifier for the amount of metal spots on a map. A setting of 100 is literally 100%, so increasing to 200% will double the amount of metal spots that are placed on the map. Remember that the amount of metal spots is already scaled according to how many players are in the game.',
+		type   = 'number',
+		section= 'resourcing',
+		def    = 100,
+		min    = 1,
+		max    = 200,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
 		key    = 'metalextractorcommunism',
 		name   = 'Metal Extractor Communism',
 		desc   = 'If enabled, then all metal income from Metal Extractors is split between allies. This means that it does not matter which ally owns the metal extractor, the entire team will benefit.',

@@ -24,6 +24,7 @@ Spring.Echo("[Default Mex Layout] Number of teamIDs in this match: " .. teamIDCo
 
 local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
 local maxMexElevationDiff = tonumber(Spring.GetModOptions().maximummexelevationdifference) or 50
+local mexSpotsPerSideMultiplier = tonumber(Spring.GetModOptions().mexspotspersidemultiplier) or 100
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
 local dynamicMexOutput = Spring.GetModOptions().dynamicmexoutput or "disabled"
 
@@ -35,6 +36,10 @@ end
 
 if maxMexElevationDiff == nil then -- This is just an oshitifukedup protection
 	maxMexElevationDiff = 50
+end
+
+if mexSpotsPerSideMultiplier == nil then -- This is just an oshitifukedup protection
+	mexSpotsPerSideMultiplier = 100
 end
 
 if mexRandomLayout == "" or mexRandomLayout == nil then -- This is just an oshitifukedup protection
@@ -231,11 +236,11 @@ if mexRandomLayout == "standard" then
 		mexSpotsPerSide = 35
 	end
 	randomMirrored = true
-	padding = 50
+	padding = 100
 	pointRadius = 100 -- TODO: change this into how big a metal circle is
 	extraSeparationBetweenPoints = 50
 	howManyTriesBeforeGiveUp = 100
-	numPointsPerSide = mexSpotsPerSide
+	numPointsPerSide = mexSpotsPerSide * (mexSpotsPerSideMultiplier * 0.01)
 	includeCentre = false
 	method = 1
 	allowWater = allowMexesInWater

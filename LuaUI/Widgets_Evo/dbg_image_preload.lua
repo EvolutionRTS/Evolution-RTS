@@ -39,7 +39,7 @@ end
 function widget:DrawGenesis()
 	if files == nil then 
 		files = {}
-		AddDir("UnitTextures")
+		--AddDir("UnitTextures")
 		AddDir("unitpics")
 		AddDir("icons")
 	else 
