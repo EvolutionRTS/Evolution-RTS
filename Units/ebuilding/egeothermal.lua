@@ -6,9 +6,10 @@ local unitName                    = "egeothermal"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[20]]
+local techrequired				 = [[tech1]]
+local energyproduced			 = [[15]]
 
-local buildCostMetal 			  = 100
+local buildCostMetal 			  = 87.5
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -25,8 +26,8 @@ local unitDef                     = {
 	energyMake                    = energyproduced,
 	energyStorage                 = 0,
 	explodeAs                     = "largeBuildingExplosionGenericBlueEMP",
-	footprintX                    = 4,
-	footprintZ                    = 4,
+	footprintX                    = 6,
+	footprintZ                    = 6,
 	iconType                      = "generator",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
@@ -45,7 +46,7 @@ local unitDef                     = {
 	smoothAnim                    = true,
 	unitname                      = "egeothermal",
 	workerTime                    = 0,
-	yardMap                       = "oooo oGGo oGGo oooo",
+	yardMap                       = "oooooo oooooo ooGGoo ooGGoo oooooo oooooo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {
@@ -72,6 +73,7 @@ local unitDef                     = {
 		iseco                     = 1,
 		needed_cover              = 2,
 		death_sounds              = "generic",
+		RequireTech				 = techrequired,
 --		ProvideTech               = techprovided,
 --		ProvideTechRange          = powerradius,
 		armortype                 = armortype,
@@ -93,8 +95,8 @@ local unitDef                     = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 6,
-	BuildingGroundDecalSizeY      = 6,
+	BuildingGroundDecalSizeX      = 8,
+	BuildingGroundDecalSizeY      = 8,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 

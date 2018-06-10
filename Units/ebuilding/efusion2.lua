@@ -9,7 +9,7 @@ local armortype					 = [[building]]
 local techrequired				 = [[tech2]]
 local energyproduced			 = [[20]]
 
-local buildCostMetal 			  = 175
+local buildCostMetal 			  = 140
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
