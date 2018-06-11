@@ -6,7 +6,7 @@ local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
 local size = math.max(mapx, mapz)
 
 --
-Spring.Echo("[Default Mex Layout] Map size is: " .. mapx + mapz)
+Spring.Echo("[Default Mex Layout] Map size is: " .. size)
 local players = Spring.GetPlayerList()
 local count = 0
 for i = 1, #players do
@@ -235,7 +235,8 @@ if mexRandomLayout == "standard" then
 	elseif teamIDCount > 6 then
 		mexSpotsPerSide = 35
 	end
-	if size <= 6144 then -- An exception for 10x10 and smaller maps
+	local mapSize = size * 2
+	if mapSize <= 6144 then -- An exception for 10x10 and smaller maps
 		mexSpotsPerSide = mexSpotsPerSide * 0.5
 	end
 	randomMirrored = true
