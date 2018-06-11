@@ -19,13 +19,6 @@ math.random(); math.random(); math.random()
 local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
 local size = math.max(mapx, mapz)
 
---This rulesparam is set elsewhere
-
-teamIDCount = Spring.GetGameRulesParam("peopleCount")
-
-Spring.Echo("[LuaGeo] Number of teamIDs in this match: " .. teamIDCount)
---
-
 local numPointsPerSide = 8
 local rotation = 3
 
@@ -56,9 +49,11 @@ end
 local positions = makePositionsForGeoSpots(mapx, mapz, numPointsPerSide, rotation)
 
 if ( positions ) then
-	Spring.Echo("I found positions")
+	Spring.Echo("[LuaGeo] I found positions for geovent feature placement!")
 	for i,numPointsPerSide in pairs(positions) do
-		Spring.Echo("I'm trying to create a feature")
+		Spring.Echo("[LuaGeo] I'm trying to create a geovent feature at:")
+		Spring.Echo("[LuaGeo] x = " .. positions[1].x)
+		Spring.Echo("[LuaGeo] z = " .. positions[2].z)
 		Spring.CreateFeature('geovent', positions[1].x, Spring.GetGroundHeight(positions[1].x,positions[2].z)+5, positions[2].z, 1)
 	end
 end
