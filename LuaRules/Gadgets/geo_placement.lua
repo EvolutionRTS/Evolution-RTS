@@ -49,11 +49,12 @@ end
 local positions = makePositionsForGeoSpots(mapx, mapz, numPointsPerSide, rotation)
 
 if ( positions ) then
+	local gaiaID = Spring.GetGaiaTeamID()
 	Spring.Echo("[LuaGeo] I found positions for geovent feature placement!")
 	for i,numPointsPerSide in pairs(positions) do
 		Spring.Echo("[LuaGeo] I'm trying to create a geovent feature at:")
 		Spring.Echo("[LuaGeo] x = " .. positions[1].x)
 		Spring.Echo("[LuaGeo] z = " .. positions[2].z)
-		Spring.CreateFeature('geovent', positions[1].x, Spring.GetGroundHeight(positions[1].x,positions[2].z)+5, positions[2].z, 1)
+		Spring.CreateFeature('geovent', positions[1].x, Spring.GetGroundHeight(positions[1].x,positions[2].z)+5, positions[2].z, 1, gaiaID)
 	end
 end
