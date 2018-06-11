@@ -17,21 +17,9 @@ end
 --math.randomseed(Game.GameID) -- This only works in 104+
 math.random(); math.random(); math.random()
 local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
--- Params
-
 local size = math.max(mapx, mapz)
 
---
-Spring.Echo("[LuaGeo] Map size is: " .. mapx + mapz)
-local players = Spring.GetPlayerList()
-local count = 0
-for i = 1, #players do
-    local playerID = players[i]
-    if not select(3, Spring.GetPlayerInfo(playerID)) then
-        count = count + 1
-    end
-end
---Spring.SetGameRulesParam("peopleCount", count)
+--This rulesparam is set elsewhere
 
 teamIDCount = Spring.GetGameRulesParam("peopleCount")
 
@@ -71,6 +59,6 @@ if ( positions ) then
 	Spring.Echo("I found positions")
 	for i,numPointsPerSide in pairs(positions) do
 		Spring.Echo("I'm trying to create a feature")
-		Spring.CreateFeature('geovent', positions[0], Spring.GetGroundHeight(positions[0],positions[1])+5, positions[1], 0)
+		Spring.CreateFeature('geovent', positions[1].x, Spring.GetGroundHeight(positions[1].x,positions[2].z)+5, positions[2].z, 1)
 	end
 end
