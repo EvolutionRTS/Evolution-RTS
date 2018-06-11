@@ -606,10 +606,24 @@ function SetMaxPlayerNameWidth()
 	-- determines the maximal player name width (in order to set the width of the widget)
 	local t = Spring_GetPlayerList()
 	local maxWidth = 14*gl_GetTextWidth(absentName) + 8 -- 8 is minimal width
-	local name = ""
+	local name = ''
+	local spec = false
+	local version = ''
+	local teamID = 0
 	local nextWidth = 0
 	for _,wplayer in ipairs(t) do
-		name,_,spec = Spring_GetPlayerInfo(wplayer)
+		name,_,spec,teamID = Spring_GetPlayerInfo(wplayer)
+		if select(4,Spring_GetTeamInfo(teamID)) then -- is AI?
+			_,_,_,_,name, version = Spring_GetAIInfo(teamID)
+			if type(version) == "string" then
+				name = "AI:" .. name .. "-" .. version
+			else
+				name = "AI:" .. name
+			end
+			if Spring.GetGameRulesParam(teamID, 'ainame') then
+				name = Spring.GetGameRulesParam(teamID, 'ainame')
+			end
+		end
 		local charSize
 		if spec then charSize = 11 else charSize = 14 end
 		nextWidth = charSize*gl_GetTextWidth(name)+8
@@ -617,7 +631,7 @@ function SetMaxPlayerNameWidth()
 			maxWidth = nextWidth
 		end
 	end
-  return maxWidth
+	return maxWidth
 end
 
 function GetNumberOfSpecs()
@@ -1110,11 +1124,14 @@ function CreatePlayerFromTeam(teamID) -- for when we don't have a human player o
 		local version
 		
 		_,_,_,_, tname, version = Spring_GetAIInfo(teamID)
-		
+
 		if type(version) == "string" then
 			tname = "AI:" .. tname .. "-" .. version
 		else
 			tname = "AI:" .. tname
+		end
+		if Spring.GetGameRulesParam('ainame_'..teamID) then
+			tname = Spring.GetGameRulesParam('ainame_'..teamID)
 		end
 		
 		ttotake = false
@@ -1145,8 +1162,8 @@ function CreatePlayerFromTeam(teamID) -- for when we don't have a human player o
 	if aliveAllyTeams[tallyteam] ~= nil  and  (mySpecStatus or myAllyTeamID == tallyteam) then
 		energy, energyStorage,_, energyIncome = Spring_GetTeamResources(teamID, "energy") or 0
 		metal, metalStorage,_, metalIncome = Spring_GetTeamResources(teamID, "metal") or 0
-		energy = math.floor(energy)
-		metal = math.floor(metal)
+		energy = math.floor(energy or 0)
+		metal = math.floor(metal or 0)
 		if energy < 0 then energy = 0 end
 		if metal < 0 then metal = 0 end
 	end

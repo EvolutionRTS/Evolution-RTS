@@ -74,13 +74,15 @@ local CheckedForSpec = false
 --------------------------------------------------------------------------------
 
 --gets the name, color, and height of the commander
+local aiCount = 1
 local function GetCommAttributes(unitID, unitDefID)
   local team = GetUnitTeam(unitID)
   if team == nil then
     return nil
   end
   local players = GetPlayerList(team)
-  local name = (#players>0) and GetPlayerInfo(players[1]) or 'Evil Machine'
+
+  local name = (#players>0) and GetPlayerInfo(players[1]) or 'Evil Machine '..aiCount
   for _,pID in ipairs(players) do
     local pname,active,spec = GetPlayerInfo(pID)
     if active and not spec then
@@ -88,6 +90,14 @@ local function GetCommAttributes(unitID, unitDefID)
       break
     end
   end
+
+    if name == 'Evil Machine '..aiCount then
+        aiCount = aiCount + 1
+        if Spring.GetGameRulesParam('ainame_'..team) then
+            name = Spring.GetGameRulesParam('ainame_'..team)
+        end
+    end
+
   local r, g, b, a = GetTeamColor(team)
   local bgColor = {0,0,0,1}
   if (r + g*1.35 + b*0.5) < 0.75 then  -- not acurate (enough) with playerlist   but...   font:SetAutoOutlineColor(true)   doesnt seem to work
