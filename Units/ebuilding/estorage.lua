@@ -63,6 +63,7 @@ local unitDef                     = {
 		explosiongenerators       = {
 			"custom:blacksmoke",
 			"custom:fusionreactionstoragenew",
+			"custom:fusionreactionstoragenew-blue",
 			"custom:skyhatelaser",
 		},
 	},
@@ -82,6 +83,7 @@ local unitDef                     = {
 		supply_granted            = supplygranted,
 		death_sounds              = "generic",
 		armortype                 = "building", 
+		noenergycost			  = true,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",  

@@ -6,10 +6,10 @@ local unitName                    = "efusion2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local techrequired				 = [[tech2]]
-local energyproduced			 = [[20]]
+local techrequired				 = [[tech3]]
+local energyproduced			 = [[50]]
 
-local buildCostMetal 			  = 175
+local buildCostMetal 			  = 400
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -25,8 +25,8 @@ local unitDef                     = {
 	energyStorage                 = 0,
 	energyMake                    = energyproduced,
 	explodeAs                     = "hugeBuildingExplosionGenericBlueEMP",
-	footprintX                    = 8,
-	footprintZ                    = 8,
+	footprintX                    = 12,
+	footprintZ                    = 12,
 	iconType                      = "generator",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
@@ -35,7 +35,7 @@ local unitDef                     = {
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
 	name                          = "Advanced Energy Generator",
-	objectName                    = "efusion2.s3o",
+	objectName                    = "efusion2-huge.s3o",
 	onoffable 		              = false,
 	radarDistance                 = 0,
 	repairable		              = false,
@@ -44,7 +44,7 @@ local unitDef                     = {
 	sightDistance                 = 367,
 	smoothAnim                    = true,
 	unitname                      = "efusion2",
-	yardMap                       = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
+	yardMap                       = "oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo oooooooooooo",
 
 	sfxtypes                      = { 
 		pieceExplosionGenerators  = { 
@@ -54,7 +54,7 @@ local unitDef                     = {
 
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactionnuclear",
+			"custom:fusionreactionnuclear-huge",
 			"custom:skyhatelaser",
 		},
 	},
@@ -73,6 +73,7 @@ local unitDef                     = {
 		death_sounds              = "generic",
 		RequireTech				 = techrequired,
 		armortype                 = armortype,
+		noenergycost			  = true,
 --		supply_granted            = supplygranted,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
@@ -91,8 +92,8 @@ local unitDef                     = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 10,
-	BuildingGroundDecalSizeY      = 10,
+	BuildingGroundDecalSizeX      = 14,
+	BuildingGroundDecalSizeY      = 14,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 

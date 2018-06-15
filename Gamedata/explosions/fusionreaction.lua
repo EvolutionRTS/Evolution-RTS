@@ -222,6 +222,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
+	  water              = true,
+      underwater         = true,
       properties = {
         airdrag            = 0.8,
         --alwaysvisible      = true,
@@ -245,14 +247,20 @@ return {
         useairlos          = false,
       },
     },
-    underwater_electricarcs1 = {
+  },
+  
+  ["fusionreactionnuclear-huge"] = {
+    electricarcs1 = {
+      air                = true,
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      underwater         = 1,
+      ground             = true,
+	  water              = true,
+      underwater         = true,
       properties = {
         airdrag            = 0.8,
         --alwaysvisible      = true,
-        colormap           = [[1.0 1.0 1.0 0.04   0 0 0.5 0.01  0 0.5 0.8 0.01	0 0 0 0.01]],
+        colormap           = [[1.0 1.0 1.0 0.04   0.5 0 0 0.01  0.8 0.5 0 0.01	0 0 0 0.01]],
         directional        = true,
         emitrot            = 45,
         emitrotspread      = 15,
@@ -266,7 +274,7 @@ return {
         particlespeed      = 2,
         particlespeedspread = 1,
         pos                = [[0, 2, 0]],
-        sizegrowth         = 1.2,
+        sizegrowth         = 1.5,
         sizemod            = 1.0,
         texture            = [[plasmaball]],
         useairlos          = false,
@@ -593,6 +601,8 @@ return {
       class              = [[CSimpleParticleSystem]],
       count              = 1,
       ground             = true,
+	  water              = true,
+      underwater         = true,
       properties = {
         airdrag            = 1,
         --alwaysvisible      = true,
@@ -616,10 +626,16 @@ return {
         useairlos          = false,
       },
     },
-    underwater_electricarcs1 = {
+  },
+  
+  ["fusionreactionstoragenew-blue"] = {
+    electricarcs1 = {
+      air                = true,
       class              = [[CSimpleParticleSystem]],
       count              = 1,
-      underwater         = 1,
+      ground             = true,
+	  water              = true,
+      underwater         = true,
       properties = {
         airdrag            = 1,
         --alwaysvisible      = true,
