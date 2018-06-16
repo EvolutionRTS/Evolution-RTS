@@ -429,7 +429,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		end
 		
 		--------------------------------------------------------------------------------
-		-- Gameplay Speed (Classic RTS Mode) --
+		-- Gameplay Costs --
 		--------------------------------------------------------------------------------
 
 		for id,unitDef in pairs(UnitDefs) do

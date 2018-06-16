@@ -114,13 +114,11 @@ local unitDef                    = {
 		needed_cover             = 1,
 		death_sounds             = "generic",
 		armortype                = armortype,
+		noenergycost			  = true,
 --		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",  
-		helptext                 = [[Armortype: ]] .. armortype .. [[ 
-
-Moving an Engineer in proximity to a Energy Core will spawn a small gunship drone from that core.]],
 	},
 }
 
