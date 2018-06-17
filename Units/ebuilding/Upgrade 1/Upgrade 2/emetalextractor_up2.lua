@@ -10,7 +10,7 @@ metalMultiplier = 2
 buildCostMetal = 200
 energyUse = 5
 
-primaryCEG = "custom:fusionreactionnuclearpurple"
+primaryCEG = "custom:fusionreactionnuclear-3color"
 
 humanName = [[Metal Extractor Mk III]]
 

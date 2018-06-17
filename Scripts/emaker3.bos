@@ -49,9 +49,9 @@ Smoke()
       if (maeksmoke)    
       {
         emit-sfx 1025 from sfxpoint2;
-        emit-sfx 1025 from sfxpoint3;
-        emit-sfx 1025 from sfxpoint4;
-        emit-sfx 1025 from sfxpoint5;
+        emit-sfx 1026 from sfxpoint3;
+        emit-sfx 1027 from sfxpoint4;
+        emit-sfx 1028 from sfxpoint5;
 		sleep 100;
       }
      sleep 500;
@@ -64,7 +64,7 @@ Smoke2()
    {
       if (maeksmoke)    
       {
-		emit-sfx 1026 from sfxpoint1;
+		emit-sfx 1029 from sfxpoint1;
 		sleep 500;
       } 
      sleep 500;

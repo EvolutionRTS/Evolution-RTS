@@ -53,7 +53,7 @@ local unitDef                     = {
 		
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactionbasic",
+			"custom:fusionreactionnuclear-small-2color",
 			"custom:skyhatelaser",
 		},
 	},
