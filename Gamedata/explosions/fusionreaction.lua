@@ -538,7 +538,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclear-small-blue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -567,7 +567,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclear-small-blue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -580,7 +580,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r1000]],
+        delay              = [[10 r90]],
         explosiongenerator = [[custom:fusionreactionnuclear-small-purple]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -609,7 +609,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclear-small-blue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -622,7 +622,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r1000]],
+        delay              = [[10 r90]],
         explosiongenerator = [[custom:fusionreactionnuclear-small-purple]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -635,7 +635,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r2000]],
+        delay              = [[10 r120]],
         explosiongenerator = [[custom:fusionreactionnuclear-small-green]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -820,7 +820,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclearblue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -849,7 +849,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclearblue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -862,7 +862,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r1000]],
+        delay              = [[10 r90]],
         explosiongenerator = [[custom:fusionreactionnuclearpurple]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -891,7 +891,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclearblue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -904,7 +904,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r1000]],
+        delay              = [[10 r90]],
         explosiongenerator = [[custom:fusionreactionnuclearpurple]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -917,7 +917,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r2000]],
+        delay              = [[10 r120]],
         explosiongenerator = [[custom:fusionreactionnucleargreen]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -1073,9 +1073,9 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        --delay              = [[10 r30]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-orange]],
-        pos                = [[5 r5, 1, 5 r5]],
+        --pos                = [[5 r5, 1, 5 r5]],
       },
     },
   },
@@ -1089,9 +1089,9 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        --delay              = [[10 r30]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-orange]],
-        pos                = [[5 r5, 1, 5 r5]],
+        --pos                = [[5 r5, 1, 5 r5]],
       },
     },
 	othercolors1 = {
@@ -1102,7 +1102,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-blue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -1118,9 +1118,9 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        --delay              = [[10 r30]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-orange]],
-        pos                = [[5 r5, 1, 5 r5]],
+        --pos                = [[5 r5, 1, 5 r5]],
       },
     },
 	othercolors1 = {
@@ -1131,7 +1131,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-blue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -1144,7 +1144,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r1000]],
+        delay              = [[10 r90]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-purple]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -1160,9 +1160,9 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        --delay              = [[10 r30]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-orange]],
-        pos                = [[5 r5, 1, 5 r5]],
+        --pos                = [[5 r5, 1, 5 r5]],
       },
     },
 	othercolors1 = {
@@ -1173,7 +1173,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r500]],
+        delay              = [[10 r60]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-blue]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -1186,7 +1186,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r1000]],
+        delay              = [[10 r90]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-purple]],
         pos                = [[5 r5, 1, 5 r5]],
       },
@@ -1199,7 +1199,7 @@ return {
       water              = true, 
 	  underwater         = true,
       properties = {
-        delay              = [[10 r2000]],
+        delay              = [[10 r120]],
         explosiongenerator = [[custom:fusionreactionnuclear-huge-green]],
         pos                = [[5 r5, 1, 5 r5]],
       },
