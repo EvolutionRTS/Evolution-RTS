@@ -6,7 +6,7 @@ unitName = [[eorb]]
 
 isUpgraded	= [[0]]
 
-humanName = [[O.R.B. MK I]]
+humanName = [[O.R.B.]]
 
 objectName = [[eorb4.s3o]]
 script = [[eorb3.cob]]

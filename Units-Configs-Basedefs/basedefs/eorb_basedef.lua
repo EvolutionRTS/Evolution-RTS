@@ -105,6 +105,7 @@ unitDef                    = {
 		death_sounds             = "generic",
 		energycorecollect        = true,
 		armortype                = armortype,
+		noenergycost			  = true,
 --		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",

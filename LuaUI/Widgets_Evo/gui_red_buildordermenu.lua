@@ -693,19 +693,19 @@ local function UpdateGrid(g,cmds,ordertype)
 						if building == 0 then
 							captionColor = skyblue
 						end
-						text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+						text.caption = captionColor..buildLetters[buildStartKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i]-96].."\n\n\n\n"..skyblue.." M: "..metalCost..offwhite.."\n"..yellow.." E: "..energyCost
 						text.options = "bs"
 					elseif i <= 30 then
 						if building == 1 then
 							captionColor = skyblue
 						end
-						text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+						text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-15]-96].."\n\n\n\n"..skyblue.." M: "..metalCost..offwhite.."\n"..yellow.." E: "..energyCost
 						text.options = "bs"
 					elseif i <= 45 then
 						if building == 2 then
 							captionColor = skyblue
 						end
-						text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-30]-96].."\n\n\n\n"..skyblue.." M:"..metalCost--..offwhite.."\n"..yellow.." E:"..energyCost
+						text.caption = captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildNextKey-96]..offwhite.." → "..captionColor..buildLetters[buildKeys[i-30]-96].."\n\n\n\n"..skyblue.." M: "..metalCost..offwhite.."\n"..yellow.." E: "..energyCost
 						text.options = "bs"
 					else
 						text.caption = nil

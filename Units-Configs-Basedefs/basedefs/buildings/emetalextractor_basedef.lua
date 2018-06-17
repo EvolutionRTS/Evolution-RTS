@@ -67,6 +67,7 @@ unitDef                     = {
 		needed_cover              = 3,
 		death_sounds              = "generic",
 		armortype                 = armortype,
+		noenergycost			  = true,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",

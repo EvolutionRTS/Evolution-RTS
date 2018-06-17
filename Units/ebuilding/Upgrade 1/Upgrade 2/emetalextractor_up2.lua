@@ -5,12 +5,12 @@ unitName = [[emetalextractor_up2]]
 
 --------------------------------------------------------------------------------
 
-metalMultiplier = 1.66
+metalMultiplier = 2
 
 buildCostMetal = 200
-energyUse = 0
+energyUse = 5
 
-primaryCEG = "custom:fusionreactionnuclearpurple"
+primaryCEG = "custom:fusionreactionnuclear-3color"
 
 humanName = [[Metal Extractor Mk III]]
 

@@ -6,10 +6,10 @@ local unitName                    = "egeothermal"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local techrequired				 = [[tech1]]
+local techrequired				 = [[tech2]]
 local energyproduced			 = [[20]]
 
-local buildCostMetal 			  = 100
+local buildCostMetal 			  = 175
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -26,8 +26,8 @@ local unitDef                     = {
 	energyMake                    = energyproduced,
 	energyStorage                 = 0,
 	explodeAs                     = "largeBuildingExplosionGenericBlueEMP",
-	footprintX                    = 6,
-	footprintZ                    = 6,
+	footprintX                    = 8,
+	footprintZ                    = 8,
 	iconType                      = "generator",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
@@ -46,7 +46,7 @@ local unitDef                     = {
 	smoothAnim                    = true,
 	unitname                      = "egeothermal",
 	workerTime                    = 0,
-	yardMap                       = "oooooo oooooo ooGGoo ooGGoo oooooo oooooo",
+	yardMap                       = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {
@@ -55,7 +55,7 @@ local unitDef                     = {
 		},
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactiongeo",
+			"custom:fusionreactionnuclear-3color",
 			"custom:skyhatelaser",
 		},
 	},
@@ -77,6 +77,7 @@ local unitDef                     = {
 --		ProvideTech               = techprovided,
 --		ProvideTechRange          = powerradius,
 		armortype                 = armortype,
+		noenergycost			  = true,
 --		supply_granted            = supplygranted,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
@@ -95,8 +96,8 @@ local unitDef                     = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 8,
-	BuildingGroundDecalSizeY      = 8,
+	BuildingGroundDecalSizeX      = 10,
+	BuildingGroundDecalSizeY      = 10,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 

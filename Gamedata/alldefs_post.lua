@@ -393,7 +393,12 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			local weaponBurst = wDef.burst or 1
 			if wDef.customparams and wDef.customparams.nocosttofire == true then
 				wDef.energypershot = 0
-			elseif wDef.customparams and wDef.customparams.oldcosttofireforumula == true then
+			else
+				wDef.energypershot = 0
+			end
+			
+			--Here is the rest of the function for units using energy to fire their weapons
+--[[			elseif wDef.customparams and wDef.customparams.oldcosttofireforumula == true then
 				local energycosttofire = math.floor(weaponDefaultDamage * 0.1 * weaponProjectiles * ((weaponAreaOfEffect * 0.001) + 1)*10 + 0.5)*0.1
 				wDef.energypershot = energycosttofire * weaponBurst
 			else
@@ -401,14 +406,15 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				local energycosttofire = math.floor(weaponDefaultDamage * 0.05 * weaponProjectiles * ((weaponAreaOfEffect * 0.001)  + 1) * weaponRange^0.25 * 0.5*10 + 0.5)*0.1
 				wDef.energypershot = energycosttofire * weaponBurst
 			end
-			
+]]--			
 			--Set shield energy cost to recharge
 			if wDef.exteriorshield == true then
 				if wDef.customparams and wDef.customparams.nocosttofire == true then
 					wDef.shieldpowerregenenergy = 0
 				else
-					wDef.shieldpowerregenenergy = math.floor(wDef.shieldpowerregen * 0.05 * wDef.shieldradius^0.25 * 0.5 * 10 + 0.5) * 0.1
+					--wDef.shieldpowerregenenergy = math.floor(wDef.shieldpowerregen * 0.05 * wDef.shieldradius^0.25 * 0.5 * 10 + 0.5) * 0.1
 					--Spring.Echo("Energy usage is " .. wDef.shieldpowerregenenergy)
+					wDef.shieldpowerregenenergy = wDef.shieldpowerregen / 10
 				end		
 			end
 		end
@@ -423,11 +429,24 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		end
 		
 		--------------------------------------------------------------------------------
-		-- Gameplay Speed (Classic RTS Mode) --
+		-- Gameplay Costs --
 		--------------------------------------------------------------------------------
 
 		for id,unitDef in pairs(UnitDefs) do
-			unitDef.buildtime = unitDef.buildcostmetal / 4			
+			unitDef.buildtime = unitDef.buildcostmetal / 4
+			unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+			if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
+				unitDef.buildcostenergy = unitDef.buildcostmetal * 3.75
+			end
+			if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
+				unitDef.buildcostenergy = unitDef.buildcostmetal * 5
+			end
+			if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
+				unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
+			end
+			if unitDef.customparams and unitDef.customparams.noenergycost == true then
+				unitDef.buildcostenergy = 0
+			end
 		end
 	end
 end

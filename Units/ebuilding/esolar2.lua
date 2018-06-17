@@ -53,7 +53,7 @@ local unitDef                     = {
 		
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactionbasic",
+			"custom:fusionreactionnuclear-small-2color",
 			"custom:skyhatelaser",
 		},
 	},
@@ -75,6 +75,7 @@ local unitDef                     = {
 --		ProvideTechRange          = powerradius,
 		--	RequireTech           = "1 Powergrid",
 		armortype                 = armortype,
+		noenergycost			  = true,
 --		supply_granted            = supplygranted,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
