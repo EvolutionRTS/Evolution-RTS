@@ -146,7 +146,7 @@ function gadget:GameFrame(n)
 				for _,i in ipairs(Spring.GetTeamList()) do
 					local _,_,_,_,_,allyTeamID = Spring.GetTeamInfo(i)
 					if i ~= Spring.GetGaiaTeamID() then -- don't give free stuff to GAIA
-						Spring.AddTeamResource(i,"e",10)
+						Spring.AddTeamResource(i,"e",5)
 					end
 					if not (baseIncome >= tonumber(maximumBaseIncome)) then
 						Spring.AddTeamResource(i,"m",baseIncome + mexIncome[allyTeamID])

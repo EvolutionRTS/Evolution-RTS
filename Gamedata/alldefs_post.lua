@@ -434,9 +434,9 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 
 		for id,unitDef in pairs(UnitDefs) do
 			unitDef.buildtime = unitDef.buildcostmetal / 4
-			unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+			unitDef.buildcostenergy = unitDef.buildcostmetal * 1.25
 			if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
-				unitDef.buildcostenergy = unitDef.buildcostmetal * 3.75
+				unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
 			end
 			if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
 				unitDef.buildcostenergy = unitDef.buildcostmetal * 5
