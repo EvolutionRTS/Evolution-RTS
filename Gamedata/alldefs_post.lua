@@ -193,6 +193,14 @@ function WeaponDef_Post(name, wDef)
 		wDef.gravityaffected = true
 	end
 	
+	--Potentially fix times when weapons explode without doing damage
+	if tonumber(wDef.areaofeffect) ~= nil and tonumber(wDef.areaofeffect) <= 25 then
+		wDef.areaofeffect = 25
+	end
+	if tonumber(wDef.areaofeffect) ~= nil and tonumber(wDef.areaofeffect) <= 25 then
+		wDef.edgeeffectiveness = 1
+	end
+	
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- Set up params for Point Defense turrets
