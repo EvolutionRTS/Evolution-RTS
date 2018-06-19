@@ -37,7 +37,7 @@ unitDef                     = {
 	repairable		              = false,
 	selfDestructAs                = "largeBuildingExplosionGenericRed",
 	side                          = "CORE",
-	sightDistance                 = 1000,
+	sightDistance                 = 850,
 	smoothAnim                    = true,
 	unitname                      = unitName,
 	workerTime                    = 0,
@@ -91,27 +91,23 @@ unitDef                     = {
 weaponDefs                  = {
 	eheavyturretweapon2           = {
 		
-		AreaOfEffect              = 50,
+		AreaOfEffect              = 25,
 		avoidFeature              = false,
-		avoidFriendly             = false,
-		beamTime                  = 0.1,
-		
+		avoidFriendly             = false,		
 		collideFeature            = false,
 		collideFriendly           = false,
 		coreThickness             = 0.6,
-		--	cegTag                = "mediumcannonweapon3",
 		duration                  = 0.25,
 		energypershot             = 0,
 		explosionGenerator        = "custom:genericshellexplosion-medium",
 		fallOffRate               = 0,
 		fireStarter               = 100,
 		impulseFactor             = 0,
-		interceptedByShieldType   = 4,
-		
+		interceptedByShieldType   = 4,	
 		minintensity              = "1",
 		name                      = "Laser",
 		range                     = 650,
-		reloadtime                = 0.5,
+		reloadtime                = 2.5,
 		WeaponType                = "LaserCannon",
 		rgbColor                  = "1 0.5 0",
 		rgbColor2                 = "1 1 1",
@@ -123,13 +119,13 @@ weaponDefs                  = {
 		thickness                 = 9,
 		tolerance                 = 1000,
 		turret                    = true,
-		weaponVelocity            = 1000,
+		weaponVelocity            = 3000,
 		customparams              = {
 			isupgraded		  	 = isUpgraded,
 			damagetype		      = "eheavyturret2",  
 		}, 
 		damage                    = {
-			default               = 100,
+			default               = 400,
 		},
 	},
 }

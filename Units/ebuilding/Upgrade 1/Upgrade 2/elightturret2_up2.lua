@@ -7,7 +7,7 @@ unitName = [[elightturret2_up2]]
 
 isUpgraded	= [[2]]
 
-humanName = [[Lightning Rod Mark III]]
+humanName = [[Pincushion Mark III]]
 
 objectName = [[elightturret3.s3o]]
 script = [[elightturret2.cob]]
