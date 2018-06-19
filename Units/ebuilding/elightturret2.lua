@@ -12,9 +12,9 @@ humanName = [[Lightning Rod]]
 objectName = [[elightturret3.s3o]]
 script = [[elightturret2.cob]]
 
-tech = [[tech1]]
+tech = [[tech0]]
 armortype = [[building]]
-supply = [[3]]
+--supply = [[3]]
 
 VFS.Include("units-configs-basedefs/basedefs/buildings/elightturret2_basedef.lua")
 

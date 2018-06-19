@@ -1,7 +1,7 @@
 unitDef                     = {
 	buildAngle                    = 8192,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 160,
+	buildCostMetal                = 120,
 	builder                       = false,
 	buildTime                     = 5,
 	buildpic					  = "eheavyturret2.png",
@@ -72,7 +72,7 @@ unitDef                     = {
 		isupgraded			  	  = isUpgraded,
 		unittype				  = "turret",
 		needed_cover              = 5,
-		supply_cost               = supply,
+		--supply_cost               = supply,
 		RequireTech				  = tech,
 		death_sounds              = "generic",
 		armortype                 = armortype, 
@@ -110,8 +110,8 @@ weaponDefs                  = {
 		
 		minintensity              = "1",
 		name                      = "Laser",
-		range                     = 1000,
-		reloadtime                = 1,
+		range                     = 650,
+		reloadtime                = 0.5,
 		WeaponType                = "LaserCannon",
 		rgbColor                  = "1 0.5 0",
 		rgbColor2                 = "1 1 1",
@@ -129,7 +129,7 @@ weaponDefs                  = {
 			damagetype		      = "eheavyturret2",  
 		}, 
 		damage                    = {
-			default               = 300,
+			default               = 100,
 		},
 	},
 }

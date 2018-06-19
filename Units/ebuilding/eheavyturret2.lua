@@ -14,7 +14,7 @@ script = [[eheavyturret2.cob]]
 
 tech = [[tech2]]
 armortype = [[building]]
-supply = [[5]]
+--supply = [[5]]
 
 VFS.Include("units-configs-basedefs/basedefs/buildings/eheavyturret2_basedef.lua")
 

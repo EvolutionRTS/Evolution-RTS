@@ -1,7 +1,7 @@
 unitDef                     = {
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 50,
+	buildCostMetal                = 55,
 	builder                       = false,
 	buildTime                     = 5,
 	buildpic					  = "elightturret2.png",
@@ -71,7 +71,7 @@ unitDef                     = {
 		unittype				  = "turret",
 		RequireTech				  = tech,
 		needed_cover              = 2,
-		supply_cost               = supply,
+		--supply_cost               = supply,
 		death_sounds              = "generic",
 		armortype                 = armortype,
 		normaltex                 = "unittextures/lego2skin_explorernormal.dds", 
@@ -104,8 +104,8 @@ weaponDefs                  = {
 		interceptedByShieldType   = 4,
 		
 		noSelfDamage              = true,
-		range                     = 1000,
-		reloadtime                = 1,
+		range                     = 550,
+		reloadtime                = 0.5,
 		WeaponType                = "LightningCannon",
 		rgbColor                  = "0.1 0.2 0.5",
 		rgbColor2                 = "0 0 1",
@@ -120,7 +120,7 @@ weaponDefs                  = {
 			damagetype		      = "elightturret2",  
 		},      
 		damage                    = {
-			default               = 100,
+			default               = 25,
 		},
 	},
 }
