@@ -6,10 +6,10 @@ local unitName                    = "egeothermal"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local techrequired				 = [[tech2]]
-local energyproduced			 = [[20]]
+local techrequired				 = [[tech1]]
+local energyproduced			 = [[15]]
 
-local buildCostMetal 			  = 175
+local buildCostMetal 			  = 130
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -55,7 +55,7 @@ local unitDef                     = {
 		},
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactionnuclear-3color",
+			"custom:fusionreactionnuclear-2color",
 			"custom:skyhatelaser",
 		},
 	},
