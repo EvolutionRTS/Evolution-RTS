@@ -236,8 +236,8 @@ local damageClasses = {
 			BUILDING 	= 0.25,
 		},	
 		ebomber	= {
-			ARMORED		= 0.33,
-			LIGHT		= 0.33,
+			ARMORED		= 0.25,
+			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		ekrow	= {
