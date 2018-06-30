@@ -15,7 +15,7 @@ script = "edrone2.cob"
 
 tech = [[tech0]]
 armortype = [[light]]
-supply = [[1]]
+supply = [[9]]
 
 VFS.Include("units-configs-basedefs/basedefs/air/edrone_basedef.lua")
 
