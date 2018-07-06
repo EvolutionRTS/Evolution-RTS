@@ -91,7 +91,7 @@ unitDef                     = {
 weaponDefs                  = {
 	eheavyturretweapon2           = {
 		
-		AreaOfEffect              = 25,
+		AreaOfEffect              = 250,
 		avoidFeature              = false,
 		avoidFriendly             = false,		
 		collideFeature            = false,
@@ -107,7 +107,7 @@ weaponDefs                  = {
 		minintensity              = "1",
 		name                      = "Laser",
 		range                     = 650,
-		reloadtime                = 2.5,
+		reloadtime                = 5,
 		WeaponType                = "LaserCannon",
 		rgbColor                  = "1 0.5 0",
 		rgbColor2                 = "1 1 1",
@@ -125,7 +125,7 @@ weaponDefs                  = {
 			damagetype		      = "eheavyturret2",  
 		}, 
 		damage                    = {
-			default               = 400,
+			default               = 500,
 		},
 	},
 }
