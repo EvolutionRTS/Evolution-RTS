@@ -99,6 +99,7 @@ weaponDefs                  = {
 		coreThickness             = 0.6,
 		duration                  = 0.25,
 		energypershot             = 0,
+		edgeeffectiveness		  = 1,
 		explosionGenerator        = "custom:genericshellexplosion-medium",
 		fallOffRate               = 0,
 		fireStarter               = 100,

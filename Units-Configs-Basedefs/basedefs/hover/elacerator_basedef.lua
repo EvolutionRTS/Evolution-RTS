@@ -101,7 +101,7 @@ weaponDefs                 = {
 		collideFeature           = false,
 		
 		cegTag                   = "nukeartyshot",
-		explosionGenerator       = "custom:nukeartyexpl",
+		explosionGenerator       = "custom:genericshellexplosion-large-red",
 		edgeEffectiveness        = 0.1,
 		energypershot            = 0,
 		id                       = 172,

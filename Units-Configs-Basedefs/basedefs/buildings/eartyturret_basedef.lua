@@ -90,7 +90,7 @@ weaponDefs                  = {
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:NUKEDATBEWMSMALL",
 		energypershot            = 0,
-		edgeEffectiveness        = 1,
+		edgeEffectiveness        = 0.1,
 		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
