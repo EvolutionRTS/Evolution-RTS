@@ -6,10 +6,10 @@ local unitName                    = "egeothermal"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local techrequired				 = [[tech1]]
-local energyproduced			 = [[15]]
+local techrequired				 = [[tech2]]
+local energyproduced			 = [[30]]
 
-local buildCostMetal 			  = 130
+local buildCostMetal 			  = 280
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {

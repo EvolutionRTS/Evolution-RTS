@@ -6,9 +6,10 @@ local unitName                    = "esolar2"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local energyproduced			 = [[2]]
+local techrequired				 = [[tech1]]
+local energyproduced			 = [[10]]
 
-local buildCostMetal 			  = 20
+local buildCostMetal 			  = 100
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -73,7 +74,7 @@ local unitDef                     = {
 		death_sounds              = "generic",
 --		ProvideTech               = powerprovided,
 --		ProvideTechRange          = powerradius,
-		--	RequireTech           = "1 Powergrid",
+		RequireTech				 = techrequired,
 		armortype                 = armortype,
 		noenergycost			  = true,
 --		supply_granted            = supplygranted,
