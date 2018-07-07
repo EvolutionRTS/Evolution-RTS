@@ -134,7 +134,7 @@ local weaponDefs                  = {
 		collideFeature            = false,
 		canAttackGround           = false,
 		cegTag                   = "missiletrail",
-		flightTime               = 5,
+		flightTime               = 2.5,
 		
 		tolerance                 = 1000,
 		turret                    = true,
