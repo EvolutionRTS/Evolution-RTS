@@ -230,6 +230,24 @@ shieldBursts400 = {
   count      = 20,
 }
 
+shieldBursts1000 = {
+  layer      = -35,
+  life       = math.huge,
+  piece      = "base",
+  rotSpeed   = 0.50,
+  rotSpread  = 0,
+  arc        = 50,
+  arcSpread  = 0,
+  size       = 1000,
+  sizeSpread = 50,
+  texture    = "bitmaps/GPL/Lups/shieldbursts5.png",
+  --colormap   = { {1, 0.6, 1, 0.8} },
+  colormap   = { {1, 1, 1, 0.1} },
+  directional= true,
+  repeatEffect = true,
+  count      = 10,
+}
+
 shieldBursts1500 = {
   layer      = -35,
   life       = math.huge,
@@ -324,6 +342,16 @@ ShieldSphere400 = {
   life=20,
   pos={0,20,0},
   size=400,
+  colormap1 = { {0, 0, 1, 0.2} },
+  colormap2 = { {0.2, 0.2, 1, 0.0} },
+  repeatEffect=true
+}
+
+ShieldSphere1000 = {
+  layer=-34,
+  life=20,
+  pos={0,60,0},
+  size=1000,
   colormap1 = { {0, 0, 1, 0.2} },
   colormap2 = { {0.2, 0.2, 1, 0.0} },
   repeatEffect=true

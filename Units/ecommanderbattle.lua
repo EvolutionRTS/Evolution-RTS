@@ -14,8 +14,8 @@ local weapon1Damage              = 200
 local weapon1AOE				 = 250
 local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
-local weapon2Damage              = 25
-local weapon2AOE				 = 10
+local weapon2Damage              = 75
+local weapon2AOE				 = 25
 local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
 
 
@@ -30,7 +30,7 @@ local unitDef                    = {
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 1000,
-	buildDistance                = 1000,
+	buildDistance                = 500,
 	builder                      = true,
 	buildTime                    = 2.5,
 	capturable		             = false,
@@ -59,7 +59,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 5000,
+	maxDamage                    = 2500,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -77,7 +77,7 @@ local unitDef                    = {
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
 	showNanoSpray                = true,
-	sightDistance                = 550,
+	sightDistance                = 650,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -303,7 +303,7 @@ local weaponDefs                 = {
 		
 		minintensity             = "1",
 		name                     = "Machine Gun",
-		range                    = 550,
+		range                    = 650,
 		reloadtime               = 0.1,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "1 0.5 0",

@@ -331,33 +331,8 @@ turn turret2 to y-axis <0> speed <60>;
 turn barrel2 to x-axis <0> speed <30>;    
 } 
 
-AimFromPrimary(p)
-{
-	p=firepoint1;
-}
 
-AimPrimary(heading,pitch)
-{
-	signal SIG_AIM1;
-	set-signal-mask SIG_AIM1;
-	return(1);
-}
-
-QueryPrimary(firefrom)
-{
-	firefrom=firepoint1;
-}
-
-FirePrimary()
-{
-	signal SIG_FIRE1;
-	set-signal-mask SIG_FIRE1;
-}
-
-//EMP Weapon End
-
-
-AimSecondary(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+AimPrimary(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
 { 
 signal SIG_AIM_2; 
 set-signal-mask SIG_AIM_2; 
@@ -369,17 +344,17 @@ start-script RestoreAfterDelay();
 return (1); 
 } 
 
-FireSecondary() // what do while firing, fires 1 barrel then the next , and resets 
+FirePrimary() // what do while firing, fires 1 barrel then the next , and resets 
 { 
 emit-sfx 1027 + 0 from firepoint2;
 } 
 
-AimFromSecondary(piecenum) // where it aims the weapon from 
+AimFromPrimary(piecenum) // where it aims the weapon from 
 { 
 piecenum = barrel2; 
 } 
 
-QuerySecondary(piecenum) // where the shot is called from 
+QueryPrimary(piecenum) // where the shot is called from 
 { 
 piecenum = firepoint2; 
 } 

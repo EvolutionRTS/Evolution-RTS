@@ -55,7 +55,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 5000,
+	maxDamage                    = 15000,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -131,11 +131,6 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-
-Can build light and riot units anywhere.
-
-Reclaims any energy cores within it's proximity.]],
 	},
 }
 

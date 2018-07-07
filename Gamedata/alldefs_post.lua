@@ -416,7 +416,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			end
 ]]--			
 			--Set shield energy cost to recharge
-			if wDef.exteriorshield == true then
+--[[			if wDef.exteriorshield == true then
 				if wDef.customparams and wDef.customparams.nocosttofire == true then
 					wDef.shieldpowerregenenergy = 0
 				else
@@ -425,6 +425,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 					wDef.shieldpowerregenenergy = wDef.shieldpowerregen / 10
 				end		
 			end
+]]--
 		end
 		--------------------------------------------------------------------------------
 		--------------------------------------------------------------------------------

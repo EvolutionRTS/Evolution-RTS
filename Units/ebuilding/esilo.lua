@@ -140,7 +140,7 @@ local weaponDefs                  = {
 		id                        = 124,
 		impulseBoost              = 0,
 		impulseFactor             = 0,
-		interceptedByShieldType   = 4,
+		--interceptedByShieldType   = 4,
 		
 		metalpershot              = 0,
 		model                     = "enuke.s3o",

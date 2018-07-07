@@ -55,7 +55,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 5000,
+	maxDamage                    = 12500,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -74,7 +74,7 @@ local unitDef                    = {
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
 	showNanoSpray                = true,
-	sightDistance                = 500,
+	sightDistance                = 650,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -132,11 +132,6 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-
-Generates a large cloaking and Jamming field
-
-Reclaims any energy cores within it's proximity.]],
 
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 0, -- How much energy does it cost to maintain the cloaking field?
@@ -178,7 +173,7 @@ local weaponDefs                 = {
 		noexplode		         = true,
 		paralyzer		         = true,
 		paralyzetime	         = 2.5,
-		range                    = 500,
+		range                    = 650,
 		reloadtime               = 1,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0 0.2 1",

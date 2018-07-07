@@ -9,11 +9,10 @@ local armortype					 = [[building]]
 
 local techrequired				 = [[tech2]]
 
-local shield1Power               = 2000
-local shield1PowerRegen          = 30
-local shield1PowerRegenEnergy    = shield1PowerRegen / 10
-
-local buildCostMetal 			  = 50
+local shield1Power               = 10000
+local shield1PowerRegen          = 100
+local shield1PowerRegenEnergy    = 100
+local buildCostMetal 			  = 1000
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -87,7 +86,7 @@ local unitDef                     = {
 		death_sounds              = "generic",
 		armortype                 = armortype,
 		shield_power			  = shield1Power,
-		shield_radius			  = 400,
+		shield_radius			  = 1000,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "outer_colonies",
@@ -111,7 +110,7 @@ local weaponDefs                  = {
 		Visibleshieldrepulse      = false,
 		ShieldStartingPower       = 0,
 		Shieldenergyuse           = 0,
-		Shieldradius              = 400,
+		Shieldradius              = 1000,
 		Shieldpower               = shield1Power,
 		Shieldpowerregen          = shield1PowerRegen,
 		Shieldpowerregenenergy    = shield1PowerRegenEnergy,

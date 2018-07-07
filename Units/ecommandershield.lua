@@ -11,7 +11,7 @@ local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
 local shield1Power               = 5000
-local shield1PowerRegen          = 40
+local shield1PowerRegen          = 50
 local shield1PowerRegenEnergy    = 0
 
 local weapon1Damage              = 200
@@ -59,7 +59,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 5000,
+	maxDamage                    = 7500,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,

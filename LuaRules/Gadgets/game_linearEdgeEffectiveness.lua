@@ -11,7 +11,7 @@ function gadget:GetInfo()
 end
 
 function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID)
-	if weaponID <= 0 then
+	if weaponDefID <= 0 then
 		return damage -- environmental damage, no weapondef entry
 	end
 
