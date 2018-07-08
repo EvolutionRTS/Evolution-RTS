@@ -77,7 +77,8 @@ function UnitDef_Post(name, uDef)
 	-- Allow all unit to see planes high above
 	-- This ties in with the global Cylinder Targetting
 	-- Default airsightdistance is sightdistance * 1.5
-	uDef.airsightdistance = uDef.sightdistance * 2
+	--uDef.airsightdistance = uDef.sightdistance * 2 --No longer needed
+	uDef.airsightdistance = uDef.sightdistance
 	
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
@@ -443,7 +444,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 
 		for id,unitDef in pairs(UnitDefs) do
 			unitDef.buildtime = unitDef.buildcostmetal / 4
-			--unitDef.buildcostenergy = unitDef.buildcostmetal * 0.5
+			unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
 			if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
 				unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
 			end
