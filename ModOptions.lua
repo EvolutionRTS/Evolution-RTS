@@ -484,7 +484,7 @@ local options= {
 		name="Burrow Placement",
 		desc="Control where burrows spawn",
 		type="list",
-		def="alwaysbox",
+		def="avoid",
 		section="chicken_defense_options",
 		items={
 			{key="anywhere", name="Anywhere", desc="Burrows can spawn anywhere"},
