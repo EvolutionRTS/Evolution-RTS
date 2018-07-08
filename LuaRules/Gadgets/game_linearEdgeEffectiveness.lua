@@ -6,10 +6,10 @@ function gadget:GetInfo()
 		date      = "Does it matter?",
 		license   = "GNU GPL, v2 or later",
 		layer     = 0,
-		enabled   = true  --  loaded by default?
+		enabled   = false  --  loaded by default?
 	}
 end
-
+--[[
 function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID)
 	if weaponDefID <= 0 then
 		return damage -- environmental damage, no weapondef entry
@@ -36,3 +36,4 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, w
 
 	return baseDamage * (1 - distance*(1 - ee))
 end
+]]--

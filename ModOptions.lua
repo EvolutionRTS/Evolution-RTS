@@ -480,6 +480,18 @@ local options= {
 		type   = 'section',
 	},
 	{
+		key    = 'chickengloballos',
+		name   = 'Global LOS for all players',
+		desc   = 'If enabled, all players will have Global Line of Sight.',
+		type="list",
+		def="disabled",
+		section= "chicken_defense_options",
+		items={
+			{key="disabled", name="Disabled", desc="Players do not get complete map vision"},
+			{key="enabled", name="Enabled", desc="All players get total map vision"},
+		}
+	},
+	{
 		key="mo_chickenstart",
 		name="Burrow Placement",
 		desc="Control where burrows spawn",

@@ -13,6 +13,8 @@ function gadget:GetInfo()
   }
 end
 
+local chickenGlobalLOS = Spring.GetModOptions().chickengloballos or "disabled"
+
 local teams = Spring.GetTeamList()
 for i =1, #teams do
 	local luaAI = Spring.GetTeamLuaAI(teams[i])
@@ -32,9 +34,11 @@ end
 
 if chickensEnabled == true then
 	Spring.Echo("[ChickenDefense: Chicken Defense Spawner] Activated!")
-	local allyteams = Spring.GetAllyTeamList()
-	for i =1, #allyteams do
-		Spring.SetGlobalLos(i, true)
+	if chickenGlobalLOS == "enabled" then
+		local allyteams = Spring.GetAllyTeamList()
+		for i =1, #allyteams do
+			Spring.SetGlobalLos(i, true)
+		end
 	end
 else
 	Spring.Echo("[ChickenDefense: Chicken Defense Spawner] Deactivated!")
