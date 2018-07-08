@@ -32,6 +32,10 @@ end
 
 if chickensEnabled == true then
 	Spring.Echo("[ChickenDefense: Chicken Defense Spawner] Activated!")
+	local allyteams = Spring.GetAllyTeamList()
+	for i =1, #allyteams do
+		Spring.SetGlobalLos(i, true)
+	end
 else
 	Spring.Echo("[ChickenDefense: Chicken Defense Spawner] Deactivated!")
 	return false
