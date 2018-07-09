@@ -484,7 +484,7 @@ local options= {
 		name   = 'Global LOS for all players',
 		desc   = 'If enabled, all players will have Global Line of Sight.',
 		type="list",
-		def="disabled",
+		def="enabled",
 		section= "chicken_defense_options",
 		items={
 			{key="disabled", name="Disabled", desc="Players do not get complete map vision"},

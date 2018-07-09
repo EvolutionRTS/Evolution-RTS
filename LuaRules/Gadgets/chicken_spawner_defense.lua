@@ -13,7 +13,7 @@ function gadget:GetInfo()
   }
 end
 
-local chickenGlobalLOS = Spring.GetModOptions().chickengloballos or "disabled"
+local chickenGlobalLOS = Spring.GetModOptions().chickengloballos or "enabled"
 
 local teams = Spring.GetTeamList()
 for i =1, #teams do
@@ -1291,14 +1291,17 @@ function gadget:GameFrame(n)
 		return
 	end
 
-	if n == 15 then
-		DisableComputerUnits()
+	if n == 1 then
 		if chickenGlobalLOS == "enabled" then
 			local allyteams = Spring.GetAllyTeamList()
-			for i =1, #allyteams do
+			for i = 0, #allyteams - 1 do
 				Spring.SetGlobalLos(i, true)
 			end
 		end
+	end
+	
+	if n == 15 then
+		DisableComputerUnits()
 	end
 	
 	if ((n % 90) == 0) then
