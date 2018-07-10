@@ -122,8 +122,6 @@ local shown = false
 local mouseover = false
 local volume
 
-local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
-local interruptMusic = Spring.GetConfigInt("evo_interruptmusic", 1)
 local warMeter = 0
 local buildMeter = false
 local buildTimer = 0
@@ -133,15 +131,6 @@ local fadeIn = false
 local endFade = false
 local maxWarMeter = 800
 
---Assume that if it isn't set, dynamic music is true
-if dynamicMusic == nil then
-	dynamicMusic = 1
-end
-
---Assume that if it isn't set, interrupt music is true
-if interruptMusic == nil then
-	interruptMusic = 1
-end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -630,17 +619,6 @@ function PlayNewTrack()
 	else
 		warMeter = 200
 	end
-	--Spring.Echo(dynamicMusic)
-	
-	if dynamicMusic == 0 then
-		--Spring.Echo("Choosing a random track")
-		r = math.random(0,1)
-		if r == 0 then
-			tracks = peaceTracks
-		else
-			tracks = warTracks
-		end
-	end
 	
 		--Spring.Echo("Unit Death Count is (Gameframe): " .. warMeter)
 		if gameOver then
@@ -697,8 +675,7 @@ function widget:Update(dt)
 	
 	if (not firstTime) then
 		if Spring.GetGameFrame() >= 1 then
-			fadelvl = 0
-			fadeOut = true
+			fadelvl = 0.02
 		end
 		if Spring.GetGameFrame() == 0 then
 			PlayNewTrack()
@@ -713,7 +690,6 @@ function widget:Update(dt)
 	if playedTime >= totalTime then	-- both zero means track stopped in 8
 		if Spring.GetGameFrame() >= 1 then
 			fadelvl = 0
-			fadeOut = true
 		end
 		if Spring.GetGameFrame() == 0 then
 			PlayNewTrack()
