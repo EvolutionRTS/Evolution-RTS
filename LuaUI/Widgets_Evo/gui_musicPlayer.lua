@@ -60,23 +60,6 @@ if next(warCutTracks) == nil then
 	warCutTracks = warTracks
 end
 
-local function GetPathLenght()
-	charactersInPath = 29
-	if tracks and tracks == peaceTracks then
-		charactersInPath = charactersInPath + 8
-	end
-	if tracks and tracks == warTracks then
-		charactersInPath = charactersInPath + 6
-	end
-	if tracks and tracks == warCutTracks then
-		charactersInPath = charactersInPath + 9
-	end
-	if tracks and tracks == silenceTracks then
-		charactersInPath = 999
-	end
-	return charactersInPath
-end
-
 local tracks = peaceTracks
 
 local firstTime = false
@@ -304,7 +287,6 @@ local function createList()
 		
 		local trackname = string.gsub(curTrack, ".ogg", "")
 		local text = ''
-		--local charactersToCut = GetPathLenght()
 		charactersInPath = 23
 		if tracks and tracks == peaceTracks then
 			charactersInPath = charactersInPath + 8
