@@ -287,7 +287,8 @@ local function createList()
 		
 		local trackname = string.gsub(curTrack, ".ogg", "")
 		local text = ''
-		charactersInPath = 23
+		--local charactersToCut = GetPathLenght()
+		charactersInPath = 28
 		if tracks and tracks == peaceTracks then
 			charactersInPath = charactersInPath + 8
 		elseif tracks and tracks == warTracks then
@@ -373,6 +374,7 @@ function widget:MouseMove(x, y)
 	if draggingSlider ~= nil then
 		if draggingSlider == 'musicvolume' then
 			changeMusicVolume(getSliderValue('musicvolume', x) * 100)
+			fadelvl = getSliderValue('musicvolume', x)
 		end
 		if draggingSlider == 'volume' then
 			changeVolume(getSliderValue('volume', x) * 100)
@@ -483,6 +485,8 @@ function widget:GameFrame(n)
 			music_volume_set = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 			music_volume_target = music_volume_set
 		end
+	if music_volume_set > 0.02 then
+			
 			prevfadelvl = fadelvl
 		
 		if tracks == warTracks or tracks == warCutTracks then
@@ -590,6 +594,7 @@ function widget:GameFrame(n)
 		if gameOver and tracks ~= loadingTracks then
 			PlayNewTrack()
 		end
+	end
 end
 
 function PlayNewTrack()
@@ -655,38 +660,41 @@ function widget:Update(dt)
 		return
 	end
 	
-	if (not firstTime) then
-		if Spring.GetGameFrame() >= 1 then
-			fadelvl = 0.02
-		end
-		if Spring.GetGameFrame() == 0 then
-			PlayNewTrack()
-		end
-		firstTime = true -- pop this cherry
-	end
-	
 	local playedTime, totalTime = Spring.GetSoundStreamTime()
-	playedTime = math.floor(playedTime)
-	totalTime = math.floor(totalTime)
-	
-	if playedTime >= totalTime then	-- both zero means track stopped in 8
-		if Spring.GetGameFrame() >= 1 then
-			fadelvl = 0
+		playedTime = math.floor(playedTime)
+		totalTime = math.floor(totalTime)
+	if music_volume_set > 0.02 then
+		if (not firstTime) then
+			if Spring.GetGameFrame() >= 1 then
+				fadelvl = 0.02
+			end
+			if Spring.GetGameFrame() == 0 then
+				PlayNewTrack()
+			end
+			firstTime = true -- pop this cherry
 		end
-		if Spring.GetGameFrame() == 0 then
-			PlayNewTrack()
+
+		if playedTime >= totalTime then	-- both zero means track stopped in 8
+			if Spring.GetGameFrame() >= 1 then
+				fadelvl = 0
+			end
+			if Spring.GetGameFrame() == 0 then
+				PlayNewTrack()
+			end
+			if gameOver then
+				PlayNewTrack()
+			end
 		end
-		if gameOver then
-			PlayNewTrack()
+		
+		if (pauseWhenPaused and Spring.GetGameSeconds()>=0) then
+		local _, _, paused = Spring.GetGameSpeed()
+			if (paused ~= wasPaused) then
+				Spring.PauseSoundStream()
+				wasPaused = paused
+			end
 		end
-	end
-	
-	if (pauseWhenPaused and Spring.GetGameSeconds()>=0) then
-    local _, _, paused = Spring.GetGameSpeed()
-		if (paused ~= wasPaused) then
-			Spring.PauseSoundStream()
-			wasPaused = paused
-		end
+	elseif playedTime > 0 and totalTime > 0 then
+		Spring.StopSoundStream()
 	end
 end
 
