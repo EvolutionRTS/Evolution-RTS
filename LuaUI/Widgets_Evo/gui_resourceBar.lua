@@ -52,6 +52,10 @@ local metalWarning = false
 
 simplifiedResourceBar = Spring.GetConfigInt("evo_simplifiedresourcebar", 1)
 
+local energyNotificationTimeout = 60
+local metalNotificationTimeout = 60
+local supplyNotificationTimeout = 60
+
 -- Avoids spamming of income increased notification
 local incomeIncreased = false
 
@@ -155,6 +159,16 @@ function RectRound(px,py,sx,sy,cs, tl,tr,br,bl)		-- (coordinates work differentl
 end
 
 function widget:GameFrame(n)
+	if n%30 == 1 then
+		energyNotificationTimeout = energyNotificationTimeout - 1
+		metalNotificationTimeout = metalNotificationTimeout - 1
+		supplyNotificationTimeout = supplyNotificationTimeout - 1
+		
+		--Spring.Echo("E " .. energyNotificationTimeout)
+		--Spring.Echo("M " .. metalNotificationTimeout)
+		--Spring.Echo("S " .. supplyNotificationTimeout)
+	end
+
 	if n%450 == 4 then
 		local _, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
 		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
@@ -183,27 +197,41 @@ function widget:GameFrame(n)
 				
 			end
 		elseif increment > 0 then
-			if energyWarning == true then
-				if n%900 == 4 then
+			if n%30 == 1 then
+				if energyWarning == true then
+					--Spring.Echo("EnergyWarning")
 					if resourcePrompts == 1 then
-						Spring.PlaySoundFile("sounds/ui/additionalgenerators.wav", 1)
-						Spring.Echo([[You must construct additional generators so that your units can fire their weapons!]])
+						if energyNotificationTimeout <= 0 then
+							if metalNotificationTimeout <= 20 and supplyNotificationTimeout <= 20 then
+								energyNotificationTimeout = 30
+								Spring.PlaySoundFile("sounds/ui/additionalgenerators.wav", 1)
+								Spring.Echo([[You must construct additional generators so you can build and evolve at full speed!]])
+							end
+						end
 					end
 				end
-			end
-			if metalWarning == true then
-				if n%1800 == 4 then
+				if metalWarning == true then
+					--Spring.Echo("MetalWarning")
 					if resourcePrompts == 1 then
-						Spring.PlaySoundFile("sounds/ui/useyourmetal.wav", 1)
-						Spring.Echo([[You are excessing metal! Consider using O.R.B.s to build units faster and spend metal more effectively!]])
+						if metalNotificationTimeout <= 0 then
+							if energyNotificationTimeout <= 20 and supplyNotificationTimeout <= 20 then
+								metalNotificationTimeout = 30
+								Spring.PlaySoundFile("sounds/ui/useyourmetal.wav", 1)
+								Spring.Echo([[You are excessing metal! Consider using O.R.B.s to build units faster and spend metal more effectively!]])
+							end
+						end
 					end
 				end
-			end
-			if supplyWarning == true then
-				if n%700 == 4 then
+				if supplyWarning == true then
+					--Spring.Echo("SupplyWarning")
 					if resourcePrompts == 1 then
-						Spring.PlaySoundFile("sounds/ui/constructadditionalpylons.wav", 1)
-						Spring.Echo([[You have no more available supply, build supply depots in order to increase the size of your army!]])
+						if supplyNotificationTimeout <= 0 then
+							if energyNotificationTimeout <= 20 and metalNotificationTimeout <= 20 then
+								supplyNotificationTimeout = 30
+								Spring.PlaySoundFile("sounds/ui/constructadditionalpylons.wav", 1)
+								Spring.Echo([[You have no more available supply, build supply depots in order to increase the size of your army!]])
+							end
+						end
 					end
 				end
 			end
