@@ -10,13 +10,11 @@
 --
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-math.randomseed( os.time() - os.clock() * 1000 )
-math.random() math.random() math.random()
 
 function widget:GetInfo()
 	return {
-		name	= "Music Player - Damgam Testing",
-		desc	= "Plays music and offers volume controls",
+		name	= "Music Player - TA Style",
+		desc	= "Plays music and offers volume controls in a TA Style that is dynamically controlled according to unit deaths",
 		author	= "Forboding Angel, Floris, Damgam",
 		date	= "november 2016",
 		license	= "GNU GPL, v2 or later",
@@ -38,11 +36,8 @@ local buttons = {}
 local previousTrack = ''
 local curTrack	= "no name"
 
-local peaceTracks = VFS.DirList('luaui/Widgets_Evo/Music/peace', '*.ogg')
-local warTracks = VFS.DirList('luaui/Widgets_Evo/Music/war', '*.ogg')
-local warCutTracks = VFS.DirList('luaui/Widgets_Evo/Music/warcut', '*.ogg')
-local silenceTracks = VFS.DirList('luaui/Widgets_Evo/Music/silence', '*.ogg')
-local loadingTracks = VFS.DirList('luaui/Widgets_Evo/Music/loading', '*.ogg')
+local peaceTracks = VFS.DirList('luaui/Widgets_Evo/music/peace', '*.ogg')
+local warTracks = VFS.DirList('luaui/Widgets_Evo/music/war', '*.ogg')
 
 --We check to make sure that we can function properly without crashing due to missing music tracks
 local next = next
@@ -56,11 +51,9 @@ if next(warTracks) == nil then
 	return false
 end
 
-if next(warCutTracks) == nil then
-	warCutTracks = warTracks
-end
-
 local tracks = peaceTracks
+
+local charactersInPath = 25
 
 local firstTime = false
 local wasPaused = false
@@ -105,25 +98,28 @@ local shown = false
 local mouseover = false
 local volume
 
+local dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
+local interruptMusic = Spring.GetConfigInt("evo_interruptmusic", 1)
 local warMeter = 0
-local buildMeter = false
-local buildTimer = 0
 local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 local fadeOut = false
-local fadeIn = false
-local endFade = false
-local maxWarMeter = 800
 
+--Assume that if it isn't set, dynamic music is true
+if dynamicMusic == nil then
+	dynamicMusic = 1
+end
+
+--Assume that if it isn't set, interrupt music is true
+if interruptMusic == nil then
+	interruptMusic = 1
+end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
 	
-	MyTeamID = Spring.GetMyTeamID()
-	
 	volume = Spring.GetConfigInt("snd_volmaster", 100)
-	music_volume_set = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
-	music_volume_target = music_volume_set
+	music_volume_percentage = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 	
 	musicInitialValue = Spring.GetConfigInt("evo_musicInitialValue", 0)
 	if musicInitialValue ~= 1 then
@@ -284,22 +280,8 @@ local function createList()
 		
 		-- track name
 		glColor(0.45,0.45,0.45,1)
-		
 		local trackname = string.gsub(curTrack, ".ogg", "")
 		local text = ''
-		--local charactersToCut = GetPathLenght()
-		charactersInPath = 28
-		if tracks and tracks == peaceTracks then
-			charactersInPath = charactersInPath + 8
-		elseif tracks and tracks == warTracks then
-			charactersInPath = charactersInPath + 6
-		elseif tracks and tracks == warCutTracks then
-			charactersInPath = charactersInPath + 9
-		elseif tracks and tracks == silenceTracks then
-			charactersInPath = 999
-		elseif tracks and tracks == loadingTracks then
-			charactersInPath = 999
-		end
 		for i=charactersInPath, #trackname do
 	    local c = string.sub(trackname, i,i)
 			local width = glGetTextWidth(text..c)*textsize
@@ -309,7 +291,7 @@ local function createList()
 	    	text = text..c
 	    end
 		end
-		glText('\255\255\255\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
+		glText('\255\135\135\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
 		
 	end)
 	drawlist[4] = glCreateList( function()
@@ -374,7 +356,6 @@ function widget:MouseMove(x, y)
 	if draggingSlider ~= nil then
 		if draggingSlider == 'musicvolume' then
 			changeMusicVolume(getSliderValue('musicvolume', x) * 100)
-			fadelvl = getSliderValue('musicvolume', x)
 		end
 		if draggingSlider == 'volume' then
 			changeVolume(getSliderValue('volume', x) * 100)
@@ -429,16 +410,22 @@ function mouseEvent(x, y, button, release)
 			return true
 		end
 		if button == 1 and buttons['next'] ~= nil and isInBox(x, y, {buttons['next'][1], buttons['next'][2], buttons['next'][3], buttons['next'][4]}) then
-			fadeIn = false
-			fadeOut = false
-			PlayNewTrack()
+			if fadeIn ~= true and fadeOut ~= true then
+				if Spring.GetGameFrame() >= 1 then
+					fadeOut = true
+					fadelvl = music_volume_percentage
+					--PlayNewTrack()
+				end
+			end
+			if Spring.GetGameFrame() == 0 then
+				PlayNewTrack()
+			end
 			return true
 		end
 		return true
 	end
 	
 end
-
 function widget:IsAbove(mx, my)
 	if isInBox(mx, my, {left, bottom, right, top}) then
   	local curVolume = Spring.GetConfigInt("snd_volmaster", 100)
@@ -470,62 +457,47 @@ function widget:Shutdown()
 	WG['music'] = nil
 end
 
-function widget:UnitDamaged()
-	warMeter = warMeter + 200
-	if warMeter > maxWarMeter then
-		warMeter = maxWarMeter
-	end
+function widget:UnitDamaged(_, _, _, damage)
+	warMeter = warMeter + damage
 end
 
-
 function widget:GameFrame(n)
-	--Spring.Echo([[Warmeter: ]] ..warMeter)
+	if n%30 == 4 then
 		--This is a little messy, but we need to be able to update these values on the fly so I see no better way
-		if n%120 == 0 then
-			music_volume_set = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
-			music_volume_target = music_volume_set
-		end
-	if music_volume_set > 0.02 then
-			
-			prevfadelvl = fadelvl
+		music_volume_percentage = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 		
-		if tracks == warTracks or tracks == warCutTracks then
-			if warMeter > 0 then
-				music_volume_target = music_volume_set
-			else
-				music_volume_target = 0
+		dynamicMusic = Spring.GetConfigInt("evo_dynamicmusic", 1)
+		interruptMusic = Spring.GetConfigInt("evo_interruptmusic", 1)
+		
+		--Assume that if it isn't set, dynamic music is true
+		if dynamicMusic == nil then
+			dynamicMusic = 1
+		end
+
+		--Assume that if it isn't set, interrupt music is true
+		if interruptMusic == nil then
+			interruptMusic = 1
+		end	
+	end
+    if n%5 == 4 then
+		if dynamicMusic == 1 then
+			--Spring.Echo("[Music Player] Unit Death Count is currently: ".. warMeter)
+			if warMeter <= 1 then
+				warMeter = 0
+			elseif warMeter >= 3000 then
+				warMeter = warMeter - 500
+			elseif warMeter >= 1000 then
+				warMeter = warMeter - 100
+			elseif warMeter >= 0 then
+				warMeter = warMeter - 3
 			end
-		elseif tracks == peaceTracks then
-			if warMeter > 0 or buildTimer <= 0 then
-				music_volume_target = 0
-			else
-				music_volume_target = music_volume_set
+			if interruptMusic == 1 then
+				if tracks == peaceTracks and warMeter >= 200 and fadeIn == false and fadeOut == false then
+					fadeOut = true
+				elseif tracks == warTracks and warMeter <= 0 and fadeIn == false and fadeOut == false  then
+					fadeOut = true
+				end
 			end
-		end
-		
-		--BuildMeter
-		local mc, ms, mp, mi, me = Spring.GetTeamResources(MyTeamID, "metal")
-		
-		if me > 1 then
-			buildMeter = true
-		else
-			buildMeter = false
-		end
-		
-		if buildMeter == false then
-			if buildTimer > 0 then
-				buildTimer = buildTimer - 1
-			end
-		elseif buildMeter == true then
-			buildTimer = 450
-		end
-		--Spring.Echo("BuildMeter: " .. buildMeter)
-		
-		--WarMeter
-		if warMeter <= 0 then
-			warMeter = 0
-		elseif warMeter >= 0 then
-			warMeter = warMeter - 1
 		end
 		
 		--80's fadeout when a track is almost finished
@@ -534,12 +506,11 @@ function widget:GameFrame(n)
 		totalTime = math.floor(totalTime)
 			
 		if totalTime ~= nil then
-			--Spring.Echo("Total time is :" .. playedTime .."/".. totalTime)
-			if playedTime >= totalTime - 2 then
+			--Spring.Echo("Total time is :" .. totalTime)
+			if playedTime > totalTime - music_volume * 0.05 then
 				--Spring.Echo("Fading out now!")
 				if Spring.GetGameFrame() >= 1 then
-					endFade = true
-					
+					fadeOut = true
 				end
 				if Spring.GetGameFrame() == 0 then
 					PlayNewTrack()
@@ -548,97 +519,56 @@ function widget:GameFrame(n)
 		end
 
 		--This has become the preferred handler of playing new tracks instead of calling the PlayNewTrack() function, set fadeOut = true
-		
-		--endfade
-		if endFade == true then
-			fadelvl = fadelvl - 0.01
+		if fadeOut == true and fadelvl >= 0.01 then
+			fadelvl = fadelvl - 0.05
+			--Spring.Echo(fadelvl)
 			Spring.SetSoundStreamVolume(fadelvl)
+		else
+			fadeOut = false
 		end
-		
-		--volumecontrol
-		if endFade == false then
-			if fadelvl < 0 then
-				fadelvl = 0
-			end
-			if fadelvl < music_volume_target then
-				if tracks == peaceTracks then
-					fadelvl = fadelvl + 0.0005
-				elseif playedTime < 5 then
-					fadelvl = fadelvl + 0.01
-				else
-					fadelvl = fadelvl + 0.001
-				end
-				Spring.SetSoundStreamVolume(fadelvl)
-			end
-			if fadelvl > music_volume_target then
-				if tracks == peaceTracks and warMeter > 0 then
-					fadelvl = fadelvl - 0.01
-				else
-					fadelvl = fadelvl - 0.001
-				end
-				Spring.SetSoundStreamVolume(fadelvl)
-			end
-		end
-		
-		--playnewtrack
-		if fadelvl <= 0 then
+		if fadeOut == false and fadelvl <= 0.005 then
+			fadelvl = music_volume_percentage * 0.01
 			PlayNewTrack()
+			--Spring.Echo("Playing a new song now")
 		end
 		
-		if tracks == silenceTracks then
-			if warMeter > 0 or buildTimer > 0 then
-				PlayNewTrack()
-			end
+		if fadeIn == true and fadelvl <= music_volume_percentage then
+			fadelvl = fadelvl + 0.05
+			--Spring.Echo(fadelvl)
+			Spring.SetSoundStreamVolume(fadelvl)
+		else
+			fadeIn = false
 		end
-		
-		if gameOver and tracks ~= loadingTracks then
-			PlayNewTrack()
-		end
-	end
+    end
 end
 
 function PlayNewTrack()
 	Spring.StopSoundStream()
-	endFade = false
-	fadelvl = 0.02
-	if warMeter < 100 then
-		warMeter = 0
-	else
-		warMeter = 200
+	if Spring.GetGameFrame() >= 1 then
+		fadelvl = 0
+		fadeIn = true
+	end
+	--Spring.Echo(dynamicMusic)
+	
+	if dynamicMusic == 0 then
+		--Spring.Echo("Choosing a random track")
+		r = math.random(0,1)
+		if r == 0 then
+			tracks = peaceTracks
+		else
+			tracks = warTracks
+		end
 	end
 	
+	if dynamicMusic == 1 then
 		--Spring.Echo("Unit Death Count is (Gameframe): " .. warMeter)
-		if gameOver then
-			tracks = loadingTracks
-			fadelvl = music_volume_set
-			warMeter = 0
-			buildTimer = 450
-		elseif Spring.GetGameFrame() == 0 then
-			tracks = warTracks
-			fadelvl = 0.15
-		elseif warMeter <= 0 then
-			if buildTimer > 10 then
-				tracks = peaceTracks
-				--Spring.Echo("Current tracklist is : Peace Tracks")
-			else
-				tracks = silenceTracks
-				--Spring.Echo("Current tracklist is : Silence Tracks")
-			end
+		if warMeter <= 3 then
+			tracks = peaceTracks
+			--Spring.Echo("Current tracklist is : Peace Tracks")
 		else
-			--if tracks == peaceTracks or tracks == silenceTracks then
-				--local r = math.random(0,3)
-				--if r == 0 then
-					tracks = warTracks
-					--Spring.Echo("Current tracklist is : War Tracks")
-				--else
-					--tracks = warCutTracks
-					--Spring.Echo("Current tracklist is : WarCut Tracks")
-				--end
-				
-			--else
-				--tracks = warTracks
-				--Spring.Echo("Current tracklist is : War Tracks")
-			--end
+			tracks = warTracks
+			--Spring.Echo("Current tracklist is : War Tracks")
+		end
 	end
 	local newTrack = previousTrack
 	repeat
@@ -647,8 +577,9 @@ function PlayNewTrack()
 	firstFade = false
 	previousTrack = newTrack
 	curTrack = newTrack
+	local musicVolScaled = music_volume * 0.01	
 	Spring.PlaySoundStream(newTrack)
-	Spring.SetSoundStreamVolume(fadelvl or 0.5)
+	Spring.SetSoundStreamVolume(musicVolScaled or 0.33)
 	if playing == false then
 		Spring.PauseSoundStream()
 	end	
@@ -660,41 +591,37 @@ function widget:Update(dt)
 		return
 	end
 	
+	if (not firstTime) then
+		if Spring.GetGameFrame() >= 1 then
+			fadelvl = 0
+			fadeOut = true
+		end
+		if Spring.GetGameFrame() == 0 then
+			PlayNewTrack()
+		end
+		firstTime = true -- pop this cherry
+	end
+	
 	local playedTime, totalTime = Spring.GetSoundStreamTime()
-		playedTime = math.floor(playedTime)
-		totalTime = math.floor(totalTime)
-	if music_volume_set > 0.02 then
-		if (not firstTime) then
-			if Spring.GetGameFrame() >= 1 then
-				fadelvl = 0.02
-			end
-			if Spring.GetGameFrame() == 0 then
-				PlayNewTrack()
-			end
-			firstTime = true -- pop this cherry
+	playedTime = math.floor(playedTime)
+	totalTime = math.floor(totalTime)
+	
+	if playedTime >= totalTime then	-- both zero means track stopped in 8
+		if Spring.GetGameFrame() >= 1 then
+			fadelvl = 0
+			fadeOut = true
 		end
-
-		if playedTime >= totalTime then	-- both zero means track stopped in 8
-			if Spring.GetGameFrame() >= 1 then
-				fadelvl = 0
-			end
-			if Spring.GetGameFrame() == 0 then
-				PlayNewTrack()
-			end
-			if gameOver then
-				PlayNewTrack()
-			end
+		if Spring.GetGameFrame() == 0 then
+			PlayNewTrack()
 		end
-		
-		if (pauseWhenPaused and Spring.GetGameSeconds()>=0) then
-		local _, _, paused = Spring.GetGameSpeed()
-			if (paused ~= wasPaused) then
-				Spring.PauseSoundStream()
-				wasPaused = paused
-			end
+	end
+	
+	if (pauseWhenPaused and Spring.GetGameSeconds()>=0) then
+    local _, _, paused = Spring.GetGameSpeed()
+		if (paused ~= wasPaused) then
+			Spring.PauseSoundStream()
+			wasPaused = paused
 		end
-	elseif playedTime > 0 and totalTime > 0 then
-		Spring.StopSoundStream()
 	end
 end
 
@@ -774,10 +701,6 @@ function widget:SetConfigData(data)
 	if data.playing ~= nil then
 		playing = data.playing
 	end
-end
-
-function widget.GameOver()
-	gameOver = true
 end
 
 --------------------------------------------------------------------------------
