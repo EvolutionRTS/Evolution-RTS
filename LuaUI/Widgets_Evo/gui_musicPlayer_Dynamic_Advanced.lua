@@ -288,7 +288,7 @@ local function createList()
 		local trackname = string.gsub(curTrack, ".ogg", "")
 		local text = ''
 		--local charactersToCut = GetPathLenght()
-		charactersInPath = 28
+		charactersInPath = 23
 		if tracks and tracks == peaceTracks then
 			charactersInPath = charactersInPath + 8
 		elseif tracks and tracks == warTracks then
