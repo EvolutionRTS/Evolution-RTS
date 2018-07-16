@@ -1560,7 +1560,7 @@ function widget:GameFrame(n)
 		notificationTimeout = notificationTimeout - 1
 		--Spring.Echo(notificationTimeout)
 	end
-	if n%450 == 4 then
+	if n%30 == 1 then
 		local _, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
 		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
 

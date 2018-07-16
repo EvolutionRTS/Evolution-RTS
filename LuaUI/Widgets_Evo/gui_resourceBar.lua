@@ -169,8 +169,9 @@ function widget:GameFrame(n)
 		--Spring.Echo("S " .. supplyNotificationTimeout)
 	end
 
-	if n%450 == 4 then
+	if n%30 == 1 then
 		local _, _, spectator = Spring.GetPlayerInfo(Spring.GetMyTeamID())
+		--Spring.Echo(spectator)
 		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
 		simplifiedResourceBar = Spring.GetConfigInt("evo_simplifiedresourcebar", 1)
 
