@@ -14,7 +14,7 @@ end
 
 if gadgetHandler:IsSyncedCode() then
 
-	local namelist = {
+		local namelist = {
 'Killertrainz',
 'CRAZY POOCHES',
 'Crazy Anti',
@@ -344,16 +344,46 @@ if gadgetHandler:IsSyncedCode() then
 'SmokinHotChick',
 'BitchWhoDontMiss',
 'LilianaVess',
+'Forboding Angel',
+'Unforboding Angel',
+'notDamgam',
+'YourMom',
+'Boi',
+'Uncommon Player'
+'Random Bot 1',
+'RoboDestroyer69',
+'Hi',
+'YouAreDead',
+'Scary le Poo',
+'DooDoo',
+'Zoptop',
+'LeaveBAAloneNoob',
+'BattleRoyalePro',
+'SuppyBoi',
+'HungryHamster',
+'Nani',
+'Hello World',
 	}
-	local takenNames = {}
+	local namelistChicken = namelist
 
-	function getName(teamID)
-		local aiName = namelist[math.random(1,#namelist)]
-		if takenNames[aiName] == nil then
+	local takenNames = {}
+	local takenNamesChicken = {}
+
+	function getName(teamID, chicken)
+		local aiName
+		if chicken then
+			aiName = namelistChicken[math.random(1,#namelistChicken)]
+		else
+			aiName = namelist[math.random(1,#namelist)]
+		end
+		if chicken and takenNamesChicken[aiName] == nil then
+			takenNamesChicken[aiName] = teamID
+			return aiName
+		elseif not chicken and takenNames[aiName] == nil then
 			takenNames[aiName] = teamID
 			return aiName
 		else
-			return getName(teamID)
+			return getName(teamID, chicken)
 		end
 	end
 
@@ -361,9 +391,7 @@ if gadgetHandler:IsSyncedCode() then
 		local t = Spring.GetTeamList()
 		for _,teamID in ipairs(t) do
 			if select(4,Spring.GetTeamInfo(teamID)) then	-- is AI?
-				if not string.find(Spring.GetTeamLuaAI(teamID), "Chicken:") then
-					Spring.SetGameRulesParam('ainame_'..teamID, getName(teamID))
-				end
+				Spring.SetGameRulesParam('ainame_'..teamID, getName(teamID, string.find(Spring.GetTeamLuaAI(teamID), "Chicken:")))
 			end
 		end
 		gadgetHandler:RemoveGadget(self)

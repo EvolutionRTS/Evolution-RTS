@@ -126,11 +126,13 @@ end
 	end
 	--Spring.SendMessageToPlayer(0, "Hello World!")
 	------- Tech 0 - Very Early Game
-	if ec <= 50 then
-		if GG.TechCheck("tech2", ai.id) == false then
-			return "esolar2"
-		else
+	if ec <= 50 and GG.TechCheck("tech1", ai.id) == true then
+		if GG.TechCheck("tech3", ai.id) == true then
 			return "efusion2"
+		elseif GG.TechCheck("tech2", ai.id) == true then
+			return "egeothermal"
+		else
+			return "esolar2"
 		end
 	elseif mc >= ms - ms*0.10 then
 		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
@@ -160,10 +162,11 @@ end
 		
 	else
 		if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
-			if ec <= 50 then
-				return "esolar2"
-			else
+			local r = math.random(0,1)
+			if r == 0 then
 				return "emine"
+			else
+				return "eturretlightai"
 			end
 		
 		------- Reached Tech 1
@@ -184,10 +187,9 @@ end
 		------- Reached Tech 2 MK 2
 		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then 
 			if ec <= 50 then
-				return "efusion2"
+				return "egeothermal"
 			else
 				local r = math.random(0,5)
-				local r2 = math.random(0,30)
 				if r2 ~= 0 then
 					if r == 0 then
 						return "emine"
@@ -299,11 +301,13 @@ function RandomOverseer()
 	
 	
 	------- Tech 0 - Very Early Game
-	if ec <= 50 then
-		if GG.TechCheck("tech2", ai.id) == false then
-			return "esolar2"
-		else
+	if ec <= 50 and GG.TechCheck("tech1", ai.id) == true then
+		if GG.TechCheck("tech3", ai.id) == true then
 			return "efusion2"
+		elseif GG.TechCheck("tech2", ai.id) == true then
+			return "egeothermal"
+		else
+			return "esolar2"
 		end
 	elseif mc >= ms - ms*0.20 then
 		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
@@ -330,12 +334,13 @@ function RandomOverseer()
 		return "estorage"
 	else
 		if Spring.GetGameSeconds() <= 200 then 
+			local r = math.random(0,1)
 			if mc <= 10 or mi*2 <= me then
 				return "emetalextractor"
-			elseif ec <= 50 then
-				return "esolar2"
-			else
+			elseif r == 0 then
 				return "emine"
+			else
+				return "eturretlightai"
 			end
 		
 		------- Reached Tech 1
@@ -356,10 +361,9 @@ function RandomOverseer()
 		------- Reached Tech 2 MK 2
 		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then 
 			if ec <= 50 then
-				return "efusion2"
+				return "egeothermal"
 			else
 				local r = math.random(0,5)
-				local r2 = math.random(0,50)
 				if r2 ~= 0 then
 					if r == 0 then
 						return "emine"
@@ -676,8 +680,6 @@ local overseerlistfirst = {
 	"emetalextractor",
 	"emetalextractor",
 	"elifterai",
-	"esolar2",
-	"esolar2",
 }
 	
 local overseerorders = {

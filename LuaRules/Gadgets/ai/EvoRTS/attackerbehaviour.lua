@@ -70,7 +70,7 @@ function AttackerBehaviour:AttackCell(cell)
 	local startBoxMinX, startBoxMinZ, startBoxMaxX, startBoxMaxZ = Spring.GetAllyTeamStartBox(self.ai.allyId)
 	local ec, es = Spring.GetTeamResources(ai.id, "energy")
 	--attack
-	if (currenthealth >= maxhealth or currenthealth > 3000) and ec >= es - es*0.80 then
+	if (currenthealth >= maxhealth or currenthealth > 3000) then
 		p = api.Position()
 		p.x = cell.posx
 		p.z = cell.posz
