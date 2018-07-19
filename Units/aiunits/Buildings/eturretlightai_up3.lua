@@ -14,7 +14,7 @@ humanName = [[Lightning Rod Mark AI]]
 objectName = [[elightturret3.s3o]]
 script = [[elightturret2.cob]]
 
-tech = [[tech1]]
+tech = [[tech0]]
 armortype = [[building]]
 supply = [[0]]
 

@@ -17,7 +17,7 @@ local NanoTC = {}
 local ClosestNanoTC = {}
 
 for unitDefID, defs in pairs(UnitDefs) do
-	if string.find(defs.name, "eorb") then
+	if string.find(defs.name, "eorb") or string.find(defs.name, "commander") then
 		isNanoTC[unitDefID] = true
 	end
 end
@@ -57,7 +57,7 @@ local function Distance(x1,z1, x2,z2)
 	return dis
 end
 
-GG.GetClosestNanoTC = function (unitID)
+GG.GetClosestNanoTC = function(unitID)
 	local bestx, besty, bestz
 	local teamID = Spring.GetUnitTeam(unitID)
 	local ux, uy, uz = Spring.GetUnitPosition(unitID)

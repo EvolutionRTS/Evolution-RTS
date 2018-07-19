@@ -64,6 +64,7 @@ end
 
 function AttackerBehaviour:AttackCell(cell)
 	local unit = self.unit:Internal()
+	local unitID = unit.id
 	local currenthealth = unit:GetHealth()
 	local maxhealth = unit:GetMaxHealth()
 	local startPosx, startPosy, startPosz = Spring.GetTeamStartPosition(self.ai.id)
@@ -85,17 +86,22 @@ function AttackerBehaviour:AttackCell(cell)
 		end
 	--retreat
 	else
-		if startBoxMinX == 0 and startBoxMinZ == 0 and startBoxMaxZ == Game.mapSizeZ and startBoxMaxX == Game.mapSizeX then
+		local nanotcx, nanotcy, nanotcz = GG.GetClosestNanoTC(unitID)
+		if nanotcx and nanotcy and nanotcz then
+			p = api.Position()
+			p.x, p.y, p.z = nanotcx, nanotcy, nanotcz
+		elseif startBoxMinX == 0 and startBoxMinZ == 0 and startBoxMaxZ == Game.mapSizeZ and startBoxMaxX == Game.mapSizeX then
 			p = api.Position()
 			p.x = startPosx
 			p.z = startPosz
+			p.y = 0
 		else
 			p = api.Position()
 			p.x = math.random(startBoxMinX, startBoxMaxX)
 			p.z = math.random(startBoxMinZ, startBoxMaxZ)
+			p.y = 0
 		end
 		
-		p.y = startPosy
 		self.target = p
 		self.attacking = false
 		self.ai.attackhandler:AddRecruit(self)
