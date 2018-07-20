@@ -349,7 +349,7 @@ if gadgetHandler:IsSyncedCode() then
 'notDamgam',
 'YourMom',
 'Boi',
-'Uncommon Player'
+'Uncommon Player',
 'Random Bot 1',
 'RoboDestroyer69',
 'Hi',
