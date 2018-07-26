@@ -112,7 +112,7 @@ local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 local fadeOut = false
 local fadeIn = false
 local endFade = false
-local maxWarMeter = 800
+local maxWarMeter = 1200
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -298,7 +298,7 @@ local function createList()
 		elseif tracks and tracks == silenceTracks then
 			charactersInPath = 999
 		elseif tracks and tracks == loadingTracks then
-			charactersInPath = 999
+			charactersInPath = charactersInPath + 10
 		end
 		for i=charactersInPath, #trackname do
 	    local c = string.sub(trackname, i,i)
@@ -551,6 +551,7 @@ function widget:GameFrame(n)
 		
 		--endfade
 		if endFade == true then
+			warMeter = 0
 			fadelvl = fadelvl - 0.01
 			Spring.SetSoundStreamVolume(fadelvl)
 		end

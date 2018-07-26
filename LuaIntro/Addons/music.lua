@@ -13,19 +13,19 @@ if addon.InGetInfo then
 end
 
 ------------------------------------------
-
+math.randomseed( os.time() - os.clock() * 1000 )
+math.random() math.random() math.random()
 Spring.SetSoundStreamVolume(0.5)
 local musicfiles = VFS.DirList("LuaUI/Widgets_Evo/Music/loading", "*.ogg")
 if (#musicfiles > 0) then
-	Spring.PlaySoundStream(musicfiles[1], 0.5)
-	Spring.SetSoundStreamVolume(0)
+	Spring.PlaySoundStream(musicfiles[math.random(1,#musicfiles)], 0.5)
+	Spring.SetSoundStreamVolume(1)
 end
 
 
-function addon.DrawLoadScreen()
-	local loadProgress = SG.GetLoadProgress()
-	Spring.SetSoundStreamVolume(loadProgress)
-end
+--function addon.DrawLoadScreen()
+	--Spring.SetSoundStreamVolume(100)
+--end
 
 
 function addon.Shutdown()
