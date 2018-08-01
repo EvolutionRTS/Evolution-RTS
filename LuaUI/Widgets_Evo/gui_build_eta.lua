@@ -33,7 +33,7 @@ local Spring = Spring
 local table  = table
 
 local etaTable = {}
-local etaMaxDist= 750000 -- max dist at which to draw ETA
+local etaMaxDist= 10000000 -- max dist at which to draw ETA
 ---------------------------
 
 --------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ local function DrawEtaText(timeLeft,yoffset)
   gl.Billboard()
   gl.Translate(0, 5 ,0)
   --fontHandler.DrawCentered(etaStr)
-  gl.Text(etaStr, 0, 0, 5.75, "co")
+  gl.Text(etaStr, 0, 0, 16, "cos")
 end
 
 function widget:DrawWorld()
