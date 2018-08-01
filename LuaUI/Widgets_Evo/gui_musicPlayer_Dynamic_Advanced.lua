@@ -488,9 +488,12 @@ function widget:GameFrame(n)
 	if music_volume_set > 0.02 then
 			
 			prevfadelvl = fadelvl
-		
+		--VolumeTargets
 		if tracks == warTracks or tracks == warCutTracks then
-			if warMeter > 0 then
+			local playedTime, totalTime = Spring.GetSoundStreamTime()
+			if fadelvl and fadelvl < music_volume_set*0.4 and playedTime > 10 then
+				music_volume_target = 0
+			elseif warMeter > 0 then
 				music_volume_target = music_volume_set
 			else
 				music_volume_target = 0
@@ -563,11 +566,11 @@ function widget:GameFrame(n)
 			end
 			if fadelvl < music_volume_target then
 				if tracks == peaceTracks then
-					fadelvl = fadelvl + 0.0005
+					fadelvl = fadelvl + 0.00025
 				elseif playedTime < 5 then
-					fadelvl = fadelvl + 0.01
+					fadelvl = fadelvl + 0.03
 				else
-					fadelvl = fadelvl + 0.001
+					fadelvl = fadelvl + 0.003
 				end
 				Spring.SetSoundStreamVolume(fadelvl)
 			end
@@ -575,7 +578,7 @@ function widget:GameFrame(n)
 				if tracks == peaceTracks and warMeter > 0 then
 					fadelvl = fadelvl - 0.01
 				else
-					fadelvl = fadelvl - 0.001
+					fadelvl = fadelvl - 0.0005
 				end
 				Spring.SetSoundStreamVolume(fadelvl)
 			end
@@ -626,20 +629,20 @@ function PlayNewTrack()
 				--Spring.Echo("Current tracklist is : Silence Tracks")
 			end
 		else
-			--if tracks == peaceTracks or tracks == silenceTracks then
-				--local r = math.random(0,3)
-				--if r == 0 then
+			if tracks == peaceTracks or tracks == silenceTracks then
+				local r = math.random(0,4)
+				if r == 0 then
 					tracks = warTracks
 					--Spring.Echo("Current tracklist is : War Tracks")
-				--else
-					--tracks = warCutTracks
+				else
+					tracks = warCutTracks
 					--Spring.Echo("Current tracklist is : WarCut Tracks")
-				--end
+				end
 				
-			--else
-				--tracks = warTracks
+			else
+				tracks = warTracks
 				--Spring.Echo("Current tracklist is : War Tracks")
-			--end
+			end
 	end
 	local newTrack = previousTrack
 	repeat
