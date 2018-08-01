@@ -236,7 +236,8 @@ function widget:Update(dt)
 	passedTime = passedTime + dt
 	if passedTime > 0.2 then
 		passedTime = passedTime - 0.2
-		if WG['advplayerlist_api'].GetLockPlayerID ~= nil then
+		updatePosition()
+		if WG['advplayerlist_api'] and WG['advplayerlist_api'].GetLockPlayerID ~= nil then
 			lockPlayerID = WG['advplayerlist_api'].GetLockPlayerID()
 			if lockPlayerID ~= prevLockPlayerID then
 				createList()
@@ -290,8 +291,8 @@ function widget:ViewResize(newX,newY)
 	vsx, vsy = newX, newY
 end
 
+
 function widget:DrawScreen()
-	updatePosition()
 	if lockPlayerID ~= nil and drawlist[1] ~= nil then
 		glPushMatrix()
 		glCallList(drawlist[1])

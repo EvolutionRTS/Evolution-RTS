@@ -12,9 +12,9 @@ return {
 end
 
 local loadedFontSize = 32
-local font = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", loadedFontSize, 16,2)
+local font = gl.LoadFont("LuaUI/Fonts/FreeSansBold.otf", loadedFontSize, 16,2)
 
-local bgcorner = LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgcorner = "LuaUI/Images/bgcorner.png"
 
 		
 local titlecolor = "\255\255\205\100"
@@ -112,7 +112,7 @@ local screenWidth = 400-bgMargin-bgMargin
 
 local textareaMinLines = 10		-- wont scroll down more, will show at least this amount of lines 
 
-local customScale = 1
+local customScale = 1.06
 
 local startLine = 1
 
@@ -429,28 +429,6 @@ function IsOnRect(x, y, BLcornerX, BLcornerY,TRcornerX,TRcornerY)
 	                      and y <= TRcornerY
 end
 
-function widget:IsAbove(x, y)
-	-- on window
-	if show then
-		local rectX1 = ((screenX-bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
-		local rectY1 = ((screenY+bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
-		local rectX2 = ((screenX+screenWidth+bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
-		local rectY2 = ((screenY-screenHeight-bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
-		return IsOnRect(x, y, rectX1, rectY2, rectX2, rectY1)
-	else
-		return false
-	end
-end
-
-function widget:GetTooltip(mx, my)
-	if show and widget:IsAbove(mx,my) then
-		return string.format(
-			"\255\255\255\1Left mouse\255\255\255\255 on textarea to scroll down.\n"..
-			"\255\255\255\1Right mouse\255\255\255\255 on textarea  to scroll up.\n\n"..
-			"Add CTRL or SHIFT to scroll faster, or combine CTRL+SHIFT (+ALT).")
-	end
-end
-
 function widget:MouseWheel(up, value)
 	
 	if show then	
@@ -532,7 +510,7 @@ end
 
 function lines(str)
   local t = {}
-  local function helper(line) table.insert(t, line) return "" end
+  local function helper(line) t[#t+1] = line return "" end
   helper((str:gsub("(.-)\r?\n", helper)))
   return t
 end
@@ -595,7 +573,7 @@ function widget:Initialize()
 		
 	else
 		--Spring.Echo("Commands info: couldn't load the commandslist file")
-		widgetHandler:RemoveWidget()
+		widgetHandler:RemoveWidget(self)
 	end
 end
 

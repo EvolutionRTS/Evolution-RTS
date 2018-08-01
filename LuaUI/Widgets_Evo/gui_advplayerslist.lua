@@ -53,8 +53,8 @@ local pointDuration    		= 40
 local cpuText				= false
 local drawAlliesLabel = false
 local alwaysHideSpecs = false
-local lockcameraHideEnemies = false --true
-local lockcameraLos = false --true
+local lockcameraHideEnemies = true 			-- specfullview
+local lockcameraLos = true					-- togglelos
 
 --------------------------------------------------------------------------------
 -- SPEED UPS
@@ -82,7 +82,6 @@ local Spring_GetAIInfo           = Spring.GetAIInfo
 local Spring_GetTeamRulesParam   = Spring.GetTeamRulesParam
 local Spring_IsGUIHidden		 = Spring.IsGUIHidden
 local Spring_GetDrawFrame		 = Spring.GetDrawFrame
-local Spring_GetTeamColor		 = Spring.GetTeamColor
 local Spring_GetMyTeamID		 = Spring.GetMyTeamID
 local Spring_AreTeamsAllied		 = Spring.AreTeamsAllied
 
@@ -143,8 +142,8 @@ local pics = {
 	resourcesPic    = imageDirectory.."res.png",
 	resbarPic       = imageDirectory.."resbar.png",
 	resbarBgPic     = imageDirectory.."resbarBg.png",
-    barGlowCenterPic= imageDirectory.."barglow-center.dds",
-    barGlowEdgePic	= imageDirectory.."barglow-edge.dds",
+    barGlowCenterPic= imageDirectory.."barglow-center.png",
+    barGlowEdgePic	= imageDirectory.."barglow-edge.png",
 
 	cpuPingPic      = imageDirectory.."cpuping.dds",
 	specPic         = imageDirectory.."spec.png",
@@ -193,11 +192,14 @@ local lastTime        = 0
 local blinkTime       = 0
 local now             = 0
 
+local lastRequestTime = -1
+local interRequestTime = 1 -- seconds
+
 --------------------------------------------------------------------------------
 -- LockCamera variables
 --------------------------------------------------------------------------------
 
-local transitionTime	= 1 --how long it takes the camera to move when trackign a player
+local transitionTime	= 0.37 --how long it takes the camera to move when trackign a player
 local listTime			= 14 --how long back to look for recent broadcasters
 
 local myPlayerID = Spring.GetMyPlayerID()
@@ -559,6 +561,7 @@ m_seespec = {
 local specsLabelOffset = 0
 local teamsizeVersusText = ""
 
+
 ---------------------------------------------------------------------------------------------------
 --  Geometry
 ---------------------------------------------------------------------------------------------------
@@ -668,7 +671,7 @@ local function UpdateAlliances()
 			local alliances = {}
 			for _,player2ID in pairs (playerList) do
 				if not player[playerID].spec and not player[player2ID].spec and playerID ~= player2ID  and  player[playerID].team ~= nil and player[player2ID].team ~= nil and  player[playerID].allyteam ~= player[player2ID].allyteam  and  Spring_AreTeamsAllied(player[player2ID].team, player[playerID].team) then
-					table.insert(alliances, player2ID)
+					alliances[#alliances+1] = player2ID
 				end
 			end
 			player[playerID].alliances = alliances
@@ -676,6 +679,198 @@ local function UpdateAlliances()
 	end
 end
 
+function toPixels(str,greyscale)
+	local chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()_+-=[]{};:,./<>?~|`'\"\\"
+	local pixels = {}
+	for i=1, string.len(str) do
+		if (not greyscale and i%3 == 1) or greyscale then
+			pixels[#pixels+1] = {}
+		end
+		local char = string.sub(str,i,i)
+		for ci=1, string.len(chars) do
+			if char == string.sub(chars,ci,ci) then
+				pixels[#pixels][#pixels[#pixels]+1] = (ci-1)/string.len(chars)
+				break
+			end
+		end
+	end
+	return pixels
+end
+
+-- only being called for devs registered in gadget
+function PlayerDataBroadcast(playerName, msg)
+	local data = ''
+	local count = 0
+	local startPos = 0
+	for i=1, string.len(msg) do
+		if string.sub(msg, i, i) == ';' then
+			count = count + 1
+			if count == 1 then
+				startPos = i+1
+				playerName = string.sub(msg,1,i-1)
+			elseif count == 2 then
+				msgType = string.sub(msg,startPos,i-1)
+				data = string.sub(msg, i+1)
+				break
+			end
+		end
+	end
+	if data then
+		if msgType == 'screenshot' then
+			data = VFS.ZlibDecompress(data)
+			count = 0
+			for i=1, string.len(data) do
+				if string.sub(data, i, i) == ';' then
+					count = count + 1
+					if count == 1 then
+						local finished = string.sub(data,1,i-1)
+						if finished == '1' then
+							screenshotFinished = true
+						else
+							screenshotFinished = false
+						end
+						startPos = i+1
+					elseif count == 2 then
+						screenshotWidth = string.sub(data,startPos,i-1)
+						startPos = i+1
+					elseif count == 3 then
+						screenshotHeight = string.sub(data,startPos,i-1)
+						startPos = i+1
+					elseif count == 4 then
+						local rgb = string.sub(data,startPos,i-1)
+						if rgb == '1' then
+							greyscale = false
+						else
+							greyscale = true
+						end
+						startPos = i+1
+					elseif count == 5 then
+						local camChanged = string.sub(data,startPos,i-1)
+						if camChanged == '1' then
+							camChanged = true
+						else
+							camChanged = false
+						end
+						startPos = i+1
+					elseif count == 6 then
+						screenshotGameframe = tonumber(string.sub(data,startPos,i-1))
+						if not screenshotData then
+							screenshotData = string.sub(data, i+1)
+						else
+							screenshotData = screenshotData .. string.sub(data, i+1)
+						end
+						break
+					end
+				end
+			end
+			data = nil
+			screenshotDataLast = totalTime
+
+			if screenshotFinished or totalTime-4000 > screenshotDataLast then
+				screenshotFinished = true
+				local map = Game.mapName
+				local datetable = os.date('*t')
+				local frame = Spring.GetGameFrame()
+				local minutes = math.floor((screenshotGameframe / 30 / 60))
+				local seconds = math.floor((screenshotGameframe - ((minutes*60)*30)) / 30)
+				if seconds == 0 then
+					seconds = '00'
+				elseif seconds < 10 then
+					seconds = '0'..seconds
+				end
+				local time = minutes..':'..seconds
+				local yyyy = datetable.year
+				local m = datetable.month
+				local d = datetable.day
+				local h = datetable.hour
+				local min = datetable.min
+				local s = datetable.sec
+				local yyyy = tostring(yyyy)
+				local mm = ((m > 9 and tostring(m)) or (m <10 and ("0"..tostring(m))))
+				local dd = ((d > 9 and tostring(d)) or (d <10 and ("0"..tostring(d))))
+				local hh = ((h > 9 and tostring(h)) or (h <10 and ("0"..tostring(h))))
+				local minmin = ((min > 9 and tostring(min)) or (min <10 and ("0"..tostring(min))))
+				local ss = ((s > 9 and tostring(s)) or (s <10 and ("0"..tostring(s))))
+				local engine = Engine.versionFull
+
+				screenshotPixels = toPixels(screenshotData, greyscale)
+				screenshotPlayer = playerName
+				screenshotFilename = yyyy..mm..dd.."_"..hh..minmin..ss.."_" ..minutes..'.'..seconds.."_"..playerName
+				screenshotSaved = nil
+				screenshotSaveQueued = true
+				screenshotPosX = widgetPosX-(backgroundMargin+30+screenshotWidth*widgetScale)
+				screenshotPosY = widgetPosY
+				screenshotDlist = gl_CreateList(function()
+					gl.PushMatrix()
+					gl.Translate(screenshotPosX, screenshotPosY,0)
+					gl.Scale(widgetScale,widgetScale,0)
+
+					gl_Color(0,0,0,0.66)
+					local margin = 2
+					RectRound(-margin,-margin,screenshotWidth+margin+margin,screenshotHeight+15+margin+margin, 6, true)
+					gl_Color(1,1,1,0.025)
+					RectRound(0,0,screenshotWidth,screenshotHeight+12+margin+margin, 4.5, true)
+
+					gl.Text(screenshotPlayer, 4, screenshotHeight+6.5, 11, "on")
+
+					local row = 0
+					local col = 0
+					for p=1, #screenshotPixels do
+						col = col + 1
+						if p%screenshotWidth == 1 then
+							row = row + 1
+							col = 1
+						end
+						if greyscale then
+							gl.Color(screenshotPixels[p][1], screenshotPixels[p][1], screenshotPixels[p][1], 1)
+						elseif screenshotPixels[p][3] then
+							gl.Color(screenshotPixels[p][1], screenshotPixels[p][2], screenshotPixels[p][3], 1)
+						end
+						gl.Rect(col, row, col+1, row+1)
+					end
+					gl.PopMatrix()
+
+				end)
+				screenshotPixels = nil
+				screenshotData = nil
+				screenshotFinished = nil
+			end
+		elseif msgType == 'infolog' or msgType == 'config' then
+			local playerID
+			for i=1, string.len(data) do
+				if string.sub(data, i, i) == ';' then
+					playerID = tonumber(string.sub(data,1,i-1))
+					startPos = i+1
+					data = string.sub(data, i+1)
+					break
+				end
+			end
+			if playerID == myPlayerID then
+				local datetable = os.date('*t')
+				local yyyy = datetable.year
+				local m = datetable.month
+				local d = datetable.day
+				local h = datetable.hour
+				local min = datetable.min
+				local yyyy = tostring(yyyy)
+				local mm = ((m > 9 and tostring(m)) or (m <10 and ("0"..tostring(m))))
+				local dd = ((d > 9 and tostring(d)) or (d <10 and ("0"..tostring(d))))
+				local hh = ((h > 9 and tostring(h)) or (h <10 and ("0"..tostring(h))))
+				local minmin = ((min > 9 and tostring(min)) or (min <10 and ("0"..tostring(min))))
+
+				local filename = 'playerdata_'..msgType..'s.txt'
+				local filedata = ''
+				if VFS.FileExists(filename) then
+					filedata = tostring(VFS.LoadFile(filename))
+				end
+				local file = assert(io.open(filename, 'w'), 'Unable to save '..filename)
+				file:write(filedata .. '-----------------------------------------------------\n----  '.. yyyy..'-'..mm..'-'..dd.."  "..hh..'.'..minmin .. '  ' .. playerName .. '\n-----------------------------------------------------\n' .. VFS.ZlibDecompress(data) .. "\n\n\n\n\n\n")
+				file:close()
+				Spring.Echo('Added '..msgType..' to '..filename)
+			end
+		end
+	end
+end
 
 ---------------------------------------------------------------------------------------------------
 --  LockCamera stuff
@@ -699,19 +894,20 @@ local function LockCamera(playerID)
 	if playerID and playerID ~= myPlayerID and playerID ~= lockPlayerID then
 		if lockcameraHideEnemies and not select(3,Spring_GetPlayerInfo(playerID)) then
 			if not fullView then
-				sceduledSpecFullView = 1
+				sceduledSpecFullView = 1	-- this is needed else the minimap/world doesnt update properly
 				Spring.SendCommands("specfullview")
 			else
-				sceduledSpecFullView = 2
+				sceduledSpecFullView = 2	-- this is needed else the minimap/world doesnt update properly
 				Spring.SendCommands("specfullview")
 			end
 			if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()~="los" then
-				Spring.SendCommands("togglelos")
+				desiredLosmode = 'los'
 			end
 		elseif lockcameraHideEnemies and select(3,Spring_GetPlayerInfo(playerID)) then
 			if not fullView then
 				Spring.SendCommands("specfullview")
 			end
+			desiredLosmode = 'normal'
 		end
 		lockPlayerID = playerID
 		myLastCameraState = myLastCameraState or GetCameraState()
@@ -729,7 +925,7 @@ local function LockCamera(playerID)
 				Spring.SendCommands("specfullview")
 			end
 			if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()=="los" then
-				Spring.SendCommands("togglelos")
+				desiredLosmode = 'normal'
 			end
 		end
 		lockPlayerID = nil
@@ -743,16 +939,19 @@ end
 
 function FpsEvent(playerID, fps)
 	lastFpsData[playerID] = fps
+
+	WG.playerFPS = WG.playerFPS or {}
+	WG.playerFPS[playerID] = fps	
 end
 	
 function SystemEvent(playerID, system)
-  -- dont trust the recieved data, limiting abuse
   local lines, length = 0, 0
   local function helper(line) lines=lines+1; if string.len(line) then length = string.len(line) end return "" end
-	helper((system:gsub("(.-)\r?\n", helper)))
-  if lines <= 9 and length <= 64 then
-  	lastSystemData[playerID] = system
-  end
+  helper((system:gsub("(.-)\r?\n", helper)))
+  lastSystemData[playerID] = system
+
+  WG.playerSystemData = WG.playerSystemData or {}
+  WG.playerSystemData[playerID] = system
 end
 
 function ActivityEvent(playerID)
@@ -799,6 +998,7 @@ function widget:Initialize()
   widgetHandler:RegisterGlobal('FpsEvent', FpsEvent)
   widgetHandler:RegisterGlobal('GpuMemEvent', GpuMemEvent)
   widgetHandler:RegisterGlobal('SystemEvent', SystemEvent)
+  widgetHandler:RegisterGlobal('PlayerDataBroadcast', PlayerDataBroadcast)
 	UpdateRecentBroadcasters()
 	
 	mySpecStatus,fullView,_ = Spring.GetSpectatingState()
@@ -825,7 +1025,6 @@ function widget:Initialize()
 	
 	WG['advplayerlist_api'] = {}
 	WG['advplayerlist_api'].GetPosition = function()
-	
 		local margin = backgroundMargin
 	
 		local BLcornerX = widgetPosX - margin
@@ -833,12 +1032,12 @@ function widget:Initialize()
 		local TRcornerX = widgetPosX + widgetWidth + margin
 		local TRcornerY = widgetPosY + widgetHeight - 1 + margin
 		
-		local left		= BLcornerX - ((widgetPosX - BLcornerX) * (widgetScale-1))
-		local bottom	= BLcornerY - ((widgetPosY - BLcornerY) * (widgetScale-1))
-		local right		= TRcornerX - ((widgetPosX - TRcornerX) * (widgetScale-1))
-		local top		= TRcornerY - ((widgetPosY - TRcornerY) * (widgetScale-1))
+		local leftPos		= BLcornerX - ((widgetPosX - BLcornerX) * (widgetScale-1))
+		local bottomPos		= BLcornerY - ((widgetPosY - BLcornerY) * (widgetScale-1))
+		local rightPos		= TRcornerX - ((widgetPosX - TRcornerX) * (widgetScale-1))
+		local topPos		= TRcornerY - ((widgetPosY - TRcornerY) * (widgetScale-1))
 		
-		return {top,left,bottom,right,widgetScale}
+		return {topPos,leftPos,bottomPos,rightPos,widgetScale,right}
 	end
     WG['advplayerlist_api'].GetLockPlayerID = function()
         return lockPlayerID
@@ -856,6 +1055,7 @@ function widget:Initialize()
 				if not fullView then
 					Spring.SendCommands("specfullview")
 					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()=="los" then
+						desiredLosmode = 'normal'
 						Spring.SendCommands("togglelos")
 					end
 				end
@@ -863,6 +1063,7 @@ function widget:Initialize()
 				if fullView then
 					Spring.SendCommands("specfullview")
 					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()~="los" then
+						desiredLosmode = 'los'
 						Spring.SendCommands("togglelos")
 					end
 				end
@@ -876,8 +1077,10 @@ function widget:Initialize()
 		lockcameraLos = value
 		if lockcameraHideEnemies and mySpecStatus and lockPlayerID and not select(3,Spring_GetPlayerInfo(lockPlayerID)) then
 			if lockcameraLos and Spring.GetMapDrawMode()~="los" then
+				desiredLosmode = 'los'
 				Spring.SendCommands("togglelos")
 			elseif not lockcameraLos and Spring.GetMapDrawMode()=="los" then
+				desiredLosmode = 'normal'
 				Spring.SendCommands("togglelos")
 			end
 		end
@@ -904,6 +1107,7 @@ end
 function widget:Shutdown()
 	if (WG['guishader_api'] ~= nil) then
 		WG['guishader_api'].RemoveRect('advplayerlist')
+		WG['guishader_api'].RemoveRect('advplayerlist_screenshot')
 	end
 	WG['advplayerlist_api'] = nil
 	widgetHandler:DeregisterGlobal('CameraBroadcastEvent')
@@ -920,8 +1124,11 @@ function widget:Shutdown()
 	if Background then
 		gl_DeleteList(Background)
 	end
+	if screenshotDlist then
+		gl_DeleteList(screenshotDlist)
+	end
 	if lockPlayerID and mySpecStatus and Spring.GetMapDrawMode()=="los" then
-		Spring.SendCommands("togglelos")
+		desiredLosmode = 'normal'
 	end
 end
 
@@ -942,7 +1149,7 @@ function SetSidePics()
 			if startunit == sideOneDefID then 
 				teamSide = teamSideOne
 			end
-			if startunit == sideOneDefID then 
+			if startunit == sideOneDefID then
 				teamSide = teamSideTwo
 			end
 		else
@@ -972,6 +1179,7 @@ end
 
 function GetAllPlayers()
 	local noplayer
+	local tplayerCount = 0
 	local allteams   = Spring_GetTeamList()
 	teamN = table.maxn(allteams) - 1               --remove gaia
 	for i = 0,teamN-1 do
@@ -979,8 +1187,12 @@ function GetAllPlayers()
 		player[i + 64] = CreatePlayerFromTeam(i)
 		for _,playerID in ipairs(teamPlayers) do
 			player[playerID] = CreatePlayer(playerID)
+			tplayerCount = tplayerCount + 1
 		end
-		playerSpecs[i] = true		-- (this isnt correct when team consists of only AI)
+		if tplayerCount > 0 then
+			playerSpecs[i] = true		-- (this isnt correct when team consists of only AI)
+		end
+		tplayerCount = 0
 	end
 	specPlayers = Spring_GetTeamList()
 	for _,playerID in ipairs(specPlayers) do
@@ -1013,7 +1225,13 @@ function round(num, idp)
 end
 
 function GetSkill(playerID)
-	local customtable = select(10,Spring_GetPlayerInfo(playerID)) -- player custom table
+
+	local customtable
+	if select(11,Spring.GetPlayerInfo(playerID)) then   -- changed to 11th in engine 104.0.1.547
+		customtable = select(11,Spring.GetPlayerInfo(playerID)) -- player custom table
+	else
+		customtable = select(10,Spring.GetPlayerInfo(playerID))
+	end
 	local tsMu = customtable.skill
 	local tsSigma = customtable.skilluncertainty
 	local tskill = ""
@@ -1124,7 +1342,7 @@ function CreatePlayerFromTeam(teamID) -- for when we don't have a human player o
 		local version
 		
 		_,_,_,_, tname, version = Spring_GetAIInfo(teamID)
-
+		
 		if type(version) == "string" then
 			tname = "AI:" .. tname .. "-" .. version
 		else
@@ -1319,8 +1537,8 @@ function SortAllyTeams(vOffset)
 		if allyTeamID == myAllyTeamID  then
 			vOffset = vOffset + labelOffset - 3
 			if drawAlliesLabel then
-				table.insert(drawListOffset, vOffset)
-			  table.insert(drawList, -2)  -- "Allies" label
+				drawListOffset[#drawListOffset+1] = vOffset
+				drawList[#drawList+1] = -2  -- "Allies" label
 			  vOffset = SortTeams(allyTeamID, vOffset)+2	-- Add the teams from the allyTeam
 			else
 			  vOffset = SortTeams(allyTeamID, vOffset-labelOffset)
@@ -1337,13 +1555,13 @@ function SortAllyTeams(vOffset)
                 vOffset = vOffset + 13
 				
 				vOffset = vOffset + labelOffset - 3
-				table.insert(drawListOffset, vOffset)
-				table.insert(drawList, -3) -- "Enemies" label
+				drawListOffset[#drawListOffset+1] = vOffset
+				drawList[#drawList+1] = -3 -- "Enemies" label
 				firstenemy = false
 			else
 				vOffset = vOffset + separatorOffset
-				table.insert(drawListOffset, vOffset)
-				table.insert(drawList, -4) -- Enemy teams separator
+				drawListOffset[#drawListOffset+1] = vOffset
+				drawList[#drawList+1] = -4 -- Enemy teams separator
 			end
 			vOffset = SortTeams(allyTeamID, vOffset)+2 -- Add the teams from the allyTeam 
 		end
@@ -1362,13 +1580,13 @@ function SortTeams(allyTeamID, vOffset)
 	
 	--add teams 
 	for _,teamID in ipairs(teamsList) do
-			table.insert(drawListOffset, vOffset)
-			table.insert(drawList, -1)
-			vOffset = SortPlayers(teamID,allyTeamID,vOffset) -- adds players form the team
-            local _,_, isDead, _, _, _ = Spring_GetTeamInfo(teamID)
-            if isDead then
-                vOffset = vOffset - (deadPlayerHeightReduction/2)
-            end
+		drawListOffset[#drawListOffset+1] = vOffset
+		drawList[#drawList+1] = -1
+		vOffset = SortPlayers(teamID,allyTeamID,vOffset) -- adds players form the team
+		local _,_, isDead, _, _, _ = Spring_GetTeamInfo(teamID)
+		if isDead then
+			vOffset = vOffset - (deadPlayerHeightReduction/2)
+		end
 	end
 	
 	return vOffset
@@ -1386,8 +1604,8 @@ function SortPlayers(teamID,allyTeamID,vOffset)
 		if player[myPlayerID].name ~= nil then
 			if mySpecStatus == false then
 				vOffset = vOffset + playerOffset
-				table.insert(drawListOffset, vOffset)
-				table.insert(drawList, myPlayerID) -- new player (with ID)
+				drawListOffset[#drawListOffset+1] = vOffset
+				drawList[#drawList+1] = myPlayerID -- new player (with ID)
 				player[myPlayerID].posY = vOffset
 				noPlayer = false
 			end
@@ -1400,8 +1618,8 @@ function SortPlayers(teamID,allyTeamID,vOffset)
 			if player[playerID].name ~= nil then
 				if player[playerID].spec ~= true then
 					vOffset = vOffset + playerOffset
-					table.insert(drawListOffset, vOffset)
-					table.insert(drawList, playerID) -- new player (with ID)
+					drawListOffset[#drawListOffset+1] = vOffset
+					drawList[#drawList+1] = playerID -- new player (with ID)
 					player[playerID].posY = vOffset
 					noPlayer = false
 				end
@@ -1412,8 +1630,8 @@ function SortPlayers(teamID,allyTeamID,vOffset)
 	-- add AI teams
 	if isAi == true then
 		vOffset = vOffset + playerOffset
-		table.insert(drawListOffset, vOffset)
-		table.insert(drawList, 64 + teamID) -- new AI team (instead of players)
+		drawListOffset[#drawListOffset+1] = vOffset
+		drawList[#drawList+1] = 64 + teamID -- new AI team (instead of players)
 		player[64 + teamID].posY = vOffset
 		noPlayer = false
 	end
@@ -1421,8 +1639,8 @@ function SortPlayers(teamID,allyTeamID,vOffset)
 	-- add no player token if no player found in this team at this point
 	if noPlayer == true then
 		vOffset = vOffset + playerOffset - (deadPlayerHeightReduction/2)
-		table.insert(drawListOffset, vOffset)
-		table.insert(drawList, 64 + teamID)  -- no players team
+		drawListOffset[#drawListOffset+1] = vOffset
+		drawList[#drawList+1] = 64 + teamID  -- no players team
 		player[64 + teamID].posY = vOffset
 		if Spring_GetGameFrame() > 0 then
 			player[64+teamID].totake = IsTakeable(teamID)
@@ -1445,8 +1663,8 @@ function SortSpecs(vOffset)
 				if noSpec == true then
 					vOffset = vOffset + 13
 					vOffset = vOffset + labelOffset - 2
-					table.insert(drawListOffset, vOffset)
-					table.insert(drawList, -5)
+					drawListOffset[#drawListOffset+1] = vOffset
+					drawList[#drawList+1] = -5
 					noSpec = false
 					specJoinedOnce = true
 					vOffset = vOffset + 4					
@@ -1455,8 +1673,8 @@ function SortSpecs(vOffset)
 				-- add spectator
 				if specListShow == true then
 					vOffset = vOffset + specOffset
-					table.insert(drawListOffset, vOffset)
-					table.insert(drawList, playerID)
+					drawListOffset[#drawListOffset+1] = vOffset
+					drawList[#drawList+1] = playerID
 					player[playerID].posY = vOffset
 					noPlayer = false
 				end
@@ -1468,8 +1686,8 @@ function SortSpecs(vOffset)
 	if specJoinedOnce and noSpec then
 		vOffset = vOffset + 13
 		vOffset = vOffset + labelOffset - 2
-		table.insert(drawListOffset, vOffset)
-		table.insert(drawList, -5)
+		drawListOffset[#drawListOffset+1] = vOffset
+		drawList[#drawList+1] = -5
 		vOffset = vOffset + 4
 	end
 	
@@ -1500,7 +1718,7 @@ function widget:DrawScreen()
 	
 	-- update lists frequently if there is mouse interaction
 	local NeedUpdate = false 
-	local mouseX,mouseY = Spring_GetMouseState()
+	local mouseX,mouseY,mouseButtonL = Spring_GetMouseState()
 	if (mouseX > widgetPosX + m_name.posX + m_name.width - 5) and (mouseX < widgetPosX + widgetWidth) and (mouseY > widgetPosY - 16) and (mouseY < widgetPosY + widgetHeight) then
 		local DrawFrame = Spring_GetDrawFrame()
 		local CurGameFrame = Spring_GetGameFrame()
@@ -1537,11 +1755,59 @@ function widget:DrawScreen()
 	else
 		CreateShareSlider()
 	end
-	
+
+
 	local scaleReset = widgetScale / widgetScale / widgetScale
 	gl.Translate(-scaleDiffX,-scaleDiffY,0)
 	gl.Scale(scaleReset,scaleReset,0)
+
+	if screenshotDlist then
+		gl_CallList(screenshotDlist)
+		local margin = 1.9*widgetScale
+		local left = screenshotPosX-margin
+		local bottom = screenshotPosY-margin
+		local width = (screenshotWidth*widgetScale)+margin+margin+margin
+		local height = (screenshotHeight*widgetScale)+margin+margin+margin+(15*widgetScale)
+		if screenshotSaveQueued then
+			if (WG['guishader_api'] ~= nil) then
+				WG['guishader_api'].InsertRect(left,bottom,left+width,bottom+height,'advplayerlist_screenshot')
+				screenshotGuishader = true
+			end
+			if not screenshotSaved then
+				screenshotSaved = 'next'
+			elseif screenshotSaved == 'next' then
+				screenshotSaved = 'done'
+				local file = 'screenshots/'..screenshotFilename..'.png'
+				gl.SaveImage(left,bottom,width,height,file)
+				Spring.Echo('Screenshot saved to: '..file)
+				screenshotSaveQueued = nil
+			end
+		end
+		if IsOnRectPlain(mouseX,mouseY, screenshotPosX,screenshotPosY,screenshotPosX+(screenshotWidth*widgetScale),screenshotPosY+(screenshotHeight*widgetScale)) then
+			if mouseButtonL then
+				gl_DeleteList(screenshotDlist)
+				if (WG['guishader_api'] ~= nil) then
+					WG['guishader_api'].RemoveRect('advplayerlist_screenshot')
+				end
+				screenshotDlist = nil
+			else
+				gl.Color(0,0,0,0.25)
+				RectRound(screenshotPosX,screenshotPosY,screenshotPosX+(screenshotWidth*widgetScale),screenshotPosY+(screenshotHeight*widgetScale), 2*widgetScale, true)				-- close button
+				local size = (screenshotHeight*widgetScale)*1.2
+				local width = size*0.011
+				gl.Color(1,1,1,0.66)
+				gl.PushMatrix()
+				gl.Translate(screenshotPosX+((screenshotWidth*widgetScale)/2), screenshotPosY+((screenshotHeight*widgetScale)/2),0)
+				gl.Rotate(-60,0,0,1)
+				gl.Rect(-width,size/2,width,-size/2)
+				gl.Rotate(120,0,0,1)
+				gl.Rect(-width,size/2,width,-size/2)
+				gl.PopMatrix()
+			end
+		end
+	end
 end
+
 
 function CreateLists()
 
@@ -1865,29 +2131,25 @@ function DrawPlayer(playerID, leader, vOffset, mouseX, mouseY)
 	if WG['betfrontend'] ~= nil then
 		playerScores = WG['betfrontend'].GetPlayerScores()
 	end
-	
-	--if mySpecStatus then
-		alpha = 0.33
-		local alphaActivity = 0
-		-- keyboard/mouse activity
-		if lastActivity[playerID] ~= nil and type(lastActivity[playerID]) == "number" then
-				alphaActivity = (8 - math.floor(now-lastActivity[playerID])) / 5.5
-				if alphaActivity > 1 then alphaActivity = 1 end
-				if alphaActivity < 0 then alphaActivity = 0 end
-				alphaActivity = 0.33 + (alphaActivity*0.21)
-				alpha = alphaActivity
-		end
-		-- camera activity
-		if recentBroadcasters[playerID] ~= nil and type(recentBroadcasters[playerID]) == "number" then
-			local alphaCam = (13 - math.floor(recentBroadcasters[playerID])) / 8.5
-			if alphaCam > 1 then alphaCam = 1 end
-			if alphaCam < 0 then alphaCam = 0 end
-			alpha = 0.33 + (alphaCam*0.42)
-			if alpha < alphaActivity then alpha = alphaActivity end
-		end
-	--else
-	--	alpha = 0.44
-	--end
+
+	alpha = 0.33
+	local alphaActivity = 0
+	-- keyboard/mouse activity
+	if lastActivity[playerID] ~= nil and type(lastActivity[playerID]) == "number" then
+			alphaActivity = (8 - math.floor(now-lastActivity[playerID])) / 5.5
+			if alphaActivity > 1 then alphaActivity = 1 end
+			if alphaActivity < 0 then alphaActivity = 0 end
+			alphaActivity = 0.33 + (alphaActivity*0.21)
+			alpha = alphaActivity
+	end
+	-- camera activity
+	if recentBroadcasters[playerID] ~= nil and type(recentBroadcasters[playerID]) == "number" then
+		local alphaCam = (13 - math.floor(recentBroadcasters[playerID])) / 8.5
+		if alphaCam > 1 then alphaCam = 1 end
+		if alphaCam < 0 then alphaCam = 0 end
+		alpha = 0.33 + (alphaCam*0.42)
+		if alpha < alphaActivity then alpha = alphaActivity end
+	end
 	
 	
 	if mouseY >= tipPosY and mouseY <= tipPosY + (16*widgetScale) then tipY = true end
@@ -2078,8 +2340,8 @@ function DrawResources(energy, energyStorage, metal, metalStorage, posY, dead)
 	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + y2Offset)
 
     if ((barWidth/metalStorage)*metal) > 0.8 then
-        local glowsize = 11
-        gl_Color(1,1,1.2,0.04)
+        local glowsize = 10
+        gl_Color(1,1,1.2,0.08)
         gl_Texture(pics["barGlowCenterPic"])
         DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/metalStorage)*metal), posY + y2Offset-glowsize)
 
@@ -2103,8 +2365,8 @@ function DrawResources(energy, energyStorage, metal, metalStorage, posY, dead)
 	DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + y2Offset)
 
     if ((barWidth/energyStorage)*energy) > 0.8 then
-        local glowsize = 11
-        gl_Color(1,1,0.2,0.04)
+        local glowsize = 10
+        gl_Color(1,1,0.2,0.08)
         gl_Texture(pics["barGlowCenterPic"])
         DrawRect(m_resources.posX + widgetPosX + paddingLeft, posY + y1Offset+glowsize, m_resources.posX + widgetPosX + paddingLeft + ((barWidth/energyStorage)*energy), posY + y2Offset-glowsize)
 
@@ -2284,6 +2546,7 @@ end
 
 function DrawName(name, team, posY, dark, playerID)
     local willSub = ""
+	local ignored = WG.ignoredPlayers and WG.ignoredPlayers[name]
     if not gameStarted then 
         if playerID>=64 then
             willSub = (Spring.GetGameRulesParam("Player" .. (playerID-64) .. "willSub")==1) and " (sub)" or "" --pID-64 because apl uses dummy playerIDs for absent players
@@ -2292,6 +2555,7 @@ function DrawName(name, team, posY, dark, playerID)
         end
     end
     local nameText = name .. willSub  
+	
     
     local nameColourR,nameColourG,nameColourB,nameColourA = Spring_GetTeamColor(team)
     local xPadding = 0
@@ -2310,42 +2574,64 @@ function DrawName(name, team, posY, dark, playerID)
 		gl_Color(nameColourR,nameColourG,nameColourB,1)
 		gl_Text(nameText, m_name.posX + widgetPosX + 3 + xPadding, posY + 4, 14, "n") -- draws name
 	end
-	gl_Color(1,1,1)
+	if ignored then
+		gl_Color(1,1,1,0.9)	
+		local x = m_name.posX + widgetPosX + 2 + xPadding
+		local y = posY + 7
+		local w = gl_GetTextWidth(nameText) * 14 + 2
+		local h = 2
+		gl_Texture(false)
+		DrawRect(x,y,x+w,y+h)
+	end
+	gl_Color(1,1,1)	
 end
 
 
 function DrawSmallName(name, team, posY, dark, playerID, alpha)
-	if team ~= nil then
-		if originalColourNames[playerID] then
-			name = originalColourNames[playerID] .. name
-		end
-		local textindent = 4
-		local explayerindent = -3
-		if m_indent.active or m_rank.active or m_side.active or m_ID.active then
-			textindent = 0
-		end
-		local nameColourR,nameColourG,nameColourB,nameColourA = 1,1,1,1
+	if team == nil then
+		return
+	end
+	
+	local ignored = WG.ignoredPlayers and WG.ignoredPlayers[name]
+	if originalColourNames[playerID] then
+		name = originalColourNames[playerID] .. name
+	end
 
-		if playerSpecs[playerID] ~= nil then
-			nameColourR,nameColourG,nameColourB,nameColourA = Spring_GetTeamColor(team)
-			if (nameColourR + nameColourG*1.2 + nameColourB*0.4) < 0.8 then
-				gl_Text(colourNames(team) .. name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "o")
-			else
-				gl_Color(0,0,0,0.3)
-				gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 2, posY + 3.2, 11, "n") -- draws name
-				gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 4, posY + 3.2, 11, "n") -- draws name
-				gl_Color(nameColourR,nameColourG,nameColourB,0.78)
-				gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "n")
-			end
+	local textindent = 4
+	local explayerindent = -3
+	if m_indent.active or m_rank.active or m_side.active or m_ID.active then
+		textindent = 0
+	end
+	local nameColourR,nameColourG,nameColourB,nameColourA = 1,1,1,1
+
+	if playerSpecs[playerID] ~= nil then
+		nameColourR,nameColourG,nameColourB,nameColourA = Spring_GetTeamColor(team)
+		if (nameColourR + nameColourG*1.2 + nameColourB*0.4) < 0.8 then
+			gl_Text(colourNames(team) .. name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "o")
 		else
 			gl_Color(0,0,0,0.3)
-			gl_Text(name, m_name.posX + textindent + widgetPosX + 2.2, posY + 3.3, 10, "n")
-			gl_Text(name, m_name.posX + textindent + widgetPosX + 3.8, posY + 3.3, 10, "n")
-			gl_Color(1,1,1,alpha)
-			gl_Text(name, m_name.posX + textindent + widgetPosX + 3, posY + 4, 10, "n")
+			gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 2, posY + 3.2, 11, "n") -- draws name
+			gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 4, posY + 3.2, 11, "n") -- draws name
+			gl_Color(nameColourR,nameColourG,nameColourB,0.78)
+			gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "n")
 		end
-		gl_Color(1,1,1)
+	else
+		gl_Color(0,0,0,0.3)
+		gl_Text(name, m_name.posX + textindent + widgetPosX + 2.2, posY + 3.3, 10, "n")
+		gl_Text(name, m_name.posX + textindent + widgetPosX + 3.8, posY + 3.3, 10, "n")
+		gl_Color(1,1,1,alpha)
+		gl_Text(name, m_name.posX + textindent + widgetPosX + 3, posY + 4, 10, "n")
 	end
+	if ignored then
+		gl_Color(1,1,1,0.7)	
+		local x = m_name.posX + textindent + widgetPosX + 2.2
+		local y = posY + 6
+		local w = gl_GetTextWidth(name) * 10 + 2
+		local h = 2
+		gl_Texture(false)
+		DrawRect(x,y,x+w,y+h)
+	end
+	gl_Color(1,1,1)
 end
 
 function DrawID(playerID, posY, dark, dead)
@@ -2416,6 +2702,10 @@ function DrawPingCpu(pingLvl, cpuLvl, posY, spec, alpha, cpu, fps)
 				fps = 99
 			end
 			grayvalue = 0.95 - (fps/195)
+			if fps < 0 then
+				fps = 0
+				greyvalue = 1
+			end
 			if spec then
 				gl_Color(0,0,0,0.1+(grayvalue*0.4))
 				gl_Text(fps, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9, "r")
@@ -2581,7 +2871,7 @@ end
 
 function stringToLines(str)
   local t = {}
-  local function helper(line) table.insert(t, line) return "" end
+  local function helper(line) t[#t+1] = line return "" end
   helper((str:gsub("(.-)\r?\n", helper)))
   return t
 end
@@ -2907,6 +3197,8 @@ function widget:MousePress(x,y,button) --super ugly code here
 						if m_name.active and clickedPlayer.name ~= absentName and IsOnRect(x, y, m_name.posX + widgetPosX +1, posY, m_name.posX + widgetPosX + m_name.width, posY+12)  then
 							if ctrl then 
 								Spring_SendCommands{"toggleignore "..clickedPlayer.name} 
+								SortList()
+								CreateLists()
 								return true 
 							end
 							if (mySpecStatus or player[i].allyteam == myAllyTeamID) and clickTime - prevClickTime < dblclickPeriod and clickedName == prevClickedName then 
@@ -3006,6 +3298,9 @@ end
 --  Tweak mode
 ---------------------------------------------------------------------------------------------------
 
+function IsOnRectPlain(x, y, BLcornerX, BLcornerY,TRcornerX,TRcornerY)
+	return x >= BLcornerX and x <= TRcornerX and y >= BLcornerY and y <= TRcornerY
+end
 
 function IsOnRect(x, y, BLcornerX, BLcornerY,TRcornerX,TRcornerY)
 	
@@ -3307,14 +3602,14 @@ function widget:SetConfigData(data)      -- load
 				if not fullView then
 					Spring.SendCommands("specfullview")
 					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()=="los" then
-						Spring.SendCommands("togglelos")
+						desiredLosmode = 'normal'
 					end
 				end
 			else
 				if fullView then
 					Spring.SendCommands("specfullview")
 					if lockcameraLos and mySpecStatus and Spring.GetMapDrawMode()~="los" then
-						Spring.SendCommands("togglelos")
+						desiredLosmode = 'los'
 					end
 				end
 			end
@@ -3542,6 +3837,15 @@ function widget:Update(delta) --handles takes & related messages
 		sceduledSpecFullView = sceduledSpecFullView - 1
 		if sceduledSpecFullView == 0 then
 			sceduledSpecFullView = nil
+		end
+	end
+	if lockcameraLos then
+		if lockPlayerID ~= nil then
+			if desiredLosmode ~= Spring.GetMapDrawMode() then	-- this is needed else the minimap/world doesnt update properly
+				Spring.SendCommands("togglelos")
+			end
+		elseif mySpecStatus and Spring.GetMapDrawMode() == 'los' then
+			Spring.SendCommands("togglelos")
 		end
 	end
 

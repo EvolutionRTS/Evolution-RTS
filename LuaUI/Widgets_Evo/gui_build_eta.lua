@@ -20,7 +20,7 @@ function widget:GetInfo()
     author    = "trepan (modified by jK)",
     date      = "Feb, 2008",
     license   = "GNU GPL, v2 or later",
-    layer     = -1,
+    layer     = -9,
     enabled   = true  --  loaded by default?
   }
 end
@@ -33,7 +33,7 @@ local Spring = Spring
 local table  = table
 
 local etaTable = {}
-local etaMaxDist= 10000000 -- max dist at which to draw ETA
+local etaMaxDist= 750000 -- max dist at which to draw ETA
 ---------------------------
 
 --------------------------------------------------------------------------------
@@ -98,10 +98,12 @@ function widget:Update(dt)
   lastGameUpdate = gs
   
   local killTable = {}
+  local count = 0
   for unitID,bi in pairs(etaTable) do
     local _,_,_,_,buildProgress = Spring.GetUnitHealth(unitID)
     if ((not buildProgress) or (buildProgress >= 1.0)) then
-      table.insert(killTable, unitID)
+      count = count + 1
+      killTable[count] = unitID
     else
       local dp = buildProgress - bi.lastProg 
       local dt = gs - bi.lastTime
@@ -184,7 +186,7 @@ end
 local function DrawEtaText(timeLeft,yoffset)
   local etaStr
   if (timeLeft == nil) then
-    etaStr = '\255\255\255\1ETA\255\255\255\255:\255\255\255\255???'
+    etaStr = '\255\255\255\1ETA\255\255\255\255:\255\1\1\255???'
   else
     if (timeLeft > 60) then
         etaStr = "\255\255\255\1ETA\255\255\255\255:" .. string.format('\255\1\255\1%d', timeLeft / 60) .. "m, " .. string.format('\255\1\255\1%.1f', timeLeft % 60) .. "s"
@@ -199,7 +201,7 @@ local function DrawEtaText(timeLeft,yoffset)
   gl.Billboard()
   gl.Translate(0, 5 ,0)
   --fontHandler.DrawCentered(etaStr)
-  gl.Text(etaStr, 0, 0, 16, "cos")
+  gl.Text(etaStr, 0, 0, 5.75, "co")
 end
 
 function widget:DrawWorld()
@@ -215,6 +217,10 @@ function widget:DrawWorld()
 			local dx, dy, dz = ux-cx, uy-cy, uz-cz
 			local dist = dx*dx + dy*dy + dz*dz
 			if dist < etaMaxDist then 
+				local unitName = UnitDefs[Spring.GetUnitDefID(unitID)].name
+					if unitName == "armomex" or unitName == "coromoex" then
+						bi.yoffset = 25
+					end
 				gl.DrawFuncAtUnit(unitID, false, DrawEtaText, bi.timeLeft,bi.yoffset)
 			end
 		end

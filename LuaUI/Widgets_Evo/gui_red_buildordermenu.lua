@@ -23,8 +23,8 @@ local highlightedIconsLeng = 0
 
 local stateTexture		     = "LuaUI/Images/resbar.dds"
 local buttonTexture		     = "LuaUI/Images/button.dds"
-local barGlowCenterTexture = "LuaUI/Images/barglow-center.dds"
-local barGlowEdgeTexture   = "LuaUI/Images/barglow-edge.dds"
+local barGlowCenterTexture = ":n:LuaUI/Images/barglow-center.png"
+local barGlowEdgeTexture   = ":n:LuaUI/Images/barglow-edge.png"
 
 local sound_queue_add = 'LuaUI/Sounds/buildbar_add.wav'
 local sound_queue_rem = 'LuaUI/Sounds/buildbar_rem.wav'
@@ -256,7 +256,7 @@ function wrap(str, limit)
 			if fi-here > limit then
 				--# Break the line
 				here = st
-				table.insert(t, buf)
+				t[#t+1] = buf
 				buf = word
 			else
 				buf = buf..sp..word  --# Append
@@ -264,11 +264,11 @@ function wrap(str, limit)
 		end)
 	--# Tack on any leftovers
 	if(buf ~= "") then
-		table.insert(t, buf)
+		t[#t+1] = buf
 	end
 	return t
 end
-
+	WG.hoverID = nil
 local function CreateGrid(r)
 
 	local background2 = {"rectanglerounded",
@@ -400,7 +400,8 @@ local function CreateGrid(r)
 			if drawTooltip and WG['tooltip'] ~= nil and r.menuname == "buildmenu" then
 				if self.texture ~= nil and string.sub(self.texture, 1, 1) == '#' then
 					local udefid =  tonumber(string.sub(self.texture, 2))
-					local text = "\255\215\255\215"..UnitDefs[udefid].humanName.."\n\255\240\240\240"
+					WG.hoverID = udefid
+                    local text = "\255\215\255\215"..UnitDefs[udefid].humanName.."\n\255\240\240\240"
 					if drawBigTooltip and UnitDefs[udefid].customParams.description_long ~= nil then
 						local lines = wrap(UnitDefs[udefid].customParams.description_long, 58)
 						local description = ''
@@ -479,7 +480,7 @@ local function CreateGrid(r)
 			local b = New(Copy(icon,true))
 			b.px = background.px +r.margin + (x-1)*(r.ispreadx + r.isx)
 			b.py = background.py +r.margin + (y-1)*(r.ispready + r.isy)
-			table.insert(background.movableslaves,b)
+			background.movableslaves[#background.movableslaves+1] = b
 			icons[#icons+1] = b
 			if ((y==r.iy) and (x==r.ix)) then
 				backward.px = icons[#icons-r.ix+1].px
@@ -506,7 +507,7 @@ local function CreateGrid(r)
 			local b = New(Copy(text,true))
 			b.px = background.px +r.margin + (x-1)*(r.ispreadx + r.isx)
 			b.py = background.py +r.margin + (y-1)*(r.ispready + r.isy)
-			table.insert(background.movableslaves,b)
+			background.movableslaves[#background.movableslaves+1] = b
 			texts[#texts+1] = b
 		end
 	end
@@ -735,7 +736,7 @@ local function UpdateGrid(g,cmds,ordertype)
 					if (s == nil) then
 						s = New(Copy(g.staterect,true))
 						g.staterectangles[usedstaterectangles] = s
-						table.insert(g.background.movableslaves,s)
+						g.background.movableslaves[#g.background.movableslaves+1] = s
 					end
 					s.active = nil --activate
 					
@@ -784,8 +785,7 @@ local function UpdateGrid(g,cmds,ordertype)
 						s.texturecolor = s.color
 					end
 				end
-
-		
+				
 				-- add glow for current state
 				if (g.staterectangles[usr] ~= nil) then
 					s = g.staterectangles[usr]
@@ -794,7 +794,7 @@ local function UpdateGrid(g,cmds,ordertype)
 					if (s2 == nil) then
 						s2 = New(Copy(g.staterectangles[usr],true))
 						g.staterectanglesglow[usedstaterectanglesglow] = s2
-						table.insert(g.background.movableslaves,s2)
+						g.background.movableslaves[#g.background.movableslaves+1] = s2
 					end
 					
 					local glowSize = s.sy * 6
@@ -813,7 +813,7 @@ local function UpdateGrid(g,cmds,ordertype)
 					if (s3 == nil) then
 						s3 = New(Copy(s2,true))
 						g.staterectanglesglow[usedstaterectanglesglow] = s3
-						table.insert(g.background.movableslaves,s3)
+						g.background.movableslaves[#g.background.movableslaves+1] = s3
 					end
 					s3.sy = s.sy + glowSize + glowSize
 					s3.py = s.py - glowSize
@@ -830,7 +830,7 @@ local function UpdateGrid(g,cmds,ordertype)
 					if (s4 == nil) then
 						s4 = New(Copy(s2,true))
 						g.staterectanglesglow[usedstaterectanglesglow] = s4
-						table.insert(g.background.movableslaves,s4)
+						g.background.movableslaves[#g.background.movableslaves+1] = s4
 					end
 					s4.sy = s.sy + glowSize + glowSize
 					s4.py = s.py - glowSize

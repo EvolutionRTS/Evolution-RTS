@@ -19,7 +19,7 @@ end
 
 --broadcast
 
-local broadcastPeriod = 0.5 --will send packet in this interval (s)
+local broadcastPeriod = 0.0833 --will send packet in this interval (s)
 
 ------------------------------------------------
 --speedups
@@ -62,9 +62,6 @@ local allowBroadcast = true
 ------------------------------------------------
 local PACKET_HEADER = "="
 local PACKET_HEADER_LENGTH = strLen(PACKET_HEADER)
-local numBroadcasts = {}
-local maxNumBroadcasts = 20
-local plannedGameFrame = 1
 if gadgetHandler:IsSyncedCode() then
 
 	local charset = {}  do -- [0-9a-zA-Z]
@@ -85,22 +82,9 @@ if gadgetHandler:IsSyncedCode() then
 		if strSub(msg, 1, PACKET_HEADER_LENGTH) ~= PACKET_HEADER or strSub(msg, 1+PACKET_HEADER_LENGTH, 1+PACKET_HEADER_LENGTH+1) ~= validation then
 			return
 		end
-		if numBroadcasts[playerID] == nil then
-			numBroadcasts[playerID] = 0
-		end
-		numBroadcasts[playerID] = numBroadcasts[playerID] + 1
-		if numBroadcasts[playerID] < maxNumBroadcasts then
 
-			SendToUnsynced("cameraBroadcast",playerID,msg)
-			return true
-		end
-	end
-
-	function gadget:GameFrame(gf)
-		if gf >= plannedGameFrame then
-			plannedGameFrame = gf + (broadcastPeriod*30)
-			maxNumBroadcasts = maxNumBroadcasts + 1
-		end
+		SendToUnsynced("cameraBroadcast",playerID,msg)
+		return true
 	end
 else
 	local totalTime = 0
@@ -308,10 +292,10 @@ else
 				return
 			end
 		end
-		local myPlayerID = GetMyPlayerID()
-		if myPlayerID == playerID then
-			--return
-		end
+		--local myPlayerID = GetMyPlayerID()
+		--if myPlayerID == playerID then
+		--	return
+		--end
 		local spec, fullView = GetSpectatingState()
 		if not spec or not fullView then
 			local _,_,targetSpec,_,allyTeamID = GetPlayerInfo(playerID)

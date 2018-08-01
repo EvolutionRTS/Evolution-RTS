@@ -50,7 +50,7 @@ local screenWidth = 1050-bgMargin-bgMargin
 
 local textareaMinLines = 10		-- wont scroll down more, will show at least this amount of lines 
 
-local customScale = 1
+local customScale = 1.06
 
 local startLine = 1
 
@@ -267,7 +267,7 @@ local textMargin	= 0.25
 local lineWidth		= 0.0625
 
 local posX = 0.947
-local posY = 0.970
+local posY = 0.965
 local buttonGL
 local startPosX = posX
 
@@ -373,7 +373,7 @@ end
 	
 function lines(str)
   local t = {}
-  local function helper(line) table.insert(t, line) return "" end
+  local function helper(line) t[#t+1]=line return "" end
   helper((str:gsub("(.-)\r?\n", helper)))
   return t
 end
@@ -425,10 +425,11 @@ function orderOptions()
 	end
 	for oid,option in pairs(options) do
 		if option.type ~= 'label' then
-			table.insert(groupOptions[option.group], option)
+			groupOptions[option.group][#groupOptions[option.group]+1] = option
 		end
 	end
 	local newOptions = {}
+	local newOptionsCount = 0
 	for id,group in pairs(optionGroups) do
 		grOptions = groupOptions[group.id]
 		if #grOptions > 0 then
@@ -436,10 +437,12 @@ function orderOptions()
 			if group.id == 'gfx' then
 				name = group.name..'                                          \255\130\130\130'..vsx..' x '..vsy
 			end
-			table.insert(newOptions, {id="group_"..group.id, name=name, type="label"})
+			newOptionsCount = newOptionsCount +1
+			newOptions[newOptionsCount] = {id="group_"..group.id, name=name, type="label"}
 		end
 		for oid,option in pairs(grOptions) do
-			table.insert(newOptions, option)
+			newOptionsCount = newOptionsCount +1
+			newOptions[newOptionsCount] = option
 		end
 	end
 	options = deepcopy(newOptions)
@@ -907,7 +910,7 @@ function widget:DrawScreen()
 						end
 						prevSelectHover = i
 					end
-					table.insert(optionSelect, {optionButtons[showSelectOptions][1], yPos-oHeight-oPadding, optionButtons[showSelectOptions][3], yPos+oPadding, i})
+					optionSelect[#optionSelect+1] = {optionButtons[showSelectOptions][1], yPos-oHeight-oPadding, optionButtons[showSelectOptions][3], yPos+oPadding, i}
 					glText('\255\255\255\255'..option, optionButtons[showSelectOptions][1]+7, yPos-(oHeight/2.25)-oPadding, oHeight*0.85, "no")
 				end
 			elseif prevSelectHover ~= nil then
@@ -1041,6 +1044,8 @@ function applyOptionValue(i, skipRedrawWindow)
 			saveOptionValue('Player Color Palette', 'playercolorpalette', 'setSameTeamColors', {'useSameTeamColors'}, options[i].value)
 		elseif id == 'bloomhighlights' then
 			saveOptionValue('Bloom Shader', 'bloom', 'setAdvBloom', {'drawHighlights'}, options[i].value)
+		elseif id == 'commandsfxfilterai' then
+			saveOptionValue('Commands FX', 'commandsfx', 'setFilterAI', {'filterAIteams'}, options[i].value)
 		elseif id == 'snowmap' then
 			saveOptionValue('Snow', 'snow', 'setSnowMap', {'snowMaps',Game.mapName:lower()}, options[i].value)
 		elseif id == 'snowautoreduce' then
@@ -1119,7 +1124,7 @@ function applyOptionValue(i, skipRedrawWindow)
 				if widgetHandler.orderList[options[i].widget] < 0.5 then
 					widgetHandler:EnableWidget(options[i].widget)
 				end
-				if id == "fancyselectedunits" then
+				if id == "fancyselectedunits" and getOptionByID('fancyselectedunits_style') then
 					options[getOptionByID('fancyselectedunits_style')].options = WG['fancyselectedunits'].getStyleList()
 				end
 			else
@@ -1318,24 +1323,6 @@ function IsOnRect(x, y, BLcornerX, BLcornerY,TRcornerX,TRcornerY)
 	                      and y <= TRcornerY
 end
 
-function widget:IsAbove(x, y)
-	-- on window
-	if show then
-		local rectX1 = ((screenX-bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
-		local rectY1 = ((screenY+bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
-		local rectX2 = ((screenX+screenWidth+bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
-		local rectY2 = ((screenY-screenHeight-bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
-		return IsOnRect(x, y, rectX1, rectY2, rectX2, rectY1)
-	else
-		return false
-	end
-end
-
-function widget:GetTooltip(mx, my)
-	if show and widget:IsAbove(mx,my) then
-		return string.format("")
-	end
-end
 
 function round(num, numDecimalPlaces)
     local mult = 10^(numDecimalPlaces or 0)
@@ -1582,6 +1569,9 @@ function mouseEvent(x, y, button, release)
 				if windowList then gl.DeleteList(windowList) end
 				windowList = gl.CreateList(DrawWindow)
 			end
+			if returnTrue then
+				return true
+			end
 		end
 	elseif showOptionsToggleButton then
 		tx = (x - posX*vsx)/(17*widgetScale)
@@ -1663,6 +1653,7 @@ function loadAllWidgetData()
 	loadWidgetData("Snow", "snowautoreduce", {'autoReduce'})
 
 	loadWidgetData("Commands FX", "commandsfxopacity", {'opacity'})
+	loadWidgetData("Commands FX", "commandsfxfilterai", {'filterAIteams'})
 
 	loadWidgetData("Depth of Field", "dofintensity", {'intensity'})
 
@@ -1718,13 +1709,14 @@ function init()
 		{id='game', name='Game'},
 	}
 	options = {
-		--GFX
+		-- PRESET
 		{id="preset", group="gfx", name="Load graphics preset", type="select", options=presetNames, value=0, description='This wont set the preset every time you restart a game. So feel free to adjust things.\n\nSave custom preset with /savepreset name\nRightclick to delete a custom preset'},
 
+		--GFX
 		--{id="windowposx", group="gfx", name="Window position X", type="slider", min=0, max=math.ceil(ssx/3), step=1, value=tonumber(Spring.GetConfigInt("WindowPosX",1) or 0), description='Set where on the screen the window is positioned on the X axis'},
 		--{id="windowposy", group="gfx", name="Window position Y", type="slider", min=0, max=math.ceil(ssy/3), step=1, value=tonumber(Spring.GetConfigInt("WindowPosY",1) or 0), description='Set where on the screen the window is positioned on the Y axis'},
-		--{id="windowresx", group="gfx", name="Window resolution X", type="slider", min=math.floor(ssx/3), max=ssx, step=1, value=tonumber(Spring.GetConfigInt("XResolutionWindowed",1) or 0), description='Set where on the screen the window is positioned on the X axis'},
-		--{id="windowresy", group="gfx", name="Window resolution Y", type="slider", min=math.floor(ssy/3), max=ssy, step=1, value=tonumber(Spring.GetConfigInt("YResolutionWindowe",1) or 0), description='Set where on the screen the window is positioned on the Y axis'},
+		--{id="windowresx", group="gfx", name="Window width", type="slider", min=math.floor(ssx/3), max=ssx, step=1, value=tonumber(Spring.GetConfigInt("XResolutionWindowed",1) or 0), description='Set where on the screen the window is positioned on the X axis'},
+		--{id="windowresy", group="gfx", name="Window height", type="slider", min=math.floor(ssy/3), max=ssy, step=1, value=tonumber(Spring.GetConfigInt("YResolutionWindowe",1) or 0), description='Set where on the screen the window is positioned on the Y axis'},
 		{id="fullscreen", group="gfx", name="Fullscreen", type="bool", value=tonumber(Spring.GetConfigInt("Fullscreen",1) or 1) == 1},
 		{id="borderless", group="gfx", name="  Borderless window", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1, description="Changes will be applied next game.\n\n(dont forget to turn off the \'fullscreen\' option next game)"},
 		{id="vsync", group="gfx", name="V-sync", type="bool", value=tonumber(Spring.GetConfigInt("VSync",1) or 1) == 1, description=''},
@@ -1776,9 +1768,6 @@ function init()
 		{id="snowautoreduce", group="gfx", name=widgetOptionColor.."   auto reduce", type="bool", value=true, description='Automaticly reduce snow when average FPS gets lower\n\n(re-enabling this needs time to readjust  to average fps again'},
 		{id="snowamount", group="gfx", name=widgetOptionColor.."   amount", type="slider", min=0.2, max=2, step=0.2, value=1, description='Tip: disable "auto reduce" option temporarily to see the max snow amount you have set'},
 
-		{id="commandsfx", group="gfx", widget="Commands FX", name="Command FX", type="bool", value=GetWidgetToggleValue("Commands FX"), description='Shows unit target lines when you give orders\n\nThe commands from your teammates are shown as well'},
-		{id="commandsfxopacity", group="gfx", name=widgetOptionColor.."   opacity", type="slider", min=0.3, max=1, step=0.1, value=1, description=''},
-
 		{id="dofintensity", group="gfx", name="DoF intensity", type="slider", min=0.05, max=5, step=0.01, value=1.5, description='Enable Depth of Field with F8 first'},
 
 		{id="resurrectionhalos", group="gfx", widget="Resurrection Halos", name="Resurrected unit halos", type="bool", value=GetWidgetToggleValue("Resurrection Halos"), description='Gives units have have been resurrected a little halo above it.'},
@@ -1817,8 +1806,8 @@ function init()
 		{id="crossalpha", group="control", name="Mouse cross alpha", type="slider", min=0, max=1, step=0.05, value=tonumber(Spring.GetConfigString("CrossAlpha",1) or 1), description='Opacity of mouse icon in center of screen when you are in camera pan mode\n\n(The\'icon\' has a dot in center with 4 arrows pointing in all directions)'},
 		{id="screenedgemove", group="control", name="Screen edge moves camera", type="bool", value=tonumber(Spring.GetConfigInt("FullscreenEdgeMove",1) or 1) == 1, description="If mouse is close to screen edge this will move camera\n\nChanges will be applied next game"},
 		{id="allyselunits_select", group="control", name="Select units of tracked player", type="bool", value=(WG['allyselectedunits']~=nil and WG['allyselectedunits'].getSelectPlayerUnits()), description="When viewing a players camera, this will also select the units the player has selected"},
-		--{id="lockcamera_hideenemies", group="control", name="Only show tracked player viewpoint", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockHideEnemies()), description="When viewing a players camera, this will only display what the tracked player sees"},
-		--{id="lockcamera_los", group="control", name=widgetOptionColor.."   show tracked player LoS", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockLos()), description="When viewing a players camera, show the Line of Sight as well"},
+		{id="lockcamera_hideenemies", group="control", name="Only show tracked player viewpoint", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockHideEnemies()), description="When viewing a players camera, this will only display what the tracked player sees"},
+		{id="lockcamera_los", group="control", name=widgetOptionColor.."   show tracked player LoS", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockLos()), description="When viewing a players camera and los, shows shaded los ranges too"},
 
 		-- UI
 		{id="teamcolors", group="ui", widget="Player Color Palette", name="Team colors based on a palette", type="bool", value=GetWidgetToggleValue("Player Color Palette"), description='Replaces lobby team colors for a color palette based one\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
@@ -1860,6 +1849,9 @@ function init()
 
 		{id="idlebuilders", group="ui", widget="Idle Builders", name="List Idle builders", type="bool", value=GetWidgetToggleValue("Idle Builders"), description='Displays a row containing a list of idle builder units (if there are any)'},
 		{id="betfrontend", group="ui", widget="Bet-Frontend", name="Bet interface", type="bool", value=GetWidgetToggleValue("Bet-Frontend"), description='When spectator: display a betting interface.\nIt allows betting on when you think a unit will be destroyed.\nBeware... you have a limited supply of chips.'},
+		{id="commandsfx", group="ui", widget="Commands FX", name="Command FX", type="bool", value=GetWidgetToggleValue("Commands FX"), description='Shows unit target lines when you give orders\n\nThe commands from your teammates are shown as well'},
+		{id="commandsfxfilterai", group="ui", name=widgetOptionColor.."   filter AI teams", type="bool", value=true, description='Hide commands for AI teams'},
+		{id="commandsfxopacity", group="ui", name=widgetOptionColor.."   opacity", type="slider", min=0.3, max=1, step=0.1, value=1, description=''},
 
 		--{id="teamplatter", group="ui", widget="TeamPlatter", name="Unit team platters", type="bool", value=GetWidgetToggleValue("TeamPlatter"), description='Shows a team color platter above all visible units'},
 		--{id="teamplatter_opacity", group="ui", name=widgetOptionColor.."   opacity", min=0.15, max=0.4, step=0.01, type="slider", value=0.3, description='Set the opacity of the team spotters'},
@@ -1907,6 +1899,18 @@ function init()
 
 	-- loads values via stored game config in luaui/configs
 	loadAllWidgetData()
+
+    -- detect AI
+    local aiDetected = false
+    local t = Spring.GetTeamList()
+    for _,teamID in ipairs(t) do
+        if select(4,Spring.GetTeamInfo(teamID)) then
+            aiDetected = true
+        end
+    end
+    if not aiDetected then
+        options[getOptionByID('commandsfxfilterai')] = nil
+    end
 
 	-- disable music volume slider
 	if widgetHandler.knownWidgets["Music Player"] == nil then
@@ -2075,6 +2079,7 @@ function init()
 	end
 
 	local processedOptions = {}
+	local processedOptionsCount = 0
 	local insert = true
 	for oid,option in pairs(options) do
 		insert = true
@@ -2097,7 +2102,8 @@ function init()
 			end
 		end
 		if insert then
-			table.insert(processedOptions, option)
+			processedOptionsCount = processedOptionsCount + 1
+			processedOptions[processedOptionsCount] = option
 		end
 	end
 	options = processedOptions

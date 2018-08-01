@@ -6,7 +6,7 @@ function widget:GetInfo()
 		author    = "Floris",
 		date      = "April 2017",
 		license   = "GNU GPL, v2 or later",
-		layer     = -math.huge,
+		layer     = -99999999,
 		enabled   = true,  --  loaded by default?
 	}
 end
@@ -137,7 +137,7 @@ end
 
 function lines(str)
   local t = {}
-  local function helper(line) table.insert(t, line) return "" end
+  local function helper(line) t[#t+1]=line return "" end
   helper((str:gsub("(.-)\r?\n", helper)))
   return t
 end
