@@ -602,6 +602,7 @@ function widget:GameFrame(n)
 end
 
 function PlayNewTrack()
+	local oldPlayedTime, oldTotalTime = Spring.GetSoundStreamTime()
 	Spring.StopSoundStream()
 	endFade = false
 	fadelvl = 0.02
@@ -631,12 +632,12 @@ function PlayNewTrack()
 		else
 			if tracks == peaceTracks or tracks == silenceTracks then
 				local r = math.random(0,4)
-				if r == 0 then
-					tracks = warTracks
-					--Spring.Echo("Current tracklist is : War Tracks")
-				else
+				if r ~= 0 and oldPlayedTime < 10 then
 					tracks = warCutTracks
 					--Spring.Echo("Current tracklist is : WarCut Tracks")
+				else
+					tracks = warTracks
+					--Spring.Echo("Current tracklist is : War Tracks")
 				end
 				
 			else
