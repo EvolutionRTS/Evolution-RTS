@@ -394,14 +394,22 @@ function generateDisplayList()
 		-- background
 	  	gl.Color(0,0,0,0.77)
 		RectRound(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin, 10)
+
+		if (WG['guishader_api'] ~= nil) then
+			local scaleDiffX = -((posx*widgetScale)-posx)/widgetScale
+			local scaleDiffY = -((posy*widgetScale)-posy)/widgetScale
+			WG['guishader_api'].InsertRect(
+				posx+(-(width*widgetScale)/3)   + supplyOffset-bgmargin,
+				posy+(-((height+bgmargin-2) * (widgetScale-1)))   - ((bgmargin)*widgetScale),
+				posx+(-(width*widgetScale)/3)   + ((metalOffset+metalBarWidth+bgmargin)*widgetScale),
+				posy+(-((height+bgmargin-2) * (widgetScale-1)))   + ((height+bgmargin)*widgetScale),
+				'resources'
+			)
+		end
 		
 		-- content area
 		gl.Color(0.33,0.33,0.33,0.15)
 		RectRound(supplyOffset-bgmargin2, -bgmargin2, metalOffset+metalBarWidth+bgmargin2, height+bgmargin2,9)
-		
-		if (WG['guishader_api'] ~= nil) then
-			WG['guishader_api'].InsertRect(supplyOffset-(bgmargin*0.8), -(bgmargin*0.8), metalOffset+metalBarWidth+(bgmargin*0.8), height+(bgmargin*0.8), 'resources')
-		end
 
 		gl.Text(yellow .. "Energy", energyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
 		gl.Text(green .. "Supply", supplyOffset+textOffsetX+29, textOffsetY, FontSize, "on")

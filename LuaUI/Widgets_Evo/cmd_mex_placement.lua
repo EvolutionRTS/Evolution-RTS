@@ -641,7 +641,7 @@ end
 function DrawMexList()
 	local specatate = spGetSpectatingState()
 	
-	if WG.metalSpots then
+	if WG.metalSpots and circleList then
 		for i = 1, #WG.metalSpots do
 			local spot = WG.metalSpots[i]
 			local x,z,y = spot.x, spot.z, spot.y
