@@ -632,7 +632,7 @@ function PlayNewTrack()
 		else
 			if tracks == peaceTracks or tracks == silenceTracks then
 				local r = math.random(0,4)
-				if r ~= 0 and oldPlayedTime < 10 then
+				if r ~= 0 and oldPlayedTime > 10 then
 					tracks = warCutTracks
 					--Spring.Echo("Current tracklist is : WarCut Tracks")
 				else
