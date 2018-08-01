@@ -509,7 +509,7 @@ function widget:GameFrame(n)
 		--BuildMeter
 		local mc, ms, mp, mi, me = Spring.GetTeamResources(MyTeamID, "metal")
 		
-		if me > 1 then
+		if me and me > 1 then
 			buildMeter = true
 		else
 			buildMeter = false
@@ -566,7 +566,7 @@ function widget:GameFrame(n)
 			end
 			if fadelvl < music_volume_target then
 				if tracks == peaceTracks then
-					fadelvl = fadelvl + 0.00025
+					fadelvl = fadelvl + 0.001
 				elseif playedTime < 5 then
 					fadelvl = fadelvl + 0.03
 				else
@@ -578,7 +578,7 @@ function widget:GameFrame(n)
 				if tracks == peaceTracks and warMeter > 0 then
 					fadelvl = fadelvl - 0.01
 				else
-					fadelvl = fadelvl - 0.0005
+					fadelvl = fadelvl - 0.002
 				end
 				Spring.SetSoundStreamVolume(fadelvl)
 			end
