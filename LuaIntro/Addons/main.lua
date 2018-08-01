@@ -28,17 +28,19 @@ end
 ------------------------------------------
 
 -- Random tips we can show
+local titleColor = "\255\215\255\215"
+local contentColor = "\255\255\255\255"
 local tips = {
-	"PLACEHOLDER GAMEPLAY TIP #1",
-	"PLACEHOLDER GAMEPLAY TIP #2",
+	"loadingpics/TheEnigmaTNG.png "..titleColor.."The Enigma TNG\n"..contentColor.."He is the creator of most if the music in the game, so go check him out!", -- Zopto
+	"loadingpics/DreamstateLogic.png "..titleColor.."Dreamstate Logic\n"..contentColor.."Composer of a lot of ambient tracks used ingame, check out his music on Soundcloud!", -- Damgam
 }
 
 -- Random unit descriptions we can show
 local titleColor = "\255\215\255\215"
 local contentColor = "\255\255\255\255"
 local unit_descs = {
-	"ekrowloading.png "..titleColor.."Krow\n"..contentColor.."PLACEHOLDER UNIT TIP #1",
-	"ecommanderloading.png "..titleColor.."Overseer\n"..contentColor.."PLACEHOLDER UNIT TIP #2",
+	"loadingpics/ecommanderloading.png "..titleColor.."Overseer\n"..contentColor.."Don't forget to evolve your overseer, different upgrades can be helpful!", -- Zopto
+	"ehbotpeewee.png "..titleColor.."H-Bots\n"..contentColor.."While hbots have long range, none of their units are armored.", -- Zopto
 }
 
 local quotes = {
@@ -109,8 +111,8 @@ file = nil
 local random_tip_or_desc = unit_descs[((k/2) % #unit_descs) + 1]
 if k%2 == 1 then
 	random_tip_or_desc = tips[((math.ceil(k/2)) % #tips) + 1]
---elseif k%3 == 2 then
---	random_tip_or_desc = quotes[((math.ceil(k/3)) % #quotes) + 1]
+elseif k%3 == 2 then
+	random_tip_or_desc = quotes[((math.ceil(k/3)) % #quotes) + 1]
 end
 
 local loadedFontSize = 70
@@ -361,7 +363,7 @@ function addon.DrawLoadScreen()
 
 		if i ~= nil then
 			image_text = string.sub(random_tip_or_desc, 0, j)
-			gl.Texture(":n:unitpics/loadingpics/" .. image_text)
+			gl.Texture(":n:unitpics/" .. image_text)
 			gl.Color(1.0,1.0,1.0,0.8)
 			if (engineVersion < 1000 and engineVersion >= 105) or engineVersion > 10401151 then
 				gl.TexRect(vsx * 0.21, vsy*(yPos-0.015), vsx*(0.21+image_size), (vsy*(yPos-0.015))-(vsx*image_size),false,true)
