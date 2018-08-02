@@ -1355,6 +1355,7 @@ local function DrawMorphUnit(unitID, morphData, localTeamID)
   glPushMatrix()
   glTranslate(px, py, pz)
   glRotate(angle, 0, 1, 0)
+  gl.Scale(1.001,1.001,1.001)
   glUnitShape(morphData.def.into, unitTeam)
   glPopMatrix()
 
