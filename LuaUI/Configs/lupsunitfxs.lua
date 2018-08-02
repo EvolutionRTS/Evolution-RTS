@@ -355,7 +355,105 @@ effectUnitDefs = {
 	ehbotrocko = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},	
+	
+	ehbotkarganneth = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},	
+	
+	
+	ehbotengineer_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
 	},
+	
+	ehbotpeewee_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotthud_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotsniper_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotrocko_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},	
+	
+	ehbotkarganneth_up1 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},	
+	
+	
+	ehbotengineer_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotpeewee_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotthud_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotsniper_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotrocko_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},	
+
+	ehbotkarganneth_up2 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},	
+	
+	
+	ehbotengineer_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotpeewee_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotthud_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotsniper_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotrocko_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},
+	
+	ehbotkarganneth_up3 = {
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust1", onActive=true, emitVector = {0, 1, 0}}},
+		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  5, length=20, piece="exhaust2", onActive=true, emitVector = {0, 1, 0}}},
+	},	
 	
 ------------------
 ------------------

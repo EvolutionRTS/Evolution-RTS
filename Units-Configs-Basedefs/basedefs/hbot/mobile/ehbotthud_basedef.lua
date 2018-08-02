@@ -109,7 +109,7 @@ unitDef                    = {
 
 weaponDefs                 = {
 	plasmacannon                	= {
-		AreaOfEffect           = 75,
+		AreaOfEffect           = 25,
 		avoidFriendly          = false,
 		avoidFeature 		   = false,
 		collideFriendly        = false,
