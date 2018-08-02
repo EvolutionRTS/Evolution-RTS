@@ -31,16 +31,46 @@ end
 local titleColor = "\255\215\255\215"
 local contentColor = "\255\255\255\255"
 local tips = {
-	"loadingpics/TheEnigmaTNG.png "..titleColor.."The Enigma TNG\n"..contentColor.."He is the creator of most if the music in the game, so go check him out!", -- Zopto
-	"loadingpics/DreamstateLogic.png "..titleColor.."Dreamstate Logic\n"..contentColor.."Composer of a lot of ambient tracks used ingame, check out his music on Soundcloud!", -- Damgam
+	-- Zopto
+	"loadingpics/TheEnigmaTNG.png "..titleColor.."The Enigma TNG\n"..contentColor.."He is the creator of most if the music in the game, so go check him out!",
+	
+	-- Suppy Boi
+	"Listen to Experienced players, they usually know what they're talking about",
+	"Build defenses or a small army early game, so you can prevent raiding",
+	
+	-- Damgam
+	"loadingpics/DreamstateLogic.png "..titleColor.."Dreamstate Logic\n"..contentColor.."Composer of a lot of ambient tracks used ingame, check out his music on Soundcloud!",
+	"Press Enter to Chat, Use Alt+Enter to Team Chat, Use Ctrl+Enter to Global Chat",
+	
+	-- Koyote
+	
 }
 
 -- Random unit descriptions we can show
 local titleColor = "\255\215\255\215"
 local contentColor = "\255\255\255\255"
 local unit_descs = {
-	"loadingpics/ecommanderloading.png "..titleColor.."Overseer\n"..contentColor.."Don't forget to evolve your overseer, different upgrades can be helpful!", -- Zopto
-	"ehbotpeewee.png "..titleColor.."H-Bots\n"..contentColor.."While hbots have long range, none of their units are armored.", -- Zopto
+	-- Zopto
+	"ecommander.png "..titleColor.."Overseer\n"..contentColor.."Don't forget to evolve your overseer, different upgrades can be helpful!", 
+	"ehbotpeewee.png "..titleColor.."H-Bots\n"..contentColor.."While hbots have long range, none of their units are armored.", 
+	"eallterrlight.png "..titleColor.."All Terrain Units\n"..contentColor.."Dispite the name of 'All-terrain', they cannot go across water.", 
+	"emetalextractor.png "..titleColor.."Metal\n"..contentColor.."Don't forget to evolve your metal extractors to get more metal!", 
+	"estorage.png "..titleColor.."Supply\n"..contentColor.."In order to increase your supply cap, build more supply depots.", 
+	"ehbotengineer.png "..titleColor.."Lifter\n"..contentColor.."Just like normal hbots, the lifter can deploy as well.", 
+	"eorb.png "..titleColor.."O.R.B.\n"..contentColor.."If you have a surplus of metal and can't find a way to use it, evolve your orbs.", 
+	"ebasefactory.png "..titleColor.."Factories\n"..contentColor.."Evolve your factories, it can give you the upper hand in battle.", 
+	"ekrow.png "..titleColor.."Endbringers\n"..contentColor.."While endbringers are strong, don't send them out on their own to fight entire armies.", 
+	"eartyturret.png "..titleColor.."Lobster\n"..contentColor.."If you really want to make your opponent hate you, evolve the lobster.", 
+	"eallterrshield.png "..titleColor.."Widow\n"..contentColor.."Even though widows have a shield, don't expect them to soak up all the damage for you.", 
+	"emine.png "..titleColor.."Mines\n"..contentColor.."In the early game, mines will be your best friend.", 
+	"eshieldgen.png "..titleColor.."Anti-Nuke\n"..contentColor.."As soon as possible, build an antinuke.", 
+	"esilo.png "..titleColor.."Nuke Silo\n"..contentColor.." If you plan to build a nuke silo, don't build it near anything important.", 
+	
+	-- Suppy Boi
+	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Always try to include some of artillery units into your army",  
+	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Try to keep your artillery behind your main battle tanks",  
+	"emetalextractor.png "..titleColor.."Metal\n"..contentColor.."Evolved metal extractors use energy",  
+	"eamphibmedtank.png "..titleColor.."Amphibious Units\n"..contentColor.."While the Amphibious units are unarmored and fast, they deal a lot of Damage!",
 }
 
 local quotes = {
@@ -93,6 +123,12 @@ local quotes = {
 	{"Don't find fault, find a remedy.", "Henry Ford"},
 	{"There is nothing impossible to him who will try.", "Alexander the Great"},
 	{"Peace is produced by war", "Pierre Corneille"},
+	{"Zopto is to lol as carbon is to life", "Dr.Hamster"},
+	{"Sup1258 is the best player, always listen to his advice", "Sup1258"},
+	{"Build 1 more Mex than the other guy.", "KoyoteKamper"},
+	{"Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Oh, wrong game", "[teh]Flow"},
+	{"...As Chobby will come after Half Life 3...", "Damgam"},
+	
 }
 
 
