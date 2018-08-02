@@ -1320,6 +1320,7 @@ local function InitializeUnitShape(unitDefID,unitTeam)
 
   glPushMatrix()
   gl.ColorMask(false)
+  gl.Scale(1.001,1.001,1.001)
   glUnitShape(unitDefID, unitTeam)
   gl.ColorMask(true)
   glPopMatrix()
