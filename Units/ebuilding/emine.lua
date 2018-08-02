@@ -24,7 +24,7 @@ local unitDef                     = {
 	buildCostMetal                = 10,
 	builder                       = false,
 	buildTime                     = 5,
-	category                      = "BUILDING NOTAIR",
+	category                      = "LIGHT NOTAIR",
 
 	-- Cloaking
 
