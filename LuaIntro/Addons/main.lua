@@ -64,7 +64,7 @@ local unit_descs = {
 	"eallterrshield.png "..titleColor.."Widow\n"..contentColor.."Even though widows have a shield, don't expect them to soak up all the damage for you.", 
 	"emine.png "..titleColor.."Mines\n"..contentColor.."In the early game, mines can be used as a simple and cheap defense.", 
 	"eshieldgen.png "..titleColor.."Anti-Nuke\n"..contentColor.."Don't forget to build an anti-nuke platform before it's too late.", 
-	"esilo.png "..titleColor.."Nuke Silo\n"..contentColor.."Remember that if a nuclear missile silo is destroyed, the nuke inside it will detonate as well. Take care to place them well away from anything important.", 
+	"esilo.png "..titleColor.."Nuke Silo\n"..contentColor.."Remember that if a nuclear missile silo is destroyed, the nuclear core inside it will detonate as well. Take care to place them well away from anything important.", 
 	
 	-- Suppy Boi
 	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Always try to include some of artillery units into your army.",  
