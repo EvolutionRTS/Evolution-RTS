@@ -52,25 +52,25 @@ local contentColor = "\255\255\255\255"
 local unit_descs = {
 	-- Zopto
 	"ecommander.png "..titleColor.."Overseer\n"..contentColor.."Don't forget to evolve your overseer, different upgrades can be helpful!", 
-	"ehbotpeewee.png "..titleColor.."H-Bots\n"..contentColor.."While hbots have long range, none of their units are armored.", 
-	"eallterrlight.png "..titleColor.."All Terrain Units\n"..contentColor.."Dispite the name of 'All-terrain', they cannot go across water.", 
+	"ehbotpeewee.png "..titleColor.."H-Bots\n"..contentColor.."While h-bots have long range, no h-bot units are armored.", 
+	"eallterrlight.png "..titleColor.."All Terrain Units\n"..contentColor.."Despite the designation 'All-terrain', All-Terrain units cannot traverse deep water.", 
 	"emetalextractor.png "..titleColor.."Metal\n"..contentColor.."Don't forget to evolve your metal extractors to get more metal!", 
-	"estorage.png "..titleColor.."Supply\n"..contentColor.."In order to increase your supply cap, build more supply depots.", 
-	"ehbotengineer.png "..titleColor.."Lifter\n"..contentColor.."Just like normal hbots, the lifter can deploy as well.", 
-	"eorb.png "..titleColor.."O.R.B.\n"..contentColor.."If you have a surplus of metal and can't find a way to use it, evolve your orbs.", 
-	"ebasefactory.png "..titleColor.."Factories\n"..contentColor.."Evolve your factories, it can give you the upper hand in battle.", 
-	"ekrow.png "..titleColor.."Endbringers\n"..contentColor.."While endbringers are strong, don't send them out on their own to fight entire armies.", 
+	"estorage.png "..titleColor.."Supply\n"..contentColor.."In order to increase your army supply cap, build more supply depots.", 
+	"ehbotengineer.png "..titleColor.."Lifter\n"..contentColor.."Just like normal h-bots, the lifter can deploy as well.", 
+	"eorb.png "..titleColor.."O.R.B.\n"..contentColor.."If you have a surplus of metal and can't find a way to use it, evolve your orbs or build more of them.", 
+	"ebasefactory.png "..titleColor.."Factories\n"..contentColor.."Evolve your factories, upgraded units will give you the upper hand in battle.", 
+	"ekrow.png "..titleColor.."Endbringers\n"..contentColor.."While Endbringers are strong, don't send them out on their own to fight entire armies.", 
 	"eartyturret.png "..titleColor.."Lobster\n"..contentColor.."If you really want to make your opponent hate you, evolve the lobster.", 
 	"eallterrshield.png "..titleColor.."Widow\n"..contentColor.."Even though widows have a shield, don't expect them to soak up all the damage for you.", 
-	"emine.png "..titleColor.."Mines\n"..contentColor.."In the early game, mines will be your best friend.", 
-	"eshieldgen.png "..titleColor.."Anti-Nuke\n"..contentColor.."As soon as possible, build an antinuke.", 
-	"esilo.png "..titleColor.."Nuke Silo\n"..contentColor.." If you plan to build a nuke silo, don't build it near anything important.", 
+	"emine.png "..titleColor.."Mines\n"..contentColor.."In the early game, mines can be used as a simple and cheap defense.", 
+	"eshieldgen.png "..titleColor.."Anti-Nuke\n"..contentColor.."Don't forget to build an anti-nuke platform before it's too late.", 
+	"esilo.png "..titleColor.."Nuke Silo\n"..contentColor.."Remember that if a nuclear missile silo is destroyed, the nuke inside it will detonate as well. Take care to place them well away from anything important.", 
 	
 	-- Suppy Boi
-	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Always try to include some of artillery units into your army",  
-	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Try to keep your artillery behind your main battle tanks",  
-	"emetalextractor.png "..titleColor.."Metal\n"..contentColor.."Evolved metal extractors use energy",  
-	"eamphibmedtank.png "..titleColor.."Amphibious Units\n"..contentColor.."While the Amphibious units are unarmored and fast, they deal a lot of Damage!",
+	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Always try to include some of artillery units into your army.",  
+	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Try to keep your artillery behind your main battle tanks.",  
+	"emetalextractor.png "..titleColor.."Metal\n"..contentColor.."Evolved metal extractors use energy, so when evolving to a higher tier, be sure to plan ahead for the increased energy consumption.",  
+	"eamphibmedtank.png "..titleColor.."Amphibious Units\n"..contentColor.."While Amphibious units are fast, nimble, and deal great damage, this comes at the cost of having little to no armor.",
 }
 
 local quotes = {
