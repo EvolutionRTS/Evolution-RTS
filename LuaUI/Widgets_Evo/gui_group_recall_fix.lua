@@ -31,7 +31,7 @@ options = {
 	timeoutlength = {
 		name = "Double Press Speed", 
 		type = "number", 
-		value = 0.4, 
+		value = 1, 
 		min = 0,
 		max = 5,
 		step = 0.1,
@@ -59,6 +59,7 @@ local groupNumber = {
 	[KEYSYMS.N_7] = 7,
 	[KEYSYMS.N_8] = 8,
 	[KEYSYMS.N_9] = 9,
+	[KEYSYMS.N_0] = 0,
 }
 
 local function GroupRecallFix(key, modifier, isRepeat)
