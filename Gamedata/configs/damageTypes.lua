@@ -61,6 +61,11 @@ local damageClasses = {
 			LIGHT		= 0.50,
 			BUILDING 	= 1,
 		},
+		eartytank_saturation	= {
+			ARMORED		= 0.25,
+			LIGHT		= 0.25,
+			BUILDING 	= 1,
+		},
 		ebomb	= {
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,

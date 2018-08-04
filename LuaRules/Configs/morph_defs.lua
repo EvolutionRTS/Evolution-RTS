@@ -1315,6 +1315,334 @@ Evolution]],
 		},
 	},
 	
+----------------------------------------------------------
+--Shotguns
+----------------------------------------------------------
+	
+	eriottank2 = 	{
+		{
+			into = 'eriottank2_shotgun',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eriottank2_shotgun = 	{
+		{
+			into = 'eriottank2',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eriottank2_up1 = 	{
+		{
+			into = 'eriottank2_shotgun_up1',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eriottank2_shotgun_up1 = 	{
+		{
+			into = 'eriottank2_up1',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eriottank2_up2 = 	{
+		{
+			into = 'eriottank2_shotgun_up2',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eriottank2_shotgun_up2 = 	{
+		{
+			into = 'eriottank2_up2',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eriottank2_up3 = 	{
+		{
+			into = 'eriottank2_shotgun_up3',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eriottank2_shotgun_up3 = 	{
+		{
+			into = 'eriottank2_up3',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eallterrriot = 	{
+		{
+			into = 'eallterrriot_shotgun',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eallterrriot_shotgun = 	{
+		{
+			into = 'eallterrriot',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eallterrriot_up1 = 	{
+		{
+			into = 'eallterrriot_shotgun_up1',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eallterrriot_shotgun_up1 = 	{
+		{
+			into = 'eallterrriot_up1',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eallterrriot_up2 = 	{
+		{
+			into = 'eallterrriot_shotgun_up2',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eallterrriot_shotgun_up2 = 	{
+		{
+			into = 'eallterrriot_up2',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eallterrriot_up3 = 	{
+		{
+			into = 'eallterrriot_shotgun_up3',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eallterrriot_shotgun_up3 = 	{
+		{
+			into = 'eallterrriot_up3',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eamphibriot = 	{
+		{
+			into = 'eamphibriot_shotgun',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eamphibriot_shotgun = 	{
+		{
+			into = 'eamphibriot',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eamphibriot_up1 = 	{
+		{
+			into = 'eamphibriot_shotgun_up1',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eamphibriot_shotgun_up1 = 	{
+		{
+			into = 'eamphibriot_up1',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eamphibriot_up2 = 	{
+		{
+			into = 'eamphibriot_shotgun_up2',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eamphibriot_shotgun_up2 = 	{
+		{
+			into = 'eamphibriot_up2',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
+	eamphibriot_up3 = 	{
+		{
+			into = 'eamphibriot_shotgun_up3',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			Shotgun]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	eamphibriot_shotgun_up3 = 	{
+		{
+			into = 'eamphibriot_up3',
+			--require = 'etech1',
+			time = 2,
+			cmdname = [[Evolve
+			EMP]],
+			energy = 0,
+			metal = 0,
+			text = [[Shotgun]],
+			require = [[tech2]],
+		},
+	},
+	
 }
 
 --

@@ -111,7 +111,7 @@ weaponDefs                 = {
 		collideFriendly          = false,
 		collideFeature           = false,
 		
-		cegTag                   = "artyshot2",
+		cegTag                   = "artyshot3",
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = 0,
@@ -122,7 +122,7 @@ weaponDefs                 = {
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
 		--highTrajectory	         = 1,
-		size					 = 16,
+		size					 = 4,
 		name                     = "Plasma Cannon",
 		range                    = 1300,
 		reloadtime               = 30,
@@ -135,7 +135,7 @@ weaponDefs                 = {
 		weaponVelocity           = 500,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eartytank",  
+			damagetype		     = "eartytank_saturation",  
 		},  
 		damage                   = {
 			default              = 200,
