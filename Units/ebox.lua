@@ -54,6 +54,7 @@ local unitDef                    = {
 	objectName                   = "ebox.s3o",
 	script			             = "ebox_lus.lua",
 	radarDistance                = 1250,
+	radarEmitHeight				 = 300,
 	repairable		             = false,
 	selfDestructAs               = "largeExplosionGenericWhite",
 	side                         = "CORE",

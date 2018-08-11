@@ -610,120 +610,110 @@ Overseer]],
 ----------------------------------------------------------
 ----------------------------------------------------------
 	
-	elightturret2 = 	{
-		{
-			into = 'elightturret2_up1',
-			--require = 'etech1',
-			time = timeToBuild_elightturret2,
-			cmdname = [[Evolve]],
-			energy = energyCost_elightturret2,
-			metal = 0,
-			text = [[+20% damage/hp buff, +15% faster reload]],
-			require = [[tech1]],
-		},
-	},	
-	elightturret2_up1 = 	{
-		{
-			into = 'elightturret2_up2',
-			--require = 'etech2',
-			time = timeToBuild_elightturret2,
-			cmdname = [[Evolve]],
-			energy = energyCost_elightturret2,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech2]],
-		},
-	},
-	elightturret2_up2 = 	{
-		{
-			into = 'elightturret2_up3',
-			--require = 'etech3',
-			time = timeToBuild_elightturret2,
-			cmdname = [[Evolve]],
-			energy = energyCost_elightturret2,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech3]],
-		},
-	},
+	-- elightturret2 = 	{
+		-- {
+			-- into = 'elightturret2_up1',
+			-- time = timeToBuild_elightturret2,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_elightturret2,
+			-- metal = 0,
+			-- text = [[+20% damage/hp buff, +15% faster reload]],
+			-- require = [[tech1]],
+		-- },
+	-- },	
+	-- elightturret2_up1 = 	{
+		-- {
+			-- into = 'elightturret2_up2',
+			-- time = timeToBuild_elightturret2,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_elightturret2,
+			-- metal = 0,
+			-- text = [[+15% damage/hp buff, +15% faster reload]],
+			-- require = [[tech2]],
+		-- },
+	-- },
+	-- elightturret2_up2 = 	{
+		-- {
+			-- into = 'elightturret2_up3',
+			-- time = timeToBuild_elightturret2,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_elightturret2,
+			-- metal = 0,
+			-- text = [[+15% damage/hp buff, +15% faster reload]],
+			-- require = [[tech3]],
+		-- },
+	-- },
 
-	eheavyturret2 = 	{
-		{
-			into = 'eheavyturret2_up1',
-			--require = 'etech1',
-			time = timeToBuild_eheavyturret2,
-			cmdname = [[Evolve]],
-			energy = energyCost_eheavyturret2,
-			metal = 0,
-			text = [[+20% damage/hp buff, +15% faster reload]],
-			require = [[tech1]],
-		},
-	},	
-	eheavyturret2_up1 = 	{
-		{
-			into = 'eheavyturret2_up2',
-			--require = 'etech2',
-			time = timeToBuild_eheavyturret2,
-			cmdname = [[Evolve]],
-			energy = energyCost_eheavyturret2,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech2]],
-		},
-	},
-	eheavyturret2_up2 = 	{
-		{
-			into = 'eheavyturret2_up3',
-			--require = 'etech3',
-			time = timeToBuild_eheavyturret2,
-			cmdname = [[Evolve]],
-			energy = energyCost_eheavyturret2,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech3]],
-		},
-	},
+	-- eheavyturret2 = 	{
+		-- {
+			-- into = 'eheavyturret2_up1',
+			-- time = timeToBuild_eheavyturret2,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_eheavyturret2,
+			-- metal = 0,
+			-- text = [[+20% damage/hp buff, +15% faster reload]],
+			-- require = [[tech1]],
+		-- },
+	-- },	
+	-- eheavyturret2_up1 = 	{
+		-- {
+			-- into = 'eheavyturret2_up2',
+			-- time = timeToBuild_eheavyturret2,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_eheavyturret2,
+			-- metal = 0,
+			-- text = [[+15% damage/hp buff, +15% faster reload]],
+			-- require = [[tech2]],
+		-- },
+	-- },
+	-- eheavyturret2_up2 = 	{
+		-- {
+			-- into = 'eheavyturret2_up3',
+			-- time = timeToBuild_eheavyturret2,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_eheavyturret2,
+			-- metal = 0,
+			-- text = [[+15% damage/hp buff, +15% faster reload]],
+			-- require = [[tech3]],
+		-- },
+	-- },
 	
-	euwturret = 	{
-		{
-			into = 'euwturret_up1',
-			--require = 'etech1',
-			time = timeToBuild_euwturret,
-			cmdname = [[Evolve]],
-			energy = energyCost_euwturret,
-			metal = 0,
-			text = [[+20% damage/hp buff, +15% faster reload]],
-			require = [[tech1]],
-		},
-	},	
-	euwturret_up1 = 	{
-		{
-			into = 'euwturret_up2',
-			--require = 'etech2',
-			time = timeToBuild_euwturret,
-			cmdname = [[Evolve]],
-			energy = energyCost_euwturret,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech2]],
-		},
-	},
-	euwturret_up2 = 	{
-		{
-			into = 'euwturret_up3',
-			--require = 'etech3',
-			time = timeToBuild_euwturret,
-			cmdname = [[Evolve]],
-			energy = energyCost_euwturret,
-			metal = 0,
-			text = [[+15% damage/hp buff, +15% faster reload]],
-			require = [[tech3]],
-		},
-	},
+	-- euwturret = 	{
+		-- {
+			-- into = 'euwturret_up1',
+			-- time = timeToBuild_euwturret,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_euwturret,
+			-- metal = 0,
+			-- text = [[+20% damage/hp buff, +15% faster reload]],
+			-- require = [[tech1]],
+		-- },
+	-- },	
+	-- euwturret_up1 = 	{
+		-- {
+			-- into = 'euwturret_up2',
+			-- time = timeToBuild_euwturret,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_euwturret,
+			-- metal = 0,
+			-- text = [[+15% damage/hp buff, +15% faster reload]],
+			-- require = [[tech2]],
+		-- },
+	-- },
+	-- euwturret_up2 = 	{
+		-- {
+			-- into = 'euwturret_up3',
+			-- time = timeToBuild_euwturret,
+			-- cmdname = [[Evolve]],
+			-- energy = energyCost_euwturret,
+			-- metal = 0,
+			-- text = [[+15% damage/hp buff, +15% faster reload]],
+			-- require = [[tech3]],
+		-- },
+	-- },
 	eartyturret = 	{
 		{
 			into = 'eartyturret_up1',
-			--require = 'etech1',
 			time = timeToBuild_eartyturret,
 			cmdname = [[Evolve]],
 			energy = energyCost_eartyturret,
@@ -735,7 +725,6 @@ Overseer]],
 	eartyturret_up1 = 	{
 		{
 			into = 'eartyturret_up2',
-			--require = 'etech2',
 			time = timeToBuild_eartyturret,
 			cmdname = [[Evolve]],
 			energy = energyCost_eartyturret,
@@ -747,7 +736,6 @@ Overseer]],
 	eartyturret_up2 = 	{
 		{
 			into = 'eartyturret_up3',
-			--require = 'etech3',
 			time = timeToBuild_eartyturret,
 			cmdname = [[Evolve]],
 			energy = energyCost_eartyturret,

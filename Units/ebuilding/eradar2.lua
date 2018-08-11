@@ -41,6 +41,7 @@ local unitDef                     = {
 	script			              = "eradar3.cob",
 	onoffable                     = true,
 	radarDistance                 = 2500,
+	radarEmitHeight				  = 300,
 	repairable		              = false,
 	selfDestructAs                = "largeBuildingExplosionGenericWhite",
 	side                          = "CORE",
