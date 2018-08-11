@@ -55,7 +55,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 12500,
+	maxDamage                    = 15000,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -112,9 +112,9 @@ local unitDef                    = {
 		},
 	},
 	weapons                      = {
-		[1]                      = {
-			def                  = "riottankempweapon",
-		},
+		-- [1]                      = {
+			-- def                  = "riottankempweapon",
+		-- },
 	},
 	customParams                 = {
 		unittype				  = "mobile",
