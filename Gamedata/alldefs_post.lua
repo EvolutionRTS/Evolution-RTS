@@ -105,8 +105,8 @@ function UnitDef_Post(name, uDef)
 	-- turn off unit collision check for planes
 	--
 
-	if uDef.canfly then --and not uDef.istransport
- 		uDef.collide = true
+	if uDef.canfly and not uDef.istransport
+ 		uDef.collide = false
   	end
 
 	--------------------------------------------------------------------------------
