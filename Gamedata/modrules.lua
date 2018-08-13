@@ -15,7 +15,7 @@ local modrules  = {
 --   },
 
   movement = {
-    allowAirPlanesToLeaveMap = false,  -- defaults to true
+    allowAirPlanesToLeaveMap = true,  -- defaults to true
 	allowAircraftToHitGround = false,
     allowPushingEnemyUnits   = true, -- defaults to false
     allowCrushingAlliedUnits = false, -- defaults to false
