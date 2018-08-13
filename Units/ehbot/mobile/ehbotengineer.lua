@@ -84,7 +84,7 @@ local unitDef                    = {
 	capturespeed                 = 1,
 	TerraformSpeed               = 2147000,
 	ReclaimSpeed                 = 0,
-	repairspeed                  = 0.15625,
+	repairspeed                  = 1,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"deathceg3", 
