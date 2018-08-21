@@ -37,7 +37,7 @@ local unitDef                    = {
 	CanAttack			         = true,
 	CanAssist			         = true,
 	canBeAssisted                = true,
-	CanCapture                   = true,
+	CanCapture                   = false,
 	CanRepair			         = true,
 	canRestore					 = false,
 	

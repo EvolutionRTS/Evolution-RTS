@@ -1,22 +1,14 @@
--- UNITDEF -- ECOMMANDERSHIELD --
+-- UNITDEF -- ECOMMANDERMETEOR --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ecommandershield"
+local unitName                   = "ecommandermeteor"
 
 --------------------------------------------------------------------------------
 
 local armortype				 = [[armored]]
-local supplyGiven				 = [[10]]
+--local supplyGiven				 = [[10]]
 local techprovided				 = [[tech0, -overseer]]
-local techrequired				 = [[0 overseer]]
-
-local shield1Power               = 5000
-local shield1PowerRegen          = 50
-local shield1PowerRegenEnergy    = 0
-
-local weapon1Damage              = 200
-local weapon1AOE				 = 250
-local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local techrequired				 = [[0 overseer, tech3]]
 
 
 local unitDef                    = {
@@ -29,8 +21,8 @@ local unitDef                    = {
 	acceleration                 = 0.2,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 1000,
-	buildDistance                = 1000,
+	buildCostMetal               = 2500,
+	buildDistance                = 500,
 	builder                      = true,
 	buildTime                    = 2.5,
 	capturable		             = false,
@@ -46,8 +38,8 @@ local unitDef                    = {
 	canPatrol                    = true,
 	canreclaim		             = false,
 	canstop                      = true,
-	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Builds Units • Provides large shielding • Gives ]] ..supplyGiven.. [[ Supply]],
+	category                     = "NOTAIR SUPPORT ARMORED",
+	description                  = [[Builds Units • Provides support in battles]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -56,10 +48,10 @@ local unitDef                    = {
 	footprintZ                   = 4,
 	hideDamage		             = true,
 	iconType                     = "commander",
-	idleAutoHeal                 = .5,
-	idleTime                     = 2200,
+	idleAutoHeal                 = 5,
+	idleTime                     = 300,
 	levelground                  = true,
-	maxDamage                    = 7500,
+	maxDamage                    = 5000,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -68,16 +60,16 @@ local unitDef                    = {
 	metalStorage                 = 0,
 	movementClass                = "COMMANDERTANK4",
 	moveState			         = "0",
-	name                         = "The Shielded Overseer",
+	name                         = "The Meteor Overseer",
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
 	objectName                   = "ecommander4.s3o",
-	script			             = "ecommander3shield.cob",
+	script			             = "ecommander4-meteor.cob",
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
 	showNanoSpray                = true,
-	sightDistance                = 500,
+	sightDistance                = 650,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -101,6 +93,7 @@ local unitDef                    = {
 			"custom:nanoorb",
 			"custom:dirt",
 			"custom:blacksmoke",
+			"custom:gdhcannon",
 		},
 	},
 	buildoptions                 = Shared.buildList,
@@ -119,7 +112,7 @@ local unitDef                    = {
 			-- def                  = "riottankempweapon",
 		-- },
 		[1]                      = {
-			def                  = "shield",
+			def                  = "meteor",
 		},
 	},
 	customParams                 = {
@@ -130,7 +123,7 @@ local unitDef                    = {
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,
-		supply_granted            = supplyGiven,
+--		supply_granted            = supplyGiven,
 		death_sounds             = "generic",
 		
 		armortype                = armortype,
@@ -138,128 +131,44 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
-		helptext                 = [[Armortype: ]] ..armortype.. [[ 
-
-Generates a large shield
-
-Reclaims any energy cores within it's proximity.]],	
 	},
 }
 
 --------------------------------------------------------------------------------
 
 local weaponDefs                 = {
-
-	riottankempweapon            = {
-		
-		AreaOfEffect             = weapon1AOE,
-		avoidFeature             = false,
-		avoidFriendly            = false,
-		avoidGround				 = false,
-		collideFeature           = false,
-		collideFriendly          = false,
-		coreThickness            = 0.6,
-		--	cegTag               = "mediumcannonweapon3",
-		duration                 = 0.05,
-		edgeeffectiveness        = 0.1,
-		energypershot            = energycosttofire,
-		explosionGenerator       = "custom:genericshellexplosion-medium-lightning",
-		fallOffRate              = 1,
-		fireStarter              = 100,
-		impulseFactor            = 0,
-		
-		minintensity             = 1,
-		name                     = "EMP Blast Wave",
-		noexplode		         = true,
-		paralyzer		         = true,
-		paralyzetime	         = 2.5,
-		range                    = 500,
-		reloadtime               = 1,
-		WeaponType               = "LaserCannon",
-		rgbColor                 = "0 0.2 1",
-		rgbColor2                = "1 1 1",
-		soundTrigger             = true,
-		soundstart               = "weapons/fnubeamfire.wav",
-		soundHit                 = "explosions/phasegun1hit.wav",
-		texture1                 = "wave",
-		texture2                 = "empty",
-		thickness                = 40,
-		tolerance                = 1000,
-		turret                   = true,
-		weaponVelocity           = 1000,
-		customparams             = {
-			damagetype		     = "eriottank2",  
-			nofriendlyfire	     = 1,
-			nocosttofire		 = true,
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
-		}, 
-		damage                   = {
-			default              = weapon1Damage,
-		},
-	},
-	
-	emp                          = {
+	meteor             = {
 		AreaOfEffect             = 500,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		explosionGenerator       = "custom:genericshellexplosion-large-blue-emp",
-		tolerance                = 1000,
+		commandFire				 = true,
+		burst					 = 50,
+		burstrate				 = 0.1,
+		--projectiles			 = 5,
+		cegTag                   = "METEORTRAIL",
+		commandfire				 = true,
+		explosionGenerator       = "custom:genericshellexplosion-large",
 		energypershot            = 0,
-		explosionScar		     = false,
 		impulseFactor            = 0,
-		name                     = "Emp Blast Weapon",
-		noSelfDamage            = true,
-		paralyzer		         = true,
-		paralyzetime	         = 5,
-		range                    = 500,
-		reloadtime               = 10,
+		interceptedByShieldType  = 4,
+		name                     = unitName .. "Weapon",
+		range                    = 10000,
+		reloadtime               = 120,
+		size					 = 16,
 		weaponType		         = "Cannon",
-		soundhit                 = "explosions/emp.wav",
-		size				     = 0,
+		soundHit                 = "explosions/explode3.wav",
+		soundStart               = "weapons/meteorwhoosh.wav",
+		sprayangle 				 = 1000,
+		tolerance                = 2000,
 		turret                   = true,
-		weaponVelocity           = 10000,
-		customparams             = {
-			damagetype		     = "default",
-			nofriendlyfire	     = 1,
-			nocosttofire		 = true,
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
+		weaponVelocity           = 1000,
+		customparams             = {		
+			damagetype		     = "eheavytank3",  
 		},      
 		damage                   = {
-			default              = 1000,
-		},
-	},
-	shield                = {
-		
-		Smartshield              = true,
-		Exteriorshield           = true,
-		Visibleshield            = false,
-		Visibleshieldrepulse     = false,
-		ShieldStartingPower      = 0,
-		Shieldenergyuse          = 0,
-		Shieldradius             = 500,
-		Shieldpower              = shield1Power,
-		Shieldpowerregen         = shield1PowerRegen,
-		Shieldpowerregenenergy   = shield1PowerRegenEnergy,
-		Shieldintercepttype      = 4,
-		Shieldgoodcolor          = "0.0 0.2 1.0",
-		Shieldbadcolor           = "1.0 0 0",
-		Shieldalpha              = 0.2,
-		
-		texture1		         = "shield4",
-		
-		visibleShieldHitFrames   = 1,
-		weaponType               = [[Shield]],
-		customparams             = {
-			nocosttofire		 = true,
-		},      
-		damage                   = {
-			default              = 1,
+			default              = 200,
 		},
 	},
 	commnuke                   = {
@@ -269,7 +178,6 @@ local weaponDefs                 = {
 		cegTag                    = "NUKETRAIL",
 		collideFriendly           = false,
 		collideFeature            = false,
-		commandfire               = true,
 		craterBoost               = 0,
 		craterMult                = 0,
 		edgeeffectiveness		  = 0.1,

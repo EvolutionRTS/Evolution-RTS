@@ -41,6 +41,9 @@ local timeToBuild_ecommanderfactory = energyCost_ecommanderfactory * 0.10
 local energyCost_ecommanderbattle = 200
 local timeToBuild_ecommanderbattle = energyCost_ecommanderbattle * 0.10
 
+local energyCost_ecommandermeteor = 12000
+local timeToBuild_ecommandermeteor = energyCost_ecommandermeteor * 0.01
+
 local energyCost_factory_up1 = 1200
 local timeToBuild_factory_up1 = energyCost_factory_up1 * 0.10
 
@@ -333,6 +336,16 @@ Overseer]],
 		},
 	},
 	ecommanderbattle = {
+	    {
+			into = 'ecommandermeteor',
+			time = timeToBuild_ecommandermeteor,
+			cmdname = [[Meteor 
+Overseer]],
+			energy = energyCost_ecommandermeteor,
+			metal = 0,
+			text = 'Evolve into Meteor Overseer: Overseer can call down devastating meteor showers.',
+			require = [[tech1]],
+		},
 	    {
 			into = 'ecommander',
 			time = timeToBuild_ecommander,
