@@ -69,7 +69,7 @@ return {
 		unitname = "chickenh1b",
 		upright = false,
 		waterline = 8,
-		workertime = 1,
+		workertime = 0.25,
 		featuredefs = {
 			dead = {},
 			heap = {},

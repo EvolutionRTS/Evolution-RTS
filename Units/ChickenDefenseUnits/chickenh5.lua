@@ -61,7 +61,7 @@ return {
 		unitname = "chickenh5",
 		upright = false,
 		waterline = 8,
-		workertime = 1,
+		workertime = 0.25,
 		featuredefs = {
 			dead = {},
 			heap = {},

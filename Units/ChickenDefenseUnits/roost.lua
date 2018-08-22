@@ -6,7 +6,7 @@ return {
 		bmcode = "0",
 		brakerate = 0,
 		buildcostenergy = 1,
-		buildcostmetal = 1,
+		buildcostmetal = 500,
 		builddistance = 90,
 		builder = true,
 		buildpic = "chicken_unitpics/roost.png",
@@ -46,7 +46,7 @@ return {
 		unitname = "roost",
 		upright = false,
 		waterline = 0,
-		workertime = 1,
+		workertime = 0.25,
 		yardmap = "ooooooooo",
 		featuredefs = {},
 		sfxtypes = {

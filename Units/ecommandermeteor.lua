@@ -114,6 +114,7 @@ local unitDef                    = {
 		-- },
 		[1]                      = {
 			def                  = "meteor",
+			badtargetcategory     = "VTOL",
 		},
 	},
 	customParams                 = {
