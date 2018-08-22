@@ -344,7 +344,7 @@ Overseer]],
 			energy = energyCost_ecommandermeteor,
 			metal = 0,
 			text = 'Evolve into Meteor Overseer: Overseer can call down devastating meteor showers.',
-			require = [[tech1]],
+			require = [[tech3]],
 		},
 	    {
 			into = 'ecommander',
