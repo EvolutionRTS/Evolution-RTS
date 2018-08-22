@@ -40,7 +40,7 @@ local damageClasses = {
 			BUILDING 	= 0.5,
 		},
 		ehbotrocko	= {
-			ARMORED		= 1,
+			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
@@ -57,8 +57,8 @@ local damageClasses = {
 			BUILDING 	= 0.66,
 		},
 		eartytank	= {
-			ARMORED		= 0.50,
-			LIGHT		= 0.50,
+			ARMORED		= 0.25,
+			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		eartytank_saturation	= {
@@ -150,8 +150,8 @@ local damageClasses = {
 			BUILDING 	= 0.25,
 		},
 		eallterrassault	= {
-			ARMORED		= 0.50,
-			LIGHT		= 0.50,
+			ARMORED		= 0.25,
+			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		eallterranarchid = {
@@ -203,8 +203,8 @@ local damageClasses = {
 			BUILDING 	= 0.5,
 		},
 		eamphibarty	= {
-			ARMORED		= 0.50,
-			LIGHT		= 0.50,
+			ARMORED		= 0.25,
+			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		eamphibleveler	= {
