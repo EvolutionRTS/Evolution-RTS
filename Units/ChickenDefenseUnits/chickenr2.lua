@@ -2,7 +2,7 @@ return {
 	chickenr2 = {
 		acceleration = 0.9,
 		activatewhenbuilt = true,
-		autoheal = 50,
+		-- autoheal = 50,
 		bmcode = "1",
 		brakerate = 0.7,
 		buildcostenergy = 1,

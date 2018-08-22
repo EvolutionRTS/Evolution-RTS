@@ -1,7 +1,7 @@
 return {
 	chicken1z = {
 		acceleration = 0.5,
-		autoheal = 3,
+		-- autoheal = 3,
 		bmcode = "1",
 		brakerate = 0.3,
 		buildcostenergy = 1,

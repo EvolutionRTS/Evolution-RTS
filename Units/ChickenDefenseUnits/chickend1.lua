@@ -2,7 +2,7 @@ return {
 	chickend1 = {
 		acceleration = 0.01,
 		activatewhenbuilt = true,
-		autoheal = 1,
+		-- autoheal = 1,
 		bmcode = "0",
 		brakerate = 0.01,
 		buildcostenergy = 1,
@@ -27,7 +27,7 @@ return {
 		footprintx = 1,
 		footprintz = 1,
 		icontype = "turret_lit",
-		idleautoheal = 15,
+		-- idleautoheal = 15,
 		idletime = 300,
 		levelground = false,
 		mass = 700,
@@ -53,7 +53,7 @@ return {
 		unitname = "chickend1",
 		upright = false,
 		waterline = 1,
-		workertime = 125,
+		workertime = 1,
 		featuredefs = {
 			dead = {},
 			heap = {},

@@ -2,7 +2,7 @@ return {
 	chickena2b = {
 		acceleration = 0.36,
 		airsightdistance = 1800,
-		autoheal = 40,
+		-- autoheal = 40,
 		bmcode = "1",
 		brakerate = 0.4,
 		buildcostenergy = 1,

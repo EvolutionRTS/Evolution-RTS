@@ -3,7 +3,7 @@ return {
 		acceleration = 2,
 		airsightdistance = 1500,
 		amphibious = true,
-		autoheal = 10,
+		-- autoheal = 10,
 		bankscale = "1",
 		bmcode = "1",
 		brakerate = 0.2,

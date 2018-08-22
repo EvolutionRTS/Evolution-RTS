@@ -25,7 +25,7 @@ return {
 		footprintx = 2,
 		footprintz = 2,
 		icontype = "td_lit_lit",
-		idleautoheal = 18,
+		-- idleautoheal = 18,
 		idletime = 20,
 		leavetracks = true,
 		maneuverleashlength = "750",

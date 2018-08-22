@@ -2,7 +2,7 @@ return {
 	chickenp1 = {
 		acceleration = 1,
 		activatewhenbuilt = true,
-		autoheal = 27,
+		-- autoheal = 27,
 		bmcode = "1",
 		brakerate = 0.6,
 		buildcostenergy = 1,

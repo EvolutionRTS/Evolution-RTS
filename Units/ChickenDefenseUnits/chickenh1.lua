@@ -2,7 +2,7 @@ return {
 	chickenh1 = {
 		acceleration = 0.05,
 		activatewhenbuilt = true,
-		autoheal = 32,
+		-- autoheal = 32,
 		bmcode = 1,
 		brakerate = 0.2,
 		buildcostenergy = 1,
@@ -69,7 +69,7 @@ return {
 		unitname = "chickenh1",
 		upright = false,
 		waterline = 8,
-		workertime = 200,
+		workertime = 1,
 		featuredefs = {
 			dead = {},
 			heap = {},

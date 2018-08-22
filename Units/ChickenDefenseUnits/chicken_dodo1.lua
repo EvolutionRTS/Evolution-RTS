@@ -2,7 +2,7 @@ return {
 	chicken_dodo1 = {
 		acceleration = 6,
 		activatewhenbuilt = true,
-		autoheal = 50,
+		-- autoheal = 50,
 		bmcode = "1",
 		brakerate = 0.2,
 		buildcostenergy = 1,

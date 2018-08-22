@@ -28,7 +28,7 @@ return {
 		footprintx = 3,
 		footprintz = 3,
 		icontype = "td_lit_lit",
-		idleautoheal = 20,
+		-- idleautoheal = 20,
 		idletime = 300,
 		initcloaked = 1,
 		leavetracks = true,

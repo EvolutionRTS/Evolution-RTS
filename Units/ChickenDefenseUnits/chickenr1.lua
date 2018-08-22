@@ -26,7 +26,7 @@ return {
 		hidedamage = 1,
 		hightrajectory = 1,
 		icontype = "arty_arm",
-		idleautoheal = 20,
+		-- idleautoheal = 20,
 		idletime = 300,
 		leavetracks = true,
 		maneuverleashlength = "640",

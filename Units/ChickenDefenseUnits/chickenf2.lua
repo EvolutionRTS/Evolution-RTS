@@ -32,7 +32,7 @@ return {
 		footprintz = 3,
 		hidedamage = 1,
 		icontype = "scout",
-		idleautoheal = 15,
+		-- idleautoheal = 15,
 		idletime = 900,
 		maneuverleashlength = "20000",
 		mass = 227.5,

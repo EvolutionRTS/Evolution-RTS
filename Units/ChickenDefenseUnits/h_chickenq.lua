@@ -2,7 +2,7 @@ return {
 	h_chickenq = {
 		acceleration = 1.6,
 		airsightdistance = 2400,
-		autoheal = 40,
+		-- autoheal = 40,
 		bmcode = "1",
 		brakerate = 2,
 		buildcostenergy = 1,

@@ -457,6 +457,11 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			if unitDef.customparams and unitDef.customparams.noenergycost == true then
 				unitDef.buildcostenergy = 0
 			end
+			
+			-- Set maximum possible workertime to 2
+			if unitDef.workertime and unitDef.workertime >= 2 then
+				unitDef.workertime = 2
+			end
 		end
 	end
 end

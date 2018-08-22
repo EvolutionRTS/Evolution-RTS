@@ -2,7 +2,7 @@ return {
 	chickens3 = {
 		acceleration = 0.5,
 		airstrafe = true,
-		autoheal = 7,
+		-- autoheal = 7,
 		brakerate = 3.5,
 		buildcostenergy = 1,
 		buildcostmetal = 50,
@@ -31,7 +31,7 @@ return {
 		hidedamage = 1,
 		hoverattack = true,
 		icontype = "air_arm",
-		idleautoheal = 2,
+		-- idleautoheal = 2,
 		idletime = 0,
 		mass = 280,
 		maxdamage = 1900,

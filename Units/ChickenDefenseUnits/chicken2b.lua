@@ -1,7 +1,7 @@
 return {
 	chicken2b = {
 		acceleration = 0.7,
-		autoheal = 20,
+		-- autoheal = 20,
 		bmcode = "1",
 		brakerate = 5,
 		buildcostenergy = 1,

@@ -22,6 +22,12 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
+		-- Overseers with weapons
+		ecommandermeteor	= {
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 1,
+		},
 		
 		-- Start H-Bots
 		ehbotpeewee	= {

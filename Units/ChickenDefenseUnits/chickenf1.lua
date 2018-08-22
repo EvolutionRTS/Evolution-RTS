@@ -32,7 +32,7 @@ return {
 		footprintz = 3,
 		hidedamage = 1,
 		icontype = "air_bomb",
-		idleautoheal = 5,
+		-- idleautoheal = 5,
 		idletime = 0,
 		maneuverleashlength = "20000",
 		mass = 227.5,

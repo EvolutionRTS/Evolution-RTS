@@ -2,7 +2,7 @@ return {
 	epic_chickenq = {
 		acceleration = 3,
 		airsightdistance = 4000,
-		autoheal = 90,
+		-- autoheal = 90,
 		bmcode = "1",
 		brakerate = 3,
 		buildcostenergy = 1,

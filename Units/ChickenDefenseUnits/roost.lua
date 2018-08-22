@@ -2,7 +2,7 @@ return {
 	roost = {
 		acceleration = 0,
 		activatewhenbuilt = true,
-		autoheal = 1.8,
+		-- autoheal = 1.8,
 		bmcode = "0",
 		brakerate = 0,
 		buildcostenergy = 1,
@@ -24,7 +24,7 @@ return {
 		footprintx = 2,
 		footprintz = 2,
 		icontype = "energy",
-		idleautoheal = 10,
+		-- idleautoheal = 10,
 		idletime = 90,
 		isairbase = true,
 		levelground = false,
@@ -46,7 +46,7 @@ return {
 		unitname = "roost",
 		upright = false,
 		waterline = 0,
-		workertime = 1500,
+		workertime = 1,
 		yardmap = "ooooooooo",
 		featuredefs = {},
 		sfxtypes = {

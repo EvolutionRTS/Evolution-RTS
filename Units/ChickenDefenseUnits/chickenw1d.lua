@@ -33,7 +33,7 @@ return {
 		footprintz = 1,
 		hidedamage = 1,
 		icontype = "air_arm",
-		idleautoheal = 2,
+		-- idleautoheal = 2,
 		idletime = 0,
 		maneuverleashlength = "1280",
 		mass = 90,
