@@ -1,7 +1,7 @@
 unitDef                     = {
 	buildAngle                    = 2048,
 	buildCostEnergy               = 0,
-	buildCostMetal                = 55,
+	buildCostMetal                = 27,
 	builder                       = false,
 	buildTime                     = 5,
 	buildpic					  = "elightturret2.png",
@@ -19,7 +19,7 @@ unitDef                     = {
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	iconType                      = "turret_lit",
-	maxDamage                     = 1250,
+	maxDamage                     = 625,
 	maxSlope                      = 60,
 	maxWaterDepth                 = 999999,
 	metalStorage                  = 0,
