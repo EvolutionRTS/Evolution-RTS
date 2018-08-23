@@ -12,7 +12,7 @@ humanName = [[Dicer]]
 objectName = "eamphibriot2.s3o"
 script = "eamphibriot.cob"
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[3]]
 

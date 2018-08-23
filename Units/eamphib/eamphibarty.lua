@@ -12,7 +12,7 @@ humanName = [[Assimilator]]
 objectName = "eamphibarty2.s3o"
 script = "eamphibarty2.cob"
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[5]]
 

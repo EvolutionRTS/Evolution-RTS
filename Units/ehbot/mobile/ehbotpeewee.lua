@@ -12,7 +12,7 @@ humanName = [[A.K.]]
 objectName = "ehbotpeewee2.s3o"
 script = "ehbotpeewee_lus.lua"
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[6]]
 

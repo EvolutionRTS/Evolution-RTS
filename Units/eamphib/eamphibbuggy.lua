@@ -12,7 +12,7 @@ humanName = [[Snake]]
 objectName = "eamphibbuggy2.s3o"
 script = "eamphibbuggy_lus.lua"
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[1]]
 

@@ -12,7 +12,7 @@ humanName = "ShadowFury"
 objectName = "eartytank2.s3o"
 script = "eartytank2.cob"
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[8]]
 
