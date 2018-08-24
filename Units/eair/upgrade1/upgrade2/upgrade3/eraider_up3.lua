@@ -15,7 +15,7 @@ script = "eraider.cob"
 
 tech = [[tech1]]
 armortype = [[light]]
-supply = [[10]]
+supply = [[2]]
 
 VFS.Include("units-configs-basedefs/basedefs/air/eraider_basedef.lua")
 

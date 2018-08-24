@@ -3,9 +3,7 @@ Shared.buildList = {
 	[[eminifac]],
 	[[ebasefactory]],
 	[[eamphibfac]],
-	[[ehbotengineer]],
-	[[eorb]],
-	-- [[eairplant]],
+	[[eairplant]],
 	[[etech1]],
 	[[emetalextractor]],
 	[[esolar2]],
@@ -24,6 +22,8 @@ Shared.buildList = {
 	[[esilo]],
 	[[escoutdrone]],
 	[[ebox]],
+	[[ehbotengineer]],
+	[[eorb]],
 	[[ecommander]],
 }
 	
@@ -47,7 +47,7 @@ local factory = {
 	[[eminifac]],
 	[[ebasefactory]],
 	[[eamphibfac]],
-	-- [[eairplant]],
+	[[eairplant]],
 	[[ehbotpeewee]],
 	[[ehbotthud]],
 	[[ehbotsniper]],
@@ -100,7 +100,7 @@ Shared.buildListAIOverseer = {
 	[[eminifac]],
 	[[ebasefactory]],
 	[[eamphibfac]],
-	-- [[eairplant]],
+	[[eairplant]],
 	[[etech1]],
 	[[esolar2]],
 	[[egeothermal]],
@@ -123,7 +123,7 @@ Shared.buildListAIOverseer = {
 	[[eminifac]],
 	[[ebasefactory]],
 	[[eamphibfac]],
-	-- [[eairplant]],
+	[[eairplant]],
 	----------------- Upgrade 0
 	[[eraider]],
 	[[edrone]],
@@ -444,40 +444,40 @@ Shared.buildListAllTerrainFactory_up3 = {
 --
 --
 Shared.buildListAirPlant = {
-		[[edrone]],
+		-- [[edrone]],
 		[[eraider]],
 		[[efighter]],
 		[[egunship2]],
 		[[ebomber]],
-		[[ekrow]],
 		[[etransport]],
+		[[ekrow]],		
 }
 Shared.buildListAirPlant_up1 = {
-		[[edrone_up1]],
+		-- [[edrone_up1]],
 		[[eraider_up1]],
 		[[efighter_up1]],
 		[[egunship2_up1]],
 		[[ebomber_up1]],
-		[[ekrow_up1]],
 		[[etransport_up1]],
+		[[ekrow_up1]],		
 }
 Shared.buildListAirPlant_up2 = {
-		[[edrone_up2]],
+		-- [[edrone_up2]],
 		[[eraider_up2]],
 		[[efighter_up2]],
 		[[egunship2_up2]],
 		[[ebomber_up2]],
-		[[ekrow_up2]],
 		[[etransport_up2]],
+		[[ekrow_up2]],		
 }
 Shared.buildListAirPlant_up3 = {
-		[[edrone_up3]],
+		-- [[edrone_up3]],
 		[[eraider_up3]],
 		[[efighter_up3]],
 		[[egunship2_up3]],
 		[[ebomber_up3]],
-		[[ekrow_up3]],
 		[[etransport_up3]],
+		[[ekrow_up3]],		
 }
 --
 --

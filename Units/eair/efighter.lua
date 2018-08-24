@@ -15,7 +15,7 @@ script = "efighter3.cob"
 
 tech = [[tech1]]
 armortype = [[light]]
-supply = [[16]]
+supply = [[2]]
 
 VFS.Include("units-configs-basedefs/basedefs/air/efighter_basedef.lua")
 
