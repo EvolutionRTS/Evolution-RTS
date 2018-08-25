@@ -12,7 +12,7 @@ humanName = [[Anvil]]
 objectName = "eallterrassault.s3o"
 script = "eallterrassault.cob"
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[armored]]
 supply = [[8]]
 
