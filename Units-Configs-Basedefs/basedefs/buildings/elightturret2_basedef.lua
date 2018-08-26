@@ -118,12 +118,13 @@ weaponDefs                  = {
 		tolerance                = 1000,
 		turret                   = true,
 		weaponVelocity           = 2000,
+		waterweapon				 = true,
 		customparams              = {
 			isupgraded		  	 = isUpgraded,
 			damagetype		      = "elightturret2",  
 		},      
 		damage                    = {
-			default               = 150,
+			default               = 100,
 		},
 	},
 }
