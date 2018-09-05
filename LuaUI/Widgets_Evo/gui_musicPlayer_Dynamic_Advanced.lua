@@ -602,7 +602,6 @@ function widget:GameFrame(n)
 end
 
 function PlayNewTrack()
-	Spring.Echo("I'M NEW MUSIC WIDGET!")
 	local oldPlayedTime, oldTotalTime = Spring.GetSoundStreamTime()
 	Spring.StopSoundStream()
 	endFade = false
