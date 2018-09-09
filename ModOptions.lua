@@ -73,6 +73,17 @@ local options= {
 			{key="enabled", name="Enabled", desc="Cries in Spam"},
 		}
 	},
+	{
+		key    = 'ai_incomemultiplier',
+		name   = 'AI Income Multiplier',
+		desc   = 'Multiplies AI resource income',
+		type   = 'number',
+		section= 'aioptions',
+		def    = 1,
+		min    = 1,
+		max    = 10,
+		step   = 0.1,
+	},
 	
 -- Resourcing
 	{
