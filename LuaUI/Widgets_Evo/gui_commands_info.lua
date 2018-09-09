@@ -28,7 +28,7 @@ local screenWidth = 1050-bgMargin-bgMargin
 
 local textareaMinLines = 10		-- wont scroll down more, will show at least this amount of lines 
 
-local customScale = 1.06
+local customScale = 1
 
 local startLine = 1
 
@@ -70,12 +70,12 @@ local changelogLines = {}
 local totalChangelogLines = 0
 
 function widget:ViewResize()
-  vsx,vsy = Spring.GetViewGeometry()
-  screenX = (vsx*0.5) - (screenWidth/2)
-  screenY = (vsy*0.5) + (screenHeight/2)
-  widgetScale = (0.75 + (vsx*vsy / 7500000)) * customScale
-  if changelogList then gl.DeleteList(changelogList) end
-  changelogList = gl.CreateList(DrawWindow)
+	vsx,vsy = Spring.GetViewGeometry()
+	screenX = (vsx*0.5) - (screenWidth/2)
+	screenY = (vsy*0.5) + (screenHeight/2)
+	widgetScale = (0.5 + (vsx*vsy / 5700000)) * customScale
+	if changelogList then gl.DeleteList(changelogList) end
+	changelogList = gl.CreateList(DrawWindow)
 end
 
 local myTeamID = Spring.GetMyTeamID()
@@ -218,7 +218,7 @@ function DrawTextarea(x,y,width,height,scrollbar)
 			
 			local line = changelogLines[lineKey]
 			if string.find(line, '^/([a-zA-Z0-9]*)') then
-				local cmd = string.match(line, '^/([\+a-zA-Z0-9_-]*)')
+				local cmd = string.match(line, '^(/[\+a-zA-Z0-9_-]*)')
 				local descr = string.sub(line, string.len(string.match(line, '^/[a-zA-Z0-9_-]*[ \t]*')))
 				descr, numLines = font:WrapText(descr, (width-scrollbarMargin-scrollbarWidth - 250 - textRightOffset)*(loadedFontSize/fontSizeLine))
 				if (lineSeparator+fontSizeTitle)*(j+numLines-1) > height then

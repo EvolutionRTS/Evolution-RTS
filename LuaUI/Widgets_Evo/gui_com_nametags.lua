@@ -22,44 +22,42 @@ local scaleFontAmount		= 120
 local fontShadow			= true		-- only shows if font has a white outline
 local shadowOpacity			= 0.35
 
-local font = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 55, 10, 10)
-local shadowFont = gl.LoadFont(LUAUI_DIRNAME.."Fonts/FreeSansBold.otf", 55, 38, 1.6)
+local font = gl.LoadFont("LuaUI/Fonts/FreeSansBold.otf", 55, 10, 10)
+local shadowFont = gl.LoadFont("LuaUI/Fonts/FreeSansBold.otf", 55, 38, 1.6)
 
+local vsx, vsy = Spring.GetViewGeometry()
+
+local singleTeams = false
+if #Spring.GetTeamList()-1  ==  #Spring.GetAllyTeamList()-1 then
+    singleTeams = true
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 local GetUnitTeam        		= Spring.GetUnitTeam
-local GetTeamInfo        		= Spring.GetTeamInfo
 local GetPlayerInfo      		= Spring.GetPlayerInfo
 local GetPlayerList    		    = Spring.GetPlayerList
 local GetTeamColor       		= Spring.GetTeamColor
-local GetVisibleUnits    		= Spring.GetVisibleUnits
 local GetUnitDefID       		= Spring.GetUnitDefID
 local GetAllUnits        		= Spring.GetAllUnits
 local IsUnitInView	 	 		= Spring.IsUnitInView
 local GetCameraPosition  		= Spring.GetCameraPosition
 local GetUnitPosition    		= Spring.GetUnitPosition
-local GetFPS					= Spring.GetFPS
 local GetSpectatingState		= Spring.GetSpectatingState
 
 local glDepthTest        		= gl.DepthTest
 local glAlphaTest        		= gl.AlphaTest
 local glColor            		= gl.Color
-local glText             		= gl.Text
 local glTranslate        		= gl.Translate
 local glBillboard        		= gl.Billboard
 local glDrawFuncAtUnit   		= gl.DrawFuncAtUnit
-local glDrawListAtUnit   		= gl.DrawListAtUnit
 local GL_GREATER     	 		= GL.GREATER
 local GL_SRC_ALPHA				= GL.SRC_ALPHA	
 local GL_ONE_MINUS_SRC_ALPHA	= GL.ONE_MINUS_SRC_ALPHA
 local glBlending          		= gl.Blending
 local glScale          			= gl.Scale
 
-local glCreateList				= gl.CreateList
-local glBeginEnd				= gl.BeginEnd
-local glDeleteList				= gl.DeleteList
 local glCallList				= gl.CallList
 
 local diag						= math.diag
@@ -67,40 +65,43 @@ local diag						= math.diag
 --------------------------------------------------------------------------------
 
 local comms = {}
-local drawShadow = fontShadow
 local comnameList = {}
 local CheckedForSpec = false
+local myTeamID = Spring.GetMyTeamID()
+local myPlayerID = Spring.GetMyPlayerID()
+
+local sameTeamColors = false
+if WG['playercolorpalette'] ~= nil and WG['playercolorpalette'].getSameTeamColors ~= nil then
+    sameTeamColors = WG['playercolorpalette'].getSameTeamColors()
+end
 
 --------------------------------------------------------------------------------
 
 --gets the name, color, and height of the commander
-local aiCount = 1
 local function GetCommAttributes(unitID, unitDefID)
   local team = GetUnitTeam(unitID)
   if team == nil then
     return nil
   end
-  local players = GetPlayerList(team)
 
-  local name = (#players>0) and GetPlayerInfo(players[1]) or 'Evil Machine '..aiCount
-  for _,pID in ipairs(players) do
-    local pname,active,spec = GetPlayerInfo(pID)
-    if active and not spec then
-      name = pname
-      break
+  local name = ''
+  if Spring.GetGameRulesParam('ainame_'..team) then
+      name = Spring.GetGameRulesParam('ainame_'..team)..' (AI)'
+  else
+    local players = GetPlayerList(team)
+    name = (#players>0) and GetPlayerInfo(players[1]) or '------'
+    for _,pID in ipairs(players) do
+      local pname,active,spec = GetPlayerInfo(pID)
+      if active and not spec then
+        name = pname
+        break
+      end
     end
   end
 
-    if name == 'Evil Machine '..aiCount then
-        aiCount = aiCount + 1
-        if Spring.GetGameRulesParam('ainame_'..team) then
-            name = Spring.GetGameRulesParam('ainame_'..team)
-        end
-    end
-
   local r, g, b, a = GetTeamColor(team)
   local bgColor = {0,0,0,1}
-  if (r + g*1.35 + b*0.5) < 0.75 then  -- not acurate (enough) with playerlist   but...   font:SetAutoOutlineColor(true)   doesnt seem to work
+  if (r + g*1.2 + b*0.4) < 0.8 then  -- try to keep these values the same as the playerlist
 	bgColor = {1,1,1,1}
   end
   
@@ -108,10 +109,20 @@ local function GetCommAttributes(unitID, unitDefID)
   return {name, {r, g, b, a}, height, bgColor}
 end
 
+local function RemoveLists()
+    for name, list in pairs(comnameList) do
+        gl.DeleteList(comnameList[name])
+    end
+    comnameList = {}
+end
+
 local function createComnameList(attributes)
+    if comnameList[attributes[1]] ~= nil then
+        gl.DeleteList(comnameList[attributes[1]])
+    end
 	comnameList[attributes[1]] = gl.CreateList( function()
 		local outlineColor = {0,0,0,1}
-		if (attributes[2][1] + attributes[2][2]*1.35 + attributes[2][3]*0.5) < 0.8 then
+		if (attributes[2][1] + attributes[2][2]*1.2 + attributes[2][3]*0.4) < 0.8 then  -- try to keep these values the same as the playerlist
 			outlineColor = {1,1,1,1}
 		end
 		if useThickLeterring then
@@ -138,7 +149,40 @@ local function createComnameList(attributes)
 	end)
 end
 
-local function DrawName(unitID, attributes, shadow)
+function widget:Update(dt)
+    if WG['playercolorpalette'] ~= nil then
+        if WG['playercolorpalette'].getSameTeamColors and sameTeamColors ~= WG['playercolorpalette'].getSameTeamColors() then
+            sameTeamColors = WG['playercolorpalette'].getSameTeamColors()
+            RemoveLists()
+            CheckAllComs()
+        end
+    elseif sameTeamColors == true then
+        sameTeamColors = false
+        RemoveLists()
+        CheckAllComs()
+    end
+    if not singleTeams and WG['playercolorpalette'] ~= nil and WG['playercolorpalette'].getSameTeamColors() then
+        if myTeamID ~= Spring.GetMyTeamID() then
+            -- old
+            local name = GetPlayerInfo(select(2,Spring.GetTeamInfo(myTeamID)))
+            if comnameList[name] ~= nil then
+                gl.DeleteList(comnameList[name])
+                comnameList[name] = nil
+            end
+            -- new
+            myTeamID = Spring.GetMyTeamID()
+            myPlayerID = Spring.GetMyPlayerID()
+            name = GetPlayerInfo(select(2,Spring.GetTeamInfo(myTeamID)))
+            if comnameList[name] ~= nil then
+                gl.DeleteList(comnameList[name])
+                comnameList[name] = nil
+            end
+            CheckAllComs()
+        end
+    end
+end
+
+local function DrawName(attributes)
 	if comnameList[attributes[1]] == nil then
 		createComnameList(attributes)
 	end
@@ -148,13 +192,12 @@ local function DrawName(unitID, attributes, shadow)
 		glScale(usedFontSize/fontSize,usedFontSize/fontSize,usedFontSize/fontSize)
 	end
 	glCallList(comnameList[attributes[1]])
-	
+
 	if nameScaling then
 		glScale(1,1,1)
 	end
 end
 
-local vsx, vsy = Spring.GetViewGeometry()
 function widget:ViewResize()
   vsx,vsy = Spring.GetViewGeometry()
 end
@@ -184,7 +227,7 @@ function widget:DrawWorld()
 		
 	    usedFontSize = (fontSize*0.5) + (camDistance/scaleFontAmount)
 	    
-		glDrawFuncAtUnit(unitID, false, DrawName, unitID, attributes, fontShadow)
+		glDrawFuncAtUnit(unitID, false, DrawName, attributes)
 	end
   end
   
@@ -212,7 +255,11 @@ function CheckAllComs()
 end
 
 function widget:Initialize()
-  CheckAllComs()
+    CheckAllComs()
+end
+
+function widget:Shutdown()
+    RemoveLists()
 end
 
 function widget:PlayerChanged(playerID)

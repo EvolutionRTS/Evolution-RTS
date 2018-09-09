@@ -5,8 +5,8 @@ function widget:GetInfo()
 		author    = "Floris", -- orginal bloom shader: Kloot
 		date      = "24-9-2016",
 		license   = "",
-		layer     = 9,
-		enabled   = false
+		layer     = -5,
+		enabled   = true,
 	}
 end
 
@@ -125,7 +125,7 @@ end
 
 local function RemoveMe(msg)
 	Spring.Echo(msg)
-	--widgetHandler:RemoveWidget()
+	--widgetHandler:RemoveWidget(self)
 end
 
 function reset()

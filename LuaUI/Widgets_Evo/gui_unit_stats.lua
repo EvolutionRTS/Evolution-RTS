@@ -7,7 +7,7 @@ function widget:GetInfo()
 		date      = "Jan 11, 2009",
 		version   = 1.3,
 		license   = "GNU GPL, v2 or later",
-		layer     = 6,
+		layer     = -9999999999,
 		enabled   = true,  --  loaded by default?
 	}
 end
@@ -34,22 +34,26 @@ include("keysym.h.lua")
 ------------------------------------------------------------------------------------
 -- Globals
 ------------------------------------------------------------------------------------
-local fontSize = 14
-local xOffset = 25
-local yOffset = 25
+local fontSize = 13
 local useSelection = true
 
-local customFontSize = 18
+local customFontSize = 13
 
 local cX, cY
+
+local vsx, vsy = gl.GetViewSizes()
+local widgetScale = (0.60 + (vsx*vsy / 5000000))
+local xOffset = (32 + (fontSize*0.9))*widgetScale
+local yOffset = -((32 - (fontSize*0.9))*widgetScale)
 
 ------------------------------------------------------------------------------------
 -- Speedups
 ------------------------------------------------------------------------------------
 
-local bgcorner				= ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgcorner				= "LuaUI/Images/bgcorner.png"
 
 local white = '\255\255\255\255'
+local grey = '\255\190\190\190'
 local green = '\255\1\255\1'
 local yellow = '\255\255\255\1'
 local orange = '\255\255\128\1'
@@ -69,14 +73,19 @@ local char = string.char
 
 local glColor = gl.Color
 local glText = gl.Text
+local glTexture = gl.Texture
 local glRect = gl.Rect
+local glTexRect = gl.TexRect
 
 local spGetMyTeamID = Spring.GetMyTeamID
 local spGetTeamResources = Spring.GetTeamResources
 local spGetTeamInfo = Spring.GetTeamInfo
 local spGetPlayerInfo = Spring.GetPlayerInfo
 local spGetTeamColor = Spring.GetTeamColor
-
+local spIsUserWriting = Spring.IsUserWriting
+if spIsUserWriting == nil then
+	spIsUserWriting = function() return true end
+end
 local spGetModKeyState = Spring.GetModKeyState
 local spGetMouseState = Spring.GetMouseState
 local spTraceScreenRay = Spring.TraceScreenRay
@@ -105,6 +114,8 @@ local vsx, vsy = Spring.GetViewGeometry()
 local maxWidth = 0
 local textBuffer = {}
 local textBufferCount = 0
+
+local spec = Spring.GetSpectatingState()
 
 ------------------------------------------------------------------------------------
 -- Functions
@@ -170,9 +181,9 @@ local function GetTeamName(teamID)
 
 	local leaderName = spGetPlayerInfo(teamLeader)
 
-	if Spring.GetGameRulesParam('ainame_'..teamID) then
-		leaderName = Spring.GetGameRulesParam('ainame_'..teamID)
-	end
+    if Spring.GetGameRulesParam('ainame_'..teamID) then
+        leaderName = Spring.GetGameRulesParam('ainame_'..teamID)
+    end
 	return leaderName or 'Error:NoName'
 end
 
@@ -197,14 +208,20 @@ function widget:Shutdown()
 	RemoveGuishader()
 end
 
+function widget:PlayerChanged()
+	spec = Spring.GetSpectatingState()
+end
+
 function init()
 	vsx, vsy = gl.GetViewSizes()
-	fontSize = customFontSize * (0.55 + (vsx*vsy / 8500000))
+	widgetScale = (0.60 + (vsx*vsy / 5000000))
+	fontSize = customFontSize * widgetScale
 	
 	bgcornerSize = fontSize*0.45
 	bgpadding = fontSize*0.9
-	xOffset = 50 + bgpadding
-	yOffset = 10 + bgpadding
+
+	xOffset = (32 + bgpadding)*widgetScale
+	yOffset = -((32 + bgpadding)*widgetScale)
 end
 
 function widget:ViewResize(x,y)
@@ -213,288 +230,578 @@ end
 
 function widget:DrawScreen()
 	local alt, ctrl, meta, shift = spGetModKeyState()
-	if not meta then RemoveGuishader() return end
-
+	if not meta then 
+		WG.hoverID = nil 
+		RemoveGuishader() 
+		return 
+	end
 	local mx, my = spGetMouseState()
 	local uID
 	local rType, unitID = spTraceScreenRay(mx, my)
 	if rType == 'unit' then
 		uID = unitID
 	end
-	if useSelection then
+	if useSelection and not spIsUserWriting() then
 		local selUnits = spGetSelectedUnits()
 		if #selUnits >= 1 then
 			uID = selUnits[1]
 		end
 	end
-	if not uID then
+	local useHoverID = false
+	local _, activeID = Spring.GetActiveCommand()
+	if not activeID then activeID = 0 end
+	if not uID and (not WG.hoverID) and not (activeID < 0) then
 		RemoveGuishader() return
+	elseif WG.hoverID and not (activeID < 0) then
+		uID = nil
+		useHoverID = true
+	elseif activeID < 0 then
+		uID = nil
+		useHoverID = false
 	end
 	local useExp = ctrl
-	local uDefID = spGetUnitDefID(uID)
+	local uDefID = (uID and spGetUnitDefID(uID)) or (useHoverID and WG.hoverID) or (UnitDefs[-activeID] and -activeID)
+	
 	if not uDefID then
 		RemoveGuishader() return
 	end
 
-	local uDef = uDefs[uDefID]
-	local uCurHp, uMaxHp, _, _, buildProg = spGetUnitHealth(uID)
-	local uTeam = spGetUnitTeam(uID)
+	if uID then
+		local uDef = uDefs[uDefID]
+		local uCurHp, uMaxHp, _, _, buildProg = spGetUnitHealth(uID)
+		local uTeam = spGetUnitTeam(uID)
 
-	maxWidth = 0
+		maxWidth = 0
 
-	cX = mx + xOffset
-	cY = my + yOffset
-	cYstart = cY
-	
-	local text = yellow .. uDef.humanName .. white .. "    " .. uDef.name .. "    (#" .. uID .. " , "..GetTeamColorCode(uTeam) .. GetTeamName(uTeam) .. white .. ")"
-	
-	local cornersize = 0
-	glColor(0,0,0,0.73)
-	RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
-	cornersize = ceil(bgpadding*0.21)
-	glColor(1,1,1,0.025)
-	RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
-	
-	if (WG['guishader_api'] ~= nil) then
-		guishaderEnabled = true
-		WG['guishader_api'].InsertRect(cX-bgpadding, cY-bgpadding, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding, cY+(fontSize/2)+bgpadding, 'unit_stats_title')
-	end
-	
-	glColor(1.0, 1.0, 1.0, 1.0)
-	glText(text, cX, cY, fontSize, "o")
-	cY = cY - 2 * fontSize
-	textBuffer = {}
-	textBufferCount = 0
+		cX = mx + xOffset
+		cY = my + yOffset
+		cYstart = cY
 
-	------------------------------------------------------------------------------------
-	-- Units under construction
-	------------------------------------------------------------------------------------
-	if buildProg and buildProg < 1 then
+		local text = yellow .. uDef.humanName .. white .. "    " .. uDef.name .. "    (#" .. uID .. " , "..GetTeamColorCode(uTeam) .. GetTeamName(uTeam) .. white .. ")"
 
-		local myTeamID = spGetMyTeamID()
-		local mCur, mStor, mPull, mInc, mExp, mShare, mSent, mRec = spGetTeamResources(myTeamID, 'metal')
-		local eCur, eStor, ePull, eInc, eExp, eShare, eSent, eRec = spGetTeamResources(myTeamID, 'energy')
-
-		local mTotal = uDef.metalCost
-		local eTotal = uDef.energyCost
-		local buildRem = 1 - buildProg
-		local mRem = mTotal * buildRem
-		local eRem = eTotal * buildRem
-		local mEta = (mRem - mCur) / (mInc + mRec)
-		local eEta = (eRem - eCur) / (eInc + eRec)
-
-		DrawText("Prog:", format("%d%%", 100 * buildProg))
-		DrawText("Metal:", format("%d / %d (" .. yellow .. "%d" .. white .. ", %ds)", mTotal * buildProg, mTotal, mRem, mEta))
-		DrawText("Energy:", format("%d / %d (" .. yellow .. "%d" .. white .. ", %ds)", eTotal * buildProg, eTotal, eRem, eEta))
-		--DrawText("MaxBP:", format(white .. '%d', buildRem * uDef.buildTime / math.max(mEta, eEta)))
-		cY = cY - fontSize
-	end
-
-	------------------------------------------------------------------------------------
-	-- Generic information, cost, move, class
-	------------------------------------------------------------------------------------
-	
-	--DrawText('Height:', uDefs[spGetUnitDefID(uID)].height)
-				
-	DrawText("Cost:", format(metalColor .. '%d' .. white .. ' / ' ..
-							energyColor .. '%d' .. white .. ' / ' ..
-							buildColor .. '%d', uDef.metalCost, uDef.energyCost, uDef.buildTime)
-			)
-
-	if not (uDef.isBuilding or uDef.isFactory) then
-		DrawText("Move:", format("%.1f / %.1f / %.0f (Speed / Accel / Turn)", uDef.speed, 900 * uDef.maxAcc, simSpeed * uDef.turnRate * (180 / 32767)))
-	end
-
-
-
-	if uDef.buildSpeed > 0 then	DrawText('Build:', yellow .. uDef.buildSpeed) end
-
-	cY = cY - fontSize
-
-	------------------------------------------------------------------------------------
-	-- Sensors and Jamming
-	------------------------------------------------------------------------------------
-	local losRadius = spGetUnitSensorRadius(uID, 'los') or 0
-	local airLosRadius = spGetUnitSensorRadius(uID, 'airLos') or 0
-	local radarRadius = spGetUnitSensorRadius(uID, 'radar') or 0
-	local sonarRadius = spGetUnitSensorRadius(uID, 'sonar') or 0
-	local jammingRadius = spGetUnitSensorRadius(uID, 'radarJammer') or 0
-	local sonarJammingRadius = spGetUnitSensorRadius(uID, 'sonarJammer') or 0
-	local seismicRadius = spGetUnitSensorRadius(uID, 'seismic') or 0
-
-	DrawText('Los:', losRadius .. (airLosRadius > losRadius and format(' (AirLos: %d)', airLosRadius) or ''))
-
-	if radarRadius   > 0 then DrawText('Radar:', '\255\77\255\77' .. radarRadius) end
-	if sonarRadius   > 0 then DrawText('Sonar:', '\255\128\128\255' .. sonarRadius) end
-	if jammingRadius > 0 then DrawText('Jam:'  , '\255\255\77\77' .. jammingRadius) end
-	if sonarJammingRadius > 0 then DrawText('Sonar Jam:', '\255\255\77\77' .. sonarJammingRadius) end
-	if seismicRadius > 0 then DrawText('Seis:' , '\255\255\26\255' .. seismicRadius) end
-
-	if uDef.stealth then DrawText("Other:", "Stealth") end
-
-	cY = cY - fontSize
-
-	local uExp = spGetUnitExperience(uID)
-	------------------------------------------------------------------------------------
-	-- Armor
-	------------------------------------------------------------------------------------
-
-	DrawText("Armor:", "class " .. Game.armorTypes[uDef.armorType or 0] or '???')
-
-	local maxHP = uDef.health
-	if ctrl then
-		maxHP = uMaxHp
-	end
-	if uExp ~= 0 then
-		DrawText("Exp:", format("+%d%% health", (uMaxHp/uDef.health-1)*100))
-	end
-	DrawText("Open:", format("maxHP: %d", maxHP) )
-	if uDef.armoredMultiple ~= 1 then DrawText("Closed:", format(" +%d%%, maxHP: %d", (1/uDef.armoredMultiple-1) *100,maxHP/uDef.armoredMultiple)) end
-
-	cY = cY - fontSize
-
-	------------------------------------------------------------------------------------
-	-- Weapons
-	------------------------------------------------------------------------------------
-	local wepCounts = {} -- wepCounts[wepDefID] = #
-	local wepsCompact = {} -- uWepsCompact[1..n] = wepDefID
-
-	local uWeps = uDef.weapons
-	local weaponNums = {}
-	for i = 1, #uWeps do
-		local wDefID = uWeps[i].weaponDef
-		local wCount = wepCounts[wDefID]
-		if wCount then
-			wepCounts[wDefID] = wCount + 1
+		local cornersize = 0
+		-- background
+		if WG.hoverID ~= nil then
+			glColor(0.11,0.11,0.11,0.9)
 		else
-			wepCounts[wDefID] = 1
-			wepsCompact[#wepsCompact + 1] = wDefID
-			weaponNums[#wepsCompact] = i
+			glColor(0,0,0,0.75)
 		end
-	end
-	local selfDWeaponID = WeaponDefNames[uDef.selfDExplosion].id
-	local deathWeaponID = WeaponDefNames[uDef.deathExplosion].id
-	local selfDWeaponIndex
-	local deathWeaponIndex
+		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
+		cornersize = ceil(bgpadding*0.21)
+		glColor(1,1,1,0.025)
+		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
 
-	if shift then
-		wepCounts = {}
-		wepsCompact = {}
-		wepCounts[selfDWeaponID] = 1
-		wepCounts[deathWeaponID] = 1
-		deathWeaponIndex = #wepsCompact+1
-		wepsCompact[deathWeaponIndex] = deathWeaponID
-		selfDWeaponIndex = #wepsCompact+1
-		wepsCompact[selfDWeaponIndex] = selfDWeaponID
-	end
+		if (WG['guishader_api'] ~= nil) then
+			guishaderEnabled = true
+			WG['guishader_api'].InsertRect(cX-bgpadding, cY-bgpadding, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding, cY+(fontSize/2)+bgpadding, 'unit_stats_title')
+		end
 
-	for i = 1, #wepsCompact do
+		glColor(1.0, 1.0, 1.0, 1.0)
+		glText(text, cX, cY, fontSize, "o")
+		cY = cY - 2 * fontSize
+		textBuffer = {}
+		textBufferCount = 0
 
-		local wDefId = wepsCompact[i]
-		local uWep = wDefs[wDefId]
+		------------------------------------------------------------------------------------
+		-- Units under construction
+		------------------------------------------------------------------------------------
+		if buildProg and buildProg < 1 then
 
-		if uWep.range > 16 then
-			local oBurst = uWep.salvoSize * uWep.projectiles
-			local oRld = max(1/30,uWep.stockpile and uWep.stockpileTime or uWep.reload)
-			if useExp and not (uWep.stockpile and uWep.stockpileTime) then
-				oRld = spGetUnitWeaponState(uID,weaponNums[i] or -1,"reloadTime") or oRld
-			end
-			local wepCount = wepCounts[wDefId]
+			local myTeamID = spGetMyTeamID()
+			local mCur, mStor, mPull, mInc, mExp, mShare, mSent, mRec = spGetTeamResources(myTeamID, 'metal')
+			local eCur, eStor, ePull, eInc, eExp, eShare, eSent, eRec = spGetTeamResources(myTeamID, 'energy')
 
-			local typeName =  uWep.type
-			if i == deathWeaponIndex then
-				typeName = "Death explosion"
-				oRld = 1
-			elseif i == selfDWeaponIndex then
-				typeName = "Self Destruct"
-				oRld = uDef.selfDCountdown
-			end
-			if wepCount > 1 then
-				DrawText("Weap:", format(yellow .. "%dx" .. white .. " %s", wepCount, typeName))
-			else
-				DrawText("Weap:", typeName)
-			end
-			local reload = spGetUnitWeaponState(uID,weaponNums[i] or -1,"reloadTime") or uWep.reload
-			local accuracy = spGetUnitWeaponState(uID,weaponNums[i] or -1,"accuracy") or uWep.accuracy
-			local moveError = spGetUnitWeaponState(uID,weaponNums[i] or -1,"targetMoveError") or uWep.targetMoveError
-			local reloadBonus = reload ~= 0 and (uWep.reload/reload-1) or 0
-			local accuracyBonus = accuracy ~= 0 and (uWep.accuracy/accuracy-1) or 0
-			local moveErrorBonus = moveError ~= 0 and (uWep.targetMoveError/moveError-1) or 0
-			local range = spGetUnitWeaponState(uID,weaponNums[i] or -1,"range") or uWep.range
-			local rangeBonus = range ~= 0 and (range/uWep.range-1) or 0
-			if uExp ~= 0 then
-				DrawText("Exp:", format("+%d%% accuracy, +%d%% aim, +%d%% firerate, +%d%% range", accuracyBonus*100, moveErrorBonus*100, reloadBonus*100, rangeBonus*100 ))
-			end
-			local infoText = format("%d range, %d aoe, %d%% edge", useExp and range or uWep.range, uWep.damageAreaOfEffect, 100 * uWep.edgeEffectiveness)
-			if uWep.damages.paralyzeDamageTime > 0 then
-				infoText = format("%s, %ds paralyze", infoText, uWep.damages.paralyzeDamageTime)
-			end
-			if uWep.damages.impulseBoost > 0 then
-				infoText = format("%s, %d impulse", infoText, uWep.damages.impulseBoost*100)
-			end
-			if uWep.damages.craterBoost > 0 then
-				infoText = format("%s, %d crater", infoText, uWep.damages.craterBoost*100)
-			end
-			DrawText("Info:", infoText)
+			local mTotal = uDef.metalCost
+			local eTotal = uDef.energyCost
+			local buildRem = 1 - buildProg
+			local mRem = mTotal * buildRem
+			local eRem = eTotal * buildRem
+			local mEta = (mRem - mCur) / (mInc + mRec)
+			local eEta = (eRem - eCur) / (eInc + eRec)
 
-			local defaultDamage = uWep.damages[0]
-			for cat=0, #uWep.damages do
-				local oDmg = uWep.damages[cat]
-				local catName = Game.armorTypes[cat]
-				if catName and oDmg and (oDmg ~= defaultDamage or cat == 0) then
-					local dmgString
-					if oBurst > 1 then
-						dmgString = format(yellow .. "%d (x%d)" .. white .. " / " .. yellow .. "%.2f\s" .. white .. " = " .. yellow .. "%.2f \d\p\s", oDmg, oBurst, oRld, oBurst * oDmg / oRld)
-					else
-						dmgString = format(yellow .. "%d" .. white .. " / " .. yellow .. "%.2f\s" .. white .. " = " .. yellow .. "%.2f \d\p\s", oDmg, oRld, oDmg / oRld)
-					end
-
-					if wepCount > 1 then
-						dmgString = dmgString .. white .. " (Each)"
-					end
-
-					dmgString = dmgString .. white .. " (" .. catName .. ")"
-
-					DrawText("Dmg:", dmgString)
-				end
-			end
-
-			if uWep.metalCost > 0 or uWep.energyCost > 0 then
-
-				-- Stockpiling weapons are weird
-				-- They take the correct amount of resources overall
-				-- They take the correct amount of time
-				-- They drain ((simSpeed+2)/simSpeed) times more resources than they should (And the listed drain is real, having lower income than listed drain WILL stall you)
-				local drainAdjust = uWep.stockpile and (simSpeed+2)/simSpeed or 1
-				
-				DrawText('Cost:', format(metalColor .. '%d' .. white .. ', ' ..
-										 energyColor .. '%d' .. white .. ' = ' ..
-										 metalColor .. '-%d' .. white .. ', ' ..
-										 energyColor .. '-%d' .. white .. ' per second',
-										 uWep.metalCost,
-										 uWep.energyCost,
-										 drainAdjust * uWep.metalCost / oRld,
-										 drainAdjust * uWep.energyCost / oRld))
-			end
-			
-				
+			DrawText("Prog:", format("%d%%", 100 * buildProg))
+			DrawText("Metal:", format("%d / %d (" .. yellow .. "%d" .. white .. ", %ds)", mTotal * buildProg, mTotal, mRem, mEta))
+			DrawText("Energy:", format("%d / %d (" .. yellow .. "%d" .. white .. ", %ds)", eTotal * buildProg, eTotal, eRem, eEta))
+			--DrawText("MaxBP:", format(white .. '%d', buildRem * uDef.buildTime / math.max(mEta, eEta)))
 			cY = cY - fontSize
 		end
-	end
-	
-	-- background
-	glColor(0,0,0,0.57)
-	cornersize = 0
-	RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
-	cornersize = ceil(bgpadding*0.16)
-	glColor(1,1,1,0.017)
-	RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
 
-	DrawTextBuffer()
+		------------------------------------------------------------------------------------
+		-- Generic information, cost, move, class
+		------------------------------------------------------------------------------------
 
-	if (WG['guishader_api'] ~= nil) then
-		guishaderEnabled = true
-		WG['guishader_api'].InsertRect(cX-bgpadding, cY+(fontSize/3)+bgpadding, cX+maxWidth+bgpadding, cYstart-bgpadding, 'unit_stats_data')
+		--DrawText('Height:', uDefs[spGetUnitDefID(uID)].height)
+
+		DrawText("Cost:", format(metalColor .. '%d' .. white .. ' / ' ..
+								energyColor .. '%d' .. white .. ' / ' ..
+								buildColor .. '%d', uDef.metalCost, uDef.energyCost, uDef.buildTime)
+				)
+
+		if not (uDef.isBuilding or uDef.isFactory) then
+			DrawText("Move:", format("%.1f / %.1f / %.0f (Speed / Accel / Turn)", uDef.speed, 900 * uDef.maxAcc, simSpeed * uDef.turnRate * (180 / 32767)))
+		end
+
+
+
+		if uDef.buildSpeed > 0 then	DrawText('Build:', yellow .. uDef.buildSpeed) end
+
+		cY = cY - fontSize
+
+		------------------------------------------------------------------------------------
+		-- Sensors and Jamming
+		------------------------------------------------------------------------------------
+		local losRadius = spGetUnitSensorRadius(uID, 'los') or 0
+		local airLosRadius = spGetUnitSensorRadius(uID, 'airLos') or 0
+		local radarRadius = spGetUnitSensorRadius(uID, 'radar') or 0
+		local sonarRadius = spGetUnitSensorRadius(uID, 'sonar') or 0
+		local jammingRadius = spGetUnitSensorRadius(uID, 'radarJammer') or 0
+		local sonarJammingRadius = spGetUnitSensorRadius(uID, 'sonarJammer') or 0
+		local seismicRadius = spGetUnitSensorRadius(uID, 'seismic') or 0
+
+		DrawText('Los:', losRadius .. (airLosRadius > losRadius and format(' (AirLos: %d)', airLosRadius) or ''))
+
+		if radarRadius   > 0 then DrawText('Radar:', '\255\77\255\77' .. radarRadius) end
+		if sonarRadius   > 0 then DrawText('Sonar:', '\255\128\128\255' .. sonarRadius) end
+		if jammingRadius > 0 then DrawText('Jam:'  , '\255\255\77\77' .. jammingRadius) end
+		if sonarJammingRadius > 0 then DrawText('Sonar Jam:', '\255\255\77\77' .. sonarJammingRadius) end
+		if seismicRadius > 0 then DrawText('Seis:' , '\255\255\26\255' .. seismicRadius) end
+
+		if uDef.stealth then DrawText("Other:", "Stealth") end
+
+		cY = cY - fontSize
+
+		local uExp = spGetUnitExperience(uID)
+		------------------------------------------------------------------------------------
+		-- Armor
+		------------------------------------------------------------------------------------
+
+		DrawText("Armor:", "class " .. Game.armorTypes[uDef.armorType or 0] or '???')
+
+		local maxHP = uDef.health
+		if ctrl then
+			maxHP = uMaxHp
+		end
+		if uExp ~= 0 then
+			DrawText("Exp:", format("+%d%% health", (uMaxHp/uDef.health-1)*100))
+		end
+		DrawText("Open:", format("maxHP: %d", maxHP) )
+		if uDef.armoredMultiple ~= 1 then DrawText("Closed:", format(" +%d%%, maxHP: %d", (1/uDef.armoredMultiple-1) *100,maxHP/uDef.armoredMultiple)) end
+
+		cY = cY - fontSize
+
+		------------------------------------------------------------------------------------
+		-- Weapons
+		------------------------------------------------------------------------------------
+		local wepCounts = {} -- wepCounts[wepDefID] = #
+		local wepsCompact = {} -- uWepsCompact[1..n] = wepDefID
+
+		local uWeps = uDef.weapons
+		local weaponNums = {}
+		for i = 1, #uWeps do
+			local wDefID = uWeps[i].weaponDef
+			local wCount = wepCounts[wDefID]
+			if wCount then
+				wepCounts[wDefID] = wCount + 1
+			else
+				wepCounts[wDefID] = 1
+				wepsCompact[#wepsCompact + 1] = wDefID
+				weaponNums[#wepsCompact] = i
+			end
+		end
+		local selfDWeaponID = WeaponDefNames[uDef.selfDExplosion].id
+		local deathWeaponID = WeaponDefNames[uDef.deathExplosion].id
+		local selfDWeaponIndex
+		local deathWeaponIndex
+
+		if shift then
+			wepCounts = {}
+			wepsCompact = {}
+			wepCounts[selfDWeaponID] = 1
+			wepCounts[deathWeaponID] = 1
+			deathWeaponIndex = #wepsCompact+1
+			wepsCompact[deathWeaponIndex] = deathWeaponID
+			selfDWeaponIndex = #wepsCompact+1
+			wepsCompact[selfDWeaponIndex] = selfDWeaponID
+		end
+
+		for i = 1, #wepsCompact do
+
+			local wDefId = wepsCompact[i]
+			local uWep = wDefs[wDefId]
+
+			if uWep.range > 16 then
+				local oBurst = uWep.salvoSize * uWep.projectiles
+				local oRld = max(1/30,uWep.stockpile and uWep.stockpileTime or uWep.reload)
+				if useExp and not (uWep.stockpile and uWep.stockpileTime) then
+					oRld = spGetUnitWeaponState(uID,weaponNums[i] or -1,"reloadTime") or oRld
+				end
+				local wepCount = wepCounts[wDefId]
+
+				local typeName =  uWep.type
+				if i == deathWeaponIndex then
+					typeName = "Death explosion"
+					oRld = 1
+				elseif i == selfDWeaponIndex then
+					typeName = "Self Destruct"
+					oRld = uDef.selfDCountdown
+				end
+				if wepCount > 1 then
+					DrawText("Weap:", format(yellow .. "%dx" .. white .. " %s", wepCount, typeName))
+				else
+					DrawText("Weap:", typeName)
+				end
+				local reload = spGetUnitWeaponState(uID,weaponNums[i] or -1,"reloadTime") or uWep.reload
+				local accuracy = spGetUnitWeaponState(uID,weaponNums[i] or -1,"accuracy") or uWep.accuracy
+				local moveError = spGetUnitWeaponState(uID,weaponNums[i] or -1,"targetMoveError") or uWep.targetMoveError
+				local reloadBonus = reload ~= 0 and (uWep.reload/reload-1) or 0
+				local accuracyBonus = accuracy ~= 0 and (uWep.accuracy/accuracy-1) or 0
+				local moveErrorBonus = moveError ~= 0 and (uWep.targetMoveError/moveError-1) or 0
+				local range = spGetUnitWeaponState(uID,weaponNums[i] or -1,"range") or uWep.range
+				local rangeBonus = range ~= 0 and (range/uWep.range-1) or 0
+				if uExp ~= 0 then
+					DrawText("Exp:", format("+%d%% accuracy, +%d%% aim, +%d%% firerate, +%d%% range", accuracyBonus*100, moveErrorBonus*100, reloadBonus*100, rangeBonus*100 ))
+				end
+				local infoText = format("%d range, %d aoe, %d%% edge", useExp and range or uWep.range, uWep.damageAreaOfEffect, 100 * uWep.edgeEffectiveness)
+				if uWep.damages.paralyzeDamageTime > 0 then
+					infoText = format("%s, %ds paralyze", infoText, uWep.damages.paralyzeDamageTime)
+				end
+				if uWep.damages.impulseBoost > 0 then
+					infoText = format("%s, %d impulse", infoText, uWep.damages.impulseBoost*100)
+				end
+				if uWep.damages.craterBoost > 0 then
+					infoText = format("%s, %d crater", infoText, uWep.damages.craterBoost*100)
+				end
+				DrawText("Info:", infoText)
+
+				local defaultDamage = uWep.damages[0]
+				for cat=0, #uWep.damages do
+					local oDmg = uWep.damages[cat]
+					local catName = Game.armorTypes[cat]
+					if catName and oDmg and (oDmg ~= defaultDamage or cat == 0) then
+						local dmgString
+						if oBurst > 1 then
+							dmgString = format(yellow .. "%d (x%d)" .. white .. " / " .. yellow .. "%.2f\s" .. white .. " = " .. yellow .. "%.2f \d\p\s", oDmg, oBurst, oRld, oBurst * oDmg / oRld)
+						else
+							dmgString = format(yellow .. "%d" .. white .. " / " .. yellow .. "%.2f\s" .. white .. " = " .. yellow .. "%.2f \d\p\s", oDmg, oRld, oDmg / oRld)
+						end
+
+						if wepCount > 1 then
+							dmgString = dmgString .. white .. " (Each)"
+						end
+
+						dmgString = dmgString .. white .. " (" .. catName .. ")"
+
+						DrawText("Dmg:", dmgString)
+					end
+				end
+
+				if uWep.metalCost > 0 or uWep.energyCost > 0 then
+
+					-- Stockpiling weapons are weird
+					-- They take the correct amount of resources overall
+					-- They take the correct amount of time
+					-- They drain ((simSpeed+2)/simSpeed) times more resources than they should (And the listed drain is real, having lower income than listed drain WILL stall you)
+					local drainAdjust = uWep.stockpile and (simSpeed+2)/simSpeed or 1
+
+					DrawText('Cost:', format(metalColor .. '%d' .. white .. ', ' ..
+											 energyColor .. '%d' .. white .. ' = ' ..
+											 metalColor .. '-%d' .. white .. ', ' ..
+											 energyColor .. '-%d' .. white .. ' per second',
+											 uWep.metalCost,
+											 uWep.energyCost,
+											 drainAdjust * uWep.metalCost / oRld,
+											 drainAdjust * uWep.energyCost / oRld))
+				end
+
+
+				cY = cY - fontSize
+			end
+		end
+
+		-- background
+		if WG.hoverID ~= nil then
+			glColor(0.11,0.11,0.11,0.9)
+		else
+			glColor(0,0,0,0.66)
+		end
+		cornersize = 0
+		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
+		cornersize = ceil(bgpadding*0.16)
+		glColor(1,1,1,0.017)
+		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
+
+		DrawTextBuffer()
+
+		if (WG['guishader_api'] ~= nil) then
+			guishaderEnabled = true
+			WG['guishader_api'].InsertRect(cX-bgpadding, cY+(fontSize/3)+bgpadding, cX+maxWidth+bgpadding, cYstart-bgpadding, 'unit_stats_data')
+		end
+
+
+
+	else
+
+
+
+		local uDef = uDefs[uDefID]
+		local uMaxHp = uDef.health
+		local uTeam = Spring.GetMyTeamID()
+
+		maxWidth = 0
+
+		cX = mx + xOffset
+		cY = my + yOffset
+		cYstart = cY
+
+		local text = yellow .. uDef.humanName .. white .. "    " .. uDef.name .. "    ("..GetTeamColorCode(uTeam) .. GetTeamName(uTeam) .. white .. ")"
+
+		local cornersize = 0
+		-- background
+		if WG.hoverID ~= nil then
+			glColor(0.11,0.11,0.11,0.9)
+		else
+			glColor(0,0,0,0.66)
+		end
+		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
+		cornersize = ceil(bgpadding*0.21)
+		glColor(1,1,1,0.025)
+		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
+
+		if (WG['guishader_api'] ~= nil) then
+			guishaderEnabled = true
+			WG['guishader_api'].InsertRect(cX-bgpadding, cY-bgpadding, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding, cY+(fontSize/2)+bgpadding, 'unit_stats_title')
+		end
+
+		glColor(1.0, 1.0, 1.0, 1.0)
+		glText(text, cX, cY, fontSize, "o")
+		cY = cY - 2 * fontSize
+		textBuffer = {}
+		textBufferCount = 0
+
+		------------------------------------------------------------------------------------
+		-- Units under construction
+		------------------------------------------------------------------------------------
+		if buildProg and buildProg < 1 then
+
+			local myTeamID = spGetMyTeamID()
+			local mCur, mStor, mPull, mInc, mExp, mShare, mSent, mRec = spGetTeamResources(myTeamID, 'metal')
+			local eCur, eStor, ePull, eInc, eExp, eShare, eSent, eRec = spGetTeamResources(myTeamID, 'energy')
+
+			local mTotal = uDef.metalCost
+			local eTotal = uDef.energyCost
+			local buildRem = 1 - buildProg
+			local mRem = mTotal * buildRem
+			local eRem = eTotal * buildRem
+			local mEta = (mRem - mCur) / (mInc + mRec)
+			local eEta = (eRem - eCur) / (eInc + eRec)
+
+			DrawText("Prog:", format("%d%%", 100 * buildProg))
+			DrawText("Metal:", format("%d / %d (" .. yellow .. "%d" .. white .. ", %ds)", mTotal * buildProg, mTotal, mRem, mEta))
+			DrawText("Energy:", format("%d / %d (" .. yellow .. "%d" .. white .. ", %ds)", eTotal * buildProg, eTotal, eRem, eEta))
+			--DrawText("MaxBP:", format(white .. '%d', buildRem * uDef.buildTime / math.max(mEta, eEta)))
+			cY = cY - fontSize
+		end
+
+		------------------------------------------------------------------------------------
+		-- Generic information, cost, move, class
+		------------------------------------------------------------------------------------
+
+		--DrawText('Height:', uDefs[spGetUnitDefID(uID)].height)
+
+		DrawText("Cost:", format(metalColor .. '%d' .. white .. ' / ' ..
+				energyColor .. '%d' .. white .. ' / ' ..
+				buildColor .. '%d', uDef.metalCost, uDef.energyCost, uDef.buildTime)
+		)
+
+		if not (uDef.isBuilding or uDef.isFactory) then
+			DrawText("Move:", format("%.1f / %.1f / %.0f (Speed / Accel / Turn)", uDef.speed, 900 * uDef.maxAcc, simSpeed * uDef.turnRate * (180 / 32767)))
+		end
+
+
+
+		if uDef.buildSpeed > 0 then	DrawText('Build:', yellow .. uDef.buildSpeed) end
+
+		cY = cY - fontSize
+
+		------------------------------------------------------------------------------------
+		-- Sensors and Jamming
+		------------------------------------------------------------------------------------
+		local losRadius = uDef.losRadius
+		local airLosRadius = uDef.airLosRadius
+		local radarRadius = uDef.radarRadius
+		local sonarRadius = uDef.sonarRadius
+		local jammingRadius = uDef.jammerRadius
+		local sonarJammingRadius = uDef.sonarJamRadius
+		local seismicRadius = uDef.seismicRadius
+
+		DrawText('Los:', losRadius .. (airLosRadius > losRadius and format(' (AirLos: %d)', airLosRadius) or ''))
+
+		if radarRadius   > 0 then DrawText('Radar:', '\255\77\255\77' .. radarRadius) end
+		if sonarRadius   > 0 then DrawText('Sonar:', '\255\128\128\255' .. sonarRadius) end
+		if jammingRadius > 0 then DrawText('Jam:'  , '\255\255\77\77' .. jammingRadius) end
+		if sonarJammingRadius > 0 then DrawText('Sonar Jam:', '\255\255\77\77' .. sonarJammingRadius) end
+		if seismicRadius > 0 then DrawText('Seis:' , '\255\255\26\255' .. seismicRadius) end
+
+		if uDef.stealth then DrawText("Other:", "Stealth") end
+
+		cY = cY - fontSize
+
+		------------------------------------------------------------------------------------
+		-- Armor
+		------------------------------------------------------------------------------------
+
+		DrawText("Armor:", "class " .. Game.armorTypes[uDef.armorType or 0] or '???')
+
+		local maxHP = uDef.health
+		if ctrl then
+			maxHP = uMaxHp
+		end
+		DrawText("Open:", format("maxHP: %d", maxHP) )
+		if uDef.armoredMultiple ~= 1 then DrawText("Closed:", format(" +%d%%, maxHP: %d", (1/uDef.armoredMultiple-1) *100,maxHP/uDef.armoredMultiple)) end
+
+		cY = cY - fontSize
+
+		------------------------------------------------------------------------------------
+		-- Weapons
+		------------------------------------------------------------------------------------
+		local wepCounts = {} -- wepCounts[wepDefID] = #
+		local wepsCompact = {} -- uWepsCompact[1..n] = wepDefID
+
+		local uWeps = uDef.weapons
+		local weaponNums = {}
+		for i = 1, #uWeps do
+			local wDefID = uWeps[i].weaponDef
+			local wCount = wepCounts[wDefID]
+			if wCount then
+				wepCounts[wDefID] = wCount + 1
+			else
+				wepCounts[wDefID] = 1
+				wepsCompact[#wepsCompact + 1] = wDefID
+				weaponNums[#wepsCompact] = i
+			end
+		end
+		local selfDWeaponID = WeaponDefNames[uDef.selfDExplosion].id
+		local deathWeaponID = WeaponDefNames[uDef.deathExplosion].id
+		local selfDWeaponIndex
+		local deathWeaponIndex
+
+		if shift then
+			wepCounts = {}
+			wepsCompact = {}
+			wepCounts[selfDWeaponID] = 1
+			wepCounts[deathWeaponID] = 1
+			deathWeaponIndex = #wepsCompact+1
+			wepsCompact[deathWeaponIndex] = deathWeaponID
+			selfDWeaponIndex = #wepsCompact+1
+			wepsCompact[selfDWeaponIndex] = selfDWeaponID
+		end
+
+		for i = 1, #wepsCompact do
+
+			local wDefId = wepsCompact[i]
+			local uWep = wDefs[wDefId]
+
+			if uWep.range > 16 then
+				local oBurst = uWep.salvoSize * uWep.projectiles
+				local oRld = max(0.00000000001,uWep.stockpile == true and uWep.stockpileTime/30 or uWep.reload)
+				local wepCount = wepCounts[wDefId]
+
+				local typeName =  uWep.type
+				if i == deathWeaponIndex then
+					typeName = "Death explosion"
+					oRld = 1
+				elseif i == selfDWeaponIndex then
+					typeName = "Self Destruct"
+					oRld = uDef.selfDCountdown
+				end
+				if wepCount > 1 then
+					DrawText("Weap:", format(yellow .. "%dx" .. white .. " %s", wepCount, typeName))
+				else
+					DrawText("Weap:", typeName)
+				end
+				local reload = uWep.reload
+				local accuracy = uWep.accuracy
+				local moveError = uWep.targetMoveError
+				local range = uWep.range
+				local reloadBonus = reload ~= 0 and (uWep.reload/reload-1) or 0
+				local accuracyBonus = accuracy ~= 0 and (uWep.accuracy/accuracy-1) or 0
+				local moveErrorBonus = moveError ~= 0 and (uWep.targetMoveError/moveError-1) or 0
+				local rangeBonus = range ~= 0 and (range/uWep.range-1) or 0
+				local infoText = format("%d range, %d aoe, %d%% edge", useExp and range or uWep.range, uWep.damageAreaOfEffect, 100 * uWep.edgeEffectiveness)
+				if uWep.damages.paralyzeDamageTime > 0 then
+					infoText = format("%s, %ds paralyze", infoText, uWep.damages.paralyzeDamageTime)
+				end
+				if uWep.damages.impulseBoost > 0 then
+					infoText = format("%s, %d impulse", infoText, uWep.damages.impulseBoost*100)
+				end
+				if uWep.damages.craterBoost > 0 then
+					infoText = format("%s, %d crater", infoText, uWep.damages.craterBoost*100)
+				end
+				DrawText("Info:", infoText)
+
+				local defaultDamage = uWep.damages[0]
+				for cat=0, #uWep.damages do
+					local oDmg = uWep.damages[cat]
+					local catName = Game.armorTypes[cat]
+					if catName and oDmg and (oDmg ~= defaultDamage or cat == 0) then
+						local dmgString
+						if oBurst > 1 then
+							dmgString = format(yellow .. "%d (x%d)" .. white .. " / " .. yellow .. "%.2f\s" .. white .. " = " .. yellow .. "%.2f \d\p\s", oDmg, oBurst, oRld, oBurst * oDmg / oRld)
+						else
+							dmgString = format(yellow .. "%d" .. white .. " / " .. yellow .. "%.2f\s" .. white .. " = " .. yellow .. "%.2f \d\p\s", oDmg, oRld, oDmg / oRld)
+						end
+
+						if wepCount > 1 then
+							dmgString = dmgString .. white .. " (Each)"
+						end
+
+						dmgString = dmgString .. white .. " (" .. catName .. ")"
+
+						DrawText("Dmg:", dmgString)
+					end
+				end
+
+				if uWep.metalCost > 0 or uWep.energyCost > 0 then
+
+					-- Stockpiling weapons are weird
+					-- They take the correct amount of resources overall
+					-- They take the correct amount of time
+					-- They drain ((simSpeed+2)/simSpeed) times more resources than they should (And the listed drain is real, having lower income than listed drain WILL stall you)
+					local drainAdjust = uWep.stockpile and (simSpeed+2)/simSpeed or 1
+
+					DrawText('Cost:', format(metalColor .. '%d' .. white .. ', ' ..
+							energyColor .. '%d' .. white .. ' = ' ..
+							metalColor .. '-%d' .. white .. ', ' ..
+							energyColor .. '-%d' .. white .. ' per second',
+						uWep.metalCost,
+						uWep.energyCost,
+						drainAdjust * uWep.metalCost / oRld,
+						drainAdjust * uWep.energyCost / oRld))
+				end
+
+
+				cY = cY - fontSize
+			end
+		end
+
+		-- background
+		if WG.hoverID ~= nil then
+			glColor(0.11,0.11,0.11,0.9)
+		else
+			glColor(0,0,0,0.75)
+		end
+		cornersize = 0
+		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
+		cornersize = ceil(bgpadding*0.16)
+		glColor(1,1,1,0.017)
+		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
+
+		DrawTextBuffer()
+
+		if (WG['guishader_api'] ~= nil) then
+			guishaderEnabled = true
+			WG['guishader_api'].InsertRect(cX-bgpadding, cY+(fontSize/3)+bgpadding, cX+maxWidth+bgpadding, cYstart-bgpadding, 'unit_stats_data')
+		end
 	end
 end
 

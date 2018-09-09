@@ -6,7 +6,7 @@ function widget:GetInfo()
 	author    = "Regret",
 	date      = "29 may 2015",
 	license   = "GNU GPL, v2 or later",
-	layer     = 0,
+	layer     = 20001,
 	enabled   = true,
 	}
 end
@@ -52,7 +52,7 @@ function widget:SetConfigData(data)
 end
 
 local bgcornerSize = 8
-local bgcorner = ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgcorner = "LuaUI/Images/bgcorner.png"
 	
 local TN = "Red_Drawing" --WG name for function list
 local version = 9

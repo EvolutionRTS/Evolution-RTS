@@ -397,25 +397,28 @@ local function CreateGrid(r)
 			mouseoverhighlight.py = self.py
 			mouseoverhighlight.active = nil
 			local tt = self.tooltip
-			if drawTooltip and WG['tooltip'] ~= nil and r.menuname == "buildmenu" then
-				if self.texture ~= nil and string.sub(self.texture, 1, 1) == '#' then
-					local udefid =  tonumber(string.sub(self.texture, 2))
+			if r.menuname == "buildmenu" then
+				if self.texture ~= nil and self.udid then--string.sub(self.texture, 1, 1) == '#' then
+					local udefid = self.udid	--tonumber(string.sub(self.texture, 2))
 					WG.hoverID = udefid
-                    local text = "\255\215\255\215"..UnitDefs[udefid].humanName.."\n\255\240\240\240"
-					if drawBigTooltip and UnitDefs[udefid].customParams.description_long ~= nil then
-						local lines = wrap(UnitDefs[udefid].customParams.description_long, 58)
-						local description = ''
-						local newline = ''
-						for i, line in ipairs(lines) do
-							description = description..newline..line
-							newline = '\n'
-						end
-						text = text..description
-					else
-						text = text..UnitDefs[udefid].tooltip
-					end
-					WG['tooltip'].ShowTooltip('redui_buildmenu', text)
-			 		tt = string.gsub(tt, esc("Build: "..UnitDefs[udefid].humanName.." - "..UnitDefs[udefid].tooltip).."\n", "")
+                    local alt, ctrl, meta, shift = Spring.GetModKeyState()
+                    if not meta and drawTooltip and WG['tooltip'] ~= nil then
+                        local text = "\255\215\255\215"..UnitDefs[udefid].humanName.."\n\255\240\240\240"
+                        if drawBigTooltip and UnitDefs[udefid].customParams.description_long ~= nil then
+                            local lines = wrap(UnitDefs[udefid].customParams.description_long, 58)
+                            local description = ''
+                            local newline = ''
+                            for i, line in ipairs(lines) do
+                                description = description..newline..line
+                                newline = '\n'
+                            end
+                            text = text..description
+                        else
+                            text = text..UnitDefs[udefid].tooltip
+                        end
+                        WG['tooltip'].ShowTooltip('redui_buildmenu', text)
+                        tt = string.gsub(tt, esc("Build: "..UnitDefs[udefid].humanName.." - "..UnitDefs[udefid].tooltip).."\n", "")
+                    end
 				end
 			end
 			if drawPrice and tt ~= nil then
@@ -640,6 +643,8 @@ local function UpdateGrid(g,cmds,ordertype)
 		
 		if (ordertype == 1) then --build icons
 			icon.texture = "#"..cmd.id*-1
+			icon.udid = cmd.id*-1
+
 			if (cmd.params[1]) then
 				icon.options = "bs"
 				icon.caption = "\n"..cmd.params[1].."        \n"
@@ -1092,11 +1097,6 @@ end
 
 
 
-
-
-
-
-
 --lots of hacks under this line ------------- overrides/disables default spring menu layout and gets current orders + filters out some commands
 local hijackedlayout = false
 function widget:Shutdown()
@@ -1106,6 +1106,7 @@ function widget:Shutdown()
 	end
 	WG['red_buildmenu'] = nil
 end
+
 local function GetCommands()
 	local hiddencmds = {
 		[76] = true, --load units clone

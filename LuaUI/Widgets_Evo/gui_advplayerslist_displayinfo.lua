@@ -150,13 +150,13 @@ local function updateValues()
 		local gameframe = Spring.GetGameFrame()
 		local minutes = math.floor((gameframe / 30 / 60))
 		local seconds = math.floor((gameframe - ((minutes*60)*30)) / 30)
-		if seconds == 0 then 
+		if seconds == 0 then
 			seconds = '00'
 		elseif seconds < 10 then
 			seconds = '0'..seconds
 		end
 		local time = minutes..':'..seconds
-		
+
 		glColor(0.45,0.45,0.45,1)
 		glText(titleColor..'time  '..valueColor..time..titleColor..'      speed  '..valueColor..gamespeed..titleColor..'      fps  '..valueColor..fps, left+textXPadding, bottom+textYPadding, textsize, 'no')
 	end)
@@ -196,12 +196,17 @@ function widget:Shutdown()
 end
 
 local passedTime = 0
+local passedTime2 = 0
 function widget:Update(dt)
 	passedTime = passedTime + dt
-	if passedTime > 1 then
-		updateValues()
-		passedTime = passedTime - 1
+	passedTime2 = passedTime2 + dt
+	if passedTime > 0.1 then
+		passedTime = passedTime - 0.1
 		updatePosition()
+	end
+	if passedTime2 > 1 then
+		updateValues()
+		passedTime2 = passedTime2 - 1
 	end
 end
 
@@ -214,13 +219,12 @@ function updatePosition(force)
 		if WG['music'] ~= nil then
             advplayerlistPos = WG['music'].GetPosition()		-- returns {top,left,bottom,right,widgetScale}
 		end
-		
 		left = advplayerlistPos[2]
 		bottom = advplayerlistPos[1]
 		right = advplayerlistPos[4]
 		top = advplayerlistPos[1]+(widgetHeight*advplayerlistPos[5])
 		widgetScale = advplayerlistPos[5]
-		
+
 		if (prevPos[1] == nil or prevPos[1] ~= advplayerlistPos[1] or prevPos[2] ~= advplayerlistPos[2] or prevPos[5] ~= advplayerlistPos[5]) or force then
 			createList()
 		end

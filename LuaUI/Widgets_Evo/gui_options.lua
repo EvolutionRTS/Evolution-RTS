@@ -23,6 +23,9 @@ end
 --
 ]]--
 
+local cameraTransitionTime = 0.2
+local cameraPanTransitionTime = 0.03
+
 local playSounds = true
 local buttonclick = 'LuaUI/Sounds/tock.wav'
 local paginatorclick = 'LuaUI/Sounds/buildbar_waypoint.wav'
@@ -50,7 +53,7 @@ local screenWidth = 1050-bgMargin-bgMargin
 
 local textareaMinLines = 10		-- wont scroll down more, will show at least this amount of lines 
 
-local customScale = 1.06
+local customScale = 1
 
 local startLine = 1
 
@@ -548,7 +551,7 @@ function DrawWindow()
 	--RectRound(x+width+width+6,y-screenHeight,x+width+width+width,y,6)
 	
 	-- description background
-	gl.Color(0.62,0.5,0.22,0.14)
+	gl.Color(0.55,0.48,0.22,0.14)
 	RectRound(x,y-screenHeight,x+width+width,y-screenHeight+90,6)
 
 	-- draw options
@@ -722,6 +725,13 @@ end
 local sec = 0
 local lastUpdate = 0
 function widget:Update(dt)
+	if WG['advplayerlist_api'] and not WG['advplayerlist_api'].GetLockPlayerID() then
+		if select(7, Spring.GetMouseState()) then	-- when camera panning
+			Spring.SetCameraState(Spring.GetCameraState(), math.min(cameraPanTransitionTime, cameraTransitionTime))
+		else
+			Spring.SetCameraState(Spring.GetCameraState(), cameraTransitionTime)
+		end
+	end
 	sec = sec + dt
 	if show and (sec > lastUpdate + 0.5 or forceUpdate) then
 		forceUpdate = nil
@@ -818,33 +828,33 @@ function widget:DrawScreen()
 			
 			-- mouseover (highlight and tooltip)
 
-		  local description = ''
+		  	local description = ''
 			local x,y,ml = Spring.GetMouseState()
 			local cx, cy = correctMouseForScaling(x,y)
 
-		  if groupRect ~= nil then
-			  for id,group in pairs(optionGroups) do
-				  if IsOnRect(cx, cy, groupRect[id][1], groupRect[id][2], groupRect[id][3], groupRect[id][4]) then
-					  mouseoverGroupTab(id)
-				  end
-			  end
-		  end
-		  if optionButtonForward ~= nil and IsOnRect(cx, cy, optionButtonForward[1], optionButtonForward[2], optionButtonForward[3], optionButtonForward[4]) then
-			  if ml then
-				glColor(1,0.91,0.66,0.36)
-			  else
-			  	glColor(1,1,1,0.14)
-			  end
-			  RectRound(optionButtonForward[1], optionButtonForward[2], optionButtonForward[3], optionButtonForward[4], (optionButtonForward[4]-optionButtonForward[2])/8)
-		  end
-		  if optionButtonBackward ~= nil and IsOnRect(cx, cy, optionButtonBackward[1], optionButtonBackward[2], optionButtonBackward[3], optionButtonBackward[4]) then
-			  if ml then
-				  glColor(1,0.91,0.66,0.36)
-			  else
-				  glColor(1,1,1,0.14)
-			  end
-			  RectRound(optionButtonBackward[1], optionButtonBackward[2], optionButtonBackward[3], optionButtonBackward[4], (optionButtonBackward[4]-optionButtonBackward[2])/8)
-		  end
+			if groupRect ~= nil then
+				for id,group in pairs(optionGroups) do
+					if IsOnRect(cx, cy, groupRect[id][1], groupRect[id][2], groupRect[id][3], groupRect[id][4]) then
+						  mouseoverGroupTab(id)
+					end
+				end
+			end
+			if optionButtonForward ~= nil and IsOnRect(cx, cy, optionButtonForward[1], optionButtonForward[2], optionButtonForward[3], optionButtonForward[4]) then
+				if ml then
+					glColor(1,0.91,0.66,0.36)
+				else
+					glColor(1,1,1,0.14)
+				end
+				RectRound(optionButtonForward[1], optionButtonForward[2], optionButtonForward[3], optionButtonForward[4], (optionButtonForward[4]-optionButtonForward[2])/8)
+			end
+			if optionButtonBackward ~= nil and IsOnRect(cx, cy, optionButtonBackward[1], optionButtonBackward[2], optionButtonBackward[3], optionButtonBackward[4]) then
+				if ml then
+					glColor(1,0.91,0.66,0.36)
+				else
+					glColor(1,1,1,0.14)
+				end
+				RectRound(optionButtonBackward[1], optionButtonBackward[2], optionButtonBackward[3], optionButtonBackward[4], (optionButtonBackward[4]-optionButtonBackward[2])/8)
+			end
 
 			if not showSelectOptions then
 				for i, o in pairs(optionHover) do
@@ -854,6 +864,8 @@ function widget:DrawScreen()
 						if options[i].description ~= nil then
 							description = options[i].description
 							glText('\255\235\200\125'..options[i].description, screenX+15, screenY-screenHeight+64.5, 16, "no")
+							glColor(0.46,0.4,0.3,0.4)
+							glText('/option '..options[i].id, screenX+screenWidth*0.659, screenY-screenHeight+8, 14, "nr")
 						end
 					end
 				end
@@ -984,15 +996,19 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SendCommands("Vsync "..value)
 			Spring.SetConfigInt("VSync",value)
 		elseif id == 'fullscreen' then
+			if value == 1 then
+				options[getOptionByID('borderless')].value = false
+				applyOptionValue(getOptionByID('borderless'))
+			end
 			Spring.SendCommands("Fullscreen "..value)
 			Spring.SetConfigInt("Fullscreen",value)
 		elseif id == 'borderless' then
 			Spring.SetConfigInt("WindowBorderless",value)
 			if value == 1 then
+				options[getOptionByID('fullscreen')].value = false
+				applyOptionValue(getOptionByID('fullscreen'))
 				Spring.SetConfigInt("WindowPosX",0)
 				Spring.SetConfigInt("WindowPosY",0)
-				Spring.SetConfigInt("XResolutionWindowed",resolutionX)
-				Spring.SetConfigInt("YResolutionWindowed",resolutionY)
 				Spring.SetConfigInt("WindowState",0)
 			else
 				Spring.SetConfigInt("WindowPosX",0)
@@ -1018,6 +1034,11 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SendCommands("fps "..value)
 			Spring.SendCommands("clock "..value)
 			Spring.SendCommands("speed "..value)
+
+		elseif id == 'resourcebarcoloring' then
+			saveOptionValue('Top Bar', 'topbar', 'setResourceBgTint', {'resourcebarBgTint'}, options[i].value)
+		elseif id == 'playerlistcollapse' then
+			saveOptionValue('AdvPlayersList', 'advplayerlist_api', 'SetCollapsable', {'collapsable'}, options[i].value)
 		elseif id == 'lockcamera_hideenemies' then
 			saveOptionValue('AdvPlayersList', 'advplayerlist_api', 'SetLockHideEnemies', {'lockcameraHideEnemies'}, options[i].value)
 		elseif id == 'lockcamera_los' then
@@ -1064,6 +1085,10 @@ function applyOptionValue(i, skipRedrawWindow)
 			saveOptionValue('Highlight Selected Units', 'highlightselunits', 'setTeamcolor', {'useTeamcolor'}, options[i].value)
 		elseif id == 'fancyselectedunits_secondline' then
 			saveOptionValue('Fancy Selected Units', 'fancyselectedunits', 'setSecondLine', {'showSecondLine'}, options[i].value)
+		elseif id == 'lighteffects_heatdistortion' then
+			saveOptionValue('Light Effects', 'lighteffects', 'setHeatDistortion', {'enableHeatDistortion'}, options[i].value)
+		elseif id == 'lighteffects_deferred' then
+			saveOptionValue('Light Effects', 'lighteffects', 'setDeferred', {'enableDeferred'}, options[i].value)
 		elseif id == 'highlightselunits_shader' then
 			if widgetHandler.configData["Highlight Selected Units"] == nil then
 				widgetHandler.configData["Highlight Selected Units"] = {}
@@ -1156,14 +1181,6 @@ function applyOptionValue(i, skipRedrawWindow)
 			end
 			Spring.SendCommands("shadows "..enabled.." "..value)
 			Spring.SetConfigInt("shadows", value)
-		elseif id == 'windowposx' then
-			Spring.SetConfigInt("WindowPosX ", value)
-		elseif id == 'windowposy' then
-			Spring.SetConfigInt("WindowPosY ", value)
-		elseif id == 'windowresx' then
-			Spring.SetConfigInt("XResolutionWindowed ", value)
-		elseif id == 'windowresy' then
-			Spring.SetConfigInt("YResolutionWindowed ", value)
 		elseif id == 'decals' then
 			Spring.SetConfigInt("GroundDecals", value)
 			Spring.SendCommands("GroundDecals "..value)
@@ -1259,6 +1276,10 @@ function applyOptionValue(i, skipRedrawWindow)
 			saveOptionValue('Fancy Selected Units', 'fancyselectedunits', 'setTeamcolorOpacity', {'teamcolorOpacity'}, value)
 		elseif id == 'voicenotifs_volume' then
 			saveOptionValue('Voice Notifs', 'voicenotifs', 'setVolume', {'volume'}, value)
+		elseif id == 'lockcamera_transitiontime' then
+			saveOptionValue('AdvPlayersList', 'advplayerlist_api', 'SetLockTransitionTime', {'transitionTime'}, value)
+		elseif id == 'camerasmoothness' then
+			cameraTransitionTime = value
 		end
 
 	elseif options[i].type == 'select' then
@@ -1286,6 +1307,21 @@ function applyOptionValue(i, skipRedrawWindow)
 			saveOptionValue('Cursors', 'cursors', 'setcursor', {'cursorSet'}, options[i].options[value])
 		elseif id == 'fancyselectedunits_style' then
 			saveOptionValue('Fancy Selected Units', 'fancyselectedunits', 'setStyle', {'currentOption'}, value)
+		elseif id == 'resolution' then
+			local resolutionX = string.match(options[i].options[options[i].value], '[0-9]*')
+			local resolutionY = string.gsub(string.match(options[i].options[options[i].value], 'x [0-9]*'), 'x ', '')
+			if tonumber(Spring.GetConfigInt("Fullscreen",1) or 1) == 1 then
+				Spring.SendCommands("Fullscreen 0")
+				Spring.SetConfigInt("XResolution", tonumber(resolutionX))
+				Spring.SetConfigInt("YResolution", tonumber(resolutionY))
+				Spring.SendCommands("Fullscreen 1")
+			else
+				Spring.SendCommands("Fullscreen 1")
+				Spring.SetConfigInt("XResolutionWindowed", tonumber(resolutionX))
+				Spring.SetConfigInt("YResolutionWindowed", tonumber(resolutionY))
+				Spring.SendCommands("Fullscreen 0")
+			end
+			options[i].value = 0
 		end
 	end
 	if skipRedrawWindow == nil then
@@ -1293,7 +1329,6 @@ function applyOptionValue(i, skipRedrawWindow)
 		windowList = gl.CreateList(DrawWindow)
 	end
 end
-
 
 function loadPreset(preset)
 	for optionID, value in pairs(presets[preset]) do
@@ -1632,15 +1667,14 @@ function loadAllWidgetData()
 	loadWidgetData("Bloom Shader", "bloomhighlights", {'drawHighlights'})
 
 	loadWidgetData("Red Console (In-game chat only)", "consolemaxlines", {'Config','console','maxlines'})
-
-	loadWidgetData("Red Console (old)", "consolemaxlines", {'Config','console','maxlines'})
-
 	loadWidgetData("Red Console (In-game chat only)", "consolefontsize", {'fontsizeMultiplier'})
-
-	loadWidgetData("Red Console (old)", "consolefontsize", {'fontsizeMultiplier'})
 
 	loadWidgetData("AdvPlayersList", "lockcamera_hideenemies", {'lockcameraHideEnemies'})
 	loadWidgetData("AdvPlayersList", "lockcamera_los", {'lockcameraLos'})
+	loadWidgetData("AdvPlayersList", "lockcamera_transitiontime", {'transitionTime'})
+	loadWidgetData("AdvPlayersList", "playerlistcollapse", {'collapsable'})
+
+	loadWidgetData("Top Bar", "resourcebarcoloring", {'resourcebarBgTint'})
 
 	loadWidgetData("Ally Selected Units", "allyselunits_select", {'selectPlayerUnits'})
 
@@ -1692,14 +1726,49 @@ function loadAllWidgetData()
 	loadWidgetData("Light Effects", "lighteffects_laserbrightness", {'globalLightMultLaser'})
 	loadWidgetData("Light Effects", "lighteffects_laserradius", {'globalRadiusMultLaser'})
 	loadWidgetData("Light Effects", "lighteffects_life", {'globalLifeMult'})
+	loadWidgetData("Light Effects", "lighteffects_heatdistortion", {'enableHeatDistortion'})
+	loadWidgetData("Light Effects", "lighteffects_deferred", {'enableDeferred'})
 
 	loadWidgetData("Auto Group", "autogroup_immediate", {'config','immediate','value'})
 
 	return changes
 end
 
+function lines(str)
+	local t = {}
+	local function helper(line) table.insert(t, line) return "" end
+	helper((str:gsub("(.-)\r?\n", helper)))
+	return t
+end
 
 function init()
+
+	local supportedResolutions = {}
+	local infolog = VFS.LoadFile("infolog.txt")
+	if infolog then
+		local fileLines = lines(infolog)
+		for i, line in ipairs(fileLines) do
+			if addResolutions then
+				local resolution = string.match(line, '[0-9]*x[0-9]*')
+				if resolution and string.len(resolution) >= 7 then
+					local resolution = string.gsub(resolution, "x", " x ")
+					local resolutionX = string.match(resolution, '[0-9]*')
+					local resolutionY = string.gsub(string.match(resolution, 'x [0-9]*'), 'x ', '')
+					if tonumber(resolutionX) >= 640 and tonumber(resolutionY) >= 480 then
+						supportedResolutions[#supportedResolutions+1] = resolution
+					end
+				else
+					break
+				end
+			end
+			if string.find(line, '	display=') then
+				if addResolutions then
+					break
+				end
+				addResolutions = true
+			end
+		end
+	end
 	-- if you want to add an option it should be added here, and in applyOptionValue(), if option needs shaders than see the code below the options definition
 	optionGroups = {
 		{id='gfx', name='Graphics'},
@@ -1713,12 +1782,10 @@ function init()
 		{id="preset", group="gfx", name="Load graphics preset", type="select", options=presetNames, value=0, description='This wont set the preset every time you restart a game. So feel free to adjust things.\n\nSave custom preset with /savepreset name\nRightclick to delete a custom preset'},
 
 		--GFX
-		--{id="windowposx", group="gfx", name="Window position X", type="slider", min=0, max=math.ceil(ssx/3), step=1, value=tonumber(Spring.GetConfigInt("WindowPosX",1) or 0), description='Set where on the screen the window is positioned on the X axis'},
-		--{id="windowposy", group="gfx", name="Window position Y", type="slider", min=0, max=math.ceil(ssy/3), step=1, value=tonumber(Spring.GetConfigInt("WindowPosY",1) or 0), description='Set where on the screen the window is positioned on the Y axis'},
-		--{id="windowresx", group="gfx", name="Window width", type="slider", min=math.floor(ssx/3), max=ssx, step=1, value=tonumber(Spring.GetConfigInt("XResolutionWindowed",1) or 0), description='Set where on the screen the window is positioned on the X axis'},
-		--{id="windowresy", group="gfx", name="Window height", type="slider", min=math.floor(ssy/3), max=ssy, step=1, value=tonumber(Spring.GetConfigInt("YResolutionWindowe",1) or 0), description='Set where on the screen the window is positioned on the Y axis'},
+		{id="resolution", group="gfx", name="Resolution", type="select", options=supportedResolutions, value=0, description='WARNING: sometimes freezes game engine in windowed mode'},
 		{id="fullscreen", group="gfx", name="Fullscreen", type="bool", value=tonumber(Spring.GetConfigInt("Fullscreen",1) or 1) == 1},
-		{id="borderless", group="gfx", name="  Borderless window", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1, description="Changes will be applied next game.\n\n(dont forget to turn off the \'fullscreen\' option next game)"},
+		{id="borderless", group="gfx", name="Borderless window", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1, description="Changes will be applied next game.\n\n(dont forget to turn off the \'fullscreen\' option next game)"},
+		{id="windowpos", group="gfx", widget="Move Window Position", name="Move window position", type="bool", value=GetWidgetToggleValue("Move Window Position"), description='Toggle and move window position with the arrow keys or by dragging'},
 		{id="vsync", group="gfx", name="V-sync", type="bool", value=tonumber(Spring.GetConfigInt("VSync",1) or 1) == 1, description=''},
 		{id="fsaa", group="gfx", name="Anti Aliasing", type="slider", min=0, max=16, step=1, value=tonumber(Spring.GetConfigInt("FSAALevel",1) or 2), description='Changes will be applied next game'},
 		{id="advmapshading", group="gfx", name="Advanced map shading", type="bool", value=tonumber(Spring.GetConfigInt("AdvMapShading",1) or 1) == 1, description='When disabled: map shadows aren\'t rendered as well'},
@@ -1743,6 +1810,8 @@ function init()
 		{id="darkenmap_darkenfeatures", group="gfx", name=widgetOptionColor.."   Darken features with map", type="bool", value=false, description='Darkens features (trees, wrecks, ect..) along with darken map slider above\n\nNOTE: This setting can be CPU intensive because it cycles through all visible features \nand renders then another time.'},
 
 		{id="lighteffects", group="gfx", name="Light effects", type="bool", value=GetWidgetToggleValue("Light Effects"), description='Adds lights to projectiles, lasers and explosions.\n\nRequires shaders.'},
+		--{id="lighteffects_deferred", group="gfx", name=widgetOptionColor.."   real map and model lights", type="bool", value=true, description='Otherwise simple ground flashes instead of actual map and model lighting.\n\nExpensive for the gpu when lots of (big) lights are there or when you zoom in on them.'},
+		--{id="lighteffects_heatdistortion", group="gfx", name=widgetOptionColor.."   apply heat distortion", type="bool", value=true, description='Enables a distortion on top of explosions to simulate heat'},
 		{id="lighteffects_life", group="gfx", name=widgetOptionColor.."   lifetime", min=0.25, max=1, step=0.05, type="slider", value=0.6, description='lifetime of explosion lights'},
 		{id="lighteffects_brightness", group="gfx", name=widgetOptionColor.."   brightness", min=1, max=5, step=0.1, type="slider", value=2.5, description='Set the brightness of the lights'},
 		{id="lighteffects_radius", group="gfx", name=widgetOptionColor.."   radius", min=1, max=2, step=0.1, type="slider", value=1.2, description='Set the radius of the lights\n\nWARNING: the bigger the radius the heavier on the GPU'},
@@ -1798,6 +1867,8 @@ function init()
 		-- CONTROL
 		{id="camera", group="control", name="Camera", type="select", options={'fps','overhead','spring','rot overhead','free'}, value=(tonumber((Spring.GetConfigInt("CamMode",1)+1) or 2))},
 		{id="camerashake", group="control", widget="CameraShake", name="Camera shake", type="bool", value=GetWidgetToggleValue("CameraShake"), description='Shakes camera on explosions'},
+		{id="camerasmoothness", group="control", name="Camera smoothing", type="slider", min=0, max=1, step=0.01, value=cameraTransitionTime, description="How smooth should the transitions between camera movement be?"},
+		{id="lockcamera_transitiontime", group="control", name="Tracking cam smoothing", type="slider", min=0.4, max=1.5, step=0.01, value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockTransitionTime~=nil and WG['advplayerlist_api'].GetLockTransitionTime()), description="When viewing a players camera...\nhow smooth should the transitions between camera movement be?"},
 
 		{id="scrollspeed", group="control", name="Scroll zoom speed", type="slider", min=1, max=45, step=1, value=math.abs(tonumber(Spring.GetConfigInt("ScrollWheelSpeed",1) or 25)), description=''},
 		{id="scrollinverse", group="control", name="Scroll inversed", type="bool", value=(tonumber(Spring.GetConfigInt("ScrollWheelSpeed",1) or 25) < 0), description=""},
@@ -1805,6 +1876,7 @@ function init()
 		{id="hwcursor", group="control", name="Hardware cursor", type="bool", value=tonumber(Spring.GetConfigInt("hardwareCursor",1) or 1) == 1, description="When disabled: the mouse cursor refresh rate will be the same as your ingame fps"},
 		{id="crossalpha", group="control", name="Mouse cross alpha", type="slider", min=0, max=1, step=0.05, value=tonumber(Spring.GetConfigString("CrossAlpha",1) or 1), description='Opacity of mouse icon in center of screen when you are in camera pan mode\n\n(The\'icon\' has a dot in center with 4 arrows pointing in all directions)'},
 		{id="screenedgemove", group="control", name="Screen edge moves camera", type="bool", value=tonumber(Spring.GetConfigInt("FullscreenEdgeMove",1) or 1) == 1, description="If mouse is close to screen edge this will move camera\n\nChanges will be applied next game"},
+		{id="containmouse", group="control", widget="Grabinput", name="Contain mouse inside window", type="bool", value=GetWidgetToggleValue("Grabinput"), description='When you are in windowed mode, this will keep your mouse from moving out of it'},
 		{id="allyselunits_select", group="control", name="Select units of tracked player", type="bool", value=(WG['allyselectedunits']~=nil and WG['allyselectedunits'].getSelectPlayerUnits()), description="When viewing a players camera, this will also select the units the player has selected"},
 		{id="lockcamera_hideenemies", group="control", name="Only show tracked player viewpoint", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockHideEnemies()), description="When viewing a players camera, this will only display what the tracked player sees"},
 		{id="lockcamera_los", group="control", name=widgetOptionColor.."   show tracked player LoS", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockLos()), description="When viewing a players camera and los, shows shaded los ranges too"},
@@ -1842,6 +1914,7 @@ function init()
 		--{id="fancyselunits", group="gfx", widget="Fancy Selected Units", name="Fancy Selected Units", type="bool", value=GetWidgetToggleValue("Fancy Selected Units"), description=''},
 
 		--{id="fpstimespeed", group="ui", name="Display FPS, GameTime and Speed", type="bool", value=tonumber(Spring.GetConfigInt("ShowFPS",1) or 1) == 1, description='Located at the top right of the screen\n\nIndividually toggle them with /fps /clock /speed'},
+		{id="playerlistcollapse", group="ui", name="Playerlist auto collapses", type="bool", value=false, description='Auto collapses the playerlist, mouseover will show it again'},
 		{id="fpstimespeed-widget", group="ui", widget="AdvPlayersList info", name="Playerlist time/speed/fps", type="bool", value=GetWidgetToggleValue("AdvPlayersList info"), description='Shows time, gamespeed and fps on top of the (adv)playerslist'},
 		{id="mascotte", group="ui", widget="AdvPlayersList mascotte", name="Playerlist mascotte", type="bool", value=GetWidgetToggleValue("AdvPlayersList mascotte"), description='Shows a mascotte on top of the (adv)playerslist'},
 
@@ -1900,6 +1973,16 @@ function init()
 	-- loads values via stored game config in luaui/configs
 	loadAllWidgetData()
 
+
+	-- while we have set config-ints, that isnt enough to have these settings applied ingame
+	if savedConfig and Spring.GetGameFrame() == 0 then
+		for k, v in pairs(savedConfig) do
+			if getOptionByID(k) then
+				applyOptionValue(getOptionByID(k))
+			end
+		end
+	end
+
     -- detect AI
     local aiDetected = false
     local t = Spring.GetTeamList()
@@ -1910,7 +1993,11 @@ function init()
     end
     if not aiDetected then
         options[getOptionByID('commandsfxfilterai')] = nil
-    end
+	end
+
+	if #supportedResolutions < 2 then
+		options[getOptionByID('resolution')] = nil
+	end
 
 	-- disable music volume slider
 	if widgetHandler.knownWidgets["Music Player"] == nil then
@@ -1945,7 +2032,8 @@ function init()
 		options[getOptionByID('voicenotifs_volume')] = nil
 		options[getOptionByID('voicenotifs_playtrackedplayernotifs')] = nil
 	end
-	
+
+
 	-- cursors
 	if (WG['cursors'] == nil) then
 		options[getOptionByID('cursor')] = nil
@@ -2028,6 +2116,10 @@ function init()
 	end
 
 
+	if WG['advplayerlist_api']==nil or WG['advplayerlist_api'].GetLockTransitionTime==nil then
+		options[getOptionByID('lockcamera_transitiontime')] = nil
+	end
+
 	-- disable options when widget isnt availible
 	if widgetHandler.knownWidgets["Outline"] == nil then
 		options[getOptionByID('outline')] = nil
@@ -2066,6 +2158,8 @@ function init()
 		options[getOptionByID("lighteffects_laserbrightness")] = nil
 		options[getOptionByID("lighteffects_radius")] = nil
 		options[getOptionByID("lighteffects_laserradius")] = nil
+		--options[getOptionByID("lighteffects_heatdistortion")] = nil
+		--options[getOptionByID("lighteffects_deferred")] = nil
 	end
 
 	if widgetHandler.knownWidgets["TeamPlatter"] == nil then
@@ -2160,20 +2254,7 @@ function widget:Initialize()
 		Spring.SetConfigInt("UsePBO",0)
 	--end
 
-	--Spring.SendCommands("minimap unitsize "..minimapIconsize)		-- spring wont remember what you set with '/minimap iconssize #'
-
-	-- making sure a redui console is displayed without the alternatives in play
-	if widgetHandler.orderList['Red Console (old)'] ~= nil and widgetHandler.orderList['Red Console (In-game chat only)'] ~= nil and widgetHandler.orderList['Red Console (Battle and autohosts)'] ~= nil then
-		if widgetHandler.orderList['Red Console (old)'] == 0 and (widgetHandler.orderList['Red Console (In-game chat only)'] == 0 or widgetHandler.orderList['Red Console (Battle and autohosts)'] == 0) then
-			widgetHandler:EnableWidget('Red Console (In-game chat only)')
-			widgetHandler:EnableWidget('Red Console (Battle and autohosts)')
-			Spring.SendCommands("luarules reloadluaui")
-		elseif widgetHandler.orderList['Red Console (old)'] > 0 and (widgetHandler.orderList['Red Console (In-game chat only)'] > 0 or widgetHandler.orderList['Red Console (Battle and autohosts)'] > 0) then
-			widgetHandler:DisableWidget('Red Console (In-game chat only)')
-			widgetHandler:DisableWidget('Red Console (Battle and autohosts)')
-			Spring.SendCommands("luarules reloadluaui")
-		end
-	end
+	Spring.SendCommands("minimap unitsize "..minimapIconsize)		-- spring wont remember what you set with '/minimap iconssize #'
 
 	Spring.SendCommands({"bind f10 options"})
 
@@ -2216,9 +2297,49 @@ local function Split(s, separator)
 	return results
 end
 
+local lastOptionCommand = 0
 function widget:TextCommand(command)
 	if (string.find(command, "options") == 1  and  string.len(command) == 7) then
 		show = not show
+	end
+	if os.clock() > lastOptionCommand+1 and string.sub(command, 1, 7) == "option " then		-- clock check is needed because toggling widget will somehow do an identical call of widget:TextCommand(command)
+		local option = string.sub(command, 8)
+		local optionID = getOptionByID(option)
+		if optionID then
+			if options[optionID].type == 'bool' then
+				lastOptionCommand = os.clock()
+				options[optionID].value = not options[optionID].value
+				applyOptionValue(optionID)
+			else
+				show = true
+			end
+		else
+			option = Split(option, ' ')
+			optionID = option[1]
+			if optionID then
+				optionID = getOptionByID(optionID)
+				if optionID and option[2] then
+					lastOptionCommand = os.clock()
+					if options[optionID].type == 'select' then
+						local selectKey = getSelectKey(optionID, option[2])
+						if selectKey then
+							options[optionID].value = selectKey
+							applyOptionValue(optionID)
+						end
+					elseif options[optionID].type == 'bool' then
+						if option[2] == '0' then
+							options[optionID].value = false
+						else
+							options[optionID].value = true
+						end
+						applyOptionValue(optionID)
+					else
+						options[optionID].value = tonumber(option[2])
+						applyOptionValue(optionID)
+					end
+				end
+			end
+		end
 	end
 	if (string.find(command, "savepreset") == 1)  then
 		local words = Split(command, ' ')
@@ -2230,11 +2351,45 @@ function widget:TextCommand(command)
 	end
 end
 
--- preserve data in case of a /luaui reload
+
+function getSelectKey(i, value)
+	for k, v in pairs(options[i].options) do
+		if v == value then
+			return k
+		end
+	end
+	return false
+end
+
+
 function widget:GetConfigData(data)
 	savedTable = {}
 	savedTable.customPresets = customPresets
 	savedTable.minimapIconsize = minimapIconsize
+
+	savedTable.cameraTransitionTime = cameraTransitionTime
+	savedTable.savedConfig = {
+		vsync = {'VSync', tonumber(Spring.GetConfigInt("VSync",1) or 1)},
+		water = {'Water', tonumber(Spring.GetConfigInt("Water",1) or 1)},
+		disticon = {'UnitIconDist', tonumber(Spring.GetConfigInt("UnitIconDist",1) or 400)},
+		particles = {'MaxParticles', tonumber(Spring.GetConfigInt("MaxParticles",1) or 10000)},
+		nanoparticles = {'MaxNanoParticles', tonumber(Spring.GetConfigInt("MaxNanoParticles",1) or 500)},
+		decals = {'GroundDecals', tonumber(Spring.GetConfigInt("GroundDecals",1) or 1)},
+		grounddetail = {'GroundDetail', tonumber(Spring.GetConfigInt("GroundDetail",1) or 1)},
+		grassdetail = {'GrassDetail', tonumber(Spring.GetConfigInt("GrassDetail",1) or 5)},
+		shadows = {'Shadows', tonumber(Spring.GetConfigInt("Shadows",1) or 1)},
+		advsky = {'AdvSky', tonumber(Spring.GetConfigInt("AdvSky",1) or 1)},
+		camera = {'CamMode', tonumber(Spring.GetConfigInt("CamMode",1) or 1)},
+		advmodelshading = {'AdvModelShading', tonumber(Spring.GetConfigInt("AdvModelShading",1) or 1)},
+		advmapshading = {'AdvMapShading', tonumber(Spring.GetConfigInt("AdvMapShading",1) or 1)},
+		--normalmapping = {'NormalMapping', tonumber(Spring.GetConfigInt("NormalMapping",1) or 1)},
+		--treewind = {'TreeWind', tonumber(Spring.GetConfigInt("TreeWind",1) or 1)},
+		hwcursor = {'HardwareCursor', tonumber(Spring.GetConfigInt("HardwareCursor",1) or 1)},
+		sndvolmaster = {'snd_volmaster', tonumber(Spring.GetConfigInt("snd_volmaster",1) or 50)},
+		sndvolbattle = {'snd_volbattle', tonumber(Spring.GetConfigInt("snd_volbattle",1) or 50)},
+		sndvolunitreply = {'snd_volunitreply', tonumber(Spring.GetConfigInt("snd_volunitreply",1) or 50)},
+		sndvolmusic = {'snd_volmusic', tonumber(Spring.GetConfigInt("snd_volmusic",1) or 50)},
+	}
 	return savedTable
 end
 
@@ -2244,5 +2399,14 @@ function widget:SetConfigData(data)
 	end
 	if data.minimapIconsize ~= nil then
 		minimapIconsize = data.minimapIconsize
+	end
+	if data.cameraTransitionTime ~= nil then
+		cameraTransitionTime = data.cameraTransitionTime
+	end
+	if data.savedConfig ~= nil then
+		savedConfig = data.savedConfig
+		for k, v in pairs(savedConfig) do
+			Spring.SetConfigInt(v[1],v[2])
+		end
 	end
 end

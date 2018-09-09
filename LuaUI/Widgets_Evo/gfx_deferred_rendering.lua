@@ -51,9 +51,9 @@ local spGetCameraPosition    = Spring.GetCameraPosition
 local spWorldToScreenCoords  = Spring.WorldToScreenCoords
 
 
-local glowImg			= ":n:LuaUI/Images/glow2.dds"
-local beamGlowImg = "LuaUI/Images/barglow-center.dds"
-local beamGlowEndImg = "LuaUI/Images/barglow-edge.dds"
+local glowImg			= "LuaUI/Images/glow2.dds"
+local beamGlowImg = ":n:LuaUI/Images/barglow-center.png"
+local beamGlowEndImg = ":n:LuaUI/Images/barglow-edge.png"
 
 local GLSLRenderer = true
 
@@ -487,7 +487,6 @@ end
 
 -- adding a glow to Cannon projectiles
 function widget:DrawWorld()
-
 	local lights = pointLights
 	glBlending(GL.SRC_ALPHA, GL.ONE)
 	gl.Texture(glowImg)
@@ -499,7 +498,7 @@ function widget:DrawWorld()
 			size = param.glowradius * 0.44
 			gl.PushMatrix()
 				local colorMultiplier = 1 / math.max(param.r, param.g, param.b)
-				gl.Color(param.r*colorMultiplier, param.g*colorMultiplier, param.b*colorMultiplier, 0.02 + (size/3300))
+				gl.Color(param.r*colorMultiplier, param.g*colorMultiplier, param.b*colorMultiplier, 0.016 + (size/4000))
 				gl.Translate(light.px, light.py, light.pz)
 				gl.Billboard(true)
 				gl.TexRect(-(size/2), -(size/2), (size/2), (size/2))
@@ -508,7 +507,7 @@ function widget:DrawWorld()
 	end
 	gl.Billboard(false)
 	gl.Texture(false)
-	glBlending(false)
+	glBlending(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)
 end
 
 
@@ -521,13 +520,13 @@ function widget:DrawScreenEffects()
 	
 	--glBlending(GL.DST_COLOR, GL.ONE) -- Set add blending mode
 	glBlending(GL.SRC_ALPHA, GL.ONE)
-
 	if beamLightCount > 0 then
 		DrawLightType(beamLights, beamLightCount, 1)
 	end
+	--glBlending(GL.ONE_MINUS_SRC_COLOR, GL.ONE)
 	if pointLightCount > 0 then
 		DrawLightType(pointLights, pointLightCount, 0)
 	end
-	
-	glBlending(false)
+
+	glBlending(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)
 end
