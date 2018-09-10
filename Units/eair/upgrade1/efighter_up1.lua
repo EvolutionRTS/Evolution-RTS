@@ -9,8 +9,8 @@ isUpgraded = [[1]]
 
 humanName = [[Koyote Mark II]]
 
-objectName = "efighter3.s3o"
-script = "efighter3.cob"
+objectName = "efighter2.s3o"
+script = "efighter2.cob"
 
 
 tech = [[tech1]]
