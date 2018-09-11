@@ -76,7 +76,7 @@ unitDef                    = {
 			def                  = "gunshipweapon",
 			BadTargetCategory    = "BUILDING WALL",
 			mainDir              = "0 0 1",
-			maxAngleDif          = 180,
+			maxAngleDif          = 90,
 		},
 	},
 	customParams                 = {
@@ -126,7 +126,7 @@ weaponDefs                 = {
 		soundStart               = "weapons/18395_inferno_rltx.wav",
 		soundStartVolume         = 10,
 		startVelocity            = 50,
-		tolerance                = 8000,
+		tolerance                = 5000,
 		turnRate                 = 20000,
 		turret                   = false,
 		weaponAcceleration       = 100,

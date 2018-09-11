@@ -1,23 +1,23 @@
--- UNITDEF -- ERAIDER --
+-- UNITDEF -- eairemp_up1 --
 --------------------------------------------------------------------------------
 
-unitName = "eraider"
+unitName = "eairemp_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[1]]
 
-humanName = [[Gridlock]]
+humanName = [[Gridlock MK II]]
 
-objectName = "eraider.s3o"
-script = "eraider.cob"
+objectName = "eairemp.s3o"
+script = "eairemp.cob"
 
 
-tech = [[tech1]]
+tech = [[tech3]]
 armortype = [[light]]
 supply = [[2]]
 
-VFS.Include("units-configs-basedefs/basedefs/air/eraider_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/air/eairemp_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 
