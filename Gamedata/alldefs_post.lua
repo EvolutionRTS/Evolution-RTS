@@ -78,7 +78,9 @@ function UnitDef_Post(name, uDef)
 	-- This ties in with the global Cylinder Targetting
 	-- Default airsightdistance is sightdistance * 1.5
 	--uDef.airsightdistance = uDef.sightdistance * 2 --No longer needed
-	uDef.airsightdistance = uDef.sightdistance
+	if uDef.airsightdistance == uDef.sightdistance * 1.5 then
+		uDef.airsightdistance = uDef.sightdistance
+	end
 	
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
@@ -173,8 +175,9 @@ end
 -- process weapondef
 function WeaponDef_Post(name, wDef)
 	
-	-- Cylinder Targeting for everything
+	-- Cylinder Targeting and infinite vertical range for everything
 	wDef.cylindertargeting = 128
+	--wDef.heightmod = 1
 	
 	--Use targetborderoverride in weapondef customparams to override this global setting
 	--Controls whether the weapon aims for the center or the edge of its target's collision volume. Clamped between -1.0 - target the far border, and 1.0 - target the near border.

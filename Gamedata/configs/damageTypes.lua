@@ -287,10 +287,10 @@ local damageClasses = {
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
-		eaaturret	= {
+		elaserbattery	= {
 			ARMORED		= 1,
-			LIGHT		= 0.66,
-			BUILDING 	= 0.66,
+			LIGHT		= 1,
+			BUILDING 	= 1,
 		},
 		elrpc	= {
 			ARMORED		= 0.25,

@@ -52,41 +52,41 @@ end
 
 
 function switchAirpadToFlyMode(unitID, unitDefID)
-    if (unitDefID == UnitDefNames["eairengineer"].id or
-	unitDefID == UnitDefNames["ebomber"].id or
-	unitDefID == UnitDefNames["edrone"].id or
-	unitDefID == UnitDefNames["edrone_up1"].id or
-	unitDefID == UnitDefNames["edrone_up2"].id or
-	unitDefID == UnitDefNames["edrone_up3"].id or
-	unitDefID == UnitDefNames["efighter"].id or
-	unitDefID == UnitDefNames["egunship2"].id or
-	unitDefID == UnitDefNames["escout"].id or
-	unitDefID == UnitDefNames["eraider"].id or
-	unitDefID == UnitDefNames["eraider_up1"].id or
-	unitDefID == UnitDefNames["eraider_up2"].id or
-	unitDefID == UnitDefNames["eraider_up3"].id or
-	unitDefID == UnitDefNames["etransport"].id or
-	unitDefID == UnitDefNames["ebomber_up1"].id or
-	unitDefID == UnitDefNames["efighter_up1"].id or
-	unitDefID == UnitDefNames["egunship2_up1"].id or
-	unitDefID == UnitDefNames["escout_up1"].id or
-	unitDefID == UnitDefNames["etransport_up1"].id or
-	unitDefID == UnitDefNames["ebomber_up2"].id or
-	unitDefID == UnitDefNames["efighter_up2"].id or
-	unitDefID == UnitDefNames["egunship2_up2"].id or
-	unitDefID == UnitDefNames["escout_up2"].id or
-	unitDefID == UnitDefNames["etransport_up2"].id or	
-	unitDefID == UnitDefNames["ebomber_up3"].id or
-	unitDefID == UnitDefNames["efighter_up3"].id or
-	unitDefID == UnitDefNames["egunship2_up3"].id or
-	unitDefID == UnitDefNames["escout_up3"].id or
-	unitDefID == UnitDefNames["etransport_up3"].id or
-	unitDefID == UnitDefNames["ekrow"].id or
-	unitDefID == UnitDefNames["ekrow_up1"].id or
-	unitDefID == UnitDefNames["ekrow_up2"].id or
-	unitDefID == UnitDefNames["ekrow_up3"].id) then
-        spGiveOrderToUnit(unitID, CMD.IDLEMODE, { 0 }, {})
-    end
+    -- if (unitDefID == UnitDefNames["eairengineer"].id or
+	-- unitDefID == UnitDefNames["ebomber"].id or
+	-- unitDefID == UnitDefNames["edrone"].id or
+	-- unitDefID == UnitDefNames["edrone_up1"].id or
+	-- unitDefID == UnitDefNames["edrone_up2"].id or
+	-- unitDefID == UnitDefNames["edrone_up3"].id or
+	-- unitDefID == UnitDefNames["efighter"].id or
+	-- unitDefID == UnitDefNames["egunship2"].id or
+	-- unitDefID == UnitDefNames["escout"].id or
+	-- unitDefID == UnitDefNames["eraider"].id or
+	-- unitDefID == UnitDefNames["eraider_up1"].id or
+	-- unitDefID == UnitDefNames["eraider_up2"].id or
+	-- unitDefID == UnitDefNames["eraider_up3"].id or
+	-- unitDefID == UnitDefNames["etransport"].id or
+	-- unitDefID == UnitDefNames["ebomber_up1"].id or
+	-- unitDefID == UnitDefNames["efighter_up1"].id or
+	-- unitDefID == UnitDefNames["egunship2_up1"].id or
+	-- unitDefID == UnitDefNames["escout_up1"].id or
+	-- unitDefID == UnitDefNames["etransport_up1"].id or
+	-- unitDefID == UnitDefNames["ebomber_up2"].id or
+	-- unitDefID == UnitDefNames["efighter_up2"].id or
+	-- unitDefID == UnitDefNames["egunship2_up2"].id or
+	-- unitDefID == UnitDefNames["escout_up2"].id or
+	-- unitDefID == UnitDefNames["etransport_up2"].id or	
+	-- unitDefID == UnitDefNames["ebomber_up3"].id or
+	-- unitDefID == UnitDefNames["efighter_up3"].id or
+	-- unitDefID == UnitDefNames["egunship2_up3"].id or
+	-- unitDefID == UnitDefNames["escout_up3"].id or
+	-- unitDefID == UnitDefNames["etransport_up3"].id or
+	-- unitDefID == UnitDefNames["ekrow"].id or
+	-- unitDefID == UnitDefNames["ekrow_up1"].id or
+	-- unitDefID == UnitDefNames["ekrow_up2"].id or
+	-- unitDefID == UnitDefNames["ekrow_up3"].id) then
+        -- spGiveOrderToUnit(unitID, CMD.IDLEMODE, { 0 }, {})
+    -- end
 end
 
 function widget:PlayerChanged(playerID)

@@ -16,6 +16,7 @@ Shared.buildList = {
 	[[emine]],
 	[[elightturret2]],
 	[[eheavyturret2]],
+	[[elaserbattery]],
 	[[eartyturret]],
 	-- [[euwturret]],
 	[[eshieldgen]],
