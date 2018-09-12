@@ -96,7 +96,7 @@ unitDef                    = {
 
 weaponDefs                 = {
 	aircannon   	             = {
-		AreaOfEffect             = 50,
+		AreaOfEffect             = 100,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
@@ -133,7 +133,7 @@ weaponDefs                 = {
 			isupgraded           = isUpgraded,
 		}, 
 		damage                   = {
-			default              = 12.5,
+			default              = 25,
 		},
 	},  
 }
