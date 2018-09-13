@@ -44,6 +44,7 @@ local warCutTracks = VFS.DirList('luaui/Widgets_Evo/Music/warcut', '*.ogg')
 local silenceTracks = VFS.DirList('luaui/Widgets_Evo/Music/silence', '*.ogg')
 local loadingTracks = VFS.DirList('luaui/Widgets_Evo/Music/loading', '*.ogg')
 
+
 --We check to make sure that we can function properly without crashing due to missing music tracks
 local next = next
 if next(peaceTracks) == nil then
@@ -60,7 +61,8 @@ if next(warCutTracks) == nil then
 	warCutTracks = warTracks
 end
 
-local tracks = peaceTracks
+--local tracks = peaceTracks
+local tracks = loadingTracks
 
 local firstTime = false
 local wasPaused = false
@@ -108,7 +110,7 @@ local volume
 local warMeter = 0
 local buildMeter = false
 local buildTimer = 0
-local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
+local fadelvl = 0.5
 local fadeOut = false
 local fadeIn = false
 local endFade = false
@@ -481,7 +483,7 @@ end
 function widget:GameFrame(n)
 	--Spring.Echo([[Warmeter: ]] ..warMeter)
 		--This is a little messy, but we need to be able to update these values on the fly so I see no better way
-		if n%120 == 0 then
+		if n%120 == 0 and tracks ~= loadingTracks then
 			music_volume_set = Spring.GetConfigInt("snd_volmusic", 20) * 0.01
 			music_volume_target = music_volume_set
 		end
@@ -504,6 +506,10 @@ function widget:GameFrame(n)
 			else
 				music_volume_target = music_volume_set
 			end
+		elseif gameOver then
+			music_volume_target = music_volume_set
+		elseif tracks == loadingTracks then
+			music_volume_target = 0
 		end
 		
 		--BuildMeter
@@ -618,9 +624,9 @@ function PlayNewTrack()
 			fadelvl = music_volume_set
 			warMeter = 0
 			buildTimer = 450
-		elseif Spring.GetGameFrame() == 0 then
-			tracks = warTracks
-			fadelvl = 0.15
+		--elseif Spring.GetGameFrame() == 0 then
+			--tracks = warTracks
+			--fadelvl = 0.15
 		elseif warMeter <= 0 then
 			if buildTimer > 10 then
 				tracks = peaceTracks
@@ -673,9 +679,9 @@ function widget:Update(dt)
 			if Spring.GetGameFrame() >= 1 then
 				fadelvl = 0.02
 			end
-			if Spring.GetGameFrame() == 0 then
-				PlayNewTrack()
-			end
+			--if Spring.GetGameFrame() == 0 then
+				--PlayNewTrack()
+			--end
 			firstTime = true -- pop this cherry
 		end
 
@@ -683,9 +689,9 @@ function widget:Update(dt)
 			if Spring.GetGameFrame() >= 1 then
 				fadelvl = 0
 			end
-			if Spring.GetGameFrame() == 0 then
-				PlayNewTrack()
-			end
+			--if Spring.GetGameFrame() == 0 then
+				--PlayNewTrack()
+			--end
 			if gameOver then
 				PlayNewTrack()
 			end

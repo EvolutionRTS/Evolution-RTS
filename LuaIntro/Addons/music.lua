@@ -19,7 +19,7 @@ Spring.SetSoundStreamVolume(0.5)
 local musicfiles = VFS.DirList("LuaUI/Widgets_Evo/Music/loading", "*.ogg")
 if (#musicfiles > 0) then
 	Spring.PlaySoundStream(musicfiles[math.random(1,#musicfiles)], 0.5)
-	Spring.SetSoundStreamVolume(1)
+	Spring.SetSoundStreamVolume(0.5)
 end
 
 
