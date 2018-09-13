@@ -110,7 +110,7 @@ local volume
 local warMeter = 0
 local buildMeter = false
 local buildTimer = 0
-local fadelvl = 0.5
+local fadelvl = Spring.GetConfigInt("snd_volmusic", 20) * 0.01 or 0.2
 local fadeOut = false
 local fadeIn = false
 local endFade = false
