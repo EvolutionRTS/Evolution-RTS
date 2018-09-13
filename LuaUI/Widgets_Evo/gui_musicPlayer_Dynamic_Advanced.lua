@@ -624,9 +624,9 @@ function PlayNewTrack()
 			fadelvl = music_volume_set
 			warMeter = 0
 			buildTimer = 450
-		--elseif Spring.GetGameFrame() == 0 then
-			--tracks = warTracks
-			--fadelvl = 0.15
+		elseif Spring.GetGameFrame() == 0 then
+			tracks = peaceTracks
+			fadelvl = music_volume_set
 		elseif warMeter <= 0 then
 			if buildTimer > 10 then
 				tracks = peaceTracks
@@ -689,9 +689,9 @@ function widget:Update(dt)
 			if Spring.GetGameFrame() >= 1 then
 				fadelvl = 0
 			end
-			--if Spring.GetGameFrame() == 0 then
-				--PlayNewTrack()
-			--end
+			if Spring.GetGameFrame() == 0 then
+				PlayNewTrack()
+			end
 			if gameOver then
 				PlayNewTrack()
 			end
