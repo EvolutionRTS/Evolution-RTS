@@ -78,6 +78,8 @@ unitDef                    = {
 			def                  = "aircannon",
 			noChaseCategory      = "VTOL LIGHT ARMORED",
 			badTargetCategory    = "VTOL LIGHT ARMORED",
+			mainDir              = "0 -1 0",
+			maxAngleDif          = 170,
 		},
 	},
 	customParams                 = {
