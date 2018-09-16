@@ -181,14 +181,10 @@ function widget:GameFrame(n)
 			resourcePrompts = 1
 		end
 		
-		if not spectator then
-			resourcePrompts = 1
-		else
+		if spectator then
 			resourcePrompts = 0
 		end
-		
-		Spring.Echo("I herd u liek prompts!")
-		Spring.Echo(resourcePrompts)
+		--Spring.Echo(resourcePrompts)
 	end
 
 	-- background flashes when the player messed up their eco
