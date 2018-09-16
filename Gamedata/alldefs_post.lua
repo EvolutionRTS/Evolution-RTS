@@ -176,7 +176,7 @@ end
 function WeaponDef_Post(name, wDef)
 	
 	-- Cylinder Targeting and infinite vertical range for everything
-	wDef.cylindertargeting = 128
+	--wDef.cylindertargeting = 128
 	--wDef.heightmod = 1
 	
 	--Use targetborderoverride in weapondef customparams to override this global setting
