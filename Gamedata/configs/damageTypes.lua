@@ -288,9 +288,9 @@ local damageClasses = {
 			BUILDING 	= 0.1,
 		},
 		elaserbattery	= {
-			ARMORED		= 1,
+			ARMORED		= 0.5,
 			LIGHT		= 1,
-			BUILDING 	= 1,
+			BUILDING 	= 0.1,
 		},
 		elrpc	= {
 			ARMORED		= 0.25,

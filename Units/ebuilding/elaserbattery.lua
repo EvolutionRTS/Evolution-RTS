@@ -12,7 +12,7 @@ humanName = [[Aegis]]
 objectName = [[elaserbattery.s3o]]
 script = [[elaserbattery.cob]]
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[building]]
 --supply = [[3]]
 
