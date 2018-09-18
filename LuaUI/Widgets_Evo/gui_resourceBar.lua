@@ -170,8 +170,7 @@ function widget:GameFrame(n)
 	end
 
 	if n%30 == 1 then
-		local myteam = Spring.GetMyTeamID()
-		local _, _, spectator = Spring.GetPlayerInfo(myteam)
+		local spectator = Spring.GetSpectatingState()
 		--Spring.Echo(spectator)
 		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
 		simplifiedResourceBar = Spring.GetConfigInt("evo_simplifiedresourcebar", 1)
