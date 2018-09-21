@@ -1486,8 +1486,7 @@ function widget:GameFrame(n)
 		--Spring.Echo(notificationTimeout)
 	end
 	if n%30 == 1 then
-		local myteam = Spring.GetMyTeamID()
-		local _, _, spectator = Spring.GetPlayerInfo(myteam)
+		local spectator = Spring.GetSpectatingState()
 		resourcePrompts = Spring.GetConfigInt("evo_resourceprompts", 1)
 
 		--Assume that if it isn't set, resourcePrompts is true
