@@ -3,13 +3,13 @@
 
 theme = {}
 
-theme.name = "Evolved"
+theme.name = "Lima"
 
 
 --//=============================================================================
 --// Define default skins
 
-local defaultSkin = "Evolved"
+local defaultSkin = "Lima"
 --local defaultSkin = "DarkGlass"
 
 theme.skin = {

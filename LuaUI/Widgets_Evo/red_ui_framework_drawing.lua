@@ -118,9 +118,9 @@ local function Text(px,py,fontsize,text,options,c)
 	end
 	glTranslate(px,py+fontsize,0)
 	if (options) then
-		options = options.."d" --fuck you jK
+		options = options.."do" --fuck you jK
 	else
-		options = "d"
+		options = "do"
 	end
 	glScale(1,-1,1) --flip
 	glText(text,0,0,fontsize,options)
