@@ -59,7 +59,7 @@ local echo  = Spring.Echo
 
 local CMD_MORPH_STOP = 32410
 local CMD_MORPH = 31410
-
+local CMD_EZ_MORPH = 31337 -- accepts target unitDefID as optional 1st parameter (1st found morph if missing)
 local MAX_MORPH = 0 --// will increase dynamically
 
 --------------------------------------------------------------------------------
@@ -1092,8 +1092,28 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
   return true
 end
 
+local function handleEzMorph(unitID, unitDefID, teamID, targetDefID)
+	local morphData = morphUnits[unitID]
+	if morphData then
+		return true, false
+	end
+ 	local morphSet = morphDefs[unitDefID]
+	if not morphSet then
+		return true, true
+	end
+ 	for morphCmd, morphDef in pairs(morphSet) do
+		if not targetDefID or morphDef.into == targetDefID then
+			StartMorph(unitID, unitDefID, teamID, morphDef)
+			break
+		end
+	end
+ 	return true, true
+end
 
 function gadget:CommandFallback(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
+  if cmdID == CMD_EZ_MORPH then
+    return handleEzMorph(unitID, unitDefID, teamID, cmdParams[1])
+  end
   if (cmdID < CMD_MORPH or cmdID >= CMD_MORPH+MAX_MORPH) then
     return false  --// command was not used
   end
