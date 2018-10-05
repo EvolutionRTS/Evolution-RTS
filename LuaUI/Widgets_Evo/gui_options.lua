@@ -1288,6 +1288,9 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.Echo('Loading preset:   '..options[i].options[value])
 			options[i].value = 0
 			loadPreset(presetNames[value])
+		elseif id == 'buildordermenu' then
+			Spring.SetConfigInt("evo_buildorderui",(value-1))
+			Spring.SendCommands("luarules reloadluaui")
 		elseif id == 'water' then
 			Spring.SendCommands("water "..(value-1))
 		elseif id == 'camera' then
@@ -1882,6 +1885,8 @@ function init()
 		{id="lockcamera_los", group="control", name=widgetOptionColor.."   show tracked player LoS", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockLos()), description="When viewing a players camera and los, shows shaded los ranges too"},
 
 		-- UI
+		{id="buildordermenu", group="ui", name="Build Menu Preset", type="select", options={'Horizontal','Compact Horizontal','Traditional','Right Side','Right Side Compact'}, value=tonumber(Spring.GetConfigInt("evo_buildorderui",0) or 0) == 0, description='Use these presets to change the build menu size and position.\nBuild and Order menus can further be custom positioned using TweakMode (ctrl+f11)\n\nNOTE: Changing this setting will cause the interface to be reloaded'},
+		
 		{id="teamcolors", group="ui", widget="Player Color Palette", name="Team colors based on a palette", type="bool", value=GetWidgetToggleValue("Player Color Palette"), description='Replaces lobby team colors for a color palette based one\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
 		{id="sameteamcolors", group="ui", name=widgetOptionColor.."   same team colors", type="bool", value=(WG['playercolorpalette']~=nil and WG['playercolorpalette'].getSameTeamColors~=nil and WG['playercolorpalette'].getSameTeamColors()), description='Use the same teamcolor for all the players in a team\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
 

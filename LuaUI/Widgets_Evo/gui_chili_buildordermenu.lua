@@ -36,37 +36,177 @@ local orderWindow, buildWindow, orderGrid, buildGrid, updateRequired, tooltip, b
 local chiliCache = {}
 local vsx, vsy = sGetWindowGeometry()
 
-local Config = {
-    ordermenu = {
-        name = 'ordermenu',
-        rows = 13, columns = 2,
-        x = '0%', y = '35%',
-        width = '50%', height = '50%',
-        orientation = 'horizontal',
-        maxWidth = 390,
-        padding = {5, 5, 5, 5},     -- outer panel
-    },
-    buildmenu = {
-        name = 'buildmenu',
-        rows = 2, columns = 10,
-        x = '21.2%', y = '66%',
-        width = '60%', height = '20%',
-        orientation = 'horizontal',
-        --maxWidth = 420,
-        padding = {5, 5, 5, 5},
-    },
-    labels = {
-        captionFontMaxSize = 12,
-        queueFontSize = 12, --32 (MaDDoX)
-        costFontSize = 12,
-        showMetalCost = true,
-        showEnergyCost = true, --true
-    },
-    hiddenCMDs = {
-        timewait = true, deathwait = true, squadwait = true, gatherwait = true,
-        loadonto = true, selfd = false, settargetnoground = true,
-    },
-}
+local buildOrderUI = Spring.GetConfigInt("evo_buildorderui", 0) or 0
+
+if buildOrderUI == 0 or buildOrderUI == nil then
+	Config = {
+		ordermenu = {
+			name = 'ordermenu',
+			rows = 13, columns = 2,
+			x = '0%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},     -- outer panel
+		},
+		buildmenu = {
+			name = 'buildmenu',
+			rows = 2, columns = 10,
+			x = '21.2%', y = '66%',
+			width = '60%', height = '20%',
+			orientation = 'horizontal',
+			--maxWidth = 420,
+			padding = {5, 5, 5, 5},
+		},
+		labels = {
+			captionFontMaxSize = 12,
+			queueFontSize = 12, --32 (MaDDoX)
+			costFontSize = 12,
+			showMetalCost = true,
+			showEnergyCost = true, --true
+		},
+		hiddenCMDs = {
+			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
+			loadonto = true, selfd = false, settargetnoground = true,
+		},
+	}
+end
+
+if buildOrderUI == 1 then
+	Config = {
+		ordermenu = {
+			name = 'ordermenu',
+			rows = 13, columns = 2,
+			x = '0%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},     -- outer panel
+		},
+		buildmenu = {
+			name = 'buildmenu',
+			rows = 3, columns = 10,
+			x = '32%', y = '66%',
+			width = '40%', height = '15%',
+			orientation = 'horizontal',
+			--maxWidth = 420,
+			padding = {5, 5, 5, 5},
+		},
+		labels = {
+			captionFontMaxSize = 12,
+			queueFontSize = 12, --32 (MaDDoX)
+			costFontSize = 12,
+			showMetalCost = true,
+			showEnergyCost = true, --true
+		},
+		hiddenCMDs = {
+			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
+			loadonto = true, selfd = false, settargetnoground = true,
+		},
+	}
+end
+
+if buildOrderUI == 2 then
+	Config = {
+		ordermenu = {
+			name = 'ordermenu',
+			rows = 13, columns = 2,
+			x = '0%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},     -- outer panel
+		},
+		buildmenu = {
+			name = 'buildmenu',
+			rows = 7, columns = 5,
+			x = '21%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},
+		},
+		labels = {
+			captionFontMaxSize = 12,
+			queueFontSize = 12, --32 (MaDDoX)
+			costFontSize = 12,
+			showMetalCost = true,
+			showEnergyCost = true, --true
+		},
+		hiddenCMDs = {
+			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
+			loadonto = true, selfd = false, settargetnoground = true,
+		},
+	}
+end
+
+if buildOrderUI == 3 then
+	Config = {
+		ordermenu = {
+			name = 'ordermenu',
+			rows = 13, columns = 2,
+			x = '0%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},     -- outer panel
+		},
+		buildmenu = {
+			name = 'buildmenu',
+			rows = 7, columns = 5,
+			x = '79.75%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},
+		},
+		labels = {
+			captionFontMaxSize = 12,
+			queueFontSize = 12, --32 (MaDDoX)
+			costFontSize = 12,
+			showMetalCost = true,
+			showEnergyCost = true, --true
+		},
+		hiddenCMDs = {
+			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
+			loadonto = true, selfd = false, settargetnoground = true,
+		},
+	}
+end
+
+if buildOrderUI == 4 then
+	Config = {
+		ordermenu = {
+			name = 'ordermenu',
+			rows = 13, columns = 2,
+			x = '0%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},     -- outer panel
+		},
+		buildmenu = {
+			name = 'buildmenu',
+			rows = 7, columns = 5,
+			x = '85%', y = '35%',
+			width = '15%', height = '30%',
+			orientation = 'horizontal',
+			padding = {5, 5, 5, 5},
+		},
+		labels = {
+			captionFontMaxSize = 12,
+			queueFontSize = 12, --32 (MaDDoX)
+			costFontSize = 12,
+			showMetalCost = true,
+			showEnergyCost = true, --true
+		},
+		hiddenCMDs = {
+			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
+			loadonto = true, selfd = false, settargetnoground = true,
+		},
+	}
+end
+
 --------------------------------------------------------------------------------
 -- Helpers
 local function deepEquals(t1, t2, ignore_mt)
