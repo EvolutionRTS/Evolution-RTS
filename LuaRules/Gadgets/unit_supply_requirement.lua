@@ -1,10 +1,9 @@
-
 function gadget:GetInfo()
 	return {
 		name      = "Supply Requirement",
 		desc      = "Implements a single supply for each team. Uses supply_cost and supply_granted.",
-		author    = "GoogleFrog",
-		date      = "Novemember 11 2013",
+		author    = "GoogleFrog, modified by CommonPlayer",
+		date      = "Novemember 11 2013", --modified by CommonPlayer, Oct 2018
 		license   = "GNU GPL, v2 or later",
 		layer     = 0,
 		enabled   = true  --  loaded by default?
@@ -77,39 +76,7 @@ local lockedUnitsArray = {} -- by teamID then unitDefID
 local grantingSupply = {} -- by teamID then unitID
 local costingSupply = {}
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
--- Utility functions for modifying commands and blocking construction.
-
-function EnableUnit(unitDefID, teamID)
-	spSetTeamRulesParam(teamID, "disallowed_" .. unitDefID, 0, {private = true})
-end
-
-function DisableUnit(unitDefID, teamID)
-	spSetTeamRulesParam(teamID, "disallowed_" .. unitDefID, 1, {private = true})
-end
-
-local function NewUnitIsAllowed(unitDefID, teamID)
-	if costUnitDefID[unitDefID] then
-		return not lockedUnitsArray[teamID][unitDefID]
-	end
-	return true
-end
-
--- Do not block commands because that would make the UI stupid
---function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpts)
---	return cmdID > 0 or cmdOpts.right or NewUnitIsAllowed(-cmdID, teamID)
---end
-
--- Block unit creation
-function gadget:AllowUnitCreation(unitDefID, builderID, builderTeam, x, y, z)
-	return NewUnitIsAllowed(unitDefID, builderTeam)
-end
-
--- Block unit transfer
-function gadget:AllowUnitTransfer(unitID, unitDefID, oldTeam, newTeam, capture)
-	return NewUnitIsAllowed(unitDefID, newTeam)
-end
+local paidFor = {} -- by unitID, if supply cost is not paid for build progress is locked
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -128,7 +95,7 @@ local function updateIncreaseSupplyGap(teamID)
 		end
 		if supplyGap >= costUnitDefID[unitDefID] then
 			lockedArray[unitDefID] = false
-			EnableUnit(unitDefID, teamID)
+			--EnableUnit(unitDefID, teamID)
 		end
 	end
 end 
@@ -146,7 +113,7 @@ local function updateDecreaseSupplyGap(teamID)
 		end
 		if supplyGap < costUnitDefID[unitDefID] then
 			lockedArray[unitDefID] = true
-			DisableUnit(unitDefID, teamID)
+			--DisableUnit(unitDefID, teamID)
 		end
 	end
 end 
@@ -190,6 +157,50 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+-- Utility functions for modifying commands and blocking construction.
+
+--[[function EnableUnit(unitDefID, teamID)
+	spSetTeamRulesParam(teamID, "disallowed_" .. unitDefID, 0, {private = true})
+end
+
+function DisableUnit(unitDefID, teamID)
+	spSetTeamRulesParam(teamID, "disallowed_" .. unitDefID, 1, {private = true})
+end]]
+
+local function NewUnitIsAllowed(unitDefID, teamID)
+	if costUnitDefID[unitDefID] then
+		return not lockedUnitsArray[teamID][unitDefID]
+	end
+	return true
+end
+
+-- Do not block commands because that would make the UI stupid
+--function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpts)
+--	return cmdID > 0 or cmdOpts.right or NewUnitIsAllowed(-cmdID, teamID)
+--end
+
+function gadget:AllowUnitBuildStep(builderID, builderTeam, unitID, unitDefID, part)
+	if part <= 0 or not costUnitDefID[unitDefID] then return true end
+	if paidFor[unitID] or NewUnitIsAllowed(unitDefID, builderTeam) then
+		AddSupplyFromUnit(unitID, unitDefID, builderTeam, true)
+		paidFor[unitID] = true
+		return true
+	end
+	return false
+end
+
+-- Block unit creation
+--[[function gadget:AllowUnitCreation(unitDefID, builderID, builderTeam, x, y, z)
+	return NewUnitIsAllowed(unitDefID, builderTeam)
+end]]
+
+-- Block unit transfer
+function gadget:AllowUnitTransfer(unitID, unitDefID, oldTeam, newTeam, capture)
+	return NewUnitIsAllowed(unitDefID, newTeam)
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Unit creation, destruction, transfer. This part assumes that the action in
 -- question has been allowed.
 
@@ -197,21 +208,24 @@ function gadget:UnitFinished(unitID, unitDefID, teamID)
 	AddSupplyFromUnit(unitID, unitDefID, teamID, false)
 end
 
-function gadget:UnitCreated(unitID, unitDefID, teamID)
+--[[function gadget:UnitCreated(unitID, unitDefID, teamID)
 	AddSupplyFromUnit(unitID, unitDefID, teamID, true)
-end
+end]]
 
 function gadget:UnitTaken(unitID, unitDefID, oldTeamID, teamID)
 	RemoveSupplyFromUnit(unitID, unitDefID, teamID, false)
 end
 
 function gadget:UnitGiven(unitID, unitDefID, teamID, oldTeamID)
-	local stunned_or_inbuild, stunned, inbuild = spGetUnitIsStunned(unitID)
-	AddSupplyFromUnit(unitID, unitDefID, teamID, inbuild)
+	if paidFor[unitID] then
+		local stunned_or_inbuild, stunned, inbuild = spGetUnitIsStunned(unitID)
+		AddSupplyFromUnit(unitID, unitDefID, teamID, inbuild)
+	end
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, teamID)
 	RemoveSupplyFromUnit(unitID, unitDefID, teamID, false)
+	paidFor[unitID] = nil
 end
 
 --------------------------------------------------------------------------------
@@ -231,7 +245,7 @@ local function InitializeTeamSupply(teamID)
 		local unitDefID = costUnitList[i]
 		if costUnitDefID[unitDefID] > maxSupplyWithCap[teamID] then
 			lockedUnitsArray[teamID][unitDefID] = true
-			DisableUnit(unitDefID, teamID)
+			--DisableUnit(unitDefID, teamID)
 		end
 	end
 	
