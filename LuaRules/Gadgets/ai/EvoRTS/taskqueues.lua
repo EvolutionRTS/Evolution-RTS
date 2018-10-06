@@ -751,7 +751,7 @@ local function overseerqueue()
 end
 
 local function lifterqueue()
-	if Spring.GetGameSeconds() > 180 then
+	if Spring.GetGameSeconds() > 90 then
 		return lifterlist
 	else
 		return lifterstart
