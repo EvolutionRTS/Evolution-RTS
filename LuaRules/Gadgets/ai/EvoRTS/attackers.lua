@@ -25,6 +25,8 @@ attackerlist = {
 	"ehbotkarganneth_up2",
 	"ehbotkarganneth_up3",
 	------------- Basic
+	"escoutdrone",
+	"eairemp",
 	"eraider",
 	"edrone",
 	"elighttank3",
@@ -59,6 +61,7 @@ attackerlist = {
 	"eallterrshield",
 	-------------- Upgrade 1
     "eraider_up1",
+	"eairemp_up1",
 	"edrone_up1",
 	"elighttank3_up1",
     "eamphibbuggy_up1",
@@ -88,6 +91,7 @@ attackerlist = {
 	"eallterrshield_up1",
 	--------------- Upgrade 2
     "eraider_up2",
+	"eairemp_up2",
 	"edrone_up2",
 	"elighttank3_up2",
     "eamphibbuggy_up2",
@@ -117,6 +121,7 @@ attackerlist = {
 	"eallterrshield_up2",
 	----------------------------- Upgrade 3
     "eraider_up3",
+	"eairemp_up3",
 	"edrone_up3",
 	"elighttank3_up3",
     "eamphibbuggy_up3",

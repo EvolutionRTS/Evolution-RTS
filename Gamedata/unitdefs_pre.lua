@@ -76,6 +76,8 @@ end
 
 Shared.buildListAIOverseer = {
 	------------- Basic
+	[[escoutdrone]],
+	[[eartyturret_up3]],
 	[[ejammerai]],
 	[[eorb_up1]],
 	[[eorb_up2]],
