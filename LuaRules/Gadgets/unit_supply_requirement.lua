@@ -27,7 +27,11 @@ local spGetUnitDefID = Spring.GetUnitDefID
 local spFindUnitCmdDesc = Spring.FindUnitCmdDesc
 local spEditUnitCmdDesc = Spring.EditUnitCmdDesc
 local spGetUnitIsStunned = Spring.GetUnitIsStunned
+local spGetUnitTeam = Spring.GetUnitTeam
 local spSetTeamRulesParam = Spring.SetTeamRulesParam
+
+local teamList = Spring.GetTeamList()
+local PRIVATE = {private = true}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -70,6 +74,8 @@ local maxSupply = {} -- This ignores SUPPLY_CAP for convinience
 local maxSupplyWithCap = {}
 local currentSupply = {}
 
+local isTeamSupplyBlocked = {}
+
 local lockedUnitsArray = {} -- by teamID then unitDefID
 
 -- Only finished units grant supply, keep track of it here.
@@ -83,8 +89,8 @@ local paidFor = {} -- by unitID, if supply cost is not paid for build progress i
 -- Handle updates to supply.
 
 local function updateIncreaseSupplyGap(teamID)
-	spSetTeamRulesParam(teamID, "supplyUsed", currentSupply[teamID], {private = true})
-	spSetTeamRulesParam(teamID, "supplyMax", maxSupplyWithCap[teamID], {private = true})
+	spSetTeamRulesParam(teamID, "supplyUsed", currentSupply[teamID], PRIVATE)
+	spSetTeamRulesParam(teamID, "supplyMax", maxSupplyWithCap[teamID], PRIVATE)
 	
 	local supplyGap = maxSupplyWithCap[teamID] - currentSupply[teamID] 
 	local lockedArray = lockedUnitsArray[teamID]
@@ -101,8 +107,8 @@ local function updateIncreaseSupplyGap(teamID)
 end 
 
 local function updateDecreaseSupplyGap(teamID)
-	spSetTeamRulesParam(teamID, "supplyUsed", currentSupply[teamID], {private = true})
-	spSetTeamRulesParam(teamID, "supplyMax", maxSupplyWithCap[teamID], {private = true})
+	spSetTeamRulesParam(teamID, "supplyUsed", currentSupply[teamID], PRIVATE)
+	spSetTeamRulesParam(teamID, "supplyMax", maxSupplyWithCap[teamID], PRIVATE)
 	
 	local supplyGap = maxSupplyWithCap[teamID] - currentSupply[teamID]
 	local lockedArray = lockedUnitsArray[teamID]
@@ -180,11 +186,17 @@ end
 --end
 
 function gadget:AllowUnitBuildStep(builderID, builderTeam, unitID, unitDefID, part)
-	if part <= 0 or not costUnitDefID[unitDefID] then return true end
-	if paidFor[unitID] or NewUnitIsAllowed(unitDefID, builderTeam) then
-		AddSupplyFromUnit(unitID, unitDefID, builderTeam, true)
+	if part <= 0 or not costUnitDefID[unitDefID] or paidFor[unitID] then return true end
+
+	local teamID = spGetUnitTeam(unitID)
+	if NewUnitIsAllowed(unitDefID, teamID) then
+		AddSupplyFromUnit(unitID, unitDefID, teamID, true)
 		paidFor[unitID] = true
 		return true
+	end
+	if not isTeamSupplyBlocked[teamID] then
+		spSetTeamRulesParam(teamID, "supply_blocked", 1, PRIVATE)
+		isTeamSupplyBlocked[teamID] = true
 	end
 	return false
 end
@@ -228,6 +240,21 @@ function gadget:UnitDestroyed(unitID, unitDefID, teamID)
 	paidFor[unitID] = nil
 end
 
+-- TODO: polling is inferior to events, ideally unit created/destroyed would be used
+function gadget:GameFrame(n)
+	if n % 30 ~= 28 then
+		return
+	end
+
+	for i = 1, #teamList do
+		local teamID = teamList[i]
+		if isTeamSupplyBlocked[teamID] then
+			spSetTeamRulesParam(teamID, "supply_blocked", nil, PRIVATE)
+			isTeamSupplyBlocked[teamID] = false
+		end
+	end
+end
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- Initialisation
@@ -239,6 +266,7 @@ local function InitializeTeamSupply(teamID)
 	lockedUnitsArray[teamID] = {}
 	grantingSupply[teamID] = {}
 	costingSupply[teamID] = {}
+	spSetTeamRulesParam(teamID, "supply_blocked", 1, PRIVATE)
 	
 	-- If no units have been added then we have 0 supply cap so everything is locked
 	for i = 1, costUnitCount do
@@ -259,8 +287,7 @@ local function InitializeTeamSupply(teamID)
 end
 
 function gadget:Initialize()
-	local teams = Spring.GetTeamList()
-	for _, teamID in ipairs(teams) do
+	for _, teamID in ipairs(teamList) do
 		InitializeTeamSupply(teamID)
 	end
 end
