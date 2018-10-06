@@ -82,7 +82,9 @@ local lockedUnitsArray = {} -- by teamID then unitDefID
 local grantingSupply = {} -- by teamID then unitID
 local costingSupply = {}
 
-local paidFor = {} -- by unitID, if supply cost is not paid for build progress is locked
+-- by unitID, if supply cost is not paid for build progress is locked
+-- 0 = supply blocked; 1 = paid for
+local paidFor = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -168,7 +170,6 @@ end
 --[[function EnableUnit(unitDefID, teamID)
 	spSetTeamRulesParam(teamID, "disallowed_" .. unitDefID, 0, {private = true})
 end
-
 function DisableUnit(unitDefID, teamID)
 	spSetTeamRulesParam(teamID, "disallowed_" .. unitDefID, 1, {private = true})
 end]]
@@ -185,18 +186,28 @@ end
 --	return cmdID > 0 or cmdOpts.right or NewUnitIsAllowed(-cmdID, teamID)
 --end
 
+local function AddSupplyBlockedCounter(teamID)
+	isTeamSupplyBlocked[teamID] = isTeamSupplyBlocked[teamID] + 1
+	if isTeamSupplyBlocked[teamID] == 1 then spSetTeamRulesParam(teamID, "supply_blocked", 1, PRIVATE) end
+end
+local function SubtractSupplyBlockedCounter(teamID)
+	isTeamSupplyBlocked[teamID] = isTeamSupplyBlocked[teamID] - 1
+	if isTeamSupplyBlocked[teamID] == 0 then spSetTeamRulesParam(teamID, "supply_blocked", nil, PRIVATE) end
+end
+
 function gadget:AllowUnitBuildStep(builderID, builderTeam, unitID, unitDefID, part)
-	if part <= 0 or not costUnitDefID[unitDefID] or paidFor[unitID] then return true end
+	if part <= 0 or not costUnitDefID[unitDefID] or paidFor[unitID] == 1 then return true end
 
 	local teamID = spGetUnitTeam(unitID)
 	if NewUnitIsAllowed(unitDefID, teamID) then
 		AddSupplyFromUnit(unitID, unitDefID, teamID, true)
-		paidFor[unitID] = true
+		if paidFor[unitID] == 0 then SubtractSupplyBlockedCounter(teamID) end
+		paidFor[unitID] = 1
 		return true
 	end
-	if not isTeamSupplyBlocked[teamID] then
-		spSetTeamRulesParam(teamID, "supply_blocked", 1, PRIVATE)
-		isTeamSupplyBlocked[teamID] = true
+	if not paidFor[unitID] then
+		paidFor[unitID] = 0
+		AddSupplyBlockedCounter(teamID)
 	end
 	return false
 end
@@ -225,23 +236,29 @@ end
 end]]
 
 function gadget:UnitTaken(unitID, unitDefID, oldTeamID, teamID)
+	if paidFor[unitID] == 0 then
+		SubtractSupplyBlockedCounter(teamID) -- this unit no longer blocks supply for old team
+	end
 	RemoveSupplyFromUnit(unitID, unitDefID, teamID, false)
 end
 
 function gadget:UnitGiven(unitID, unitDefID, teamID, oldTeamID)
-	if paidFor[unitID] then
+	if paidFor[unitID] == 0 then
+		AddSupplyBlockedCounter(teamID) -- this unit now blocks supply for new team
+	elseif paidFor[unitID] == 1 then
 		local stunned_or_inbuild, stunned, inbuild = spGetUnitIsStunned(unitID)
 		AddSupplyFromUnit(unitID, unitDefID, teamID, inbuild)
 	end
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, teamID)
+	if paidFor[unitID] == 0 then SubtractSupplyBlockedCounter(teamID) end
 	RemoveSupplyFromUnit(unitID, unitDefID, teamID, false)
 	paidFor[unitID] = nil
 end
 
 -- TODO: polling is inferior to events, ideally unit created/destroyed would be used
-function gadget:GameFrame(n)
+--[[function gadget:GameFrame(n)
 	if n % 30 ~= 28 then
 		return
 	end
@@ -253,7 +270,7 @@ function gadget:GameFrame(n)
 			isTeamSupplyBlocked[teamID] = false
 		end
 	end
-end
+end]]
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -266,7 +283,8 @@ local function InitializeTeamSupply(teamID)
 	lockedUnitsArray[teamID] = {}
 	grantingSupply[teamID] = {}
 	costingSupply[teamID] = {}
-	spSetTeamRulesParam(teamID, "supply_blocked", 1, PRIVATE)
+	isTeamSupplyBlocked[teamID] = 0
+	spSetTeamRulesParam(teamID, "supply_blocked", nil, PRIVATE)
 	
 	-- If no units have been added then we have 0 supply cap so everything is locked
 	for i = 1, costUnitCount do
