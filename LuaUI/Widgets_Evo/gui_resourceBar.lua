@@ -300,7 +300,7 @@ function widget:DrawScreen()
 		
 		local cockblocked = (Spring.GetTeamRulesParam(myTeamID, "supply_blocked") == 1)
 		
-		if cockblocked or (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95) then
+		if sm < maxSupply and (cockblocked or su > sm) then
 			supplyWarning = true
 			bgSupplyR = 1
 			bgSupplyG = increment/bgFlashPeriod
