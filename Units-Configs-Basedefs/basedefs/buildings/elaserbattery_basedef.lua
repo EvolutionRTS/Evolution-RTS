@@ -123,7 +123,7 @@ weaponDefs                  = {
 			damagetype		      = "elaserbattery",  
 		},      
 		damage                    = {
-			default               = 50,
+			default               = 15,
 		},
 	},
 }

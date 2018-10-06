@@ -31,7 +31,7 @@ unitDef                    = {
 	idleTime                     = 2200,
 	loopbackattack               = true,
 	maxacc						 = 1,
-	maxDamage                    = 337,
+	maxDamage                    = 670,
 	maxSlope                     = 90,
 	maxVelocity                  = 10,
 	verticalSpeed		         = 15,
@@ -127,7 +127,7 @@ weaponDefs                 = {
 			damagetype		     = "ebomber",  
 		},      
 		damage                   = {
-			default              = 25,
+			default              = 50,
 		},
 	},
 
