@@ -397,6 +397,13 @@ local function GetMorphToolTip(unitID, unitDefID, teamID, morphDef, teamTech, un
   return tt
 end
 
+local function MorphRequirementsFulfilled(unitID, morphDef, techLevel, unreachedTechs)
+	return morphDef.tech <= techLevel
+	   and morphDef.rank <= GetUnitRank(unitID)
+	   and morphDef.xp   <= Spring.GetUnitExperience(unitID)
+	   and #unreachedTechs == 0
+end
+
 local function UpdateMorphReqs(teamID)
   local morphCmdDesc = {}
 
@@ -413,8 +420,7 @@ local function UpdateMorphReqs(teamID)
       local cmdDescID = Spring.FindUnitCmdDesc(unitID, morphDef.cmd)
       if (cmdDescID) then
         local unreachedTechs = TechReqList(teamID, morphDef.require)
-        morphCmdDesc.disabled = (morphDef.tech > teamTech) or (morphDef.rank > unitRank)
-                or (morphDef.xp > unitXP) or (#unreachedTechs > 0)
+        morphCmdDesc.disabled = not MorphRequirementsFulfilled(unitID, morphDef, teamTech, unreachedTechs)
         if (morphCmdDesc.disabled) then
           morphCmdDesc.name = "\255\255\64\64"..morphDef.cmdname
         else
@@ -496,11 +502,14 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-
 local function StartMorph(unitID, unitDefID, teamID, morphDef)
 
   -- do not allow morph for unfinsihed units
-  if not isFinished(unitID) then return true end
+  if not isFinished(unitID)
+  or not MorphRequirementsFulfilled(unitID, morphDef, teamTechLevel[teamID] or 0, TechReqList(teamID, morphDef.require))
+  then
+    return true
+  end
 
   --Spring.SetUnitHealth(unitID, { paralyze = 1.0e9 })    --// turns mexes and mm off (paralyze the unit)
   Spring.SetUnitResourcing(unitID,"e",0)                --// turns solars off
