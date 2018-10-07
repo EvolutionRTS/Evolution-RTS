@@ -67,9 +67,13 @@ end
 function AttackerBehaviour:AttackCell(cell)
 	local unit = self.unit:Internal()
 	local unitID = unit.id
+	local teamID = ai.id
 	local r = math.random(0,1000)
 	if r == 0 then
-		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		local ec = Spring.GetTeamResources(ai.id, "energy")
+		if ec > 100 then
+			Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		end
 	end
 	--attack
 	if unitID%60 == Spring.GetGameFrame()%60 then

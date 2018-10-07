@@ -5,9 +5,9 @@ Attackers!
 attackerlist = {
     ------------- Morphs
 	---Buildings, just to make them upgrade
-	--"emetalextractor",
-	--"emetalextractor_up1",
-	--"emetalextractor_up2",
+	"emetalextractor",
+	"emetalextractor_up1",
+	"emetalextractor_up2",
 	"etech1",
 	"etech2",
 	---Amphibs
