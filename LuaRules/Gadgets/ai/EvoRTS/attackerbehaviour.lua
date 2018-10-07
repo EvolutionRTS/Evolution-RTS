@@ -1,5 +1,7 @@
 shard_include( "attackers" )
 
+local SpGetUnitNearestEnemy = Spring.GetUnitNearestEnemy
+
 function IsAttacker(unit)
 	for i,name in ipairs(attackerlist) do
 		if name == unit:Internal():Name() then
@@ -70,12 +72,20 @@ function AttackerBehaviour:AttackCell(cell)
 	local startPosx, startPosy, startPosz = Spring.GetTeamStartPosition(self.ai.id)
 	local startBoxMinX, startBoxMinZ, startBoxMaxX, startBoxMaxZ = Spring.GetAllyTeamStartBox(self.ai.allyId)
 	local ec, es = Spring.GetTeamResources(ai.id, "energy")
+	local closestUnit = Spring.GetUnitNearestEnemy(unitID)
+	local ex,ey,ez = Spring.GetUnitPosition(closestUnit)
+	local enemyDis = Spring.GetUnitSeparation(unitID,closestUnit)
 	--attack
 	if (currenthealth >= maxhealth or currenthealth > 3000) then
+		if enemyDis < 2000 then
+			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
+		else
+			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
+		end
 		p = api.Position()
-		p.x = cell.posx
-		p.z = cell.posz
-		p.y = 0
+		p.x = ex
+		p.z = ez
+		p.y = ey
 		self.target = p
 		self.attacking = true
 		self.ai.attackhandler:AddRecruit(self)
@@ -87,6 +97,11 @@ function AttackerBehaviour:AttackCell(cell)
 	--retreat
 	else
 		local nanotcx, nanotcy, nanotcz = GG.GetClosestNanoTC(unitID)
+		if enemyDis < 2000 then
+			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
+		else
+			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
+		end
 		if nanotcx and nanotcy and nanotcz then
 			p = api.Position()
 			p.x, p.y, p.z = nanotcx, nanotcy, nanotcz

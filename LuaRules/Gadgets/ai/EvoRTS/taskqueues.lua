@@ -176,7 +176,7 @@ end
 				return "esolar2"
 			else
 				local r = math.random(0,2)
-				local aar = math.random(0,10)
+				local aar = math.random(0,5)
 				if aar > 0 then
 					if r == 0 then
 						return "emine"
@@ -196,7 +196,7 @@ end
 				return "egeothermal"
 			else
 				local r2 = math.random(0,40)
-				local aar = math.random(0,10)
+				local aar = math.random(0,5)
 				if r2 > 0 and aar > 0 then
 					local r = math.random(0,5)
 					if r == 0 then
@@ -348,7 +348,7 @@ function RandomOverseer()
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
 	else
-		if Spring.GetGameSeconds() <= 200 then 
+		if Spring.GetGameSeconds() <= 90 then 
 			local r = math.random(0,1)
 			if mc <= 10 or mi*2 <= me then
 				return "emetalextractor"
@@ -532,7 +532,7 @@ function RandomUnit()
 			
 			elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 2 MK 2
 
-			local r = math.random(0,10)
+			local r = math.random(0,9)
 				if r == 0 then
 					return "eheavytank3_up1"
 				elseif r == 1 then
@@ -548,17 +548,15 @@ function RandomUnit()
 				elseif r == 6 then
 					return "efighter_up1"
 				elseif r == 7 then
-					return "escoutdrone"
-				elseif r == 8 then
 					return "eamphibrock_up1"
-				elseif r == 9 then
+				elseif r == 8 then
 					return "emissiletank_up1"
-				elseif r == 10 then
+				elseif r == 9 then
 					return "eamphibmedtank_up1"
 				end	
 
 			elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
-					local r = math.random(0,11)
+					local r = math.random(0,10)
 					if r == 0 then
 						return "eheavytank3_up2"
 					elseif r == 1 then
@@ -576,12 +574,10 @@ function RandomUnit()
 					elseif r == 7 then
 						return "eairemp_up2"
 					elseif r == 8 then
-						return "escoutdrone"
-					elseif r == 9 then
 						return "eamphibrock_up2"
-					elseif r == 10 then
+					elseif r == 9 then
 						return "emissiletank_up2"
-					elseif r == 11 then
+					elseif r == 10 then
 						return "eamphibmedtank_up2"
 					end
 			elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
