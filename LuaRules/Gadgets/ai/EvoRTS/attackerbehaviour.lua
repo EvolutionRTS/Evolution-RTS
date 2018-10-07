@@ -72,7 +72,7 @@ function AttackerBehaviour:AttackCell(cell)
 	local startPosx, startPosy, startPosz = Spring.GetTeamStartPosition(self.ai.id)
 	local startBoxMinX, startBoxMinZ, startBoxMaxX, startBoxMaxZ = Spring.GetAllyTeamStartBox(self.ai.allyId)
 	local ec, es = Spring.GetTeamResources(ai.id, "energy")
-	local closestUnit = Spring.GetUnitNearestEnemy(unitID)
+	local closestUnit = Spring.GetUnitNearestEnemy(unitID, 50000, false)
 	local ex,ey,ez = Spring.GetUnitPosition(closestUnit)
 	local enemyDis = Spring.GetUnitSeparation(unitID,closestUnit)
 	--attack
