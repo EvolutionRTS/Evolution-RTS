@@ -499,7 +499,7 @@ function RandomUnit()
 				
 			if GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 1
 			
-			local r = math.random(0,13)
+			local r = math.random(0,12)
 				if r == 0 then
 					return "eallterrlight"
 				elseif r == 1 then
@@ -523,10 +523,8 @@ function RandomUnit()
 				elseif r == 10 then
 					return "eamphibneedle"
 				elseif r == 11 then
-					return "eallterrshield"
-				elseif r == 12 then
 					return "eallterrriot"
-				elseif r == 13 then
+				elseif r == 12 then
 					return "ehbotthud"
 				end
 			
