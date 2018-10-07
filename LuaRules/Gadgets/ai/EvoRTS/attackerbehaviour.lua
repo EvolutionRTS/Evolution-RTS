@@ -81,8 +81,8 @@ function AttackerBehaviour:AttackCell(cell)
 		local closestUnit = Spring.GetUnitNearestEnemy(unitID, 50000, false)
 		local ex,ey,ez = Spring.GetUnitPosition(closestUnit)
 		local enemyDis = Spring.GetUnitSeparation(unitID,closestUnit)
-		if (currenthealth >= maxhealth or currenthealth > 3000) then
-			if enemyDis < 2000 then
+		if (currenthealth >= maxhealth or currenthealth > 3000) and closestUnit then
+			if enemyDis < 1500 then
 				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
 			else
 				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
@@ -103,7 +103,7 @@ function AttackerBehaviour:AttackCell(cell)
 		--retreat
 		else
 			local nanotcx, nanotcy, nanotcz = GG.GetClosestNanoTC(unitID)
-			if enemyDis < 2000 then
+			if enemyDis < 1500 then
 				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
 			else
 				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
