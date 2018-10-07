@@ -298,7 +298,8 @@ function widget:DrawScreen()
 	    ec, es, ep, ei, ee = Spring.GetTeamResources(myTeamID, "energy")
 	    mc, ms, mp, mi, me = Spring.GetTeamResources(myTeamID, "metal")
 		
-		if (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95) then
+		local cockblocked = (Spring.GetTeamRulesParam(myTeamID, "supply_blocked") == 1)		
+		if cockblocked or (sm < 30 and su >= sm - 5) or (su > sm) or (sm >= 30 and su >= sm - 10 and su < sm and sm < maxSupply * 0.95) then
 			supplyWarning = true
 			bgSupplyR = 1
 			bgSupplyG = increment/bgFlashPeriod
