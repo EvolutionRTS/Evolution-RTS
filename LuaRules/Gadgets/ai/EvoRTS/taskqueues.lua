@@ -17,6 +17,7 @@ local spGetTeamUnitDefCount = Spring.GetTeamUnitDefCount
 local spGetTeamInfo = Spring.GetTeamInfo
 local spGetTeamStartPosition = Spring.GetTeamStartPosition
 local spGetAllyTeamStartBox = Spring.GetAllyTeamStartBox
+local liftersqueued = 0
 --Spring.GetGameSeconds() -- checking gametime
 
 if aiDebug == nil then
@@ -154,12 +155,8 @@ end
 	elseif su >= sm-20 and sm ~= 400 then
 		return "estorage"
 	
-	elseif GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech0ai", ai.id) == true then
-		return "etech1ai"
-	elseif GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false then
-		return "etech2ai"
-	elseif GG.TechCheck("tech3", ai.id) == false and GG.TechCheck("tech2ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == false then
-		return "etech3ai"
+	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) then
+		return "etech1"
 		
 	else
 		if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
@@ -338,12 +335,8 @@ function RandomOverseer()
 				return "eorb_up3"
 			end
 		end
-	elseif GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech0ai", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
-		return "etech1ai"
-	elseif GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false and GG.TechCheck("tech3", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
-		return "etech2ai"
-	elseif GG.TechCheck("tech3", ai.id) == false and GG.TechCheck("tech2ai", ai.id) == true and GG.TechCheck("tech0ai", ai.id) == false and GG.TechCheck("tech1ai", ai.id) == false and GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
-		return "etech3ai"
+	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) then
+		return "etech1"
 		
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
@@ -657,11 +650,13 @@ function RandomUnit()
 						end
 					end
 				else
-					local r = math.random(0,1)
+					local r = math.random(0,5)
 					if r == 0 then
 						return "emine"
-					else
+					elseif r == 1 then
 						return "escoutdrone"
+					else
+						return "elrpc"
 					end
 				end
 		end
@@ -687,6 +682,8 @@ local overseerlistfirst = {
 	"emetalextractor",
 	"emetalextractor",
 	"elifterai",
+	"elifterai",
+	"elifterai",
 }
 	
 local overseerorders = {
@@ -700,15 +697,73 @@ local overseerorders = {
 
 local lifterlist = {
 	RandomLift,
+	BuildMex,
 	RandomUnit,
 	RandomUnit,
 	RandomUnit,
 	"emine",
 	BuildMex,
+	
 }
 
 local lifterstart = {
-	BuildMex,
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
 }
 
 local unitsqueue = {
@@ -745,9 +800,10 @@ local function overseerqueue()
 end
 
 local function lifterqueue()
-	if Spring.GetGameSeconds() > 90 then
+	if liftersqueued > 1 then
 		return lifterlist
 	else
+		liftersqueued = liftersqueued + 1
 		return lifterstart
 	end
 end

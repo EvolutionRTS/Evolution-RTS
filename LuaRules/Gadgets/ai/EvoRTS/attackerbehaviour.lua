@@ -67,63 +67,70 @@ end
 function AttackerBehaviour:AttackCell(cell)
 	local unit = self.unit:Internal()
 	local unitID = unit.id
-	local currenthealth = unit:GetHealth()
-	local maxhealth = unit:GetMaxHealth()
-	local startPosx, startPosy, startPosz = Spring.GetTeamStartPosition(self.ai.id)
-	local startBoxMinX, startBoxMinZ, startBoxMaxX, startBoxMaxZ = Spring.GetAllyTeamStartBox(self.ai.allyId)
-	local ec, es = Spring.GetTeamResources(ai.id, "energy")
-	local closestUnit = Spring.GetUnitNearestEnemy(unitID, 50000, false)
-	local ex,ey,ez = Spring.GetUnitPosition(closestUnit)
-	local enemyDis = Spring.GetUnitSeparation(unitID,closestUnit)
+	local r = math.random(0,1000)
+	if r == 0 then
+		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+	end
 	--attack
-	if (currenthealth >= maxhealth or currenthealth > 3000) then
-		if enemyDis < 2000 then
-			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
-		else
-			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
-		end
-		p = api.Position()
-		p.x = ex
-		p.z = ez
-		p.y = ey
-		self.target = p
-		self.attacking = true
-		self.ai.attackhandler:AddRecruit(self)
-		if self.active then
-			self.unit:Internal():MoveAndFire(self.target)
-		else
-			self.unit:ElectBehaviour()
-		end
-	--retreat
-	else
-		local nanotcx, nanotcy, nanotcz = GG.GetClosestNanoTC(unitID)
-		if enemyDis < 2000 then
-			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
-		else
-			Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
-		end
-		if nanotcx and nanotcy and nanotcz then
+	if unitID%60 == Spring.GetGameFrame()%60 then
+		local currenthealth = unit:GetHealth()
+		local maxhealth = unit:GetMaxHealth()
+		local startPosx, startPosy, startPosz = Spring.GetTeamStartPosition(self.ai.id)
+		local startBoxMinX, startBoxMinZ, startBoxMaxX, startBoxMaxZ = Spring.GetAllyTeamStartBox(self.ai.allyId)
+		local ec, es = Spring.GetTeamResources(ai.id, "energy")
+		local closestUnit = Spring.GetUnitNearestEnemy(unitID, 50000, false)
+		local ex,ey,ez = Spring.GetUnitPosition(closestUnit)
+		local enemyDis = Spring.GetUnitSeparation(unitID,closestUnit)
+		if (currenthealth >= maxhealth or currenthealth > 3000) then
+			if enemyDis < 2000 then
+				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
+			else
+				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
+			end
+			
 			p = api.Position()
-			p.x, p.y, p.z = nanotcx, nanotcy, nanotcz
-		elseif startBoxMinX == 0 and startBoxMinZ == 0 and startBoxMaxZ == Game.mapSizeZ and startBoxMaxX == Game.mapSizeX then
-			p = api.Position()
-			p.x = startPosx
-			p.z = startPosz
-			p.y = 0
+			p.x = ex
+			p.z = ez
+			p.y = ey
+			self.target = p
+			self.attacking = true
+			self.ai.attackhandler:AddRecruit(self)
+			if self.active then
+				self.unit:Internal():MoveAndFire(self.target)
+			else
+				self.unit:ElectBehaviour()
+			end
+		--retreat
 		else
-			p = api.Position()
-			p.x = math.random(startBoxMinX, startBoxMaxX)
-			p.z = math.random(startBoxMinZ, startBoxMaxZ)
-			p.y = 0
-		end
-		
-		self.target = p
-		self.attacking = false
-		self.ai.attackhandler:AddRecruit(self)
-		if self.active then
-			self.unit:Internal():Move(self.target)
-		else
-			self.unit:ElectBehaviour()
+			local nanotcx, nanotcy, nanotcz = GG.GetClosestNanoTC(unitID)
+			if enemyDis < 2000 then
+				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 1 }, {})
+			else
+				Spring.GiveOrderToUnit(unitID, CMD.CLOAK, { 0 }, {})
+			end
+			if nanotcx and nanotcy and nanotcz then
+				p = api.Position()
+				p.x, p.y, p.z = nanotcx, nanotcy, nanotcz
+			elseif startBoxMinX == 0 and startBoxMinZ == 0 and startBoxMaxZ == Game.mapSizeZ and startBoxMaxX == Game.mapSizeX then
+				p = api.Position()
+				p.x = startPosx
+				p.z = startPosz
+				p.y = 0
+			else
+				p = api.Position()
+				p.x = math.random(startBoxMinX, startBoxMaxX)
+				p.z = math.random(startBoxMinZ, startBoxMaxZ)
+				p.y = 0
+			end
+			
+			self.target = p
+			self.attacking = false
+			self.ai.attackhandler:AddRecruit(self)
+			if self.active then
+				self.unit:Internal():Move(self.target)
+			else
+				self.unit:ElectBehaviour()
+			end
 		end
 	end
 end

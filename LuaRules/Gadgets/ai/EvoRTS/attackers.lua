@@ -3,7 +3,55 @@ Attackers!
 ]]--
 
 attackerlist = {
-    ------------- Endbringers
+    ------------- Morphs
+	---Buildings, just to make them upgrade
+	--"emetalextractor",
+	--"emetalextractor_up1",
+	--"emetalextractor_up2",
+	"etech1",
+	"etech2",
+	---Amphibs
+	"eamphibriot_shotgun",
+	"eamphibriot_shotgun_up1",
+	"eamphibriot_shotgun_up2",
+	"eamphibriot_shotgun_up3",
+	---AllTerr
+	"eallterrriot_shotgun",
+	"eallterrriot_shotgun_up1",
+	"eallterrriot_shotgun_up2",
+	"eallterrriot_shotgun_up3",
+	---Hbots
+	"ehbotpeewee_turret",
+	"ehbotpeewee_turret_up1",
+	"ehbotpeewee_turret_up2",
+	"ehbotpeewee_turret_up3",
+	"ehbotrocko_turret",
+	"ehbotrocko_turret_up1",
+	"ehbotrocko_turret_up2",
+	"ehbotrocko_turret_up3",
+	"ehbotsniper_turret",
+	"ehbotsniper_turret_up1",
+	"ehbotsniper_turret_up2",
+	"ehbotsniper_turret_up3",
+	"ehbotthud_turret",
+	"ehbotthud_turret_up1",
+	"ehbotthud_turret_up2",
+	"ehbotthud_turret_up3",
+	"ehbotkarganneth_turret",
+	"ehbotkarganneth_turret_up1",
+	"ehbotkarganneth_turret_up2",
+	"ehbotkarganneth_turret_up3",
+	---Hover
+	"eriottank2_shotgun",
+	"eriottank2_shotgun_up1",
+	"eriottank2_shotgun_up2",
+	"eriottank2_shotgun_up3",
+	"eartytank_saturation",
+	"eartytank_saturation_up1",
+	"eartytank_saturation_up2",
+	"eartytank_saturation_up3",
+	
+	------------- Endbringers
 	"eallterranarchid",
 	"eallterranarchid_up1",
 	"eallterranarchid_up2",
@@ -24,6 +72,7 @@ attackerlist = {
 	"ehbotkarganneth_up1",
 	"ehbotkarganneth_up2",
 	"ehbotkarganneth_up3",
+	
 	------------- Basic
 	"escoutdrone",
 	"eairemp",
@@ -59,6 +108,7 @@ attackerlist = {
 	"eaimexer",
 	"escout",
 	"eallterrshield",
+	
 	-------------- Upgrade 1
     "eraider_up1",
 	"eairemp_up1",
@@ -89,6 +139,7 @@ attackerlist = {
 	"ehbotthud_up1",
 	"escout_up1",
 	"eallterrshield_up1",
+	
 	--------------- Upgrade 2
     "eraider_up2",
 	"eairemp_up2",
@@ -119,6 +170,7 @@ attackerlist = {
 	"ehbotthud_up2",
 	"escout_up2",
 	"eallterrshield_up2",
+	
 	----------------------------- Upgrade 3
     "eraider_up3",
 	"eairemp_up3",
@@ -149,6 +201,7 @@ attackerlist = {
 	"ehbotthud_up3",
 	"escout_up3",
 	"eallterrshield_up3",
+	
 	---------------------------- Chickens
 	"chicken_dodo1",
 	"chicken_dodo2",

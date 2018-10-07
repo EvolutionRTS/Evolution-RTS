@@ -29,20 +29,14 @@ end
 --require "factoryregisterbehaviour"
 
 behaviours = {
-	emetalextractor = {
-		MorphBehaviour,
-	},
 	eorb = {
 		TaskQueueBehaviour,
-		MorphBehaviour,
 	},
 	eorb_up1 = {
 		TaskQueueBehaviour,
-		MorphBehaviour,
 	},
 	eorb_up2 = {
 		TaskQueueBehaviour,
-		MorphBehaviour,
 	},
 	eorb_up3 = {
 		TaskQueueBehaviour,
