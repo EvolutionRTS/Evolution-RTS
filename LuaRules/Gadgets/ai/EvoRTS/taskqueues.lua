@@ -155,7 +155,7 @@ end
 	elseif su >= sm-20 and sm ~= 400 then
 		return "estorage"
 	
-	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) then
+	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) ~= 0 then
 		return "etech1"
 		
 	else
@@ -338,7 +338,7 @@ function RandomOverseer()
 				return "eorb_up3"
 			end
 		end
-	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) then
+	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) ~= 0 then
 		return "etech1"
 		
 	elseif es < Spring.GetGameSeconds()*0.5 then
@@ -705,6 +705,19 @@ local overseerlistfirst = {
 	"elifterai",
 	"eturretlightai",
 	"escoutdrone",
+	"elifterai",
+	"eturretlightai",
+	"escoutdrone",
+	"etech1",
+	"elaserbattery",
+	"esolar2",
+	"eorb",
+	"eorb",
+	"esolar2",
+	"eturretlightai",
+	"eturretlightai",
+	"eturretlightai",
+	"eturretlightai",
 }
 	
 local overseerorders = {
@@ -878,7 +891,7 @@ local function overseerqueue()
 end
 
 local function lifterqueue()
-	if liftersqueued > 1 then
+	if liftersqueued > 2 then
 		liftersqueued = liftersqueued - 0.02
 		return lifterlist
 	else
