@@ -155,7 +155,7 @@ end
 	elseif su >= sm-20 and sm ~= 400 then
 		return "estorage"
 	
-	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) ~= 0 then
+	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
 		return "etech1"
 		
 	else
@@ -338,7 +338,7 @@ function RandomOverseer()
 				return "eorb_up3"
 			end
 		end
-	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) ~= 0 then
+	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
 		return "etech1"
 		
 	elseif es < Spring.GetGameSeconds()*0.5 then
