@@ -99,7 +99,7 @@ local WaitRNG = math.random(0,500)
 		if aimexamount * 15 <= Spring.GetGameSeconds()  then
 			return "emetalextractor"
 		else
-			return "elrpc"
+			return "ebomb"
 		end
 	end
 end
@@ -192,10 +192,10 @@ end
 			if ec <= 50 then
 				return "egeothermal"
 			else
-				local r2 = math.random(0,40)
+				local r2 = math.random(0,20)
 				local aar = math.random(0,5)
 				if r2 > 0 and aar > 0 then
-					local r = math.random(0,5)
+					local r = math.random(0,4)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -206,11 +206,14 @@ end
 						return "eturretheavyai"
 					elseif r == 4 then
 						return "ejammerai"
-					elseif r == 5 then
-						return "ekmar"
 					end
 				elseif r2 == 0 then
-					return "eshieldgen"
+					local r = math.random(0,1)
+					if r == 0 then
+						return "eshieldgen"
+					else
+						return "ekmar"
+					end
 				else
 					return "elaserbattery"
 				end
@@ -221,10 +224,10 @@ end
 			if ec <= 50 then
 				return "efusion2"
 			else
-				local r2 = math.random(0,15)
-				local aar = math.random(0,10)
+				local r2 = math.random(0,10)
+				local aar = math.random(0,5)
 				if r2 > 0 and aar > 0 then
-					local r = math.random(0,5)
+					local r = math.random(0,4)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -235,17 +238,17 @@ end
 						return "eturretheavyai"
 					elseif r == 4 then
 						return "ejammerai"
-					elseif r == 5 then
-						return "ekmar"
 					end
 				elseif r2 == 0 then
-					local r = math.random(0,2)
+					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
 						return "eartyturret_up3"
 					elseif r == 2 then
 						return "esiloai"
+					elseif r == 3 then
+						return "ekmar"
 					end
 				else
 					return "elaserbattery"
@@ -260,8 +263,8 @@ end
 				local r2 = math.random(0,5)
 				local aar = math.random(0,10)
 				if r2 > 0 and aar > 0 then
-					local r = math.random(0,5)
-					if r == 0 then
+					local r = math.random(0,4)
+					if r == 0 then	
 						return "emine"
 					elseif r == 1 then
 						return "eradar2"
@@ -271,17 +274,17 @@ end
 						return "eturretheavyai_up3"
 					elseif r == 4 then
 						return "ejammerai"
-					elseif r == 5 then
-						return "ekmar"
 					end
 				elseif r2 == 0 then
-					local r = math.random(0,2)
+					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
 						return "eartyturret_up3"
 					elseif r == 2 then
 						return "esiloai"
+					elseif r == 3 then
+						return "ekmar"
 					end
 				else
 					return "elaserbattery"
@@ -376,10 +379,10 @@ function RandomOverseer()
 			if ec <= 50 then
 				return "egeothermal"
 			else
-				local r2 = math.random(0,40)
+				local r2 = math.random(0,20)
 				local aar = math.random(0,10)
 				if r2 > 0 and aar > 0 then
-					local r = math.random(0,5)
+					local r = math.random(0,4)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
@@ -390,11 +393,14 @@ function RandomOverseer()
 						return "eturretheavyai"
 					elseif r == 4 then
 						return "ejammerai"
-					elseif r == 5 then
-						return "ekmar"
 					end
 				elseif r2 == 0 then
-					return "eshieldgen"
+					local r = math.random(0,1)
+					if r == 0 then
+						return "eshieldgen"
+					else
+						return "ekmar"
+					end
 				else
 					return "elaserbattery"
 				end
@@ -408,24 +414,28 @@ function RandomOverseer()
 				local r2 = math.random(0,15)
 				local aar = math.random(0,10)
 				if r2 > 0 and aar > 0 then
-					local r = math.random(0,3)
+					local r = math.random(0,4)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "ejammerai"
+						return "eturretlightai_up3"
 					elseif r == 3 then
-						return "ekmar"
+						return "eturretheavyai_up3"
+					elseif r == 4 then
+						return "ejammerai"
 					end
 				elseif r2 == 0 then
-					local r = math.random(0,2)
+					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
 						return "eartyturret_up3"
 					elseif r == 2 then
 						return "esiloai"
+					elseif r == 3 then
+						return "ekmar"
 					end
 				else
 					return "elaserbattery"
@@ -440,24 +450,28 @@ function RandomOverseer()
 				local r2 = math.random(0,5)
 				local aar = math.random(0,10)
 				if r2 > 0 and aar > 0 then
-					local r = math.random(0,3)
+					local r = math.random(0,4)
 					if r == 0 then
 						return "emine"
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "ejammerai"
+						return "eturretlightai_up3"
 					elseif r == 3 then
-						return "ekmar"
+						return "eturretheavyai_up3"
+					elseif r == 4 then
+						return "ejammerai"
 					end
 				elseif r2 == 0 then
-					local r = math.random(0,2)
+					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
 						return "eartyturret_up3"
 					elseif r == 2 then
 						return "esiloai"
+					elseif r == 3 then
+						return "ekmar"
 					end
 				else
 					return "elaserbattery"
@@ -656,7 +670,7 @@ function RandomUnit()
 					elseif r == 1 then
 						return "escoutdrone"
 					else
-						return "elrpc"
+						return "ebomb"
 					end
 				end
 		end
@@ -713,7 +727,7 @@ local lifterlist = {
 	
 }
 
-local lifterstart = {
+local lifterareamex = {
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
@@ -865,11 +879,11 @@ end
 
 local function lifterqueue()
 	if liftersqueued > 1 then
-		liftersqueued = liftersqueued - 0.2
+		liftersqueued = liftersqueued - 0.02
 		return lifterlist
 	else
 		liftersqueued = liftersqueued + 1
-		return lifterstart
+		return lifterareamex
 	end
 end
 
