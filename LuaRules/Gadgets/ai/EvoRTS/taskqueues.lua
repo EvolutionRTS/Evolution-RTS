@@ -735,12 +735,10 @@ local overseerlistfirst = {
 	"escoutdrone",
 	"eorb",
 	"eorb",
-	"elaserbattery",
 	"eturretlightai",
 	"eturretlightai",
 	"eturretlightai",
 	"eturretlightai",
-	"elaserbattery",
 }
 	
 local overseerorders = {
