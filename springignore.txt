@@ -2,6 +2,7 @@
 # This should allow to play multiplayer directly using a clone of the repo.
 #
 
+./.git
 /.git
 /.svn
 /*/.svn
