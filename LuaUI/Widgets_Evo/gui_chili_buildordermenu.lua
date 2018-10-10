@@ -586,9 +586,8 @@ function widget:Update()
     if updateRequired then
         processAllCommands()
         updateRequired = false
-    else
-        updateSelection()
     end
+    updateSelection()
 end --Update
 
 function widget:WorldTooltip(ttType,data1,data2,data3)
