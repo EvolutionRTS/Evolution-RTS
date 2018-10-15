@@ -727,26 +727,21 @@ local overseerlistfirst = {
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
-	"escoutdrone",
+	"elifterai",
+	"eorb",
+	"elifterai",
+	"eorb",
+	"elifterai",
+	"eorb",
+	"eturretlightai",
 	"elifterai",
 	"eturretlightai",
-	"escoutdrone",
 	BuildTechLab,
 	"elifterai",
-	"eturretlightai",
-	"escoutdrone",
-	"elifterai",
-	"eturretlightai",
-	"escoutdrone",
-	"elifterai",
-	"eturretlightai",
-	"escoutdrone",
 	"eorb",
 	"eorb",
 	"eturretlightai",
-	"eturretlightai",
-	"eturretlightai",
-	"eturretlightai",
+	"elifterai",
 }
 	
 local overseerorders = {
@@ -759,14 +754,11 @@ local overseerorders = {
 }
 
 local lifterlist = {
+	RandomUnit,
+	RandomUnit,
+	RandomUnit,
+	BuildMex,
 	RandomLift,
-	BuildMex,
-	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	"emine",
-	BuildMex,
-	
 }
 
 local lifterareamex = {
