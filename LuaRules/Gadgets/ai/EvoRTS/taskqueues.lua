@@ -700,7 +700,14 @@ function RandomUnit()
 				end
 		end
 	end
----Factories:
+
+function BuildTechLab()
+	if not GG.TechCheck("tech1", ai.id) and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
+		return "etech1"
+	else
+		return "emine"
+	end
+end
 
 
 	
@@ -724,6 +731,7 @@ local overseerlistfirst = {
 	"elifterai",
 	"eturretlightai",
 	"escoutdrone",
+	BuildTechLab,
 	"elifterai",
 	"eturretlightai",
 	"escoutdrone",
@@ -746,7 +754,7 @@ local overseerorders = {
 	RandomOverseer,
 	RandomOverseer,
 	RandomOverseer,
-	"emine",
+	BuildTechLab,
 	"elifterai",
 }
 
