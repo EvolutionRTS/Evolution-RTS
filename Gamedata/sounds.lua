@@ -23,6 +23,16 @@ local Sounds = {
 			in3d = true,
 			maxconcurrent = 1,
 		},
+		buildmechanical = {
+			--- new since 89.0
+			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
+			file = "sounds/miscfx/buildstart-nano.wav",
+			--gainmod = 0.35,
+			--pitchmod = 0.05,
+			--pitch = 0.7,
+			in3d = true,
+			maxconcurrent = 1,
+		},
 	
 		airraider = {
 			--- new since 89.0
