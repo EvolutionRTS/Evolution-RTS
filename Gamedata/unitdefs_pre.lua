@@ -27,6 +27,10 @@ Shared.buildList = {
 	[[eorb]],
 	[[ecommander]],
 }
+
+Shared.buildListChicken = {
+	[[croost]]
+}
 	
 local turrets = {
 	[[ehbotpeewee_turret]],

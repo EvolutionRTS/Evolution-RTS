@@ -1,7 +1,7 @@
--- UNITDEF -- BURROW --
+-- UNITDEF -- ATM --
 --------------------------------------------------------------------------------
 
-local unitName                    = "burrow"
+local unitName                    = "atm"
 
 --------------------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ local unitDef                     = {
 	maxWaterDepth                 = 5000,
 	metalmake	                  = 998,
 	metalStorage                  = 900,
-	name                          = "Plot Device",
+	name                          = "ATM Machine",
 	objectName                    = "efusion2.s3o",
 	radarDistance                 = 1000,
 	reclaimable		              = false,
@@ -41,7 +41,7 @@ local unitDef                     = {
 	side                          = "ARM",
 	sightDistance                 = 1000,
 	smoothAnim                    = true,
-	unitname                      = "burrow",
+	unitname                      = "atm",
 	workerTime                    = 0,
 
 	sfxtypes                      = {
