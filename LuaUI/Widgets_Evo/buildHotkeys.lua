@@ -12,6 +12,12 @@ function widget:GetInfo()
 	}
 end
 
+-- first look through nameToKeyCode, then use the key to find ud
+local nameToKeyCode = {
+	elighttank3 = {98, 113},
+	etech1 = {98, 97},
+}
+
 -- Taken from gui_red_buildordermenu
 local sGetSelectedUnitsCount = Spring.GetSelectedUnitsCount
 local sGetActiveCmdDescs = Spring.GetActiveCmdDescs
@@ -73,64 +79,92 @@ local function GetCommands()
 	return buildcmds,othercmds
 end
 
--- ASCII: a is 97, z is 122
-local building = -1 -- -1 = not building, 0 = B + *, 1 = N + *, 2 = N + N + *
-local buildStartKey = 98 -- B, for B + *
-local buildNextKey = 110 -- N, for N + *, N + N + *
--- Q W E R T, A S D F G, Z X C V B
-local buildKeys = { -- mapping keys to the correct indices
-	[113] = 1,
-	[119] = 2,
-	[101] = 3,
-	[114] = 4,
-	[116] = 5,
-	
-	[97] = 6,
-	[115] = 7,
-	[100] = 8,
-	[102] = 9,
-	[103] = 10,
-	
-	[122] = 11,
-	[120] = 12,
-	[99] = 13,
-	[118] = 14,
-	[98] = 15,
-}
---local buildLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
+local sPlaySoundFile = Spring.PlaySoundFile
+local sGetModKeyState = Spring.GetModKeyState
+local sGetCmdDescIndex = Spring.GetCmdDescIndex
+local sSetActiveCommand = Spring.SetActiveCommand
 
-function widget:KeyPress(key, mods, isRepeat)
-	if building ~= -1 then
-		if building == 1 and key == buildNextKey then
-			building = 2 -- N + N + *
-			return true
-		end
+local updateCommands = false
+local buildOptions = {}
+local lengBuildOptions = 0
+
+function widget:CommandsChanged()
+	updateCommands = true
+end
+function widget:Update(dt)
+	if updateCommands then
+		updateCommands = false
+		lengKeysPressed = 0
+		keysPressed = {}
 		
+		buildOptions = {}
+		lengBuildOptions = 0
 		local buildcmds, othercmds = GetCommands()
-		local found = buildKeys[key]
-		if found then
-			found = found + 15 * building
-			if buildcmds[found] ~= nil then
-				if playSounds then
-					Spring.PlaySoundFile(sound_queue_add, 0.75, 'ui')
-				end
-				Spring.SetActiveCommand(Spring.GetCmdDescIndex(buildcmds[found].id),1,true,false,Spring.GetModKeyState())
+		for i = 1, #buildcmds do
+			if nameToKeyCode[buildcmds[i].name] then
+				lengBuildOptions = lengBuildOptions + 1
+				buildOptions[lengBuildOptions] = {
+					keyCode = nameToKeyCode[buildcmds[i].name],
+					id = buildcmds[i].id
+				}
 			end
 		end
-		building = -1
-		return true
-	else
-		-- this prevents keys to be captured when you cannot build anything
-		local buildcmds = GetCommands()
-		if #buildcmds == 0 then return false end
-		
-		if key == buildStartKey then
-			building = 0 -- B + *
-			return true
-		elseif key == buildNextKey then
-			building = 1 -- N + *
-			return true
+	end
+end
+
+local lengKeysPressed = 0
+local keysPressed = {}
+function widget:KeyPress(key, mods, isRepeat)
+	if key == 304 or key == 306 or key == 308 then return false end -- shift, ctrl, alt keys
+	lengKeysPressed = lengKeysPressed + 1
+	keysPressed[lengKeysPressed] = key
+
+	local lengMatches = 0
+	local matches = {}
+	for i = 1, lengBuildOptions do
+		local getKeyCode = buildOptions[i].keyCode
+		local lengKeyCode = #getKeyCode
+		if lengKeyCode >= lengKeysPressed then
+			local match = true
+			for j = 1, lengKeysPressed do
+				if keysPressed[j] ~= getKeyCode[j] then
+					match = false
+					break
+				end
+			end
+			if match then
+				lengMatches = lengMatches + 1
+				matches[lengMatches] = {id = buildOptions[i].id, sameLeng = lengKeyCode == lengKeysPressed}
+			end
 		end
+	end
+	if matches[1] then
+		for i = 1, lengMatches do
+			if matches[i].sameLeng then
+				-- if playSounds then
+				-- 	sPlaySoundFile(sound_queue_add, 0.75, 'ui')
+				-- end
+				local alt, ctrl, meta, shift = sGetModKeyState()
+				local index = sGetCmdDescIndex(matches[i].id)
+				sSetActiveCommand(index, 1, true, false, alt, ctrl, meta, shift)
+				keysPressed[lengKeysPressed] = nil
+				lengKeysPressed = lengKeysPressed - 1 -- so you can B + Q + Q + Q to spam units
+				return true
+			end
+		end
+	else -- reset
+		lengKeysPressed = 0
+		keysPressed = {}
+	end
+	return false
+end
+
+function widget:MousePress(x, y, button)
+	-- reset on left click or right click (button = 2 for clicking mouse wheel because ???)
+	--if button == 1 or button == 3 then building = -1 end
+	if button == 1 or button == 3 then
+		lengKeysPressed = 0
+		keysPressed = {}
 	end
 	return false
 end
