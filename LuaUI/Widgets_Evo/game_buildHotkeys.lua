@@ -87,8 +87,10 @@ local lengBuildOptions = 0
 local lengKeysPressed = 0
 local keysPressed = {}
 
-local letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
-local lettersOffset = 96
+VFS.Include("LuaUI/Headers/keysym.h.lua", nil, VFS.RAW_FIRST)
+local keyCodeToString = {}
+for k, v in pairs(KEYSYMS) do keyCodeToString[v] = k:sub(1, 1) .. k:sub(2):lower() end
+
 local hotkeyText = ""
 local screenWidth = gl.GetViewSizes()
 local function updateHotkeyText()
@@ -96,7 +98,7 @@ local function updateHotkeyText()
 		hotkeyText = "Build hotkey: "
 		for i = 1, lengKeysPressed do
 		    if keysPressed[i] >= 97 and keysPressed[i] <= 122 then
-		    	hotkeyText = hotkeyText .. letters[keysPressed[i] - lettersOffset] .. " + "
+		    	hotkeyText = hotkeyText .. keyCodeToString[keysPressed[i]] .. " + "
 		    end
 		    -- if i < lengKeysPressed then str = str .. " + " end
 		end
