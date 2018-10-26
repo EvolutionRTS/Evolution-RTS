@@ -84,6 +84,27 @@ local updateCommands = false
 local buildOptions = {}
 local lengBuildOptions = 0
 
+local lengKeysPressed = 0
+local keysPressed = {}
+
+local letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
+local lettersOffset = 96
+local hotkeyText = ""
+local screenWidth = gl.GetViewSizes()
+local function updateHotkeyText()
+	if lengKeysPressed > 0 then
+		hotkeyText = "Build hotkey: "
+		for i = 1, lengKeysPressed do
+		    if keysPressed[i] >= 97 and keysPressed[i] <= 122 then
+		    	hotkeyText = hotkeyText .. letters[keysPressed[i] - lettersOffset] .. " + "
+		    end
+		    -- if i < lengKeysPressed then str = str .. " + " end
+		end
+
+	else hotkeyText = "" end
+end
+local function shortenHotkeyText() hotkeyText = hotkeyText:sub(1, -4) end
+
 function widget:CommandsChanged()
 	updateCommands = true
 end
@@ -92,6 +113,7 @@ function widget:Update(dt)
 		updateCommands = false
 		lengKeysPressed = 0
 		keysPressed = {}
+		updateHotkeyText()
 		
 		buildOptions = {}
 		lengBuildOptions = 0
@@ -108,12 +130,11 @@ function widget:Update(dt)
 	end
 end
 
-local lengKeysPressed = 0
-local keysPressed = {}
 function widget:KeyPress(key, mods, isRepeat)
 	if key == 304 or key == 306 or key == 308 then return false end -- shift, ctrl, alt keys
 	lengKeysPressed = lengKeysPressed + 1
 	keysPressed[lengKeysPressed] = key
+	updateHotkeyText()
 
 	local lengMatches = 0
 	local matches = {}
@@ -143,6 +164,7 @@ function widget:KeyPress(key, mods, isRepeat)
 				local alt, ctrl, meta, shift = sGetModKeyState()
 				local index = sGetCmdDescIndex(matches[i].id)
 				sSetActiveCommand(index, 1, true, false, alt, ctrl, meta, shift)
+				shortenHotkeyText()
 				keysPressed[lengKeysPressed] = nil
 				lengKeysPressed = lengKeysPressed - 1 -- so you can B + Q + Q + Q to spam units
 				return true
@@ -151,6 +173,7 @@ function widget:KeyPress(key, mods, isRepeat)
 	else -- reset
 		lengKeysPressed = 0
 		keysPressed = {}
+		updateHotkeyText()
 	end
 	return false
 end
@@ -161,6 +184,11 @@ function widget:MousePress(x, y, button)
 	if button == 1 or button == 3 then
 		lengKeysPressed = 0
 		keysPressed = {}
+		updateHotkeyText()
 	end
 	return false
+end
+
+function widget:DrawScreen()
+	gl.Text(hotkeyText, screenWidth * 0.5, 60, 20, "onc")
 end
