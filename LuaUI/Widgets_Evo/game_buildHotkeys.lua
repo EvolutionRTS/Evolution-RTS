@@ -7,16 +7,12 @@ function widget:GetInfo()
 	date      = "5 Oct 2018",
 	license   = "GNU GPL, v2 or later",
 	layer     = 0,
-	enabled   = false,
+	enabled   = true,
 	handler   = true, --can use widgetHandler:x()
 	}
 end
 
--- first look through nameToKeyCode, then use the key to find ud
-local nameToKeyCode = {
-	elighttank3 = {98, 113},
-	etech1 = {98, 97},
-}
+VFS.Include("luaui/configs/evo_buildHotkeysConfig.lua")
 
 -- Taken from gui_red_buildordermenu
 local sGetSelectedUnitsCount = Spring.GetSelectedUnitsCount
