@@ -87,9 +87,11 @@ local lengBuildOptions = 0
 local lengKeysPressed = 0
 local keysPressed = {}
 
-VFS.Include("LuaUI/Headers/keysym.h.lua", nil, VFS.RAW_FIRST)
-local keyCodeToString = {}
-for k, v in pairs(KEYSYMS) do keyCodeToString[v] = k:sub(1, 1) .. k:sub(2):lower() end
+local sGetKeySymbol = Spring.GetKeySymbol
+
+-- VFS.Include("LuaUI/Headers/keysym.h.lua", nil, VFS.RAW_FIRST)
+-- local keyCodeToString = {}
+-- for k, v in pairs(KEYSYMS) do keyCodeToString[v] = k:sub(1, 1) .. k:sub(2):lower() end
 
 local hotkeyText = ""
 local screenWidth = gl.GetViewSizes()
@@ -97,9 +99,9 @@ local function updateHotkeyText()
 	if lengKeysPressed > 0 then
 		hotkeyText = "Build hotkey: "
 		for i = 1, lengKeysPressed do
-		    if keysPressed[i] >= 97 and keysPressed[i] <= 122 then
-		    	hotkeyText = hotkeyText .. keyCodeToString[keysPressed[i]] .. " + "
-		    end
+		    -- hotkeyText = hotkeyText .. keyCodeToString[keysPressed[i]] .. " + "
+		    local keySymbol = sGetKeySymbol(keysPressed[i]) -- note: there are 2 outputs to this function
+		    hotkeyText = hotkeyText .. keySymbol:sub(1, 1):upper() .. keySymbol:sub(2) .. " + "
 		    -- if i < lengKeysPressed then str = str .. " + " end
 		end
 
