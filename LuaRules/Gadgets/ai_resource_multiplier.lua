@@ -96,7 +96,7 @@ end
 
 function gadget:Initialize()
 	for uDefID,def in ipairs(UnitDefs) do
-		if def.energyMake >= 5 then	-- filter insignificant production to save some performance
+		if def.energyMake >= 10 then	-- filter insignificant production to save some performance
 			energyUnitDefs[uDefID] = def.energyMake
 			ecoUnitsDefs[uDefID] = true
 		end
@@ -126,9 +126,11 @@ function gadget:Initialize()
 		for teamID,_ in pairs(aiTeams) do
 			local teamUnits = Spring.GetTeamUnitsSorted(teamID)
 			for uDefID, units in pairs(teamUnits) do
-				for _, unitID in pairs(units) do
-					if select(5,Spring.GetUnitHealth(unitID)) >= 1 then
-						gadget:UnitFinished(unitID, uDefID, teamID)
+				if type(units) == 'table' then
+					for _, unitID in pairs(units) do
+						if select(5,Spring.GetUnitHealth(unitID)) >= 1 then
+							gadget:UnitFinished(unitID, uDefID, teamID)
+						end
 					end
 				end
 			end

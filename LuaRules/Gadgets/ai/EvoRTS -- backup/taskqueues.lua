@@ -720,16 +720,13 @@ local idlelist = {
 }
 
 local assistqueue = {
-	{ action = "patrolrelative", position = {x = 200, y = 0, z = 200} },
+	{ action = "patrolrelative", position = {x = 100, y = 0, z = 100} },
 }
 
 local overseerlistfirst = {
 	"emetalextractor",
-	{ action = "wait", frames = 3000},
 	"emetalextractor",
-	{ action = "wait", frames = 3000},
 	"emetalextractor",
-	{ action = "wait", frames = 3000},
 	"elifterai",
 	"eorb",
 	"elifterai",

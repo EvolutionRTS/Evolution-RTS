@@ -69,9 +69,26 @@ end
 function TaskQueueBehaviour:GetQueue()
 	q = taskqueues[self.name]
 	if type(q) == "function" then
-		q = q(self)
+		q = q(self, self.ai, self.unit)
 	end
 	return q
+end
+function TaskQueueBehaviour:CanQueueNextTask()
+	local unitID = self.unit:Internal().id
+	-- must: already have 1 queue (not override default behaviour)
+	-- Have less than 2 queues (not cancel the next buildings
+	-- Have "secured" the cur spot it has to build on (not cancel 1st in queue to start 2nd in queue == is currently building
+	-- We check curqueuelength == 1
+	-- Unit is not a factory
+	local notfactory = self.unit:Internal():Type():IsFactory() ~= true
+	local notprogressing = self.progress ~= true	-- Not already progressing in queue
+	local curqueuelength = #(Spring.GetCommandQueue(unitID,2))
+	local building = Spring.GetUnitIsBuilding(unitID)	-- we check cur buildspeed/power ~= 0
+	if curqueuelength <= 1 and building and notprogressing and notfactory then
+		return true
+	else
+		return
+	end
 end
 
 function TaskQueueBehaviour:Update()
@@ -80,6 +97,11 @@ function TaskQueueBehaviour:Update()
 		return
 	end
 	local f = self.game:Frame()
+	if f%15 == self.unit:Internal().id%15 then
+		if self:CanQueueNextTask() then
+			self.progress = true
+		end
+	end
 	if self.progress == true then
 		if self.countdown > 14 then
 			self:ProgressQueue()
@@ -146,6 +168,10 @@ function TaskQueueBehaviour:ProgressQueue()
 		self:HandleActionTask( value )
 		return
 	end
+	if type(value) == "table" then
+		self:HandleActionTask( value )
+		return
+	end
 
 	success = self:TryToBuild( value )
 	if success ~= true then
@@ -155,7 +181,8 @@ function TaskQueueBehaviour:ProgressQueue()
 	end
 end
 
-function TaskQueueBehaviour:TryToBuild( unit_name )
+function TaskQueueBehaviour:TryToBuild( unit_name, pos )
+	--Spring.Echo(unit_name)
 	utype = self.game:GetTypeByName(unit_name)
 	if not utype then
 		self.game:SendToConsole("Cannot build:"..unit_name..", could not grab the unit type from the engine")
@@ -168,21 +195,38 @@ function TaskQueueBehaviour:TryToBuild( unit_name )
 	if utype:Extractor() then
 		success = self:BuildExtractor(utype)
 	elseif utype:Geothermal() then
-		success = self:BuildGeothermal(utype)
+		success = self:BuildGeo(utype)
 	elseif unit:Type():IsFactory() then
 		success = self.unit:Internal():Build(utype)
 	else
-		success = self:BuildOnMap(utype)
+		success = self:BuildOnMap(utype,pos)
 	end
 	return success
 end
 
 function TaskQueueBehaviour:HandleActionTask( task )
 	local action = task.action
-	if action == "wait" then
-		t = TaskQueueWakeup(self)
-		tqb = self
-		self.ai.sleep:Wait({ wakeup = function() tqb:ProgressQueue() end, },task.frames)
+	if action == "nexttask" then
+		self:OnToNextTask()
+	elseif action == "wait" then
+        if task.frames == "infinite" then
+            return
+        end
+        t = TaskQueueWakeup(self)
+        tqb = self
+        local wakeup = function()
+            tqb:ProgressQueue() 
+        end
+        self.ai.sleep:Wait( wakeup, task.frames)
+	elseif action == "command" then
+		if task.params then
+			self.unit:Internal():ExecuteCustomCommand(task.params.cmdID, task.params.cmdParams, task.params.cmdOptions)
+		end
+	elseif UnitDefNames[action] and task.pos then
+		if not task.pos.x then
+			task.pos = nil
+		end
+		self:TryToBuild(action, task.pos)
 	elseif action == "move" then
 		self.unit:Internal():Move(task.position)
 	elseif action == "moverelative" then
@@ -238,38 +282,60 @@ function TaskQueueBehaviour:StopWaitingForPosition()
 	self.placementInProgress = false
 end
 
-function TaskQueueBehaviour:BuildOnMap(utype)
-	--p = self.map:FindClosestBuildSite(utype, unit:GetPosition())
-	--self.progress = not self.unit:Internal():Build(utype,p)
+function TaskQueueBehaviour:BuildOnMap(utype,pos)
 	unit = self.unit:Internal()
-
-	local job = {
-		start_position=unit:GetPosition(),
-		max_radius=1500,
-		onSuccess=onsuccess,
-		onFail=onfail,
-		unittype=utype,
-		cleanup_on_unit_death=self.unit.engineID,
-		tqb=self
+	local facing = 0
+	if pos then
+		pos, facing = self.ai.newplacementhandler:CreateNewPlan(unit, utype, pos)
+	else
+		pos = unit:GetPosition()
+		pos, facing = self.ai.newplacementhandler:CreateNewPlan(unit, utype, pos)
+	end
+	job = {
+			start_position=pos,
+			max_radius=1500,
+			onSuccess=onsuccess,
+			onFail=onfail,
+			unittype=utype,
+			cleanup_on_unit_death=self.unit.engineID,
+			tqb=self
 	}
-	local success = self.ai.placementhandler:NewJob( job )
-	if success ~= true then
-		self:StopWaitingForPosition()
+	if pos then
+		self:OnBuildingPlacementSuccess( job, pos, facing )
+		return true
+	else
+		self:OnBuildingPlacementFailure( job, pos )
 		return false
 	end
-	self:BeginWaitingForPosition()
-	return true
+end
+
+function TaskQueueBehaviour:BuildGeo(utype)
+	-- find a free spot!
+	unit = self.unit:Internal()
+	local facing = 0
+	p = unit:GetPosition()
+	p = self.ai.geospothandler:ClosestFreeGeo(utype,p,2500)
+	if p == nil or self.game.map:CanBuildHere(utype,p) ~= true then
+		self:OnToNextTask()
+		return false
+	end
+	p, facing = self.ai.newplacementhandler:CreateNewPlanNoSearch(unit,utype,p)
+	return self.unit:Internal():Build(utype,p,facing,{"shift"})
 end
 
 function TaskQueueBehaviour:BuildExtractor(utype)
-	-- find a free spot!
-	unit = self.unit:Internal()
-	p = unit:GetPosition()
-	p = self.ai.metalspothandler:ClosestFreeSpot(utype,p)
-	if p == nil then
-		return false
-	end
-	return self.unit:Internal():Build(utype,p)
+    -- find a free spot!
+    unit = self.unit:Internal()
+    local p = unit:GetPosition()
+    local up = p
+    local facing = 0
+    p = self.ai.metalspothandler:ClosestFreeSpot(utype,p)
+    if not p then
+        self:OnToNextTask()
+        return false
+    end
+    p, facing = self.ai.newplacementhandler:CreateNewPlanNoSearch(unit,utype,p)
+    return self.unit:Internal():Build(utype,p,facing,{"shift"})
 end
 
 function TaskQueueBehaviour:OnToNextTask()
@@ -280,10 +346,10 @@ function TaskQueueBehaviour:IsDoingSomething()
 	return ( self.progress == false )
 end
 
-function TaskQueueBehaviour:OnBuildingPlacementSuccess( job, pos )
+function TaskQueueBehaviour:OnBuildingPlacementSuccess( job, pos, facing )
 	self:StopWaitingForPosition()
 	local p = dump( pos )
-	local success self.unit:Internal():Build( job.unittype, pos )
+	local success self.unit:Internal():Build( job.unittype, pos, facing,{"shift"})
 	if success == false then
 		self:OnToNextTask()
 	end

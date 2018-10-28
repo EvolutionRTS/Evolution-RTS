@@ -22,6 +22,12 @@ if controlPoints == "disabled" then
 	--shard_include(  "engineerturretbehaviour"  )
 end
 
+--shard_include "capturerbehaviour"
+--require "missingfactorybehaviour"
+--require "autoreclaimbehaviour"
+--shard_include "lowenergybehaviour"
+--require "factoryregisterbehaviour"
+
 behaviours = {
 	eorb = {
 		TaskQueueBehaviour,
