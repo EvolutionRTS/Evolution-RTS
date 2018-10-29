@@ -112,25 +112,39 @@ local function shortenHotkeyText() hotkeyText = hotkeyText:sub(1, -4) end
 function widget:CommandsChanged()
 	updateCommands = true
 end
+local oldBuildOptions, oldLengBuildOptions
 function widget:Update(dt)
 	if updateCommands then
 		updateCommands = false
-		lengKeysPressed = 0
-		keysPressed = {}
-		updateHotkeyText()
 		
+		local same = true
+		if not oldLengBuildOptions then same = false end
 		buildOptions = {}
 		lengBuildOptions = 0
 		local buildcmds, othercmds = GetCommands()
 		for i = 1, #buildcmds do
-			if nameToKeyCode[buildcmds[i].name] then
+			local name = buildcmds[i].name
+			if name:find("_up", -5) then name = name:sub(1, -5) end
+			if nameToKeyCode[name] then
 				lengBuildOptions = lengBuildOptions + 1
 				buildOptions[lengBuildOptions] = {
-					keyCode = nameToKeyCode[buildcmds[i].name],
+					keyCode = nameToKeyCode[name],
 					id = buildcmds[i].id
 				}
+				if same and
+					(lengBuildOptions > oldLengBuildOptions or
+					buildOptions[lengBuildOptions].keyCode ~= oldBuildOptions[lengBuildOptions].keyCode) then
+					same = false
+				end
 			end
 		end
+		if not same then
+			lengKeysPressed = 0
+			keysPressed = {}
+			updateHotkeyText()
+		end
+		oldBuildOptions = buildOptions
+		oldLengBuildOptions = lengBuildOptions
 	end
 end
 
