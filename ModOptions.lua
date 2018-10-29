@@ -38,30 +38,6 @@ local options= {
 		type   = 'section',
 	},
 	{
-		key    = 'aimetalhandicap',
-		name   = 'Shard Metal Handicap',
-		desc   = 'Determines the amount of extra metal given to Shard',
-		type   = 'number',
-		section= 'aioptions',
-		def    = 0,
-		min    = 0,
-		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
-	},
-	{
-		key    = 'aienergyhandicap',
-		name   = 'Shard Energy Handicap',
-		desc   = 'Determines the amount of extra metal given to Shard',
-		type   = 'number',
-		section= 'aioptions',
-		def    = 0,
-		min    = 0,
-		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
-	},
-	{
 		key    = 'aidebug',
 		name   = 'AI is spamming chat with debug values',
 		desc   = 'AI is spamming chat with debug values',
@@ -82,7 +58,7 @@ local options= {
 		def    = 1,
 		min    = 1,
 		max    = 10,
-		step   = 0.1,
+		step   = 1,
 	},
 	
 -- Resourcing
