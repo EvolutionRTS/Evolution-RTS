@@ -56,54 +56,43 @@ nameToKeyCode = {
 	ecommander = {v, o},
 
 	-- HBots
-	ehbotpeewee     = {q}, -- Q
-	ehbotthud       = {w}, -- W
-	ehbotsniper     = {e}, -- E
-	ehbotrocko      = {r}, -- R
-	ehbotkarganneth = {t}, -- T
-	ehbotpeewee     = {y}, -- Y
-	ehbotthud       = {u}, -- U
-	ehbotsniper     = {i}, -- I
-	ehbotrocko      = {o}, -- O
-	ehbotkarganneth = {p}, -- P
+	ehbotpeewee     = {q},
+	ehbotthud       = {w},
+	ehbotsniper     = {e},
+	ehbotrocko      = {r},
+	ehbotkarganneth = {t},
 
 	-- ATs
-	eallterrlight    = {q}, -- Q
-	eallterrriot     = {w}, -- W
-	eallterrmed      = {e}, -- E
-	eallterrheavy    = {r}, -- R
-	eallterrassault  = {t}, -- T
-	eallterranarchid = {y}, -- Y
-	eallterrshield   = {u}, -- U
+	eallterrlight    = {q},
+	eallterrriot     = {w},
+	eallterrmed      = {e},
+	eallterrheavy    = {r},
+	eallterrassault  = {t},
+	eallterranarchid = {y},
+	eallterrshield   = {u},
 
 	-- Hovers
-	elighttank3  = {q}, -- Q
-	eriottank2   = {w}, -- W
-	eheavytank3  = {e}, -- E
-	emissiletank = {r}, -- R
-	eartytank    = {t}, -- T
-	elacerator   = {y}, -- Y
+	elighttank3  = {q},
+	eriottank2   = {w},
+	eheavytank3  = {e},
+	emissiletank = {r},
+	eartytank    = {t},
+	elacerator   = {y},
 
 	-- Amphibious
-	eamphibbuggy   = {q}, -- Q
-	eamphibriot    = {w}, -- W
-	eamphibneedle  = {e}, -- E
-	eamphibmedtank = {r}, -- R
-	eamphibrock    = {t}, -- T
-	eamphibarty    = {y}, -- Y
-	eamphibleveler = {u}, -- U
+	eamphibbuggy   = {q},
+	eamphibriot    = {w},
+	eamphibneedle  = {e},
+	eamphibmedtank = {r},
+	eamphibrock    = {t},
+	eamphibarty    = {y},
+	eamphibleveler = {u},
 
 	-- Air
-	efighter   = {q}, -- Q
-	egunship2  = {w}, -- W
-	ebomber    = {e}, -- E
-	eairemp    = {r}, -- R
-	etransport = {t}, -- T
-	ekrow      = {y}, -- Y
-	efighter   = {u}, -- U
-	egunship2  = {i}, -- I
-	ebomber    = {o}, -- O
-	eairemp    = {p}, -- P
-	etransport = {a},  -- A
-	ekrow      = {s}, -- S
+	efighter   = {q},
+	egunship2  = {w},
+	ebomber    = {e},
+	eairemp    = {r},
+	etransport = {t},
+	ekrow      = {y},
 }
