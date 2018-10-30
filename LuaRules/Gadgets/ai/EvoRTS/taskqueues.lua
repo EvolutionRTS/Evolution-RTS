@@ -82,18 +82,10 @@ local WaitRNG = math.random(0,500)
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local aimexamount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id)
 	if mc >= ms - ms*0.10 then
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
+		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
-			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up1"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up2"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
-				return "eorb_up3"
-			end
+			return "eorb"
 		end
 	else
 		if aimexamount * 15 <= Spring.GetGameSeconds()  then
@@ -137,18 +129,10 @@ end
 			return "esolar2"
 		end
 	elseif mc >= ms - ms*0.10 then
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
+		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
-			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up1"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up2"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
-				return "eorb_up3"
-			end
+			return "eorb"
 		end
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
@@ -325,18 +309,10 @@ function RandomOverseer()
 			return "esolar2"
 		end
 	elseif mc >= ms - ms*0.20 then
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
+		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
-			if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up1"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
-				return "eorb_up2"
-			elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
-				return "eorb_up3"
-			end
+			return "eorb"
 		end
 	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
 		return "etech1"
@@ -602,7 +578,7 @@ function RandomUnit()
 								return "ehbotkarganneth_up2"
 							end
 						else
-							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
+							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 								return "elifterai"
 							else
 								return "eorb_up2"
@@ -649,7 +625,7 @@ function RandomUnit()
 								return "ehbotkarganneth_up3"
 							end
 						else
-							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
+							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 								return "elifterai"
 							else
 								return "eorb_up3"
@@ -661,7 +637,7 @@ function RandomUnit()
 				if es < Spring.GetGameSeconds()*0.5 then
 					return "estorage"
 				elseif mc >= ms - ms*0.20 then
-					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*60 < Spring.GetGameSeconds() then
+					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 						return "elifterai"
 					else
 						if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
@@ -725,24 +701,16 @@ local assistqueue = {
 
 local overseerlistfirst = {
 	"emetalextractor",
-	{ action = "wait", frames = 3000},
 	"emetalextractor",
-	{ action = "wait", frames = 3000},
 	"emetalextractor",
-	{ action = "wait", frames = 3000},
 	"elifterai",
-	"eorb",
 	"elifterai",
-	"eorb",
 	"elifterai",
-	"eorb",
 	"eturretlightai",
 	"elifterai",
 	"eturretlightai",
 	BuildTechLab,
 	"elifterai",
-	"eorb",
-	"eorb",
 	"eturretlightai",
 	"elifterai",
 }
@@ -754,6 +722,7 @@ local overseerorders = {
 	RandomOverseer,
 	BuildTechLab,
 	"elifterai",
+	"eorb",
 }
 
 local lifterlist = {
@@ -762,6 +731,12 @@ local lifterlist = {
 	RandomUnit,
 	BuildMex,
 	RandomLift,
+	RandomUnit,
+	RandomUnit,
+	RandomUnit,
+	BuildMex,
+	RandomLift,
+	"eorb",
 }
 
 local lifterareamex = {

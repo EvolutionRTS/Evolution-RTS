@@ -24,16 +24,16 @@ end
 
 behaviours = {
 	eorb = {
-		TaskQueueBehaviour,
+		AttackerBehaviour,
 	},
 	eorb_up1 = {
-		TaskQueueBehaviour,
+		AttackerBehaviour,
 	},
 	eorb_up2 = {
-		TaskQueueBehaviour,
+		AttackerBehaviour,
 	},
 	eorb_up3 = {
-		TaskQueueBehaviour,
+		AttackerBehaviour,
 	},
 	ebasefactory = {
 		TaskQueueBehaviour,

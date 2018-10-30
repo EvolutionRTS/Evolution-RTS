@@ -53,7 +53,15 @@ function AttackerBehaviour:Update()
 	end
 	local frame = SpGetGameFrame()
 	if (frame%450 == self.unitID%450) or self.myRange == nil then --refresh "myRange" casually because it can change with experience
-		self.myRange = SpGetUnitMaxRange(self.unitID)
+		local unitID = self.unit:Internal().id
+		local unitDefID = Spring.GetUnitDefID(unitID)
+		if UnitDefs[unitDefID].customParams.retreatrangedai then
+			--Spring.Echo("ORB RANGE!")
+			self.myRange = tonumber(UnitDefs[unitDefID].customParams.retreatrangedai)
+		else
+			--Spring.Echo("NORMAL RANGE!")
+			self.myRange = SpGetUnitMaxRange(self.unitID)
+		end
 	end
 	if (frame%90 == self.unitID%90) then -- a unit on map stays 'visible' for max 3s, this also reduces lag
 		local nearestVisibleAcrossMap = SpGetUnitNearestEnemy(self.unitID, self.AggFactor*self.myRange)
@@ -85,7 +93,7 @@ function AttackerBehaviour:OwnerBuilt()
 	self.unitID = self.unit:Internal().id
 	self.AggFactor = self.ai.attackhandler:GetAggressiveness(self)
 	self.type = self.ai.attackhandler:GetRole(self)
-	repairThisUnit = false
+	self.repairThisUnit = true
 end
 
 function AttackerBehaviour:OwnerDead()
@@ -106,22 +114,26 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	local mc, ms = Spring.GetTeamResources(teamID, "metal")
 	local ec, es = Spring.GetTeamResources(teamID, "energy")
 	local r = math.random(0,5)
-	if r == 0 and UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor == "0" then
+	if r == 0 and UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor == "0" and not string.find(UnitDefs[utype.id].name, "eorb") then
 		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
 	end
-	if UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor ~= "0" and mc < ms*0.25 and ec > es*0.99 then
+	if string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
+		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		return
+	end
+	if UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor ~= "0" and ec > es*0.98 then
 		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
 		return
 	end
 	local currenthealth = unit:GetHealth()
 	local maxhealth = unit:GetMaxHealth()
-	if currenthealth < maxhealth*0.99 and currenthealth < 5000 and not repairThisUnit then
-		repairThisUnit = true
-	else
-		repairThisUnit = false
+	if currenthealth < maxhealth*0.99 and currenthealth < 5000 then
+		self.repairThisUnit = true
+	elseif currenthealth >= maxhealth*0.99 then
+		self.repairThisUnit = false
 	end
 	-- Retreating first so we have less data process/only what matters
-	if repairThisUnit then
+	if self.repairThisUnit then
 	local nanotcx, nanotcy, nanotcz = GG.AiHelpers.NanoTC.GetClosestNanoTC(self.unitID)
 		if nanotcx and nanotcy and nanotcz then
 			p = api.Position()
@@ -150,7 +162,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		self.nearestVisibleAcrossMap = nil 
 	end
 	
-	if nearestVisibleInRange and (not utype:CanFly() == true) then -- process cases where there isn't any visible nearestVisibleInRange first
+	if not self.repairThisUnit and nearestVisibleInRange and (not utype:CanFly() == true) then -- process cases where there isn't any visible nearestVisibleInRange first
 		local ex,ey,ez = SpGetUnitPosition(nearestVisibleInRange)
 		local ux,uy,uz = SpGetUnitPosition(self.unitID)
 		local pointDis = SpGetUnitSeparation(self.unitID,nearestVisibleInRange)
@@ -160,14 +172,14 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		if self.myRange and enemyRange and self.myRange >= enemyRange and enemyRange > 50 then -- we skirm here
 			wantedRange = self.myRange
 		else -- randomize wantedRange between 25-75% of myRange
-			wantedRange = math.random(self.myRange*0.25, self.myRange*0.75)
+			wantedRange = math.random(self.myRange*0.80, self.myRange)
 		end
 		-- offset upos randomly so it moves a bit while keeping distance
 		local dx, _, dz, dw = SpGetUnitVelocity(self.unitID) -- attempt to not always queue awful turns
 		local modifier = "ctrl"
-		ux = ux + 10*dx + math.random (-80,80)
+		ux = ux + math.random (-80,80)
 		uy = uy
-		uz = uz + 10*dz + math.random (-80,80)
+		uz = uz + math.random (-80,80)
 		if wantedRange <= pointDis then
 			modifier = nil -- Do not try to move backwards if attempting to get closer to target
 		end
@@ -178,16 +190,22 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		local cx = ux+(ux-ex)*f
 		local cy = uy
 		local cz = uz+(uz-ez)*f
-		self.unit:Internal():ExecuteCustomCommand(CMD.MOVE, {cx, cy, cz}, {modifier})
+		if unit:Name() == "eorb" or unit:Name() == "eorb_up1" or unit:Name() == "eorb_up2" or unit:Name() == "eorb_up3" then
+			if SpGetUnitCurrentBuildPower(unit.id) == 0 then -- if currently IDLE 
+				self.unit:Internal():ExecuteCustomCommand(CMD.FIGHT, {cx, cy, cz}, {modifier})
+			end
+		else
+			self.unit:Internal():ExecuteCustomCommand(CMD.MOVE, {cx, cy, cz}, {modifier})
+		end
 		return
 	end
 	
 	-- We have processed units that had to retreat and units that had visible enemies within 2* their range
 	-- what are left are units with no visible enemies within 2*maxRange (no radar/los/prevLOS buildings)
 	local enemyposx, enemyposy, enemyposz
-	if nearestVisibleAcrossMap then
+	if not self.repairThisUnit and nearestVisibleAcrossMap then
 		enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestVisibleAcrossMap) -- visible on map
-	else
+	elseif not self.repairThisUnit then
 		local attacker = type == "attacker"
 		if attacker then
 			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 10000, false)
@@ -215,12 +233,10 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	self.target = p
 	self.attacking = true
 	if unit:Name() == "eorb" or unit:Name() == "eorb_up1" or unit:Name() == "eorb_up2" or unit:Name() == "eorb_up3" then
-		if SpGetUnitCurrentBuildPower(unit.id) == 0 then -- if currently IDLE
-			unit:ExecuteCustomCommand(CMD.FIGHT, {p.x, p.y, p.z}, {"alt"})
-		end
+		unit:ExecuteCustomCommand(CMD.FIGHT, {p.x, p.y, p.z}, {})
 	else
-		if (utype:CanFly() == true) then
-			unit:MoveAndFire(self.target)
+		if (utype:CanFly() == true) and unit:Name() ~= "escoutdrone" then
+			unit:MoveAndPatrol(self.target)
 		else
 			unit:Move(self.target)
 		end

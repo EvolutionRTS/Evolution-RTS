@@ -151,9 +151,9 @@ function distance(pos1,pos2)
 	return dist
 end
 function NoMex(x,z, batchextracts,teamID) -- Is there any better mex at this location (returns false if there is)
-	local mexesatspot = Spring.GetUnitsInCylinder(x,z, Game.extractorRadius+16)
+	local mexesatspot = Spring.GetUnitsInCylinder(x,z,128)
 		for ct, uid in pairs(mexesatspot) do
-			if UnitDefs[Spring.GetUnitDefID(uid)].extractsMetal >= batchextracts and (teamID and Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
+			if string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "emetalextractor") and (teamID and Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
 				return false
 			end	
 		end
@@ -161,9 +161,9 @@ function NoMex(x,z, batchextracts,teamID) -- Is there any better mex at this loc
 end
 
 function EnemyMex(x,z, batchextracts,teamID) -- Is there any better mex at this location (returns false if there is)
-	local mexesatspot = Spring.GetUnitsInCylinder(x,z, Game.extractorRadius+16)
+	local mexesatspot = Spring.GetUnitsInCylinder(x,z,128)
 		for ct, uid in pairs(mexesatspot) do
-			if UnitDefs[Spring.GetUnitDefID(uid)].extractsMetal > 0 and (teamID and not Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
+			if string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "emetalextractor") and (teamID and not Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
 				return true
 			end	
 		end
@@ -178,11 +178,13 @@ function MetalSpotHandler:ClosestFreeSpot(unittype,position,maxdis)
     for i,v in ipairs(self.spots) do
         local p = v
         local dist = distance(position,p)
-        if NoMex(p.x, p.z, UnitDefs[unittype.id].extractsMetal, teamID) == true then
-		    if dist < bestDistance then
-                bestDistance = dist
-                pos = p
-            end
+        if NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) == true then
+			if EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) == false then
+				if dist < bestDistance then
+					bestDistance = dist
+					pos = p
+				end
+			end
         end
     end
     return pos
@@ -196,7 +198,7 @@ function MetalSpotHandler:ClosestEnemySpot(unittype,position)
     for i,v in ipairs(self.spots) do
         local p = v
         local dist = distance(position,p)
-        if EnemyMex(p.x, p.z, UnitDefs[unittype.id].extractsMetal, teamID) == true then
+        if EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) == true then
 		    if dist < bestDistance then
                 bestDistance = dist
                 pos = p
@@ -207,7 +209,7 @@ function MetalSpotHandler:ClosestEnemySpot(unittype,position)
 end
 
 function MetalSpotHandler:GetClosestMexPosition(spot, x, z, uDefID, facing)
-	x, z = spot.x + 200, spot.z + 200 
+	x, z = spot.x, spot.z
 	local bestPos
 	local bestDist = math.huge
 	local positions = GetMexPositions(spot, uDefID, facing, true)
