@@ -272,6 +272,8 @@ function NewPlacementHandler:GetMinimalSpacing(utype)
 		return 0
 	elseif string.find(UnitDefs[utype.id].name, "emine") then
 		return 0
+	elseif string.find(UnitDefs[utype.id].name, "estorage") then
+		return 0
 	elseif UnitDefs[utype.id].canMove == true then
 		return 0
 	else

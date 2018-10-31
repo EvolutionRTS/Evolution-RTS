@@ -75,17 +75,17 @@ function TaskQueueBehaviour:GetQueue()
 end
 function TaskQueueBehaviour:CanQueueNextTask()
 	local unitID = self.unit:Internal().id
-	-- must: already have 1 queue (not override default behaviour)
-	-- Have less than 2 queues (not cancel the next buildings
-	-- Have "secured" the cur spot it has to build on (not cancel 1st in queue to start 2nd in queue == is currently building
-	-- We check curqueuelength == 1
-	-- Unit is not a factory
-	local notfactory = self.unit:Internal():Type():IsFactory() ~= true
+	--- must: already have 1 queue (not override default behaviour)
+	--- Have less than 2 queues (not cancel the next buildings
+	--- Have "secured" the cur spot it has to build on (not cancel 1st in queue to start 2nd in queue == is currently building
+	--- We check curqueuelength == 1
+	--- Unit is not a factory
+	--local notfactory = self.unit:Internal():Type():IsFactory() ~= true
 	local notprogressing = self.progress ~= true	-- Not already progressing in queue
 	local curqueuelength = #(Spring.GetCommandQueue(unitID,2))
 	local building = Spring.GetUnitIsBuilding(unitID)
 	-- we check cur buildspeed/power ~= 0
-	if curqueuelength <= 1 and building and notprogressing and notfactory then
+	if curqueuelength <= 0 and building and notprogressing then --and notfactory
 		local buildingDefID = Spring.GetUnitDefID(building)
 		local isextractor = string.find(UnitDefs[buildingDefID].name, "emetalextractor")
 		if not isextractor then
@@ -357,9 +357,9 @@ function TaskQueueBehaviour:OnBuildingPlacementSuccess( job, pos, facing )
 	self:StopWaitingForPosition()
 	local p = dump( pos )
 	local success self.unit:Internal():Build( job.unittype, pos, facing,{"shift"})
-	if success == false then
-		self:OnToNextTask()
-	end
+	--if success == false then
+		--self:OnToNextTask()
+	--end
 end
 
 function TaskQueueBehaviour:OnBuildingPlacementFailure( job )

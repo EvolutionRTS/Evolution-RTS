@@ -79,15 +79,21 @@ function AttackerBehaviour:Update()
 	end
 	local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 10000, false)
 	local distance = (nearestEnemy and SpGetUnitSeparation(self.unitID, nearestEnemy)) or 3000
-	local refreshRate = math.max(math.floor(((distance*0.5 or 250)/10)),10)
+	local refreshRate = math.max(math.floor(((distance*0.2 or 250)/10)),10)
 	if self.unitID%refreshRate == frame%refreshRate then
 		self:AttackCell(self.type, self.nearestVisibleAcrossMap, self.nearestVisibleInRange, self.enemyRange)
 	end
 end
 
 function AttackerBehaviour:OwnerBuilt()
-	self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 2 }, {})
+	if string.find(UnitDefs[Spring.GetUnitDefID(self.unit:Internal().id)].name, "eorb") then
+		self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 2 }, {})
+	else
+		self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 0 }, {})
+	end
 	self.unit:Internal():ExecuteCustomCommand(CMD.FIRE_STATE, { 2 }, {})
+	self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 1 }, {})
+	self.unit:Internal():ExecuteCustomCommand(34569, { 1 }, {})
 	self.attacking = true
 	self.active = true
 	self.unitID = self.unit:Internal().id
@@ -113,9 +119,13 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	--local unitCanMove = UnitDefs[unitDefID].canMove
 	local mc, ms = Spring.GetTeamResources(teamID, "metal")
 	local ec, es = Spring.GetTeamResources(teamID, "energy")
-	local r = math.random(0,5)
+	local r = math.random(0,10)
 	if r == 0 and UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor == "0" and not string.find(UnitDefs[utype.id].name, "eorb") then
 		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+	end
+	if (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") and ec > es*0.98 then
+		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		return
 	end
 	if string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
 		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
@@ -225,15 +235,21 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 			end
 		end
 	end
-
+	
 	p = api.Position()
-	p.x = enemyposx + math.random(-math.sqrt(2)/2*self.myRange*0.90, math.sqrt(2)/2*self.myRange*0.90)
-	p.z = enemyposz + math.random(-math.sqrt(2)/2*self.myRange*0.90, math.sqrt(2)/2*self.myRange*0.90)
-	p.y = enemyposy
+	if p == nil then 
+		return
+	end
+	p.x = enemyposx + math.random(-math.sqrt(2)/2*self.myRange*0.90, math.sqrt(2)/2*self.myRange*0.90) or 0
+	p.z = enemyposz + math.random(-math.sqrt(2)/2*self.myRange*0.90, math.sqrt(2)/2*self.myRange*0.90) or 0
+	p.y = enemyposy or 0
 	self.target = p
 	self.attacking = true
-	if unit:Name() == "eorb" or unit:Name() == "eorb_up1" or unit:Name() == "eorb_up2" or unit:Name() == "eorb_up3" then
-		unit:ExecuteCustomCommand(CMD.FIGHT, {p.x, p.y, p.z}, {})
+	if unit:Name() == "eorb" or unit:Name() == "eorb_up1" or unit:Name() == "eorb_up2" or unit:Name() == "eorb_up3" then 
+		if SpGetUnitCurrentBuildPower(unit.id) == 0 then -- if currently IDLE  then
+			unit:MoveAndPatrol(self.target)
+		end
+		return
 	else
 		if (utype:CanFly() == true) and unit:Name() ~= "escoutdrone" then
 			unit:MoveAndPatrol(self.target)

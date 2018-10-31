@@ -18,6 +18,7 @@ local spGetTeamInfo = Spring.GetTeamInfo
 local spGetTeamStartPosition = Spring.GetTeamStartPosition
 local spGetAllyTeamStartBox = Spring.GetAllyTeamStartBox
 local liftersqueued = 0
+local skip = {action = "nexttask"}
 --Spring.GetGameSeconds() -- checking gametime
 
 if aiDebug == nil then
@@ -581,7 +582,7 @@ function RandomUnit()
 							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 								return "elifterai"
 							else
-								return "eorb_up2"
+								return "eorb"
 							end
 						end
 					end
@@ -628,7 +629,7 @@ function RandomUnit()
 							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 								return "elifterai"
 							else
-								return "eorb_up3"
+								return "eorb"
 							end
 						end
 					end
@@ -640,15 +641,7 @@ function RandomUnit()
 					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 						return "elifterai"
 					else
-						if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-							return "eorb"
-						elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then
-							return "eorb_up1"
-						elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then
-							return "eorb_up2"
-						elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true then
-							return "eorb_up3"
-						end
+						return "eorb"	
 					end
 				elseif Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emine.id) > Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) and GG.TechCheck("tech1", ai.id) then
 					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) > Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai_up3.id) and GG.TechCheck("tech2", ai.id) then
@@ -681,7 +674,7 @@ function BuildTechLab()
 	if not GG.TechCheck("tech1", ai.id) and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
 		return "etech1"
 	else
-		return "emine"
+		return skip
 	end
 end
 
@@ -716,27 +709,28 @@ local overseerlistfirst = {
 }
 	
 local overseerorders = {
-	RandomOverseer,
-	RandomOverseer,
-	RandomOverseer,
-	RandomOverseer,
+	--RandomOverseer,
+	--RandomOverseer,
+	--RandomOverseer,
+	--RandomOverseer,
 	BuildTechLab,
 	"elifterai",
+	"eorb",
 	"eorb",
 }
 
 local lifterlist = {
-	RandomUnit,
-	RandomUnit,
-	RandomUnit,
-	BuildMex,
 	RandomLift,
 	RandomUnit,
 	RandomUnit,
 	RandomUnit,
 	BuildMex,
 	RandomLift,
-	"eorb",
+	RandomUnit,
+	RandomUnit,
+	RandomUnit,
+	BuildMex,
+	RandomLift,
 }
 
 local lifterareamex = {
