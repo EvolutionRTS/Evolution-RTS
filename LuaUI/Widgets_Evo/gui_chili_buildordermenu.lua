@@ -402,7 +402,8 @@ local function addOrderCommand(cmd)
         margin = {2, 2, 2, 2},
         OnMouseUp = {ActionCommand},
     }
-    button:SetCaption(cmd.name)
+    if cmd.name == "Repair" then button:SetCaption("Build")
+    else button:SetCaption(cmd.name) end
     chiliCache['button' .. cmd.id] = button
     local s = (btWidth - button.textPadding * 2) / glGetTextWidth(button.caption)
     button.font:SetSize(mathmin(s, Config.labels.captionFontMaxSize))
