@@ -100,7 +100,7 @@ local function updateHotkeyText()
 		hotkeyText = "Build hotkey: "
 		for i = 1, lengKeysPressed do
 		    -- hotkeyText = hotkeyText .. keyCodeToString[keysPressed[i]] .. " + "
-		    local keySymbol = sGetKeySymbol(keysPressed[i]) -- note: there are 2 outputs to this function
+		    local keySymbol = sGetKeySymbol(keysPressed[i])
 		    hotkeyText = hotkeyText .. keySymbol:sub(1, 1):upper() .. keySymbol:sub(2) .. " + "
 		    -- if i < lengKeysPressed then str = str .. " + " end
 		end
@@ -108,6 +108,18 @@ local function updateHotkeyText()
 	else hotkeyText = "" end
 end
 local function shortenHotkeyText() hotkeyText = hotkeyText:sub(1, -4) end
+local function hotkeyTargetDisabled() hotkeyText = hotkeyText:sub(1, -4) .. ' (Locked)' end
+WG.buildHotkeys = {}
+WG.buildHotkeys.keysPressed = {}
+WG.buildHotkeys.hasUpdated = false
+local function updateWidgetVar()
+	WG.buildHotkeys.keysPressed = {}
+	for i = 1, lengKeysPressed do
+		local keySymbol = sGetKeySymbol(keysPressed[i])
+		WG.buildHotkeys.keysPressed[i] = keySymbol:sub(1, 1):upper() .. keySymbol:sub(2)
+	end
+	WG.buildHotkeys.hasUpdated = true
+end
 
 function widget:CommandsChanged()
 	updateCommands = true
@@ -125,11 +137,13 @@ function widget:Update(dt)
 		for i = 1, #buildcmds do
 			local name = buildcmds[i].name
 			if name:find("_up", -5) then name = name:sub(1, -5) end
+			--if nameToKeyCode[name] and not buildcmds[i].disabled then
 			if nameToKeyCode[name] then
 				lengBuildOptions = lengBuildOptions + 1
 				buildOptions[lengBuildOptions] = {
 					keyCode = nameToKeyCode[name],
-					id = buildcmds[i].id
+					id = buildcmds[i].id,
+					disabled = buildcmds[i].disabled
 				}
 				if same and
 					(lengBuildOptions > oldLengBuildOptions or
@@ -153,6 +167,7 @@ function widget:KeyPress(key, mods, isRepeat)
 	lengKeysPressed = lengKeysPressed + 1
 	keysPressed[lengKeysPressed] = key
 	updateHotkeyText()
+	updateWidgetVar()
 
 	local lengMatches = 0
 	local matches = {}
@@ -169,7 +184,11 @@ function widget:KeyPress(key, mods, isRepeat)
 			end
 			if match then
 				lengMatches = lengMatches + 1
-				matches[lengMatches] = {id = buildOptions[i].id, sameLeng = lengKeyCode == lengKeysPressed}
+				matches[lengMatches] = {
+					id = buildOptions[i].id,
+					disabled = buildOptions[i].disabled,
+					sameLeng = lengKeyCode == lengKeysPressed
+				}
 			end
 		end
 	end
@@ -179,12 +198,18 @@ function widget:KeyPress(key, mods, isRepeat)
 				-- if playSounds then
 				-- 	sPlaySoundFile(sound_queue_add, 0.75, 'ui')
 				-- end
-				local alt, ctrl, meta, shift = sGetModKeyState()
-				local index = sGetCmdDescIndex(matches[i].id)
-				sSetActiveCommand(index, 1, true, false, alt, ctrl, meta, shift)
-				shortenHotkeyText()
+				if matches[i].disabled then
+					hotkeyTargetDisabled()
+				else
+					local alt, ctrl, meta, shift = sGetModKeyState()
+					local index = sGetCmdDescIndex(matches[i].id)
+					sSetActiveCommand(index, 1, true, false, alt, ctrl, meta, shift)
+					shortenHotkeyText()
+					updateWidgetVar()
+				end
 				keysPressed[lengKeysPressed] = nil
 				lengKeysPressed = lengKeysPressed - 1 -- so you can B + Q + Q + Q to spam units
+				if matches[i].disabled then updateWidgetVar() end -- Don't show you that you have a locked building selected
 				return true
 			end
 		end
@@ -192,6 +217,7 @@ function widget:KeyPress(key, mods, isRepeat)
 		lengKeysPressed = 0
 		keysPressed = {}
 		updateHotkeyText()
+		updateWidgetVar()
 	end
 	return false
 end
@@ -203,6 +229,7 @@ function widget:MousePress(x, y, button)
 		lengKeysPressed = 0
 		keysPressed = {}
 		updateHotkeyText()
+		updateWidgetVar()
 	end
 	return false
 end
