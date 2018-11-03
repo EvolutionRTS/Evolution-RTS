@@ -110,6 +110,7 @@ local unitDef                    = {
 	customParams                 = {
 		unittype				  = "mobile",
 		area_mex_def			 = "emetalextractor",
+		ProvideTech              = [[tech0]],
 		canbetransported 		 = "true",
 		needed_cover             = 1,
 		death_sounds             = "generic",
