@@ -35,50 +35,86 @@ behaviours = {
 	eorb_up3 = {
 		AttackerBehaviour,
 	},
+	
 	ebasefactory = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
 	eairplant = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
 	eamphibfac = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
 	eminifac = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
+	ehbotfac = {
+		TaskQueueBehaviour,
+	},
+	ebasefactory_up1 = {
+		TaskQueueBehaviour,
+	},
+	eairplant_up1 = {
+		TaskQueueBehaviour,
+	},
+	eamphibfac_up1 = {
+		TaskQueueBehaviour,
+	},
+	eminifac_up1 = {
+		TaskQueueBehaviour,
+	},
+	ehbotfac_up1 = {
+		TaskQueueBehaviour,
+	},
+	ebasefactory_up2 = {
+		TaskQueueBehaviour,
+	},
+	eairplant_up2 = {
+		TaskQueueBehaviour,
+	},
+	eamphibfac_up2 = {
+		TaskQueueBehaviour,
+	},
+	eminifac_up2 = {
+		TaskQueueBehaviour,
+	},
+	ehbotfac_up2 = {
+		TaskQueueBehaviour,
+	},
+	ebasefactory_up3 = {
+		TaskQueueBehaviour,
+	},
+	eairplant_up3 = {
+		TaskQueueBehaviour,
+	},
+	eamphibfac_up3 = {
+		TaskQueueBehaviour,
+	},
+	eminifac_up3 = {
+		TaskQueueBehaviour,
+	},
+	ehbotfac_up3 = {
+		TaskQueueBehaviour,
+	},
+	
 	ecommanderbattleai = {
 		TaskQueueBehaviour,
-		--LowEnergyBehaviour,
-		--EngineerTurretBehaviour,
 	},
+	
 	eengineer5 = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
+	
 	eamphibengineer = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
+	
 	eairengineer = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
+	
 	eallterrengineer = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
 	--eaimexer = {
 		--EngineerTurretBehaviour,

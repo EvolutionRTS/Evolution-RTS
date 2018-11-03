@@ -121,18 +121,18 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	local ec, es = Spring.GetTeamResources(teamID, "energy")
 	local r = math.random(0,10)
 	if r == 0 and UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor == "0" and not string.find(UnitDefs[utype.id].name, "eorb") then
-		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		self.unit:Internal():EZMorph()
 	end
 	if (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") and ec > es*0.98 then
-		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		self.unit:Internal():EZMorph()
 		return
 	end
 	if string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
-		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		self.unit:Internal():EZMorph()
 		return
 	end
 	if UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor ~= "0" and ec > es*0.98 then
-		Spring.GiveOrderToUnit(unitID, 31337, {}, {})
+		self.unit:Internal():EZMorph()
 		return
 	end
 	local currenthealth = unit:GetHealth()
@@ -182,7 +182,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		if self.myRange and enemyRange and self.myRange >= enemyRange and enemyRange > 50 then -- we skirm here
 			wantedRange = self.myRange
 		else -- randomize wantedRange between 25-75% of myRange
-			wantedRange = math.random(self.myRange*0.80, self.myRange)
+			wantedRange = math.random(self.myRange*0.75, self.myRange*0.90)
 		end
 		-- offset upos randomly so it moves a bit while keeping distance
 		local dx, _, dz, dw = SpGetUnitVelocity(self.unitID) -- attempt to not always queue awful turns

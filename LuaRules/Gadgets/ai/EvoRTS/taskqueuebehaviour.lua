@@ -215,6 +215,10 @@ function TaskQueueBehaviour:HandleActionTask( task )
 	local action = task.action
 	if action == "nexttask" then
 		self:OnToNextTask()
+	elseif action == "ezmorph" then
+		--Spring.Echo("Trying to EZMorph "..self.unit:Internal().id)
+		self.unit:Internal():EZMorph()
+		self:OnToNextTask()
 	elseif action == "wait" then
         if task.frames == "infinite" then
             return

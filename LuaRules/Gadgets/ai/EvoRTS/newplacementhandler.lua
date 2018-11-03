@@ -268,12 +268,12 @@ function NewPlacementHandler:GetExistingPlansByUnit(unit)
 end
 
 function NewPlacementHandler:GetMinimalSpacing(utype)
-	if string.find(UnitDefs[utype.id].name, "esolar") then
+	if string.find(UnitDefs[utype.id].name, "emine") then
 		return 0
-	elseif string.find(UnitDefs[utype.id].name, "emine") then
+	elseif string.find(UnitDefs[utype.id].name, "eairplant") then
 		return 0
-	elseif string.find(UnitDefs[utype.id].name, "estorage") then
-		return 0
+	elseif string.find(UnitDefs[utype.id].name, "eminifac") or string.find(UnitDefs[utype.id].name, "eamphibfac") or string.find(UnitDefs[utype.id].name, "ehbotfac") or string.find(UnitDefs[utype.id].name, "ebasefactory") then
+		return 150
 	elseif UnitDefs[utype.id].canMove == true then
 		return 0
 	else

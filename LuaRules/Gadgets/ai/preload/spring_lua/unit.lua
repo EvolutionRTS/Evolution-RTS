@@ -298,6 +298,11 @@ function ShardUnit:MorphInto( type )
 	return true
 end
 
+function ShardUnit:EZMorph()
+	Spring.GiveOrderToUnit( self.id, 31337, {}, {} )
+	return true
+end
+
 function ShardUnit:HoldFire()
 	Spring.GiveOrderToUnit( self.id, CMD.FIRE_STATE, { 0 }, {} )
 	return true
