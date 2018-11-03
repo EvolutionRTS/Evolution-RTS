@@ -1134,6 +1134,15 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SetConfigInt("evo_dynamicmusic", value)
 		elseif id == 'interruptmusic' then
 			Spring.SetConfigInt("evo_interruptmusic", value)
+		elseif id == 'showcost' then
+			Spring.SetConfigInt("evo_showcost", value)
+			if WG.buildOrderUI then WG.buildOrderUI.updateConfigInt = true end
+		elseif id == 'showtechreq' then
+			Spring.SetConfigInt("evo_showtechreq", value)
+			if WG.buildOrderUI then WG.buildOrderUI.updateConfigInt = true end
+		elseif id == 'showhotkeys' then
+			Spring.SetConfigInt("evo_showhotkeys", value)
+			if WG.buildOrderUI then WG.buildOrderUI.updateConfigInt = true end
 		end
 
 		if options[i].widget ~= nil then
@@ -1885,7 +1894,10 @@ function init()
 		{id="lockcamera_los", group="control", name=widgetOptionColor.."   show tracked player LoS", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockLos()), description="When viewing a players camera and los, shows shaded los ranges too"},
 
 		-- UI
-		{id="buildordermenu", group="ui", name="Build Menu Preset", type="select", options={'Horizontal','Compact Horizontal','Traditional','Right Side','Right Side Compact'}, value=tonumber(Spring.GetConfigInt("evo_buildorderui",0) or 0) == 0, description='Use these presets to change the build menu size and position.\nBuild and Order menus can further be custom positioned using TweakMode (ctrl+f11)\n\nNOTE: Changing this setting will cause the interface to be reloaded'},
+		{id="buildordermenu", group="ui", name="Build Menu Preset", type="select", options={'Horizontal','Compact Horizontal','Traditional','Right Side','Right Side Compact'}, value=Spring.GetConfigInt("evo_buildorderui",0) + 1, description='Use these presets to change the build menu size and position.\nBuild and Order menus can further be custom positioned using TweakMode (ctrl+f11)\n\nNOTE: Changing this setting will cause the interface to be reloaded'},
+		{id="showcost", group="ui", name="Show Cost", type="bool", value=Spring.GetConfigInt("evo_showcost",1) == 1, description='Show cost of units in the build icon'},
+		{id="showtechreq", group="ui", name="Show Tech Requirement", type="bool", value=Spring.GetConfigInt("evo_showtechreq",1) == 1, description='Show tech requirement of units in the build icon'},
+		{id="showhotkeys", group="ui", name="Show Build Hotkeys", type="bool", value=Spring.GetConfigInt("evo_showhotkeys",1) == 1, description='Show build hotkeys in the build icon'},
 		
 		{id="teamcolors", group="ui", widget="Player Color Palette", name="Team colors based on a palette", type="bool", value=GetWidgetToggleValue("Player Color Palette"), description='Replaces lobby team colors for a color palette based one\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
 		{id="sameteamcolors", group="ui", name=widgetOptionColor.."   same team colors", type="bool", value=(WG['playercolorpalette']~=nil and WG['playercolorpalette'].getSameTeamColors~=nil and WG['playercolorpalette'].getSameTeamColors()), description='Use the same teamcolor for all the players in a team\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
