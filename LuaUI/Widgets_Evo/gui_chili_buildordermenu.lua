@@ -545,7 +545,7 @@ local function addBuildCommand(cmd)
             end
             -- chiliCache['hotkeyLabel' .. cmd.id]:SetCaption(color2incolor(1,1,1) .. nameToKeySymbols[cmd.name])
             local function updateLabel()
-                local str = ''
+                local str = color2incolor(1,1,1)
                 local leng = #nameToKeySymbols[cmd.name]
                 local getLengKeysPressed = WG.buildHotkeys and #WG.buildHotkeys.keysPressed or 0
                 local matching = true
