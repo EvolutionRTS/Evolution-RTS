@@ -330,7 +330,7 @@ local function updateButtons()
     if (WG['commands'] ~= nil) then text = text..'Cmd    ' end
     if (WG['keybinds'] ~= nil) then text = text..'Keys    ' end
     if (WG['changelog'] ~= nil) then text = text..'Changes    ' end
-    if (WG['options'] ~= nil) then text = text..'Options    ' end
+    if (WG['options'] ~= nil) then text = text..'Settings    ' end
     text = text..'Quit    '
 
 	local fontsize = totalWidth / glGetTextWidth(text)

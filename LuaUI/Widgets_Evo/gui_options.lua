@@ -5,7 +5,7 @@ return {
 	desc    = "",
 	author  = "Floris",
 	date    = "September 2016",
-	layer   = 20000,
+	layer   = -20000,
 	enabled = true,
 	handler = true,
 }
@@ -501,7 +501,7 @@ function DrawWindow()
 	gl.PopMatrix()]]--
 
 	-- title
-	local title = "Options"
+	local title = "Settings"
 	local titleFontSize = 18
 	titleRect = {x-bgMargin, y+bgMargin, x+(glGetTextWidth(title)*titleFontSize)+27-bgMargin, y+37 }
 
