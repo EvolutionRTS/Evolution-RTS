@@ -12,8 +12,7 @@ humanName = [[Leveler]]
 objectName = "eamphibleveler.s3o"
 script = "eamphibleveler.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
 --supply = [[30]]
 

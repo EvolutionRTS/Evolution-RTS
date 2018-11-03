@@ -1,25 +1,25 @@
--- UNITDEF -- ESCOUT --
+-- UNITDEF -- EKROW_up3 --
 --------------------------------------------------------------------------------
 
-unitName = "escout_up2"
+unitName = "ekrow_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[2]]
+isUpgraded = [[3]]
 
-humanName = [[AirSkout Mark III]]
+humanName = [[Krow MK IV]]
 
-objectName = "escout2.s3o"
-script = "escout2.cob"
+objectName = "ekrow.s3o"
+script = "ekrow.cob"
 
 
-tech = [[tech0]]
+tech = [[tech3]]
 armortype = [[light]]
-supply = [[0]]
 
-VFS.Include("units-configs-basedefs/basedefs/air/escout_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/air/ekrow_basedef.lua")
 
--- unitDef.weaponDefs = weaponDefs
+unitDef.weaponDefs = weaponDefs
+
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName] = unitDef })

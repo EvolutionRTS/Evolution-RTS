@@ -1,19 +1,18 @@
--- UNITDEF -- eamphibleveler_up1 --
+-- UNITDEF -- eamphibleveler_up3 --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibleveler_up1"
+unitName = "eamphibleveler_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[1]]
+isUpgraded = [[3]]
 
-humanName = [[Leveler Mark II]]
+humanName = [[Leveler Mark IV]]
 
 objectName = "eamphibleveler.s3o"
 script = "eamphibleveler.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
 --supply = [[30]]
 

@@ -1,18 +1,18 @@
--- UNITDEF -- ehbotkarganneth_turret_up2 --
+-- UNITDEF -- ehbotkarganneth_turret_up3 --
 --------------------------------------------------------------------------------
 
-unitName = [[ehbotkarganneth_turret_up2]]
+unitName = [[ehbotkarganneth_turret_up3]]
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[2]]
+isUpgraded = [[3]]
 
-humanName = [[Karganneth (Deployed) MK III]]
+humanName = [[Karganneth (Deployed) MK IV]]
 
 objectName = [[ehbotkarganneth_turret.s3o]]
 script = [[ehbotkarganneth_turret_lus.lua]]
 
-tech = [[endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/hbot/turret/ehbotkarganneth_turret_basedef.lua")

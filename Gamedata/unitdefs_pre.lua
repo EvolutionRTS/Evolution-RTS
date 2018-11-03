@@ -25,7 +25,7 @@ Shared.buildList = {
 	[[ebox]],
 	[[ehbotengineer]],
 	[[eorb]],
-	[[ecommander]],
+	-- [[ecommander]],
 }
 
 Shared.buildListChicken = {
@@ -416,8 +416,8 @@ Shared.buildListAllTerrainFactory = {
 		[[eallterrmed]],
 		[[eallterrheavy]],
 		[[eallterrassault]],
-		[[eallterranarchid]],
 		[[eallterrshield]],
+		[[eallterranarchid]],
 }
 
 Shared.buildListAllTerrainFactory_up1 = {
@@ -426,8 +426,8 @@ Shared.buildListAllTerrainFactory_up1 = {
 		[[eallterrmed_up1]],
 		[[eallterrheavy_up1]],
 		[[eallterrassault_up1]],
-		[[eallterranarchid_up1]],
 		[[eallterrshield_up1]],
+		[[eallterranarchid_up1]],
 }
 
 Shared.buildListAllTerrainFactory_up2 = {
@@ -436,8 +436,8 @@ Shared.buildListAllTerrainFactory_up2 = {
 		[[eallterrmed_up2]],
 		[[eallterrheavy_up2]],
 		[[eallterrassault_up2]],
-		[[eallterranarchid_up2]],
 		[[eallterrshield_up2]],
+		[[eallterranarchid_up2]],
 }
 
 Shared.buildListAllTerrainFactory_up3 = {
@@ -446,8 +446,8 @@ Shared.buildListAllTerrainFactory_up3 = {
 		[[eallterrmed_up3]],
 		[[eallterrheavy_up3]],
 		[[eallterrassault_up3]],
-		[[eallterranarchid_up3]],
 		[[eallterrshield_up3]],
+		[[eallterranarchid_up3]],
 }
 --
 --

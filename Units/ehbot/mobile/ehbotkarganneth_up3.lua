@@ -1,18 +1,18 @@
--- UNITDEF -- ehbotkarganneth_up1 --
+-- UNITDEF -- ehbotkarganneth_up3 --
 --------------------------------------------------------------------------------
 
-unitName = "ehbotkarganneth_up1"
+unitName = "ehbotkarganneth_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[1]]
+isUpgraded = [[3]]
 
-humanName = [[Karganneth MK II]]
+humanName = [[Karganneth MK IV]]
 
 objectName = "ehbotkarganneth.s3o"
 script = "ehbotkarganneth_lus.lua"
 
-tech = [[endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
 
 VFS.Include("units-configs-basedefs/basedefs/hbot/mobile/ehbotkarganneth_basedef.lua")

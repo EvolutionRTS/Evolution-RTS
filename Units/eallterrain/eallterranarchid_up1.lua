@@ -1,23 +1,22 @@
--- UNITDEF -- eamphibleveler_up2 --
+-- UNITDEF -- eallterranarchid -- Anarchid --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibleveler_up2"
+unitName = "eallterranarchid_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[2]]
+isUpgraded = [[1]]
 
-humanName = [[Leveler Mark III]]
+humanName = [[Anarchid Mark II]]
 
-objectName = "eamphibleveler.s3o"
-script = "eamphibleveler.cob"
+objectName = "eallterranarchid.s3o"
+script = "eallterranarchid.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
---supply = [[30]]
+--supply = [[35]]
 
-VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibleveler_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterranarchid_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

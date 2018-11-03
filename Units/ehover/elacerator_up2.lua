@@ -1,28 +1,26 @@
--- UNITDEF -- EKROW_up3 --
+-- UNITDEF -- elacerator_up2 --
 --------------------------------------------------------------------------------
 
-unitName = "ekrow_up3"
+unitName = "elacerator_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[3]]
+isUpgraded	= [[2]]
 
-humanName = [[Krow MK IV]]
+humanName = [[Lacerator Mark III]]
 
-objectName = "ekrow.s3o"
-script = "ekrow.cob"
+objectName = "elacerator.s3o"
+script = "elacerator.cob"
 
+tech = [[tech3]]
+armortype = [[armored]]
+--supply = [[25]]
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
-armortype = [[light]]
-
-VFS.Include("Units-Configs-Basedefs/basedefs/air/ekrow_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/elacerator_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
-
 --------------------------------------------------------------------------------
 
-return lowerkeys({ [unitName] = unitDef })
+return lowerkeys({ [unitName]    = unitDef })
 
 --------------------------------------------------------------------------------

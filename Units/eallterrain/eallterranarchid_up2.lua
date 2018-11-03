@@ -1,23 +1,22 @@
--- UNITDEF -- elacerator_up1 --
+-- UNITDEF -- eallterranarchid -- Anarchid --
 --------------------------------------------------------------------------------
 
-unitName = "elacerator_up1"
+unitName = "eallterranarchid_up2"
 
 --------------------------------------------------------------------------------
 
-isUpgraded	= [[1]]
+isUpgraded = [[2]]
 
-humanName = [[Lacerator Mark II]]
+humanName = [[Anarchid Mark III]]
 
-objectName = "elacerator.s3o"
-script = "elacerator.cob"
+objectName = "eallterranarchid.s3o"
+script = "eallterranarchid.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
---supply = [[25]]
+---supply = [[35]]
 
-VFS.Include("units-configs-basedefs/basedefs/hover/elacerator_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterranarchid_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

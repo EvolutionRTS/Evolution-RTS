@@ -1,28 +1,26 @@
--- UNITDEF -- EKROW_up1 --
+-- UNITDEF -- eamphibleveler_up1 --
 --------------------------------------------------------------------------------
 
-unitName = "ekrow_up1"
+unitName = "eamphibleveler_up1"
 
 --------------------------------------------------------------------------------
 
 isUpgraded = [[1]]
 
-humanName = [[Krow MK II]]
+humanName = [[Leveler Mark II]]
 
-objectName = "ekrow.s3o"
-script = "ekrow.cob"
+objectName = "eamphibleveler.s3o"
+script = "eamphibleveler.cob"
 
+tech = [[tech3]]
+armortype = [[armored]]
+--supply = [[30]]
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
-armortype = [[light]]
-
-VFS.Include("Units-Configs-Basedefs/basedefs/air/ekrow_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibleveler_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
-
 --------------------------------------------------------------------------------
 
-return lowerkeys({ [unitName] = unitDef })
+return lowerkeys({ [unitName]    = unitDef })
 
 --------------------------------------------------------------------------------

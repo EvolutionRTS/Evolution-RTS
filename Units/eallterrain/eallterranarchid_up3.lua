@@ -1,21 +1,20 @@
 -- UNITDEF -- eallterranarchid -- Anarchid --
 --------------------------------------------------------------------------------
 
-unitName = "eallterranarchid_up2"
+unitName = "eallterranarchid_up3"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[2]]
+isUpgraded = [[3]]
 
-humanName = [[Anarchid Mark III]]
+humanName = [[Anarchid Mark IV]]
 
 objectName = "eallterranarchid.s3o"
 script = "eallterranarchid.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
----supply = [[35]]
+--supply = [[35]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/allterrain/eallterranarchid_basedef.lua")
 

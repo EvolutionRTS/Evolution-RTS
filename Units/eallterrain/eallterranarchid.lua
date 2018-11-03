@@ -12,8 +12,7 @@ humanName = [[Anarchid]]
 objectName = "eallterranarchid.s3o"
 script = "eallterranarchid.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
 --supply = [[35]]
 

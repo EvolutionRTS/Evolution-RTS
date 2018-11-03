@@ -1,23 +1,22 @@
--- UNITDEF -- eamphibleveler_up3 --
+-- UNITDEF -- elacerator_up1 --
 --------------------------------------------------------------------------------
 
-unitName = "eamphibleveler_up3"
+unitName = "elacerator_up1"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[3]]
+isUpgraded	= [[1]]
 
-humanName = [[Leveler Mark IV]]
+humanName = [[Lacerator Mark II]]
 
-objectName = "eamphibleveler.s3o"
-script = "eamphibleveler.cob"
+objectName = "elacerator.s3o"
+script = "elacerator.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
---supply = [[30]]
+--supply = [[25]]
 
-VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibleveler_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/elacerator_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

@@ -104,7 +104,6 @@ unitDef                    = {
 		unittype				  = "mobile",
 		isupgraded           	 = isUpgraded,
 		death_sounds             = "nuke",
-		ProvideTech              = techprovided,
 		RequireTech              = tech,
 		armortype                = armortype,
 		--supply_cost              = supply,

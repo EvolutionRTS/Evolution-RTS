@@ -1,23 +1,22 @@
--- UNITDEF -- EDRONE_up1 --
+-- UNITDEF -- EKROW_up1 --
 --------------------------------------------------------------------------------
 
-unitName = "edrone_up1"
+unitName = "ekrow_up1"
 
 --------------------------------------------------------------------------------
 
 isUpgraded = [[1]]
 
-humanName = [[Mosquito MK II]]
+humanName = [[Krow MK II]]
 
-objectName = "edrone2.s3o"
-script = "edrone2.cob"
+objectName = "ekrow.s3o"
+script = "ekrow.cob"
 
 
-tech = [[tech0]]
+tech = [[tech3]]
 armortype = [[light]]
-supply = [[9]]
 
-VFS.Include("units-configs-basedefs/basedefs/air/edrone_basedef.lua")
+VFS.Include("Units-Configs-Basedefs/basedefs/air/ekrow_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 
