@@ -80,12 +80,12 @@ function TaskQueueBehaviour:CanQueueNextTask()
 	--- Have "secured" the cur spot it has to build on (not cancel 1st in queue to start 2nd in queue == is currently building
 	--- We check curqueuelength == 1
 	--- Unit is not a factory
-	--local notfactory = self.unit:Internal():Type():IsFactory() ~= true
+	local notfactory = self.unit:Internal():Type():IsFactory() ~= true
 	local notprogressing = self.progress ~= true	-- Not already progressing in queue
 	local curqueuelength = #(Spring.GetCommandQueue(unitID,2))
 	local building = Spring.GetUnitIsBuilding(unitID)
 	-- we check cur buildspeed/power ~= 0
-	if curqueuelength <= 0 and building and notprogressing then --and notfactory
+	if curqueuelength <= 0 and building and notprogressing and notfactory then 
 		local buildingDefID = Spring.GetUnitDefID(building)
 		local isextractor = string.find(UnitDefs[buildingDefID].name, "emetalextractor")
 		if not isextractor then

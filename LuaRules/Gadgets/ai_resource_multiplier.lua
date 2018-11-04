@@ -96,7 +96,7 @@ end
 
 function gadget:Initialize()
 	for uDefID,def in ipairs(UnitDefs) do
-		if def.energyMake >= 10 then	-- filter insignificant production to save some performance
+		if def.energyMake >= 5 then	-- filter insignificant production to save some performance
 			energyUnitDefs[uDefID] = def.energyMake
 			ecoUnitsDefs[uDefID] = true
 		end
@@ -113,6 +113,9 @@ function gadget:Initialize()
 			ecoUnitsDefs[uDefID] = true
 		end
 		if def.extractsMetal > 0 then
+			if def.customParams then
+				mexUnitDefs[uDefID] = def.customParams.metal_extractor
+			end
 			mexUnitDefs[uDefID] = def.extractsMetal
 			ecoUnitsDefs[uDefID] = true
 		end

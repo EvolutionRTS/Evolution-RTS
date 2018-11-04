@@ -69,11 +69,7 @@ function BuildMex()
 			return "eorb"
 		end
 	else
-		if aimexamount * 15 <= Spring.GetGameSeconds()  then
-			return "emetalextractor"
-		else
-			return "ebomb"
-		end
+		return "emetalextractor"
 	end
 end
  
@@ -109,13 +105,11 @@ end
 		else
 			return "esolar2"
 		end
-	elseif mc >= ms - ms*0.10 then
+	elseif mc >= ms - ms*0.10 and Spring.GetGameSeconds() < 300 then
 		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
-		elseif Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb_up1.id) < 6  or Spring.GetGameSeconds() > 300 then
+		else
 			return "eorb"
-		else 
-			return skip
 		end
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
@@ -590,7 +584,7 @@ function BuildTechFacility(tqb, ai, unit)
 end
 
 function BuildFactory(tqb, ai, unit)
-	local count = AllFacs(tqb, ai, unit)
+	local count = GetFacs(tqb,ai,unit)
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	if count < Spring.GetGameSeconds()*0.00332 then
 		if GG.TechCheck("tech2", ai.id) then 
