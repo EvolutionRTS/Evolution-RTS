@@ -1060,9 +1060,31 @@ function gadget:GameFrame(n)
   end
 end
 
+local function handleEzMorph(unitID, unitDefID, teamID, targetDefID)
+	local morphData = morphUnits[unitID]
+	if morphData then
+		return true, false
+	end
+ 	local morphSet = morphDefs[unitDefID]
+	if not morphSet then
+		return true, true
+	end
+ 	for morphCmd, morphDef in pairs(morphSet) do
+		if not targetDefID or morphDef.into == targetDefID then
+			StartMorph(unitID, unitDefID, teamID, morphDef)
+			break
+		end
+	end
+ 	return true, true
+end
+
 --// Allows or disallow the morph command button
 function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
   local morphData = morphUnits[unitID]
+  if cmdID == CMD_EZ_MORPH and isFactory(unitDefID) then
+    handleEzMorph(unitID, unitDefID, teamID, cmdParams[1])
+    return false
+  end
   if (morphData) then
     if (cmdID==morphData.def.stopCmd)or(cmdID == CMD.STOP) then
 	  if not Spring.GetUnitTransporter(unitID) then
@@ -1099,24 +1121,6 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
   end
 
   return true
-end
-
-local function handleEzMorph(unitID, unitDefID, teamID, targetDefID)
-	local morphData = morphUnits[unitID]
-	if morphData then
-		return true, false
-	end
- 	local morphSet = morphDefs[unitDefID]
-	if not morphSet then
-		return true, true
-	end
- 	for morphCmd, morphDef in pairs(morphSet) do
-		if not targetDefID or morphDef.into == targetDefID then
-			StartMorph(unitID, unitDefID, teamID, morphDef)
-			break
-		end
-	end
- 	return true, true
 end
 
 function gadget:CommandFallback(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
