@@ -112,8 +112,10 @@ end
 	elseif mc >= ms - ms*0.10 then
 		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
-		else
+		elseif Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb_up1.id) < 6  or Spring.GetGameSeconds() > 300 then
 			return "eorb"
+		else 
+			return skip
 		end
 	elseif es < Spring.GetGameSeconds()*0.5 then
 		return "estorage"
@@ -437,218 +439,6 @@ function RandomOverseer( tqb, ai, unit )
 		end
 	end
 end
-
-function RandomUnit( tqb, ai, unit )
-	--Locals
-	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	local ec, es = Spring.GetTeamResources(ai.id, "energy")
-	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
-	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
-	local unitcount = Spring.GetTeamUnitCount(ai.id)
-	
-	--DEBUG LOG
-	if aiDebug == "enabled" then
-		Spring.Echo([[Shard Debug Log]])
-		Spring.Echo([[--Units:]])
-		Spring.Echo([[AI have ]] .. unitcount .. [[ units!]])
-		Spring.Echo([[--Resources:]])
-		Spring.Echo([[AI is using ]] .. su ..[[/]] .. sm .. [[ supply!]])
-		Spring.Echo([[AI have ]] .. math.ceil(mc) ..[[/]] .. ms .. [[ metal and ]] .. math.ceil(ec) .. [[/]] .. es .. [[ energy!]])
-	else
-	end
-
-	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 4 then
-		return "elifterai"
-	elseif su <= sm-20 and GG.TechCheck("tech1", ai.id) == true then
-				
-			if GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 1
-			
-			local r = math.random(0,12)
-				if r == 0 then
-					return "eallterrlight"
-				elseif r == 1 then
-					return "eallterrassault"
-				elseif r == 2 then
-					return "elighttank3"
-				elseif r == 3 then
-					return "eartytank"
-				elseif r == 4 then
-					return "escoutdrone"
-				elseif r == 5 then
-					return "eamphibarty"
-				elseif r == 6 then
-					return "eamphibriot"
-				elseif r == 7 then
-					return "eamphibbuggy"
-				elseif r == 8 then
-					return "ehbotpeewee"
-				elseif r == 9 then
-					return "eriottank2"
-				elseif r == 10 then
-					return "eamphibneedle"
-				elseif r == 11 then
-					return "eallterrriot"
-				elseif r == 12 then
-					return "ehbotthud"
-				end
-			
-			elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then ------- Reached Tech 2 MK 2
-
-			local r = math.random(0,9)
-				if r == 0 then
-					return "eheavytank3_up1"
-				elseif r == 1 then
-					return "ehbotrocko_up1"
-				elseif r == 2 then
-					return "eallterrmed_up1"
-				elseif r == 3 then
-					return "eallterrheavy_up1"
-				elseif r == 4 then
-					return "egunship2_up1"
-				elseif r == 5 then
-					return "ebomber_up1"
-				elseif r == 6 then
-					return "efighter_up1"
-				elseif r == 7 then
-					return "eamphibrock_up1"
-				elseif r == 8 then
-					return "emissiletank_up1"
-				elseif r == 9 then
-					return "eamphibmedtank_up1"
-				end	
-
-			elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1300 then ------- Reached Tech 3 MK 3
-					local r2 = math.random(0,50)
-					if r2 ~= 0 then
-						local r = math.random(0,10)
-						if r == 0 then
-							return "eheavytank3_up2"
-						elseif r == 1 then
-							return "ehbotrocko_up2"
-						elseif r == 2 then
-							return "eallterrmed_up2"
-						elseif r == 3 then
-							return "eallterrheavy_up2"
-						elseif r == 4 then
-							return "egunship2_up2"
-						elseif r == 5 then
-							return "ebomber_up2"
-						elseif r == 6 then
-							return "efighter_up2"
-						elseif r == 7 then
-							return "eairemp_up2"
-						elseif r == 8 then
-							return "eamphibrock_up2"
-						elseif r == 9 then
-							return "emissiletank_up2"
-						elseif r == 10 then
-							return "eamphibmedtank_up2"
-						end
-					elseif r2 == 0 then
-						if GG.TechCheck("endbringer", ai.id) == true then
-						local r = math.random(0,4)
-							if r == 0 then
-								return "eamphibleveler_up2"
-							elseif r == 1 then
-								return "eallterranarchid_up2"
-							elseif r == 2 then
-								return "elacerator_up2"
-							elseif r == 3 then
-								return "ekrow_up2"
-							elseif r == 4 then
-								return "ehbotkarganneth_up2"
-							end
-						else
-							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
-								return "elifterai"
-							else
-								return "eorb"
-							end
-						end
-					end
-					
-			elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1300 then ------- Reached MK 4
-				
-				local r2 = math.random(0,50)
-				if r2 ~= 0 then
-					local r = math.random(0,8)
-					if r == 0 then
-						return "eheavytank3_up3"
-					elseif r == 1 then
-						return "ehbotrocko_up3"
-					elseif r == 2 then
-						return "eallterrmed_up3"
-					elseif r == 3 then
-						return "eallterrheavy_up3"
-					elseif r == 4 then
-						return "egunship2_up3"
-					elseif r == 5 then
-						return "eairemp_up3"
-					elseif r == 6 then
-						return "eamphibrock_up3"
-					elseif r == 7 then
-						return "emissiletank_up3"
-					elseif r == 8 then
-						return "eamphibmedtank_up3"
-					end
-				elseif r2 == 0 then
-					if GG.TechCheck("endbringer", ai.id) == true then
-						local r = math.random(0,4)
-							if r == 0 then
-								return "eamphibleveler_up3"
-							elseif r == 1 then
-								return "eallterranarchid_up3"
-							elseif r == 2 then
-								return "elacerator_up3"
-							elseif r == 3 then
-								return "ekrow_up3"
-							elseif r == 4 then
-								return "ehbotkarganneth_up3"
-							end
-						else
-							if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
-								return "elifterai"
-							else
-								return "eorb"
-							end
-						end
-					end
-				end	
-		else
-				if es < Spring.GetGameSeconds()*0.5 then
-					return "estorage"
-				elseif mc >= ms - ms*0.20 then
-					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
-						return "elifterai"
-					else
-						return "eorb"	
-					end
-				elseif Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emine.id) > Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) and GG.TechCheck("tech1", ai.id) then
-					if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretlightai_up3.id) > Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eturretheavyai_up3.id) and GG.TechCheck("tech2", ai.id) then
-						if GG.TechCheck("tech3", ai.id) then
-							return "eturretheavyai_up3"
-						else
-							return "eturretheavyai"
-						end
-					else
-						if GG.TechCheck("tech3", ai.id) then
-							return "eturretlightai_up3"
-						else
-							return "eturretlightai"
-						end
-					end
-				else
-					local r = math.random(0,5)
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "escoutdrone"
-					else
-						return "ebomb"
-					end
-				end
-		end
-	end
 
 	
 ------------------------------------------------------------------------------------------------------------NEW STUFF
@@ -1323,13 +1113,11 @@ local overseerlistfirst = {
 	"emetalextractor",
 	"emetalextractor",
 	"elifterai",
-	"eorb",
-	"eorb",
+	"elifterai",
 	"elifterai",
 	"elifterai",
 	BuildTechFacility,
 	BuildFactory,
-	"esolar2",
 	"estorage",
 	"estorage",
 	"elifterai",
@@ -1356,6 +1144,7 @@ local overseerorders = {
 }
 
 local lifterlist = {
+	"estorage",
 	BuildFactory,
 	RandomLift,
 	BuildMex,

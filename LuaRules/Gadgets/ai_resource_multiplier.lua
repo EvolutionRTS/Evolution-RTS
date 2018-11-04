@@ -142,7 +142,6 @@ end
 function gadget:GameFrame(n)
 
 	if n % 30 == 1 then
-
 		-- a just finished mex doesnt produce metal yet so we sceduled it
 		for uID,params in pairs(newMexes) do
 			if n > params[1] then
@@ -164,6 +163,10 @@ function gadget:GameFrame(n)
 
 			--Spring.Echo(totalEnergy..'   +   '..((totalEnergy * (aiResourceMultiplier + timedResBonus)) - totalEnergy))
 			--Spring.Echo(totalMetal..'   +   '..((totalMetal * (aiResourceMultiplier + timedResBonus)) - totalMetal))
+			if Spring.GetGameSeconds() < 300 then
+				Spring.AddTeamResource(TeamID,"e", 300 - Spring.GetGameSeconds())
+				Spring.AddTeamResource(TeamID,"m", 300 - Spring.GetGameSeconds())
+			end
 			Spring.AddTeamResource(TeamID,"e", (totalEnergy * (aiResourceMultiplier + timedResBonus)) - totalEnergy)
 			Spring.AddTeamResource(TeamID,"m", (totalMetal * (aiResourceMultiplier + timedResBonus)) - totalMetal)
 		end
