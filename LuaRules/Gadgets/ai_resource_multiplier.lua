@@ -113,7 +113,7 @@ function gadget:Initialize()
 			ecoUnitsDefs[uDefID] = true
 		end
 		if def.customParams then
-			if def.customParams.metal_extractor and def.customParams.metal_extractor > 0 then
+			if def.customParams.metal_extractor and tonumber(def.customParams.metal_extractor) > 0 then
 				mexUnitDefs[uDefID] = def.customParams.metal_extractor
 				mexUnitDefs[uDefID] = def.extractsMetal
 				ecoUnitsDefs[uDefID] = true
