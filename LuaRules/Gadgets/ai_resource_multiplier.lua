@@ -167,8 +167,10 @@ function gadget:GameFrame(n)
 			--Spring.Echo(totalEnergy..'   +   '..((totalEnergy * (aiResourceMultiplier + timedResBonus)) - totalEnergy))
 			--Spring.Echo(totalMetal..'   +   '..((totalMetal * (aiResourceMultiplier + timedResBonus)) - totalMetal))
 			if Spring.GetGameSeconds() < 300 then
-				Spring.AddTeamResource(TeamID,"e", 300 - Spring.GetGameSeconds())
-				Spring.AddTeamResource(TeamID,"m", 300 - Spring.GetGameSeconds())
+				local mc, ms = Spring.GetTeamResources(TeamID, "metal")
+				local ec, es = Spring.GetTeamResources(TeamID, "energy")
+				Spring.AddTeamResource(TeamID,"e", es*0.10 - ec)
+				Spring.AddTeamResource(TeamID,"m", ms*0.10 - mc)
 			end
 			Spring.AddTeamResource(TeamID,"e", (totalEnergy * (aiResourceMultiplier + timedResBonus)) - totalEnergy)
 			Spring.AddTeamResource(TeamID,"m", (totalMetal * (aiResourceMultiplier + timedResBonus)) - totalMetal)

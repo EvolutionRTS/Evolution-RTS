@@ -62,7 +62,7 @@ end
 function BuildMex()
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local aimexamount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id)
-	if mc >= ms - ms*0.10 then
+	if mc >= ms - ms*0.10 or Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
@@ -105,7 +105,7 @@ end
 		else
 			return "esolar2"
 		end
-	elseif mc >= ms - ms*0.10 and Spring.GetGameSeconds() < 300 then
+	elseif (mc >= ms - ms*0.10 or Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5) and Spring.GetGameSeconds() < 300 then
 		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
 		else
@@ -1127,13 +1127,18 @@ local overseerorders = {
 	--RandomOverseer,
 	--RandomOverseer,
 	BuildTechFacility,
-	BuildFactory,
+	"elifterai",
+	"eorb",
 	"elifterai",
 	"eorb",
 	"escoutdrone",
 	"escoutdrone",
+	"elifterai",
+	"eorb",
 	"escoutdrone",
 	"escoutdrone",
+	"elifterai",
+	"eorb",
 	"ebox",
 }
 
@@ -1150,7 +1155,10 @@ local lifterlist = {
 	BuildMex,
 	RandomLift,
 	BuildMex,
+	"elifterai",
+	"eorb",
 	"estorage",
+	"escoutdrone",
 }
 
 local lifterareamex = {
@@ -1301,7 +1309,7 @@ end
 
 local function lifterqueue()
 	if liftersqueued > 2 then
-		liftersqueued = liftersqueued - 0.02
+		liftersqueued = liftersqueued - 0.10
 		return lifterlist
 	else
 		liftersqueued = liftersqueued + 1
