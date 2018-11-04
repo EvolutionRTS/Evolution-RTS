@@ -33,7 +33,7 @@ local options= {
 -- Shard AI Options
 	{
 		key    = 'aioptions',
-		name   = 'Shard AI Options',
+		name   = 'DAI (AI Opponent) Options',
 		desc   = 'Allows you to adjust ShardLua settings',
 		type   = 'section',
 	},
