@@ -112,12 +112,12 @@ function gadget:Initialize()
 			metalUnitDefs[uDefID] = def.metalMake
 			ecoUnitsDefs[uDefID] = true
 		end
-		if def.extractsMetal > 0 then
-			if def.customParams then
+		if def.customParams then
+			if def.customParams.metal_extractor > 0 then
 				mexUnitDefs[uDefID] = def.customParams.metal_extractor
+				mexUnitDefs[uDefID] = def.extractsMetal
+				ecoUnitsDefs[uDefID] = true
 			end
-			mexUnitDefs[uDefID] = def.extractsMetal
-			ecoUnitsDefs[uDefID] = true
 		end
 		if ecoUnitsDefs[uDefID] then
 			for teamID,_ in pairs(aiTeams) do
