@@ -527,7 +527,7 @@ local function addBuildCommand(cmd)
         chiliCache['costLabel' .. cmd.id]:SetCaption(str)
     end
 
-    if showHotkeys then
+    if showHotkeys and widgetHandler.orderList["EvoRTS Build Hotkeys"] and widgetHandler.orderList["EvoRTS Build Hotkeys"] ~= 0 then
         if nameToKeySymbols[cmd.name] then
             if not chiliCache['hotkeyLabel' .. cmd.id] then
                 chiliCache['hotkeyLabel' .. cmd.id] = Label:New{
