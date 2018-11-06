@@ -51,13 +51,13 @@ local options= {
 	},
 	{
 		key    = 'ai_incomemultiplier',
-		name   = 'AI Income Multiplier',
-		desc   = 'Multiplies AI resource income',
+		name   = 'AI Income Percentage',
+		desc   = 'Percentage of AI resource income compared to the default (100 = 100%, I.E. Normal. 200 = 200%, which would mean that the AI income would be double the player income)',
 		type   = 'number',
 		section= 'aioptions',
-		def    = 1,
+		def    = 100,
 		min    = 1,
-		max    = 10,
+		max    = 1000,
 		step   = 1,
 	},
 	

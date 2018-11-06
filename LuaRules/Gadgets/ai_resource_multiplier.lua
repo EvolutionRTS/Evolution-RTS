@@ -18,7 +18,7 @@ if (not gadgetHandler:IsSyncedCode()) then
 	return -- No Unsynced
 end
 
-local aiResourceMultiplier = tonumber(Spring.GetModOptions().ai_incomemultiplier) or 1
+local aiResourceMultiplier = tonumber(Spring.GetModOptions().ai_incomemultiplier) * 0.01 or 1
 
 if timedResBonusMultiplier == 0 and aiResourceMultiplier == 1 then
 	return
@@ -58,7 +58,7 @@ function gadget:UnitFinished(uID, uDefID, uTeam, builderID)
 			aiTeams[uTeam].winds = aiTeams[uTeam].winds + 1
 		end
 		if mexUnitDefs[uDefID] then
-			newMexes[uID] = {Spring.GetGameFrame() + 30, uTeam} 	-- unfortunately mex produces nothing yet so we have to scedule it
+			newMexes[uID] = {Spring.GetGameFrame() + 30, uTeam} 	-- unfortunately mex produces nothing yet so we have to schedule it
 		end
 		if energyUnitDefs[uDefID] then
 			aiTeams[uTeam].energy = aiTeams[uTeam].energy + energyUnitDefs[uDefID]
@@ -145,7 +145,7 @@ end
 function gadget:GameFrame(n)
 
 	if n % 30 == 1 then
-		-- a just finished mex doesnt produce metal yet so we sceduled it
+		-- a just finished mex doesn't produce metal yet so we schedule it
 		for uID,params in pairs(newMexes) do
 			if n > params[1] then
 				aiTeams[params[2]].mexes[uID] = select(1,spGetUnitResources(uID))
