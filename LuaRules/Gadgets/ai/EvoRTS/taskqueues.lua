@@ -125,7 +125,7 @@ end
 			if r == 0 then
 				return "emine"
 			else
-				return "eturretlightai"
+				return "elightturret2"
 			end
 		
 		------- Reached Tech 1
@@ -141,7 +141,7 @@ end
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai"
+						return "elightturret2"
 					end
 				else
 					return "elaserbattery"
@@ -162,11 +162,11 @@ end
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai"
+						return "elightturret2"
 					elseif r == 3 then
-						return "eturretheavyai"
+						return "eheavyturret2"
 					elseif r == 4 then
-						return "ejammerai"
+						return "ejammer2"
 					end
 				elseif r2 == 0 then
 					local r = math.random(0,1)
@@ -194,18 +194,18 @@ end
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai"
+						return "elightturret2"
 					elseif r == 3 then
-						return "eturretheavyai"
+						return "eheavyturret2"
 					elseif r == 4 then
-						return "ejammerai"
+						return "ejammer2"
 					end
 				elseif r2 == 0 then
 					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
-						return "eartyturret_up3"
+						return "eartyturret"
 					elseif r == 2 then
 						return "esiloai"
 					elseif r == 3 then
@@ -230,18 +230,18 @@ end
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai_up3"
+						return "elightturret2"
 					elseif r == 3 then
-						return "eturretheavyai_up3"
+						return "eheavyturret2"
 					elseif r == 4 then
-						return "ejammerai"
+						return "ejammer2"
 					end
 				elseif r2 == 0 then
 					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
-						return "eartyturret_up3"
+						return "eartyturret"
 					elseif r == 2 then
 						return "esiloai"
 					elseif r == 3 then
@@ -304,7 +304,7 @@ function RandomOverseer( tqb, ai, unit )
 			elseif r == 0 then
 				return "emine"
 			else
-				return "eturretlightai"
+				return "elightturret2"
 			end
 		
 		------- Reached Tech 1
@@ -320,7 +320,7 @@ function RandomOverseer( tqb, ai, unit )
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai"
+						return "elightturret2"
 					end
 				else
 					return "elaserbattery"
@@ -341,11 +341,11 @@ function RandomOverseer( tqb, ai, unit )
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai"
+						return "elightturret2"
 					elseif r == 3 then
-						return "eturretheavyai"
+						return "eheavyturret2"
 					elseif r == 4 then
-						return "ejammerai"
+						return "ejammer2"
 					end
 				elseif r2 == 0 then
 					local r = math.random(0,1)
@@ -373,18 +373,18 @@ function RandomOverseer( tqb, ai, unit )
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai_up3"
+						return "elightturret2"
 					elseif r == 3 then
-						return "eturretheavyai_up3"
+						return "eheavyturret2"
 					elseif r == 4 then
-						return "ejammerai"
+						return "ejammer2"
 					end
 				elseif r2 == 0 then
 					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
-						return "eartyturret_up3"
+						return "eartyturret"
 					elseif r == 2 then
 						return "esiloai"
 					elseif r == 3 then
@@ -409,18 +409,18 @@ function RandomOverseer( tqb, ai, unit )
 					elseif r == 1 then
 						return "eradar2"
 					elseif r == 2 then
-						return "eturretlightai_up3"
+						return "elightturret2"
 					elseif r == 3 then
-						return "eturretheavyai_up3"
+						return "eheavyturret2"
 					elseif r == 4 then
-						return "ejammerai"
+						return "ejammer2"
 					end
 				elseif r2 == 0 then
 					local r = math.random(0,3)
 					if r == 0 then
 						return "eshieldgen"	
 					elseif r == 1 then
-						return "eartyturret_up3"
+						return "eartyturret"
 					elseif r == 2 then
 						return "esiloai"
 					elseif r == 3 then
@@ -1116,9 +1116,9 @@ local overseerlistfirst = {
 	"estorage",
 	"elifterai",
 	"elifterai",
-	"eturretlightai",
-	"eturretlightai",
-	"eturretlightai",
+	"elightturret2",
+	"elightturret2",
+	"elightturret2",
 }
 	
 local overseerorders = {
