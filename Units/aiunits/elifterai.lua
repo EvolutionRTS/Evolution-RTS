@@ -7,22 +7,11 @@ local unitName                   = "elifterai"
 
 local buildCostMetal			 = 40
 local maxDamage					 = 400
-local buildDistance				 = 600
+local buildDistance				 = 800
+local workerTime				 = 1
 
 local armortype					 = [[light]]
---local supply					 = [[2]]
-
-	aiDifficulty = Spring.GetModOptions().aidifficulty
-	
-	if aiDifficulty == nil then
-		aiDifficulty = "easy"
-	end
-
-	if aiDifficulty == "easy" then
-		workerTime				 = 1
-	elseif aiDifficulty == "hard" then
-		workerTime				 = 1
-	end
+--local supply					 = [[2]]	
 
 local unitDef                    = {
 
@@ -96,7 +85,7 @@ local unitDef                    = {
 	capturespeed                 = 1,
 	TerraformSpeed               = 100000,
 	ReclaimSpeed                 = 0,
-	repairspeed                  = 100,
+	repairspeed                  = workerTime,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"deathceg3", 
