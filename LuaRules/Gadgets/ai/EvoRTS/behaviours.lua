@@ -97,6 +97,19 @@ behaviours = {
 		TaskQueueBehaviour,
 	},
 	
+	eartyturret = {
+		AttackerBehaviour,
+	},
+	eartyturret_up1 = {
+		AttackerBehaviour,
+	},
+	eartyturret_up2 = {
+		AttackerBehaviour,
+	},
+	eartyturret_up3 = {
+		AttackerBehaviour,
+	},
+	
 	ecommanderbattleai = {
 		TaskQueueBehaviour,
 	},
