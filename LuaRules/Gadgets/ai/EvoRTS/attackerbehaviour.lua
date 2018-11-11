@@ -252,7 +252,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		return
 	else
 		if (utype:CanFly() == true) and unit:Name() ~= "escoutdrone" then
-			unit:MoveAndPatrol(self.target)
+			unit:MoveAndFire(self.target)
 		else
 			unit:Move(self.target)
 		end

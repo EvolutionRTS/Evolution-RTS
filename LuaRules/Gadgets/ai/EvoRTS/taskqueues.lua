@@ -16,426 +16,11 @@ local spGetTeamStartPosition = Spring.GetTeamStartPosition
 local spGetAllyTeamStartBox = Spring.GetAllyTeamStartBox
 local liftersqueued = 0
 local skip = {action = "nexttask"}
+local MaximumSupply = tonumber(Spring.GetModOptions().supplycap)
+if MaximumSupply == nil then
+	MaximumSupply = 400
+end
 --Spring.GetGameSeconds() -- checking gametime
-
-if aiDebug == nil then
-	aiDebug = "enabled"
-end
-
----------------------------------------------------------------- LIFTER QUEUES
- 
- --function MoveToStartLocation( taskqueuebehaviour )
-	
-	--local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(ai.allyId)
-	--local px = math.random(startxmin, startxmax)
-	--local pz = math.random(startzmin, startzmax)
-	--local py = 0
-	
-	--Spring.Echo([[AI startxmin ]] .. startxmin .. [[ ]])
-	--Spring.Echo([[AI startzmin ]] .. startzmin .. [[ ]])
-	--Spring.Echo([[AI startxmax ]] .. startxmax .. [[ ]])
-	--Spring.Echo([[AI startzmax ]] .. startzmax .. [[ ]])
-	
-	--local spawnposx, _, spawnposz = spGetTeamStartPosition(ai.id)
-	--local sx = spawnposx
-	--local sz = spawnposz
-	
-	--Spring.Echo([[AI spawnx ]] .. sx .. [[ ]])
-	--Spring.Echo([[AI spawnz ]] .. sz .. [[ ]])
-	
-	--mx = sx - px
-	--mz = sz - pz
-	--my = 0
-
-	--local x = px
-	--local z = pz
-	--local y = py
-	
-	--Spring.Echo([[AI startlocationx ]] .. mx .. [[ ]])
-	--Spring.Echo([[AI startlocationz ]] .. mz .. [[ ]])
-	
-	--Spring.Echo([[AI ID ]] .. ai.id .. [[ ]])
-	--Spring.Echo([[AI allyID ]] .. ai.allyId .. [[ ]])
-	--return action = "move", position = {x = px, y = py, z = pz},
---end
-
-function BuildMex()
-	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	local aimexamount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.emetalextractor.id)
-	if mc >= ms - ms*0.10 or Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
-			return "elifterai"
-		else
-			return "eorb"
-		end
-	else
-		return "emetalextractor"
-	end
-end
- 
- 
- function RandomLift( tqb, ai, unit )
-	--Locals
-	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	local ec, es = Spring.GetTeamResources(ai.id, "energy")
-	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
-	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
-	local unitcount = Spring.GetTeamUnitCount(ai.id)
-	
-	--DEBUG LOG
-	if aiDebug == "enabled" then
-		Spring.Echo([[Shard Debug Log]])
-		Spring.Echo([[--Units:]])
-		Spring.Echo([[AI have ]] .. unitcount .. [[ units!]])
-		Spring.Echo([[--Resources:]])
-		Spring.Echo([[AI is using ]] .. su ..[[/]] .. sm .. [[ supply!]])
-		Spring.Echo([[AI have ]] .. math.ceil(mc) ..[[/]] .. ms .. [[ metal and ]] .. math.ceil(ec) .. [[/]] .. es .. [[ energy!]])
-		Spring.Echo([[AI Metal Income is ]] .. mi.. [[ / -]] .. me )
-		Spring.Echo(GG.TechCheck("endbringer", ai.id) )
-	else
-	end
-	--Spring.SendMessageToPlayer(0, "Hello World!")
-	------- Tech 0 - Very Early Game
-	
-	if ec <= 50 and GG.TechCheck("tech1", ai.id) == true then
-		if GG.TechCheck("tech3", ai.id) == true then
-			return "efusion2"
-		elseif GG.TechCheck("tech2", ai.id) == true then
-			return "egeothermal"
-		else
-			return "esolar2"
-		end
-	elseif (mc >= ms - ms*0.10 or Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5) and Spring.GetGameSeconds() < 300 then
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
-			return "elifterai"
-		else
-			return "eorb"
-		end
-	elseif es < Spring.GetGameSeconds()*0.5 then
-		return "estorage"
-	elseif su >= sm-40 and sm ~= 400 then
-		return "estorage"
-	
-	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
-		return "etech1"
-		
-	else
-		if GG.TechCheck("tech1", ai.id) == false and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
-			local r = math.random(0,1)
-			if r == 0 then
-				return "emine"
-			else
-				return "elightturret2"
-			end
-		
-		------- Reached Tech 1
-		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
-			if ec <= 50 then
-				return "esolar2"
-			else
-				local r = math.random(0,2)
-				local aar = math.random(0,5)
-				if aar > 0 then
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-		
-		------- Reached Tech 2 MK 2
-		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then 
-			if ec <= 50 then
-				return "egeothermal"
-			else
-				local r2 = math.random(0,20)
-				local aar = math.random(0,5)
-				if r2 > 0 and aar > 0 then
-					local r = math.random(0,4)
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					elseif r == 3 then
-						return "eheavyturret2"
-					elseif r == 4 then
-						return "ejammer2"
-					end
-				elseif r2 == 0 then
-					local r = math.random(0,1)
-					if r == 0 then
-						return "eshieldgen"
-					else
-						return "ekmar"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-			
-		------- Reached Tech 3 MK 3
-		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1500 then 
-			if ec <= 50 then
-				return "efusion2"
-			else
-				local r2 = math.random(0,10)
-				local aar = math.random(0,5)
-				if r2 > 0 and aar > 0 then
-					local r = math.random(0,4)
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					elseif r == 3 then
-						return "eheavyturret2"
-					elseif r == 4 then
-						return "ejammer2"
-					end
-				elseif r2 == 0 then
-					local r = math.random(0,3)
-					if r == 0 then
-						return "eshieldgen"	
-					elseif r == 1 then
-						return "eartyturret"
-					elseif r == 2 then
-						return "esiloai"
-					elseif r == 3 then
-						return "ekmar"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-		
-		------- Reached MK 4
-		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1500 then
-			if ec <= 50 then
-				return "efusion2"
-			else
-				local r2 = math.random(0,5)
-				local aar = math.random(0,10)
-				if r2 > 0 and aar > 0 then
-					local r = math.random(0,4)
-					if r == 0 then	
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					elseif r == 3 then
-						return "eheavyturret2"
-					elseif r == 4 then
-						return "ejammer2"
-					end
-				elseif r2 == 0 then
-					local r = math.random(0,3)
-					if r == 0 then
-						return "eshieldgen"	
-					elseif r == 1 then
-						return "eartyturret"
-					elseif r == 2 then
-						return "esiloai"
-					elseif r == 3 then
-						return "ekmar"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-		end
-	end
-end
-
-function RandomOverseer( tqb, ai, unit )
-	--Locals
-	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	local ec, es = Spring.GetTeamResources(ai.id, "energy")
-	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
-	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
-	local unitcount = Spring.GetTeamUnitCount(ai.id)
-	
-	--DEBUG LOG
-	if aiDebug == "enabled" then
-		Spring.Echo([[Shard Debug Log]])
-		Spring.Echo([[--Units:]])
-		Spring.Echo([[AI have ]] .. unitcount .. [[ units!]])
-		Spring.Echo([[--Resources:]])
-		Spring.Echo([[AI is using ]] .. su ..[[/]] .. sm .. [[ supply!]])
-		Spring.Echo([[AI have ]] .. math.ceil(mc) ..[[/]] .. ms .. [[ metal and ]] .. math.ceil(ec) .. [[/]] .. es .. [[ energy!]])
-	else
-	end
-	
-	
-	
-	------- Tech 0 - Very Early Game
-	if ec <= 50 and GG.TechCheck("tech1", ai.id) == true then
-		if GG.TechCheck("tech3", ai.id) == true then
-			return "efusion2"
-		elseif GG.TechCheck("tech2", ai.id) == true then
-			return "egeothermal"
-		else
-			return "esolar2"
-		end
-	elseif mc >= ms - ms*0.20 then
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
-			return "elifterai"
-		else
-			return "eorb"
-		end
-	elseif GG.TechCheck("tech1", ai.id) == false and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
-		return "etech1"
-		
-	elseif es < Spring.GetGameSeconds()*0.5 then
-		return "estorage"
-	else
-		if Spring.GetGameSeconds() <= 90 then 
-			local r = math.random(0,1)
-			if mc <= 10 or mi*2 <= me then
-				return "emetalextractor"
-			elseif r == 0 then
-				return "emine"
-			else
-				return "elightturret2"
-			end
-		
-		------- Reached Tech 1
-		elseif GG.TechCheck("tech1", ai.id) == true and GG.TechCheck("tech2", ai.id) == false and GG.TechCheck("tech3", ai.id) == false then 
-			if ec <= 50 then
-				return "esolar2"
-			else
-				local r = math.random(0,2)
-				local aar = math.random(0,10)
-				if aar > 0 then
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-		
-		------- Reached Tech 2 MK 2
-		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == false then 
-			if ec <= 50 then
-				return "egeothermal"
-			else
-				local r2 = math.random(0,20)
-				local aar = math.random(0,10)
-				if r2 > 0 and aar > 0 then
-					local r = math.random(0,4)
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					elseif r == 3 then
-						return "eheavyturret2"
-					elseif r == 4 then
-						return "ejammer2"
-					end
-				elseif r2 == 0 then
-					local r = math.random(0,1)
-					if r == 0 then
-						return "eshieldgen"
-					else
-						return "ekmar"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-			
-		------- Reached Tech 3 MK 3
-		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() <= 1500 then 
-			if ec <= 50 then
-				return "efusion2"
-			else
-				local r2 = math.random(0,15)
-				local aar = math.random(0,10)
-				if r2 > 0 and aar > 0 then
-					local r = math.random(0,4)
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					elseif r == 3 then
-						return "eheavyturret2"
-					elseif r == 4 then
-						return "ejammer2"
-					end
-				elseif r2 == 0 then
-					local r = math.random(0,3)
-					if r == 0 then
-						return "eshieldgen"	
-					elseif r == 1 then
-						return "eartyturret"
-					elseif r == 2 then
-						return "esiloai"
-					elseif r == 3 then
-						return "ekmar"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-		
-		------- Reached MK 4
-		elseif GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech2", ai.id) == true and GG.TechCheck("tech3", ai.id) == true and Spring.GetGameSeconds() > 1500 then
-			if ec <= 50 then
-				return "efusion2"
-			else
-				local r2 = math.random(0,5)
-				local aar = math.random(0,10)
-				if r2 > 0 and aar > 0 then
-					local r = math.random(0,4)
-					if r == 0 then
-						return "emine"
-					elseif r == 1 then
-						return "eradar2"
-					elseif r == 2 then
-						return "elightturret2"
-					elseif r == 3 then
-						return "eheavyturret2"
-					elseif r == 4 then
-						return "ejammer2"
-					end
-				elseif r2 == 0 then
-					local r = math.random(0,3)
-					if r == 0 then
-						return "eshieldgen"	
-					elseif r == 1 then
-						return "eartyturret"
-					elseif r == 2 then
-						return "esiloai"
-					elseif r == 3 then
-						return "ekmar"
-					end
-				else
-					return "elaserbattery"
-				end
-			end
-		end
-	end
-end
-
-	
-------------------------------------------------------------------------------------------------------------NEW STUFF
 
 local UDC = Spring.GetTeamUnitDefCount
 local UDN = UnitDefNames
@@ -548,6 +133,24 @@ function UUDC(unitName, teamID) -- Unfinished UnitDef Count
 	return count
 end
 
+function MoveToRandomStartBoxLocation(tqb, ai, unit)
+	local _,_,_,_,_,MyAllyTeam = Spring.GetTeamInfo(ai.id)
+	local startxmin, startzmin, startxmax, startzmax = spGetAllyTeamStartBox(MyAllyTeam)
+	local mx = Game.mapSizeX
+	local mz = Game.mapSizeZ
+	if startxmax == mx and startzmax == mz and startxmin == 0 and startzmin == 0 then
+		return skip
+	else
+		px = math.random(startxmin, startxmax)
+		pz = math.random(startzmin, startzmax)
+		py = Spring.GetGroundHeight(px, pz)
+	end
+	if py <= 0 then
+		return skip
+	end
+	return {action = "move", position = {x = px, y = py, z = pz}}
+end
+
 ---- FIND BEST ---
 function FindBest(unitoptions,ai)
 	if unitoptions and unitoptions[1] then
@@ -574,9 +177,12 @@ end
 ---------------
 
 ---------------------------------------------------------------- BUILD FUNCTIONS
+--------------------------------------STRUCTURES
 
 function BuildTechFacility(tqb, ai, unit)
-	if not GG.TechCheck("tech1", ai.id) and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+		return "elifterai"
+	elseif not GG.TechCheck("tech1", ai.id) and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
 		return "etech1"
 	else
 		return skip
@@ -586,7 +192,9 @@ end
 function BuildFactory(tqb, ai, unit)
 	local count = GetFacs(tqb,ai,unit)
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	if count < Spring.GetGameSeconds()*0.00332 then
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+		return "elifterai"
+	elseif count < Spring.GetGameSeconds()*0.00332 then
 		if GG.TechCheck("tech2", ai.id) then 
 			local unitoptions = {"eairplant", "eminifac", "eamphibfac", "ehbotfac", "ebasefactory",}
 			return FindBest(unitoptions, ai)
@@ -599,6 +207,120 @@ function BuildFactory(tqb, ai, unit)
 	end
 end
 
+function BuildMex(tqb, ai, unit)
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+		return "elifterai"
+	else
+		return "emetalextractor"
+	end
+end
+
+function BuildEnergy(tqb, ai, unit)
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+		return "elifterai"
+	else
+		if ec <= es*0.10 then
+			if GG.TechCheck("tech3", ai.id) then
+				return "efusion2"
+			elseif GG.TechCheck("tech2", ai.id) then
+				return "egeothermal"
+			elseif GG.TechCheck("tech1", ai.id) then
+				return "esolar2"
+			else
+				return skip
+			end
+		else
+			return skip
+		end
+	end
+end
+
+function BuildSupply(tqb, ai, unit)
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
+	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+		return "elifterai"
+	elseif su < sm - 20 and sm ~= MaximumSupply then
+		return "estorage"
+	elseif ms < Spring.GetGameSeconds() and ms < 1000 then
+		return "estorage"
+	else
+		return skip
+	end
+end
+
+function BuildTurret(tqb, ai, unit)
+	local r = math.random(0,1)
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+			return "elifterai"
+	elseif r == 0 then
+		local LT = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elightturret2.id)
+		local AAT = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elaserbattery.id)
+		if GG.TechCheck("tech2", ai.id) then 
+			local HT = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eheavyturret2.id)
+			if AAT*5 < LT and AAT*5 < HT then
+				return "elaserbattery"
+			elseif HT < LT then
+				return "eheavyturret2"
+			else
+				return "elightturret2"
+			end
+		elseif AAT*10 < LT and GG.TechCheck("tech1", ai.id) then
+			return "elaserbattery"
+		else
+			return "elightturret2"
+		end
+	else
+		return skip
+	end
+end
+ 
+function BuildEngineers(tqb, ai, unit)
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+		return "elifterai"
+	else
+		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
+			return "elifterai"
+		elseif mc > ms*90 then
+			return "eorb"
+		else 
+			return skip
+		end
+	end
+end
+
+function BuildSupport(tqb, ai, unit)
+	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
+		return "elifterai"
+	else
+		if GG.TechCheck("tech3", ai.id) then
+			local r = math.random(0,20)
+			if r == 0 then
+				local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2", "eshieldgen", "ekmar", "esiloai", "eartyturret",}
+				return unitoptions[math.random(1,#unitoptions)]
+			else
+				local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2",}
+				return unitoptions[math.random(1,#unitoptions)]
+			end
+		elseif GG.TechCheck("tech2", ai.id) then
+			local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2",}
+			return unitoptions[math.random(1,#unitoptions)]
+		elseif GG.TechCheck("tech1", ai.id) then
+			local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox",}
+			return unitoptions[math.random(1,#unitoptions)]
+		else
+			local unitoptions = {"emine", "escoutdrone",}
+			return unitoptions[math.random(1,#unitoptions)]
+		end
+	end
+end	
+
+--------------------------------------------UNITS
 ---Air
 function BuildAirUP0(tqb, ai, unit)
 	if GG.TechCheck("tech3", ai.id) then
@@ -1103,22 +825,12 @@ local HoverFactoryQueueUP3 = {
 }
 
 local overseerlistfirst = {
+	MoveToRandomStartBoxLocation,
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
 	"elifterai",
-	"elifterai",
-	"elifterai",
-	"elifterai",
-	BuildTechFacility,
-	BuildFactory,
-	"estorage",
-	"estorage",
-	"elifterai",
-	"elifterai",
-	"elightturret2",
-	"elightturret2",
-	"elightturret2",
+	MoveToRandomStartBoxLocation,
 }
 	
 local overseerorders = {
@@ -1126,39 +838,38 @@ local overseerorders = {
 	--RandomOverseer,
 	--RandomOverseer,
 	--RandomOverseer,
+	BuildFactory,
+	BuildEnergy,
 	BuildTechFacility,
-	"elifterai",
-	"eorb",
-	"elifterai",
-	"eorb",
-	"escoutdrone",
-	"escoutdrone",
-	"elifterai",
-	"eorb",
-	"escoutdrone",
-	"escoutdrone",
-	"elifterai",
-	"eorb",
-	"ebox",
+	BuildEnergy,
+	BuildSupply,
+	BuildEnergy,
+	BuildEngineers,
+	BuildEnergy,
+	BuildEngineers,
+	BuildEnergy,
+	BuildTurret,
+	BuildEnergy,
+	BuildSupport,
+	BuildEnergy,
+	MoveToRandomStartBoxLocation,
 }
 
 local lifterlist = {
-	"estorage",
+	BuildMex,
+	MoveToRandomStartBoxLocation,
 	BuildFactory,
-	RandomLift,
+	BuildEnergy,
+	BuildSupply,
+	BuildTurret,
+	BuildEngineers,
+	BuildSupport,
 	BuildMex,
-	RandomLift,
-	BuildMex,
-	RandomLift,
-	BuildMex,
-	RandomLift,
-	BuildMex,
-	RandomLift,
-	BuildMex,
-	"elifterai",
-	"eorb",
-	"estorage",
-	"escoutdrone",
+	BuildTurret,
+	BuildEnergy,
+	BuildSupply,
+	BuildEngineers,
+	BuildSupport,
 }
 
 local lifterareamex = {
@@ -1172,131 +883,10 @@ local lifterareamex = {
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
+	MoveToRandomStartBoxLocation,
 }
+
 -----------------------------------------------------
---local factory = {
---}
-
---local airplant = {
---}
-
---local amphibfactory = {
---}
-
---local allterrfactory = {
---
-
---local orbs = {
-	--{ action = "moverelative", position = {x = math.random(-200, 200), y = math.random(-200, 200), z = math.random(-200, 200)} },
-	--{ action = "moverelative", position = {x = math.random(-200, 200), y = math.random(-200, 200), z = math.random(-200, 200)} },
-	--{ action = "moverelative", position = {x = math.random(-200, 200), y = math.random(-200, 200), z = math.random(-200, 200)} },
-	--{ action = "moverelative", position = {x = math.random(-200, 200), y = math.random(-200, 200), z = math.random(-200, 200)} },
---}
-
 
 local function overseerqueue()
 	if ai.engineerfirst == true then
@@ -1309,7 +899,7 @@ end
 
 local function lifterqueue()
 	if liftersqueued > 2 then
-		liftersqueued = liftersqueued - 0.10
+		liftersqueued = liftersqueued - 0.30
 		return lifterlist
 	else
 		liftersqueued = liftersqueued + 1
