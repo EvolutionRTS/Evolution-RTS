@@ -12,7 +12,7 @@ humanName = [[A.K. Mk III (Deployed)]]
 objectName = [[ehbotpeewee_turret.s3o]]
 script = [[ehbotpeewee_turret_lus.lua]]
 
-tech = [[tech0]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[6]]
 
