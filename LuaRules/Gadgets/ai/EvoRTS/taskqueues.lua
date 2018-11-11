@@ -180,6 +180,7 @@ end
 --------------------------------------STRUCTURES
 
 function BuildTechFacility(tqb, ai, unit)
+	--Spring.Echo([[Build Tech Facility]])
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 		return "elifterai"
 	elseif not GG.TechCheck("tech1", ai.id) and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
@@ -190,6 +191,7 @@ function BuildTechFacility(tqb, ai, unit)
 end
 
 function BuildFactory(tqb, ai, unit)
+	--Spring.Echo([[Build Factory]])
 	local count = GetFacs(tqb,ai,unit)
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
@@ -208,6 +210,7 @@ function BuildFactory(tqb, ai, unit)
 end
 
 function BuildMex(tqb, ai, unit)
+	--Spring.Echo([[Build Mex]])
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 		return "elifterai"
 	else
@@ -216,6 +219,7 @@ function BuildMex(tqb, ai, unit)
 end
 
 function BuildEnergy(tqb, ai, unit)
+	--Spring.Echo([[Build Energy]])
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 		return "elifterai"
@@ -237,6 +241,7 @@ function BuildEnergy(tqb, ai, unit)
 end
 
 function BuildSupply(tqb, ai, unit)
+	--Spring.Echo([[Build Supply]])
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
@@ -253,6 +258,7 @@ function BuildSupply(tqb, ai, unit)
 end
 
 function BuildTurret(tqb, ai, unit)
+	--Spring.Echo([[Build Turret]])
 	local r = math.random(0,1)
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 			return "elifterai"
@@ -279,6 +285,7 @@ function BuildTurret(tqb, ai, unit)
 end
  
 function BuildEngineers(tqb, ai, unit)
+	--Spring.Echo([[Build Engineers]])
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
@@ -294,6 +301,7 @@ function BuildEngineers(tqb, ai, unit)
 end
 
 function BuildSupport(tqb, ai, unit)
+	--Spring.Echo([[Build Support]])
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 		return "elifterai"
 	else
@@ -307,8 +315,14 @@ function BuildSupport(tqb, ai, unit)
 				return unitoptions[math.random(1,#unitoptions)]
 			end
 		elseif GG.TechCheck("tech2", ai.id) then
-			local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2",}
-			return unitoptions[math.random(1,#unitoptions)]
+			local r = math.random(0,30)
+			if r == 0 then
+				local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2", "eshieldgen", "ekmar",}
+				return unitoptions[math.random(1,#unitoptions)]
+			else
+				local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2",}
+				return unitoptions[math.random(1,#unitoptions)]
+			end
 		elseif GG.TechCheck("tech1", ai.id) then
 			local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox",}
 			return unitoptions[math.random(1,#unitoptions)]
