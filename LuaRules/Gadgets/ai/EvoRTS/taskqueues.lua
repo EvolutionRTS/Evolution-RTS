@@ -286,7 +286,7 @@ function BuildEngineers(tqb, ai, unit)
 	else
 		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
 			return "elifterai"
-		elseif mc > ms*90 then
+		elseif mc > ms*0.90 then
 			return "eorb"
 		else 
 			return skip
@@ -825,11 +825,14 @@ local HoverFactoryQueueUP3 = {
 }
 
 local overseerlistfirst = {
-	MoveToRandomStartBoxLocation,
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
 	"elifterai",
+	"elifterai",
+	"elifterai",
+	"elifterai",
+	BuildTechFacility,
 	MoveToRandomStartBoxLocation,
 }
 	
@@ -873,6 +876,10 @@ local lifterlist = {
 }
 
 local lifterareamex = {
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
+	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
 	"emetalextractor",
