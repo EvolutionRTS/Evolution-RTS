@@ -284,9 +284,8 @@ function BuildEngineers(tqb, ai, unit)
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 		return "elifterai"
 	else
-		if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id)*240 < Spring.GetGameSeconds() then
-			return "elifterai"
-		elseif mc > ms*0.90 then
+		local r = math.random(0,3)
+		if r == 0 then
 			return "eorb"
 		else 
 			return skip
