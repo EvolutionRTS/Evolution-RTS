@@ -235,7 +235,8 @@ function BuildEnergy(tqb, ai, unit)
 	if Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) < 5 then
 		return "elifterai"
 	else
-		if ec <= es*0.10 then
+		local math.random(0,5)
+		if ec <= es*0.10 or r == 0 then
 			if GG.TechCheck("tech3", ai.id) then
 				return "efusion2"
 			elseif GG.TechCheck("tech2", ai.id) then
