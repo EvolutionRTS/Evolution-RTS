@@ -139,7 +139,6 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		if nearestEnemyDistance >= 1500 or self.repairThisUnit == true then
 			self.unit:Internal():EZMorph()
 		end
-	end
 	elseif (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") then
 		self.unit:Internal():EZMorph()
 		return
