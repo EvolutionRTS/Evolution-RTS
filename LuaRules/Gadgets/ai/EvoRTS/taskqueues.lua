@@ -38,6 +38,17 @@ local ezMorph = {action = "ezmorph"}
 
 ---- UNIT COUNTS ---
 
+function GetArtileryUnits(tqb,ai,unit)
+	local list = {
+	UDN.eartytank.id, UDN.eartytank_up1.id, UDN.eartytank_up2.id, UDN.eartytank_up3.id, 
+	UDN.eartytank_saturation.id, UDN.eartytank_saturation_up1.id, UDN.eartytank_saturation_up2.id, UDN.eartytank_saturation_up3.id, 
+	UDN.eamphibarty.id, UDN.eamphibarty_up1.id, UDN.eamphibarty_up2.id, UDN.eamphibarty_up3.id, 
+	UDN.eallterrassault.id, UDN.eallterrassault_up1.id, UDN.eallterrassault_up2.id, UDN.eallterrassault_up3.id, 
+	}
+	local units = Spring.GetTeamUnitsByDefs(ai.id, list)
+	return #units
+end
+
 function GetFacs(tqb,ai,unit)
 	local list = {
 	UDN.eairplant.id, UDN.eairplant_up1.id, UDN.eairplant_up2.id, UDN.eairplant_up3.id, 
@@ -406,80 +417,144 @@ end
 ----AllTer
 
 function BuildAllTerUP0(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eallterranarchid"
 			else
-				local unitoptions = {"eallterrassault", "eallterrheavy", "eallterrlight", "eallterrmed", "eallterrriot", "eallterrshield",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eallterrassault", "eallterrheavy", "eallterrlight", "eallterrmed", "eallterrriot", "eallterrshield",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eallterrheavy", "eallterrlight", "eallterrmed", "eallterrriot", "eallterrshield",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eallterrassault", "eallterrheavy", "eallterrlight", "eallterrmed", "eallterrriot", "eallterrshield",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault", "eallterrheavy", "eallterrlight", "eallterrmed", "eallterrriot", "eallterrshield",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrheavy", "eallterrlight", "eallterrmed", "eallterrriot", "eallterrshield",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eallterrassault", "eallterrlight", "eallterrriot", "eallterrshield",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault", "eallterrlight", "eallterrriot", "eallterrshield",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrlight", "eallterrriot", "eallterrshield",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildAllTerUP1(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eallterranarchid_up1"
 			else
-				local unitoptions = {"eallterrassault_up1", "eallterrheavy_up1", "eallterrlight_up1", "eallterrmed_up1", "eallterrriot_up1", "eallterrshield_up1",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eallterrassault_up1", "eallterrheavy_up1", "eallterrlight_up1", "eallterrmed_up1", "eallterrriot_up1", "eallterrshield_up1",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eallterrheavy_up1", "eallterrlight_up1", "eallterrmed_up1", "eallterrriot_up1", "eallterrshield_up1",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eallterrassault_up1", "eallterrheavy_up1", "eallterrlight_up1", "eallterrmed_up1", "eallterrriot_up1", "eallterrshield_up1",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault_up1", "eallterrheavy_up1", "eallterrlight_up1", "eallterrmed_up1", "eallterrriot_up1", "eallterrshield_up1",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrheavy_up1", "eallterrlight_up1", "eallterrmed_up1", "eallterrriot_up1", "eallterrshield_up1",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eallterrassault_up1", "eallterrlight_up1", "eallterrriot_up1", "eallterrshield_up1",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault_up1", "eallterrlight_up1", "eallterrriot_up1", "eallterrshield_up1",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrlight_up1", "eallterrriot_up1", "eallterrshield_up1",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildAllTerUP2(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eallterranarchid_up2"
 			else
-				local unitoptions = {"eallterrassault_up2", "eallterrheavy_up2", "eallterrlight_up2", "eallterrmed_up2", "eallterrriot_up2", "eallterrshield_up2",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eallterrassault_up2", "eallterrheavy_up2", "eallterrlight_up2", "eallterrmed_up2", "eallterrriot_up2", "eallterrshield_up2",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eallterrheavy_up2", "eallterrlight_up2", "eallterrmed_up2", "eallterrriot_up2", "eallterrshield_up2",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eallterrassault_up2", "eallterrheavy_up2", "eallterrlight_up2", "eallterrmed_up2", "eallterrriot_up2", "eallterrshield_up2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault_up2", "eallterrheavy_up2", "eallterrlight_up2", "eallterrmed_up2", "eallterrriot_up2", "eallterrshield_up2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrheavy_up2", "eallterrlight_up2", "eallterrmed_up2", "eallterrriot_up2", "eallterrshield_up2",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eallterrassault_up2", "eallterrlight_up2", "eallterrriot_up2", "eallterrshield_up2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault_up2", "eallterrlight_up2", "eallterrriot_up2", "eallterrshield_up2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrlight_up2", "eallterrriot_up2", "eallterrshield_up2",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildAllTerUP3(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eallterranarchid_up3"
 			else
-				local unitoptions = {"eallterrassault_up3", "eallterrheavy_up3", "eallterrlight_up3", "eallterrmed_up3", "eallterrriot_up3", "eallterrshield_up3",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eallterrassault_up3", "eallterrheavy_up3", "eallterrlight_up3", "eallterrmed_up3", "eallterrriot_up3", "eallterrshield_up3",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eallterrheavy_up3", "eallterrlight_up3", "eallterrmed_up3", "eallterrriot_up3", "eallterrshield_up3",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eallterrassault_up3", "eallterrheavy_up3", "eallterrlight_up3", "eallterrmed_up3", "eallterrriot_up3", "eallterrshield_up3",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault_up3", "eallterrheavy_up3", "eallterrlight_up3", "eallterrmed_up3", "eallterrriot_up3", "eallterrshield_up3",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrheavy_up3", "eallterrlight_up3", "eallterrmed_up3", "eallterrriot_up3", "eallterrshield_up3",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eallterrassault_up3", "eallterrlight_up3", "eallterrriot_up3", "eallterrshield_up3",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eallterrassault_up3", "eallterrlight_up3", "eallterrriot_up3", "eallterrshield_up3",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eallterrlight_up3", "eallterrriot_up3", "eallterrshield_up3",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
@@ -488,80 +563,144 @@ end
 ----Amphib
 
 function BuildAmphibUP0(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eamphibleveler"
 			else
-				local unitoptions = {"eamphibarty", "eamphibbuggy", "eamphibmedtank", "eamphibneedle", "eamphibrock",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eamphibarty", "eamphibbuggy", "eamphibmedtank", "eamphibneedle", "eamphibrock",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eamphibbuggy", "eamphibmedtank", "eamphibneedle", "eamphibrock",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eamphibarty", "eamphibbuggy", "eamphibmedtank", "eamphibneedle", "eamphibrock",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty", "eamphibbuggy", "eamphibmedtank", "eamphibneedle", "eamphibrock",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy", "eamphibmedtank", "eamphibneedle", "eamphibrock",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eamphibarty", "eamphibbuggy", "eamphibneedle",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty", "eamphibbuggy", "eamphibneedle",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy", "eamphibneedle",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildAmphibUP1(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eamphibleveler_up1"
 			else
-				local unitoptions = {"eamphibarty_up1", "eamphibbuggy_up1", "eamphibmedtank_up1", "eamphibneedle_up1", "eamphibrock_up1",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eamphibarty_up1", "eamphibbuggy_up1", "eamphibmedtank_up1", "eamphibneedle_up1", "eamphibrock_up1",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eamphibbuggy_up1", "eamphibmedtank_up1", "eamphibneedle_up1", "eamphibrock_up1",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eamphibarty_up1", "eamphibbuggy_up1", "eamphibmedtank_up1", "eamphibneedle_up1", "eamphibrock_up1",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty_up1", "eamphibbuggy_up1", "eamphibmedtank_up1", "eamphibneedle_up1", "eamphibrock_up1",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy_up1", "eamphibmedtank_up1", "eamphibneedle_up1", "eamphibrock_up1",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eamphibarty_up1", "eamphibbuggy_up1", "eamphibneedle_up1",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty_up1", "eamphibbuggy_up1", "eamphibneedle_up1",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy_up1", "eamphibneedle_up1",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildAmphibUP2(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eamphibleveler_up2"
 			else
-				local unitoptions = {"eamphibarty_up2", "eamphibbuggy_up2", "eamphibmedtank_up2", "eamphibneedle_up2", "eamphibrock_up2",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eamphibarty_up2", "eamphibbuggy_up2", "eamphibmedtank_up2", "eamphibneedle_up2", "eamphibrock_up2",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eamphibbuggy_up2", "eamphibmedtank_up2", "eamphibneedle_up2", "eamphibrock_up2",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eamphibarty_up2", "eamphibbuggy_up2", "eamphibmedtank_up2", "eamphibneedle_up2", "eamphibrock_up2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty_up2", "eamphibbuggy_up2", "eamphibmedtank_up2", "eamphibneedle_up2", "eamphibrock_up2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy_up2", "eamphibmedtank_up2", "eamphibneedle_up2", "eamphibrock_up2",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eamphibarty_up2", "eamphibbuggy_up2", "eamphibneedle_up2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty_up2", "eamphibbuggy_up2", "eamphibneedle_up2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy_up2", "eamphibneedle_up2",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildAmphibUP3(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "eamphibleveler_up3"
 			else
-				local unitoptions = {"eamphibarty_up3", "eamphibbuggy_up3", "eamphibmedtank_up3", "eamphibneedle_up3", "eamphibrock_up3",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eamphibarty_up3", "eamphibbuggy_up3", "eamphibmedtank_up3", "eamphibneedle_up3", "eamphibrock_up3",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eamphibbuggy_up3", "eamphibmedtank_up3", "eamphibneedle_up3", "eamphibrock_up3",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eamphibarty_up3", "eamphibbuggy_up3", "eamphibmedtank_up3", "eamphibneedle_up3", "eamphibrock_up3",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty_up3", "eamphibbuggy_up3", "eamphibmedtank_up3", "eamphibneedle_up3", "eamphibrock_up3",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy_up3", "eamphibmedtank_up3", "eamphibneedle_up3", "eamphibrock_up3",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eamphibarty_up3", "eamphibbuggy_up3", "eamphibneedle_up3",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eamphibarty_up3", "eamphibbuggy_up3", "eamphibneedle_up3",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eamphibbuggy_up3", "eamphibneedle_up3",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
@@ -652,80 +791,144 @@ end
 ----Hover
 
 function BuildHoverUP0(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "elacerator"
 			else
-				local unitoptions = {"eartytank", "eheavytank3", "elighttank3", "emissiletank", "eriottank2",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eartytank", "eheavytank3", "elighttank3", "emissiletank", "eriottank2",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eheavytank3", "elighttank3", "emissiletank", "eriottank2",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eartytank", "eheavytank3", "elighttank3", "emissiletank", "eriottank2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank", "eheavytank3", "elighttank3", "emissiletank", "eriottank2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eheavytank3", "elighttank3", "emissiletank", "eriottank2",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eartytank", "elighttank3", "eriottank2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank", "elighttank3", "eriottank2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"elighttank3", "eriottank2",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildHoverUP1(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "elacerator_up1"
 			else
-				local unitoptions = {"eartytank_up1", "eheavytank3_up1", "elighttank3_up1", "emissiletank_up1", "eriottank2_up1",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eartytank_up1", "eheavytank3_up1", "elighttank3_up1", "emissiletank_up1", "eriottank2_up1",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eheavytank3_up1", "elighttank3_up1", "emissiletank_up1", "eriottank2_up1",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eartytank_up1", "eheavytank3_up1", "elighttank3_up1", "emissiletank_up1", "eriottank2_up1",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank_up1", "eheavytank3_up1", "elighttank3_up1", "emissiletank_up1", "eriottank2_up1",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eheavytank3_up1", "elighttank3_up1", "emissiletank_up1", "eriottank2_up1",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eartytank_up1", "elighttank3_up1", "eriottank2_up1",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank_up1", "elighttank3_up1", "eriottank2_up1",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"elighttank3_up1", "eriottank2_up1",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildHoverUP2(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "elacerator_up2"
 			else
-				local unitoptions = {"eartytank_up2", "eheavytank3_up2", "elighttank3_up2", "emissiletank_up2", "eriottank2_up2",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eartytank_up2", "eheavytank3_up2", "elighttank3_up2", "emissiletank_up2", "eriottank2_up2",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eheavytank3_up2", "elighttank3_up2", "emissiletank_up2", "eriottank2_up2",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eartytank_up2", "eheavytank3_up2", "elighttank3_up2", "emissiletank_up2", "eriottank2_up2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank_up2", "eheavytank3_up2", "elighttank3_up2", "emissiletank_up2", "eriottank2_up2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eheavytank3_up2", "elighttank3_up2", "emissiletank_up2", "eriottank2_up2",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eartytank_up2", "elighttank3_up2", "eriottank2_up2",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank_up2", "elighttank3_up2", "eriottank2_up2",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"elighttank3_up2", "eriottank2_up2",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
 end
 
 function BuildHoverUP3(tqb, ai, unit)
+	local ArtyCount = GetArtileryUnits(tqb,ai,unit)
 	if GG.TechCheck("tech3", ai.id) then
 		local r = math.random(0,100)
 			if r == 0 then
 				return "elacerator_up3"
 			else
-				local unitoptions = {"eartytank_up3", "eheavytank3_up3", "elighttank3_up3", "emissiletank_up3", "eriottank2_up3",}
-				return FindBest(unitoptions, ai)
+				if ArtyCount < 5 then
+					local unitoptions = {"eartytank_up3", "eheavytank3_up3", "elighttank3_up3", "emissiletank_up3", "eriottank2_up3",}
+					return FindBest(unitoptions, ai)
+				else
+					local unitoptions = {"eheavytank3_up3", "elighttank3_up3", "emissiletank_up3", "eriottank2_up3",}
+					return FindBest(unitoptions, ai)
+				end
 			end
 	elseif GG.TechCheck("tech2", ai.id) then
-		local unitoptions = {"eartytank_up3", "eheavytank3_up3", "elighttank3_up3", "emissiletank_up3", "eriottank2_up3",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank_up3", "eheavytank3_up3", "elighttank3_up3", "emissiletank_up3", "eriottank2_up3",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"eheavytank3_up3", "elighttank3_up3", "emissiletank_up3", "eriottank2_up3",}
+			return FindBest(unitoptions, ai)
+		end
 	elseif GG.TechCheck("tech1", ai.id) then
-		local unitoptions = {"eartytank_up3", "elighttank3_up3", "eriottank2_up3",}
-		return FindBest(unitoptions, ai)
+		if ArtyCount < 5 then
+			local unitoptions = {"eartytank_up3", "elighttank3_up3", "eriottank2_up3",}
+			return FindBest(unitoptions, ai)
+		else
+			local unitoptions = {"elighttank3_up3", "eriottank2_up3",}
+			return FindBest(unitoptions, ai)
+		end
 	else
 		return skip
 	end
