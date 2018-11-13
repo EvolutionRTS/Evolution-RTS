@@ -77,7 +77,7 @@ function AttackerBehaviour:Update()
 			self.enemyRange = SpGetUnitMaxRange(nearestVisibleInRange)
 		end
 	end
-	local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 10000, false)
+	local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
 	local distance = (nearestEnemy and SpGetUnitSeparation(self.unitID, nearestEnemy)) or 3000
 	local refreshRate = math.max(math.floor(((distance*0.5 or 250)/10)),10)
 	if self.unitID%refreshRate == frame%refreshRate then
@@ -119,21 +119,44 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	--local unitCanMove = UnitDefs[unitDefID].canMove
 	local mc, ms = Spring.GetTeamResources(teamID, "metal")
 	local ec, es = Spring.GetTeamResources(teamID, "energy")
-	local r = math.random(0,10)
-	if r == 0 and UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor == "0" and not string.find(UnitDefs[utype.id].name, "eorb") then
+	local r = math.random(0,20)
+	if r == 0 and string.find(UnitDefs[unitDefID].name, "eartytank") then
 		self.unit:Internal():EZMorph()
+	elseif r == 0 and string.find(UnitDefs[unitDefID].name, "riot") then
+		self.unit:Internal():EZMorph()
+	elseif r < 10 and string.find(UnitDefs[unitDefID].name, "eartyturret") then
+		self.unit:Internal():EZMorph()
+		return
+	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and not string.find(UnitDefs[unitDefID].name, "turret") then
+		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
+		if nearestEnemyDistance < 1500 and self.repairThisUnit == false then
+			self.unit:Internal():EZMorph()
+		end
+	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and string.find(UnitDefs[unitDefID].name, "turret") then
+		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
+		if nearestEnemyDistance >= 1500 or self.repairThisUnit == true then
+			self.unit:Internal():EZMorph()
+		end
 	end
-	if (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") and ec > es*0.98 then
+	elseif (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") then
+		self.unit:Internal():EZMorph()
+		return
+	elseif string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
+		self.unit:Internal():EZMorph()
+	elseif UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor ~= "0" and ec > es*0.98 then
 		self.unit:Internal():EZMorph()
 		return
 	end
-	if string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
-		self.unit:Internal():EZMorph()
-		return
-	end
-	if UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor ~= "0" and ec > es*0.98 then
-		self.unit:Internal():EZMorph()
-		return
+	if string.find(UnitDefs[unitDefID].name, "eallterr") then
+		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
+		if nearestEnemyDistance < 1500 then
+			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 1 }, {})
+		else
+			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 0 }, {})
+		end
 	end
 	local currenthealth = unit:GetHealth()
 	local maxhealth = unit:GetMaxHealth()
@@ -218,7 +241,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	elseif not self.repairThisUnit then
 		local attacker = type == "attacker"
 		if attacker then
-			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 10000, false)
+			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
 			enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestEnemy)
 			--local cms = self.ai.attackhandler.targetMexes[(self.unitID%5)+1]
 			--if cms then -- there is an enemy metal spot
