@@ -79,7 +79,7 @@ function AttackerBehaviour:Update()
 	end
 	local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 10000, false)
 	local distance = (nearestEnemy and SpGetUnitSeparation(self.unitID, nearestEnemy)) or 3000
-	local refreshRate = math.max(math.floor(((distance*0.2 or 250)/10)),10)
+	local refreshRate = math.max(math.floor(((distance*0.5 or 250)/10)),10)
 	if self.unitID%refreshRate == frame%refreshRate then
 		self:AttackCell(self.type, self.nearestVisibleAcrossMap, self.nearestVisibleInRange, self.enemyRange)
 	end
