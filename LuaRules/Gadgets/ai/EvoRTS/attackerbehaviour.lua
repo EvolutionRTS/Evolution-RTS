@@ -136,14 +136,18 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		return
 	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and not string.find(UnitDefs[unitDefID].name, "turret") then
 		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local EnemyDefID = Spring.GetUnitDefID(nearestEnemy)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
-		if nearestEnemyDistance < self.myRange*1.30 and self.repairThisUnit == false then
-			self.unit:Internal():EZMorph()
+		if nearestEnemyDistance < self.myRange*1.30 and self.repairThisUnit == falsethen
+			if UnitDefs[EnemyDefID].customParams and UnitDefs[EnemyDefID].customParams.armortype ~= "building" then
+				self.unit:Internal():EZMorph()
+			end
 		end
 	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and string.find(UnitDefs[unitDefID].name, "turret") then
 		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local EnemyDefID = Spring.GetUnitDefID(nearestEnemy)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
-		if nearestEnemyDistance >= self.myRange+50 or self.repairThisUnit == true then
+		if nearestEnemyDistance >= self.myRange+50 or self.repairThisUnit == true or (UnitDefs[EnemyDefID].customParams and UnitDefs[EnemyDefID].customParams.armortype == "building") then
 			self.unit:Internal():EZMorph()
 		end
 	elseif (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") then
@@ -204,7 +208,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		if self.myRange and enemyRange and self.myRange >= enemyRange and enemyRange > 50 then -- we skirm here
 			wantedRange = self.myRange
 		else -- randomize wantedRange between 25-75% of myRange
-			wantedRange = math.random(self.myRange*0.75, self.myRange*0.90)
+			wantedRange = math.random(self.myRange*0.70, self.myRange*0.80)
 		end
 		-- offset upos randomly so it moves a bit while keeping distance
 		local dx, _, dz, dw = SpGetUnitVelocity(self.unitID) -- attempt to not always queue awful turns
