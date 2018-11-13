@@ -838,14 +838,11 @@ local HoverFactoryQueueUP3 = {
 }
 
 local overseerlistfirst = {
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
-	"elifterai",
-	"elifterai",
-	"elifterai",
-	"elifterai",
-	BuildTechFacility,
+	BuildEngineers,
+	BuildEngineers,
+	BuildEngineers,
+	BuildEngineers,
+	BuildEngineers,
 	MoveToRandomStartBoxLocation,
 }
 	

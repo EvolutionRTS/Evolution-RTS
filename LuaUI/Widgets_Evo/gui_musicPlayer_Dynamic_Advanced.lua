@@ -473,7 +473,7 @@ function widget:Shutdown()
 end
 
 function widget:UnitDamaged()
-	warMeter = maxWarMeter*0.5
+	warMeter = maxWarMeter
 	if warMeter > maxWarMeter then
 		warMeter = maxWarMeter
 	end
