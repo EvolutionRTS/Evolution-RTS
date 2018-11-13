@@ -99,7 +99,7 @@ function AttackerBehaviour:OwnerBuilt()
 	self.unitID = self.unit:Internal().id
 	self.AggFactor = self.ai.attackhandler:GetAggressiveness(self)
 	self.type = self.ai.attackhandler:GetRole(self)
-	self.repairThisUnit = true
+	self.repairThisUnit = false
 end
 
 function AttackerBehaviour:OwnerDead()
@@ -120,6 +120,13 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	local mc, ms = Spring.GetTeamResources(teamID, "metal")
 	local ec, es = Spring.GetTeamResources(teamID, "energy")
 	local r = math.random(0,20)
+	local currenthealth = unit:GetHealth()
+	local maxhealth = unit:GetMaxHealth()
+	if currenthealth < maxhealth*0.99 and currenthealth < 5000 then
+		self.repairThisUnit = true
+	elseif currenthealth >= maxhealth*0.99 then
+		self.repairThisUnit = false
+	end
 	if r == 0 and string.find(UnitDefs[unitDefID].name, "eartytank") then
 		self.unit:Internal():EZMorph()
 	elseif r == 0 and string.find(UnitDefs[unitDefID].name, "riot") then
@@ -130,13 +137,13 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and not string.find(UnitDefs[unitDefID].name, "turret") then
 		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
-		if nearestEnemyDistance < 1500 and self.repairThisUnit == false then
+		if nearestEnemyDistance < self.myRange*1.30 and self.repairThisUnit == false then
 			self.unit:Internal():EZMorph()
 		end
 	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and string.find(UnitDefs[unitDefID].name, "turret") then
 		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
-		if nearestEnemyDistance >= 1500 or self.repairThisUnit == true then
+		if nearestEnemyDistance >= self.myRange+50 or self.repairThisUnit == true then
 			self.unit:Internal():EZMorph()
 		end
 	elseif (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") then
@@ -151,18 +158,11 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	if string.find(UnitDefs[unitDefID].name, "eallterr") then
 		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
-		if nearestEnemyDistance < 1500 then
+		if nearestEnemyDistance < 2000 then
 			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 1 }, {})
 		else
 			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 0 }, {})
 		end
-	end
-	local currenthealth = unit:GetHealth()
-	local maxhealth = unit:GetMaxHealth()
-	if currenthealth < maxhealth*0.99 and currenthealth < 5000 then
-		self.repairThisUnit = true
-	elseif currenthealth >= maxhealth*0.99 then
-		self.repairThisUnit = false
 	end
 	-- Retreating first so we have less data process/only what matters
 	if self.repairThisUnit then
@@ -274,7 +274,8 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		return
 	else
 		if (utype:CanFly() == true) and unit:Name() ~= "escoutdrone" then
-			unit:MoveAndFire(self.target)
+			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+			unit:Attack(nearestEnemy)
 		else
 			unit:Move(self.target)
 		end
