@@ -138,7 +138,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
 		local EnemyDefID = Spring.GetUnitDefID(nearestEnemy)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
-		if nearestEnemyDistance < self.myRange*1.30 and self.repairThisUnit == falsethen
+		if nearestEnemyDistance < self.myRange*1.30 and self.repairThisUnit == false then
 			if UnitDefs[EnemyDefID].customParams and UnitDefs[EnemyDefID].customParams.armortype ~= "building" then
 				self.unit:Internal():EZMorph()
 			end
