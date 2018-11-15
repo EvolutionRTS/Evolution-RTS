@@ -16,18 +16,9 @@ end
 local teams = Spring.GetTeamList()
 for i =1, #teams do
 	local luaAI = Spring.GetTeamLuaAI(teams[i])
-	if (string.find(luaAI, "Chicken:")) then
-		if luaAI == "Chicken: Very Easy" or 
-		luaAI == "Chicken: Easy" or 
-		luaAI == "Chicken: Normal" or 
-		luaAI == "Chicken: Hard" or 
-		luaAI == "Chicken: Very Hard" or 
-		luaAI == "Chicken: Epic!" or 
-		luaAI == "Chicken: Custom" or 
-		luaAI == "Chicken: Survival" then
-			chickensEnabled = true
-		end
-	end
+    if luaAI and luaAI ~= "" and string.sub(luaAI, 1, 9) == 'Chicken: ' then
+        chickensEnabled = true
+    end
 end
 
 if chickensEnabled == true then
@@ -236,8 +227,10 @@ SetGameRulesParam("chickenTeamID", chickenTeamID)
 
 local function SetToList(set)
   local list = {}
+  local count = 0
   for k in pairs(set) do
-    table.insert(list, k)
+      count = count + 1
+      list[count] = k
   end
   return list
 end
@@ -1210,10 +1203,14 @@ local function getMostDefendedArea()
 		local k = next(defenseMap)
 		if k then
 			local x,z = string.match(k, "(%d+),(%d+)")
-			x = x * DMAREA
-			z = z * DMAREA
-			local y = GetGroundHeight(x,z)
-			return x,y,z
+            if x ~= nil and z ~= nil then
+                x = x * DMAREA
+                z = z * DMAREA
+                local y = GetGroundHeight(x,z)
+                return x,y,z
+            else
+                return nil, nil, nil
+            end
 		else
 			return nil,nil,nil
 		end

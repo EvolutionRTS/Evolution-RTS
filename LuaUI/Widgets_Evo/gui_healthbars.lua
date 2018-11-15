@@ -130,6 +130,12 @@ for udefID,def in ipairs(UnitDefs) do
     ignoreUnits[udefID] = true
   end
 end
+local ignoreFeatures = {}
+for fdefID,def in pairs(FeatureDefs) do
+  if def.customParams['nohealthbars'] then
+    ignoreFeatures[fdefID] = true
+  end
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -1190,6 +1196,8 @@ do
   local ci
 
   function DrawFeatureInfos(featureID,featureDefID,fullText,fx,fy,fz)
+    if ignoreFeatures[featureDefID] ~= nil then return end
+
     if (not customInfo[featureDefID]) then
       local featureDef   = FeatureDefs[featureDefID or -1] or {height=0,name=''}
       customInfo[featureDefID] = {

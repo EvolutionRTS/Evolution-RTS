@@ -20,18 +20,9 @@ local widgetScale = customScale
 local teams = Spring.GetTeamList()
 for i =1, #teams do
 	local luaAI = Spring.GetTeamLuaAI(teams[i])
-	if luaAI ~= "" then
-		if luaAI == "Chicken: Very Easy" or 
-		luaAI == "Chicken: Easy" or 
-		luaAI == "Chicken: Normal" or 
-		luaAI == "Chicken: Hard" or 
-		luaAI == "Chicken: Very Hard" or 
-		luaAI == "Chicken: Epic!" or 
-		luaAI == "Chicken: Custom" or 
-		luaAI == "Chicken: Survival" then
-			chickensEnabled = true
-		end
-	end
+    if luaAI and luaAI ~= "" and string.sub(luaAI, 1, 9) == 'Chicken: ' then
+        chickensEnabled = true
+    end
 end
 
 if chickensEnabled == true then
@@ -194,12 +185,14 @@ end
 
 local function MakeCountString(type, showbreakdown)
   local t = {}
+  local tcount = 0
   local total = 0
   local showbrackets = false
   for _, colorInfo in ipairs(chickenColors) do
     local subTotal = gameInfo[colorInfo[1]..type]
-    if subTotal > 0 then 
-      table.insert(t, colorInfo[2]..subTotal)
+    if subTotal > 0 then
+      tcount = tcount + 1
+      t[tcount] = colorInfo[2]..subTotal
       total = total + subTotal
       showbrackets = true
     end
