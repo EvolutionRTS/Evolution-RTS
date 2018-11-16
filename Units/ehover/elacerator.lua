@@ -12,8 +12,7 @@ humanName = "Lacerator"
 objectName = "elacerator.s3o"
 script = "elacerator.cob"
 
-techprovided = [[-1 endbringer]]
-tech = [[tech3, 1 endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
 --supply  = [[25]]
 

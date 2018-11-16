@@ -17,7 +17,14 @@ math.randomseed( os.time() - os.clock() * 1000 )
 math.random() math.random() math.random()
 local music_volume_set = Spring.GetConfigInt("snd_volmusic", 20) * 0.01 or 0.2
 Spring.SetSoundStreamVolume(music_volume_set)
-local musicfiles = VFS.DirList("LuaUI/Widgets_Evo/Music/loading", "*.ogg")
+local r = math.random(0,2)
+
+if r == 0 then 
+	musicfiles = VFS.DirList("LuaUI/Widgets_Evo/Music/loading", "*.ogg")
+else
+	musicfiles = VFS.DirList("LuaUI/Widgets_Evo/Music/war", "*.ogg")
+end
+
 if (#musicfiles > 0) then
 	Spring.PlaySoundStream(musicfiles[math.random(1,#musicfiles)], music_volume_set)
 	Spring.SetSoundStreamVolume(music_volume_set)

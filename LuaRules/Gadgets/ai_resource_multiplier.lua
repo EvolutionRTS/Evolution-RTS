@@ -18,7 +18,7 @@ if (not gadgetHandler:IsSyncedCode()) then
 	return -- No Unsynced
 end
 
-local aiResourceMultiplier = tonumber(Spring.GetModOptions().ai_incomemultiplier) or 1
+local aiResourceMultiplier = tonumber(Spring.GetModOptions().ai_incomemultiplier) * 0.01 or 1
 
 if timedResBonusMultiplier == 0 and aiResourceMultiplier == 1 then
 	return
@@ -58,7 +58,7 @@ function gadget:UnitFinished(uID, uDefID, uTeam, builderID)
 			aiTeams[uTeam].winds = aiTeams[uTeam].winds + 1
 		end
 		if mexUnitDefs[uDefID] then
-			newMexes[uID] = {Spring.GetGameFrame() + 30, uTeam} 	-- unfortunately mex produces nothing yet so we have to scedule it
+			newMexes[uID] = {Spring.GetGameFrame() + 30, uTeam} 	-- unfortunately mex produces nothing yet so we have to schedule it
 		end
 		if energyUnitDefs[uDefID] then
 			aiTeams[uTeam].energy = aiTeams[uTeam].energy + energyUnitDefs[uDefID]
@@ -96,7 +96,7 @@ end
 
 function gadget:Initialize()
 	for uDefID,def in ipairs(UnitDefs) do
-		if def.energyMake >= 10 then	-- filter insignificant production to save some performance
+		if def.energyMake >= 5 then	-- filter insignificant production to save some performance
 			energyUnitDefs[uDefID] = def.energyMake
 			ecoUnitsDefs[uDefID] = true
 		end
@@ -112,9 +112,12 @@ function gadget:Initialize()
 			metalUnitDefs[uDefID] = def.metalMake
 			ecoUnitsDefs[uDefID] = true
 		end
-		if def.extractsMetal > 0 then
-			mexUnitDefs[uDefID] = def.extractsMetal
-			ecoUnitsDefs[uDefID] = true
+		if def.customParams then
+			if def.customParams.metal_extractor and tonumber(def.customParams.metal_extractor) > 0 then
+				mexUnitDefs[uDefID] = def.customParams.metal_extractor
+				mexUnitDefs[uDefID] = def.extractsMetal
+				ecoUnitsDefs[uDefID] = true
+			end
 		end
 		if ecoUnitsDefs[uDefID] then
 			for teamID,_ in pairs(aiTeams) do
@@ -126,9 +129,11 @@ function gadget:Initialize()
 		for teamID,_ in pairs(aiTeams) do
 			local teamUnits = Spring.GetTeamUnitsSorted(teamID)
 			for uDefID, units in pairs(teamUnits) do
-				for _, unitID in pairs(units) do
-					if select(5,Spring.GetUnitHealth(unitID)) >= 1 then
-						gadget:UnitFinished(unitID, uDefID, teamID)
+				if type(units) == 'table' then
+					for _, unitID in pairs(units) do
+						if select(5,Spring.GetUnitHealth(unitID)) >= 1 then
+							gadget:UnitFinished(unitID, uDefID, teamID)
+						end
 					end
 				end
 			end
@@ -140,8 +145,7 @@ end
 function gadget:GameFrame(n)
 
 	if n % 30 == 1 then
-
-		-- a just finished mex doesnt produce metal yet so we sceduled it
+		-- a just finished mex doesn't produce metal yet so we schedule it
 		for uID,params in pairs(newMexes) do
 			if n > params[1] then
 				aiTeams[params[2]].mexes[uID] = select(1,spGetUnitResources(uID))
@@ -162,6 +166,12 @@ function gadget:GameFrame(n)
 
 			--Spring.Echo(totalEnergy..'   +   '..((totalEnergy * (aiResourceMultiplier + timedResBonus)) - totalEnergy))
 			--Spring.Echo(totalMetal..'   +   '..((totalMetal * (aiResourceMultiplier + timedResBonus)) - totalMetal))
+			if Spring.GetGameSeconds() < 300 then
+				local mc, ms = Spring.GetTeamResources(TeamID, "metal")
+				local ec, es = Spring.GetTeamResources(TeamID, "energy")
+				Spring.AddTeamResource(TeamID,"e", es*0.10 - ec)
+				Spring.AddTeamResource(TeamID,"m", ms*0.10 - mc)
+			end
 			Spring.AddTeamResource(TeamID,"e", (totalEnergy * (aiResourceMultiplier + timedResBonus)) - totalEnergy)
 			Spring.AddTeamResource(TeamID,"m", (totalMetal * (aiResourceMultiplier + timedResBonus)) - totalMetal)
 		end

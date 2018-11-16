@@ -101,6 +101,7 @@ local unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies", 
 		helptext                 = [[]],
+		retreatRangeDAI			 = 1250,
 	},
 }
 

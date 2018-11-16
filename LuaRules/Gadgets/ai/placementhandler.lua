@@ -12,6 +12,12 @@ function PlacementHandler:Init()
 	self.jobs = {}
 end
 
+function snap_to_grid( pos , gridsize )
+    pos.x = pos.x - (pos.x % gridsize )
+    pos.z = pos.z - (pos.z % gridsize )
+    return pos
+end
+
 --[[
 Usage:
 
@@ -73,6 +79,9 @@ function PlacementHandler:NewJob( details )
 	end
 	details.status = 'new'
 	details.step = 1
+
+	-- snap the position to a 16x16 grid for consistency
+	details.start_position = snap_to_grid( start_position, 16 )
 
 	-- figure out the spiral search pattern necessary
 	local max_width = details.max_radius * 2

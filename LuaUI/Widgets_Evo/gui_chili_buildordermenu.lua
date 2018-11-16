@@ -12,6 +12,34 @@ function widget:GetInfo()
     }
 end
 --------------------------------------------------------------------------------
+-- Hotkeys
+VFS.Include("luaui/configs/evo_buildHotkeysConfig.lua")
+local sGetKeySymbol = Spring.GetKeySymbol
+local function getKeySymbol(k)
+    local keySymbol = sGetKeySymbol(k)
+    return keySymbol:sub(1, 1):upper() .. keySymbol:sub(2)
+end
+local nameToKeySymbols = {}
+for unitDefID = 1, #UnitDefs do
+    local ud = UnitDefs[unitDefID]
+    local name = ud.name
+    if name:find("_up", -5) then name = name:sub(1, -5) end
+    if nameToKeyCode[name] then
+        -- local str = ""
+        -- local leng = #nameToKeyCode[name]
+        -- for i = 1, leng do
+        --     str = str .. getKeySymbol(nameToKeyCode[name][i])
+        --     if i < leng then str = str .. " + " end
+        -- end
+        -- nameToKeySymbols[name] = str
+        nameToKeySymbols[name] = {}
+        for i = 1, #nameToKeyCode[name] do
+            nameToKeySymbols[name][i] = getKeySymbol(nameToKeyCode[name][i])
+        end
+    end
+end
+local hotkeyLabels = {}
+--------------------------------------------------------------------------------
 -- Localize
 local sForceLayoutUpdate = Spring.ForceLayoutUpdate
 local sSetActiveCommand = Spring.SetActiveCommand
@@ -36,7 +64,12 @@ local orderWindow, buildWindow, orderGrid, buildGrid, updateRequired, tooltip, b
 local chiliCache = {}
 local vsx, vsy = sGetWindowGeometry()
 
-local buildOrderUI = Spring.GetConfigInt("evo_buildorderui", 0) or 0
+local sGetConfigInt = Spring.GetConfigInt
+local buildOrderUI = sGetConfigInt("evo_buildorderui", 0)
+local showCost = sGetConfigInt("evo_showcost", 1) == 1
+local showTechReq = sGetConfigInt("evo_showtechreq", 1) == 1
+local showHotkeys = sGetConfigInt("evo_showhotkeys", 1) == 1
+WG.buildOrderUI = {updateConfigInt = false}
 
 if buildOrderUI == 0 or buildOrderUI == nil then
 	Config = {
@@ -62,8 +95,6 @@ if buildOrderUI == 0 or buildOrderUI == nil then
 			captionFontMaxSize = 12,
 			queueFontSize = 12, --32 (MaDDoX)
 			costFontSize = 12,
-			showMetalCost = true,
-			showEnergyCost = true, --true
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -96,8 +127,6 @@ if buildOrderUI == 1 then
 			captionFontMaxSize = 12,
 			queueFontSize = 12, --32 (MaDDoX)
 			costFontSize = 12,
-			showMetalCost = true,
-			showEnergyCost = true, --true
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -130,8 +159,6 @@ if buildOrderUI == 2 then
 			captionFontMaxSize = 12,
 			queueFontSize = 12, --32 (MaDDoX)
 			costFontSize = 12,
-			showMetalCost = true,
-			showEnergyCost = true, --true
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -164,8 +191,6 @@ if buildOrderUI == 3 then
 			captionFontMaxSize = 12,
 			queueFontSize = 12, --32 (MaDDoX)
 			costFontSize = 12,
-			showMetalCost = true,
-			showEnergyCost = true, --true
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -197,8 +222,6 @@ if buildOrderUI == 4 then
 			captionFontMaxSize = 12,
 			queueFontSize = 12, --32 (MaDDoX)
 			costFontSize = 12,
-			showMetalCost = true,
-			showEnergyCost = true, --true
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -402,7 +425,8 @@ local function addOrderCommand(cmd)
         margin = {2, 2, 2, 2},
         OnMouseUp = {ActionCommand},
     }
-    button:SetCaption(cmd.name)
+    if cmd.name == "Repair" then button:SetCaption("Build")
+    else button:SetCaption(cmd.name) end
     chiliCache['button' .. cmd.id] = button
     local s = (btWidth - button.textPadding * 2) / glGetTextWidth(button.caption)
     button.font:SetSize(mathmin(s, Config.labels.captionFontMaxSize))
@@ -462,16 +486,28 @@ local function addBuildCommand(cmd)
         chiliCache['queueLabel' .. cmd.id]:SetCaption(tostring(cmd.params[1] or ''))
     end
 
-    if not cmd.disabled and (Config.labels.showMetalCost or Config.labels.showEnergyCost) then
-        local s, e, metalCost, energyCost, line = 0, 0, '', '', '\n'
-        if Config.labels.showMetalCost then
-            s, e = stringfind(cmd.tooltip, 'Metal cost %d*')
-            metalCost = color2incolor(0.53,0.77,0.89) .. stringsub(cmd.tooltip, s + 11, e)
-        else line = '' end
-        if Config.labels.showEnergyCost then
-            s, e = stringfind(cmd.tooltip, 'Energy cost %d*')
-            energyCost = color2incolor(1,1,0) .. stringsub(cmd.tooltip, s + 12, e)
-        else line = '' end
+    local str = ''
+    if showCost then
+        local s, e = 0, 0
+        local comma = color2incolor(1,1,1) .. ','
+        s, e = stringfind(cmd.tooltip, 'Uses %+%d* Supply')
+        if s then str = str .. color2incolor(1,0.5,0) .. stringsub(cmd.tooltip, s + 6, e - 7) .. comma end
+        s, e = stringfind(cmd.tooltip, 'Energy cost %d*')
+        str = str .. color2incolor(1,1,0) .. stringsub(cmd.tooltip, s + 12, e) .. comma
+        s, e = stringfind(cmd.tooltip, 'Metal cost %d*')
+        str = str .. color2incolor(0.53,0.77,0.89) .. stringsub(cmd.tooltip, s + 11, e) .. comma
+    end
+    local techReqColors = {color2incolor(1,0.5,0), color2incolor(0,0.8,1), color2incolor(1,0,1), color2incolor(0,1,0)}
+    if showTechReq and cmd.disabled then
+        if stringfind(cmd.tooltip, 'Requires') and not stringfind(cmd.tooltip, 'Provides') then
+            local s, e = stringfind(cmd.tooltip, 'tech%d*')
+            if s then
+                local techLevel = stringsub(cmd.tooltip, s + 4, e)
+                str = techReqColors[tonumber(techLevel) + 1] .. "T" .. techLevel .. '\n' .. str
+            end
+        end
+    end
+    if str ~= '' then
         if (not chiliCache['costLabel' .. cmd.id]) then
             chiliCache['costLabel' .. cmd.id] = Label:New{
                 name = 'costLabel' .. cmd.id,
@@ -486,7 +522,50 @@ local function addBuildCommand(cmd)
                 },
             }
         end
-        chiliCache['costLabel' .. cmd.id]:SetCaption(metalCost .. line .. energyCost)
+        chiliCache['costLabel' .. cmd.id]:SetCaption(str:sub(1, -2))
+    elseif chiliCache['costLabel' .. cmd.id] then
+        chiliCache['costLabel' .. cmd.id]:SetCaption(str)
+    end
+
+    if showHotkeys and widgetHandler.orderList["EvoRTS Build Hotkeys"] and widgetHandler.orderList["EvoRTS Build Hotkeys"] ~= 0 then
+        if nameToKeySymbols[cmd.name] then
+            if not chiliCache['hotkeyLabel' .. cmd.id] then
+                chiliCache['hotkeyLabel' .. cmd.id] = Label:New{
+                    name = 'hotkeyLabel' .. cmd.id,
+                    parent = image,
+                    x = '5%', y = '5%',
+                    valign = 'top',
+                    --caption = metalCost .. line .. energyCost,
+                    font = {
+                        size = Config.labels.costFontSize,
+                        outline = true, shadow  = true,
+                        outlineWidth  = 4, outlineWeight = 4,
+                    },
+                }
+            end
+            -- chiliCache['hotkeyLabel' .. cmd.id]:SetCaption(color2incolor(1,1,1) .. nameToKeySymbols[cmd.name])
+            local function updateLabel()
+                local str = color2incolor(1,1,1)
+                local leng = #nameToKeySymbols[cmd.name]
+                local getLengKeysPressed = WG.buildHotkeys and #WG.buildHotkeys.keysPressed or 0
+                local matching = true
+                for i = 1, leng do
+                    if i <= getLengKeysPressed and matching then
+                        if nameToKeySymbols[cmd.name][i] == WG.buildHotkeys.keysPressed[i] then str = str .. color2incolor(0,1,0)
+                        else matching = false end
+                    end
+                    str = str .. nameToKeySymbols[cmd.name][i]
+                    if i < leng then str = str .. color2incolor(1,1,1) .. ' + ' end
+                end
+                chiliCache['hotkeyLabel' .. cmd.id]:SetCaption(str)
+            end
+            chiliCache['hotkeyLabel' .. cmd.id].updateLabel = updateLabel
+            updateLabel()
+            hotkeyLabels[cmd.id] = chiliCache['hotkeyLabel' .. cmd.id]
+        end
+    elseif chiliCache['hotkeyLabel' .. cmd.id] then
+        chiliCache['hotkeyLabel' .. cmd.id].updateLabel = nil
+        chiliCache['hotkeyLabel' .. cmd.id]:SetCaption('')
     end
 
     applyHighlightHandler(image, cmd)
@@ -500,8 +579,8 @@ local function processCommand(cmd)
 end --processCommand
 
 local lastCommands
-local function processAllCommands()
-    if (deepEquals(lastCommands, widgetHandler.commands)) then
+local function processAllCommands(flush)
+    if (deepEquals(lastCommands, widgetHandler.commands)) and not flush then
      return
     end
     lastCommands = widgetHandler.commands
@@ -544,6 +623,11 @@ local function updateSelection()
         if bt.updateSelection then bt.updateSelection(cmdID) end
     end
 end --updateSelection
+local function updateLabel()
+    for _, label in pairs(hotkeyLabels) do
+        if label.updateLabel then label.updateLabel() end
+    end
+end --updateLabel
 
 local function OverrideDefaultMenu()
     local function layoutHandler(xIcons, yIcons, cmdCount, commands)
@@ -586,8 +670,19 @@ function widget:Update()
     if updateRequired then
         processAllCommands()
         updateRequired = false
-    else
-        updateSelection()
+    end
+    updateSelection()
+
+    if WG.buildHotkeys and WG.buildHotkeys.hasUpdated then
+        updateLabel()
+        WG.buildHotkeys.hasUpdated = false
+    end
+    if WG.buildOrderUI and WG.buildOrderUI.updateConfigInt then
+        WG.buildOrderUI.updateConfigInt = false
+        showCost = sGetConfigInt("evo_showcost", 1) == 1
+        showTechReq = sGetConfigInt("evo_showtechreq", 1) == 1
+        showHotkeys = sGetConfigInt("evo_showhotkeys", 1) == 1
+        processAllCommands(true)
     end
 end --Update
 

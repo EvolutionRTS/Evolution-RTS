@@ -90,7 +90,7 @@ local unitDef                     = {
 		death_sounds              = "generic",
 		--ProvideTechRange          = "300",
 		armortype                 = armortype, 
-		normaltex                = "unittextures/eshieldgennormal.png",
+		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,

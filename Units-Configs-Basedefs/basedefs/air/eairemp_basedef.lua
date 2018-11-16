@@ -16,7 +16,7 @@ unitDef                    = {
 	canstop                      = "1",
 	category                     = "LIGHT VTOL",
 	collide                      = false,
-	cruiseAlt                    = 800,
+	cruiseAlt                    = 500,
 	description                  = [[EMP Attack Craft]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -91,6 +91,7 @@ unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
 		corpse                   = "energycore",
+		retreatRangeDAI			 = 0,
 	},
 }
 

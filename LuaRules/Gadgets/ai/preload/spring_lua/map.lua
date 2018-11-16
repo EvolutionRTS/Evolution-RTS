@@ -1,6 +1,6 @@
 local map = {}
 map.spots = shard_include("spring_lua/metal")
-
+map.geos = shard_include("spring_lua/geo")
 	-- function map:FindClosestBuildSite(unittype,builderpos, searchradius, minimumdistance)
 	-- function map:CanBuildHere(unittype,position)
 	-- function map:GetMapFeatures()
@@ -44,7 +44,7 @@ function map:FindClosestBuildSite(unittype, builderpos, searchradius, minimumdis
 				position = validFunction(position)
 				if position then return position end
 			end
-		end
+		end 
 	end
 	local lastDitch, lastDitchPos = self:CanBuildHere(unittype, builderpos)
 	if lastDitch then
@@ -54,8 +54,7 @@ function map:FindClosestBuildSite(unittype, builderpos, searchradius, minimumdis
 end
 
 function map:CanBuildHere(unittype,position) -- returns boolean
-	local y = Spring.GetGroundHeight( position.x, position.z )
-	local newX, newY, newZ = Spring.Pos2BuildPos(unittype:ID(), position.x, y, position.z)
+	local newX, newY, newZ = Spring.Pos2BuildPos(unittype:ID(), position.x, position.y, position.z)
 	local blocked = Spring.TestBuildOrder(unittype:ID(), newX, newY, newZ, 1) == 0
 	-- Spring.Echo(unittype:Name(), newX, newY, newZ, blocked)
 	return ( not blocked ), {x=newX, y=newY, z=newZ}
@@ -92,6 +91,26 @@ end
 function map:GetMetalSpots() -- returns a table of spot positions
 	local fv = self.spots
 	local count = self:SpotCount()
+	local f = {}
+	local i = 0
+	while i  < count do
+		table.insert( f, fv[i] )
+		i = i + 1
+	end
+	return f
+end
+
+function map:GeoCount() -- returns the nubmer of metal spots
+	return #self.geos
+end
+
+function map:GetGeo(idx)
+	return self.geos[idx]
+end
+
+function map:GetGeoSpots() -- returns a table of spot positions
+	local fv = self.geos
+	local count = self:GeoCount()
 	local f = {}
 	local i = 0
 	while i  < count do

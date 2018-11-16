@@ -16,7 +16,7 @@ unitDef                    = {
 	canstop                      = true,
 	category                     = "LIGHT VTOL",
 	collide                      = true,
-	cruiseAlt                    = 500,
+	cruiseAlt                    = 350,
 	description                  = [[Light Gunship • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -91,6 +91,7 @@ unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
 		corpse                   = "energycore",
+		retreatRangeDAI			 = 0,
 	},
 }
 
@@ -119,7 +120,7 @@ weaponDefs                 = {
 		rgbColor                 = "1 0.5 0",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		soundstart               = "weapons/tmediumtankfire.wav",
+		soundstart               = "other/ejerikfiresingle.wav",
 		sprayangle				 = 1000,
 		size					 = 4,
 		--texture1                 = "shot",

@@ -20,7 +20,7 @@ return {
 	modtype=1,
 	depend = {
 		"Spring Features v1.9",
-		"Evolution RTS Music Addon v1",
+		-- "Evolution RTS Music Addon v1",
 		-- "Shard LuaAI $VERSION",
 		-- "Evolution RTS Shard LuaAI $VERSION",		
 	},

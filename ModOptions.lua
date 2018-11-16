@@ -33,33 +33,9 @@ local options= {
 -- Shard AI Options
 	{
 		key    = 'aioptions',
-		name   = 'Shard AI Options',
+		name   = 'DAI (AI Opponent) Options',
 		desc   = 'Allows you to adjust ShardLua settings',
 		type   = 'section',
-	},
-	{
-		key    = 'aimetalhandicap',
-		name   = 'Shard Metal Handicap',
-		desc   = 'Determines the amount of extra metal given to Shard',
-		type   = 'number',
-		section= 'aioptions',
-		def    = 0,
-		min    = 0,
-		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
-	},
-	{
-		key    = 'aienergyhandicap',
-		name   = 'Shard Energy Handicap',
-		desc   = 'Determines the amount of extra metal given to Shard',
-		type   = 'number',
-		section= 'aioptions',
-		def    = 0,
-		min    = 0,
-		max    = 20,
-		step   = 1,  -- quantization is aligned to the def value
-		-- (step <= 0) means that there is no quantization
 	},
 	{
 		key    = 'aidebug',
@@ -75,14 +51,14 @@ local options= {
 	},
 	{
 		key    = 'ai_incomemultiplier',
-		name   = 'AI Income Multiplier',
-		desc   = 'Multiplies AI resource income',
+		name   = 'AI Income Percentage',
+		desc   = 'Percentage of AI resource income compared to the default (100 = 100%, I.E. Normal. 200 = 200%, which would mean that the AI income would be double the player income)',
 		type   = 'number',
 		section= 'aioptions',
-		def    = 1,
+		def    = 100,
 		min    = 1,
-		max    = 10,
-		step   = 0.1,
+		max    = 1000,
+		step   = 1,
 	},
 	
 -- Resourcing

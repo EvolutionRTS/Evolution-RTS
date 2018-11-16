@@ -117,7 +117,7 @@ function UnitDef_Post(name, uDef)
 	--
 	
 	if uDef.builder == true and uDef.sounds then
-		uDef.sounds.build = "miscfx/buildstart-mechanical.wav"
+		uDef.sounds.build = "miscfx/buildstart-nano.wav"
 	end
 	
 	--------------------------------------------------------------------------------
@@ -187,7 +187,7 @@ function WeaponDef_Post(name, wDef)
 		wDef.targetborder = tonumber(wDef.customparams.targetborderoverride)
 	end
 	
-	-- weapon reloadTime and stockpileTime were seperated in 77b1
+	-- weapon reloadTime and stockpileTime were separated in 77b1
 	if (tobool(wDef.stockpile) and (wDef.stockpiletime==nil)) then
 		wDef.stockpiletime = wDef.reloadtime
 		--wDef.reloadtime    = 2             -- 2 seconds
@@ -205,6 +205,8 @@ function WeaponDef_Post(name, wDef)
 		wDef.edgeeffectiveness = 1
 	end
 	
+	--Override map gravity for all weapons
+	wDef.mygravity = 0.14
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- Set up params for Point Defense turrets

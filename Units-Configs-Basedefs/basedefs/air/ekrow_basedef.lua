@@ -17,7 +17,7 @@ unitDef                    = {
 	canstop                      = true,
 	category                     = "ARMORED VTOL",
 	collide                      = true,
-	cruiseAlt                    = 300,
+	cruiseAlt                    = 250,
 	description                  = [[Unit Type: Endbringer Flying Fortress]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -88,7 +88,6 @@ unitDef                    = {
 		--    needed_cover       = 2,
 		death_sounds             = "generic",
 		nofriendlyfire           = "1",
-		ProvideTech              = techprovided,
 		RequireTech              = tech,
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
@@ -97,6 +96,7 @@ unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
 		corpse                   = "energycore",
+		retreatRangeDAI			 = 0,
 	},
 }
 

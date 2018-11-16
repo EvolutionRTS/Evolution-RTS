@@ -5,7 +5,7 @@ return {
 	desc    = "",
 	author  = "Floris",
 	date    = "September 2016",
-	layer   = 20000,
+	layer   = -20000,
 	enabled = true,
 	handler = true,
 }
@@ -501,7 +501,7 @@ function DrawWindow()
 	gl.PopMatrix()]]--
 
 	-- title
-	local title = "Options"
+	local title = "Settings"
 	local titleFontSize = 18
 	titleRect = {x-bgMargin, y+bgMargin, x+(glGetTextWidth(title)*titleFontSize)+27-bgMargin, y+37 }
 
@@ -756,6 +756,27 @@ function widget:Update(dt)
 	end
 end
 
+function widget:CommandNotify(cmdID, cmdParams, cmdOptions)
+	if show then
+		--on window
+		local rectX1 = ((screenX-bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
+		local rectY1 = ((screenY+bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
+		local rectX2 = ((screenX+screenWidth+bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
+		local rectY2 = ((screenY-screenHeight-bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
+		local x,y,ml = Spring.GetMouseState()
+		local cx, cy = correctMouseForScaling(x,y)
+		if IsOnRect(x, y, rectX1, rectY2, rectX2, rectY1) then
+			return true
+		elseif groupRect ~= nil then
+			for id,group in pairs(optionGroups) do
+				if IsOnRect(cx, cy, groupRect[id][1], groupRect[id][2], groupRect[id][3], groupRect[id][4]) then
+					return true
+				end
+			end
+		end
+	end
+end
+
 function widget:DrawScreen()
 
   if spIsGUIHidden() then return end
@@ -787,7 +808,24 @@ function widget:DrawScreen()
   end
   
   if show or showOnceMore then
-  	
+
+	  --on window
+	  local rectX1 = ((screenX-bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
+	  local rectY1 = ((screenY+bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
+	  local rectX2 = ((screenX+screenWidth+bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
+	  local rectY2 = ((screenY-screenHeight-bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
+	  local x,y,ml = Spring.GetMouseState()
+	  local cx, cy = correctMouseForScaling(x,y)
+	  if IsOnRect(x, y, rectX1, rectY2, rectX2, rectY1) then
+	  	Spring.SetMouseCursor('cursornormal')
+	  elseif groupRect ~= nil then
+		  for id,group in pairs(optionGroups) do
+			  if IsOnRect(cx, cy, groupRect[id][1], groupRect[id][2], groupRect[id][3], groupRect[id][4]) then
+				  Spring.SetMouseCursor('cursornormal')
+				  break
+			  end
+		  end
+	  end
 		-- draw the options panel
 		glPushMatrix()
 			glTranslate(-(vsx * (widgetScale-1))/2, -(vsy * (widgetScale-1))/2, 0)
@@ -1099,6 +1137,8 @@ function applyOptionValue(i, skipRedrawWindow)
 			end
 		elseif id == 'smartselect_includebuildings' then
 			saveOptionValue('SmartSelect', 'smartselect', 'setIncludeBuildings', {'selectBuildingsWithMobile'}, options[i].value)
+		elseif id == 'smartselect_includebuilders' then
+			saveOptionValue('SmartSelect', 'smartselect', 'setIncludeBuilders', {'includeBuilders'}, options[i].value)
 		elseif id == 'lighteffects' then
 			if value ~= 0 then
 				if widgetHandler.orderList["Deferred rendering"] ~= nil then
@@ -1134,6 +1174,15 @@ function applyOptionValue(i, skipRedrawWindow)
 			Spring.SetConfigInt("evo_dynamicmusic", value)
 		elseif id == 'interruptmusic' then
 			Spring.SetConfigInt("evo_interruptmusic", value)
+		elseif id == 'showcost' then
+			Spring.SetConfigInt("evo_showcost", value)
+			if WG.buildOrderUI then WG.buildOrderUI.updateConfigInt = true end
+		elseif id == 'showtechreq' then
+			Spring.SetConfigInt("evo_showtechreq", value)
+			if WG.buildOrderUI then WG.buildOrderUI.updateConfigInt = true end
+		elseif id == 'showhotkeys' then
+			Spring.SetConfigInt("evo_showhotkeys", value)
+			if WG.buildOrderUI then WG.buildOrderUI.updateConfigInt = true end
 		end
 
 		if options[i].widget ~= nil then
@@ -1167,13 +1216,14 @@ function applyOptionValue(i, skipRedrawWindow)
 	
 	elseif options[i].type == 'slider' then
 		local value =  options[i].value
-		if id == 'fsaa' then
+		if id == 'msaa' then
 			if value > 0 then
-				Spring.SetConfigInt("FSAA",1)
+				Spring.SetConfigInt("MSAALevel",1)
 			else
-				Spring.SetConfigInt("FSAA",0)
+				Spring.SetConfigInt("MSAALevel",0)
 			end
-			Spring.SetConfigInt("FSAALevel",value)
+			Spring.SetConfigInt("FSAALevel",0)		-- engine deprecated it in 104.x
+			Spring.SetConfigInt("MSAALevel",value)
 		elseif id == 'shadowslider' then
 			local enabled = 1
 			if value == options.min then 
@@ -1181,6 +1231,20 @@ function applyOptionValue(i, skipRedrawWindow)
 			end
 			Spring.SendCommands("shadows "..enabled.." "..value)
 			Spring.SetConfigInt("shadows", value)
+		elseif id == 'shadows_maxquality' then
+			if value < options[getOptionByID('shadows_minquality')].value then
+				options[getOptionByID('shadows_minquality')].value = value
+				saveOptionValue('Shadow Quality Manager', 'shadowmanager', 'setMinQuality', {'maxQuality'}, value)
+			end
+			saveOptionValue('Shadow Quality Manager', 'shadowmanager', 'setMaxQuality', {'maxQuality'}, value)
+		elseif id == 'shadows_minquality' then
+			if value > options[getOptionByID('shadows_maxquality')].value then
+				options[getOptionByID('shadows_maxquality')].value = value
+				saveOptionValue('Shadow Quality Manager', 'shadowmanager', 'setMaxQuality', {'maxQuality'}, value)
+			end
+			saveOptionValue('Shadow Quality Manager', 'shadowmanager', 'setMinQuality', {'minQuality'}, value)
+		elseif id == 'shadows_disablefps' then
+			saveOptionValue('Shadow Quality Manager', 'shadowmanager', 'setDisableFps', {'disableFps'}, value)
 		elseif id == 'decals' then
 			Spring.SetConfigInt("GroundDecals", value)
 			Spring.SendCommands("GroundDecals "..value)
@@ -1666,6 +1730,10 @@ end
 function loadAllWidgetData()
 	loadWidgetData("Health Bars", "healthbarsscale", {'barScale'})
 
+	loadWidgetData("Shadow Quality Manager", "shadows_maxquality", {'maxQuality'})
+	loadWidgetData("Shadow Quality Manager", "shadows_minquality", {'minQuality'})
+	loadWidgetData("Shadow Quality Manager", "shadows_disablefps", {'disableFps'})
+
 	loadWidgetData("Bloom Shader", "bloombrightness", {'basicAlpha'})
 	loadWidgetData("Bloom Shader", "bloomhighlights", {'drawHighlights'})
 
@@ -1790,14 +1858,17 @@ function init()
 		{id="borderless", group="gfx", name="Borderless window", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1, description="Changes will be applied next game.\n\n(dont forget to turn off the \'fullscreen\' option next game)"},
 		{id="windowpos", group="gfx", widget="Move Window Position", name="Move window position", type="bool", value=GetWidgetToggleValue("Move Window Position"), description='Toggle and move window position with the arrow keys or by dragging'},
 		{id="vsync", group="gfx", name="V-sync", type="bool", value=tonumber(Spring.GetConfigInt("VSync",1) or 1) == 1, description=''},
-		{id="fsaa", group="gfx", name="Anti Aliasing", type="slider", min=0, max=16, step=1, value=tonumber(Spring.GetConfigInt("FSAALevel",1) or 2), description='Changes will be applied next game'},
+		{id="msaa", group="gfx", name="Anti Aliasing", type="slider", min=0, max=4, step=1, value=tonumber(Spring.GetConfigInt("MSAALevel",1) or 2), description='Enables multisample anti-aliasing. NOTE: Can be expensive!\n\nChanges will be applied next game'},
 		{id="advmapshading", group="gfx", name="Advanced map shading", type="bool", value=tonumber(Spring.GetConfigInt("AdvMapShading",1) or 1) == 1, description='When disabled: map shadows aren\'t rendered as well'},
 		{id="advmodelshading", group="gfx", name="Advanced model shading", type="bool", value=tonumber(Spring.GetConfigInt("AdvModelShading",1) or 1) == 1},
 		{id="advsky", group="gfx", name="Advanced sky", type="bool", value=tonumber(Spring.GetConfigInt("AdvSky",1) or 1) == 1, description='Enables high resolution clouds\n\nChanges will be applied next game'},
 
 		-- only one of these shadow options are shown, depending if "Shadow Quality Manager" widget is active
 		{id="shadows", group="gfx", name="Shadows", type="bool", value=tonumber(Spring.GetConfigInt("Shadows",1) or 1) == 1, description='Shadow detail is currently controlled by "Shadow Quality Manager" widget\n...this widget will auto reduce detail when fps gets low.\n\nShadows requires "Advanced map shading" option to be enabled'},
-		{id="shadowslider", group="gfx", name="Shadows", type="slider", min=1024, max=8192, step=1024, value=tonumber(Spring.GetConfigInt("ShadowMapSize",1) or 2048), description='Set shadow detail\nSlider positioned the very left means shadows will be disabled\n\nShadows requires "Advanced map shading" option to be enabled'},
+		{id="shadowslider", group="gfx", name="Shadows", type="slider", min=1500, max=6000, step=500, value=tonumber(Spring.GetConfigInt("ShadowMapSize",1) or 2000), description='Set shadow detail\nSlider positioned the very left means shadows will be disabled\n\nShadows requires "Advanced map shading" option to be enabled'},
+		{id="shadows_maxquality", group="gfx", name=widgetOptionColor.."   max quality", min=2000, max=8000, step=500, type="slider", value=8000, description='Maximum shadow detail when having high Frames Per Second'},
+		{id="shadows_minquality", group="gfx", name=widgetOptionColor.."   min quality", min=2000, max=8000, step=500, type="slider", value=2000, description='Minimum shadow detail when having low Frames Per Second'},
+		{id="shadows_disablefps", group="gfx", name=widgetOptionColor.."   disable at FPS", min=0, max=30, step=1, type="slider", value=0, description='Automaticly disables shadows at this average FPS value'},
 
 		{id="decals", group="gfx", name="Ground decals", type="slider", min=0, max=5, step=1, value=tonumber(Spring.GetConfigInt("GroundDecals",1) or 1), description='Set how long map decals will stay.\n\nDecals are ground scars, footsteps/tracks and shading under buildings'},
 		{id="grounddetail", group="gfx", name="Ground detail", type="slider", min=32, max=200, step=1, value=tonumber(Spring.GetConfigInt("GroundDetail",1) or 1), description='Set how detailed the map mesh/model is. Note that detail over 120 is largely unnoticeable.\n64 is a good default amount for playing that will not cost unnecessary fps.'},
@@ -1885,7 +1956,10 @@ function init()
 		{id="lockcamera_los", group="control", name=widgetOptionColor.."   show tracked player LoS", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockLos()), description="When viewing a players camera and los, shows shaded los ranges too"},
 
 		-- UI
-		{id="buildordermenu", group="ui", name="Build Menu Preset", type="select", options={'Horizontal','Compact Horizontal','Traditional','Right Side','Right Side Compact'}, value=tonumber(Spring.GetConfigInt("evo_buildorderui",0) or 0) == 0, description='Use these presets to change the build menu size and position.\nBuild and Order menus can further be custom positioned using TweakMode (ctrl+f11)\n\nNOTE: Changing this setting will cause the interface to be reloaded'},
+		{id="buildordermenu", group="ui", name="Build Menu Preset", type="select", options={'Horizontal','Compact Horizontal','Traditional','Right Side','Right Side Compact'}, value=Spring.GetConfigInt("evo_buildorderui",0) + 1, description='Use these presets to change the build menu size and position.\nBuild and Order menus can further be custom positioned using TweakMode (ctrl+f11)\n\nNOTE: Changing this setting will cause the interface to be reloaded'},
+		{id="showcost", group="ui", name="Show Cost", type="bool", value=Spring.GetConfigInt("evo_showcost",1) == 1, description='Show cost of units in the build icon'},
+		{id="showtechreq", group="ui", name="Show Tech Requirement", type="bool", value=Spring.GetConfigInt("evo_showtechreq",1) == 1, description='Show tech requirement of units in the build icon'},
+		{id="showhotkeys", group="ui", name="Show Build Hotkeys", type="bool", value=Spring.GetConfigInt("evo_showhotkeys",1) == 1, description='Show build hotkeys in the build icon'},
 		
 		{id="teamcolors", group="ui", widget="Player Color Palette", name="Team colors based on a palette", type="bool", value=GetWidgetToggleValue("Player Color Palette"), description='Replaces lobby team colors for a color palette based one\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
 		{id="sameteamcolors", group="ui", name=widgetOptionColor.."   same team colors", type="bool", value=(WG['playercolorpalette']~=nil and WG['playercolorpalette'].getSameTeamColors~=nil and WG['playercolorpalette'].getSameTeamColors()), description='Use the same teamcolor for all the players in a team\n\nNOTE: reloads all widgets because these need to update their teamcolors'},
@@ -1959,6 +2033,7 @@ function init()
 		{id="autoquit", group="game", widget="Autoquit", name="Auto quit", type="bool", value=GetWidgetToggleValue("Autoquit"), description='Automatically quits after the game ends.\n...unless the mouse has been moved within a few seconds.'},
 
 		{id="smartselect_includebuildings", group="game", name="Include buildings in area-selection", type="bool", value=false, description='When rectangle-drag-selecting an area, include building units too?\n\ndisabled: non-mobile units will not be selected\n(except: nanos always will be selected)'},
+		{id="smartselect_includebuilders", group="game", name=widgetOptionColor.."   include builders   (if above is off)", type="bool", value=true, description='When rectangle-drag-selecting an area, exclude builder units from the selection'},
 
         {id="onlyfighterspatrol", group="game", widget="OnlyFightersPatrol", name="Only fighters patrol", type="bool", value=GetWidgetToggleValue("Autoquit"), description='Only fighters obey a factory\'s patrol route after leaving airlab.'},
 		{id="fightersfly", group="game", widget="Set fighters on Fly mode", name="Set fighters on Fly mode", type="bool", value=GetWidgetToggleValue("Set fighters on Fly mode"), description='Setting fighters on Fly mode when created'},
@@ -1975,9 +2050,17 @@ function init()
 		{id="settargetdefault", group="game", widget="Set target default", name="Set-target as default", type="bool", value=GetWidgetToggleValue("Set target default"), description='Replace default attack command to a set-target command\n(when rightclicked on enemy unit)'},
 	}
 
+	-- fsaa is deprecated in 104.x
+	if tonumber(Spring.GetConfigInt("FSAALevel",0)) > 0 then
+		local fsaa = tonumber(Spring.GetConfigInt("FSAALevel",0))
+		if fsaa > options[getOptionByID('msaa')].max then
+			fsaa = options[getOptionByID('msaa')].max
+		end
+		Spring.SetConfigInt("MSAALevel", fsaa)
+		Spring.SetConfigInt("FSAALevel", 0)
+	end
 	-- loads values via stored game config in luaui/configs
 	loadAllWidgetData()
-
 
 	-- while we have set config-ints, that isnt enough to have these settings applied ingame
 	if savedConfig and Spring.GetGameFrame() == 0 then
@@ -2072,8 +2155,10 @@ function init()
 
 	if (WG['smartselect'] == nil) then
 		options[getOptionByID('smartselect_includebuildings')] = nil
+		options[getOptionByID('smartselect_includebuilders')] = nil
 	else
 		options[getOptionByID('smartselect_includebuildings')].value = WG['smartselect'].getIncludeBuildings()
+		options[getOptionByID('smartselect_includebuilders')].value = WG['smartselect'].getIncludeBuilders()
 	end
 
 	if WG['snow'] ~= nil and WG['snow'].getSnowMap ~= nil then
@@ -2186,7 +2271,7 @@ function init()
 			if option.value < option.min then option.value = option.min end
 			if option.value > option.max then option.value = option.max end
 		end
-		if option.id == "shadows" and (widgetHandler.knownWidgets["Shadow Quality Manager"] == nil or (widgetHandler.orderList["Shadow Quality Manager"] == 0)) then
+		if (option.id == "shadows" or option.id == "shadows_maxquality" or option.id == "shadows_minquality" or option.id == "shadows_disablefps") and (widgetHandler.knownWidgets["Shadow Quality Manager"] == nil or (widgetHandler.orderList["Shadow Quality Manager"] == 0)) then
 			insert = false
 		end
 		if option.id == "shadowslider" and widgetHandler.knownWidgets["Shadow Quality Manager"] ~= nil and (widgetHandler.orderList["Shadow Quality Manager"] > 0) then

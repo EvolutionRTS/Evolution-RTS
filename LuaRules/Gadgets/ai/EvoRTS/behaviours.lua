@@ -22,75 +22,112 @@ if controlPoints == "disabled" then
 	--shard_include(  "engineerturretbehaviour"  )
 end
 
---shard_include "capturerbehaviour"
---require "missingfactorybehaviour"
---require "autoreclaimbehaviour"
---shard_include "lowenergybehaviour"
---require "factoryregisterbehaviour"
-
 behaviours = {
-	emetalextractor = {
-		MorphBehaviour,
-	},
 	eorb = {
-		TaskQueueBehaviour,
-		MorphBehaviour,
+		AttackerBehaviour,
 	},
 	eorb_up1 = {
-		TaskQueueBehaviour,
-		MorphBehaviour,
+		AttackerBehaviour,
 	},
 	eorb_up2 = {
-		TaskQueueBehaviour,
-		MorphBehaviour,
+		AttackerBehaviour,
 	},
 	eorb_up3 = {
-		TaskQueueBehaviour,
+		AttackerBehaviour,
 	},
+	
 	ebasefactory = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
 	eairplant = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
 	eamphibfac = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
 	eminifac = {
 		TaskQueueBehaviour,
-		--FactoryRegisterBehaviour,
 	},
+	ehbotfac = {
+		TaskQueueBehaviour,
+	},
+	ebasefactory_up1 = {
+		TaskQueueBehaviour,
+	},
+	eairplant_up1 = {
+		TaskQueueBehaviour,
+	},
+	eamphibfac_up1 = {
+		TaskQueueBehaviour,
+	},
+	eminifac_up1 = {
+		TaskQueueBehaviour,
+	},
+	ehbotfac_up1 = {
+		TaskQueueBehaviour,
+	},
+	ebasefactory_up2 = {
+		TaskQueueBehaviour,
+	},
+	eairplant_up2 = {
+		TaskQueueBehaviour,
+	},
+	eamphibfac_up2 = {
+		TaskQueueBehaviour,
+	},
+	eminifac_up2 = {
+		TaskQueueBehaviour,
+	},
+	ehbotfac_up2 = {
+		TaskQueueBehaviour,
+	},
+	ebasefactory_up3 = {
+		TaskQueueBehaviour,
+	},
+	eairplant_up3 = {
+		TaskQueueBehaviour,
+	},
+	eamphibfac_up3 = {
+		TaskQueueBehaviour,
+	},
+	eminifac_up3 = {
+		TaskQueueBehaviour,
+	},
+	ehbotfac_up3 = {
+		TaskQueueBehaviour,
+	},
+	
+	eartyturret = {
+		AttackerBehaviour,
+	},
+	eartyturret_up1 = {
+		AttackerBehaviour,
+	},
+	eartyturret_up2 = {
+		AttackerBehaviour,
+	},
+	eartyturret_up3 = {
+		AttackerBehaviour,
+	},
+	
 	ecommanderbattleai = {
 		TaskQueueBehaviour,
-		--LowEnergyBehaviour,
-		--EngineerTurretBehaviour,
 	},
+	
 	eengineer5 = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
+	
 	eamphibengineer = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
+	
 	eairengineer = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
+	
 	eallterrengineer = {
 		TaskQueueBehaviour,
-		--MissingFactoryBehaviour,
-		--EngineerTurretBehaviour,
-		--LowEnergyBehaviour,
 	},
 	--eaimexer = {
 		--EngineerTurretBehaviour,

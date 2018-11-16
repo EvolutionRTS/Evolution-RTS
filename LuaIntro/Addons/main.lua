@@ -31,15 +31,15 @@ end
 local titleColor = "\255\215\255\215"
 local contentColor = "\255\255\255\255"
 local tips = {
+	
 	-- Zopto
-	"loadingpics/TheEnigmaTNG.png "..titleColor.."The Enigma TNG\n"..contentColor.."He is the creator of most if the music in the game, so go check him out!",
+	"loadingpics/theenigmatng.png "..titleColor.."The Enigma TNG\n"..contentColor.."He is the creator of most of the music in the game, so go check him out!",
 	
 	-- Suppy Boi
-	"Listen to Experienced players, they usually know what they're talking about",
-	"Build defenses or a small army early game, so you can prevent raiding",
+	
 	
 	-- Damgam
-	"loadingpics/DreamstateLogic.png "..titleColor.."Dreamstate Logic\n"..contentColor.."Composer of a lot of ambient tracks used ingame, check out his music on Soundcloud!",
+	"loadingpics/dreamstatelogic.png "..titleColor.."Dreamstate Logic\n"..contentColor.."Composer of a many ambient tracks used ingame, check out his music on Soundcloud!",
 	"Press Enter to Chat, Use Alt+Enter to Team Chat, Use Ctrl+Enter to Global Chat",
 	
 	-- Koyote
@@ -50,6 +50,15 @@ local tips = {
 local titleColor = "\255\215\255\215"
 local contentColor = "\255\255\255\255"
 local unit_descs = {
+
+	"elightturret2.png "..titleColor.."Pincushion\n"..contentColor.."Only you can prevent tech rushes (by building a Pincushion in your base)!",
+	"ehbotpeewee.png "..titleColor.."A.K. (H-Bot Raider)\n"..contentColor.."H-Bots can traverse any terrain, but they have two giant weaknesses... They are terrible in close quarter combat, and they are extremely vulnerable to artillery. Use cloaked All-Terrains to get in close, or use artillery to zone them out.",
+	"elighttank3.png "..titleColor.."Kite (Hovertank Raider)\n"..contentColor.."Hovertanks are all around good units with a lot of excellent variety, however, they lack some of the more specialized abilities of the other techs.",
+	"eallterrlight.png "..titleColor.."Recluse (All-Terrain Raider)\n"..contentColor.."All-Terrains have some of the most specialized units in the game. All All-Terrain units can cloak. Cloaking is ESSENTIAL to ensure that your units get the first shot. This can be the difference between winning or losing a battle.",
+	"eamphibbuggy.png "..titleColor.."Snake (Amphibious Raider\n"..contentColor.."Amphibious units are fast (even faster underwater!), extremely high damage, but suffer in terms of armor and range. Use them to hit fast and hard. Then back away before your opponent can do any real damage and hit is undefended flank!",
+	"emetalextractor.png "..titleColor.."Metal Extractor\n"..contentColor.."Make sure to evolve your Metal Extractors so that you can continually increase your income",
+	"esolar2.png "..titleColor.."Fission Energy Generator\n"..contentColor.."Make sure to keep building energy production as your tech progresses. At each tech, the energy cost for units and buildings increases.",
+
 	-- Zopto
 	"ecommander.png "..titleColor.."Overseer\n"..contentColor.."Don't forget to evolve your overseer, different upgrades can be helpful!", 
 	"ehbotpeewee.png "..titleColor.."H-Bots\n"..contentColor.."While h-bots have long range, no h-bot units are armored.", 
@@ -67,62 +76,13 @@ local unit_descs = {
 	"esilo.png "..titleColor.."Nuke Silo\n"..contentColor.."Remember that if a nuclear missile silo is destroyed, the nuclear core inside it will detonate as well. Take care to place them well away from anything important.", 
 	
 	-- Suppy Boi
-	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Always try to include some of artillery units into your army.",  
+	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Always try to include some of artillery units into your army. The sight distance can be a huge help.",  
 	"eartytank.png "..titleColor.."Artillery\n"..contentColor.."Try to keep your artillery behind your main battle tanks.",  
 	"emetalextractor.png "..titleColor.."Metal\n"..contentColor.."Evolved metal extractors use energy, so when evolving to a higher tier, be sure to plan ahead for the increased energy consumption.",  
 	"eamphibmedtank.png "..titleColor.."Amphibious Units\n"..contentColor.."While Amphibious units are fast, nimble, and deal great damage, this comes at the cost of having little to no armor.",
 }
 
 local quotes = {
-	{"The two most powerful warriors are patience and time.", "Leo Tolstoy"},
-	{"Know thy self, know thy enemy. A thousand battles, a thousand victories.", "Sun Tzu"},
-	{"People never lie so much as after a hunt, during a war or before an election.", "Otto von Bismarck"},
-	{"The best weapon against an enemy is another enemy.", "Friedrich Nietzsche"},
-	{"Thus, what is of supreme importance in war is to attack the enemy's strategy.", "Sun Tzu"},
-	{"Great is the guilt of an unnecessary war.", "John Adams"},
-	{"I have never advocated war except as a means of peace.", "Ulysses S Grant"},
-	{"War is not only a matter of equipment, artillery, group troops or air force; it is largely a matter of spirit, or morale.", "Chiang Kai-Shek"},
-	{"In nuclear war all men are cremated equal.", "Dexter Gordon"},
-	{"There are no absolute rules of conduct, either in peace or war. Everything depends on circumstances.", "Leon Trotsky"},
-	{"Weapons are an important factor in war, but not the decisive one; it is man and not materials that counts.", "Mao Zedong"},
-	{"To secure peace is to prepare for war.", "Carl von Clausewitz"},
-	{"Quickness is the essence of the war.", "Sun Tzu"},
-	{"The whole art of war consists of guessing at what is on the other side of the hill.", "Arthur Wellesley"},
-	{"War is a game that is played with a smile. If you can't smile, grin. If you can't grin, keep out of the way till you can.", "Winston Churchill"},
-	{"War can only be abolished through war, and in order to get rid of the gun it is necessary to take up the gun.", "Mao Zedong"},
-	{"The quickest way of ending a war is to lose it.", "George Orwell"},
-	{"Heaven cannot brook two suns, nor earth two masters.", "Alexander the Great"},
-	{"People always make war when they say they love peace.", "D H Lawrence"},
-	{"This is totally awesome. Wow. great job guys!!", "Chris Taylor"},
-	{"War is like love; it always finds a way.", "Bertolt Brecht"},
-	{"Ten soldiers wisely led will beat a hundred without a head.", "Euripides"},
-	{"In war there is no prize for runner-up.", "Lucius Annaeus Seneca"},
-	{"I think there should be holy war against yoga classes.", "Werner herzog"},
-	{"An army marches on its stomach.", "Napoleon Bonaparte"},
-	{"It is fatal to enter any war without the will to win it.", "Douglas MacArthur"},
-	{"You cannot simultaneously prevent and prepare for war.", "Albert Einstein"},
-	{"Try not to become a man of success, but rather try to become a man of value.", "Albert Einstein"},
-	{"Every failure is a step to success.", "William Whewell"},
-	{"If everyone is moving forward together, then success takes care of itself.", "Henry Ford"},
-	{"Failure is success if we learn from it.", "Malcolm Forbes"},
-	{"It is no use saying, 'We are doing our best.' You have got to succeed in doing what is necessary.", "Winston Churchill"},
-	{"Knowledge will give you power, but character respect.", "Bruce Lee"},
-	{"In time of war the laws are silent.", "Marcus Tullius Cicero"},
-	{"War is a contagion.", "Franklin D Roosevelt"},
-	{"War is the unfolding of miscalculations.", "Barbara Tuchman"},
-	{"Girl power is about loving yourself and having confidence and strength from within, so even if you're not wearing a sexy outfit, you feel sexy.", "Nicole Scherzinger"},
-	{"The most common way people give up their power is by thinking they don't have any.", "Alice Walker"},
-	{"Mastering others is strength. Mastering yourself is true power.", "Lao Tzu"},
-	{"There is more power in unity than division.", "Emmanuel Cleaver"},
-	{"I am not afraid of an army of lions led by a sheep; I am afraid of an army of sheep led by a lion.", "Alexander the Great"},
-	{"The power of an air force is terrific when there is nothing to oppose it.", "Winston Churchill"},
-	{"You must never underestimate the power of the eyebrow.", "Jack Black"},
-	{"Common sense is not so common.", "Voltaire"},
-	{"If everyone is thinking alike, then somebody isn't thinking.", "George S Patton"},
-	{"Ignorance is bold and knowledge reserved.", "Thucydides"},
-	{"Don't find fault, find a remedy.", "Henry Ford"},
-	{"There is nothing impossible to him who will try.", "Alexander the Great"},
-	{"Peace is produced by war", "Pierre Corneille"},
 	{"Zopto is to lol as carbon is to life", "Dr.Hamster"},
 	{"Sup1258 is the best player, always listen to his advice", "Sup1258"},
 	{"Build 1 more Mex than the other guy.", "KoyoteKamper"},

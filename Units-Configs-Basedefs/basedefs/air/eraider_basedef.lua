@@ -91,6 +91,7 @@ unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
 		corpse                   = "energycore",
+		retreatRangeDAI			 = 0,
 	},
 }
 

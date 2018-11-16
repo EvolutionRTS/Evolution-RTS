@@ -12,7 +12,7 @@ humanName = [[Karganneth]]
 objectName = "ehbotkarganneth.s3o"
 script = "ehbotkarganneth_lus.lua"
 
-tech = [[endbringer]]
+tech = [[tech3]]
 armortype = [[armored]]
 
 VFS.Include("units-configs-basedefs/basedefs/hbot/mobile/ehbotkarganneth_basedef.lua")

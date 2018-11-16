@@ -9,152 +9,70 @@ function AttackHandler:internalName()
 end
 
 function AttackHandler:Init()
-	self.recruits = {}
+	self.recruits = {attackers = {}, defenders = {}}
 	self.counter = 1
+	self.ratio = 10
 end
 
 function AttackHandler:Update()
--- stagger targetting if multiple shards are in the game
-	local f = self.game:Frame() + self.game:GetTeamID() 
-	if math.mod(f,30) == 0 then
-		self:DoTargetting()
+	local frame = Spring.GetGameFrame()
+	if frame%30 == 0 then -- Refresh commander position
+		local x,y,z
+		local comms = Spring.GetTeamUnitsByDefs(self.ai.id, {UnitDefNames.ecommanderbattleai.id})
+		if comms[1] then
+			x,y,z = Spring.GetUnitPosition(comms[1])
+			self.commpos = {x = x, y = y, z = z}
+		end
 	end
+	if frame%3000 == 0 then -- Generate random mexpositions
+		local positions = self:PickRandomPositionsOnMap()
+		local targets = {}
+		for ct, position in pairs(positions) do
+			targets[ct] = self.ai.metalspothandler:ClosestEnemySpot(self.game:GetTypeByName("eorb") , {x = position[1], y = Spring.GetGroundHeight(position[1], position[2]),z = position[2]} )
+		end
+		self.targetMexes = targets
+	end
+	
+end
+
+function AttackHandler:GetAggressiveness(atkbehaviour)
+	return (math.random(2, 5))
+end
+
+function AttackHandler:GetRole(atkbehaviour)
+	if math.random(1, self.ratio) == 1 then
+		return ("defender")
+	else
+		return ("attacker")
+	end
+end
+
+function AttackHandler:PickRandomPositionsOnMap()
+	local pos = {{math.random(0,Game.mapSizeX), math.random(0,Game.mapSizeZ)},{math.random(0,Game.mapSizeX), math.random(0,Game.mapSizeZ)},{math.random(0,Game.mapSizeX), math.random(0,Game.mapSizeZ)},{math.random(0,Game.mapSizeX), math.random(0,Game.mapSizeZ)},{math.random(0,Game.mapSizeX), math.random(0,Game.mapSizeZ)}}
+	return pos
 end
 
 function AttackHandler:UnitDead(engineunit)
-	if engineunit:Team() == self.game:GetTeamID() then
-		--self.counter = self.counter - 0.2
-		--self.counter = math.max(self.counter,8)
-		-- try and clean up dead recruits where possible
-		for i,v in ipairs(self.recruits) do
-			if v.engineID == engineunit:ID() then
-				table.remove(self.recruits,i)
-				break
-			end
-		end
-	end
+
 end
 
 function AttackHandler:DoTargetting()
-	if #self.recruits > self.counter then
+end
 
-		--[[ try and catch invalid recruits and remove them, then reevaluate
-		local nrecruits = {}
-		for i,v in ipairs(self.recruits) do
-			if v.unit ~= nil then
-				table.insert(nrecruits,v)
-				break
-			end
-		end
-		self.recruits = nrecruits
-		if #nrecruits > self.counter then
-			
-		else
-			return
-		end]]--
+function AttackHandler:DoTargettingOld()
 
-		-- find somewhere to attack
-		local cells = {}
-		local celllist = {}
-		local mapdimensions = self.game.map:MapDimensions()
-		--enemies = game:GetEnemies()
-		local enemies = self.game:GetEnemies()
-
-		if enemies and #enemies > 0 then
-			-- figure out where all the enemies are!
-			for i=1,#enemies do
-				local e = enemies[i]
-
-				if e ~= nil then
-					pos = e:GetPosition()
-					px = pos.x - math.fmod(pos.x,400)
-					pz = pos.z - math.fmod(pos.z,400)
-					px = px/400
-					pz = pz/400
-					if cells[px] == nil then
-						cells[px] = {}
-					end
-					if cells[px][pz] == nil then
-						local newcell = { count = 0, posx = 0,posz=0,}
-						cells[px][pz] = newcell
-						table.insert(celllist,newcell)
-					end
-					cell = cells[px][pz]
-					cell.count = cell.count + self:ScoreUnit(e)
-					
-					-- we dont want to target the center of the cell encase its a ledge with nothing
-					-- on it etc so target this units position instead
-					cell.posx = pos.x
-					cell.posz = pos.z
-
-					-- @TODO: The unit chosen may not be the best unit to target, ideally pick the
-					-- one closest to the average location of all units in that grid
-				end
-
-			end
-			
-			local bestCell = nil
-			-- now find the smallest nonvacant cell to go lynch!
-			for i=1,#celllist do
-				local cell = celllist[i]
-				if bestCell == nil then
-					bestCell = cell
-				else
-					if cell.count < bestCell.count then
-						bestCell = cell
-					end
-				end
-			end
-			
-			-- if we have a cell then lets go attack it!
-			if bestCell ~= nil then
-				for i,recruit in ipairs(self.recruits) do
-					recruit:AttackCell(bestCell)
-				end
-				
-				--self.counter = self.counter + 0.2
-				--self.counter = math.min(self.counter,20)
-				
-				-- remove all our recruits!
-				--self.recruits = {}
-			end
-		end
-		
-		-- cleanup
-		cellist = nil
-		cells = nil
-		mapdimensions = nil
-		
-	end
 end
 
 function AttackHandler:IsRecruit(attkbehaviour)
-	for i,v in ipairs(self.recruits) do
-		if v.engineID == attkbehaviour.engineID then
-			return true
-		end
-	end
-	return false
+
 end
 
 function AttackHandler:AddRecruit(attkbehaviour)
-	if attkbehaviour.unit == nil then
-		self.game:SendToConsole( "null unit in attack beh found ")
-		return
-	end
-	if not self:IsRecruit(attkbehaviour) then
-		table.insert(self.recruits,attkbehaviour)
-	end
+
 end
 
 function AttackHandler:RemoveRecruit(attkbehaviour)
-	for i,v in ipairs(self.recruits) do
-		if v.engineID == attkbehaviour.engineID then
-			table.remove(self.recruits,i)
-			return true
-		end
-	end
-	return false
+
 end
 
 -- How much is this unit worth?

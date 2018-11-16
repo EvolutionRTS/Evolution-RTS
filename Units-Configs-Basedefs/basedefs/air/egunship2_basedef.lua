@@ -16,7 +16,7 @@ unitDef                    = {
 	canstop                      = true,
 	category                     = "ARMORED VTOL",
 	collide                      = true,
-	cruiseAlt                    = 600,
+	cruiseAlt                    = 450,
 	description                  = [[Anti-Armor Gunship • Uses +]] .. supply .. [[ Supply]],
 	energyMake                   = 0,
 	energyStorage                = 0,
@@ -93,6 +93,7 @@ unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
 		corpse                   = "energycore",
+		retreatRangeDAI			 = 0,
 	},
 }
 
@@ -131,7 +132,7 @@ weaponDefs                 = {
 		turret                   = false,
 		weaponAcceleration       = 100,
 		flightTime               = 2.5,
-		weaponVelocity           = 500,
+		weaponVelocity           = 700,
 		customparams             = {
 			isupgraded           = isUpgraded,
 			damagetype		     = "egunship2",  

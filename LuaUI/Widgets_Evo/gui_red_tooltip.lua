@@ -51,6 +51,31 @@ local sGetSelectedUnitsCount = Spring.GetSelectedUnitsCount
 
 local GaiaTeamID  = Spring.GetGaiaTeamID()
 
+-- Hotkeys
+VFS.Include("luaui/configs/evo_buildHotkeysConfig.lua")
+
+local sGetKeySymbol = Spring.GetKeySymbol
+local function getKeySymbol(k)
+	local keySymbol = sGetKeySymbol(k)
+	return keySymbol:sub(1, 1):upper() .. keySymbol:sub(2)
+end
+local humanNameToKeySymbols = {}
+for unitDefID = 1, #UnitDefs do
+	local ud = UnitDefs[unitDefID]
+	local name = ud.name
+	if name:find("_up", -5) then name = name:sub(1, -5) end
+	if nameToKeyCode[name] then
+		local str = ""
+		local leng = #nameToKeyCode[name]
+		for i = 1, leng do
+			str = str .. getKeySymbol(nameToKeyCode[name][i])
+			if i < leng then str = str .. ", " end
+		end
+		humanNameToKeySymbols[ud.humanName] = str
+	end
+end
+--
+
 
 local function IncludeRedUIFrameworkFunctions()
 	New = WG.Red.New(widget)
@@ -128,7 +153,16 @@ local function AutoResizeObjects() --autoresize v2
 end
 local function getEditedCurrentTooltip() 
 	local text = sGetCurrentTooltip() 
-	if text == "Repair: Repairs another unit" then text = "Build: Builds unfinished structures" end -- hack for Evo
+	if text == "Repair: Repairs another unit" then return "Build: Builds unfinished structures" end -- hack for Evo
+	-- Shows build hotkey
+	local buildTextPosition = text:find("Build: ")
+	if buildTextPosition then
+		local nameEndPosition = text:find("- ")
+		local humanName = text:sub(buildTextPosition + 7, nameEndPosition - 2)
+		if humanNameToKeySymbols[humanName] then
+			text = text:gsub("- ", "(Hotkey: " .. humanNameToKeySymbols[humanName] .. ") - ", 1)
+		end
+	end
 	--extract the exp value with regexp 
 	local expPattern = "Experience (%d+%.%d%d)" 
 	local currentExp = tonumber(text:match(expPattern)) 
