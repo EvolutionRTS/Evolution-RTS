@@ -115,7 +115,7 @@ local minimapIconsize = 2.5	-- spring wont remember what you set with '/minimap 
 local presetNames = {'lowest','low','medium','high','ultra'}	-- defined so these get listed in the right order
 local presets = {
 	lowest = {
-		fsaa = 0,
+		msaa = 0,
 		bloom = false,
 		bloomhighlights = false,
 		water = 1,
@@ -141,7 +141,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	low = {
-		fsaa = 0,
+		msaa = 0,
 		bloom = false,
 		bloomhighlights = false,
 		water = 2,
@@ -167,7 +167,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	medium = {
-		fsaa = 2,
+		msaa = 2,
 		bloom = true,
 		bloomhighlights = false,
 		water = 3,
@@ -193,7 +193,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	high = {
-		fsaa = 4,
+		msaa = 4,
 		bloom = true,
 		bloomhighlights = false,
 		water = 3,
@@ -219,7 +219,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	ultra = {
-		fsaa = 8,
+		msaa = 8,
 		bloom = true,
 		bloomhighlights = true,
 		water = 3,
@@ -1858,16 +1858,16 @@ function init()
 		{id="borderless", group="gfx", name="Borderless window", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1, description="Changes will be applied next game.\n\n(dont forget to turn off the \'fullscreen\' option next game)"},
 		{id="windowpos", group="gfx", widget="Move Window Position", name="Move window position", type="bool", value=GetWidgetToggleValue("Move Window Position"), description='Toggle and move window position with the arrow keys or by dragging'},
 		{id="vsync", group="gfx", name="V-sync", type="bool", value=tonumber(Spring.GetConfigInt("VSync",1) or 1) == 1, description=''},
-		{id="msaa", group="gfx", name="Anti Aliasing", type="slider", min=0, max=4, step=1, value=tonumber(Spring.GetConfigInt("MSAALevel",1) or 2), description='Enables multisample anti-aliasing. NOTE: Can be expensive!\n\nChanges will be applied next game'},
+		{id="msaa", group="gfx", name="Anti Aliasing", type="slider", min=0, max=32, step=1, value=tonumber(Spring.GetConfigInt("MSAALevel",1) or 2), description='Enables multisample anti-aliasing. NOTE: Can be expensive!\n\nChanges will be applied next game'},
 		{id="advmapshading", group="gfx", name="Advanced map shading", type="bool", value=tonumber(Spring.GetConfigInt("AdvMapShading",1) or 1) == 1, description='When disabled: map shadows aren\'t rendered as well'},
 		{id="advmodelshading", group="gfx", name="Advanced model shading", type="bool", value=tonumber(Spring.GetConfigInt("AdvModelShading",1) or 1) == 1},
 		{id="advsky", group="gfx", name="Advanced sky", type="bool", value=tonumber(Spring.GetConfigInt("AdvSky",1) or 1) == 1, description='Enables high resolution clouds\n\nChanges will be applied next game'},
 
 		-- only one of these shadow options are shown, depending if "Shadow Quality Manager" widget is active
 		{id="shadows", group="gfx", name="Shadows", type="bool", value=tonumber(Spring.GetConfigInt("Shadows",1) or 1) == 1, description='Shadow detail is currently controlled by "Shadow Quality Manager" widget\n...this widget will auto reduce detail when fps gets low.\n\nShadows requires "Advanced map shading" option to be enabled'},
-		{id="shadowslider", group="gfx", name="Shadows", type="slider", min=1500, max=6000, step=500, value=tonumber(Spring.GetConfigInt("ShadowMapSize",1) or 2000), description='Set shadow detail\nSlider positioned the very left means shadows will be disabled\n\nShadows requires "Advanced map shading" option to be enabled'},
-		{id="shadows_maxquality", group="gfx", name=widgetOptionColor.."   max quality", min=2000, max=8000, step=500, type="slider", value=8000, description='Maximum shadow detail when having high Frames Per Second'},
-		{id="shadows_minquality", group="gfx", name=widgetOptionColor.."   min quality", min=2000, max=8000, step=500, type="slider", value=2000, description='Minimum shadow detail when having low Frames Per Second'},
+		{id="shadowslider", group="gfx", name="Shadows", type="slider", min=1024, max=8192, step=1024, value=tonumber(Spring.GetConfigInt("ShadowMapSize",1) or 2048), description='Set shadow detail\nSlider positioned the very left means shadows will be disabled\n\nShadows requires "Advanced map shading" option to be enabled'},
+		{id="shadows_maxquality", group="gfx", name=widgetOptionColor.."   max quality", min=1024, max=8192, step=1024, type="slider", value=8192, description='Maximum shadow detail when having high Frames Per Second'},
+		{id="shadows_minquality", group="gfx", name=widgetOptionColor.."   min quality", min=1024, max=8192, step=1024, type="slider", value=1024, description='Minimum shadow detail when having low Frames Per Second'},
 		{id="shadows_disablefps", group="gfx", name=widgetOptionColor.."   disable at FPS", min=0, max=30, step=1, type="slider", value=0, description='Automaticly disables shadows at this average FPS value'},
 
 		{id="decals", group="gfx", name="Ground decals", type="slider", min=0, max=5, step=1, value=tonumber(Spring.GetConfigInt("GroundDecals",1) or 1), description='Set how long map decals will stay.\n\nDecals are ground scars, footsteps/tracks and shading under buildings'},
