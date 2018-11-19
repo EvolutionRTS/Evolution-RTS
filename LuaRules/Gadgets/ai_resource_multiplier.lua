@@ -19,8 +19,9 @@ if (not gadgetHandler:IsSyncedCode()) then
 end
 
 local aiResourceMultiplier = tonumber(Spring.GetModOptions().ai_incomemultiplier) * 0.01 or 1
+local aiEnableResourceMultiplier = Spring.GetModOptions().ai_enableincomemultiplier or "enabled"
 
-if timedResBonusMultiplier == 0 and aiResourceMultiplier == 1 then
+if (timedResBonusMultiplier == 0 and aiResourceMultiplier == 1) or aiEnableResourceMultiplier == "disabled" then
 	return
 end
 

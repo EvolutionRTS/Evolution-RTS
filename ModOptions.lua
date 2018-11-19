@@ -50,6 +50,18 @@ local options= {
 		}
 	},
 	{
+		key    = 'ai_enableincomemultiplier',
+		name   = 'Enable DAI resource cheats',
+		desc   = 'Enable DAI resource cheats',
+		type="list",
+		def="disabled",
+		section= "aioptions",
+		items={
+			{key="disabled", name="Disabled", desc="Clean, non cheating AI"},
+			{key="enabled", name="Enabled", desc="Laughs in hardcore"},
+		}
+	},
+	{
 		key    = 'ai_incomemultiplier',
 		name   = 'AI Income Percentage',
 		desc   = 'Percentage of AI resource income compared to the default (100 = 100%, I.E. Normal. 200 = 200%, which would mean that the AI income would be double the player income)',
