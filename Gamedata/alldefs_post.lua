@@ -476,7 +476,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			-- Add a modifier for unit HP
 			unitHealthModifier = tonumber(Spring.GetModOptions().unithealthmodifier)
 			if unitHealthModifier == nil then
-				unitHealthModifier = 500
+				unitHealthModifier = 100
 			end
 			unitHealthModifier = unitHealthModifier * 0.01
 			if uDef.maxdamage then
