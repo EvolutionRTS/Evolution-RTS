@@ -107,6 +107,7 @@ weaponDefs                  = {
 		customparams             = {
 			damagetype		     = "eartytank", 
 			isupgraded		  	 = isUpgraded,
+			effectedByunitHealthModifier = true,
 		},  
 		damage                   = {
 			default              = 1000,

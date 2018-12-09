@@ -124,7 +124,8 @@ weaponDefs                  = {
 		waterweapon				 = true,
 		customparams              = {
 			isupgraded		  	 = isUpgraded,
-			damagetype		      = "eheavyturret2",  
+			damagetype		      = "eheavyturret2",
+			effectedByunitHealthModifier = true,
 		}, 
 		damage                    = {
 			default               = 500,

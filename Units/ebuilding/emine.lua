@@ -162,6 +162,7 @@ local weaponDefs                  = {
 		customparams              = {
 			damagetype		      = "emine",
 			nofriendlyfire	      = "true", 
+			effectedByunitHealthModifier = true,
 		},  
 
 		damage                    = {

@@ -18,6 +18,14 @@
 -- The widget to do so can be found in 'etc/Lua/bake_unitdefs_post'
 SaveDefsToCustomParams = false
 
+-------------------------
+-- Process relevant modoptions first
+-------------------------
+unitHealthModifier = tonumber(Spring.GetModOptions().unithealthmodifier)
+if unitHealthModifier == nil then
+	unitHealthModifier = 100
+end
+unitHealthModifier = unitHealthModifier * 0.01
 
 -------------------------
 -- DEFS POST PROCESSING
@@ -268,19 +276,19 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				-- unitDef.corpse = "ammobox"
 			-- end
 			
-		--Shield handling
-		if unitDef.weapondefs then
-			for _, weaponDef in pairs(unitDef.weapondefs) do
-				if weaponDef.weapontype == "Shield" then
-					unitDef.customparams.shield_radius = weaponDef.shieldradius
-					unitDef.customparams.shield_power = weaponDef.shieldpower
-					unitDef.customparams.shield_rate = (weaponDef.customparams or {}).shield_rate or weaponDef.shieldpowerregen
-					break
+			--Shield handling
+			if unitDef.weapondefs then
+				for _, weaponDef in pairs(unitDef.weapondefs) do
+					if weaponDef.weapontype == "Shield" then
+						unitDef.customparams.shield_radius = weaponDef.shieldradius
+						unitDef.customparams.shield_power = weaponDef.shieldpower
+						unitDef.customparams.shield_rate = (weaponDef.customparams or {}).shield_rate or weaponDef.shieldpowerregen
+						break
+					end
 				end
-			end
-		end			
+			end			
 			
-		-- Set building Hitpoints
+			-- Set building Hitpoints
 			if unitDef.customparams then
 				if unitDef.customparams.unittype == "building" then
 					unitDef.maxdamage = unitDef.buildcostmetal * 5
@@ -291,6 +299,25 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				if unitDef.customparams.unittype == "shield" then
 					unitDef.maxdamage = unitDef.buildcostmetal * 5
 				end
+			end
+
+			-- Add a modifier for unit HP
+			if unitDef.maxdamage then
+				--Spring.Echo(uDef.name)
+				--Spring.Echo(uDef.maxdamage)
+				unitDef.maxdamage = unitDef.maxdamage * unitHealthModifier
+				--Spring.Echo(uDef.name)
+				--Spring.Echo(uDef.maxdamage)
+			end
+		end
+
+		-- Make sure that land based defense weapons are scaled up to match
+		for id,wDef in pairs(WeaponDefs) do
+			if wDef.customparams and wDef.customparams.effectedByunitHealthModifier == true then
+				if wDef.damage.default then
+					wDef.damage.default = wDef.damage.default * unitHealthModifier
+				end
+				--Spring.Echo(wDef.damage.default)
 			end
 		end
 	
@@ -467,24 +494,6 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			-- Set maximum possible workertime to 2
 			if unitDef.workertime and unitDef.workertime >= 2 then
 				unitDef.workertime = 2
-			end
-		end
-		
-		for id,uDef in pairs(UnitDefs) do
-			--------------------------------------------------------------------------------
-			--------------------------------------------------------------------------------
-			-- Add a modifier for unit HP
-			unitHealthModifier = tonumber(Spring.GetModOptions().unithealthmodifier)
-			if unitHealthModifier == nil then
-				unitHealthModifier = 100
-			end
-			unitHealthModifier = unitHealthModifier * 0.01
-			if uDef.maxdamage then
-				--Spring.Echo(uDef.name)
-				--Spring.Echo(uDef.maxdamage)
-				uDef.maxdamage = uDef.maxdamage * unitHealthModifier
-				--Spring.Echo(uDef.name)
-				--Spring.Echo(uDef.maxdamage)
 			end
 		end
 	end
