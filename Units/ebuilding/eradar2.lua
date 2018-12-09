@@ -9,7 +9,7 @@ local armortype					 = [[building]]
 
 local techrequired				 = [[tech1]]
 
-local buildCostMetal 			  = 30
+local buildCostMetal 			  = 10
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -40,15 +40,15 @@ local unitDef                     = {
 	objectName                    = "eradar3.s3o",
 	script			              = "eradar3.cob",
 	onoffable                     = true,
-	radarDistance                 = 2500,
+	radarDistance                 = 1000,
 	radarEmitHeight				  = 300,
 	repairable		              = false,
 	selfDestructAs                = "largeBuildingExplosionGenericWhite",
 	side                          = "CORE",
-	sightDistance                 = 500,
+	sightDistance                 = 250,
 	smoothAnim                    = true,
-	sonarDistance                 = 2500,
-	seismicDistance               = 2500,
+	sonarDistance                 = 1000,
+	seismicDistance               = 1000,
 	unitname                      = "eradar2",
 	workerTime                    = 0,
 	yardMap                       = "oooooo oooooo oooooo oooooo oooooo oooooo",

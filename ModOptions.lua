@@ -256,6 +256,18 @@ local options= {
 		type   = 'section',
 	},
 	{
+		key    = 'unithealthmodifier',
+		name   = 'Unit Health Modifier',
+		desc   = 'This acts as a percentage of base unit health. Setting to 200 would double unit hitpoints.',
+		type   = 'number',
+		section= 'gameplayoptions',
+		def    = 100,
+		min    = 1,
+		max    = 300,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
 		key="deathmode",
 		name="Game End Mode",
 		desc="What it takes to eliminate a team",

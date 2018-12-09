@@ -168,6 +168,7 @@ function UnitDef_Post(name, uDef)
 	if uDef.corpse == "chicken_egg" then
 		uDef.corpse = ""
 	end
+	
 end
 
 --------------------------------------------------------------------------------
@@ -466,6 +467,24 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			-- Set maximum possible workertime to 2
 			if unitDef.workertime and unitDef.workertime >= 2 then
 				unitDef.workertime = 2
+			end
+		end
+		
+		for id,uDef in pairs(UnitDefs) do
+			--------------------------------------------------------------------------------
+			--------------------------------------------------------------------------------
+			-- Add a modifier for unit HP
+			unitHealthModifier = tonumber(Spring.GetModOptions().unithealthmodifier)
+			if unitHealthModifier == nil then
+				unitHealthModifier = 500
+			end
+			unitHealthModifier = unitHealthModifier * 0.01
+			if uDef.maxdamage then
+				--Spring.Echo(uDef.name)
+				--Spring.Echo(uDef.maxdamage)
+				uDef.maxdamage = uDef.maxdamage * unitHealthModifier
+				--Spring.Echo(uDef.name)
+				--Spring.Echo(uDef.maxdamage)
 			end
 		end
 	end
