@@ -9,7 +9,7 @@ isUpgraded = [[3]]
 
 humanName = [[Kamper Mark IV]]
 
-objectName = "ebomber2.s3o"
+objectName = "ebomber2-small.s3o"
 script = "ebomber2.cob"
 
 

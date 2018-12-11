@@ -9,7 +9,7 @@ isUpgraded = [[3]]
 
 humanName = [[Koyote Mark IV]]
 
-objectName = "efighter2.s3o"
+objectName = "efighter2-small.s3o"
 script = "efighter2.cob"
 
 

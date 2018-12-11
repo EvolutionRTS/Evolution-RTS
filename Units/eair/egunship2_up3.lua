@@ -9,7 +9,7 @@ isUpgraded = [[3]]
 
 humanName = [[Wildkat Mark IV]]
 
-objectName = "egunship3.s3o"
+objectName = "egunship3-small.s3o"
 script = "egunship3.cob"
 
 

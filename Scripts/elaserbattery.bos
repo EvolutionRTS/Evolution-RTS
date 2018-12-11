@@ -5,7 +5,7 @@
 
 piece base, beams, firepoint1, lilypad; // these are the pieces of the model
 
-static-var CanFire, shooting_num, terraintype;
+static-var shooting_num, terraintype;
 
 // Signal definitions
 #define SIG_AIM 2 // this is a aim define <- o_O This is a kill flag
@@ -62,26 +62,11 @@ terraintype = setSFXoccupy_argument;
 }
 
 
-cannotfire()
-{
-   while( TRUE )
-   {
-      if (!CanFire)
-      {
-		emit-sfx 1025 from firepoint1;
-	  }
-	sleep 1500;
-   }
-}
 
 Create() // tells it what to do on creation
 {
-	CanFire=TRUE;
 	shooting_num=1;
-	while( get BUILD_PERCENT_LEFT )
-		sleep 400;
 	start-script SmokeUnit();
-	start-script cannotfire();
 }
 
 RestoreAfterDelay() // restore function to turn the turret and so forth back to start
@@ -92,15 +77,11 @@ AimWeapon1(heading, pitch) // aiming animation and firing authorization
 {
 	signal SIG_AIM;
 	set-signal-mask SIG_AIM;
-	while(!CanFire)
-		sleep 200;
-	start-script RestoreAfterDelay();
 	return (1);
 }
 
 FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets
 {
-   	emit-sfx GDMARTY from firepoint1;
 }
 
 AimFromWeapon1(piecenum) // where it aims the weapon from
