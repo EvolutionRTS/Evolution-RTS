@@ -313,7 +313,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 
 		-- Make sure that land based defense weapons are scaled up to match
 		for id,wDef in pairs(WeaponDefs) do
-			if wDef.customparams and wDef.customparams.effectedByunitHealthModifier == true then
+			if wDef.customparams and wDef.customparams.effectedbyunithealthmodifier == true then
 				if wDef.damage.default then
 					wDef.damage.default = wDef.damage.default * unitHealthModifier
 				end
