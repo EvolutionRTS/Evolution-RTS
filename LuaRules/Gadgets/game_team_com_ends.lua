@@ -75,10 +75,16 @@ function gadget:GameFrame(t)
 				for _,team in ipairs(GetTeamList(at)) do
 					for _,unitID in ipairs(GetTeamUnits(team)) do
 						local x,y,z = GetUnitPosition(unitID)
+						local unitDefID = Spring.GetUnitDefID(unitID)
+						if UnitDefs[unitDefID].isBuilder then
+							builderdeath = 0
+						else
+							builderdeath = 1
+						end
 						local deathTime = min(((getSqrDistance(x,z,defs.x,defs.z) / DISTANCE_LIMIT) * 250), 250)
 						if (destroyUnitQueue[unitID] == nil) then
 							destroyUnitQueue[unitID] = { 
-									time = t + deathTime + math.random(0,#GetTeamUnits(team)*10), 
+									time = t + deathTime + math.random(0,#GetTeamUnits(team)*5)*builderdeath, 
 									x = x, 
 									y = y, 
 									z = z, 
