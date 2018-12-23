@@ -4,50 +4,6 @@
 local unitName                   = "ecommanderbattleai"
 
 --------------------------------------------------------------------------------
-aiDifficulty = Spring.GetModOptions().aidifficulty
-shardChicken = Spring.GetModOptions().shardchicken
-
-if aiDifficulty == nil then
-	aiDifficulty = "easy"
-end
-
-if shardChicken == nil then
-	shardChicken = "disabled"
-end
---Spring.Echo("AI difficulty is set to: " .. aiDifficulty)
--- This should be done in game_resourceGifts.lua using modoptions so that we can have default settings but users can modify to change hardness as needed
-if shardChicken == "enabled" then
-			description				 = [[Chicken Overseer, builds chickens]]
-			energyMake				 = 500
-			metalMake				 = 1000
-			workerTime			 	 = 100
-			maxDamage 				 = 50000		
-elseif shardChicken == "disabled" then
-		if aiDifficulty == "easy" then
-			description                = [[Easy AI • Builds Units • Provides support in battles]]
-			energyMake				 = 0
-			metalMake				 = 0
-			workerTime				 = 1
-			maxDamage				 = 20000
-		elseif aiDifficulty == "hard" then
-			description                = [[Hard AI • Builds Units • Provides support in battles]]
-			energyMake				 = 0
-			metalMake				 = 0
-			workerTime				 = 1
-			maxDamage				 = 100000
-		end
-	end
-
-if shardChicken == "disabled" then
-	objectName					= "ecommander4-battle.s3o"
-	script						= "ecommander4-battle.cob"
-	movementClass				= "COMMANDERTANK4"
-	elseif shardChicken == "enabled" then
-	objectName					= "ChickenDefenseModels/brain_bug.s3o"
-	script						= "ChickenDefenseScripts/chickenh5.cob"
-	movementClass				= "CHICKENHKBOT2"
-end
-
 local armortype					 = [[armored]]
 local supplyGiven				 = [[10]]
 local techprovided				 = [[tech0, 1 tech0ai]]
@@ -90,8 +46,8 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT ARMORED",
-	description                  = description,
-	energyMake                   = energyMake,
+	description                  = [[AI Overseer • Builds Units • Provides support in battles]],
+	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "commnuke",
@@ -102,19 +58,19 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = maxDamage,
+	maxDamage                    = 20000,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
 	maxWaterDepth                = 5000,
-	metalmake                    = metalMake,
+	metalmake                    = 0,
 	metalStorage                 = 9500,
-	movementClass                = movementClass,
+	movementClass                = "COMMANDERTANK4",
 	moveState			         = "0",
 	name                         = "The Battle Overseer (AI)",
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
-	objectName                   = objectName,
-	script			             = script,
+	objectName                   = "ecommander4-battle.s3o",
+	script			             = "ecommander4-battle.cob",
 	radarDistance                = 1000,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
@@ -128,7 +84,7 @@ local unitDef                    = {
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	upright                      = false,
-	workerTime                   = workerTime,
+	workerTime                   = 1,
 	capturespeed                 = 0.25,
 	TerraformSpeed               = 100000,
 	ReclaimSpeed                 = 0,
