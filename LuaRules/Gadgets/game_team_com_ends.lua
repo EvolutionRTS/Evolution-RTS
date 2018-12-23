@@ -28,6 +28,10 @@ if (gadgetHandler:IsSyncedCode()) then
 
 --SYNCED
 
+---STUFF FOR DEATH SOUNDS
+local DeathSounds = VFS.DirList('sounds/deathsounds/generic', '*.wav')
+-------------------------
+
 local destroyQueue = {}
 
 local destroyUnitQueue = {}
@@ -74,7 +78,7 @@ function gadget:GameFrame(t)
 						local deathTime = min(((getSqrDistance(x,z,defs.x,defs.z) / DISTANCE_LIMIT) * 250), 250)
 						if (destroyUnitQueue[unitID] == nil) then
 							destroyUnitQueue[unitID] = { 
-									time = t + deathTime + math.random(0,5), 
+									time = t + deathTime + math.random(0,#GetTeamUnits(team)*10), 
 									x = x, 
 									y = y, 
 									z = z, 
@@ -99,6 +103,8 @@ function gadget:GameFrame(t)
 			if (dt > defs.time) then
 				DestroyUnit(unitID, true)
 				destroyUnitQueue[unitID] = nil
+				local deathsound = DeathSounds[math.random(1, #DeathSounds)]
+				Spring.PlaySoundFile(deathsound, math.random(1,7), defs.x, defs.y, defs.z)
 			end
 		end
 		deathTimeBoost = math.min(deathTimeBoost * 1.125, 250)
@@ -128,6 +134,7 @@ function gadget:UnitDestroyed(u, ud, team)
 		aliveCount[allyTeam] = aliveCount[allyTeam] - 1
 		if aliveCount[allyTeam] <= 0 then
 			local x,y,z = Spring.GetUnitPosition(u)
+			Spring.SetGlobalLos (allyTeam, true)
 			destroyQueue[allyTeam] = {x = x, y = y, z = z}
 		end
 	end
