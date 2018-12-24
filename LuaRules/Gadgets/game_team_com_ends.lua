@@ -69,22 +69,17 @@ end
 
 function gadget:GameFrame(t)
 	--Spring.Echo("Deathmode is " .. deathMode)
-	if t % 15 < .1 then
+	if t % 15 < 1 then
 		for at,defs in pairs(destroyQueue) do
 			if aliveCount[at] <= 0 then --safety check, triggers on transferring the last com otherwise
 				for _,team in ipairs(GetTeamList(at)) do
 					for _,unitID in ipairs(GetTeamUnits(team)) do
 						local x,y,z = GetUnitPosition(unitID)
 						local unitDefID = Spring.GetUnitDefID(unitID)
-						if UnitDefs[unitDefID].isBuilder then
-							builderdeath = 0
-						else
-							builderdeath = 1
-						end
 						local deathTime = min(((getSqrDistance(x,z,defs.x,defs.z) / DISTANCE_LIMIT) * 250), 250)
 						if (destroyUnitQueue[unitID] == nil) then
 							destroyUnitQueue[unitID] = { 
-									time = t + deathTime + math.random(0,#GetTeamUnits(team)*5)*builderdeath, 
+									time = t + deathTime + math.random(0,#GetTeamUnits(team)*10), 
 									x = x, 
 									y = y, 
 									z = z, 
@@ -95,7 +90,7 @@ function gadget:GameFrame(t)
 				end
 				deathWave = true
 			end
-			destroyQueue[at]=nil
+			--destroyQueue[at]=nil
 		end
 	end
 	
@@ -140,7 +135,6 @@ function gadget:UnitDestroyed(u, ud, team)
 		aliveCount[allyTeam] = aliveCount[allyTeam] - 1
 		if aliveCount[allyTeam] <= 0 then
 			local x,y,z = Spring.GetUnitPosition(u)
-			Spring.SetGlobalLos (allyTeam, true)
 			destroyQueue[allyTeam] = {x = x, y = y, z = z}
 		end
 	end
@@ -157,6 +151,19 @@ function gadget:UnitTaken(u, ud, team)
 	end
 end
 
+function gadget:TeamDied(team)
+	local _,_,_,_,_,allyTeam = Spring.GetTeamInfo(team)
+		for _,unitID in ipairs(GetTeamUnits(team)) do
+			local unitDefID = Spring.GetUnitDefID(unitID)
+			if isAlive[unitID] and UnitDefs[unitDefID].customParams.iscommander then
+				local x,y,z = GetUnitPosition(unitID)
+				local deathsound = "sounds/explosions/explosion_enormous.wav"
+				Spring.PlaySoundFile(deathsound, 7, x, y, z)
+				DestroyUnit(unitID, true)
+			end
+		end
+end
+			
 else
 
 --UNSYNCED
