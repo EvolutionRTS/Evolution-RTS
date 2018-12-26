@@ -79,7 +79,7 @@ function gadget:GameFrame(t)
 						local deathTime = min(((getSqrDistance(x,z,defs.x,defs.z) / DISTANCE_LIMIT) * 250), 250)
 						if (destroyUnitQueue[unitID] == nil) then
 							destroyUnitQueue[unitID] = { 
-									time = t + deathTime + math.random(0,#GetTeamUnits(team)*10) + math.random(0,#GetTeamUnits(team)*10) + math.random(0,#GetTeamUnits(team)*10) + math.random(0,#GetTeamUnits(team)*10) + math.random(0,#GetTeamUnits(team)*10), 
+									time = t + deathTime + math.random(0,#GetTeamUnits(team)*10) + math.random(0,#GetTeamUnits(team)*10) + math.random(0,#GetTeamUnits(team)*10), 
 									x = x, 
 									y = y, 
 									z = z, 
