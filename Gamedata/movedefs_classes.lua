@@ -18,13 +18,15 @@ local moveDefs = {
          minHeight      = 0,
          maxHeight      = 5000,
          maxScale       = 1.1,
-         quadraticCoeff = 0.3,
-         linearCoeff    = 0.3, -- deprecates "depthMod"
+		 quadraticCoeff = 0,
+         linearCoeff    = 0, -- deprecates "depthMod"
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=4,
+	  slopemod=2,
+	  depthMod=0,
+	  allowRawMovement=true,
    },
 
    HOVERTANK2 = {
@@ -46,6 +48,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
 
    NORMALTANK2 = {
@@ -67,6 +70,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    
    TANK2 = {
@@ -81,13 +85,14 @@ local moveDefs = {
          minHeight      = 0,
          maxHeight      = 5000,
          maxScale       = 1.5,
-         quadraticCoeff = 0.1,
-         linearCoeff    = 0.1, -- deprecates "depthMod"
+         quadraticCoeff = 0,
+         linearCoeff    = 0, -- deprecates "depthMod"
          constantCoeff  = 1,
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=4,
+	  slopemod=2,
+	  allowRawMovement=true,
    },
 
    HOVERTANK3 = {
@@ -109,6 +114,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    
    HOVERHBOT3 = {
@@ -129,7 +135,8 @@ local moveDefs = {
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=2,
+	  slopemod=3,
+	  allowRawMovement=true,
    },
    
    HOVERHBOT4 = {
@@ -150,7 +157,8 @@ local moveDefs = {
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=2,
+	  slopemod=3,
+	  allowRawMovement=true,
    },
    
    HOVERHBOT5 = {
@@ -171,7 +179,8 @@ local moveDefs = {
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=2,
+	  slopemod=3,
+	  allowRawMovement=true,
    },
    
    HOVERHBOT6 = {
@@ -192,7 +201,8 @@ local moveDefs = {
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=2,
+	  slopemod=3,
+	  allowRawMovement=true,
    },
    
    HOVERHBOT8 = {
@@ -213,7 +223,8 @@ local moveDefs = {
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=2,
+	  slopemod=3,
+	  allowRawMovement=true,
    },
 
    TANK3 = {
@@ -228,13 +239,14 @@ local moveDefs = {
          minHeight      = 0,
          maxHeight      = 5000,
          maxScale       = 1.1,
-         quadraticCoeff = 0.3,
-         linearCoeff    = 0.3, -- deprecates "depthMod"
+         quadraticCoeff = 0,
+         linearCoeff    = 0, -- deprecates "depthMod"
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=4,
+	  slopemod=2,
+	  allowRawMovement=true,
    },
    
    ALLTERRTANK3 = {
@@ -254,6 +266,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
 
    HOVERTANK4 = {
@@ -275,6 +288,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
 
    TANK4 = {
@@ -289,13 +303,14 @@ local moveDefs = {
          minHeight      = 0,
          maxHeight      = 5000,
          maxScale       = 1.1,
-         quadraticCoeff = 0.3,
-         linearCoeff    = 0.3, -- deprecates "depthMod"
+         quadraticCoeff = 0,
+         linearCoeff    = 0, -- deprecates "depthMod"
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=4,
+	  slopemod=2,
+	  allowRawMovement=true,
    },
    ALLTERRTANK4 = {
       footprintx=4,
@@ -314,6 +329,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
     UBOAT4 = {
       footprintx = 4,
@@ -333,6 +349,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
 
    HOVERTANK5 = {
@@ -354,6 +371,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    
     ALLTERRTANK5 = {
@@ -373,6 +391,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    TANK6 = {
       footprintx=6,
@@ -386,13 +405,14 @@ local moveDefs = {
          minHeight      = 0,
          maxHeight      = 5000,
          maxScale       = 1.1,
-         quadraticCoeff = 0.3,
-         linearCoeff    = 0.3, -- deprecates "depthMod"
+         quadraticCoeff = 0,
+         linearCoeff    = 0, -- deprecates "depthMod"
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
-	  slopemod=4,
+	  slopemod=2,
+	  allowRawMovement=true,
    },
    HOVERTANK6 = {
       footprintx=6,
@@ -413,6 +433,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    ORBHOVERTANK6 = {
       footprintx=6,
@@ -433,6 +454,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    ALLTERRTANK6 = {
       footprintx=6,
@@ -451,6 +473,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    COMMANDERTANK4 = {
       footprintx=4,
@@ -471,6 +494,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    COMMANDERTANKAI4 = {
       footprintx=4,
@@ -491,6 +515,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    EXPERIMENTALTANK10 = {
       footprintx=12,
@@ -504,13 +529,14 @@ local moveDefs = {
          minHeight      = 0,
          maxHeight      = 5000,
          maxScale       = 1.1,
-         quadraticCoeff = 0.3,
-         linearCoeff    = 0.3, -- deprecates "depthMod"
+         quadraticCoeff = 0,
+         linearCoeff    = 0, -- deprecates "depthMod"
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    HOVERTANKEXPERIMENTAL9 = {
       footprintx=9,
@@ -529,6 +555,7 @@ local moveDefs = {
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    EXPERIMENTALTANK12 = {
       footprintx=12,
@@ -540,13 +567,14 @@ local moveDefs = {
          minHeight      = 0,
          maxHeight      = 5000,
          maxScale       = 1.1,
-         quadraticCoeff = 0.3,
-         linearCoeff    = 0.3, -- deprecates "depthMod"
+         quadraticCoeff = 0,
+         linearCoeff    = 0, -- deprecates "depthMod"
          constantCoeff  = 0.3,
        },
 	  minwaterdepth=10,
 	  heatmod=unitHeat,
 	  slopemod=4,
+	  allowRawMovement=true,
    },
    
 	CHICKENNANO = {
@@ -555,6 +583,7 @@ local moveDefs = {
 		footprintz = 3,
 		maxslope = 18,
 		maxwaterdepth = 0,
+		allowRawMovement=true,
 	},
 	CHICKQUEEN = {
 		footprintx=3,
@@ -563,6 +592,7 @@ local moveDefs = {
 		maxslope=40,
 		crushstrength=15000,
 		avoidMobilesOnPath=false,
+		allowRawMovement=true,
 	},
 	CHICKENHKBOT1 = {
 		footprintx=1,
@@ -570,6 +600,7 @@ local moveDefs = {
 		maxwaterdepth=22,
 		maxslope=36,
 		crushstrength=1400,
+		allowRawMovement=true,
 	},
 	CHICKENHKBOT2 = {
 		footprintx=2,
@@ -577,6 +608,7 @@ local moveDefs = {
 		maxwaterdepth=22,
 		maxslope=36,
 		crushstrength=1400,
+		allowRawMovement=true,
 	},
 	CHICKENHKBOT3 = {
 		footprintx=3,
@@ -584,6 +616,7 @@ local moveDefs = {
 		maxwaterdepth=22,
 		maxslope=36,
 		crushstrength=1400,
+		allowRawMovement=true,
 	},
 	CHICKENHKBOT4 = {
 		footprintx=4,
@@ -591,6 +624,7 @@ local moveDefs = {
 		maxwaterdepth=22,
 		maxslope=36,
 		crushstrength=11000,
+		allowRawMovement=true,
 	},
 	CHICKENHKBOT5 = {
 		footprintx=5,
@@ -598,6 +632,7 @@ local moveDefs = {
 		maxwaterdepth=22,
 		maxslope=36,
 		crushstrength=11000,
+		allowRawMovement=true,
 	},
 	CHICKENHKBOT6 = {
 		footprintx=6,
@@ -605,12 +640,14 @@ local moveDefs = {
 		maxwaterdepth=22,
 		maxslope=36,
 		crushstrength=11000,
+		allowRawMovement=true,
 	},
 	CHICKENHOVERDODO = {
 		footprintx = 1,
 		footprintz = 1,
 		maxslope = 30,
 		maxwaterslope = 255,
+		allowRawMovement=true,
 	},
    
 }
