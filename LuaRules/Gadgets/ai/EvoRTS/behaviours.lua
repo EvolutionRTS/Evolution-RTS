@@ -10,6 +10,7 @@ if controlPoints == "disabled" then
 	shard_include(  "taskqueuebehaviour" )
 	shard_include(  "attackerbehaviour" )
 	shard_include(  "bootbehaviour" )
+	shard_include(  "nukebehaviour" )
 	--shard_include(	"morphbehaviour"	)
 	--shard_include(  "engineerturretbehaviour"  )
 	else
@@ -18,11 +19,15 @@ if controlPoints == "disabled" then
 	shard_include(  "attackerbehaviour" )
 	shard_include(  "bootbehaviour" )
 	shard_include(  "capturerbehaviour" )
+	shard_include(  "nukebehaviour" )
 	--shard_include(	"morphbehaviour"	)
 	--shard_include(  "engineerturretbehaviour"  )
 end
 
 behaviours = {
+	esilo = {
+		NukeBehaviour,
+	},
 	eorb = {
 		AttackerBehaviour,
 	},

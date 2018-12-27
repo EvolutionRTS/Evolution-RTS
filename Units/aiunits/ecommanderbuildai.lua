@@ -1,11 +1,11 @@
--- UNITDEF -- ECOMMANDERBATTLE --
+-- UNITDEF -- ECOMMANDERBUILD --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ecommanderbattle"
+local unitName                   = "ecommanderbuildai"
 
 --------------------------------------------------------------------------------
 
-local armortype				 = [[armored]]
+local armortype					 = [[light]]
 local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
@@ -13,10 +13,6 @@ local techrequired				 = [[0 overseer]]
 local weapon1Damage              = 200
 local weapon1AOE				 = 250
 local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
-local weapon2Damage              = 75
-local weapon2AOE				 = 25
-local energycosttofire2			 = weapon2Damage / 10 * ((weapon2AOE / 1000) + 1)
 
 
 local unitDef                    = {
@@ -30,7 +26,7 @@ local unitDef                    = {
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 1000,
-	buildDistance                = 500,
+	buildDistance                = 1500,
 	builder                      = true,
 	buildTime                    = 2.5,
 	capturable		             = false,
@@ -46,8 +42,8 @@ local unitDef                    = {
 	canPatrol                    = true,
 	canreclaim		             = false,
 	canstop                      = true,
-	category                     = "NOTAIR SUPPORT ARMORED",
-	description                  = [[Builds Units • Provides support in battles]],
+	category                     = "NOTAIR SUPPORT LIGHT",
+	description                  = [[Builds Units x3 as fast]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -56,10 +52,10 @@ local unitDef                    = {
 	footprintZ                   = 4,
 	hideDamage		             = true,
 	iconType                     = "commander",
-	idleAutoHeal                 = 5,
-	idleTime                     = 300,
+	idleAutoHeal                 = .5,
+	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 2500,
+	maxDamage                    = 20000,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -68,16 +64,16 @@ local unitDef                    = {
 	metalStorage                 = 0,
 	movementClass                = "COMMANDERTANK4",
 	moveState			         = "0",
-	name                         = "The Battle Overseer",
+	name                         = "The Builder Overseer",
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
-	objectName                   = "ecommander4-battle.s3o",
-	script			             = "ecommander4-battle.cob",
+	objectName                   = "ecommander4.s3o",
+	script			             = "ecommander3.cob",
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
 	showPlayerName	             = true,
 	showNanoSpray                = true,
-	sightDistance                = 650,
+	sightDistance                = 500,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -85,12 +81,12 @@ local unitDef                    = {
 	turnRate                     = 5000,
 	unitname                     = unitName,
 	upright                      = false,
-	workerTime                   = 1,
+	workerTime                   = 3,
 	capturespeed                 = 0.25,
 	TerraformSpeed               = 2147000,
 	ReclaimSpeed                 = 0,
 	-- 0.03125                   = 1 hp per second
-	repairspeed                  = 0.5,
+	repairspeed                  = 1.5,
 	sfxtypes                     = {
 		pieceExplosionGenerators = { 
 			"deathceg3", 
@@ -101,7 +97,6 @@ local unitDef                    = {
 			"custom:nanoorb",
 			"custom:dirt",
 			"custom:blacksmoke",
-			"custom:gdhcannon",
 		},
 	},
 	buildoptions                 = Shared.buildList,
@@ -116,11 +111,8 @@ local unitDef                    = {
 		},
 	},
 	weapons                      = {
-		-- [1]                      = {
-			-- def                  = "riottankempweapon",
-		-- },
 		[1]                      = {
-			def                  = "machinegun",
+			def                  = "riottankempweapon",
 		},
 	},
 	customParams                 = {
@@ -139,6 +131,12 @@ local unitDef                    = {
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "outer_colonies",
+		helptext                 = [[Armortype: ]] ..armortype.. [[ 
+x3 Buildpower
+ 
+1000 EMP Damage vs Light/Armored/Building
+
+Reclaims any energy cores within it's proximity.]],
 	},
 }
 
@@ -170,7 +168,7 @@ local weaponDefs                 = {
 		paralyzer		         = true,
 		paralyzetime	         = 2.5,
 		range                    = 500,
-		reloadtime               = 2,
+		reloadtime               = 0.5,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0 0.2 1",
 		rgbColor2                = "1 1 1",
@@ -197,7 +195,7 @@ local weaponDefs                 = {
 	},
 
 	emp                          = {
-		AreaOfEffect             = 500,
+		AreaOfEffect             = 250,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -212,7 +210,7 @@ local weaponDefs                 = {
 		paralyzer		         = true,
 		paralyzetime	         = 5,
 		range                    = 500,
-		reloadtime               = 20,
+		reloadtime               = 5,
 		weaponType		         = "Cannon",
 		soundhit                 = "explosions/emp.wav",
 		size				     = 0,
@@ -277,52 +275,10 @@ local weaponDefs                 = {
 		customparams              = {
 			damagetype		      = "default",  
 			death_sounds 		  = "nuke",
-			nocosttofire		  = true,
+			nocosttofire		 = true,
 		},      
 		damage                    = {
 			default               = 1000,
-		},
-	},
-	machinegun                   = {
-		accuracy                 = 300,
-		AreaOfEffect             = weapon2AOE,
-		avoidFriendly            = false,
-		avoidFeature             = false,
-		collideFriendly          = false,
-		collideFeature           = false,
-		beamTime                 = 0.1,
-		
-		coreThickness            = 0.5,
-		duration                 = 0.1,
-		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
-		energypershot            = energycosttofire2,
-		fallOffRate              = 0,
-		fireStarter              = 50,
-		interceptedByShieldType  = 4,
-		impulsefactor			 = 0,
-		
-		minintensity             = "1",
-		name                     = "Machine Gun",
-		range                    = 650,
-		reloadtime               = 0.1,
-		WeaponType               = "LaserCannon",
-		rgbColor                 = "1 0.5 0",
-		rgbColor2                = "1 1 1",
-		soundTrigger             = true,
-		soundstart               = "weapons/tankdestroyerfire.wav",
-		texture1                 = "shot",
-		texture2                 = "empty",
-		thickness                = 5,
-		tolerance                = 1000,
-		turret                   = true,
-		weaponVelocity           = 1000,
-		customparams             = {
-			damagetype		      = "ecommanderbattle", 
-
-			nocosttofire		    = true,
-		}, 
-		damage                   = {
-			default              = weapon2Damage,
 		},
 	},
 }

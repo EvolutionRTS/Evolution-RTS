@@ -6,7 +6,7 @@ local unitName                   = "ecommandermeteor"
 --------------------------------------------------------------------------------
 
 local armortype				 = [[armored]]
---local supplyGiven				 = [[10]]
+local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer, tech3]]
 
@@ -125,7 +125,7 @@ local unitDef                    = {
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,
---		supply_granted            = supplyGiven,
+		supply_granted            = supplyGiven,
 		death_sounds             = "generic",
 		
 		armortype                = armortype,

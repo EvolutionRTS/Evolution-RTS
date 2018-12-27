@@ -192,10 +192,10 @@ end
 
 function BuildTechFacility(tqb, ai, unit)
 	--Spring.Echo([[Build Tech Facility]])
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	if GetLifters < 4 or rLifter == 0 then
-		return "elifterai"
+		return "ehbotengineer"
 	elseif not GG.TechCheck("tech1", ai.id) and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.etech1.id) == 0 then
 		return "etech1"
 	else
@@ -207,10 +207,10 @@ function BuildFactory(tqb, ai, unit)
 	--Spring.Echo([[Build Factory]])
 	local count = GetFacs(tqb,ai,unit)
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	if GetLifters < 4 or rLifter == 0 then
-		return "elifterai"
+		return "ehbotengineer"
 	elseif count < Spring.GetGameSeconds()*0.00332 then
 		if GG.TechCheck("tech2", ai.id) then 
 			local unitoptions = {"eairplant", "eminifac", "eamphibfac", "ehbotfac", "ebasefactory",}
@@ -226,10 +226,10 @@ end
 
 function BuildMex(tqb, ai, unit)
 	--Spring.Echo([[Build Mex]])
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	if GetLifters < 4 or rLifter == 0 then
-		return "elifterai"
+		return "ehbotengineer"
 	else
 		return "emetalextractor"
 	end
@@ -238,10 +238,10 @@ end
 function BuildEnergy(tqb, ai, unit)
 	--Spring.Echo([[Build Energy]])
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	if GetLifters < 4 or rLifter == 0 then
-		return "elifterai"
+		return "ehbotengineer"
 	else
 		local r = math.random(0,5)
 		if ec <= es*0.10 or r == 0 then
@@ -266,10 +266,10 @@ function BuildSupply(tqb, ai, unit)
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed")
 	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax")
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	if GetLifters < 4 or rLifter == 0 then
-		return "elifterai"
+		return "ehbotengineer"
 	elseif su < sm - 20 and sm ~= MaximumSupply then
 		return "estorage"
 	elseif ms < Spring.GetGameSeconds() and ms < 1000 then
@@ -281,11 +281,11 @@ end
 
 function BuildTurret(tqb, ai, unit)
 	--Spring.Echo([[Build Turret]])
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	local r = math.random(0,1)
 	if GetLifters < 4 or rLifter == 0 then
-			return "elifterai"
+			return "ehbotengineer"
 	elseif r == 0 then
 		local LT = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elightturret2.id)
 		local AAT = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elaserbattery.id)
@@ -312,10 +312,10 @@ function BuildEngineers(tqb, ai, unit)
 	--Spring.Echo([[Build Engineers]])
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	if GetLifters < 4 or rLifter == 0 then
-		return "elifterai"
+		return "ehbotengineer"
 	else
 		local GetORBs = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb_up1.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb_up2.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eorb_up3.id) + 1
 		local rORB = math.random(0, GetORBs)
@@ -329,15 +329,15 @@ end
 
 function BuildSupport(tqb, ai, unit)
 	--Spring.Echo([[Build Support]])
-	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.elifterai.id) + 1
+	local GetLifters = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.ehbotengineer.id) + 1
 	local rLifter = math.random(0, GetLifters*2)
 	if GetLifters < 4 or rLifter == 0 then
-		return "elifterai"
+		return "ehbotengineer"
 	else
 		if GG.TechCheck("tech3", ai.id) then
 			local r = math.random(0,20)
 			if r == 0 then
-				local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2", "eshieldgen", "ekmar", "esiloai", "eartyturret",}
+				local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2", "eshieldgen", "ekmar", "esilo", "eartyturret",}
 				return unitoptions[math.random(1,#unitoptions)]
 			else
 				local unitoptions = {"emine", "escoutdrone", "eradar2", "ebox", "ejammer2",}
@@ -937,11 +937,9 @@ local overseerlistfirst = {
 	BuildEngineers,
 	BuildEngineers,
 	BuildEngineers,
-	MoveToRandomStartBoxLocation,
 	BuildEngineers,
 	BuildEngineers,
 	BuildEngineers,
-	MoveToRandomStartBoxLocation,
 }
 	
 local overseerorders = {
@@ -1025,7 +1023,12 @@ end
 taskqueues = {
     --builders
 	ecommanderbattleai = overseerqueue,
-    elifterai = lifterqueue,
+	ecommanderbuildai = overseerqueue,
+	ecommandercloakai = overseerqueue,
+	ecommanderfactoryai = overseerqueue,
+	ecommanderhealerai = overseerqueue,
+	ecommandershieldai = overseerqueue,
+    ehbotengineer = lifterqueue,
 	eairplant = AirFactoryQueueUP0, 
 	eairplant_up1 = AirFactoryQueueUP1, 
 	eairplant_up2 = AirFactoryQueueUP2, 

@@ -6,7 +6,7 @@ local unitName                   = "ecommanderfactory"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
-local supplyGiven				 = [[25]]
+local supplyGiven				 = [[15]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 

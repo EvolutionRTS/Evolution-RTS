@@ -6,7 +6,7 @@ local unitName                   = "ecommanderbuild"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[light]]
---local supplyGiven				 = [[10]]
+local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
@@ -123,7 +123,7 @@ local unitDef                    = {
 		canbetransported 		 = "true",
 		iscommander              = true,
 		needed_cover             = 2,
---		supply_granted            = supplyGiven,
+		supply_granted            = supplyGiven,
 		death_sounds             = "generic",
 		
 		armortype                = armortype,

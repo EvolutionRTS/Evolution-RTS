@@ -168,8 +168,13 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 0 }, {})
 		end
 	end
-	-- Retreating first so we have less data process/only what matters
-	if self.repairThisUnit then
+	-- DEFEND DA COMMANDA!
+	if ai.triggerhandler.CommInDanger and ai.triggerhandler.CommAttackerPos and ai.triggerhandler.CommAttackerPos.x then
+		self.target = ai.triggerhandler.CommAttackerPos
+		self.unit:Internal():Move(self.target)
+		return
+	-- Retreating so we have less data process/only what matters
+	elseif self.repairThisUnit then
 	local nanotcx, nanotcy, nanotcz = GG.AiHelpers.NanoTC.GetClosestNanoTC(self.unitID)
 		if nanotcx and nanotcy and nanotcz then
 			p = api.Position()
@@ -281,7 +286,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
 			unit:Attack(nearestEnemy)
 		else
-			unit:Move(self.target)
+			unit:MoveAndFire(self.target)
 		end
 	return
 	end

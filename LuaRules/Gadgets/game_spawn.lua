@@ -51,7 +51,21 @@ local function GetStartUnit(teamID)
                 if boolIsAI==true then
 					Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
 					local sidedata = Spring.GetSideData()
-					startUnit = "ecommanderbattleai"
+					math.random(); math.random(); math.random()
+					local i = math.random(1,6)
+					if i == 1 then
+						startUnit = "ecommanderbattleai"
+					elseif i == 2 then
+						startUnit = "ecommanderbuildai"
+					elseif i == 3 then
+						startUnit = "ecommandercloakai"
+					elseif i == 4 then
+						startUnit = "ecommanderfactoryai"
+					elseif i == 5 then
+						startUnit = "ecommandershieldai"
+					else
+						startUnit = "ecommanderhealerai"
+					end
 					return startUnit
                 end
        
@@ -72,6 +86,17 @@ local function SpawnStartUnit(teamID)
 	if (startUnit and startUnit ~= "") then
 		-- spawn the specified start unit
 		local x,y,z = Spring.GetTeamStartPosition(teamID)
+		if boolIsAI==true then
+			local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+			local startBoxXmin, startBoxZmin, startBoxXmax, startBoxZmax = Spring.GetAllyTeamStartBox(allyID)
+			local mx = Game.mapSizeX
+			local mz = Game.mapSizeZ
+			if not (startBoxXmin == 0 and startBoxZmin == 0 and startBoxXmax == mx and startBoxZmax == mz) then
+				math.random(); math.random(); math.random()
+				x = math.random(startBoxXmin, startBoxXmax)
+				z = math.random(startBoxZmin, startBoxZmax)
+			end
+		end
 		-- snap to 16x16 grid
 		x, z = 16*math.floor((x+8)/16), 16*math.floor((z+8)/16)
 		y = Spring.GetGroundHeight(x, z)

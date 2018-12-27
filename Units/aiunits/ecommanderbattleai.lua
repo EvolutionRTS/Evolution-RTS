@@ -5,7 +5,7 @@ local unitName                   = "ecommanderbattleai"
 
 --------------------------------------------------------------------------------
 local armortype					 = [[armored]]
-local supplyGiven				 = [[10]]
+local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, 1 tech0ai]]
 local techrequired				 = [[0 overseer]]
 
@@ -58,7 +58,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 20000,
+	maxDamage                    = 5000,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -103,7 +103,7 @@ local unitDef                    = {
 			"custom:gdhcannon",
 		},
 	},
-	buildoptions                 = Shared.buildListAIOverseer,
+	buildoptions                 = Shared.buildList,
 	sounds                       = {
 		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",

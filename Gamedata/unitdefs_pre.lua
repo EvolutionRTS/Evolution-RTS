@@ -78,38 +78,36 @@ for i = 1, #factory do
 	Shared.buildListFactory[#Shared.buildListFactory + 1] = factory[i]
 end
 
-Shared.buildListAIOverseer = {
-	------------- Basic
-	[[esiloai]],
-	[[elifterai]],
-	[[ehbotfac]],
-	[[eminifac]],
-	[[ebasefactory]],
-	[[eamphibfac]],
-	[[eairplant]],
-	[[etech1]],
-	[[emetalextractor]],
-	[[esolar2]],
-	[[egeothermal]],
-	[[efusion2]],
-	[[estorage]],
-	[[eradar2]],
-	[[ejammer2]],
-	[[ekmar]],
-	[[emine]],
-	[[elightturret2]],
-	[[eheavyturret2]],
-	[[elaserbattery]],
-	[[eartyturret]],
-	-- [[euwturret]],
-	[[eshieldgen]],
-	[[esilo]],
-	[[escoutdrone]],
-	[[ebox]],
-	[[ehbotengineer]],
-	[[eorb]],
-	-- [[ecommander]],
-}
+-- Shared.buildListAIOverseer = {
+	-- ------------- Basic
+	-- [[ehbotfac]],
+	-- [[eminifac]],
+	-- [[ebasefactory]],
+	-- [[eamphibfac]],
+	-- [[eairplant]],
+	-- [[etech1]],
+	-- [[emetalextractor]],
+	-- [[esolar2]],
+	-- [[egeothermal]],
+	-- [[efusion2]],
+	-- [[estorage]],
+	-- [[eradar2]],
+	-- [[ejammer2]],
+	-- [[ekmar]],
+	-- [[emine]],
+	-- [[elightturret2]],
+	-- [[eheavyturret2]],
+	-- [[elaserbattery]],
+	-- [[eartyturret]],
+	-- -- [[euwturret]],
+	-- [[eshieldgen]],
+	-- [[esilo]],
+	-- [[escoutdrone]],
+	-- [[ebox]],
+	-- [[ehbotengineer]],
+	-- [[eorb]],
+	-- -- [[ecommander]],
+-- }
 
 -----------------------------
 -----------------------------

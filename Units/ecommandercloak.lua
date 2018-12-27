@@ -6,7 +6,7 @@ local unitName                   = "ecommandercloak"
 --------------------------------------------------------------------------------
 
 local armortype				 = [[light]]
-local supplyGiven				 = [[10]]
+local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
@@ -43,7 +43,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Builds Units • Provides Cloak Field • Gives ]] ..supplyGiven.. [[ Supply]],
+	description                  = [[Builds Units • Provides Cloak Field]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
