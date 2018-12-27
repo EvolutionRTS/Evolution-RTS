@@ -77,7 +77,7 @@ local NanoTC = {}
 local ClosestNanoTC = {}
 
 for unitDefID, defs in pairs(UnitDefs) do
-	if string.find(defs.name, "eorb") then
+	if string.find(defs.name, "ecommander") then
 		isNanoTC[unitDefID] = true
 	end
 end
