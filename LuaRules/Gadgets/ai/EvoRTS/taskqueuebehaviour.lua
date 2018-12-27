@@ -86,13 +86,7 @@ function TaskQueueBehaviour:CanQueueNextTask()
 	local building = Spring.GetUnitIsBuilding(unitID)
 	-- we check cur buildspeed/power ~= 0
 	if curqueuelength <= 1 and building and notprogressing and notfactory then 
-		local buildingDefID = Spring.GetUnitDefID(building)
-		local isextractor = string.find(UnitDefs[buildingDefID].name, "emetalextractor")
-		if not isextractor then
-			return true
-		else
-			return
-		end
+		return true
 	else
 		return
 	end
