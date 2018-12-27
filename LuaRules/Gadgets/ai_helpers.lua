@@ -40,6 +40,7 @@ GG.AiHelpers.NewPlacementHandler.GetIDFromPos = function(x, z, cellsize)
 end
 
 GG.AiHelpers.NewPlacementHandler.GetIDBuildable = function(id, cellsize, buildtype)
+	if cellsize == 112 then cellsize = 128 end
 	return cells[cellsize][buildtype][id]
 end
 
