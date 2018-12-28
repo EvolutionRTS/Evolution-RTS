@@ -461,15 +461,6 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			end
 ]]--
 		end
-		--------------------------------------------------------------------------------
-		--------------------------------------------------------------------------------
-
-		for id,unitDef in pairs(UnitDefs) do
-			for id,weaponDef in pairs(WeaponDefs) do
-				weaponDef.name = unitDef.name .. [[ Weapon]]
-				--Spring.Echo(weaponDef.name)
-			end
-		end
 		
 		--------------------------------------------------------------------------------
 		-- Gameplay Costs --
