@@ -179,10 +179,12 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		end
 		self.target = p
 		self.attacking = false
-		if self.active then
+		if self.active and self.target then
 			self.unit:Internal():Move(self.target)
+			return
+		else 
+			self.repairThisUnit = false
 		end
-		return
 	end
 	
 	local utype = self.game:GetTypeByName(unit:Name())
