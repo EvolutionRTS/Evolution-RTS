@@ -85,7 +85,7 @@ function TaskQueueBehaviour:CanQueueNextTask()
 	local curqueuelength = #(Spring.GetCommandQueue(unitID,2))
 	local building = Spring.GetUnitIsBuilding(unitID)
 	-- we check cur buildspeed/power ~= 0
-	if curqueuelength <= 1 and building and notprogressing and notfactory then 
+	if curqueuelength <= 0 and building and notprogressing and notfactory then 
 		return true
 	else
 		return
@@ -123,18 +123,6 @@ function TaskQueueBehaviour:CompareWithOldPos()
 end
 
 function TaskQueueBehaviour:Update()
-	if Spring.GetGameFrame()%600 == 0 and Spring.GetGameFrame() > 1 then
-		if (not self.unit:Internal():Type():IsFactory()) then
-			if self:IsRunningAQueue() and (not self:IsBusy()) and self:CompareWithOldPos() then -- check stucked cons
-				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
-			elseif (not self:IsRunningAQueue()) and (not self:IsBusy()) then 
-				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
-				self:CompareWithOldPos()
-			else
-				self:CompareWithOldPos() -- still register current position
-			end		
-		end
-	end
 	if not self:IsActive() then
 		self:DebugPoint("nothing")
 		return
