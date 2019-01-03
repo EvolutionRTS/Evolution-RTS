@@ -83,6 +83,12 @@ local GL_LINE_STRIP = GL.LINE_STRIP
 
 local GaiaTeamID  = Spring.GetGaiaTeamID()
 
+-- show total cost and highest MK level of highlighted units
+--local TotalCost, TechStr = 0, ""
+-- local HighestTech = 0
+WG.smartSelectTooltip = {totalMetalCost = 0, totalEnergyCost = 0, totalSupplyCost = 0, totalSupplyGive = 0, unitCount = 0, highestTech = 0, active = false}
+--local TechToStr = {"\255\0\205\255Mark II", "\255\255\0\255Mark III", "\255\0\255\0Mark IV"}
+
 -----------------------------------------------------------------
 -- end function locals ------------------------------------------
 -----------------------------------------------------------------
@@ -230,6 +236,10 @@ function widget:Update()
 	end
 	lastUpdate = newUpdate
 	--]]
+	
+	--TotalCost, TechStr = 0, ""
+	WG.smartSelectTooltip.totalMetalCost, WG.smartSelectTooltip.totalEnergyCost, WG.smartSelectTooltip.totalSupplyCost, WG.smartSelectTooltip.totalSupplyGive, WG.smartSelectTooltip.unitCount, WG.smartSelectTooltip.highestTech, WG.smartSelectTooltip.active = 0, 0, 0, 0, 0, 0, false
+	--HighestTech = 0
 
 	if (referenceCoords ~= nil and GetActiveCommand() == 0) then
 		x, y, pressed = GetMouseState()
@@ -270,6 +280,28 @@ function widget:Update()
 				mouseSelection = GetUnitsInScreenRectangle(x, y, x1, y1, nil)
 			end
 			originalMouseSelection = mouseSelection
+			
+			-- show total cost of selected units
+			WG.smartSelectTooltip.active = true
+			local highestTech = 0
+			local totalMetalCost, totalEnergyCost, totalSupplyCost, totalSupplyGive, unitCount = 0, 0, 0, 0, #mouseSelection
+			--TotalCost, highestTech = 0, 0
+			for i=1, unitCount do
+				local uid = mouseSelection[i]
+				local udid = GetUnitDefID(uid)
+				totalMetalCost = totalMetalCost + UnitDefs[udid].metalCost
+				totalEnergyCost = totalEnergyCost + UnitDefs[udid].energyCost
+				totalSupplyCost = totalSupplyCost + (UnitDefs[udid].customParams.supply_cost or 0)
+				totalSupplyGive = totalSupplyGive + (UnitDefs[udid].customParams.supply_grant or 0)
+				--local upgradeLevel = tonumber(UnitDefs[udid].isUpgraded) or 0
+				local unitName = UnitDefs[udid].name
+				local upgradeLevel = unitName:find("_up", -5) and tonumber(unitName:sub(-1, -1)) or 0
+				highestTech = highestTech < upgradeLevel and upgradeLevel or highestTech
+			end
+			WG.smartSelectTooltip.totalMetalCost, WG.smartSelectTooltip.totalEnergyCost, WG.smartSelectTooltip.totalSupplyCost, WG.smartSelectTooltip.totalSupplyGive, WG.smartSelectTooltip.unitCount = totalMetalCost, totalEnergyCost, totalSupplyCost, totalSupplyGive, unitCount
+			WG.smartSelectTooltip.highestTech = highestTech
+			--if highestTech > 0 then WG.smartSelectTooltip.techStr = TechToStr[highestTech] end
+			--Spring.Echo("TotalCost=",TotalCost,"HighestTech=",HighestTech)
 
 			
 			-- filter gaia units
@@ -487,3 +519,15 @@ function widget:DrawWorld()
 		glBeginEnd(GL_LINE_STRIP, DrawRectangle, minimapRect)
 	end
 end
+--[[
+function widget:DrawScreen()
+	local mx,my,pressed = GetMouseState()
+	if pressed then
+		local spacingX, spacingY = 5, 18
+		local fontSize = 20
+		local sb = "Total cost: " .. TotalCost
+		if TechStr ~= "" then sb = sb .. ", Highest tech: " .. TechStr end
+		if pressed then gl.Text(sb, mx + spacingX, my - fontSize - spacingY, fontSize, 'o') end
+	end
+end
+]]
