@@ -1183,6 +1183,8 @@ function applyOptionValue(i, skipRedrawWindow)
 		elseif id == 'showhotkeys' then
 			Spring.SetConfigInt("evo_showhotkeys", value)
 			if WG.buildOrderUI then WG.buildOrderUI.updateConfigInt = true end
+		elseif id == 'ctrl_dequeue' then
+			Spring.SetConfigInt("evo_ctrl_dequeue", value)
 		end
 
 		if options[i].widget ~= nil then
@@ -2032,6 +2034,8 @@ function init()
 		-- GAME
 		{id="autoquit", group="game", widget="Autoquit", name="Auto quit", type="bool", value=GetWidgetToggleValue("Autoquit"), description='Automatically quits after the game ends.\n...unless the mouse has been moved within a few seconds.'},
 
+		{id="ctrl_dequeue", group="game", name="Ctrl to dequeue units", type="bool", value=Spring.GetConfigInt("evo_ctrl_dequeue",1) == 1, description='Use ctrl key to dequeue units for factory'},
+		
 		{id="smartselect_includebuildings", group="game", name="Include buildings in area-selection", type="bool", value=false, description='When rectangle-drag-selecting an area, include building units too?\n\ndisabled: non-mobile units will not be selected\n(except: nanos always will be selected)'},
 		{id="smartselect_includebuilders", group="game", name=widgetOptionColor.."   include builders   (if above is off)", type="bool", value=true, description='When rectangle-drag-selecting an area, exclude builder units from the selection'},
 
