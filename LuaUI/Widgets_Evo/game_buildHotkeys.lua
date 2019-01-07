@@ -121,6 +121,8 @@ local function updateWidgetVar()
 	WG.buildHotkeys.hasUpdated = true
 end
 
+local sGetConfigInt = Spring.GetConfigInt
+
 function widget:CommandsChanged()
 	updateCommands = true
 end
@@ -202,8 +204,10 @@ function widget:KeyPress(key, mods, isRepeat)
 					hotkeyTargetDisabled()
 				else
 					local alt, ctrl, meta, shift = sGetModKeyState()
+					local rmb = 1
+					if sGetConfigInt("evo_ctrl_dequeue", 1) == 1 then rmb, ctrl = ctrl and 3 or 1, false end
 					local index = sGetCmdDescIndex(matches[i].id)
-					sSetActiveCommand(index, 1, true, false, alt, ctrl, meta, shift)
+					sSetActiveCommand(index, rmb, true, false, alt, ctrl, meta, shift)
 					shortenHotkeyText()
 					updateWidgetVar()
 				end
