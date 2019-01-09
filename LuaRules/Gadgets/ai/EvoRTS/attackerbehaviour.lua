@@ -247,7 +247,9 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		local attacker = type == "attacker"
 		if attacker then
 			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
-			enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestEnemy)
+			if nearestEnemy then
+				enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestEnemy)
+			end
 			--local cms = self.ai.attackhandler.targetMexes[(self.unitID%5)+1]
 			--if cms then -- there is an enemy metal spot
 				--enemyposx, enemyposy, enemyposz = cms.x, cms.y, cms.z
@@ -281,7 +283,9 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	else
 		if (utype:CanFly() == true) and unit:Name() ~= "escoutdrone" then
 			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
-			unit:Attack(nearestEnemy)
+			if nearestEnemy then
+				unit:Attack(nearestEnemy)
+			end
 		else
 			unit:MoveAndFire(self.target)
 		end
