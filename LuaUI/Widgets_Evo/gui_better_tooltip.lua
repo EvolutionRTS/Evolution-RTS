@@ -998,7 +998,7 @@ function widget:DrawScreenEffects(vsx,vsy)
         end
  
         if not FontSize then
-                FontSize = math.max(8,4+vsy/100)
+                FontSize = math.max(8,4+vsy/80)
         end
  
         local nttString = GenerateNewTooltip()
