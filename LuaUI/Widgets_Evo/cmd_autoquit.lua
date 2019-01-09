@@ -49,7 +49,6 @@ function widget:Update(dt)
     if nmx~=mx or nmy~=my then
       --Echo("<autoquit> Autoquit canceled.")
       --endTime = false
-	  Echo(GetTimer())
       endTime = GetTimer()   -- set new endtime, because I've had times that game was running for ages because i wasnt attending pc but somehow it detect a move
       mx,my = GetMouseState()
       -- widgetHandler:RemoveWidget(self)
