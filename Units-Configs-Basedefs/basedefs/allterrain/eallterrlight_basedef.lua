@@ -26,7 +26,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Raider • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Raider]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

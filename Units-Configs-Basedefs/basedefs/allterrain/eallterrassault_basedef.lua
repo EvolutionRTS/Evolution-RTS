@@ -27,7 +27,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Self-Propelled Precision Artillery • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Self-Propelled Precision Artillery]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

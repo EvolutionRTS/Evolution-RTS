@@ -26,7 +26,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Heavy Anti-Armor Tank Destroyer • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Heavy Anti-Armor Tank Destroyer]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

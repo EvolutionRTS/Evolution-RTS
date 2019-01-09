@@ -26,7 +26,7 @@ unitDef                    = {
 	-- Starting out cloaked will dramatically increase the initial cost, however, it is much more convenient from a micromanagement standpoint.
 	-- End Cloaking
 
-	description                  = [[Shield/Cloak Field Emitter • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Shield/Cloak Field Emitter]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,

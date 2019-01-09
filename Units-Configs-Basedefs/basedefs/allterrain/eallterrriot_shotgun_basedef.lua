@@ -28,7 +28,7 @@ unitDef                    = {
 	
 	-- End Cloaking
 
-	description                  = [[Shotgun/Riot Tank • Uses +]] .. supply .. [[ Supply]],
+	description                  = [[Shotgun/Riot Tank]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
