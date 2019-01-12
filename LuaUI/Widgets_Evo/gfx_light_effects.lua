@@ -779,7 +779,7 @@ function widget:GetConfigData(data)
 end
 
 function widget:SetConfigData(data)
-	if data.globalLifeMult ~= nil and data.resetted ~= nil and data.resetted == 1.4 then
+	if data.globalLifeMult ~= nil and data.resetted ~= nil and data.resetted == 1 then
 		if data.globalLightMult ~= nil then
 			globalLightMult = data.globalLightMult
 		end
