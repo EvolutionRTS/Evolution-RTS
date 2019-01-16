@@ -1,0 +1,33 @@
+{
+    "title" : "Evolution RTS",
+    "setups" : [
+        {
+            "package": {
+                "id": "stable",
+                "display": "Stable"
+            },
+            "downloads": {
+                "games" : ["evo:stable", "chobby:test"],
+                "engines" : [ "104.0.1-968-gb54c668 maintenance" ]
+            },
+            "no_start_script" : true,
+            "launch": {
+                "start_args" : ["--menu", "rapid://chobby:test"]
+            }
+        },
+        {
+            "package": {
+                "id": "test",
+                "display": "Test"
+            },
+            "downloads": {
+                "games" : ["evo:test", "chobby:test"],
+                "engines" : [ "104.0.1-968-gb54c668 maintenance" ]
+            },
+            "no_start_script" : true,
+            "launch": {
+                "start_args" : ["--menu", "rapid://chobby:test"]
+            }
+        }
+    ]
+}
