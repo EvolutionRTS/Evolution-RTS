@@ -1070,7 +1070,8 @@ local function handleEzMorph(unitID, unitDefID, teamID, targetDefID)
 		return true, true
 	end
  	for morphCmd, morphDef in pairs(morphSet) do
-		if not targetDefID or morphDef.into == targetDefID then
+		if (not targetDefID or morphDef.into == targetDefID)
+		and MorphRequirementsFulfilled(unitID, morphDef, teamTechLevel[teamID] or 0, TechReqList(teamID, morphDef.require)) then
 			StartMorph(unitID, unitDefID, teamID, morphDef)
 			break
 		end
