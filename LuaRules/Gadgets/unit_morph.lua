@@ -1069,13 +1069,19 @@ local function handleEzMorph(unitID, unitDefID, teamID, targetDefID)
 	if not morphSet then
 		return true, true
 	end
+	
+	local validMorphs = {}
  	for morphCmd, morphDef in pairs(morphSet) do
 		if (not targetDefID or morphDef.into == targetDefID)
 		and MorphRequirementsFulfilled(unitID, morphDef, teamTechLevel[teamID] or 0, TechReqList(teamID, morphDef.require)) then
-			StartMorph(unitID, unitDefID, teamID, morphDef)
-			break
+			validMorphs[#validMorphs+1] = morphDef
 		end
 	end
+
+	if #validMorphs > 0 then
+		StartMorph(unitID, unitDefID, teamID, validMorphs[math.random(1, #validMorphs)])
+	end
+
  	return true, true
 end
 
