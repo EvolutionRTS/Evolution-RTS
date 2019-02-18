@@ -42,7 +42,7 @@ return {
         maxheat            = 5,
         pos                = [[r-2 r2, 5, r-2 r2]],
         size               = 1,
-        sizegrowth         = 20,
+        sizegrowth         = 10,
         speed              = [[0, 0, 0]],
         texture            = [[starexplo]],
       },
