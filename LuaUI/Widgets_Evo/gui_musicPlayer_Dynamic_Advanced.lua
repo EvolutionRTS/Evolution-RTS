@@ -64,6 +64,8 @@ end
 --local tracks = peaceTracks
 local tracks = loadingTracks
 
+local ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+
 local firstTime = false
 local wasPaused = false
 local firstFade = true
@@ -144,6 +146,10 @@ function widget:Initialize()
 	
 	WG['music'] = {}
 	WG['music'].GetPosition = function()
+		if shutdown then
+			return false
+		end
+		updatePosition(force)
 		return {top,left,bottom,right,widgetScale}
 	end
 end
@@ -251,11 +257,11 @@ local function createList()
 		WG['guishader_api'].InsertRect(left, bottom, right, top,'music')
 	end
 	drawlist[1] = glCreateList( function()
-		glColor(0, 0, 0, 0.66)
+		glColor(0, 0, 0, ui_opacity)
 		RectRound(left, bottom, right, top, 5.5*widgetScale)
 		
 		local borderPadding = 2.75*widgetScale
-		glColor(1,1,1,0.022)
+		glColor(1,1,1,ui_opacity*0.04)
 		RectRound(left+borderPadding, bottom+borderPadding, right-borderPadding, top-borderPadding, 4.4*widgetScale)
 		
 	end)
@@ -311,7 +317,7 @@ local function createList()
 	    	text = text..c
 	    end
 		end
-		glText('\255\255\255\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
+		glText('\255\135\135\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
 		
 	end)
 	drawlist[4] = glCreateList( function()
@@ -394,6 +400,9 @@ end
 
 function changeMusicVolume(value)
 	music_volume = value
+	fadelvl = value
+	fadeIn = false
+	fadeOut = false
 	Spring.SetConfigInt("snd_volmusic", music_volume)
   createList()
 end
