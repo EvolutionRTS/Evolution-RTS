@@ -64,7 +64,7 @@ end
 --local tracks = peaceTracks
 local tracks = loadingTracks
 
-local ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66)
 
 local firstTime = false
 local wasPaused = false
