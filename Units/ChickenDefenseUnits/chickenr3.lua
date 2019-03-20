@@ -75,7 +75,7 @@ return {
 				interceptedByShieldType   = 4,
 				areaofeffect = 750,
 				avoidfriendly = 0,
-				cegtag = "nuketrail-roost",
+				cegtag = "missiletrailgunshiplesssmokey",
 				collidefriendly = 0,
 				craterboost = 0,
 				cratermult = 0,

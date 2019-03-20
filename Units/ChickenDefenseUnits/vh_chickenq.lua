@@ -80,7 +80,7 @@ return {
 				avoidfriendly = 0,
 				burst = 10,
 				burstrate = 0.01,
-				cegtag = "nuketrail-roost",
+				cegtag = "missiletrailgunshiplesssmokey",
 				collidefriendly = 0,
 				craterboost = 0,
 				cratermult = 0,
@@ -107,7 +107,7 @@ return {
 				weapontimer = 0.2,
 				weaponvelocity = 800,
 				damage = {
-					default = 1000,
+					default = 200,
 				},
 			},
 			melee = {
@@ -135,7 +135,7 @@ return {
 				weapontype = "Cannon",
 				weaponvelocity = 2500,
 				damage = {
-					default = 900,
+					default = 600,
 				},
 			},
 			spores1 = {
