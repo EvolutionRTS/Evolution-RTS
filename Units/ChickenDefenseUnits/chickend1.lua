@@ -42,7 +42,7 @@ return {
 		objectname = "ChickenDefenseModels/tube.s3o",
 		script = "ChickenDefenseScripts/chickend1.cob",
 		reclaimspeed = 200,
-		repairspeed = 25,
+		repairspeed = 0.25,
 		seismicsignature = 0,
 		selfdestructas = "custom:blood_explode",
 		side = "THUNDERBIRDS",

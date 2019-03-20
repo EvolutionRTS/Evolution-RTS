@@ -44,7 +44,7 @@ return {
 		nochasecategory = "VTOL",
 		objectname = "ChickenDefenseModels/brain_bug.s3o",
 		script = "ChickenDefenseScripts/chickenh5.cob",
-		repairspeed = 450,
+		repairspeed = 0.25,
 		selfdestructas = "BUG_DEATH",
 		side = "THUNDERBIRDS",
 		sightdistance = 760,
