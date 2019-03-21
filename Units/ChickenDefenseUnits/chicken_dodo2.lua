@@ -27,7 +27,7 @@ return {
 		floater = false,
 		footprintx = 1,
 		footprintz = 1,
-		hidedamage = 1,
+		--hidedamage = 1,
 		icontype = "raider",
 		kamikaze = true,
 		kamikazedistance = 72,

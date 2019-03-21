@@ -24,7 +24,7 @@ return {
 		floater = false,
 		footprintx = 2,
 		footprintz = 2,
-		hidedamage = 1,
+		--hidedamage = 1,
 		icontype = "raider",
 		leavetracks = true,
 		maneuverleashlength = 640,

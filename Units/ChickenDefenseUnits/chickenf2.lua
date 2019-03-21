@@ -30,7 +30,7 @@ return {
 		explodeas = "TALON_DEATH",
 		footprintx = 3,
 		footprintz = 3,
-		hidedamage = 1,
+		--hidedamage = 1,
 		icontype = "scout",
 		-- idleautoheal = 15,
 		idletime = 900,

@@ -28,7 +28,7 @@ return {
 		floater = true,
 		footprintx = 1,
 		footprintz = 1,
-		hidedamage = 1,
+		--hidedamage = 1,
 		hoverattack = true,
 		icontype = "air_arm",
 		-- idleautoheal = 2,

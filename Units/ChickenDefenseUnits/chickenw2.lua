@@ -32,7 +32,7 @@ return {
 		floater = true,
 		footprintx = 1,
 		footprintz = 1,
-		hidedamage = 1,
+		--hidedamage = 1,
 		icontype = "air_lit",
 		maneuverleashlength = "1280",
 		mass = 200,

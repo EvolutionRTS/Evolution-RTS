@@ -23,7 +23,7 @@ return {
 		explodeas = "LOBBER_MORPH",
 		footprintx = 3,
 		footprintz = 3,
-		hidedamage = 1,
+		--hidedamage = 1,
 		hightrajectory = 1,
 		icontype = "arty_arm",
 		-- idleautoheal = 20,

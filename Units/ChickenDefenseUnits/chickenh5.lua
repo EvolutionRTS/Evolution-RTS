@@ -28,7 +28,7 @@ return {
 		floater = false,
 		footprintx = 3,
 		footprintz = 3,
-		hidedamage = 1,
+		--hidedamage = 1,
 		icontype = "chickencommander",
 		leavetracks = true,
 		maneuverleashlength = 640,
