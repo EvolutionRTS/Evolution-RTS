@@ -22,7 +22,7 @@
             },
             "downloads": {
                 "games" : ["evo:test", "chobby:test"],
-                "engines" : [ "104.0.1-968-gb54c668 maintenance" ]
+                "engines" : [ "104.0.1-1156-gb72a9cc maintenance" ]
             },
             "no_start_script" : true,
             "launch": {
@@ -35,7 +35,7 @@
                 "display": "Dev Lobby"
             },
             "downloads": {
-                "engines" : [ "104.0.1-968-gb54c668 maintenance" ]
+                "engines" : [ "104.0.1-1156-gb72a9cc maintenance" ]
             },
             "no_start_script" : true,
             "no_downloads" : true,
