@@ -27,7 +27,7 @@ local separator = "::"
 local teams = Spring.GetTeamList()
 for i =1, #teams do
 	local luaAI = Spring.GetTeamLuaAI(teams[i])
-	if luaAI ~= "" and string.sub(luaAI, 1, 9) == 'Chicken: ' then
+	if luaAI and luaAI ~= "" and string.sub(luaAI, 1, 9) == 'Chicken: ' then
 		chickensEnabled = true
 	end
 end
@@ -54,6 +54,9 @@ if Spring.GetModOptions() and Spring.GetModOptions().map_tidal then
 	elseif map_tidal == "high" then
 		tidal = 23
 	end
+end
+if Spring.GetTidal then
+	tidal = Spring.GetTidal()
 end
 changelogFile = changelogFile .. keycolor.."Tidal speed"..separator..valuegreycolor..tidal.. keycolor.."\n"
 
