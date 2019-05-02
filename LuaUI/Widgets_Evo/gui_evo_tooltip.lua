@@ -142,6 +142,8 @@ VFS.Include("luaui/configs/evo_buildHotkeysConfig.lua")
 
 local sGetKeySymbol = Spring.GetKeySymbol
 local function getKeySymbol(k)
+    if k >= 97 and k <= 122 then return string.char(k):upper() end
+    -- basically unused
 	local keySymbol = sGetKeySymbol(k)
 	return keySymbol:sub(1, 1):upper() .. keySymbol:sub(2)
 end

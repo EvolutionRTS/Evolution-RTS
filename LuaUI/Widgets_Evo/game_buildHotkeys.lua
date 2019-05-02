@@ -100,8 +100,9 @@ local function updateHotkeyText()
 		hotkeyText = "Build hotkey: "
 		for i = 1, lengKeysPressed do
 		    -- hotkeyText = hotkeyText .. keyCodeToString[keysPressed[i]] .. " + "
-		    local keySymbol = sGetKeySymbol(keysPressed[i])
-		    hotkeyText = hotkeyText .. keySymbol:sub(1, 1):upper() .. keySymbol:sub(2) .. " + "
+		    if keysPressed[i] >= 97 and keysPressed[i] <= 122 then hotkeyText = hotkeyText .. string.char(keysPressed[i]):upper() .. " + " end
+		    -- local keySymbol = sGetKeySymbol(keysPressed[i])
+		    -- hotkeyText = hotkeyText .. keySymbol:sub(1, 1):upper() .. keySymbol:sub(2) .. " + "
 		    -- if i < lengKeysPressed then str = str .. " + " end
 		end
 
@@ -115,8 +116,9 @@ WG.buildHotkeys.hasUpdated = false
 local function updateWidgetVar()
 	WG.buildHotkeys.keysPressed = {}
 	for i = 1, lengKeysPressed do
-		local keySymbol = sGetKeySymbol(keysPressed[i])
-		WG.buildHotkeys.keysPressed[i] = keySymbol:sub(1, 1):upper() .. keySymbol:sub(2)
+		if keysPressed[i] >= 97 and keysPressed[i] <= 122 then WG.buildHotkeys.keysPressed[i] = string.char(keysPressed[i]):upper() end
+		-- local keySymbol = sGetKeySymbol(keysPressed[i])
+		-- WG.buildHotkeys.keysPressed[i] = keySymbol:sub(1, 1):upper() .. keySymbol:sub(2)
 	end
 	WG.buildHotkeys.hasUpdated = true
 end

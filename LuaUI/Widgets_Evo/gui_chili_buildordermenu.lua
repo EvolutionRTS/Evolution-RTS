@@ -16,15 +16,17 @@ end
 VFS.Include("luaui/configs/evo_buildHotkeysConfig.lua")
 local sGetKeySymbol = Spring.GetKeySymbol
 local function getKeySymbol(k)
+    if k >= 97 and k <= 122 then return string.char(k):upper() end
+    -- basically unused
     local keySymbol = sGetKeySymbol(k)
     return keySymbol:sub(1, 1):upper() .. keySymbol:sub(2)
 end
 local nameToKeySymbols = {}
 for unitDefID = 1, #UnitDefs do
     local ud = UnitDefs[unitDefID]
-    local name = ud.name
-    if name:find("_up", -5) then name = name:sub(1, -5) end
-    if nameToKeyCode[name] then
+    local trimmedName = ud.name
+    if trimmedName:find("_up", -5) then trimmedName = trimmedName:sub(1, -5) end
+    if nameToKeyCode[trimmedName] then
         -- local str = ""
         -- local leng = #nameToKeyCode[name]
         -- for i = 1, leng do
@@ -32,9 +34,9 @@ for unitDefID = 1, #UnitDefs do
         --     if i < leng then str = str .. " + " end
         -- end
         -- nameToKeySymbols[name] = str
-        nameToKeySymbols[name] = {}
-        for i = 1, #nameToKeyCode[name] do
-            nameToKeySymbols[name][i] = getKeySymbol(nameToKeyCode[name][i])
+        nameToKeySymbols[ud.name] = {}
+        for i = 1, #nameToKeyCode[trimmedName] do
+            nameToKeySymbols[ud.name][i] = getKeySymbol(nameToKeyCode[trimmedName][i])
         end
     end
 end
