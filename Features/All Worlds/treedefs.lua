@@ -17,7 +17,7 @@ local function CreateTreeDef(type)
 
      damage      = 5,
      metal = 0,
-	 object				="features/0ad/ad0_pine_3_xl.s3o",
+	 object				="features/enginetreereplacement/enginetreereplacement.s3o",
 
      reclaimTime = 25,
      mass        = 5,
