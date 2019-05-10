@@ -28,6 +28,33 @@ Shared.buildList = {
 	-- [[ecommander]],
 }
 
+Shared.buildListeCommanderFactory = {
+	[[ehbotengineer]],
+	[[eorb]],
+	[[escoutdrone]],
+	[[ebox]],
+	[[ehbotfac]],
+	[[eminifac]],
+	[[ebasefactory]],
+	[[eamphibfac]],
+	[[eairplant]],
+	[[ehbotpeewee]],
+	[[ehbotthud]],
+	[[ehbotsniper]],
+	[[eallterrlight]],
+	[[eallterrriot]],
+	[[eallterrheavy]],
+	[[elighttank3]],
+	[[eriottank2]],
+	[[eheavytank3]],
+	[[eamphibbuggy]],
+	[[eamphibriot]],
+	[[eamphibmedtank]],
+	[[efighter]],
+	[[egunship2]],
+	[[ebomber]],
+}
+
 Shared.buildListChicken = {
 	[[croost]]
 }

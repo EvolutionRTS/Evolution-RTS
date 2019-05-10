@@ -104,7 +104,7 @@ local unitDef                    = {
 			"custom:gdhcannon",
 		},
 	},
-	buildoptions                 = Shared.buildList,
+	--buildoptions                 = Shared.buildList,
 	sounds                       = {
 		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",
@@ -125,7 +125,7 @@ local unitDef                    = {
 	},
 	customParams                 = {
 		unittype				  = "mobile",
-		area_mex_def			 = "emetalextractor",
+		--area_mex_def			 = "emetalextractor",
 		ProvideTech              = techprovided,
 		RequireTech				 = techrequired,
 		canbetransported 		 = "true",

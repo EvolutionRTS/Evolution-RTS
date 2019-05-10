@@ -43,7 +43,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT LIGHT",
-	description                  = [[Builds Units • Provides Cloak Field]],
+	description                  = [[Provides Massive Cloak Field]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -100,7 +100,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = Shared.buildList,
+	--buildoptions                 = Shared.buildList,
 	sounds                       = {
 		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",
@@ -118,7 +118,7 @@ local unitDef                    = {
 	},
 	customParams                 = {
 		unittype				  = "mobile",
-		area_mex_def			 = "emetalextractor",
+		--area_mex_def			 = "emetalextractor",
 		ProvideTech              = techprovided,
 		RequireTech				 = techrequired,
 		canbetransported 		 = "true",

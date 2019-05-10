@@ -482,9 +482,9 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				unitDef.buildcostenergy = 0
 			end
 			
-			-- Set maximum possible workertime to 2
-			if unitDef.workertime and unitDef.workertime >= 2 then
-				unitDef.workertime = 2
+			-- Set maximum possible workertime to 8
+			if unitDef.workertime and unitDef.workertime >= 8 then
+				unitDef.workertime = 8
 			end
 		end
 	end
