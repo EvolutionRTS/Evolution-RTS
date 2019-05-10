@@ -18,9 +18,9 @@ local damageClasses = {
 		----------------------------------------------------------------------------			
 		-- Overseers with weapons
 		ecommanderbattle	= {
-			ARMORED		= 1,
+			ARMORED		= 0.5,
 			LIGHT		= 1,
-			BUILDING 	= 0.5,
+			BUILDING 	= 0.1,
 		},
 		-- Overseers with weapons
 		ecommandermeteor	= {

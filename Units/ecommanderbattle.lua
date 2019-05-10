@@ -121,6 +121,7 @@ local unitDef                    = {
 		-- },
 		[1]                      = {
 			def                  = "machinegun",
+			badTargetCategory    = "BUILDING ARMORED WALL",
 		},
 	},
 	customParams                 = {
