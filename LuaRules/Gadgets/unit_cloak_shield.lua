@@ -74,7 +74,6 @@ local cloakees = {}
 local cloakShieldCmdDesc = {
   id      = CMD_CLOAK_SHIELD,
   type    = CMDTYPE.ICON_MODE,
-
   name    = 'CloakShield',
   cursor  = 'CloakShield',  -- add with LuaUI?
   action  = 'cloak_shield',
@@ -203,12 +202,14 @@ end
 
 local alliedTrueTable = {allied = true}
 local function SetUnitCloakAndParam(unitID, level, decloakDistance)
+	local newRadius = decloakDistance
 	if level then
 		local cannotCloak = GetUnitRulesParam(unitID, "cannotcloak")
 		if cannotCloak ~= 1 then
 			local changeRadius = true
 			if cloakers[unitID] and cloakers[unitID].radius > 0 then
 				changeRadius = false
+				newRadius = 0
 			end
 			SetUnitCloak(unitID, level, ((changeRadius and decloakDistance) or GetUnitRulesParam(unitID, "comm_decloak_distance") or false))
 		end
@@ -224,14 +225,14 @@ local function SetUnitCloakAndParam(unitID, level, decloakDistance)
 		end
 	end
 	SetUnitRulesParam(unitID, "areacloaked", (level and 1) or 0, alliedTrueTable)
+	SetUnitRulesParam(unitID, "areacloaked_radius", (level and newRadius) or 0, alliedTrueTable)
 end
 
 --------------------------------------------------------------------------------
 
 function gadget:Initialize()
   -- get the cloakShieldDefs
-  cloakShieldDefs, uncloakableDefs =
-    include("LuaRules/Configs/cloak_shield_defs.lua")
+  cloakShieldDefs, uncloakableDefs = include("LuaRules/Configs/cloak_shield_defs.lua")
 
   if (not cloakShieldDefs) then
     gadgetHandler:RemoveGadget()
@@ -245,10 +246,7 @@ function gadget:Initialize()
   -- add the CloakShield command to existing units
   for _,unitID in ipairs(Spring.GetAllUnits()) do
     local unitDefID = GetUnitDefID(unitID)
-    local cloakShieldDef = cloakShieldDefs[unitDefID]
-    if (cloakShieldDef) then
-      AddCloakShieldUnit(unitID, cloakShieldDef)
-    end
+    gadget:UnitCreated(unitID, unitDefID)
   end
 end
 
@@ -263,7 +261,6 @@ function gadget:Shutdown()
     end
   end
 end
-
 
 --------------------------------------------------------------------------------
 
@@ -284,8 +281,8 @@ end
 
 
 function gadget:UnitTaken(unitID, unitDefID, oldTeamID, teamID)
-	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(teamID)
-	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(oldTeamID)
+	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(teamID, false)
+	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(oldTeamID, false)
 	
 	if (newAllyTeam ~= oldAllyTeam) then
 		if (cloakShieldUnits[unitID]) then
@@ -334,10 +331,10 @@ local function UpdateCloakees(data)
         cloakees[cloakee] = true
       end
     end
-  -- the GetUnitsInSphere() call uses unit midPos's, which can
-  -- differ from the unit's position while being transported.
-  -- here we do a direct check to see what units the cloakees are
-  -- transporting. this does not fix nested transports
+    -- the GetUnitsInSphere() call uses unit midPos's, which can
+    -- differ from the unit's position while being transported.
+    -- here we do a direct check to see what units the cloakees are
+    -- transporting. this does not fix nested transports
     if (UnitDefs[udid].transportCapacity >= 1) then
       local transported = Spring.GetUnitIsTransporting(cloakee)
       if transported ~= nil then
@@ -382,6 +379,7 @@ local function GrowRadius(cloaker)
   r = math.sqrt(r)
   r = (r >= cloaker.maxrad) and cloaker.maxrad or r
   cloaker.radius = r
+  Spring.SetUnitRulesParam(cloaker.id, "cloakerRadius", r)
 
   if (cloaker.draw) then
     SendToUnsynced(SYNCSTR, cloaker.id, r)
@@ -395,10 +393,10 @@ local function ShrinkRadius(cloaker)
     cloaker.radius = 0
     return 0
   end
-  local r = cloaker.radius
   r = (r * r) - cloaker.def.shrinkRate
   r = (r < 0) and 0 or math.sqrt(r)
   cloaker.radius = r
+  Spring.SetUnitRulesParam(cloaker.id, "cloakerRadius", r)
   if (cloaker.draw) then
     SendToUnsynced(SYNCSTR, cloaker.id, r)
   end
@@ -431,8 +429,7 @@ function gadget:GameFrame(frameNum)
     elseif (not data.want) then
       ShrinkRadius(data)
     else
-	  local activeState = Spring.GetUnitStates(unitID)
-	  local newState = activeState and activeState["active"] and (GetUnitRulesParam(unitID, "forcedOff") ~= 1)
+	  local newState = Spring.Utilities.GetUnitActiveState(unitID) and (GetUnitRulesParam(unitID, "forcedOff") ~= 1)
       if (newState) then
         GrowRadius(data)
       else
@@ -456,6 +453,35 @@ function gadget:GameFrame(frameNum)
   end
 end
 
+function gadget:Load(zip)
+  -- restore cloak shield for dyncomms
+  for _,unitID in ipairs(Spring.GetAllUnits()) do
+	if not cloakShieldUnits[unitID] then
+	  local unitDefID = Spring.GetUnitDefID(unitID)
+	  local cloakShieldDef = GG.Upgrades_UnitCloakShieldDef(unitID)
+	  if cloakShieldDef then
+		local state = GetUnitRulesParam(unitID, "cloak_shield")
+		local radius = Spring.GetUnitRulesParam(unitID, "cloakerRadius")
+		local isOn = state ~= nil and state > 0
+		
+		AddCloakShieldUnit(unitID, cloakShieldDef)
+		CloakShieldCommand(unitID, {isOn and 1 or 0})
+		Spring.SetUnitRulesParam(unitID, "cloakerRadius", radius)
+	  end
+	end
+  end
+  
+  for unitID, data in pairs(cloakers) do
+    local radius = Spring.GetUnitRulesParam(unitID, "cloakerRadius") or 0
+	if radius > 0 then
+	  data.radius = radius
+	  if (data.draw) then
+		SendToUnsynced(SYNCSTR, data.id, radius)
+	  end
+	  UpdateCloakees(data)
+	end
+  end
+end
 
 --------------------------------------------------------------------------------
 
@@ -780,8 +806,6 @@ local GetSpectatingState  = Spring.GetSpectatingState
 local GetLocalAllyTeamID  = Spring.GetLocalAllyTeamID
 local IsUnitSelected      = Spring.IsUnitSelected
 local GetUnitAllyTeam     = Spring.GetUnitAllyTeam
-local GetLocalAllyTeamID  = Spring.GetLocalAllyTeamID
-local GetUnitViewPosition = Spring.GetUnitViewPosition
 local DrawGroundCircle    = gl.DrawGroundCircle
 
 function gadget:DrawWorld()

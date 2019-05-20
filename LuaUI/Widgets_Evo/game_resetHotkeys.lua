@@ -12,6 +12,12 @@ end
 
 function widget:Initialize()
 
+	-- bind k to cloak
+	Spring.SendCommands({
+		"unbindkeyset k",
+	})
+	Spring.SendCommands("bind k wantcloak")
+
 	-- bind sell command
 	Spring.SendCommands({
 		"unbindkeyset shift+s",

@@ -25,7 +25,6 @@ local unitWantCloakCommandDesc = {
 	type    = CMDTYPE.ICON_MODE,
 	name    = 'Cloak State',
 	action  = 'wantcloak',
-	queueing = false,
 	tooltip	= 'Unit cloaking state',
 	params 	= {0, 'Decloaked', 'Cloaked'}
 }
@@ -60,7 +59,7 @@ for i = 1, #WeaponDefs do
 	end
 end
 
-local DEFAULT_DECLOAK_TIME = 128
+local DEFAULT_DECLOAK_TIME = 100
 local UPDATE_FREQUENCY = 10
 local CLOAK_MOVE_THRESHOLD = math.sqrt(0.2)
 
@@ -72,6 +71,45 @@ for i = 1, #UnitDefs do
 	if ud.canCloak and not ud.customParams.dynamic_comm then
 		cloakUnitDefID[i] = true
 	end
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Water handling
+
+local waterUnitCount = 0
+local waterUnitMap = {}
+local waterUnits = {}
+local waterUnitCloakBlocked = {}
+
+local function AddWaterUnit(unitID)
+	if waterUnitMap[unitID] then
+		return
+	end
+	waterUnitCount = waterUnitCount + 1
+	waterUnitMap[unitID] = waterUnitCount
+	waterUnits[waterUnitCount] = unitID
+end
+
+local function RemoveWaterUnit(unitID)
+	if not waterUnitMap[unitID] then
+		return
+	end
+	waterUnits[waterUnitMap[unitID]] = waterUnits[waterUnitCount]
+	waterUnitMap[waterUnits[waterUnitCount]] = waterUnitMap[unitID]
+	waterUnits[waterUnitCount] = nil
+	waterUnitMap[unitID] = nil
+	waterUnitCount = waterUnitCount - 1
+	
+	waterUnitCloakBlocked[unitID] = nil
+end
+
+function gadget:UnitEnteredWater(unitID)
+	AddWaterUnit(unitID)
+end
+
+function gadget:UnitLeftWater(unitID)
+	RemoveWaterUnit(unitID)
 end
 
 --------------------------------------------------------------------------------
@@ -92,23 +130,35 @@ GG.PokeDecloakUnit = PokeDecloakUnit
 
 function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, 
                             weaponID, attackerID, attackerDefID, attackerTeam)
-	-- if damage > 0 and
-		-- not (attackerTeam and
-		-- weaponID and
-		-- noFFWeaponDefs[weaponID] and
-		-- attackerID ~= unitID and
-		-- spAreTeamsAllied(unitTeam, attackerTeam)) then
-		-- PokeDecloakUnit(unitID)
-	-- end
+	if damage > 0 and
+		not (attackerTeam and
+		weaponID and
+		noFFWeaponDefs[weaponID] and
+		attackerID ~= unitID and
+		spAreTeamsAllied(unitTeam, attackerTeam)) then
+		PokeDecloakUnit(unitID)
+	end
 end
 
+local function CheckWaterBlockCloak(unitID, pos)
+	local radius = Spring.GetUnitRadius(unitID)
+	if radius + pos < 0 then
+		if not waterUnitCloakBlocked[unitID] then
+			PokeDecloakUnit(unitID)
+			spSetUnitRulesParam(unitID, "cannotcloak", 1, alliedTrueTable)
+			waterUnitCloakBlocked[unitID] = true
+		end
+		return true
+	end
+	return false
+end
 
 function gadget:GameFrame(n)
 	currentFrame = n
 	if n%UPDATE_FREQUENCY == 2 then
 		for unitID, frames in pairs(recloakUnit) do
 			if frames <= UPDATE_FREQUENCY then
-				if not ((spGetUnitRulesParam(unitID,"on_fire") == 1) or (spGetUnitRulesParam(unitID,"disarmed") == 1)) then
+				if not ((spGetUnitRulesParam(unitID,"on_fire") == 1) or (spGetUnitRulesParam(unitID,"disarmed") == 1) or waterUnitCloakBlocked[unitID]) then
 					local wantCloakState = spGetUnitRulesParam(unitID, "wantcloak")
 					local areaCloaked = spGetUnitRulesParam(unitID, "areacloaked")
 					spSetUnitRulesParam(unitID, "cannotcloak", 0, alliedTrueTable)
@@ -123,12 +173,37 @@ function gadget:GameFrame(n)
 		end
 		
 		local i = 1
+		while i <= waterUnitCount do
+			local unitID = waterUnits[i]
+			if Spring.ValidUnitID(unitID) then
+				local pos = select(5, Spring.GetUnitPosition(unitID, true))
+				if pos < 0 then
+					if (not CheckWaterBlockCloak(unitID, pos)) and waterUnitCloakBlocked[unitID] then
+						spSetUnitRulesParam(unitID, "cannotcloak", 0, alliedTrueTable)
+						waterUnitCloakBlocked[unitID] = false
+					end
+				else
+					if waterUnitCloakBlocked[unitID] then
+						spSetUnitRulesParam(unitID, "cannotcloak", 0, alliedTrueTable)
+						waterUnitCloakBlocked[unitID] = false
+					end
+				end
+				i = i + 1
+			else
+				RemoveWaterUnit(unitID)
+			end
+		end
 	end
 end
 
 -- Only called with enemyID if an enemy is within decloak radius.
 function gadget:AllowUnitCloak(unitID, enemyID)
 	if enemyID then
+		local transID = Spring.GetUnitTransporter(unitID)
+		if transID then
+			-- For some reason enemyID indicates that the unit is being transported.
+			return Spring.GetUnitIsCloaked(transID)
+		end
 		return false
 	end
 	
@@ -213,7 +288,7 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 		if cloakUnitDefID[unitDefID] then
 			SetWantedCloaked(unitID,cmdParams[1])
 		end
-		return true
+		return false
 	elseif cmdID == CMD_CLOAK then
 		return false
 	end
@@ -231,7 +306,7 @@ function gadget:UnitCreated(unitID, unitDefID)
 			Spring.InsertUnitCmdDesc(unitID, unitWantCloakCommandDesc)
 			Spring.RemoveUnitCmdDesc(unitID, cloakDescID)
 			spSetUnitRulesParam(unitID, "wantcloak", 0, alliedTrueTable)
-			if ud.customParams.initcloaked or ud.startCloaked then
+			if ud.customParams.initcloaked then
 				SetWantedCloaked(unitID, 1)
 			end
 			return
@@ -248,6 +323,10 @@ function gadget:Initialize()
 	for _, unitID in ipairs(Spring.GetAllUnits()) do
 		local unitDefID = spGetUnitDefID(unitID)
 		gadget:UnitCreated(unitID, unitDefID)
+		local pos = select(2, Spring.GetUnitPosition(unitID))
+		if pos <= 0 then
+			gadget:UnitEnteredWater(unitID)
+		end
 	end
 end
 
