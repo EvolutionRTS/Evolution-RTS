@@ -16,6 +16,8 @@ if timeCyclesWeatherEffects ~= 1 then
 	return false
 end
 
+lightningcolor = 0
+
 function widget:Initialize()
     spx,spy,spz = gl.GetSun()
     r = 1
@@ -85,8 +87,8 @@ end
 
 function widget:UnitDestroyed(unitID)
     explosion = UnitDefs[Spring.GetUnitDefID(unitID)].deathExplosion
-    maxlightningcolor = 0--(WeaponDefs[WeaponDefNames[explosion].id].damages[1]^0.001 * WeaponDefs[WeaponDefNames[explosion].id].damageAreaOfEffect)/160
-    -- Spring.Echo(maxlightningcolor)
+    maxlightningcolor = (WeaponDefs[WeaponDefNames[explosion].id].damages[1]^0.001 * WeaponDefs[WeaponDefNames[explosion].id].damageAreaOfEffect)/160
+    Spring.Echo(maxlightningcolor)
     lightning = true
 end
 
