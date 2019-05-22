@@ -2,16 +2,33 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local materials = {
-	normalMappedS3o = {
+local function SunChanged(curShaderObj)
+	curShaderObj:SetUniformAlways("shadowDensity", gl.GetSun("shadowDensity" ,"unit"))
+
+	curShaderObj:SetUniformAlways("sunAmbient", gl.GetSun("ambient" ,"unit"))
+	curShaderObj:SetUniformAlways("sunDiffuse", gl.GetSun("diffuse" ,"unit"))
+	curShaderObj:SetUniformAlways("sunSpecular", gl.GetSun("specular" ,"unit"))
+	--gl.Uniform(gl.GetUniformLocation(curShader, "sunSpecularExp"), gl.GetSun("specularExponent" ,"unit"))
+end
+
+
+
+local default_lua = VFS.Include("ModelMaterials/Shaders/default.lua")
+
+local matTemplate = {
 		shaderDefinitions = {
-			"#define use_perspective_correct_shadows",
 			"#define use_normalmapping",
-			--"#define flip_normalmap",
-			--"#define flipAlpha",
-			--"#define tex1Alpha",
+			"#define deferred_mode 0",
+			"#define SPECULARMULT 8.0",
 		},
-		shader    = include("ModelMaterials/Shaders/default.lua"),
+		deferredDefinitions = {
+			"#define use_normalmapping",
+			"#define deferred_mode 1",
+			"#define SPECULARMULT 8.0",
+		},
+
+		shader    = default_lua,
+		deferred  = default_lua,
 		usecamera = false,
 		culling   = GL.BACK,
 		predl  = nil,
@@ -20,34 +37,23 @@ local materials = {
 			[0] = '%%UNITDEFID:0',
 			[1] = '%%UNITDEFID:1',
 			[2] = '$shadow',
-			[3] = '$specular',
 			[4] = '$reflection',
 			[5] = '%NORMALTEX',
 		},
-	},
-	normalMappedS3oFlipped = {
-		shaderDefinitions = {
-			"#define use_perspective_correct_shadows",
-			"#define use_normalmapping",
-			"#define flip_normalmap",
-			--"#define flipAlpha",
-			--"#define tex1Alpha",
-		},
-		shader    = include("ModelMaterials/Shaders/default.lua"),
-		usecamera = false,
-		culling   = GL.BACK,
-		predl  = nil,
-		postdl = nil,
-		texunits  = {
-			[0] = '%%UNITDEFID:0',
-			[1] = '%%UNITDEFID:1',
-			[2] = '$shadow',
-			[3] = '$specular',
-			[4] = '$reflection',
-			[5] = '%NORMALTEX',
-		},
-	},
+		-- uniforms = {
+		-- }
+		--DrawUnit = DrawUnit,
+		SunChanged = SunChanged,
 }
+
+
+local materials = {
+	normalMappedS3o = Spring.Utilities.CopyTable(matTemplate, true),
+	normalMappedS3oFlipped = Spring.Utilities.CopyTable(matTemplate, true),
+}
+
+table.insert(materials.normalMappedS3oFlipped.shaderDefinitions, "#define flip_normalmap")
+table.insert(materials.normalMappedS3oFlipped.deferredDefinitions, "#define flip_normalmap")
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -124,6 +130,8 @@ local function FindNormalmapFromModel(modelpath, fileext)
 	--// all others & fallback use just modelfilename itself to find the normalmap
 	return normaltex or FindTextureFile(modelpath)
 end
+
+
 
 
 

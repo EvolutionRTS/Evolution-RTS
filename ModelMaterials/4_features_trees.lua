@@ -1,24 +1,30 @@
 -- $Id$
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-local windLocIDs = {[0] = -2, [1] = -2}
 
-local function DrawFeature(featureID, material, drawMode) -- UNUSED!
-  local etcLocIdx = (drawMode == 5) and 1 or 0
-  local curShader = (drawMode == 5) and material.deferredShader or material.standardShader
-
-  if windLocIDs[etcLocIdx] == -2 then
-    windLocIDs[etcLocIdx] = gl.GetUniformLocation(curShader, "wind")
-  end
+local function DrawFeature(featureID, featureDefID, material, drawMode, luaShaderObj) -- UNUSED!
   local wx, wy, wz = Spring.GetWind()
-  gl.Uniform(windLocIDs[etcLocIdx], wx, wy, wz)
+  luaShaderObj:SetUniformAlways("wind", wx, wy, wz)
+
   return false
 end
 
+local function SunChanged(curShaderObj)
+	curShaderObj:SetUniformAlways("shadowDensity", gl.GetSun("shadowDensity" ,"unit"))
+
+	curShaderObj:SetUniformAlways("sunAmbient", gl.GetSun("ambient" ,"unit"))
+	curShaderObj:SetUniformAlways("sunDiffuse", gl.GetSun("diffuse" ,"unit"))
+	curShaderObj:SetUniformAlways("sunSpecular", gl.GetSun("specular" ,"unit"))
+	--gl.Uniform(gl.GetUniformLocation(curShader, "sunSpecularExp"), gl.GetSun("specularExponent" ,"unit"))
+end
+
+
+local default_lua = VFS.Include("ModelMaterials/Shaders/default.lua")
+
 local materials = {
 	feature_tree = {
-		shader    = include("ModelMaterials/Shaders/default.lua"),
-		deferred  = include("ModelMaterials/Shaders/default.lua"),
+		shader    = default_lua,
+		deferred  = default_lua,
 		shaderDefinitions = {
 			"#define use_normalmapping",
 			"#define deferred_mode 0",
@@ -88,11 +94,11 @@ local materials = {
 			[0] = '%%FEATUREDEFID:0',
 			[1] = '%%FEATUREDEFID:1',
 			[2] = '$shadow',
-			[3] = '$specular',
 			[4] = '$reflection',
 			[5] = '%NORMALTEX',
 		},
 		--DrawFeature = DrawFeature,
+		SunChanged = SunChanged,
 	},
 }
 
