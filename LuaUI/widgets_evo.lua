@@ -157,6 +157,7 @@ local flexCallIns = {
   'DrawWorldRefraction',
   'DrawScreenEffects',
   'DrawInMiniMap',
+  'SunChanged',
   'RecvSkirmishAIMessage',
 }
 local flexCallInMap = {}
@@ -1312,6 +1313,13 @@ end
 function widgetHandler:DrawInMiniMap(xSize, ySize)
   for _,w in ripairs(self.DrawInMiniMapList) do
     w:DrawInMiniMap(xSize, ySize)
+  end
+  return
+end
+
+function widgetHandler:SunChanged()
+  for _,w in ripairs(self.SunChangedList) do
+    w:SunChanged()
   end
   return
 end

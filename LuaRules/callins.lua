@@ -136,6 +136,8 @@ CALLIN_LIST = {
 	"DrawScreen",
 	"DrawInMiniMap",
 
+	"SunChanged",
+
 	"DrawUnit",
 	"DrawFeature",
 	"DrawShield",
