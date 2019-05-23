@@ -19,12 +19,12 @@ local matTemplate = {
 		shaderDefinitions = {
 			"#define use_normalmapping",
 			"#define deferred_mode 0",
-			"#define SPECULARMULT 8.0",
+			"#define SPECULARMULT 4.0",
 		},
 		deferredDefinitions = {
 			"#define use_normalmapping",
 			"#define deferred_mode 1",
-			"#define SPECULARMULT 8.0",
+			"#define SPECULARMULT 4.0",
 		},
 
 		shader    = default_lua,

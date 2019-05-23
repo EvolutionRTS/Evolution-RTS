@@ -306,7 +306,7 @@ fragment = [[
 		float HdotN = max(dot(H, N), 0.0);
 		specularColor = sunSpecular * pow(HdotN, sunSpecularExp);
 
-		specularColor *= extraColor.g * SPECULARMULT;
+		specularColor *= extraColor.b * SPECULARMULT; //EvoRTS specific change, tex2.b is used as specular multiplier; tex2.g is used as a reflectivity
 
 		vec3 reflection = texture(reflectTex,  Rv).rgb;
 
