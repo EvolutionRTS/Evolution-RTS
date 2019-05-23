@@ -88,8 +88,8 @@ end
 function widget:UnitDestroyed(unitID)
     explosion = UnitDefs[Spring.GetUnitDefID(unitID)].deathExplosion
     maxlightningcolor = (WeaponDefs[WeaponDefNames[explosion].id].damages[1]^0.001 * WeaponDefs[WeaponDefNames[explosion].id].damageAreaOfEffect)/160
-    Spring.Echo(maxlightningcolor)
-    lightning = true
+    --Spring.Echo(maxlightningcolor)
+    lightning = false
 end
 
 function GameStart()
