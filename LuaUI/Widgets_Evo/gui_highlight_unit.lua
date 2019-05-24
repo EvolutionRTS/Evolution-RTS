@@ -233,7 +233,7 @@ local function SetUnitColor(unitID, alpha)
   if (teamID == nil) then
     glColor(1.0, 0.0, 0.0, alpha) -- red
   elseif (teamID == spGetMyTeamID()) then
-    glColor(0.0, 1.0, 1.0, alpha) -- cyan
+    glColor(0.5, 0.5, 0.5, alpha) -- cyan
   elseif (spGetUnitAllyTeam(unitID) == spGetMyAllyTeamID()) then
     glColor(0.0, 1.0, 0.0, alpha) -- green
   else
@@ -250,7 +250,7 @@ local function SetFeatureColor(featureID, alpha)
   if ((allyTeamID == nil) or (allyTeamID < 0)) then
     glColor(1.0, 1.0, 1.0, alpha) -- white
   elseif (allyTeamID == spGetMyAllyTeamID()) then
-    glColor(0.0, 1.0, 1.0, alpha) -- cyan
+    glColor(0.5, 0.5, 0.5, alpha) -- cyan
   else
     glColor(1.0, 0.0, 0.0, alpha) -- red
   end

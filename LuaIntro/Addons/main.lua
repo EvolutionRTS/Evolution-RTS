@@ -84,9 +84,7 @@ local unit_descs = {
 
 local quotes = {
 	{"Zopto is to lol as carbon is to life", "Dr.Hamster"},
-	{"Sup1258 is the best player, always listen to his advice", "Sup1258"},
 	{"Build 1 more Mex than the other guy.", "KoyoteKamper"},
-	{"Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Silos Needed! Oh, wrong game", "[teh]Flow"},
 	{"...As Chobby will come after Half Life 3...", "Damgam"},
 	{"Damgam: Can you remind me why we disabled Communism?\n Forboding Angel: Because people don't like to share? lol xD\n Damgam: Tfw my question and your answer works for both ingame communism and real communism", "Damgam & Forboding Angel"},
 	
