@@ -27,6 +27,7 @@ local matTemplate = {
 			"#define deferred_mode 1",
 			"#define SPECULARMULT 6.0",
 			"#define SPECULARSUNEXP 12.0",
+			"#define MAT_IDX 1",
 		},
 
 		shader    = default_lua,

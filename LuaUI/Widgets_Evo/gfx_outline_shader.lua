@@ -1,7 +1,7 @@
-local wiName = "Outline"
+local wiName = "Outline (deferred)"
 function widget:GetInfo()
 	return {
-		name      = "Outline Shader",
+		name      = wiName,
 		desc      = "Displays small outline around units based on deferred g-buffer",
 		author    = "ivand",
 		date      = "2019",
@@ -31,7 +31,7 @@ local BLUR_PASSES = 1 -- number of blur passes
 local BLUR_SIGMA = 1 -- Gaussian sigma of a single blur pass, other factors like BLUR_HALF_KERNEL_SIZE, BLUR_PASSES and DOWNSAMPLE affect the end result gaussian shape too
 
 local OUTLINE_COLOR = {0.0, 0.0, 0.0, 1.0}
-local OUTLINE_STRENGTH = 1 -- make it much smaller for softer edges
+local OUTLINE_STRENGTH = 2.5 -- make it much smaller for softer edges
 
 local USE_MATERIAL_INDICES = true -- for future material indices based SSAO evaluation
 
