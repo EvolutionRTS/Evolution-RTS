@@ -165,6 +165,7 @@ local weaponDefs                  = {
 			death_sounds 		  = "nuke",
 			oldcosttofireforumula = true,
 			effectedByunitHealthModifier = true,
+			friendlyfireexception = true,
 		},      
 		damage                    = {
 			default               = weapon1Damage,

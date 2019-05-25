@@ -256,6 +256,15 @@ function WeaponDef_Post(name, wDef)
 		wDef.damage.default = 6.25
 		wDef.energypershot = math.floor(wDef.damage.default * 0.05 * wDef.projectiles * ((wDef.areaofeffect * 0.001) + 1) * wDef.range^0.25 * 0.5 * 10 + 0.5) * 0.1
 	end	
+	
+	
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	-- Disable Friendly Fire Completely
+	if wDef.customparams and not wDef.customparams.friendlyfireexception then
+		wDef.customparams.nofriendlyfire = 1
+	end
+	
 end
 
 
