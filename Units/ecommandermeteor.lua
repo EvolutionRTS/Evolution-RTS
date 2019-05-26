@@ -97,7 +97,7 @@ local unitDef                    = {
 			"custom:gdhcannon",
 		},
 	},
-	buildoptions                 = Shared.buildList,
+	--buildoptions                 = Shared.buildList,
 	sounds                       = {
 		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",
@@ -168,9 +168,10 @@ local weaponDefs                 = {
 		weaponVelocity           = 1000,
 		customparams             = {		
 			damagetype		     = "ecommandermeteor",  
+			friendlyfireexception = true,
 		},      
 		damage                   = {
-			default              = 200,
+			default              = 100,
 		},
 	},
 	commnuke                   = {
