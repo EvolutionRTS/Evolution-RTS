@@ -114,7 +114,7 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer,
 	if weaponID and noFFWeaponDefs[weaponID] then
 		attackerTeam = attackerTeam or haxProjectiles[projectileID]
 		if not attackerTeam then
-			Spring.Echo(" OUTLAWFHTAGN ") -- some unique string I can search infologs for to track the bug's existence (too trivial for LUA_ERRRUN)
+			--Spring.Echo(" OUTLAWFHTAGN ") -- some unique string I can search infologs for to track the bug's existence (too trivial for LUA_ERRRUN)
 			attackerTeam = unitTeam
 		end
 		if attackerID ~= unitID and spAreTeamsAllied(unitTeam, attackerTeam) then
