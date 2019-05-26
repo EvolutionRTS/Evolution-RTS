@@ -28,10 +28,10 @@ local GL_COLOR_ATTACHMENT0_EXT = 0x8CE0
 
 local BLUR_HALF_KERNEL_SIZE = 5 -- (BLUR_HALF_KERNEL_SIZE + BLUR_HALF_KERNEL_SIZE + 1) samples are used to perform the blur.
 local BLUR_PASSES = 1 -- number of blur passes
-local BLUR_SIGMA = 1 -- Gaussian sigma of a single blur pass, other factors like BLUR_HALF_KERNEL_SIZE, BLUR_PASSES and DOWNSAMPLE affect the end result gaussian shape too
+local BLUR_SIGMA = 3 -- Gaussian sigma of a single blur pass, other factors like BLUR_HALF_KERNEL_SIZE, BLUR_PASSES and DOWNSAMPLE affect the end result gaussian shape too
 
 local OUTLINE_COLOR = {0.0, 0.0, 0.0, 1.0}
-local OUTLINE_STRENGTH = 2.5 -- make it much smaller for softer edges
+local OUTLINE_STRENGTH = 20.0 -- make it much smaller for softer edges
 
 local USE_MATERIAL_INDICES = true -- for future material indices based SSAO evaluation
 
@@ -131,7 +131,7 @@ function widget:Initialize()
 		target = GL_TEXTURE_2D,
 		border = false,
 		min_filter = GL.NEAREST,
-		mag_filter = GL.NEAREST,
+		mag_filter = GL.LINEAR,
 
 		wrap_s = GL.CLAMP_TO_EDGE,
 		wrap_t = GL.CLAMP_TO_EDGE,
@@ -139,7 +139,6 @@ function widget:Initialize()
 
 	shapeTex = gl.CreateTexture(vsx, vsy, commonTexOpts)
 
-	commonTexOpts.mag_filter = GL.LINEAR
 	for i = 1, 2 do
 		blurTexes[i] = gl.CreateTexture(vsx, vsy, commonTexOpts)
 	end
@@ -225,24 +224,6 @@ function widget:Initialize()
 		},
 	}, wiName..": Outline Application")
 	applicationShader:Initialize()
-
-	WG['outline'] = {}
-	WG['outline'].getSize = function()
-		return BLUR_SIGMA
-	end
-	WG['outline'].setSize = function(value)
-		BLUR_SIGMA = value
-		widget:Shutdown()
-		widget:Initialize()
-	end
-	WG['outline'].getStrength = function()
-		return OUTLINE_STRENGTH
-	end
-	WG['outline'].setStrength = function(value)
-		OUTLINE_STRENGTH = value
-		widget:Shutdown()
-		widget:Initialize()
-	end
 end
 
 function widget:Shutdown()
@@ -385,17 +366,4 @@ function widget:DrawWorld()
 
 	gl.MatrixMode(GL.MODELVIEW)
 	gl.PopMatrix()
-end
-
-
-function widget:GetConfigData()
-	savedTable = {}
-	savedTable.BLUR_SIGMA = BLUR_SIGMA
-	savedTable.OUTLINE_STRENGTH = OUTLINE_STRENGTH
-	return savedTable
-end
-
-function widget:SetConfigData(data)
-	if data.BLUR_SIGMA then BLUR_SIGMA = data.BLUR_SIGMA or BLUR_SIGMA end
-	if data.OUTLINE_STRENGTH then OUTLINE_STRENGTH = data.OUTLINE_STRENGTH or OUTLINE_STRENGTH end
 end
