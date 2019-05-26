@@ -21,10 +21,10 @@ local GL_COLOR_ATTACHMENT0_EXT = 0x8CE0
 -- Configuration Constants
 -----------------------------------------------------------------
 
---local MIN_FPS = 20
---local MIN_FPS_DELTA = 10
---local AVG_FPS_ELASTICITY = 0.2
---local AVG_FPS_ELASTICITY_INV = 1.0 - AVG_FPS_ELASTICITY
+local MIN_FPS = 20
+local MIN_FPS_DELTA = 10
+local AVG_FPS_ELASTICITY = 0.2
+local AVG_FPS_ELASTICITY_INV = 1.0 - AVG_FPS_ELASTICITY
 
 local BLUR_HALF_KERNEL_SIZE = 5 -- (BLUR_HALF_KERNEL_SIZE + BLUR_HALF_KERNEL_SIZE + 1) samples are used to perform the blur.
 local BLUR_PASSES = 1 -- number of blur passes
@@ -66,6 +66,7 @@ local shapeShader
 local gaussianBlurShader
 local applicationShader
 
+local show = true
 
 -----------------------------------------------------------------
 -- Local Functions
@@ -253,8 +254,7 @@ function widget:Shutdown()
 	applicationShader:Finalize()
 end
 
-local show = true
-local function DoDrawOutline(isScreenSpace)
+local function PrepareOutline()
 	if not show then
 		return
 	end
@@ -264,12 +264,7 @@ local function DoDrawOutline(isScreenSpace)
 
 	if firstTime then
 		screenQuadList = gl.CreateList(gl.TexRect, -1, -1, 1, 1)
-		if isScreenSpace then
-			--screenWideList = gl.CreateList(gl.TexRect, 0, vsy, vsx, 0)
-			screenWideList = gl.CreateList(gl.TexRect, 0, vsy, vsx, 0)
-		else
-			screenWideList = gl.CreateList(gl.TexRect, -1, -1, 1, 1, false, true)
-		end
+		screenWideList = gl.CreateList(gl.TexRect, -1, -1, 1, 1, false, true)
 		firstTime = false
 	end
 
@@ -311,46 +306,45 @@ local function DoDrawOutline(isScreenSpace)
 		end)
 	end
 
-	gl.Blending(true)
-	gl.BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA) --alpha NO pre-multiply
-
-	--gl.Texture(1, "$model_gbuffer_zvaltex") -- already bound
-
-	applicationShader:ActivateWith( function ()
-		gl.CallList(screenWideList)
-	end)
-
 	gl.Texture(0, false)
 	gl.Texture(1, false)
 end
 
+local function DrawOutline(strength)
+	gl.Blending(true)
+	gl.BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA) --alpha NO pre-multiply
 
---local accuTime = 0
---local lastTime = 0
---local averageFPS = MIN_FPS + MIN_FPS_DELTA
---
---function widget:Update(dt)
---	accuTime = accuTime + dt
---	if accuTime >= lastTime + 1 then
---		lastTime = accuTime
---		averageFPS = AVG_FPS_ELASTICITY_INV * averageFPS + AVG_FPS_ELASTICITY * Spring.GetFPS()
---		if averageFPS < MIN_FPS then
---			show = false
---		elseif averageFPS > MIN_FPS + MIN_FPS_DELTA then
---			show = true
---		end
---	end
---end
+	gl.Texture(0, blurTexes[2])
+	gl.Texture(1, "$model_gbuffer_zvaltex")
 
-function widget:DrawUnitsPostDeferred() --to be done
-	--Spring.Echo("DrawUnitsPostDeferred")
+	applicationShader:ActivateWith( function ()
+		applicationShader:SetUniformFloat("strength", strength or 1.0)
+		gl.CallList(screenWideList)
+	end)
+
+		gl.Texture(0, false)
+	gl.Texture(1, false)
 end
 
-function widget:DrawScreenEffects()
-	--DoDrawOutline(true)
+
+local accuTime = 0
+local lastTime = 0
+local averageFPS = MIN_FPS + MIN_FPS_DELTA
+
+function widget:Update(dt)
+	accuTime = accuTime + dt
+	if accuTime >= lastTime + 1 then
+		lastTime = accuTime
+		averageFPS = AVG_FPS_ELASTICITY_INV * averageFPS + AVG_FPS_ELASTICITY * Spring.GetFPS()
+		if averageFPS < MIN_FPS then
+			show = false
+		elseif averageFPS > MIN_FPS + MIN_FPS_DELTA then
+			show = true
+		end
+	end
 end
 
-function widget:DrawWorld()
+local function EnterLeaveScreenSpace(functionName, ...)
 	gl.MatrixMode(GL.MODELVIEW)
 	gl.PushMatrix()
 	gl.LoadIdentity()
@@ -359,11 +353,26 @@ function widget:DrawWorld()
 		gl.PushMatrix()
 		gl.LoadIdentity();
 
-			DoDrawOutline(false)
+			functionName(...)
 
 		gl.MatrixMode(GL.PROJECTION)
 		gl.PopMatrix()
 
 	gl.MatrixMode(GL.MODELVIEW)
 	gl.PopMatrix()
+end
+
+function widget:DrawUnitsPostDeferred() --to be done
+	--Spring.Echo("DrawUnitsPostDeferred")
+end
+
+function widget:DrawWorldPreUnit()
+	EnterLeaveScreenSpace( function()
+		PrepareOutline()
+		DrawOutline(1.0)
+	end)
+end
+
+function widget:DrawWorld()
+	EnterLeaveScreenSpace(DrawOutline, 0.25)
 end
