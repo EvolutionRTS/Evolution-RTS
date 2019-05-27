@@ -150,6 +150,7 @@ return {
 		},
 		customparams = {
 			unittype = "mobile",
+			normaltex = "unittextures/greenchicken_normals.dds", 
 		},
 	},
 }

@@ -81,7 +81,7 @@ return {
 				weaponvelocity = 2000,
 				wobble = 0,
 				damage = {
-					default = 6000,
+					default = 0,
 				},
 			},
 		},

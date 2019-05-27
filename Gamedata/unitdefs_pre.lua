@@ -56,7 +56,9 @@ Shared.buildListeCommanderFactory = {
 }
 
 Shared.buildListChicken = {
-	[[croost]]
+	[[croost]],
+	[[chicken1]],
+	[[chicken2]],
 }
 	
 local turrets = {

@@ -159,7 +159,7 @@ function UnitDef_Post(name, uDef)
 	end
 
 	--Override groundplate used
-	if uDef.usegrounddecal == true then
+	if uDef.usegrounddecal == true and uDef.customparams and uDef.customparams.customgrounddecal ~= true then
 		uDef.buildinggrounddecaltype = "groundplate.dds"
 	end
 	
