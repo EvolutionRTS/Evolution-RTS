@@ -1,7 +1,7 @@
--- UNITDEF -- CROOST --
+-- UNITDEF -- ZROOST --
 --------------------------------------------------------------------------------
 
-unitName = [[croost]]
+unitName = [[zroost]]
 
 --------------------------------------------------------------------------------
 
@@ -12,15 +12,15 @@ energyUse = 0
 
 primaryCEG = "custom:fusionreactionnuclear-1color"
 
-humanName = [[Chicken Roost]]
+humanName = [[Zaal Roost]]
 
-objectName = [[ChickenDefenseModels/roost.s3o]]
-script = [[chickens/croost_lus.lua]]
+objectName = [[zaal/zroost.s3o]]
+script = [[zaal/zroost_lus.lua]]
 
-tech = [[tech0]]
+techprovided = [[1 roost]]
 armortype = [[building]]
 
-VFS.Include("units-configs-basedefs/basedefs/chickens/croost_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/zaal/zroost_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

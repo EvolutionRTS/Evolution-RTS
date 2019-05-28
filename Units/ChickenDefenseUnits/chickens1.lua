@@ -103,6 +103,7 @@ return {
 			},
 			weapon = {
 				interceptedByShieldType   = 4,
+				interceptedByShieldType   = 4,
 				areaofeffect = 16,
 				avoidfeature = 0,
 				avoidfriendly = 0,
@@ -150,7 +151,7 @@ return {
 		},
 		customparams = {
 			unittype = "mobile",
-			normaltex = "unittextures/greenchicken_normals.dds", 
+			normaltex = "unittextures/z_normals.dds", 
 		},
 	},
 }

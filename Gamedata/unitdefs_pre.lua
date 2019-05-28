@@ -55,10 +55,9 @@ Shared.buildListeCommanderFactory = {
 	[[ebomber]],
 }
 
-Shared.buildListChicken = {
-	[[croost]],
-	[[chicken1]],
-	[[chicken2]],
+Shared.buildListZaal = {
+	[[zroost]],
+	[[zskirmisher]],
 }
 	
 local turrets = {
