@@ -56,7 +56,7 @@ Shared.buildListeCommanderFactory = {
 }
 
 Shared.buildListZaal = {
-	[[zroost]],
+	[[zhive]],
 	[[zskirmisher]],
 }
 	
