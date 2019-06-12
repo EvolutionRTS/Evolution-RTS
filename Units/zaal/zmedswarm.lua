@@ -12,7 +12,7 @@ humanName = "Trike"
 objectName = "zaal/zmedswarm.s3o"
 script = "zaal/zmedswarm.cob"
 
-tech = [[6 hive]]
+tech = [[3 hive]]
 armortype = [[armored]]
 supply = [[4]]
 

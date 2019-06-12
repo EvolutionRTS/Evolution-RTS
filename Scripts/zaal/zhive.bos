@@ -1,0 +1,136 @@
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+piece base, nanopoint1, nanopoint2, mouth;
+
+static-var  Maya, building, spray;
+
+// Signal definitions (they must be distincts power of 2)
+#define SIG_ACTIVATE 2
+#define SIG_BUILDING 4
+
+SmokeUnit()
+{
+   var healthpercent, sleeptime, smoketype;
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = SFXTYPE_BLACKSMOKE;
+         if( Rand( 1, 66 ) < healthpercent )
+            smoketype = SFXTYPE_WHITESMOKE;
+         emit-sfx 1025 from mouth;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+         sleeptime = 200;
+      sleep sleeptime;
+   }
+}
+
+
+buildingfx()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx 1024 from mouth;
+      }        
+   sleep 300;
+   }
+}
+
+Create()
+{
+	spray = 0;
+   while( get BUILD_PERCENT_LEFT )
+      sleep 400;
+   start-script SmokeUnit();
+   start-script Buildingfx(); 
+}
+
+
+QueryNanoPiece(piecenum)
+{
+	piecenum = nanopoint2;
+}
+
+Activate()
+{
+   // Kill any other Activate or Deactivate:
+   signal SIG_ACTIVATE;
+   // Flag self so it can be killed:
+   set-signal-mask SIG_ACTIVATE;
+   // Local variables
+   // Open animation:
+   // Try to open the yard
+   set YARD_OPEN to TRUE;
+   // If yard not open, tell units around to bugger off until yard is open
+   while( !get YARD_OPEN )
+   {
+      set BUGGER_OFF to TRUE;
+      sleep 1500;
+      set YARD_OPEN to TRUE;
+   }
+   set BUGGER_OFF to FALSE;
+   // Now yard is open.
+   // Allow the nano to flow:
+   set INBUILDSTANCE to TRUE;
+   // Send wheel spinning:
+   // The idle but activated animation
+}
+
+Deactivate()
+{
+   // Kill any other Activate or Deactivate:
+   signal SIG_ACTIVATE;
+   // Flag self so it can be killed:
+   set-signal-mask SIG_ACTIVATE;
+   // Switch off the nano faucet:
+   set INBUILDSTANCE to FALSE;
+   // Stop wheel spinning
+   // Try to close the yard
+   set YARD_OPEN to FALSE;
+   // If yard not closed, tell units around to bugger off until yard is closed
+   while( get YARD_OPEN )
+   {
+      set BUGGER_OFF to TRUE;
+      sleep 1500;
+      set YARD_OPEN to FALSE;
+   }
+   set BUGGER_OFF to FALSE;
+   // Now yard is closed.
+   // Close animation:
+}
+
+StartBuilding()
+{
+   signal SIG_BUILDING; // Kill any other StartBuilding
+   set-signal-mask SIG_BUILDING; // Be killable
+   building = 1;
+   while(TRUE)
+   {
+      emit-sfx 1024 from nanopoint2;
+      sleep 600;
+   }
+}
+
+StopBuilding()
+{
+   signal SIG_BUILDING; // Kill StartBuilding
+   building = 0;
+}
+
+QueryBuildInfo(piecenum)
+{
+   piecenum = nanopoint1;
+}
+
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1;
+} 

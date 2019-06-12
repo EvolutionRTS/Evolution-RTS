@@ -56,8 +56,14 @@ Shared.buildListeCommanderFactory = {
 }
 
 Shared.buildListZaal = {
-	[[zhive]],
+	[[zlightswarm]],
+	[[zmedswarm]],
 	[[zskirmisher]],
+	[[zpyro]],
+	[[zassault]],
+	[[zarty]],
+	[[zkamikaze]],
+	[[zqueen]],
 }
 	
 local turrets = {

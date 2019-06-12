@@ -10,12 +10,14 @@ metalMultiplier = 1
 buildCostMetal = 50
 energyUse = 0
 
+supplygranted = 40
+
 primaryCEG = "custom:fusionreactionnuclear-1color"
 
 humanName = [[Zaal Hive]]
 
 objectName = [[zaal/zhive.s3o]]
-script = [[zaal/zhive_lus.lua]]
+script = [[zaal/zhive.cob]]
 
 techprovided = [[1 hive]]
 armortype = [[building]]
