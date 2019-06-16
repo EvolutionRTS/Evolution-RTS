@@ -801,14 +801,14 @@ function widget:Update(dt)
 			end
 			windowList = gl.CreateList(DrawWindow)
 		end
-		options[getOptionByID('sndvolmaster')].value = tonumber(Spring.GetConfigInt("snd_volmaster",40) or 40)	-- update value because other widgets can adjust this too
-		if getOptionByID('sndvolmusic') then
-			if WG['music'] and WG['music'].GetMusicVolume then
-				options[getOptionByID('sndvolmusic')].value = WG['music'].GetMusicVolume()
-			else
-				options[getOptionByID('sndvolmusic')].value = tonumber(Spring.GetConfigInt("snd_volmusic",20) or 20)
-			end
-		end
+		--options[getOptionByID('sndvolmaster')].value = tonumber(Spring.GetConfigInt("snd_volmaster",40) or 40)	-- update value because other widgets can adjust this too
+		--if getOptionByID('sndvolmusic') then
+		--	if WG['music'] and WG['music'].GetMusicVolume then
+		--		options[getOptionByID('sndvolmusic')].value = WG['music'].GetMusicVolume()
+		--	else
+		--		options[getOptionByID('sndvolmusic')].value = tonumber(Spring.GetConfigInt("snd_volmusic",20) or 20)
+		--	end
+		--end
 	end
 end
 
