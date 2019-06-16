@@ -262,7 +262,7 @@ local function createList()
 		WG['guishader'].InsertRect(left, bottom, right, top,'music')
 	end
 	drawlist[1] = glCreateList( function()
-		glColor(0, 0, 0, 0.66)
+		glColor(0, 0, 0, ui_opacity)
 		RectRound(left, bottom, right, top, 5.5*widgetScale)
 
 		borderPadding = 3*widgetScale
@@ -322,7 +322,7 @@ local function createList()
 		end
 		for i=charactersInPath, #trackname do
 	    local c = string.sub(trackname, i,i)
-			local width = glGetTextWidth(text..c)*textsize
+			local width = font:GetTextWidth(text..c)*textsize
 	    if width > maxTextWidth then
 	    	break
 	    else
