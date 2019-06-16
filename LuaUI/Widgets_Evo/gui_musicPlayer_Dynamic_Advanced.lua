@@ -27,6 +27,15 @@ end
 
 local pauseWhenPaused = false
 
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "Poppins-Regular.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 36
+local fontfileOutlineSize = 8.5
+local fontfileOutlineStrength = 1.33
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -311,7 +320,9 @@ local function createList()
 	    	text = text..c
 	    end
 		end
-		glText('\255\255\255\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
+		font:Begin()
+		font:Print('\255\255\255\135'..text, buttons['next'][3]+textXPadding, bottom+textYPadding, textsize, 'no')
+		font:End()
 		
 	end)
 	drawlist[4] = glCreateList( function()
@@ -470,6 +481,7 @@ function widget:Shutdown()
 		glDeleteList(drawlist[i])
 	end
 	WG['music'] = nil
+	gl.DeleteFont(font)
 end
 
 function widget:UnitDamaged()
@@ -728,6 +740,12 @@ end
 
 function widget:ViewResize(newX,newY)
 	vsx, vsy = newX, newY
+	local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+	if (fontfileScale ~= newFontfileScale) then
+		fontfileScale = newFontfileScale
+		gl.DeleteFont(font)
+		font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	end
 end
 
 function widget:DrawScreen()
