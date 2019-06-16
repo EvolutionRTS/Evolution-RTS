@@ -36,6 +36,10 @@ local fontfileOutlineSize = 8.5
 local fontfileOutlineStrength = 1.33
 local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66)
+
+local guishaderEnabled = (WG['guishader'])
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -683,11 +687,20 @@ function PlayNewTrack()
 	createList()
 end
 
+local uiOpacitySec = 0
 function widget:Update(dt)
 	if gameOver then
 		return
 	end
-	
+	uiOpacitySec = uiOpacitySec + dt
+	if uiOpacitySec>0.5 then
+		uiOpacitySec = 0
+		if ui_opacity ~= Spring.GetConfigFloat("ui_opacity",0.66) or guishaderEnabled ~= (WG['guishader']) then
+			ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+			guishaderEnabled = (WG['guishader'])
+			createList()
+		end
+	end
 	local playedTime, totalTime = Spring.GetSoundStreamTime()
 		playedTime = math.floor(playedTime)
 		totalTime = math.floor(totalTime)
