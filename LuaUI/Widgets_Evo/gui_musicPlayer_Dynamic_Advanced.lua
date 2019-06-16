@@ -28,7 +28,7 @@ end
 local pauseWhenPaused = false
 
 
-local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "Poppins-Regular.otf")
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.ttf")
 local vsx,vsy = Spring.GetViewGeometry()
 local fontfileScale = (0.5 + (vsx*vsy / 5700000))
 local fontfileSize = 36
@@ -108,6 +108,7 @@ local drawlist = {}
 local advplayerlistPos = {}
 local widgetHeight = 23
 local top, left, bottom, right = 0,0,0,0
+local borderPadding = 5
 
 local shown = false
 local mouseover = false
@@ -259,11 +260,18 @@ local function createList()
 	drawlist[1] = glCreateList( function()
 		glColor(0, 0, 0, 0.66)
 		RectRound(left, bottom, right, top, 5.5*widgetScale)
-		
-		local borderPadding = 2.75*widgetScale
-		glColor(1,1,1,0.022)
-		RectRound(left+borderPadding, bottom+borderPadding, right-borderPadding, top-borderPadding, 4.4*widgetScale)
-		
+
+		borderPadding = 3*widgetScale
+		borderPaddingRight = borderPadding
+		if right >= vsx-0.2 then
+			borderPaddingRight = 0
+		end
+		borderPaddingLeft = borderPadding
+		if left <= 0.2 then
+			borderPaddingLeft = 0
+		end
+		glColor(1,1,1,ui_opacity*0.055)
+		RectRound(left+borderPaddingLeft, bottom+borderPadding, right-borderPaddingRight, top-borderPadding, borderPadding*1.66)
 	end)
 	drawlist[2] = glCreateList( function()
 	
