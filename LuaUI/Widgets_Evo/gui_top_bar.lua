@@ -383,25 +383,25 @@ local function updateButtons()
             if (WG['teamstats'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('   Stats  ') * fontsize
+                width = font2:GetTextWidth('   Stats  ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['stats'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4] }
             end
             if (WG['commands'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('  Cmd  ') * fontsize
+                width = font2:GetTextWidth('  Cmd  ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['commands'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
 			end
             if (WG['keybinds'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('  Keys  ') * fontsize
+                width = font2:GetTextWidth('  Keys  ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['keybinds'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
             if (WG['changelog'] ~= nil) then
                 button = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('  Changes  ') * fontsize
+                width = font2:GetTextWidth('  Changes  ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['changelog'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
             if (WG['options'] ~= nil) then

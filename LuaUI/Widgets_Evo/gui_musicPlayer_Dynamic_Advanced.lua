@@ -79,8 +79,7 @@ local firstFade = true
 local gameOver = false
 local playing = true
 
-local vsx, vsy   = widgetHandler:GetViewSizes()
-
+local playedTime, totalTime = Spring.GetSoundStreamTime()
 local playTex				= ":n:"..LUAUI_DIRNAME.."Images/music/play.png"
 local pauseTex				= ":n:"..LUAUI_DIRNAME.."Images/music/pause.png"
 local nextTex				= ":n:"..LUAUI_DIRNAME.."Images/music/next.png"
@@ -91,8 +90,6 @@ local buttonHighlightTex				= ":n:"..LUAUI_DIRNAME.."Images/button-highlight.dds
 local bgcorner				= ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
 
 local widgetScale = 1
-local glText         = gl.Text
-local glGetTextWidth = gl.GetTextWidth
 local glBlending     = gl.Blending
 local glScale        = gl.Scale
 local glRotate       = gl.Rotate
@@ -761,6 +758,17 @@ function widget:DrawScreen()
 				glCallList(drawlist[4])
 			end
 			if mouseover then
+
+			  -- display play progress
+			  local progressPx = ((right-left)*(playedTime/totalTime))
+			  if progressPx > 1 then
+			    if progressPx < borderPadding*5 then
+			    	progressPx = borderPadding*5
+			    end
+			    glColor(1,1,1,ui_opacity*0.09)
+			    RectRound(left+borderPaddingLeft, bottom+borderPadding, left-borderPaddingRight+progressPx , top-borderPadding, borderPadding*1.66)
+			  end
+
 			  local color = {1,1,1,0.25}
 			  local colorHighlight = {1,1,1,0.33}
 			  local button = 'playpause'

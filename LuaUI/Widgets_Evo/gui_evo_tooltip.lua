@@ -1043,9 +1043,9 @@ function widget:DrawScreen()
                 --table.insert(nttList,"\255\255\255\255"..line)
 				lengNttList = lengNttList + 1
 				nttList[lengNttList] = stringSplitIcons("\255\255\255\255"..line, false, useMetalTexture, useEnergyTexture, useSupplyTexture)
-				local width = FontSize * gl.GetTextWidth(line)
+				local width = FontSize * font:GetTextWidth(line)
 				for i = 2, #nttList[lengNttList], 2 do
-					width = width - FontSize * gl.GetTextWidth(nttList[lengNttList][i]) + FontSize
+					width = width - FontSize * font:GetTextWidth(nttList[lengNttList][i]) + FontSize
 				end
                 if width > maxWidth then
                         maxWidth = width
@@ -1066,24 +1066,24 @@ function widget:DrawScreen()
 
         gl.Blending(GL.SRC_ALPHA,GL.ONE_MINUS_SRC_ALPHA) -- default
         if WG.MidKnightBG then
-                gl.Color(1,1,1,1)
-                gl.Texture("bitmaps/tooltipbg.png")
-                gl.TexRect(x1,y1,x2*1.2,y2*1.2,0.01,0.99,0.99,0.01)
-                gl.Texture(false)
+            gl.Color(1,1,1,1)
+            gl.Texture("bitmaps/tooltipbg.png")
+            gl.TexRect(x1,y1,x2*1.2,y2*1.2,0.01,0.99,0.99,0.01)
+            gl.Texture(false)
         else
-				local tl, tr, br, bl = (y2 >= vsy or x1 <= 0) and 0 or 1, (y2 >= vsy or x2 >= vsx) and 0 or 1, (y1 <= 0 or x2 >= vsx) and 0 or 1, (y1 <= 0 or x1 <= 0) and 0 or 1
-                gl.Color(0.0,0.0,0.0,ui_opacity)  --background
-				RectRound(x1, y1, x2, y2, 15,tl, tr, br, bl,vsx,vsy)
-                gl.Color(0.33,0.33,0.33,0.1*ui_opacity)
-				RectRound(x1 + bgmargin, y1 + bgmargin, x2 - bgmargin, y2 - bgmargin, 10,tl, tr, br, bl,vsx,vsy)
-                --[[gl.Rect(x1,y1,x2,y2)
-                gl.Color(0.0,0.0,0.0,1)  --border
-                gl.LineWidth(1)
-                gl.Shape(GL.LINE_LOOP,{
-                        {v={x1,y2}},{v={x2,y2}},
-                        {v={x2,y1}},{v={x1,y1}},})
-						]]
-                gl.Color(1,1,1,1)
+			local tl, tr, br, bl = (y2 >= vsy or x1 <= 0) and 0 or 1, (y2 >= vsy or x2 >= vsx) and 0 or 1, (y1 <= 0 or x2 >= vsx) and 0 or 1, (y1 <= 0 or x1 <= 0) and 0 or 1
+            gl.Color(0.0,0.0,0.0,ui_opacity)  --background
+			RectRound(x1, y1, x2, y2, 15,tl, tr, br, bl,vsx,vsy)
+            gl.Color(0.33,0.33,0.33,0.1*ui_opacity)
+			RectRound(x1 + bgmargin, y1 + bgmargin, x2 - bgmargin, y2 - bgmargin, 10,tl, tr, br, bl,vsx,vsy)
+            --[[gl.Rect(x1,y1,x2,y2)
+            gl.Color(0.0,0.0,0.0,1)  --border
+            gl.LineWidth(1)
+            gl.Shape(GL.LINE_LOOP,{
+                    {v={x1,y2}},{v={x2,y2}},
+                    {v={x2,y1}},{v={x1,y1}},})
+					]]
+            gl.Color(1,1,1,1)
 
 			if (WG['guishader'] ~= nil) then
 				guishaderEnabled = true
@@ -1097,7 +1097,7 @@ function widget:DrawScreen()
 			for j = 1, #iconStr do
 				if j % 2 == 1 then
 					font:Print(iconStr[j], currX, currY, FontSize, 'o')
-					currX = currX + FontSize * gl.GetTextWidth(iconStr[j])
+					currX = currX + FontSize * font:GetTextWidth(iconStr[j])
 				else
 					gl.Texture(drawIcons[iconStr[j]])
 					-- Icon size = font size

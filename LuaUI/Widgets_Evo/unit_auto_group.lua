@@ -35,6 +35,14 @@ include("keysym.h.lua")
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "Poppins-Regular.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local debug = false --of true generates debug messages
 local unit2group = {} -- list of unit types to group
 
@@ -120,6 +128,15 @@ function printDebug( value )
 	if ( debug ) then Echo( value ) end
 end
 
+function widget:ViewResize(n_vsx,n_vsy)
+  vsx,vsy = Spring.GetViewGeometry()
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
+end
 
 function widget:GameStart()
     gameStarted = true
@@ -129,14 +146,12 @@ end
 function widget:PlayerChanged(playerID)
     if Spring.GetSpectatingState() and (Spring.GetGameFrame() > 0 or gameStarted) then
         widgetHandler:RemoveWidget(self)
+		return
     end
     myTeam = Spring.GetMyTeamID()
 end
 
 function widget:Initialize()
-    if Spring.IsReplay() or Spring.GetGameFrame() > 0 then
-        widget:PlayerChanged()
-    end
 	myTeam = Spring.GetMyTeamID()
 
 	WG['autogroup'] = {}
@@ -150,18 +165,26 @@ function widget:Initialize()
     dlists = {}
     for i=0, 9 do
         dlists[i] = gl.CreateList(function()
-            gl.Text("\255\200\255\200" .. i, 20.0, -10.0, textSize, "cns")
+			font:Begin()
+			font:Print("\255\200\255\200" .. i, 20.0, -10.0, textSize, "cns")
+			font:End()
         end)
-    end
+	end
+
+	if Spring.IsReplay() or Spring.GetGameFrame() > 0 then
+		widget:PlayerChanged()
+	end
 end
 
 function widget:Shutdown()
 	WG['autogroup'] = nil
-
-    dlists = {}
-    for i,_ in ipairs(dlists) do
-        gl.DeleteList(dlists[i])
-    end
+	if dlists then
+		for i,_ in ipairs(dlists) do
+			gl.DeleteList(dlists[i])
+		end
+		dlists = {}
+	end
+	gl.DeleteFont(font)
 end
 
 function widget:DrawWorld()
@@ -262,7 +285,8 @@ function widget:KeyPress(key, modifier, isRepeat)
 				selUnitDefIDs = {}
 				local unit2groupDeleted = {}
 				local exec = false --set to true when there is at least one unit to process
-				for _, unitID in ipairs(GetSelectedUnits()) do
+				local units = GetSelectedUnits()
+				for _, unitID in ipairs(units) do
 					local udid = GetUnitDefID(unitID)
 					if ( not UDefTab[udid]["isFactory"] and (groupableBuildings[udid] or not UDefTab[udid]["isBuilding"] )) then
 						--if unit2group[udid] ~= nil then
@@ -322,12 +346,13 @@ function widget:KeyPress(key, modifier, isRepeat)
 			local mindist = math.huge
 			local muid = nil
 			if (pos == nil) then return end
-				for _, uid in ipairs(GetSelectedUnits()) do  
-					local x,_,z = GetUnitPosition(uid)
+				local units = GetSelectedUnits()
+				for _, unitID in ipairs(units) do
+					local x,_,z = GetUnitPosition(unitID)
 					dist = (pos[1]-x)*(pos[1]-x) + (pos[3]-z)*(pos[3]-z)
 					if (dist < mindist) then
 						mindist = dist
-						muid = uid
+						muid = unitID
 					end
 				end
 			if (muid ~= nil) then
@@ -337,8 +362,9 @@ function widget:KeyPress(key, modifier, isRepeat)
 		end
 		 --[[
 		if (key == KEYSYMS.Q) then
-		  for _, uid in ipairs(GetSelectedUnits()) do  
-			SetUnitGroup(uid,-1)
+			local units = GetSelectedUnits()
+			for _, unitID in ipairs(units) do
+			SetUnitGroup(unitID,-1)
 		  end
 		end
 		--]]

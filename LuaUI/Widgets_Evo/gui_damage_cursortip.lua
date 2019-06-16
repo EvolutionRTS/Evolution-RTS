@@ -22,6 +22,28 @@ local drawString = false
 local attackText = ""
 local defendText = ""
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.ttf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 4.5
+local fontfileOutlineStrength = 1.8
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
+function widget:ViewResize(x,y)
+	vsx,vsy = Spring.GetViewGeometry()
+
+	local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+	if (fontfileScale ~= newFontfileScale) then
+		fontfileScale = newFontfileScale
+		font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	end
+end
+
+function widget:Shutdown()
+	gl.DeleteFont(font)
+end
+
 local function UpdateSelection(newSelection)
 	
 	selectedHealth = {}
@@ -125,6 +147,8 @@ end
 function widget:DrawScreen()
 	if drawString then
 		local x, y = Spring.GetMouseState()
-		gl.Text(attackText .. "\n" .. defendText, x+40, y, 15, "o")
+		font:Begin()
+		font:Print(attackText .. "\n" .. defendText, x+40, y, 15, "o")
+		font:End()
 	end
 end
