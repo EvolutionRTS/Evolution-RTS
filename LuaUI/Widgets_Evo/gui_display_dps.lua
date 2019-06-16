@@ -19,12 +19,20 @@ function widget:GetInfo()
     date      = "May 27, 2008",
     license   = "GNU GPL, v2 or later",
     layer     = 0,
-    enabled   = true  --  loaded by default?
+    enabled   = false  --  loaded by default?
   }
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
 -- Speed Up
 
@@ -38,7 +46,6 @@ local GetUnitViewPosition  = Spring.GetUnitViewPosition
 local glTranslate      = gl.Translate
 local glColor          = gl.Color
 local glBillboard      = gl.Billboard
-local glText           = gl.Text
 local glDepthMask      = gl.DepthMask
 local glDepthTest      = gl.DepthTest
 local glAlphaTest      = gl.AlphaTest
@@ -65,10 +72,19 @@ local paused = false
 local changed = false
 local heightList = {}
 local drawTextLists = {}
+local drawTextListsDeath = {}
+local drawTextListsEmp = {}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+function widget:ViewResize(n_vsx,n_vsy)
+  vsx,vsy = Spring.GetViewGeometry()
+  widgetScale = (0.5 + (vsx*vsy / 5700000))
+  local fontScale = widgetScale/2
+  gl.DeleteFont(font)
+  font = gl.LoadFont(fontfile, 52*fontScale, 17*fontScale, 1.5)
+end
 
 local function unitHeight(unitDefID)
   if not heightList[unitDefID] then 
@@ -84,9 +100,8 @@ function widget:UnitFinished(unitID, unitDefID, unitTeam)
 end
 
 local function getTextSize(damage, paralyze)
-  local sizeMod = 3
-  if paralyze then sizeMod = 2.25 end
-  return math.floor(8 * (1 + sizeMod * (1 - (200 / (200 + damage)))))
+  --if paralyze then sizeMod = 2.25 end
+  return 15 + math.floor(3 * (2 * (1 - (100 / (100 + damage/10)))))
 end
 
 local function displayDamage(unitID, unitDefID, damage, paralyze)
@@ -95,13 +110,13 @@ local function displayDamage(unitID, unitDefID, damage, paralyze)
     unitID = unitID,
     damage = math.ceil(damage - 0.5),
     height = unitHeight(unitDefID),
-    offset = (6 - math.random(0,12)),
+    offset = (10 - math.random(0,12)),
     textSize = getTextSize(damage, paralyze),
     heightOffset = 0,
     lifeSpan = 1,
     paralyze = paralyze,
     fadeTime = math.max((0.03 - (damage / 333333)), 0.015),
-    riseTime = (math.min((damage / 2500), 2) + 1),
+    riseTime = (math.min((damage / 2500), 2) + 1)/3,
   }
 end
 
@@ -116,8 +131,8 @@ function widget:UnitDestroyed(unitID, unitDefID, unitTeam)
         y = (uy + unitHeight(unitDefID)),
         z = uz,
         lifeSpan = 1,
-        fadeTime = math.max((0.03 - (damage / 333333)), 0.015) * 0.66,
-        riseTime = (math.min((damage / 2500), 2) + 1)* 1.33,
+        fadeTime = math.max((0.03 - (damage / 333333)), 0.015) * 0.5,
+        riseTime = (math.min((damage / 2500), 2) + 1)/3,
         damage = damage,
         textSize = getTextSize(damage, false),
         red = true,
@@ -138,7 +153,7 @@ function widget:UnitDestroyed(unitID, unitDefID, unitTeam)
             z = uz,
             lifeSpan = v.lifeSpan,
             fadeTime = v.fadeTime * 2.5,
-            riseTime = v.riseTime * 0.66,
+            riseTime = v.riseTime * 0.9,
             damage = v.damage,
             textSize = v.textSize,
             red = false,
@@ -160,18 +175,16 @@ function widget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer)
   if (damage < 1.5) then return end
   
   if (UnitDefs[unitDefID] == nil) then return end
-    
-  if paralyzer then
-    if unitParalyze[unitID] then
-      unitParalyze[unitID].damage = (unitParalyze[unitID].damage + damage)
-    end
+
+  if paralyzer and unitParalyze[unitID] then
+    unitParalyze[unitID].damage = (unitParalyze[unitID].damage + damage)
     return
   elseif unitDamage[unitID] then
     unitDamage[unitID].damage = (unitDamage[unitID].damage + damage)
     return
   end
     
-  if paralyze then 
+  if paralyzer then
     unitParalyze[unitID] = {}
     unitParalyze[unitID].damage = damage
     unitParalyze[unitID].time = (lastTime + 0.1)
@@ -206,17 +219,26 @@ local function drawDeathDPS(damage,ux,uy,uz,textSize,red,alpha)
   gl.MultiTexCoord(1, 0.25 + (0.5 * alpha))
 
   if red then
-    glColor(1, 0, 0)
+      if drawTextListsDeath[damage] == nil then
+          drawTextListsDeath[damage] = gl.CreateList(function()
+              font:Begin()
+              font:SetTextColor(1, 0.5, 0.5)
+              font:Print(damage, 0, 0, textSize, 'cnO')
+              font:End()
+          end)
+      end
+      glCallList(drawTextListsDeath[damage])
   else
-    glColor(1, 1, 1)
+      if drawTextLists[damage] == nil then
+          drawTextLists[damage] = gl.CreateList(function()
+              font:Begin()
+              font:SetTextColor(1, 1, 1)
+              font:Print(damage, 0, 0, textSize, 'cnO')
+              font:End()
+          end)
+      end
+      glCallList(drawTextLists[damage])
   end
-
-  if drawTextLists[damage] == nil then
-    drawTextLists[damage] = gl.CreateList(function()
-      glText(damage, 0, 0, textSize, 'cnO')
-    end)
-  end
-  glCallList(drawTextLists[damage])
   
   glPopMatrix()
 end
@@ -226,13 +248,22 @@ local function DrawUnitFunc(yshift, xshift, damage, textSize, alpha, paralyze)
   glBillboard()
   gl.MultiTexCoord(1, 0.25 + (0.5 * alpha))
   if paralyze then
-    glColor(0, 0, 1)
-    glText(damage, 0, 0, textSize, 'cnO')
+    if drawTextListsEmp[damage] == nil then
+      drawTextListsEmp[damage] = gl.CreateList(function()
+        font:Begin()
+        font:SetTextColor(0.5, 0.5, 1)
+        font:Print(damage, 0, 0, textSize, 'cnO')
+        font:End()
+      end)
+    end
+    glCallList(drawTextListsEmp[damage])
   else
-    glColor(1, 1, 1)
     if drawTextLists[damage] == nil then
       drawTextLists[damage] = gl.CreateList(function()
-        glText(damage, 0, 0, textSize, 'cnO')
+        font:Begin()
+        font:SetTextColor(1, 1, 1)
+        font:Print(damage, 0, 0, textSize, 'cnO')
+        font:End()
       end)
     end
     glCallList(drawTextLists[damage])
@@ -265,7 +296,7 @@ function widget:DrawWorld()
   glDepthTest(true)
   glAlphaTest(GL_GREATER, 0)
   glBlending(GL_SRC_ALPHA, GL_ONE)
-  gl.Texture(1, LUAUI_DIRNAME .. "images/gradient_alpha_2.png")
+  gl.Texture(1, "LuaUI/images/gradient_alpha_2.png")
 
   for i, damage in pairs(damageTable) do
     if (damage.lifeSpan <= 0) then 
@@ -274,15 +305,15 @@ function widget:DrawWorld()
       glDrawFuncAtUnit(damage.unitID, false, DrawUnitFunc, (damage.height + damage.heightOffset), 
                        damage.offset, damage.damage, damage.textSize, damage.lifeSpan, damage.paralyze)
       if not paused then
-        if damage.paralyze then 
-          damage.lifeSpan = (damage.lifeSpan - 0.05)
-          damage.textSize = (damage.textSize + 0.2)
-        else
+        --if damage.paralyze then
+        --  damage.lifeSpan = (damage.lifeSpan - 0.05)
+        --  damage.textSize = (damage.textSize + 0.2)
+        --else
           damage.heightOffset = (damage.heightOffset + damage.riseTime)
           if (damage.heightOffset > 25) then 
             damage.lifeSpan = (damage.lifeSpan - damage.fadeTime)
           end
-        end
+        --end
       end
     end
   end
@@ -307,10 +338,25 @@ function widget:DrawWorld()
 end
 
 
+--function widget:Initialize()
+--  for damage=1, 200 do
+--    drawTextLists[damage] = gl.CreateList(function()
+--      glText(damage, 0, 0, getTextSize(damage, false), 'cnO')
+--    end)
+--  end
+--end
+
 function widget:Shutdown()
-  for k,_ in pairs(drawTextLists) do
-    gl.DeleteList(drawTextLists[k])
-  end
+    for k,_ in pairs(drawTextLists) do
+        gl.DeleteList(drawTextLists[k])
+    end
+    for k,_ in pairs(drawTextListsDeath) do
+        gl.DeleteList(drawTextListsDeath[k])
+    end
+    for k,_ in pairs(drawTextListsEmp) do
+        gl.DeleteList(drawTextListsEmp[k])
+    end
+  gl.DeleteFont(font)
 end
 
 --------------------------------------------------------------------------------

@@ -19,6 +19,14 @@ local unitConf				= {}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 45
+local fontfileOutlineSize = 4.5
+local fontfileOutlineStrength = 9
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local selfdUnits = {}
 local drawLists = {}
 local glDrawListAtUnit			= gl.DrawListAtUnit
@@ -28,7 +36,7 @@ local spGetUnitDefID			= Spring.GetUnitDefID
 local spIsUnitInView 			= Spring.IsUnitInView
 local spGetUnitSelfDTime		= Spring.GetUnitSelfDTime
 local spGetAllUnits				= Spring.GetAllUnits
-local spGetUnitCommands			= Spring.GetUnitCommands
+local spGetCommandQueue			= Spring.GetCommandQueue
 local spIsUnitAllied			= Spring.IsUnitAllied
 local spGetCameraDirection		= Spring.GetCameraDirection
 
@@ -37,6 +45,15 @@ local spec = Spring.GetSpectatingState()
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+function widget:ViewResize(n_vsx,n_vsy)
+	vsx,vsy = Spring.GetViewGeometry()
+
+	local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+	if (fontfileScale ~= newFontfileScale) then
+		fontfileScale = newFontfileScale
+		font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	end
+end
 
 function DrawIcon(text)
 	local iconSize = 0.9
@@ -45,7 +62,9 @@ function DrawIcon(text)
 	gl.Translate(0.32,1,1.4)
 	gl.Billboard()
 	gl.TexRect(-(iconSize+0.085), 0, -0.08, iconSize)
-	gl.Text(text,0,(iconSize/4),0.66,"oc")
+	font:Begin()
+	font:Print(text,0,(iconSize/4),0.66,"oc")
+	font:End()
 	gl.PopMatrix()
 end
 
@@ -62,24 +81,18 @@ end
 -- Engine Calls
 --------------------------------------------------------------------------------
 
-function widget:PlayerChanged(playerID)
+function init()
 	spec = Spring.GetSpectatingState()
-end
-
-function widget:Initialize()
-	spec = Spring.GetSpectatingState()
-
-	SetUnitConf()
-	
 	-- check all units for selfd cmd
+	selfdUnits = {}
 	local units = spGetAllUnits()
 	for _, unitID in ipairs(units) do
-		if spGetUnitSelfDTime(unitID) ~= nil then 
+		if spGetUnitSelfDTime(unitID) ~= nil then
 			if spGetUnitSelfDTime(unitID) > 0 then
 				selfdUnits[unitID] = true
 			end
 			-- check for queued selfd
-			local unitQueue = spGetUnitCommands(unitID,20) or {}
+			local unitQueue = spGetCommandQueue(unitID,20) or {}
 			if (#unitQueue > 0) then
 				for _,cmd in ipairs(unitQueue) do
 					if cmd.id == CMD.SELFD then
@@ -91,11 +104,21 @@ function widget:Initialize()
 	end
 end
 
+function widget:PlayerChanged(playerID)
+	init()
+end
+
+function widget:Initialize()
+	SetUnitConf()
+	init()
+end
+
 
 function widget:Shutdown()
 	for k,_ in pairs(drawLists) do
 		gl.DeleteList(drawLists[k])
 	end
+	gl.DeleteFont(font)
 end
 
 
@@ -150,7 +173,7 @@ function widget:UnitCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpti
 	-- check for queued selfd (to check if queue gets cancelled)
 	if selfdUnits[unitID] then
 		local foundSelfdCmd = false
-		local unitQueue = spGetUnitCommands(unitID,20) or {}
+		local unitQueue = spGetCommandQueue(unitID,20) or {}
 		if (#unitQueue > 0) then
 			for _,cmd in ipairs(unitQueue) do
 				if cmd.id == CMD.SELFD then

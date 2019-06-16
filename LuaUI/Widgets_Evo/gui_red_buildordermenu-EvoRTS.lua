@@ -6,7 +6,7 @@ function widget:GetInfo()
 	author    = "Regret, modified by CommonPlayer",
 	date      = "29 may 2015", --modified by CommonPlayer, Oct 2016
 	license   = "GNU GPL, v2 or later",
-	layer     = 0,
+	layer     = -10,
 	enabled   = false, --enabled by default
 	handler   = true, --can use widgetHandler:x()
 	}
@@ -35,6 +35,8 @@ local CanvasX,CanvasY = 1272,734 --resolution in which the widget was made (for 
 --1272,734 == 1280,768 windowed
 
 --todo: build categories (eco | labs | defences | etc) basically sublists of buildcmds (maybe for regular orders too)
+
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66)
 
 local playSounds = true
 local iconScaling = true
@@ -93,13 +95,13 @@ local Config = {
 		margin = 5, --distance from background border
 		
 		padding = 4*widgetScale, -- for border effect
-		color2 = {1,1,1,0.025}, -- for border effect
+		color2 = {1,1,1,ui_opacity*0.045}, -- for border effect
 		
 		fadetime = 0.14, --fade effect time, in seconds
 		fadetimeOut = 0.022, --fade effect time, in seconds
 		
 		ctext = {1,1,1,1}, --color {r,g,b,alpha}
-		cbackground = {0,0,0,0.66},
+		cbackground = {0,0,0,ui_opacity},
 		cborder = {0,0,0,1},
 		cbuttonbackground = {0.1,0.1,0.1,1},
 		dragbutton = {2,3}, --middle mouse button
@@ -126,11 +128,11 @@ local Config = {
 		padding = 4*widgetScale, -- for border effect
 		color2 = {1,1,1,0.025}, -- for border effect
 		
-		fadetime = 0.14,
-		fadetimeOut = 0.022, --fade effect time, in seconds
+		fadetime = 0.1,
+		fadetimeOut = 0.015, --fade effect time, in seconds
 		
 		ctext = {1,1,1,1},
-		cbackground = {0,0,0,0.66},
+		cbackground = {0,0,0,ui_opacity},
 		cborder = {0,0,0,1},
 		cbuttonbackground={0.1,0.1,0.1,1},
 		
@@ -149,7 +151,7 @@ function widget:ViewResize(newX,newY)
 	Config.ordermenu.padding = 3*widgetScale
 end
 
-local guishaderEnabled = WG['guishader_api'] or false
+local guishaderEnabled = WG['guishader'] or false
 
 local sGetSelectedUnitsCount = Spring.GetSelectedUnitsCount
 local sGetActiveCommand = Spring.GetActiveCommand
@@ -276,6 +278,7 @@ local function CreateGrid(r)
 		sx=(r.isx*r.ix+r.ispreadx*(r.ix-1) +r.margin*2) -r.padding -r.padding,
 		sy=(r.isy*(r.iy)+r.ispready*(r.iy) +r.margin*2) -r.padding -r.padding,
 		color=r.color2,
+		roundedsize=r.padding*1.45,
 	}
 	local background = {"rectanglerounded",
 		px=r.px,py=r.py,
@@ -289,6 +292,7 @@ local function CreateGrid(r)
 		
 		padding=r.padding,
 		
+		guishader=true,
 		effects = {
 			fadein_at_activation = r.fadetime,
 			fadeout_at_deactivation = r.fadetimeOut,
@@ -341,6 +345,7 @@ local function CreateGrid(r)
 		border={0,0,0,0},
 		options="n", --disable colorcodes
 		captioncolor=r.ctext,
+		font2 = true,
 		
 		overridecursor = true,
 		overrideclick = {3},
@@ -560,6 +565,7 @@ local function UpdateGrid(g,cmds,ordertype)
 	local icons = g.icons
 	local page = {{}}
 	
+
 	local visibleIconCount = #icons
 	if #cmds > #icons then
 		visibleIconCount = visibleIconCount - Config[g.menuname].ix
@@ -628,12 +634,14 @@ local function UpdateGrid(g,cmds,ordertype)
 		
 		icon.mouseclick = {
 			{1,function(mx,my,self)
+				mouseClicked = 2
 				if playSounds then
 					Spring.PlaySoundFile(sound_queue_add, 0.75, 'ui')
 				end
 				Spring.SetActiveCommand(Spring.GetCmdDescIndex(cmd.id),1,true,false,Spring.GetModKeyState())
 			end},
 			{3,function(mx,my,self)
+				mouseClicked = 2
 				if playSounds then
 					Spring.PlaySoundFile(sound_queue_rem, 0.75, 'ui')
 				end
@@ -1031,19 +1039,8 @@ function widget:Initialize()
   end
 end
 
-local function onNewCommands(buildcmds,othercmds)
-	if (SelectedUnitsCount==0) then
-		buildmenu.page = 1
-		ordermenu.page = 1
-	end
-
-	UpdateGrid(ordermenu,othercmds,2)
-	UpdateGrid(buildmenu,buildcmds,1)
-end
-
 local function onWidgetUpdate() --function widget:Update()
 	AutoResizeObjects()
-	SelectedUnitsCount = sGetSelectedUnitsCount()
 end
 
 --save/load stuff
@@ -1163,6 +1160,36 @@ local function GetCommands()
 	return buildcmds,othercmds
 end
 
+
+
+local selectionChanged = true
+local function onNewCommands(force)
+	local buildcmds,othercmds = {},{}
+	if selectionChanged or force then
+		if (SelectedUnitsCount==0) then
+			buildmenu.page = 1
+			ordermenu.page = 1
+		else
+			buildcmds,othercmds = GetCommands()
+		end
+		UpdateGrid(ordermenu,othercmds,2)
+		UpdateGrid(buildmenu,buildcmds,1)
+		selectionChanged = false
+	end
+end
+
+local function updateGrids()
+	local buildcmds,othercmds = {},{}
+	if (SelectedUnitsCount == 0) then
+		buildmenu.page = 1
+		ordermenu.page = 1
+	else
+		buildcmds,othercmds = GetCommands()
+	end
+	UpdateGrid(ordermenu,othercmds,2)
+	UpdateGrid(buildmenu,buildcmds,1)
+end
+
 local hijackattempts = 0
 local layoutping = 54352 --random number
 local function hijacklayout()
@@ -1198,15 +1225,29 @@ end
 function widget:CommandsChanged()
 	haxlayout()
 end
+
 local sec = 0
+
 local guishaderCheckInterval = 1
 local oldSupplyMax = 0
+local uiOpacitySec = 0
 function widget:Update(dt)
+	uiOpacitySec = uiOpacitySec + dt
+	if uiOpacitySec>0.5 then
+		uiOpacitySec = 0
+		if ui_opacity ~= Spring.GetConfigFloat("ui_opacity",0.66) then
+			ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+			ordermenu.background.color = {0,0,0,ui_opacity}
+			buildmenu.background.color = {0,0,0,ui_opacity}
+			ordermenu.background2.color = {1,1,1,ui_opacity*0.055}
+			buildmenu.background2.color = {1,1,1,ui_opacity*0.055}
+		end
+	end
 	sec=sec+dt
 	if (sec>1/guishaderCheckInterval) then
 		sec = 0
-		if (WG['guishader_api'] ~= guishaderEnabled) then
-			guishaderEnabled = WG['guishader_api']
+		if (WG['guishader'] ~= guishaderEnabled) then
+			guishaderEnabled = WG['guishader']
 			if (guishaderEnabled) then
 				Config.buildmenu.fadetimeOut = 0.02
 				Config.ordermenu.fadetimeOut = 0.02
@@ -1222,26 +1263,32 @@ function widget:Update(dt)
 			haxlayout()
 			firstupdate = nil
 		end
-		onNewCommands(GetCommands())
+		onNewCommands(mouseClicked>0)
+		mouseClicked = mouseClicked-1
 		updatehax = false
 		updatehax2 = true
 	end
+
+	-- refresh cause queue text could have changed
+	queueUpdateSec = queueUpdateSec + dt
+	if buildmenu.background.active == nil and queueUpdateSec > 0.5 then
+		queueUpdateSec = 0
+		local buildcmds = GetCommands()
+		UpdateGrid(buildmenu,buildcmds,1)
+	end
+
 	if (updatehax2) then
 		if (SelectedUnitsCount == 0) then
-			onNewCommands({},{}) --flush
+			onNewCommands() --flush
 			updatehax2 = false
 		end
 	end
-	
-	-- updates UI when supply count changed
-	local myTeamID = Spring.GetMyTeamID()
-	local newSupplyMax = Spring.GetTeamRulesParam(myTeamID, "supplyMax") or 0
-	if oldSupplyMax ~= newSupplyMax then
-		onNewCommands(GetCommands())
-		oldSupplyMax = newSupplyMax
-	end
 end
 
+function widget:SelectionChanged(sel)
+	selectionChanged = true
+	SelectedUnitsCount = sGetSelectedUnitsCount()
+end
 
 
 function widget:KeyPress(key, mods, isRepeat)
@@ -1249,7 +1296,7 @@ function widget:KeyPress(key, mods, isRepeat)
 		if building ~= -1 then
 			if building == 1 and key == buildNextKey then
 				building = 2
-				onNewCommands(GetCommands())
+ 				onNewCommands(true)
 				return true
 			end
 			local buildcmds, othercmds = GetCommands()
@@ -1267,7 +1314,7 @@ function widget:KeyPress(key, mods, isRepeat)
 				Spring.SetActiveCommand(Spring.GetCmdDescIndex(buildcmds[found].id),1,true,false,Spring.GetModKeyState())
 			end
 			building = -1
-			onNewCommands(GetCommands())
+			onNewCommands(true)
 			return true
 		else
 			-- this prevents keys to be captured when you cannot build anything
@@ -1276,16 +1323,16 @@ function widget:KeyPress(key, mods, isRepeat)
 			
 			if key == buildStartKey then
 				building = 0
-				onNewCommands(GetCommands())
+			onNewCommands(true)
 				return true
 			elseif key == buildNextKey then
 				building = 1
-				onNewCommands(GetCommands())
+			onNewCommands(true)
 				return true
 			end
 		end
 		-- updates UI because hotkeys text changed color
-		onNewCommands(GetCommands())
+			onNewCommands(true)
 		return false
 	end
 end

@@ -5,14 +5,23 @@ function widget:GetInfo()
 		author		= "Floris",
 		date		= "24 july 2016",
 		license		= "GNU GPL, v2 or later",
-		layer		= -3,			-- set to -5 to draw mascotte on top of advplayerlist
-		enabled		= true,
- 	  handler = true,
+		layer		= -4,			-- set to -5 to draw mascotte on top of advplayerlist
+		enabled		= false,
 	}
 end
 
-local iconTexture = ":n:"..LUAUI_DIRNAME.."Images/discord.png"
+local discordLink = 'discord.me/evolutionrts'
+
+local iconTexture = ":n:LuaUI/Images/discord.png"
 local iconSize = 32
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
 local spGetGameFrame		= Spring.GetGameFrame
 
@@ -31,6 +40,18 @@ local xPos = 0
 local yPos = 0
 
 local mouseover = false
+local usedImgSize = iconSize
+
+function widget:ViewResize(n_vsx,n_vsy)
+	vsx,vsy = Spring.GetViewGeometry()
+	widgetScale = (0.5 + (vsx*vsy / 5700000))
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
+end
 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
@@ -67,13 +88,9 @@ function updatePosition(force)
 	if (WG['advplayerlist_api'] ~= nil) then
 		local prevPos = parentPos
 		if WG['displayinfo'] ~= nil then
-			if widgetHandler.orderList["AdvPlayersList info"] ~= nil and (widgetHandler.orderList["AdvPlayersList info"] > 0) then
-				parentPos = WG['displayinfo'].GetPosition()		-- returns {top,left,bottom,right,widgetScale}
-			end
+			parentPos = WG['displayinfo'].GetPosition()		-- returns {top,left,bottom,right,widgetScale}
 		elseif WG['music'] ~= nil then
-			if widgetHandler.orderList["Music Player"] ~= nil and (widgetHandler.orderList["Music Player"] > 0) then
-				parentPos = WG['music'].GetPosition()		-- returns {top,left,bottom,right,widgetScale}
-			end
+			parentPos = WG['music'].GetPosition()		-- returns {top,left,bottom,right,widgetScale}
 		else
 			parentPos = WG['advplayerlist_api'].GetPosition()		-- returns {top,left,bottom,right,widgetScale}
 		end
@@ -97,6 +114,7 @@ function widget:Shutdown()
 	if drawlist[1] ~= nil then
 		glDeleteList(drawlist[1])
 	end
+	gl.DeleteFont(font)
 end
 
 function widget:GameFrame(n)
@@ -118,8 +136,10 @@ function widget:DrawScreen()
 			glCallList(drawlist[1])
 			local mx,my = Spring.GetMouseState()
 			if widget:IsAbove(mx,my) then
-				local textWidth = glGetTextWidth("discord.gg/aDtX3hW") * 13
-				glText("discord.me/evolutionrts", -(textWidth+6+iconSize)*parentPos[5], 12*parentPos[5], 13*parentPos[5], "no")
+				local textWidth = font:GetTextWidth(discordLink) * 13
+				font:Begin()
+				font:Print(discordLink, -(textWidth+6+iconSize)*parentPos[5], 12*parentPos[5], 13*parentPos[5], "no")
+				font:End()
 			end
 		glPopMatrix()
 		mouseover = false
@@ -132,7 +152,7 @@ end
 
 function widget:MousePress(mx, my, mb)
 	if mb == 1 and isInBox(mx, my, {xPos-usedImgSize, yPos, xPos, yPos+usedImgSize}) then
-		Spring.SendCommands("say BA's discord server: https://discord.gg/aDtX3hW")
+		Spring.SendCommands("our discord server: https://"..discordLink)
 		widgetHandler:RemoveWidget(self)
 		return true
 	end
@@ -153,6 +173,6 @@ end
 
 function widget:GetTooltip(mx, my)
 	if widget:IsAbove(mx,my) then
-		return string.format("We have our own Discord server now!\nour central community hub (chat/voice/info)\n\ndiscord.gg/aDtX3hW")
+		return string.format("We have our own Discord server now!\nour central community hub (chat/voice/info)\n\n"..discordLink)
 	end
 end

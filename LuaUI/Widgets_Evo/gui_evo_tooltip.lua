@@ -10,6 +10,16 @@ function widget:GetInfo()
 	}
 end
 
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66)
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 4.5
+local fontfileOutlineStrength = 1.8
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local barTexture = LUAUI_DIRNAME.."Images/resbar.dds"
 local bgcorner = ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
 local function DrawRectRound(px,py,sx,sy,cs, tl,tr,br,bl ,vsx,vsy)
@@ -214,10 +224,23 @@ function widget:Initialize()
 		ud.shieldPower = ((shieldDefID)and(WeaponDefs[shieldDefID].shieldPower))or(-1)
 	end
 end
- 
- 
+
+local FontSize = math.max(8,3+vsy/80)
+function widget:ViewResize(x,y)
+	vsx,vsy = Spring.GetViewGeometry()
+
+	FontSize = math.max(8,3+vsy/80)
+
+	local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+	if (fontfileScale ~= newFontfileScale) then
+		fontfileScale = newFontfileScale
+		font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	end
+end
+
 function widget:Shutdown()
-        Spring.SendCommands({"tooltip 1"})
+	Spring.SendCommands({"tooltip 1"})
+	gl.DeleteFont(font)
 end
   
 -- format number  
@@ -999,22 +1022,17 @@ function GenerateNewTooltip()
 	end
 end
  
- 
-local FontSize
+
 local xTooltipSize = 0
 local yTooltipSize = 0
 local tooltipX, tooltipY = 0, 0
 local bgmargin = 4
  
-function widget:DrawScreenEffects(vsx,vsy)
+function widget:DrawScreen()
 		-- KP_ToolTip is probably deprecated
         --WG.KP_ToolTip=nil
         if Spring.IsGUIHidden() then
                 return
-        end
- 
-        if not FontSize then
-                FontSize = math.max(8,3+vsy/80)
         end
  
         local nttString = GenerateNewTooltip()
@@ -1033,7 +1051,7 @@ function widget:DrawScreenEffects(vsx,vsy)
                         maxWidth = width
                 end
         end
- 
+
         --xTooltipSize = FontSize*(1+maxWidth)
 		xTooltipSize = maxWidth + FontSize
         yTooltipSize = FontSize*(1+lengNttList)
@@ -1044,7 +1062,8 @@ function widget:DrawScreenEffects(vsx,vsy)
         -- Note: this line is done even if the KP_ToolTip is devoid of text
         -- The only case where KP_ToolTip is nil are when the widget is off or the GUI is hidden
         --WG.KP_ToolTip={x1=x1,y1=y1,x2=x2,y2=y2,xSize=xTooltipSize,ySize=yTooltipSize,FontSize=FontSize}
- 
+
+
         gl.Blending(GL.SRC_ALPHA,GL.ONE_MINUS_SRC_ALPHA) -- default
         if WG.MidKnightBG then
                 gl.Color(1,1,1,1)
@@ -1053,9 +1072,9 @@ function widget:DrawScreenEffects(vsx,vsy)
                 gl.Texture(false)
         else
 				local tl, tr, br, bl = (y2 >= vsy or x1 <= 0) and 0 or 1, (y2 >= vsy or x2 >= vsx) and 0 or 1, (y1 <= 0 or x2 >= vsx) and 0 or 1, (y1 <= 0 or x1 <= 0) and 0 or 1
-                gl.Color(0.0,0.0,0.0,0.66)  --background
+                gl.Color(0.0,0.0,0.0,ui_opacity)  --background
 				RectRound(x1, y1, x2, y2, 15,tl, tr, br, bl,vsx,vsy)
-                gl.Color(0.33,0.33,0.33,0.1)
+                gl.Color(0.33,0.33,0.33,0.1*ui_opacity)
 				RectRound(x1 + bgmargin, y1 + bgmargin, x2 - bgmargin, y2 - bgmargin, 10,tl, tr, br, bl,vsx,vsy)
                 --[[gl.Rect(x1,y1,x2,y2)
                 gl.Color(0.0,0.0,0.0,1)  --border
@@ -1065,13 +1084,19 @@ function widget:DrawScreenEffects(vsx,vsy)
                         {v={x2,y1}},{v={x1,y1}},})
 						]]
                 gl.Color(1,1,1,1)
-        end
+
+			if (WG['guishader'] ~= nil) then
+				guishaderEnabled = true
+				WG['guishader'].InsertRect(x1, y1, x2, y2, 'evo_tooltip')
+			end
+		end
+		font:Begin()
         for i = 1, lengNttList do
 			local iconStr = nttList[i]
 			local currX, currY = x1 + FontSize / 2, y1 + FontSize * (lengNttList + 0.5 - i)
 			for j = 1, #iconStr do
 				if j % 2 == 1 then
-					gl.Text(iconStr[j], currX, currY, FontSize, 'o')
+					font:Print(iconStr[j], currX, currY, FontSize, 'o')
 					currX = currX + FontSize * gl.GetTextWidth(iconStr[j])
 				else
 					gl.Texture(drawIcons[iconStr[j]])
@@ -1080,11 +1105,26 @@ function widget:DrawScreenEffects(vsx,vsy)
 					currX = currX + FontSize
 				end
 			end
-			--gl.Text(nttList[i], currX, currY, FontSize, 'o')
+			--font:Print(nttList[i], currX, currY, FontSize, 'o')
         end
 		gl.Texture(false)
-        gl.Text("\255\255\255\255 ",0,0,FontSize,'o') -- Reset color to white for other widgets using gl.Text
+        font:Print("\255\255\255\255 ",0,0,FontSize,'o') -- Reset color to white for other widgets using gl.Text
+	font:End()
 end
+
+
+local uiOpacitySec = 0
+function widget:Update(dt)
+	uiOpacitySec = uiOpacitySec + dt
+	if uiOpacitySec>0.5 then
+		uiOpacitySec = 0
+		if ui_opacity ~= Spring.GetConfigFloat("ui_opacity",0.66) then
+			ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+		end
+	end
+end
+
+
 --[[
 -- tweaking UI position with ctrl+f11
 local widgetScale = 1 -- potential TODO

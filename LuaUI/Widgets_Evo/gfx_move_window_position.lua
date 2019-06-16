@@ -13,6 +13,14 @@ function widget:GetInfo()
 	}
 end
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 50
+local fontfileOutlineSize = 16
+local fontfileOutlineStrength = 1.5
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local vsx, vsy = gl.GetViewSizes()
 local customScale = 1.2
 local widgetScale = (1 + (vsx*vsy / 4000000)) * customScale
@@ -63,41 +71,41 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	if py <= 0 or px <= 0 then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, py+cs, 0)
 	-- top right
 	if py <= 0 or sx >= vsx then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, py+cs, 0)
 	-- bottom left
 	if sy >= vsy or px <= 0 then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, sy-cs, 0)
 	-- bottom right
 	if sy >= vsy or sx >= vsx then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, sy-cs, 0)
 end
 
@@ -112,21 +120,22 @@ end
 function DrawWindow()
 	dlistPosX = windowPosX
 	dlistPosY = windowPosY
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].InsertRect(0,0,vsx,vsy, 'movewindowpos')
-		WG['guishader_api'].setScreenBlur(true)
+	if WG['guishader'] then
+		WG['guishader'].InsertRect(0,0,vsx,vsy, 'movewindowpos')
+		WG['guishader'].setScreenBlur(true)
 	end
+	font:Begin()
 	gl.Color(0,0,0,0.6)
 	gl.Rect(0,0,vsx,vsy)
-	gl.Text("\255\200\200\200Move window position with the arrow keys or drag it with the mouse\n(change will be applied after mouse-release).", vsx/2, (vsy/2)+(40*widgetScale), 12*widgetScale, "ocn")
-	gl.Text("\255\222\255\222x = "..windowPosX.."     y = "..windowPosY, vsx/2, (vsy/2), 14*widgetScale, "ocn")
+	font:Print("\255\170\170\170Move window position with the \255\255\255\255arrow keys\255\170\170\170 or \255\255\255\255drag\255\170\170\170 using the mouse.", vsx/2, (vsy/2)+(50*widgetScale), 12*widgetScale, "ocn")
+	font:Print("\255\222\255\222x = "..windowPosX.."     y = "..windowPosY, vsx/2, (vsy/2), 14*widgetScale, "ocn")
 	local buttonText = '   Apply   '
 	local buttonX = vsx/2
 	local buttonY = (vsy/2)-(36*widgetScale)
 	local buttonFontsize = 15*widgetScale
-	local buttonWidth = gl.GetTextWidth(buttonText)*buttonFontsize
+	local buttonWidth = font:GetTextWidth(buttonText)*buttonFontsize
 	local buttonHeight = buttonFontsize*2.2
-	gl.Text("\255\200\200\200ESCAPE key will cancel changes", vsx/2, (vsy/2)-(50*widgetScale)-buttonHeight, 12*widgetScale, "ocn")
+	font:Print("\255\255\255\255ESCAPE\255\170\170\170 key will cancel changes", vsx/2, (vsy/2)-(50*widgetScale)-buttonHeight, 12*widgetScale, "ocn")
 	if initialWindowPosX ~= dlistPosX or initialWindowPosY ~= dlistPosY then
 		applyButtonPos = {buttonX-(buttonWidth/2), buttonY-(buttonHeight/2), buttonX+(buttonWidth/2), buttonY+(buttonHeight/2),buttonFontsize/5}
 		gl.Color(0,0.33,0,0.8)
@@ -134,15 +143,22 @@ function DrawWindow()
 		local padding = 2*widgetScale
 		gl.Color(1,1,1,0.1)
 		RectRound(applyButtonPos[1]+padding,applyButtonPos[2]+padding,applyButtonPos[3]-padding,applyButtonPos[4]-padding,applyButtonPos[5]*0.66)
-		gl.Text("\255\200\255\200"..buttonText, buttonX, buttonY-(buttonFontsize*0.27), buttonFontsize, "ocn")
+		font:Print("\255\222\255\222"..buttonText, buttonX, buttonY-(buttonFontsize*0.27), buttonFontsize, "ocn")
 	else
 		applyButtonPos = nil
 	end
+	font:End()
 end
 
 function widget:ViewResize()
 	vsx,vsy = Spring.GetViewGeometry()
 	widgetScale = (1 + (vsx*vsy / 4000000)) * customScale
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
 	if windowList then gl.DeleteList(windowList) end
 	windowList = gl.CreateList(DrawWindow)
 end
@@ -252,10 +268,11 @@ function widget:DrawScreen()
 end
 
 function widget:Shutdown()
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('movewindowpos')
-		WG['guishader_api'].setScreenBlur(false)
+	if WG['guishader'] then
+		WG['guishader'].RemoveRect('movewindowpos')
+		WG['guishader'].setScreenBlur(false)
 	end
 	if windowList then gl.DeleteList(windowList) end
 	widgetHandler:DisableWidget(widgetName)
+	gl.DeleteFont(font)
 end

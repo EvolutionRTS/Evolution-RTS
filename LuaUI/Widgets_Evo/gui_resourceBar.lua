@@ -10,6 +10,18 @@ function widget:GetInfo()
     }
 end
 
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66)
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.33
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 
 --Disable Default Resources Bar
 Spring.SendCommands({"resbar 0"})
@@ -365,8 +377,8 @@ end
 
 
 function widget:Shutdown()
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('resources')
+	if (WG['guishader'] ~= nil) then
+		WG['guishader'].RemoveRect('resources')
 	end
 	
 	if displayList ~= nil then
@@ -374,6 +386,8 @@ function widget:Shutdown()
 		gl.DeleteList(displayList2)
 		gl.DeleteList(displayList3)
 	end
+	gl.DeleteFont(font)
+	gl.DeleteFont(font2)
 end
 ---------------------------------------------------------------------------------------------------------
 
@@ -394,13 +408,13 @@ function generateDisplayList()
 		gl.Scale(widgetScale, widgetScale, 1)
 		
 		-- background
-	  	gl.Color(0,0,0,0.77)
+	  	gl.Color(0,0,0,ui_opacity)
 		RectRound(supplyOffset-bgmargin, -bgmargin, metalOffset+metalBarWidth+bgmargin, height+bgmargin, 10)
 
-		if (WG['guishader_api'] ~= nil) then
+		if (WG['guishader'] ~= nil) then
 			local scaleDiffX = -((posx*widgetScale)-posx)/widgetScale
 			local scaleDiffY = -((posy*widgetScale)-posy)/widgetScale
-			WG['guishader_api'].InsertRect(
+			WG['guishader'].InsertRect(
 				posx+(-(width*widgetScale)/3)   + supplyOffset-bgmargin,
 				posy+(-((height+bgmargin-2) * (widgetScale-1)))   - ((bgmargin)*widgetScale),
 				posx+(-(width*widgetScale)/3)   + ((metalOffset+metalBarWidth+bgmargin)*widgetScale),
@@ -413,10 +427,11 @@ function generateDisplayList()
 		gl.Color(0.33,0.33,0.33,0.15)
 		RectRound(supplyOffset-bgmargin2, -bgmargin2, metalOffset+metalBarWidth+bgmargin2, height+bgmargin2,9)
 
-		gl.Text(yellow .. "Energy", energyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
-		gl.Text(green .. "Supply", supplyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
-		gl.Text(skyblue .. "Metal", metalOffset+textOffsetX+29, textOffsetY, FontSize, "on")
-
+		font2:Begin()
+		font2:Print(yellow .. "Energy", energyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
+		font2:Print(green .. "Supply", supplyOffset+textOffsetX+29, textOffsetY, FontSize, "on")
+		font2:Print(skyblue .. "Metal", metalOffset+textOffsetX+29, textOffsetY, FontSize, "on")
+		font2:End()
 	  gl.Texture(false)
 		
 	end)
@@ -503,7 +518,8 @@ function generateDisplayList2()
 		else
 			supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
 		end
-		gl.Text(supplyStr, supplyOffset+supplyBarWidth, textOffsetY, FontSize, "onr")
+		font2:Begin()
+		font2:Print(supplyStr, supplyOffset+supplyBarWidth, textOffsetY, FontSize, "onr")
 		
 		
 		-- energy bar
@@ -547,7 +563,7 @@ function generateDisplayList2()
 		else
 			energyStr = green .. "+" .. tostring(math.round(ei,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(ep,1)) .. white .. " (" .. yellow .. tostring(math.round(ec)).. white .. "/" .. tostring(math.round(es)) .. ") "
 		end
-	  gl.Text(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
+		font2:Print(energyStr, energyOffset+energyBarWidth, textOffsetY, FontSize, "onr")
 		
 		-- metal bar
 		r, g, b = 0, 0, 0
@@ -610,8 +626,8 @@ function generateDisplayList2()
 		else
 			metalStr = orange .. "±" .. tostring(math.round(mi - me)) .. green .. " +" .. tostring(math.round(mi,1)) .. white .. "/" .. red .. "-" .. tostring(math.round(mp)) .. white .. " (" .. skyblue .. tostring(math.round(mc)) .. white .. "/" .. tostring(math.round(ms)) .. ") "
 		end
-	  gl.Text(metalStr, metalOffset+metalBarWidth, textOffsetY, FontSize, "onr")
-	    
+		font2:Print(metalStr, metalOffset+metalBarWidth, textOffsetY, FontSize, "onr")
+		font2:End()
 	  gl.Texture(false)
 	
   end)
@@ -646,7 +662,31 @@ function widget:ViewResize(newX,newY)
 	--posx, posy = (vsx - width)/2, vsy - height - 10
 	posx, posy = (vsx/2), vsy - (height+bgmargin-2)
 	tweakStartX, tweakStartY = vsx - width * 1.59, vsy - height
+
+	local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+	if (fontfileScale ~= newFontfileScale) then
+		fontfileScale = newFontfileScale
+		gl.DeleteFont(font)
+		font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+		gl.DeleteFont(font2)
+		font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	end
+
 	--tweakStartX, tweakStartY = vsx - ((width * 1.59)*widgetScale), vsy - (height*widgetScale)
 	generateDisplayList()
 	generateDisplayList3()
+end
+
+
+local uiOpacitySec = 0
+function widget:Update(dt)
+	uiOpacitySec = uiOpacitySec + dt
+	if uiOpacitySec>0.5 then
+		uiOpacitySec = 0
+		if ui_opacity ~= Spring.GetConfigFloat("ui_opacity",0.66) then
+			ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+			generateDisplayList()
+			generateDisplayList3()
+		end
+	end
 end

@@ -48,7 +48,7 @@ end
 -- Config
 --------------------------------------------------------------------------------
 
-local customScale			= 1
+local customScale			= 1.05
 local customScaleStep		= 0.025
 local pointDuration    		= 40
 local cpuText				= false
@@ -57,6 +57,17 @@ local alwaysHideSpecs = false
 local lockcameraHideEnemies = true 			-- specfullview
 local lockcameraLos = true					-- togglelos
 local collapsable = false
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.35
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local fontfileScale2 = fontfileScale * 1.25
+local font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale2, fontfileOutlineSize*fontfileScale2, fontfileOutlineStrength)
 
 --------------------------------------------------------------------------------
 -- SPEED UPS
@@ -100,18 +111,16 @@ local gl_BeginEnd		= gl.BeginEnd
 local gl_DeleteList		= gl.DeleteList
 local gl_CallList		= gl.CallList
 local gl_Text			= gl.Text
-local gl_GetTextWidth	= gl.GetTextWidth
-local gl_GetTextHeight	= gl.GetTextHeight
 
 --------------------------------------------------------------------------------
 -- IMAGES
 --------------------------------------------------------------------------------
 
-local imageDirectory  = ":n:LuaUI/Images/advplayerslist/"
+local imageDirectory  = ":n:"..LUAUI_DIRNAME.."Images/advplayerslist/"
 
 local flagsDirectory  = imageDirectory.."flags/"
 
-local bgcorner        = "LuaUI/Images/bgcorner.png"
+local bgcorner        = LUAUI_DIRNAME.."Images/bgcorner.png"
 
 local pics = {
 	chipPic         = imageDirectory.."chip.dds",
@@ -223,10 +232,10 @@ local myLastCameraState
 --------------------------------------------------------------------------------
 -- 
 --------------------------------------------------------------------------------
-
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66)
 local playSounds = true
-local buttonclick = 'LuaUI/Sounds/buildbar_waypoint.wav'
-local sliderdrag = 'LuaUI/Sounds/buildbar_rem.wav'
+local buttonclick = LUAUI_DIRNAME..'Sounds/buildbar_waypoint.wav'
+local sliderdrag = LUAUI_DIRNAME..'Sounds/buildbar_rem.wav'
 
 local lastActivity = {}
 local lastFpsData = {}
@@ -292,16 +301,13 @@ local desiredLosmodeChanged = 0
 -- GEOMETRY VARIABLES
 --------------------------------------------------------------------------------
 
-local vsx,vsy  			= gl.GetViewSizes()
-
-local openClose     	= 0
 local widgetTop     	= 0
 local widgetRight   	= 1
 local widgetHeight  	= 0
 local widgetWidth   	= 0
 local widgetPosX    	= vsx-200
 local widgetPosY    	= 0
-local widgetScale		= 1
+local widgetScale		= 0
 
 local expandDown    	= false
 local expandLeft    	= true
@@ -617,7 +623,7 @@ end
 function SetMaxPlayerNameWidth()
 	-- determines the maximal player name width (in order to set the width of the widget)
 	local t = Spring_GetPlayerList()
-	local maxWidth = 14*gl_GetTextWidth(absentName) + 8 -- 8 is minimal width
+	local maxWidth = 14*font2:GetTextWidth(absentName) + 8 -- 8 is minimal width
 	local name = ''
 	local spec = false
 	local version = ''
@@ -625,7 +631,7 @@ function SetMaxPlayerNameWidth()
 	local nextWidth = 0
 	for _,wplayer in ipairs(t) do
 		name,_,spec,teamID = Spring_GetPlayerInfo(wplayer)
-		if select(4,Spring_GetTeamInfo(teamID)) then -- is AI?
+		if select(4,Spring_GetTeamInfo(teamID,false)) then -- is AI?
 			_,_,_,_,name, version = Spring_GetAIInfo(teamID)
 			if type(version) == "string" then
 				name = "AI:" .. name .. "-" .. version
@@ -638,7 +644,7 @@ function SetMaxPlayerNameWidth()
 		end
 		local charSize
 		if spec then charSize = 11 else charSize = 14 end
-		nextWidth = charSize*gl_GetTextWidth(name)+8
+		nextWidth = charSize*font2:GetTextWidth(name)+8
 		if nextWidth > maxWidth then
 			maxWidth = nextWidth
 		end
@@ -804,7 +810,9 @@ function PlayerDataBroadcast(playerName, msg)
 					gl_Color(1,1,1,0.025)
 					RectRound(0,0,screenshotWidth,screenshotHeight+12+margin+margin, 4.5, true)
 
-					gl.Text(screenshotPlayer, 4, screenshotHeight+6.5, 11, "on")
+                    font:Begin()
+                    font:Print(screenshotPlayer, 4, screenshotHeight+6.5, 11, "on")
+                    font:End()
 
 					local row = 0
 					local col = 0
@@ -1112,9 +1120,10 @@ end
 
 
 function widget:Shutdown()
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('advplayerlist')
-		WG['guishader_api'].RemoveRect('advplayerlist_screenshot')
+	if WG['guishader'] then
+		WG['guishader'].RemoveDlist('advplayerlist')
+		--WG['guishader'].RemoveRect('advplayerlist')
+		WG['guishader'].RemoveRect('advplayerlist_screenshot')
 	end
 	WG['advplayerlist_api'] = nil
 	widgetHandler:DeregisterGlobal('CameraBroadcastEvent')
@@ -1134,9 +1143,15 @@ function widget:Shutdown()
 	if screenshotDlist then
 		gl_DeleteList(screenshotDlist)
 	end
-	if lockPlayerID and mySpecStatus and Spring.GetMapDrawMode()=="los" then
-		desiredLosmode = 'normal'
-		desiredLosmodeChanged = os.clock()
+	gl.DeleteFont(font)
+	if lockPlayerID then
+		LockCamera()
+	end
+end
+
+function widget:GameOver()
+	if lockPlayerID then
+		LockCamera()
 	end
 end
 
@@ -1161,7 +1176,7 @@ function SetSidePics()
 				teamSide = teamSideTwo
 			end
 		else
-			_,_,_,_,teamSide = Spring_GetTeamInfo(team)
+			_,_,_,_,teamSide = Spring_GetTeamInfo(team,false)
 		end
 	
 		if teamSide then
@@ -1197,14 +1212,19 @@ function GetAllPlayers()
 			player[playerID] = CreatePlayer(playerID)
 			tplayerCount = tplayerCount + 1
 		end
-		if tplayerCount > 0 then
-			playerSpecs[i] = true		-- (this isnt correct when team consists of only AI)
+
+		local _,_,_,isAiTeam = Spring.GetTeamInfo(teamN,false)
+		local isLuaAI = (Spring.GetTeamLuaAI(teamN) ~= "")
+		if not (isAiTeam or isLuaAI) then
+			if tplayerCount > 0 then
+				playerSpecs[i] = true		-- (this isnt correct when team consists of only AI)
+			end
+			tplayerCount = 0
 		end
-		tplayerCount = 0
 	end
 	specPlayers = Spring_GetTeamList()
 	for _,playerID in ipairs(specPlayers) do
-		local active,_,spec = Spring_GetPlayerInfo(playerID)
+		local active,_,spec = Spring_GetPlayerInfo(playerID,false)
 		if spec == true then
 			if active == true then
 				player[playerID] = CreatePlayer(playerID)
@@ -1219,7 +1239,7 @@ function GetAliveAllyTeams()
 	local allteams   = Spring_GetTeamList()
 	teamN = table.maxn(allteams) - 1               --remove gaia
 	for i = 0,teamN-1 do
-		local _,_, isDead, _, _, tallyteam = Spring_GetTeamInfo(i)
+		local _,_, isDead, _, _, tallyteam = Spring_GetTeamInfo(i,false)
 		if not isDead then
 			aliveAllyTeams[tallyteam] = true
 		end
@@ -1234,12 +1254,7 @@ end
 
 function GetSkill(playerID)
 
-	local customtable
-	if select(11,Spring.GetPlayerInfo(playerID)) then   -- changed to 11th in engine 104.0.1.547
-		customtable = select(11,Spring.GetPlayerInfo(playerID)) -- player custom table
-	else
-		customtable = select(10,Spring.GetPlayerInfo(playerID))
-	end
+	local customtable = select(11,Spring.GetPlayerInfo(playerID))
 	local tsMu = customtable.skill
 	local tsSigma = customtable.skilluncertainty
 	local tskill = ""
@@ -1284,8 +1299,8 @@ end
 function CreatePlayer(playerID)
 	
 	--generic player data
-	local tname,_, tspec, tteam, tallyteam, tping, tcpu, tcountry, trank = Spring_GetPlayerInfo(playerID)
-	local _,_,_,_, tside, tallyteam                                      = Spring_GetTeamInfo(tteam)
+	local tname,_, tspec, tteam, tallyteam, tping, tcpu, tcountry, trank = Spring_GetPlayerInfo(playerID,false)
+	local _,_,_,_, tside, tallyteam                                      = Spring_GetTeamInfo(tteam,false)
 	local tred, tgreen, tblue  										     = Spring_GetTeamColor(tteam)
 	
 	--skill
@@ -1345,7 +1360,7 @@ end
 
 function CreatePlayerFromTeam(teamID) -- for when we don't have a human player occupying the slot, also when a player changes team (dies)
 	
-	local _,_, isDead, isAI, tside, tallyteam = Spring_GetTeamInfo(teamID)
+	local _,_, isDead, isAI, tside, tallyteam = Spring_GetTeamInfo(teamID,false)
 	local tred, tgreen, tblue                 = Spring_GetTeamColor(teamID)
 	local tname, ttotake, tskill
 	local tdead = true
@@ -1481,15 +1496,14 @@ function SortList()
 	local teamList
 	local myOldSpecStatus = mySpecStatus
 	
-	_,_, mySpecStatus,_,_,_,_,_,_ = Spring_GetPlayerInfo(myPlayerID)
+	mySpecStatus = select(3,Spring_GetPlayerInfo(myPlayerID,false))
 	
 	-- checks if a team has died
 	if mySpecStatus ~= myOldSpecStatus then
-		if mySpecStatus == true then
+		if mySpecStatus then
 			teamList = Spring_GetTeamList()
-			for _, team in ipairs(teamList) do               --
-				_,_, isDead = Spring_GetTeamInfo(team)
-				if isDead == false then
+			for _, team in ipairs(teamList) do
+				if not select(3,Spring_GetTeamInfo(team,false)) then -- not dead
 					Spec(team)
 					break
 				end
@@ -1596,8 +1610,7 @@ function SortTeams(allyTeamID, vOffset)
 		drawListOffset[#drawListOffset+1] = vOffset
 		drawList[#drawList+1] = -1
 		vOffset = SortPlayers(teamID,allyTeamID,vOffset) -- adds players form the team
-		local _,_, isDead, _, _, _ = Spring_GetTeamInfo(teamID)
-		if isDead then
+		if select(3,Spring_GetTeamInfo(teamID,false)) then
 			vOffset = vOffset - (deadPlayerHeightReduction/2)
 		end
 	end
@@ -1610,7 +1623,6 @@ function SortPlayers(teamID,allyTeamID,vOffset)
 	
 	local playersList       = Spring_GetPlayerList(teamID,true)
 	local noPlayer          = true
-	local _,_,_, isAi = Spring_GetTeamInfo(teamID)
 	
 	-- add own player (if not spec)
 	if myTeamID == teamID then
@@ -1641,7 +1653,7 @@ function SortPlayers(teamID,allyTeamID,vOffset)
 	end
 	
 	-- add AI teams
-	if isAi == true then
+	if select(4,Spring_GetTeamInfo(teamID,false)) then -- is AI
 		vOffset = vOffset + playerOffset
 		drawListOffset[#drawListOffset+1] = vOffset
 		drawList[#drawList+1] = 64 + teamID -- new AI team (instead of players)
@@ -1668,7 +1680,7 @@ function SortSpecs(vOffset)
 	local playersList = Spring_GetPlayerList(-1,true)
 	local noSpec = true
 	for _,playerID in ipairs(playersList) do
-		_,active,spec = Spring_GetPlayerInfo(playerID)
+		_,active,spec = Spring_GetPlayerInfo(playerID,false)
 		if spec and active then
 			if player[playerID].name ~= nil then
 				
@@ -1723,21 +1735,8 @@ function widget:DrawScreen()
 
 	if Spring_IsGUIHidden() then return end
 
-
-	local scaleDiffX = -((widgetPosX*widgetScale)-widgetPosX)/widgetScale
-	local scaleDiffY = -((widgetPosY*widgetScale)-widgetPosY)/widgetScale
-	gl.Scale(widgetScale,widgetScale,0)
-	gl.Translate(scaleDiffX,scaleDiffY,0)
-
 	local mouseX,mouseY,mouseButtonL = Spring_GetMouseState()
-	if collapsed then
-		-- draws the background
-		if Background then
-			gl_CallList(Background)
-		else
-			CreateBackground()
-		end
-	else
+	if not collapsed then
 		-- update lists frequently if there is mouse interaction
 		local NeedUpdate = false
 		if (mouseX > widgetPosX + m_name.posX + m_name.width - 5) and (mouseX < widgetPosX + widgetWidth) and (mouseY > widgetPosY - 16) and (mouseY < widgetPosY + widgetHeight) then
@@ -1755,14 +1754,20 @@ function widget:DrawScreen()
 			CreateLists()
 			PrevGameFrame = CurGameFrame
 		end
+	end
+	-- draws the background
+	if Background then
+		gl_CallList(Background)
+	else
+		CreateBackground()
+	end
 
-		-- draws the background
-		if Background then
-			gl_CallList(Background)
-		else
-			CreateBackground()
-		end
+	local scaleDiffX = -((widgetPosX*widgetScale)-widgetPosX)/widgetScale
+	local scaleDiffY = -((widgetPosY*widgetScale)-widgetPosY)/widgetScale
+	gl.Scale(widgetScale,widgetScale,0)
+	gl.Translate(scaleDiffX,scaleDiffY,0)
 
+	if not collapsed then
 		-- draws the main list
 		if MainList then
 			gl_CallList(MainList)
@@ -1791,8 +1796,8 @@ function widget:DrawScreen()
 		local width = (screenshotWidth*widgetScale)+margin+margin+margin
 		local height = (screenshotHeight*widgetScale)+margin+margin+margin+(15*widgetScale)
 		if screenshotSaveQueued then
-			if (WG['guishader_api'] ~= nil) then
-				WG['guishader_api'].InsertRect(left,bottom,left+width,bottom+height,'advplayerlist_screenshot')
+			if WG['guishader'] then
+				WG['guishader'].InsertRect(left,bottom,left+width,bottom+height,'advplayerlist_screenshot')
 				screenshotGuishader = true
 			end
 			if not screenshotSaved then
@@ -1808,8 +1813,8 @@ function widget:DrawScreen()
 		if screenshotWidth and IsOnRectPlain(mouseX,mouseY, screenshotPosX,screenshotPosY,screenshotPosX+(screenshotWidth*widgetScale),screenshotPosY+(screenshotHeight*widgetScale)) then
 			if mouseButtonL then
 				gl_DeleteList(screenshotDlist)
-				if (WG['guishader_api'] ~= nil) then
-					WG['guishader_api'].RemoveRect('advplayerlist_screenshot')
+				if WG['guishader'] then
+					WG['guishader'].RemoveRect('advplayerlist_screenshot')
 				end
 				screenshotDlist = nil
 			else
@@ -1854,69 +1859,69 @@ end
 --  Background gllist
 ---------------------------------------------------------------------------------------------------
 
-local function DrawRectRound(px,py,sx,sy,cs,ignoreBorder)
+local function DrawRectRound(px,py,sx,sy,cs, tl,tr,br,bl)
 	gl.TexCoord(0.8,0.8)
 	gl.Vertex(px+cs, py, 0)
 	gl.Vertex(sx-cs, py, 0)
 	gl.Vertex(sx-cs, sy, 0)
 	gl.Vertex(px+cs, sy, 0)
-	
+
 	gl.Vertex(px, py+cs, 0)
 	gl.Vertex(px+cs, py+cs, 0)
 	gl.Vertex(px+cs, sy-cs, 0)
 	gl.Vertex(px, sy-cs, 0)
-	
+
 	gl.Vertex(sx, py+cs, 0)
 	gl.Vertex(sx-cs, py+cs, 0)
 	gl.Vertex(sx-cs, sy-cs, 0)
 	gl.Vertex(sx, sy-cs, 0)
-	
-	local offset = 0.05		-- texture offset, because else gaps could show
-	
-	-- top left
-	if (py+((sy-py)*widgetScale) >= vsy-backgroundMargin or px <= backgroundMargin) and ignoreBorder == nil then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(px, sy-cs, 0)
-	-- top right
-	if (py+((sy-py)*widgetScale) >= vsy-backgroundMargin or (px+((sx-px)*widgetScale)) >= vsx-backgroundMargin) and ignoreBorder == nil  then o = 0.5 else o = offset end
+
+	local offset = 0.07		-- texture offset, because else gaps could show
+
+	-- bottom left
+	if ((py <= 0 or px <= 0)  or (bl ~= nil and bl == 0)) and bl ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, py+cs, 0)
-	-- bottom left
-	if (py <= backgroundMargin or px <= backgroundMargin) and ignoreBorder == nil  then o = 0.5 else o = offset end
+	-- bottom right
+	if ((py <= 0 or sx >= vsx) or (br ~= nil and br == 0)) and br ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, py+cs, 0)
-	-- bottom right
-	if (py <= backgroundMargin or (px+((sx-px)*widgetScale)) >= vsx-backgroundMargin) and ignoreBorder == nil  then o = 0.5 else o = offset end
+	-- top left
+	if ((sy >= vsy or px <= 0) or (tl ~= nil and tl == 0)) and tl ~= 2   then o = 0.5 else o = offset end
+	gl.TexCoord(o,o)
+	gl.Vertex(px, sy, 0)
+	gl.TexCoord(o,1-offset)
+	gl.Vertex(px+cs, sy, 0)
+	gl.TexCoord(1-offset,1-offset)
+	gl.Vertex(px+cs, sy-cs, 0)
+	gl.TexCoord(1-offset,o)
+	gl.Vertex(px, sy-cs, 0)
+	-- top right
+	if ((sy >= vsy or sx >= vsx)  or (tr ~= nil and tr == 0)) and tr ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, sy-cs, 0)
 end
-function RectRound(px,py,sx,sy,cs,ignoreBorder)		-- (coordinates work differently than the RectRound func in other widgets)
+function RectRound(px,py,sx,sy,cs, tl,tr,br,bl)		-- (coordinates work differently than the RectRound func in other widgets)
 	gl.Texture(bgcorner)
-	gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs,ignoreBorder)
+	gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs, tl,tr,br,bl)
 	gl.Texture(false)
 end
 
@@ -1937,39 +1942,48 @@ function CreateBackground()
 		TRcornerY = widgetPosY - margin + collapsedHeight
 	end
 
-	local absLeft		= BLcornerX - ((widgetPosX - BLcornerX) * (widgetScale-1))
-	local absBottom		= BLcornerY - ((widgetPosY - BLcornerY) * (widgetScale-1))
-	local absRight		= TRcornerX - ((widgetPosX - TRcornerX) * (widgetScale-1))
-	local absTop		= TRcornerY - ((widgetPosY - TRcornerY) * (widgetScale-1))
+	local absLeft		= math.floor(BLcornerX - ((widgetPosX - BLcornerX) * (widgetScale-1)))
+	local absBottom		= math.floor(BLcornerY - ((widgetPosY - BLcornerY) * (widgetScale-1)))
+	local absRight		= math.ceil(TRcornerX - ((widgetPosX - TRcornerX) * (widgetScale-1)))
+	local absTop		= math.ceil(TRcornerY - ((widgetPosY - TRcornerY) * (widgetScale-1)))
 	apiAbsPosition = {absTop,absLeft,absBottom,absRight,widgetScale,right,collapsed}
 
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].InsertRect(absLeft,absBottom,absRight,absTop,'advplayerlist')
+	local padding = 3*widgetScale
+	local paddingBottom = padding
+	local paddingRight = padding
+	local paddingTop = padding
+	local paddingLeft = padding
+	if absBottom <= 0.2 then paddingBottom = 0 end
+	if absRight >= vsx-0.2 then paddingRight = 0 end
+	if absTop <= 0.2 then paddingTop = 0 end
+	if absLeft <= 0.2 then paddingLeft = 0 end
+
+	if WG['guishader'] then
+		BackgroundGuishader = gl_CreateList( function()
+			RectRound(absLeft,absBottom,absRight,absTop,padding*2, math.min(paddingLeft,paddingTop), math.min(paddingTop,paddingRight), math.min(paddingRight,paddingBottom), math.min(paddingBottom,paddingLeft))
+		end)
+		WG['guishader'].InsertDlist(BackgroundGuishader, 'advplayerlist')
+		--WG['guishader'].InsertRect(absLeft,absBottom,absRight,absTop,'advplayerlist')
 	end
 	Background = gl_CreateList(function()
-		gl_Color(0,0,0,0.66)
-		RectRound(BLcornerX,BLcornerY,TRcornerX,TRcornerY,6)
-		
-		local padding = 2.75
-		gl_Color(1,1,1,0.025)
-		RectRound(BLcornerX+padding,BLcornerY+padding,TRcornerX-padding,TRcornerY-padding,padding,true)
 
+		gl_Color(0,0,0,ui_opacity)
+		RectRound(absLeft,absBottom,absRight,absTop,padding*2, math.min(paddingLeft,paddingTop), math.min(paddingTop,paddingRight), math.min(paddingRight,paddingBottom), math.min(paddingBottom,paddingLeft))
+		gl_Color(1,1,1,ui_opacity*0.055)
+		RectRound(absLeft+paddingLeft,absBottom+paddingBottom,absRight-paddingRight,absTop-paddingTop,padding*1.66, math.min(paddingLeft,paddingTop), math.min(paddingTop,paddingRight), math.min(paddingRight,paddingBottom), math.min(paddingBottom,paddingLeft))
 		if collapsed then
+			font:Begin()
 			local text = 'Playerlist'
 			local yOffset = collapsedHeight*0.5
 			local xOffset = collapsedHeight/6
-			gl_Color(0,0,0,0.2)
-			gl_Text(text, widgetPosX - 1 + xOffset, TRcornerY-padding -yOffset, 13, "")
-			gl_Text(text, widgetPosX + 1 + xOffset, TRcornerY-padding -yOffset, 13, "")
-			gl_Color(0.9,0.9,0.9,0.75)
-			gl_Text(text, widgetPosX + xOffset, TRcornerY-padding -yOffset+0.8, 13, "n")
+			font:SetTextColor(0,0,0,0.2)
+			font:Print(text, widgetPosX - 1 + xOffset, TRcornerY-padding -yOffset, 13, "")
+			font:Print(text, widgetPosX + 1 + xOffset, TRcornerY-padding -yOffset, 13, "")
+			font:SetTextColor(0.9,0.9,0.9,0.75)
+			font:Print(text, widgetPosX + xOffset, TRcornerY-padding -yOffset+0.8, 13, "n")
+			font:End()
 		end
-		--DrawRect(BLcornerX,BLcornerY,TRcornerX,TRcornerY)
-		-- draws highlight (top and left sides)
-		--gl_Color(0.44,0.44,0.44,0.38)	
-		--gl_Rect(widgetPosX-margin-1,					widgetPosY + widgetHeight +margin, 	widgetPosX + widgetWidth+margin, 			widgetPosY + widgetHeight-1+margin)
-		--gl_Rect(widgetPosX-margin-1 , 					widgetPosY-margin, 					widgetPosX-margin, 							widgetPosY-margin + widgetHeight + 1  - 1+margin+margin)
-		
+
 		gl_Color(1,1,1,1)
 	end)
 
@@ -2046,6 +2060,7 @@ function CreateMainList(tip)
 	if MainList then
 		gl_DeleteList(MainList)
 	end
+	tipText = nil
 	MainList = gl_CreateList(function()
 		drawTipText = nil
 		for i, drawObject in ipairs(drawList) do
@@ -2088,7 +2103,9 @@ function CreateMainList(tip)
 		end
 		if drawTipText ~= nil then 
 			tipText = drawTipText
-			DrawTip(drawTipMouseX, drawTipMouseY)
+			if not WG['tooltip'] then	-- else use tooltip widget (in widget:update)
+				DrawTip(drawTipMouseX, drawTipMouseY)
+			end
 		end
 	end)
 	
@@ -2098,12 +2115,13 @@ function DrawLabel(text, vOffset, drawSeparator)
 	if widgetWidth < 67 then
 		text = string.sub(text, 0, 1)
 	end
-	gl_Color(0,0,0,0.2)
-	gl_Text(text, widgetPosX - 1, widgetPosY + widgetHeight -vOffset+6.6, 12, "")
-	gl_Text(text, widgetPosX + 1, widgetPosY + widgetHeight -vOffset+6.6, 12, "")
-	gl_Color(0.9,0.9,0.9,0.75)
-	gl_Text(text, widgetPosX, widgetPosY + widgetHeight -vOffset+7.5, 12, "n")
-	
+	font:Begin()
+	--font:SetTextColor(0,0,0,0.2)
+	--font:Print(text, widgetPosX - 1, widgetPosY + widgetHeight -vOffset+6.6, 12, "")
+	--font:Print(text, widgetPosX + 1, widgetPosY + widgetHeight -vOffset+6.6, 12, "")
+	font:SetTextColor(0.9,0.9,0.9,0.75)
+	font:Print(text, widgetPosX, widgetPosY + widgetHeight -vOffset+7.5, 12, "on")
+	font:End()
 	if drawSeparator then
 		--DrawSeparator(vOffset)
 	end
@@ -2113,11 +2131,13 @@ function DrawLabelTip(text, vOffset, xOffset)
 	if widgetWidth < 67 then
 		text = string.sub(text, 0, 1)
 	end
-	gl_Color(0,0,0,0.08)
-	gl_Text(text, widgetPosX + xOffset - 1, widgetPosY + widgetHeight -vOffset+6.8, 10, "")
-	gl_Text(text, widgetPosX + xOffset + 1, widgetPosY + widgetHeight -vOffset+6.8, 10, "")
-	gl_Color(0.9,0.9,0.9,0.35)
-	gl_Text(text, widgetPosX + xOffset, widgetPosY + widgetHeight -vOffset+7.5, 10, "n")
+	font:Begin()
+	--font:SetTextColor(0,0,0,0.08)
+	--font:Print(text, widgetPosX + xOffset - 1, widgetPosY + widgetHeight -vOffset+6.8, 10, "")
+	--font:Print(text, widgetPosX + xOffset + 1, widgetPosY + widgetHeight -vOffset+6.8, 10, "")
+	font:SetTextColor(0.9,0.9,0.9,0.35)
+	font:Print(text, widgetPosX + xOffset, widgetPosY + widgetHeight -vOffset+7.5, 10, "on")
+	font:End()
 end
 
 function DrawSeparator(vOffset)
@@ -2130,9 +2150,11 @@ function DrawSeparator(vOffset)
 end
 
 function DrawLabelRightside(text, vOffset)
-	local textLength = (gl_GetTextWidth(text)*12)*widgetScale
-	gl_Color(1,1,1,0.13)
-	gl_Text(text, widgetRight - textLength, widgetPosY + widgetHeight -vOffset+7.5, 12, "n")
+	local textLength = (font:GetTextWidth(text)*12)*widgetScale
+	font:Begin()
+	font:SetTextColor(1,1,1,0.13)
+	font:Print(text, widgetRight - textLength, widgetPosY + widgetHeight -vOffset+7.5, 12, "n")
+	font:End()
 end
 
 
@@ -2416,8 +2438,10 @@ end
 
 function DrawChips(playerID, posY)
 	local xPos = m_name.posX + widgetPosX - 6
-	gl_Color(0.75,0.75,0.75,0.8)
-	gl_Text(playerScores[playerID].score, xPos-5, posY+4, 9.5, "r")
+	font:Begin()
+	font:SetTextColor(0.75,0.75,0.75,0.8)
+	font:Print(playerScores[playerID].score, xPos-5, posY+4, 9.5, "r")
+	font:End()
 	gl_Color(1,1,1,1)
 	gl_Texture(pics["chipPic"])
 	DrawRect(xPos+4, posY+3.5, xPos-2.5, posY + 10)
@@ -2604,19 +2628,25 @@ function DrawName(name, team, posY, dark, playerID)
 		DrawState(playerID, m_name.posX + widgetPosX, posY)
 	end
 	if (nameColourR + nameColourG*1.2 + nameColourB*0.4) < 0.8 then
-		gl_Text(colourNames(team) .. nameText, m_name.posX + widgetPosX + 3 + xPadding, posY + 4, 14, "o") -- draws name
+        font2:Begin()
+        font2:Print(colourNames(team) .. nameText, m_name.posX + widgetPosX + 3 + xPadding, posY + 4, 14, "o")
+        font2:End()
 	else
-		gl_Color(0,0,0,0.45)
-		gl_Text(nameText, m_name.posX + widgetPosX + 2 + xPadding, posY + 3, 14, "n") -- draws name
-		gl_Text(nameText, m_name.posX + widgetPosX + 4 + xPadding, posY + 3, 14, "n") -- draws name
-		gl_Color(nameColourR,nameColourG,nameColourB,1)
-		gl_Text(nameText, m_name.posX + widgetPosX + 3 + xPadding, posY + 4, 14, "n") -- draws name
+        font2:Begin()
+        font2:SetTextColor(0,0,0,0.4)
+        font2:SetOutlineColor(0,0,0,0.4)
+        font2:Print(nameText, m_name.posX + widgetPosX + 2 + xPadding, posY + 3, 14, "n") -- draws name
+        font2:Print(nameText, m_name.posX + widgetPosX + 4 + xPadding, posY + 3, 14, "n") -- draws name
+        font2:SetTextColor(1,1,1,1)
+        font2:SetOutlineColor(0,0,0,1)
+        font2:Print(colourNames(team) .. nameText, m_name.posX + widgetPosX + 3 + xPadding, posY + 4, 14, "n")
+        font2:End()
 	end
 	if ignored then
 		gl_Color(1,1,1,0.9)	
 		local x = m_name.posX + widgetPosX + 2 + xPadding
 		local y = posY + 7
-		local w = gl_GetTextWidth(nameText) * 14 + 2
+		local w = font:GetTextWidth(nameText) * 14 + 2
 		local h = 2
 		gl_Texture(false)
 		DrawRect(x,y,x+w,y+h)
@@ -2645,26 +2675,36 @@ function DrawSmallName(name, team, posY, dark, playerID, alpha)
 	if playerSpecs[playerID] ~= nil then
 		nameColourR,nameColourG,nameColourB,nameColourA = Spring_GetTeamColor(team)
 		if (nameColourR + nameColourG*1.2 + nameColourB*0.4) < 0.8 then
-			gl_Text(colourNames(team) .. name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "o")
+            font2:Begin()
+            font2:Print(colourNames(team) .. name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "o")
+            font2:End()
 		else
-			gl_Color(0,0,0,0.3)
-			gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 2, posY + 3.2, 11, "n") -- draws name
-			gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 4, posY + 3.2, 11, "n") -- draws name
-			gl_Color(nameColourR,nameColourG,nameColourB,0.78)
-			gl_Text(name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "n")
+            font2:Begin()
+            font2:SetTextColor(0,0,0,0.3)
+            font2:SetOutlineColor(0,0,0,0.3)
+            font2:Print(name, m_name.posX + textindent + explayerindent + widgetPosX + 2, posY + 3.2, 11, "n") -- draws name
+            font2:Print(name, m_name.posX + textindent + explayerindent + widgetPosX + 4, posY + 3.2, 11, "n") -- draws name
+            font2:SetTextColor(1,1,1,0.78)
+            font2:SetOutlineColor(0,0,0,0.3)
+			--gl_Color(nameColourR,nameColourG,nameColourB,0.78)
+            font2:Print(colourNames(team) .. name, m_name.posX + textindent + explayerindent + widgetPosX + 3, posY + 4, 11, "n")
+            font2:End()
 		end
 	else
-		gl_Color(0,0,0,0.3)
-		gl_Text(name, m_name.posX + textindent + widgetPosX + 2.2, posY + 3.3, 10, "n")
-		gl_Text(name, m_name.posX + textindent + widgetPosX + 3.8, posY + 3.3, 10, "n")
-		gl_Color(1,1,1,alpha)
-		gl_Text(name, m_name.posX + textindent + widgetPosX + 3, posY + 4, 10, "n")
+		font2:Begin()
+		font2:SetTextColor(0,0,0,0.3)
+		font2:SetOutlineColor(0,0,0,0.3)
+		font2:Print(name, m_name.posX + textindent + widgetPosX + 2.2, posY + 3.3, 10, "n")
+		font2:Print(name, m_name.posX + textindent + widgetPosX + 3.8, posY + 3.3, 10, "n")
+		font2:SetTextColor(1,1,1,alpha)
+		font2:Print(name, m_name.posX + textindent + widgetPosX + 3, posY + 4, 10, "n")
+		font2:End()
 	end
 	if ignored then
 		gl_Color(1,1,1,0.7)	
 		local x = m_name.posX + textindent + widgetPosX + 2.2
 		local y = posY + 6
-		local w = gl_GetTextWidth(name) * 10 + 2
+		local w = font:GetTextWidth(name) * 10 + 2
 		local h = 2
 		gl_Texture(false)
 		DrawRect(x,y,x+w,y+h)
@@ -2679,27 +2719,29 @@ function DrawID(playerID, posY, dark, dead)
 	end
 	local fontSize = 11
 	local deadspace = 0
-	if dead then
-		fontSize = 8
-		deadspace = 1.5
-		gl_Color(0,0,0,0.4)
-	else
-		gl_Color(0,0,0,0.6)
-	end
+	font:Begin()
+	--if dead then
+	--	fontSize = 8
+	--	deadspace = 1.5
+	--	font:SetTextColor(0,0,0,0.4)
+	--else
+	--	font:SetTextColor(0,0,0,0.6)
+	--end
 	--gl_Text(colourNames(playerID) .. " ".. playerID .. "", m_ID.posX + widgetPosX+4.5, posY + 5, 11, "o")
-	gl_Text(spacer .. playerID .. "", m_ID.posX + deadspace + widgetPosX+4.5, posY + 4.1, fontSize, "n")
+	--font:Print(spacer .. playerID .. "", m_ID.posX + deadspace + widgetPosX+4.5, posY + 4.1, fontSize, "n")
 	if dead then
-		gl_Color(1,1,1,0.33)
+		font:SetTextColor(1,1,1,0.4)
 	else
-		gl_Color(1,1,1,0.5)
+		font:SetTextColor(1,1,1,0.66)
 	end
-	gl_Text(spacer .. playerID .. "", m_ID.posX + deadspace + widgetPosX+4.5, posY + 5, fontSize, "n")
-	gl_Color(1,1,1)
+	font:Print(spacer .. playerID .. "", m_ID.posX + deadspace + widgetPosX+4.5, posY + 5, fontSize, "on")
+	font:End()
 end
 
 function DrawSkill(skill, posY, dark)
-	gl_Text(skill, m_skill.posX + widgetPosX + m_skill.width - 2, posY + 5.3, 9.5, "or")
-	gl_Color(1,1,1)
+	font:Begin()
+	font:Print(skill, m_skill.posX + widgetPosX + m_skill.width - 2, posY + 5.3, 9.5, "or")
+	font:End()
 end
 
 function DrawPingCpu(pingLvl, cpuLvl, posY, spec, alpha, cpu, fps)
@@ -2715,23 +2757,23 @@ function DrawPingCpu(pingLvl, cpuLvl, posY, spec, alpha, cpu, fps)
 	
 	grayvalue = 0.7 + (cpu/135)
 	
+	font:Begin()
 	if cpuText ~= nil and cpuText then
 		if type(cpu) == "number" then
 			if cpu > 99 then
 				cpu = 99
 			end
 			if spec then
-				gl_Color(0,0,0,0.1+(grayvalue*0.4))
-				gl_Text(cpu, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9, "r")
-				gl_Color(grayvalue,grayvalue,grayvalue,0.66*alpha*grayvalue)
-				gl_Text(cpu, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9, "r")
+				--font:SetTextColor(0,0,0,0.1+(grayvalue*0.4))
+				--font:Print(cpu, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9, "r")
+				font:SetTextColor(grayvalue,grayvalue,grayvalue,0.66*alpha*grayvalue)
+				font:Print(cpu, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9, "ro")
 			else
-				gl_Color(0,0,0,0.12+(grayvalue*0.44))
-				gl_Text(cpu, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9.5, "r")
-				gl_Color(grayvalue,grayvalue,grayvalue,0.8*alpha*grayvalue)
-				gl_Text(cpu, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9.5, "r")
+				--font:SetTextColor(0,0,0,0.12+(grayvalue*0.44))
+				--font:Print(cpu, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9.5, "r")
+				font:SetTextColor(grayvalue,grayvalue,grayvalue,0.8*alpha*grayvalue)
+				font:Print(cpu, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9.5, "ro")
 			end
-			gl_Color(1,1,1)
 		end
 	else
 	
@@ -2745,17 +2787,16 @@ function DrawPingCpu(pingLvl, cpuLvl, posY, spec, alpha, cpu, fps)
 				greyvalue = 1
 			end
 			if spec then
-				gl_Color(0,0,0,0.1+(grayvalue*0.4))
-				gl_Text(fps, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9, "r")
-				gl_Color(grayvalue,grayvalue,grayvalue,0.77*alpha*grayvalue)
-				gl_Text(fps, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9, "r")
+				--font:SetTextColor(0,0,0,0.1+(grayvalue*0.4))
+				--font:Print(fps, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9, "r")
+				font:SetTextColor(grayvalue,grayvalue,grayvalue,0.77*alpha*grayvalue)
+				font:Print(fps, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9, "ro")
 			else
-				gl_Color(0,0,0,0.12+(grayvalue*0.44))
-				gl_Text(fps, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9.5, "r")
-				gl_Color(grayvalue,grayvalue,grayvalue,alpha*grayvalue)
-				gl_Text(fps, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9.5, "r")
+				--font:SetTextColor(0,0,0,0.12+(grayvalue*0.44))
+				--font:Print(fps, m_cpuping.posX + widgetPosX+11, posY + 4.3, 9.5, "r")
+				font:SetTextColor(grayvalue,grayvalue,grayvalue,alpha*grayvalue)
+				font:Print(fps, m_cpuping.posX + widgetPosX+11, posY + 5.3, 9.5, "ro")
 			end
-			gl_Color(1,1,1)
 		else
 			gl_Texture(pics["cpuPic"])
 			if spec then
@@ -2765,8 +2806,10 @@ function DrawPingCpu(pingLvl, cpuLvl, posY, spec, alpha, cpu, fps)
 				gl_Color(pingCpuColors[cpuLvl].r,pingCpuColors[cpuLvl].g,pingCpuColors[cpuLvl].b)
 				DrawRect(m_cpuping.posX + widgetPosX  + 1, posY+1, m_cpuping.posX + widgetPosX  + 14, posY + 15)
 			end
+			gl_Color(1,1,1,1)
 		end
 	end
+	font:End()
 end
 
 function DrawPoint(posY,pointtime)
@@ -2926,7 +2969,7 @@ function DrawTip(mouseX, mouseY)
 	text = tipText --this is needed because we're inside a gllist
 	if text ~= nil then
 		local fontSize = 14*widgetScale
-		local tw = fontSize*gl_GetTextWidth(text) + (20*widgetScale)
+		local tw = fontSize*font:GetTextWidth(text) + (20*widgetScale)
 		local _, lines = string.gsub(text, "\n", "")
 		lines = lines + 1
 		
@@ -2964,17 +3007,16 @@ function DrawTip(mouseX, mouseY)
 		-- draw text
 		local textLines = stringToLines(text)
 		th = 0
-		gl.BeginText()
+		font:Begin()
 		for i, line in ipairs(textLines) do
-
 			if right then
-				gl_Text('\255\244\244\244'..line, mouseX+xoffset+(8*widgetScale)-tw, mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
+				font:Print('\255\244\244\244'..line, mouseX+xoffset+(8*widgetScale)-tw, mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
 			else
-				gl_Text('\255\244\244\244'..line, mouseX+xoffset+(8*widgetScale), mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
+				font:Print('\255\244\244\244'..line, mouseX+xoffset+(8*widgetScale), mouseY+(8*widgetScale)+ycorrection+th, fontSize, "o")
 			end
 			th = th - lineHeight
 		end
-		gl.EndText()
+		font:End()
 	end
 	tipText = nil
 
@@ -2995,6 +3037,7 @@ function CreateShareSlider()
 	
 	ShareSlider = gl_CreateList(function()
 
+		font:Begin()
 	local posY
 	if energyPlayer ~= nil then
 		posY = widgetPosY + widgetHeight - energyPlayer.posY
@@ -3006,12 +3049,12 @@ function CreateShareSlider()
 		if right == true then
 			DrawRect(m_share.posX + widgetPosX  - 28,posY-1+sliderPosition, m_share.posX + widgetPosX  + 19,posY+17+sliderPosition)
 			gl_Texture(false)
-			gl_Text(amountEM.."", m_share.posX + widgetPosX  - 5,posY+3+sliderPosition)
-		else
-			DrawRect(m_share.posX + widgetPosX  + 76,posY-1+sliderPosition, m_share.posX + widgetPosX  + 31,posY+17+sliderPosition)
-			gl_Texture(false)
-			gl_Text(amountEM.."", m_share.posX + widgetPosX  + 55,posY+3+sliderPosition)				
-		end
+				font:Print(amountEM.."", m_share.posX + widgetPosX  - 5,posY+3+sliderPosition, 14, "on")
+			else
+				DrawRect(m_share.posX + widgetPosX  + 76,posY-1+sliderPosition, m_share.posX + widgetPosX  + 31,posY+17+sliderPosition)
+				gl_Texture(false)
+				font:Print(amountEM.."", m_share.posX + widgetPosX  + 55,posY+3+sliderPosition, 14, "on")
+			end
 	elseif metalPlayer ~= nil then
 		posY = widgetPosY + widgetHeight - metalPlayer.posY
 		gl_Texture(pics["barPic"])
@@ -3022,13 +3065,14 @@ function CreateShareSlider()
 		if right == true then
 			DrawRect(m_share.posX + widgetPosX  - 12,posY-1+sliderPosition, m_share.posX + widgetPosX  + 35,posY+17+sliderPosition)
 			gl_Texture(false)
-			gl_Text(amountEM.."", m_share.posX + widgetPosX  + 11,posY+3+sliderPosition)
-		else
-			DrawRect(m_share.posX + widgetPosX  + 88,posY-1+sliderPosition, m_share.posX + widgetPosX  + 47,posY+17+sliderPosition)
-			gl_Texture(false)
-			gl_Text(amountEM.."", m_share.posX + widgetPosX  + 71,posY+3+sliderPosition)
+				font:Print(amountEM.."", m_share.posX + widgetPosX  + 11,posY+3+sliderPosition, 14, "on")
+			else
+				DrawRect(m_share.posX + widgetPosX  + 88,posY-1+sliderPosition, m_share.posX + widgetPosX  + 47,posY+17+sliderPosition)
+				gl_Texture(false)
+				font:Print(amountEM.."", m_share.posX + widgetPosX  + 71,posY+3+sliderPosition, 14, "on")
+			end
 		end
-	end
+		font:End()
 	
 	end)
 end
@@ -3659,7 +3703,7 @@ function widget:SetConfigData(data)      -- load
 	end
 	if data.lockPlayerID ~= nil and Spring.GetGameFrame()>0 then
 		lockPlayerID = data.lockPlayerID
-		if lockPlayerID and not select(3,Spring_GetPlayerInfo(lockPlayerID)) then
+		if lockPlayerID and not select(3,Spring_GetPlayerInfo(lockPlayerID),false) then
 			if not lockcameraHideEnemies then
 				if not fullView then
 					Spring.SendCommands("specfullview")
@@ -3743,7 +3787,7 @@ end
 function CheckPlayersChange()
 	local sorting = false
 	for i = 0,63 do
-		local name,active,spec,teamID,allyTeamID,pingTime,cpuUsage, country, rank = Spring_GetPlayerInfo(i)
+		local name,active,spec,teamID,allyTeamID,pingTime,cpuUsage, country, rank = Spring_GetPlayerInfo(i,false)
 		if active == false then
 			if player[i].name ~= nil then                                             -- NON SPEC PLAYER LEAVING
 				if player[i].spec==false then
@@ -3892,11 +3936,31 @@ local timeCounter = 0
 local updateRate = 0.75
 local updateRatePreStart = 0.25
 local lastTakeMsg = -120
-
+local uiOpacitySec = 0.5
+local hoverPlayerlist = false
 function widget:Update(delta) --handles takes & related messages
+
+	local mx,my = Spring.GetMouseState()
+	hoverPlayerlist = false
+	if isInBox(mx, my, {apiAbsPosition[2]-1,apiAbsPosition[3]-1,apiAbsPosition[4]+1,apiAbsPosition[1]+1}) then
+		hoverPlayerlist = true
+		if tipText and WG['tooltip'] then
+			WG['tooltip'].ShowTooltip('advplayerlist', tipText)
+		end
+	end
+
+
+	uiOpacitySec = uiOpacitySec + delta
+	if uiOpacitySec>0.5 then
+		uiOpacitySec = 0
+		if ui_opacity ~= Spring.GetConfigFloat("ui_opacity",0.66) then
+			ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+			CreateBackground()
+		end
+	end
+
 	if collapsable then
-		local mx,my = Spring.GetMouseState()
-		if collapsed and isInBox(mx, my, {apiAbsPosition[2]-1,apiAbsPosition[3]-1,apiAbsPosition[4]+1,apiAbsPosition[1]+1}) then
+		if collapsed and hoverPlayerlist then
 			collapsed = false
 			CreateBackground()
 		elseif not collapsed and not energyPlayer and not metalPlayer then
@@ -4004,7 +4068,7 @@ function updateWidgetScale()
 	if customScale < 0.6 then
 		customScale = 0.6
 	end
-	widgetScale = (0.7 + (vsx*vsy / 5000000)) * customScale
+	widgetScale = (0.75 + (vsx*vsy / 5000000)) * customScale
 end
 
 function customScaleUp()
@@ -4024,10 +4088,16 @@ end
 
 function widget:ViewResize(viewSizeX, viewSizeY)
 	local dx, dy = vsx - viewSizeX, vsy - viewSizeY
+
+	--local vsxDiff = 1 / (vsx/viewSizeX)
+	--local vsyDiff = 1 / (vsy/viewSizeY)
+
 	vsx, vsy = viewSizeX, viewSizeY
-	
+
+	--local oldWidgetScale = widgetScale
 	updateWidgetScale()
-	
+	--local scaleDiff = 1 / (vsx/widgetScale)
+
 	if expandDown == true then
 		widgetTop  = widgetTop - dy
 		widgetPosY = widgetTop - widgetHeight
@@ -4035,6 +4105,15 @@ function widget:ViewResize(viewSizeX, viewSizeY)
 	if expandLeft == true then
 		widgetRight = widgetRight - dx
 	    widgetPosX = vsx - (widgetWidth * widgetScale) - widgetRelRight
+	end
+	local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+	if (fontfileScale ~= newFontfileScale) then
+		fontfileScale = newFontfileScale
+		fontfileScale2 = newFontfileScale * 1.25
+		gl.DeleteFont(font)
+		font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+		gl.DeleteFont(font2)
+		font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale2, fontfileOutlineSize*fontfileScale2, fontfileOutlineStrength)
 	end
 end
 

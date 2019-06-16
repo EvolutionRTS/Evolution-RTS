@@ -19,6 +19,14 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local minFps					= 22		-- stops snowing at
 local maxFps					= 55		-- max particles at
 local particleSteps				= 14		-- max steps in diminishing number of particles	(dont use too much steps, creates extra dlist for each step)
@@ -234,6 +242,7 @@ function init()
 
 	shader = glCreateShader({
 		vertex = [[
+	  		#version 150 compatibility
 			uniform float time;
 			uniform float scale;
 			uniform vec3 speed;
@@ -356,11 +365,13 @@ function widget:Initialize()
 		local text = "Snowing less when FPS gets lower \n"
 		local text2 = "/snow to toggle snow... for this map \n".."disable 'Snow' widget... for all maps "
 		local fontSize = 30
-		--local textWidth = gl.GetTextWidth(text)*fontSize
-		local textHeight = gl.GetTextHeight(text)*fontSize
+		--local textWidth = font:GetTextWidth(text)*fontSize
+		local textHeight = font:GetTextHeight(text)*fontSize
 		--gl.Text(text, -textWidth/2, -textHeight/2, fontSize, "")
-		gl.Text(text, 0, textHeight/2, fontSize, "c")
-		gl.Text(text2, 0, -textHeight/1.6, fontSize*0.8, "c")
+		font:Begin()
+		font:Print(text, 0, textHeight/2, fontSize, "c")
+		font:Print(text2, 0, -textHeight/1.6, fontSize*0.8, "c")
+		font:End()
 	end)
 	
 	startOsClock = os.clock()
@@ -446,6 +457,7 @@ function widget:Shutdown()
 	if drawinfolist ~= nil then
 		gl.DeleteList(drawinfolist)
 	end
+	gl.DeleteFont(font)
 end
 
 function widget:DrawScreen()
@@ -526,6 +538,12 @@ end
 function widget:ViewResize(newX,newY)
 	vsx, vsy = newX, newY
 	widgetScale = (0.55 + (vsx*vsy / 10000000))
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
 	if particleLists[#particleTypes] ~= nil then
 		CreateParticleLists()
 		gameFrameCountdown = 80

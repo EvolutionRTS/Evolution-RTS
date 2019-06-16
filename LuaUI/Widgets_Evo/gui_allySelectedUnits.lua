@@ -1,4 +1,3 @@
-include("colors.h.lua")
 include("keysym.h.lua")
 local versionNumber = "2.03"
 
@@ -13,6 +12,14 @@ function widget:GetInfo()
 		enabled   = true
 	}
 end
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
 --callin driven
 --"hot" units
@@ -184,13 +191,14 @@ function widget:Shutdown()
 	if circleLinesAlly ~= nil then
 		gl.DeleteList(circleLinesAlly)
 	end
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('allyselectedunits')
+	gl.DeleteFont(font)
+	if WG['guishader'] then
+		WG['guishader'].RemoveRect('allyselectedunits')
 	end
 end
 
 function widget:PlayerAdded(playerID)
-	local playerTeam = select(4,spGetPlayerInfo(playerID))
+	local playerTeam = select(4,spGetPlayerInfo(playerID,false))
 	if not playerSelectedUnits[ playerID ] then
 		playerSelectedUnits[ playerID ] = {
 			["units"]={},
@@ -233,7 +241,7 @@ function widget:PlayerChanged(playerID)
 		end
 	end
 	myTeamID = spGetLocalTeamID()
-	local playerTeam = select(4,spGetPlayerInfo(playerID))
+	local playerTeam = select(4,spGetPlayerInfo(playerID,false))
 	local oldCoopStatus = playerSelectedUnits[ playerID ]["coop"]
 	playerSelectedUnits[ playerID ]["coop"] = (teamID == myTeamID)
 	playerSelectedUnits[ playerID ]["todraw"] = DoDrawPlayer(playerID)
@@ -290,7 +298,7 @@ end
 
 
 function selectedUnitsClear(playerID)
-	isSpec = select(3,spGetPlayerInfo(playerID))
+	isSpec = select(3,spGetPlayerInfo(playerID),false)
 	if not isSpec or (lockPlayerID ~= nil and playerID == lockPlayerID) then
 		if not playerSelectedUnits[ playerID ] then
 			widget:PlayerAdded(playerID)
@@ -308,7 +316,7 @@ function selectedUnitsClear(playerID)
 end
 
 function selectedUnitsAdd(playerID,unitID)
-	isSpec = select(3,spGetPlayerInfo(playerID))
+	isSpec = select(3,spGetPlayerInfo(playerID),false)
 	if not isSpec or (lockPlayerID ~= nil and playerID == lockPlayerID) then
 		if not playerSelectedUnits[ playerID ] then
 			widget:PlayerAdded(playerID)
@@ -330,7 +338,7 @@ function selectedUnitsAdd(playerID,unitID)
 end
 
 function selectedUnitsRemove(playerID,unitID)
-	isSpec = select(3,spGetPlayerInfo(playerID))
+	isSpec = select(3,spGetPlayerInfo(playerID),false)
 	if not isSpec or (lockPlayerID ~= nil and playerID == lockPlayerID) then
 		if not playerSelectedUnits[ playerID ] then
 			widget:PlayerAdded(playerID)
@@ -388,9 +396,17 @@ function widget:Update(dt)
 		end
 	end
 end
-  
-function widget:ViewResize(viewSizeX, viewSizeY)
-	vsx, vsy = viewSizeX, viewSizeY
+
+function widget:ViewResize(n_vsx,n_vsy)
+	vsx,vsy = Spring.GetViewGeometry()
+	widgetScale = (0.5 + (vsx*vsy / 5700000))
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
+
 	xPos, yPos            = xRelPos*vsx, yRelPos*vsy
 	sizeMultiplier = 0.55 + (vsx*vsy / 8000000)
 end
@@ -416,12 +432,13 @@ local function createGuiList()
 	guiList = gl.CreateList(function()
 		glColor(0, 0, 0, 0.6)
 		RectRound(xPos, yPos, xPos + (panelWidth*sizeMultiplier), yPos + (panelHeight*sizeMultiplier), 8*sizeMultiplier)
-		glColor(1, 1, 1, 1)
-		glText("Ally Selected Units", xPos + (10*sizeMultiplier), yPos + ((panelHeight - 19)*sizeMultiplier), 13*sizeMultiplier, "n")
+		font:Begin()
+		font:Print("Ally Selected Units", xPos + (10*sizeMultiplier), yPos + ((panelHeight - 19)*sizeMultiplier), 13*sizeMultiplier, "n")
+		font:End()
 		glColor(1, 1, 1, 0.2)
 		drawCheckbox(xPos + (12*sizeMultiplier), yPos + (10*sizeMultiplier), selectPlayerUnits,  "Select tracked player units")
-		if (WG['guishader_api'] ~= nil) then
-			WG['guishader_api'].InsertRect(xPos, yPos, xPos + (panelWidth*sizeMultiplier), yPos + (panelHeight*sizeMultiplier), 'allyselectedunits')
+		if WG['guishader'] then
+			WG['guishader'].InsertRect(xPos, yPos, xPos + (panelWidth*sizeMultiplier), yPos + (panelHeight*sizeMultiplier), 'allyselectedunits')
 		end
 	end)
 end
@@ -571,8 +588,8 @@ if showGui then
             end
             glCallList(guiList)
         else
-            if (WG['guishader_api'] ~= nil) then
-                WG['guishader_api'].RemoveRect('allyselectedunits')
+            if WG['guishader'] then
+                WG['guishader'].RemoveRect('allyselectedunits')
             end
         end
     end
@@ -600,41 +617,41 @@ if showGui then
         --if py <= 0 or px <= 0 then o = 0.5 else o = offset end
         gl.TexCoord(o,o)
         gl.Vertex(px, py, 0)
-        gl.TexCoord(o,1-o)
+        gl.TexCoord(o,1-offset)
         gl.Vertex(px+cs, py, 0)
-        gl.TexCoord(1-o,1-o)
+        gl.TexCoord(1-offset,1-offset)
         gl.Vertex(px+cs, py+cs, 0)
-        gl.TexCoord(1-o,o)
+        gl.TexCoord(1-offset,o)
         gl.Vertex(px, py+cs, 0)
         -- top right
         --if py <= 0 or sx >= vsx then o = 0.5 else o = offset end
         gl.TexCoord(o,o)
         gl.Vertex(sx, py, 0)
-        gl.TexCoord(o,1-o)
+        gl.TexCoord(o,1-offset)
         gl.Vertex(sx-cs, py, 0)
-        gl.TexCoord(1-o,1-o)
+        gl.TexCoord(1-offset,1-offset)
         gl.Vertex(sx-cs, py+cs, 0)
-        gl.TexCoord(1-o,o)
+        gl.TexCoord(1-offset,o)
         gl.Vertex(sx, py+cs, 0)
         -- bottom left
         --if sy >= vsy or px <= 0 then o = 0.5 else o = offset end
         gl.TexCoord(o,o)
         gl.Vertex(px, sy, 0)
-        gl.TexCoord(o,1-o)
+        gl.TexCoord(o,1-offset)
         gl.Vertex(px+cs, sy, 0)
-        gl.TexCoord(1-o,1-o)
+        gl.TexCoord(1-offset,1-offset)
         gl.Vertex(px+cs, sy-cs, 0)
-        gl.TexCoord(1-o,o)
+        gl.TexCoord(1-offset,o)
         gl.Vertex(px, sy-cs, 0)
         -- bottom right
         --if sy >= vsy or sx >= vsx then o = 0.5 else o = offset end
         gl.TexCoord(o,o)
         gl.Vertex(sx, sy, 0)
-        gl.TexCoord(o,1-o)
+        gl.TexCoord(o,1-offset)
         gl.Vertex(sx-cs, sy, 0)
-        gl.TexCoord(1-o,1-o)
+        gl.TexCoord(1-offset,1-offset)
         gl.Vertex(sx-cs, sy-cs, 0)
-        gl.TexCoord(1-o,o)
+        gl.TexCoord(1-offset,o)
         gl.Vertex(sx, sy-cs, 0)
     end
 
@@ -657,7 +674,9 @@ if showGui then
             glTexRect(0, 0, 16*sizeMultiplier, 16*sizeMultiplier)
             glTexture(false)
         end
-        glText(text, 23*sizeMultiplier, 4*sizeMultiplier, 12*sizeMultiplier, "n")
+		font:Begin()
+		font:Print(text, 23*sizeMultiplier, 4*sizeMultiplier, 12*sizeMultiplier, "n")
+		font:End()
         glPopMatrix()
     end
 

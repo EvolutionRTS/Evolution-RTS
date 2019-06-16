@@ -11,8 +11,16 @@ function widget:GetInfo()
 	}
 end
 
-local loadedFontSize = 32
-local font = gl.LoadFont("LuaUI/Fonts/FreeSansBold.otf", loadedFontSize, 16,2)
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local loadedFontSize = fontfileSize*fontfileScale
 
 local bgcorner = "LuaUI/Images/bgcorner.png"
 
@@ -32,17 +40,17 @@ for i =1, #teams do
 	end
 end
 
-local changelogFile = ""
-changelogFile = changelogFile .. titlecolor..Game.gameName..valuegreycolor.." ("..Game.gameMutator..") "..titlecolor..Game.gameVersion.."\n"
-changelogFile = changelogFile .. keycolor.."Engine"..separator..valuegreycolor..((Game and Game.version) or (Engine and Engine.version) or "Engine version error").."\n"
-changelogFile = changelogFile .. "\n"
+local content = ""
+content = content .. titlecolor..Game.gameName..valuegreycolor.." ("..Game.gameMutator..") "..titlecolor..Game.gameVersion.."\n"
+content = content .. keycolor.."Engine"..separator..valuegreycolor..((Game and Game.version) or (Engine and Engine.version) or "Engine version error").."\n"
+content = content .. "\n"
 
 -- map info
-changelogFile = changelogFile .. titlecolor..Game.mapName.."\n"
-changelogFile = changelogFile .. valuegreycolor..Game.mapDescription.."\n"
-changelogFile = changelogFile .. keycolor.."Size"..separator..valuegreycolor..Game.mapX..valuegreycolor.." x "..valuegreycolor..Game.mapY.."\n"
-changelogFile = changelogFile .. keycolor.."Gravity"..separator..valuegreycolor..Game.gravity.."\n"
-changelogFile = changelogFile .. keycolor.."Hardness"..separator..valuegreycolor..Game.mapHardness.. keycolor.."\n"
+content = content .. titlecolor..Game.mapName.."\n"
+content = content .. valuegreycolor..Game.mapDescription.."\n"
+content = content .. keycolor.."Size"..separator..valuegreycolor..Game.mapX..valuegreycolor.." x "..valuegreycolor..Game.mapY.."\n"
+content = content .. keycolor.."Gravity"..separator..valuegreycolor..Game.gravity.."\n"
+content = content .. keycolor.."Hardness"..separator..valuegreycolor..Game.mapHardness.. keycolor.."\n"
 tidal = Game.tidal
 if Spring.GetModOptions() and Spring.GetModOptions().map_tidal then
 	map_tidal = Spring.GetModOptions().map_tidal
@@ -58,21 +66,21 @@ end
 if Spring.GetTidal then
 	tidal = Spring.GetTidal()
 end
-changelogFile = changelogFile .. keycolor.."Tidal speed"..separator..valuegreycolor..tidal.. keycolor.."\n"
+content = content .. keycolor.."Tidal speed"..separator..valuegreycolor..tidal.. keycolor.."\n"
 
 
 if Game.windMin == Game.windMax then
-	changelogFile = changelogFile .. keycolor.."Wind speed"..separator..valuegreycolor..Game.windMin..valuegreycolor.."\n"
+	content = content .. keycolor.."Wind speed"..separator..valuegreycolor..Game.windMin..valuegreycolor.."\n"
 else
-	changelogFile = changelogFile .. keycolor.."Wind speed"..separator..valuegreycolor..Game.windMin..valuegreycolor.."  -  "..valuegreycolor..Game.windMax.."\n"
+	content = content .. keycolor.."Wind speed"..separator..valuegreycolor..Game.windMin..valuegreycolor.."  -  "..valuegreycolor..Game.windMax.."\n"
 end
 if Game.waterDamage == 0 then
 	vcolor = valuegreycolor
 else
 	vcolor = valuecolor
 end
-changelogFile = changelogFile .. keycolor.."Water damage"..separator..vcolor..Game.waterDamage .. keycolor.."\n"
-changelogFile = changelogFile .. "\n"
+content = content .. keycolor.."Water damage"..separator..vcolor..Game.waterDamage .. keycolor.."\n"
+content = content .. "\n"
 
 -- modoptions
 local defaultModoptions = VFS.Include("modoptions.lua")
@@ -90,7 +98,7 @@ end
 -- modoptions.lua doesnt contain engine modoptions: maxunits, pathfinder, startmetal, startenergy, disablemapdamage, fixedallies
 modoptionsDefault['maxspeed'] = '3'
 modoptionsDefault['minspeed'] = '0.3'
-modoptionsDefault['pathfinder'] = 'normal'
+--modoptionsDefault['pathfinder'] = 'normal'
 modoptionsDefault['startmetal'] = '1000'
 modoptionsDefault['startenergy'] = '1000'
 modoptionsDefault['fixedallies'] = '1'
@@ -125,21 +133,21 @@ for key, value in pairs(modoptions) do
 	end
 end
 if chickensEnabled then	-- filter chicken modoptions
-	changelogFile = changelogFile .. titlecolor.."Chicken options\n"
+	content = content .. titlecolor.."Chicken options\n"
 	for key, value in pairs(changedChickenModoptions) do
-		changelogFile = changelogFile .. keycolor..string.sub(key, 9)..separator..valuecolor..value.."\n"
+		content = content .. keycolor..string.sub(key, 9)..separator..valuecolor..value.."\n"
 	end
 	for key, value in pairs(unchangedChickenModoptions) do
-		changelogFile = changelogFile .. keycolor..string.sub(key, 9)..separator..valuegreycolor..value.."\n"
+		content = content .. keycolor..string.sub(key, 9)..separator..valuegreycolor..value.."\n"
 	end
-	changelogFile = changelogFile .. "\n"
+	content = content .. "\n"
 end
-changelogFile = changelogFile .. titlecolor.."Mod options\n"
+content = content .. titlecolor.."Mod options\n"
 for key, value in pairs(changedModoptions) do
-	changelogFile = changelogFile .. keycolor..key..separator..valuecolor..value.."\n"
+	content = content .. keycolor..key..separator..valuecolor..value.."\n"
 end
 for key, value in pairs(unchangedModoptions) do
-	changelogFile = changelogFile .. keycolor..key..separator..valuegreycolor..value.."\n"
+	content = content .. keycolor..key..separator..valuegreycolor..value.."\n"
 end
 
 
@@ -168,8 +176,6 @@ local glPolygonMode = gl.PolygonMode
 local glRect = gl.Rect
 local glText = gl.Text
 local glShape = gl.Shape
-local glGetTextWidth = gl.GetTextWidth
-local glGetTextHeight = gl.GetTextHeight
 
 local bgColorMultiplier = 0
 
@@ -197,6 +203,15 @@ function widget:ViewResize()
 	screenX = (vsx*0.5) - (screenWidth/2)
 	screenY = (vsy*0.5) + (screenHeight/2)
 	widgetScale = (0.5 + (vsx*vsy / 5700000)) * customScale
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+	  gl.DeleteFont(font)
+	  font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	  gl.DeleteFont(font2)
+	  font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	loadedFontSize = fontfileSize*fontfileScale
+  end
 	if changelogList then gl.DeleteList(changelogList) end
 	changelogList = gl.CreateList(DrawWindow)
 end
@@ -229,41 +244,41 @@ local function DrawRectRound(px,py,sx,sy,cs, tl,tr,br,bl)
 	if ((py <= 0 or px <= 0)  or (bl ~= nil and bl == 0)) and bl ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, py+cs, 0)
 	-- bottom right
 	if ((py <= 0 or sx >= vsx) or (br ~= nil and br == 0)) and br ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, py+cs, 0)
 	-- top left
 	if ((sy >= vsy or px <= 0) or (tl ~= nil and tl == 0)) and tl ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, sy-cs, 0)
 	-- top right
 	if ((sy >= vsy or sx >= vsx)  or (tr ~= nil and tr == 0)) and tr ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, sy-cs, 0)
 end
 function RectRound(px,py,sx,sy,cs, tl,tr,br,bl)		-- (coordinates work differently than the RectRound func in other widgets)
@@ -327,7 +342,7 @@ function DrawTextarea(x,y,width,height,scrollbar)
 	end
 
 	-- draw textarea
-	if changelogFile then
+	if content then
 		font:Begin()
 		local lineKey = startLine
 		local j = 1
@@ -402,13 +417,13 @@ function DrawWindow()
 	local title = "Game info"
 	local titleFontSize = 18
 	gl.Color(0,0,0,0.8)
-	titleRect = {x-bgMargin, y+bgMargin, x+(glGetTextWidth(title)*titleFontSize)+27-bgMargin, y+37}
+	titleRect = {x-bgMargin, y+bgMargin, x+(font2:GetTextWidth(title)*titleFontSize)+27-bgMargin, y+37}
 	RectRound(titleRect[1], titleRect[2], titleRect[3], titleRect[4], 8, 1,1,0,0)
-	font:Begin()
-	font:SetTextColor(1,1,1,1)
-	font:SetOutlineColor(0,0,0,0.4)
-	font:Print(title, x-bgMargin+(titleFontSize*0.75), y+bgMargin+8, titleFontSize, "on")
-	font:End()
+	font2:Begin()
+	font2:SetTextColor(1,1,1,1)
+	font2:SetOutlineColor(0,0,0,0.4)
+	font2:Print(title, x-bgMargin+(titleFontSize*0.75), y+bgMargin+8, titleFontSize, "on")
+	font2:End()
 
 	-- textarea
 	DrawTextarea(x, y-10, screenWidth, screenHeight-24, 1)
@@ -432,24 +447,31 @@ function widget:DrawScreen()
 		glScale(widgetScale, widgetScale, 1)
 		glCallList(changelogList)
 		glPopMatrix()
-		if (WG['guishader_api'] ~= nil) then
+		if WG['guishader'] then
 			local rectX1 = ((screenX-bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
 			local rectY1 = ((screenY+bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
 			local rectX2 = ((screenX+screenWidth+bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
 			local rectY2 = ((screenY-screenHeight-bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
-			WG['guishader_api'].InsertRect(rectX1, rectY2, rectX2, rectY1, 'gameinfo')
-			--WG['guishader_api'].setBlurIntensity(0.0017)
-			--WG['guishader_api'].setScreenBlur(true)
+			if backgroundGuishader ~= nil then
+				glDeleteList(backgroundGuishader)
+			end
+			backgroundGuishader = glCreateList( function()
+				-- background
+				RectRound(rectX1, rectY2, rectX2, rectY1, 9*widgetScale, 0,1,1,1)
+				-- title
+				rectX1 = (titleRect[1] * widgetScale) - ((vsx * (widgetScale-1))/2)
+				rectY1 = (titleRect[2] * widgetScale) - ((vsy * (widgetScale-1))/2)
+				rectX2 = (titleRect[3] * widgetScale) - ((vsx * (widgetScale-1))/2)
+				rectY2 = (titleRect[4] * widgetScale) - ((vsy * (widgetScale-1))/2)
+				RectRound(rectX1, rectY1, rectX2, rectY2, 9*widgetScale, 1,1,0,0)
+			end)
+			WG['guishader'].InsertDlist(backgroundGuishader, 'gameinfo')
 		end
 		showOnceMore = false
 
 	else
-		if (WG['guishader_api'] ~= nil) then
-			local removed = WG['guishader_api'].RemoveRect('gameinfo')
-			if removed then
-				--WG['guishader_api'].setBlurIntensity()
-				WG['guishader_api'].setScreenBlur(false)
-			end
+		if WG['guishader'] then
+			WG['guishader'].DeleteDlist('gameinfo')
 		end
 	end
 end
@@ -581,7 +603,7 @@ function toggle()
 end
 
 function widget:Initialize()
-	if changelogFile then
+	if content then
 
 		widgetHandler:AddAction("customgameinfo", toggle)
 		Spring.SendCommands("unbind any+i gameinfo")
@@ -601,10 +623,10 @@ function widget:Initialize()
 		end
 
 		-- somehow there are a few characters added at the start that we need to remove
-		--changelogFile = string.sub(changelogFile, 4)
+		--content = string.sub(content, 4)
 
 		-- store changelog into array
-		changelogLines = lines(changelogFile)
+		changelogLines = lines(content)
 
 		for i, line in ipairs(changelogLines) do
 			totalChangelogLines = i
@@ -630,4 +652,9 @@ function widget:Shutdown()
 		glDeleteList(changelogList)
 		changelogList = nil
 	end
+	if WG['guishader'] then
+		WG['guishader'].DeleteDlist('gameinfo')
+	end
+	gl.DeleteFont(font)
+	gl.DeleteFont(font2)
 end

@@ -15,6 +15,14 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local commands					= {}
 local mapDrawNicknameTime		= {}	-- this table is used to filter out previous map drawing nicknames if user has drawn something new
 local mapEraseNicknameTime		= {}
@@ -22,12 +30,8 @@ local mapEraseNicknameTime		= {}
 local ownPlayerID				= Spring.GetMyPlayerID()
 
 -- spring vars
-local spGetCameraPosition		= Spring.GetCameraPosition
 local spGetPlayerInfo			= Spring.GetPlayerInfo
-local spTraceScreenRay			= Spring.TraceScreenRay
-local spLoadCmdColorsConfig		= Spring.LoadCmdColorsConfig
 local spGetTeamColor			= Spring.GetTeamColor
-local spGetMouseState			= Spring.GetMouseStates
 
 local glCreateList				= gl.CreateList
 local glDeleteList				= gl.DeleteList
@@ -37,7 +41,6 @@ local glCallList				= gl.CallList
 --------------------------------------------------------------------------------
 
 local nicknameOpacityMultiplier	= 6		-- multiplier applied to the given color opacity of the type: 'map_draw'
-local showMouseclicks			= true
 
 local generalSize 				= 28		-- overall size
 local generalOpacity 			= 0.8		-- overall opacity
@@ -46,12 +49,12 @@ local generalDuration			= 1.2		-- overall duration
 local ringStartSize				= 9
 local ringScale					= 0.75
 
-local imageDir					= ":n:"..LUAUI_DIRNAME.."Images/mapmarksfx/"
+local imageDir					= ":n:LuaUI/Images/mapmarksfx/"
 
 local types = {
 	map_mark = {
-		size			= 4.0,
-		endSize			= 2.75,
+		size			= 3.2,
+		endSize			= 2.25,
 		duration		= 14,
 		glowColor		= {1.00 ,1.00 ,1.00 ,0.20},
 		ringColor		= {1.00 ,1.00 ,1.00 ,0.75}
@@ -94,7 +97,7 @@ local function AddEffect(cmdType, x, y, z, osClock, unitID, playerID)
 	if not playerID then
 		playerID = false
 	end
-	local nickname,_,spec,teamID = spGetPlayerInfo(playerID)
+	local nickname,_,spec,teamID = spGetPlayerInfo(playerID,false)
 	local teamcolor = {}
 	teamcolor[1],teamcolor[2],teamcolor[3] = spGetTeamColor(teamID)
 	
@@ -121,6 +124,16 @@ end
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 
+function widget:ViewResize(n_vsx,n_vsy)
+	vsx,vsy = Spring.GetViewGeometry()
+	widgetScale = (0.5 + (vsx*vsy / 5700000))
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
+end
 
 function widget:Initialize()
 	
@@ -152,6 +165,7 @@ function widget:Shutdown()
 	glDeleteList(pencilDlist)
 	glDeleteList(eraserDlist)
 	glDeleteList(ringDlist)
+	gl.DeleteFont(font)
 end
 
 
@@ -184,6 +198,7 @@ function widget:DrawWorldPreUnit()
 	gl.PushMatrix()
 	
 	local duration, durationProcess, size, a, glowColor, ringColor, aRing, ringSize, iconSize
+
 	for cmdKey, cmdValue in pairs(commands) do
 		
 		duration		= types[cmdValue.cmdType].duration * generalDuration
@@ -253,7 +268,9 @@ function widget:DrawWorldPreUnit()
 					
 					gl.PushMatrix()
 					gl.Billboard()
-					gl.Text(cmdValue.nickname, 0, -28, 20, "cn")
+					font:Begin()
+					font:Print(cmdValue.nickname, 0, -28, 20, "cn")
+					font:End()
 					gl.PopMatrix()
 				end
 			end

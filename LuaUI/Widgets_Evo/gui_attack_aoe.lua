@@ -663,12 +663,18 @@ function widget:DrawWorld()
 end
 
 function widget:SelectionChanged(sel)
-  UpdateSelection()
-  widgetHandler:RemoveCallIn("MousePress")
-  widgetHandler:RemoveCallIn("KeyPress")
+  selectionChanged = true
 end
 
+local selChangedSec = 0
 function widget:Update(dt)
   secondPart = secondPart + dt
   secondPart = secondPart - floor(secondPart)
+
+  selChangedSec = selChangedSec + dt
+  if selectionChanged and selChangedSec>0.15 then
+    selChangedSec = 0
+    selectionChanged = nil
+    UpdateSelection()
+  end
 end

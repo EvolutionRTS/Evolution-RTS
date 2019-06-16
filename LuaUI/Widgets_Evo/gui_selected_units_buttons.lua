@@ -29,6 +29,15 @@ end
 
 -- Automatically generated local definitions
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
+
 local GL_ONE                   = GL.ONE
 local GL_ONE_MINUS_SRC_ALPHA   = GL.ONE_MINUS_SRC_ALPHA
 local GL_SRC_ALPHA             = GL.SRC_ALPHA
@@ -42,8 +51,6 @@ local glRect                   = gl.Rect
 local glRotate                 = gl.Rotate
 local glScale                  = gl.Scale
 local glTexRect                = gl.TexRect
-local glGetTextWidth           = gl.GetTextWidth
-local glGetTextHeight          = gl.GetTextHeight
 local glText                   = gl.Text
 local glTexture                = gl.Texture
 local glTranslate              = gl.Translate
@@ -53,6 +60,7 @@ local spGetModKeyState         = Spring.GetModKeyState
 local spGetMouseState          = Spring.GetMouseState
 local spGetMyTeamID            = Spring.GetMyTeamID
 local spGetSelectedUnits       = Spring.GetSelectedUnits
+local spGetSelectedUnitsCount  = Spring.GetSelectedUnitsCount
 local spGetSelectedUnitsCounts = Spring.GetSelectedUnitsCounts
 local spGetSelectedUnitsSorted = Spring.GetSelectedUnitsSorted
 local spGetTeamUnitsSorted     = Spring.GetTeamUnitsSorted
@@ -60,12 +68,13 @@ local spSelectUnitArray        = Spring.SelectUnitArray
 local spSelectUnitMap          = Spring.SelectUnitMap
 local spSendCommands           = Spring.SendCommands
 local spIsGUIHidden            = Spring.IsGUIHidden
-local spGetSelectedUnitsCount  = Spring.GetSelectedUnitsCount
 
-include("colors.h.lua")
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
+
+local ui_opacityMultiplier = 0.6
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66) * ui_opacityMultiplier
 
 local bgcorner = ":n:LuaUI/Images/bgcorner.png"
 local highlightImg = ":n:LuaUI/Images/button-highlight.dds"
@@ -83,9 +92,10 @@ local activePress = false
 local mouseIcon = -1
 local currentDef = nil
 local prevUnitCount = spGetSelectedUnitsCounts()
+local oldUnitpics = false
 
-local iconSizeX = 64
-local iconSizeY = 64
+local iconSizeX = 76
+local iconSizeY = 76
 local iconImgMult = 0.85
 
 local usedIconSizeX = iconSizeX
@@ -114,37 +124,55 @@ end
 
 
 local function updateGuishader()
-	if (WG['guishader_api'] ~= nil) then
+	if WG['guishader'] then
 		if not picList then
-			WG['guishader_api'].RemoveRect('selectionbuttons')
+            WG['guishader'].RemoveDlist('selectionbuttons')
             guishaderDisabled = true
-		else
+        else
 			if backgroundDimentions[1] ~= nil then
-				WG['guishader_api'].InsertRect(
-					backgroundDimentions[1],
-					backgroundDimentions[2],
-					backgroundDimentions[3],
-					backgroundDimentions[4],
-					'selectionbuttons'
-				)
+                if dlistGuishader ~= nil then
+                  WG['guishader'].RemoveDlist('selectionbuttons')
+                  gl.DeleteList(dlistGuishader)
+                end
+                dlistGuishader = gl.CreateList( function()
+                  RectRound(backgroundDimentions[1], backgroundDimentions[2], backgroundDimentions[3], backgroundDimentions[4], usedIconSizeX / 8)
+                  WG['guishader'].InsertDlist(dlistGuishader, 'selectionbuttons')
+                end)
                 guishaderDisabled = false
 			end
 		end
 	end
 end
 
+local selectedUnits = Spring.GetSelectedUnits()
+local selectedUnitsCount = Spring.GetSelectedUnitsCount()
+local selectedUnitsCounts = Spring.GetSelectedUnitsCounts()
+local selectionChanged = true
+function widget:SelectionChanged(sel)
+  selectedUnits = sel
+  selectedUnitsCount = Spring.GetSelectedUnitsCount()
+  selectedUnitsCounts = Spring.GetSelectedUnitsCounts()
+  selectionChanged = true
+end
+
+
 local vsx, vsy = widgetHandler:GetViewSizes()
-function widget:ViewResize(viewSizeX, viewSizeY)
-  vsx = viewSizeX
-  vsy = viewSizeY
-  
+function widget:ViewResize(n_vsx,n_vsy)
+  vsx,vsy = Spring.GetViewGeometry()
+  iconsPerRow = math.floor(8 * (vsx / vsy))
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
+
   usedIconSizeX = math.floor((iconSizeX/2) + ((vsx*vsy) / 115000))
   usedIconSizeY =  math.floor((iconSizeY/2) + ((vsx*vsy) / 115000))
   fontSize = usedIconSizeY * 0.28
   iconMargin = usedIconSizeX / 25
   
   if picList then
-    unitCounts = spGetSelectedUnitsCounts()
     gl.DeleteList(picList)
 	picList = gl.CreateList(DrawPicList)
   end
@@ -169,13 +197,14 @@ function widget:DrawScreen()
   cacheUnitIcons()    -- else white icon bug happens
   if picList then
     if (spIsGUIHidden()) then return end
+
     if mouseIcon ~= prevMouseIcon then
-      unitCounts = spGetSelectedUnitsCounts()
       gl.DeleteList(picList)
       picList = gl.CreateList(DrawPicList)
       prevMouseIcon = mouseIcon
     end
     gl.CallList(picList)
+
     -- draw the highlights
     local x,y,lb,mb,rb = spGetMouseState()
     mouseIcon = MouseOverIcon(x, y)
@@ -192,28 +221,30 @@ function widget:DrawScreen()
         --DrawIconQuad(mouseIcon, hoverColor)  --  hover highlight
       end
       if hoverClock == nil then hoverClock = os.clock() end
+      Spring.SetMouseCursor('cursornormal')
+      if WG['tooltip'] ~= nil and mouseIcon then
+        local unitName = ' --- '
+        local i = 0
+        for udid,count in pairs(selectedUnitsCounts) do
+          if type(udid) == 'number' then
+            if i == mouseIcon then
+              unitName = UnitDefs[udid].humanName
+              break
+            end
+            i = i + 1
+          end
+        end
+        WG['tooltip'].ShowTooltip('selectedunitbuttons_unit', "\255\215\255\215"..unitName, x, backgroundDimentions[4]+(usedIconSizeY*0.37))
+      end
       if WG['tooltip'] ~= nil and os.clock() - hoverClock > 0.6 then
-        WG['tooltip'].ShowTooltip('selectedunitbuttons', "\255\215\255\215Selected units\n \255\255\255\255Left click\255\210\210\210: Remove all other unit types\n \255\255\255\255Left click + CTRL\255\210\210\210: Select all units of this type on map\n \255\255\255\255Left click + ALT\255\210\210\210: Remove all by 1 unit of this unit type\n \255\255\255\255Right click\255\210\210\210: Remove that unit type from the selection\n \255\255\255\255Right click + CTRL\255\210\210\210: Only remove 1 unit from that unit type\n \255\255\255\255Middle click\255\210\210\210: Move to the center location of the selected unit(s)\n \255\255\255\255Middle click + CTRL\255\210\210\210: Move to the center off whole selection")
+        local text = "\255\215\255\215Selected units\n \255\255\255\255Left click\255\210\210\210: Select\n \255\255\255\255   + CTRL\255\210\210\210: Select units of this type on map\n \255\255\255\255   + ALT\255\210\210\210: Remove all by 1 unit of this unit type\n \255\255\255\255Right click\255\210\210\210: Remove\n \255\255\255\255    + CTRL\255\210\210\210: Remove only 1 unit from that unit type\n \255\255\255\255Middle click\255\210\210\210: Move to center location\n \255\255\255\255    + CTRL\255\210\210\210: Move to center off whole selection"
+        local textHeight, desc, numLines = font:GetTextHeight(text)
+        WG['tooltip'].ShowTooltip('selectedunitbuttons', text, vsx, backgroundDimentions[4]+(usedIconSizeY*1.3) + (textHeight*numLines*15*fontfileScale))
       end
     else
       hoverClock = nil
     end
   end
-end
-
-function widget:CommandsChanged()
-  if spGetSelectedUnitsCount() > 0 then
-    checkSelectedUnits = true
-    --updateDlist = true
-  elseif picList then
-    gl.DeleteList(picList)
-    picList = nil
-    checkSelectedUnits = nil
-  end
-  if not picList and not guishaderDisabled then
-    updateGuishader()
-  end
-  sec = 0
 end
 
 function widget:UnitDestroyed(unitID, unitDefID, teamID, attackerID, attackerDefID, attackerTeamID)
@@ -228,46 +259,43 @@ function widget:UnitDestroyed(unitID, unitDefID, teamID, attackerID, attackerDef
   end
 end
 
-local sec = 0
+local uiOpacitySec = 0
+local selChangedSec = 0
 function widget:Update(dt)
-  sec = sec + dt
-  if (checkSelectedUnits and sec>0.09) then
-    sec = 0
-    if not skipGetUnitCounts then
-      unitCounts = spGetSelectedUnitsCounts()
-      local equal = true
-      if unitCounts.n ~= prevUnitCount.n then
-        equal = false
-      else
-        for udid,count in pairs(unitCounts) do
-          if not prevUnitCount[udid] or prevUnitCount[udid] ~= count then
-            equal = false
-            break
-          end
-        end
-      end
-      skipGetUnitCounts = nil
-    else
-      equal = false
-    end
-    if not equal and spGetSelectedUnitsCount() > 0 then
-      updateDlist = true
+  uiOpacitySec = uiOpacitySec + dt
+  if uiOpacitySec>0.5 then
+    uiOpacitySec = 0
+    if ui_opacity ~= (Spring.GetConfigFloat("ui_opacity",0.66) * ui_opacityMultiplier) then
+      ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66) * ui_opacityMultiplier
+      gl.DeleteList(picList)
+      picList = gl.CreateList(DrawPicList)
     end
   end
-  if updateDlist then
-    sec = 0
-    checkSelectedUnits = nil
-    updateDlist = nil
+
+  selChangedSec = selChangedSec + dt
+  if selectionChanged and selChangedSec>0.1 then
+    selChangedSec = 0
+    selectionChanged = nil
     if picList then
       gl.DeleteList(picList)
+      picList = nil
     end
-    picList = gl.CreateList(DrawPicList)
+    if selectedUnitsCount > 0 then
+      picList = gl.CreateList(DrawPicList)
+    end
     updateGuishader()
   end
 end
 
 
 function widget:Initialize()
+  WG['selunitbuttons'] = {}
+  WG['selunitbuttons'].getOldUnitIcons = function()
+    return oldUnitpics
+  end
+  WG['selunitbuttons'].setOldUnitIcons = function(value)
+    oldUnitpics = value
+  end
   widget:ViewResize(vsx, vsy)
 end
 
@@ -275,17 +303,23 @@ function widget:Shutdown()
   if picList then
     gl.DeleteList(picList)
   end
+  gl.DeleteFont(font)
+  WG['selunitbuttons'] = nil
   enabled = false
   updateGuishader()
 end
 
-
+local startFromIcon = 0
 function DrawPicList()
+  if selectedUnitsCount == 0 then return end
   --Spring.Echo(Spring.GetGameFrame()..'  '..math.random())
-  prevUnitCount = unitCounts
-  unitCounts = spGetSelectedUnitsCounts()
 
-  unitTypes = unitCounts.n;
+  unitTypes = selectedUnitsCounts.n;
+  displayedUnitTypes = unitTypes
+  if displayedUnitTypes > iconsPerRow then
+    displayedUnitTypes = iconsPerRow
+  end
+
   if (unitTypes <= 0) then
     countsTable = {}
     activePress = false
@@ -294,7 +328,7 @@ function DrawPicList()
   end
   
   local xmid = vsx * 0.5
-  local width = math.floor(usedIconSizeX * unitTypes)
+  local width = math.floor(usedIconSizeX * displayedUnitTypes)
   rectMinX = math.floor(xmid - (0.5 * width))
   rectMaxX = math.floor(xmid + (0.5 * width))
   rectMinY = 0
@@ -302,31 +336,58 @@ function DrawPicList()
   
   -- draw background bar
   local xmin = math.floor(rectMinX)
-  local xmax = math.floor(rectMinX + (usedIconSizeX * unitTypes))
+  local xmax = math.floor(rectMinX + (usedIconSizeX * displayedUnitTypes))
+
+
+  if unitTypes > 16 then
+    -- back button
+    if startFromIcon > 0 then
+      xmin = xmin - usedIconSizeX
+    end
+    -- forward button
+    if startFromIcon + iconsPerRow < unitTypes then
+      xmax = xmax + usedIconSizeX
+    end
+  end
+
   if ((xmax < 0) or (xmin > vsx)) then return end  -- bail
-  
   local ymin = rectMinY
   local ymax = rectMaxY
   local xmid = (xmin + xmax) * 0.5
   local ymid = (ymin + ymax) * 0.5
-  
+
   backgroundDimentions = {xmin-iconMargin-0.5, ymin, xmax+iconMargin+0.5, ymax+iconMargin-1}
-  gl.Color(0,0,0,0.66)
-  RectRound(backgroundDimentions[1],backgroundDimentions[2],backgroundDimentions[3],backgroundDimentions[4],usedIconSizeX / 7)
-	local borderPadding = iconMargin
-	glColor(1,1,1,0.025)
-  RectRound(backgroundDimentions[1]+borderPadding, backgroundDimentions[2]+borderPadding, backgroundDimentions[3]-borderPadding, backgroundDimentions[4]-borderPadding, usedIconSizeX / 9)
+  gl.Color(0,0,0,ui_opacity)
+  RectRound(backgroundDimentions[1],backgroundDimentions[2],backgroundDimentions[3],backgroundDimentions[4],usedIconSizeX / 8)
+  local borderPadding = iconMargin*1.4
+  glColor(1,1,1,ui_opacity*0.055)
+  RectRound(backgroundDimentions[1]+borderPadding, backgroundDimentions[2]+borderPadding, backgroundDimentions[3]-borderPadding, backgroundDimentions[4]-borderPadding, usedIconSizeX / 14)
+
+  -- back button
+  if startFromIcon > 0 then
+
+  end
+  -- forward button
+  if startFromIcon + iconsPerRow < unitTypes then
+
+  end
 
   -- draw the buildpics
-  unitCounts.n = nil 
-  local row = 0 
+  local row = 0
   local icon = 0
-  for udid,count in pairs(unitCounts) do
-    if icon % iconsPerRow == 0 then 
-		row = row + 1
-	end
-    DrawUnitDefTexture(udid, icon, count, row)
-	icon = icon + 1
+  local displayedIcon = 0
+  for udid,count in pairs(selectedUnitsCounts) do
+    if type(udid) == 'number' then
+      if icon >= startFromIcon then
+        --if icon % iconsPerRow == 0 then
+        --	row = row + 1
+        --end
+        DrawUnitDefTexture(udid, icon, count, row)
+        displayedIcon = displayedIcon + 1
+        if displayedIcon >= iconsPerRow then break end
+      end
+      icon = icon + 1
+    end
   end
 end
 
@@ -334,17 +395,19 @@ end
 function DrawUnitDefTexture(unitDefID, iconPos, count, row)
   local usedIconImgMult = iconImgMult
   local ypad2 = -usedIconSizeY/50
-  local color = {1, 1, 1, 0.9}
-  if mouseIcon ~= -1 then
-  	color = {1, 1, 1, 0.75}
+  local color = {1, 1, 1, 0.9 }
+  if (not WG['topbar'] or not WG['topbar'].showingQuit()) then
+    if mouseIcon ~= -1 then
+      color = {1, 1, 1, 0.7}
+    end
+    if iconPos == mouseIcon then
+      usedIconImgMult = iconImgMult*1.1
+      color = {1, 1, 1, 1}
+      ypad2 = 0
+    end
   end
-  if iconPos == mouseIcon then
-  	usedIconImgMult = iconImgMult*1.08
-  	color = {1, 1, 1, 1}
-  	ypad2 = 0
-  end
-  local yPad = (usedIconSizeY*(1-usedIconImgMult)) / 2
-  local xPad = (usedIconSizeX*(1-usedIconImgMult)) / 2
+  local yPad = (usedIconSizeY*(1-usedIconImgMult)) / 3
+  local xPad = (usedIconSizeX*(1-usedIconImgMult)) / 3
   
   local xmin = math.floor(rectMinX + (usedIconSizeX * iconPos)) + xPad
   local xmax = xmin + usedIconSizeX - xPad - xPad
@@ -364,7 +427,10 @@ function DrawUnitDefTexture(unitDefID, iconPos, count, row)
   if count > 1 then
     -- draw the count text
     local offset = math.ceil((ymax - (ymin+iconMargin+iconMargin)) / 20)
-    glText(count, xmax-iconMargin-offset, ymin+iconMargin+iconMargin+offset+(fontSize/16)-(yPad/2) , fontSize, "or")
+    font:Begin()
+    font:SetTextColor(0.85,0.85,0.85,1)
+    font:Print(count, xmax-(iconMargin*1.3)-offset, ymin+(iconMargin*2.2)+offset+(fontSize/16)-(yPad/2) , fontSize, "or")
+    font:End()
   end
 end
 
@@ -500,6 +566,7 @@ end
 
 
 function widget:MouseRelease(x, y, button)
+    if WG['smartselect'] and not WG['smartselect'].updateSelection then return end
   if (not activePress) then
     return -1
   end
@@ -526,9 +593,9 @@ function widget:MouseRelease(x, y, button)
   if (unitTable == nil) then
     return -1
   end
-  
+
   local alt, ctrl, meta, shift = spGetModKeyState()
-  
+
   if (button == 1) then
     LeftMouseButton(unitDefID, unitTable)
   elseif (button == 2) then
@@ -562,23 +629,16 @@ end
 
 -------------------------------------------------------------------------------
 
-function widget:IsAbove(x, y)
-  local icon = MouseOverIcon(x, y)
-  if (icon < 0) then
-    return false
-  end
-  return true
+
+function widget:GetConfigData()
+  return {oldUnitpics=oldUnitpics}
 end
 
-
-function widget:GetTooltip(x, y)
-  local ud = currentDef
-  if (not ud) then
-    return ''
+function widget:SetConfigData(data) --load config
+  if (data.oldUnitpics ~= nil) then
+    oldUnitpics = data.oldUnitpics
   end
-  return ud.humanName .. ' - ' .. ud.tooltip
 end
-
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------

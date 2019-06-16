@@ -14,6 +14,14 @@ end
 
 local bgcorner				= "LuaUI/Images/bgcorner.png"
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local speedbuttons={} --the 1x 2x 3x etc buttons
 local buttons={}	--other buttons (atm only pause/play)
 local wantedSpeed = nil
@@ -22,6 +30,8 @@ wPos = {x=0.00, y=0.15}
 local isPaused = false
 local isActive = true --is the widget shown and reacts to clicks?
 local sceduleUpdate = true
+local vsx,vsy = Spring.GetViewGeometry()
+widgetScale = (0.5 + (vsx*vsy / 5700000))
 
 function widget:Initialize()	
 	if (not Spring.IsReplay()) then
@@ -46,12 +56,13 @@ function widget:Initialize()
 	
 end
 
-function widget:Shutdown()	
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('replaybuttons')
+function widget:Shutdown()
+	if WG['guishader'] then
+		WG['guishader'].DeleteDlist('replaybuttons')
 	end
 	gl.DeleteList(speedButtonsList)
 	gl.DeleteList(buttonsList)
+	gl.DeleteFont(font)
 end
 
 function speedButtonColor (i)
@@ -59,13 +70,20 @@ function speedButtonColor (i)
 end
 
 function widget:DrawScreen()
-	if (WG['guishader_api'] ~= nil) then
+	if WG['guishader'] then
 		if isActive then
 			local h = 0.033
 			local dy = (#speeds +1) * h
-			WG['guishader_api'].InsertRect(sX(wPos.x), sY(wPos.y), sX(wPos.x+0.037), sY(wPos.y+dy), 'replaybuttons')
+
+			if backgroundGuishader then
+				gl.DeleteList(backgroundGuishader)
+			end
+			backgroundGuishader = gl.CreateList( function()
+				RectRound(sX(wPos.x), sY(wPos.y), sX(wPos.x+0.037), sY(wPos.y+dy), 6*widgetScale)
+			end)
+			WG['guishader'].InsertDlist(backgroundGuishader, 'replaybuttons')
 		else
-			WG['guishader_api'].RemoveRect('replaybuttons')
+			WG['guishader'].DeleteDlist('replaybuttons')
 		end
 	end
 	
@@ -171,8 +189,7 @@ end
 --Feb 2011 by knorke
 local glPopMatrix      = gl.PopMatrix
 local glPushMatrix     = gl.PushMatrix
-local glText           = gl.Text
-local vsx, vsy = widgetHandler:GetViewSizes()
+
 --UI coordinaten zu scalierten screen koordinaten
 function sX (uix)
 	return uix*vsx
@@ -189,10 +206,17 @@ function uiY (sY)
 end
 
 function widget:ViewResize(viewSizeX, viewSizeY)
-	vsx = viewSizeX
-	vsy = viewSizeY
-    sceduleUpdate = true
+	vsx,vsy = Spring.GetViewGeometry()
+	widgetScale = (0.5 + (vsx*vsy / 5700000))
+	sceduleUpdate = true
+	local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+	if (fontfileScale ~= newFontfileScale) then
+		fontfileScale = newFontfileScale
+		gl.DeleteFont(font)
+		font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	end
 end
+
 ----zeichen funktionen---------
 function uiRect (x,y,x2,y2)
 	RectRound(sX(x), sY(y), sX(x2), sY(y2), 6)
@@ -201,7 +225,9 @@ end
 
 function uiText (text, x,y,s,options)
 	if (text==" " or text=="  ") then return end --archivement: unlock +20 fps
-	glText (text, sX(x), sY(y), sX(s), options)
+	font:Begin()
+	font:Print(text, sX(x), sY(y), sX(s), options)
+	font:End()
 end
 --------------------------------
 -----message boxxy-----
@@ -221,11 +247,13 @@ end
 
 function drawmessage_simple (message, x, y, s)
 	offx=0
-	if (message.frame) then		
-		glText (frame2time (message.frame), sX(x+offx), sY(y), sX(s/2), 'vo')
+	font:Begin()
+	if (message.frame) then
+		font:Print(frame2time (message.frame), sX(x+offx), sY(y), sX(s/2), 'vo')
 		offx=offx+(2*s)
-	end	
-	glText (message.text, sX(x+offx), sY(y), sX(s), 'vo')	
+	end
+	font:Print(message.text, sX(x+offx), sY(y), sX(s), 'vo')
+	font:End()
 end
 
 --X, Y and size in UI scale
@@ -235,8 +263,9 @@ function drawmessage (message, x, y, s)
 		uiRect (x,y+s/2, x+1, y-s/2)
 	end	
 	offx=0
-	if (message.frame) then		
-		glText (frame2time (message.frame), sX(x+offx), sY(y), sX(s/2), 'vo')
+	font:Begin()
+	if (message.frame) then
+		font:Print(frame2time (message.frame), sX(x+offx), sY(y), sX(s/2), 'vo')
 		offx=offx+(2*s)
 	end
 	if (message.icon) then		
@@ -248,8 +277,9 @@ function drawmessage (message, x, y, s)
 		gl.Texture(false)
 		--gl.PopMatrix()
 		offx=offx+(s)
-	end	
-	glText (message.text, sX(x+offx), sY(y), sX(s), 'vo')	
+	end
+	font:Print(message.text, sX(x+offx), sY(y), sX(s), 'vo')
+	font:End()
 end
 
 

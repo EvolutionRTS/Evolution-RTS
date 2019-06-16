@@ -24,12 +24,20 @@ end
 
 -- configs
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local cursorSize					= 11
 local drawNamesCursorSize			= 8.5
 
 local dlistAmount					= 5		-- number of dlists generated for each player (# available opacity levels)
 
-local sendPacketEvery				= 0.7
+local sendPacketEvery				= 0.6
 local numMousePos					= 2 --//num mouse pos in 1 packet
 
 local showSpectatorName    			= true
@@ -60,6 +68,13 @@ local allyCursor      			    = ":n:LuaUI/Images/allycursor.dds"
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+function widget:ViewResize(n_vsx,n_vsy)
+    vsx,vsy = Spring.GetViewGeometry()
+    widgetScale = (0.5 + (vsx*vsy / 5700000))
+    local fontScale = widgetScale/2
+    font = gl.LoadFont(fontfile, 52*fontScale, 17*fontScale, 1.5)
+end
 
 function widget:TextCommand(command)
     local mycommand = false
@@ -125,8 +140,7 @@ function updateSpecList()
     specList = {}
     local t = Spring.GetPlayerList()
     for _,playerID in ipairs(t) do
-        local _,_,spec = spGetPlayerInfo(playerID)
-        specList[playerID] = spec
+        specList[playerID] = select(3,spGetPlayerInfo(playerID,false))
     end
 end
 
@@ -158,6 +172,7 @@ function widget:Shutdown()
             gl.DeleteList(allycursorDrawList[playerID][opacityMultiplier])
         end
     end
+    gl.DeleteFont(font)
 end
 
 --------------------------------------------------------------------------------
@@ -213,7 +228,7 @@ function MouseCursorEvent(playerID,x,z,click)
 
         acp[(numMousePos+1)*2+1] = clock()
         acp[(numMousePos+1)*2+2] = playerPosList[#playerPosList].click
-        _,_,_,acp[(numMousePos+1)*2+3] = spGetPlayerInfo(playerID)
+        acp[(numMousePos+1)*2+3] = select(4,spGetPlayerInfo(playerID,false))
     end
     
     
@@ -280,7 +295,7 @@ end
 
 
 function widget:PlayerChanged(playerID)
-    local _, _, isSpec, teamID = spGetPlayerInfo(playerID)
+    local _, _, isSpec, teamID = spGetPlayerInfo(playerID,false)
     specList[playerID] = isSpec
     local r, g, b = spGetTeamColor(teamID)
     local color
@@ -301,7 +316,7 @@ end
 
 
 function createCursorDrawList(playerID, opacityMultiplier)
-    local name,_,spec,teamID = spGetPlayerInfo(playerID)
+    local name,_,spec,teamID = spGetPlayerInfo(playerID,false)
     local r, g, b = spGetTeamColor(teamID)
     local wx,gy,wz = 0,0,0
     local quadSize = usedCursorSize
@@ -328,21 +343,23 @@ function createCursorDrawList(playerID, opacityMultiplier)
         gl.PushMatrix()
         gl.Translate(wx, gy, wz)
         gl.Rotate(-90,1,0,0)
-        
+
+        font:Begin()
         if spec then
-            gl.Color(1,1,1,fontOpacitySpec*opacityMultiplier)
-            gl.Text(name, 0, 0, fontSizeSpec, "cn")
+            font:SetTextColor(1,1,1,fontOpacitySpec*opacityMultiplier)
+            font:Print(name, 0, 0, fontSizeSpec, "cn")
         else
             local verticalOffset = usedCursorSize + 8
             local horizontalOffset = usedCursorSize + 1
             -- text shadow
-            gl.Color(0,0,0,fontOpacityPlayer*0.62*opacityMultiplier)
-            gl.Text(name, horizontalOffset-(fontSizePlayer/50), verticalOffset-(fontSizePlayer/42), fontSizePlayer, "n")
-            gl.Text(name, horizontalOffset+(fontSizePlayer/50), verticalOffset-(fontSizePlayer/42), fontSizePlayer, "n")
+            font:SetTextColor(0,0,0,fontOpacityPlayer*0.62*opacityMultiplier)
+            font:Print(name, horizontalOffset-(fontSizePlayer/50), verticalOffset-(fontSizePlayer/42), fontSizePlayer, "n")
+            font:Print(name, horizontalOffset+(fontSizePlayer/50), verticalOffset-(fontSizePlayer/42), fontSizePlayer, "n")
             -- text
-            gl.Color(r,g,b,fontOpacityPlayer*opacityMultiplier)
-            gl.Text(name, horizontalOffset, verticalOffset, fontSizePlayer, "n")
+            font:SetTextColor(r,g,b,fontOpacityPlayer*opacityMultiplier)
+            font:Print(name, horizontalOffset, verticalOffset, fontSizePlayer, "n")
         end
+        font:End()
         gl.PopMatrix()
     end   
 end

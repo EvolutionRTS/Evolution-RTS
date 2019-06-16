@@ -16,10 +16,20 @@ local widgetScale = (0.5 + (vsx*vsy / 5700000)) * customScale
 
 local bgcorner = "LuaUI/Images/bgcorner.png"
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local font2 = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 -- being set at gamestart again:
 local myPlayerID = Spring.GetMyPlayerID()
-local myName,_,mySpec,myTeamID,myAllyTeamID = Spring.GetPlayerInfo(myPlayerID)
-local startedAsPlayer = not mySpec
+local myName,_,mySpec,myTeamID,myAllyTeamID = Spring.GetPlayerInfo(myPlayerID,false)
+local startedAsPlayer = not mycSpec
 
 local function DrawRectRound(px,py,sx,sy,cs)
 
@@ -58,41 +68,41 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	if py <= 0 or px <= 0 then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, py+cs, 0)
 	-- top right
 	if py <= 0 or sx >= vsx then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, py+cs, 0)
 	-- bottom left
 	if sy >= vsy or px <= 0 then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, sy-cs, 0)
 	-- bottom right
 	if sy >= vsy or sx >= vsx then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, sy-cs, 0)
 end
 
@@ -108,9 +118,17 @@ function IsOnRect(x, y, BLcornerX, BLcornerY,TRcornerX,TRcornerY)
 	return x >= BLcornerX and x <= TRcornerX and y >= BLcornerY and y <= TRcornerY
 end
 
-function widget:ViewResize()
+function widget:ViewResize(n_vsx,n_vsy)
 	vsx,vsy = Spring.GetViewGeometry()
 	widgetScale = (0.5 + (vsx*vsy / 5700000)) * customScale
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+	gl.DeleteFont(font)
+	font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	gl.DeleteFont(font2)
+	font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
 end
 
 function widget:PlayerChanged(playerID)
@@ -119,7 +137,7 @@ end
 
 --local sec = 0
 --function widget:Update(dt)
---	myName,_,mySpec,myTeamID,myAllyTeamID = Spring.GetPlayerInfo(1)
+--	myName,_,mySpec,myTeamID,myAllyTeamID = Spring.GetPlayerInfo(1,false)
 --	sec = sec + dt
 --	if sec > 2 and not voteDlist then
 --		StartVote('testvote yeah!', 'somebody')
@@ -136,7 +154,7 @@ function widget:GameFrame(n)
 	if n > 0 and not gameStarted then
 		gameStarted = true
 		myPlayerID = Spring.GetMyPlayerID()
-		myName,_,mySpec,myTeamID,myAllyTeamID = Spring.GetPlayerInfo(myPlayerID)
+		myName,_,mySpec,myTeamID,myAllyTeamID = Spring.GetPlayerInfo(myPlayerID,false)
 		startedAsPlayer = not mySpec
 	end
 end
@@ -144,7 +162,7 @@ end
 function isTeamPlayer(playerName)
 	local players = Spring.GetPlayerList()
 	for _,pID in ipairs(players) do
-		local name,_,spec,teamID,allyTeamID = Spring.GetPlayerInfo(pID)
+		local name,_,spec,teamID,allyTeamID = Spring.GetPlayerInfo(pID,false)
 		if name == playerName then
 			if allyTeamID == myAllyTeamID then
 				return true
@@ -179,8 +197,8 @@ function EndVote()
 		voteDlist = nil
 		voteName = nil
 		voteOwner = nil
-		if (WG['guishader_api'] ~= nil) then
-			WG['guishader_api'].RemoveRect('voteinterface')
+		if WG['guishader'] then
+			WG['guishader'].DeleteDlist('voteinterface')
 		end
 	end
 end
@@ -203,7 +221,7 @@ function StartVote(name, owner)
 		local height = vsy/13
 
 		local fontSize = height/5	-- title only
-		local minWidth = gl.GetTextWidth('  '..voteName..'  ')*fontSize
+		local minWidth = font:GetTextWidth('  '..voteName..'  ')*fontSize
 		if width < minWidth then
 			width = minWidth
 		end
@@ -230,11 +248,6 @@ function StartVote(name, owner)
 		yesButtonArea = {xpos-(width/2)+buttonMargin, ypos-(height/2)+buttonMargin, xpos-(buttonMargin/2), ypos-(height/2)+buttonHeight-buttonMargin }
 		noButtonArea = {xpos+(buttonMargin/2), ypos-(height/2)+buttonMargin, xpos+(width/2)-buttonMargin, ypos-(height/2)+buttonHeight-buttonMargin}
 
-		-- background blur
-		if (WG['guishader_api'] ~= nil) then
-			WG['guishader_api'].InsertRect(windowArea[1],windowArea[2],windowArea[3],windowArea[4], 'voteinterface')
-		end
-
 		-- window
 		gl.Color(0,0,0,0.82)
 		RectRound(windowArea[1], windowArea[2], windowArea[3], windowArea[4], 5.5*widgetScale)
@@ -254,10 +267,15 @@ function StartVote(name, owner)
 
 		fontSize = fontSize*0.85
 		gl.Color(0,0,0,1)
-		gl.Text("ESC", closeButtonArea[1]+((closeButtonArea[3]-closeButtonArea[1])/2), closeButtonArea[2]+((closeButtonArea[4]-closeButtonArea[2])/2)-(fontSize/3), fontSize, "cn")
 
 		-- vote name
-		gl.Text("\255\190\190\190"..voteName, windowArea[1]+((windowArea[3]-windowArea[1])/2), windowArea[4]-padding-padding-padding-fontSize, fontSize, "con")
+		font:Begin()
+		font:Print("\255\190\190\190"..voteName, windowArea[1]+((windowArea[3]-windowArea[1])/2), windowArea[4]-padding-padding-padding-fontSize, fontSize, "con")
+		font:End()
+
+		font2:Begin()
+		-- ESC
+		font2:Print("\255\0\0\0ESC", closeButtonArea[1]+((closeButtonArea[3]-closeButtonArea[1])/2), closeButtonArea[2]+((closeButtonArea[4]-closeButtonArea[2])/2)-(fontSize/3), fontSize, "cn")
 
 		-- NO
 		if IsOnRect(x, y, noButtonArea[1], noButtonArea[2], noButtonArea[3], noButtonArea[4]) then
@@ -275,7 +293,8 @@ function StartVote(name, owner)
 		if voteOwner then
 			noText = 'End Vote'
 		end
-		gl.Text("\255\255\255\255"..noText, noButtonArea[1]+((noButtonArea[3]-noButtonArea[1])/2), noButtonArea[2]+((noButtonArea[4]-noButtonArea[2])/2)-(fontSize/3), fontSize, "con")
+		font2:SetOutlineColor(0,0,0,0.4)
+		font2:Print(noText, noButtonArea[1]+((noButtonArea[3]-noButtonArea[1])/2), noButtonArea[2]+((noButtonArea[4]-noButtonArea[2])/2)-(fontSize/3), fontSize, "con")
 
 		-- YES
 		if not voteOwner then
@@ -289,9 +308,17 @@ function StartVote(name, owner)
 			gl.Color(0,0,0,0.075)
 			RectRound(yesButtonArea[1]+buttonPadding, yesButtonArea[2]+buttonPadding, yesButtonArea[3]-buttonPadding, yesButtonArea[4]-buttonPadding, 4*widgetScale)
 
-			gl.Text("\255\255\255\255YES", yesButtonArea[1]+((yesButtonArea[3]-yesButtonArea[1])/2), yesButtonArea[2]+((yesButtonArea[4]-yesButtonArea[2])/2)-(fontSize/3), fontSize, "con")
+			font2:Print("YES", yesButtonArea[1]+((yesButtonArea[3]-yesButtonArea[1])/2), yesButtonArea[2]+((yesButtonArea[4]-yesButtonArea[2])/2)-(fontSize/3), fontSize, "con")
 		end
+		font2:End()
 	end)
+	-- background blur
+	if WG['guishader'] then
+		dlistGuishader = gl.CreateList( function()
+			RectRound(windowArea[1],windowArea[2],windowArea[3],windowArea[4], 5.5*widgetScale)
+		end)
+		WG['guishader'].InsertDlist(dlistGuishader, 'voteinterface')
+	end
 end
 
 function widget:KeyPress(key)
@@ -326,23 +353,26 @@ function widget:MousePress(x, y, button)
 end
 
 function widget:Shutdown()
+	gl.DeleteFont(font)
 	EndVote()
 end
 
 function widget:DrawScreen()
 	if voteDlist then
 		local x,y,b = Spring.GetMouseState()
-		if IsOnRect(x, y, windowArea[1], windowArea[2], windowArea[3], windowArea[4]) then
-			if (not voteOwner and IsOnRect(x, y, yesButtonArea[1], yesButtonArea[2], yesButtonArea[3], yesButtonArea[4])) or
-					IsOnRect(x, y, noButtonArea[1], noButtonArea[2], noButtonArea[3], noButtonArea[4]) or
-					IsOnRect(x, y, closeButtonArea[1], closeButtonArea[2], closeButtonArea[3], closeButtonArea[4])
-			then
-				StartVote()
+		if (not WG['topbar'] or not WG['topbar'].showingQuit()) then
+			if IsOnRect(x, y, windowArea[1], windowArea[2], windowArea[3], windowArea[4]) then
+				if (not voteOwner and IsOnRect(x, y, yesButtonArea[1], yesButtonArea[2], yesButtonArea[3], yesButtonArea[4])) or
+						IsOnRect(x, y, noButtonArea[1], noButtonArea[2], noButtonArea[3], noButtonArea[4]) or
+						IsOnRect(x, y, closeButtonArea[1], closeButtonArea[2], closeButtonArea[3], closeButtonArea[4])
+				then
+					StartVote()
+				elseif hovered then
+					StartVote()
+				end
 			elseif hovered then
 				StartVote()
 			end
-		elseif hovered then
-			StartVote()
 		end
 		gl.CallList(voteDlist)
 	end

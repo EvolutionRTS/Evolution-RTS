@@ -5,16 +5,29 @@ function widget:GetInfo()
 		author	= "Floris",
 		date		= "Feb, 2017",
 		license	= "GNU GPL, v2 or later",
-        layer     = -99999,
+        layer		= -9999999,
 		enabled   = true, --enabled by default
 		handler   = true, --can use widgetHandler:x()
 	}
 end
 
+local ui_opacity = tonumber(Spring.GetConfigFloat("ui_opacity",0.66) or 0.66)
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.33
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local height = 38
 local relXpos = 0.3
 local borderPadding = 5
 local showConversionSlider = true
+local bladeSpeedMultiplier = 0.2
 local bladeSpeedMultiplier = 0.22
 
 --local armcomDefID = UnitDefNames.armcom.id
@@ -51,7 +64,6 @@ local glTexture = gl.Texture
 local glRect = gl.Rect
 local glTexRect = gl.TexRect
 local glText = gl.Text
-local glGetTextWidth = gl.GetTextWidth
 local glRotate = gl.Rotate
 local glCreateList = gl.CreateList
 local glCallList = gl.CallList
@@ -146,6 +158,15 @@ function widget:ViewResize(n_vsx,n_vsy)
 	widgetScale = (vsy / height) * 0.043	-- using 734 because redui-console uses this value too
 	xPos = vsx*relXpos
 
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+	gl.DeleteFont(font)
+	font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+    gl.DeleteFont(font2)
+    font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
+
     for n,_ in pairs(dlistWindText) do
         glDeleteList(dlistWindText[n])
     end
@@ -158,90 +179,74 @@ function widget:ViewResize(n_vsx,n_vsy)
         glDeleteList(dlistResValues['energy'][n])
     end
     dlistResValues['energy'] = {}
+
 	init()
 end
 
-local function DrawRectRound(px,py,sx,sy,cs)
+local function DrawRectRound(px,py,sx,sy,cs, tl,tr,br,bl)
+    gl.TexCoord(0.8,0.8)
+    gl.Vertex(px+cs, py, 0)
+    gl.Vertex(sx-cs, py, 0)
+    gl.Vertex(sx-cs, sy, 0)
+    gl.Vertex(px+cs, sy, 0)
 
-	local csx = cs
-	local csy = cs
-	if sx-px < (cs*2) then
-		csx = (sx-px)/2
-		if csx < 0 then csx = 0 end
-	end
-	if sy-py < (cs*2) then
-		csy = (sy-py)/2
-		if csy < 0 then csy = 0 end
-	end
-	cs = math.min(csx, csy)
+    gl.Vertex(px, py+cs, 0)
+    gl.Vertex(px+cs, py+cs, 0)
+    gl.Vertex(px+cs, sy-cs, 0)
+    gl.Vertex(px, sy-cs, 0)
 
-	gl.TexCoord(0.8,0.8)
-	gl.Vertex(px+cs, py, 0)
-	gl.Vertex(sx-cs, py, 0)
-	gl.Vertex(sx-cs, sy, 0)
-	gl.Vertex(px+cs, sy, 0)
-	
-	gl.Vertex(px, py+cs, 0)
-	gl.Vertex(px+cs, py+cs, 0)
-	gl.Vertex(px+cs, sy-cs, 0)
-	gl.Vertex(px, sy-cs, 0)
-	
-	gl.Vertex(sx, py+cs, 0)
-	gl.Vertex(sx-cs, py+cs, 0)
-	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.Vertex(sx, sy-cs, 0)
-	
-	local offset = 0.05		-- texture offset, because else gaps could show
-	local o = offset
+    gl.Vertex(sx, py+cs, 0)
+    gl.Vertex(sx-cs, py+cs, 0)
+    gl.Vertex(sx-cs, sy-cs, 0)
+    gl.Vertex(sx, sy-cs, 0)
 
-	-- top left
-	if py <= 0 or px <= 0 then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(px, py+cs, 0)
-	-- top right
-	if py <= 0 or sx >= vsx then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(sx, py+cs, 0)
-	-- bottom left
-	if sy >= vsy or px <= 0 then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(px, sy-cs, 0)
-	-- bottom right
-	if sy >= vsy or sx >= vsx then o = 0.5 else o = offset end
-	gl.TexCoord(o,o)
-	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
-	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
-	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
-	gl.Vertex(sx, sy-cs, 0)
+    local offset = 0.07		-- texture offset, because else gaps could show
+
+    -- bottom left
+    if ((py <= 0 or px <= 0)  or (bl ~= nil and bl == 0)) and bl ~= 2   then o = 0.5 else o = offset end
+    gl.TexCoord(o,o)
+    gl.Vertex(px, py, 0)
+    gl.TexCoord(o,1-offset)
+    gl.Vertex(px+cs, py, 0)
+    gl.TexCoord(1-offset,1-offset)
+    gl.Vertex(px+cs, py+cs, 0)
+    gl.TexCoord(1-offset,o)
+    gl.Vertex(px, py+cs, 0)
+    -- bottom right
+    if ((py <= 0 or sx >= vsx) or (br ~= nil and br == 0)) and br ~= 2   then o = 0.5 else o = offset end
+    gl.TexCoord(o,o)
+    gl.Vertex(sx, py, 0)
+    gl.TexCoord(o,1-offset)
+    gl.Vertex(sx-cs, py, 0)
+    gl.TexCoord(1-offset,1-offset)
+    gl.Vertex(sx-cs, py+cs, 0)
+    gl.TexCoord(1-offset,o)
+    gl.Vertex(sx, py+cs, 0)
+    -- top left
+    if ((sy >= vsy or px <= 0) or (tl ~= nil and tl == 0)) and tl ~= 2   then o = 0.5 else o = offset end
+    gl.TexCoord(o,o)
+    gl.Vertex(px, sy, 0)
+    gl.TexCoord(o,1-offset)
+    gl.Vertex(px+cs, sy, 0)
+    gl.TexCoord(1-offset,1-offset)
+    gl.Vertex(px+cs, sy-cs, 0)
+    gl.TexCoord(1-offset,o)
+    gl.Vertex(px, sy-cs, 0)
+    -- top right
+    if ((sy >= vsy or sx >= vsx)  or (tr ~= nil and tr == 0)) and tr ~= 2   then o = 0.5 else o = offset end
+    gl.TexCoord(o,o)
+    gl.Vertex(sx, sy, 0)
+    gl.TexCoord(o,1-offset)
+    gl.Vertex(sx-cs, sy, 0)
+    gl.TexCoord(1-offset,1-offset)
+    gl.Vertex(sx-cs, sy-cs, 0)
+    gl.TexCoord(1-offset,o)
+    gl.Vertex(sx, sy-cs, 0)
 end
-
-function RectRound(px,py,sx,sy,cs)
-	local px,py,sx,sy,cs = math.floor(px),math.floor(py),math.ceil(sx),math.ceil(sy),math.floor(cs)
-	
-	gl.Texture(bgcorner)
-	gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs)
-	gl.Texture(false)
+function RectRound(px,py,sx,sy,cs, tl,tr,br,bl)		-- (coordinates work differently than the RectRound func in other widgets)
+    gl.Texture(bgcorner)
+    gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs, tl,tr,br,bl)
+    gl.Texture(false)
 end
 
 
@@ -273,15 +278,15 @@ local function updateRejoin()
 	dlistRejoin = glCreateList( function()
 	
 		-- background
-		glColor(0,0,0,0.7)
+		glColor(0,0,0,ui_opacity)
 		RectRound(area[1], area[2], area[3], area[4], 5.5*widgetScale)
 		local bgpadding = 3*widgetScale
-		glColor(1,1,1,0.03)
+		glColor(1,1,1,0.055*ui_opacity)
 		RectRound(area[1]+bgpadding, area[2]+bgpadding, area[3]-bgpadding, area[4], 5*widgetScale)
 
-		if (WG['guishader_api'] ~= nil) then
+		if (WG['guishader'] ~= nil) then
             guishaderEnabled = true
-			WG['guishader_api'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_rejoin')
+			WG['guishader'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_rejoin')
 		end
 		
 		local barHeight = (height*widgetScale/10)
@@ -333,26 +338,38 @@ local function updateButtons()
     if (WG['options'] ~= nil) then text = text..'Settings    ' end
     text = text..'Quit    '
 
-	local fontsize = totalWidth / glGetTextWidth(text)
+	local fontsize = totalWidth / font2:GetTextWidth(text)
 	if fontsize > (height*widgetScale)/3 then
 		fontsize = (height*widgetScale)/3
 	end
-	
+
+
+	-- add background blur
+	if dlistButtonsGuishader ~= nil then
+		if WG['guishader'] then
+			WG['guishader'].RemoveDlist('topbar_buttons')
+		end
+		glDeleteList(dlistButtonsGuishader)
+	end
+	dlistButtonsGuishader = glCreateList( function()
+		RectRound(area[1], area[2], area[3], area[4], 5.5*widgetScale)
+	end)
+
+
 	if dlistButtons1 ~= nil then
 		glDeleteList(dlistButtons1)
 	end
 	dlistButtons1 = glCreateList( function()
 	
 		-- background
-		glColor(0,0,0,0.7)
+		glColor(0,0,0,ui_opacity)
 		RectRound(area[1], area[2], area[3], area[4], 5.5*widgetScale)
 		local bgpadding = 3*widgetScale
-		glColor(1,1,1,0.03)
-		RectRound(area[1]+bgpadding, area[2]+bgpadding, area[3]-bgpadding, area[4], 5*widgetScale)
+		glColor(1,1,1,ui_opacity*0.055)
+		RectRound(area[1]+bgpadding, area[2]+bgpadding, area[3], area[4], bgpadding*1.25)
 		
-		if (WG['guishader_api'] ~= nil) then
-            guishaderEnabled = true
-			WG['guishader_api'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_buttons')
+		if WG['guishader'] then
+			WG['guishader'].InsertDlist(dlistButtonsGuishader, 'topbar_buttons')
 		end
 		
 		if buttonsArea['buttons'] == nil then
@@ -366,35 +383,35 @@ local function updateButtons()
             if (WG['teamstats'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = glGetTextWidth('   Stats  ') * fontsize
+                width = font2:GetTextWidth('   Stats  ') * fontsize
                 buttonsArea['buttons']['stats'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4] }
             end
             if (WG['commands'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = glGetTextWidth('  Cmd  ') * fontsize
+                width = font2:GetTextWidth('  Cmd  ') * fontsize
                 buttonsArea['buttons']['commands'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
 			end
             if (WG['keybinds'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = glGetTextWidth('  Keys  ') * fontsize
+                width = font2:GetTextWidth('  Keys  ') * fontsize
                 buttonsArea['buttons']['keybinds'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
             if (WG['changelog'] ~= nil) then
                 button = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = glGetTextWidth('  Changes  ') * fontsize
+                width = font2:GetTextWidth('  Changes  ') * fontsize
                 buttonsArea['buttons']['changelog'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
             if (WG['options'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = glGetTextWidth('  Options  ') * fontsize
+                width = font2:GetTextWidth('  Options  ') * fontsize
                 buttonsArea['buttons']['options'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
             offset = offset+width
-            width = glGetTextWidth('  Quit    ') * fontsize
+            width = font2:GetTextWidth('  Quit    ') * fontsize
             buttonsArea['buttons']['quit'] = {area[1]+offset, area[2]+margin, area[3], area[4]}
 		end
 	end)
@@ -403,7 +420,9 @@ local function updateButtons()
 		glDeleteList(dlistButtons2)
 	end
 	dlistButtons2 = glCreateList( function()
-		glText('\255\210\210\210'..text, area[1], area[2]+((area[4]-area[2])/2)-(fontsize/5), fontsize, 'o')
+        font2:Begin()
+        font2:Print('\255\210\210\210'..text, area[1], area[2]+((area[4]-area[2])/2)-(fontsize/5), fontsize, 'o')
+        font2:End()
 	end)
 end
 
@@ -423,9 +442,9 @@ local function updateMetalmaker()
 		glColor(1,1,1,0.03)
 		RectRound(area[1]+bgpadding, area[2]+bgpadding, area[3]-bgpadding, area[4], 5*widgetScale)
 
-		if (WG['guishader_api'] ~= nil) then
+		if (WG['guishader'] ~= nil) then
 			guishaderEnabled = true
-			WG['guishader_api'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_metalmaker')
+			WG['guishader'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_metalmaker')
 		end
 	end)
 
@@ -461,9 +480,9 @@ local function updateComs(forceText)
 		glColor(1,1,1,0.03)
 		RectRound(area[1]+bgpadding, area[2]+bgpadding, area[3]-bgpadding, area[4], 5*widgetScale)
 		
-		if (WG['guishader_api'] ~= nil) then
+		if (WG['guishader'] ~= nil) then
             guishaderEnabled = true
-			WG['guishader_api'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_coms')
+			WG['guishader'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_coms')
 		end
 	end)
 	
@@ -527,9 +546,9 @@ local function updateWind()
 		glColor(1,1,1,0.03)
 		RectRound(area[1]+bgpadding, area[2]+bgpadding, area[3]-bgpadding, area[4], 5*widgetScale)
 
-		if (WG['guishader_api'] ~= nil) then
+		if (WG['guishader'] ~= nil) then
             guishaderEnabled = true
-			WG['guishader_api'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_wind')
+			WG['guishader'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_wind')
 		end
 
 		glPushMatrix()
@@ -659,9 +678,9 @@ local function updateResbar(res)
 		glColor(1,1,1,0.03)
 		RectRound(area[1]+bgpadding, area[2]+bgpadding, area[3]-bgpadding, area[4], 5*widgetScale)
 		
-		if (WG['guishader_api'] ~= nil) then
+		if (WG['guishader'] ~= nil) then
             guishaderEnabled = true
-			WG['guishader_api'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_'..res)
+			WG['guishader'].InsertRect(area[1], area[2], area[3], area[4], 'topbar_'..res)
 		end
 		
 		-- Icon
@@ -771,9 +790,9 @@ function init()
 		--glColor(1,1,1,0.025)
 		--RectRound(barContentArea[1], barContentArea[2], barContentArea[3], barContentArea[4]+(10*widgetScale), 5*widgetScale)
 		
-		--if (WG['guishader_api'] ~= nil) then
+		--if (WG['guishader'] ~= nil) then
         --  guishaderEnabled = true3
-		--	WG['guishader_api'].InsertRect(topbarArea[1]+((borderPadding*widgetScale)/2), topbarArea[2], topbarArea[3], topbarArea[4], 'topbar')
+		--	WG['guishader'].InsertRect(topbarArea[1]+((borderPadding*widgetScale)/2), topbarArea[2], topbarArea[3], topbarArea[4], 'topbar')
 		--end
 	end)
 	
@@ -893,7 +912,17 @@ function widget:GameFrame(n)
 end
 
 local sec = 0
+local uiOpacitySec = 0
 function widget:Update(dt)
+	uiOpacitySec = uiOpacitySec + dt
+	if uiOpacitySec>0.5 then
+		uiOpacitySec = 0
+		if ui_opacity ~= Spring.GetConfigFloat("ui_opacity",0.66) then
+			ui_opacity = Spring.GetConfigFloat("ui_opacity",0.66)
+			updateButtons()
+		end
+	end
+
 	local mx,my = spGetMouseState()
 
     --sec = sec + dt
@@ -902,6 +931,7 @@ function widget:Update(dt)
     --    r['metal'] = {spGetTeamResources(spGetMyTeamID(),'metal') }
     --    r['energy'] = {spGetTeamResources(spGetMyTeamID(),'energy') }
     --end
+
 
     now = os.clock()
 	if now > nextGuishaderCheck then
@@ -1158,8 +1188,8 @@ function widget:DrawScreen()
 	--		glDeleteList(dlistRejoin)
 	--		dlistRejoin = nil
 	--	end
-	--	if WG['guishader_api'] ~= nil then
-	--		WG['guishader_api'].RemoveRect('topbar_rejoin')
+	--	if WG['guishader'] ~= nil then
+	--		WG['guishader'].RemoveRect('topbar_rejoin')
 	--	end
 	--	if WG['tooltip'] ~= nil then
 	--		WG['tooltip'].RemoveTooltip('rejoin')
@@ -1169,7 +1199,7 @@ function widget:DrawScreen()
 	if dlistButtons1 then
 		glCallList(dlistButtons1)
 		-- hovered?
-		if buttonsArea['buttons'] ~= nil and IsOnRect(x, y, buttonsArea[1], buttonsArea[2], buttonsArea[3], buttonsArea[4]) then
+		if not showQuitscreen and buttonsArea['buttons'] ~= nil and IsOnRect(x, y, buttonsArea[1], buttonsArea[2], buttonsArea[3], buttonsArea[4]) then
 			buttonsAreaHovered = nil
 			for button, pos in pairs(buttonsArea['buttons']) do
 				if IsOnRect(x, y, pos[1], pos[2], pos[3], pos[4]) then
@@ -1186,24 +1216,32 @@ function widget:DrawScreen()
 		glCallList(dlistButtons2)
 	end
 
+    if dlistQuit ~= nil then
+        if WG['guishader'] then
+            WG['guishader'].removeRenderDlist(dlistQuit)
+        end
+        glDeleteList(dlistQuit)
+        dlistQuit = nil
+    end
 	if showQuitscreen ~= nil then
 		local fadeoutBonus = 0
 		local fadeTime = 0.2
 		local fadeProgress = (now - showQuitscreen) / fadeTime
 		if fadeProgress > 1 then fadeProgress = 1 end
 
-		-- background
-		if (WG['guishader_api'] ~= nil) then
-            guishaderEnabled = true
-			WG['guishader_api'].InsertRect(0,0,vsx,vsy, 'topbar_screenblur')
-		end
+		Spring.SetMouseCursor('cursornormal')
 
-		glColor(0,0,0,(0.15*fadeProgress))
-		glRect( 0, 0, vsx, vsy)
+        dlistQuit = glCreateList( function()
+			if WG['guishader'] then
+            	glColor(0,0,0,(0.18*fadeProgress))
+			else
+				glColor(0,0,0,(0.35*fadeProgress))
+			end
+            glRect( 0, 0, vsx, vsy)
 
-		if hideQuitWindow == nil then	-- when terminating spring, keep the faded screen
+            if hideQuitWindow == nil then	-- when terminating spring, keep the faded screen
 
-			local width = vsx/6.2
+                local width = vsx/5.8
 			local height = width/3.5
 			local padding = width/70
 			local buttonPadding = width/100
@@ -1218,43 +1256,59 @@ function widget:DrawScreen()
 			glColor(1,1,1,0.5+(0.36*fadeProgress))
 			RectRound(quitscreenArea[1], quitscreenArea[2], quitscreenArea[3], quitscreenArea[4], 5.5*widgetScale)
 			glColor(0,0,0,0.035+(0.035*fadeProgress))
-			RectRound(quitscreenArea[1]+padding, quitscreenArea[2]+padding, quitscreenArea[3]-padding, quitscreenArea[4]-padding, 5*widgetScale)
+                RectRound(quitscreenArea[1]+padding, quitscreenArea[2]+padding, quitscreenArea[3]-padding, quitscreenArea[4]-padding, padding)
 
-			local fontSize = height/5.5
-			if not spec then
-				glText("\255\000\000\000Want to resign or quit to desktop?", quitscreenArea[1]+((quitscreenArea[3]-quitscreenArea[1])/2), quitscreenArea[4]-padding-padding-padding-fontSize, fontSize, "con")
-			else
-				glText("\255\000\000\000Really want to quit?", quitscreenArea[1]+((quitscreenArea[3]-quitscreenArea[1])/2), quitscreenArea[4]-padding-padding-padding-padding-fontSize, fontSize, "con")
-			end
+                local fontSize = height/6
+                font:Begin()
+                font:SetTextColor(0,0,0,1)
+                if not spec then
+                    font:Print("Want to resign or quit to desktop?", quitscreenArea[1]+((quitscreenArea[3]-quitscreenArea[1])/2), quitscreenArea[4]-padding-padding-padding-fontSize, fontSize, "cn")
+                else
+                    font:Print("Really want to quit?", quitscreenArea[1]+((quitscreenArea[3]-quitscreenArea[1])/2), quitscreenArea[4]-padding-padding-padding-padding-fontSize, fontSize, "cn")
+                end
 
-			-- quit button
-			if IsOnRect(x, y, quitscreenQuitArea[1], quitscreenQuitArea[2], quitscreenQuitArea[3], quitscreenQuitArea[4]) then
-				glColor(0.75,0.1,0.1,0.4+(0.4*fadeProgress))
-			else
-				glColor(0.5,0,0,0.35+(0.35*fadeProgress))
-			end
-			RectRound(quitscreenQuitArea[1], quitscreenQuitArea[2], quitscreenQuitArea[3], quitscreenQuitArea[4], 5*widgetScale)
-			glColor(0,0,0,0.07+(0.05*fadeProgress))
-			RectRound(quitscreenQuitArea[1]+buttonPadding, quitscreenQuitArea[2]+buttonPadding, quitscreenQuitArea[3]-buttonPadding, quitscreenQuitArea[4]-buttonPadding, 4*widgetScale)
+                -- quit button
+                if IsOnRect(x, y, quitscreenQuitArea[1], quitscreenQuitArea[2], quitscreenQuitArea[3], quitscreenQuitArea[4]) then
+                    glColor(0.66,0.05,0.05,0.4+(0.5*fadeProgress))
+                else
+                    glColor(0.45,0,0,0.35+(0.4*fadeProgress))
+                end
+                RectRound(quitscreenQuitArea[1], quitscreenQuitArea[2], quitscreenQuitArea[3], quitscreenQuitArea[4], 3.5*widgetScale)
+                glColor(0,0,0,0.07+(0.05*fadeProgress))
+                RectRound(quitscreenQuitArea[1]+buttonPadding, quitscreenQuitArea[2]+buttonPadding, quitscreenQuitArea[3]-buttonPadding, quitscreenQuitArea[4]-buttonPadding, 2.8*widgetScale)
+				font:End()
 
-			local fontSize = fontSize*0.85
-			glText("\255\255\255\255Quit", quitscreenQuitArea[1]+((quitscreenQuitArea[3]-quitscreenQuitArea[1])/2), quitscreenQuitArea[2]+((quitscreenQuitArea[4]-quitscreenQuitArea[2])/2)-(fontSize/3), fontSize, "con")
+                fontSize = fontSize*0.9
+				font2:Begin()
+                font2:SetTextColor(1,1,1,1)
+                font2:SetOutlineColor(0,0,0,0.23)
+                font2:Print("Quit", quitscreenQuitArea[1]+((quitscreenQuitArea[3]-quitscreenQuitArea[1])/2), quitscreenQuitArea[2]+((quitscreenQuitArea[4]-quitscreenQuitArea[2])/2)-(fontSize/3), fontSize, "con")
 
-			-- resign button
-			if not spec then
-				if IsOnRect(x, y, quitscreenResignArea[1], quitscreenResignArea[2], quitscreenResignArea[3], quitscreenResignArea[4]) then
-					glColor(0.6,0.6,0.6,0.4+(0.4*fadeProgress))
-				else
-					glColor(0.3,0.3,0.3,0.35+(0.35*fadeProgress))
-				end
-				RectRound(quitscreenResignArea[1], quitscreenResignArea[2], quitscreenResignArea[3], quitscreenResignArea[4], 5*widgetScale)
-				glColor(0,0,0,0.07+(0.05*fadeProgress))
-				RectRound(quitscreenResignArea[1]+buttonPadding, quitscreenResignArea[2]+buttonPadding, quitscreenResignArea[3]-buttonPadding, quitscreenResignArea[4]-buttonPadding, 4*widgetScale)
+                -- resign button
+                if not spec then
+                    if IsOnRect(x, y, quitscreenResignArea[1], quitscreenResignArea[2], quitscreenResignArea[3], quitscreenResignArea[4]) then
+                        glColor(0.55,0.55,0.55,0.4+(0.5*fadeProgress))
+                    else
+                        glColor(0.3,0.3,0.3,0.4+(0.4*fadeProgress))
+                    end
+                    RectRound(quitscreenResignArea[1], quitscreenResignArea[2], quitscreenResignArea[3], quitscreenResignArea[4], 3.5*widgetScale)
+                    glColor(0,0,0,0.07+(0.05*fadeProgress))
+                    RectRound(quitscreenResignArea[1]+buttonPadding, quitscreenResignArea[2]+buttonPadding, quitscreenResignArea[3]-buttonPadding, quitscreenResignArea[4]-buttonPadding, 2.8*widgetScale)
 
-				glText("\255\255\255\255Resign", quitscreenResignArea[1]+((quitscreenResignArea[3]-quitscreenResignArea[1])/2), quitscreenResignArea[2]+((quitscreenResignArea[4]-quitscreenResignArea[2])/2)-(fontSize/3), fontSize, "con")
-			end
-		end
-	end
+                    font2:Print("Resign", quitscreenResignArea[1]+((quitscreenResignArea[3]-quitscreenResignArea[1])/2), quitscreenResignArea[2]+((quitscreenResignArea[4]-quitscreenResignArea[2])/2)-(fontSize/3), fontSize, "con")
+                end
+                font2:End()
+            end
+        end)
+
+        -- background
+        if WG['guishader'] then
+            WG['guishader'].setScreenBlur(true)
+            WG['guishader'].insertRenderDlist(dlistQuit)
+        else
+            glCallList(dlistQuit)
+        end
+    end
 	glColor(1,1,1,1)
 	glPopMatrix()
 end
@@ -1309,8 +1363,8 @@ local function hideWindows()
         WG['teamstats'].toggle(false)
 	end
 	showQuitscreen = nil
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('topbar_screenblur')
+	if WG['guishader'] then
+		WG['guishader'].setScreenBlur(false)
 	end
 end
 
@@ -1331,8 +1385,8 @@ local function applyButtonAction(button)
 		if oldShowQuitscreen ~= nil then
 			if isvisible ~= true then
 				showQuitscreen = oldShowQuitscreen
-				if (WG['guishader_api'] ~= nil) then
-					WG['guishader_api'].InsertRect(0,0,vsx,vsy, 'topbar_screenblur')
+				if WG['guishader'] then
+					WG['guishader'].setScreenBlur(true)
 				end
 			end
 		else
@@ -1381,9 +1435,18 @@ local function applyButtonAction(button)
 	end
 end
 
+function widget:MouseWheel(up,value) --up = true/false , value = -1/1
+	if showQuitscreen ~= nil and quitscreenArea ~= nil then
+		return true
+	end
+end
+
 function widget:KeyPress(key)
 	if key == 27 then	-- ESC
 		hideWindows()
+	end
+	if showQuitscreen ~= nil and quitscreenArea ~= nil then
+		return true
 	end
 end
 
@@ -1443,26 +1506,33 @@ function widget:MousePress(x, y, button)
 					end
 					Spring.SendCommands("spectator")
 					showQuitscreen = nil
-					if (WG['guishader_api'] ~= nil) then
-						WG['guishader_api'].RemoveRect('topbar_screenblur')
+					if WG['guishader'] then
+						WG['guishader'].setScreenBlur(false)
 					end
 					return true
 				end
 				return true
 			else
 				showQuitscreen = nil
-				if (WG['guishader_api'] ~= nil) then
-					WG['guishader_api'].RemoveRect('topbar_screenblur')
+				if WG['guishader'] then
+					WG['guishader'].setScreenBlur(false)
 				end
 				return true
 			end
+
+			return true
 		end
-
-
+	else
+		if showQuitscreen ~= nil and quitscreenArea ~= nil then
+			return true
+		end
 	end
 end
 
 --function widget:MouseRelease(x, y, button)
+--	if showQuitscreen ~= nil and quitscreenArea ~= nil then
+--		return true
+--	end
 --	if draggingShareIndicator ~= nil then
 --		adjustSliders(x, y)
 --        draggingShareIndicator = nil
@@ -1717,6 +1787,9 @@ function widget:Initialize()
 	WG['topbar'].showingRejoining = function()
 		return showRejoinUI
 	end
+	WG['topbar'].showingQuit = function()
+		return showQuitscreen
+	end
 
 	init()
 end
@@ -1753,15 +1826,15 @@ function widget:Shutdown()
 		--	glDeleteList(dlistResValues['energy'][n])
 		--end
 	end
-	if WG['guishader_api'] ~= nil then
-		WG['guishader_api'].RemoveRect('topbar')
-		--WG['guishader_api'].RemoveRect('topbar_energy')
-		--WG['guishader_api'].RemoveRect('topbar_metal')
-		--WG['guishader_api'].RemoveRect('topbar_wind')
-		--WG['guishader_api'].RemoveRect('topbar_coms')
-		--WG['guishader_api'].RemoveRect('topbar_metalmaker')
-		WG['guishader_api'].RemoveRect('topbar_buttons')
-		--WG['guishader_api'].RemoveRect('topbar_rejoin')
+	gl.DeleteFont(font)
+	gl.DeleteFont(font2)
+	if WG['guishader'] then
+		--WG['guishader'].RemoveDlist('topbar_energy')
+		--WG['guishader'].RemoveDlist('topbar_metal')
+		--WG['guishader'].RemoveDlist('topbar_wind')
+		--WG['guishader'].RemoveDlist('topbar_coms')
+		WG['guishader'].RemoveDlist('topbar_buttons')
+		--WG['guishader'].RemoveDlist('topbar_rejoin')
 	end
 	--if WG['tooltip'] ~= nil then
 	--	WG['tooltip'].RemoveTooltip('coms')

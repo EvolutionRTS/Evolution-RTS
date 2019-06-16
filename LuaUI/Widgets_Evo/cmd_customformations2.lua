@@ -157,8 +157,6 @@ local spFindUnitCmdDesc = Spring.FindUnitCmdDesc
 local spGetModKeyState = Spring.GetModKeyState
 local spGetInvertQueueKey = Spring.GetInvertQueueKey
 local spIsAboveMiniMap = Spring.IsAboveMiniMap
-local spGetSelectedUnitsCount = Spring.GetSelectedUnitsCount
-local spGetSelectedUnits = Spring.GetSelectedUnits
 local spGetUnitDefID = Spring.GetUnitDefID
 local spGiveOrder = Spring.GiveOrder
 local spGetUnitIsTransporting = Spring.GetUnitIsTransporting
@@ -172,6 +170,7 @@ local spGetUnitHeight = Spring.GetUnitHeight
 local spGetCameraPosition = Spring.GetCameraPosition
 local spGetViewGeometry = Spring.GetViewGeometry
 local spTraceScreenRay = Spring.TraceScreenRay
+
 
 local mapSizeX, mapSizeZ = Game.mapSizeX, Game.mapSizeZ
 local maxUnits = Game.maxUnits
@@ -192,7 +191,6 @@ local CMD_MOVE = CMD.MOVE
 local CMD_ATTACK = CMD.ATTACK
 local CMD_UNLOADUNIT = CMD.UNLOAD_UNIT
 local CMD_UNLOADUNITS = CMD.UNLOAD_UNITS
-
 local CMD_OPT_ALT = CMD.OPT_ALT
 local CMD_OPT_CTRL = CMD.OPT_CTRL
 local CMD_OPT_META = CMD.OPT_META
@@ -200,6 +198,8 @@ local CMD_OPT_SHIFT = CMD.OPT_SHIFT
 local CMD_OPT_RIGHT = CMD.OPT_RIGHT
 
 local keyShift = 304
+local selectedUnits = Spring.GetSelectedUnits()
+local selectedUnitsCount = Spring.GetSelectedUnitsCount()
 
 --------------------------------------------------------------------------------
 -- Helper Functions
@@ -269,9 +269,8 @@ local function CanUnitExecute(uID, cmdID)
 end
 local function GetExecutingUnits(cmdID)
 	local units = {}
-	local selUnits = spGetSelectedUnits()
-	for i = 1, #selUnits do
-		local uID = selUnits[i]
+    for i = 1, selectedUnitsCount do
+        local uID = selectedUnits[i]
 		if CanUnitExecute(uID, cmdID) then
 			units[#units + 1] = uID
 		end
@@ -433,6 +432,12 @@ local function GiveNotifyingOrderToUnit(uID, cmdID, cmdParams, cmdOpts)
 	spGiveOrderToUnit(uID, cmdID, cmdParams, cmdOpts.coded)
 end
 
+
+function widget:SelectionChanged(sel)
+    selectedUnits = sel
+    selectedUnitsCount = Spring.GetSelectedUnitsCount()
+end
+
 --------------------------------------------------------------------------------
 -- Mouse/keyboard Callins
 --------------------------------------------------------------------------------
@@ -505,13 +510,12 @@ function widget:MousePress(mx, my, mButton)
 	if not AddFNode(pos) then return false end
 	
 	-- Is this line a path candidate (We don't do a path off an overriden command)
-	pathCandidate = (not overriddenCmd) and (spGetSelectedUnitsCount()==1 or (alt and not requiresAlt[usingCmd]))
+	pathCandidate = (not overriddenCmd) and (selectedUnitsCount==1 or (alt and not requiresAlt[usingCmd]))
 	
 	-- We handled the mouse press
 	return true
 end
 function widget:MouseMove(mx, my, dx, dy, mButton)
-	
 	-- It is possible for MouseMove to fire after MouseRelease
 	if #fNodes == 0 then
 		return false
@@ -825,7 +829,6 @@ function widget:DrawWorld()
 			zoomY = 6 
 		end
 		if lineLength > 0 then  --don't try and draw if the command was cancelled by having two mouse buttons pressed at once
-			local unitCount = spGetSelectedUnitsCount()
 			DrawFormationDots(tVerts, zoomY, unitCount)
 		end
 	end

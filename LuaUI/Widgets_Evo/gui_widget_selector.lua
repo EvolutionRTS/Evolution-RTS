@@ -35,9 +35,16 @@ end
 -- relies on a gadget to implement "luarules reloadluaui"
 -- relies on custom stuff in widgetHandler to implement blankOutConfig and allowUserWidgets
 
-include("colors.h.lua")
 include("keysym.h.lua")
 include("fonts.lua")
+
+local WhiteStr   = "\255\255\255\255"
+local RedStr     = "\255\255\001\001"
+local GreenStr   = "\255\001\255\001"
+local BlueStr    = "\255\001\001\255"
+local CyanStr    = "\255\001\255\255"
+local YellowStr  = "\255\255\255\001"
+local MagentaStr = "\255\255\001\255"
 
 local cutomScale = 1
 local sizeMultiplier = 1
@@ -49,24 +56,28 @@ local fullWidgetsList = {}
 
 local vsx, vsy = widgetHandler:GetViewSizes()
 
-local minMaxEntries = 15 
+local minMaxEntries = 15
 local curMaxEntries = 25
 
 local startEntry = 1
 local pageStep  = math.floor(curMaxEntries / 2) - 1
 
-local fontSize = 12
-local fontSpace = 7
+local fontSize = 13.5
+local fontSpace = 8.5
 local yStep = fontSize + fontSpace
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
-local entryFont  = "LuaUI/Fonts/FreeMonoBold_12"
-local headerFont  = "LuaUI/Fonts/FreeMonoBold_12"
-entryFont  = ":n:" .. entryFont
-headerFont = ":n:" .. headerFont
-
-local bgPadding = 6
-local bgcorner	= ":n:"..LUAUI_DIRNAME.."Images/bgcorner.png"
+local bgPadding = 5.5
+local bgcorner	= "LuaUI/Images/bgcorner.png"
 
 local maxWidth = 0.01
 local borderx = yStep * 0.75
@@ -94,29 +105,40 @@ local show = false
 local pagestepped = false
 
 
-
 local buttons = { --see MouseRelease for which functions are called by which buttons
-    [1] = "Reload LuaUI", 
-    [2] = "Unload ALL Widgets (DO NOT CLICK THIS)",
-    [3] = "Allow/Disallow User Widgets (DO NOT CLICK THIS)",
+    [1] = "Reload LuaUI",
+    [2] = "Unload ALL Widgets",
+    [3] = "Allow/Disallow User Widgets",
     [4] = "Reset LuaUI",
     [5] = "Factory Reset LuaUI",
 }
-local titleFontSize = 16
-local buttonFontSize = 14
-local buttonHeight = 20
-local buttonTop = 20 -- offset between top of buttons and bottom of widget
+
+local allowuserwidgets = true
+if Spring.GetModOptions and (tonumber(Spring.GetModOptions().allowuserwidgets) or 1) == 0 then
+  allowuserwidgets = false
+  buttons[3] = ''
+end
+
+local titleFontSize = 20
+local buttonFontSize = 15
+local buttonHeight = 24
+local buttonTop = 28 -- offset between top of buttons and bottom of widget
 
 -------------------------------------------------------------------------------
 
 function widget:Initialize()
   widgetHandler.knownChanged = true
   Spring.SendCommands('unbindkeyset f11')
-  
-  if widgetHandler.allowUserWidgets then
-    buttons[3] = "Disallow User Widgets"
-  else
-    buttons[3] = "Allow User Widgets"
+
+  if allowuserwidgets then
+    if widgetHandler.allowUserWidgets then
+      buttons[3] = "Disallow User Widgets"
+    else
+      buttons[3] = "Allow User Widgets"
+    end
+  end
+  if Spring.GetGameFrame() <= 0 then
+    Spring.SendLuaRulesMsg('xmas'..((os.date("%m") == "12"  and  os.date("%d") >= "17") and '1' or '0'))
   end
 end
 
@@ -147,41 +169,41 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	if py <= 0 or px <= 0 then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, py+cs, 0)
 	-- top right
 	if py <= 0 or sx >= vsx then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, py+cs, 0)
 	-- bottom left
 	if sy >= vsy or px <= 0 then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, sy-cs, 0)
 	-- bottom right
 	if sy >= vsy or sx >= vsx then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, sy-cs, 0)
 end
 
@@ -284,9 +306,9 @@ local function UpdateList()
   widgetsList = {}
   for name,data in pairs(widgetHandler.knownWidgets) do
     if (name ~= myName) then
-      table.insert(fullWidgetsList, { name, data })
+      fullWidgetsList[#fullWidgetsList+1] = { name, data }
       -- look for the maxWidth
-      local width = fontSize * gl.GetTextWidth(name)
+      local width = fontSize * font:GetTextWidth(name)
       if (width > maxWidth) then
         maxWidth = width
       end
@@ -307,9 +329,12 @@ local function UpdateList()
 end
 
 
-function widget:ViewResize(viewSizeX, viewSizeY)
-  vsx = viewSizeX
-  vsy = viewSizeY
+function widget:ViewResize(n_vsx,n_vsy)
+  vsx,vsy = Spring.GetViewGeometry()
+  widgetScale = (0.5 + (vsx*vsy / 5700000))
+  local fontfileScale = widgetScale
+  font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
   if customScale == nil then
 	customScale = 1
@@ -343,27 +368,32 @@ local activeGuishader = false
 local scrollbarOffset = -15
 function widget:DrawScreen()
   if not show then 
-    if activeGuishader and (WG['guishader_api'] ~= nil) then
+    if activeGuishader and (WG['guishader']) then
       activeGuishader = false
-      WG['guishader_api'].RemoveRect('widgetselector')
+      WG['guishader'].DeleteDlist('widgetselector')
     end
     return
   end
   UpdateList()
-  gl.BeginText()
-  if (WG['guishader_api'] == nil) then
+  if (WG['guishader'] == nil) then
     activeGuishader = false 
   end
-  if (WG['guishader_api'] ~= nil) and not activeGuishader then
+  if (WG['guishader']) and not activeGuishader then
     activeGuishader = true
-    WG['guishader_api'].InsertRect(minx-(bgPadding*sizeMultiplier), miny-(bgPadding*sizeMultiplier), maxx+(bgPadding*sizeMultiplier), maxy+(bgPadding*sizeMultiplier),'widgetselector')
+    dlistGuishader = gl.CreateList( function()
+      RectRound(minx-(bgPadding*sizeMultiplier), miny-(bgPadding*sizeMultiplier), maxx+(bgPadding*sizeMultiplier), maxy+(bgPadding*sizeMultiplier), 8*sizeMultiplier)
+    end)
+    WG['guishader'].InsertDlist(dlistGuishader, 'widgetselector')
   end
   borderx = (yStep*sizeMultiplier) * 0.75
   bordery = (yStep*sizeMultiplier) * 0.75
 
   -- draw the header
-  gl.Text("Widget Selector", midx, maxy + ((8 + bgPadding)*sizeMultiplier), titleFontSize*sizeMultiplier, "oc")
-  
+  font2:Begin()
+  font2:Print("Widget Selector", midx, maxy + ((11 + bgPadding)*sizeMultiplier), titleFontSize*sizeMultiplier, "oc")
+  font2:End()
+
+  font:Begin()
   local mx,my,lmb,mmb,rmb = Spring.GetMouseState()
   local tcol = WhiteStr
     
@@ -371,16 +401,20 @@ function widget:DrawScreen()
   if maxx-10 < mx and mx < maxx and maxy < my and my < maxy + ((buttonFontSize + 7)*sizeMultiplier) then
     tcol = '\255\031\031\031'
   end
-  gl.Text(tcol.."+", maxx, maxy + ((7 + bgPadding)*sizeMultiplier), buttonFontSize*sizeMultiplier, "or")
+  font:Print(tcol.."+", maxx, maxy + ((7 + bgPadding)*sizeMultiplier), buttonFontSize*sizeMultiplier, "or")
   tcol = WhiteStr
   if minx < mx and mx < minx+10 and maxy < my and my < maxy + ((buttonFontSize + 7)*sizeMultiplier) then
     tcol = '\255\031\031\031'
   end
-  gl.Text(tcol.."-", minx, maxy + ((7 + bgPadding)*sizeMultiplier), buttonFontSize*sizeMultiplier, "ol")
+  font:Print(tcol.."-", minx, maxy + ((7 + bgPadding)*sizeMultiplier), buttonFontSize*sizeMultiplier, "ol")
   tcol = WhiteStr
 
   -- draw the box
-  gl.Color(0,0,0,0.8)
+  if WG['guishader'] then
+    gl.Color(0,0,0,0.8)
+  else
+    gl.Color(0,0,0,0.85)
+  end
   RectRound(minx-(bgPadding*sizeMultiplier), miny-(bgPadding*sizeMultiplier), maxx+(bgPadding*sizeMultiplier), maxy+(bgPadding*sizeMultiplier), 8*sizeMultiplier)
   
   gl.Color(0.33,0.33,0.33,0.2)
@@ -392,7 +426,7 @@ function widget:DrawScreen()
     if minx < mx and mx < maxx and miny - (buttonTop*sizeMultiplier) - i*(buttonHeight*sizeMultiplier) < my and my < miny - (buttonTop*sizeMultiplier) - (i-1)*(buttonHeight*sizeMultiplier) then
       tcol = '\255\031\031\031'
     end
-    gl.Text(tcol .. buttons[i], (minx+maxx)/2, miny - (buttonTop*sizeMultiplier) - (i*(buttonHeight*sizeMultiplier)), buttonFontSize*sizeMultiplier, "oc")
+    font:Print(tcol .. buttons[i], (minx+maxx)/2, miny - (buttonTop*sizeMultiplier) - (i*(buttonHeight*sizeMultiplier)), buttonFontSize*sizeMultiplier, "oc")
   end
   
   
@@ -433,7 +467,7 @@ function widget:DrawScreen()
       tmpName = color .. name
     end
 
-    gl.Text(color..tmpName, midx, posy + (fontSize*sizeMultiplier) * 0.5, fontSize*sizeMultiplier, "vc")
+    font:Print(color..tmpName, midx, posy + (fontSize*sizeMultiplier) * 0.5, fontSize*sizeMultiplier, "vc")
     posy = posy - (yStep*sizeMultiplier)
   end
   
@@ -518,8 +552,8 @@ function widget:DrawScreen()
     gl.Blending(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)
 end
   end
-  
-  gl.EndText()
+
+  font:End()
 end
 
 
@@ -661,7 +695,7 @@ function widget:MouseRelease(x, y, mb)
       widgetHandler:SaveConfigData()    
       return -1
     end
-    if buttonID == 3 then
+    if buttonID == 3 and allowuserwidgets then
       -- tell the widget handler that we allow/disallow user widgets and reload
       if widgetHandler.allowUserWidgets then
         widgetHandler.__allowUserWidgets = false
@@ -800,9 +834,11 @@ end
 function widget:Shutdown()
   Spring.SendCommands('bind f11 luaui selector') -- if this one is removed or crashes, then have the backup one take over.
   
-	if (WG['guishader_api'] ~= nil) then
-		WG['guishader_api'].RemoveRect('widgetselector')
-	end
+  if WG['guishader'] then
+    WG['guishader'].DeleteDlist('widgetselector')
+  end
+  gl.DeleteFont(font)
+  gl.DeleteFont(font2)
 end
 
 

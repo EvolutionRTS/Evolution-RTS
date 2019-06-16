@@ -37,9 +37,20 @@ include("keysym.h.lua")
 local fontSize = 13
 local useSelection = true
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "Poppins-Regular.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local customFontSize = 13
 
-local cX, cY
+local bgcornerSize = fontSize*0.45
+local bgpadding = fontSize*0.9
+
+local cX, cY, cYstart
 
 local vsx, vsy = gl.GetViewSizes()
 local widgetScale = (0.60 + (vsx*vsy / 5000000))
@@ -83,14 +94,9 @@ local spGetTeamInfo = Spring.GetTeamInfo
 local spGetPlayerInfo = Spring.GetPlayerInfo
 local spGetTeamColor = Spring.GetTeamColor
 local spIsUserWriting = Spring.IsUserWriting
-if spIsUserWriting == nil then
-	spIsUserWriting = function() return true end
-end
 local spGetModKeyState = Spring.GetModKeyState
 local spGetMouseState = Spring.GetMouseState
 local spTraceScreenRay = Spring.TraceScreenRay
-local spGetSelectedUnits = Spring.GetSelectedUnits
-local spGetSelectedUnitsCount	= Spring.GetSelectedUnitsCount
 
 local spGetUnitDefID = Spring.GetUnitDefID
 local spGetUnitExp = Spring.GetUnitExperience
@@ -142,15 +148,17 @@ local function DrawText(t1, t2)
 	textBufferCount = textBufferCount + 1
 	textBuffer[textBufferCount] = {t1,t2,cX,cY}
 	cY = cY - fontSize
-	maxWidth = max(maxWidth, (gl.GetTextWidth(t1)*fontSize), (gl.GetTextWidth(t2)*fontSize)+(fontSize*6.5))
+	maxWidth = max(maxWidth, (font:GetTextWidth(t1)*fontSize), (font:GetTextWidth(t2)*fontSize)+(fontSize*6.5))
 end
 
 local function DrawTextBuffer()
 	local num = #textBuffer
+	font:Begin()
 	for i=1, num do
-		glText(textBuffer[i][1], textBuffer[i][3], textBuffer[i][4], fontSize, "o")
-		glText(textBuffer[i][2], textBuffer[i][3] + (fontSize*6.5), textBuffer[i][4], fontSize, "o")
+		font:Print(textBuffer[i][1], textBuffer[i][3], textBuffer[i][4], fontSize, "o")
+		font:Print(textBuffer[i][2], textBuffer[i][3] + (fontSize*6.5), textBuffer[i][4], fontSize, "o")
 	end
+	font:End()
 end
 
 local function GetTeamColorCode(teamID)
@@ -176,10 +184,10 @@ local function GetTeamName(teamID)
 
 	if not teamID then return 'Error:NoTeamID' end
 
-	local _, teamLeader = spGetTeamInfo(teamID)
+	local _, teamLeader = spGetTeamInfo(teamID,false)
 	if not teamLeader then return 'Error:NoLeader' end
 
-	local leaderName = spGetPlayerInfo(teamLeader)
+	local leaderName = spGetPlayerInfo(teamLeader,false)
 
     if Spring.GetGameRulesParam('ainame_'..teamID) then
         leaderName = Spring.GetGameRulesParam('ainame_'..teamID)
@@ -189,9 +197,9 @@ end
 
 local guishaderEnabled = false	-- not a config var
 function RemoveGuishader()
-	if guishaderEnabled and WG['guishader_api'] ~= nil then
-		WG['guishader_api'].RemoveRect('unit_stats_title')
-		WG['guishader_api'].RemoveRect('unit_stats_data')
+	if guishaderEnabled and WG['guishader'] then
+		WG['guishader'].DeleteScreenDlist('unit_stats_title')
+		WG['guishader'].DeleteScreenDlist('unit_stats_data')
 		guishaderEnabled = false
 	end
 end
@@ -205,6 +213,7 @@ function widget:Initialize()
 end
 
 function widget:Shutdown()
+	gl.DeleteFont(font)
 	RemoveGuishader()
 end
 
@@ -224,16 +233,36 @@ function init()
 	yOffset = -((32 + bgpadding)*widgetScale)
 end
 
-function widget:ViewResize(x,y)
+function widget:ViewResize(n_vsx,n_vsy)
+	vsx,vsy = Spring.GetViewGeometry()
+	widgetScale = (0.5 + (vsx*vsy / 5700000))
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+    gl.DeleteFont(font)
+    font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
 	init()
 end
 
+local selectedUnits = Spring.GetSelectedUnits()
+local selectedUnitsCount = Spring.GetSelectedUnitsCount()
+if useSelection then
+	function widget:SelectionChanged(sel)
+		selectedUnits = sel
+		selectedUnitsCount = Spring.GetSelectedUnitsCount()
+	end
+end
+
 function widget:DrawScreen()
+	if (WG['topbar'] and WG['topbar'].showingQuit()) then
+		return
+	end
 	local alt, ctrl, meta, shift = spGetModKeyState()
-	if not meta then 
-		WG.hoverID = nil 
-		RemoveGuishader() 
-		return 
+	if not meta or spIsUserWriting() then
+		WG.hoverID = nil
+		RemoveGuishader()
+		return
 	end
 	local mx, my = spGetMouseState()
 	local uID
@@ -241,10 +270,9 @@ function widget:DrawScreen()
 	if rType == 'unit' then
 		uID = unitID
 	end
-	if useSelection and not spIsUserWriting() then
-		local selUnits = spGetSelectedUnits()
-		if #selUnits >= 1 then
-			uID = selUnits[1]
+	if useSelection then
+		if selectedUnitsCount >= 1 then
+			uID = selectedUnits[1]
 		end
 	end
 	local useHoverID = false
@@ -261,15 +289,19 @@ function widget:DrawScreen()
 	end
 	local useExp = ctrl
 	local uDefID = (uID and spGetUnitDefID(uID)) or (useHoverID and WG.hoverID) or (UnitDefs[-activeID] and -activeID)
-	
+
 	if not uDefID then
 		RemoveGuishader() return
 	end
 
+	local uDef = uDefs[uDefID]
+	local titleFontSize = fontSize*1.12
+	local cornersize = ceil(bgpadding*0.21)
+
 	if uID then
 		local uDef = uDefs[uDefID]
 		local uCurHp, uMaxHp, _, _, buildProg = spGetUnitHealth(uID)
-		local uTeam = spGetUnitTeam(uID)
+		uTeam = spGetUnitTeam(uID)
 
 		maxWidth = 0
 
@@ -277,28 +309,8 @@ function widget:DrawScreen()
 		cY = my + yOffset
 		cYstart = cY
 
-		local text = yellow .. uDef.humanName .. white .. "    " .. uDef.name .. "    (#" .. uID .. " , "..GetTeamColorCode(uTeam) .. GetTeamName(uTeam) .. white .. ")"
 
-		local cornersize = 0
-		-- background
-		if WG.hoverID ~= nil then
-			glColor(0.11,0.11,0.11,0.9)
-		else
-			glColor(0,0,0,0.75)
-		end
-		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
-		cornersize = ceil(bgpadding*0.21)
-		glColor(1,1,1,0.025)
-		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
-
-		if (WG['guishader_api'] ~= nil) then
-			guishaderEnabled = true
-			WG['guishader_api'].InsertRect(cX-bgpadding, cY-bgpadding, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding, cY+(fontSize/2)+bgpadding, 'unit_stats_title')
-		end
-
-		glColor(1.0, 1.0, 1.0, 1.0)
-		glText(text, cX, cY, fontSize, "o")
-		cY = cY - 2 * fontSize
+		cY = cY - 2 * titleFontSize
 		textBuffer = {}
 		textBufferCount = 0
 
@@ -432,7 +444,7 @@ function widget:DrawScreen()
 			if uWep.range > 16 then
 				local oBurst = uWep.salvoSize * uWep.projectiles
 				local oRld = max(1/30,uWep.stockpile and uWep.stockpileTime or uWep.reload)
-				if useExp and not (uWep.stockpile and uWep.stockpileTime) then
+				if uID and useExp and not uWep.stockpile and uWep.stockpileTime then
 					oRld = spGetUnitWeaponState(uID,weaponNums[i] or -1,"reloadTime") or oRld
 				end
 				local wepCount = wepCounts[wDefId]
@@ -518,25 +530,6 @@ function widget:DrawScreen()
 			end
 		end
 
-		-- background
-		if WG.hoverID ~= nil then
-			glColor(0.11,0.11,0.11,0.9)
-		else
-			glColor(0,0,0,0.66)
-		end
-		cornersize = 0
-		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
-		cornersize = ceil(bgpadding*0.16)
-		glColor(1,1,1,0.017)
-		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
-
-		DrawTextBuffer()
-
-		if (WG['guishader_api'] ~= nil) then
-			guishaderEnabled = true
-			WG['guishader_api'].InsertRect(cX-bgpadding, cY+(fontSize/3)+bgpadding, cX+maxWidth+bgpadding, cYstart-bgpadding, 'unit_stats_data')
-		end
-
 
 
 	else
@@ -555,25 +548,6 @@ function widget:DrawScreen()
 
 		local text = yellow .. uDef.humanName .. white .. "    " .. uDef.name .. "    ("..GetTeamColorCode(uTeam) .. GetTeamName(uTeam) .. white .. ")"
 
-		local cornersize = 0
-		-- background
-		if WG.hoverID ~= nil then
-			glColor(0.11,0.11,0.11,0.9)
-		else
-			glColor(0,0,0,0.66)
-		end
-		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
-		cornersize = ceil(bgpadding*0.21)
-		glColor(1,1,1,0.025)
-		RectRound(cX-bgpadding+cornersize, cY-bgpadding+cornersize, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding-cornersize, cY+(fontSize/2)+bgpadding-cornersize, bgcornerSize)
-
-		if (WG['guishader_api'] ~= nil) then
-			guishaderEnabled = true
-			WG['guishader_api'].InsertRect(cX-bgpadding, cY-bgpadding, cX+(gl.GetTextWidth(text)*fontSize)+bgpadding, cY+(fontSize/2)+bgpadding, 'unit_stats_title')
-		end
-
-		glColor(1.0, 1.0, 1.0, 1.0)
-		glText(text, cX, cY, fontSize, "o")
 		cY = cY - 2 * fontSize
 		textBuffer = {}
 		textBufferCount = 0
@@ -783,26 +757,100 @@ function widget:DrawScreen()
 				cY = cY - fontSize
 			end
 		end
-
-		-- background
-		if WG.hoverID ~= nil then
-			glColor(0.11,0.11,0.11,0.9)
-		else
-			glColor(0,0,0,0.75)
-		end
-		cornersize = 0
-		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
-		cornersize = ceil(bgpadding*0.16)
-		glColor(1,1,1,0.017)
-		RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
-
-		DrawTextBuffer()
-
-		if (WG['guishader_api'] ~= nil) then
-			guishaderEnabled = true
-			WG['guishader_api'].InsertRect(cX-bgpadding, cY+(fontSize/3)+bgpadding, cX+maxWidth+bgpadding, cYstart-bgpadding, 'unit_stats_data')
-		end
 	end
-end
 
+	-- background
+	if WG.hoverID ~= nil then
+		glColor(0.11,0.11,0.11,0.9)
+	else
+		glColor(0,0,0,0.66)
+	end
+
+	-- correct position when it goes below screen
+	if cY < 0 then
+		cYstart = cYstart - cY
+		local num = #textBuffer
+		for i=1, num do
+			textBuffer[i][4] = textBuffer[i][4] - (cY/2)
+			textBuffer[i][4] = textBuffer[i][4] - (cY/2)
+		end
+		cY = 0
+	end
+	-- correct position when it goes off screen
+	if cX + maxWidth+bgpadding+bgpadding > vsx then
+		local cXnew = vsx-maxWidth-bgpadding-bgpadding
+		local num = #textBuffer
+		for i=1, num do
+			textBuffer[i][3] = textBuffer[i][3] - ((cX-cXnew)/2)
+			textBuffer[i][3] = textBuffer[i][3] - ((cX-cXnew)/2)
+		end
+		cX = cXnew
+	end
+
+	-- title
+	local text = "\255\190\255\190" .. uDef.humanName
+	if uID then
+		text = text .. "   " ..  grey ..  uDef.name .. "   #" .. uID .. "   "..GetTeamColorCode(uTeam) .. GetTeamName(uTeam)
+	end
+	local iconHalfSize = titleFontSize*0.75
+	if not uID then
+		iconHalfSize = -bgpadding/2.5
+	end
+	cornersize = 0
+	if not uID then
+		glColor(0.1,0.1,0.1,(WG['guishader'] and 0.8 or 0.88))
+	else
+		glColor(0,0,0,(WG['guishader'] and 0.7 or 0.75))
+	end
+	RectRound(cX-bgpadding+cornersize, cYstart-bgpadding+cornersize, cX+(font:GetTextWidth(text)*titleFontSize)+iconHalfSize+iconHalfSize+bgpadding+(bgpadding/1.5)-cornersize, cYstart+(titleFontSize/2)+bgpadding-cornersize, bgcornerSize)
+
+	if WG['guishader'] then
+		guishaderEnabled = true
+		WG['guishader'].InsertScreenDlist( gl.CreateList( function()
+			RectRound(cX-bgpadding+cornersize, cYstart-bgpadding+cornersize, cX+(font:GetTextWidth(text)*titleFontSize)+iconHalfSize+iconHalfSize+bgpadding+(bgpadding/1.5)-cornersize, cYstart+(titleFontSize/2)+bgpadding-cornersize, bgcornerSize)
+		end), 'unit_stats_title')
+	end
+
+	cornersize = ceil(bgpadding*0.25)
+	glColor(1,1,1,0.023)
+	RectRound(cX-bgpadding+cornersize, cYstart-bgpadding+cornersize, cX+(font:GetTextWidth(text)*titleFontSize)+iconHalfSize+iconHalfSize+bgpadding+(bgpadding/1.5)-cornersize, cYstart+(titleFontSize/2)+bgpadding-cornersize, bgcornerSize*0.88)
+
+
+	-- icon
+	if uID then
+		glColor(1,1,1,1)
+		glTexture('#' .. uDefID)
+		glTexRect(cX, cYstart+cornersize-iconHalfSize, cX+iconHalfSize+iconHalfSize, cYstart+cornersize+iconHalfSize)
+		glTexture(false)
+	end
+
+	-- title text
+	glColor(1,1,1,1)
+	font:Begin()
+	font:Print(text, cX+iconHalfSize+iconHalfSize+(bgpadding/1.5), cYstart, titleFontSize, "o")
+	font:End()
+
+	-- stats
+	cornersize = 0
+	if not uID then
+		glColor(0.1,0.1,0.1,(WG['guishader'] and 0.8 or 0.88))
+	else
+		glColor(0,0,0,(WG['guishader'] and 0.7 or 0.75))
+	end
+	RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
+
+	if WG['guishader'] then
+		guishaderEnabled = true
+		WG['guishader'].InsertScreenDlist( gl.CreateList( function()
+			RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize)
+		end), 'unit_stats_data')
+	end
+
+	cornersize = ceil(bgpadding*0.23)
+	glColor(1,1,1,0.025)
+	RectRound(floor(cX-bgpadding)+cornersize, ceil(cY+(fontSize/3)+bgpadding)+cornersize, ceil(cX+maxWidth+bgpadding)-cornersize, floor(cYstart-bgpadding)-cornersize, bgcornerSize*0.88)
+
+	DrawTextBuffer()
+
+end
 ------------------------------------------------------------------------------------

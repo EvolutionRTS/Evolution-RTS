@@ -19,7 +19,7 @@ function widget:GetInfo()
 		author    = "aegis",
 		date      = "Jan 2, 2011",
 		license   = "Public Domain",
-		layer     = 0,
+		layer     = -99999999999,
 		enabled   = true
 	}
 end
@@ -68,7 +68,7 @@ local IsAboveMiniMap = Spring.IsAboveMiniMap
 
 local GetUnitDefID = Spring.GetUnitDefID
 local GetUnitPosition = Spring.GetUnitPosition
-local GetUnitCommands = Spring.GetUnitCommands
+local GetCommandQueue = Spring.GetCommandQueue
 
 local UnitDefs = UnitDefs
 local min = math.min
@@ -82,12 +82,6 @@ local glBeginEnd = gl.BeginEnd
 local GL_LINE_STRIP = GL.LINE_STRIP
 
 local GaiaTeamID  = Spring.GetGaiaTeamID()
-
--- show total cost and highest MK level of highlighted units
---local TotalCost, TechStr = 0, ""
--- local HighestTech = 0
-WG.smartSelectTooltip = {totalMetalCost = 0, totalEnergyCost = 0, totalSupplyCost = 0, totalSupplyGive = 0, unitCount = 0, highestTech = 0, active = false}
---local TechToStr = {"\255\0\205\255Mark II", "\255\255\0\255Mark III", "\255\0\255\0Mark IV"}
 
 -----------------------------------------------------------------
 -- end function locals ------------------------------------------
@@ -168,13 +162,33 @@ local function GetUnitsInScreenRectangle(x1, y1, x2, y2, team)
 	return result
 end
 
+
+local selectedUnits = Spring.GetSelectedUnits()
+function widget:SelectionChanged(sel)
+	local equalSelection = true
+	for k,v in pairs(sel) do
+		if selectedUnits[k] ~= v then
+			equalSelection = false
+			break
+		end
+	end
+	selectedUnits = sel
+	if (referenceCoords ~= nil and GetActiveCommand() == 0) then
+		if not select(3,GetMouseState()) and referenceSelection ~= nil and lastSelection ~= nil and equalSelection then
+			WG['smartselect'].updateSelection = false	-- widgethandler uses this to ignore the engine mouserelease selection
+		end
+	end
+end
+
 function widget:MousePress(x, y, button)
 	if (button == 1) then
-		referenceSelection = GetSelectedUnits()
+		referenceSelection = selectedUnits
 		referenceSelectionTypes = {}
 		for i=1, #referenceSelection do
 			udid = GetUnitDefID(referenceSelection[i])
-			referenceSelectionTypes[udid] = 1
+			if udid then
+				referenceSelectionTypes[udid] = 1
+			end
 		end
 		referenceScreenCoords = {x, y}
 		lastMeta = nil
@@ -227,25 +241,16 @@ function widget:SetConfigData(data)
 	if data.includeBuilders ~= nil 	then  includeBuilders	= data.includeBuilders end
 end
 
-
 function widget:Update()
-	--[[
-	local newUpdate = GetTimer()
-	if (DiffTimers(newUpdate, lastUpdate) < 0.1) then
-		return
-	end
-	lastUpdate = newUpdate
-	--]]
-	
-	--TotalCost, TechStr = 0, ""
-	WG.smartSelectTooltip.totalMetalCost, WG.smartSelectTooltip.totalEnergyCost, WG.smartSelectTooltip.totalSupplyCost, WG.smartSelectTooltip.totalSupplyGive, WG.smartSelectTooltip.unitCount, WG.smartSelectTooltip.highestTech, WG.smartSelectTooltip.active = 0, 0, 0, 0, 0, 0, false
-	--HighestTech = 0
 
+	WG['smartselect'].updateSelection = true
 	if (referenceCoords ~= nil and GetActiveCommand() == 0) then
-		x, y, pressed = GetMouseState()
+		local x, y, pressed = GetMouseState()
+
 		local px, py, sx, sy = GetMiniMapGeometry()
-		
-		if (pressed) and (referenceSelection ~= nil) then
+
+		if (pressed or lastSelection) and (referenceSelection ~= nil) then
+
 			local alt, ctrl, meta, shift = GetModKeyState()
 			if (#referenceSelection == 0) then
 				-- no point in inverting an empty selection
@@ -254,7 +259,7 @@ function widget:Update()
 
 			local sameSelect = GetKeyState(sameSelectKey)
 			local idleSelect = GetKeyState(idleSelectKey)
-			
+
 			local sameLast = (referenceScreenCoords ~= nil) and (x == referenceScreenCoords[1] and y == referenceScreenCoords[2])
 			if (sameLast and lastCoords == referenceCoords) then
 				return
@@ -269,7 +274,7 @@ function widget:Update()
 
 			local mouseSelection, originalMouseSelection
 			local r = referenceScreenCoords
-			local playing = GetPlayerInfo(myPlayerID).spectating == false
+			local playing = GetPlayerInfo(myPlayerID,false).spectating == false
 			local team = (playing and GetMyTeamID())
 			if (r ~= nil and IsAboveMiniMap(r[1], r[2])) then
 				local mx, my = max(px, min(px+sx, x)), max(py, min(py+sy, y))
@@ -280,42 +285,22 @@ function widget:Update()
 				mouseSelection = GetUnitsInScreenRectangle(x, y, x1, y1, nil)
 			end
 			originalMouseSelection = mouseSelection
-			
-			-- show total cost of selected units
-			WG.smartSelectTooltip.active = true
-			local highestTech = 0
-			local totalMetalCost, totalEnergyCost, totalSupplyCost, totalSupplyGive, unitCount = 0, 0, 0, 0, #mouseSelection
-			--TotalCost, highestTech = 0, 0
-			for i=1, unitCount do
-				local uid = mouseSelection[i]
-				local udid = GetUnitDefID(uid)
-				totalMetalCost = totalMetalCost + UnitDefs[udid].metalCost
-				totalEnergyCost = totalEnergyCost + UnitDefs[udid].energyCost
-				totalSupplyCost = totalSupplyCost + (UnitDefs[udid].customParams.supply_cost or 0)
-				totalSupplyGive = totalSupplyGive + (UnitDefs[udid].customParams.supply_grant or 0)
-				--local upgradeLevel = tonumber(UnitDefs[udid].isUpgraded) or 0
-				local unitName = UnitDefs[udid].name
-				local upgradeLevel = unitName:find("_up", -5) and tonumber(unitName:sub(-1, -1)) or 0
-				highestTech = highestTech < upgradeLevel and upgradeLevel or highestTech
-			end
-			WG.smartSelectTooltip.totalMetalCost, WG.smartSelectTooltip.totalEnergyCost, WG.smartSelectTooltip.totalSupplyCost, WG.smartSelectTooltip.totalSupplyGive, WG.smartSelectTooltip.unitCount = totalMetalCost, totalEnergyCost, totalSupplyCost, totalSupplyGive, unitCount
-			WG.smartSelectTooltip.highestTech = highestTech
-			--if highestTech > 0 then WG.smartSelectTooltip.techStr = TechToStr[highestTech] end
-			--Spring.Echo("TotalCost=",TotalCost,"HighestTech=",HighestTech)
 
-			
+
 			-- filter gaia units
 			local filteredselection = {}
 			local filteredselectionCount = 0
-			for i=1, #mouseSelection do
-				if GetUnitTeam(mouseSelection[i]) ~= GaiaTeamID then
-					filteredselectionCount = filteredselectionCount + 1
-					filteredselection[filteredselectionCount] = mouseSelection[i]
+			if not Spring.IsGodModeEnabled() then
+				for i=1, #mouseSelection do
+					if GetUnitTeam(mouseSelection[i]) ~= GaiaTeamID then
+						filteredselectionCount = filteredselectionCount + 1
+						filteredselection[filteredselectionCount] = mouseSelection[i]
+					end
 				end
+				mouseSelection = filteredselection
 			end
-			mouseSelection = filteredselection
 			filteredselection = nil
-			
+
 			local newSelection = {}
 			local uid, udid, udef, tmp
 
@@ -324,7 +309,7 @@ function widget:Update()
 				for i=1, #mouseSelection do
 					uid = mouseSelection[i]
 					udid = GetUnitDefID(uid)
-					if (mobileFilter[udid] or builderFilter[udid]) and (#GetUnitCommands(uid, 1) == 0) then
+					if (mobileFilter[udid] or builderFilter[udid]) and (GetCommandQueue(uid, 0) == 0) then
 						tmp[#tmp+1] = uid
 					end
 				end
@@ -440,20 +425,23 @@ function widget:Update()
 				lastSelection = nil
 				return
 			end
-			lastSelection = GetSelectedUnits()
-		elseif (lastSelection ~= nil) then
-			SelectUnitArray(lastSelection)
-			lastSelection = nil
-			referenceSelection = nil
-			referenceSelectionTypes = nil
-			referenceCoords = nil
-			minimapRect = nil
+
+			if pressed then
+				lastSelection = true --selectedUnits
+			else
+				lastSelection = nil
+				referenceSelection = nil
+				referenceSelectionTypes = nil
+				referenceCoords = nil
+				minimapRect = nil
+			end
 		else
 			referenceSelection = nil
 			referenceSelectionTypes = nil
 			referenceCoords = nil
 			minimapRect = nil
 		end
+
 	end
 end
 
@@ -465,7 +453,7 @@ function init()
 	mobileFilter = {}
 	
 	for udid, udef in pairs(UnitDefs) do
-		local mobile = (udef.canMove and udef.speed > 0.000001) or (includeNanosAsMobile and (UnitDefs[udid].name == "armnanotc" or UnitDefs[udid].name == "cornanotc" or UnitDefs[udid].name == "armnanotc_bar" or UnitDefs[udid].name == "cornanotc_bar"))
+		local mobile = (udef.canMove and udef.speed > 0.000001) or (includeNanosAsMobile and (UnitDefs[udid].name == "armnanotc" or UnitDefs[udid].name == "cornanotc"))
 		local builder = (udef.canReclaim and udef.reclaimSpeed > 0) or
 						--(udef.builder and udef.buildSpeed > 0) or					-- udef.builder = deprecated it seems
 						(udef.canResurrect and udef.resurrectSpeed > 0) or
@@ -499,6 +487,7 @@ function widget:Initialize()
 	WG['smartselect'].setIncludeBuilders = function(value)
 		includeBuilders = value
 	end
+	WG['smartselect'].updateSelection = false
 	init()
 end
 
@@ -511,23 +500,13 @@ local function DrawRectangle(r)
 	glVertex(r[1], 0, r[2])
 end
 
-function widget:DrawWorld()
-	if (minimapRect ~= nil) then
-		glColor(1, 1, 1, 1)
-		glLineWidth(1.0)
-		glDepthTest(false)
-		glBeginEnd(GL_LINE_STRIP, DrawRectangle, minimapRect)
-	end
-end
---[[
-function widget:DrawScreen()
-	local mx,my,pressed = GetMouseState()
-	if pressed then
-		local spacingX, spacingY = 5, 18
-		local fontSize = 20
-		local sb = "Total cost: " .. TotalCost
-		if TechStr ~= "" then sb = sb .. ", Highest tech: " .. TechStr end
-		if pressed then gl.Text(sb, mx + spacingX, my - fontSize - spacingY, fontSize, 'o') end
-	end
-end
-]]
+
+
+--function widget:DrawWorld()
+--	if (minimapRect ~= nil) then
+--		glColor(1, 1, 1, 1)
+--		glLineWidth(1.0)
+--		glDepthTest(false)
+--		glBeginEnd(GL_LINE_STRIP, DrawRectangle, minimapRect)	-- drawing coordinates display incorrect
+--	end
+--end

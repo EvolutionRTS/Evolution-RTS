@@ -8,14 +8,13 @@ function widget:GetInfo()
         author    = "Floris",
         date      = "sept 2016",
         license   = "GNU GPL v2",
-        layer     = -1001,
+        layer     = 99999999,
         enabled   = true
     }
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
 
 local spGetGameSpeed        = Spring.GetGameSpeed
 
@@ -26,7 +25,6 @@ local glPopMatrix           = gl.PopMatrix
 local glPushMatrix          = gl.PushMatrix
 local glTranslate           = gl.Translate
 local glTexRect             = gl.TexRect
-local glLoadFont            = gl.LoadFont
 local glDeleteFont          = gl.DeleteFont
 local glRect                = gl.Rect
 local glUseShader           = gl.UseShader
@@ -40,22 +38,28 @@ local osClock               = os.clock
 
 -- CONFIGURATION
 
+local fontfile = LUAUI_DIRNAME .. "fonts/unlisted/MicrogrammaDBold.ttf"
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+
 local sizeMultiplier        = 1
-local maxAlpha              = 0.6
-local maxShaderAlpha        = 0.2
-local maxNonShaderAlpha     = 0.1			--background alpha when shaders arent availible
+local maxAlpha              = 0.65
+local maxShaderAlpha        = 0.25
+local maxNonShaderAlpha     = 0.12			--background alpha when shaders arent availible
 local boxWidth              = 200
 local boxHeight             = 35
 local slideTime             = 0.4
 local fadeToTextAlpha       = 0.4
 local fontSizeHeadline      = 24
-local fontPath              = "LuaUI/Fonts/MicrogrammaDBold.ttf"
 local autoFadeTime          = 1
 
 local blurScreen            = false 	-- makes use of guishader api widget
 
 local vsx, vsy
-local myFont
 local pauseTimestamp = -10 --start or end of pause
 local lastPause = false
 local wndX1 = nil
@@ -112,16 +116,49 @@ local fragmentShaderSource = {
 	]],
 }
 
+local gameover = false
+function widget:GameOver()
+    gameover = true
+end
+
+function widget:Update(dt)
+    local now = osClock()
+    previousDrawScreenClock = now
+
+    local diffPauseTime = ( now - pauseTimestamp)
+
+    if ( ( not paused and lastPause ) or ( paused and not lastPause ) ) then
+        --pause switch
+        pauseTimestamp = osClock()
+        if ( diffPauseTime <= slideTime ) then
+            pauseTimestamp = pauseTimestamp - ( slideTime - ( diffPauseTime / slideTime ) * slideTime )
+        end
+    end
+
+    if ( paused and not lastPause ) then
+        --new pause
+        if widgetInitTime + 5 > now then        -- so if you do /luaui reload when paused, it wont re-animate
+            pauseTimestamp = now - (slideTime + autoFadeTime)
+        end
+    end
+
+    lastPause = paused
+
+    local _, _, isPaused = spGetGameSpeed()
+    if not gameover and isPaused  then    -- when host (admin) paused its just gamespeed 0
+        paused = true
+    else
+        paused = false
+    end
+end
 
 function widget:Initialize()
   vsx, vsy = widgetHandler:GetViewSizes()
   widget:ViewResize(vsx, vsy)
-  
-  myFont = glLoadFont( fontPath, fontSizeHeadline )
    
-   
-  local _, _, isPaused = spGetGameSpeed()
-  if isPaused then
+
+  local _, gameSpeed, isPaused = spGetGameSpeed()
+  if isPaused or gameSpeed == 0 then    -- when host admin paused its just gamespeed 0
       paused = true
   end
 
@@ -155,37 +192,17 @@ end
 function widget:DrawScreen()
   if Spring.IsGUIHidden() then return end
     local now = osClock()
-    previousDrawScreenClock = now
-    
-    local diffPauseTime = ( now - pauseTimestamp)
-    
-    if ( ( not paused and lastPause ) or ( paused and not lastPause ) ) then
-        --pause switch
-        pauseTimestamp = osClock()
-        if ( diffPauseTime <= slideTime ) then
-            pauseTimestamp = pauseTimestamp - ( slideTime - ( diffPauseTime / slideTime ) * slideTime )
-        end
-    end
-    
-    if ( paused and not lastPause ) then
-        --new pause
-        if widgetInitTime + 5 > now then        -- so if you do /luaui reload when paused, it wont re-animate
-            pauseTimestamp = now - (slideTime + autoFadeTime)
-        end
-    end
-    
-    lastPause = paused
     
     if ( paused or ( ( now - pauseTimestamp) <= slideTime ) ) then
         showPauseScreen = true
         drawPause()
-        if blurScreen and WG['guishader_api'] ~= nil then
-            WG['guishader_api'].InsertRect(0,0,vsx,vsy, 'pausescreen')
+        if blurScreen and WG['guishader'] then
+            WG['guishader'].InsertRect(0,0,vsx,vsy, 'pausescreen')
         end
     else
         showPauseScreen = false
-        if blurScreen and WG['guishader_api'] ~= nil then
-            WG['guishader_api'].RemoveRect('pausescreen')
+        if blurScreen and WG['guishader'] then
+            WG['guishader'].RemoveRect('pausescreen')
         end
     end
 end
@@ -236,11 +253,11 @@ function drawPause()
     end
     
     --draw text
-    myFont:Begin()
-    myFont:SetOutlineColor( outline )
-    myFont:SetTextColor( text )
-    myFont:Print( "GAME  PAUSED", textX, textY, fontSizeHeadline, "O" )
-    myFont:End()
+    font:Begin()
+    font:SetOutlineColor( outline )
+    font:SetTextColor( text )
+    font:Print( "GAME  PAUSED", textX, textY, fontSizeHeadline, "O" )
+    font:End()
     
     glPopMatrix()
 end
@@ -258,7 +275,13 @@ end
 function widget:ViewResize(viewSizeX, viewSizeY)
   vsx, vsy = viewSizeX, viewSizeY
   usedSizeMultiplier = (0.5 + ((vsx*vsy)/5500000)) * sizeMultiplier
-  
+
+    local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+    if (fontfileScale ~= newFontfileScale) then
+        fontfileScale = newFontfileScale
+        font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+    end
+
   updateWindowCoords()
   
   screencopy = gl.CreateTexture(vsx, vsy, {

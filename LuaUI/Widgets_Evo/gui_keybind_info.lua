@@ -11,8 +11,15 @@ return {
 }
 end
 
-local loadedFontSize = 32
-local font = gl.LoadFont("LuaUI/Fonts/FreeSansBold.otf", loadedFontSize, 16,2)
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.otf")
+local vsx,vsy = Spring.GetViewGeometry()
+local fontfileScale = (0.5 + (vsx*vsy / 5700000))
+local fontfileSize = 25
+local fontfileOutlineSize = 6
+local fontfileOutlineStrength = 1.4
+local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf")
+local font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
 local bgcorner = "LuaUI/Images/bgcorner.png"
 
@@ -33,8 +40,6 @@ local glPolygonMode = gl.PolygonMode
 local glRect = gl.Rect
 local glText = gl.Text
 local glShape = gl.Shape
-local glGetTextWidth = gl.GetTextWidth
-local glGetTextHeight = gl.GetTextHeight
 
 local bgColorMultiplier = 0
 
@@ -63,6 +68,14 @@ function widget:ViewResize()
 	screenX = (vsx*0.5) - (screenWidth/2)
 	screenY = (vsy*0.5) + (screenHeight/2)
 	widgetScale = (0.5 + (vsx*vsy / 5700000)) * customScale
+  local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
+  if (fontfileScale ~= newFontfileScale) then
+    fontfileScale = newFontfileScale
+	gl.DeleteFont(font)
+	font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+	gl.DeleteFont(font2)
+	font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
+  end
 	if keybinds then gl.DeleteList(keybinds) end
 	keybinds = gl.CreateList(DrawWindow)
 end
@@ -93,41 +106,41 @@ local function DrawRectRound(px,py,sx,sy,cs, tl,tr,br,bl)
 	if ((py <= 0 or px <= 0)  or (bl ~= nil and bl == 0)) and bl ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, py+cs, 0)
 	-- bottom right
 	if ((py <= 0 or sx >= vsx) or (br ~= nil and br == 0)) and br ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, py, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, py, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, py+cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, py+cs, 0)
 	-- top left
 	if ((sy >= vsy or px <= 0) or (tl ~= nil and tl == 0)) and tl ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(px, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(px+cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(px+cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(px, sy-cs, 0)
 	-- top right
 	if ((sy >= vsy or sx >= vsx)  or (tr ~= nil and tr == 0)) and tr ~= 2   then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
 	gl.Vertex(sx, sy, 0)
-	gl.TexCoord(o,1-o)
+	gl.TexCoord(o,1-offset)
 	gl.Vertex(sx-cs, sy, 0)
-	gl.TexCoord(1-o,1-o)
+	gl.TexCoord(1-offset,1-offset)
 	gl.Vertex(sx-cs, sy-cs, 0)
-	gl.TexCoord(1-o,o)
+	gl.TexCoord(1-offset,o)
 	gl.Vertex(sx, sy-cs, 0)
 end
 function RectRound(px,py,sx,sy,cs, tl,tr,br,bl)		-- (coordinates work differently than the RectRound func in other widgets)
@@ -147,6 +160,7 @@ function DrawTextTable(t,x,y)
     local j = 0
     local height = 0
     local width = 0
+	font:Begin()
     for _,t in pairs(t) do
       if t.blankLine then
         -- nothing here
@@ -154,20 +168,21 @@ function DrawTextTable(t,x,y)
         -- title line
         local title = t[1] or ""
         local line = " " .. titleColor .. title -- a WTF whitespace is needed here, the colour doesn't show without it...
-        gl.Text(line, x+4, y-((13)*j)+5, 14)
-		screenWidth = math.max(glGetTextWidth(line)*13,screenWidth)
+		font:Print(line, x+4, y-((13)*j)+5, 14)
+		screenWidth = math.max(font:GetTextWidth(line)*13,screenWidth)
       else
         -- keybind line
         local bind = string.upper(t[1]) or ""
         local effect = t[2] or ""
         local line = " " .. bindColor .. bind .. "   " .. descriptionColor .. effect
-        gl.Text(line, x+14, y-(13)*j, 11)
-		width = math.max(glGetTextWidth(line)*11,width)
+		font:Print(line, x+14, y-(13)*j, 11)
+		width = math.max(font:GetTextWidth(line)*11,width)
       end
       height = height + 13
       
 	  j = j + 1
     end
+	font:End()
     --screenHeight = math.max(screenHeight, height)
     --screenWidth = screenWidth + width
     return x,j
@@ -179,7 +194,11 @@ function DrawWindow()
     local y = screenY --upwards
     
 	-- background
-    gl.Color(0,0,0,0.8)
+	if WG['guishader'] then
+		gl.Color(0,0,0,0.8)
+	else
+		gl.Color(0,0,0,0.85)
+	end
 	RectRound(x-bgMargin,y-screenHeight-bgMargin,x+screenWidth+bgMargin,y+bgMargin,8, 0,1,1,1)
 	-- content area
 	gl.Color(0.33,0.33,0.33,0.15)
@@ -200,15 +219,19 @@ function DrawWindow()
 	-- title background
     local title = "Keybinds"
     local titleFontSize = 18
-    gl.Color(0,0,0,0.8)
-    titleRect = {x-bgMargin, y+bgMargin, x-bgMargin+(glGetTextWidth(title)*titleFontSize)+27, y+37}
+	if WG['guishader'] then
+		gl.Color(0,0,0,0.8)
+	else
+		gl.Color(0,0,0,0.85)
+	end
+    titleRect = {x-bgMargin, y+bgMargin, x-bgMargin+(font2:GetTextWidth(title)*titleFontSize)+27, y+37}
 	RectRound(titleRect[1], titleRect[2], titleRect[3], titleRect[4], 8, 1,1,0,0)
 	-- title
-	font:Begin()
-	font:SetTextColor(1,1,1,1)
-	font:SetOutlineColor(0,0,0,0.4)
-	font:Print(title, x-bgMargin+(titleFontSize*0.75), y+bgMargin+8, titleFontSize, "on")
-	font:End()
+	font2:Begin()
+	font2:SetTextColor(1,1,1,1)
+	font2:SetOutlineColor(0,0,0,0.4)
+	font2:Print(title, x-bgMargin+(titleFontSize*0.75), y+bgMargin+8, titleFontSize, "on")
+	font2:End()
 	
     DrawTextTable(General,x,y-24)
     x = x + 350
@@ -217,7 +240,9 @@ function DrawWindow()
     DrawTextTable(Units_III,x,y-24)
 	
     gl.Color(1,1,1,1)
-    gl.Text("These keybinds are set by default. If you remove/replace hotkey widgets, or use your own uikeys, they might stop working!", screenX+12, y-screenHeight + 14, 12.5)
+	font:Begin()
+    font:Print("These keybinds are set by default. If you remove/replace hotkey widgets, or use your own uikeys, they might stop working!", screenX+12, y-screenHeight + 14, 12.5)
+	font:End()
 end
 
 
@@ -235,23 +260,30 @@ function widget:DrawScreen()
 			glScale(widgetScale, widgetScale, 1)
 			glCallList(keybinds)
 		glPopMatrix()
-		if (WG['guishader_api'] ~= nil) then
+		if WG['guishader'] then
 			local rectX1 = ((screenX-bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
 			local rectY1 = ((screenY+bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
 			local rectX2 = ((screenX+screenWidth+bgMargin) * widgetScale) - ((vsx * (widgetScale-1))/2)
 			local rectY2 = ((screenY-screenHeight-bgMargin) * widgetScale) - ((vsy * (widgetScale-1))/2)
-			WG['guishader_api'].InsertRect(rectX1, rectY2, rectX2, rectY1, 'keybindinfo')
-			--WG['guishader_api'].setBlurIntensity(0.0017)
-			--WG['guishader_api'].setScreenBlur(true)
+			if backgroundGuishader ~= nil then
+				glDeleteList(backgroundGuishader)
+			end
+			backgroundGuishader = glCreateList( function()
+				-- background
+				RectRound(rectX1, rectY2, rectX2, rectY1, 9*widgetScale, 0,1,1,1)
+				-- title
+				rectX1 = (titleRect[1] * widgetScale) - ((vsx * (widgetScale-1))/2)
+				rectY1 = (titleRect[2] * widgetScale) - ((vsy * (widgetScale-1))/2)
+				rectX2 = (titleRect[3] * widgetScale) - ((vsx * (widgetScale-1))/2)
+				rectY2 = (titleRect[4] * widgetScale) - ((vsy * (widgetScale-1))/2)
+				RectRound(rectX1, rectY1, rectX2, rectY2, 9*widgetScale, 1,1,0,0)
+			end)
+			WG['guishader'].InsertDlist(backgroundGuishader, 'keybindinfo')
 		end
 		showOnceMore = false
-  else
-		if (WG['guishader_api'] ~= nil) then
-			local removed = WG['guishader_api'].RemoveRect('keybindinfo')
-			if removed then
-				--WG['guishader_api'].setBlurIntensity()
-				WG['guishader_api'].setScreenBlur(false)
-			end
+  	else
+		if WG['guishader'] then
+			WG['guishader'].DeleteDlist('keybindinfo')
 		end
 	end
 end
@@ -330,4 +362,9 @@ function widget:Shutdown()
         glDeleteList(keybinds)
         keybinds = nil
     end
+	if WG['guishader'] then
+		WG['guishader'].DeleteDlist('keybindinfo')
+	end
+	gl.DeleteFont(font)
+	gl.DeleteFont(font2)
 end

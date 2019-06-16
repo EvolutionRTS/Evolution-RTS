@@ -57,7 +57,9 @@ local glTexCoord = gl.TexCoord
 local glUnit = gl.Unit
 local GL_QUADS = GL.QUADS
 
-	--------------------------------------------------------------------------------
+local GaiaTeamID  = Spring.GetGaiaTeamID()
+
+--------------------------------------------------------------------------------
 -- Config
 --------------------------------------------------------------------------------
 
@@ -90,7 +92,7 @@ local maxGroundGlowCount		= 50
 local drawUnitHightlightMaxUnits = 70
 
 local glowImg			= ":n:LuaUI/Images/commandsfx/glow.dds"
-local lineImg			= ":n:LuaUI/Images/commandsfx/line2.dds"
+local lineImg			= ":n:LuaUI/Images/commandsfx/line.dds"
 
 local ignoreUnits = {}
 for udefID,def in ipairs(UnitDefs) do
@@ -217,7 +219,7 @@ local drawFrame = 0
 local gameframeDrawFrame = 0
 
 local spGetUnitPosition	= Spring.GetUnitPosition
-local spGetUnitCommands	= Spring.GetUnitCommands
+local spGetCommandQueue	= Spring.GetCommandQueue
 local spIsUnitInView = Spring.IsUnitInView
 local spIsSphereInView = Spring.IsSphereInView
 local spIsUnitIcon = Spring.IsUnitIcon
@@ -293,7 +295,7 @@ function resetEnabledTeams()
 	enabledTeams = {}
 	local t = Spring.GetTeamList()
 	for _,teamID in ipairs(t) do
-		if not filterAIteams  or  not select(4,Spring.GetTeamInfo(teamID)) then
+		if not filterAIteams  or  not select(4,Spring.GetTeamInfo(teamID,false)) then
 			enabledTeams[teamID] = true
 		end
 	end
@@ -489,12 +491,14 @@ end
 local newUnitCommands = {}
 function widget:UnitCommand(unitID, unitDefID, teamID, cmdID, _, _)
 	if enabledTeams[teamID] ~= nil then
-		if ignoreUnits[unitDefID] == nil then
-			if newUnitCommands[unitID] == nil then		-- only process the first in queue, else when super large queue order is given widget will hog memory and crash
-				addUnitCommand(unitID, unitDefID, cmdID)
-				newUnitCommands[unitID] = true
-			else
-				newUnitCommands[unitID] = {unitDefID, cmdID}
+		if teamID ~= GaiaTeamID or not string.find(UnitDefs[unitDefID].name, "critter_") then
+			if ignoreUnits[unitDefID] == nil then
+				if newUnitCommands[unitID] == nil then		-- only process the first in queue, else when super large queue order is given widget will hog memory and crash
+					addUnitCommand(unitID, unitDefID, cmdID)
+					newUnitCommands[unitID] = true
+				else
+					newUnitCommands[unitID] = {unitDefID, cmdID}
+				end
 			end
 		end
 	end
@@ -524,7 +528,7 @@ function ExtractTargetLocation(a,b,c,d,cmdID)
 end
 
 function getCommandsQueue(unitID)
-	local q = spGetUnitCommands(unitID, 35) or {} --limit to prevent mem leak, hax etc
+	local q = spGetCommandQueue(unitID, 35) or {} --limit to prevent mem leak, hax etc
 	local our_q = {}
 	local cmd
 	for i=1, #q do
@@ -613,7 +617,7 @@ function widget:Update(dt)
 						if commands[i].draw == false then
 							monitorCommands[i] = nil
 						else
-							local q = spGetUnitCommands(commands[i].unitID,35) or {}
+							local q = spGetCommandQueue(commands[i].unitID,35) or {}
 							if qsize ~= #q then
 								local our_q = getCommandsQueue(commands[i].unitID)
 								commands[i].queue = our_q
