@@ -674,6 +674,9 @@ function widget:CommandsChanged()
 end --CommandsChanged
 
 function widget:Update()
+    if WG['topbar'] and WG['topbar'].showingQuit() then
+        return
+    end
     if updateRequired then
         processAllCommands()
         updateRequired = false

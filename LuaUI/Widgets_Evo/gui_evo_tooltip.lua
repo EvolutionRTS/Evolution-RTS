@@ -1033,7 +1033,11 @@ function widget:DrawScreen()
         --WG.KP_ToolTip=nil
         if Spring.IsGUIHidden() then
                 return
-        end
+		end
+
+		if WG['topbar'] and WG['topbar'].showingQuit() then
+			return
+		end
  
         local nttString = GenerateNewTooltip()
         local nttList = {}
