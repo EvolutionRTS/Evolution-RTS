@@ -65,6 +65,11 @@ Shared.buildListZaal = {
 	[[zkamikaze]],
 	[[zqueen]],
 }
+
+Shared.buildListZaalArm = {
+	[[zarm]],
+	[[zhive]],
+}
 	
 local turrets = {
 	[[ehbotpeewee_turret]],
