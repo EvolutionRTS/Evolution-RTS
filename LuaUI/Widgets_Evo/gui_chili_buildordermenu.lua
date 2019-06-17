@@ -11,6 +11,10 @@ function widget:GetInfo()
         handler   = true,
     }
 end
+
+local vsx,vsy = Spring.GetViewGeometry()
+local widgetScale = (0.5 + (vsx*vsy / 5700000))
+
 --------------------------------------------------------------------------------
 -- Hotkeys
 VFS.Include("luaui/configs/evo_buildHotkeysConfig.lua")
@@ -73,6 +77,7 @@ local showTechReq = sGetConfigInt("evo_showtechreq", 1) == 1
 local showHotkeys = sGetConfigInt("evo_showhotkeys", 1) == 1
 WG.buildOrderUI = {updateConfigInt = false}
 
+local fontSize = 12 * widgetScale
 if buildOrderUI == 0 or buildOrderUI == nil then
 	Config = {
 		ordermenu = {
@@ -94,9 +99,9 @@ if buildOrderUI == 0 or buildOrderUI == nil then
 			padding = {5, 5, 5, 5},
 		},
 		labels = {
-			captionFontMaxSize = 12,
-			queueFontSize = 12, --32 (MaDDoX)
-			costFontSize = 12,
+			captionFontMaxSize = fontSize,
+			queueFontSize = fontSize, --32 (MaDDoX)
+			costFontSize = fontSize,
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -126,9 +131,9 @@ if buildOrderUI == 1 then
 			padding = {5, 5, 5, 5},
 		},
 		labels = {
-			captionFontMaxSize = 12,
-			queueFontSize = 12, --32 (MaDDoX)
-			costFontSize = 12,
+			captionFontMaxSize = fontSize,
+			queueFontSize = fontSize, --32 (MaDDoX)
+			costFontSize = fontSize,
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -158,9 +163,9 @@ if buildOrderUI == 2 then
 			padding = {5, 5, 5, 5},
 		},
 		labels = {
-			captionFontMaxSize = 12,
-			queueFontSize = 12, --32 (MaDDoX)
-			costFontSize = 12,
+			captionFontMaxSize = fontSize,
+			queueFontSize = fontSize, --32 (MaDDoX)
+			costFontSize = fontSize,
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -190,9 +195,9 @@ if buildOrderUI == 3 then
 			padding = {5, 5, 5, 5},
 		},
 		labels = {
-			captionFontMaxSize = 12,
-			queueFontSize = 12, --32 (MaDDoX)
-			costFontSize = 12,
+			captionFontMaxSize = fontSize,
+			queueFontSize = fontSize, --32 (MaDDoX)
+			costFontSize = fontSize,
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -221,9 +226,9 @@ if buildOrderUI == 4 then
 			padding = {5, 5, 5, 5},
 		},
 		labels = {
-			captionFontMaxSize = 12,
-			queueFontSize = 12, --32 (MaDDoX)
-			costFontSize = 12,
+			captionFontMaxSize = fontSize,
+			queueFontSize = fontSize, --32 (MaDDoX)
+			costFontSize = fontSize,
 		},
 		hiddenCMDs = {
 			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
@@ -693,6 +698,15 @@ function widget:WorldTooltip(ttType,data1,data2,data3)
 end --WorldTooltip
 
 function widget:ViewResize(newX,newY)
+    vsx,vsy = Spring.GetViewGeometry()
+    widgetScale = (0.5 + (vsx*vsy / 5700000))
+    if Config then
+        Config.labels = {
+            captionFontMaxSize = fontSize,
+            queueFontSize = fontSize, --32 (MaDDoX)
+            costFontSize = fontSize,
+        }
+    end
     -- TODO: implement config for this resize and make a reusable helper function to handle it
     Config.buildmenu.height = buildWindow.width * (Config.buildmenu.rows / Config.buildmenu.columns)
     buildWindow:SetPos(nil, nil, nil,Config.buildmenu.height)

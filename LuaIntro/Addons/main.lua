@@ -12,6 +12,18 @@ if addon.InGetInfo then
 	}
 end
 
+local defaultFont = 'ComicSans.ttf'
+local fontfile = 'luaui/fonts/'..Spring.GetConfigString("ui_font", defaultFont)
+if not VFS.FileExists(fontfile) then
+	Spring.SetConfigString('ui_font', defaultFont)
+	fontfile = 'luaui/fonts/'..defaultFont
+end
+local defaultFont2 = 'ComicSans-Bold.ttf'
+local fontfile2 = 'luaui/fonts/'..Spring.GetConfigString("ui_font2", defaultFont2)
+if not VFS.FileExists(fontfile2) then
+	Spring.SetConfigString('ui_font2', defaultFont2)
+	fontfile2 = 'luaui/fonts/'..defaultFont2
+end
 ------------------------------------------
 
 local showTips = true
