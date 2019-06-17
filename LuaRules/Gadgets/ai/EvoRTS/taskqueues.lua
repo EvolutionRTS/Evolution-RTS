@@ -212,7 +212,7 @@ function BuildFactory(tqb, ai, unit)
 	if GetLifters < 4 or rLifter == 0 then
 		return "ehbotengineer"
 	elseif count < Spring.GetGameSeconds()*0.00332 then
-		if count > 0 and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant.id) < 1 then
+		if count > 0 and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant_up1.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant_up2.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant_up3.id) < 1 then
 			return "eairplant"
 		elseif GG.TechCheck("tech2", ai.id) then 
 			local unitoptions = {"eairplant", "eminifac", "eamphibfac", "ehbotfac", "ebasefactory",}
