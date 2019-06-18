@@ -133,8 +133,8 @@ local function stringSplitIcons(str, convertIconStr, ...)
 end
 --
 
-local TechColour = {"\255\0\205\255", "\255\255\0\255", "\255\0\255\0"}
-local TechToStr = {TechColour[1].."Mark II", TechColour[2].."Mark III", TechColour[3].."Mark IV"}
+local TechColour = {"\255\0\205\255", "\255\255\0\255", "\255\0\255\0", "\255\255\0\0"}
+local TechToStr = {TechColour[1].."Mark II", TechColour[2].."Mark III", TechColour[3].."Mark IV"..TechColour[4].."Hive"}
 
 -- colours
 local supplyColour = "\255\255\128\0"
@@ -792,7 +792,7 @@ function GenerateNewTooltip()
 			
 			if unitpre ~= "" then
 				local techText = unitpre:sub(22, 22)
-				if techText == "0" then unitpre = ""
+				if techText == "0" or techText == nil then unitpre = ""
 				else unitpre = unitpre:sub(1, 13) .. TechColour[tonumber(techText)] .. "Tech " .. techText end
 			end
 			
