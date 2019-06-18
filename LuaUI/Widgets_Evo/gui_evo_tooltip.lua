@@ -134,7 +134,7 @@ end
 --
 
 local TechColour = {"\255\0\205\255", "\255\255\0\255", "\255\0\255\0", "\255\255\0\0"}
-local TechToStr = {TechColour[1].."Mark II", TechColour[2].."Mark III", TechColour[3].."Mark IV"..TechColour[4].."Hive"}
+local TechToStr = {TechColour[1].."Mark II", TechColour[2].."Mark III", TechColour[3].."Mark IV", TechColour[4].."Hive"}
 
 -- colours
 local supplyColour = "\255\255\128\0"

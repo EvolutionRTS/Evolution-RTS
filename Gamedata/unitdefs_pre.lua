@@ -64,6 +64,10 @@ Shared.buildListZaal = {
 	[[zarty]],
 	[[zkamikaze]],
 	[[zqueen]],
+	[[zairscout]],
+	[[zairtoairfighter]],
+	[[zairtogroundfighter]],
+	[[zairbomber]],
 }
 
 Shared.buildListZaalArm = {
