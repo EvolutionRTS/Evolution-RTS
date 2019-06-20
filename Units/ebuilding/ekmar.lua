@@ -89,7 +89,7 @@ local unitDef                     = {
 		shield_radius			  = 1000,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	              = "outer_colonies",
+		factionname	              = "ateran",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

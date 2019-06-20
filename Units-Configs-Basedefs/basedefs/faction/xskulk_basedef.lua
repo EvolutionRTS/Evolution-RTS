@@ -92,7 +92,7 @@ unitDef                    = {
 		supply_cost              = 1,
 		normaltex               = "unittextures/faction/bfaction_normal.dds",  
 		--buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",
+		factionname	             = "xed",
 		corpse                   = "energycore",
 	},
 }

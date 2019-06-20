@@ -107,7 +107,7 @@ local unitDef                     = {
 		--supply_cost               = supply,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	              = "outer_colonies",  
+		factionname	              = "ateran",  
 		helptext                  = [[
 Armortype: ]] ..armortype.. [[ 
 

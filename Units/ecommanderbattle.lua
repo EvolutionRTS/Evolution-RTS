@@ -47,7 +47,7 @@ local unitDef                    = {
 	canreclaim		             = false,
 	canstop                      = true,
 	category                     = "NOTAIR SUPPORT ARMORED",
-	description                  = [[Builds Units • Provides support in battles]],
+	description                  = [[Builds Units â€¢ Provides support in battles]],
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
@@ -139,7 +139,7 @@ local unitDef                    = {
 		nofriendlyfire	         = "1",
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "outer_colonies",
+		factionname	             = "ateran",
 	},
 }
 

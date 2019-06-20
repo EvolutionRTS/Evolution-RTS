@@ -1,6 +1,6 @@
 local sideData = {
   [1] = {
-    name      = 'Outer_Colonies',
+    name      = 'Ateran',
     startunit = 'ecommander',
 	startunitai = 'ecommanderai',
 	uiSets = {

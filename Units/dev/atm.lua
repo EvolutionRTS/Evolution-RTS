@@ -66,7 +66,7 @@ local unitDef                     = {
 		supply_granted            = 200,
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	              = "outer_colonies",
+		factionname	              = "ateran",
 		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,

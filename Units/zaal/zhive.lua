@@ -7,7 +7,7 @@ unitName = [[zhive]]
 
 metalMultiplier = 1
 
-buildCostMetal = 50
+buildCostMetal = 30
 energyUse = 0
 
 supplygranted = 40

@@ -1,7 +1,7 @@
--- UNITDEF -- zairbomber --
+-- UNITDEF -- zairtogroundfighter --
 --------------------------------------------------------------------------------
 
-unitName = "zairbomber"
+unitName = "zairtogroundfighter"
 
 --------------------------------------------------------------------------------
 
@@ -9,15 +9,15 @@ isUpgraded = [[0]]
 
 humanName = [[Koyote]]
 
-objectName = "zaal/zairbomber.s3o"
-script = "zaal/zairbomber.cob"
+objectName = "zaal/zairtogroundfighter.s3o"
+script = "zaal/zairtogroundfighter.cob"
 
 
-tech = [[5 hive]]
+tech = [[4 hive]]
 armortype = [[light]]
 supply = [[2]]
 
-VFS.Include("units-configs-basedefs/basedefs/zaal/zairbomber_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/zaal/zairtogroundfighter_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 

@@ -792,8 +792,11 @@ function GenerateNewTooltip()
 			
 			if unitpre ~= "" then
 				local techText = unitpre:sub(22, 22)
-				if techText == "0" or techText == nil then unitpre = ""
-				else unitpre = unitpre:sub(1, 13) .. TechColour[tonumber(techText)] .. "Tech " .. techText end
+				if techText == "0" or techText == nil then
+					unitpre = ""
+				else 
+					-- unitpre = unitpre:sub(1, 13) .. TechColour[tonumber(techText)] .. "Tech " .. techText
+				end
 			end
 			
 			local unitsupplycost = fud.customParams.supply_cost or 0

@@ -298,15 +298,26 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			end			
 			
 			-- Set building Hitpoints
-			if unitDef.customparams then
-				if unitDef.customparams.unittype == "building" then
-					unitDef.maxdamage = unitDef.buildcostmetal * 5
+				-- Ateran
+			if unitDef.customparams and unitDef.customparams.factionname == "ateran" then
+				if unitDef.customparams then
+					if unitDef.customparams.unittype == "building" then
+						unitDef.maxdamage = unitDef.buildcostmetal * 5
+					end
+					if unitDef.customparams.unittype == "turret" then
+						unitDef.maxdamage = unitDef.buildcostmetal * 5
+					end
+					if unitDef.customparams.unittype == "shield" then
+						unitDef.maxdamage = unitDef.buildcostmetal * 5
+					end
 				end
-				if unitDef.customparams.unittype == "turret" then
-					unitDef.maxdamage = unitDef.buildcostmetal * 5
-				end
-				if unitDef.customparams.unittype == "shield" then
-					unitDef.maxdamage = unitDef.buildcostmetal * 5
+			end
+				-- Zaal
+			if unitDef.customparams and unitDef.customparams.factionname == "zaal" then
+				if unitDef.customparams then
+					if unitDef.customparams.unittype == "building" then
+						unitDef.maxdamage = unitDef.buildcostmetal * 10
+					end
 				end
 			end
 
@@ -476,19 +487,29 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		--------------------------------------------------------------------------------
 
 		for id,unitDef in pairs(UnitDefs) do
-			unitDef.buildtime = unitDef.buildcostmetal / 4
-			unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
-			if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
-				unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+		
+			-- Set Rules for Ateran race
+			if unitDef.customparams and unitDef.customparams.factionname == "ateran" then
+				unitDef.buildtime = unitDef.buildcostmetal / 4
+				unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
+				if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+				end
+				if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 5
+				end
+				if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
+				end
+				if unitDef.customparams and unitDef.customparams.noenergycost == true then
+					unitDef.buildcostenergy = 0
+				end
 			end
-			if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
-				unitDef.buildcostenergy = unitDef.buildcostmetal * 5
-			end
-			if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
-				unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
-			end
-			if unitDef.customparams and unitDef.customparams.noenergycost == true then
-				unitDef.buildcostenergy = 0
+			
+			-- Set Rules for Zaal race
+			if unitDef.customparams and unitDef.customparams.factionname == "zaal" then
+				unitDef.buildtime = unitDef.buildcostmetal
+				unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
 			end
 			
 			-- Set maximum possible workertime to 8
