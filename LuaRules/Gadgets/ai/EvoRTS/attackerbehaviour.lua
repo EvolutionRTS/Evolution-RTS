@@ -10,6 +10,7 @@ local SpGetUnitMaxRange = Spring.GetUnitMaxRange
 local SpValidUnitID = Spring.ValidUnitID
 local SpGetUnitCurrentBuildPower = Spring.GetUnitCurrentBuildPower
 local SpGetUnitNearestEnemy = Spring.GetUnitNearestEnemy
+local Echo = Spring.Echo
 ------
 
 
@@ -77,8 +78,8 @@ function AttackerBehaviour:Update()
 			self.enemyRange = SpGetUnitMaxRange(nearestVisibleInRange)
 		end
 	end
-	local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
-	local distance = (nearestEnemy and SpGetUnitSeparation(self.unitID, nearestEnemy)) or 3000
+	local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
+	local distance = (nearestEnemy and SpGetUnitSeparation(self.unitID, nearestEnemy)) or 300
 	local refreshRate = math.max(math.floor(((distance*0.5 or 250)/10)),10)
 	if self.unitID%refreshRate == frame%refreshRate then
 		self:AttackCell(self.type, self.nearestVisibleAcrossMap, self.nearestVisibleInRange, self.enemyRange)
@@ -86,6 +87,7 @@ function AttackerBehaviour:Update()
 end
 
 function AttackerBehaviour:OwnerBuilt()
+	--Echo("registered unit construction")
 	if string.find(UnitDefs[Spring.GetUnitDefID(self.unit:Internal().id)].name, "eorb") then
 		self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 2 }, {})
 	else
@@ -111,6 +113,7 @@ function AttackerBehaviour:OwnerIdle()
 end
 
 function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisibleInRange, enemyRange)
+	--Echo("trying to get attack position")
 	local p
 	local unit = self.unit:Internal()
 	local unitID = unit.id
@@ -135,7 +138,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		self.unit:Internal():EZMorph()
 		return
 	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and not string.find(UnitDefs[unitDefID].name, "turret") then
-		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
 		local EnemyDefID = Spring.GetUnitDefID(nearestEnemy)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
 		if nearestEnemyDistance < self.myRange*1.30 and self.repairThisUnit == false then
@@ -144,7 +147,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 			end
 		end
 	elseif string.find(UnitDefs[unitDefID].name, "ehbot") and string.find(UnitDefs[unitDefID].name, "turret") then
-		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
 		local EnemyDefID = Spring.GetUnitDefID(nearestEnemy)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
 		if nearestEnemyDistance >= self.myRange+50 or self.repairThisUnit == true or (UnitDefs[EnemyDefID].customParams and UnitDefs[EnemyDefID].customParams.armortype == "building") then
@@ -160,7 +163,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		return
 	end
 	if string.find(UnitDefs[unitDefID].name, "eallterr") then
-		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
 		if nearestEnemyDistance < 2000 then
 			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 1 }, {})
@@ -170,6 +173,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	end
 	-- Retreating so we have less data process/only what matters
 	if self.repairThisUnit then
+	Echo("trying to retreat")
 	local nanotcx, nanotcy, nanotcz = GG.AiHelpers.NanoTC.GetClosestNanoTC(self.unitID)
 		if nanotcx and nanotcy and nanotcz then
 			p = api.Position()
@@ -201,6 +205,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	end
 	
 	if not self.repairThisUnit and nearestVisibleInRange and (not utype:CanFly() == true) then -- process cases where there isn't any visible nearestVisibleInRange first
+		Echo("trying to attack nearby enemy")
 		local ex,ey,ez = SpGetUnitPosition(nearestVisibleInRange)
 		local ux,uy,uz = SpGetUnitPosition(self.unitID)
 		local pointDis = SpGetUnitSeparation(self.unitID,nearestVisibleInRange)
@@ -246,7 +251,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	elseif not self.repairThisUnit then
 		local attacker = type == "attacker"
 		if attacker then
-			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
 			if nearestEnemy then
 				enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestEnemy)
 			end
@@ -281,8 +286,8 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		end
 		return
 	else
-		if (utype:CanFly() == true) and unit:Name() ~= "escoutdrone" then
-			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 20000, false)
+		if (utype:CanFly() == true) and (unit:Name() ~= "escoutdrone" or unit:Name() ~= "zairscout") then
+			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
 			if nearestEnemy then
 				unit:Attack(nearestEnemy)
 			end

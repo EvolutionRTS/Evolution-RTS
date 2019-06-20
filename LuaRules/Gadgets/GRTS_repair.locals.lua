@@ -33,6 +33,7 @@ function gadget:GetInfo()
 end
 
 local repairUnits= {
+	[UnitDefNames.zarm.id] = {radius=500,strength=1.0},
 	[UnitDefNames.eorb.id] = {radius=500,strength=1.0},
 	[UnitDefNames.eorb_up1.id] = {radius=650,strength=2.0},
 	[UnitDefNames.eorb_up2.id] = {radius=800,strength=3.0},

@@ -12,7 +12,7 @@ function TaskQueueBehaviour:Init()
 
 	self.waiting = {}
 	self:OnToNextTask()
-
+	self.ImBusy = 0
 end
 
 function dump(o)
@@ -123,6 +123,25 @@ function TaskQueueBehaviour:CompareWithOldPos()
 end
 
 function TaskQueueBehaviour:Update()
+	if Spring.GetGameFrame()%30 and Spring.GetGameFrame() > 30 then
+		if self:IsBusy() then
+			self.ImBusy = self.ImBusy + 2
+		elseif not self:IsBusy() and self.ImBusy > 0 then
+			self.ImBusy = self.ImBusy - 1
+		end
+	end
+	if Spring.GetGameFrame()%180 == 0 and Spring.GetGameFrame() > 180 then
+		--if (not self.unit:Internal():Type():IsFactory()) then
+			if self:IsRunningAQueue() and (not self:IsBusy()) and self.ImBusy == 0 and self:CompareWithOldPos() then -- check stucked cons
+				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
+			elseif (not self:IsRunningAQueue()) and (not self:IsBusy()) and self.ImBusy == 0 then 
+				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
+				self:CompareWithOldPos()
+			else
+				self:CompareWithOldPos() -- still register current position
+			end		
+		--end
+	end
 	if not self:IsActive() then
 		self:DebugPoint("nothing")
 		return

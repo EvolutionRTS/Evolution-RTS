@@ -250,4 +250,15 @@ attackerlist = {
 	"ve_chickenq",
 	"vh_chickenq",
 	"roost",
+	--------------------- Zaals
+	"zairscout",
+	"zairtoairfighter",
+	"zairtogroundfighter",
+	"zarty",
+	"zkamikaze",
+	"zlightswarm",
+	"zmedswarm",
+	"zpyro",
+	"zqueen",
+	"zskirmisher",
 }

@@ -78,7 +78,7 @@ unitDef                    = {
 		supply_cost              = supply,
 		nofriendlyfire	         = "1",
 		factionname	             = "zaal",
-		retreatRangeDAI			 = 0,
+		retreatRangeDAI			 = 5000,
 	},
 }
 

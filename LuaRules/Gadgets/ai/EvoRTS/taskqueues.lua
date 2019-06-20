@@ -1022,6 +1022,34 @@ local function lifterqueue()
 	end
 end
 
+------------------------------------------------- ZAAAAAAAAAAAAAALS
+
+local ZaalArm = {
+	"zhive",
+	"zarm",
+	"zhive",
+}
+
+local function ZaalUnitLists(tqb, ai, unit)
+	--if GG.TechCheck("hive", ai.id) then
+		return "zlightswarm"
+	--end
+	
+		
+	--if GG.TechCheck("1 hive", ai.id) then
+		-- local build = random{zlightswarm, zairscout}
+		-- return build
+		--local build = {"zlightswarm"}
+		--return FindBest(build, ai)
+		
+	--end
+end
+
+local ZaalHive = {
+	ZaalUnitLists,
+}
+
+
 taskqueues = {
     --builders
 	ecommanderbattleai = overseerqueue,
@@ -1050,6 +1078,8 @@ taskqueues = {
 	ebasefactory = HoverFactoryQueueUP0, 
 	ebasefactory_up1 = HoverFactoryQueueUP1, 
 	ebasefactory_up2 = HoverFactoryQueueUP2, 
-	ebasefactory_up3 = HoverFactoryQueueUP3, 
+	ebasefactory_up3 = HoverFactoryQueueUP3,
+	zarm = ZaalArm,
+	zhive = ZaalHive,
 }
 ----------------------------------------------------------

@@ -25,6 +25,12 @@ if controlPoints == "disabled" then
 end
 
 behaviours = {
+	zarm = {
+		TaskQueueBehaviour,
+	},
+	zhive = {
+		TaskQueueBehaviour,
+	},
 	esilo = {
 		NukeBehaviour,
 	},
@@ -137,6 +143,13 @@ behaviours = {
 	--eaimexer = {
 		--EngineerTurretBehaviour,
 	--},
+	
+	-- zlightswarm = {
+		-- AttackerBehaviour,
+	-- },
+	-- zairscout = {
+		-- AttackerBehaviour,
+	-- },
 }
 
 function defaultBehaviours(unit)

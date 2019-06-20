@@ -90,8 +90,10 @@ function NewPlacementHandler:GetClosestBuildPosition(x, z, cellsize, buildtype)
 	if buildable == true then bestID = ID end
 	while buildable ~= true and attempt <= 10200 do
 		attempt = attempt + 1
-		v = spiral[attempt][1]
-		h = spiral[attempt][2]
+		if attempt then
+			v = spiral[attempt][1]
+			h = spiral[attempt][2]
+		end
 		local id = ID + (v*cellsize*mapwidth) + (h*cellsize)
 		if self:GetIDBuildable(id, cellsize, buildtype) == true then
 			buildable = true
@@ -111,7 +113,7 @@ function NewPlacementHandler:UnitDead(unit)
 	local unitDefID = UnitDefNames[unit:Name()].id
 	local defs = UnitDefs[unitDefID]
 	if defs then
-		if defs.isBuilding or string.find(defs.name, "nanotc") then
+		if defs.isBuilding or string.find(defs.name, "nanotc") or string.find(defs.name, "zarm") then
 			local pos = unit:GetPosition()
 			local spacing = self:GetMinimalSpacing(unit:Type())
 			local cellsize = math.max(defs.xsize, defs.zsize) * 8
@@ -135,7 +137,7 @@ function NewPlacementHandler:UnitCreated(unit) -- Clear plan but leave position 
 	local unitDefID = UnitDefNames[unit:Name()].id
 	local defs = UnitDefs[unitDefID]
 	if defs then
-		if defs.isBuilding or string.find(defs.name, "nanotc") then
+		if defs.isBuilding or string.find(defs.name, "nanotc") or string.find(defs.name, "zarm") then
 			local pos = unit:GetPosition()
 			local spacing = self:GetMinimalSpacing(unit:Type())
 			local cellsize = math.max(defs.xsize, defs.zsize) * 8
@@ -157,7 +159,7 @@ end
 
 function NewPlacementHandler:CreateNewPlan(unit, utype, p)
 	local defs = UnitDefs[utype.id]
-	local Building = (defs.isBuilding == true or string.find(defs.name, "nanotc"))
+	local Building = (defs.isBuilding == true or string.find(defs.name, "nanotc") or string.find(defs.name, "zarm"))
 	local cellsize = math.max(defs.xsize, defs.zsize) * 8
 	local buildtype = "ground"
 	p = self:GetClosestBuildPosition(p.x, p.z, cellsize, buildtype)
@@ -268,7 +270,11 @@ function NewPlacementHandler:GetExistingPlansByUnit(unit)
 end
 
 function NewPlacementHandler:GetMinimalSpacing(utype)
-	if string.find(UnitDefs[utype.id].name, "emine") then
+	if string.find(UnitDefs[utype.id].name, "zarm") then
+		return 400
+	elseif string.find(UnitDefs[utype.id].name, "zhive") then
+		return 100
+	elseif string.find(UnitDefs[utype.id].name, "emine") then
 		return 0
 	elseif string.find(UnitDefs[utype.id].name, "eminifac") or string.find(UnitDefs[utype.id].name, "eamphibfac") or string.find(UnitDefs[utype.id].name, "ehbotfac") or string.find(UnitDefs[utype.id].name, "ebasefactory") then
 		return 120

@@ -78,7 +78,7 @@ local NanoTC = {}
 local ClosestNanoTC = {}
 
 for unitDefID, defs in pairs(UnitDefs) do
-	if string.find(defs.name, "ecommander") then
+	if string.find(defs.name, "ecommander") or string.find(defs.name, "zarm") then
 		isNanoTC[unitDefID] = true
 	end
 end
@@ -183,6 +183,8 @@ local Interest = {
 	eartyturret_up2 = true,
 	eartyturret_up3 = true,
 	ekmar = true,
+	zarm = true,
+	zhive = true,
 }
 
 GG.AiHelpers.TargetsOfInterest = {}
