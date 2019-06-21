@@ -40,11 +40,7 @@ function AttackHandler:GetAggressiveness(atkbehaviour)
 end
 
 function AttackHandler:GetRole(atkbehaviour)
-	if math.random(1, self.ratio) == 1 then
-		return ("defender")
-	else
-		return ("attacker")
-	end
+	return ("attacker")
 end
 
 function AttackHandler:PickRandomPositionsOnMap()

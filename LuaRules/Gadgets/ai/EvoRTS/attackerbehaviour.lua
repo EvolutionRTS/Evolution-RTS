@@ -158,7 +158,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		return
 	elseif string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
 		self.unit:Internal():EZMorph()
-	elseif UnitDefs[unitDefID].customParams and UnitDefs[unitDefID].customParams.metal_extractor ~= "0" and ec > es*0.98 then
+	elseif string.find(UnitDefs[unitDefID].name, "emetalextractor") and ec > es*0.98 then
 		self.unit:Internal():EZMorph()
 		return
 	end
@@ -173,7 +173,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	end
 	-- Retreating so we have less data process/only what matters
 	if self.repairThisUnit then
-	Echo("trying to retreat")
+	--Echo("trying to retreat")
 	local nanotcx, nanotcy, nanotcz = GG.AiHelpers.NanoTC.GetClosestNanoTC(self.unitID)
 		if nanotcx and nanotcy and nanotcz then
 			p = api.Position()
@@ -205,7 +205,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	end
 	
 	if not self.repairThisUnit and nearestVisibleInRange and (not utype:CanFly() == true) then -- process cases where there isn't any visible nearestVisibleInRange first
-		Echo("trying to attack nearby enemy")
+		--Echo("trying to attack nearby enemy")
 		local ex,ey,ez = SpGetUnitPosition(nearestVisibleInRange)
 		local ux,uy,uz = SpGetUnitPosition(self.unitID)
 		local pointDis = SpGetUnitSeparation(self.unitID,nearestVisibleInRange)
@@ -238,6 +238,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 				self.unit:Internal():ExecuteCustomCommand(CMD.FIGHT, {cx, cy, cz}, {modifier})
 			end
 		else
+			--Echo("attacking nearby enemy")
 			self.unit:Internal():ExecuteCustomCommand(CMD.MOVE, {cx, cy, cz}, {modifier})
 		end
 		return
@@ -247,28 +248,20 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 	-- what are left are units with no visible enemies within 2*maxRange (no radar/los/prevLOS buildings)
 	local enemyposx, enemyposy, enemyposz
 	if not self.repairThisUnit and nearestVisibleAcrossMap then
+		--Echo("Attacking nearest enemy on map")
 		enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestVisibleAcrossMap) -- visible on map
 	elseif not self.repairThisUnit then
-		local attacker = type == "attacker"
-		if attacker then
-			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
-			if nearestEnemy then
-				enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestEnemy)
-			end
-			--local cms = self.ai.attackhandler.targetMexes[(self.unitID%5)+1]
-			--if cms then -- there is an enemy metal spot
-				--enemyposx, enemyposy, enemyposz = cms.x, cms.y, cms.z
-			--else -- there is nothing to target
-				--return
-			--end
-		else
-			local cms = self.ai.metalspothandler:ClosestFreeSpot(self.game:GetTypeByName("emetalextractor"), self.unit:Internal():GetPosition())
-			if cms then
-				enemyposx, enemyposy, enemyposz = cms.x, cms.y, cms.z
-			else
-				return
-			end
+		--Echo("IDFK what i'm doing with my life")
+		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
+		if nearestEnemy then
+			enemyposx, enemyposy, enemyposz = SpGetUnitPosition(nearestEnemy)
 		end
+		--local cms = self.ai.attackhandler.targetMexes[(self.unitID%5)+1]
+		--if cms then -- there is an enemy metal spot
+			--enemyposx, enemyposy, enemyposz = cms.x, cms.y, cms.z
+		--else -- there is nothing to target
+			--return
+		--end
 	end
 	
 	p = api.Position()
@@ -286,12 +279,14 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		end
 		return
 	else
-		if (utype:CanFly() == true) and (unit:Name() ~= "escoutdrone" or unit:Name() ~= "zairscout") then
+		if (utype:CanFly() == true) and not (unit:Name() ~= "escoutdrone" or unit:Name() ~= "zairscout") then
 			local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
 			if nearestEnemy then
+				--Echo("I'm battle aircraft and i'm attacking")
 				unit:Attack(nearestEnemy)
 			end
 		else
+			--Echo("I'm anything else and i'm attacking")
 			unit:MoveAndFire(self.target)
 		end
 	return

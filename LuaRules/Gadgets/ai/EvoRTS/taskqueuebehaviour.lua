@@ -134,8 +134,10 @@ function TaskQueueBehaviour:Update()
 		--if (not self.unit:Internal():Type():IsFactory()) then
 			if self:IsRunningAQueue() and (not self:IsBusy()) and self.ImBusy == 0 and self:CompareWithOldPos() then -- check stucked cons
 				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
+				self.ai.newplacementhandler:ClearPlan()
 			elseif (not self:IsRunningAQueue()) and (not self:IsBusy()) and self.ImBusy == 0 then 
 				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
+				self.ai.newplacementhandler:ClearPlan()
 				self:CompareWithOldPos()
 			else
 				self:CompareWithOldPos() -- still register current position
