@@ -27,7 +27,7 @@ local UDN = UnitDefNames
 ----------------------------------------------------------------------
 
 local unitoptions = {}
-local options = ()
+local options = {}
 local skip = {action = "nexttask"}
 local assistaround = { action = "fightrelative", position = {x = 0, y = 0, z = 0} }
 local patrolaround = { action = "patrolrelative", position = {x = 1, y = 0, z = 1} }

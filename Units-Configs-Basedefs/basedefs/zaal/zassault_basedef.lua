@@ -98,7 +98,6 @@ unitDef                    = {
 }
 
 weaponDefs = {
-	},
 	weapon = {
 		interceptedByShieldType		= 4,
 		areaofeffect				= 16,
