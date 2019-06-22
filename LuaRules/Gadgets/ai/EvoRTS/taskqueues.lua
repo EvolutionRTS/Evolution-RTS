@@ -1030,34 +1030,34 @@ local function ZaalUnitLists(tqb, ai, unit)
 	--Spring.Echo(hivecount.." hives for team "..ai.id)
 	if hivecount == 1 then
 		local options = {"zlightswarm",}
-		return FindBest(options, ai)
+		return FindBest(options,ai)
 	elseif hivecount == 2 then
-		local options = {"zlightswarm",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout",}
+		return FindBest(options,ai)
 	elseif hivecount == 3 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm",}
-		return FindBest(options, ai)
+		return FindBest(options,ai)
 	elseif hivecount == 4 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter",}
+		return FindBest(options,ai)
 	elseif hivecount == 5 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber",}
+		return FindBest(options,ai)
 	elseif hivecount == 6 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
+		return FindBest(options,ai)
 	elseif hivecount == 7 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
+		return FindBest(options,ai)
 	elseif hivecount == 8 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
+		return FindBest(options,ai)
 	elseif hivecount == 9 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
+		return FindBest(options,ai)
 	elseif hivecount >= 10 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro", "zqueen",}
-		return FindBest(options, ai)
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro", "zqueen",}
+		return FindBest(options,ai)
 	end
 	-- 
 	--if GG.TechCheck("1 hive", ai.id) then
@@ -1086,10 +1086,6 @@ local ZaalHive = {
 local ZaalArm = {
 	"zhive",
 	"zarm",
-	ZaalArmLists,
-	ZaalArmLists,
-	ZaalArmLists,
-	ZaalArmLists,
 	assistaround,
 }
 
