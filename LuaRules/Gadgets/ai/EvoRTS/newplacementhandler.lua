@@ -269,9 +269,9 @@ end
 
 function NewPlacementHandler:GetMinimalSpacing(utype)
 	if string.find(UnitDefs[utype.id].name, "zarm") then
-		return 400
+		return math.random(100,300)
 	elseif string.find(UnitDefs[utype.id].name, "zhive") then
-		return 100
+		return 0
 	elseif string.find(UnitDefs[utype.id].name, "emine") then
 		return 0
 	elseif string.find(UnitDefs[utype.id].name, "eminifac") or string.find(UnitDefs[utype.id].name, "eamphibfac") or string.find(UnitDefs[utype.id].name, "ehbotfac") or string.find(UnitDefs[utype.id].name, "ebasefactory") then

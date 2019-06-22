@@ -1024,20 +1024,15 @@ end
 
 ------------------------------------------------- ZAAAAAAAAAAAAAALS
 
-local ZaalArm = {
-	"zhive",
-	"zarm",
-	"zhive",
-}
 
 local function ZaalUnitLists(tqb, ai, unit)
 	local hivecount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zhive.id) - UUDC("zhive", ai.id)
 	--Spring.Echo(hivecount.." hives for team "..ai.id)
 	if hivecount == 1 then
-		local options = {"zlightswarm", "zairscout",}
+		local options = {"zlightswarm",}
 		return FindBest(options, ai)
 	elseif hivecount == 2 then
-		local options = {"zlightswarm", "zairscout",}
+		local options = {"zlightswarm",}
 		return FindBest(options, ai)
 	elseif hivecount == 3 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm",}
@@ -1074,8 +1069,28 @@ local function ZaalUnitLists(tqb, ai, unit)
 	--end
 end
 
+local function ZaalArmLists(tqb, ai, unit)
+	if ai.engineerfirst == true then
+		return skip
+	else
+		ai.engineerfirst = true
+		return "zarm"
+	end
+end
+
+
 local ZaalHive = {
 	ZaalUnitLists,
+}
+
+local ZaalArm = {
+	"zhive",
+	"zarm",
+	ZaalArmLists,
+	ZaalArmLists,
+	ZaalArmLists,
+	ZaalArmLists,
+	assistaround,
 }
 
 
