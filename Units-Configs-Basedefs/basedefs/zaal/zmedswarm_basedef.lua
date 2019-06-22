@@ -105,10 +105,11 @@ weaponDefs = {
 		avoidFeature				= false,
 		collideFriendly				= false,
 		collideFeature				= false,
+		cegTag                  	= "zaalspiketrail-optimized",
 		craterboost					= 0,
 		cratermult					= 0,
 		edgeeffectiveness			= 0,
-		explosiongenerator			= "custom:dirt",
+		explosiongenerator 			= "custom:chickenspike-large-sparks-burn",
 		impulseboost				= 0,
 		impulsefactor				= 0,
 		interceptedbyshieldtype		= 4,
@@ -122,6 +123,10 @@ weaponDefs = {
 		weapontimer					= 1,
 		weapontype					= "Cannon",
 		weaponvelocity				= 750,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
 		damage = {
 			default					= 50,
 		},

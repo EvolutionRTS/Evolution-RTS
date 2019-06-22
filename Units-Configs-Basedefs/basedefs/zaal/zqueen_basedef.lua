@@ -1,6 +1,6 @@
 unitDef                    = {
 	acceleration                 = 1,
-	brakeRate                    = 0.2,
+	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 59,
 	builder                      = false,
@@ -83,11 +83,9 @@ unitDef                    = {
 			def = "SPORES1",
 		},
 		[3] = {
-			badtargetcategory = "WEAPON",
 			def = "SPORES2",
 		},
 		[4] = {
-			badtargetcategory = "NOWEAPON",
 			def = "SPORES3",
 		},
 		[5] = {
@@ -147,6 +145,10 @@ weaponDefs = {
 		turret = true,
 		weapontimer = 0.2,
 		weaponvelocity = 400,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
 		damage = {
 			default = 200,
 		},
@@ -175,6 +177,10 @@ weaponDefs = {
 		waterweapon = true,
 		weapontype = "Cannon",
 		weaponvelocity = 2500,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
 		damage = {
 			default = 600,
 		},
@@ -220,6 +226,10 @@ weaponDefs = {
 		weapontype = "MissileLauncher",
 		weaponvelocity = 1000,
 		wobble = 64000,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
 		damage = {
 			default = 145,
 		},
@@ -265,6 +275,10 @@ weaponDefs = {
 		weapontype = "MissileLauncher",
 		weaponvelocity = 1000,
 		wobble = 64000,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
 		damage = {
 			default = 145,
 		},
@@ -310,6 +324,10 @@ weaponDefs = {
 		weapontype = "MissileLauncher",
 		weaponvelocity = 1000,
 		wobble = 64000,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
 		damage = {
 			default = 145,
 		},

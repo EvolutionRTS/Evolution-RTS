@@ -1,6 +1,6 @@
 unitDef                    = {
 	acceleration                 = 1,
-	brakeRate                    = 0.2,
+	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 36,
 	builder                      = false,
@@ -129,8 +129,8 @@ weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 500,
 		customparams             = {
-			isupgraded			 = isUpgraded,
-			damagetype		     = "eartytank",  
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
 		},  
 		damage                   = {
 			default              = 200,

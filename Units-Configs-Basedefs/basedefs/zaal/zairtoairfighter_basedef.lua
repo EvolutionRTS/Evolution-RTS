@@ -100,6 +100,7 @@ weaponDefs                 = {
 		avoidFeature			 = false,
 		collideFriendly			 = false,
 		collideFeature			 = false,
+		cegTag                   = "zaalspiketrail-optimized",
 		burnblow 				 = true,
 		craterboost 			 = 0,
 		cratermult 				 = 0,
@@ -123,6 +124,10 @@ weaponDefs                 = {
 		weaponacceleration 		 = 250,
 		weapontimer 			 = 1,
 		weaponvelocity 			 = 1000,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		},    
 		damage = {
 			default 			 = 200,
 		},

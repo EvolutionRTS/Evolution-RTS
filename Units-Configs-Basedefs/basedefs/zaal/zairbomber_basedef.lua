@@ -115,6 +115,10 @@ weaponDefs                 = {
 		soundhit				  = "ChickenDefenseSounds/junohit2edit",
 		sprayangle				  = 2000,
 		weapontype				  = "AircraftBomb",
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		},    
 		damage = {
 			default				  = 250,
 		},
