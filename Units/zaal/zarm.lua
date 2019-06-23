@@ -5,7 +5,7 @@ unitName = "zarm"
 
 --------------------------------------------------------------------------------
 
-buildDistance = 1000
+buildDistance = 65000
 
 humanName = "Arm"
 

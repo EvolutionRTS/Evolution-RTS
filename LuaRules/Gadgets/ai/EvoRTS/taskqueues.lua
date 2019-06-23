@@ -1029,34 +1029,35 @@ end
 local function ZaalUnitLists(tqb, ai, unit)
 	local hivecount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zhive.id) - UUDC("zhive", ai.id)
 	--Spring.Echo(hivecount.." hives for team "..ai.id)
-	if hivecount == 1 then
+	local r = math.random(0,hivecount)
+	if r == 0 or r == 1 then
 		local options = {"zlightswarm",}
 		return FindBest(options,ai)
-	elseif hivecount == 2 then
+	elseif r == 2 then
 		local options = {"zlightswarm", "zairscout",}
 		return FindBest(options,ai)
-	elseif hivecount == 3 then
+	elseif r == 3 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm",}
 		return FindBest(options,ai)
-	elseif hivecount == 4 then
+	elseif r == 4 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter",}
 		return FindBest(options,ai)
-	elseif hivecount == 5 then
+	elseif r == 5 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber",}
 		return FindBest(options,ai)
-	elseif hivecount == 6 then
+	elseif r == 6 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
 		return FindBest(options,ai)
-	elseif hivecount == 7 then
+	elseif r == 7 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
 		return FindBest(options,ai)
-	elseif hivecount == 8 then
+	elseif r == 8 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
 		return FindBest(options,ai)
-	elseif hivecount == 9 then
+	elseif r == 9 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
 		return FindBest(options,ai)
-	elseif hivecount >= 10 then
+	elseif r >= 10 then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro", "zqueen",}
 		return FindBest(options,ai)
 	end
@@ -1071,11 +1072,12 @@ local function ZaalUnitLists(tqb, ai, unit)
 end
 
 local function ZaalArmLists(tqb, ai, unit)
-	if ai.engineerfirst == true then
-		return skip
-	else
-		ai.engineerfirst = true
+	local armcount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zarm.id)
+	local counter = Spring.GetGameSeconds()*0.005 + 1
+	if armcount < counter then
 		return "zarm"
+	else
+		return skip
 	end
 end
 
@@ -1085,9 +1087,8 @@ local ZaalHive = {
 }
 
 local ZaalArm = {
+	ZaalArmLists,
 	"zhive",
-	"zarm",
-	assistaround,
 }
 
 

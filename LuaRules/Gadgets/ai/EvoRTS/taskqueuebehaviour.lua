@@ -130,14 +130,13 @@ function TaskQueueBehaviour:Update()
 			self.ImBusy = self.ImBusy - 1
 		end
 	end
-	if Spring.GetGameFrame()%180 == self.unit:Internal().id%180 and Spring.GetGameFrame() > 180 or Spring.GetGameFrame() == 180 then
+	if Spring.GetGameFrame()%180 == self.unit:Internal().id%180 and Spring.GetGameFrame() > 180 then
 		--if (not self.unit:Internal():Type():IsFactory()) then
 			if self:IsRunningAQueue() and (not self:IsBusy()) and self.ImBusy == 0 and self:CompareWithOldPos() then -- check stucked cons
+				--self.ai.newplacementhandler:UnitIdle(self.unit:Internal())
 				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
 			elseif (not self:IsRunningAQueue()) and (not self:IsBusy()) and self.ImBusy == 0 then 
-				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
-				self:CompareWithOldPos()
-			elseif Spring.GetGameFrame() == 180 then
+				--self.ai.newplacementhandler:UnitIdle(self.unit:Internal())
 				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
 				self:CompareWithOldPos()
 			else

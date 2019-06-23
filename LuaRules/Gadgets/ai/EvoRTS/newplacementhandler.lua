@@ -46,9 +46,7 @@ function generateSpiral()
 	return retTable
 end
 		
-	
-
-function NewPlacementHandler:UnitIdle(engineunit)
+function NewPlacementHandler:UnitIdle(unit)
 	local unitDefID = UnitDefNames[unit:Name()].id
 	local defs = UnitDefs[unitDefID]
 	if defs then
@@ -269,7 +267,7 @@ end
 
 function NewPlacementHandler:GetMinimalSpacing(utype)
 	if string.find(UnitDefs[utype.id].name, "zarm") then
-		return math.random(100,300)
+		return 500
 	elseif string.find(UnitDefs[utype.id].name, "zhive") then
 		return 0
 	elseif string.find(UnitDefs[utype.id].name, "emine") then

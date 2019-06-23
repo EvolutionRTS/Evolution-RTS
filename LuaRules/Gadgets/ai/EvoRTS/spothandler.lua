@@ -143,13 +143,14 @@ end
 function distance(pos1,pos2)
 	local xd = pos1.x-pos2.x
 	local zd = pos1.z-pos2.z
-	local yd = pos1.y-pos2.y
+	local yd = 0
 	if yd < 0 then
 		yd = -yd
 	end
 	dist = math.sqrt(xd*xd + zd*zd + yd*yd*yd)
 	return dist
 end
+
 function NoMex(x,z, batchextracts,teamID) -- Is there any better mex at this location (returns false if there is)
 	local mexesatspot = Spring.GetUnitsInCylinder(x,z,128)
 		for ct, uid in pairs(mexesatspot) do
