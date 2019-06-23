@@ -1073,7 +1073,7 @@ end
 
 local function ZaalArmLists(tqb, ai, unit)
 	local armcount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zarm.id)
-	local counter = Spring.GetGameSeconds()*0.005 + 1
+	local counter = Spring.GetGameSeconds()*0.01 + 1
 	if armcount < counter then
 		return "zarm"
 	else
@@ -1088,6 +1088,8 @@ local ZaalHive = {
 
 local ZaalArm = {
 	ZaalArmLists,
+	"zhive",
+	"zhive",
 	"zhive",
 }
 
