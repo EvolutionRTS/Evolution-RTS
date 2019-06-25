@@ -153,7 +153,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		if nearestEnemyDistance >= self.myRange+50 or self.repairThisUnit == true or (UnitDefs[EnemyDefID].customParams and UnitDefs[EnemyDefID].customParams.armortype == "building") then
 			self.unit:Internal():EZMorph()
 		end
-	elseif (UnitDefs[unitDefID].name == "etech" or UnitDefs[unitDefID].name == "etech2") then
+	elseif (UnitDefs[unitDefID].name == "etech1" or UnitDefs[unitDefID].name == "etech2") then
 		self.unit:Internal():EZMorph()
 		return
 	elseif string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
