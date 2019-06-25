@@ -179,7 +179,7 @@ function MetalSpotHandler:ClosestFreeSpot(unittype,position,maxdis)
     for i,v in ipairs(self.spots) do
         local p = v
         local dist = distance(position,p)
-        if NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) or NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhive"), teamID) == true then
+        if NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) or NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhive"), teamID) then
 			if EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) == false then
 				if dist < bestDistance then
 					bestDistance = dist
@@ -199,7 +199,7 @@ function MetalSpotHandler:ClosestEnemySpot(unittype,position)
     for i,v in ipairs(self.spots) do
         local p = v
         local dist = distance(position,p)
-        if EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhive"), teamID) == true then
+        if EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhive"), teamID) then
 		    if dist < bestDistance then
                 bestDistance = dist
                 pos = p
