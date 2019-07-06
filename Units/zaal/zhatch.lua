@@ -13,8 +13,8 @@ energyMake = 0
 
 supplygranted = 20
 
-footprintX = 8
-footprintZ = 8
+footprintX = 16
+footprintZ = 16
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 

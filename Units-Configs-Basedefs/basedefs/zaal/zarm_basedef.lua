@@ -34,7 +34,7 @@ unitDef                    = {
 	idleTime                     = 2200,
 	levelground                  = true,
 	maxDamage                    = 500,
-	maxSlope                     = 60,
+	maxSlope                     = 90,
 	maxVelocity                  = 0.001,
 	maxReverseVelocity           = 0.001,
 	maxWaterDepth                = 5000,
@@ -59,6 +59,7 @@ unitDef                    = {
 	yardmap 					 = "oooooo oooooo oooooo oooooo oooooo oooooo",
 	workerTime                   = 1,
 	TerraformSpeed               = 2147000,
+	usePieceCollisionVolumes	 = true,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"blood_spray", 

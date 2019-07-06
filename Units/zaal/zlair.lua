@@ -5,7 +5,7 @@ unitName = [[zlair]]
 
 --------------------------------------------------------------------------------
 
-metalMultiplier = 1.5
+metalMultiplier = 2
 
 buildCostMetal = 150
 energyUse = 0
@@ -13,8 +13,8 @@ energyMake = 10
 
 supplygranted = 40
 
-footprintX = 8
-footprintZ = 8
+footprintX = 16
+footprintZ = 16
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 
