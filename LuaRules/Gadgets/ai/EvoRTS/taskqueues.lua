@@ -1025,42 +1025,38 @@ end
 
 ------------------------------------------------- ZAAAAAAAAAAAAAALS
 
+local function ZaalMorph(tqb, ai, unit)
+	local r = math.random(1,5)
+	if r == 1 then
+		return ezMorph
+	else
+		return skip
+	end
+end
+
 
 local function ZaalUnitLists(tqb, ai, unit)
-	local hivecount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zhive.id) - UUDC("zhive", ai.id)
+	--GG.TechCheck("techX", ai.id)
+	local techs = 0
+	if GG.TechCheck("tech1", ai.id) then techs = techs + 1 end
+	if GG.TechCheck("tech2", ai.id) then techs = techs + 1 end
+	if GG.TechCheck("tech3", ai.id) then techs = techs + 1 end
+	--local hivecount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zhive.id) - UUDC("zhive", ai.id)
 	--Spring.Echo(hivecount.." hives for team "..ai.id)
-	local r = math.random(0,hivecount)
-	if r == 0 or r == 1 then
-		local options = {"zlightswarm",}
-		return FindBest(options,ai)
-	elseif r == 2 then
-		local options = {"zlightswarm", "zairscout",}
-		return FindBest(options,ai)
-	elseif r == 3 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm",}
-		return FindBest(options,ai)
-	elseif r == 4 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter",}
-		return FindBest(options,ai)
-	elseif r == 5 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber",}
-		return FindBest(options,ai)
-	elseif r == 6 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
-		return FindBest(options,ai)
-	elseif r == 7 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher",}
-		return FindBest(options,ai)
-	elseif r == 8 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
-		return FindBest(options,ai)
-	elseif r == 9 then
-		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
-		return FindBest(options,ai)
-	elseif r >= 10 then
+	local r = math.random(1,techs)
+	
+	if GG.TechCheck("tech3", ai.id) then
 		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro", "zqueen",}
-		return FindBest(options,ai)
+		return FindBest(options, ai)
+	elseif GG.TechCheck("tech2", ai.id) then
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
+		return FindBest(options, ai)
+	elseif GG.TechCheck("tech1", ai.id) then
+		local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter",}
+		return FindBest(options, ai)
 	end
+	
+	--local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro", "zqueen",}
 	-- 
 	--if GG.TechCheck("1 hive", ai.id) then
 		-- local build = random{zlightswarm, zairscout}
@@ -1082,15 +1078,20 @@ local function ZaalArmLists(tqb, ai, unit)
 end
 
 
-local ZaalHive = {
+local ZaalHive1 = {
+	ZaalUnitLists,
+	ZaalMorph,
+}
+
+local ZaalHive2 = {
 	ZaalUnitLists,
 }
 
 local ZaalArm = {
 	ZaalArmLists,
-	"zhive",
-	"zhive",
-	"zhive",
+	"zhatch",
+	"zhatch",
+	"zhatch",
 }
 
 
@@ -1124,6 +1125,8 @@ taskqueues = {
 	ebasefactory_up2 = HoverFactoryQueueUP2, 
 	ebasefactory_up3 = HoverFactoryQueueUP3,
 	zarm = ZaalArm,
-	zhive = ZaalHive,
+	zhive = ZaalHive2,
+	zhatch = ZaalHive1,
+	zlair = ZaalHive1,
 }
 ----------------------------------------------------------

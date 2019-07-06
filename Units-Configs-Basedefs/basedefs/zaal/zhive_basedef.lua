@@ -31,11 +31,8 @@ unitDef                     = {
 	maxSlope                      = 25,
 	maxWaterDepth                 = 99999999999,
 	metalStorage                  = 0,
-<<<<<<< HEAD
 	metalMake                     = 1,
-=======
 	metalMake                     = metalMultiplier,
->>>>>>> Get the tech structure all set up and set some tentative balance for Zaal
 	name                          = humanName,
 	objectName                    = objectName,
 	script						  = script,
