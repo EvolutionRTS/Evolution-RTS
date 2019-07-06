@@ -53,6 +53,12 @@ local timeToBuild_etech2 = energyCost_etech2 * 0.10
 local energyCost_etech3 = 4000
 local timeToBuild_etech3 = energyCost_etech3 * 0.10
 
+local energyCost_zlair = 2000
+local timeToBuild_zlair = energyCost_zlair * 0.10
+
+local energyCost_zhive = 4000
+local timeToBuild_zhive = energyCost_zhive * 0.10
+
 local energyCost_elightturret2 = 150
 local timeToBuild_elightturret2 = energyCost_elightturret2 * 0.10
 
@@ -1221,6 +1227,32 @@ Evolution]],
 			energy = energyCost_etech3,
 			metal = 0,
 			text = 'Evolve into a Tech Level 3 Facility.',
+		},
+	},	
+	
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	zhatch = 	{
+		{
+			into = 'zlair',
+			time = timeToBuild_zlair,
+			cmdname = [[Lair
+Evolution]],
+			energy = energyCost_zlair,
+			metal = 0,
+			text = 'Evolve into a Lair.',
+		},
+	},	
+	zlair = 	{
+		{
+			into = 'zhive',
+			time = timeToBuild_zhive,
+			cmdname = [[Hive
+Evolution]],
+			energy = energyCost_zhive,
+			metal = 0,
+			text = 'Evolve into a Hive.',
 		},
 	},	
 	

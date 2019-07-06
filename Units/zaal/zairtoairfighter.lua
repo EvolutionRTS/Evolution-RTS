@@ -13,7 +13,7 @@ objectName = "zaal/zairtoairfighter.s3o"
 script = "zaal/zairtoairfighter.cob"
 
 
-tech = [[4 hive]]
+tech = [[tech1]]
 armortype = [[light]]
 supply = [[2]]
 

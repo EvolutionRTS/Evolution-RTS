@@ -104,7 +104,7 @@ weaponDefs                 = {
 	Artilleryweapon              = {
 		
 		accuracy                 = 500,
-		AreaOfEffect             = 50,
+		AreaOfEffect             = 250,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -119,7 +119,7 @@ weaponDefs                 = {
 		interceptedByShieldType  = 4,
 		highTrajectory	         = 0,
 		name                     = "Plasma Cannon",
-		range                    = 1300,
+		range                    = 1500,
 		reloadtime               = 5,
 		size					 = 16,
 		weaponType		         = "Cannon",
@@ -133,7 +133,7 @@ weaponDefs                 = {
 			nofriendlyfire	     = 1,
 		},  
 		damage                   = {
-			default              = 200,
+			default              = 600,
 		},
 	},
 }

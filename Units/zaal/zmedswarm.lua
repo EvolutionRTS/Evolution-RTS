@@ -12,8 +12,8 @@ humanName = "Trike"
 objectName = "zaal/zmedswarm.s3o"
 script = "zaal/zmedswarm.cob"
 
-tech = [[3 hive]]
-armortype = [[armored]]
+tech = [[tech1]]
+armortype = [[light]]
 supply = [[4]]
 
 VFS.Include("units-configs-basedefs/basedefs/zaal/zmedswarm_basedef.lua")

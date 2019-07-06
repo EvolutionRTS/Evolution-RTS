@@ -1,31 +1,31 @@
--- UNITDEF -- ZHIVE --
+-- UNITDEF -- ZLAIR --
 --------------------------------------------------------------------------------
 
-unitName = [[zhive]]
+unitName = [[zlair]]
 
 --------------------------------------------------------------------------------
 
-metalMultiplier = 2
+metalMultiplier = 1.5
 
-buildCostMetal = 300
+buildCostMetal = 150
 energyUse = 0
-energyMake = 20
+energyMake = 10
 
-supplygranted = 60
+supplygranted = 40
 
 footprintX = 8
 footprintZ = 8
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 
-primaryCEG = "custom:fusionreactionnuclear-4color"
+primaryCEG = "custom:fusionreactionnuclear-3color"
 
-humanName = [[Zaal Hive]]
+humanName = [[Zaal Lair]]
 
 objectName = [[zaal/zhive.s3o]]
 script = [[zaal/zhive.cob]]
 
-techprovided = [[tech3, tech2, tech1, tech0]]
+techprovided = [[tech2, tech1, tech0]]
 armortype = [[building]]
 
 VFS.Include("units-configs-basedefs/basedefs/zaal/zhive_basedef.lua")

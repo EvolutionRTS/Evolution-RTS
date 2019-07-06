@@ -12,7 +12,7 @@ humanName = "Trike"
 objectName = "zaal/zpyro.s3o"
 script = "zaal/zpyro.cob"
 
-tech = [[8 hive]]
+tech = [[tech2]]
 armortype = [[armored]]
 supply = [[4]]
 

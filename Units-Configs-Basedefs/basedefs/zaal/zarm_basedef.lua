@@ -81,6 +81,7 @@ unitDef                    = {
 	customParams                 = {
 		unittype				 = "building",
 		area_mex_def			 = "zhive",
+		ProvideTech               = techprovided,
 		canbetransported 		 = "false",
 		needed_cover             = 1,
 		death_sounds             = "generic",

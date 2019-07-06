@@ -1,31 +1,31 @@
--- UNITDEF -- ZHIVE --
+-- UNITDEF -- ZHATCH --
 --------------------------------------------------------------------------------
 
-unitName = [[zhive]]
+unitName = [[zhatch]]
 
 --------------------------------------------------------------------------------
 
-metalMultiplier = 2
+metalMultiplier = 1
 
-buildCostMetal = 300
+buildCostMetal = 30
 energyUse = 0
-energyMake = 20
+energyMake = 0
 
-supplygranted = 60
+supplygranted = 20
 
 footprintX = 8
 footprintZ = 8
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 
-primaryCEG = "custom:fusionreactionnuclear-4color"
+primaryCEG = "custom:fusionreactionnuclear-2color"
 
-humanName = [[Zaal Hive]]
+humanName = [[Zaal Hatchery]]
 
 objectName = [[zaal/zhive.s3o]]
 script = [[zaal/zhive.cob]]
 
-techprovided = [[tech3, tech2, tech1, tech0]]
+techprovided = [[tech1, tech0]]
 armortype = [[building]]
 
 VFS.Include("units-configs-basedefs/basedefs/zaal/zhive_basedef.lua")

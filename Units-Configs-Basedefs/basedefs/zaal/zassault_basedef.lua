@@ -2,7 +2,7 @@ unitDef                    = {
 	acceleration                 = 1,
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
-	buildCostMetal               = 59,
+	buildCostMetal               = 75,
 	builder                      = false,
 	buildTime                    = 5,
 	buildpic					 = "zaal_unitpics/zskirmisher.png",
@@ -24,7 +24,7 @@ unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 375,
+	maxDamage                    = 600,
 	maxSlope                     = 26,
 	maxVelocity                  = 3.5,
 	maxReverseVelocity           = 1,
@@ -132,7 +132,7 @@ weaponDefs = {
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
-			default					= 325,
+			default					= 500,
 		},
 	},
 }

@@ -16,13 +16,13 @@ unitDef                     = {
 	canRepair		              = true,
 	canstop                       = true,
 	category                      = "BUILDING NOTAIR",
-	description                   = [[Build a Tech Facility to unlock units. Build Supply Depots to increase your army size.]],
+	description                   = [[Upgrade to get more supply and Metal/Energy Income and unlock new Tech]],
 	energyStorage                 = 0,
-	energyUse                     = 0,
-	energyMake                    = 0,
+	energyUse                     = energyUse,
+	energyMake                    = energyMake,
 	explodeAs                     = "hugeBuildingExplosionGeneric",
-	footprintX                    = 8,
-	footprintZ                    = 8,
+	footprintX                    = footprintX,
+	footprintZ                    = footprintZ,
 	floater			              = true,
 	iconType                      = "factory",
 	idleAutoHeal                  = .5,
@@ -31,7 +31,11 @@ unitDef                     = {
 	maxSlope                      = 25,
 	maxWaterDepth                 = 99999999999,
 	metalStorage                  = 0,
+<<<<<<< HEAD
 	metalMake                     = 1,
+=======
+	metalMake                     = metalMultiplier,
+>>>>>>> Get the tech structure all set up and set some tentative balance for Zaal
 	name                          = humanName,
 	objectName                    = objectName,
 	script						  = script,
@@ -46,7 +50,7 @@ unitDef                     = {
 	unitname                      = unitName,
 	--  unitRestricted	          = 1,
 	workerTime                    = 1,
-	yardMap                       = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
+	yardMap                       = yardMap,
 	--  usePieceCollisionVolumes  = true,
 	--  modelCenterOffset	      = {108, 10, 0},
 	sfxtypes                      = { 
@@ -55,7 +59,7 @@ unitDef                     = {
 		}, 
 
 		explosiongenerators       = {
-			"custom:blacksmoke",
+			primaryCEG,
 			"custom:blood_spray",
 		},
 	},
