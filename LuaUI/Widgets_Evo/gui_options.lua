@@ -2480,7 +2480,7 @@ function init()
 
 		options[getOptionByID('font2')].options = fonts
 		options[getOptionByID('font2')].optionsFont = fontsFull
-		local fname = Spring.GetConfigString("ui_font2", "ComicSans-Bold.otf"):lower()
+		local fname = Spring.GetConfigString("ui_font2", "ComicSans-Bold.ttf"):lower()
 		options[getOptionByID('font2')].value = getSelectKey(getOptionByID('font2'), string.sub(fname, 1, string.len(fname) - 4))
 	end
 
