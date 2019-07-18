@@ -108,12 +108,6 @@ local unitDef                     = {
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                 = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	              = "ateran",  
-		helptext                  = [[
-Armortype: ]] ..armortype.. [[ 
-
-Fires a projectile dealing ]] .. weapon1Damage .. [[ damage
-
-Energy cost to fire: ]] .. roundToFirstDecimal(energycosttofire),
 	},
 	useGroundDecal                = false,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

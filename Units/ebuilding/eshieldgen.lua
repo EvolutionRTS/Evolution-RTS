@@ -92,6 +92,7 @@ local unitDef                     = {
 		armortype                 = armortype, 
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 
 		corpse                   = "energycore",
+		factionname	             = "ateran",
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

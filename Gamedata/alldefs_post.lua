@@ -512,6 +512,12 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
 			end
 			
+			-- This is a catchall for units that don't have a factionname declared
+			if unitDef.customparams and unitDef.customparams.factionname == nil then
+				unitDef.buildtime = unitDef.buildcostmetal / 4
+				unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
+			end
+			
 			-- Set maximum possible workertime to 8
 			if unitDef.workertime and unitDef.workertime >= 8 then
 				unitDef.workertime = 8
