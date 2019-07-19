@@ -25,7 +25,7 @@ unitDef                    = {
 	energyMake                   = 0,
 	energyStorage                = 0,
 	energyUse                    = 0,
-	explodeAs                    = "mediumExplosionGenericGreen",
+	explodeAs                    = "BUG_DEATH_MEDIUM",
 	floater			              = true,
 	footprintX                   = 6,
 	footprintZ                   = 6,
@@ -47,7 +47,7 @@ unitDef                    = {
 	script			             = script,
 	radarDistance                = 0,
 	repairable		             = false,
-	selfDestructAs               = "mediumExplosionGenericGreen",
+	selfDestructAs               = "BUG_DEATH_MEDIUM",
 	showNanoSpray                = true,
 	side                         = "ARM",
 	sightDistance                = 300,
@@ -80,6 +80,7 @@ unitDef                    = {
 		},
 	},
 	customParams                 = {
+		iscommander              = true,
 		unittype				 = "building",
 		area_mex_def			 = "zhive",
 		ProvideTech               = techprovided,
@@ -90,6 +91,11 @@ unitDef                    = {
 		normaltex               = "unittextures/zarm_normals.dds", 
 		factionname	             = "zaal",  
 	},
+	useGroundDecal                = true,
+	BuildingGroundDecalType       = "zgroundtexture.dds",
+	BuildingGroundDecalSizeX      = 10,
+	BuildingGroundDecalSizeY      = 10,
+	BuildingGroundDecalDecaySpeed = 0.9,
 }
 
 --------------------------------------------------------------------------------

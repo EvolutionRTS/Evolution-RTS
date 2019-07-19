@@ -160,7 +160,12 @@ function UnitDef_Post(name, uDef)
 
 	--Override groundplate used
 	if uDef.usegrounddecal == true and uDef.customparams and uDef.customparams.customgrounddecal ~= true then
-		uDef.buildinggrounddecaltype = "groundplate.dds"
+		if uDef.customparams and uDef.customparams.factionname == "ateran" then
+			uDef.buildinggrounddecaltype = "groundplate.dds"
+		end
+		if uDef.customparams and uDef.customparams.factionname == "zaal" then
+			uDef.buildinggrounddecaltype = "zgroundtexture.dds"
+		end
 	end
 	
 	--------------------------------------------------------------------------------
@@ -508,8 +513,20 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			
 			-- Set Rules for Zaal race
 			if unitDef.customparams and unitDef.customparams.factionname == "zaal" then
-				unitDef.buildtime = unitDef.buildcostmetal
+				unitDef.buildtime = unitDef.buildcostmetal / 4
 				unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
+				if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+				end
+				if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 5
+				end
+				if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
+				end
+				if unitDef.customparams and unitDef.customparams.noenergycost == true then
+					unitDef.buildcostenergy = 0
+				end
 			end
 			
 			-- This is a catchall for units that don't have a factionname declared

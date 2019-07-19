@@ -7,14 +7,14 @@ unitName = [[zhive]]
 
 metalMultiplier = 4
 
-buildCostMetal = 300
+buildCostMetal = 600
 energyUse = 0
-energyMake = 20
+energyMake = 40
 
-supplygranted = 60
+supplygranted = 120
 
-footprintX = 16
-footprintZ = 16
+footprintX = 8
+footprintZ = 8
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 

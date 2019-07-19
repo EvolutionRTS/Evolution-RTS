@@ -48,41 +48,43 @@ local function GetStartUnit(teamID)
        
         boolIsAI= IsTeamAI(teamID)
        
-                if boolIsAI==true then
-					Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
-					local sidedata = Spring.GetSideData()
-					math.random(); math.random(); math.random()
-					local i = math.random(1,6)
-					local factioncheck = math.random(0,1)
-					if factioncheck == 0 then
-						if i == 1 then
-							startUnit = "ecommanderbattleai"
-						elseif i == 2 then
-							startUnit = "ecommanderbuildai"
-						elseif i == 3 then
-							startUnit = "ecommandercloakai"
-						elseif i == 4 then
-							startUnit = "ecommanderfactoryai"
-						elseif i == 5 then
-							startUnit = "ecommandershieldai"
-						else
-							startUnit = "ecommanderhealerai"
-						end
-					elseif factioncheck == 1 then
-						startUnit = "zarm"
-					end
-					return startUnit
-                end
+		if boolIsAI==true then
+			Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
+			local sidedata = Spring.GetSideData()
+			math.random(); math.random(); math.random()
+			local i = math.random(1,6)
+			local factioncheck = math.random(0,1)
+			if factioncheck == 0 then
+				if i == 1 then
+					startUnit = "ecommanderbattleai"
+				elseif i == 2 then
+					startUnit = "ecommanderbuildai"
+				elseif i == 3 then
+					startUnit = "ecommandercloakai"
+				elseif i == 4 then
+					startUnit = "ecommanderfactoryai"
+				elseif i == 5 then
+					startUnit = "ecommandershieldai"
+				else
+					startUnit = "ecommanderhealerai"
+				end
+			elseif factioncheck == 1 then
+				startUnit = "zarm"
+			end
+			return startUnit
+		end
        
+		-- If a side isn't selected, flip a coin
         if (side == "") then
-                -- startscript didn't specify a side for this team
-                local sidedata = Spring.GetSideData()
-                if (sidedata and #sidedata > 0) then
-                        startUnit = sidedata[1 + teamID % #sidedata].startUnit
-                end
+            local coinflip = math.random(0,1)
+			if coinflip == 0 then
+				startUnit = "ecommander"
+			elseif coinflip == 1 then
+				startUnit = "zarm"
+			end
         else
-                startUnit = Spring.GetSideData(side)
-        end
+			startUnit = Spring.GetSideData(side)
+		end
         return startUnit
 end
 

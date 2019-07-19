@@ -1,5 +1,26 @@
 return {
-	bug_death = {
+	bug_death_small = {
+		areaofeffect = 100,
+		craterboost = 0,
+		cratermult = 0,
+		impulseboost = 0,
+		impulsefactor = 0,
+		explosiongenerator = "custom:chickenunitexplosion-small-red",
+		name = "bug_death",
+		range = 450,
+		reloadtime = 0,
+		soundhit = "ChickenDefenseSounds/bugdie",
+		turret = 1,
+		weaponvelocity = 250,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
+		damage = {
+			default = 0,
+		},
+	},
+	bug_death_medium = {
 		areaofeffect = 100,
 		craterboost = 0,
 		cratermult = 0,
@@ -17,7 +38,49 @@ return {
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
-			default = 250,
+			default = 0,
+		},
+	},
+	bug_death_large = {
+		areaofeffect = 100,
+		craterboost = 0,
+		cratermult = 0,
+		impulseboost = 0,
+		impulsefactor = 0,
+		explosiongenerator = "custom:chickenunitexplosion-large-red",
+		name = "bug_death",
+		range = 450,
+		reloadtime = 0,
+		soundhit = "ChickenDefenseSounds/bugdie",
+		turret = 1,
+		weaponvelocity = 250,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
+		damage = {
+			default = 0,
+		},
+	},
+	bug_death_kamikaze = {
+		areaofeffect = 300,
+		craterboost = 0,
+		cratermult = 0,
+		impulseboost = 0,
+		impulsefactor = 0,
+		explosiongenerator = "custom:chickenunitexplosion-medium-red",
+		name = "bug_death",
+		range = 450,
+		reloadtime = 0,
+		soundhit = "ChickenDefenseSounds/bugdie",
+		turret = 1,
+		weaponvelocity = 250,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
+		damage = {
+			default = 200,
 		},
 	},
 }
