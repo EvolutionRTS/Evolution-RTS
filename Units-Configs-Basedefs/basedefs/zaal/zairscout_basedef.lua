@@ -71,7 +71,7 @@ unitDef                    = {
 	},
 	customParams                 = {
 		unittype				  = "mobile",
-		death_sounds             = "generic",
+		death_sounds             = "bug",
 		normaltex 				 = "unittextures/z_normals.dds", 
 		RequireTech              = tech,
 		armortype                = armortype,
