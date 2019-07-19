@@ -7,9 +7,12 @@ unitName = [[zhatch]]
 
 metalMultiplier = 1
 
-buildCostMetal = 150
+buildCostMetal = 200
 energyUse = 0
 energyMake = 10
+
+metalStorage = 50
+energyStorage = 50
 
 supplygranted = 40
 

@@ -7,9 +7,12 @@ unitName = [[zhive]]
 
 metalMultiplier = 4
 
-buildCostMetal = 600
+buildCostMetal = 800
 energyUse = 0
 energyMake = 40
+
+metalStorage = 200
+energyStorage = 200
 
 supplygranted = 120
 
