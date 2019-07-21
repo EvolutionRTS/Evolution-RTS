@@ -11,12 +11,12 @@ metalMultiplier = 1
 
 buildCostMetal = 30
 energyUse = 0
-energyMake = 5
+energyMake = 0
 
-metalStorage = 100
-energyStorage = 100
+metalStorage = 50
+energyStorage = 50
 
-supplygranted = 20
+supplygranted = 0
 
 footprintX = 8
 footprintZ = 8
