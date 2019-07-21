@@ -95,6 +95,7 @@ weaponDefs                  = {
 		beamTime                 = 0.1,
 		collideFeature           = false,
 		collideFriendly          = false,
+		canAttackGround 		 = false,
 		coreThickness            = 0.5,
 		duration                 = 0.1,
 		energypershot            = 0,

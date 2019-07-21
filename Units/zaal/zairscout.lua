@@ -12,7 +12,7 @@ script = "zaal/zairscout.cob"
 
 armortype = [[light]]
 
-tech = [[tech0]]
+tech = [[tech1]]
 
 supply = [[1]]
 

@@ -7,7 +7,7 @@ unitDef                    = {
 	buildTime                    = 5,
 	buildpic					 = "zaal_unitpics/zarm.png",
 	blocking					 = true,
-	CanAttack			         = false,
+	CanAttack			         = true,
 	CanAssist			         = true,
 	canBeAssisted                = true,
 	CanCapture                   = false,
@@ -79,8 +79,16 @@ unitDef                    = {
 			"unitselect",
 		},
 	},
+	weapons                       = {
+		[1]                       = {
+			def                   = "spores1",
+			--onlyTargetCategory    = "VTOL",
+		},
+	},
 	customParams                 = {
 		iscommander              = true,
+		shownametag				 = false,
+		noalert					 = true,
 		unittype				 = "building",
 		area_mex_def			 = "zhatch",
 		ProvideTech               = techprovided,
@@ -96,6 +104,44 @@ unitDef                    = {
 	BuildingGroundDecalSizeX      = 10,
 	BuildingGroundDecalSizeY      = 10,
 	BuildingGroundDecalDecaySpeed = 0.9,
+}
+
+weaponDefs                  = {
+	spores1 = {
+		areaofeffect = 1,
+		cegTag                   = "gunshiptrail-optimized",
+		explosiongenerator 		 = "custom:chickenspike-large-sparks-burn",
+		avoidFriendly				= false,
+		avoidFeature				= false,
+		collideFriendly				= false,
+		collideFeature				= false,
+		--canAttackGround 			= false,
+		flighttime 					= 5,
+		impulsefactor 				= 0,
+		name 						= "Missiles",
+		noselfdamage 				= true,
+		proximitypriority 			= 3,
+		range 						= 1000,
+		reloadtime 					= 5,
+		smoketrail 					= false,
+		soundhit 					= "ChickenDefenseSounds/e25",
+		startvelocity 				= 200,
+		tolerance 					= 10000,
+		tracks 						= true,
+		turnrate 					= 48000,
+		turret 						= true,
+		waterweapon 				= true,
+		weaponacceleration 			= 200,
+		weapontype 					= "MissileLauncher",
+		weaponvelocity 				= 1250,
+		customparams             = {
+			damagetype		     = "default",
+			nofriendlyfire	     = 1,
+		}, 
+		damage = {
+			default = 150,
+		},
+	},
 }
 
 --------------------------------------------------------------------------------

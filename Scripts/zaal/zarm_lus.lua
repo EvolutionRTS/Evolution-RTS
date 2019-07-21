@@ -16,7 +16,7 @@ common = include("headers/common_includes_lus.lua")
 
 function BuildFX()
 	while(building == true) do
-		EmitSfx (point1, 1024)
+		--EmitSfx (point1, 1024)
 		Sleep(550)
 	end
 end
@@ -26,8 +26,37 @@ function RestoreAfterDelay()
 		Sleep(2000)
 		Turn(point1, y_axis, 0, 5)
 	end
-end		
+end
 
+-------------------------------------------
+-------------------------------------------
+
+function script.AimFromWeapon1()
+	--Spring.Echo("AimFromWeapon: FireWeapon")
+	return point1
+end
+
+function script.QueryWeapon1()
+	--Spring.Echo("QueryWeapon: FireWeapon")
+	return point1
+end
+
+
+function script.AimWeapon1(heading, pitch)
+	Signal(SIG_AIM)
+	SetSignalMask(SIG_AIM)
+	--Spring.Echo("AimWeapon: FireWeapon")
+	return true
+end
+
+function script.FireWeapon1()
+	--Spring.Echo("FireWeapon: FireWeapon")
+	--EmitSfx (point1, 1024)
+end
+		
+-------------------------------------------
+-------------------------------------------
+		
 local nanoPoints = piece("point1")
 
 Spring.SetUnitNanoPieces(nanoPoints)
@@ -47,6 +76,6 @@ function script.StopBuilding()
 end
 
 function script.Killed()
-		Explode(base, SFX.EXPLODE_ON_HIT)
+		--Explode(base, SFX.EXPLODE_ON_HIT)
 		return 1   -- spawn ARMSTUMP_DEAD corpse / This is the equivalent of corpsetype = 1; in bos
 end

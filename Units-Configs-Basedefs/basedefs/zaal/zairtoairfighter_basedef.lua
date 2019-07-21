@@ -71,7 +71,7 @@ unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			badtargetcategory = "ARMORED BUILDING",
+			badtargetcategory = " LIGHT ARMORED BUILDING",
 			def = "WEAPON",
 			maindir = "0 0 1",
 			maxangledif = 90,

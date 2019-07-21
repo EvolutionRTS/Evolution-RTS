@@ -183,7 +183,7 @@ local options= {
 	{
 		key    = 'basicincome',
 		name   = 'Basic Metal Income Amount',
-		desc   = 'Determines the amount of metal income you start with per second. It increases every <Basic Metal Income Increase Interval> (2.5 minutes, is the default) by this amount until it hits <Maximum Basic Income> income.',
+		desc   = 'Determines the amount of metal income you start with per second.',
 		type   = 'number',
 		section= 'resourcing',
 		def    = 5,
@@ -202,6 +202,18 @@ local options= {
 		min    = 0.5,
 		max    = 5,
 		step   = 0.5,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'basicincomeincrease',
+		name   = 'Basic Metal Income Increase',
+		desc   = 'Your basic metal income increases every <Basic Metal Income Increase Interval> (1 minutes, is the default) by this amount until it hits <Maximum Basic Income> income.',
+		type   = 'number',
+		section= 'resourcing',
+		def    = 1,
+		min    = 0,
+		max    = 5,
+		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 	{

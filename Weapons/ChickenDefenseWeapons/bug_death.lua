@@ -9,7 +9,7 @@ return {
 		name = "bug_death",
 		range = 450,
 		reloadtime = 0,
-		soundhit = "ChickenDefenseSounds/bugdie",
+		--soundhit = "ChickenDefenseSounds/bugdie",
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
@@ -30,7 +30,7 @@ return {
 		name = "bug_death",
 		range = 450,
 		reloadtime = 0,
-		soundhit = "ChickenDefenseSounds/bugdie",
+		--soundhit = "ChickenDefenseSounds/bugdie",
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
@@ -51,7 +51,7 @@ return {
 		name = "bug_death",
 		range = 450,
 		reloadtime = 0,
-		soundhit = "ChickenDefenseSounds/bugdie",
+		--soundhit = "ChickenDefenseSounds/bugdie",
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
@@ -72,12 +72,12 @@ return {
 		name = "bug_death",
 		range = 300,
 		reloadtime = 0,
-		soundhit = "ChickenDefenseSounds/bugdie",
+		--soundhit = "ChickenDefenseSounds/bugdie",
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
 			damagetype		     = "default",
-			nofriendlyfire	     = 1,
+			--nofriendlyfire	     = 1,
 		}, 
 		damage = {
 			default = 200,

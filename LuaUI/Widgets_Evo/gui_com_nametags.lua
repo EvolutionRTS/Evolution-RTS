@@ -82,9 +82,12 @@ local myPlayerID = Spring.GetMyPlayerID()
 
 local comDefs = {}
 for unitDefID, defs in pairs(UnitDefs) do
-    if defs.customParams.iscommander then
-        comDefs[unitDefID] = true
-    end
+	--For some reason spring throws errors if I write these statements in short form, so here I am being overly specific
+    if defs.customParams.iscommander and defs.customParams.shownametag == false then
+			
+	elseif defs.customParams.iscommander and defs.customParams.shownametag == nil or defs.customParams.iscommander and defs.customParams.shownametag == true then
+		comDefs[unitDefID] = true
+	end
 end
 
 local sameTeamColors = false

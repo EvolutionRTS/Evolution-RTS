@@ -12,7 +12,7 @@ humanName = "Trike"
 objectName = "zaal/zskirmisher.s3o"
 script = "zaal/zskirmisher.cob"
 
-tech = [[tech2]]
+tech = [[tech3]]
 armortype = [[armored]]
 supply = [[4]]
 

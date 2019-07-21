@@ -5,16 +5,18 @@ unitName = [[zlair]]
 
 --------------------------------------------------------------------------------
 
-metalMultiplier = 2
+builder = true
+
+metalMultiplier = 1.5
 
 buildCostMetal = 400
 energyUse = 0
-energyMake = 20
+energyMake = 10
 
-metalStorage = 100
-energyStorage = 100
+metalStorage = 200
+energyStorage = 200
 
-supplygranted = 80
+supplygranted = 40
 
 footprintX = 8
 footprintZ = 8

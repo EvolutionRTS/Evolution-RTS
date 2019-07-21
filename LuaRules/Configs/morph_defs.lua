@@ -56,7 +56,7 @@ local timeToBuild_etech3 = energyCost_etech3 * 0.10
 local energyCost_zlair = 1000
 local timeToBuild_zlair = energyCost_zlair * 0.10
 
-local energyCost_zhive = 2000
+local energyCost_zhive = 3000
 local timeToBuild_zhive = energyCost_zhive * 0.10
 
 local energyCost_elightturret2 = 150

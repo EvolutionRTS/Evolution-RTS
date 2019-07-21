@@ -4,6 +4,8 @@ else
 	unitHeat = 0.0042
 end
 
+flowMappingToggle = true
+
 local genericDepthmodParams = {
 		minHeight      = 0,
 		maxHeight      = 5000,
@@ -39,6 +41,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
    HOVERTANK3 = {
@@ -54,6 +57,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    HOVERTANK4 = {
@@ -69,6 +73,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    HOVERTANK5 = {
@@ -84,6 +89,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    HOVERTANK6 = {
@@ -99,6 +105,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    ORBHOVERTANK6 = {
@@ -114,6 +121,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
 --End Hover--
@@ -134,6 +142,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=3,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    HOVERHBOT4 = {
@@ -149,6 +158,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=3,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    HOVERHBOT5 = {
@@ -164,6 +174,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=3,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    HOVERHBOT6 = {
@@ -179,6 +190,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=3,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    HOVERHBOT8 = {
@@ -194,6 +206,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=3,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
 --End hBot--
@@ -212,6 +225,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
    ALLTERRTANK4 = {
@@ -225,6 +239,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
     ALLTERRTANK5 = {
@@ -238,6 +253,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
    ALLTERRTANK6 = {
@@ -251,6 +267,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
 --End All Terrain--
@@ -271,6 +288,7 @@ local moveDefs = {
 	  slopemod=2,
 	  depthMod=0,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    NORMALTANK2 = {
@@ -286,6 +304,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    TANK2 = {
@@ -301,6 +320,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=2,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    TANK3 = {
@@ -316,6 +336,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=2,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    TANK4 = {
@@ -331,6 +352,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=2,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
    TANK6 = {
@@ -346,6 +368,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=2,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    
 
@@ -366,6 +389,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
 --End UBoat--
@@ -386,6 +410,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    HOVERTANKEXPERIMENTAL9 = {
       footprintx=9,
@@ -398,6 +423,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    EXPERIMENTALTANK12 = {
       footprintx=12,
@@ -410,6 +436,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
 --End Endbringers--
@@ -430,6 +457,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
    COMMANDERTANKAI4 = {
       footprintx=4,
@@ -444,6 +472,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
    },
 
 --End Commanders--
@@ -464,6 +493,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
 	},
 	ZAALKBOT1 = {
 		footprintx=1,
@@ -478,6 +508,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
 	},
 	ZAALKBOT2 = {
 		footprintx=2,
@@ -492,6 +523,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
 	},
 	ZAALKBOT3 = {
       footprintx=3,
@@ -506,6 +538,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
 	},
 	ZAALKBOT4 = {
 		footprintx=4,
@@ -520,6 +553,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
 	},
 	ZAALKBOT5 = {
 		footprintx=5,
@@ -533,6 +567,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
 	},
 	ZAALKBOT6 = {
 		footprintx=6,
@@ -547,6 +582,7 @@ local moveDefs = {
 	  heatmod=unitHeat,
 	  slopemod=4,
 	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
 	},
 	
 --End ZAAL--
