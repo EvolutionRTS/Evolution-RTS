@@ -51,19 +51,19 @@ local ringsDefs = {
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.eorb.id] = {
-        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 498 },
+        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
-		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 510 },
+		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },
     },
 	[UnitDefNames.eorb_up1.id] = {
-        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 600 },
+        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
-		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 650 },
+		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },
     },
 	[UnitDefNames.eorb_up2.id] = {
-        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 700 },
+        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
-		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 800 },
+		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1050 },
     },
 	[UnitDefNames.eorb_up3.id] = {
         { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },

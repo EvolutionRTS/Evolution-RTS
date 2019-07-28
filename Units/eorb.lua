@@ -12,7 +12,7 @@ objectName = [[eorb4.s3o]]
 script = [[eorb3.cob]]
 
 workerTime = 1
-buildDistance = 500
+buildDistance = 800
 
 tech = [[tech0]]
 armortype = [[light]]

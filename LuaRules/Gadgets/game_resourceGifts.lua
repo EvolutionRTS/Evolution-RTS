@@ -20,7 +20,7 @@ local baseIncomeIncrease = Spring.GetModOptions().basicincomeincrease or 1 -- ad
 if Spring.GetModOptions().basicincomeinterval ~= nil then
 	baseIncomeIncreasePeriod = Spring.GetModOptions().basicincomeinterval*60*30
 else
-	baseIncomeIncreasePeriod = 1*60*30 -- x min * 60 s/min * 30 frame/s
+	baseIncomeIncreasePeriod = 2.5*60*30 -- x min * 60 s/min * 30 frame/s
 end
 
 local maximumBaseIncome = Spring.GetModOptions().maxbasicincome or 10
