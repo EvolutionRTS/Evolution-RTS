@@ -9,6 +9,9 @@ local skin = {
   }
 }
 
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.ttf")
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.ttf")
+
 --//=============================================================================
 --// Render Helpers
 
@@ -604,12 +607,12 @@ end
 --//
 
 skin.general = {
-  --font        = "FreeSansBold.ttf",
+  font        = fontfile2,
   textColor   = {0,0,0,1},
 
   font = {
-    outlineColor = {0,0,0,0.5},
-    outline      = false,
+    outlineColor = {0,0,0,0.7},
+    outline      = true,
     size         = 13,
   },
 

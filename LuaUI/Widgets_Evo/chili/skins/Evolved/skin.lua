@@ -17,7 +17,7 @@ local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2"
 
 skin.general = {
   font        = fontfile2,
-  fontOutline = false,
+  fontOutline = true,
   fontsize    = 13,
   textColor   = {1,1,1,1},
 
