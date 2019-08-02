@@ -246,8 +246,8 @@ function BuildEnergy(tqb, ai, unit)
 	if GetLifters < 4 or rLifter == 0 then
 		return "ehbotengineer"
 	else
-		local r = math.random(0,5)
-		if ec <= es*0.10 or r == 0 then
+		local r = math.random(0,20)
+		if ei <= ee or r == 0 then
 			if GG.TechCheck("tech3", ai.id) then
 				return "efusion2"
 			elseif GG.TechCheck("tech2", ai.id) then
@@ -934,9 +934,6 @@ local HoverFactoryQueueUP3 = {
 }
 
 local overseerlistfirst = {
-	"emetalextractor",
-	"emetalextractor",
-	"emetalextractor",
 	BuildEngineers,
 	BuildEngineers,
 	BuildEngineers,
@@ -946,28 +943,14 @@ local overseerlistfirst = {
 }
 	
 local overseerorders = {
-	--RandomOverseer,
-	--RandomOverseer,
-	--RandomOverseer,
-	--RandomOverseer,
 	BuildFactory,
-	BuildEnergy,
 	BuildTechFacility,
-	BuildEnergy,
-	BuildSupply,
-	BuildEnergy,
-	BuildEngineers,
-	BuildEnergy,
-	BuildEngineers,
-	BuildEnergy,
-	BuildTurret,
-	BuildEnergy,
-	BuildSupport,
 	BuildEnergy,
 	MoveToRandomStartBoxLocation,
 }
 
 local lifterlist = {
+	BuildFactory,
 	BuildMex,
 	MoveToRandomStartBoxLocation,
 	BuildFactory,
@@ -1045,7 +1028,7 @@ local function ZaalUnitLists(tqb, ai, unit)
 			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter",}
 			return FindBest(options, ai)
 		elseif r <= 9 then
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
+			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber",}
 			return FindBest(options, ai)
 		else
 			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro", "zqueen",}
@@ -1060,7 +1043,7 @@ local function ZaalUnitLists(tqb, ai, unit)
 			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter",}
 			return FindBest(options, ai)
 		else
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro",}
+			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber",}
 			return FindBest(options, ai)
 		end
 		
@@ -1088,11 +1071,15 @@ end
 
 
 local ZaalHive1 = {
-	ZaalUnitLists,
 	ZaalMorph,
 }
 
 local ZaalHive2 = {
+	ZaalUnitLists,
+	ZaalMorph,
+}
+
+local ZaalHive3 = {
 	ZaalUnitLists,
 }
 
@@ -1134,8 +1121,8 @@ taskqueues = {
 	ebasefactory_up2 = HoverFactoryQueueUP2, 
 	ebasefactory_up3 = HoverFactoryQueueUP3,
 	zarm = ZaalArm,
-	zhive = ZaalHive2,
+	zhive = ZaalHive3,
 	zhatch = ZaalHive1,
-	zlair = ZaalHive1,
+	zlair = ZaalHive2,
 }
 ----------------------------------------------------------

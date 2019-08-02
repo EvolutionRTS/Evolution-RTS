@@ -14,7 +14,7 @@ local spGetUnitHealth       = Spring.GetUnitHealth
 local spGetUnitHeight       = Spring.GetUnitHeight
 local spGetUnitPosition     = Spring.GetUnitPosition
 local spGetUnitTeam         = Spring.GetUnitTeam
-local spGetUnitsInSphere    = Spring.GetUnitsInSphere
+local spGetUnitsInCylinder    = Spring.GetUnitsInCylinder
 local spSetUnitHealth       = Spring.SetUnitHealth
 
 --------------------------------------------------------------------------------
@@ -45,6 +45,7 @@ local repairUnits= {
 	[UnitDefNames.ecommandercloakai.id] = {radius=1000,strength=10.0},
 	[UnitDefNames.ecommanderbuildai.id] = {radius=1000,strength=20.0},
 	[UnitDefNames.ecommanderfactoryai.id] = {radius=1000,strength=20.0},
+	[UnitDefNames.zarm.id] = {radius=200,strength=10.0},
 }
 
 local delayAfterHit=150             --Frames after a hit that no repairs will take place in
@@ -67,7 +68,7 @@ local GetGameFrame=spGetGameFrame
 local GetUnitPosition=spGetUnitPosition
 local GetUnitTeam=spGetUnitTeam
 local GetUnitAllyTeam=spGetUnitAllyTeam
-local GetUnitsInSphere=spGetUnitsInSphere
+local GetUnitsInCylinder=spGetUnitsInCylinder
 local GetUnitHealth = spGetUnitHealth
 local SetUnitHealth = spSetUnitHealth
 local GetUnitDefID = spGetUnitDefID
@@ -121,7 +122,7 @@ function gadget:GameFrame(f)
 			local held 			= d.holding
 			local strength		= d.strength
 						
-			for uis,t in ipairs(GetUnitsInSphere(x,y,z,d.radius)) do
+			for uis,t in ipairs(GetUnitsInCylinder(x,z,d.radius)) do
 				local ud = GetUnitDefID(t)
 				if t ~= held and t ~= u then
 				
