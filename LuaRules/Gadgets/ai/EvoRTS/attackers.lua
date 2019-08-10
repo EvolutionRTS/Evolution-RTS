@@ -261,4 +261,6 @@ attackerlist = {
 	"zpyro",
 	"zqueen",
 	"zskirmisher",
+	"zassault",
+	"zairbomber",
 }
