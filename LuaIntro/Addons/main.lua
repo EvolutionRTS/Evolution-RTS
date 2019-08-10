@@ -372,11 +372,7 @@ function addon.DrawLoadScreen()
 			image_text = string.sub(random_tip_or_desc, 0, j)
 			gl.Texture(":n:unitpics/" .. image_text)
 			gl.Color(1.0,1.0,1.0,0.8)
-			if (engineVersion < 1000 and engineVersion >= 105) or engineVersion > 10401151 then
-				gl.TexRect(vsx * 0.21, (vsy*(yPos-0.015))-(vsx*image_size), vsx*(0.21+image_size), vsy*(yPos-0.015),false,true)
-			else
-				gl.TexRect(vsx * 0.21, (vsy*(yPos-0.015))-(vsx*image_size), vsx*(0.21+image_size), vsy*(yPos-0.015))
-			end
+			gl.TexRect(vsx * 0.21, (vsy*(yPos-0.015))-(vsx*image_size), vsx*(0.21+image_size), vsy*(yPos-0.015),false,false)
 			font:Print(text_to_show, vsx * (0.21+image_size+0.012) , vsy * (yPos-0.0175), fontSize, "oa")
 		else
 			font:Print(text_to_show, vsx * 0.21, vsy * (yPos-0.0175), fontSize, "oa")
