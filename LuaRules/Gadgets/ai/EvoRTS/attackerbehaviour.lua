@@ -88,11 +88,7 @@ end
 
 function AttackerBehaviour:OwnerBuilt()
 	--Echo("registered unit construction")
-	if string.find(UnitDefs[Spring.GetUnitDefID(self.unit:Internal().id)].name, "eorb") then
-		self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 2 }, {})
-	else
-		self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 0 }, {})
-	end
+	self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 2 }, {})
 	self.unit:Internal():ExecuteCustomCommand(CMD.FIRE_STATE, { 2 }, {})
 	self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 1 }, {})
 	self.unit:Internal():ExecuteCustomCommand(34569, { 1 }, {})
