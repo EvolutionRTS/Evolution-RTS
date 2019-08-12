@@ -1,7 +1,7 @@
 unitDef                    = {
 
 	buildCostEnergy              = 0,
-	buildCostMetal               = 15,
+	buildCostMetal               = 1000,
 	buildDistance                = buildDistance,
 	builder                      = true,
 	buildTime                    = 5,
