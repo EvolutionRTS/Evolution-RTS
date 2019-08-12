@@ -1007,6 +1007,14 @@ local function lifterqueue()
 end
 
 ------------------------------------------------- ZAAAAAAAAAAAAAALS
+function GetZaalSpawners(tqb,ai,unit)
+	local list = {
+	UDN.zhatch.id, UDN.zlair.id, UDN.zhive.id
+	}
+	local units = Spring.GetTeamUnitsByDefs(ai.id, list)
+	return #units
+end
+
 
 local function ZaalMorph(tqb, ai, unit)
 	local r = math.random(1,5)
@@ -1052,31 +1060,46 @@ local function ZaalUnitLists(tqb, ai, unit)
 		if r <= 9 then
 			return "zlightswarm"
 		else
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter",}
+			local options = {"zlightswarm", "zairscout",}
 			return FindBest(options, ai)
 		end
 		
 	end
 end
 
-local function ZaalArmLists(tqb, ai, unit)
-	local armcount = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zarm.id)
-	local counter = Spring.GetGameSeconds()*0.01 + 1
-	if armcount < counter then
-		return "zarm"
+
+local function ZaalEZMorphIfEnergyIsOK(tqb, ai, unit)
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	if ec >= es*0.5 then
+		return ezMorph
 	else
 		return skip
 	end
 end
 
 
+local function ZaalBuild(tqb, ai, unit)
+	local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed") or 0
+	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
+	if ec <= es*0.5 or (su > sm-20 and sm ~= MaximumSupply) and GG.TechCheck("tech1", ai.id) and SpawnerCount >= 3 then
+		return "zespire1"
+	else
+		return "zhatch"
+	end
+end
+
+
+
 local ZaalHive1 = {
-	ZaalMorph,
+	ZaalUnitLists,
+	ZaalEZMorphIfEnergyIsOK,
 }
 
 local ZaalHive2 = {
 	ZaalUnitLists,
-	ZaalMorph,
+	ZaalEZMorphIfEnergyIsOK,
 }
 
 local ZaalHive3 = {
@@ -1084,11 +1107,13 @@ local ZaalHive3 = {
 }
 
 local ZaalArm = {
-	ZaalArmLists,
-	"zhatch",
-	"zhatch",
-	"zhatch",
+	ZaalBuild,
 }
+
+local ZaalEspire = {
+	ZaalEZMorphIfEnergyIsOK,
+}
+	
 
 
 taskqueues = {
@@ -1124,5 +1149,7 @@ taskqueues = {
 	zhive = ZaalHive3,
 	zhatch = ZaalHive1,
 	zlair = ZaalHive2,
+	zespire1 = ZaalEspire,
+	zespire4 = ZaalEspire,
 }
 ----------------------------------------------------------

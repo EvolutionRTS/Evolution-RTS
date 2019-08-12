@@ -73,6 +73,24 @@ local function GetStartUnit(teamID)
 			elseif sidedata == "zarm" then
 			--elseif factioncheck == 1 then
 				startUnit = "zarm"
+			else
+				if factioncheck == 0 then
+					if i == 1 then
+						startUnit = "ecommanderbattleai"
+					elseif i == 2 then
+						startUnit = "ecommanderbuildai"
+					elseif i == 3 then
+						startUnit = "ecommandercloakai"
+					elseif i == 4 then
+						startUnit = "ecommanderfactoryai"
+					elseif i == 5 then
+						startUnit = "ecommandershieldai"
+					else
+						startUnit = "ecommanderhealerai"
+					end
+				else
+					startUnit = "zarm"
+				end
 			end
 			return startUnit
 		end

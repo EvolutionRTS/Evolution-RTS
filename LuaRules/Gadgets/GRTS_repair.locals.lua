@@ -45,7 +45,7 @@ local repairUnits= {
 	[UnitDefNames.ecommandercloakai.id] = {radius=1000,strength=10.0},
 	[UnitDefNames.ecommanderbuildai.id] = {radius=1000,strength=20.0},
 	[UnitDefNames.ecommanderfactoryai.id] = {radius=1000,strength=20.0},
-	[UnitDefNames.zarm.id] = {radius=200,strength=10.0},
+	[UnitDefNames.zarm.id] = {radius=1000,strength=10.0},
 }
 
 local delayAfterHit=150             --Frames after a hit that no repairs will take place in

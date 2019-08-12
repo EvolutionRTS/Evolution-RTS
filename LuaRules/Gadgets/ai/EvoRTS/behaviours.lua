@@ -28,6 +28,12 @@ behaviours = {
 	zarm = {
 		TaskQueueBehaviour,
 	},
+	zespire1 = {
+		TaskQueueBehaviour,
+	},
+	zespire4 = {
+		TaskQueueBehaviour,
+	},
 	zhive = {
 		TaskQueueBehaviour,
 	},
