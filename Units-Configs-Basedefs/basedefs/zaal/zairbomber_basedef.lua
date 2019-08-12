@@ -1,8 +1,8 @@
 unitDef                    = {
-	--acceleration                 = 0.5,
+	acceleration                 = 1,
 	airStrafe                    = false,
 	airHoverFactor				 = 0,
-	--brakeRate                    = 1,
+	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 60,
 	buildTime                    = 2.5,

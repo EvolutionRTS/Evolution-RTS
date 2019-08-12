@@ -82,6 +82,10 @@ local ringsDefs = {
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 995 },		
 	},
+	[UnitDefNames.zarm.id] = {
+		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },
+    },
+	
 	-- Shield Units
 	[UnitDefNames.ekmar.id] = {
         { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 1000 },
