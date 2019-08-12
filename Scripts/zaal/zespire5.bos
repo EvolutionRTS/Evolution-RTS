@@ -5,9 +5,6 @@
 
 piece  base;
 
-static-var  Static_Var_1, tech;
-
-
 SmokeUnit(healthpercent, sleeptime, smoketype)
 {
 	while( get BUILD_PERCENT_LEFT )
@@ -35,24 +32,11 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
 	}
 }
 
-
 Create()
 {
 	start-script SmokeUnit();
 }
-/*
-TechLost()
-{
-	set ACTIVATION to 0;
-	tech=FALSE;
-}
 
-TechGranted()
-{
-	set ACTIVATION to 1;
-	tech=TRUE;
-}
-*/
 Killed(severity, corpsetype) // how it explodes 
 { 
 	corpsetype = 1; 

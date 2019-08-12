@@ -10,7 +10,7 @@ energyMake = 20
 humanName = "Mature Energy Spire"
 
 objectName = "zaal/zespire5.s3o"
-script = "zaal/zespire5.bos"
+script = "zaal/zespire5.cob"
 
 armortype = [[building]]
 tech = [[tech3]]
