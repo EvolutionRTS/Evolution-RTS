@@ -7,7 +7,7 @@ unitName = "zairtoairfighter"
 
 isUpgraded = [[0]]
 
-humanName = [[Koyote]]
+humanName = [[Corruptor]]
 
 objectName = "zaal/zairtoairfighter.s3o"
 script = "zaal/zairtoairfighter.cob"

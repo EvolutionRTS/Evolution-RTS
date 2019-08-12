@@ -59,6 +59,12 @@ local timeToBuild_zlair = energyCost_zlair * 0.10
 local energyCost_zhive = 3000
 local timeToBuild_zhive = energyCost_zhive * 0.10
 
+local energyCost_zespire4 = 400
+local timeToBuild_zespire4 = energyCost_zespire4 * 0.10
+
+local energyCost_zespire5 = 400
+local timeToBuild_zespire5 = energyCost_zespire5 * 0.10
+
 local energyCost_elightturret2 = 150
 local timeToBuild_elightturret2 = energyCost_elightturret2 * 0.10
 
@@ -1253,6 +1259,32 @@ Evolution]],
 			energy = energyCost_zhive,
 			metal = 0,
 			text = 'Evolve into a Hive.',
+		},
+	},	
+	
+----------------------------------------------------------
+----------------------------------------------------------
+	
+	zespire1 = 	{
+		{
+			into = 'zespire4',
+			time = timeToBuild_zespire4,
+			cmdname = [[Evolve]],
+			energy = energyCost_zespire4,
+			metal = 0,
+			require = [[tech2]],
+			text = 'Evolve into a Budding Energy Spire.',
+		},
+	},	
+	zespire4 = 	{
+		{
+			into = 'zespire5',
+			time = timeToBuild_zespire5,
+			cmdname = [[Evolve]],
+			energy = energyCost_zespire5,
+			metal = 0,
+			require = [[tech3]],
+			text = 'Evolve into a Mature Energy Spire.',
 		},
 	},	
 	

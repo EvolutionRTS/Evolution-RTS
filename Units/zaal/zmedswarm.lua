@@ -7,7 +7,7 @@ unitName = "zmedswarm"
 
 isUpgraded	= [[0]]
 
-humanName = "Trike"
+humanName = "Roach"
 
 objectName = "zaal/zmedswarm.s3o"
 script = "zaal/zmedswarm.cob"

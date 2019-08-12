@@ -5,7 +5,9 @@ unitName = [[zhatch]]
 
 --------------------------------------------------------------------------------
 
-builder = false
+builder = true
+
+buildSpeedModifier = 1
 
 metalMultiplier = 1
 

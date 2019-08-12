@@ -1,24 +1,22 @@
--- UNITDEF -- zqueen --
+-- UNITDEF -- zespire5 --
 --------------------------------------------------------------------------------
 
-unitName = "zqueen"
+unitName = "zespire5"
 
 --------------------------------------------------------------------------------
+supplygranted = 40
+energyMake = 20
 
-isUpgraded	= [[0]]
+humanName = "Mature Energy Spire"
 
-humanName = "Queen"
+objectName = "zaal/zespire5.s3o"
+script = "zaal/zespire5.bos"
 
-objectName = "zaal/zqueen.s3o"
-script = "zaal/zqueen.cob"
-
+armortype = [[building]]
 tech = [[tech3]]
-armortype = [[armored]]
-supply = [[4]]
 
-VFS.Include("units-configs-basedefs/basedefs/zaal/zqueen_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/zaal/zespire5_basedef.lua")
 	
-unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName]    = unitDef })

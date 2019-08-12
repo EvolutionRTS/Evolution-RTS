@@ -8,15 +8,16 @@ unitName = [[zhive]]
 builder = true
 
 metalMultiplier = 2
+buildSpeedModifier = 2
 
 buildCostMetal = 800
 energyUse = 0
-energyMake = 10
+energyMake = 0
 
 metalStorage = 200
 energyStorage = 200
 
-supplygranted = 40
+supplygranted = 0
 
 footprintX = 8
 footprintZ = 8
