@@ -125,13 +125,13 @@ end
 function TaskQueueBehaviour:Update()
 	if Spring.GetGameFrame()%30 and Spring.GetGameFrame() > 30 then
 		if self:IsBusy() then
-			self.ImBusy = self.ImBusy + 2
+			self.ImBusy = 15
 		elseif not self:IsBusy() and self.ImBusy > 0 then
 			self.ImBusy = self.ImBusy - 1
 		end
 	end
 	if Spring.GetGameFrame()%600 == self.unit:Internal().id%600 and Spring.GetGameFrame() > 600 then
-		--if (not self.unit:Internal():Type():IsFactory()) then
+		if (not self.unit:Internal():Type():IsFactory()) then
 			if self:IsRunningAQueue() and (not self:IsBusy()) and self.ImBusy == 0 and self:CompareWithOldPos() then -- check stucked cons
 				--self.ai.newplacementhandler:UnitIdle(self.unit:Internal())
 				self.unit:Internal():ExecuteCustomCommand(CMD.STOP, {}, {}) --> Triggers UnitIdle -> Next Task
@@ -142,7 +142,7 @@ function TaskQueueBehaviour:Update()
 			else
 				self:CompareWithOldPos() -- still register current position
 			end		
-		--end
+		end
 	end
 	if not self:IsActive() then
 		self:DebugPoint("nothing")
