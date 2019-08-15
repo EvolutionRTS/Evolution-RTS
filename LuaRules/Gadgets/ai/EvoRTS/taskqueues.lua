@@ -171,7 +171,7 @@ function FindBest(unitoptions,ai)
 		local randomunit = {}
 		for n, unitName in pairs(unitoptions) do
 			local cost = UnitDefs[UnitDefNames[unitName].id].energyCost + UnitDefs[UnitDefNames[unitName].id].metalCost
-			local avgkilled_cost = GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id) and GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id).avgkilled_cost or 2000 --start at 200 so that costly units aren't made from the start
+			local avgkilled_cost = GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id) and GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id).avgkilled_cost or 200 --start at 200 so that costly units aren't made from the start
 			effect[unitName] = math.max(math.floor((avgkilled_cost/cost)^4*10),1)
 			for i = randomization, randomization + effect[unitName] do
 				randomunit[i] = unitName
@@ -935,23 +935,27 @@ local HoverFactoryQueueUP3 = {
 
 local overseerlistfirst = {
 	BuildEngineers,
+	BuildTurret,
 	BuildEngineers,
 	BuildEngineers,
 	BuildEngineers,
 	BuildEngineers,
 	BuildEngineers,
+	BuildTurret,
 }
 	
 local overseerorders = {
 	BuildFactory,
 	BuildTechFacility,
 	BuildEnergy,
+	BuildTurret,
 	MoveToRandomStartBoxLocation,
 }
 
 local lifterlist = {
 	BuildFactory,
 	BuildMex,
+	BuildTurret,
 	MoveToRandomStartBoxLocation,
 	BuildFactory,
 	BuildEnergy,
@@ -969,19 +973,33 @@ local lifterlist = {
 
 local lifterareamex = {
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	"emetalextractor",
+	BuildTurret,
 	MoveToRandomStartBoxLocation,
 }
 

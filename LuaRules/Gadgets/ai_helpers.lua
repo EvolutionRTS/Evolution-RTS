@@ -340,7 +340,7 @@ end
 		info[teamID] = info[teamID] or {}
 		info[teamID][unitDefID] = info[teamID][unitDefID] or {killed_cost=0,n=0, avgkilled_cost=0}
 		info[teamID][unitDefID].n = info[teamID][unitDefID].n + 1
-		if info[teamID][unitDefID].n > 1000 then 
+		if info[teamID][unitDefID].n > 80 then 
 			info[teamID][unitDefID].n = info[teamID][unitDefID].n - 1
 			info[teamID][unitDefID].killed_cost = info[teamID][unitDefID].killed_cost - info[teamID][unitDefID].avgkilled_cost
 			if info[teamID][unitDefID].killed_cost <= 0 then info[teamID][unitDefID].killed_cost = 0 end
