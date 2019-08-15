@@ -170,8 +170,8 @@ function FindBest(unitoptions,ai)
 		local randomization = 1
 		local randomunit = {}
 		for n, unitName in pairs(unitoptions) do
-			local cost = UnitDefs[UnitDefNames[unitName].id].energyCost / 60 + UnitDefs[UnitDefNames[unitName].id].metalCost
-			local avgkilled_cost = GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id) and GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id).avgkilled_cost or 200 --start at 200 so that costly units aren't made from the start
+			local cost = UnitDefs[UnitDefNames[unitName].id].energyCost + UnitDefs[UnitDefNames[unitName].id].metalCost
+			local avgkilled_cost = GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id) and GG.AiHelpers.UnitInfo(ai.id, UnitDefNames[unitName].id).avgkilled_cost or 2000 --start at 200 so that costly units aren't made from the start
 			effect[unitName] = math.max(math.floor((avgkilled_cost/cost)^4*10),1)
 			for i = randomization, randomization + effect[unitName] do
 				randomunit[i] = unitName
@@ -1080,16 +1080,16 @@ end
 
 local function ZaalBuild(tqb, ai, unit)
 	local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
+	local r = math.random(0,SpawnerCount + 1)
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed") or 0
 	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
-	if ec <= es*0.5 or (su > sm-20 and sm ~= MaximumSupply) and GG.TechCheck("tech1", ai.id) and SpawnerCount >= 3 then
+	if (ec <= es*0.5 or (su > sm-20 and sm ~= MaximumSupply) and GG.TechCheck("tech1", ai.id) and SpawnerCount >= 3) and r ~= 0 then
 		return "zespire1"
 	else
 		return "zhatch"
 	end
 end
-
 
 
 local ZaalHive1 = {
