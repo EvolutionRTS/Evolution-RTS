@@ -14,7 +14,7 @@ script = "zaal/zqueen.cob"
 
 tech = [[tech3]]
 armortype = [[armored]]
-supply = [[4]]
+supply = [[8]]
 
 VFS.Include("units-configs-basedefs/basedefs/zaal/zqueen_basedef.lua")
 	
