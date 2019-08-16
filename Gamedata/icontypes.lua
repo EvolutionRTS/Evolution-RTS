@@ -297,6 +297,43 @@ local icontypes = {
     radiusadjust=3,
   },
 
+ --------Zaals--------- 
+ 
+ -- land
+  zlightswarm = {
+	bitmap='icons/z/zswarm.png',
+	size=2.5,
+	radiusadjust=0
+  },
+  
+  zmediumswarm = {
+	bitmap='icons/z/zswarm.png',
+	size=3.5,
+	radiusadjust=0
+  },
+  
+  zarty = {
+	bitmap='icons/z/zarty.png',
+	size=3.5,
+	radiusadjust=0
+  },
+  
+  -- air
+  zairscout = {
+	bitmap='icons/z/zairscout.png',
+	size=2,
+	radiusadjust=0
+  },
+  
+   zbomber = {
+	bitmap='icons/z/zbomber.png',
+	size=4,
+	radiusadjust=0
+  },
+  -- buildings
+  
+  
+ ----------------------
     
   chicken = 
 	{
