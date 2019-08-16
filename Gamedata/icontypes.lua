@@ -325,6 +325,18 @@ local icontypes = {
 	radiusadjust=0
   },
   
+  zairtoairfighter = {
+	bitmap='icons/z/zairtoairfighter.png',
+	size=3.5,
+	radiusadjust=0
+  },
+  
+  zairtogroundfighter = {
+	bitmap='icons/z/zairtogroundfighter.png',
+	size=3.5,
+	radiusadjust=0
+  },
+  
    zbomber = {
 	bitmap='icons/z/zbomber.png',
 	size=4,
