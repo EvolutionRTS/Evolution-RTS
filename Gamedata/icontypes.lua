@@ -306,8 +306,20 @@ local icontypes = {
 	radiusadjust=0
   },
   
-  zmediumswarm = {
-	bitmap='icons/z/zswarm.png',
+  zmedswarm = {
+	bitmap='icons/z/zmedswarm.png',
+	size=3,
+	radiusadjust=0
+  },
+  
+  zskirmisher = {
+	bitmap='icons/z/zskirmisher.png',
+	size=3,
+	radiusadjust=0
+  },
+  
+  zassault = {
+	bitmap='icons/z/zassault.png',
 	size=3.5,
 	radiusadjust=0
   },
@@ -315,6 +327,12 @@ local icontypes = {
   zarty = {
 	bitmap='icons/z/zarty.png',
 	size=3.5,
+	radiusadjust=0
+  },
+  
+  zqueen = {
+	bitmap='icons/z/zqueen.png',
+	size=8,
 	radiusadjust=0
   },
   
