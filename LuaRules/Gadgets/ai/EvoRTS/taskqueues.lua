@@ -1051,13 +1051,13 @@ local function ZaalUnitLists(tqb, ai, unit)
 		if r <= 3 then
 			return "zlightswarm"
 		elseif r <= 6 then
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter",}
+			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro",}
 			return FindBest(options, ai)
 		elseif r <= 9 then
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber",}
+			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro", "zairbomber",}
 			return FindBest(options, ai)
 		else
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairtogroundfighter", "zairbomber", "zarty", "zassault", "zkamikaze", "zskirmisher", "zpyro", "zqueen",}
+			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro","zairbomber", "zairtogroundfighter", "zarty", "zassault", "zkamikaze", "zskirmisher", "zqueen",}
 			return FindBest(options, ai)
 		end
 	
@@ -1066,10 +1066,10 @@ local function ZaalUnitLists(tqb, ai, unit)
 		if r <= 6 then
 			return "zlightswarm"
 		elseif r <= 9 then
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter",}
+			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro",}
 			return FindBest(options, ai)
 		else
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zairbomber",}
+			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro", "zairbomber",}
 			return FindBest(options, ai)
 		end
 		
@@ -1078,7 +1078,7 @@ local function ZaalUnitLists(tqb, ai, unit)
 		if r <= 9 then
 			return "zlightswarm"
 		else
-			local options = {"zlightswarm", "zairscout",}
+			local options = {"zlightswarm", "zairscout", "zpyro",}
 			return FindBest(options, ai)
 		end
 		
