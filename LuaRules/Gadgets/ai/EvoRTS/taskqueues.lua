@@ -1035,12 +1035,7 @@ end
 
 
 local function ZaalMorph(tqb, ai, unit)
-	local r = math.random(1,5)
-	if r == 1 then
-		return ezMorph
-	else
-		return skip
-	end
+	return ezMorph
 end
 
 
@@ -1112,12 +1107,12 @@ end
 
 local ZaalHive1 = {
 	ZaalUnitLists,
-	ZaalEZMorphIfEnergyIsOK,
+	ZaalMorph,
 }
 
 local ZaalHive2 = {
 	ZaalUnitLists,
-	ZaalEZMorphIfEnergyIsOK,
+	ZaalMorph,
 }
 
 local ZaalHive3 = {
@@ -1129,7 +1124,7 @@ local ZaalArm = {
 }
 
 local ZaalEspire = {
-	ZaalEZMorphIfEnergyIsOK,
+	ZaalMorph,
 }
 	
 
