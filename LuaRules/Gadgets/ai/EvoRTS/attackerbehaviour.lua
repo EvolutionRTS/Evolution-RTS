@@ -90,7 +90,7 @@ function AttackerBehaviour:OwnerBuilt()
 	--Echo("registered unit construction")
 	self.unit:Internal():ExecuteCustomCommand(CMD.MOVE_STATE, { 2 }, {})
 	self.unit:Internal():ExecuteCustomCommand(CMD.FIRE_STATE, { 2 }, {})
-	self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 1 }, {})
+	self.unit:Internal():ExecuteCustomCommand(37382, { 1 }, {})
 	self.unit:Internal():ExecuteCustomCommand(34569, { 1 }, {})
 	self.attacking = true
 	self.active = true
@@ -162,9 +162,9 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		local nearestEnemy = SpGetUnitNearestEnemy(self.unitID, 30000, false)
 		local nearestEnemyDistance = SpGetUnitSeparation(self.unitID,nearestEnemy)
 		if nearestEnemyDistance < 2000 then
-			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 1 }, {})
+			self.unit:Internal():ExecuteCustomCommand(37382, { 1 }, {})
 		else
-			self.unit:Internal():ExecuteCustomCommand(CMD.CLOAK, { 0 }, {})
+			self.unit:Internal():ExecuteCustomCommand(37382, { 0 }, {})
 		end
 	end
 	-- Retreating so we have less data process/only what matters
