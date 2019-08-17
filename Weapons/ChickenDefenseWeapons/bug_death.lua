@@ -63,24 +63,24 @@ return {
 		},
 	},
 	bug_death_kamikaze = {
-		areaofeffect = 300,
+		areaofeffect = 100,
 		craterboost = 0,
 		cratermult = 0,
 		impulseboost = 0,
 		impulsefactor = 0,
 		explosiongenerator = "custom:chickenunitexplosion-medium-red",
 		name = "bug_death",
-		range = 300,
+		range = 100,
 		reloadtime = 0,
 		--soundhit = "ChickenDefenseSounds/bugdie",
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
 			damagetype		     = "default",
-			--nofriendlyfire	     = 1,
+			nofriendlyfire	     = 1,
 		}, 
 		damage = {
-			default = 200,
+			default = 100,
 		},
 	},
 }
