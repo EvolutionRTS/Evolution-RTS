@@ -51,7 +51,11 @@ local function GetStartUnit(teamID)
 		if boolIsAI==true then
 			Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
 			local sidedata = Spring.GetSideData(side)
-			Spring.Echo("faction: " .. sidedata)
+			if sidedata == nil then
+				Spring.Echo("faction: nil")
+			else
+				Spring.Echo("faction: " .. sidedata)
+			end
 			math.random(); math.random(); math.random()
 			local i = math.random(1,6)
 			local factioncheck = math.random(0,1)
