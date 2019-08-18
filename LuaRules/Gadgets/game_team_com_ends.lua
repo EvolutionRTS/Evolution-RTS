@@ -76,7 +76,7 @@ function gadget:GameFrame(t)
 					for _,unitID in ipairs(GetTeamUnits(team)) do
 						local x,y,z = GetUnitPosition(unitID)
 						local unitDefID = Spring.GetUnitDefID(unitID)
-						local deathTime = ((getSqrDistance(x,z,defs.x,defs.z) / DISTANCE_LIMIT) * 250)*30
+						local deathTime = ((getSqrDistance(x,z,defs.x,defs.z) / DISTANCE_LIMIT) * 250)
 						if (destroyUnitQueue[unitID] == nil) then
 							destroyUnitQueue[unitID] = { 
 									time = t + deathTime, 
