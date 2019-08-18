@@ -137,6 +137,7 @@ weaponDefs                 = {
 		customparams             = {
 			isupgraded			 = isUpgraded,
 			damagetype		     = "eamphibbuggy",  
+			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {
 			default              = 13.5, -- multiply * 1.2 for correct dps output
