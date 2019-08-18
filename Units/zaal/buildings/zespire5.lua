@@ -4,7 +4,7 @@
 unitName = "zespire5"
 
 --------------------------------------------------------------------------------
-supplygranted = 40
+supplygranted = 0
 energyMake = 20
 
 humanName = "Mature Energy Spire"

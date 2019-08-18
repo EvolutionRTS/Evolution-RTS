@@ -18,7 +18,7 @@ energyMake = 0
 metalStorage = 50
 energyStorage = 50
 
-supplygranted = 0
+supplygranted = 10
 
 footprintX = 8
 footprintZ = 8
