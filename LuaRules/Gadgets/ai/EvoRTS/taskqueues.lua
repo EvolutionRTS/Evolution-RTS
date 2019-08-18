@@ -1033,15 +1033,6 @@ function GetZaalSpawners(tqb,ai,unit)
 	return #units
 end
 
-function GetZaalSpawners(tqb,ai,unit)
-	local list = {
-	UDN.zhatch.id, UDN.zlair.id, UDN.zhive.id
-	}
-	local units = Spring.GetTeamUnitsByDefs(ai.id, list)
-	return #units
-end
-
-
 local function ZaalMorph(tqb, ai, unit)
 	return ezMorph
 end
