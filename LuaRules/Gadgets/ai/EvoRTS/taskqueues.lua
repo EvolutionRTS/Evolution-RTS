@@ -1033,6 +1033,14 @@ function GetZaalSpawners(tqb,ai,unit)
 	return #units
 end
 
+function GetZaalSpawners(tqb,ai,unit)
+	local list = {
+	UDN.zhatch.id, UDN.zlair.id, UDN.zhive.id
+	}
+	local units = Spring.GetTeamUnitsByDefs(ai.id, list)
+	return #units
+end
+
 
 local function ZaalMorph(tqb, ai, unit)
 	return ezMorph
@@ -1041,18 +1049,23 @@ end
 
 local function ZaalUnitLists(tqb, ai, unit)
 	local r = math.random(0,10)
+	local scouts = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zairscout.id)
+	
+	if scouts < 3 then
+		return "zairscout"
+	end
+	
 	if GG.TechCheck("tech3", ai.id) then
-		
 		if r <= 3 then
 			return "zlightswarm"
 		elseif r <= 6 then
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro",}
+			local options = {"zlightswarm", "zmedswarm", "zairtoairfighter", "zpyro",}
 			return FindBest(options, ai)
 		elseif r <= 9 then
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro", "zairbomber",}
+			local options = {"zlightswarm", "zmedswarm", "zairtoairfighter", "zpyro", "zairbomber", "zskirmisher",}
 			return FindBest(options, ai)
 		else
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro","zairbomber", "zairtogroundfighter", "zarty", "zassault", "zkamikaze", "zskirmisher", "zqueen",}
+			local options = {"zlightswarm", "zmedswarm", "zairtoairfighter", "zpyro","zairbomber", "zairtogroundfighter", "zarty", "zassault", "zkamikaze", "zskirmisher", "zqueen",}
 			return FindBest(options, ai)
 		end
 	
@@ -1061,10 +1074,10 @@ local function ZaalUnitLists(tqb, ai, unit)
 		if r <= 6 then
 			return "zlightswarm"
 		elseif r <= 9 then
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro",}
+			local options = {"zlightswarm", "zmedswarm", "zairtoairfighter", "zpyro",}
 			return FindBest(options, ai)
 		else
-			local options = {"zlightswarm", "zairscout", "zmedswarm", "zairtoairfighter", "zpyro", "zairbomber",}
+			local options = {"zlightswarm", "zmedswarm", "zairtoairfighter", "zpyro", "zairbomber", "zskirmisher",}
 			return FindBest(options, ai)
 		end
 		
@@ -1073,7 +1086,7 @@ local function ZaalUnitLists(tqb, ai, unit)
 		if r <= 9 then
 			return "zlightswarm"
 		else
-			local options = {"zlightswarm", "zairscout", "zpyro",}
+			local options = {"zlightswarm", "zpyro",}
 			return FindBest(options, ai)
 		end
 		
@@ -1081,23 +1094,23 @@ local function ZaalUnitLists(tqb, ai, unit)
 end
 
 
-local function ZaalEZMorphIfEnergyIsOK(tqb, ai, unit)
-	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
-	if ec >= es*0.5 then
-		return ezMorph
-	else
-		return skip
-	end
-end
+-- local function ZaalEZMorphIfEnergyIsOK(tqb, ai, unit)
+	-- local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	-- if ec >= es*0.5 then
+		-- return ezMorph
+	-- else
+		-- return skip
+	-- end
+-- end
 
 
 local function ZaalBuild(tqb, ai, unit)
-	local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
-	local r = math.random(0,SpawnerCount + 1)
+	--local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
+	--local r = math.random(0,SpawnerCount + 1)
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
-	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed") or 0
-	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
-	if (ec <= es*0.5 or (su > sm-20 and sm ~= MaximumSupply) and GG.TechCheck("tech1", ai.id) and SpawnerCount >= 3) and r ~= 0 then
+	--local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed") or 0
+	--local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
+	if ec <= es*0.5 and GG.TechCheck("tech1", ai.id) then
 		return "zespire1"
 	else
 		return "zhatch"
