@@ -34,83 +34,86 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local aiStartUnits = {
+	["ecommander"] = {
+		"ecommanderbattleai",
+		"ecommanderbuildai",
+		"ecommandercloakai",
+		"ecommanderfactoryai",
+		"ecommandershieldai",
+		"ecommanderhealerai",
+	},
+	["zarm"] = {
+		"zarm",
+	}
+}
+
+local factionDefComms = {
+	[0] = "ecommander",
+	[1] = "zarm",
+}
+
+local validStartComm = {
+	[UnitDefNames["ecommander"].id] = true,
+	[UnitDefNames["zarm"].id] = true,
+}
+
+local ACCESS_LEVEL = {
+    -- pick one of the two below choose whether enemies can see faction choice
+	private = true,
+    -- public = true,
+}
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local modOptions = Spring.GetModOptions()
- 
+
 function IsTeamAI(teamID)
-	teamID,leader,isDead,isAiTeam=Spring.GetTeamInfo(teamID)
+	_, _, _, isAiTeam=Spring.GetTeamInfo(teamID)
 	return isAiTeam
 end
- 
+
 local function GetStartUnit(teamID)
-        -- get the team startup info
-        local side = select(5, Spring.GetTeamInfo(teamID))
-        local startUnit
-       
-        boolIsAI= IsTeamAI(teamID)
-       
-		if boolIsAI==true then
-			Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
-			local sidedata = Spring.GetSideData(side)
-			if sidedata == nil then
-				Spring.Echo("faction: nil")
-			else
-				Spring.Echo("faction: " .. sidedata)
-			end
-			math.random(); math.random(); math.random()
-			local i = math.random(1,6)
-			local factioncheck = math.random(0,1)
-			--if factioncheck == 0 then
-			if sidedata == "ecommander" then
-				if i == 1 then
-					startUnit = "ecommanderbattleai"
-				elseif i == 2 then
-					startUnit = "ecommanderbuildai"
-				elseif i == 3 then
-					startUnit = "ecommandercloakai"
-				elseif i == 4 then
-					startUnit = "ecommanderfactoryai"
-				elseif i == 5 then
-					startUnit = "ecommandershieldai"
-				else
-					startUnit = "ecommanderhealerai"
-				end
-			elseif sidedata == "zarm" then
-			--elseif factioncheck == 1 then
-				startUnit = "zarm"
-			else
-				if factioncheck == 0 then
-					if i == 1 then
-						startUnit = "ecommanderbattleai"
-					elseif i == 2 then
-						startUnit = "ecommanderbuildai"
-					elseif i == 3 then
-						startUnit = "ecommandercloakai"
-					elseif i == 4 then
-						startUnit = "ecommanderfactoryai"
-					elseif i == 5 then
-						startUnit = "ecommandershieldai"
-					else
-						startUnit = "ecommanderhealerai"
-					end
-				else
-					startUnit = "zarm"
-				end
-			end
-			return startUnit
+	local reqStartUnit = Spring.GetTeamRulesParam(teamID, "startUnit")
+	if reqStartUnit then
+		return UnitDefs[reqStartUnit].name
+	end
+
+	-- get the team startup info
+	local side = select(5, Spring.GetTeamInfo(teamID))
+	local startUnit
+
+	if IsTeamAI(teamID) then
+		Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
+		local sidedata = Spring.GetSideData(side)
+		if sidedata == nil then
+			Spring.Echo("faction: nil")
+		else
+			Spring.Echo("faction: " .. sidedata)
 		end
-       
+
+		math.random(); math.random(); math.random()
+
+		if not sidedata then
+			local factionIndex = math.random(0, 1)
+			sidedata = factionDefComms[factionIndex]
+		end
+
+		local aiCommData = aiStartUnits[sidedata] or {}
+		local aiCommIndex = math.random(1, #aiCommData)
+		startUnit = aiCommData[aiCommIndex]
+	else
 		-- If a side isn't selected, flip a coin
-        if (side == "") then
-            local coinflip = math.random(0,1)
-			if coinflip == 0 then
-				startUnit = "ecommander"
-			elseif coinflip == 1 then
-				startUnit = "zarm"
-			end
-        else
+		if (side == "") then
+			local factionIndex = math.random(0, 1)
+			startUnit = factionDefComms[factionIndex]
+		else
 			startUnit = Spring.GetSideData(side)
 		end
-        return startUnit
+	end
+
+	return startUnit
 end
 
 local function SpawnStartUnit(teamID)
@@ -137,7 +140,7 @@ local function SpawnStartUnit(teamID)
 			and ((x>Game.mapSizeX/2) and "west" or "east")
 			or ((z>Game.mapSizeZ/2) and "north" or "south")
 		local unitID = Spring.CreateUnit(startUnit, x, y, z, facing, teamID)
--- Fun times		
+-- Fun times
 --		if startUnit == "ecommanderai" then
 --			id1=Spring.CreateUnit("eorb", x+100, y+200, z, facing, teamID)
 --			Spring.GiveOrderToUnit(id1,CMD.GUARD,{unitID}, {"shift"})
@@ -167,6 +170,21 @@ local function SpawnStartUnit(teamID)
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", tonumber(e))
 	end
+end
+
+function gadget:RecvLuaMsg(msg, playerID)
+	if msg:find("\138") ~= 1 then
+		return
+	end
+
+	local requestedCommDefID = tonumber(msg:sub(2) or "-1")
+	if not validStartComm[requestedCommDefID] then
+		return
+	end
+
+	local teamID = select(4, Spring.GetPlayerInfo(playerID, false))
+	--Spring.Echo("Setting start unit for team", teamID, " to ", requestedCommDefID)
+	Spring.SetTeamRulesParam(teamID, "startUnit", requestedCommDefID, ACCESS_LEVEL)
 end
 
 

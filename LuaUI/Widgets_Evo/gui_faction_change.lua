@@ -86,20 +86,20 @@ local function DrawRectRound(px,py,sx,sy,cs)
 	gl.Vertex(sx-cs, py, 0)
 	gl.Vertex(sx-cs, sy, 0)
 	gl.Vertex(px+cs, sy, 0)
-	
+
 	gl.Vertex(px, py+cs, 0)
 	gl.Vertex(px+cs, py+cs, 0)
 	gl.Vertex(px+cs, sy-cs, 0)
 	gl.Vertex(px, sy-cs, 0)
-	
+
 	gl.Vertex(sx, py+cs, 0)
 	gl.Vertex(sx-cs, py+cs, 0)
 	gl.Vertex(sx-cs, sy-cs, 0)
 	gl.Vertex(sx, sy-cs, 0)
-	
+
 	local offset = 0.05		-- texture offset, because else gaps could show
 	local o = offset
-	
+
 	-- top left
 	--if py <= 0 or px <= 0 then o = 0.5 else o = offset end
 	gl.TexCoord(o,o)
@@ -144,7 +144,7 @@ end
 
 function RectRound(px,py,sx,sy,cs)
 	local px,py,sx,sy,cs = math.floor(px),math.floor(py),math.ceil(sx),math.ceil(sy),math.floor(cs)
-	
+
 	gl.Texture(bgcorner)
 	gl.BeginEnd(GL.QUADS, DrawRectRound, px,py,sx,sy,cs)
 	gl.Texture(false)
@@ -217,13 +217,13 @@ function widget:DrawScreen()
 	--call list
 	if factionChangeList then
 		glCallList(factionChangeList)
-	else 
+	else
 		factionChangeList = glCreateList(GenerateFactionChangeList)
 		updateGuishader()
 	end
 	glPopMatrix()
 
-	
+
 end
 
 function widget:ViewResize(n_vsx,n_vsy)
@@ -244,7 +244,7 @@ function GenerateFactionChangeList()
 	glColor(1, 1, 1, 0.025)
 	RectRound(2*widgetScale, 2*widgetScale, 126*widgetScale, 78*widgetScale, 5*widgetScale)
 
-	
+
 		-- Highlight
 	glColor(0.8, 0.8, 0.8, 0.3)
 	if commanderDefID == aterancomDefID then
@@ -259,7 +259,7 @@ function GenerateFactionChangeList()
 	glTexture('LuaUI/Images/zarm.png')
 	glTexRect(76*widgetScale, 20*widgetScale, 116*widgetScale, 60*widgetScale)
 	glTexture(false)
-	
+
 		-- Text
 	font:Begin()
 	font:Print('Choose Your Faction', 64*widgetScale, 64*widgetScale, 11.5*widgetScale, 'ocd')
@@ -294,12 +294,12 @@ function widget:MousePress(mx, my, mButton)
 			if newCom then
 				commanderDefID = newCom
 				-- tell initial_spawn
-				spSendLuaRulesMsg('\138' .. tostring(commanderDefID)) 
+				spSendLuaRulesMsg("\138" .. tostring(commanderDefID))
 				-- tell initial_queue
-				if WG["faction_change"] then 
+				if WG["faction_change"] then
 					WG["faction_change"](commanderDefID)
 				end
-				
+
 				--Remake gui
 				if factionChangeList then
 					glDeleteList(factionChangeList)
@@ -309,7 +309,7 @@ function widget:MousePress(mx, my, mButton)
 
 				return true
 			end
-			
+
 		elseif (mButton == 2 or mButton == 3) and mx < px + (128*widgetScale) then
 			-- Dragging
 			return true
