@@ -492,19 +492,19 @@ function loadWindow()
 	if WG.BarMenu then
 		WG.BarMenu.AddControl('Graph', control0)
 	else
-		Chili.Button:New{
-			parent = control0,
-			caption = 'Quit',
-			right = 0,
-			y = 0,
-			width = 50,
-			height = 25,
-			OnMouseUp = {
-				function()
-					Spring.SendCommands{'QuitForce'}
-				end
-			},
-		}
+		-- Chili.Button:New{
+			-- parent = control0,
+			-- caption = 'Quit',
+			-- right = 0,
+			-- y = 0,
+			-- width = 50,
+			-- height = 25,
+			-- OnMouseUp = {
+				-- function()
+					-- Spring.SendCommands{'QuitForce'}
+				-- end
+			-- },
+		-- }
 		Chili.Window:New{
 			parent    = Chili.Screen0,
 			x         = '20%',
