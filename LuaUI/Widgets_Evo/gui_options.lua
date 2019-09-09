@@ -36,7 +36,7 @@ local selecthoverclick = 'LuaUI/Sounds/hover.wav'
 local toggleonclick = 'LuaUI/Sounds/switchon.wav'
 local toggleoffclick = 'LuaUI/Sounds/switchoff.wav'
 
-local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "ComicSans.ttf")
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "JosefinSans-SemiBold.ttf")
 local vsx,vsy = Spring.GetViewGeometry()
 local fontfileScale = (0.5 + (vsx*vsy / 5700000))
 local fontfileSize = 25
@@ -44,7 +44,7 @@ local fontfileOutlineSize = 6
 local fontfileOutlineStrength = 1.4
 local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 local fontfileScale2 = fontfileScale * 1.2
-local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "ComicSans-Bold.ttf")
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "JosefinSans-Bold.ttf")
 local font2 = gl.LoadFont(fontfile2, fontfileSize*fontfileScale2, fontfileOutlineSize*fontfileScale2, fontfileOutlineStrength)
 
 local bgcorner = "LuaUI/Images/bgcorner.png"
@@ -2475,12 +2475,12 @@ function init()
 
 		options[getOptionByID('font')].options = fonts
 		options[getOptionByID('font')].optionsFont = fontsFull
-		local fname = Spring.GetConfigString("ui_font", "ComicSans.ttf"):lower()
+		local fname = Spring.GetConfigString("ui_font", "JosefinSans-SemiBold.ttf"):lower()
 		options[getOptionByID('font')].value = getSelectKey(getOptionByID('font'), string.sub(fname, 1, string.len(fname) - 4))
 
 		options[getOptionByID('font2')].options = fonts
 		options[getOptionByID('font2')].optionsFont = fontsFull
-		local fname = Spring.GetConfigString("ui_font2", "ComicSans-Bold.ttf"):lower()
+		local fname = Spring.GetConfigString("ui_font2", "JosefinSans-Bold.ttf"):lower()
 		options[getOptionByID('font2')].value = getSelectKey(getOptionByID('font2'), string.sub(fname, 1, string.len(fname) - 4))
 	end
 

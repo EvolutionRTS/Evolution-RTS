@@ -74,7 +74,7 @@ unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "Artilleryweapon",
-			badTargetCategory    = "VTOL",
+			onlyTargetCategory    = "BUILDING",
 		},
 		-- [2]                      = {
 			-- def                  = "SaturationArtilleryweapon",
@@ -124,13 +124,13 @@ weaponDefs                 = {
 		rgbcolor 				 = "0.1 0.6 1",
 		size 					 = 16,
 		weaponType		         = "Cannon",
-		soundHit                 = "explosions/artyhit.wav",
-		soundStart               = "weapons/arty2.wav",
+		--soundHit                 = "explosions/artyhit.wav",
+		--soundStart               = "weapons/arty2.wav",
 		
 		turret                   = true,
 		weaponVelocity           = 500,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "zarty",
 			nofriendlyfire	     = 1,
 		},  
 		damage                   = {

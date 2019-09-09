@@ -57,7 +57,7 @@ unitDef                    = {
 	unitname                     = unitName,
 	upright                      = true,
 	yardmap 					 = "oooooo oooooo oooooo oooooo oooooo oooooo",
-	workerTime                   = 1,
+	workerTime                   = 1.5,
 	TerraformSpeed               = 2147000,
 	usePieceCollisionVolumes	 = true,
 	sfxtypes                     = { 
@@ -121,8 +121,8 @@ weaponDefs                  = {
 		name 						= "Missiles",
 		noselfdamage 				= true,
 		proximitypriority 			= 3,
-		range 						= 1000,
-		reloadtime 					= 1,
+		range 						= 2500,
+		reloadtime 					= 2.5,
 		smoketrail 					= false,
 		soundhit 					= "ChickenDefenseSounds/e25",
 		startvelocity 				= 200,
@@ -133,13 +133,13 @@ weaponDefs                  = {
 		waterweapon 				= true,
 		weaponacceleration 			= 200,
 		weapontype 					= "MissileLauncher",
-		weaponvelocity 				= 1250,
+		weaponvelocity 				= 2500,
 		customparams             = {
 			damagetype		     = "default",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
-			default = 150,
+			default = 1000,
 		},
 	},
 }

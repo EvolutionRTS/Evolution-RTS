@@ -308,7 +308,35 @@ local damageClasses = {
 			BUILDING 	= 0,
 		},
 		-- End Buildings
-			
+		
+		-- Start Zaal
+		zlightswarm	= {
+			ARMORED		= 0.5,
+			LIGHT		= 1,
+			BUILDING 	= 0.5,
+		},
+		zmedswarm	= {
+			ARMORED		= 1,
+			LIGHT		= 0.5,
+			BUILDING 	= 0.5,
+		},			
+		zskirmisher	= {
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 1,
+		},
+		zpyro	= {
+			ARMORED		= 0,
+			LIGHT		= 0,
+			BUILDING 	= 1,
+		},
+		zarty	= {
+			ARMORED		= 0,
+			LIGHT		= 0,
+			BUILDING 	= 1,
+		},
+		-- End Zaal
+		
 		-- Start Miscellaneous
 		queenbeam	= {
 			ARMORED		= 0.1,
