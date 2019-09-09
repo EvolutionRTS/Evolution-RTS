@@ -11,7 +11,7 @@ buildSpeedModifier = 1
 
 metalMultiplier = 1
 
-buildCostMetal = 75
+buildCostMetal = 50
 energyUse = 0
 energyMake = 0
 

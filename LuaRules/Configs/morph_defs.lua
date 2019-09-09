@@ -1250,7 +1250,7 @@ Evolution]],
 			text = 'Evolve into a Lair.',
 		},
 	},	
-	zlair = 	{
+	zhatch_up1 = 	{
 		{
 			into = 'zhatch_up2',
 			time = timeToBuild_zhive,
