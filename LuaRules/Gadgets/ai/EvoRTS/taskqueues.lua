@@ -1027,7 +1027,7 @@ end
 ------------------------------------------------- ZAAAAAAAAAAAAAALS
 function GetZaalSpawners(tqb,ai,unit)
 	local list = {
-	UDN.zhatch.id, UDN.zlair.id, UDN.zhive.id
+	UDN.zhatch.id, UDN.zhatch_up1.id, UDN.zhatch_up2.id
 	}
 	local units = Spring.GetTeamUnitsByDefs(ai.id, list)
 	return #units
@@ -1163,9 +1163,9 @@ taskqueues = {
 	ebasefactory_up2 = HoverFactoryQueueUP2, 
 	ebasefactory_up3 = HoverFactoryQueueUP3,
 	zarm = ZaalArm,
-	zhive = ZaalHive3,
+	zhatch_up1 = ZaalHive3,
 	zhatch = ZaalHive1,
-	zlair = ZaalHive2,
+	zhatch_up2 = ZaalHive2,
 	zespire1 = ZaalEspire,
 	zespire4 = ZaalEspire,
 }

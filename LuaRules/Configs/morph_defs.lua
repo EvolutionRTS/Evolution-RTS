@@ -1241,7 +1241,7 @@ Evolution]],
 	
 	zhatch = 	{
 		{
-			into = 'zlair',
+			into = 'zhatch_up1',
 			time = timeToBuild_zlair,
 			cmdname = [[Lair
 Evolution]],
@@ -1252,7 +1252,7 @@ Evolution]],
 	},	
 	zlair = 	{
 		{
-			into = 'zhive',
+			into = 'zhatch_up2',
 			time = timeToBuild_zhive,
 			cmdname = [[Hive
 Evolution]],
