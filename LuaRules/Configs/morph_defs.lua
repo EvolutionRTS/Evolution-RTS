@@ -54,10 +54,10 @@ local energyCost_etech3 = 4000
 local timeToBuild_etech3 = energyCost_etech3 * 0.10
 
 local energyCost_zlair = 0
-local timeToBuild_zlair = 50
+local timeToBuild_zlair = 200
 
 local energyCost_zhive = 0
-local timeToBuild_zhive = 300
+local timeToBuild_zhive = 500
 
 local energyCost_zespire4 = 0
 local timeToBuild_zespire4 = 40
