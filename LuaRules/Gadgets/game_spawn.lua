@@ -87,18 +87,12 @@ local function GetStartUnit(teamID)
 	if IsTeamAI(teamID) then
 		Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
 		--local factionrandom = math.random(0,1)
+		math.random(); math.random(); math.random()
 		local sidedata = factionDefComms[math.random(0,1)]
 		if sidedata == nil then
 			Spring.Echo("faction: nil")
 		else
 			Spring.Echo("faction: " .. sidedata)
-		end
-
-		math.random(); math.random(); math.random()
-
-		if not sidedata then
-			local factionIndex = math.random(0, 1)
-			sidedata = factionDefComms[factionIndex]
 		end
 
 		local aiCommData = aiStartUnits[sidedata] or {}
@@ -122,7 +116,7 @@ local function SpawnStartUnit(teamID)
 	if (startUnit and startUnit ~= "") then
 		-- spawn the specified start unit
 		local x,y,z = Spring.GetTeamStartPosition(teamID)
-		if boolIsAI==true then
+		if IsTeamAI(teamID) then
 			local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
 			local startBoxXmin, startBoxZmin, startBoxXmax, startBoxZmax = Spring.GetAllyTeamStartBox(allyID)
 			local mx = Game.mapSizeX
