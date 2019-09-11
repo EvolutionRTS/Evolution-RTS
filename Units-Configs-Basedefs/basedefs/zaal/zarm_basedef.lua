@@ -8,10 +8,10 @@ unitDef                    = {
 	buildpic					 = "zaal_unitpics/zarm.png",
 	blocking					 = true,
 	CanAttack			         = true,
-	CanAssist			         = false,
+	CanAssist			         = true,
 	canBeAssisted                = false,
 	CanCapture                   = false,
-	CanRepair			         = false,
+	CanRepair			         = true,
 	canRestore					 = false,
 	cantBeTransported			 = true,
 	canGuard                     = false,
@@ -76,7 +76,7 @@ unitDef                    = {
 			"ack",
 		},
 		select                   = {
-			"unitselect",
+			"BugSelect",
 		},
 	},
 	weapons                       = {

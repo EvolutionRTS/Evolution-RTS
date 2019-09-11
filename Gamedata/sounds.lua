@@ -23,7 +23,7 @@ local Sounds = {
 			in3d = true,
 			maxconcurrent = 1,
 		},
-		buildmechanical = {
+		buildmechanical1 = {
 			--- new since 89.0
 			--- you can overwrite the fallback profile here (used when no corresponding SoundItem is defined for a sound)
 			file = "sounds/miscfx/buildstart-nano.wav",
@@ -119,6 +119,13 @@ local Sounds = {
 		UnitSelect = {
 			--- always play on the front speaker(s)
 			file = "sounds/miscfx/unitselect.wav",
+			in3d = true,
+			maxconcurrent = 1,
+		},
+		
+		BugSelect = {
+			--- always play on the front speaker(s)
+			file = "sounds/ui/zaal/bugselect.wav",
 			in3d = true,
 			maxconcurrent = 1,
 		},

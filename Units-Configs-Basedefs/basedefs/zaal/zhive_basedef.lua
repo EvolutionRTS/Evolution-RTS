@@ -63,7 +63,7 @@ unitDef                     = {
 	sounds                        = {
 		underattack               = "other/unitsunderattack1",
 		select                    = {
-			"other/gdfactoryselect",
+			"BugSelect",
 		},
 	},
 	weapons                       = {
