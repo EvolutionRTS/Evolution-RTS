@@ -16,7 +16,7 @@ local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2"
 --//
 
 skin.general = {
-  font        = fontfile2,
+  font        = "JosefinSans-SemiBold.ttf",
   fontsize    = 13,
   textColor   = {1.0, 1.0, 1.0, 1.0},
   focusColor   = {0.35, 0.35, 1.0, 0.9},

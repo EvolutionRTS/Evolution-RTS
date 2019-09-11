@@ -20,6 +20,10 @@
 -- @int[opt=1e9] maxWidth maximum width
 -- @int[opt=1e9] maxHeight maximum height
 -- @tparam {func1,fun2,...} OnResize table of function listeners for size changes, (default {})
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "JosefinSans-SemiBold.ttf")
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "JosefinSans-Bold.ttf")
+
 Control = Object:Inherit{
   classname       = 'control',
   padding         = {5, 5, 5, 5},
@@ -50,7 +54,7 @@ Control = Object:Inherit{
   tooltip         = nil, --// JUST TEXT
 
   font = {
-    font          = "FreeSansBold.otf",
+    font          = fontfile2,
     size          = 14,
     shadow        = false,
     outline       = false,

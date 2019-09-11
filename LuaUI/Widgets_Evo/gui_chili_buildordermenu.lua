@@ -91,8 +91,8 @@ if buildOrderUI == 0 or buildOrderUI == nil then
 		},
 		buildmenu = {
 			name = 'buildmenu',
-			rows = 2, columns = 10,
-			x = '21.2%', y = '66%',
+			rows = 3, columns = 10,
+			x = '21.2%', y = '57.5%',
 			width = '60%', height = '20%',
 			orientation = 'horizontal',
 			--maxWidth = 420,
@@ -146,17 +146,17 @@ if buildOrderUI == 2 then
 	Config = {
 		ordermenu = {
 			name = 'ordermenu',
-			rows = 13, columns = 2,
-			x = '0%', y = '35%',
-			width = '50%', height = '50%',
+			rows = 4, columns = 4,
+			x = '0%', y = '24%',
+			width = '50%', height = '25%',
 			orientation = 'horizontal',
 			maxWidth = 390,
 			padding = {5, 5, 5, 5},     -- outer panel
 		},
 		buildmenu = {
 			name = 'buildmenu',
-			rows = 7, columns = 5,
-			x = '21%', y = '35%',
+			rows = 5, columns = 5,
+			x = '0%', y = '50%',
 			width = '50%', height = '50%',
 			orientation = 'horizontal',
 			maxWidth = 390,
@@ -188,7 +188,7 @@ if buildOrderUI == 3 then
 		buildmenu = {
 			name = 'buildmenu',
 			rows = 7, columns = 5,
-			x = '79.75%', y = '35%',
+			x = '21%', y = '35%',
 			width = '50%', height = '50%',
 			orientation = 'horizontal',
 			maxWidth = 390,
@@ -207,6 +207,38 @@ if buildOrderUI == 3 then
 end
 
 if buildOrderUI == 4 then
+	Config = {
+		ordermenu = {
+			name = 'ordermenu',
+			rows = 13, columns = 2,
+			x = '0%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},     -- outer panel
+		},
+		buildmenu = {
+			name = 'buildmenu',
+			rows = 7, columns = 5,
+			x = '79.75%', y = '35%',
+			width = '50%', height = '50%',
+			orientation = 'horizontal',
+			maxWidth = 390,
+			padding = {5, 5, 5, 5},
+		},
+		labels = {
+			captionFontMaxSize = fontSize,
+			queueFontSize = fontSize, --32 (MaDDoX)
+			costFontSize = fontSize,
+		},
+		hiddenCMDs = {
+			timewait = true, deathwait = true, squadwait = true, gatherwait = true,
+			loadonto = true, selfd = false, settargetnoground = true,
+		},
+	}
+end
+
+if buildOrderUI == 5 then
 	Config = {
 		ordermenu = {
 			name = 'ordermenu',

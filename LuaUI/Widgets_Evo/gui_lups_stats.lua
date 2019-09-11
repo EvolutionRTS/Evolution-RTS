@@ -42,7 +42,7 @@ local yposf  = 0.010
 local ypos   = yposf * vsy + 40
 local sizef  = 0.015
 local size   = sizef * vsy
-local font   = "LuaUI/Fonts/FreeSansBold_14"
+local font   = "LuaUI/Fonts/JosefinSans-SemiBold(OTF)"
 local format = "orn"
 
 local fh = (font ~= nil)

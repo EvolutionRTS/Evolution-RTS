@@ -12,13 +12,13 @@ if addon.InGetInfo then
 	}
 end
 
-local defaultFont = 'ComicSans.ttf'
+local defaultFont = 'JosefinSans-SemiBold.ttf'
 local fontfile = 'luaui/fonts/'..Spring.GetConfigString("ui_font", defaultFont)
 if not VFS.FileExists(fontfile) then
 	Spring.SetConfigString('ui_font', defaultFont)
 	fontfile = 'luaui/fonts/'..defaultFont
 end
-local defaultFont2 = 'ComicSans-Bold.ttf'
+local defaultFont2 = 'JosefinSans-Bold.ttf'
 local fontfile2 = 'luaui/fonts/'..Spring.GetConfigString("ui_font2", defaultFont2)
 if not VFS.FileExists(fontfile2) then
 	Spring.SetConfigString('ui_font2', defaultFont2)
@@ -123,7 +123,7 @@ elseif k%3 == 2 then
 end
 
 local loadedFontSize = 70
-local font = gl.LoadFont("FreeSansBold.otf", 70, 22, 1.15)
+local font = gl.LoadFont(fontfile, 70, 22, 1.15)
 
 local engineVersion = 100 -- just filled this in here incorrectly but old engines arent used anyway
 if Engine and Engine.version then

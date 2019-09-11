@@ -2338,7 +2338,7 @@ function init()
 		{id="lockcamera_los", group="control", name=widgetOptionColor.."   show tracked player LoS", type="bool", value=(WG['advplayerlist_api']~=nil and WG['advplayerlist_api'].GetLockLos()), description="When viewing a players camera and los, shows shaded los ranges too"},
 
 		-- UI
-		{id="buildordermenu", group="ui", name="Build Menu Preset", type="select", options={'Horizontal','Compact Horizontal','Traditional','Right Side','Right Side Compact'}, value=Spring.GetConfigInt("evo_buildorderui",0) + 1, description='Use these presets to change the build menu size and position.\nBuild and Order menus can further be custom positioned using TweakMode (ctrl+f11)\n\nNOTE: Changing this setting will cause the interface to be reloaded'},
+		{id="buildordermenu", group="ui", name="Build Menu Preset", type="select", options={'Horizontal','Compact Horizontal','Traditional', 'Traditional (SxS)','Right Side','Right Side Compact'}, value=Spring.GetConfigInt("evo_buildorderui",0) + 1, description='Use these presets to change the build menu size and position.\nBuild and Order menus can further be custom positioned using TweakMode (ctrl+f11)\n\nNOTE: Changing this setting will cause the interface to be reloaded'},
 		{id="showcost", group="ui", name="Show Cost", type="bool", value=Spring.GetConfigInt("evo_showcost",1) == 1, description='Show cost of units in the build icon'},
 		{id="showtechreq", group="ui", name="Show Tech Requirement", type="bool", value=Spring.GetConfigInt("evo_showtechreq",1) == 1, description='Show tech requirement of units in the build icon'},
 		{id="showhotkeys", group="ui", name="Show Build Hotkeys", type="bool", value=Spring.GetConfigInt("evo_showhotkeys",1) == 1, description='Show build hotkeys in the build icon'},

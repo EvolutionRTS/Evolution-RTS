@@ -13,10 +13,14 @@
 -- @tparam {r,g,b,a} color color table (default {1,1,1,1})
 -- @tparam {r,g,b,a} outlineColor outlineColor table (default {0,0,0,1})
 -- @bool[opt=true] autoOutlineColor ??
+
+local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", "JosefinSans-SemiBold.ttf")
+local fontfile2 = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "JosefinSans-Bold.ttf")
+
 Font = Object:Inherit{
   classname     = 'font',
 
-  font          = "FreeSansBold.otf",
+  font          = fontfile,
   size          = 12,
   outlineWidth  = 3,
   outlineWeight = 3,
