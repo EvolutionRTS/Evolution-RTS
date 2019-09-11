@@ -1040,9 +1040,10 @@ end
 
 local function ZaalUnitLists(tqb, ai, unit)
 	local r = math.random(0,10)
+	local r2 = math.random(0,5)
 	local scouts = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zairscout.id)
 	
-	if scouts < 3 then
+	if scouts < r2 then
 		return "zairscout"
 	end
 	
@@ -1077,7 +1078,7 @@ local function ZaalUnitLists(tqb, ai, unit)
 		if r <= 9 then
 			return "zlightswarm"
 		else
-			local options = {"zlightswarm", "zpyro",}
+			local options = {"zlightswarm", "zpyro", "zmedswarm",}
 			return FindBest(options, ai)
 		end
 		
