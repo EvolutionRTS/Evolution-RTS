@@ -1163,9 +1163,9 @@ taskqueues = {
 	ebasefactory_up2 = HoverFactoryQueueUP2, 
 	ebasefactory_up3 = HoverFactoryQueueUP3,
 	zarm = ZaalArm,
-	zhatch_up1 = ZaalHive3,
+	zhatch_up2 = ZaalHive3,
 	zhatch = ZaalHive1,
-	zhatch_up2 = ZaalHive2,
+	zhatch_up1 = ZaalHive2,
 	zespire1 = ZaalEspire,
 	zespire4 = ZaalEspire,
 }
