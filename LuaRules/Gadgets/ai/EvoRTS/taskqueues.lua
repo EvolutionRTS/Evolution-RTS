@@ -1104,7 +1104,7 @@ local function ZaalBuild(tqb, ai, unit)
 	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
 	if ec <= es*0.5 and GG.TechCheck("tech1", ai.id) then
 		return "zespire1"
-	elseif su < sm - 20 and sm ~= MaximumSupply then
+	elseif su > sm - 20 and sm ~= MaximumSupply then
 		return "ztiberium"
 	else
 		return "zhatch"
