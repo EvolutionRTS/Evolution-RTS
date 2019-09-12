@@ -1,24 +1,22 @@
--- UNITDEF -- zmedswarm --
+-- UNITDEF -- ztiberium --
 --------------------------------------------------------------------------------
 
-unitName = "zmedswarm"
+unitName = "ztiberium"
 
 --------------------------------------------------------------------------------
+supplygranted = 10
+storage = 25
 
-isUpgraded	= [[0]]
+humanName = "Basic Energy Spire"
 
-humanName = "Roach"
+objectName = "zaal/ztiberium.s3o"
+script = "zaal/ztiberium.cob"
 
-objectName = "zaal/zmedswarm.s3o"
-script = "zaal/zmedswarm.cob"
+armortype = [[building]]
+tech = [[tech0]]
 
-tech = [[tech1]]
-armortype = [[light]]
-supply = [[4]]
-
-VFS.Include("units-configs-basedefs/basedefs/zaal/zmedswarm_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/zaal/ztiberium_basedef.lua")
 	
-unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName]    = unitDef })

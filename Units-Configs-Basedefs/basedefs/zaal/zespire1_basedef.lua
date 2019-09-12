@@ -1,7 +1,7 @@
 unitDef                    = {
 
 	buildCostEnergy              = 0,
-	buildCostMetal               = 25,
+	buildCostMetal               = 100,
 	buildDistance                = buildDistance,
 	builder                      = false,
 	buildTime                    = 5,
@@ -24,7 +24,7 @@ unitDef                    = {
 	levelground                  = true,
 	maxDamage                    = 500,
 	maxSlope                     = 90,
-	maxWaterDepth                = 5000,
+	maxWaterDepth                 = 99999999999,
 	metalmake                    = 0,
 	metalStorage                 = 0,
 	name                         = humanName,

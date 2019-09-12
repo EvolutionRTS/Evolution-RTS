@@ -74,6 +74,7 @@ unitDef                     = {
 		unittype				  = "building",
 		metal_extractor			  = metalMultiplier,
 		supply_granted            = supplygranted,
+		noenergycost			  = true,
 		iseco                     = 1,
 		death_sounds              = "bug",
 		armortype                 = "building", 

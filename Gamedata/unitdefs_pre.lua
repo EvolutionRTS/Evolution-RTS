@@ -73,6 +73,7 @@ Shared.buildListZaal = {
 Shared.buildListZaalArm = {
 	[[zhatch]],
 	[[zespire1]],
+	[[ztiberium]],
 }
 	
 local turrets = {

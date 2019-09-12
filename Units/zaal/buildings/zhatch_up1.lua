@@ -14,10 +14,10 @@ buildCostMetal = 400
 energyUse = 0
 energyMake = 0
 
-metalStorage = 100
-energyStorage = 100
+metalStorage = 0
+energyStorage = 0
 
-supplygranted = 20
+supplygranted = 0
 
 footprintX = 8
 footprintZ = 8

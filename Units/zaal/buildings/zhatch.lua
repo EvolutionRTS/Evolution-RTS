@@ -11,14 +11,14 @@ buildSpeedModifier = 1
 
 metalMultiplier = 1
 
-buildCostMetal = 50
+buildCostMetal = 150
 energyUse = 0
 energyMake = 0
 
-metalStorage = 50
-energyStorage = 50
+metalStorage = 0
+energyStorage = 0
 
-supplygranted = 10
+supplygranted = 0
 
 footprintX = 8
 footprintZ = 8

@@ -14,7 +14,7 @@ script = "zaal/zlightswarm.cob"
 
 tech = [[tech1]]
 armortype = [[light]]
-supply = [[1]]
+supply = [[2]]
 
 VFS.Include("units-configs-basedefs/basedefs/zaal/zlightswarm_basedef.lua")
 	
