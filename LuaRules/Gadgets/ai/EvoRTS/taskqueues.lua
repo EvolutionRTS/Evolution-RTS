@@ -1100,10 +1100,12 @@ local function ZaalBuild(tqb, ai, unit)
 	--local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
 	--local r = math.random(0,SpawnerCount + 1)
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
-	--local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed") or 0
-	--local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
+	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed") or 0
+	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
 	if ec <= es*0.5 and GG.TechCheck("tech1", ai.id) then
 		return "zespire1"
+	elseif su < sm - 20 and sm ~= MaximumSupply then
+		return "ztiberium"
 	else
 		return "zhatch"
 	end
