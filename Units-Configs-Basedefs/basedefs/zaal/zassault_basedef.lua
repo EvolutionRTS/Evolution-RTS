@@ -24,7 +24,7 @@ unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	leaveTracks                  = false,
-	maxDamage                    = 1500,
+	maxDamage                    = 1750,
 	maxSlope                     = 26,
 	maxVelocity                  = 2.5,
 	maxReverseVelocity           = 1,
@@ -128,7 +128,7 @@ weaponDefs = {
 		turret                   = true,
 		weaponVelocity           = 2000,
 		customparams             = {
-			damagetype		     = "zpyro",  
+			damagetype		     = "zassault",  
 		}, 
 		damage                   = {
 			default              = 1500,

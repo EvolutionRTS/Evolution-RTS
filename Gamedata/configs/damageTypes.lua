@@ -335,6 +335,11 @@ local damageClasses = {
 			LIGHT		= 0,
 			BUILDING 	= 1,
 		},
+		zassault	= {
+			ARMORED		= 1,
+			LIGHT		= 1,
+			BUILDING 	= 1,
+		},
 		-- End Zaal
 		
 		-- Start Miscellaneous
