@@ -1040,7 +1040,7 @@ end
 
 local function ZaalUnitLists(tqb, ai, unit)
 	local r = math.random(0,10)
-	local r2 = math.random(0,5)
+	local r2 = math.random(0,3)
 	local scouts = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.zairscout.id)
 	
 	if scouts < r2 then
