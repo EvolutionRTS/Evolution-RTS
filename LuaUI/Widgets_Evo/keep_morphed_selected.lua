@@ -44,6 +44,8 @@ function widget:GameFrame(frameNum)
 			if c.x==d.x and c.z==d.z and c.t==d.t then
 				for i = 1, #d.queue do
 					for k, v in pairs(d.queue[i]) do
+						for _ = 1, v do Spring.GiveOrderToUnit(c.u, -UnitDefs[k].id, {}, 0) end
+						
 						local oldName = UnitDefs[k].name
 						local newName = oldName .. "_up1"
 						if oldName:find("_up1") then newName = oldName:gsub("_up1", "_up2")
