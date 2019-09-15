@@ -1,8 +1,8 @@
 unitDef                    = {
 
 	buildCostEnergy              = 0,
-	buildCostMetal               = 100,
-	buildDistance                = buildDistance,
+	buildCostMetal               = buildCostMetal,
+	buildDistance                = 0,
 	builder                      = false,
 	buildTime                    = 5,
 	buildpic					 = "zaal_unitpics/zespire1.png",

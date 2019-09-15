@@ -7,11 +7,10 @@ unitName = [[zhatch]]
 
 builder = true
 
+metalMultiplier = 1
 buildSpeedModifier = 1
 
-metalMultiplier = 1
-
-buildCostMetal = 150
+buildCostMetal = 50
 energyUse = 0
 energyMake = 0
 
@@ -22,7 +21,6 @@ supplygranted = 0
 
 footprintX = 8
 footprintZ = 8
-
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 
