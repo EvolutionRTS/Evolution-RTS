@@ -324,6 +324,12 @@ local icontypes = {
 	radiusadjust=0
   },
   
+  zpyro = {
+	bitmap='icons/z/zpyro.png',
+	size=3,
+	radiusadjust=0
+  },
+  
   zarty = {
 	bitmap='icons/z/zarty.png',
 	size=3.5,
