@@ -130,6 +130,7 @@ weaponDefs = {
 		weaponVelocity           = 2000,
 		customparams             = {
 			damagetype		     = "zlightswarm",  
+			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {
 			default              = 50,

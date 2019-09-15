@@ -39,7 +39,7 @@ unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "BUG_DEATH_MEDIUM",
 	side                         = "CORE",
-	sightDistance                = 500,
+	sightDistance                = 450,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -114,7 +114,7 @@ weaponDefs = {
 		
 		minintensity             = "1",
 		name                     = "Laser",
-		range                    = 500,
+		range                    = 450,
 		reloadtime               = 2,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "0.5 1 0.5",
@@ -129,9 +129,10 @@ weaponDefs = {
 		weaponVelocity           = 2000,
 		customparams             = {
 			damagetype		     = "skirmisher",  
+			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {
-			default              = 400,
+			default              = 300,
 		},
 	},
 }

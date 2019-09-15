@@ -129,6 +129,7 @@ weaponDefs = {
 		weaponVelocity           = 2000,
 		customparams             = {
 			damagetype		     = "zassault",  
+			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {
 			default              = 1500,
