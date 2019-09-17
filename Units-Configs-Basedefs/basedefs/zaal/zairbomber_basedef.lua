@@ -71,7 +71,7 @@ unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			badtargetcategory = "VTOL",
+			onlytargetcategory = "BUILDING",
 			def = "WEAPON",
 		},
 	},
