@@ -44,6 +44,7 @@ unitDef                    = {
 	--movementClass                = "ZAALKBOT6",
 	moveState			         = 2,
 	name                         = humanName,
+	noChaseCategory              = "VTOL LIGHT ARMORED BUILDING",
 	objectName                   = objectName,
 	script			             = script,
 	radarDistance                = 0,
