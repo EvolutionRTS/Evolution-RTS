@@ -75,6 +75,10 @@ local function GetColor(i, teams)
 			
 			color1 = math.random(0,239) + math.random(0,100) - math.random(0,100)
 			
+			if color1 > 239 then
+				color1 = color1 - 239
+			end
+			
 			local h = color1/239
 			local s = math.random(50,100)/100
 			local l = math.random(40,85)/100
@@ -87,8 +91,8 @@ local function GetColor(i, teams)
 			
 			color2 = color1 + 119 + math.random(0,100) - math.random(0,100)
 			
-			if color2 > 1 then
-				color2 = color2 - 1
+			if color2 > 239 then
+				color2 = color2 - 239
 			end
 			
 			local h = color2/239
