@@ -57,9 +57,50 @@ local function hslToRgb(h, s, l)
 end
 
 local function GetColor(i, teams)
-	local s = 1
-	local l = 0.53
 	local h = 0
+	local s = 1
+	local l = 0.5
+	local r,g,b = 0,0,0
+	local hueteams = teams
+	local useHueRGB = true
+	
+	-- duel
+	math.randomseed( os.time() )
+	math.random()
+	math.random()
+	math.random()
+	if teams == 2 then
+		
+		if i == 1 then
+			
+			color1 = math.random(0,239) + math.random(0,100) - math.random(0,100)
+			
+			local h = color1/239
+			local s = math.random(50,100)/100
+			local l = math.random(40,85)/100
+			
+			r,g,b = hslToRgb(h, s, l)
+			useHueRGB = false
+		end
+		
+		if i == 2 then
+			
+			color2 = color1 + 119 + math.random(0,100) - math.random(0,100)
+			
+			if color2 > 1 then
+				color2 = color2 - 1
+			end
+			
+			local h = color2/239
+			local s = math.random(50,100)/100
+			local l = math.random(40,85)/100
+			
+			r,g,b = hslToRgb(h, s, l)
+			useHueRGB = false
+		end
+		
+	end
+		
 	--if i > (teams * 0.33) then l = 0.7 end
 	--if i > (teams * 0.66) then l = 0.3 end
 	if teams > 16 then
@@ -93,31 +134,28 @@ local function GetColor(i, teams)
 			end
 		end
 	end
-	
-	local r,g,b = 0,0,0
-	local hueteams = teams
-	local useHueRGB = true
-	if teams > 7 then
-		hueteams = hueteams - 1
-		if i == teams then
-			r,g,b = 0.5, 0.5, 0.5
-			useHueRGB = false
-		end
-	end
-	if teams > 11 then
-		hueteams = hueteams - 1
-	 	if i == teams-1 then
-			r,g,b = 0.9, 0.9, 0.9
-			useHueRGB = false
-		end
-	end
-	if teams > 19 then
-		hueteams = hueteams - 1
-		if i == teams-2 then
-			r,g,b = 0.15, 0.15, 0.15
-			useHueRGB = false
-		end
-	end
+
+	-- if teams > 7 then
+		-- hueteams = hueteams - 1
+		-- if i == teams then
+			-- r,g,b = 0.5, 0.5, 0.5
+			-- useHueRGB = false
+		-- end
+	-- end
+	-- if teams > 11 then
+		-- hueteams = hueteams - 1
+	 	-- if i == teams-1 then
+			-- r,g,b = 0.9, 0.9, 0.9
+			-- useHueRGB = false
+		-- end
+	-- end
+	-- if teams > 19 then
+		-- hueteams = hueteams - 1
+		-- if i == teams-2 then
+			-- r,g,b = 0.15, 0.15, 0.15
+			-- useHueRGB = false
+		-- end
+	-- end
 	
 	if useHueRGB then
 		local offset = 0
