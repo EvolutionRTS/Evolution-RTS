@@ -11,12 +11,14 @@ function widget:GetInfo()
 	}
 end
 
-math.randomseed( 1 ) -- if gameid doesn't work i should always get the same colors
+--math.randomseed( 1 ) -- if gameid doesn't work i should always get the same colors
 
 function widget:GameID(gameid)
-	math.randomseed( gameid )
+	colorrandomseed = math.randomseed( gameid )
 	Spring.Echo("gameid is: ".. gameid)
 end
+
+
 
 math.random()
 math.random()
@@ -74,7 +76,7 @@ local function GetColor(i, teams)
 	local r,g,b = 0,0,0
 	local hueteams = teams
 	local useHueRGB = true
-
+    math.randomseed( colorrandomseed )
 	-- FFA and 1v1
 	if singleTeams == true then
 		local colorOffset = math.floor(100/teams)
