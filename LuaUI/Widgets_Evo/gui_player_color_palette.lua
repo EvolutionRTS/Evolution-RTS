@@ -11,7 +11,13 @@ function widget:GetInfo()
 	}
 end
 
-math.randomseed( os.time() )
+math.randomseed( 1 ) -- if gameid doesn't work i should always get the same colors
+
+function widget:GameID(gameid)
+	math.randomseed( gameid )
+	Spring.Echo("gameid is: ".. gameid)
+end
+
 math.random()
 math.random()
 math.random()
@@ -90,7 +96,13 @@ local function GetColor(i, teams)
 		r,g,b = hslToRgb(h, s, l)
 		useHueRGB = false
 	end
-			
+	
+	-- teams
+	-- if singleteams == false and #Spring.GetAllyTeamList()-1 == 2 then
+		-- local colorOffset = math.floor(100/teams)
+		-- local RNG = math.floor(40/teams)
+		-- local allyteam = Spring.GetTeamInfo(i)
+	-- end	
 		
 		
 	--if i > (teams * 0.33) then l = 0.7 end
