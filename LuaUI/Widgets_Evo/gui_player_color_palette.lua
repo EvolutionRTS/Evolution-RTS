@@ -11,6 +11,11 @@ function widget:GetInfo()
 	}
 end
 
+math.randomseed( os.time() )
+math.random()
+math.random()
+math.random()
+	
 local randomize = false					-- randomize player colors
 local offsetstartcolor = true		-- when false it will always use red as start color, when true it starts with an offset towards center of rgb hue palette more in effect with small playernumbers
 local useSameTeamColors = false
@@ -24,7 +29,7 @@ local singleTeams = false
 if #Spring.GetTeamList()-1  ==  #Spring.GetAllyTeamList()-1 then
 	singleTeams = true
 end
-
+local ffacolor = {}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -63,47 +68,30 @@ local function GetColor(i, teams)
 	local r,g,b = 0,0,0
 	local hueteams = teams
 	local useHueRGB = true
-	
-	-- duel
-	math.randomseed( os.time() )
-	math.random()
-	math.random()
-	math.random()
-	if teams == 2 then
+
+	-- FFA and 1v1
+	if singleTeams == true then
+		local colorOffset = math.floor(100/teams)
+		local RNG = math.floor(40/teams)
 		
 		if i == 1 then
-			
-			color1 = math.random(0,239) + math.random(0,100) - math.random(0,100)
-			
-			if color1 > 239 then
-				color1 = color1 - 239
+			ffacolor[i] = math.random(0,100)
+		else
+			ffacolor[i] = ffacolor[i-1] + colorOffset + math.random(-RNG,RNG)
+			if ffacolor[i] > 100 then
+				ffacolor[i] = ffacolor[i] - 100
 			end
-			
-			local h = color1/239
-			local s = math.random(50,100)/100
-			local l = math.random(40,85)/100
-			
-			r,g,b = hslToRgb(h, s, l)
-			useHueRGB = false
 		end
 		
-		if i == 2 then
-			
-			color2 = color1 + 119 + math.random(0,100) - math.random(0,100)
-			
-			if color2 > 239 then
-				color2 = color2 - 239
-			end
-			
-			local h = color2/239
-			local s = math.random(50,100)/100
-			local l = math.random(40,85)/100
-			
-			r,g,b = hslToRgb(h, s, l)
-			useHueRGB = false
-		end
+		local h = ffacolor[i]/100
+		local s = math.random(50,100)/100
+		local l = math.random(40,85)/100
 		
+		r,g,b = hslToRgb(h, s, l)
+		useHueRGB = false
 	end
+			
+		
 		
 	--if i > (teams * 0.33) then l = 0.7 end
 	--if i > (teams * 0.66) then l = 0.3 end
