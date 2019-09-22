@@ -266,7 +266,7 @@ function WeaponDef_Post(name, wDef)
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- Disable Friendly Fire Completely
-	if wDef.customparams and not wDef.customparams.friendlyfireexception then
+	if wDef.customparams and wDef.customparams.friendlyfireexception == nil then
 		wDef.customparams.nofriendlyfire = 1
 	end
 	
