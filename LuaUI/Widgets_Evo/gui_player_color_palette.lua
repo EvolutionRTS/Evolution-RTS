@@ -13,13 +13,49 @@ end
 
 --math.randomseed( 1 ) -- if gameid doesn't work i should always get the same colors
 
-function widget:GameID(gameid)
-	colorrandomseed = math.randomseed( gameid )
-	Spring.Echo("gameid is: ".. gameid)
+-- some hacks from the internets
+function num2hex(num)
+    local hexstr = num
+    local s = ''
+    while num > 0 do
+        local mod = math.fmod(num, 16)
+        s = string.sub(hexstr, mod+1, mod+1) .. s
+        num = math.floor(num / 16)
+    end
+    if s == '' then s = '0' end
+    return s
+end
+
+function str2hex(str)
+    local hex = ''
+    while #str > 0 do
+        local hb = num2hex(string.byte(str, 1, 1))
+        if #hb < 2 then hb = '0' .. hb end
+        hex = hex .. hb
+        str = string.sub(str, 2)
+    end
+    return hex
 end
 
 
+local mapname = string.byte(Game.mapName)
+local mapnameseed = tonumber(mapname,16)
 
+local mapdescription = string.byte(Game.mapDescription)
+local mapdescriptionseed = tonumber(mapdescription,16)
+
+local gameversion = string.byte(Game.gameVersion)
+local gameversionseed = tonumber(gameversion,16)
+
+
+local finalrandomseed = mapnameseed * mapdescriptionseed * gameversionseed * #Spring.GetAllyTeamList() * #Spring.GetTeamList()
+Spring.Echo( "finalrandomseed: ".. finalrandomseed)
+
+-- function widget:GameID(gameid)
+	-- --colorrandomseed = gameid
+	
+-- end
+--Spring.Echo("gameid is: ".. Game.GameID)
 math.random()
 math.random()
 math.random()
@@ -76,13 +112,13 @@ local function GetColor(i, teams)
 	local r,g,b = 0,0,0
 	local hueteams = teams
 	local useHueRGB = true
-    math.randomseed( colorrandomseed )
 	-- FFA and 1v1
 	if singleTeams == true then
 		local colorOffset = math.floor(100/teams)
-		local RNG = math.floor(40/teams)
+		local RNG = math.floor(30/teams)
 		
 		if i == 1 then
+			math.randomseed( finalrandomseed )
 			ffacolor[i] = math.random(0,100)
 		else
 			ffacolor[i] = ffacolor[i-1] + colorOffset + math.random(-RNG,RNG)
@@ -92,8 +128,8 @@ local function GetColor(i, teams)
 		end
 		
 		local h = ffacolor[i]/100
-		local s = math.random(50,100)/100
-		local l = math.random(40,85)/100
+		local s = math.random(75,100)/100
+		local l = math.random(40,80)/100
 		
 		r,g,b = hslToRgb(h, s, l)
 		useHueRGB = false
