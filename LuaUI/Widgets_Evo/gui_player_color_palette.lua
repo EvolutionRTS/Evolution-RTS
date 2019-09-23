@@ -11,55 +11,6 @@ function widget:GetInfo()
 	}
 end
 
---math.randomseed( 1 ) -- if gameid doesn't work i should always get the same colors
-
--- some hacks from the internets
-function num2hex(num)
-    local hexstr = num
-    local s = ''
-    while num > 0 do
-        local mod = math.fmod(num, 16)
-        s = string.sub(hexstr, mod+1, mod+1) .. s
-        num = math.floor(num / 16)
-    end
-    if s == '' then s = '0' end
-    return s
-end
-
-function str2hex(str)
-    local hex = ''
-    while #str > 0 do
-        local hb = num2hex(string.byte(str, 1, 1))
-        if #hb < 2 then hb = '0' .. hb end
-        hex = hex .. hb
-        str = string.sub(str, 2)
-    end
-    return hex
-end
-
-
-local mapname = string.byte(Game.mapName)
-local mapnameseed = tonumber(mapname,16)
-
-local mapdescription = string.byte(Game.mapDescription)
-local mapdescriptionseed = tonumber(mapdescription,16)
-
-local gameversion = string.byte(Game.gameVersion)
-local gameversionseed = tonumber(gameversion,16)
-
-
-local finalrandomseed = mapnameseed * mapdescriptionseed * gameversionseed * #Spring.GetAllyTeamList() * #Spring.GetTeamList()
-Spring.Echo( "finalrandomseed: ".. finalrandomseed)
-
--- function widget:GameID(gameid)
-	-- --colorrandomseed = gameid
-	
--- end
---Spring.Echo("gameid is: ".. Game.GameID)
-math.random()
-math.random()
-math.random()
-	
 local randomize = false					-- randomize player colors
 local offsetstartcolor = true		-- when false it will always use red as start color, when true it starts with an offset towards center of rgb hue palette more in effect with small playernumbers
 local useSameTeamColors = false
@@ -73,7 +24,7 @@ local singleTeams = false
 if #Spring.GetTeamList()-1  ==  #Spring.GetAllyTeamList()-1 then
 	singleTeams = true
 end
-local ffacolor = {}
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -106,43 +57,9 @@ local function hslToRgb(h, s, l)
 end
 
 local function GetColor(i, teams)
-	local h = 0
 	local s = 1
-	local l = 0.5
-	local r,g,b = 0,0,0
-	local hueteams = teams
-	local useHueRGB = true
-	-- FFA and 1v1
-	if singleTeams == true then
-		local colorOffset = math.floor(100/teams)
-		local RNG = math.floor(30/teams)
-		
-		if i == 1 then
-			math.randomseed( finalrandomseed )
-			ffacolor[i] = math.random(0,100)
-		else
-			ffacolor[i] = ffacolor[i-1] + colorOffset + math.random(-RNG,RNG)
-			if ffacolor[i] > 100 then
-				ffacolor[i] = ffacolor[i] - 100
-			end
-		end
-		
-		local h = ffacolor[i]/100
-		local s = math.random(75,100)/100
-		local l = math.random(40,80)/100
-		
-		r,g,b = hslToRgb(h, s, l)
-		useHueRGB = false
-	end
-	
-	-- teams
-	-- if singleteams == false and #Spring.GetAllyTeamList()-1 == 2 then
-		-- local colorOffset = math.floor(100/teams)
-		-- local RNG = math.floor(40/teams)
-		-- local allyteam = Spring.GetTeamInfo(i)
-	-- end	
-		
-		
+	local l = 0.53
+	local h = 0
 	--if i > (teams * 0.33) then l = 0.7 end
 	--if i > (teams * 0.66) then l = 0.3 end
 	if teams > 16 then
@@ -176,28 +93,31 @@ local function GetColor(i, teams)
 			end
 		end
 	end
-
-	-- if teams > 7 then
-		-- hueteams = hueteams - 1
-		-- if i == teams then
-			-- r,g,b = 0.5, 0.5, 0.5
-			-- useHueRGB = false
-		-- end
-	-- end
-	-- if teams > 11 then
-		-- hueteams = hueteams - 1
-	 	-- if i == teams-1 then
-			-- r,g,b = 0.9, 0.9, 0.9
-			-- useHueRGB = false
-		-- end
-	-- end
-	-- if teams > 19 then
-		-- hueteams = hueteams - 1
-		-- if i == teams-2 then
-			-- r,g,b = 0.15, 0.15, 0.15
-			-- useHueRGB = false
-		-- end
-	-- end
+	
+	local r,g,b = 0,0,0
+	local hueteams = teams
+	local useHueRGB = true
+	if teams > 7 then
+		hueteams = hueteams - 1
+		if i == teams then
+			r,g,b = 0.5, 0.5, 0.5
+			useHueRGB = false
+		end
+	end
+	if teams > 11 then
+		hueteams = hueteams - 1
+	 	if i == teams-1 then
+			r,g,b = 0.9, 0.9, 0.9
+			useHueRGB = false
+		end
+	end
+	if teams > 19 then
+		hueteams = hueteams - 1
+		if i == teams-2 then
+			r,g,b = 0.15, 0.15, 0.15
+			useHueRGB = false
+		end
+	end
 	
 	if useHueRGB then
 		local offset = 0
@@ -354,4 +274,3 @@ function widget:SetConfigData(data)
 		useSameTeamColors = data.useSameTeamColors
 	end
 end
-
