@@ -136,10 +136,11 @@ local function SpawnStartUnit(teamID)
 			or ((z>Game.mapSizeZ/2) and "north" or "south")
 		local unitID = Spring.CreateUnit(startUnit, x, y, z, facing, teamID)
 -- Fun times
---		if startUnit == "ecommanderai" then
---			id1=Spring.CreateUnit("eorb", x+100, y+200, z, facing, teamID)
---			Spring.GiveOrderToUnit(id1,CMD.GUARD,{unitID}, {"shift"})
---		end
+		if startUnit == "zarm" then
+			id1=Spring.CreateUnit("ztumor", x+100, y+200, z, facing, teamID)
+			id1=Spring.CreateUnit("ztumor", x-100, y-200, z, facing, teamID)
+			--Spring.GiveOrderToUnit(id1,CMD.GUARD,{unitID}, {"shift"})
+		end
 	end
 
 	-- set start resources, either from mod options or custom team keys

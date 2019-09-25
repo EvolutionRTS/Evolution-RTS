@@ -75,6 +75,10 @@ Shared.buildListZaalArm = {
 	[[zespire1]],
 	[[ztiberium]],
 }
+
+Shared.buildListZaalTumor = {
+	[[ztumor]],
+}
 	
 local turrets = {
 	[[ehbotpeewee_turret]],

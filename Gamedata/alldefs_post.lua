@@ -492,47 +492,49 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		--------------------------------------------------------------------------------
 
 		for id,unitDef in pairs(UnitDefs) do
-		
-			-- Set Rules for Ateran race
-			if unitDef.customparams and unitDef.customparams.factionname == "ateran" then
-				unitDef.buildtime = unitDef.buildcostmetal / 4
-				unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
-				if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
-					unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+			
+			if unitDef.customparams and unitDef.customparams.unitdefbuildtime == nil then
+				-- Set Rules for Ateran race
+				if unitDef.customparams and unitDef.customparams.factionname == "ateran" then
+					unitDef.buildtime = unitDef.buildcostmetal / 4
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
+					if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+					end
+					if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 5
+					end
+					if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
+					end
+					if unitDef.customparams and unitDef.customparams.noenergycost == true then
+						unitDef.buildcostenergy = 0
+					end
 				end
-				if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
+				
+				-- Set Rules for Zaal race
+				if unitDef.customparams and unitDef.customparams.factionname == "zaal" then
+					unitDef.buildtime = unitDef.buildcostmetal / 4
 					unitDef.buildcostenergy = unitDef.buildcostmetal * 5
+					if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
+					end
+					if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 10
+					end
+					if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 12.5
+					end
+					if unitDef.customparams and unitDef.customparams.noenergycost == true then
+						unitDef.buildcostenergy = 0
+					end
 				end
-				if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
-					unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
+				
+				-- This is a catchall for units that don't have a factionname declared
+				if unitDef.customparams and unitDef.customparams.factionname == nil then
+					unitDef.buildtime = unitDef.buildcostmetal / 4
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
 				end
-				if unitDef.customparams and unitDef.customparams.noenergycost == true then
-					unitDef.buildcostenergy = 0
-				end
-			end
-			
-			-- Set Rules for Zaal race
-			if unitDef.customparams and unitDef.customparams.factionname == "zaal" then
-				unitDef.buildtime = unitDef.buildcostmetal / 4
-				unitDef.buildcostenergy = unitDef.buildcostmetal * 5
-				if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
-					unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
-				end
-				if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
-					unitDef.buildcostenergy = unitDef.buildcostmetal * 10
-				end
-				if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
-					unitDef.buildcostenergy = unitDef.buildcostmetal * 12.5
-				end
-				if unitDef.customparams and unitDef.customparams.noenergycost == true then
-					unitDef.buildcostenergy = 0
-				end
-			end
-			
-			-- This is a catchall for units that don't have a factionname declared
-			if unitDef.customparams and unitDef.customparams.factionname == nil then
-				unitDef.buildtime = unitDef.buildcostmetal / 4
-				unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
 			end
 			
 			-- Set maximum possible workertime to 8
