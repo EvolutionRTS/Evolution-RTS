@@ -7,7 +7,7 @@ unitName = "ztiberium"
 supplygranted = 10
 storage = 25
 
-humanName = "Basic Energy Spire"
+humanName = "Tiberium Supply/Storage"
 
 objectName = "zaal/ztiberium.s3o"
 script = "zaal/ztiberium.cob"
