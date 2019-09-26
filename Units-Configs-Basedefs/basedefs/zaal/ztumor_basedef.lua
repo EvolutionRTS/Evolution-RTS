@@ -91,9 +91,6 @@ unitDef                    = {
 		},
 	},
 	customParams                 = {
-		iscommander              = true,
-		shownametag				 = true,
-		noalert					 = false,
 		unittype				 = "building",
 		--area_mex_def			 = "zhatch",
 		--ProvideTech              = techprovided,
