@@ -123,6 +123,7 @@ weaponDefs                 = {
 		flightTime               = 5,
 		sprayangle		         = 3000,
 		weaponVelocity           = 1000,
+		waterWeapon				 = true,
 		customparams             = {
 			damagetype		     = "default",
 			nofriendlyfire	     = 1,

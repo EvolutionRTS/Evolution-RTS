@@ -127,6 +127,7 @@ weaponDefs = {
 		tolerance                = 1000,
 		turret                   = true,
 		weaponVelocity           = 2000,
+		waterWeapon				  = true,
 		customparams             = {
 			damagetype		     = "skirmisher",  
 			nofriendlyfire	     = 1,

@@ -118,6 +118,7 @@ weaponDefs                 = {
 		startvelocity 			  = 200,
 		submissile 				  = 1,
 		turret 					  = true,
+		waterWeapon				  = true,
 		weaponacceleration 		  = 100,
 		weapontimer 			  = 1,
 		weaponvelocity 			  = 350,

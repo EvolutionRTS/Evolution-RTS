@@ -126,6 +126,7 @@ weaponDefs = {
 		thickness                = 20,
 		tolerance                = 1000,
 		turret                   = true,
+		waterWeapon				  = true,
 		weaponVelocity           = 2000,
 		customparams             = {
 			damagetype		     = "zpyro",  

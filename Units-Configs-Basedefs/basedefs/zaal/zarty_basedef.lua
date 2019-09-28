@@ -114,6 +114,7 @@ weaponDefs                 = {
 		avoidNeutral	         = false,
 		explosionGenerator       = "custom:genericshellexplosion-huge",
 		energypershot            = 0,
+		fireSubmersed			 = false,
 		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
@@ -128,6 +129,7 @@ weaponDefs                 = {
 		--soundStart               = "weapons/arty2.wav",
 		
 		turret                   = true,
+		waterWeapon				  = true,
 		weaponVelocity           = 500,
 		customparams             = {
 			damagetype		     = "zarty",
