@@ -194,7 +194,7 @@ function widget:DrawWorld()
 			if spGetTeamRulesParam(teamID, 'startUnit') == aterancomDefID then
 				glTexture('LuaUI/Images/ecommander.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 80)
-			else
+			elseif spGetTeamRulesParam(teamID, 'startUnit') == zaalcomDefID then
 				glTexture('LuaUI/Images/zarm.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 64)
 			end
@@ -249,7 +249,7 @@ function GenerateFactionChangeList()
 	glColor(0.8, 0.8, 0.8, 0.3)
 	if commanderDefID == aterancomDefID then
 		RectRound(3*widgetScale, 3*widgetScale, 61*widgetScale, 61*widgetScale,4.5*widgetScale)
-	else
+	elseif commanderDefID == zaalcomDefID then
 		RectRound(65*widgetScale, 3*widgetScale, 125*widgetScale, 61*widgetScale,4.5*widgetScale)
 	end
 		-- Icons
