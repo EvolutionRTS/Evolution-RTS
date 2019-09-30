@@ -12,6 +12,24 @@ function widget:GetInfo()
 end
 
 -----------------------------------------------------------------
+-- Accel
+-----------------------------------------------------------------
+local glMatrixMode = gl.MatrixMode
+local glPushMatrix = gl.PushMatrix
+local glLoadIdentity = gl.LoadIdentity
+local glPopMatrix = gl.PopMatrix
+local glDepthTest = gl.DepthTest
+local glDepthMask = gl.DepthMask
+local glBlending = gl.Blending
+local glBlendFunc = gl.BlendFunc
+local glTexture = gl.Texture
+local glActiveFBO = gl.ActiveFBO
+local glCallList = gl.CallList
+
+local GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA = GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA
+local GL_MODELVIEW, GL_PROJECTION = GL.MODELVIEW, GL.PROJECTION
+
+-----------------------------------------------------------------
 -- Constants
 -----------------------------------------------------------------
 
@@ -21,9 +39,9 @@ local GL_COLOR_ATTACHMENT0_EXT = 0x8CE0
 -- Configuration Constants
 -----------------------------------------------------------------
 
-local MIN_FPS = 20
+local MIN_FPS = 15
 local MIN_FPS_DELTA = 10
-local AVG_FPS_ELASTICITY = 0.2
+local AVG_FPS_ELASTICITY = 0.15
 local AVG_FPS_ELASTICITY_INV = 1.0 - AVG_FPS_ELASTICITY
 
 local BLUR_HALF_KERNEL_SIZE = 4 -- (BLUR_HALF_KERNEL_SIZE + BLUR_HALF_KERNEL_SIZE + 1) samples are used to perform the blur.
@@ -50,7 +68,6 @@ local luaShaderDir = "LuaUI/Widgets_Evo/Include/"
 local LuaShader = VFS.Include(luaShaderDir.."LuaShader.lua")
 
 local vsx, vsy, vpx, vpy
-local firstTime
 
 local screenQuadList
 local screenWideList
@@ -125,7 +142,12 @@ function widget:Initialize()
 		Spring.Echo(string.format("Error in [%s] widget: %s", wiName, "Deferred shading is not enabled or advanced shading is not active"))
 	end
 
-	firstTime = true
+	local configName = "AllowDrawModelPostDeferredEvents"
+	if Spring.GetConfigInt(configName, 0) == 0 then
+		Spring.Echo(string.format("Warning in [%s] widget: %s", wiName, "AllowDrawModelPostDeferredEvents is not enabled, enabling it now"))
+		Spring.SetConfigInt(configName, 1) --required to enable receiving DrawUnitsPostDeferred/DrawFeaturesPostDeferred
+	end
+
 	vsx, vsy, vpx, vpy = Spring.GetViewGeometry()
 
 	local commonTexOpts = {
@@ -225,11 +247,12 @@ function widget:Initialize()
 		},
 	}, wiName..": Outline Application")
 	applicationShader:Initialize()
+
+	screenQuadList = gl.CreateList(gl.TexRect, -1, -1, 1, 1)
+	screenWideList = gl.CreateList(gl.TexRect, -1, -1, 1, 1, false, true)
 end
 
 function widget:Shutdown()
-	firstTime = nil
-
 	if screenQuadList then
 		gl.DeleteList(screenQuadList)
 	end
@@ -255,75 +278,76 @@ function widget:Shutdown()
 end
 
 local function PrepareOutline()
-	if not show then
-		return
-	end
-	gl.DepthTest(false)
-	gl.DepthMask(false)
-	gl.Blending(false)
+	glDepthTest(false)
+	glDepthMask(false)
 
-	if firstTime then
-		screenQuadList = gl.CreateList(gl.TexRect, -1, -1, 1, 1)
-		screenWideList = gl.CreateList(gl.TexRect, -1, -1, 1, 1, false, true)
-		firstTime = false
-	end
-
-	gl.ActiveFBO(shapeFBO, function()
+	glActiveFBO(shapeFBO, function()
 		shapeShader:ActivateWith( function ()
-			gl.Texture(1, "$model_gbuffer_zvaltex")
+			glTexture(1, "$model_gbuffer_zvaltex")
 			if USE_MATERIAL_INDICES then
-				gl.Texture(2, "$model_gbuffer_misctex")
+				glTexture(2, "$model_gbuffer_misctex")
 			end
-			gl.Texture(3, "$map_gbuffer_zvaltex")
+			glTexture(3, "$map_gbuffer_zvaltex")
 
-			gl.CallList(screenQuadList) -- gl.TexRect(-1, -1, 1, 1)
+			glCallList(screenQuadList) -- gl.TexRect(-1, -1, 1, 1)
 
-			--gl.Texture(1, false) --will reuse later
+			--glTexture(1, false) --will reuse later
 			if USE_MATERIAL_INDICES then
-				gl.Texture(2, false)
+				glTexture(2, false)
 			end
-			gl.Texture(3, false)
+			glTexture(3, false)
 		end)
 	end)
 
-	gl.Texture(0, shapeTex)
+	glTexture(0, shapeTex)
 
 	for i = 1, BLUR_PASSES do
 		gaussianBlurShader:ActivateWith( function ()
 
 			gaussianBlurShader:SetUniform("dir", 1.0, 0.0) --horizontal blur
-			gl.ActiveFBO(blurFBOs[1], function()
-				gl.CallList(screenQuadList) -- gl.TexRect(-1, -1, 1, 1)
+			glActiveFBO(blurFBOs[1], function()
+				glCallList(screenQuadList) -- gl.TexRect(-1, -1, 1, 1)
 			end)
-			gl.Texture(0, blurTexes[1])
+			glTexture(0, blurTexes[1])
 
 			gaussianBlurShader:SetUniform("dir", 0.0, 1.0) --vertical blur
-			gl.ActiveFBO(blurFBOs[2], function()
-				gl.CallList(screenQuadList) -- gl.TexRect(-1, -1, 1, 1)
+			glActiveFBO(blurFBOs[2], function()
+				glCallList(screenQuadList) -- gl.TexRect(-1, -1, 1, 1)
 			end)
-			gl.Texture(0, blurTexes[2])
+			glTexture(0, blurTexes[2])
 
 		end)
 	end
 
-	gl.Texture(0, false)
-	gl.Texture(1, false)
+	glTexture(0, false)
+	glTexture(1, false)
 end
 
-local function DrawOutline(strength)
-	gl.Blending(true)
-	gl.BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA) --alpha NO pre-multiply
+local function DrawOutline(strength, dupd)
+	glBlending(true)
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) --alpha NO pre-multiply
 
-	gl.Texture(0, blurTexes[2])
-	gl.Texture(1, "$model_gbuffer_zvaltex")
+	if dupd then
+		glDepthTest(false)
+		glDepthMask(false)
+	end
+
+	glTexture(0, blurTexes[2])
+	glTexture(1, "$model_gbuffer_zvaltex")
 
 	applicationShader:ActivateWith( function ()
 		applicationShader:SetUniformFloat("strength", strength or 1.0)
-		gl.CallList(screenWideList)
+		glCallList(screenWideList)
 	end)
 
-		gl.Texture(0, false)
-	gl.Texture(1, false)
+	if dupd then
+		glBlending(false)
+		glDepthTest(true)
+		glDepthMask(true)
+	end
+
+	glTexture(0, false)
+	glTexture(1, false)
 end
 
 
@@ -345,34 +369,47 @@ function widget:Update(dt)
 end
 
 local function EnterLeaveScreenSpace(functionName, ...)
-	gl.MatrixMode(GL.MODELVIEW)
-	gl.PushMatrix()
-	gl.LoadIdentity()
+	glMatrixMode(GL_MODELVIEW)
+	glPushMatrix()
+	glLoadIdentity()
 
-		gl.MatrixMode(GL.PROJECTION)
-		gl.PushMatrix()
-		gl.LoadIdentity();
+		glMatrixMode(GL_PROJECTION)
+		glPushMatrix()
+		glLoadIdentity();
 
 			functionName(...)
 
-		gl.MatrixMode(GL.PROJECTION)
-		gl.PopMatrix()
+		glMatrixMode(GL_PROJECTION)
+		glPopMatrix()
 
-	gl.MatrixMode(GL.MODELVIEW)
-	gl.PopMatrix()
+	glMatrixMode(GL_MODELVIEW)
+	glPopMatrix()
 end
 
-function widget:DrawUnitsPostDeferred() --to be done
-	--Spring.Echo("DrawUnitsPostDeferred")
+function widget:DrawUnitsPostDeferred()
+	if not show then
+		return
+	end
+	EnterLeaveScreenSpace( function()
+		PrepareOutline()
+		DrawOutline(1.0, true)
+	end)
+	widgetHandler:RemoveCallIn("DrawWorldPreUnit")
 end
 
 function widget:DrawWorldPreUnit()
+	if not show then
+		return
+	end
 	EnterLeaveScreenSpace( function()
 		PrepareOutline()
-		DrawOutline(1.0)
+		DrawOutline(1.0, false)
 	end)
 end
 
 function widget:DrawWorld()
-	EnterLeaveScreenSpace(DrawOutline, 0.25)
+	if not show then
+		return
+	end
+	EnterLeaveScreenSpace(DrawOutline, 0.25, false)
 end

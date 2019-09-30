@@ -156,6 +156,8 @@ local flexCallIns = {
   'DrawWorldShadow',
   'DrawWorldReflection',
   'DrawWorldRefraction',
+  'DrawUnitsPostDeferred',
+  'DrawFeaturesPostDeferred',
   'DrawScreenEffects',
   'DrawInMiniMap',
   'SunChanged',
@@ -1301,6 +1303,22 @@ end
 function widgetHandler:DrawWorldRefraction()
   for _,w in ripairs(self.DrawWorldRefractionList) do
     w:DrawWorldRefraction()
+  end
+  return
+end
+
+
+function widgetHandler:DrawUnitsPostDeferred()
+  for _,w in ripairs(self.DrawUnitsPostDeferredList) do
+    w:DrawUnitsPostDeferred()
+  end
+  return
+end
+
+
+function widgetHandler:DrawFeaturesPostDeferred()
+  for _,w in ripairs(self.DrawFeaturesPostDeferredList) do
+    w:DrawFeaturesPostDeferred()
   end
   return
 end
