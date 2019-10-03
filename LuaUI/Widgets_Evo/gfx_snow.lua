@@ -460,7 +460,14 @@ function widget:Shutdown()
 	gl.DeleteFont(font)
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawScreen()
+	if chobbyInterface then return end
 	if not enabled or not autoReduce then return end
 
 	if not gameStarted and snowMaps[currentMapname] ~= nil and snowMaps[currentMapname] then

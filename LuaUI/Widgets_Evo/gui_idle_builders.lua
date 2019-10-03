@@ -549,7 +549,14 @@ function calcSizes(numIcons)
 	Y_MAX = POSITION_Y*vsy+0.5*ICON_SIZE_Y
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawScreen()
+	if chobbyInterface then return end
 
 	if widgetHandler:InTweakMode() then
 		calcSizes(MAX_ICONS)
@@ -717,7 +724,14 @@ end
 --end
 
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawWorld()
+	if chobbyInterface then return end
 	if mouseOnUnitID and (not WG['topbar'] or not WG['topbar'].showingQuit()) then
 		if widgetHandler:InTweakMode() then return -1 end
 		glColor(1,1,1,0.22)

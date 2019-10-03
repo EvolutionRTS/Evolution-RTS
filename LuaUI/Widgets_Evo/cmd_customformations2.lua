@@ -808,7 +808,14 @@ function widget:ViewResize(viewSizeX, viewSizeY)
 	Xs, Ys = Xs*0.5, Ys*0.5
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawWorld()
+	if chobbyInterface then return end
 	-- Draw lines when a path is drawn instead of a formation, OR when drawmode for formations is not "dots" only
 	if pathCandidate or options.drawmode.value ~= "dots" then
 		DrawFormationLines(tVerts, 2)

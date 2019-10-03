@@ -1357,7 +1357,14 @@ local function setBrightness(condition, icon)
 		icon.border = {0, 0, 0, 0}
 	end
 end
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawScreen()
+	if chobbyInterface then return end
 	if buildPicHelp == 1 then
 	
 		--Legend for quick reference

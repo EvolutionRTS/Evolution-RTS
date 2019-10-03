@@ -1031,7 +1031,14 @@ local yTooltipSize = 0
 local tooltipX, tooltipY = 0, 0
 local bgmargin = 4
  
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawScreen()
+	if chobbyInterface then return end
 		-- KP_ToolTip is probably deprecated
         --WG.KP_ToolTip=nil
         if Spring.IsGUIHidden() then

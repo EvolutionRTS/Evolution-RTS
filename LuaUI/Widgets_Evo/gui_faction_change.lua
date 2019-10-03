@@ -184,7 +184,14 @@ function widget:Shutdown()
 	gl.DeleteFont(font)
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawWorld()
+	if chobbyInterface then return end
 	glColor(1, 1, 1, 0.5)
 	glDepthTest(false)
 	for i = 1, #teamList do
@@ -203,7 +210,14 @@ function widget:DrawWorld()
 	glTexture(false)
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawScreen()
+	if chobbyInterface then return end
 
 	-- Spectator check
 	if spGetSpectatingState() then

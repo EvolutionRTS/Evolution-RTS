@@ -301,7 +301,14 @@ end
 
 local TweakAbove
 
-function widget:DrawScreen()	--Tweak Mode doesn't work without it
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
+function widget:DrawScreen()
+	if chobbyInterface then return end	--Tweak Mode doesn't work without it
 end
 function widget:TweakDrawScreen()
 	glPushMatrix()

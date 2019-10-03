@@ -717,7 +717,14 @@ function widget:SetConfigData(data)
 	usingSimpleColors = data.usingSimpleColors or usingSimpleColors
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawScreen()
+	if chobbyInterface then return end
 	
 	if inMinMode then
 		DrawPanel(minModeL, minModeL + buttonSize, minModeB, minModeB + buttonSize)
@@ -845,7 +852,14 @@ function widget:DrawScreen()
 	
 	glColor(1, 1, 1, 1)
 end
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawWorld()
+	if chobbyInterface then return end
 	if inMinMode then return end
 	glColor(1, 1, 0, 0.25)
 	glLineWidth(1.49)
