@@ -126,6 +126,11 @@ local gameFrame = Spring.GetGameFrame()
 
 local draggingShareIndicatorValue = {}
 
+local chobbyLoaded = false
+if Spring.GetMenuName and string.find(string.lower(Spring.GetMenuName()), 'chobby') ~= nil then
+	chobbyLoaded = true
+	Spring.SendLuaMenuMsg("disableLobbyButton")
+end
 --------------------------------------------------------------------------------
 -- Rejoin
 --------------------------------------------------------------------------------
@@ -331,12 +336,16 @@ local function updateButtons()
 	local totalWidth = area[3] - area[1]
 
 	local text = '    '
-    if (WG['teamstats'] ~= nil) then text = text..'Stats    ' end
-    if (WG['commands'] ~= nil) then text = text..'Cmd    ' end
-    if (WG['keybinds'] ~= nil) then text = text..'Keys    ' end
-    if (WG['changelog'] ~= nil) then text = text..'Changes    ' end
-    if (WG['options'] ~= nil) then text = text..'Settings    ' end
-    text = text..'Quit    '
+    if (WG['teamstats'] ~= nil) then text = text..'Stats   ' end
+    if (WG['commands'] ~= nil) then text = text..'Cmd   ' end
+    if (WG['keybinds'] ~= nil) then text = text..'Keys   ' end
+    if (WG['changelog'] ~= nil) then text = text..'Changes   ' end
+    if (WG['options'] ~= nil) then text = text..'Settings   ' end
+	if chobbyLoaded then
+		text = text..'Lobby  '
+	else
+		text = text..'Quit  '
+	end
 
 	local fontsize = totalWidth / font2:GetTextWidth(text)
 	if fontsize > (height*widgetScale)/3 then
@@ -383,36 +392,42 @@ local function updateButtons()
             if (WG['teamstats'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('   Stats  ') * fontsize + (buttons == 1 and 20 or 0)
+                width = font2:GetTextWidth('   Stats ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['stats'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4] }
             end
             if (WG['commands'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('  Cmd  ') * fontsize + (buttons == 1 and 20 or 0)
+                width = font2:GetTextWidth('  Cmd ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['commands'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
 			end
             if (WG['keybinds'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('  Keys  ') * fontsize + (buttons == 1 and 20 or 0)
+                width = font2:GetTextWidth('  Keys ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['keybinds'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
             if (WG['changelog'] ~= nil) then
                 button = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('  Changes  ') * fontsize + (buttons == 1 and 20 or 0)
+                width = font2:GetTextWidth('  Changes ') * fontsize + (buttons == 1 and 20 or 0)
                 buttonsArea['buttons']['changelog'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
             if (WG['options'] ~= nil) then
                 buttons = buttons + 1
                 if buttons > 1 then offset = offset+width end
-                width = font2:GetTextWidth('  Options  ') * fontsize
+                width = font2:GetTextWidth('  Settings ') * fontsize
                 buttonsArea['buttons']['options'] = {area[1]+offset, area[2]+margin, area[1]+offset+width, area[4]}
             end
-            offset = offset+width
-            width = font2:GetTextWidth('  Quit    ') * fontsize
-            buttonsArea['buttons']['quit'] = {area[1]+offset, area[2]+margin, area[3], area[4]}
+			if chobbyLoaded then
+				offset = offset+width
+				width = font2:GetTextWidth('  Lobby  ') * fontsize
+				buttonsArea['buttons']['quit'] = {area[1]+offset, area[2]+margin, area[3], area[4]}
+			else
+				offset = offset+width
+				width = font2:GetTextWidth('  Quit  ') * fontsize
+				buttonsArea['buttons']['quit'] = {area[1]+offset, area[2]+margin, area[3], area[4]}
+			end
 		end
 	end)
 	
@@ -1097,7 +1112,14 @@ function drawResbarValues(res)
 	glCallList(dlistResValues[res][currentResValue[res]])
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawScreen()
+	if chobbyInterface then return end
 	local now = os.clock()
 
 	glPushMatrix()
@@ -1376,21 +1398,25 @@ local function applyButtonAction(button)
 
 	local isvisible = false
 	if button == 'quit' then
-		local oldShowQuitscreen
-		if showQuitscreen ~= nil then
-			oldShowQuitscreen = showQuitscreen
-			isvisible = true
-		end
-		hideWindows()
-		if oldShowQuitscreen ~= nil then
-			if isvisible ~= true then
-				showQuitscreen = oldShowQuitscreen
-				if WG['guishader'] then
-					WG['guishader'].setScreenBlur(true)
-				end
-			end
+		if chobbyLoaded then
+			Spring.SendLuaMenuMsg("showLobby")
 		else
-			showQuitscreen = os.clock()
+			local oldShowQuitscreen
+			if showQuitscreen ~= nil then
+				oldShowQuitscreen = showQuitscreen
+				isvisible = true
+			end
+			hideWindows()
+			if oldShowQuitscreen ~= nil then
+				if isvisible ~= true then
+					showQuitscreen = oldShowQuitscreen
+					if WG['guishader'] then
+						WG['guishader'].setScreenBlur(true)
+					end
+				end
+			else
+				showQuitscreen = os.clock()
+			end
 		end
 	elseif button == 'options' then
 		if (WG['options'] ~= nil) then
