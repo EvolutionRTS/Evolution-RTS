@@ -52,7 +52,14 @@ local function DrawTexturedGroundQuadFromU(u)
 	DrawTexturedGroundQuadFromUdXZ(Spring.GetUnitDefID(u),x,z)
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawWorldPreUnit()
+	if chobbyInterface then return end
 
 	-- Units being placed
 	local _,cmd=Spring.GetActiveCommand()

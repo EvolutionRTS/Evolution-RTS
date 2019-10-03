@@ -929,6 +929,7 @@ end
 local sec = 0
 local uiOpacitySec = 0
 function widget:Update(dt)
+	if chobbyInterface then return end
 	uiOpacitySec = uiOpacitySec + dt
 	if uiOpacitySec>0.5 then
 		uiOpacitySec = 0

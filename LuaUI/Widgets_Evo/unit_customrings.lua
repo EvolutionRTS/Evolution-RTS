@@ -126,7 +126,14 @@ function widget:UnitCreated(uId, uDefId)
     end
 end
 
+function widget:RecvLuaMsg(msg, playerID)
+	if msg:sub(1,18) == 'LobbyOverlayActive' then
+		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')
+	end
+end
+
 function widget:DrawWorldPreUnit()
+	if chobbyInterface then return end
 	if Spring.IsGUIHidden() then return end
     for uId, rings in pairs(ringedUnits) do
 		if (Spring.IsUnitAllied(uId)and Spring.IsUnitSelected(uId)) then
