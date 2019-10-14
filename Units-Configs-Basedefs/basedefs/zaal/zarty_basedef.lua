@@ -126,7 +126,7 @@ weaponDefs                 = {
 		size 					 = 16,
 		weaponType		         = "Cannon",
 		--soundHit                 = "explosions/artyhit.wav",
-		--soundStart               = "weapons/arty2.wav",
+		soundStart               = "weapons/zaal/zartyroar.wav",
 		
 		turret                   = true,
 		waterWeapon				  = true,
