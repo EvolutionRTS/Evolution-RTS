@@ -326,8 +326,8 @@ local damageClasses = {
 			BUILDING 	= 1,
 		},
 		zpyro	= {
-			ARMORED		= 0,
-			LIGHT		= 0,
+			ARMORED		= 0.5,
+			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		zarty	= {

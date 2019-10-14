@@ -77,7 +77,8 @@ unitDef                    = {
 			def = "WEAPON",
 			maindir = "0 0 1",
 			maxangledif = 180,
-			onlyTargetCategory    = "BUILDING",
+			badTargetCategory	  = "NOTAIR",
+			onlyTargetCategory    = "NOTAIR BUILDING",
 		},
 	},
 	customParams                 = {

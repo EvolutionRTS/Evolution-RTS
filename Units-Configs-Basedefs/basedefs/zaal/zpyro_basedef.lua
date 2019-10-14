@@ -77,7 +77,8 @@ unitDef                    = {
 			def = "WEAPON",
 			maindir = "0 0 1",
 			maxangledif = 180,
-			onlyTargetCategory   = "BUILDING",
+			badTargetCategory	 = "NOTAIR",
+			onlyTargetCategory   = "BUILDING NOTAIR",
 		},
 	},
 	customParams                 = {
@@ -98,7 +99,7 @@ unitDef                    = {
 
 weaponDefs = {
 	weapon              = {		
-		AreaOfEffect             = 1,
+		AreaOfEffect             = 100,
 		avoidFeature             = false,
 		avoidFriendly            = false,
 		collideFeature           = false,
@@ -115,7 +116,7 @@ weaponDefs = {
 		minintensity             = "1",
 		name                     = "Laser",
 		range                    = 250,
-		reloadtime               = 1,
+		reloadtime               = 7.5,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "1 1 1",
 		rgbColor2                = "1 1 1",
