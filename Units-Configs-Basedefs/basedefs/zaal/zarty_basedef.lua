@@ -112,7 +112,7 @@ weaponDefs                 = {
 		
 		cegTag                   = "artyshot2",
 		avoidNeutral	         = false,
-		explosionGenerator       = "custom:genericshellexplosion-huge",
+		explosionGenerator       = "custom:genericshellexplosion-large",
 		energypershot            = 0,
 		fireSubmersed			 = false,
 		

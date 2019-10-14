@@ -26,7 +26,6 @@ return {
         sizemod            = 1.0,
         texture            = [[Lightring]],
         useairlos          = false,
-		colorchange			= "stuffs",
       },
     },
   },

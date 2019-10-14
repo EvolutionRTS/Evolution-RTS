@@ -50,6 +50,12 @@ function widget:Initialize()
 	})
 	Spring.SendCommands("bind i priority")
 	
+	-- set high quality screenshots to f12
+	Spring.SendCommands({
+		"unbindkeyset f12",
+	})
+	Spring.SendCommands("bind f12 screenshot png")
+	
 	if Game.version == "85.0" then
 		Spring.SendCommands({"unbindaction specteam"})
 	end
