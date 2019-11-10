@@ -735,7 +735,9 @@ function GenerateNewTooltip()
 	if spGetSelectedUnitsCount() >= 1 then
 		for _,u in pairs(spGetSelectedUnits()) do
 			local def=UnitDefs[Spring.GetUnitDefID(u)]
-			buildpower = buildpower + def.buildSpeed
+			if def ~= nil then
+				buildpower = buildpower + def.buildSpeed
+			end
 		end
 	end   
 
