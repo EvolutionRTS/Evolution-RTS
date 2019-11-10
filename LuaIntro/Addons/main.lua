@@ -109,7 +109,7 @@ k = os.time() % 1500
 if VFS.FileExists(filename) then
 	k = VFS.LoadFile(filename)
 end
-k = k + 1
+k = tonumber(k) + 1
 local file = assert(io.open(filename,'w'), "Unable to save latest randomseed from "..filename)
     file:write(k)
     file:close()
