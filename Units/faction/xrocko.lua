@@ -1,22 +1,22 @@
--- UNITDEF -- xhammer --
+-- UNITDEF -- xrocko --
 --------------------------------------------------------------------------------
 
-unitName = "xhammer"
+unitName = "xrocko"
 
 --------------------------------------------------------------------------------
 
 isUpgraded = [[0]]
 
-humanName = [[Hammer]]
+humanName = [[Rocko]]
 
-objectName = "faction/xhammer.s3o"
-script = "faction/xhammer.cob"
+objectName = "faction/xrocko.s3o"
+script = "faction/xrocko.cob"
 
 tech = [[tech1]]
 armortype = [[light]]
 supply = [[1]]
 
-VFS.Include("units-configs-basedefs/basedefs/faction/xhammer_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/faction/xrocko_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
