@@ -90,9 +90,9 @@ unitDef                    = {
 		armortype                = "light",
 		nofriendlyfire	         = "1",
 		supply_cost              = 1,
-		normaltex               = "unittextures/faction/bfaction_normals.dds",  
+		normaltex               = "unittextures/bfaction_normals.dds",  
 		--buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "xed",
+		factionname	             = "pattern",
 		corpse                   = "energycore",
 	},
 }

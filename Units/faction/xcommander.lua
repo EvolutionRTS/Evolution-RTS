@@ -129,7 +129,7 @@ local unitDef                    = {
 		
 		armortype                = armortype,
 		nofriendlyfire	         = "1",
-		normaltex               = "unittextures/faction/bfaction_normals.dds", 
+		normaltex               = "unittextures/bfaction_normals.dds", 
 		--buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "xed",
 	},
