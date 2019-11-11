@@ -589,6 +589,22 @@ local moveDefs = {
 
 --Pattern--
 
+	PATTERNKBOT2 = {
+      footprintx=2,
+      footprintz=2,
+      maxslope=40,
+      maxwaterdepth=5000,
+      maxwaterslope=255,
+      badwaterslope=255,
+      crushstrength=20,
+	  depthModParams = genericDepthmodParams,
+	  minwaterdepth=0,
+	  heatmod=unitHeat,
+	  slopemod=4,
+	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
+	},
+	
 	PATTERNKBOT3 = {
       footprintx=3,
       footprintz=3,
