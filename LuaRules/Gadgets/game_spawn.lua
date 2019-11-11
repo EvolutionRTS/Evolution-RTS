@@ -56,6 +56,7 @@ local factionDefComms = {
 local validStartComm = {
 	[UnitDefNames["ecommander"].id] = true,
 	[UnitDefNames["zarm"].id] = true,
+	[UnitDefNames["xcommander"].id] = true,
 }
 
 local ACCESS_LEVEL = {

@@ -79,6 +79,12 @@ Shared.buildListZaalArm = {
 Shared.buildListZaalTumor = {
 	[[ztumor]],
 }
+
+Shared.buildListXCommander = {
+	[[xskulk]],
+	[[xhammer]],
+	[[xrocko]],
+}
 	
 local turrets = {
 	[[ehbotpeewee_turret]],

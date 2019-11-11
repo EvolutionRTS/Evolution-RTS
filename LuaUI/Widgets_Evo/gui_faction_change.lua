@@ -58,6 +58,7 @@ local spGetSpectatingState = Spring.GetSpectatingState
 
 local aterancomDefID = UnitDefNames.ecommander.id
 local zaalcomDefID = UnitDefNames.zarm.id
+local patterncomDefID = UnitDefNames.xcommander.id
 
 local commanderDefID = spGetTeamRulesParam(myTeamID, 'startUnit')
 local amNewbie = (spGetTeamRulesParam(myTeamID, 'isNewbie') == 1)
@@ -156,7 +157,7 @@ function updateGuishader()
 			glDeleteList(backgroundGuishader)
 		end
 		backgroundGuishader = glCreateList( function()
-			RectRound(px+(2*widgetScale), py+(2*widgetScale), px+(126*widgetScale), py+(78*widgetScale), 6*widgetScale)
+			RectRound(px+(2*widgetScale), py+(2*widgetScale), px+(190*widgetScale), py+(78*widgetScale), 6*widgetScale)
 		end)
 		WG['guishader'].InsertDlist(backgroundGuishader, 'factionchange')
 	end
@@ -197,6 +198,9 @@ function widget:DrawWorld()
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 80)
 			elseif spGetTeamRulesParam(teamID, 'startUnit') == zaalcomDefID then
 				glTexture('LuaUI/Images/zarm.png')
+				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 64)
+			elseif spGetTeamRulesParam(teamID, 'startUnit') == patterncomDefID then
+				glTexture('LuaUI/Images/xcommander.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 64)
 			end
 		end
@@ -248,9 +252,9 @@ end
 function GenerateFactionChangeList()
 	-- Panel
 	glColor(0, 0, 0, 0.66)
-	RectRound(0, 0, 128*widgetScale, 80*widgetScale,6*widgetScale)
+	RectRound(0, 0, 192*widgetScale, 80*widgetScale,6*widgetScale)
 	glColor(1, 1, 1, 0.025)
-	RectRound(2*widgetScale, 2*widgetScale, 126*widgetScale, 78*widgetScale, 5*widgetScale)
+	RectRound(2*widgetScale, 2*widgetScale, 190*widgetScale, 78*widgetScale, 5*widgetScale)
 
 
 		-- Highlight
@@ -259,6 +263,8 @@ function GenerateFactionChangeList()
 		RectRound(3*widgetScale, 3*widgetScale, 61*widgetScale, 61*widgetScale,4.5*widgetScale)
 	elseif commanderDefID == zaalcomDefID then
 		RectRound(65*widgetScale, 3*widgetScale, 125*widgetScale, 61*widgetScale,4.5*widgetScale)
+	elseif commanderDefID == patterncomDefID then
+		RectRound(128*widgetScale, 3*widgetScale, 189*widgetScale, 61*widgetScale,4.5*widgetScale)
 	end
 		-- Icons
 	glColor(1, 1, 1, 1)
@@ -266,13 +272,16 @@ function GenerateFactionChangeList()
 	glTexRect(12*widgetScale, 17*widgetScale, 52*widgetScale, 59*widgetScale)
 	glTexture('LuaUI/Images/zarm.png')
 	glTexRect(76*widgetScale, 20*widgetScale, 116*widgetScale, 60*widgetScale)
+	glTexture('LuaUI/Images/xcommander.png')
+	glTexRect(140*widgetScale, 20*widgetScale, 180*widgetScale, 60*widgetScale)
 	glTexture(false)
 
 		-- Text
 	font:Begin()
-	font:Print('Choose Your Faction', 64*widgetScale, 64*widgetScale, 11.5*widgetScale, 'ocd')
+	font:Print('Choose Your Faction', 96*widgetScale, 64*widgetScale, 11.5*widgetScale, 'ocd')
 	font:Print('Ateran', 32*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
 	font:Print('Zaal', 96*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
+	font:Print('Pattern(WIP)', 160*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
 	font:End()
 end
 
@@ -298,6 +307,8 @@ function widget:MousePress(mx, my, mButton)
 				newCom = aterancomDefID
 			elseif mx < px + (128*widgetScale) then
 				newCom = zaalcomDefID
+			elseif mx < px + (192*widgetScale) then
+				newCom = patterncomDefID
 			end
 			if newCom then
 				commanderDefID = newCom
@@ -318,7 +329,7 @@ function widget:MousePress(mx, my, mButton)
 				return true
 			end
 
-		elseif (mButton == 2 or mButton == 3) and mx < px + (128*widgetScale) then
+		elseif (mButton == 2 or mButton == 3) and mx < px + (192*widgetScale) then
 			-- Dragging
 			return true
 		end

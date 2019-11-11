@@ -7,7 +7,7 @@ local unitName                   = "xcommander"
 
 local armortype					 = [[light]]
 local supplyGiven				 = [[0]]
-local techprovided				 = [[tech0, -overseer]]
+local techprovided				 = [[tech0,tech1,tech2,tech3 -overseer]]
 local techrequired				 = [[0 overseer]]
 
 local weapon1Damage              = 200
@@ -27,6 +27,7 @@ local unitDef                    = {
 	buildCostEnergy              = 0,
 	buildCostMetal               = 1000,
 	buildDistance                = 1000,
+	buildpic					 = [[pattern/xcommander.png]],
 	builder                      = true,
 	buildTime                    = 2.5,
 	capturable		             = false,
@@ -99,7 +100,7 @@ local unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
-	buildoptions                 = Shared.buildList,
+	buildoptions                 = Shared.buildListXCommander,
 	sounds                       = {
 		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",
