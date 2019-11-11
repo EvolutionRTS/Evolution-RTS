@@ -17,8 +17,8 @@ unitDef                    = {
 	energyStorage                = 0,
 	energyUse                    = 0,
 	explodeAs                    = "smallExplosionGenericRed",
-	footprintX                   = 2,
-	footprintZ                   = 2,
+	footprintX                   = 3,
+	footprintZ                   = 3,
 	iconType                     = "raider",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
@@ -29,7 +29,7 @@ unitDef                    = {
 	maxReverseVelocity           = 2,
 	maxWaterDepth                = 5000,
 	metalStorage                 = 0,
-	movementClass                = "PATTERNKBOT2",
+	movementClass                = "PATTERNKBOT3",
 	name                         = humanName,
 	noChaseCategory              = "VTOL",
 	objectName                   = objectName,
@@ -75,10 +75,10 @@ unitDef                    = {
 		},
 	},
 	weapons                      = {
-		[1]                      = {
-			def                  = "lightbeamlaser",
-			badTargetCategory    = "ARMORED BUILDING WALL",
-		},
+		-- [1]                      = {
+			-- def                  = "lightbeamlaser",
+			-- badTargetCategory    = "ARMORED BUILDING WALL",
+		-- },
 	},
 	customParams                 = {
 		isupgraded			  	 = isUpgraded,

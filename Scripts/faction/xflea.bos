@@ -3,7 +3,7 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece  base, turret, firepoint, lfupleg, lrupleg, rrupleg,
+piece  base, turret, firepoint1, lfupleg, lrupleg, rrupleg,
        rfupleg, rrleg, rfleg, lrleg, lfleg;
 
 static-var  bMoving, bAiming, Static_Var_3, restore_delay, wpn1_lasthead;
@@ -278,7 +278,7 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
 
 Create()
 {
-	hide firepoint;
+	hide firepoint1;
 	bMoving = FALSE;
 	bAiming = FALSE;
 	Static_Var_3 = 1;
@@ -324,7 +324,7 @@ AimFromPrimary(piecenum)
 
 QueryPrimary(piecenum)
 {
-	piecenum = firepoint;
+	piecenum = firepoint1;
 }
 
 AimPrimary(heading, pitch)
@@ -332,23 +332,14 @@ AimPrimary(heading, pitch)
 	signal SIG_AIM;
 	bAiming = TRUE;
 	turn turret to y-axis heading speed <5000.000000>;
-	while( !Static_Var_3 )
-	{
-		return(0);
-	}
-	if (((get ABS(wpn1_lasthead - heading)) > 65536) OR(((get ABS(wpn1_lasthead - heading)) > 1300) AND ((get ABS(wpn1_lasthead - heading)) < 64236)))
-	{
-		wpn1_lasthead = 1000000;
-		wait-for-turn turret around y-axis;
-	}
-	wpn1_lasthead = heading;
+	turn turret to x-axis heading speed <5000.000000>;
 	start-script RestoreAfterDelay();
 	return (1);
 }
 
 FirePrimary()
 {
-	emit-sfx 1024 from firepoint;
+	emit-sfx 1024 from firepoint1;
 }
 
 Killed(severity, corpsetype)
