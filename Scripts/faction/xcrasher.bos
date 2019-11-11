@@ -6,7 +6,7 @@
 piece  firepoint1, firepoint2, torso, pelvis, lleg, rleg, lbarrel,
        rbarrel,head,lthigh,rthigh;
 
-static-var  gun_3, notMoving, restore_delay, currentSpeed, moveSpeed,wpn3_lasthead;
+static-var  gun_3, notMoving, restore_delay, currentSpeed, moveSpeed,wpn3_lasthead,shooting_num;
 
 // Signal definitions
 #define SIG_MOVE			2
@@ -201,10 +201,19 @@ StopMoving()
 	notMoving = TRUE;
 }
 
+RestoreAfterDelay()
+{
+	set-signal-mask SIG_AIM_3;
+	sleep restore_delay;
+	turn torso to y-axis <0.000000> speed <90.000000>;
+	wpn3_lasthead = 1000000;
+	return (0);
+}
+
 Create()
 {
 	gun_3 = firepoint2;
-	restore_delay = 3000;
+	restore_delay = 300;
 	notMoving = TRUE;
 	moveSpeed = get MAX_SPEED;
 	currentSpeed = 100;
@@ -217,9 +226,13 @@ SetMaxReloadTime(Func_Var_1)
 	restore_delay = Func_Var_1 * 5;
 }
 
-SweetSpot(piecenum)
+AimPrimary(heading, pitch)
 {
-	piecenum = pelvis;
+	signal SIG_AIM_3;
+	turn torso to y-axis heading speed <5000.000000>;
+	turn head to x-axis <0.000000> - pitch speed <5000.000000>;
+	start-script RestoreAfterDelay();
+	return (1);
 }
 
 AimFromPrimary(piecenum)
@@ -229,58 +242,33 @@ AimFromPrimary(piecenum)
 
 QueryPrimary(piecenum)
 {
-	piecenum = firepoint1 + gun_3;
+	 if (shooting_num==1) 
+     {  
+     	piecenum=firepoint1;     
+     }
+
+     if (shooting_num==2)
+     {   
+     	piecenum=firepoint2;
+     } 
 }
 
-AimFromTertiary(piecenum)
+FirePrimary()
 {
-	piecenum = head;
-	return (0);
-}
+	if(shooting_num==1)
+         {
+         	emit-sfx 1024 from firepoint2;
+         }
+	if(shooting_num==2)
+         {
+         	emit-sfx 1024 from firepoint1;
+         }
+	shooting_num=shooting_num+1;
 
-QueryTertiary(piecenum)
-{
-	piecenum = firepoint1 + gun_3;
-}
-
-RestoreAfterDelay()
-{
-	set-signal-mask SIG_AIM_3;
-	sleep restore_delay;
-	turn torso to y-axis <0.000000> speed <90.000000>;
-	wpn3_lasthead = 1000000;
-	return (0);
-}
-
-AimTertiary(heading, pitch)
-{
-	signal SIG_AIM_3;
-	turn torso to y-axis heading speed <225.000000>;
-	if (((get ABS(wpn3_lasthead - heading)) > 65536) OR(((get ABS(wpn3_lasthead - heading)) > 5000) AND ((get ABS(wpn3_lasthead - heading)) < 60536)))
-	{
-		wpn3_lasthead = 1000000;
-		wait-for-turn torso around y-axis;
-	}
-	wpn3_lasthead = heading;
-	start-script RestoreAfterDelay();
-	return (1);
-}
-
-FireTertiary()
-{
-	if( gun_3 )
-	{
-		move lbarrel to z-axis [-3.750000] speed [62.500000];
-		wait-for-move rbarrel along z-axis;
-		move lbarrel to z-axis [0.000000] speed [7.500000];
-	}
-	else
-	{
-		move rbarrel to z-axis [-3.750000] speed [62.500000];
-		wait-for-move lbarrel along z-axis;
-		move rbarrel to z-axis [0.000000] speed [7.500000];
-	}
-	gun_3 = !gun_3;
+            if( shooting_num == 3)
+            {  
+            	shooting_num=1;
+            }
 }
 
 Killed(severity, corpsetype)

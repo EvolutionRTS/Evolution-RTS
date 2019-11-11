@@ -85,6 +85,9 @@ Shared.buildListXCommander = {
 	[[xhammer]],
 	[[xrocko]],
 	[[xwarrior]],
+	[[xcrasher]],
+	[[xflea]],
+	[[xkconstructor]],
 }
 	
 local turrets = {
