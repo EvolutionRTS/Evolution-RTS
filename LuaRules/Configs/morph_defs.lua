@@ -77,6 +77,9 @@ local timeToBuild_euwturret = energyCost_euwturret * 0.10
 local energyCost_emetalextractor_up1 = 400
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
 
+local energyCost_xmetalextractor = 1200
+local timeToBuild_xmetalextractor = energyCost_xmetalextractor * 0.10
+
 local energyCost_eorb = 300
 local timeToBuild_eorb = energyCost_eorb * 0.10
 
@@ -416,7 +419,7 @@ Overseer]],
 			cmdname = [[Evolve]],
 			energy = energyCost_emetalextractor_up1,
 			metal = 0,
-			text = [[x2 Metal Extraction rate]],
+			text = [[x1.33 Metal Extraction rate]],
 			require = [[tech1]],
 		},
 	},
@@ -428,7 +431,7 @@ Overseer]],
 			cmdname = [[Evolve]],
 			energy = energyCost_emetalextractor_up1,
 			metal = 0,
-			text = [[x3 Metal Extraction rate]],
+			text = [[x1.66 Metal Extraction rate]],
 			require = [[tech2]],
 		},
 	},
@@ -440,11 +443,22 @@ Overseer]],
 			cmdname = [[Evolve]],
 			energy = energyCost_emetalextractor_up1,
 			metal = 0,
-			text = [[x4 Metal Extraction rate]],
+			text = [[x2 Metal Extraction rate]],
 			require = [[tech3]],
 		},
 	},
-	
+	xmetalextractor = 	{
+		{
+			into = 'xmetalextractormoho',
+			--require = 'etech2',
+			time = timeToBuild_xmetalextractor,
+			cmdname = [[Evolve]],
+			energy = energyCost_xmetalextractor,
+			metal = 0,
+			text = [[x2 Metal Extraction rate]],
+			require = [[tech1]],
+		},
+	},
 ----------------------------------------------------------
 ----------------------------------------------------------
 --Factories	
