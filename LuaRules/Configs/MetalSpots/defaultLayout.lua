@@ -7,14 +7,14 @@ local size = math.max(mapx, mapz)
 
 --
 Spring.Echo("[Default Mex Layout] Map size is: " .. size)
-local players = Spring.GetPlayerList()
-local count = 0
-for i = 1, #players do
-    local playerID = players[i]
-    if not select(3, Spring.GetPlayerInfo(playerID)) then
-        count = count + 1
-    end
-end
+local count = #Spring.GetTeamList() - 1
+local allycount = #Spring.GetAllyTeamList() - 1
+-- for i = 1, #players do
+    -- local playerID = players[i]
+    -- if not select(3, Spring.GetPlayerInfo(playerID)) then
+        -- count = count + 1
+    -- end
+-- end
 Spring.SetGameRulesParam("peopleCount", count)
 
 teamIDCount = Spring.GetGameRulesParam("peopleCount")
@@ -26,6 +26,9 @@ local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
 local maxMexElevationDiff = tonumber(Spring.GetModOptions().maximummexelevationdifference) or 50
 local mexSpotsPerSideMultiplier = tonumber(Spring.GetModOptions().mexspotspersidemultiplier) or 100
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"
+	if allycount > 2 then
+		mexRandomLayout = "legacy1"
+	end
 local dynamicMexOutput = Spring.GetModOptions().dynamicmexoutput or "disabled"
 
 if placeMexesInWater == "enabled" or placeMexesInWater == "" or placeMexesInWater == nil then -- This is just an oshitifukedup protection
@@ -105,8 +108,13 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 		while not done and numIterations < howManyTriesBeforeGiveUp do
 			numIterations = numIterations + 1
 			done = true
-			newPoint[1] = padding + math.random() * (sizeX - padding * 2)
-			newPoint[2] = padding + math.random() * (sizeY - padding * 2)
+			if method == 6 then
+				newPoint[1] = padding + math.random() * (sizeX *0.5 - padding * 2)
+				newPoint[2] = padding + math.random() * (sizeY *0.5 - padding * 2)
+			else
+				newPoint[1] = padding + math.random() * (sizeX - padding * 2)
+				newPoint[2] = padding + math.random() * (sizeY - padding * 2)
+			end
 			if method == 1 then
 				newPoint[3] = sizeX - newPoint[1]
 				newPoint[4] = sizeY - newPoint[2]
@@ -122,6 +130,13 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 			elseif method == 5 then
 				newPoint[3] = newPoint[2]
 				newPoint[4] = newPoint[1]
+			elseif method == 6 then
+				newPoint[3] = newPoint[1]
+				newPoint[4] = sizeY - newPoint[2]
+				newPoint[5] = sizeX - newPoint[1]
+				newPoint[6] = newPoint[2]
+				newPoint[7] = sizeX - newPoint[1]
+				newPoint[8] = sizeY - newPoint[2]
 			end
 			-- check slope of new point and mirror
 			done = checkSlope(newPoint[1], newPoint[2], maxMexElevationDiff, allowWater)
@@ -155,6 +170,12 @@ local function makePositionsRandomMirrored(sizeX, sizeY, padding, pointRadius, e
 		if numIterations == howManyTriesBeforeGiveUp then logFailures = logFailures + 1 end
 		positions[#positions + 1] = {x = newPoint[1], z = newPoint[2]}
 		positions[#positions + 1] = {x = newPoint[3], z = newPoint[4]}
+		if newPoint[5] then
+			positions[#positions + 1] = {x = newPoint[5], z = newPoint[6]}
+		end
+		if newPoint[7] then
+			positions[#positions + 1] = {x = newPoint[7], z = newPoint[8]}
+		end
 	end
 	--table.remove(positions, 1)
 	--table.remove(positions, 1)
@@ -227,13 +248,13 @@ end
 
 if mexRandomLayout == "standard" then
 	if teamIDCount <= 2 then
-		mexSpotsPerSide = 20
+		mexSpotsPerSide = 10
 	elseif teamIDCount > 2 and teamIDCount <= 4 then
-		mexSpotsPerSide = 25
+		mexSpotsPerSide = 15
 	elseif teamIDCount > 4 and teamIDCount <= 6 then
-		mexSpotsPerSide = 30
+		mexSpotsPerSide = 20
 	elseif teamIDCount > 6 then
-		mexSpotsPerSide = 35
+		mexSpotsPerSide = 25
 	end
 	local mapSize = size * 2
 	if mapSize <= 6144 then -- An exception for 10x10 and smaller maps
@@ -246,7 +267,7 @@ if mexRandomLayout == "standard" then
 	howManyTriesBeforeGiveUp = 100
 	numPointsPerSide = mexSpotsPerSide * (mexSpotsPerSideMultiplier * 0.01)
 	includeCentre = false
-	method = 1
+	method = 6
 	allowWater = allowMexesInWater
 	--metalPerPoint = 1
 end
