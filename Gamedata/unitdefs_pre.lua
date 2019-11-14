@@ -81,16 +81,20 @@ Shared.buildListZaalTumor = {
 }
 
 Shared.buildListXCommander = {
+	[[xklab]],
+	[[xkconstructor]],
+	[[xmetalextractor]],
+	[[xsolar]],
+	[[xllt]],
+}
+
+Shared.buildListXKLab = {
 	[[xskulk]],
 	[[xhammer]],
 	[[xrocko]],
 	[[xwarrior]],
 	[[xcrasher]],
 	[[xflea]],
-	[[xkconstructor]],
-	[[xmetalextractor]],
-	[[xsolar]],
-	[[xllt]],
 }
 	
 local turrets = {
