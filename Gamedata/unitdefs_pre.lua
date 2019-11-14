@@ -89,6 +89,7 @@ Shared.buildListXCommander = {
 	[[xflea]],
 	[[xkconstructor]],
 	[[xmetalextractor]],
+	[[xsolar]],
 }
 	
 local turrets = {
