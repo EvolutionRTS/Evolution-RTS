@@ -85,6 +85,7 @@ Shared.buildListXCommander = {
 	[[xkconstructor]],
 	[[xmetalextractor]],
 	[[xsolar]],
+	[[xstorage]],
 	[[xllt]],
 }
 
