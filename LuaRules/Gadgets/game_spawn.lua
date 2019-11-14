@@ -45,12 +45,16 @@ local aiStartUnits = {
 	},
 	["zarm"] = {
 		"zarm",
-	}
+	},
+	["xcommander"] = {
+		"xcommander",
+	},
 }
 
 local factionDefComms = {
 	[0] = "ecommander",
 	[1] = "zarm",
+	[2] = "xcommander",
 }
 
 local validStartComm = {
@@ -89,7 +93,7 @@ local function GetStartUnit(teamID)
 		Spring.Echo ("Enemy is an AI so it gets an AI Specific Overseer!")
 		--local factionrandom = math.random(0,1)
 		math.random(); math.random(); math.random()
-		local sidedata = factionDefComms[math.random(0,1)]
+		local sidedata = factionDefComms[math.random(0,2)]
 		if sidedata == nil then
 			Spring.Echo("faction: nil")
 		else
@@ -102,7 +106,7 @@ local function GetStartUnit(teamID)
 	else
 		-- If a side isn't selected, flip a coin
 		if (side == "") then
-			local factionIndex = math.random(0, 1)
+			local factionIndex = math.random(0, 2)
 			startUnit = factionDefComms[factionIndex]
 		else
 			startUnit = Spring.GetSideData(side)

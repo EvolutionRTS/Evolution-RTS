@@ -25,6 +25,9 @@ if controlPoints == "disabled" then
 end
 
 behaviours = {
+	xklab = {
+		TaskQueueBehaviour,
+	},
 	zarm = {
 		TaskQueueBehaviour,
 	},

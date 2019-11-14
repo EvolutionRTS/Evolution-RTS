@@ -44,7 +44,8 @@ function GetArtileryUnits(tqb,ai,unit)
 	UDN.eartytank.id, UDN.eartytank_up1.id, UDN.eartytank_up2.id, UDN.eartytank_up3.id, 
 	UDN.eartytank_saturation.id, UDN.eartytank_saturation_up1.id, UDN.eartytank_saturation_up2.id, UDN.eartytank_saturation_up3.id, 
 	UDN.eamphibarty.id, UDN.eamphibarty_up1.id, UDN.eamphibarty_up2.id, UDN.eamphibarty_up3.id, 
-	UDN.eallterrassault.id, UDN.eallterrassault_up1.id, UDN.eallterrassault_up2.id, UDN.eallterrassault_up3.id, 
+	UDN.eallterrassault.id, UDN.eallterrassault_up1.id, UDN.eallterrassault_up2.id, UDN.eallterrassault_up3.id,
+	UDN.xklab.id,
 	}
 	local units = Spring.GetTeamUnitsByDefs(ai.id, list)
 	return #units
@@ -56,7 +57,8 @@ function GetFacs(tqb,ai,unit)
 	UDN.eminifac.id, UDN.eminifac_up1.id, UDN.eminifac_up2.id, UDN.eminifac_up3.id, 
 	UDN.eamphibfac.id, UDN.eamphibfac_up1.id, UDN.eamphibfac_up2.id, UDN.eamphibfac_up3.id, 
 	UDN.ehbotfac.id, UDN.ehbotfac_up1.id, UDN.ehbotfac_up2.id, UDN.ehbotfac_up3.id, 
-	UDN.ebasefactory.id, UDN.ebasefactory_up1.id, UDN.ebasefactory_up2.id, UDN.ebasefactory_up3.id, 
+	UDN.ebasefactory.id, UDN.ebasefactory_up1.id, UDN.ebasefactory_up2.id, UDN.ebasefactory_up3.id,
+	UDN.xklab.id,
 	}
 	local units = Spring.GetTeamUnitsByDefs(ai.id, list)
 	return #units
@@ -68,7 +70,8 @@ function GetPlannedFacs(tqb, ai, unit)
 	UDN.eminifac.id, UDN.eminifac_up1.id, UDN.eminifac_up2.id, UDN.eminifac_up3.id, 
 	UDN.eamphibfac.id, UDN.eamphibfac_up1.id, UDN.eamphibfac_up2.id, UDN.eamphibfac_up3.id, 
 	UDN.ehbotfac.id, UDN.ehbotfac_up1.id, UDN.ehbotfac_up2.id, UDN.ehbotfac_up3.id, 
-	UDN.ebasefactory.id, UDN.ebasefactory_up1.id, UDN.ebasefactory_up2.id, UDN.ebasefactory_up3.id, 
+	UDN.ebasefactory.id, UDN.ebasefactory_up1.id, UDN.ebasefactory_up2.id, UDN.ebasefactory_up3.id,
+	UDN.xklab.id,
 	}
 	local total = 0
 	for ct, unitDefID in pairs(list) do
@@ -86,7 +89,8 @@ function GetPlannedAndUnfinishedFacs(tqb,ai,unit)
 	UDN.eminifac.id, UDN.eminifac_up1.id, UDN.eminifac_up2.id, UDN.eminifac_up3.id, 
 	UDN.eamphibfac.id, UDN.eamphibfac_up1.id, UDN.eamphibfac_up2.id, UDN.eamphibfac_up3.id, 
 	UDN.ehbotfac.id, UDN.ehbotfac_up1.id, UDN.ehbotfac_up2.id, UDN.ehbotfac_up3.id, 
-	UDN.ebasefactory.id, UDN.ebasefactory_up1.id, UDN.ebasefactory_up2.id, UDN.ebasefactory_up3.id, 
+	UDN.ebasefactory.id, UDN.ebasefactory_up1.id, UDN.ebasefactory_up2.id, UDN.ebasefactory_up3.id,
+	UDN.xklab.id,
 	}
 	local count = 0
 	for ct, unitDefID in pairs(list) do
@@ -1160,7 +1164,109 @@ local ZaalEspire = {
 	ZaalMorph,
 }
 	
+-- Pattern
 
+local function PatternNeedFactory(tqb, ai, unit)
+	local count = GetFacs(tqb,ai,unit)
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
+	if count < Spring.GetGameSeconds()*0.00332 then
+		-- if count > 0 and Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant_up1.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant_up2.id) + Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.eairplant_up3.id) < 1 then
+			-- return "eairplant"
+		-- if GG.TechCheck("tech2", ai.id) then 
+			-- local unitoptions = {"eairplant", "eminifac", "eamphibfac", "ehbotfac", "ebasefactory",}
+			-- return FindBest(unitoptions, ai)
+			return "xklab"
+		-- else
+			-- local unitoptions = {"eminifac", "eamphibfac", "ehbotfac", "ebasefactory",}
+			-- return FindBest(unitoptions, ai)
+		-- end
+	else
+		return skip
+	end
+end
+
+local function PatternNeedEnergy(tqb, ai, unit)
+	local GetConstructors = Spring.GetTeamUnitDefCount(ai.id, UnitDefNames.xkconstructor.id) + 1
+	local rConstructors = math.random(0, GetConstructors*2)
+	if GetConstructors < 4 or rConstructors == 0 then
+		return "xkconstructor"
+	end
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	if ei <= ee then
+		return "xsolar"
+	else
+		return skip
+	end
+end
+
+local function PatternKLabOrder(tqb, ai, unit)
+	local options = {"xcrasher","xflea","xhammer","xrocko","xskulk","xwarrior",}
+	return FindBest(options, ai)
+end
+	
+	
+	
+local PatternCommanderFirst = {
+	"xmetalextractor",
+	"xsolar",
+	"xklab",
+}
+
+local PatternCommander = {
+	PatternNeedFactory,
+	PatternNeedEnergy,
+	"xllt",
+	MoveToRandomStartBoxLocation,
+}
+
+local PatternMexer = {
+	"xmetalextractor",
+	"xmetalextractor",
+	"xmetalextractor",
+	"xllt",
+	MoveToRandomStartBoxLocation,
+}
+
+local PatternEco = {
+	"xsolar",
+	"xsolar",
+	PatternNeedEnergy,
+	PatternNeedEnergy,
+	"xstorage",
+	PatternNeedFactory,
+	"xllt",
+	MoveToRandomStartBoxLocation,
+}
+
+local PatternKLab = {
+	PatternKLabOrder,
+}
+
+
+
+
+local function xcommanderqueue()
+	if ai.engineerfirst == true then
+		return PatternCommander
+	else
+		ai.engineerfirst = true
+		return PatternCommanderFirst
+	end
+end
+
+local function xk1constructor()
+	if ai.xengineersqueued == nil then
+		ai.xengineersqueued = 0
+	end
+	if ai.xengineersqueued > 2 then
+		ai.xengineersqueued = ai.xengineersqueued - 0.5
+		return PatternEco
+	else
+		ai.xengineersqueued = ai.xengineersqueued + 1
+		return PatternMexer
+	end
+end
+	
 
 taskqueues = {
     --builders
@@ -1197,5 +1303,8 @@ taskqueues = {
 	zhatch_up1 = ZaalHive2,
 	zespire1 = ZaalEspire,
 	zespire4 = ZaalEspire,
+	xcommander = xcommanderqueue,
+	xkconstructor = xk1constructor,
+	xklab = PatternKLab,
 }
 ----------------------------------------------------------

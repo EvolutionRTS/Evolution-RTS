@@ -263,4 +263,14 @@ attackerlist = {
 	"zskirmisher",
 	"zassault",
 	"zairbomber",
+	
+	-------------------- Pattern
+	"xmetalextractor",
+	"xcrasher",
+	"xflea",
+	"xhammer",
+	"xrocko",
+	"xskulk",
+	"xwarrior",
+	
 }

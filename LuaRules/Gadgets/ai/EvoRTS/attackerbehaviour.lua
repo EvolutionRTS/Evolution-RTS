@@ -154,7 +154,7 @@ function AttackerBehaviour:AttackCell(type, nearestVisibleAcrossMap, nearestVisi
 		return
 	elseif string.find(UnitDefs[unitDefID].name, "eorb") and ec > es*0.98 then
 		self.unit:Internal():EZMorph()
-	elseif string.find(UnitDefs[unitDefID].name, "emetalextractor") and ec > es*0.98 then
+	elseif (string.find(UnitDefs[unitDefID].name, "emetalextractor") or string.find(UnitDefs[unitDefID].name, "xmetalextractor")) and ec > es*0.98 then
 		self.unit:Internal():EZMorph()
 		return
 	end

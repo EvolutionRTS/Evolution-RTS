@@ -71,7 +71,11 @@ function ShardUnitType:WeaponCount()
 end
 
 function ShardUnitType:Extractor()
-	return self.def.customParams.metal_extractor
+	if self.def.name == "xmetalextractor" or self.def.name == "xmetalextractormoho" then
+		return true
+	elseif self.def.customParams.metal_extractor then
+		return true
+	end
 end
 
 function ShardUnitType:Geothermal()
