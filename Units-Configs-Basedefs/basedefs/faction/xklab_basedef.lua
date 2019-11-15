@@ -71,7 +71,7 @@ unitDef                     = {
 		unittype				  = "building",
 		death_sounds              = "generic",
 		armortype                 = "building", 
-		normaltex               = "unittextures/afaction_normals.dds",  
+		normaltex               = "unittextures/bfaction_normals.dds",  
 		factionname	              = "pattern",
 		corpse                   = "energycore",
 	},
