@@ -87,6 +87,7 @@ Shared.buildListXCommander = {
 	[[xsolar]],
 	[[xstorage]],
 	[[xllt]],
+	[[xrocketturret]],
 }
 
 Shared.buildListXKLab = {
