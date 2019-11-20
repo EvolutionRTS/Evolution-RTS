@@ -3,7 +3,7 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece  base, firepoint, turret, barrel, launcher, sleeve;
+piece  base, firepoint1, turret, launcher, sleeve;
 
 static-var  gun_1;
 
@@ -37,49 +37,39 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
 		sleep sleeptime;
 	}
 	return (0);
-	// Build by COBBLER Ver4.0 Copyright @1998 DIGITAL CONCEPT SOFTWARE (MANU@inext.fr) / http://www.annihilationcenter.com/DCS/  
 }
 
 Create()
 {
-
-	gun_1 = firepoint;
 	start-script SmokeUnit();
 	return (0);
 }
+
+RestoreAfterDelay()
+{
+	sleep 3000;
+	stop-spin sleeve around x-axis decelerate <15.000000>;
+	turn turret to y-axis <0> speed <60>; 
+	turn launcher to x-axis <0> speed <30>;  
+}
+
 
 AimPrimary(heading, pitch)
 {
 	signal SIG_AIM;
 	set-signal-mask SIG_AIM;
-	if( gun_1 == 1 )
-	{
-		turn sleeve to z-axis <0.000000> speed <400.000000>;
-	}
-	if( gun_1 == 2 )
-	{
-		turn sleeve to z-axis <120.027473> speed <400.000000>;
-	}
-	if( gun_1 == 3 )
-	{
-		turn sleeve to z-axis <-120.027473> speed <400.000000>;
-	}
 	turn turret to y-axis heading speed <5000.000000>;
 	turn launcher to x-axis <0.000000> - pitch speed <5000.000000>;
-	wait-for-turn sleeve around z-axis;
+	spin sleeve around z-axis speed <100.000000>;
 	wait-for-turn turret around y-axis;
-	wait-for-turn launcher around x-axis;
+    wait-for-turn launcher around x-axis;
+	start-script RestoreAfterDelay();
 	return (1);
 }
 
 FirePrimary()
 {
-	emit-sfx 1024 from firepoint;
-	++gun_1;
-	if( gun_1 == 4 )
-	{
-		gun_1 = firepoint;
-	}
+	emit-sfx 1024 from firepoint1;
 	return (0);
 }
 
@@ -91,13 +81,7 @@ AimFromPrimary(piecenum)
 
 QueryPrimary(piecenum)
 {
-	piecenum = firepoint;
-	return (0);
-}
-
-SweetSpot(piecenum)
-{
-	piecenum = base;
+	piecenum = firepoint1;
 	return (0);
 }
 
@@ -108,5 +92,4 @@ Killed(severity, corpsetype)
 	explode turret type EXPLODE_ON_HIT;
 	explode launcher type EXPLODE_ON_HIT;
 	explode sleeve type EXPLODE_ON_HIT;
-	explode barrel type EXPLODE_ON_HIT;
 }
