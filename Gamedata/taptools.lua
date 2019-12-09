@@ -1,13 +1,15 @@
---
--- Created by IntelliJ IDEA.
--- User: BEPID
--- Date: 30/05/17
--- Time: 20:41
 --==============================
---== Evolution RTS HELPER FUNCTIONS ==
+--== TAPrime HELPER FUNCTIONS ==
 --==============================
 --shard_include("luarules/gadgets/ai/ba/commonfunctions.lua") 	-- doesn' work here
+VFS.Include("LuaRules/colors.h.lua")
 
+local spFindUnitCmdDesc     = Spring.FindUnitCmdDesc
+local spInsertUnitCmdDesc     = Spring.InsertUnitCmdDesc
+local spEditUnitCmdDesc     = Spring.EditUnitCmdDesc
+local spGetUnitPosition = Spring.GetUnitPosition
+local spMarkerAddPoint = Spring.MarkerAddPoint
+local spMarkerErasePosition = Spring.MarkerErasePosition
 
 function isbool(x)   return (type(x) == 'boolean') end
 function istable(x)  return (type(x) == 'table')   end
@@ -100,6 +102,9 @@ function ipairs_len(table)
 end
 
 function pairs_len(table)
+    -- Alert: Line below prevent errors, but it won't be obvious to the caller if the table is nil
+    if table == nil or not istable(table) then
+        return 0 end
 	local numItems = 0
 	for _, v in pairs(table) do
         if v then
@@ -277,6 +282,88 @@ function tostringplus(t, indent, sep, nl, text, osign, csign)
 	return text
 end
 
+--// Converters a quotes-enclosed table into a lua table. Used for customParams encoded tables
+--function str2table(s)
+--    local exps, res = {}, {}
+--    local function save(v)
+--        exps[#exps + 1] = v
+--        return ('\0'):rep(#exps)
+--    end
+--    s = s:gsub('%b{}', function(s) return save{str2table(s:sub(2, -2))} end)    -- arrays
+--    s = s:gsub('"(.-)"', save)                                                  -- strings
+--    s = s:gsub('%-?%d+', function(s) return save(tonumber(s)) end)              -- integer numbers
+--    for k in s:gmatch'%z+' do
+--        res[#res + 1] = exps[#k]
+--    end
+--    return (table.unpack or unpack)(res)
+--end
+
+-- [WIP], doesn't work with backspace chars properly
+function str2table(input)
+    local function is_digit(c)
+        return c >= '0' and c <= '9'
+    end
+    --input = tostring(input)
+    if not input then
+        return end
+    if isstring(input) then
+        input = string.gsub(input, "%[%[", "'")
+        input = string.gsub(input, "%]%]", "'")
+        input = string.gsub(input, "\"", "'")
+        input = string.gsub(input, "\b", "")    --backspace char, used in the data spreadsheet
+        --Spring.Echo("Formatted string: "..input)
+    end
+    if type(input) == 'string' then
+        local data = input
+        local pos = 0
+        function input(undo)
+            if undo then
+                pos = pos - 1
+            else
+                pos = pos + 1
+                return string.sub(data, pos, pos)
+            end
+        end
+    end
+    local c
+    repeat
+        c = input()
+    until c ~= ' ' and c ~= ','
+    if c == "'" then
+        local s = ''
+        repeat
+            c = input()
+            if c == "'" then
+                return s
+            end
+            s = s..c
+        until c == ''
+    elseif c == '-' or is_digit(c) then
+        local s = c
+        repeat
+            c = input()
+            local d = is_digit(c)
+            if d then
+                s = s..c
+            end
+        until not d
+        input(true)
+        return tonumber(s)
+    elseif c == '{' then
+        local arr = {}
+        local elem
+        repeat
+            elem = str2table(input)
+            table.insert(arr, elem)
+        until not elem
+        return arr
+    end
+end
+
+--////////////////////////
+--// MATH FUNCTIONS
+--////////////////////////
+
 function inverselerp(a, b, t)
 	--return t / (a + b) || deprecated, was used by los scaler
 
@@ -293,6 +380,101 @@ function minmax(n, min, max)
 	if n < min then
 		n = min end
 	return n
+end
+
+--////////////////////////
+--// UPGRADE FUNCTIONS
+--////////////////////////
+
+function HasTech(prereq, teamID)
+	if prereq == "" or prereq == nil then
+		return true end
+	return GG.TechCheck(prereq, teamID)
+end
+
+--////////////////////////
+--// LUA UI FUNCTIONS
+--////////////////////////
+
+--Adds or updates the command-button
+function AddUpdateCommand(unitID, cmdDesc, block)
+    local CurrentCmdDescId = spFindUnitCmdDesc(unitID, cmdDesc.id)
+    cmdDesc.disabled = block or false
+
+    if not CurrentCmdDescId then
+        spInsertUnitCmdDesc(unitID, cmdDesc.id, cmdDesc)
+    else
+        spEditUnitCmdDesc(unitID, cmdDesc.id, cmdDesc)
+    end
+end
+
+-- BlockCmdID(.., ..) or BlockCmdID(.., .., false)
+function SetCmdIDEnable(unitID, cmdID, block, orgTooltip, suffix)
+	if not isnumber(cmdID) then
+		return
+	end
+	local cmdDescId = spFindUnitCmdDesc(unitID, cmdID)
+	if not cmdDescId then
+		return end
+
+    local disable = (block == true or block == nil) -- default: disabled (blocked)
+    local cmdArray = { disabled = disable }
+
+    if disable and suffix then
+        cmdArray.tooltip = orgTooltip.."\n\n"..RedStr..suffix
+    else
+        cmdArray.tooltip = orgTooltip
+    end
+
+	--Spring.Echo(cmdID.." Disabled: "..tostring(disable))
+	spEditUnitCmdDesc(unitID, cmdDescId, cmdArray)
+end
+
+function BlockCmdID(unitID, cmdID, orgTooltip, suffix)
+    SetCmdIDEnable(unitID, cmdID, true, orgTooltip, suffix)
+end
+
+function UnblockCmdID(unitID, cmdID, orgTooltip, suffix)
+    SetCmdIDEnable(unitID, cmdID, false, orgTooltip)
+end
+
+
+function LocalAlert(unitID, msg)
+    local x, y, z = spGetUnitPosition(unitID)  --x and z on map floor, y is height
+    spMarkerAddPoint(x,y,z,msg,true)
+    spMarkerErasePosition(x,y,z)
+end
+
+function IsValidUnit(unitID)
+	local unitDefID = Spring.GetUnitDefID(unitID)
+	if unitDefID and Spring.ValidUnitID(unitID) then
+		return true
+	end
+	return false
+end
+
+function DistanceToPoint(unitID, px,py,pz)
+	if not Spring.ValidUnitID(unitID) then return end
+	if not px or not pz then return end
+
+	local ux, uy, uz = spGetUnitPosition(unitID)
+	local dx, dy ,dz = ux - px, uy - py, uz - pz
+	local dist = dx * dx + dy * dy + dz * dz
+	return dist
+end
+
+
+function Distance2D(unitID, px, pz)
+	if not Spring.ValidUnitID(unitID) then
+		return end
+	if not px or not pz then
+		Spring.Echo(" Invalid px or pz")
+		return end
+
+	local ux, _, uz = spGetUnitPosition(unitID)
+	local dx, dz = ux - px, uz - pz
+	local dist = dx * dx + dz * dz
+	return dist
 end
 
 --function indent(i, str)
