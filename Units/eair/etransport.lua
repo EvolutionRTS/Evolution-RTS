@@ -14,7 +14,7 @@ script = "etransport2.cob"
 
 
 --tech = [[tech1]]
-armortype = [[armored]]
+armortype = [[airarmored]]
 supply = [[0]]
 
 VFS.Include("units-configs-basedefs/basedefs/air/etransport_basedef.lua")

@@ -5,12 +5,16 @@ local damageClasses = {
 	-- classes with armor classes for weapons
 	damageTypes = {
 		nonexistent	= {
+			AIRLIGHT	= 0.1,
+			AIRARMORED	= 0.1,
 			ARMORED		= 0.1,
 			LIGHT		= 0.1,
 			BUILDING 	= 0.1,
 		},	
 		
 		pdlaser	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
@@ -18,12 +22,16 @@ local damageClasses = {
 		----------------------------------------------------------------------------			
 		-- Overseers with weapons
 		ecommanderbattle	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		-- Overseers with weapons
 		ecommandermeteor	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -31,26 +39,36 @@ local damageClasses = {
 		
 		-- Start H-Bots
 		ehbotpeewee	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		ehbotthud	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		ehbotsniper	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},
 		ehbotrocko	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		ehbotkarganneth	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -58,66 +76,92 @@ local damageClasses = {
 		
 		-- Start Hovers
 		eaatank	= {
+			AIRLIGHT	= 0.66,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.66,
 			BUILDING 	= 0.66,
 		},
 		eartytank	= {
+			AIRLIGHT	= 0.25,
+			AIRARMORED	= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		eartytank_saturation	= {
+			AIRLIGHT	= 0.25,
+			AIRARMORED	= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		ebomb	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		efatso	= {
+			AIRLIGHT	= 0.125,
+			AIRARMORED	= 0.125,
 			ARMORED		= 0.125,
 			LIGHT		= 0.125,
 			BUILDING 	= 1,
 		},
 		eflametank	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		elighttank3	= {
+			AIRLIGHT	= 0.6,
+			AIRARMORED	= 0.6,
 			ARMORED		= 0.60,
 			LIGHT		= 0.60,
 			BUILDING 	= 1,
 		},
 		eheavytank3	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.33,
 		},
 		emediumtank3	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},
 		emissiletank	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},	
 		eriottank2	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},		
 		eriottank2shotgun	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},	
 		elacerator	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -126,46 +170,64 @@ local damageClasses = {
 			
 		-- Start All Terrains
 		eallterrheavy	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eallterrlight	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eallterrmed	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},	
 		eallterraa	= {
+			AIRLIGHT	= 0.66,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.66,
 			BUILDING 	= 0.66,
 		},
 		eallterrriot	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eallterrriotshotgun	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},
 		eallterrassault	= {
+			AIRLIGHT	= 0.25,
+			AIRARMORED	= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		eallterranarchid = {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		eallterranarchidflame = {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -174,46 +236,64 @@ local damageClasses = {
 			
 		-- Start Amphibs
 		eamphibbuggy	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		eamphibriot	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibneedle	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibriotshotgun	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},
 		eamphibaa	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibmedtank	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		eamphibrock	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},
 		eamphibarty	= {
+			AIRLIGHT	= 0.25,
+			AIRARMORED	= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		eamphibleveler	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -222,36 +302,50 @@ local damageClasses = {
 			
 		-- Start Aircraft
 		edrone	= {
-			ARMORED		= 0.50,
-			LIGHT		= 0.50,
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 0.5,
+			ARMORED		= 0.5,
+			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		eraider	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		efighter	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},
 		egunship2	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},	
 		egunship2torpedo	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.25,
 		},	
 		ebomber	= {
+			AIRLIGHT	= 0.25,
+			AIRARMORED	= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		ekrow	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -260,16 +354,22 @@ local damageClasses = {
 			
 		-- Start Experimentals
 		eexkrabgroth	= {
+			AIRLIGHT	= 0.1,
+			AIRARMORED	= 0.1,
 			ARMORED		= 0.1,
 			LIGHT		= 0.1,
 			BUILDING 	= 1,
 		},	
 		eextankdestroyer	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		eexnukearty	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
 			BUILDING 	= 1,
@@ -278,31 +378,43 @@ local damageClasses = {
 			
 		-- Start Buildings
 		elightturret2	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		eheavyturret2	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		elaserbattery	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		elrpc	= {
+			AIRLIGHT	= 0.25,
+			AIRARMORED	= 0.25,
 			ARMORED		= 0.25,
 			LIGHT		= 0.25,
 			BUILDING 	= 1,
 		},
 		euwturret	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},
 		emine	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0,
@@ -311,31 +423,43 @@ local damageClasses = {
 		
 		-- Start Zaal
 		zlightswarm	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 1,
 			BUILDING 	= 0.5,
 		},
 		zmedswarm	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},			
 		zskirmisher	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
 		},
 		zpyro	= {
+			AIRLIGHT	= 0.5,
+			AIRARMORED	= 0.5,
 			ARMORED		= 0.5,
 			LIGHT		= 0.5,
 			BUILDING 	= 1,
 		},
 		zarty	= {
+			AIRLIGHT	= 0,
+			AIRARMORED	= 0,
 			ARMORED		= 0,
 			LIGHT		= 0,
 			BUILDING 	= 1,
 		},
 		zassault	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -344,16 +468,22 @@ local damageClasses = {
 		
 		-- Start Miscellaneous
 		queenbeam	= {
+			AIRLIGHT	= 0.1,
+			AIRARMORED	= 0.1,
 			ARMORED		= 0.1,
 			LIGHT		= 0.1,
 			BUILDING 	= 1,
 		},	
 		queenflames	= {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
 		},	
 		queencannon = {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 0.1,
@@ -361,6 +491,8 @@ local damageClasses = {
 			
 			-- End Miscellaneous
 		default = {
+			AIRLIGHT	= 1,
+			AIRARMORED	= 1,
 			ARMORED		= 1,
 			LIGHT		= 1,
 			BUILDING 	= 1,
@@ -368,6 +500,8 @@ local damageClasses = {
 	},
 	
 	armorDefs = {
+		"AIRLIGHT"
+		"AIRARMORED"
 		"LIGHT", 
 		"ARMORED",
 		"BUILDING", 

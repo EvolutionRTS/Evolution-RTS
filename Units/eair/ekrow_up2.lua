@@ -14,7 +14,7 @@ script = "ekrow.cob"
 
 
 tech = [[tech3]]
-armortype = [[light]]
+armortype = [[airlight]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/air/ekrow_basedef.lua")
 
