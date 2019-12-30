@@ -42,7 +42,7 @@ local damageClasses = {
 		},
 		ehbotsniper	= {
 			ARMORED		= 1,
-			LIGHT		= 1,
+			LIGHT		= 0.5,
 			BUILDING 	= 0.5,
 		},
 		ehbotrocko	= {
