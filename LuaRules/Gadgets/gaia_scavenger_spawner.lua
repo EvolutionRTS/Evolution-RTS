@@ -381,7 +381,7 @@ function gadget:GameFrame(n)
 				end
 				--spawn units
 				if canSpawnHere then
-					Spring.Echo("Spawning Scav Group")
+					--Spring.Echo("Spawning Scav Group")
 					local groupsize = (((n)+#Spring.GetAllUnits())*spawnmultiplier*teamcount)/(#Spring.GetAllyTeamList())
 					if Spring.GetGameSeconds() < 450 then
 						spawnunit = T0Units[math.random(1,#T0Units)]
