@@ -414,7 +414,7 @@ end
 
 function changeMusicVolume(value)
 	music_volume = value
-	Spring.SetConfigInt("snd_volmusic", music_volume * 0.5)
+	Spring.SetConfigInt("snd_volmusic", music_volume * 0.25)
   createList()
 end
 
