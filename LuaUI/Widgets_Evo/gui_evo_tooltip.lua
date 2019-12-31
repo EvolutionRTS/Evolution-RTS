@@ -174,7 +174,7 @@ for unitDefID = 1, #UnitDefs do
 end
 --
 
-local weaponTypeToStr = { "Armored", "Building", "Light" }
+local weaponTypeToStr = { "Armored", "Building", "Light", "AirLight", "AirArmored" }
 
 local frameSkip = 4       -- draw once every frameSkip+1 frames 
 local counter = 0
@@ -306,7 +306,7 @@ end]]
 
 -- generates weapon data string for unit
 local function GetUnitTotalDamageEnergyMaxRange(ud)
-	local damages, paralyzeDamages = { 0, 0, 0 }, { 0, 0, 0 }
+	local damages, paralyzeDamages = { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }
 	damages[0], paralyzeDamages[0] = 0, 0
 	local hasDamage, hasParalyzDamage = false, false
 	local maxRange, totalEnergyCost = 0, 0
@@ -492,7 +492,9 @@ local function GetTooltipArmor(ud)
 	local str = ud.customParams.armortype
 	if str == "light" then return "Light"
 	elseif str == "armored" then return "Armored"
-	elseif str == "building" then return "Building" end
+	elseif str == "building" then return "Building"
+	elseif str == "airlight" then return "Aircraft Light"
+	elseif str == "airarmored" then return "Aircraft Armored" end
 	return "Default"
 end
 -- get tooltip for resource upkeeps

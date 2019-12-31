@@ -118,10 +118,10 @@ local damageClasses = {
 			BUILDING 	= 1,
 		},
 		elighttank3	= {
-			AIRLIGHT	= 0.6,
+			AIRLIGHT	= 1,
 			AIRARMORED	= 0.6,
-			ARMORED		= 0.60,
-			LIGHT		= 0.60,
+			ARMORED		= 0.6,
+			LIGHT		= 0.6,
 			BUILDING 	= 1,
 		},
 		eheavytank3	= {
@@ -502,9 +502,9 @@ local damageClasses = {
 	armorDefs = {
 		"AIRLIGHT",
 		"AIRARMORED",
-		"LIGHT", 
+		"LIGHT",
 		"ARMORED",
-		"BUILDING", 
+		"BUILDING",
 	},
 } 
 return damageClasses;
