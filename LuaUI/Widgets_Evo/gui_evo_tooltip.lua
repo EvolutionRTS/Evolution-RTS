@@ -367,7 +367,7 @@ function GetTooltipWeaponData(ud)
 		if hasDamage then
 			NewTooltip = NewTooltip .. white .. "Damage/s: "
 			for i = 1, #damages do -- actually ignore default
-				local reorder = (i + 1) % 3 + 1
+				local reorder = (i + 1) % 5 + 1
 				if damages[reorder] > 0 then NewTooltip = NewTooltip .. weaponDamageColour .. FormatNbr(damages[reorder], 1) .. white .. " (" .. weaponTypeToStr[reorder] .. ") / " end
 			end
 			NewTooltip = NewTooltip:sub(1, -4)
@@ -375,7 +375,7 @@ function GetTooltipWeaponData(ud)
 		if hasParalyzDamage then
 			NewTooltip = NewTooltip .. white .. "Paralyze/s: "
 			for i = 1, #paralyzeDamages do -- actually ignore default
-				local reorder = (i + 1) % 3 + 1
+				local reorder = (i + 1) % 5 + 1
 				if paralyzeDamages[reorder] > 0 then NewTooltip = NewTooltip .. weaponParalyzeColour .. FormatNbr(paralyzeDamages[reorder], 1) .. white .. " (" .. weaponTypeToStr[reorder] .. ") / " end
 			end
 			NewTooltip = NewTooltip:sub(1, -4)
