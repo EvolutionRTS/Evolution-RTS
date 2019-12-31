@@ -500,8 +500,8 @@ local damageClasses = {
 	},
 	
 	armorDefs = {
-		"AIRLIGHT"
-		"AIRARMORED"
+		"AIRLIGHT",
+		"AIRARMORED",
 		"LIGHT", 
 		"ARMORED",
 		"BUILDING", 
