@@ -280,6 +280,17 @@ local options= {
 		-- (step <= 0) means that there is no quantization
 	},
 	{
+		key    = 'scavengers',
+		name   = 'Scavenger amount',
+		desc   = 'This multiplier will be applied on the amount of civilians a map will end up with',
+		type   = 'number',
+		section= 'gameplayoptions',
+		def    = 1,
+		min    = 0,
+		max    = 5,
+		step   = 0.1,
+	},
+	{
 		key="deathmode",
 		name="Game End Mode",
 		desc="What it takes to eliminate a team",
