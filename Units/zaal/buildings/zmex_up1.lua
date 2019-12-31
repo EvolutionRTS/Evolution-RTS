@@ -1,23 +1,29 @@
--- UNITDEF -- ZHATCH --
+-- UNITDEF -- ZMEX_UP1 --
 --------------------------------------------------------------------------------
 
-unitName = [[zhatch]]
+unitName = [[zmex_up1]]
 
 --------------------------------------------------------------------------------
 
-metalMultiplier = 1
+metalMultiplier = 1.33
 
-buildCostMetal = 50
+energyUse = 2
 
-humanName = [[Zaal Hatchery]]
+buildCostMetal = 100
 
-objectName = [[zaal/zfactory.s3o]]
-script = [[zaal/zfactory.cob]]
+yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 
-techprovided = [[tech1, tech0]]
+primaryCEG = "custom:fusionreactionnuclear-2color"
+
+humanName = [[Zaal Metal Extractor Mk II]]
+
+objectName = [[zaal/zmex.s3o]]
+script = [[zaal/zmex.cob]]
+
+tech = [[tech1]]
 armortype = [[building]]
 
-VFS.Include("units-configs-basedefs/basedefs/zaal/zhive_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/zaal/zmex_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------

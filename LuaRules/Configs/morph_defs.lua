@@ -53,17 +53,17 @@ local timeToBuild_etech2 = energyCost_etech2 * 0.10
 local energyCost_etech3 = 4000
 local timeToBuild_etech3 = energyCost_etech3 * 0.10
 
-local energyCost_zlair = 0
-local timeToBuild_zlair = 200
+local energyCost_zlair = 600
+local timeToBuild_zlair = energyCost_zlair * 0.20
 
-local energyCost_zhive = 0
-local timeToBuild_zhive = 500
+local energyCost_zhive = 2000
+local timeToBuild_zhive = energyCost_zhive * 0.20
 
-local energyCost_zespire4 = 0
-local timeToBuild_zespire4 = 40
+local energyCost_zespire4 = 200
+local timeToBuild_zespire4 = energyCost_zespire4 * 0.20
 
-local energyCost_zespire5 = 0
-local timeToBuild_zespire5 = 40
+local energyCost_zespire5 = 200
+local timeToBuild_zespire5 = energyCost_zespire5 * 0.20
 
 local energyCost_elightturret2 = 150
 local timeToBuild_elightturret2 = energyCost_elightturret2 * 0.10
@@ -76,6 +76,9 @@ local timeToBuild_euwturret = energyCost_euwturret * 0.10
 
 local energyCost_emetalextractor_up1 = 400
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
+
+local energyCost_zmex_up1 = 200
+local timeToBuild_zmex_up1 = energyCost_zmex_up1 * 0.20
 
 local energyCost_xmetalextractor = 1200
 local timeToBuild_xmetalextractor = energyCost_xmetalextractor * 0.10
@@ -442,6 +445,42 @@ Overseer]],
 			time = timeToBuild_emetalextractor_up1,
 			cmdname = [[Evolve]],
 			energy = energyCost_emetalextractor_up1,
+			metal = 0,
+			text = [[x2 Metal Extraction rate]],
+			require = [[tech3]],
+		},
+	},
+	zmex = 	{
+		{
+			into = 'zmex_up1',
+			--require = 'etech2',
+			time = timeToBuild_zmex_up1,
+			cmdname = [[Evolve]],
+			energy = energyCost_zmex_up1,
+			metal = 0,
+			text = [[x1.33 Metal Extraction rate]],
+			require = [[tech1]],
+		},
+	},
+	zmex_up1 = 	{
+		{
+			into = 'zmex_up2',
+			--require = 'etech2',
+			time = timeToBuild_zmex_up1,
+			cmdname = [[Evolve]],
+			energy = energyCost_zmex_up1,
+			metal = 0,
+			text = [[x1.66 Metal Extraction rate]],
+			require = [[tech2]],
+		},
+	},
+	zmex_up2 = 	{
+		{
+			into = 'zmex_up3',
+			--require = 'etech2',
+			time = timeToBuild_zmex_up1,
+			cmdname = [[Evolve]],
+			energy = energyCost_zmex_up1,
 			metal = 0,
 			text = [[x2 Metal Extraction rate]],
 			require = [[tech3]],

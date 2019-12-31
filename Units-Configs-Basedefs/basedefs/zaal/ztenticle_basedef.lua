@@ -1,11 +1,11 @@
 unitDef                    = {
 
 	buildCostEnergy              = 0,
-	buildCostMetal               = 1000,
+	buildCostMetal               = buildCostMetal,
 	buildDistance                = buildDistance,
 	builder                      = true,
 	buildTime                    = 5,
-	buildpic					 = "zaal_unitpics/zarm.png",
+	buildpic					 = "zaal_unitpics/ztenticle.png",
 	blocking					 = true,
 	CanAttack			         = true,
 	CanAssist			         = true,
@@ -27,8 +27,8 @@ unitDef                    = {
 	energyUse                    = 0,
 	explodeAs                    = "BUG_DEATH_MEDIUM",
 	floater			              = true,
-	footprintX                   = 6,
-	footprintZ                   = 6,
+	footprintX                   = 3,
+	footprintZ                   = 3,
 	iconType                     = "engineer",
 	autoHeal					 = 10,
 	idleAutoHeal                 = 25,
@@ -58,8 +58,8 @@ unitDef                    = {
 	seismicSignature             = 2,
 	unitname                     = unitName,
 	upright                      = true,
-	yardmap 					 = "oooooo oooooo oooooo oooooo oooooo oooooo",
-	workerTime                   = 2,
+	yardmap 					 = "ooo ooo ooo",
+	workerTime                   = 1,
 	TerraformSpeed               = 2147000,
 	usePieceCollisionVolumes	 = true,
 	sfxtypes                     = { 
@@ -71,7 +71,6 @@ unitDef                    = {
 			"custom:blood_spray",
 		},
 	},
-	buildoptions                 = Shared.buildListZaalArm,
 	sounds                       = {
 		underattack              = "other/unitsunderattack1",
 		ok                       = {
@@ -81,18 +80,8 @@ unitDef                    = {
 			"BugSelect",
 		},
 	},
-	weapons                       = {
-		[1]                       = {
-			def                   = "spores1",
-			--onlyTargetCategory    = "VTOL",
-		},
-	},
 	customParams                 = {
-		iscommander              = true,
-		shownametag				 = true,
-		noalert					 = false,
 		unittype				 = "building",
-		area_mex_def			 = "zmex",
 		ProvideTech               = techprovided,
 		canbetransported 		 = "false",
 		needed_cover             = 1,
@@ -103,47 +92,9 @@ unitDef                    = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "zgroundtexture.dds",
-	BuildingGroundDecalSizeX      = 10,
-	BuildingGroundDecalSizeY      = 10,
+	BuildingGroundDecalSizeX      = 5,
+	BuildingGroundDecalSizeY      = 5,
 	BuildingGroundDecalDecaySpeed = 0.9,
-}
-
-weaponDefs                  = {
-	spores1 = {
-		areaofeffect = 1,
-		cegTag                   = "gunshiptrail-optimized",
-		explosiongenerator 		 = "custom:chickenspike-large-sparks-burn",
-		avoidFriendly				= false,
-		avoidFeature				= false,
-		collideFriendly				= false,
-		collideFeature				= false,
-		--canAttackGround 			= false,
-		flighttime 					= 5,
-		impulsefactor 				= 0,
-		name 						= "Missiles",
-		noselfdamage 				= true,
-		proximitypriority 			= 3,
-		range 						= 2500,
-		reloadtime 					= 2.5,
-		smoketrail 					= false,
-		soundhit 					= "ChickenDefenseSounds/e25",
-		startvelocity 				= 200,
-		tolerance 					= 10000,
-		tracks 						= true,
-		turnrate 					= 48000,
-		turret 						= true,
-		waterweapon 				= true,
-		weaponacceleration 			= 200,
-		weapontype 					= "MissileLauncher",
-		weaponvelocity 				= 2500,
-		customparams             = {
-			damagetype		     = "default",
-			nofriendlyfire	     = 1,
-		}, 
-		damage = {
-			default = 1000,
-		},
-	},
 }
 
 --------------------------------------------------------------------------------

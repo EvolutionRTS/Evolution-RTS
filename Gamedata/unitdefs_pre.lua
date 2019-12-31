@@ -71,7 +71,9 @@ Shared.buildListZaal = {
 }
 
 Shared.buildListZaalArm = {
+	[[ztenticle]],
 	[[zhatch]],
+	[[zmex]],
 	[[zespire1]],
 	[[ztiberium]],
 }

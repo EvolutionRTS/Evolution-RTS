@@ -1,35 +1,18 @@
--- UNITDEF -- ZHIVE --
+-- UNITDEF -- ZHATCH_UP2 --
 --------------------------------------------------------------------------------
 
 unitName = [[zhatch_up2]]
 
 --------------------------------------------------------------------------------
 
-builder = true
+metalMultiplier = 1
 
-metalMultiplier = 2
-buildSpeedModifier = 2
-
-buildCostMetal = 800
-energyUse = 0
-energyMake = 0
-
-metalStorage = 0
-energyStorage = 0
-
-supplygranted = 0
-
-footprintX = 8
-footprintZ = 8
-
-yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
-
-primaryCEG = "custom:fusionreactionnuclear-4color"
+buildCostMetal = 300
 
 humanName = [[Zaal Hive]]
 
-objectName = [[zaal/zhive.s3o]]
-script = [[zaal/zhive.cob]]
+objectName = [[zaal/zfactory_up2.s3o]]
+script = [[zaal/zfactory.cob]]
 
 techprovided = [[tech3, tech2, tech1, tech0]]
 armortype = [[building]]

@@ -1,35 +1,18 @@
--- UNITDEF -- ZLAIR --
+-- UNITDEF -- ZHATCH_UP1 --
 --------------------------------------------------------------------------------
 
 unitName = [[zhatch_up1]]
 
 --------------------------------------------------------------------------------
 
-builder = true
+metalMultiplier = 1
 
-metalMultiplier = 1.5
-buildSpeedModifier = 1.5
-
-buildCostMetal = 400
-energyUse = 0
-energyMake = 0
-
-metalStorage = 0
-energyStorage = 0
-
-supplygranted = 0
-
-footprintX = 8
-footprintZ = 8
-
-yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
-
-primaryCEG = "custom:fusionreactionnuclear-3color"
+buildCostMetal = 150
 
 humanName = [[Zaal Lair]]
 
-objectName = [[zaal/zhive.s3o]]
-script = [[zaal/zhive.cob]]
+objectName = [[zaal/zfactory_up1.s3o]]
+script = [[zaal/zfactory.cob]]
 
 techprovided = [[tech2, tech1, tech0]]
 armortype = [[building]]
@@ -40,5 +23,3 @@ unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName]    = unitDef })
-
---------------------------------------------------------------------------------

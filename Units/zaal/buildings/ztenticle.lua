@@ -1,22 +1,23 @@
--- UNITDEF -- ztiberium --
+-- UNITDEF -- ztenticle --
 --------------------------------------------------------------------------------
 
-unitName = "ztiberium"
+unitName = "ztenticle"
 
 --------------------------------------------------------------------------------
-supplygranted = 25
-storage = 25
 
-humanName = "Tiberium Supply/Storage"
+buildDistance = 65000
+buildCostMetal = 40
 
-objectName = "zaal/ztiberium.s3o"
-script = "zaal/ztiberium.cob"
+humanName = "Tenticle"
+
+objectName = "zaal/ztenticle.s3o"
+script = "zaal/ztenticle_lus.lua"
 
 armortype = [[building]]
-tech = [[tech0]]
 
-VFS.Include("units-configs-basedefs/basedefs/zaal/ztiberium_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/zaal/ztenticle_basedef.lua")
 	
+unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName]    = unitDef })
