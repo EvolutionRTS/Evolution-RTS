@@ -35,27 +35,9 @@ local function AddFaction(ud,faction,scaned)
 end
 
 
---[[
 for i,sideData in ipairs(sides) do
   AddFaction(UnitDefNames[sideData.startUnit],sideData.sideName,{})
 end
---]]
-
-
-AddFaction(UnitDefNames['ecommander'],'outer_colonies',{})
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-
-for udid,udef in ipairs(UnitDefs) do
-  if ((#udef.factions)==0) then
-    local lowname = udef.name:lower()
-    if (lowname:sub(1,3)=='cor') then
-      AddFaction(udef,'core',{})
-    elseif (lowname:sub(1,3)=='arm') then
-      AddFaction(udef,'arm',{})
-    elseif (lowname:sub(1,5)=='chick') then
-      AddFaction(udef,'chicken',{})
-    end
-  end
-end

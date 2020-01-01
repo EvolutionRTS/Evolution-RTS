@@ -95,9 +95,9 @@ local function GetStartUnit(teamID)
 		math.random(); math.random(); math.random()
 		local sidedata = factionDefComms[math.random(0,2)]
 		if sidedata == nil then
-			Spring.Echo("faction: nil")
+			Spring.Echo("[Game Spawn] AI Faction: nil")
 		else
-			Spring.Echo("faction: " .. sidedata)
+			Spring.Echo("[Game Spawn] AI Faction: " .. sidedata)
 		end
 
 		local aiCommData = aiStartUnits[sidedata] or {}
@@ -118,7 +118,25 @@ end
 
 local function SpawnStartUnit(teamID)
 	local startUnit = GetStartUnit(teamID)
+
 	if (startUnit and startUnit ~= "") then
+	
+		if startUnit == "ecommander" then
+			playerFaction = "ateran"
+		end
+		if startUnit == "zarm" then
+			playerFaction = "zaal"
+		end
+		if startUnit == "xcommander" then
+			playerFaction = "pattern"
+		end
+		if startUnit == nil then
+			playerFaction = "Script is Fucked"
+		end
+		
+		Spring.Echo("[Game Spawn] My starting faction is " .. playerFaction)
+		Spring.SetTeamRulesParam(teamID, "faction", playerFaction)
+	
 		-- spawn the specified start unit
 		local x,y,z = Spring.GetTeamStartPosition(teamID)
 		if IsTeamAI(teamID) then
@@ -170,7 +188,7 @@ local function SpawnStartUnit(teamID)
 		Spring.SetTeamResource(teamID, "es", tonumber(e)) --Use tonumber(e) to have it match the startenergy amounts
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", tonumber(e))
-	end
+	end	
 end
 
 function gadget:RecvLuaMsg(msg, playerID)
