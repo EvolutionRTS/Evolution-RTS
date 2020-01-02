@@ -91,6 +91,7 @@ Shared.buildListXCommander = {
 	[[xllt]],
 	[[xrocketturret]],
 	[[xantinuke]],
+	[[xnukesilo]],
 }
 
 Shared.buildListXKLab = {
