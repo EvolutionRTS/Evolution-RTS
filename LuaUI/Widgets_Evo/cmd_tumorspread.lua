@@ -18,10 +18,9 @@ function widget:GameFrame(n)
         myFaction = Spring.GetTeamRulesParam(myTeamID, "faction", playerFaction)
         --Spring.Echo("[Ambient Background Sound Player] Player faction is " .. myFaction)
 		
-		--if myFaction ~= "zaal" then
-			--Spring.Echo("Tumor Spread widget removed")
-			--widgetHandler:RemoveWidget(self)
-		--end
+		if myFaction ~= "zaal" then
+			widgetHandler:RemoveWidget(self)
+		end
     end
 	
 
@@ -46,7 +45,6 @@ function widget:UnitFinished(unitID, unitDefID, unitTeam)
 		local buildpos2Y = Spring.GetGroundHeight(buildpos2X, buildpos2Z)
 		local buildpos3Y = Spring.GetGroundHeight(buildpos3X, buildpos3Z)
 		local buildpos4Y = Spring.GetGroundHeight(buildpos4X, buildpos4Z)
-		Spring.Echo(#Spring.GetUnitsInCylinder(buildpos1X,buildpos1Z,10))
 		if #Spring.GetUnitsInCylinder(buildpos1X,buildpos1Z,250) < 1 then
 			Spring.GiveOrderToUnit(unitID, -unitDefID , {buildpos1X, buildpos1Y, buildpos1Z, 0}, {"shift"})
 		end
