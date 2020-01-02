@@ -123,16 +123,18 @@ local function SpawnStartUnit(teamID)
 	
 		if startUnit == "ecommander" then
 			playerFaction = "ateran"
-		end
-		if startUnit == "zarm" then
+		elseif startUnit == "zarm" then
 			playerFaction = "zaal"
-		end
-		if startUnit == "xcommander" then
+		elseif startUnit == "xcommander" then
 			playerFaction = "pattern"
-		end
-		if startUnit == nil then
+		elseif startUnit == nil then
 			playerFaction = "Script is Fucked"
+		else
+			playerFaction = startUnit
+			Spring.Echo("[Game Spawn] If you're seeing this message that means that the code which sets the player's faction is absolutely fucked somewhere. On the next line I will echo the playerFaction variable. If it says anything other than the factions listed above, at least ti will provide a clue.")
+			Spring.Echo(playerFaction)
 		end
+		
 		
 		Spring.Echo("[Game Spawn] My starting faction is " .. playerFaction)
 		Spring.SetTeamRulesParam(teamID, "faction", playerFaction)
