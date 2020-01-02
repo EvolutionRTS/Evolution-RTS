@@ -37,7 +37,7 @@ function widget:GameFrame(n)
 		if myFaction == nil then
 			Spring.Echo("[Ambient Background Sound Player] If you're seeing this message that means that the code which sets the player's faction is absolutely fucked somewhere. On the next line I will echo the myFaction variable (It will be nil). If it says anything other than the factions listed in game_spawn.lua (it will), at least it will provide a clue. Additionally I will manually set the player faction to ateran so that it doesn't crash and burn. Happy bug hunting!")
 			Spring.Echo(myFaction)
-			myFaction == "ateran"
+			myFaction = "ateran"
 		else
 			Spring.Echo("[Ambient Background Sound Player] Player faction is " .. myFaction)
 		end
