@@ -21,11 +21,21 @@ ScavengerBlueprintsT0 = {}
 ScavengerBlueprintsT1 = {}
 ScavengerBlueprintsT2 = {}
 ScavengerBlueprintsT3 = {}
+ScavengerConstructorBlueprintsT0 = {}
+ScavengerConstructorBlueprintsT1 = {}
+ScavengerConstructorBlueprintsT2 = {}
+ScavengerConstructorBlueprintsT3 = {}
 
 ConfigsList = VFS.DirList('LuaRules/Configs/ScavengerBlueprints/','*.lua')
 for i = 1,#ConfigsList do
 	VFS.Include(ConfigsList[i])
 	Spring.Echo("Direction: " ..ConfigsList[i])
+end
+
+ConfigsList2 = VFS.DirList('LuaRules/Configs/ScavengerBlueprints/Constructor/','*.lua')
+for i = 1,#ConfigsList2 do
+	VFS.Include(ConfigsList2[i])
+	Spring.Echo("Direction: " ..ConfigsList2[i])
 end
 
 ------------------------------------------------------------------------
@@ -44,7 +54,7 @@ end
 local failcounter = 0
 --local discoscavengers = tonumber(Spring.GetModOptions().discoscavengers) or 0
 
-local BonusUnits = {"eorb", "ehbotengineer", "ebox", "escoutdrone", "eallterrshield", "zairscout",}
+local BonusUnits = {"scavcommanderateran", "eorb", "ehbotengineer", "ebox", "escoutdrone", "eallterrshield", "zairscout",}
 
 local T0Units = {
 -- Z
@@ -202,6 +212,7 @@ local dz = {}
 local olddx = {}
 local olddy = {}
 local olddz = {}
+local isScavCommander = {}
 local selfdestructcounter = 0
 local posx = 0
 local posy = 0
@@ -209,8 +220,10 @@ local posz = 0
 local posradius = 0
 local canSpawnHere = false
 local canBuildHere = false
+local canConstructHere = false
 local blueprint = 0
 local radiusCheck = false
+local FailedToGiveBlueprint = 0
 
 
 
@@ -224,6 +237,16 @@ function gadget:Initialize()
 	-- end
 
 end
+
+-- function gadget:UnitCreated(unitID, unitDefID, unitTeam)
+	-- if unitTeam == GaiaTeamID then
+		-- if string.find(UnitDefs[unitDefID].name,"scavcommander") then
+			-- isScavCommander[unitID] = true
+		-- else
+			-- isScavCommander[unitID] = false
+		-- end
+	-- end
+-- end
 
 local function posCheck(posx, posy, posz, posradius)
 	-- if true then can spawn
@@ -312,55 +335,55 @@ function gadget:GameFrame(n)
 			Spring.SetTeamResource(GaiaTeamID, "m", 100000)
 			Spring.SetTeamResource(GaiaTeamID, "e", 100000)
 		end
-		if n%90 == 0 and n > 3000 then
-			local gaiaUnitCount = Spring.GetTeamUnitCount(GaiaTeamID)
-			local spawnchance = math.random(0,20)
-			if spawnchance == 0 or canBuildHere == false then
-				posx = math.random(200,mapsizeX-200)
-				posz = math.random(200,mapsizeZ-200)
-				posy = Spring.GetGroundHeight(posx, posz)
-				--blueprint = ScavengerBlueprintsStart[math.random(1,#ScavengerBlueprintsStart)]
-				if n > 54000 then
-					local r = math.random(0,1)
-					if r == 0 then
-						blueprint = ScavengerBlueprintsT3[math.random(1,#ScavengerBlueprintsT3)]
-					else
-						blueprint = ScavengerBlueprintsT2[math.random(1,#ScavengerBlueprintsT2)]
-					end
-				elseif n > 36000 then
-					local r = math.random(0,2)
-					if r == 0 then
-						blueprint = ScavengerBlueprintsT2[math.random(1,#ScavengerBlueprintsT2)]
-					elseif r == 1 then
-						blueprint = ScavengerBlueprintsT1[math.random(1,#ScavengerBlueprintsT1)]
-					else
-						blueprint = ScavengerBlueprintsT0[math.random(1,#ScavengerBlueprintsT0)]
-					end
-				elseif n > 18000 then
-					local r = math.random(0,1)
-					if r == 0 then
-						blueprint = ScavengerBlueprintsT1[math.random(1,#ScavengerBlueprintsT1)]
-					else
-						blueprint = ScavengerBlueprintsT0[math.random(1,#ScavengerBlueprintsT0)]
-					end
-				else
-					blueprint = ScavengerBlueprintsT0[math.random(1,#ScavengerBlueprintsT0)]
-				end
-				posradius = blueprint(posx, posy, posz, GaiaTeamID, true)
-				canBuildHere = posLosCheck(posx, posy, posz, posradius)
-				if canBuildHere then
-					canBuildHere = posOccupied(posx, posy, posz, posradius)
-				end
-				if canBuildHere then
-					canBuildHere = posCheck(posx, posy, posz, posradius)
-				end
+		-- if n%90 == 0 and n > 3000 then
+			-- local gaiaUnitCount = Spring.GetTeamUnitCount(GaiaTeamID)
+			-- local spawnchance = math.random(0,20)
+			-- if spawnchance == 0 or canBuildHere == false then
+				-- posx = math.random(200,mapsizeX-200)
+				-- posz = math.random(200,mapsizeZ-200)
+				-- posy = Spring.GetGroundHeight(posx, posz)
+				-- --blueprint = ScavengerBlueprintsStart[math.random(1,#ScavengerBlueprintsStart)]
+				-- if n > 54000 then
+					-- local r = math.random(0,1)
+					-- if r == 0 then
+						-- blueprint = ScavengerBlueprintsT3[math.random(1,#ScavengerBlueprintsT3)]
+					-- else
+						-- blueprint = ScavengerBlueprintsT2[math.random(1,#ScavengerBlueprintsT2)]
+					-- end
+				-- elseif n > 36000 then
+					-- local r = math.random(0,2)
+					-- if r == 0 then
+						-- blueprint = ScavengerBlueprintsT2[math.random(1,#ScavengerBlueprintsT2)]
+					-- elseif r == 1 then
+						-- blueprint = ScavengerBlueprintsT1[math.random(1,#ScavengerBlueprintsT1)]
+					-- else
+						-- blueprint = ScavengerBlueprintsT0[math.random(1,#ScavengerBlueprintsT0)]
+					-- end
+				-- elseif n > 18000 then
+					-- local r = math.random(0,1)
+					-- if r == 0 then
+						-- blueprint = ScavengerBlueprintsT1[math.random(1,#ScavengerBlueprintsT1)]
+					-- else
+						-- blueprint = ScavengerBlueprintsT0[math.random(1,#ScavengerBlueprintsT0)]
+					-- end
+				-- else
+					-- blueprint = ScavengerBlueprintsT0[math.random(1,#ScavengerBlueprintsT0)]
+				-- end
+				-- posradius = blueprint(posx, posy, posz, GaiaTeamID, true)
+				-- canBuildHere = posLosCheck(posx, posy, posz, posradius)
+				-- if canBuildHere then
+					-- canBuildHere = posOccupied(posx, posy, posz, posradius)
+				-- end
+				-- if canBuildHere then
+					-- canBuildHere = posCheck(posx, posy, posz, posradius)
+				-- end
 			
-				if canBuildHere then
-					-- let's do this shit
-					blueprint(posx, 5000, posz, GaiaTeamID, false)
-				end
-			end
-		end
+				-- if canBuildHere then
+					-- -- let's do this shit
+					-- blueprint(posx, 5000, posz, GaiaTeamID, false)
+				-- end
+			-- end
+		-- end
 			
 		if n%30 == 0 and n > 5400 then
 			local gaiaUnitCount = Spring.GetTeamUnitCount(GaiaTeamID)
@@ -411,9 +434,9 @@ function gadget:GameFrame(n)
 					local scav = scavengerunits[i]
 					local scavDef = Spring.GetUnitDefID(scav)
 					local scavStructure = UnitDefs[scavDef].isBuilding
-					-- if UnitDefs[scavDef].name == "cormaw" or UnitDefs[scavDef].name == "armclaw" or UnitDefs[scavDef].name == "cornanotc" or UnitDefs[scavDef].name == "armnanotc" then
-						-- scavStructure = true
-					-- end
+					if string.find(UnitDefs[scavDef].name, "scavcommander") then
+						scavStructure = true
+					end
 					if not scavStructure and n%900 == 0 then
 						if dx[scav] then
 							olddx[scav] = dx[scav]
@@ -430,12 +453,64 @@ function gadget:GameFrame(n)
 							selfdestructcounter = selfdestructcounter + 1
 						end
 					end
-					if not scavStructure and Spring.GetCommandQueue(scav, 0) <= 1 then
-						local nearest = Spring.GetUnitNearestEnemy(scav, 200000, false)
-						local x,y,z = Spring.GetUnitPosition(nearest)
-						local x = x + math.random(-50,50)
-						local z = z + math.random(-50,50)
-						Spring.GiveOrderToUnit(scav, CMD.FIGHT,{x,y,z}, {})
+					if (not scavStructure and Spring.GetCommandQueue(scav, 0) <= 1) or (string.find(UnitDefs[scavDef].name, "scavcommander") and Spring.GetCommandQueue(scav, 0) <= 1) then
+						
+						if string.find(UnitDefs[scavDef].name,"scavcommander") then
+							local x,y,z = Spring.GetUnitPosition(scav)
+							local posx = math.random(x-1000,x+1000)
+							local posz = math.random(z-1000,z+1000)
+							local posy = Spring.GetGroundHeight(posx, posz)
+							if n > 54000 then
+								local r = math.random(0,1)
+								if r == 0 then
+									blueprint = ScavengerConstructorBlueprintsT3[math.random(1,#ScavengerConstructorBlueprintsT3)]
+								else
+									blueprint = ScavengerConstructorBlueprintsT2[math.random(1,#ScavengerConstructorBlueprintsT2)]
+								end
+							elseif n > 36000 then
+								local r = math.random(0,2)
+								if r == 0 then
+									blueprint = ScavengerConstructorBlueprintsT2[math.random(1,#ScavengerConstructorBlueprintsT2)]
+								elseif r == 1 then
+									blueprint = ScavengerConstructorBlueprintsT1[math.random(1,#ScavengerConstructorBlueprintsT1)]
+								else
+									blueprint = ScavengerConstructorBlueprintsT0[math.random(1,#ScavengerConstructorBlueprintsT0)]
+								end
+							elseif n > 18000 then
+								local r = math.random(0,1)
+								if r == 0 then
+									blueprint = ScavengerConstructorBlueprintsT1[math.random(1,#ScavengerConstructorBlueprintsT1)]
+								else
+									blueprint = ScavengerConstructorBlueprintsT0[math.random(1,#ScavengerConstructorBlueprintsT0)]
+								end
+							else
+								blueprint = ScavengerConstructorBlueprintsT0[math.random(1,#ScavengerConstructorBlueprintsT0)]
+							end
+
+							posradius = blueprint(scav, posx, posy, posz, GaiaTeamID, true)
+							canConstructHere = posOccupied(posx, posy, posz, posradius)
+							if canConstructHere then
+								canConstructHere = posCheck(posx, posy, posz, posradius)
+							end
+							if canConstructHere then
+								-- let's do this shit
+								blueprint(scav, posx, posy, posz, GaiaTeamID, false)
+								local x = math.random(100,mapsizeX-100)
+								local z = math.random(100,mapsizeZ-100)
+								local y = Spring.GetGroundHeight(x,z)
+								Spring.GiveOrderToUnit(scav, CMD.MOVE,{x,y,z}, {"shift"})
+								local x = math.random(x-100,x+100)
+								local z = math.random(z-100,z+100)
+								local y = Spring.GetGroundHeight(x,z)
+								Spring.GiveOrderToUnit(scav, CMD.MOVE,{x,y,z}, {"shift"})
+							end
+						else
+							local nearest = Spring.GetUnitNearestEnemy(scav, 200000, false)
+							local x,y,z = Spring.GetUnitPosition(nearest)
+							local x = x + math.random(-50,50)
+							local z = z + math.random(-50,50)
+							Spring.GiveOrderToUnit(scav, CMD.FIGHT,{x,y,z}, {"shift"})
+						end
 					end
 				end
 				if selfdestructcounter and selfdestructcounter > 0 and devswitch == 1 then
@@ -455,5 +530,6 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 		olddx[unitID] = nil
 		olddy[unitID] = nil
 		olddz[unitID] = nil
+		isScavCommander[unitID] = nil
 	end
 end
