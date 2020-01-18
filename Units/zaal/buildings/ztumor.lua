@@ -5,7 +5,7 @@ unitName = "ztumor"
 
 --------------------------------------------------------------------------------
 
-buildDistance = 500
+buildDistance = 1500
 
 humanName = "Tumor"
 

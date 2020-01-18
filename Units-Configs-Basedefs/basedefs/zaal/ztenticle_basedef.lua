@@ -92,8 +92,8 @@ unitDef                    = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "zgroundtexture.dds",
-	BuildingGroundDecalSizeX      = 5,
-	BuildingGroundDecalSizeY      = 5,
+	BuildingGroundDecalSizeX      = 14,
+	BuildingGroundDecalSizeY      = 14,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 

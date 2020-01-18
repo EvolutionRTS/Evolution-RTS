@@ -164,7 +164,7 @@ function UnitDef_Post(name, uDef)
 			uDef.buildinggrounddecaltype = "groundplate.dds"
 		end
 		if uDef.customparams and uDef.customparams.factionname == "zaal" then
-			uDef.buildinggrounddecaltype = "zgroundtexture.dds"
+			uDef.buildinggrounddecaltype = "zgroundtexture2.dds"
 		end
 		if uDef.customparams and uDef.customparams.factionname == "pattern" then
 			uDef.buildinggrounddecaltype = "groundplate.dds"

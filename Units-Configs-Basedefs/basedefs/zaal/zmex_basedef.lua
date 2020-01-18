@@ -68,8 +68,8 @@ unitDef                     = {
 		corpse                   = "energycore",
 	},
 	useGroundDecal                = true,
-	BuildingGroundDecalType       = "zgroundtexture.dds",
-	BuildingGroundDecalSizeX      = 12,
-	BuildingGroundDecalSizeY      = 12,
+	BuildingGroundDecalType       = "zgroundtexture2.dds",
+	BuildingGroundDecalSizeX      = 14,
+	BuildingGroundDecalSizeY      = 14,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }

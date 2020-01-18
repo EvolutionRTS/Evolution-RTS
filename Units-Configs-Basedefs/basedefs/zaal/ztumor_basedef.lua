@@ -1,10 +1,10 @@
 unitDef                    = {
 
 	buildCostEnergy              = 0,
-	buildCostMetal               = 1,
+	buildCostMetal               = 10,
 	buildDistance                = buildDistance,
 	builder                      = true,
-	buildTime                    = 10,
+	buildTime                    = 20,
 	buildpic					 = "zaal_unitpics/ztumor.png",
 	blocking					 = false,
 	CanAttack			         = true,
@@ -70,7 +70,7 @@ unitDef                    = {
 	yardmap 					 = "cccc cccc cccc cccc",
 	workerTime                   = 1,
 	TerraformSpeed               = 2147000,
-	usePieceCollisionVolumes	 = true,
+	usePieceCollisionVolumes	 = false,
 	sfxtypes                     = { 
 		pieceExplosionGenerators = { 
 			"blood_spray", 
@@ -95,7 +95,7 @@ unitDef                    = {
 		--area_mex_def			 = "zhatch",
 		--ProvideTech              = techprovided,
 		unitdefbuildtime		 = true,
-		decloakradiusmodifier	 = 0,
+		decloakradiusmodifier	 = 20,
 		canbetransported 		 = "false",
 		needed_cover             = 1,
 		death_sounds             = "bug",
@@ -105,8 +105,8 @@ unitDef                    = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "zgroundtexture.dds",
-	BuildingGroundDecalSizeX      = 4,
-	BuildingGroundDecalSizeY      = 4,
+	BuildingGroundDecalSizeX      = 14,
+	BuildingGroundDecalSizeY      = 14,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 
