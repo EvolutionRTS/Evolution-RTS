@@ -11,8 +11,6 @@ energyUse = 5
 
 buildCostMetal = 150
 
-yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
-
 primaryCEG = "custom:fusionreactionnuclear-3color"
 
 humanName = [[Zaal Metal Extractor Mk III]]
