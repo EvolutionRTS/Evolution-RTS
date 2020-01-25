@@ -503,6 +503,12 @@ function gadget:GameFrame(n)
 								local z = math.random(z-100,z+100)
 								local y = Spring.GetGroundHeight(x,z)
 								Spring.GiveOrderToUnit(scav, CMD.MOVE,{x,y,z}, {"shift"})
+							else
+								local x,y,z = Spring.GetUnitPosition(scav)
+								local x = math.random(x-500,x+500)
+								local z = math.random(z-500,z+500)
+								local y = Spring.GetGroundHeight(x,z)
+								Spring.GiveOrderToUnit(scav, CMD.MOVE,{x,y,z}, {"shift"})
 							end
 						else
 							local nearest = Spring.GetUnitNearestEnemy(scav, 200000, false)
