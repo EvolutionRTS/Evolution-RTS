@@ -1104,7 +1104,24 @@ end
 -- end
 
 local function ZaalBuildHatch(tqb, ai, unit)
-	return "zhatch"
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
+	local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
+	if SpawnerCount < 1 then
+		return "zhatch"
+	elseif ec >= es*0.7 and mc >= ms*0.5 and GG.TechCheck("tech1", ai.id) then
+		if SpawnerCount <= Spring.GetGameSeconds()/300
+			return "zhatch"
+		else
+			return "ztenticle"
+		end
+	else
+		return "zmex"
+	end
+end
+
+local function ZaalBuildMetal(tqb, ai, unit)
+	return "zmex"
 end
 
 local function ZaalBuildEnergy(tqb, ai, unit)
@@ -1115,7 +1132,7 @@ local function ZaalBuildEnergy(tqb, ai, unit)
 	elseif ec <= es*0.7 and GG.TechCheck("tech1", ai.id) then
 		return "zespire1" 
 	else
-		return "zhatch"
+		return "zmex"
 	end
 end
 
@@ -1128,7 +1145,7 @@ local function ZaalBuildSupply(tqb, ai, unit)
 	elseif su > sm - 35 and sm ~= MaximumSupply then
 		return "ztiberium"
 	else
-		return "zhatch"
+		return "zmex"
 	end
 end
 
@@ -1148,20 +1165,30 @@ local ZaalHive3 = {
 
 local ZaalArm = {
 	ZaalBuildHatch,
+	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,
+	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,
+	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,
+	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,
+	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,
+	ZaalBuildMetal,
 }
 
 local ZaalEspire = {
 	ZaalMorph,
+}
+
+local ZaalTenticle = {
+	assistaround,
 }
 	
 -- Pattern
@@ -1301,10 +1328,14 @@ taskqueues = {
 	zhatch_up2 = ZaalHive3,
 	zhatch = ZaalHive1,
 	zhatch_up1 = ZaalHive2,
+	zmex = ZaalEspire,
+	zmex_up1 = ZaalEspire,
+	zmex_up2 = ZaalEspire,
 	zespire1 = ZaalEspire,
 	zespire4 = ZaalEspire,
 	xcommander = xcommanderqueue,
 	xkconstructor = xk1constructor,
 	xklab = PatternKLab,
+	ztenticle = ZaalTenticle,
 }
 ----------------------------------------------------------

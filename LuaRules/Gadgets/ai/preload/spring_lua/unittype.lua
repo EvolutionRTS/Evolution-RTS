@@ -71,7 +71,7 @@ function ShardUnitType:WeaponCount()
 end
 
 function ShardUnitType:Extractor()
-	if self.def.name == "xmetalextractor" or self.def.name == "xmetalextractormoho" then
+	if self.def.name == "xmetalextractor" or self.def.name == "xmetalextractormoho" or string.find(self.def.name, "zmex") then
 		return true
 	elseif self.def.customParams.metal_extractor then
 		return true
