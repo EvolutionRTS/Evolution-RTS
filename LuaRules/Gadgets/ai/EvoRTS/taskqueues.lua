@@ -1110,7 +1110,7 @@ local function ZaalBuildHatch(tqb, ai, unit)
 	if SpawnerCount < 1 then
 		return "zhatch"
 	elseif ec >= es*0.7 and mc >= ms*0.5 and GG.TechCheck("tech1", ai.id) then
-		if SpawnerCount <= Spring.GetGameSeconds()/300
+		if SpawnerCount <= Spring.GetGameSeconds()/300 then
 			return "zhatch"
 		else
 			return "ztenticle"
