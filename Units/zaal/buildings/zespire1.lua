@@ -4,7 +4,7 @@
 unitName = "zespire1"
 
 --------------------------------------------------------------------------------
-buildCostMetal = 50
+buildCostMetal = 100
 
 supplygranted = 0
 energyMake = 10
