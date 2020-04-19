@@ -899,7 +899,7 @@ else -- UNSYNCED
 	local screenX = (vsx*0.5) - (screenWidth/2)
 	local screenY = (vsy*0.5) + (screenHeight/2)
 	local loadedFontSize = 32
-	local font = gl.LoadFont("luaui/Fonts/FreeSansBold.otf", loadedFontSize, 16,2)
+	local font = gl.LoadFont("luaui/Fonts/JosefinSans-SemiBold.ttf", loadedFontSize, 16,2)
 
 	local Text = gl.Text
 	local Color = gl.Color
