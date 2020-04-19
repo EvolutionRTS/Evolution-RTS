@@ -47,7 +47,7 @@ local mapsizeX = Game.mapSizeX
 local mapsizeZ = Game.mapSizeZ
 local deathwater = Game.waterDamage
 --local spawnmultiplier = 1
-local spawnmultiplier = tonumber(Spring.GetModOptions().scavengers) or 1
+local spawnmultiplier = tonumber(Spring.GetModOptions().scavengers) or 0
 if devswitch == 1 then
 	spawnmultiplier = 1
 end

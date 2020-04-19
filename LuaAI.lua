@@ -12,6 +12,10 @@ return {
     name = 'DAI',
     desc = 'Shard by AF for Spring Lua',
   },
+  {
+    name = 'Sandbox',
+    desc = 'Does absolutely Nothing',
+  },
 }
 
 
