@@ -141,7 +141,7 @@ function gadget:GameFrame(f)
 								if x then
 									local h = spGetUnitHeight(t)
 									Spring.SpawnCEG("heal", x, y+h, z)
-									Spring.PlaySoundFile("sounds/miscfx/heal.wav", 0.2, x, y, z) 
+								--	Spring.PlaySoundFile("sounds/miscfx/heal.wav", 0.2, x, y, z) 
 								--	Spring.AddTeamResource(UnitTeam,"e",-5)
 								end
 							end

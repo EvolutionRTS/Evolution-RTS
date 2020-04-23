@@ -500,15 +500,15 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				-- Set Rules for Ateran race
 				if unitDef.customparams and unitDef.customparams.factionname == "ateran" then
 					unitDef.buildtime = unitDef.buildcostmetal / 4
-					unitDef.buildcostenergy = unitDef.buildcostmetal * 0.25
+					unitDef.buildcostenergy = unitDef.buildcostmetal * 1.5
 					if unitDef.customparams and unitDef.customparams.requiretech == "tech1" or unitDef.customparams and unitDef.customparams.isupgraded == "1" then
-						unitDef.buildcostenergy = unitDef.buildcostmetal * 2.5
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 3
 					end
 					if unitDef.customparams and unitDef.customparams.requiretech == "tech2" or unitDef.customparams and unitDef.customparams.isupgraded == "2" then
-						unitDef.buildcostenergy = unitDef.buildcostmetal * 5
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 6
 					end
 					if unitDef.customparams and unitDef.customparams.requiretech == "tech3" or unitDef.customparams and unitDef.customparams.isupgraded == "3" then
-						unitDef.buildcostenergy = unitDef.buildcostmetal * 7.5
+						unitDef.buildcostenergy = unitDef.buildcostmetal * 12
 					end
 					if unitDef.customparams and unitDef.customparams.noenergycost == true then
 						unitDef.buildcostenergy = 0
