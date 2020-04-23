@@ -758,7 +758,7 @@ function gadget:Initialize()
   table.insert(GG.UnitRanked, UnitRanked)
 
   --// get the morphDefs
-  morphDefs = include("LuaRules/Configs/morph_defs.lua")
+  morphDefs = include("gamedata/morph_defs.lua")
 
   --// MorphDefs can now be all defined in customParams (by MaDDoX)
   AddCustomMorphDefs()
