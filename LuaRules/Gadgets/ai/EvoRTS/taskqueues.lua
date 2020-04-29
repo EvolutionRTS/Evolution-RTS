@@ -258,8 +258,8 @@ function BuildEnergy(tqb, ai, unit)
 				return "egeothermal"
 			elseif GG.TechCheck("tech1", ai.id) then
 				return "esolar2"
-			else
-				return skip
+			elseif GG.TechCheck("tech0", ai.id) then
+				return "esolar2"
 			end
 		else
 			return skip
@@ -838,20 +838,20 @@ local AirFactoryQueueUP0 = {
 	BuildAirUP0,
 }
 
-local AirFactoryQueueUP1 = {
-	ezMorph,
-	BuildAirUP1,
-}
+-- local AirFactoryQueueUP1 = {
+	-- ezMorph,
+	-- BuildAirUP1,
+-- }
 
-local AirFactoryQueueUP2 = {
-	ezMorph,
-	BuildAirUP2,
-}
+-- local AirFactoryQueueUP2 = {
+	-- ezMorph,
+	-- BuildAirUP2,
+-- }
 
-local AirFactoryQueueUP3 = {
-	ezMorph,
-	BuildAirUP3,
-}
+-- local AirFactoryQueueUP3 = {
+	-- ezMorph,
+	-- BuildAirUP3,
+-- }
 
 ---AllTer
 local AllTerFactoryQueueUP0 = {
@@ -859,20 +859,20 @@ local AllTerFactoryQueueUP0 = {
 	BuildAllTerUP0,
 }
 
-local AllTerFactoryQueueUP1 = {
-	ezMorph,
-	BuildAllTerUP1,
-}
+-- local AllTerFactoryQueueUP1 = {
+	-- ezMorph,
+	-- BuildAllTerUP1,
+-- }
 
-local AllTerFactoryQueueUP2 = {
-	ezMorph,
-	BuildAllTerUP2,
-}
+-- local AllTerFactoryQueueUP2 = {
+	-- ezMorph,
+	-- BuildAllTerUP2,
+-- }
 
-local AllTerFactoryQueueUP3 = {
-	ezMorph,
-	BuildAllTerUP3,
-}
+-- local AllTerFactoryQueueUP3 = {
+	-- ezMorph,
+	-- BuildAllTerUP3,
+-- }
 
 ---Amphib
 local AmphibFactoryQueueUP0 = {
@@ -880,20 +880,20 @@ local AmphibFactoryQueueUP0 = {
 	BuildAmphibUP0,
 }
 
-local AmphibFactoryQueueUP1 = {
-	ezMorph,
-	BuildAmphibUP1,
-}
+-- local AmphibFactoryQueueUP1 = {
+	-- ezMorph,
+	-- BuildAmphibUP1,
+-- }
 
-local AmphibFactoryQueueUP2 = {
-	ezMorph,
-	BuildAmphibUP2,
-}
+-- local AmphibFactoryQueueUP2 = {
+	-- ezMorph,
+	-- BuildAmphibUP2,
+-- }
 
-local AmphibFactoryQueueUP3 = {
-	ezMorph,
-	BuildAmphibUP3,
-}
+-- local AmphibFactoryQueueUP3 = {
+	-- ezMorph,
+	-- BuildAmphibUP3,
+-- }
 
 ---Hbot
 local HbotFactoryQueueUP0 = {
@@ -901,20 +901,20 @@ local HbotFactoryQueueUP0 = {
 	BuildHbotUP0,
 }
 
-local HbotFactoryQueueUP1 = {
-	ezMorph,
-	BuildHbotUP1,
-}
+-- local HbotFactoryQueueUP1 = {
+	-- ezMorph,
+	-- BuildHbotUP1,
+-- }
 
-local HbotFactoryQueueUP2 = {
-	ezMorph,
-	BuildHbotUP2,
-}
+-- local HbotFactoryQueueUP2 = {
+	-- ezMorph,
+	-- BuildHbotUP2,
+-- }
 
-local HbotFactoryQueueUP3 = {
-	ezMorph,
-	BuildHbotUP3,
-}
+-- local HbotFactoryQueueUP3 = {
+	-- ezMorph,
+	-- BuildHbotUP3,
+-- }
 
 ---Hover
 local HoverFactoryQueueUP0 = {
@@ -922,20 +922,20 @@ local HoverFactoryQueueUP0 = {
 	BuildHoverUP0,
 }
 
-local HoverFactoryQueueUP1 = {
-	ezMorph,
-	BuildHoverUP1,
-}
+-- local HoverFactoryQueueUP1 = {
+	-- ezMorph,
+	-- BuildHoverUP1,
+-- }
 
-local HoverFactoryQueueUP2 = {
-	ezMorph,
-	BuildHoverUP2,
-}
+-- local HoverFactoryQueueUP2 = {
+	-- ezMorph,
+	-- BuildHoverUP2,
+-- }
 
-local HoverFactoryQueueUP3 = {
-	ezMorph,
-	BuildHoverUP3,
-}
+-- local HoverFactoryQueueUP3 = {
+	-- ezMorph,
+	-- BuildHoverUP3,
+-- }
 
 local overseerlistfirst = {
 	BuildEngineers,
@@ -1107,44 +1107,72 @@ local function ZaalBuildHatch(tqb, ai, unit)
 	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
-	if SpawnerCount < 1 then
+	Spring.Echo("Hatchtime!")
+	if ei <= 20 then
+		Spring.Echo("Hatchtime: Energy is less than 20!")
+		return "zespire1"
+	elseif SpawnerCount < 1 then
+		Spring.Echo("Hatchtime: Spawnercount is less than 1!")
 		return "zhatch"
-	elseif ec >= es*0.7 and mc >= ms*0.5 and GG.TechCheck("tech1", ai.id) then
-		if SpawnerCount <= Spring.GetGameSeconds()/300 then
-			return "zhatch"
-		else
-			return "ztenticle"
-		end
+	elseif mi >= mp then
+		Spring.Echo("Hatchtime: Metalincome amount is greater than metal pull!")
+		return "ztenticle"
 	else
+		Spring.Echo("Hatchtime: Fuckit, let's build a mex!")
 		return "zmex"
 	end
 end
 
 local function ZaalBuildMetal(tqb, ai, unit)
+	Spring.Echo("Metaltime!")
+	Spring.Echo("Metaltime: Let's make a mex!")
 	return "zmex"
 end
 
 local function ZaalBuildEnergy(tqb, ai, unit)
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
 	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
-	if SpawnerCount < 1 then
-		return "zhatch"
-	elseif ec <= es*0.7 and GG.TechCheck("tech1", ai.id) then
+	Spring.Echo("Energytime!")
+	if ei <= 20 then
+		Spring.Echo("Energytime: Energy is less than 20!")
+		return "zespire1"
+	elseif ec <= es*0.7 then
+		Spring.Echo("Energytime: Energy current is less than or equal to 70% of energy storage!")
 		return "zespire1" 
+	elseif ec <= es*0.8 and mc <= ms*0.8 then
+		Spring.Echo("Energytime: Energy current is less than or equal to 80% of energy storage and metal current is less than or equal to 80% of metal storage!")
+		if SpawnerCount < 1 then
+			Spring.Echo("Energytime: Spawnercount is less than 1!")
+			return "zhatch"
+		else
+			Spring.Echo("Energytime: Fuckit, let's make a tenticle!")
+			return "ztenticle"
+		end
 	else
+		Spring.Echo("Energytime: Fuckit, let's make a mex!")
 		return "zmex"
 	end
 end
 
 local function ZaalBuildSupply(tqb, ai, unit)
+	local mc, ms, mp, mi, me = Spring.GetTeamResources(ai.id, "metal")
+	local ec, es, ep, ei, ee = Spring.GetTeamResources(ai.id, "energy")
 	local su = Spring.GetTeamRulesParam(ai.id, "supplyUsed") or 0
 	local sm = Spring.GetTeamRulesParam(ai.id, "supplyMax") or 0
+	Spring.Echo("Supplytime!")
 	local SpawnerCount = GetZaalSpawners(tqb,ai,unit)
-	if SpawnerCount < 1 then
+	if ei <= 20 then
+		Spring.Echo("Supplytime: Energy income is less than 20!")
+		return "zespire1"
+	elseif SpawnerCount < 1 then
+		Spring.Echo("Supplytime: Spawner count is less than 1!")
 		return "zhatch"
 	elseif su > sm - 35 and sm ~= MaximumSupply then
+		Spring.Echo("Supplytime: Supply used is greater than supply max - 35 and supplymax is not equal to maximum supply!")
 		return "ztiberium"
 	else
+		Spring.Echo("Supplytime: Fuckit, let's make a mex!")
 		return "zmex"
 	end
 end
@@ -1164,10 +1192,10 @@ local ZaalHive3 = {
 }
 
 local ZaalArm = {
-	ZaalBuildHatch,
 	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,
+	ZaalBuildHatch,
 	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,
