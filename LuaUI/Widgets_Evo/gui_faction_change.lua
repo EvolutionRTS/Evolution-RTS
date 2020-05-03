@@ -15,7 +15,7 @@ end
 -- Var
 --------------------------------------------------------------------------------
 local wWidth, wHeight = Spring.GetWindowGeometry()
-local px, py = 50, 0.55*wHeight
+local px, py = 0.42*wWidth, 0.42*wHeight
 
 local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font2", "JosefinSans-Bold.ttf")
 local vsx,vsy = Spring.GetViewGeometry()
@@ -66,7 +66,7 @@ local amNewbie = (spGetTeamRulesParam(myTeamID, 'isNewbie') == 1)
 local factionChangeList
 
 local vsx, vsy = gl.GetViewSizes()
-local widgetScale = (0.50 + (vsx*vsy / 5000000))
+local widgetScale = (1.5 + (vsx*vsy / 5000000))
 
 local bgcorner = "LuaUI/Images/bgcorner.png"
 
@@ -240,7 +240,7 @@ end
 
 function widget:ViewResize(n_vsx,n_vsy)
 	vsx, vsy = gl.GetViewSizes()
-	widgetScale = (0.50 + (vsx*vsy / 5000000))
+	widgetScale = (1.5 + (vsx*vsy / 5000000))
   local newFontfileScale = (0.5 + (vsx*vsy / 5700000))
   if (fontfileScale ~= newFontfileScale) then
     fontfileScale = newFontfileScale

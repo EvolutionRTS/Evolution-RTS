@@ -53,11 +53,14 @@ local timeToBuild_etech2 = energyCost_etech2 * 0.10
 local energyCost_etech3 = 4000
 local timeToBuild_etech3 = energyCost_etech3 * 0.10
 
-local energyCost_zlair = 600
-local timeToBuild_zlair = energyCost_zlair * 0.20
+local energyCost_zarmtech1 = 300
+local timeToBuild_zarmtech1 = energyCost_zarmtech1 * 0.20
 
-local energyCost_zhive = 2000
-local timeToBuild_zhive = energyCost_zhive * 0.20
+local energyCost_zarmtech2 = 600
+local timeToBuild_zarmtech2 = energyCost_zarmtech2 * 0.20
+
+local energyCost_zarmtech3 = 2000
+local timeToBuild_zarmtech3 = energyCost_zarmtech3 * 0.20
 
 local energyCost_zespire4 = 200
 local timeToBuild_zespire4 = energyCost_zespire4 * 0.20
@@ -77,7 +80,7 @@ local timeToBuild_euwturret = energyCost_euwturret * 0.10
 local energyCost_emetalextractor_up1 = 1200
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
 
-local energyCost_zmex_up1 = 600
+local energyCost_zmex_up1 = 2400
 local timeToBuild_zmex_up1 = energyCost_zmex_up1 * 0.20
 
 local energyCost_xmetalextractor = 1200
@@ -713,29 +716,36 @@ Evolution]],
 ----------------------------------------------------------
 ----------------------------------------------------------
 	
-	zhatch = 	{
+	zarm = 	{
 		{
-			into = 'zhatch_up1',
-			time = timeToBuild_zlair,
-			cmdname = [[Lair
-Evolution]],
-			energy = energyCost_zlair,
+			into = 'zarm_up1',
+			time = timeToBuild_zarmtech1,
+			cmdname = [[Evolve Tech 1]],
+			energy = energyCost_zarmtech1,
 			metal = 0,
-			text = 'Evolve into a Lair.',
+			text = 'Evolve Tech 1',
 		},
 	},	
-	zhatch_up1 = 	{
+	zarm_up1 = 	{
 		{
-			into = 'zhatch_up2',
-			time = timeToBuild_zhive,
-			cmdname = [[Hive
-Evolution]],
-			energy = energyCost_zhive,
+			into = 'zarm_up2',
+			time = timeToBuild_zarmtech2,
+			cmdname = [[Evolve Tech 2]],
+			energy = energyCost_zarmtech2,
 			metal = 0,
-			text = 'Evolve into a Hive.',
+			text = 'Evolve Tech 2',
 		},
 	},	
-	
+	zarm_up2 = 	{
+		{
+			into = 'zarm_up3',
+			time = timeToBuild_zarmtech3,
+			cmdname = [[Evolve Tech 3]],
+			energy = energyCost_zarmtech3,
+			metal = 0,
+			text = 'Evolve Tech 3',
+		},
+	},	
 ----------------------------------------------------------
 ----------------------------------------------------------
 	

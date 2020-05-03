@@ -154,7 +154,7 @@ end
 function NoMex(x,z, batchextracts,teamID) -- Is there any better mex at this location (returns false if there is)
 	local mexesatspot = Spring.GetUnitsInCylinder(x,z,128)
 		for ct, uid in pairs(mexesatspot) do
-			if (string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "emetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "xmetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zhive") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zhatch") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zlair")) and (teamID and Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
+			if (string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "emetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "xmetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zmex")) and (teamID and Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
 				return false
 			end	
 		end
@@ -164,7 +164,7 @@ end
 function EnemyMex(x,z, batchextracts,teamID) -- Is there any better mex at this location (returns false if there is)
 	local mexesatspot = Spring.GetUnitsInCylinder(x,z,128)
 		for ct, uid in pairs(mexesatspot) do
-			if (string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "emetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "xmetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zhive") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zhatch") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zlair")) and (teamID and not Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
+			if (string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "emetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "xmetalextractor") or string.find(UnitDefs[Spring.GetUnitDefID(uid)].name, "zmex")) and (teamID and not Spring.AreTeamsAllied(Spring.GetUnitTeam(uid), teamID)) then
 				return true
 			end	
 		end
@@ -180,7 +180,7 @@ function MetalSpotHandler:ClosestFreeSpot(unittype,position,maxdis)
         local p = v
         local dist = distance(position,p)
         if NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) or NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "xmetalextractor"), teamID) or NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhive"), teamID)  or NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhatch"), teamID) or NoMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zlair"), teamID) then
-			if EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "xmetalextractor"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhive"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zhatch"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zlair"), teamID) == false then
+			if EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "emetalextractor"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "xmetalextractor"), teamID) or EnemyMex(p.x, p.z, string.find(UnitDefs[unittype.id].name, "zmex"), teamID) == false then
 				if dist < bestDistance then
 					bestDistance = dist
 					pos = p

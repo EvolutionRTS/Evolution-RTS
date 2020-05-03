@@ -1149,6 +1149,9 @@ local function ZaalBuildEnergy(tqb, ai, unit)
 			Spring.Echo("Energytime: Fuckit, let's make a tenticle!")
 			return "ztenticle"
 		end
+	elseif mi >= mp then
+		Spring.Echo("Hatchtime: Metalincome amount is greater than metal pull!")
+		return "ztenticle"
 	else
 		Spring.Echo("Energytime: Fuckit, let's make a mex!")
 		return "zmex"
@@ -1171,6 +1174,9 @@ local function ZaalBuildSupply(tqb, ai, unit)
 	elseif su > sm - 35 and sm ~= MaximumSupply then
 		Spring.Echo("Supplytime: Supply used is greater than supply max - 35 and supplymax is not equal to maximum supply!")
 		return "ztiberium"
+	elseif mi >= mp then
+		Spring.Echo("Hatchtime: Metalincome amount is greater than metal pull!")
+		return "ztenticle"
 	else
 		Spring.Echo("Supplytime: Fuckit, let's make a mex!")
 		return "zmex"
@@ -1192,6 +1198,7 @@ local ZaalHive3 = {
 }
 
 local ZaalArm = {
+	"ztenticle",
 	ZaalBuildMetal,
 	ZaalBuildSupply,
 	ZaalBuildEnergy,

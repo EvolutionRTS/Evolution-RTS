@@ -68,7 +68,7 @@ unitDef                     = {
 	},
 	customParams                  = {
 		noalert					 = true,
-		ProvideTech              = techprovided,
+		--ProvideTech              = techprovided,
 		unittype				  = "building",
 		death_sounds              = "bug",
 		armortype                 = "building", 

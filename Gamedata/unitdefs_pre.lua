@@ -62,7 +62,6 @@ Shared.buildListZaal = {
 	[[zpyro]],
 	[[zassault]],
 	[[zarty]],
-	[[zkamikaze]],
 	[[zqueen]],
 	[[zairscout]],
 	[[zairtoairfighter]],
@@ -70,12 +69,17 @@ Shared.buildListZaal = {
 	[[zairbomber]],
 }
 
-Shared.buildListZaalArm = {
+Shared.buildListZaalConstructor = {
+	[[zconstructor]],
 	[[ztenticle]],
 	[[zhatch]],
 	[[zmex]],
 	[[zespire1]],
 	[[ztiberium]],
+}
+
+Shared.buildListZaalArm = {
+	[[zconstructor]],
 }
 
 Shared.buildListZaalTumor = {
