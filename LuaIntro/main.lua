@@ -35,7 +35,7 @@ else
 
 	Spring.Log = function(name, level, ...)
 		if (type(level) == "string")and(level == "info") then
-			Spring.Echo(("[%s]"):format(name), ...)
+			--Spring.Echo(("[%s]"):format(name), ...)
 		else
 			origSpringLog(name, level, ...)
 		end

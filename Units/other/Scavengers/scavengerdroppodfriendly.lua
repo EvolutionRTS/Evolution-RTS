@@ -74,7 +74,7 @@ return {
 				impulsefactor = 0.1,
 				interceptedbyshieldtype = 4,
 				metalpershot = 0,
-				model = "scavs/scavbeacondroppodbyar.s3o",
+				model = "scavs/scavbeacondroppod.s3o",
 				name = "Droppod",
 				range = 29999,
 				reloadtime = 5,

@@ -7,7 +7,7 @@ unitName = "zconstructor"
 
 isUpgraded	= [[0]]
 
-buildDistance = 300
+buildDistance = 400
 
 humanName = "Worker Drone"
 
