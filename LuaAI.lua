@@ -13,6 +13,10 @@ return {
     desc = 'Shard by AF for Spring Lua',
   },
   {
+    name = 'ScavengersAI',
+    desc = 'scavs',
+  },
+  {
     name = 'Sandbox',
     desc = 'Does absolutely Nothing',
   },
