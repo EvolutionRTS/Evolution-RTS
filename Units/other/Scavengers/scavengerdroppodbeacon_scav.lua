@@ -35,7 +35,7 @@ return {
 		noautofire = false,
 		objectname = "scavs/scavbeacon.s3o",
 		radardistance = 900,
-		script = "scavs/beaconbyar.cob",
+		script = "scavs/beacon.cob",
 		seismicsignature = 4,
 		selfdestructcountdown = 1,
 		--selfdestructas = "ROOST_DEATH",
@@ -55,7 +55,7 @@ return {
 		customparams = {
 			subfolder = "scavengers",
 			isairbase = true,
-			normaltex = "unittextures/Core_normal.dds",
+			normaltex = "unittextures/scavbeacon_normals.dds",
 		},
 		featuredefs = {},
 		sfxtypes = {
