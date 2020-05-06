@@ -10,7 +10,7 @@ if scavengersAIEnabled then
 			brutal = 5,
 		},
 		unitnamesuffix = "",
-		messenger = false, -- BYAR specific thing, don't enable otherwise (or get gui_messages.lua from BYAR)
+		messenger = true, -- BYAR specific thing, don't enable otherwise (or get gui_messages.lua from BYAR)
 		modules = {
 			buildingSpawnerModule 			= true, --building spawner spawns random blueprints around map
 			constructorControllerModule 	= true, --constructor controller is for units that build blueprints
@@ -103,7 +103,7 @@ if scavengersAIEnabled then
 
 	-- Functions which you can configure
 	function CountScavConstructors()
-		return UDC(GaiaTeamID, UDN.corcom_scav.id) + UDC(GaiaTeamID, UDN.armcom_scav.id)
+		return UDC(GaiaTeamID, UDN.ecommander.id) + UDC(GaiaTeamID, UDN.ecommanderbattle.id)
 	end
 
 	function UpdateTierChances(n)
@@ -256,7 +256,7 @@ else
 			hard = 3,
 			brutal = 5,
 		},
-		unitnamesuffix = "_scav",
+		unitnamesuffix = "",
 		messenger = true, -- BYAR specific thing, don't enable otherwise (or get gui_messages.lua from BYAR)
 		modules = {
 			buildingSpawnerModule 			= false,
@@ -350,7 +350,7 @@ else
 
 	-- Functions which you can configure
 	function CountScavConstructors()
-		return UDC(GaiaTeamID, UDN.corcom_scav.id) + UDC(GaiaTeamID, UDN.armcom_scav.id)
+		return UDC(GaiaTeamID, UDN.ecommander.id) + UDC(GaiaTeamID, UDN.ecommanderbattle.id)
 	end
 
 	function UpdateTierChances(n)
