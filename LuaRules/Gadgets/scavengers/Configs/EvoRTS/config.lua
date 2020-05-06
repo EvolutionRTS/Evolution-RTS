@@ -100,7 +100,6 @@ if scavengersAIEnabled then
 	}
 
 
-
 	-- Functions which you can configure
 	function CountScavConstructors()
 		return UDC(GaiaTeamID, UDN.ecommander.id) + UDC(GaiaTeamID, UDN.ecommanderbattle.id)
@@ -265,7 +264,7 @@ else
 			unitSpawnerModule 				= true,
 			startBoxProtection				= false,
 			reinforcementsModule			= false,
-			stockpilers						= true,
+			stockpilers						= false,
 			nukes							= true,
 		},
 		timers = {
@@ -332,11 +331,10 @@ else
 		constructortimer 					= 220, -- time in seconds between commander/constructor spawns
 		constructortimerreductionframes		= 36000,
 		minimumconstructors					= 1,
-		useresurrectors						= true,
+		useresurrectors						= false,
 			searesurrectors					= false,
 		useconstructors						= true,
-		usecollectors						= true,
-
+		usecollectors						= false,
 	}
 
 	unitControllerModuleConfig = {
@@ -355,7 +353,6 @@ else
 
 	function UpdateTierChances(n)
 		-- Must be 100 in total
-
 		if globalScore > scavconfig.timers.T4top then
 			TierSpawnChances.T0 = 0
 			TierSpawnChances.T1 = 0
