@@ -185,6 +185,11 @@ function UnitDef_Post(name, uDef)
 		uDef.corpse = ""
 	end
 	
+	if string.find(name, '_scav') then
+		VFS.Include("gamedata/scavengers/unitdef_post.lua")
+		uDef = scav_Udef_Post(name, uDef)
+	end
+	
 end
 
 --------------------------------------------------------------------------------
@@ -271,6 +276,11 @@ function WeaponDef_Post(name, wDef)
 	-- Disable Friendly Fire Completely
 	if wDef.customparams and wDef.customparams.friendlyfireexception == nil then
 		wDef.customparams.nofriendlyfire = 1
+	end
+	
+	if string.find(name, '_scav') then
+		VFS.Include("gamedata/scavengers/weapondef_post.lua")
+		wDef = scav_Wdef_Post(name, wDef)
 	end
 	
 end

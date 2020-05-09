@@ -9,7 +9,7 @@ if scavengersAIEnabled then
 			hard = 3,
 			brutal = 5,
 		},
-		unitnamesuffix = "",
+		unitnamesuffix = "_scav",
 		messenger = true, -- BYAR specific thing, don't enable otherwise (or get gui_messages.lua from BYAR)
 		modules = {
 			buildingSpawnerModule 			= true, --building spawner spawns random blueprints around map
@@ -255,7 +255,7 @@ else
 			hard = 3,
 			brutal = 5,
 		},
-		unitnamesuffix = "",
+		unitnamesuffix = "_scav",
 		messenger = true, -- BYAR specific thing, don't enable otherwise (or get gui_messages.lua from BYAR)
 		modules = {
 			buildingSpawnerModule 			= false,
