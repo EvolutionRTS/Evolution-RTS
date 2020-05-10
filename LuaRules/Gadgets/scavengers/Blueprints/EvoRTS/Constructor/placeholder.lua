@@ -26,11 +26,11 @@ local posradius = 150
 	if radiusCheck then
 		return posradius
 	else
-		Spring.GiveOrderToUnit(scav, -(UDN.eradar2.id), {posx, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2.id), {posx-200, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2.id), {posx+200, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2.id), {posx, posy, posz-200, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2.id), {posx, posy, posz+200, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.eradar2_scav.id), {posx, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx-200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx+200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx, posy, posz-200, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx, posy, posz+200, 0}, {"shift"})
 	end
 end
 table.insert(ScavengerConstructorBlueprintsT0,placeholderradar1)
@@ -43,11 +43,11 @@ local posradius = 150
 	if radiusCheck then
 		return posradius
 	else
-		Spring.GiveOrderToUnit(scav, -(UDN.eradar2.id), {posx, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2.id), {posx-200, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2.id), {posx+200, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2.id), {posx, posy, posz-200, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2.id), {posx, posy, posz+200, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.eradar2_scav.id), {posx, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx-200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx+200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx, posy, posz-200, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx, posy, posz+200, 0}, {"shift"})
 	end
 end
 table.insert(ScavengerConstructorBlueprintsT2,placeholderradar2)
@@ -58,11 +58,11 @@ local posradius = 150
 	if radiusCheck then
 		return posradius
 	else
-		Spring.GiveOrderToUnit(scav, -(UDN.emine.id), {posx, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.emine.id), {posx-100, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.emine.id), {posx+100, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.emine.id), {posx, posy, posz-100, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.emine.id), {posx, posy, posz+100, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.emine_scav.id), {posx, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.emine_scav.id), {posx-100, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.emine_scav.id), {posx+100, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.emine_scav.id), {posx, posy, posz-100, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.emine_scav.id), {posx, posy, posz+100, 0}, {"shift"})
 	end
 end
 table.insert(ScavengerConstructorBlueprintsT0,placeholderradar1)

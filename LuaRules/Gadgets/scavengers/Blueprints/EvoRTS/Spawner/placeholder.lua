@@ -24,7 +24,7 @@ local posradius = 30
 	if radiusCheck then
 		return posradius
 	else
-		Spring.CreateUnit("eradar2", posx, posy, posz, math.random(0,3),GaiaTeamID) 
+		Spring.CreateUnit("eradar2_scav", posx, posy, posz, math.random(0,3),GaiaTeamID) 
 	end
 end
 table.insert(ScavengerBlueprintsT0,placeholderradar)

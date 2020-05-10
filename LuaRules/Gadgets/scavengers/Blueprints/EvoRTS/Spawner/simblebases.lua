@@ -1,4 +1,4 @@
-nameSuffix = ""
+nameSuffix = "_scav"
 
 local function simplebasehover(posx, posy, posz, GaiaTeamID, radiusCheck)
 local posradius = 500

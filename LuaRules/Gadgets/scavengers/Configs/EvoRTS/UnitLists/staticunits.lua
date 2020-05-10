@@ -1,4 +1,18 @@
 NoSelfdList = {
+"ecommanderbattleai",
+"ecommanderbuildai",
+"ecommandercloakai",
+"ecommanderfactoryai",
+"ecommanderhealerai",
+"ecommandershieldai",
+"ecommanderbattle",
+"ecommanderbuild",
+"ecommandercloak",
+"ecommanderfactory",
+"ecommanderhealer",
+"ecommandershield",
+"zarm",
+"xcommander",
 }
 
 StockpilingUnitNames = {
@@ -9,6 +23,8 @@ NukingUnitNames = {
 }
 
 BeaconCaptureExcludedUnits = {
+	"fuck",
+	"this",
 }
 
 BeaconDefenceStructuresT0 = {

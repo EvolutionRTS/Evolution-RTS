@@ -12,6 +12,15 @@ local ranc = math.random(1,b)
 
 
 function scav_Udef_Post(name, uDef)
+	
+	----------------- EVO stuff
+	
+	if uDef.customParams then
+		uDef.customParams.ProvideTech = [[tech0, tech1, tech2, tech3]]
+		uDef.customParams.supply_granted = [[10]]
+	end
+	----------------- End of EVO stuff
+
 	if not uDef.customparams then
 		uDef.customparams = {}
 	end
@@ -95,6 +104,7 @@ function scav_Udef_Post(name, uDef)
 		uDef.name = "Scavenger "..uDef.name
 	end
 
+	
 	
 	if uDef.buildcostenergy then
 		uDef.buildcostenergy = math.ceil(uDef.buildcostenergy*0.5)

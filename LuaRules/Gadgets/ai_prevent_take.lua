@@ -1,7 +1,7 @@
 function gadget:GetInfo()
 	return {
 		name = "AI Prevent Take",
-		desc = "Prevent players from taking AI tema units with /take",
+		desc = "Prevent players from taking AI team units with /take",
 		author = "Floris",
 		date = "September 2018",
 		license = "GPL",
@@ -17,7 +17,7 @@ end
 local aiTeams = {}
 local aiCount = 0
 for _,teamID in ipairs(Spring.GetTeamList()) do
-	if select(4,Spring.GetTeamInfo(teamID)) then	-- is AI?
+	if select(4,Spring.GetTeamInfo(teamID,false)) then	-- is AI?
 		aiCount = aiCount + 1
 		aiTeams[teamID] = true
 	end
@@ -27,7 +27,8 @@ if aiCount == 0 then
 end
 
 function gadget:AllowUnitTransfer(unitID, unitDefID, oldTeam, newTeam, capture)
-	if aiTeams[oldTeam] then
+    local UnitName = UnitDefs[unitDefID].name
+	if (aiTeams[oldTeam] and not string.find(UnitName, "_scav")) or aiTeams[newTeam] then
 		return false
 	else
 		return true
