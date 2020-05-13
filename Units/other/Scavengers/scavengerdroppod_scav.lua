@@ -44,7 +44,7 @@ return {
 		turninplace = true,
 		turninplaceanglelimit = 90,
 		turnrate = 0,
-		unitname = "scavengerdroppod",
+		unitname = "scavengerdroppod_scav",
 		upright = false,
 		waterline = 0,
 		workertime = 1500,

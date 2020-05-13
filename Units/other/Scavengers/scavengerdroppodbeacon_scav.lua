@@ -47,7 +47,7 @@ return {
 		turninplace = true,
 		turninplaceanglelimit = 90,
 		turnrate = 0,
-		unitname = "scavengerbeacon",
+		unitname = "scavengerbeacon_scav",
 		upright = false,
 		waterline = 0,
 		workertime = 1500,
