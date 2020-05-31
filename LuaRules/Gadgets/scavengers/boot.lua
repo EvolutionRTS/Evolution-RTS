@@ -314,16 +314,16 @@ end
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 	local UnitName = UnitDefs[unitDefID].name
 	if unitTeam == GaiaTeamID then
-		killedscavengers = killedscavengers + 1
+		killedscavengers = killedscavengers + scavconfig.scoreConfig.baseScorePerKill
 		if scavStructure[unitID] and not UnitName == "scavengerdroppod_scav" and not UnitName == "scavengerdroppodbeacon_scav"  then
-			killedscavengers = killedscavengers + 4
+			killedscavengers = killedscavengers + scavconfig.scoreConfig.scorePerKilledBuilding
 		end
 		if scavConstructor[unitID] then
-			killedscavengers = killedscavengers + 99
+			killedscavengers = killedscavengers + scavconfig.scoreConfig.scorePerKilledConstructor
 		end
 		if UnitName == "scavengerdroppodbeacon_scav" then
 			numOfSpawnBeacons = numOfSpawnBeacons - 1
-			killedscavengers = killedscavengers - 1
+			killedscavengers = killedscavengers + scavconfig.scoreConfig.scorePerKilledSpawner
 		end
 		if UnitName == "scavengerdroppod_scav" then
 			killedscavengers = killedscavengers - 1
@@ -367,7 +367,7 @@ function gadget:UnitTaken(unitID, unitDefID, unitOldTeam, unitNewTeam)
 		if UnitDefs[unitDefID].name == "scavengerdroppodbeacon_scav" then
 			numOfSpawnBeacons = numOfSpawnBeacons - 1
 			numOfSpawnBeaconsTeams[unitNewTeam] = numOfSpawnBeaconsTeams[unitNewTeam] + 1
-			killedscavengers = killedscavengers + 50
+			killedscavengers = killedscavengers + scavconfig.scoreConfig.scorePerCapturedSpawner
 			if scavconfig.modules.reinforcementsModule == true then
 				Spring.SetUnitNeutral(unitID, false)
 				Spring.SetUnitHealth(unitID, 10000)
