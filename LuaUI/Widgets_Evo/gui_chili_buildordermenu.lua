@@ -151,7 +151,7 @@ if buildOrderUI == 2 then
 	Config = {
 		ordermenu = {
 			name = 'ordermenu',
-			rows = 4, columns = 4,
+			rows = 6, columns = 4,
 			x = '0%', y = '24%',
 			width = '50%', height = '25%',
 			orientation = 'horizontal',

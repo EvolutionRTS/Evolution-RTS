@@ -42,33 +42,33 @@ function scav_Udef_Post(name, uDef)
 	end
 	if uDef.sfxtypes then
 		-- make barrelshot purple
-		if uDef.sfxtypes.explosiongenerators then
-			for k,v in pairs(uDef.sfxtypes.explosiongenerators) do
-				if string.find(v, 'barrelshot') then
-					uDef.sfxtypes.explosiongenerators[k] = v..'-purple'
-				end
-			end
-		end
+		-- if uDef.sfxtypes.explosiongenerators then
+			-- for k,v in pairs(uDef.sfxtypes.explosiongenerators) do
+				-- if string.find(v, 'barrelshot') then
+					-- uDef.sfxtypes.explosiongenerators[k] = v..'-purple'
+				-- end
+			-- end
+		-- end
 		-- make deathcegs purple
-		if uDef.sfxtypes.pieceexplosiongenerators then
-			for k,v in pairs(uDef.sfxtypes.pieceexplosiongenerators) do
-				if string.find(v, 'deathceg') then
-					uDef.sfxtypes.pieceexplosiongenerators[k] = v..'-purple'
-				end
-			end
-		end
+		-- if uDef.sfxtypes.pieceexplosiongenerators then
+			-- for k,v in pairs(uDef.sfxtypes.pieceexplosiongenerators) do
+				-- if string.find(v, 'deathceg') then
+					-- uDef.sfxtypes.pieceexplosiongenerators[k] = v..'-purple'
+				-- end
+			-- end
+		-- end
 	end
 	-- make unit explosion purple
-	if uDef.explodeas then
-		if string.find(string.lower(uDef.explodeas), 'explosiongeneric') or string.find(string.lower(uDef.explodeas), 'buildingexplosiongeneric') then
-			uDef.explodeas = uDef.explodeas..'-purple'
-		end
-	end
-	if uDef.selfdestructas then
-		if string.find(string.lower(uDef.selfdestructas), 'explosiongeneric') or string.find(string.lower(uDef.selfdestructas), 'buildingexplosiongeneric') then
-			uDef.selfdestructas = uDef.selfdestructas..'-purple'
-		end
-	end
+	-- if uDef.explodeas then
+		-- if string.find(string.lower(uDef.explodeas), 'explosiongeneric') or string.find(string.lower(uDef.explodeas), 'buildingexplosiongeneric') then
+			-- uDef.explodeas = uDef.explodeas..'-purple'
+		-- end
+	-- end
+	-- if uDef.selfdestructas then
+		-- if string.find(string.lower(uDef.selfdestructas), 'explosiongeneric') or string.find(string.lower(uDef.selfdestructas), 'buildingexplosiongeneric') then
+			-- uDef.selfdestructas = uDef.selfdestructas..'-purple'
+		-- end
+	-- end
 
 	-- replace buillists with _scav units
 	if uDef.buildoptions then
