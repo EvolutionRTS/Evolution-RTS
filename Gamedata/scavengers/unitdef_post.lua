@@ -17,7 +17,7 @@ function scav_Udef_Post(name, uDef)
 	
 	if uDef.customParams then
 		uDef.customParams.ProvideTech = [[tech0, tech1, tech2, tech3]]
-		uDef.customParams.supply_granted = [[10]]
+		uDef.customParams.supply_granted = [[400]]
 	end
 	----------------- End of EVO stuff
 
@@ -35,11 +35,7 @@ function scav_Udef_Post(name, uDef)
 	uDef.customparams.healthlookmod = 0.40
 
 	-- make barrelshot purple
-	if uDef.customparams.firingceg then
-		if string.find(uDef.customparams.firingceg, 'barrelshot') then
-			uDef.customparams.firingceg = uDef.customparams.firingceg..'-purple'
-		end
-	end
+
 	if uDef.sfxtypes then
 		-- make barrelshot purple
 		-- if uDef.sfxtypes.explosiongenerators then
@@ -59,16 +55,12 @@ function scav_Udef_Post(name, uDef)
 		-- end
 	end
 	-- make unit explosion purple
-	-- if uDef.explodeas then
-		-- if string.find(string.lower(uDef.explodeas), 'explosiongeneric') or string.find(string.lower(uDef.explodeas), 'buildingexplosiongeneric') then
-			-- uDef.explodeas = uDef.explodeas..'-purple'
-		-- end
-	-- end
-	-- if uDef.selfdestructas then
-		-- if string.find(string.lower(uDef.selfdestructas), 'explosiongeneric') or string.find(string.lower(uDef.selfdestructas), 'buildingexplosiongeneric') then
-			-- uDef.selfdestructas = uDef.selfdestructas..'-purple'
-		-- end
-	-- end
+	if uDef.explodeas then
+		uDef.explodeas = "mediumScavengerExplosionGeneric"
+	end
+	if uDef.selfdestructas then
+		uDef.selfdestructas = "mediumScavengerExplosionGeneric"
+	end
 
 	-- replace buillists with _scav units
 	if uDef.buildoptions then
