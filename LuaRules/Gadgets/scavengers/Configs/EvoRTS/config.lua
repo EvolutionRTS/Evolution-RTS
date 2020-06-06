@@ -1,5 +1,7 @@
 Spring.Echo("[Scavengers] Config initialized")
 
+adder = 300
+multiplier = 1
 -- Config for Scavengers Survival AI
 if scavengersAIEnabled then
 	scavconfig = {
@@ -33,34 +35,34 @@ if scavengersAIEnabled then
 				-- Additional score for specific unit types, use -baseScorePerKill(default 1) to make it have no effect on score, use values lower than baseScorePerKill to reduce score
 				scorePerKilledBuilding 			= 4,
 				scorePerKilledConstructor 		= 99,
-				scorePerKilledSpawner 			= -1,
-				scorePerCapturedSpawner 		= 50, -- this doesn't care about baseScorePerKill 
+				scorePerKilledSpawner 			= 49,
+				scorePerCapturedSpawner 		= -51, -- this doesn't care about baseScorePerKill 
 		},
 		
 		timers = {
 			-- globalScore values
 			T0start								= 1,
-			T1start								= 600*0.25,
-			T1low								= 900*0.25,
-			T1med								= 1200*0.25,
-			T1high								= 1500*0.25,
-			T1top								= 1800*0.25,
-			T2start								= 2250*0.25,
-			T2low								= 3000*0.25,
-			T2med								= 3750*0.25,
-			T2high								= 4500*0.25,
-			T2top								= 6000*0.25,
-			T3start								= 7500*0.25,
-			T3low								= 9000*0.25,
-			T3med								= 10500*0.25,
-			T3high								= 12000*0.25,
-			T3top								= 13500*0.25,
-			T4start								= 15000*0.25,
-			T4low								= 18000*0.25,
-			T4med								= 21000*0.25,
-			T4high								= 24000*0.25,
-			T4top								= 28000*0.25,
-			BossFight							= 28001*0.25,
+			T1start								= 150+adder*multiplier,
+			T1low								= 300+adder*multiplier,
+			T1med								= 450+adder*multiplier,
+			T1high								= 600+adder*multiplier,
+			T1top								= 750+adder*multiplier,
+			T2start								= 900+adder*multiplier,
+			T2low								= 1050+adder*multiplier,
+			T2med								= 1200+adder*multiplier,
+			T2high								= 1350+adder*multiplier,
+			T2top								= 1500+adder*multiplier,
+			T3start								= 1750+adder*multiplier,
+			T3low								= 2000+adder*multiplier,
+			T3med								= 2250+adder*multiplier,
+			T3high								= 2500+adder*multiplier,
+			T3top								= 2750+adder*multiplier,
+			T4start								= 3000+adder*multiplier,
+			T4low								= 3250+adder*multiplier,
+			T4med								= 3500+adder*multiplier,
+			T4high								= 3750+adder*multiplier,
+			T4top								= 4000+adder*multiplier,
+			BossFight							= 4001+adder*multiplier,
 			-- don't delete
 			NoRadar								= 1200,
 		},
@@ -79,7 +81,7 @@ if scavengersAIEnabled then
 	unitSpawnerModuleConfig = {
 		bossFightEnabled					= true,
 		FinalBossUnit						= true,
-		BossWaveTimeLeft					= 900,
+		BossWaveTimeLeft					= 300,
 		aircraftchance 						= 20, -- higher number = lower chance
 		globalscoreperoneunit 				= 900,
 		spawnchance							= 120,

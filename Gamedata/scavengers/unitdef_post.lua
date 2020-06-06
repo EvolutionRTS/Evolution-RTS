@@ -17,7 +17,8 @@ function scav_Udef_Post(name, uDef)
 	
 	if uDef.customParams then
 		uDef.customParams.ProvideTech = [[tech0, tech1, tech2, tech3]]
-		uDef.customParams.supply_granted = [[400]]
+		uDef.customParams.supply_granted = 400
+		uDef.customparams.supply_cost = 0
 	end
 	----------------- End of EVO stuff
 
