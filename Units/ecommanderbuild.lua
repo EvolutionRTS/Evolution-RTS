@@ -10,9 +10,9 @@ local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
-local weapon1Damage              = 200
-local weapon1AOE				 = 250
-local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local weapon1Damage              = 15
+local weapon1AOE				 = 25
+local energycosttofire1			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 
 local unitDef                    = {
@@ -66,8 +66,8 @@ local unitDef                    = {
 	moveState			         = "0",
 	name                         = "The Builder Overseer",
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
-	objectName                   = "ecommander4.s3o",
-	script			             = "ecommander3.cob",
+	objectName                   = "ecommander4-battle.s3o",
+	script			             = "ecommander4-battle.cob",
 	radarDistance                = 0,
 	repairable		             = false,
 	selfDestructAs               = "commnuke",
@@ -112,7 +112,7 @@ local unitDef                    = {
 	},
 	weapons                      = {
 		[1]                      = {
-			def                  = "riottankempweapon",
+			def                  = "machinegun",
 		},
 	},
 	customParams                 = {
@@ -143,6 +143,49 @@ Reclaims any energy cores within it's proximity.]],
 --------------------------------------------------------------------------------
 
 local weaponDefs                 = {
+
+	machinegun                   = {
+		accuracy                 = 300,
+		AreaOfEffect             = weapon1AOE,
+		avoidFriendly            = false,
+		avoidFeature             = false,
+		collideFriendly          = false,
+		collideFeature           = false,
+		beamTime                 = 0.1,
+		
+		coreThickness            = 0.5,
+		duration                 = 0.1,
+		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
+		energypershot            = energycosttofire1,
+		fallOffRate              = 0,
+		fireStarter              = 50,
+		interceptedByShieldType  = 4,
+		impulsefactor			 = 0,
+		
+		minintensity             = "1",
+		name                     = "Machine Gun",
+		range                    = 650,
+		reloadtime               = 0.1,
+		WeaponType               = "LaserCannon",
+		rgbColor                 = "1 0.2 0",
+		rgbColor2                = "1 1 1",
+		soundTrigger             = true,
+		soundstart               = "weapons/tankdestroyerfire.wav",
+		texture1                 = "shot",
+		texture2                 = "empty",
+		thickness                = 5,
+		tolerance                = 1000,
+		turret                   = true,
+		weaponVelocity           = 1000,
+		customparams             = {
+			damagetype		      = "ecommanderbattle", 
+
+			nocosttofire		    = true,
+		}, 
+		damage                   = {
+			default              = weapon1Damage,
+		},
+	},
 
 	riottankempweapon            = {
 		

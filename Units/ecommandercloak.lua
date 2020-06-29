@@ -10,9 +10,9 @@ local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
-local weapon1Damage              = 200
-local weapon1AOE				 = 250
-local energycosttofire			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local weapon1Damage              = 15
+local weapon1AOE				 = 25
+local energycosttofire1			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
 
 
 local unitDef                    = {
