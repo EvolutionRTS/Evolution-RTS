@@ -822,19 +822,6 @@ Evolution]],
 			require = [[tech1]],
 		},
 	},
-	eallterrriot_shotgun = 	{
-		{
-			into = 'eallterrriot',
-			--require = 'etech1',
-			time = 2,
-			cmdname = [[Evolve
-			EMP]],
-			energy = 0,
-			metal = 0,
-			text = [[Shotgun]],
-			require = [[tech1]],
-		},
-	},
 	
 	eamphibriot = 	{
 		{
@@ -843,19 +830,6 @@ Evolution]],
 			time = 2,
 			cmdname = [[Evolve
 			Shotgun]],
-			energy = 0,
-			metal = 0,
-			text = [[Shotgun]],
-			require = [[tech1]],
-		},
-	},
-	eamphibriot_shotgun = 	{
-		{
-			into = 'eamphibriot',
-			--require = 'etech1',
-			time = 2,
-			cmdname = [[Evolve
-			EMP]],
 			energy = 0,
 			metal = 0,
 			text = [[Shotgun]],

@@ -23,6 +23,17 @@ unitDeaths = {
 		},
 	},
 	
+	mediumScavengerExplosionNuke = {
+		weaponType		   = "Cannon",
+		impulseFactor      = mediumExplosionImpulseFactor,
+		AreaOfEffect=mediumExplosion,
+		explosiongenerator="custom:NUKEDATBEWMSMALL",
+		cameraShake=mediumExplosion,
+		damage = {
+			default            = 0,
+		},
+	},
+	
 }
 
 return lowerkeys(unitDeaths)
