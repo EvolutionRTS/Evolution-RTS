@@ -97,6 +97,7 @@ local unitDef                    = {
 			"custom:nanoorb",
 			"custom:dirt",
 			"custom:blacksmoke",
+			"custom:gdhcannon",
 		},
 	},
 	buildoptions                 = Shared.buildListeCommanderFactory,

@@ -86,6 +86,7 @@ unitDef                    = {
 			"custom:blacksmoke",
 		},
 	},
+	buildoptions                 = Shared.buildList,
 	sounds                       = {
 		build					 = "miscfx/buildstart.wav",
 		underattack              = "other/unitsunderattack1",

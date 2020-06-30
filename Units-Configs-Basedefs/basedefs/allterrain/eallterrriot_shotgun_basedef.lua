@@ -167,6 +167,8 @@ weaponDefs                 = {
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
+		burst					 = 5,
+		burstrate				 = 0.2,
 		
 		cegTag                   = "bruisercannon",
 		explosionGenerator       = "custom:genericshellexplosion-medium",
@@ -177,6 +179,7 @@ weaponDefs                 = {
 		--projectiles		     = 10,
 		range                    = 500,
 		reloadtime               = 5,
+		sprayangle				 = 2000,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/mediumcannonhit.wav",
 		soundStart               = "weapons/bruisercannon.wav",
@@ -189,7 +192,7 @@ weaponDefs                 = {
 			damagetype		     = "eriottank2shotgun",  
 		},      
 		damage                   = {
-			default              = 300,
+			default              = 30,
 		},
 	},
 }
