@@ -64,7 +64,7 @@ if scavengersAIEnabled then
 			T4top								= 4000+adder*multiplier,
 			BossFight							= 4001+adder*multiplier,
 			-- don't delete
-			NoRadar								= 1200,
+			NoRadar								= 1200, --Under this score beacons don't spawn in radar covered area. Above this score they can spawn in radar but not in LoS.
 		},
 		other = {
 			heighttolerance						= 30, -- higher = allow higher height diffrences
