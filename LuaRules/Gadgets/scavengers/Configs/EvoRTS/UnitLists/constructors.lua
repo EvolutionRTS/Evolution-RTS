@@ -6,7 +6,14 @@ ConstructorsList = {
 -- put ALL commander units from your game here
 CommandersList = {
 	"ecommander",
-	"ecommander",
+	"ecommanderbattle",
+	"ecommanderbuild",
+	"ecommandercloak",
+	"ecommanderfactory",
+	"ecommandermeteor",
+	"ecommandershield",
+	"zarm",
+	"xcommander",
 }
 
 ConstructorsCounter = {
