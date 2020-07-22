@@ -133,6 +133,9 @@ function BossFightMessages(BossWaveTimeLeft)
 	if BossWaveTimeLeft == 1 then
 		ScavSendMessage("1")
 	end
+	if BossWaveTimeLeft == 0 then
+		ScavSendMessage("BOSS SPAWNED")
+	end
 
 	if BossWaveTimeLeft == 0 then
 		ScavSendNotification("scav_scavfinalvictory")
