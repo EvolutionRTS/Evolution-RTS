@@ -18,7 +18,7 @@ end
 	customDefs.ecommander = {
 		buildoptions = scavUnit,
 		customParams = {
-			ProvideTech = [[tech0, tech1, tech2, tech3, -overseer]]
+			ProvideTech = [[tech0, tech1, tech2, tech3, -overseer]],
 		},
 	}
 
