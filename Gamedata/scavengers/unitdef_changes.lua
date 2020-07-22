@@ -16,10 +16,10 @@ end
 -- Use this commented out BAR part as example
 	
 	customDefs.ecommander = {
-		buildoptions = scavUnit
+		buildoptions = scavUnit,
 		customParams = {
 			ProvideTech = [[tech0, tech1, tech2, tech3, -overseer]]
-		}
+		},
 	}
 
 
