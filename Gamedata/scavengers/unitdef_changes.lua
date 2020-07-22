@@ -14,7 +14,13 @@ for name,uDef in pairs(UnitDefs) do
 end
 
 -- Use this commented out BAR part as example
-
+	
+	customDefs.ecommander = {
+		buildoptions = scavUnit
+		customParams = {
+			ProvideTech = [[tech0, tech1, tech2, tech3, -overseer]]
+		}
+	}
 
 
 
