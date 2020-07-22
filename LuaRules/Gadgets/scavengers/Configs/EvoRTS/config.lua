@@ -93,10 +93,10 @@ if scavengersAIEnabled then
 		chanceforaircraftonsea				= 2, -- higher number = lower chance
 
 		t0multiplier						= 1.5,
-		t1multiplier						= 1.2,
+		t1multiplier						= 1.25,
 		t2multiplier						= 1,
-		t3multiplier						= 0.8,
-		t4multiplier						= 0.5,
+		t3multiplier						= 0.75,
+		t4multiplier						= 0.1,
 	}
 
 	constructorControllerModuleConfig = {
