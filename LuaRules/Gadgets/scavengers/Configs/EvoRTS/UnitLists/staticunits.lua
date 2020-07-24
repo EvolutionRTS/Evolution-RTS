@@ -51,7 +51,6 @@ BeaconDefenceStructuresT1 = {
 BeaconDefenceStructuresT2 = {
 	"eheavyturret2",
 	"elaserbattery",
-	"ehbotkarganneth_turret",
 	"ehbotrocko_turret",
 	"ehbotsniper_turret",
 	"ehbotthud_turret",
@@ -85,7 +84,6 @@ StartboxDefenceStructuresT1 = {
 StartboxDefenceStructuresT2 = {
 	"eheavyturret2",
 	"elaserbattery",
-	"ehbotkarganneth_turret",
 	"ehbotrocko_turret",
 	"ehbotsniper_turret",
 	"ehbotthud_turret",
@@ -128,7 +126,6 @@ StartboxDefenceStructuresT1Sea = {
 StartboxDefenceStructuresT2Sea = {
 	"eheavyturret2",
 	"elaserbattery",
-	"ehbotkarganneth_turret",
 	"ehbotrocko_turret",
 	"ehbotsniper_turret",
 	"ehbotthud_turret",
