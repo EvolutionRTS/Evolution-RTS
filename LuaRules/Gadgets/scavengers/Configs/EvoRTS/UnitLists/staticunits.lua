@@ -1,23 +1,11 @@
 NoSelfdList = {
-	"ecommanderbattleai",
-	"ecommanderbuildai",
-	"ecommandercloakai",
-	"ecommanderfactoryai",
-	"ecommanderhealerai",
-	"ecommandershieldai",
-	"ecommanderbattle",
-	"ecommanderbuild",
-	"ecommandercloak",
-	"ecommanderfactory",
-	"ecommanderhealer",
-	"ecommandershield",
 	"ehbotkarganneth_turret",
 	"ehbotpeewee_turret",
 	"ehbotrocko_turret",
 	"ehbotsniper_turret",
 	"ehbotthud_turret",
 	"zarm",
-	"xcommander",
+	"ztenticle",
 }
 
 StockpilingUnitNames = {
@@ -27,7 +15,7 @@ StockpilingUnitNames = {
 
 NukingUnitNames = {
 	"esilo",
-	"esilo",
+	"xnukesilo",
 }
 
 BeaconCaptureExcludedUnits = {

@@ -18,6 +18,10 @@ end
 	customDefs.ecommander = {
 		buildoptions = scavUnit,
 	}
+	
+	customDefs.xcommander = {
+		buildoptions = scavUnit,
+	}
 
 
 
