@@ -12,19 +12,24 @@ local ranc = math.random(1,b)
 
 
 function scav_Udef_Post(name, uDef)
+	if not uDef.customparams then
+		uDef.customparams = {}
+	end
 	
+	if not uDef.customParams then
+		uDef.customParams = {}
+	end
 	----------------- EVO stuff
 	
 	if uDef.customParams then
-		uDef.customParams.ProvideTech = [[tech0, tech1, tech2, tech3]]
-		uDef.customParams.supply_granted = 400
+		--uDef.customParams.ProvideTech = [[tech0, tech1, tech2, tech3]]
+		uDef.customparams.providetech = [[tech0, tech1, tech2, tech3]]
+		uDef.customparams.supply_granted = 400
 		uDef.customparams.supply_cost = 0
 	end
 	----------------- End of EVO stuff
 
-	if not uDef.customparams then
-		uDef.customparams = {}
-	end
+	
 
 	-- add unit category
 	uDef.category = uDef.category..' SCAVENGER'
@@ -100,27 +105,27 @@ function scav_Udef_Post(name, uDef)
 	
 	
 	if uDef.buildcostenergy then
-		uDef.buildcostenergy = math.ceil(uDef.buildcostenergy*0.5)
+		uDef.buildcostenergy = math.ceil(uDef.buildcostenergy*2)
 	end
 
 	if uDef.buildcostmetal then
-		uDef.buildcostmetal = math.ceil(uDef.buildcostmetal*0.5)
+		uDef.buildcostmetal = math.ceil(uDef.buildcostmetal*2)
 	end
 
 	if uDef.energymake then
-		uDef.energymake = math.ceil(uDef.energymake*0.5)
+		uDef.energymake = math.ceil(uDef.energymake*2)
 	end
 
 	if uDef.metalmake then
-		uDef.metalmake = math.ceil(uDef.metalmake*0.5)
+		uDef.metalmake = math.ceil(uDef.metalmake*2)
 	end
 
 	if uDef.maxdamage then
-		uDef.maxdamage = math.ceil(uDef.maxdamage*0.5)
+		uDef.maxdamage = math.ceil(uDef.maxdamage*2)
 	end
 
 	if uDef.maxvelocity then
-		uDef.maxvelocity = uDef.maxvelocity*0.9
+		uDef.maxvelocity = uDef.maxvelocity*0.5
 	end
 
 	if uDef.radardistancejam then
@@ -136,7 +141,7 @@ function scav_Udef_Post(name, uDef)
 	end
 
 	if uDef.turnrate then
-		uDef.turnrate = uDef.turnrate*0.8
+		uDef.turnrate = uDef.turnrate*0.1
 	end
 
 	if uDef.turninplaceanglelimit then
