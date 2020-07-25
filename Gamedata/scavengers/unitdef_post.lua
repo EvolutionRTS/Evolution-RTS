@@ -127,6 +127,10 @@ function scav_Udef_Post(name, uDef)
 	if uDef.maxvelocity then
 		uDef.maxvelocity = uDef.maxvelocity*0.5
 	end
+	
+	if uDef.reversevelocity then
+		uDef.reversevelocity = uDef.reversevelocity*0.1
+	end
 
 	if uDef.radardistancejam then
 		uDef.radardistancejam = math.ceil(uDef.radardistancejam*1.5)
