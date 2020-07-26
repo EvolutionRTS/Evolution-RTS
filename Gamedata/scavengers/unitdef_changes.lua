@@ -17,10 +17,14 @@ end
 	
 	customDefs.ecommander = {
 		buildoptions = scavUnit,
+		workertime = 10,
+		repairspeed = 10,
 	}
 	
 	customDefs.xcommander = {
 		buildoptions = scavUnit,
+		workertime = 10,
+		repairspeed = 10,
 	}
 
 

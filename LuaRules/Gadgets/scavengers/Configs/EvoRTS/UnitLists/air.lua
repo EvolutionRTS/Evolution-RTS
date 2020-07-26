@@ -9,6 +9,8 @@ T1AirUnits = {
 }
 
 T2AirUnits = {
+	"efighter",
+	"zairtoairfighter",
 	"egunship2",
 	"ebomber",
 	"zairtogroundfighter",
@@ -16,8 +18,11 @@ T2AirUnits = {
 }
 
 T3AirUnits = {
+	"efighter",
+	"zairtoairfighter",
 	"egunship2",
 	"ebomber",
+	"zairtogroundfighter",
 	"zairbomber",
 }
 
