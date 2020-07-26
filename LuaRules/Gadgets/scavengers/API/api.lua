@@ -10,7 +10,7 @@ ScavengerStartboxZMin = mapsizeZ + 1
 ScavengerStartboxXMax = mapsizeX + 1
 ScavengerStartboxZMax = mapsizeZ + 1
 ScavengerStartboxExists = false
-spawnmultiplier = tonumber(Spring.GetModOptions().scavengers) or 2
+spawnmultiplier = tonumber(Spring.GetModOptions().scavengers) or 1
 scavTechDifficulty = Spring.GetModOptions().scavengerstech or "adaptive"
 if scavengersAIEnabled then
 	if spawnmultiplier == 0 then
