@@ -6,6 +6,10 @@ NoSelfdList = {
 	"ehbotthud_turret",
 	"zarm",
 	"ztenticle",
+	"lootboxbronze",
+	"lootboxsilver",
+	"lootboxgold",
+	"lootboxplatinum",
 }
 
 StockpilingUnitNames = {
