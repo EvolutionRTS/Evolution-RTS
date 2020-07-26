@@ -141,7 +141,7 @@ function gadget:GameFrame(n)
             for j = 1,#aliveLootboxes do 
                 local unitID            = aliveLootboxes[j]
                 local unitTeam          = spGetUnitTeam(unitID)
-                local unitEnemy         = spNearestEnemy(unitID, 128, false)
+                local unitEnemy         = spNearestEnemy(unitID, 384, false)
                 if unitEnemy then
                     local enemyTeam = spGetUnitTeam(unitEnemy)
                     --if enemyTeam ~= spGaiaTeam then
@@ -158,7 +158,7 @@ function gadget:GameFrame(n)
                 local posx = math.floor(math_random(xBorder,mapsizeX-xBorder)/16)*16
                 local posz = math.floor(math_random(zBorder,mapsizeZ-zBorder)/16)*16
                 local posy = spGroundHeight(posx, posz)
-				local unitsCyl = spGetCylinder(posx, posz, 128)
+				local unitsCyl = spGetCylinder(posx, posz, 384)
                 if #unitsCyl == 0 then
                     --QueueSpawn("lootdroppod_gold", posx, posy, posz, math_random(0,3),spGaiaTeam, n)
                     --QueueSpawn(lootboxesList[math_random(1,#lootboxesList)], posx, posy, posz, math_random(0,3),spGaiaTeam, n+600)

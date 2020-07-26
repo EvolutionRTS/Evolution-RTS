@@ -182,7 +182,7 @@ function gadget:GameFrame(n)
 	end
 
 
-	if scavconfig.modules.startBoxProtection == true and ScavengerStartboxExists == true then
+	if scavconfig.modules.startBoxProtection == true and ScavengerStartboxExists == true and FinalBossKilled == false then
 		if n%30 == 0 then
 			spawnStartBoxProtection(n)
 			executeStartBoxProtection(n)
@@ -307,7 +307,7 @@ function gadget:GameFrame(n)
 				end
 				
 				-- backup -- and not scavConstructor[scav] and not scavResurrector[scav] and not scavCollector[scav]
-				if n%900 == 0 and not scavStructure[scav] and not scavAssistant[scav] and not scavFactory[scav] and not scavSpawnBeacon[scav] then
+				if n%450 == 0 and not scavStructure[scav] and not scavAssistant[scav] and not scavFactory[scav] and not scavSpawnBeacon[scav] then
 					SelfDestructionControls(n, scav, scavDef)
 				end
 				if Spring.GetCommandQueue(scav, 0) <= 1 and not scavStructure[scav] and not scavConstructor[scav] and not scavResurrector[scav] and not scavAssistant[scav] and not scavCollector[scav] and not scavFactory[scav] and not scavSpawnBeacon[scav] then
