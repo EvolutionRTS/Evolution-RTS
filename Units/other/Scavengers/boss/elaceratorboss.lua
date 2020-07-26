@@ -1,22 +1,22 @@
--- UNITDEF -- eamphibleveler --
+-- UNITDEF -- elacerator --
 --------------------------------------------------------------------------------
 
-unitName = "eamphiblevelerboss"
+unitName = "elaceratorboss"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[boss]]
+isUpgraded	= [[boss]]
 
-humanName = [[Mega Leveler]]
+humanName = "Lacerator"
 
-objectName = "scavs/boss/eamphiblevelerboss.s3o"
-script = "eamphibleveler.cob"
+objectName = "scavs/boss/elaceratorboss.s3o"
+script = "elacerator.cob"
 
 tech = [[tech3]]
 armortype = [[armored]]
---supply = [[30]]
+--supply  = [[25]]
 
-VFS.Include("units-configs-basedefs/basedefs/amphib/eamphibleveler_basedef.lua")
+VFS.Include("units-configs-basedefs/basedefs/hover/elacerator_basedef.lua")
 
 unitDef.weaponDefs = weaponDefs
 --------------------------------------------------------------------------------
