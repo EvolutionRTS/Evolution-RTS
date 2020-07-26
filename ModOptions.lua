@@ -306,6 +306,17 @@ local options= {
 		}
 	},
 	{
+		key    = 'lootboxes',
+		name   = 'Lootboxes',
+		desc   = '1 to enable, 0 to disable',
+		type   = 'number',
+		section= 'gameplayoptions',
+		def    = 0,
+		min    = 0,
+		max    = 1,
+		step   = 1,
+	},
+	{
 		key="deathmode",
 		name="Game End Mode",
 		desc="What it takes to eliminate a team",

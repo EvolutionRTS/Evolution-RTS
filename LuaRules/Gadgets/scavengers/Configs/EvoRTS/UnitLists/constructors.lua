@@ -25,6 +25,7 @@ AssistUnits = {
 	"eorb",
 	"zconstructor",
 	"ztenticle",
+	"zarm",
 }
 
 Resurrectors = {

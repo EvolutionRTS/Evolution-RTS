@@ -6,6 +6,7 @@ NoSelfdList = {
 	"ehbotthud_turret",
 	"zarm",
 	"ztenticle",
+	"ztumor",
 	"lootboxbronze",
 	"lootboxsilver",
 	"lootboxgold",
@@ -31,6 +32,7 @@ BeaconDefenceStructuresT0 = {
 	"elightturret2",
 	"elightturret2",
 	"ehbotpeewee_turret",
+	"xllt",
 }
 
 BeaconDefenceStructuresT1 = {
@@ -38,6 +40,8 @@ BeaconDefenceStructuresT1 = {
 	"eheavyturret2",
 	"ehbotpeewee_turret",
 	"ehbotthud_turret",
+	"xllt",
+	"xrocketturret",
 }
 
 BeaconDefenceStructuresT2 = {
@@ -46,6 +50,7 @@ BeaconDefenceStructuresT2 = {
 	"ehbotrocko_turret",
 	"ehbotsniper_turret",
 	"ehbotthud_turret",
+	"xrocketturret",
 }
 
 BeaconDefenceStructuresT3 = {
@@ -64,6 +69,7 @@ StartboxDefenceStructuresT0 = {
 	"elightturret2",
 	"elightturret2",
 	"ehbotpeewee_turret",
+	"xllt",
 }
 
 StartboxDefenceStructuresT1 = {
@@ -71,6 +77,8 @@ StartboxDefenceStructuresT1 = {
 	"eheavyturret2",
 	"ehbotpeewee_turret",
 	"ehbotthud_turret",
+	"xllt",
+	"xrocketturret",
 }
 
 StartboxDefenceStructuresT2 = {
@@ -79,6 +87,7 @@ StartboxDefenceStructuresT2 = {
 	"ehbotrocko_turret",
 	"ehbotsniper_turret",
 	"ehbotthud_turret",
+	"xrocketturret",
 }
 
 StartboxDefenceStructuresT3 = {
@@ -106,6 +115,7 @@ StartboxDefenceStructuresT0Sea = {
 	"elightturret2",
 	"elightturret2",
 	"ehbotpeewee_turret",
+	"xllt",
 }
 
 StartboxDefenceStructuresT1Sea = {
@@ -113,6 +123,8 @@ StartboxDefenceStructuresT1Sea = {
 	"eheavyturret2",
 	"ehbotpeewee_turret",
 	"ehbotthud_turret",
+	"xllt",
+	"xrocketturret",
 }
 
 StartboxDefenceStructuresT2Sea = {
@@ -121,6 +133,7 @@ StartboxDefenceStructuresT2Sea = {
 	"ehbotrocko_turret",
 	"ehbotsniper_turret",
 	"ehbotthud_turret",
+	"xrocketturret",
 }
 
 StartboxDefenceStructuresT3Sea = {

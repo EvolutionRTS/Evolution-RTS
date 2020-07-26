@@ -4,6 +4,8 @@ T0LandUnits = {
 	"ehbotpeewee",
 	"elighttank3",
 	"zlightswarm",
+	"xskulk",
+	"xflea",
 }
 
 T1LandUnits = {
@@ -27,6 +29,12 @@ T1LandUnits = {
 	"eartytank_saturation",
 	"zmedswarm",
 	"zpyro",
+	"xskulk",
+	"xflea",
+	"xcrasher",
+	"xhammer",
+	"xrocko",
+	"xwarrior",
 }
 
 T2LandUnits = {
@@ -40,6 +48,10 @@ T2LandUnits = {
 	"emissiletank",
 	"zskirmisher",
 	"zassault",
+	"xcrasher",
+	"xhammer",
+	"xrocko",
+	"xwarrior",
 }
 
 T3LandUnits = {
