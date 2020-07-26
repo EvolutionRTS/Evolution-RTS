@@ -27,8 +27,32 @@ end
 		repairspeed = 10,
 	}
 
+	-- nukedatbewm
+	
+	customDefs.eallterranarchidboss = {
+		explodeas = "bossScavengerExplosionNuke",
+		selfdestructas = "bossScavengerExplosionNuke",
+	}
 
-
+	customDefs.eamphiblevelerboss = {
+		explodeas = "bossScavengerExplosionNuke",
+		selfdestructas = "bossScavengerExplosionNuke",
+	}
+	
+	customDefs.ehbotkargannethboss = {
+		explodeas = "bossScavengerExplosionNuke",
+		selfdestructas = "bossScavengerExplosionNuke",
+	}
+	
+	customDefs.ekrowboss = {
+		explodeas = "bossScavengerExplosionNuke",
+		selfdestructas = "bossScavengerExplosionNuke",
+	}
+	
+	customDefs.elaceratorboss = {
+		explodeas = "bossScavengerExplosionNuke",
+		selfdestructas = "bossScavengerExplosionNuke",
+	}
 
 
 

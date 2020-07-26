@@ -61,10 +61,10 @@ function scav_Udef_Post(name, uDef)
 		-- end
 	end
 	-- make unit explosion purple
-	if uDef.explodeas then
+	if uDef.explodeas and uDef.explodeas ~= "bossScavengerExplosionNuke" then
 		uDef.explodeas = "mediumScavengerExplosionGeneric"
 	end
-	if uDef.selfdestructas then
+	if uDef.selfdestructas and uDef.selfdestructas ~= "bossScavengerExplosionNuke" then
 		uDef.selfdestructas = "mediumScavengerExplosionGeneric"
 	end
 
@@ -132,6 +132,10 @@ function scav_Udef_Post(name, uDef)
 		uDef.maxreversevelocity = uDef.maxreversevelocity*0.1
 	end
 
+	if uDef.sightdistance then
+		uDef.sightdistance = math.ceil(uDef.sightdistance*5)
+	end
+	
 	if uDef.radardistancejam then
 		uDef.radardistancejam = math.ceil(uDef.radardistancejam*1.5)
 	end

@@ -34,6 +34,16 @@ unitDeaths = {
 		},
 	},
 	
+	bossScavengerExplosionNuke    = {
+		weaponType		    = "Cannon",
+		impulseFactor       = hugeExplosionImpulseFactor,
+		AreaOfEffect		= 1500,
+		explosionGenerator  = "custom:NUKEDATBEWM",
+		cameraShake			= hugeExplosion,
+		damage = {
+			default            = 9999999,
+		},
+	},
+	
 }
-
 return lowerkeys(unitDeaths)

@@ -384,9 +384,9 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				end
 			end
 			if uDef.customparams and uDef.customparams.isupgraded == "boss" then
-				uDef.maxdamage = uDef.maxdamage * 10
+				uDef.maxdamage = uDef.maxdamage * 5
 				if uDef.maxvelocity then
-					uDef.maxvelocity = uDef.maxvelocity * 0.5
+					uDef.maxvelocity = uDef.maxvelocity * 0.75
 				end
 			end
 		end
@@ -418,7 +418,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				wDef.reloadtime = wDef.reloadtime * 0.5
 				wDef.damage.default = wDef.damage.default * 10
 				if wDef.exteriorshield == true and wDef.shieldpower < 0 then
-					wDef.shieldpower = wDef.shieldpower * 10
+					wDef.shieldpower = wDef.shieldpower * 5
 				end
 			end
 			
@@ -440,7 +440,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			end
 			if wDef.customparams and wDef.customparams.isshieldupgraded == "boss" then
 				if wDef.exteriorshield == true then
-					wDef.shieldpower = wDef.shieldpower * 10
+					wDef.shieldpower = wDef.shieldpower * 5
 				end
 			end
 	

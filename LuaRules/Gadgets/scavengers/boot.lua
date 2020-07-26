@@ -653,7 +653,12 @@ function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 		-- CMD.CLOAK = 37382
 		Spring.GiveOrderToUnit(unitID,37382,{1},0)
 		-- Fire At Will
-		Spring.GiveOrderToUnit(unitID,CMD.FIRE_STATE,{2},0)
-		Spring.GiveOrderToUnit(unitID,CMD.MOVE_STATE,{2},0)
+		if scavConstructor[unitID] then
+			Spring.GiveOrderToUnit(unitID,CMD.FIRE_STATE,{1},0)
+			Spring.GiveOrderToUnit(unitID,CMD.MOVE_STATE,{0},0)
+		else
+			Spring.GiveOrderToUnit(unitID,CMD.FIRE_STATE,{2},0)
+			Spring.GiveOrderToUnit(unitID,CMD.MOVE_STATE,{2},0)
+		end
 	end
 end
