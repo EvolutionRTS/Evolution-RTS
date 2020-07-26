@@ -5,7 +5,7 @@ unitName = "eallterranarchidboss"
 
 --------------------------------------------------------------------------------
 
-isUpgraded = [[0]]
+isUpgraded = [[boss]]
 
 humanName = [[Mega Anarchid]]
 
