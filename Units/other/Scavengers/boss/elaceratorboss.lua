@@ -7,7 +7,7 @@ unitName = "elaceratorboss"
 
 isUpgraded	= [[boss]]
 
-humanName = "Lacerator"
+humanName = "Mega Lacerator"
 
 objectName = "scavs/boss/elaceratorboss.s3o"
 script = "elacerator.cob"
