@@ -1,4 +1,4 @@
 BossUnits = {
-"xcrasher_scav",
-"xcrasher_scav",
+"ekrowboss_scav",
+"ekrowboss_scav",
 }
