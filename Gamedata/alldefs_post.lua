@@ -415,7 +415,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				end
 			end
 			if wDef.customparams and wDef.customparams.isupgraded == "boss" then
-				wDef.reloadtime = wDef.reloadtime * 10
+				wDef.reloadtime = wDef.reloadtime * 2
 				wDef.damage.default = wDef.damage.default * 10
 				if wDef.exteriorshield == true and wDef.shieldpower < 0 then
 					wDef.shieldpower = wDef.shieldpower * 10
