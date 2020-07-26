@@ -23,7 +23,7 @@ SaveDefsToCustomParams = false
 -------------------------
 unitHealthModifier = tonumber(Spring.GetModOptions().unithealthmodifier)
 if unitHealthModifier == nil then
-	unitHealthModifier = 200
+	unitHealthModifier = 300
 end
 unitHealthModifier = unitHealthModifier * 0.01
 

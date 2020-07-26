@@ -1,5 +1,5 @@
 return {
-	scavengerdroppodfriendly_scav = {
+	scavengerdroppodfriendly = {
 		acceleration = 0,
 		activatewhenbuilt = true,
 		autoheal = 1.8,
@@ -42,7 +42,7 @@ return {
 		turninplace = true,
 		turninplaceanglelimit = 90,
 		turnrate = 0,
-		unitname = "scavengerfriendlydroppod_scav",
+		unitname = "scavengerfriendlydroppod",
 		upright = false,
 		waterline = 0,
 		workertime = 1500,

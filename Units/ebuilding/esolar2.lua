@@ -35,6 +35,7 @@ local unitDef                     = {
 	metalStorage                  = 0,
 	name                          = "Fission Energy Generator",
 	objectName                    = "epowerplant6x6.s3o",
+	script						  = "esolar2.cob",
 	onoffable                     = false,
 	radarDistance                 = 0,
 	repairable		              = false,
