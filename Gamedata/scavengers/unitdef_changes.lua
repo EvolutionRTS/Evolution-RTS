@@ -23,7 +23,7 @@ end
 		selfdestructas = "mediumScavengerExplosionNuke",
 		customparams = {
 			providetech = [[tech0, tech1, tech2, tech3]],
-		}
+		},
 	}
 	
 	customDefs.xcommander = {
@@ -34,7 +34,7 @@ end
 		selfdestructas = "mediumScavengerExplosionNuke",
 		customparams = {
 			providetech = [[tech0, tech1, tech2, tech3]],
-		}
+		},
 	}
 
 	customDefs.eamphibbuggybig = {
