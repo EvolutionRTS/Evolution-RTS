@@ -61,10 +61,10 @@ function scav_Udef_Post(name, uDef)
 		-- end
 	end
 	-- make unit explosion purple
-	if uDef.explodeas and uDef.explodeas ~= "bossScavengerExplosionNuke" then
+	if uDef.explodeas and uDef.explodeas ~= "bossScavengerExplosionNuke" and uDef.explodeas ~= "mediumScavengerExplosionNuke" then
 		uDef.explodeas = "mediumScavengerExplosionGeneric"
 	end
-	if uDef.selfdestructas and uDef.selfdestructas ~= "bossScavengerExplosionNuke" then
+	if uDef.selfdestructas and uDef.selfdestructas ~= "bossScavengerExplosionNuke" and uDef.selfdestructas ~= "mediumScavengerExplosionNuke" then
 		uDef.selfdestructas = "mediumScavengerExplosionGeneric"
 	end
 

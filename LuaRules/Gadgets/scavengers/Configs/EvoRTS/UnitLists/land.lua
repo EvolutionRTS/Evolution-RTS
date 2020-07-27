@@ -73,4 +73,5 @@ T4LandUnits = {
 	"ehbotkarganneth",
 	"elacerator",
 	"zqueen",
+	"eamphibbuggybig",
 }

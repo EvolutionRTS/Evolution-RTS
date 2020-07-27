@@ -30,7 +30,7 @@ unitDeaths = {
 		explosionGenerator = "custom:NUKEDATBEWMSMALL",
 		cameraShake=mediumExplosion,
 		damage = {
-			default            = 0,
+			default            = 5000,
 		},
 	},
 	

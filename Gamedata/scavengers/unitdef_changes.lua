@@ -19,15 +19,54 @@ end
 		buildoptions = scavUnit,
 		workertime = 10,
 		repairspeed = 10,
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
 	}
 	
 	customDefs.xcommander = {
 		buildoptions = scavUnit,
 		workertime = 10,
 		repairspeed = 10,
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
 	}
 
-	-- nukedatbewm
+	customDefs.eamphibbuggybig = {
+		maxdamage = 2500,
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
+		weaponDefs = {
+			lightbeamlaser = {
+				thickness = 15,
+			},
+		},
+	}
+
+	
+	customDefs.eallterranarchid = {
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
+	}
+
+	customDefs.eamphibleveler = {
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
+	}
+	
+	customDefs.ehbotkarganneth = {
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
+	}
+	
+	customDefs.ekrow = {
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
+	}
+	
+	customDefs.elacerator = {
+		explodeas = "mediumScavengerExplosionNuke",
+		selfdestructas = "mediumScavengerExplosionNuke",
+	}
 	
 	customDefs.eallterranarchidboss = {
 		explodeas = "bossScavengerExplosionNuke",
