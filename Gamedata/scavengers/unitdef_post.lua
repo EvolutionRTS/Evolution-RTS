@@ -23,8 +23,7 @@ function scav_Udef_Post(name, uDef)
 	
 	if uDef.customParams then
 		--uDef.customParams.ProvideTech = [[tech0, tech1, tech2, tech3]]
-		uDef.customparams.providetech = [[tech0, tech1, tech2, tech3]]
-		uDef.customparams.supply_granted = 400
+		uDef.customparams.supply_granted = 1
 		uDef.customparams.supply_cost = 0
 	end
 	----------------- End of EVO stuff
@@ -133,7 +132,7 @@ function scav_Udef_Post(name, uDef)
 	end
 
 	if uDef.sightdistance then
-		uDef.sightdistance = math.ceil(uDef.sightdistance*5)
+		uDef.sightdistance = math.ceil(uDef.sightdistance*1.5)
 	end
 	
 	if uDef.radardistancejam then

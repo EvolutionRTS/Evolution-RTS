@@ -21,6 +21,9 @@ end
 		repairspeed = 10,
 		explodeas = "mediumScavengerExplosionNuke",
 		selfdestructas = "mediumScavengerExplosionNuke",
+		customparams = {
+			providetech = [[tech0, tech1, tech2, tech3]],
+		}
 	}
 	
 	customDefs.xcommander = {
@@ -29,15 +32,18 @@ end
 		repairspeed = 10,
 		explodeas = "mediumScavengerExplosionNuke",
 		selfdestructas = "mediumScavengerExplosionNuke",
+		customparams = {
+			providetech = [[tech0, tech1, tech2, tech3]],
+		}
 	}
 
 	customDefs.eamphibbuggybig = {
 		maxdamage = 2500,
 		explodeas = "mediumScavengerExplosionNuke",
 		selfdestructas = "mediumScavengerExplosionNuke",
-		weaponDefs = {
+		weapondefs = {
 			lightbeamlaser = {
-				thickness = 15,
+				thickness = 20,
 			},
 		},
 	}
