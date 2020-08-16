@@ -340,7 +340,7 @@ local function createGridWindow(config)
         height = config.height, width = config.width,
         maxWidth = config.maxWidth,
         children = {grid},
-        bringToFrontOnClick = false, dockable = false, draggable = false,
+        bringToFrontOnClick = true, dockable = false, draggable = false,
         resizable = false, tweakDraggable = true, tweakResizable = false,
         padding = config.padding,
     }

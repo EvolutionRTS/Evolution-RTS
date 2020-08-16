@@ -60,6 +60,7 @@ function widget:Initialize()
 	Spring.SendCommands({
 		"unbindkeyset f4",
 	})
+	Spring.SendCommands("bind f4 screenshot png")
 	
 	if Game.version == "85.0" then
 		Spring.SendCommands({"unbindaction specteam"})

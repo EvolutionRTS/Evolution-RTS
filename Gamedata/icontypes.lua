@@ -292,7 +292,7 @@ local icontypes = {
   
   commander = {
 		bitmap='icons/commander.png',
-		size=3,
+		size=1,
 		radiusadjust=3,
 	},
 

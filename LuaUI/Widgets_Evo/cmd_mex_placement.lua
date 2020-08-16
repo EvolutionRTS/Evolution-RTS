@@ -118,12 +118,15 @@ local currentRotationAngle = 0
 local currentRotationAngleOpposite = 0
 local drawIncome = false -- Should we draw the income estimation?
 
-local minimapIconSizeMult = 0.01 --0.0145
+local minimapIconSizeMult = 0.0145 --0.0145
 
 -- only used when animating a spreadsheet/atlas texture
-local animRate = 60      -- That's actually the reverse of animrate, the lower it is the faster the animation goes
-local texturewidth = 290 --160 (actual in-game rect width)
+local spotTexture = "bitmaps/default/metalshimmer_color4.dds"
+local animRate = 500      -- That's actually the reverse of animrate, the lower it is the faster the animation goes
+local texturewidth = 160 --160 (actual in-game rect width)
 local textureYoffset = 2 --10 (offset from the ground)
+local numberOfImagesX = 8
+local numberOfImagesY = 8
 
 --------------------
 
@@ -539,7 +542,7 @@ local function Initialize()
         uniformInt = {
             colorAtlas = 0,
             normAtlas = 1,
-            numImages = {4, 4}
+            numImages = {numberOfImagesX, numberOfImagesY}
         },
         uniformFloat = {
             animProgress = 0.0,
@@ -749,7 +752,7 @@ function DrawMexList()
 
     local gf = spGetGameFrame() + spGetFrameTimeOffset();
 
-    gl.Texture(0, "bitmaps/default/metalshimmer_color.dds")
+    gl.Texture(0, spotTexture)
     gl.Blending(GL.ONE, GL.ONE) -- "hellish" look (1/2)
 
     if WG.metalSpots and circleList then

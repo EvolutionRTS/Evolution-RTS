@@ -397,11 +397,11 @@ function widget:MouseMove(x, y)
 		if draggingSlider == 'musicvolume' then
 			changeMusicVolume(getSliderValue('musicvolume', x) * 100)
 			fadelvl = getSliderValue('musicvolume', x)
-			Spring.Echo("Music volume set to: " .. (getSliderValue('musicvolume', x) * 100))
+			--Spring.Echo("Music volume set to: " .. (getSliderValue('musicvolume', x) * 100))
 		end
 		if draggingSlider == 'volume' then
 			changeVolume(getSliderValue('volume', x) * 100)
-			Spring.Echo("Global volume set to: " .. changeVolume(getSliderValue('volume', x) * 100))
+			--Spring.Echo("Global volume set to: " .. changeVolume(getSliderValue('volume', x) * 100))
 		end
 	end
 end
