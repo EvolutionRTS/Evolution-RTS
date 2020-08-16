@@ -8,10 +8,10 @@
 --
 
 return {
-  {
-    name = 'DAI',
-    desc = 'Shard by AF for Spring Lua',
-  },
+  -- {
+    -- name = 'DAI',
+    -- desc = 'Shard by AF for Spring Lua',
+  -- },
   {
     name = 'ScavengersAI',
     desc = 'scavs',
