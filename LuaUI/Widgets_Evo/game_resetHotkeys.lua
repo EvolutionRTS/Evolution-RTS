@@ -56,6 +56,11 @@ function widget:Initialize()
 	})
 	Spring.SendCommands("bind f12 screenshot png")
 	
+	-- Remove Mex Button
+	Spring.SendCommands({
+		"unbindkeyset f4",
+	})
+	
 	if Game.version == "85.0" then
 		Spring.SendCommands({"unbindaction specteam"})
 	end
