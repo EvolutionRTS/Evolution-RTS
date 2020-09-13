@@ -140,7 +140,7 @@ weaponDefs                 = {
 		weaponVelocity           = 1000,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "ehbotkarganneth", 
+			damagetype		     = "antiarmored", 
 		}, 
 		damage                   = {
 			default              = 40,

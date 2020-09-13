@@ -76,7 +76,6 @@ unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "missletankweapon",
-			onlyTargetCategory   = "BIO LIGHT ARMORED BUILDING",
 			badTargetCategory    = "BUILDING LIGHT",
 		},
 	},
@@ -141,7 +140,7 @@ weaponDefs                 = {
 		weaponVelocity           = 1000,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "emissiletank",  
+			damagetype		     = "antiair",  
 		},      
 		damage                   = {
 			default              = 150,

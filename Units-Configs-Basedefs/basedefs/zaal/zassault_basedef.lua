@@ -130,7 +130,7 @@ weaponDefs = {
 		weaponVelocity           = 2000,
 		waterWeapon				  = true,
 		customparams             = {
-			damagetype		     = "zassault",  
+			damagetype		     = "antiarmored",  
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {

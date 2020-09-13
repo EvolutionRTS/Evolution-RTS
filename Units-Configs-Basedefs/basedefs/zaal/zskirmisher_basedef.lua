@@ -129,7 +129,7 @@ weaponDefs = {
 		weaponVelocity           = 2000,
 		waterWeapon				  = true,
 		customparams             = {
-			damagetype		     = "skirmisher",  
+			damagetype		     = "antiarmored",  
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {

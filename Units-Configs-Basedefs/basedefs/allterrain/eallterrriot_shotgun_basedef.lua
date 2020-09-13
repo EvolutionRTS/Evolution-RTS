@@ -153,7 +153,7 @@ weaponDefs                 = {
 		weaponVelocity           = 1000,
 		customparams             = {
 			isupgraded           = isUpgraded,
-			damagetype		     = "eallterrriot", 
+			damagetype		     = "light", 
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {
@@ -189,7 +189,7 @@ weaponDefs                 = {
 		weaponVelocity           = 400,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eriottank2shotgun",  
+			damagetype		     = "light",  
 		},      
 		damage                   = {
 			default              = 30,

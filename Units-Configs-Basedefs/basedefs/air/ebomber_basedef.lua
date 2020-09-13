@@ -141,7 +141,7 @@ weaponDefs                 = {
 		weaponVelocity           = 800,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "ebomber",  
+			damagetype		     = "antibuilding",  
 			nofriendlyfire	     = 1,
 		},
 		damage                   = {

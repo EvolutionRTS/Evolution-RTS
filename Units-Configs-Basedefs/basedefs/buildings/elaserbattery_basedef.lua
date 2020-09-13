@@ -127,7 +127,7 @@ weaponDefs                  = {
 		waterweapon		         = true,
 		customparams              = {
 			isupgraded		  	 = isUpgraded,
-			damagetype		      = "elaserbattery",
+			damagetype		      = "antiair",
 			effectedByunitHealthModifier = true,
 		},      
 		damage                    = {

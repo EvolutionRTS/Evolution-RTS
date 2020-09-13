@@ -136,7 +136,7 @@ weaponDefs                 = {
 		waterweapon		         = true,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eamphibbuggy",  
+			damagetype		     = "light",  
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {

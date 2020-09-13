@@ -10,7 +10,7 @@ humanName = [[Sparrow]]
 objectName = "zaal/zairscout.s3o"
 script = "zaal/zairscout.cob"
 
-armortype = [[airlight]]
+armortype = [[light]]
 
 tech = [[tech1]]
 

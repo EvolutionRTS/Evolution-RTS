@@ -154,7 +154,7 @@ local weaponDefs                  = {
 		soundStart				= "weapons/minewhir.wav",
 		explosiongenerator        ="custom:genericshellexplosion-small-white",
 		customparams              = {
-			damagetype		      = "emine",
+			damagetype		      = "light",
 			nofriendlyfire	      = "true", 
 			effectedByunitHealthModifier = true,
 		},  

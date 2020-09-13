@@ -177,7 +177,7 @@ weaponDefs                 = {
 		waterweapon				 = true,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eraider",  
+			damagetype		     = "light",  
 		}, 
 		damage                   = {
 			default              = 15,

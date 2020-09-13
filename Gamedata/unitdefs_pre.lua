@@ -190,10 +190,10 @@ end
 
 Shared.buildListHoverFactory = {
 		[[elighttank3]],
-		[[eriottank2_shotgun]],
+		-- [[eriottank2_shotgun]],
 		[[eheavytank3]],
 		[[emissiletank]],
-		[[eartytank]],
+		-- [[eartytank]],
 		[[elacerator]],
 }
 
@@ -229,11 +229,11 @@ Shared.buildListHoverFactory_up3 = {
 
 Shared.buildListAmphibFactory = {
 		[[eamphibbuggy]],
-		[[eamphibriot_shotgun]],
-		[[eamphibneedle]],
+		-- [[eamphibriot_shotgun]],
+		-- [[eamphibneedle]],
 		[[eamphibmedtank]],
 		[[eamphibrock]],
-		[[eamphibarty]],
+		-- [[eamphibarty]],
 		[[eamphibleveler]],
 }
 
@@ -272,10 +272,10 @@ Shared.buildListAmphibFactory_up3 = {
 
 Shared.buildListAllTerrainFactory = {
 		[[eallterrlight]],
-		[[eallterrriot_shotgun]],
-		[[eallterrmed]],
+		-- [[eallterrriot_shotgun]],
+		-- [[eallterrmed]],
 		[[eallterrheavy]],
-		[[eallterrassault]],
+		-- [[eallterrassault]],
 		[[eallterrshield]],
 		[[eallterranarchid]],
 }
@@ -313,10 +313,10 @@ Shared.buildListAllTerrainFactory_up3 = {
 --
 Shared.buildListAirPlant = {
 		-- [[edrone]],
-		[[efighter]],
+		-- [[efighter]],
 		[[egunship2]],
 		[[ebomber]],
-		[[eairemp]],
+		-- [[eairemp]],
 		[[etransport]],
 		[[ekrow]],		
 }
@@ -351,7 +351,7 @@ Shared.buildListAirPlant_up3 = {
 --
 Shared.buildListHbotFactory = {
 		[[ehbotpeewee]],
-		[[ehbotthud]],
+		-- [[ehbotthud]],
 		[[ehbotsniper]],
 		[[ehbotrocko]],
 		[[ehbotkarganneth]],

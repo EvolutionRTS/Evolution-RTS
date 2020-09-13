@@ -139,7 +139,7 @@ weaponDefs                 = {
 		weaponTimer            = 1,
 		weaponVelocity         = 600,
 		customparams             = {
-			damagetype		     = "ehbotthud",
+			damagetype		     = "light",
 			isupgraded			  	 = isUpgraded,
 		},      
 		damage                   = {

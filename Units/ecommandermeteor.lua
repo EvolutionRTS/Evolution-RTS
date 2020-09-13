@@ -22,7 +22,7 @@ local unitDef                    = {
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 1000,
-	buildDistance                = 500,
+	buildDistance                = 350,
 	builder                      = true,
 	buildTime                    = 2.5,
 	capturable		             = false,
@@ -167,7 +167,7 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {		
-			damagetype		     = "ecommandermeteor",  
+			damagetype		     = "antibuilding",  
 			friendlyfireexception = true,
 		},      
 		damage                   = {
@@ -218,7 +218,7 @@ local weaponDefs                 = {
 		weaponType                = "StarburstLauncher",
 		weaponVelocity            = 1000,
 		customparams              = {
-			damagetype		      = "default",  
+			damagetype		      = "light",  
 			death_sounds 		  = "nuke",
 			nocosttofire		  = true,
 		},      

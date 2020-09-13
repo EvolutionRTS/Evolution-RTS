@@ -141,7 +141,7 @@ weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 750,
 		customparams             = {
-			damagetype		     = "edrone",
+			damagetype		     = "light",
 			isupgraded			 = isUpgraded,			
 		},    
 		damage                   = {

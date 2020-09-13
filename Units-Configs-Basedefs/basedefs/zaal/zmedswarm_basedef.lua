@@ -129,7 +129,7 @@ weaponDefs = {
 		weaponVelocity           = 2000,
 		waterWeapon				  = true,
 		customparams             = {
-			damagetype		     = "zmedswarm",  
+			damagetype		     = "light",  
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {

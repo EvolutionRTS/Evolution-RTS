@@ -130,7 +130,7 @@ weaponDefs                 = {
 		turret                   = false,
 		weaponVelocity           = 1250,
 		customparams             = {
-			damagetype		     = "efighter",
+			damagetype		     = "light",
 			isupgraded           = isUpgraded,
 		}, 
 		damage                   = {

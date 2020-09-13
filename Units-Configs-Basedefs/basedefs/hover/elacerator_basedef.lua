@@ -119,7 +119,7 @@ weaponDefs                 = {
 		weaponVelocity           = 800,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "elacerator",  
+			damagetype		     = "antibuilding",  
 		}, 
 		damage                   = {
 			default              = 280,

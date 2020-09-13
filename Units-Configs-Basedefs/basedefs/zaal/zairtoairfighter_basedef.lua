@@ -125,7 +125,7 @@ weaponDefs                 = {
 		weapontimer 			 = 1,
 		weaponvelocity 			 = 1000,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 		},    
 		damage = {

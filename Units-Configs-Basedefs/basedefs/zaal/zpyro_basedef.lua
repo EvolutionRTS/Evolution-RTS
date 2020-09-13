@@ -130,7 +130,7 @@ weaponDefs = {
 		waterWeapon				  = true,
 		weaponVelocity           = 2000,
 		customparams             = {
-			damagetype		     = "zpyro",  
+			damagetype		     = "antibuilding",  
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {

@@ -14,7 +14,7 @@ script = "egunship3.cob"
 
 
 tech = [[tech2]]
-armortype = [[airlight]]
+armortype = [[light]]
 supply = [[4]]
 
 VFS.Include("Units-Configs-Basedefs/basedefs/air/egunship2_basedef.lua")

@@ -105,7 +105,7 @@ weaponDefs                  = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
-			damagetype		     = "eartytank", 
+			damagetype		     = "antibuilding", 
 			isupgraded		  	 = isUpgraded,
 			effectedByunitHealthModifier = true,
 		},  

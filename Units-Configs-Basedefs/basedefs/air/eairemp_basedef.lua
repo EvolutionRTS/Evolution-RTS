@@ -142,7 +142,7 @@ weaponDefs                 = {
 		weaponVelocity           = 800,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eraider",  
+			damagetype		     = "light",  
 			nofriendlyfire	     = 1,
 		},
 		damage                   = {
@@ -178,7 +178,7 @@ weaponDefs                 = {
 		waterweapon				 = true,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eraider",  
+			damagetype		     = "light",  
 		}, 
 		damage                   = {
 			default              = 15,

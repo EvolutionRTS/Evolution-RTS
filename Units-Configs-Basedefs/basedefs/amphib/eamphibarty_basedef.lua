@@ -131,7 +131,7 @@ weaponDefs              = {
 		waterweapon		          = true,
 		customparams              = {
 		isupgraded			  	 = isUpgraded,
-		damagetype		          = "eamphibarty",  
+		damagetype		          = "antibuilding",  
 		}, 
 		damage                    = {
 		default                   = 100,

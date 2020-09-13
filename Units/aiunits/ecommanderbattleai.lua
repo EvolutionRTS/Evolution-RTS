@@ -180,7 +180,7 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
-			damagetype		     = "eriottank2",  
+			damagetype		     = "light",  
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
 		}, 
@@ -213,7 +213,7 @@ local weaponDefs                 = {
 		weaponVelocity           = 10000,
 		waterweapon				 = true,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
 		},      
@@ -267,7 +267,7 @@ local weaponDefs                 = {
 		weaponVelocity            = 1000,
 		waterweapon				 = true,
 		customparams              = {
-			damagetype		      = "default",  
+			damagetype		      = "light",  
 			death_sounds 		  = "nuke",
 			nocosttofire		  = true,
 		},      
@@ -310,7 +310,7 @@ local weaponDefs                 = {
 		weaponVelocity           = 1000,
 		waterweapon				 = true,
 		customparams             = {
-			damagetype		     = "ecommanderbattle", 
+			damagetype		     = "light", 
 			nocosttofire		 = true,
 		}, 
 		damage                   = {

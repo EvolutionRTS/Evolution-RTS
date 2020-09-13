@@ -174,7 +174,7 @@ for unitDefID = 1, #UnitDefs do
 end
 --
 
-local weaponTypeToStr = { "Armored", "Building", "Light", "AirLight", "AirArmored" }
+local weaponTypeToStr = { "Light", "Armored", "Building", "Air" }
 
 local frameSkip = 4       -- draw once every frameSkip+1 frames 
 local counter = 0
@@ -493,8 +493,7 @@ local function GetTooltipArmor(ud)
 	if str == "light" then return "Light"
 	elseif str == "armored" then return "Armored"
 	elseif str == "building" then return "Building"
-	elseif str == "airlight" then return "Aircraft Light"
-	elseif str == "airarmored" then return "Aircraft Armored" end
+	elseif str == "air" then return "Air" end
 	return "Default"
 end
 -- get tooltip for resource upkeeps

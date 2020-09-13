@@ -135,7 +135,7 @@ weaponDefs                 = {
 		weaponVelocity           = 500,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eartytank_saturation",  
+			damagetype		     = "antibuilding",  
 		},  
 		damage                   = {
 			default              = 200,

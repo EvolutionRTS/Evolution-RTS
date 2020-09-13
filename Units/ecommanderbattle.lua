@@ -30,7 +30,7 @@ local unitDef                    = {
 	brakeRate                    = 1,
 	buildCostEnergy              = 0,
 	buildCostMetal               = 1000,
-	buildDistance                = 500,
+	buildDistance                = 350,
 	builder                      = true,
 	buildTime                    = 2.5,
 	capturable		             = false,
@@ -186,7 +186,7 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
-			damagetype		     = "eriottank2",  
+			damagetype		     = "light",  
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
 			
@@ -221,7 +221,7 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 10000,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
 			
@@ -277,7 +277,7 @@ local weaponDefs                 = {
 		weaponType                = "StarburstLauncher",
 		weaponVelocity            = 1000,
 		customparams              = {
-			damagetype		      = "default",  
+			damagetype		      = "light",  
 			death_sounds 		  = "nuke",
 			nocosttofire		  = true,
 		},      
@@ -319,7 +319,7 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
-			damagetype		      = "ecommanderbattle", 
+			damagetype		      = "antiarmored", 
 
 			nocosttofire		    = true,
 		}, 

@@ -137,7 +137,7 @@ weaponDefs                 = {
 		waterweapon		         = true,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eamphibbuggy",  
+			damagetype		     = "light",  
 		}, 
 		damage                   = {
 			default              = 13.5, -- multiply * 1.2 for correct dps output

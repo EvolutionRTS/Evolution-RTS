@@ -139,10 +139,10 @@ weaponDefs                 = {
 		waterweapon		         = true,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eamphibmedtank",  
+			damagetype		     = "light",  
 		}, 
 		damage                   = {
-			default              = 12.5, -- multiply * 1.2 for correct dps output
+			default              = 16, -- multiply * 1.2 for correct dps output
 		},
 	},
 }

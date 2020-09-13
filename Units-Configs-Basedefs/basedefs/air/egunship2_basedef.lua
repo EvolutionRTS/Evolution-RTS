@@ -135,7 +135,7 @@ weaponDefs                 = {
 		weaponVelocity           = 700,
 		customparams             = {
 			isupgraded           = isUpgraded,
-			damagetype		     = "egunship2",  
+			damagetype		     = "light",  
 		},      
 		damage                   = {
 			default              = 150,

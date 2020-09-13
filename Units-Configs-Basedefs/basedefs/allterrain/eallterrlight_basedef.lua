@@ -140,7 +140,7 @@ unitDef                    = {
 		weaponVelocity           = 2000,
 		customparams             = {
 			isupgraded           = isUpgraded,
-			damagetype		     = "eallterrlight",  
+			damagetype		     = "light",  
 		}, 
 		damage                   = {
 			default              = 50,

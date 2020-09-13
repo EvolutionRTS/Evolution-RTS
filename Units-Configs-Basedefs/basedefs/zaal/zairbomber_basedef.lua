@@ -125,7 +125,7 @@ weaponDefs                 = {
 		weaponVelocity           = 1000,
 		waterWeapon				 = true,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "antibuilding",
 			nofriendlyfire	     = 1,
 		},    
 		damage = {

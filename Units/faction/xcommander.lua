@@ -177,7 +177,7 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 1000,
 		customparams             = {
-			damagetype		     = "eriottank2",  
+			damagetype		     = "light",  
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
 			
@@ -212,7 +212,7 @@ local weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 10000,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 			nocosttofire		 = true,
 			
@@ -268,7 +268,7 @@ local weaponDefs                 = {
 		weaponType                = "StarburstLauncher",
 		weaponVelocity            = 1000,
 		customparams              = {
-			damagetype		      = "default",  
+			damagetype		      = "light",  
 			death_sounds 		  = "nuke",
 			nocosttofire		  = true,
 		},      

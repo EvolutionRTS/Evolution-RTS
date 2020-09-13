@@ -132,7 +132,7 @@ weaponDefs                 = {
 		waterWeapon				  = true,
 		weaponVelocity           = 500,
 		customparams             = {
-			damagetype		     = "zarty",
+			damagetype		     = "antibuilding",
 			nofriendlyfire	     = 1,
 		},  
 		damage                   = {

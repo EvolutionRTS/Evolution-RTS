@@ -151,7 +151,7 @@ weaponDefs                 = {
 		weaponVelocity           = 800,
 		customparams             = {
 			isupgraded           	 = isUpgraded,
-			damagetype		     = "eallterranarchid",  
+			damagetype		     = "antibuilding",  
 		}, 
 		damage                   = {
 			default              = 440,
@@ -189,7 +189,7 @@ weaponDefs                 = {
 		weaponVelocity           = 400,
 		customparams             = {
 			isupgraded           	 = isUpgraded,
-			damagetype		     = "eallterranarchidflame",  
+			damagetype		     = "antiarmored",  
 		},      
 		damage                   = {
 			default              = 6,

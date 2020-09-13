@@ -144,7 +144,7 @@ weaponDefs                 = {
 		turret                    = true,
 		weaponVelocity            = 3000,
 		customparams              = {
-			damagetype		      = "ehbotsniper",  
+			damagetype		      = "antiarmored",  
 			isupgraded			  	 = isUpgraded,
 		}, 
 		damage                    = {

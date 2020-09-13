@@ -148,7 +148,7 @@ weaponDefs = {
 		weapontimer = 0.2,
 		weaponvelocity = 400,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "antibuilding",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
@@ -180,7 +180,7 @@ weaponDefs = {
 		weapontype = "Cannon",
 		weaponvelocity = 2500,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
@@ -229,7 +229,7 @@ weaponDefs = {
 		weaponvelocity = 1000,
 		wobble = 64000,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "antiarmoredair",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
@@ -278,7 +278,7 @@ weaponDefs = {
 		weaponvelocity = 1000,
 		wobble = 64000,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "antiarmoredair",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
@@ -327,7 +327,7 @@ weaponDefs = {
 		weaponvelocity = 1000,
 		wobble = 64000,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "antiarmoredair",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {

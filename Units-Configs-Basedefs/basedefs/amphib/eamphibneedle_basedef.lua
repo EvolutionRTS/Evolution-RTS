@@ -137,7 +137,7 @@ weaponDefs                 = {
 		waterweapon		         = true,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "eamphibneedle",  
+			damagetype		     = "light",  
 		}, 
 		damage                   = {
 			default              = 20, -- multiply * 1.2 for correct dps output

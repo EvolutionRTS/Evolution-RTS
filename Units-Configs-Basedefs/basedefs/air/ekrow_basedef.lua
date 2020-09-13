@@ -144,7 +144,7 @@ weaponDefs                 = {
 		turret                   = true,
 		weaponVelocity           = 750,
 		customparams             = {
-			damagetype		     = "ekrow",
+			damagetype		     = "antibuilding",
 			isupgraded           = isUpgraded,
 		}, 
 		damage                   = {

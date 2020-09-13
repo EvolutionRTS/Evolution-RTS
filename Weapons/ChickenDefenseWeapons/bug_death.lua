@@ -13,7 +13,7 @@ return {
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
@@ -34,7 +34,7 @@ return {
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
@@ -55,7 +55,7 @@ return {
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
@@ -76,7 +76,7 @@ return {
 		turret = 1,
 		weaponvelocity = 250,
 		customparams             = {
-			damagetype		     = "default",
+			damagetype		     = "light",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {
