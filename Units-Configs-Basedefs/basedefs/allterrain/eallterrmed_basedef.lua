@@ -148,7 +148,7 @@ weaponDefs                 = {
 			damagetype		     = "antiarmored",  
 		}, 
 		damage                   = {
-			default              = 200,
+			default              = 150,
 		},
 	},
 

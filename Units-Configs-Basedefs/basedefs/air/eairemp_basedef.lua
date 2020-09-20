@@ -178,7 +178,7 @@ weaponDefs                 = {
 		waterweapon				 = true,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "light",  
+			damagetype		     = "antiarmored",  
 		}, 
 		damage                   = {
 			default              = 15,

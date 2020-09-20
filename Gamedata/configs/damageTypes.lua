@@ -12,39 +12,39 @@ local damageClasses = {
 		},	
 		antiarmored = {
 			LIGHT		= 1,
-			ARMORED		= 1.5,
+			ARMORED		= 2,
 			BUILDING	= 1,
 			AIR			= 1,
 		},	
 		antibuilding = {
 			LIGHT		= 1,
 			ARMORED		= 1,
-			BUILDING	= 1.5,
+			BUILDING	= 2,
 			AIR			= 1,
 		},
 		antiair = {
 			LIGHT		= 1,
 			ARMORED		= 1,
 			BUILDING	= 1,
-			AIR			= 1.5,
+			AIR			= 2,
 		},
 		antiarmoredbuilding = {
 			LIGHT		= 1,
-			ARMORED		= 1.5,
-			BUILDING	= 1.5,
+			ARMORED		= 2,
+			BUILDING	= 2,
 			AIR			= 1,
 		},
 		antibuildingair = {
 			LIGHT		= 1,
 			ARMORED		= 1,
-			BUILDING	= 1.5,
-			AIR			= 1.5,
+			BUILDING	= 2,
+			AIR			= 2,
 		},
 		antiarmoredair = {
 			LIGHT		= 1,
-			ARMORED		= 1.5,
+			ARMORED		= 2,
 			BUILDING	= 1,
-			AIR			= 1.5,
+			AIR			= 2,
 		},
 			-- End Miscellaneous
 		default = {

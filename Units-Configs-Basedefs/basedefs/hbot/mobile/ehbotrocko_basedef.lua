@@ -138,7 +138,7 @@ weaponDefs                 = {
 		flightTime               = 3,
 		weaponVelocity           = 1500,
 		customparams             = {
-			damagetype		     = "antiair",
+			damagetype		     = "antibuildingair",
 			isupgraded			  	 = isUpgraded,
 		},     
 		damage                   = {

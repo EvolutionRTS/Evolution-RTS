@@ -84,7 +84,7 @@ unitDef                    = {
 			def                  = "rockets",
 --			mainDir = "0 0 1", -- x:0 y:0 z:1 => that's forward!
 --			maxAngleDif = 70,
-			onlyTargetCategory    = "LIGHT ARMORED BIO",
+			--onlyTargetCategory    = "LIGHT ARMORED BIO",
 			--badTargetCategory    = "BUILDING",
 		},
 	},
@@ -136,7 +136,7 @@ weaponDefs                 = {
 		flightTime               = 3,
 		weaponVelocity           = 1500,
 		customparams             = {
-			damagetype		     = "antiair",  
+			damagetype		     = "antibuildingair",  
 			isupgraded			  	 = isUpgraded,
 		},     
 		damage                   = {

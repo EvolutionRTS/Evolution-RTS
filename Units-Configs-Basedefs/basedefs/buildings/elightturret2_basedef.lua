@@ -62,8 +62,8 @@ unitDef                     = {
 	weapons                       = {
 		[1]                       = {
 			def                   = "lighteweapon",
-			badTargetCategory     = "VTOL ARMORED",
-			onlyTargetCategory    = "BIO LIGHT VTOL ARMORED",
+			badTargetCategory     = "VTOL ARMORED BUILDING",
+			--onlyTargetCategory    = "BIO LIGHT VTOL ARMORED",
 		},
 	},
 	customParams                  = {

@@ -71,7 +71,7 @@ unitDef                     = {
 	weapons                       = {
 	},
 	customParams                  = {
-		unittype				  = "building",
+		unittype				  = "factory",
 		death_sounds              = "generic",
 		armortype                 = "building", 
 		normaltex                = "unittextures/lego2skin_explorernormal.dds", 

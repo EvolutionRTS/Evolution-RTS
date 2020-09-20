@@ -24,73 +24,73 @@ local morphDefs = {		--beginig of morphDefs
 local devolution = (-1 > 0)
 
 local energyCost_ecommander = 200
-local timeToBuild_ecommander = energyCost_ecommander * 0.10
+local timeToBuild_ecommander = energyCost_ecommander * 0.05
 
 local energyCost_ecommandercloak = 200
-local timeToBuild_ecommandercloak = energyCost_ecommandercloak * 0.10
+local timeToBuild_ecommandercloak = energyCost_ecommandercloak * 0.05
 
 local energyCost_ecommandershield = 200
-local timeToBuild_ecommandershield = energyCost_ecommandershield * 0.10
+local timeToBuild_ecommandershield = energyCost_ecommandershield * 0.05
 
 local energyCost_ecommanderbuild = 200
-local timeToBuild_ecommanderbuild = energyCost_ecommanderbuild * 0.10
+local timeToBuild_ecommanderbuild = energyCost_ecommanderbuild * 0.05
 
 local energyCost_ecommanderfactory = 200
-local timeToBuild_ecommanderfactory = energyCost_ecommanderfactory * 0.10
+local timeToBuild_ecommanderfactory = energyCost_ecommanderfactory * 0.05
 
 local energyCost_ecommanderbattle = 200
-local timeToBuild_ecommanderbattle = energyCost_ecommanderbattle * 0.10
+local timeToBuild_ecommanderbattle = energyCost_ecommanderbattle * 0.05
 
 local energyCost_ecommandermeteor = 12000
-local timeToBuild_ecommandermeteor = energyCost_ecommandermeteor * 0.01
+local timeToBuild_ecommandermeteor = energyCost_ecommandermeteor * 0.005
 
 local energyCost_factory_up1 = 1200
-local timeToBuild_factory_up1 = energyCost_factory_up1 * 0.10
+local timeToBuild_factory_up1 = energyCost_factory_up1 * 0.05
 
 local energyCost_etech2 = 1200
-local timeToBuild_etech2 = energyCost_etech2 * 0.10
+local timeToBuild_etech2 = energyCost_etech2 * 0.05
 
 local energyCost_etech3 = 4000
-local timeToBuild_etech3 = energyCost_etech3 * 0.10
+local timeToBuild_etech3 = energyCost_etech3 * 0.05
 
 local energyCost_zarmtech1 = 300
-local timeToBuild_zarmtech1 = energyCost_zarmtech1 * 0.20
+local timeToBuild_zarmtech1 = energyCost_zarmtech1 * 0.10
 
 local energyCost_zarmtech2 = 600
-local timeToBuild_zarmtech2 = energyCost_zarmtech2 * 0.20
+local timeToBuild_zarmtech2 = energyCost_zarmtech2 * 0.10
 
 local energyCost_zarmtech3 = 2000
-local timeToBuild_zarmtech3 = energyCost_zarmtech3 * 0.20
+local timeToBuild_zarmtech3 = energyCost_zarmtech3 * 0.10
 
 local energyCost_zespire4 = 200
-local timeToBuild_zespire4 = energyCost_zespire4 * 0.20
+local timeToBuild_zespire4 = energyCost_zespire4 * 0.10
 
 local energyCost_zespire5 = 200
-local timeToBuild_zespire5 = energyCost_zespire5 * 0.20
+local timeToBuild_zespire5 = energyCost_zespire5 * 0.10
 
 local energyCost_elightturret2 = 150
-local timeToBuild_elightturret2 = energyCost_elightturret2 * 0.10
+local timeToBuild_elightturret2 = energyCost_elightturret2 * 0.05
 
 local energyCost_eheavyturret2 = 250
-local timeToBuild_eheavyturret2 = energyCost_eheavyturret2 * 0.10
+local timeToBuild_eheavyturret2 = energyCost_eheavyturret2 * 0.05
 
 local energyCost_euwturret = 100
-local timeToBuild_euwturret = energyCost_euwturret * 0.10
+local timeToBuild_euwturret = energyCost_euwturret * 0.05
 
 local energyCost_emetalextractor_up1 = 1200
-local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
+local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.05
 
 local energyCost_zmex_up1 = 2400
-local timeToBuild_zmex_up1 = energyCost_zmex_up1 * 0.20
+local timeToBuild_zmex_up1 = energyCost_zmex_up1 * 0.10
 
 local energyCost_xmetalextractor = 1200
-local timeToBuild_xmetalextractor = energyCost_xmetalextractor * 0.10
+local timeToBuild_xmetalextractor = energyCost_xmetalextractor * 0.05
 
 local energyCost_eorb = 300
-local timeToBuild_eorb = energyCost_eorb * 0.10
+local timeToBuild_eorb = energyCost_eorb * 0.05
 
 local energyCost_eartyturret = 800
-local timeToBuild_eartyturret = energyCost_eartyturret * 0.10
+local timeToBuild_eartyturret = energyCost_eartyturret * 0.05
 
 local energyCost_ehbotturret = 0
 local timeToBuild_ehbotturret = 2
@@ -99,7 +99,7 @@ local energyCost_ehbot = 0
 local timeToBuild_ehbot = 10
 
 local energyCost_eartytanksauration = 300
-local timeToBuild_eartytanksauration = energyCost_eartytanksauration * 0.10
+local timeToBuild_eartytanksauration = energyCost_eartytanksauration * 0.05
 
 local energyCost_kargannethturret = 0
 local timeToBuild_kargannethturret = 2
