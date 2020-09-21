@@ -181,6 +181,9 @@ function gadget:GameFrame(n)
 		pregameMessages(n)
 	end
 
+	if n%30 == 15 and FinalBossUnitID then
+		BossMinionsSpawn(n)
+	end
 
 	if scavconfig.modules.startBoxProtection == true and ScavengerStartboxExists == true and FinalBossKilled == false then
 		if n%30 == 0 then
@@ -232,22 +235,26 @@ function gadget:GameFrame(n)
 				if scavconfig.timers.BossFight == 0 then scavconfig.timers.BossFight = 1 end
 				if globalScore/scavconfig.timers.BossFight < 1 then
 					ScavSendMessage("Scavengers Tech Progress: "..math.ceil((globalScore/scavconfig.timers.BossFight)*100).."%")
+					ScavSendMessage("Scav Score: "..globalScore)
+					ScavSendMessage(TierSpawnChances.Message)
 				else
 					ScavSendMessage("Scavengers Tech Progress: 100%")
+					ScavSendMessage("Score: "..globalScore)
+					ScavSendMessage(TierSpawnChances.Message)
 				end
 			end
 		end
 	end
 
-	if n%90 == 0 and scavconfig.modules.buildingSpawnerModule and not FinalBossUnitSpawned then
+	if n%90 == 0 and scavconfig.modules.buildingSpawnerModule and (not FinalBossUnitSpawned) then
 		SpawnBlueprint(n)
 	end
 	if n%30 == 0 then
-		if scavconfig.modules.unitSpawnerModule and not FinalBossUnitSpawned then
+		if scavconfig.modules.unitSpawnerModule and (not FinalBossUnitSpawned) then
 			SpawnBeacon(n)
 			UnitGroupSpawn(n)
 		end
-		if scavconfig.modules.constructorControllerModule and constructorControllerModuleConfig.useconstructors and n > 9000 and not FinalBossUnitSpawned then
+		if scavconfig.modules.constructorControllerModule and constructorControllerModuleConfig.useconstructors and n > 9000 and (not FinalBossUnitSpawned) then
 			SpawnConstructor(n)
 		end
 		local scavengerunits = Spring.GetTeamUnits(GaiaTeamID)
@@ -255,7 +262,7 @@ function gadget:GameFrame(n)
 			for i = 1,#scavengerunits do
 				local scav = scavengerunits[i]
 				local scavDef = Spring.GetUnitDefID(scav)
-				local collectorRNG = math_random(0,5)
+				local collectorRNG = math_random(0,2)
 
 				if n%300 == 0 and scavconfig.modules.stockpilers == true then
 					if scavStockpiler[scav] == true then
@@ -331,6 +338,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 				if string.sub(UnitName, 1, string.len(UnitName)) == BossUnits[i] then
 					Spring.Echo("GG")
 					FinalBossKilled = true
+					FinalBossUnitID = nil
 				end
 			end
 		end
@@ -347,7 +355,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 			killedscavengers = killedscavengers + scavconfig.scoreConfig.scorePerKilledSpawner
 		end
 		if UnitName == "scavengerdroppod_scav" then
-			killedscavengers = killedscavengers - 1
+			killedscavengers = killedscavengers - scavconfig.scoreConfig.baseScorePerKill
 		end
 		selfdx[unitID] = nil
 		selfdy[unitID] = nil
@@ -396,7 +404,7 @@ function gadget:UnitTaken(unitID, unitDefID, unitOldTeam, unitNewTeam)
 				Spring.SetUnitHealth(unitID, 10000)
 				Spring.SetUnitMaxHealth(unitID, 10000)
 			end
-			SpawnDefencesAfterCapture(unitID, unitNewTeam)
+			--SpawnDefencesAfterCapture(unitID, unitNewTeam)
 		end
 		selfdx[unitID] = nil
 		selfdy[unitID] = nil
@@ -485,7 +493,7 @@ function gadget:UnitTaken(unitID, unitDefID, unitOldTeam, unitNewTeam)
 				if constructorControllerModuleConfig.usecollectors then
 					for i = 1,#Collectors do
 						if string.sub(UnitName, 1, string.len(UnitName)-UnitSuffixLenght[unitID]) == Collectors[i] then
-							if math_random(0,1) == 0 then
+							if math_random(0,100) <= 10 then
 								scavCollector[unitID] = true
 							else
 								scavReclaimer[unitID] = true
@@ -547,6 +555,16 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 					Spring.CreateUnit(UnitName..suffix, posx, posy, posz, 2,GaiaTeamID)
 				end
 				return
+			end
+		end
+		for i = 1,#BossUnits do
+			if string.sub(UnitName, 1, string.len(UnitName)) == BossUnits[i] then
+				Spring.Echo("Got boss commander ID, attempting to spawn minions")
+				FinalBossUnitID = unitID
+				local _,basehealth = Spring.GetUnitHealth(unitID)
+				local bosshealthmultiplier = basehealth*((teamcount*0.5)+0.5)*spawnmultiplier
+				Spring.SetUnitMaxHealth(unitID, bosshealthmultiplier)
+				Spring.SetUnitHealth(unitID, bosshealthmultiplier)
 			end
 		end
 		if UnitName == "scavengerdroppod_scav" then
@@ -617,7 +635,7 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			if constructorControllerModuleConfig.usecollectors then
 				for i = 1,#Collectors do
 					if string.sub(UnitName, 1, string.len(UnitName)-UnitSuffixLenght[unitID]) == Collectors[i] then
-						if math_random(0,1) == 0 then
+						if math_random(0,100) <= 10 then
 							scavCollector[unitID] = true
 						else
 							scavReclaimer[unitID] = true
