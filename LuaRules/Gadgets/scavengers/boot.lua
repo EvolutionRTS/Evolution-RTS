@@ -401,8 +401,8 @@ function gadget:UnitTaken(unitID, unitDefID, unitOldTeam, unitNewTeam)
 			killedscavengers = killedscavengers + scavconfig.scoreConfig.scorePerCapturedSpawner
 			if scavconfig.modules.reinforcementsModule == true then
 				Spring.SetUnitNeutral(unitID, false)
-				Spring.SetUnitHealth(unitID, 10000)
-				Spring.SetUnitMaxHealth(unitID, 10000)
+				Spring.SetUnitHealth(unitID, 2500)
+				Spring.SetUnitMaxHealth(unitID, 2500)
 			end
 			--SpawnDefencesAfterCapture(unitID, unitNewTeam)
 		end

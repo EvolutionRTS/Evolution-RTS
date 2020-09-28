@@ -3,7 +3,7 @@ local ShieldSphereBase = {
 	life = 10000,
 	size = 350,
 	radius = 350,
-	colormap1 = {{0.1, 0.1, 1, 0.2}, {1, 0.1, 0.1, 0.05}},
+	colormap1 = {{0.1, 0.1, 1, 0.1}, {1, 0.1, 0.1, 0.05}},
 	colormap2 = {{0.2, 0.9, 1, 0.0}, {1, 0.9, 0.2, 0.0}},
 	repeatEffect = true,
 	drawBack = 0.7,
@@ -57,7 +57,7 @@ for unitDefID = 1, #UnitDefs do
 			myShield.drawBackMargin = 3
 			myShield.margin = 1.35
 			myShield.hitResposeMult = 0.6
-			myShield.colormap1[1][4] = 0.22
+			myShield.colormap1[1][4] = 0.1
 			myShield.colormap1[2][4] = 0.1
 		else
 			myShield.shieldSize = "small"

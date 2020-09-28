@@ -602,7 +602,7 @@ effectUnitDefs = {
   
 	eallterrshield = {
 	--{class='ShieldSphere',options=ShieldSphere300},
-	{class='Bursts',options=shieldBursts300},
+--	  {class='Bursts',options=shieldBursts200},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -614,7 +614,7 @@ effectUnitDefs = {
   
 	eallterrshield_up1 = {
 	--{class='ShieldSphere',options=ShieldSphere300},
-	{class='Bursts',options=shieldBursts300},
+	--{class='Bursts',options=shieldBursts300},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -627,7 +627,7 @@ effectUnitDefs = {
   
 	eallterrshield_up2 = {
 	--{class='ShieldSphere',options=ShieldSphere300},
-	{class='Bursts',options=shieldBursts300},
+--    {class='Bursts',options=shieldBursts200},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -640,7 +640,7 @@ effectUnitDefs = {
   
 	eallterrshield_up3 = {
 	--{class='ShieldSphere',options=ShieldSphere300},
-	{class='Bursts',options=shieldBursts300},
+--	  {class='Bursts',options=shieldBursts200},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -655,7 +655,7 @@ effectUnitDefs = {
   
 	ekmar = {
 	--{class='ShieldSphere',options=ShieldSphere400},
-	{class='Bursts',options=shieldBursts1000},
+--	  {class='Bursts',options=shieldBursts200},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},
@@ -667,7 +667,7 @@ effectUnitDefs = {
   
 	ecommandershield = {
 	--{class='ShieldSphere',options=ShieldSphere400},
-	{class='Bursts',options=shieldBursts400},
+--	  {class='Bursts',options=shieldBursts200},
 --    {class='StaticParticles', options=corfusNova},
 --    {class='StaticParticles', options=corfusNova2},
 --    {class='StaticParticles', options=corfusNova3},

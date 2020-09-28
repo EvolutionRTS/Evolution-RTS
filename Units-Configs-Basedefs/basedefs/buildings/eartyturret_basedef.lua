@@ -96,7 +96,7 @@ weaponDefs                  = {
 		interceptedByShieldType  = 4,
 		name                     = "Plasma Cannon",
 		range                    = 8000,
-		reloadtime               = 40,
+		reloadtime               = 15,
 		size					 = 16,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/artyhit.wav",
@@ -107,10 +107,10 @@ weaponDefs                  = {
 		customparams             = {
 			damagetype		     = "antibuilding", 
 			isupgraded		  	 = isUpgraded,
-			effectedByunitHealthModifier = true,
+			--effectedByunitHealthModifier = true,
 		},  
 		damage                   = {
-			default              = 1000,
+			default              = 400,
 		},
 	},
 

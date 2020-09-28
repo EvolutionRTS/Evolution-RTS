@@ -10,7 +10,7 @@ humanName = [[Mosquito]]
 objectName = "edrone2.s3o"
 script = "edrone2.cob"
 
-armortype = [[light]]
+armortype = [[air]]
 
 tech = [[tech0]]
 

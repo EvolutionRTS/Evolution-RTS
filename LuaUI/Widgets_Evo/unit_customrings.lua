@@ -26,7 +26,7 @@ end
 
 local ringsDefs = {
     [UnitDefNames.ecommander.id] = {
-        { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
+       -- { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
 		{ color = {0,1,0,0.6}, lineWidth = 5, radius = 300, divs = 64 },
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
@@ -39,7 +39,7 @@ local ringsDefs = {
         { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.ecommanderbuild.id] = {
-        { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1500 },
+        --{ color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1500 },
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.ecommanderbattle.id] = {
@@ -47,26 +47,26 @@ local ringsDefs = {
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.ecommanderfactory.id] = {
-        { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 250 },
+        --{ color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 250 },
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.eorb.id] = {
-        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
+        --{ color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },
     },
 	[UnitDefNames.eorb_up1.id] = {
-        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
+        --{ color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },
     },
 	[UnitDefNames.eorb_up2.id] = {
-        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
+        --{ color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1050 },
     },
 	[UnitDefNames.eorb_up3.id] = {
-        { color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
+        --{ color = {1,0.5,0,0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 1000 },
     },
@@ -74,11 +74,11 @@ local ringsDefs = {
         { color = {0.5,0,1,0.2}, lineWidth = 5, radius = 500 },
     },
 	[UnitDefNames.ehbotengineer.id] = {
-        { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 800 },
+        --{ color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 800 },
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
 	},
 	[UnitDefNames.ehbotengineer_turret.id] = {
-        { color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
+        --{ color = {1, 0.5, 0, 0.8}, lineWidth = 2, radius = 1000 },
         --{ color = {0.5, 0, 1, 0.2}, lineWidth = 5, radius = 500 },
 		{ color = {0,1,0,0.6}, lineWidth = 10, radius = 995 },		
 	},
@@ -88,7 +88,7 @@ local ringsDefs = {
 	
 	-- Shield Units
 	[UnitDefNames.ekmar.id] = {
-        { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 1000 },
+        { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 750 },
     },
 	[UnitDefNames.eallterrshield.id] = {
         { color = {0, 0, 1, 0.5}, lineWidth = 5, radius = 300 },

@@ -37,6 +37,7 @@ local unitDef                     = {
 	metalStorage                  = 0,
 	name                          = "Fusion Energy Generator",
 	objectName                    = "egeothermal2.s3o",
+	script						  = "egeothermal.cob",
 	onoffable			          = false,
 	radarDistance                 = 0,
 	repairable		              = false,

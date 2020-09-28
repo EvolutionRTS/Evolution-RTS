@@ -145,7 +145,7 @@ weaponDefs                 = {
 			nofriendlyfire	     = 1,
 		},
 		damage                   = {
-			default              = 300,
+			default              = 500,
 		},
 	},
 }

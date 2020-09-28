@@ -14,7 +14,7 @@ script = "eairemp.cob"
 
 
 tech = [[tech3]]
-armortype = [[light]]
+armortype = [[air]]
 supply = [[2]]
 
 VFS.Include("units-configs-basedefs/basedefs/air/eairemp_basedef.lua")

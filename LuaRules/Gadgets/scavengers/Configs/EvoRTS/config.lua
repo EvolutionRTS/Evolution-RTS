@@ -1,7 +1,7 @@
 Spring.Echo("[Scavengers] Config initialized")
 
 adder = 300
-multiplier = 1
+multiplier = 0.5
 -- Config for Scavengers Survival AI
 if scavengersAIEnabled then
 	scavconfig = {

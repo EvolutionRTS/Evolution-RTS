@@ -63,6 +63,7 @@ return {
 			subfolder = "scavengers",
 			isairbase = true,
 			normaltex = "unittextures/scavbeacon_normals.dds",
+			armortype = "building",
 		},
 		featuredefs = {},
 		sfxtypes = {

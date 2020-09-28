@@ -321,7 +321,8 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 				if unitDef.customparams then
 					if unitDef.customparams.unittype == "building" then
 						unitDef.maxdamage = unitDef.buildcostmetal * 5
-					elseif unitDef.customparams.unittype == "factory" then
+					end
+					if unitDef.customparams.unittype == "factory" then
 						unitDef.maxdamage = unitDef.buildcostmetal * 30
 					end
 					if unitDef.customparams.unittype == "turret" then
@@ -351,7 +352,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			end
 		end
 
-		-- Make sure that land based defense weapons are scaled up to match
+		-- Make sure that land based defense weapons and turrets are scaled up to match
 		for id,wDef in pairs(WeaponDefs) do
 			if wDef.customparams and wDef.customparams.effectedbyunithealthmodifier == true then
 				if wDef.damage.default then

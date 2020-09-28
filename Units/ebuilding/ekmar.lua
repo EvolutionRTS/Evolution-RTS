@@ -9,10 +9,10 @@ local armortype					 = [[building]]
 
 local techrequired				 = [[tech2]]
 
-local shield1Power               = 10000
-local shield1PowerRegen          = 100
-local shield1PowerRegenEnergy    = 100
-local buildCostMetal 			  = 1000
+local shield1Power               = 500
+local shield1PowerRegen          = 50
+local shield1PowerRegenEnergy    = 50
+local buildCostMetal 			  = 50
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {
@@ -110,7 +110,7 @@ local weaponDefs                  = {
 		Visibleshieldrepulse      = false,
 		ShieldStartingPower       = 0,
 		Shieldenergyuse           = 0,
-		Shieldradius              = 1000,
+		Shieldradius              = 750,
 		Shieldpower               = shield1Power,
 		Shieldpowerregen          = shield1PowerRegen,
 		Shieldpowerregenenergy    = shield1PowerRegenEnergy,

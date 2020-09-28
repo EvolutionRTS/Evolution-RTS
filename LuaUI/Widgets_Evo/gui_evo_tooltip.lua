@@ -347,45 +347,45 @@ function GetTooltipWeaponData(ud)
 	end]]
 	
 	if ud.canKamikaze then
-	    local weapname=ud.selfDExplosion
-	    local weap=nil
-	    for wid,weaponDef in pairs(WeaponDefs) do
-	        if weaponDef.name==weapname then
-	        	weap=WeaponDefs[wid]
-	        end
-	    end
-	    if weap then
-	        local weapon_action="Damage"
-	        if weap.damages and weap.damages.paralyzeDamageTime and weap.damages.paralyzeDamageTime>0 then
-	                weapon_action="Paralyze"
-	        end
-	        NewTooltip = NewTooltip.."\n\255\255\213\213Damage: \255\255\170\170"..FormatNbr(dmgMod * weap.damages[Game.armorTypes.default],2).."/once"
-	    end
+	    -- local weapname=ud.selfDExplosion
+	    -- local weap=nil
+	    -- for wid,weaponDef in pairs(WeaponDefs) do
+	        -- if weaponDef.name==weapname then
+	        	-- weap=WeaponDefs[wid]
+	        -- end
+	    -- end
+	    -- if weap then
+	        -- local weapon_action="Damage"
+	        -- if weap.damages and weap.damages.paralyzeDamageTime and weap.damages.paralyzeDamageTime>0 then
+	                -- weapon_action="Paralyze"
+	        -- end
+	        -- NewTooltip = NewTooltip.."\n\255\255\213\213Damage: \255\255\170\170"..FormatNbr(dmgMod * weap.damages[Game.armorTypes.default],2).."/once"
+	    -- end
     elseif ud.weapons and ud.weapons[1] and ud.weapons[1].weaponDef then
-		local damages, paralyzeDamages, hasDamage, hasParalyzDamage, maxRange, totalEnergyCost = GetUnitTotalDamageEnergyMaxRange(ud)
-		--NewTooltip = NewTooltip .. "\n"
-		if hasDamage then
-			NewTooltip = NewTooltip .. white .. "Damage/s: "
-			for i = 1, #damages do -- actually ignore default
-				local reorder = (i + 1) % 5 + 1
-				if damages[reorder] > 0 then NewTooltip = NewTooltip .. weaponDamageColour .. FormatNbr(damages[reorder], 1) .. white .. " (" .. weaponTypeToStr[reorder] .. ") / " end
-			end
-			NewTooltip = NewTooltip:sub(1, -4)
-		end
-		if hasParalyzDamage then
-			NewTooltip = NewTooltip .. white .. "Paralyze/s: "
-			for i = 1, #paralyzeDamages do -- actually ignore default
-				local reorder = (i + 1) % 5 + 1
-				if paralyzeDamages[reorder] > 0 then NewTooltip = NewTooltip .. weaponParalyzeColour .. FormatNbr(paralyzeDamages[reorder], 1) .. white .. " (" .. weaponTypeToStr[reorder] .. ") / " end
-			end
-			NewTooltip = NewTooltip:sub(1, -4)
-		end
-		if hasDamage or hasParalyzDamage then
-			NewTooltip = "\n" .. NewTooltip
-			NewTooltip = NewTooltip .. "     Range: " .. FormatNbr(maxRange, 2)
-			--totalEnergyCost = 12
-			if totalEnergyCost > 0 then NewTooltip = NewTooltip .. "     " .. useEnergyTexture .. useResColour .. " -" .. FormatNbr(totalEnergyCost, 1) end
-		end
+		-- local damages, paralyzeDamages, hasDamage, hasParalyzDamage, maxRange, totalEnergyCost = GetUnitTotalDamageEnergyMaxRange(ud)
+		-- if hasDamage then
+			-- NewTooltip = NewTooltip .. white .. "Damage/s: "
+			-- for i = 1, #damages do -- actually ignore default
+				-- local reorder = (i + 1) % 5 + 1
+				-- if damages[reorder] > 0 then NewTooltip = NewTooltip .. weaponDamageColour .. FormatNbr(damages[reorder], 1) .. white .. " (" .. weaponTypeToStr[reorder] .. ") / " end
+			-- end
+			-- NewTooltip = NewTooltip:sub(1, -4)
+		-- end
+		-- if hasParalyzDamage then
+			-- NewTooltip = NewTooltip .. white .. "Paralyze/s: "
+			-- for i = 1, #paralyzeDamages do -- actually ignore default
+				-- local reorder = (i + 1) % 5 + 1
+				-- if paralyzeDamages[reorder] > 0 then NewTooltip = NewTooltip .. weaponParalyzeColour .. FormatNbr(paralyzeDamages[reorder], 1) .. white .. " (" .. weaponTypeToStr[reorder] .. ") / " end
+			-- end
+			-- NewTooltip = NewTooltip:sub(1, -4)
+		-- end
+		-- if hasDamage or hasParalyzDamage then
+			-- NewTooltip = "\n" .. NewTooltip
+			-- NewTooltip = NewTooltip .. "     Range: " .. FormatNbr(maxRange, 2)
+			-- if totalEnergyCost > 0 then NewTooltip = NewTooltip .. "     " .. useEnergyTexture .. useResColour .. " -" .. FormatNbr(totalEnergyCost, 1) end
+		-- end
+		
+		
 		--[[for _,w in pairs(ud.weapons) do
 			local weap=WeaponDefs[w.weaponDef]
 			--Spring.Echo(weap.damages[0],weap.damages[1],weap.damages[2],weap.damages[3]) -- default, armored, building, light

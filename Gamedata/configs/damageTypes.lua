@@ -5,7 +5,7 @@ local damageClasses = {
 	-- classes with armor classes for weapons
 	damageTypes = {
 		light = {
-			LIGHT		= 1,
+			LIGHT		= 2,
 			ARMORED		= 1,
 			BUILDING	= 1,
 			AIR			= 1,

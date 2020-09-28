@@ -14,7 +14,7 @@ script = "zaal/zairtoairfighter.cob"
 
 
 tech = [[tech2]]
-armortype = [[light]]
+armortype = [[air]]
 supply = [[2]]
 
 VFS.Include("units-configs-basedefs/basedefs/zaal/zairtoairfighter_basedef.lua")

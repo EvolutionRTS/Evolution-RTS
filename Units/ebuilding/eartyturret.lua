@@ -12,7 +12,7 @@ script = [[eartyturret.cob]]
 tech = [[tech3]]
 armortype = [[building]]
 
-AreaOfEffect = 600
+AreaOfEffect = 300
 
 VFS.Include("units-configs-basedefs/basedefs/buildings/eartyturret_basedef.lua")
 
