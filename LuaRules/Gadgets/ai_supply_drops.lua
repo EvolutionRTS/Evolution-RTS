@@ -1,7 +1,15 @@
-if (Spring.GetModOptions and (tonumber(Spring.GetModOptions().lootboxes) or 0) ~= 0) then
-    lootboxSpawnEnabled = true
+lootBoxSpawns = tonumber(Spring.GetModOptions().lootboxes)
+if Spring.GetModOptions then
+	if lootBoxSpawns == nil or lootBoxSpawns == 1 then
+		lootboxSpawnEnabled = true
+		Spring.Echo("[Scavengers] Lootbox Spawns are Enabled")
+	elseif lootBoxSpawns == 0 then
+		lootboxSpawnEnabled = false
+		Spring.Echo("[Scavengers] Lootbox Spawns are Disabled")
+	end
 else
-    lootboxSpawnEnabled = false
+	lootboxSpawnEnabled = true
+	Spring.Echo("[Scavengers] Lootbox Spawns are Enabled")
 end
 
 function gadget:GetInfo()
