@@ -7,7 +7,7 @@ function widget:GetInfo()
       date      = "4-11-2010",
       license   = "GNU GPL v2",
       layer     = 0,
-      enabled   = false
+      enabled   = true
    }
 end
 
@@ -26,8 +26,8 @@ local fontfile = LUAUI_DIRNAME .. "fonts/" .. Spring.GetConfigString("ui_font", 
 local vsx,vsy = Spring.GetViewGeometry()
 local fontfileScale = (0.5 + (vsx*vsy / 5700000))
 local fontfileSize = 25
-local fontfileOutlineSize = 4.5
-local fontfileOutlineStrength = 1.8
+local fontfileOutlineSize = 4.75
+local fontfileOutlineStrength = 5
 local font = gl.LoadFont(fontfile, fontfileSize*fontfileScale, fontfileOutlineSize*fontfileScale, fontfileOutlineStrength)
 
 function widget:ViewResize(x,y)

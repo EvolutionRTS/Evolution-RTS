@@ -386,7 +386,7 @@ function GetTooltipWeaponData(ud)
 		-- end
 		
 		
-		--[[for _,w in pairs(ud.weapons) do
+		for _,w in pairs(ud.weapons) do
 			local weap=WeaponDefs[w.weaponDef]
 			--Spring.Echo(weap.damages[0],weap.damages[1],weap.damages[2],weap.damages[3]) -- default, armored, building, light
 		    if weap.isShield == false and weap.description ~= "No Weapon" then
@@ -429,7 +429,7 @@ function GetTooltipWeaponData(ud)
                 	 NewTooltip = NewTooltip.."    \255\64\64\255WATER"
                 end
 		    end
-		end]]
+		end
     end
     
     return NewTooltip
@@ -612,19 +612,21 @@ local function GetTooltipUnit(id)
 	end]]
 				
 	-- speed
-	if ud.speed and ud.speed>0 then
+	
+	--Disable Speed Readout
+	--if ud.speed and ud.speed>0 then
 		--[[local speedMod = spGetUnitRulesParam(u,"upgrade_speed")
 		if not speedMod then
 			speedMod = 1
 		else
 			speedMod = 1 + speedMod
 		end]]
-		local speedMod = 1
+		--local speedMod = 1
 		
-		local vx,vy,vz = spGetUnitVelocity(u)
-		local speed = 30*math.sqrt(vx*vx+vz*vz)
-		result = result.."\255\193\255\187Speed: \255\134\255\121"..FormatNbr(speed).."\255\193\255\187/\255\134\255\121"..FormatNbr(ud.speed*speedMod,2).."\255\255\255\255      "
-	end
+		--local vx,vy,vz = spGetUnitVelocity(u)
+		--local speed = 30*math.sqrt(vx*vx+vz*vz)
+		--result = result.."\255\193\255\187Speed: \255\134\255\121"..FormatNbr(speed).."\255\193\255\187/\255\134\255\121"..FormatNbr(ud.speed*speedMod,2).."\255\255\255\255      "
+	--end
 
 	--[[if ud.transportCapacity>0 and ud.transportMass>0 and isFriendly then
 		local currentCapacityUsage = 0 

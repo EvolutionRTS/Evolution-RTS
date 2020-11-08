@@ -201,6 +201,8 @@ function WeaponDef_Post(name, wDef)
 	--wDef.cylindertargeting = 128
 	--wDef.heightmod = 1
 	
+	wDef.name = wDef.weapontype
+	
 	--Use targetborderoverride in weapondef customparams to override this global setting
 	--Controls whether the weapon aims for the center or the edge of its target's collision volume. Clamped between -1.0 - target the far border, and 1.0 - target the near border.
 	if wDef.customparams and wDef.customparams.targetborderoverride == nil then
@@ -346,7 +348,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			if unitDef.maxdamage then
 				--Spring.Echo(uDef.name)
 				--Spring.Echo(uDef.maxdamage)
-				unitDef.maxdamage = unitDef.maxdamage * unitHealthModifier
+				unitDef.maxdamage = unitDef.maxdamage * unitHealthModifier --Look in the top of this file for default health modifier
 				--Spring.Echo(uDef.name)
 				--Spring.Echo(uDef.maxdamage)
 			end

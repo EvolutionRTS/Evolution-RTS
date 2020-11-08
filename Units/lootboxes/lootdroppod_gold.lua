@@ -29,6 +29,7 @@ return {
 		name = "Lootbox Droppod",
 		noautofire = false,
 		objectname = "scavs/cube.s3o",
+		pushResistant = true,
 		radardistance = 900,
 		script = "scavs/droppod.cob",
 		seismicsignature = 4,
