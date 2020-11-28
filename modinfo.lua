@@ -13,7 +13,7 @@ return {
 	name='Evolution RTS -',
 	description='EvoRTS',
 	shortname='EvoRTS',
-	version='$VERSION',
+	version='v15.01',
 	mutator='Official',
 	game='Evolution RTS',
 	shortGame='EvoRTS',
