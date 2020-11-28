@@ -73,6 +73,41 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local pressed = {}
+
+function widget:MousePress(mx, my, mButton)
+  if pressed[mButton] then --engine bug?(mouserelease is not called when another mouse button is pressed before releasing) 
+			    --this is also fixed in Update()
+  widget:MouseRelease(mx, my, mButton)
+end
+
+pressed[mButton] = true
+
+return true
+end
+
+function widget:MouseRelease(mx, my, mButton)
+  if not pressed[mButton] then return false end
+  
+  pressed[mButton] = false
+  return true
+end
+
+function widget:Update()
+  local mx, my, lmb, mmb, rmb = Spring.GetMouseState()--engine BUG FIX --should work fine even after engine/wh bug is fixed
+  if pressed[1] and not lmb then 
+    widget:MouseRelease(mx, my, 1)
+  end
+  if pressed[2] and not mmb then 
+    widget:MouseRelease(mx, my, 2)
+  end
+  if pressed[3] and not rmb then 
+    widget:MouseRelease(mx, my, 3)
+  end
+end
+
+
+
 function widget:RecvLuaMsg(msg, playerID)
 	if msg:sub(1,18) == 'LobbyOverlayActive' then
 		chobbyInterface = (msg:sub(1,19) == 'LobbyOverlayActive1')

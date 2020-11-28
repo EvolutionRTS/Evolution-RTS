@@ -470,7 +470,8 @@ local function addOrderCommand(cmd)
         textPadding = 9, --8, (MaDDoX)
         padding = {0, 0, 0, 0},
         margin = {2, 2, 2, 2},
-        OnMouseUp = {ActionCommand},
+        OnClick = {function() end},
+		OnMouseDown = {ActionCommand}
     }
     if cmd.name == "Repair" then button:SetCaption("Build")
     else button:SetCaption(cmd.name) end
@@ -489,7 +490,8 @@ local function addStateCommand(cmd)
         textPadding = 12, --8,
         padding = {0, 0, 0, 0},
         margin = {2, 2, 2, 2},
-        OnMouseUp = {ActionCommand},
+        OnClick = {function() end},
+		OnMouseDown = {ActionCommand}
     }
     button:SetCaption(cmd.params[cmd.params[1] + 2])
     chiliCache['button' .. cmd.id] = button
@@ -508,7 +510,8 @@ local function addBuildCommand(cmd)
         file = '#' .. cmd.id * -1,
         padding = {0, 0, 0, 0},
         margin = {2, 2, 2, 2},
-        OnClick = {ActionCommand},
+        OnClick = {function() end},
+		OnMouseDown = {ActionCommand}
     }
     chiliCache['button' .. cmd.id] = image
 
