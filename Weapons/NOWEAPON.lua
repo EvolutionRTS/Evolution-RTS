@@ -1,6 +1,6 @@
 unitDeaths = {
 
-	smallBuildingExplosionGeneric = {
+	NOWEAPON = {
 		weaponType		   = "Cannon",
 		impulseFactor      = 0,
 		AreaOfEffect=0,
