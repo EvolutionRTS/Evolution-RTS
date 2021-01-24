@@ -46,21 +46,21 @@ local aiStartUnits = {
 	["zarm"] = {
 		"zarm",
 	},
-	["xcommander"] = {
-		"xcommander",
-	},
+	--["xcommander"] = {
+	--	"xcommander",
+	--},
 }
 
 local factionDefComms = {
 	[0] = "ecommander",
 	[1] = "zarm",
-	[2] = "xcommander",
+	--[2] = "xcommander",
 }
 
 local validStartComm = {
 	[UnitDefNames["ecommander"].id] = true,
 	[UnitDefNames["zarm"].id] = true,
-	[UnitDefNames["xcommander"].id] = true,
+	--[UnitDefNames["xcommander"].id] = true,
 }
 
 local ACCESS_LEVEL = {
@@ -125,8 +125,8 @@ local function SpawnStartUnit(teamID)
 			playerFaction = "ateran"
 		elseif startUnit == "zarm" then
 			playerFaction = "zaal"
-		elseif startUnit == "xcommander" then
-			playerFaction = "pattern"
+		--elseif startUnit == "xcommander" then
+		--	playerFaction = "pattern"
 		elseif startUnit == nil then
 			playerFaction = "Script is Fucked"
 		else
