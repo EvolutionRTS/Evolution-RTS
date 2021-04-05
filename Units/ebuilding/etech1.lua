@@ -96,6 +96,7 @@ local unitDef                     = {
 --		groundtexselectxsize      = 500, -- optional
 --		groundtexselectzsize      = 500, -- optional
 		helptext                  = [[]],
+		buildcostenergyoverride	  = 800,
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",

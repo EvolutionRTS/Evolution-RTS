@@ -546,6 +546,9 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 					if unitDef.customparams and unitDef.customparams.noenergycost == true then
 						unitDef.buildcostenergy = 0
 					end
+					if unitDef.customparams and unitDef.customparams.buildcostenergyoverride ~= nil then
+						unitDef.buildcostenergy = unitDef.customparams.buildcostenergyoverride
+					end
 				end
 				
 				-- Set Rules for Zaal race
@@ -563,6 +566,9 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 					end
 					if unitDef.customparams and unitDef.customparams.noenergycost == true then
 						unitDef.buildcostenergy = 0
+					end
+					if unitDef.customparams and unitDef.customparams.buildcostenergyoverride ~= nil then
+						unitDef.buildcostenergy = unitDef.customparams.buildcostenergyoverride
 					end
 				end
 				

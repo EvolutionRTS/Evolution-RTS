@@ -5,7 +5,7 @@ unitName = "eairplant"
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 30
+buildCostMetal = 60
 maxDamage = buildCostMetal * 12.5
 
 humanName = [[VTOL Factory]]

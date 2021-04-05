@@ -5,7 +5,7 @@ unitName = "ehbotfac"
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 30
+buildCostMetal = 60
 maxDamage = buildCostMetal * 12.5
 
 humanName = [[H-Bot Factory]]

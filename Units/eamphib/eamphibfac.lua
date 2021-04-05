@@ -5,7 +5,7 @@ unitName = "eamphibfac"
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 30
+buildCostMetal = 60
 maxDamage = buildCostMetal * 12.5
 
 humanName = [[Amphibious Tank Factory]]
