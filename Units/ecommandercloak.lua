@@ -29,6 +29,7 @@ local unitDef                    = {
 	buildDistance                = 350,
 	builder                      = true,
 	buildTime                    = 2.5,
+	buildpic					 = "ecommanderbattle.png",
 	capturable		             = false,
 	CanAttack			         = true,
 	CanAssist			         = true,

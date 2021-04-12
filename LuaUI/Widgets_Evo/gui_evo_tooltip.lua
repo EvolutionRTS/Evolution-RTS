@@ -410,16 +410,12 @@ function GetTooltipWeaponData(ud)
 				end
 
                 local range = weap.range * rangeMod
-                local hitpower = "L"
-                
-                if ( weap.damages[Game.armorTypes.default] == weap.damages[Game.armorTypes.armor_heavy] ) then
-                	hitpower = "H"
-                elseif ( weap.damages[Game.armorTypes.default] == weap.damages[Game.armorTypes.armor_medium] ) then
-                	hitpower = "M"
-                end
-                
-       
-                NewTooltip = NewTooltip.."\n\255\255\255\255"..weap.description.."    "..actionStr.."("..hitpower..")     Range: "..FormatNbr(range,2)
+                local hitpower = weap.customParams.damagetype
+				if hitpower == nil then
+					hitpower = "Default"
+				end
+
+                NewTooltip = NewTooltip.."\n\255\255\255\255"..weap.description.."    "..actionStr.." ("..hitpower..")     Range: "..FormatNbr(range,2)
 
                 if energyPerSecond  > 0 then
                    NewTooltip = NewTooltip.."     \255\255\255\0E/s: "..FormatNbr(energyPerSecond,1)
@@ -578,7 +574,7 @@ local function GetTooltipUnit(id)
 	--[[local armorTypeStr= "L"
 	if ( Game.armorTypes[ud.armorType] == "armor_heavy" ) then armorTypeStr = "H"
 	elseif ( Game.armorTypes[ud.armorType] == "armor_medium" ) then armorTypeStr = "M" end]]
-	local armorTypeStr = GetTooltipArmor(ud)
+	local armorTypeStr = ud.customParams.armortype
 
 	local hasShield, ShieldPower=Spring.GetUnitShieldState(id)
 	local maxShieldPower = ud.shieldPower

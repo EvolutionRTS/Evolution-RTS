@@ -1,10 +1,10 @@
 unitDef                    = {
 
 	buildCostEnergy              = 0,
-	buildCostMetal               = 10,
+	buildCostMetal               = 5,
 	buildDistance                = buildDistance,
 	builder                      = true,
-	buildTime                    = 20,
+	buildTime                    = 10,
 	buildpic					 = "zaal_unitpics/ztumor.png",
 	blocking					 = false,
 	CanAttack			         = true,

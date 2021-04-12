@@ -14,7 +14,7 @@ local MEX_INCOME = 1 -- income of each mex
 local modOptions = Spring.GetModOptions();
 
 -- Give resources to teams
-local baseIncome = Spring.GetModOptions().basicincome or 5
+local baseIncome = Spring.GetModOptions().basicincome or 1
 local baseIncomeIncrease = Spring.GetModOptions().basicincomeincrease or 1 -- add this each 1cycle
 
 if Spring.GetModOptions().basicincomeinterval ~= nil then
