@@ -410,12 +410,24 @@ function GetTooltipWeaponData(ud)
 				end
 
                 local range = weap.range * rangeMod
-                local hitpower = weap.customParams.damagetype
-				if hitpower == nil then
-					hitpower = "Default"
+                local damagetype = weap.customParams.damagetype
+				if damagetype == nil then
+					damagetype = "Default"
 				end
+				
+				if damagetype == "light" then damagetype = "Light" end
+				if damagetype == "antiarmored" then damagetype = "Armored" end
+				if damagetype == "antibuilding" then damagetype = "Buildings" end
+				if damagetype == "antiair" then damagetype = "Aircraft" end
+				if damagetype == "antiarmoredbuilding" then damagetype = "Armored and Buildings" end
+				if damagetype == "antibuildingair" then damagetype = "Buildings and Aircraft" end
+				if damagetype == "antiarmoredair" then damagetype = "Armored and Aircraft" end
+				if damagetype == "Default" then damagetype = "None" end
+				
+				local AOE = weap.damageAreaOfEffect
+				
 
-                NewTooltip = NewTooltip.."\n\255\255\255\255"..weap.description.."    "..actionStr.." ("..hitpower..")     Range: "..FormatNbr(range,2)
+                NewTooltip = NewTooltip.."\n\255\255\255\255"..weap.description.."    "..actionStr.." (x2 vs "..damagetype..")     AoE: "..AOE.."(r)     Range: "..FormatNbr(range,2)
 
                 if energyPerSecond  > 0 then
                    NewTooltip = NewTooltip.."     \255\255\255\0E/s: "..FormatNbr(energyPerSecond,1)
