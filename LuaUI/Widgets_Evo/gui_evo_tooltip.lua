@@ -412,7 +412,7 @@ function GetTooltipWeaponData(ud)
                 local range = weap.range * rangeMod
                 local damagetype = weap.customParams.damagetype
 				if damagetype == nil then
-					damagetype = "Default"
+					damagetype = "default"
 				end
 				
 				if damagetype == "light" then damagetype = "Light" end
@@ -587,6 +587,9 @@ local function GetTooltipUnit(id)
 	if ( Game.armorTypes[ud.armorType] == "armor_heavy" ) then armorTypeStr = "H"
 	elseif ( Game.armorTypes[ud.armorType] == "armor_medium" ) then armorTypeStr = "M" end]]
 	local armorTypeStr = ud.customParams.armortype
+	if armorTypeStr == nil then
+		armorTypeStr = "None"
+	end
 
 	local hasShield, ShieldPower=Spring.GetUnitShieldState(id)
 	local maxShieldPower = ud.shieldPower

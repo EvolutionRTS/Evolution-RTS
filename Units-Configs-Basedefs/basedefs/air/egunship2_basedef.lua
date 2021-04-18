@@ -30,6 +30,12 @@ unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	maxacc						 = 1,
+	
+	maxAileron					 = 0.01,
+	maxElevator					 = 0.01,
+	maxRudder					 = 0.01,
+	maxBank					 	 = 0.01,
+	
 	maxDamage                    = 940,
 	maxSlope                     = 90,
 	maxVelocity                  = 15,

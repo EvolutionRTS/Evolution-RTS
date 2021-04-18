@@ -32,6 +32,12 @@ unitDef                    = {
 	maxDamage                    = 500,
 	maxSlope                     = 90,
 	maxVelocity                  = 7,
+
+	maxAileron					 = 0.01,
+	maxElevator					 = 0.01,
+	maxRudder					 = 0.01,
+	maxBank					 	 = 0.01,
+	
 	verticalSpeed		         = 30,
 	name                         = humanName,
 	objectName                   = objectName,

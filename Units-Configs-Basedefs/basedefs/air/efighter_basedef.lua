@@ -31,6 +31,12 @@ unitDef                    = {
 	idleTime                     = 2200,
 	maxacc						 = 1,
 	maxDamage                    = 812,
+	
+	maxAileron					 = 0.01,
+	maxElevator					 = 0.01,
+	maxRudder					 = 0.01,
+	maxBank					 	 = 0.01,
+	
 	maxSlope                     = 90,
 	maxVelocity                  = 12,
 	maxWaterDepth                = 255,

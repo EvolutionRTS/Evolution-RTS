@@ -31,6 +31,12 @@ unitDef                    = {
 	idleTime                     = 2200,
 	loopbackattack               = true,
 	maxAcc						 = 1,
+	
+	maxAileron					 = 0.01,
+	maxElevator					 = 0.01,
+	maxRudder					 = 0.01,
+	maxBank					 	 = 0.01,
+	
 	maxDamage                    = 640,
 	maxSlope                     = 90,
 	maxVelocity                  = 10,
