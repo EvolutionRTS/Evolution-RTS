@@ -10,6 +10,18 @@ local damageClasses = {
 			BUILDING	= 1,
 			AIR			= 1,
 		},	
+		turretantilight = {
+			LIGHT		= 2,
+			ARMORED		= 1,
+			BUILDING	= 0.1,
+			AIR			= 1,
+		},
+		turretantiarmored = {
+			LIGHT		= 1,
+			ARMORED		= 2,
+			BUILDING	= 0.1,
+			AIR			= 1,
+		},
 		antiarmored = {
 			LIGHT		= 1,
 			ARMORED		= 2,

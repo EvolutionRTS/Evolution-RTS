@@ -121,7 +121,7 @@ weaponDefs                  = {
 		waterweapon				 = true,
 		customparams              = {
 			isupgraded		  	 = isUpgraded,
-			damagetype		      = "light",
+			damagetype		      = "turretantilight",
 			unittype			 = "turret",
 			effectedByunitHealthModifier = true,
 		},      

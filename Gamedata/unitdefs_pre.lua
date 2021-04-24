@@ -23,13 +23,17 @@ Shared.buildList = {
 	[[esilo]],
 	[[escoutdrone]],
 	[[ebox]],
-	-- [[ehbotengineer]],
+	[[ehbotengineer]],
 	[[eorb]],
 	-- [[ecommander]],
 }
 
+Shared.eorb = {
+	[[ehbotengineer]],
+}
+
 Shared.buildListeCommanderFactory = {
-	-- [[ehbotengineer]],
+	[[ehbotengineer]],
 	[[eorb]],
 	[[escoutdrone]],
 	[[ebox]],

@@ -5,9 +5,9 @@ local unitName                   = "ehbotengineer"
 
 --------------------------------------------------------------------------------
 
-local buildCostMetal			 = 40
+local buildCostMetal			 = 60
 local maxDamage					 = 400
-local buildDistance				 = 800
+local buildDistance				 = 350
 
 local armortype					 = [[light]]
 --local supply					 = [[2]]

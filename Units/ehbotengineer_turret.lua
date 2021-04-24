@@ -7,7 +7,7 @@ local unitName                   = "ehbotengineer_turret"
 
 local buildCostMetal			 = 90
 local maxDamage					 = 400
-local buildDistance				 = 1000
+local buildDistance				 = 800
 
 local armortype					 = [[light]]
 --local supply					 = [[2]]
@@ -118,10 +118,6 @@ local unitDef                    = {
 --		supply_cost              = supply,
 		normaltex               = "unittextures/lego2skin_explorernormal.dds", 
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
-		factionname	             = "ateran",  
-		helptext                 = [[Armortype: ]] .. armortype .. [[ 
-
-Moving an Engineer in proximity to a Energy Core will spawn a small gunship drone from that core.]],
 	},
 }
 
