@@ -37,11 +37,11 @@ end
 local aiStartUnits = {
 	["ecommander"] = {
 		"ecommanderbattleai",
-		"ecommanderbuildai",
-		"ecommandercloakai",
-		"ecommanderfactoryai",
-		"ecommandershieldai",
-		"ecommanderhealerai",
+		-- "ecommanderbuildai",
+		-- "ecommandercloakai",
+		-- "ecommanderfactoryai",
+		-- "ecommandershieldai",
+		-- "ecommanderhealerai",
 	},
 	["zarm"] = {
 		"zarm",

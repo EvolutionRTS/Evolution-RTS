@@ -23,7 +23,7 @@ SaveDefsToCustomParams = false
 -------------------------
 unitHealthModifier = tonumber(Spring.GetModOptions().unithealthmodifier)
 if unitHealthModifier == nil then
-	unitHealthModifier = 250
+	unitHealthModifier = 500
 end
 unitHealthModifier = unitHealthModifier * 0.01
 
@@ -358,7 +358,7 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 		for id,wDef in pairs(WeaponDefs) do
 			if wDef.customparams and wDef.customparams.effectedbyunithealthmodifier == true then
 				if wDef.damage.default then
-					wDef.damage.default = wDef.damage.default * unitHealthModifier
+					wDef.damage.default = wDef.damage.default * (unitHealthModifier * 0.33)
 				end
 				--Spring.Echo(wDef.damage.default)
 			end

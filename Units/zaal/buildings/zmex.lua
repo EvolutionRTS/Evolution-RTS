@@ -9,7 +9,7 @@ metalMultiplier = 1
 
 energyUse = 0
 
-buildCostMetal = 50
+buildCostMetal = 35
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 

@@ -4,10 +4,10 @@
 unitName = "zespire1"
 
 --------------------------------------------------------------------------------
-buildCostMetal = 100
+buildCostMetal = 50
 
 supplygranted = 0
-energyMake = 10
+energyMake = 5
 
 humanName = "Basic Energy Spire"
 

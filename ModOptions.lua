@@ -273,9 +273,9 @@ local options= {
 		desc   = 'This acts as a percentage of base unit health. Setting to 200 would double unit hitpoints.',
 		type   = 'number',
 		section= 'gameplayoptions',
-		def    = 250,
+		def    = 500,
 		min    = 1,
-		max    = 400,
+		max    = 2000,
 		step   = 1,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},

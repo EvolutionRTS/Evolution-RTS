@@ -6,7 +6,7 @@ local unitName                   = "ecommanderbattleai"
 --------------------------------------------------------------------------------
 local armortype					 = [[armored]]
 local supplyGiven				 = [[0]]
-local techprovided				 = [[tech0, 1 tech0ai]]
+local techprovided				 = [[tech0, tech1, tech2, tech3, 1 tech0ai]]
 local techrequired				 = [[0 overseer]]
 
 local weapon1Damage              = 200
