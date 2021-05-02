@@ -141,7 +141,7 @@ weaponDefs                 = {
 		weaponVelocity           = 700,
 		customparams             = {
 			isupgraded           = isUpgraded,
-			damagetype		     = "antiarmored",  
+			damagetype		     = "antilightarmored",  
 		},      
 		damage                   = {
 			default              = 150,

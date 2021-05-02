@@ -136,7 +136,7 @@ weaponDefs                  = {
 		weapontype 					= "MissileLauncher",
 		weaponvelocity 				= 2500,
 		customparams             = {
-			damagetype		     = "light",
+			damagetype		     = "antilightarmored",
 			nofriendlyfire	     = 1,
 		}, 
 		damage = {

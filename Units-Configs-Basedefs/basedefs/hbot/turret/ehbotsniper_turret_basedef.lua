@@ -142,7 +142,7 @@ weaponDefs                 = {
 		turret                    = true,
 		weaponVelocity            = 3000,
 		customparams              = {
-			damagetype		      = "antiarmored",  
+			damagetype		      = "antilightarmored",  
 			isupgraded			  	 = isUpgraded,
 		}, 
 		damage                    = {

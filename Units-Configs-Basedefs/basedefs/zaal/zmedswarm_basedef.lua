@@ -75,8 +75,8 @@ unitDef                    = {
 	weapons                      = {
 		[1] = {
 			def = "WEAPON",
-			maindir = "0 0 1",
-			maxangledif = 180,
+			--maindir = "0 0 1",
+			--maxangledif = 180,
 			badTargetCategory    = "BUILDING WALL",
 		},
 	},

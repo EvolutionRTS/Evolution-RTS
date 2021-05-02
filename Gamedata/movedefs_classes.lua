@@ -1,5 +1,5 @@
 if Spring.GetModOptions and Spring.GetModOptions().unitheat ~= nil then
-	unitHeat = Spring.GetModOptions().unitheat * 0.0001
+	unitHeat = Spring.GetModOptions().unitheat * 0.0042
 else
 	unitHeat = 0.0042
 end
