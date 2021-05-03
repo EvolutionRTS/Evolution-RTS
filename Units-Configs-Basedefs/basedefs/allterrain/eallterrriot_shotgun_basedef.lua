@@ -182,7 +182,7 @@ weaponDefs                 = {
 		sprayangle				 = 2000,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/mediumcannonhit.wav",
-		soundStart               = "weapons/bruisercannon.wav",
+		soundStart               = "weapons/Shotgun Boom 103.wav",
 		--sprayangle		         = 2000,
 		
 		turret                   = true,
