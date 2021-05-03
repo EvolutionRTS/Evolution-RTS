@@ -7,7 +7,7 @@ local damageClasses = {
 		light = {
 			LIGHT		= 2,
 			ARMORED		= 1,
-			BUILDING	= 0.5,
+			BUILDING	= 1,
 			AIR			= 1,
 		},	
 		turretantilight = {
@@ -25,7 +25,7 @@ local damageClasses = {
 		antiarmored = {
 			LIGHT		= 1,
 			ARMORED		= 2,
-			BUILDING	= 0.5,
+			BUILDING	= 1,
 			AIR			= 1,
 		},	
 		antibuilding = {
@@ -37,13 +37,19 @@ local damageClasses = {
 		antiair = {
 			LIGHT		= 1,
 			ARMORED		= 1,
-			BUILDING	= 0.5,
+			BUILDING	= 1,
 			AIR			= 2,
 		},
 		antilightarmored = {
 			LIGHT		= 2,
 			ARMORED		= 2,
-			BUILDING	= 0.5,
+			BUILDING	= 1,
+			AIR			= 1,
+		},
+		antilightbuilding = {
+			LIGHT		= 2,
+			ARMORED		= 1,
+			BUILDING	= 2,
 			AIR			= 1,
 		},
 		antiarmoredbuilding = {
@@ -61,7 +67,7 @@ local damageClasses = {
 		antiarmoredair = {
 			LIGHT		= 1,
 			ARMORED		= 2,
-			BUILDING	= 0.5,
+			BUILDING	= 1,
 			AIR			= 2,
 		},
 		turretantilightarmored = {

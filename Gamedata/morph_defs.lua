@@ -38,11 +38,11 @@ local timeToBuild_ecommanderbuild = energyCost_ecommanderbuild * 0.05
 local energyCost_ecommanderfactory = 200
 local timeToBuild_ecommanderfactory = energyCost_ecommanderfactory * 0.05
 
-local energyCost_ecommanderbattle = 200
+local energyCost_ecommanderbattle = 6000
 local timeToBuild_ecommanderbattle = energyCost_ecommanderbattle * 0.05
 
 local energyCost_ecommandermeteor = 12000
-local timeToBuild_ecommandermeteor = energyCost_ecommandermeteor * 0.005
+local timeToBuild_ecommandermeteor = energyCost_ecommandermeteor * 0.025
 
 local energyCost_factory_up1 = 1200
 local timeToBuild_factory_up1 = energyCost_factory_up1 * 0.05
@@ -156,7 +156,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
-			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light Units. No longer grants supply.',
 			require = [[tech2]],
 		},
 	},

@@ -136,14 +136,14 @@ weaponDefs                 = {
 		tolerance              = 10000,
 		turret                 = true,
 		weaponTimer            = 1,
-		weaponVelocity         = 1000,
+		weaponVelocity         = 1500,
 		customparams             = {
 			damagetype		     = "light",
 			single_hit		 	 = true,
 			isupgraded			 = isUpgraded,
 		},      
 		damage                   = {
-			default              = 30,
+			default              = 45,
 		},
 	},
 }

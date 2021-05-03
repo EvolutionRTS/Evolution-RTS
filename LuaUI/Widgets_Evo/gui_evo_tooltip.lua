@@ -403,7 +403,7 @@ function GetTooltipWeaponData(ud)
                    weapon_action="Paralyze/s"
                    isDisruptor = true
                 end
-				if (reloadTime > 5) then
+				if (reloadTime >= 2.5) then
 					actionStr = weapon_action..": \255\255\255\255"..(isDisruptor and "\255\100\255\255" or "")..FormatNbr(damage,0).."\255\255\255\255"..(reloadTime >= ONCE_RELOAD_THRESHOLD and " once" or ("/"..FormatNbr(reloadTime,2).."s"))
 				else 
 					actionStr = weapon_action..": \255\255\255\255"..(isDisruptor and "\255\100\255\255" or "")..FormatNbr(dps,1).."\255\255\255\255"
@@ -421,6 +421,7 @@ function GetTooltipWeaponData(ud)
 				if damagetype == "turretantilightarmored" then damagetype = "Light/Armored Mobile Units" end
 				if damagetype == "antiarmored" then damagetype = "Armored" end
 				if damagetype == "antilightarmored" then damagetype = "Light/Armored" end
+				if damagetype == "antilightbuilding" then damagetype = "Light/Buildings" end
 				if damagetype == "antibuilding" then damagetype = "Buildings" end
 				if damagetype == "antiair" then damagetype = "Aircraft" end
 				if damagetype == "antiarmoredbuilding" then damagetype = "Armored and Buildings" end

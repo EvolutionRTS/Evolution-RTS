@@ -65,7 +65,7 @@ unitDef                     = {
 		[1]                       = {
 			def                   = "eheavyturretweapon2",
 			badTargetCategory     = "LIGHT VTOL BUILDING",
-			--onlyTargetCategory    = "BIO ARMORED LIGHT",
+			onlyTargetCategory    = "BIO ARMORED LIGHT",
 		},
 	},
 	customParams                  = {
