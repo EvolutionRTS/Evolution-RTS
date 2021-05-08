@@ -77,7 +77,7 @@ unitDef                    = {
 			def = "WEAPON",
 			--maindir = "0 0 1",
 			--maxangledif = 180,
-			badTargetCategory	 = "NOTAIR",
+			badTargetCategory	 = "NOTAIR LIGHT ARMORED",
 			onlyTargetCategory   = "BUILDING NOTAIR",
 		},
 	},
@@ -121,7 +121,7 @@ weaponDefs = {
 		rgbColor                 = "1 1 1",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		--soundstart               = "weapons/heavycannonGD.wav",
+		soundstart               = "weapons/zaal/Medium monster attack/Medium monster attack 4.wav",
 		texture1                 = "shot",
 		texture2                 = "empty",
 		thickness                = 20,
@@ -130,7 +130,7 @@ weaponDefs = {
 		waterWeapon				  = true,
 		weaponVelocity           = 2000,
 		customparams             = {
-			damagetype		     = "antibuilding",  
+			damagetype		     = "antilightbuilding",  
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {

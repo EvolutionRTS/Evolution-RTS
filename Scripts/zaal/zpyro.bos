@@ -193,8 +193,8 @@ AimSecondary(heading,pitch)
 	{
   	signal SIG_AIM;
 	set-signal-mask SIG_AIM;
-	turn head to y-axis heading speed <175>;
-	turn head to x-axis 0 -pitch speed <175>;
+	turn head to y-axis heading speed <5000>;
+	turn head to x-axis 0 -pitch speed <5000>;
 	wait-for-turn head around y-axis;
 	wait-for-turn head around x-axis;
 	return(1);

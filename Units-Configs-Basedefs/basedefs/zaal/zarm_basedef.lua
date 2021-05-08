@@ -126,6 +126,7 @@ weaponDefs                  = {
 		reloadtime 					= 2.5,
 		smoketrail 					= false,
 		soundhit 					= "ChickenDefenseSounds/e25",
+		soundstart                  = "weapons/zaal/large monster attack/large monster attack 5.wav",
 		startvelocity 				= 200,
 		tolerance 					= 10000,
 		tracks 						= true,

@@ -125,8 +125,8 @@ weaponDefs                 = {
 		rgbcolor 				 = "0.1 0.6 1",
 		size 					 = 16,
 		weaponType		         = "Cannon",
-		--soundHit                 = "explosions/artyhit.wav",
-		soundStart               = "weapons/zaal/zartyroar.wav",
+		soundHit                 = "deathsounds/generic/TomWinandySFX_Explosions Volume I_DistantExplosion_25.wav",
+		soundStart               = "weapons/zaal/Large monster Growls/Large monster Growls 5.wav",
 		
 		turret                   = true,
 		waterWeapon				  = true,

@@ -121,7 +121,7 @@ weaponDefs = {
 		rgbColor                 = "1 1 1",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		soundstart               = "weapons/zaal/ultraliskroar.wav",
+		soundstart               = "weapons/zaal/BABY DRAGONS/BABY ROAR/BABY ROAR 1.wav",
 		texture1                 = "shot",
 		texture2                 = "empty",
 		thickness                = 40,
@@ -130,7 +130,7 @@ weaponDefs = {
 		weaponVelocity           = 2000,
 		waterWeapon				  = true,
 		customparams             = {
-			damagetype		     = "antiarmored",  
+			damagetype		     = "antilightarmored",  
 			nofriendlyfire	     = 1,
 		}, 
 		damage                   = {

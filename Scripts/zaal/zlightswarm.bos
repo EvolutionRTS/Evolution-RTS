@@ -152,8 +152,8 @@ AimPrimary(heading,pitch)
 	{
 	signal SIG_AIM;
 	set-signal-mask SIG_AIM;
-	turn head to y-axis heading speed <250>;
-	turn head to x-axis 0 -pitch speed <200>;
+	turn head to y-axis heading speed <5000>;
+	turn head to x-axis 0 -pitch speed <5000>;
 		
 	wait-for-turn head around y-axis;
 	start-script RestoreAfterDelay();
@@ -178,9 +178,9 @@ Killed( severity, corpsetype )
 	{
 	corpsetype = 1;
 	emit-sfx 1025 from body;
-	explode head type FALL | NOHEATCLOUD;
-	explode tail type FALL | NOHEATCLOUD;
-	explode lblade type FALL | NOHEATCLOUD;
-	explode rblade type FALL | NOHEATCLOUD;
+	explode head type FALL;
+	explode tail type FALL;
+	explode lblade type FALL;
+	explode rblade type FALL;
 	return( 0 );
 	}

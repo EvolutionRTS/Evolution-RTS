@@ -152,8 +152,8 @@ AimPrimary(heading,pitch)
 	{
 	signal SIG_AIM;
 	set-signal-mask SIG_AIM;
-	turn head to y-axis heading speed <250>;
-	turn head to x-axis 0 -pitch speed <200>;
+	turn head to y-axis heading speed <5000>;
+	turn head to x-axis 0 -pitch speed <5000>;
 		
 	wait-for-turn head around y-axis;
 	start-script RestoreAfterDelay();
@@ -169,8 +169,8 @@ AimSecondary(heading,pitch)
     }
 	signal SIG_AIM;
 	set-signal-mask SIG_AIM;
-	turn head to y-axis heading speed <250>;
-	turn head to x-axis 0 -pitch speed <200>;
+	turn head to y-axis heading speed <5000>;
+	turn head to x-axis 0 -pitch speed <5000>;
 		
 	wait-for-turn head around y-axis;
 	start-script RestoreAfterDelay();
