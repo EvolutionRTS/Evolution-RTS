@@ -44,6 +44,9 @@ local timeToBuild_ecommanderbattle = energyCost_ecommanderbattle * 0.05
 local energyCost_ecommandermeteor = 12000
 local timeToBuild_ecommandermeteor = energyCost_ecommandermeteor * 0.025
 
+local energyCost_eradar2_up1 = 1800
+local timeToBuild_eradar2_up1 = energyCost_eradar2_up1 * 0.05
+
 local energyCost_factory_up1 = 1200
 local timeToBuild_factory_up1 = energyCost_factory_up1 * 0.05
 
@@ -80,7 +83,7 @@ local timeToBuild_euwturret = energyCost_euwturret * 0.05
 local energyCost_emetalextractor_up1 = 1200
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.05
 
-local energyCost_zmex_up1 = 2400
+local energyCost_zmex_up1 = 1200
 local timeToBuild_zmex_up1 = energyCost_zmex_up1 * 0.10
 
 local energyCost_xmetalextractor = 1200
@@ -423,6 +426,22 @@ Overseer]],
 			metal = 0,
 			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
 			require = [[tech1]],
+		},
+	},
+	
+----------------------------------------------------------
+----------------------------------------------------------
+--Radar
+	eradar2 = 	{
+		{
+			into = 'eradar2_up1',
+			--require = 'etech2',
+			time = timeToBuild_eradar2_up1,
+			cmdname = [[Evolve to Tech2]],
+			energy = energyCost_eradar2_up1,
+			metal = 0,
+			text = [[Increases Radar/Sensing Range]],
+			require = [[tech2]],
 		},
 	},
 	

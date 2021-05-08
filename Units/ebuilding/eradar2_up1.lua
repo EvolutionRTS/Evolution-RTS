@@ -1,21 +1,21 @@
--- UNITDEF -- eradar2 --
+-- UNITDEF -- eradar2_up1 --
 --------------------------------------------------------------------------------
 
-unitName = [[eradar2]]	
+unitName = [[eradar2_up1]]	
 
-buildCostMetal = 5
+buildCostMetal = 40
 
 humanName = [[Radar Tower]]
-objectName = [[eradar3_small.s3o]]
+objectName = [[eradar3_large.s3o]]
 
-radarDistance = 1000
-radarEmitHeight = 64
+radarDistance = 3000
+radarEmitHeight = 128
 
-sightDistance = 750
-sonarDistance = 750
-seismicDistance = 750
+sightDistance = 1500
+sonarDistance = 1500
+seismicDistance = 1500
 
-tech = [[tech0]]
+tech = [[tech2]]
 armortype = [[building]]
 
 
