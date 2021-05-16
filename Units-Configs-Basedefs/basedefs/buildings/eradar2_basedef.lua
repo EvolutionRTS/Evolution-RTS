@@ -57,7 +57,7 @@ unitDef                    = {
 		},
 	},
 	customParams                  = {
-		RequireTech				 = techrequired,
+		RequireTech				 = tech,
 		unittype				  = "building",
 		needed_cover              = 2,
 		death_sounds              = "generic",

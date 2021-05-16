@@ -123,7 +123,7 @@ local minimapIconSizeMult = 0.0145 --0.0145
 -- only used when animating a spreadsheet/atlas texture
 local spotTexture = "bitmaps/default/metalshimmer_color4.dds"
 local animRate = 500      -- That's actually the reverse of animrate, the lower it is the faster the animation goes
-local texturewidth = 160 --160 (actual in-game rect width)
+local texturewidth = 80 --160 (actual in-game rect width)
 local textureYoffset = 2 --10 (offset from the ground)
 local numberOfImagesX = 8
 local numberOfImagesY = 8

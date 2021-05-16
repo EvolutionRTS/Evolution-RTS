@@ -14,7 +14,7 @@ primaryCEG = "custom:fusionreactionnuclear-1color"
 
 humanName = [[Metal Extractor]]
 
-objectName = [[emetalextractor2.s3o]]
+objectName = [[emetalextractor2_small.s3o]]
 script = [[emetalextractor.cob]]
 
 tech = [[tech0]]

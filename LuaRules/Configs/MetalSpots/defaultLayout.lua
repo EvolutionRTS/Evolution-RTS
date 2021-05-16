@@ -248,18 +248,30 @@ end
 
 if mexRandomLayout == "standard" then
 	if teamIDCount <= 2 then
-		mexSpotsPerSide = 10
-	elseif teamIDCount > 2 and teamIDCount <= 4 then
-		mexSpotsPerSide = 15
-	elseif teamIDCount > 4 and teamIDCount <= 6 then
 		mexSpotsPerSide = 20
+	elseif teamIDCount > 2 and teamIDCount <= 4 then
+		mexSpotsPerSide = 30
+	elseif teamIDCount > 4 and teamIDCount <= 6 then
+		mexSpotsPerSide = 40
 	elseif teamIDCount > 6 then
-		mexSpotsPerSide = 25
+		mexSpotsPerSide = 50
 	end
 	local mapSize = size * 2
-	if mapSize <= 6144 then -- An exception for 10x10 and smaller maps
+	
+	if mapSize >= 14336 then -- An exception for 28x28 maps
+		mexSpotsPerSide = mexSpotsPerSide * 2
+	elseif mapSize >= 12288 then -- An exception for 24x24 maps
+		mexSpotsPerSide = mexSpotsPerSide * 1.75
+	elseif mapSize >= 10240 then -- An exception for 20x20 maps
+		mexSpotsPerSide = mexSpotsPerSide * 1.5
+	elseif mapSize >= 8192 then -- An exception for 16x16 maps
+		mexSpotsPerSide = mexSpotsPerSide * 1
+	elseif mapSize >= 7168 then -- An exception for 14x14 maps
+		mexSpotsPerSide = mexSpotsPerSide * 0.75
+	elseif mapSize >= 6144 then -- An exception for 12x12 and smaller maps
 		mexSpotsPerSide = mexSpotsPerSide * 0.5
 	end
+
 	randomMirrored = true
 	padding = 100
 	pointRadius = 100 -- TODO: change this into how big a metal circle is

@@ -32,8 +32,8 @@ local unitDef                     = {
 	metalStorage                 = storage,
 	energyUse                     = 0,
 	explodeAs                     = "smallBuildingExplosionGenericPurple",
-	footprintX                    = 4,
-	footprintZ                    = 8,
+	footprintX                    = 2,
+	footprintZ                    = 4,
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	icontype                      = "storage",
@@ -42,7 +42,7 @@ local unitDef                     = {
 	maxWaterDepth                 = 5000,
 	--metalStorage                  = storage,
 	name                          = "Supply/Storage Depot",
-	objectName                    = "estorage2.s3o",
+	objectName                    = "estorage2_small.s3o",
 	script			              = "estorage2.cob",
 	radarDistance                 = 0,
 	repairable		              = false,
@@ -52,7 +52,7 @@ local unitDef                     = {
 	smoothAnim                    = true,
 	unitname                      = "estorage",
 	workerTime                    = 0,
-	yardMap                       = "yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy yyooooyy ",
+	yardMap                       = "oo oo oo oo oo oo oo oo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {
@@ -62,8 +62,8 @@ local unitDef                     = {
 		
 		explosiongenerators       = {
 			"custom:blacksmoke",
-			"custom:fusionreactionstoragenew",
-			"custom:fusionreactionstoragenew-blue",
+			"custom:fusionreactionstoragenew-small",
+			"custom:fusionreactionstoragenew-blue-small",
 			"custom:skyhatelaser",
 		},
 	},
@@ -92,8 +92,8 @@ local unitDef                     = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 10,
-	BuildingGroundDecalSizeY      = 10,
+	BuildingGroundDecalSizeX      = 4,
+	BuildingGroundDecalSizeY      = 6,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 
