@@ -88,6 +88,7 @@ unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "assaulttankcannon",
+			badTargetCategory  	 = "VTOL LIGHT ARMORED BIO",
 		},
 	},
 	customParams                 = {
@@ -142,7 +143,7 @@ weaponDefs                 = {
 		weaponVelocity           = 1000,
 		customparams             = {
 			isupgraded           = isUpgraded,
-			damagetype		     = "antibuilding",  
+			damagetype		     = "antibuildingarty",  
 		}, 
 		damage                   = {
 			default              = 150,

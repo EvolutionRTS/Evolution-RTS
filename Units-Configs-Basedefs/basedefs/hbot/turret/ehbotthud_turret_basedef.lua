@@ -42,7 +42,7 @@ unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGeneric",
 	side                         = "CORE",
-	sightDistance                = 800*1.33,
+	sightDistance                = 800,
 	smoothAnim                   = true,
 	stealth			             = false,
 	seismicSignature             = 2,
@@ -124,7 +124,7 @@ weaponDefs                 = {
 		interceptedByShieldType  = 4,
 		name                   = "Plasma Cannon",
 		--noExplode			   = true,
-		range                  = 800*1.33,
+		range                  = 800,
 		reloadtime             = 2,
 		size					 = 8,
 		--projectiles			   = projectiles,
@@ -138,11 +138,11 @@ weaponDefs                 = {
 		weaponTimer            = 1,
 		weaponVelocity         = 600,
 		customparams             = {
-			damagetype		     = "antilightarmored",
+			damagetype		     = "antilight",
 			isupgraded			  	 = isUpgraded,
 		},      
 		damage                   = {
-			default              = 150,
+			default              = 150*1.33,
 		},
 	},
 }

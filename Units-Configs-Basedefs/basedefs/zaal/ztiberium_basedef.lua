@@ -12,8 +12,8 @@ unitDef                     = {
 	metalStorage                  = storage,
 	energyUse                     = 0,
 	explodeAs                     = "BUG_DEATH_MEDIUM",
-	footprintX                    = 8,
-	footprintZ                    = 8,
+	footprintX                    = 4,
+	footprintZ                    = 4,
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
 	icontype                      = "storage",
@@ -65,8 +65,8 @@ unitDef                     = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "zgroundtexture.dds",
-	BuildingGroundDecalSizeX      = 14,
-	BuildingGroundDecalSizeY      = 14,
+	BuildingGroundDecalSizeX      = 8,
+	BuildingGroundDecalSizeY      = 8,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 

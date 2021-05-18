@@ -46,7 +46,7 @@ unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "hugeExplosionGenericPurple",
 	side                         = "CORE",
-	sightDistance                = 1000*1.33,
+	sightDistance                = 1000,
 	smoothAnim                   = true,
 	stealth			             = true,
 	seismicSignature             = 2,
@@ -147,7 +147,7 @@ weaponDefs                 = {
 			damagetype		     = "antiarmored", 
 		}, 
 		damage                   = {
-			default              = 40,
+			default              = 40*1.33,
 		},
 	},
 }

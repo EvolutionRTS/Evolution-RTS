@@ -74,7 +74,7 @@ unitDef                    = {
 	weapons                      = {
 		[1]                      = {
 			def                  = "Artilleryweapon",
-			badTargetCategory    = "VTOL",
+			badTargetCategory    = "VTOL LIGHT ARMORED BIO",
 		},
 		-- [2]                      = {
 			-- def                  = "SaturationArtilleryweapon",
@@ -132,7 +132,7 @@ weaponDefs                 = {
 		weaponVelocity           = 500,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "antibuilding",  
+			damagetype		     = "antibuildingarty",  
 		},  
 		damage                   = {
 			default              = 200,
@@ -169,7 +169,7 @@ weaponDefs                 = {
 		weaponVelocity           = 500,
 		customparams             = {
 			isupgraded			 = isUpgraded,
-			damagetype		     = "antibuilding",  
+			damagetype		     = "antibuildingarty",  
 		},  
 		damage                   = {
 			default              = 20,

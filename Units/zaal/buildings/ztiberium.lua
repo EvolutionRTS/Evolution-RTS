@@ -9,7 +9,7 @@ storage = 25
 
 humanName = "Tiberium Supply/Storage"
 
-objectName = "zaal/ztiberium.s3o"
+objectName = "zaal/ztiberium_small.s3o"
 script = "zaal/ztiberium.cob"
 
 armortype = [[building]]

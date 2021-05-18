@@ -42,7 +42,7 @@ unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericPurple",
 	side                         = "CORE",
-	sightDistance                = 300*1.33,
+	sightDistance                = 300,
 	smoothAnim                   = true,
 	stealth			             = false,
 	seismicSignature             = 2,
@@ -127,7 +127,7 @@ weaponDefs                 = {
 		
 		minintensity              = "1",
 		name                      = "Laser",
-		range                     = 900*1.33,
+		range                     = 900,
 		reloadtime                = 7.5,
 		WeaponType                = "LaserCannon",
 		rgbColor                  = "0 0.5 1",
@@ -146,7 +146,7 @@ weaponDefs                 = {
 			isupgraded			  	 = isUpgraded,
 		}, 
 		damage                    = {
-			default               = 500,
+			default               = 500*1.33,
 		},
 	},
 

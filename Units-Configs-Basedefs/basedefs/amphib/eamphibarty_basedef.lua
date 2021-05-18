@@ -74,6 +74,7 @@ unitDef                 = {
 	weapons                       = {
 		[1]                       = {
 		def                       = "assimilatorbeamweapon",
+		badTargetCategory   	  = "VTOL LIGHT ARMORED BIO",
 		},
 	},
 	customParams                  = {
@@ -131,7 +132,7 @@ weaponDefs              = {
 		waterweapon		          = true,
 		customparams              = {
 		isupgraded			  	 = isUpgraded,
-		damagetype		          = "antibuilding",  
+		damagetype		          = "antibuildingarty",  
 		}, 
 		damage                    = {
 		default                   = 100,

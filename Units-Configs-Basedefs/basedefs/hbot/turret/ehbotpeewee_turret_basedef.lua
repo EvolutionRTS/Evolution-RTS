@@ -41,7 +41,7 @@ unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "smallExplosionGenericBlue",
 	side                         = "CORE",
-	sightDistance                = 650*1.33,
+	sightDistance                = 650,
 	smoothAnim                   = true,
 	stealth			             = false,
 	seismicSignature             = 2,
@@ -122,7 +122,7 @@ weaponDefs                 = {
 		impulseFactor          = 0,
 		interceptedByShieldType  = 4,
 		name                   = "E.M.G.",
-		range                  = 650*1.33,
+		range                  = 650,
 		reloadtime             = 0.5,
 		--projectiles			   = 5,
 		weaponType		       = "LaserCannon",
@@ -141,7 +141,7 @@ weaponDefs                 = {
 			isupgraded			 = isUpgraded,
 		},      
 		damage                   = {
-			default              = 45,
+			default              = 45*1.33,
 		},
 	},
 }

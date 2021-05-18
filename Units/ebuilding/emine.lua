@@ -8,9 +8,8 @@ local unitName                    = "emine"
 local armortype					 = [[building]]
 --local supply					 = [[1]]
 
-local weapon1Damage              = 305
-local weapon1AOE				 = 1
-local energycosttofire			 = weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
+local weapon1Damage              = 1000
+local weapon1AOE				 = 25
 
 local function roundToFirstDecimal(energycosttofire)
     return math.floor(energycosttofire*10 + 0.5)*0.1
@@ -136,7 +135,7 @@ local weaponDefs                  = {
 		
 		model                    = "missilesmallvlaunch.s3o",
 		edgeeffectiveness	      = 1,
-		energypershot             = energycosttofire,
+		energypershot             = 0,
 		range                     =400,
 		reloadtime                =8,
 		weaponvelocity            =2500,

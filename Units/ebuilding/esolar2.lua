@@ -24,8 +24,8 @@ local unitDef                     = {
 	energyStorage                 = 0,
 	energyMake                    = energyproduced,
 	explodeAs                     = "mediumBuildingExplosionGenericBlueEMP",
-	footprintX                    = 6,
-	footprintZ                    = 6,
+	footprintX                    = 3,
+	footprintZ                    = 3,
 	icontype                      = "generator",
 	idleAutoHeal                  = .5,
 	idleTime                      = 2200,
@@ -34,7 +34,7 @@ local unitDef                     = {
 	maxWaterDepth                 = 5000,
 	metalStorage                  = 0,
 	name                          = "Fission Energy Generator",
-	objectName                    = "epowerplant6x6.s3o",
+	objectName                    = "epowerplant3x3.s3o",
 	script						  = "esolar2.cob",
 	onoffable                     = false,
 	radarDistance                 = 0,
@@ -44,7 +44,7 @@ local unitDef                     = {
 	sightDistance                 = 367,
 	smoothAnim                    = true,
 	unitname                      = "esolar2",
-	yardMap                       = "oooooo oooooo oooooo oooooo oooooo oooooo",
+	yardMap                       = "ooo ooo ooo",
 
 	sfxtypes                      = {
 		pieceExplosionGenerators  = {
@@ -94,8 +94,8 @@ local unitDef                     = {
 	},
 	useGroundDecal                = true,
 	BuildingGroundDecalType       = "factorygroundplate.dds",
-	BuildingGroundDecalSizeX      = 8,
-	BuildingGroundDecalSizeY      = 8,
+	BuildingGroundDecalSizeX      = 5,
+	BuildingGroundDecalSizeY      = 5,
 	BuildingGroundDecalDecaySpeed = 0.9,
 }
 --------------------------------------------------------------------------------

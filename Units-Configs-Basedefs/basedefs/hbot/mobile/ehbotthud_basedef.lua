@@ -140,7 +140,7 @@ weaponDefs                 = {
 		weaponTimer            = 1,
 		weaponVelocity         = 600,
 		customparams             = {
-			damagetype		     = "antilightarmored",
+			damagetype		     = "antilight",
 			isupgraded			  	 = isUpgraded,
 		},      
 		damage                   = {

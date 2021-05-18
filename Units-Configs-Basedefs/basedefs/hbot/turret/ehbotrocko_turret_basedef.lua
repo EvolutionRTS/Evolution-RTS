@@ -42,7 +42,7 @@ unitDef                    = {
 	repairable		             = false,
 	selfDestructAs               = "mediumExplosionGenericRed",
 	side                         = "CORE",
-	sightDistance                = 300*1.33,
+	sightDistance                = 300,
 	smoothAnim                   = true,
 	stealth			             = false,
 	seismicSignature             = 2,
@@ -121,7 +121,7 @@ weaponDefs                 = {
 		interceptedByShieldType  = 4,
 		model                    = "missilesmalllauncher.s3o",
 		name                     = "Rockets",
-		range                    = 850*1.33,
+		range                    = 850,
 		reloadtime               = 2.5,
 		weaponType		         = "MissileLauncher",
 		smokeTrail               = false,
@@ -136,11 +136,11 @@ weaponDefs                 = {
 		flightTime               = 3,
 		weaponVelocity           = 1500,
 		customparams             = {
-			damagetype		     = "antibuildingair",  
+			damagetype		     = "antilightarmored",  
 			isupgraded			  	 = isUpgraded,
 		},     
 		damage                   = {
-			default              = 100,
+			default              = 100*1.33,
 		},
 	},
 }

@@ -1,12 +1,19 @@
 --math.randomseed(Game.GameID) -- This only works in 104+
 math.random(); math.random(); math.random()
 local mapx, mapz = Game.mapSizeX * 0.5, Game.mapSizeZ * 0.5
--- Params
 
+-- Lets sq root the map size into a digestable number for later. We're doing some math here to account for the fact that spring does not work with add numbers. Only even ones. So, for that reason we cant to get the square root in numbers that comport to how we normally thing about maps. For example, a 16 x 16 map sqrt is 256, so that is our basis.
+
+local mapWidthX = (Game.mapSizeX * 2) / 1024
+local mapLengthZ = (Game.mapSizeZ * 2) / 1024
+local mapSQRT = mapWidthX * mapLengthZ
+
+-- Params
 local size = math.max(mapx, mapz)
 
 --
 Spring.Echo("[Default Mex Layout] Map size is: " .. size)
+Spring.Echo("[Default Mex Layout] Map square root size is: " .. mapSQRT)
 local count = #Spring.GetTeamList() - 1
 local allycount = #Spring.GetAllyTeamList() - 1
 -- for i = 1, #players do
@@ -256,20 +263,25 @@ if mexRandomLayout == "standard" then
 	elseif teamIDCount > 6 then
 		mexSpotsPerSide = 50
 	end
-	local mapSize = size * 2
 	
-	if mapSize >= 14336 then -- An exception for 28x28 maps
+	if mapSQRT >= 784 then -- An exception for 28x28 maps
 		mexSpotsPerSide = mexSpotsPerSide * 2
-	elseif mapSize >= 12288 then -- An exception for 24x24 maps
+		Spring.Echo("[Default Mex Layout] Map Square Root size is " .. mapSQRT .. " with a teamIDCount of " .. teamIDCount.. ". Placing " .. mexSpotsPerSide .. " mex points per quadrant (This is usually rounded up to the next whole number).")
+	elseif mapSQRT >= 576 then -- An exception for 24x24 maps
 		mexSpotsPerSide = mexSpotsPerSide * 1.75
-	elseif mapSize >= 10240 then -- An exception for 20x20 maps
+		Spring.Echo("[Default Mex Layout] Map Square Root size is " .. mapSQRT .. " with a teamIDCount of " .. teamIDCount.. ". Placing " .. mexSpotsPerSide .. " mex points per quadrant (This is usually rounded up to the next whole number).")
+	elseif mapSQRT >= 400 then -- An exception for 20x20 maps
 		mexSpotsPerSide = mexSpotsPerSide * 1.5
-	elseif mapSize >= 8192 then -- An exception for 16x16 maps
+		Spring.Echo("[Default Mex Layout] Map Square Root size is " .. mapSQRT .. " with a teamIDCount of " .. teamIDCount.. ". Placing " .. mexSpotsPerSide .. " mex points per quadrant (This is usually rounded up to the next whole number).")
+	elseif mapSQRT >= 256 then -- An exception for 16x16 maps
 		mexSpotsPerSide = mexSpotsPerSide * 1
-	elseif mapSize >= 7168 then -- An exception for 14x14 maps
+		Spring.Echo("[Default Mex Layout] Map Square Root size is " .. mapSQRT .. " with a teamIDCount of " .. teamIDCount.. ". Placing " .. mexSpotsPerSide .. " mex points per quadrant (This is usually rounded up to the next whole number).")
+	elseif mapSQRT >= 196 then -- An exception for 14x14 maps
 		mexSpotsPerSide = mexSpotsPerSide * 0.75
-	elseif mapSize >= 6144 then -- An exception for 12x12 and smaller maps
+		Spring.Echo("[Default Mex Layout] Map Square Root size is " .. mapSQRT .. " with a teamIDCount of " .. teamIDCount.. ". Placing " .. mexSpotsPerSide .. " mex points per quadrant (This is usually rounded up to the next whole number).")
+	elseif mapSQRT >= 144 then -- An exception for 12x12 and smaller maps
 		mexSpotsPerSide = mexSpotsPerSide * 0.5
+		Spring.Echo("[Default Mex Layout] Map Square Root size is " .. mapSQRT .. " with a teamIDCount of " .. teamIDCount.. ". Placing " .. mexSpotsPerSide .. " mex points per quadrant (This is usually rounded up to the next whole number).")
 	end
 
 	randomMirrored = true
