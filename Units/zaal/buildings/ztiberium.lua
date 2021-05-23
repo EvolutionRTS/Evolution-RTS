@@ -5,7 +5,7 @@ unitName = "ztiberium"
 
 --------------------------------------------------------------------------------
 supplygranted = 25
-storage = 25
+storage = 50
 
 humanName = "Tiberium Supply/Storage"
 

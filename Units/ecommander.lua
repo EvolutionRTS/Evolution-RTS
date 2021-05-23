@@ -10,10 +10,6 @@ local supplyGiven				 = [[0]]
 local techprovided				 = [[tech0, -overseer]]
 local techrequired				 = [[0 overseer]]
 
-local weapon1Damage              = 15
-local weapon1AOE				 = 25
-local energycosttofire1			 = 0 --weapon1Damage / 10 * ((weapon1AOE / 1000) + 1)
-
 
 
 local unitDef                    = {
@@ -142,132 +138,45 @@ local unitDef                    = {
 local weaponDefs                 = {
 
 	machinegun                   = {
-		accuracy                 = 300,
-		AreaOfEffect             = weapon1AOE,
+		AreaOfEffect             = 50,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
 		collideFeature           = false,
-		beamTime                 = 0.1,
 		
 		coreThickness            = 0.5,
-		duration                 = 0.1,
-		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
-		energypershot            = energycosttofire1,
+		duration                 = 0.2,
+		explosionGenerator       = "custom:genericshellexplosion-small",
+		energypershot            = 0,
 		fallOffRate              = 0,
 		fireStarter              = 50,
 		interceptedByShieldType  = 4,
 		impulsefactor			 = 0,
 		
 		minintensity             = "1",
-		name                     = "Machine Gun",
+		name                     = "Overseer Pulse Laser",
 		range                    = 650,
-		reloadtime               = 0.1,
+		reloadtime               = 1,
 		WeaponType               = "LaserCannon",
 		rgbColor                 = "1 0.2 0",
 		rgbColor2                = "1 1 1",
 		soundTrigger             = true,
-		soundstart               = "weapons/Machine Gun Shot_05.wav",
+		soundstart               = "weapons/Sci Fi Sniper 10.wav",
 		texture1                 = "shot",
 		texture2                 = "empty",
-		thickness                = 5,
+		thickness                = 7,
 		tolerance                = 1000,
 		turret                   = true,
-		weaponVelocity           = 1000,
+		weaponVelocity           = 1500,
 		customparams             = {
 			damagetype		      = "light", 
-
 			nocosttofire		    = true,
 		}, 
 		damage                   = {
-			default              = weapon1Damage,
+			default              = 150,
 		},
 	},
 
-	riottankempweapon            = {
-		
-		AreaOfEffect             = weapon1AOE,
-		avoidFeature             = false,
-		avoidFriendly            = false,
-		avoidGround				 = false,
-		collideFeature           = false,
-		collideFriendly          = false,
-		coreThickness            = 0.6,
-		--	cegTag               = "mediumcannonweapon3",
-		duration                 = 0.05,
-		edgeeffectiveness        = 0.1,
-		energypershot            = energycosttofire,
-		explosionGenerator       = "custom:genericshellexplosion-medium-lightning",
-		fallOffRate              = 1,
-		fireStarter              = 100,
-		impulseFactor            = 0,
-		
-		minintensity             = 1,
-		name                     = "EMP Blast Wave",
-		noexplode		         = true,
-		paralyzer		         = true,
-		paralyzetime	         = 2.5,
-		range                    = 500,
-		reloadtime               = 1,
-		WeaponType               = "LaserCannon",
-		rgbColor                 = "0 0.2 1",
-		rgbColor2                = "1 1 1",
-		soundTrigger             = true,
-		soundstart               = "weapons/fnubeamfire.wav",
-		soundHit                 = "explosions/phasegun1hit.wav",
-		texture1                 = "wave",
-		texture2                 = "empty",
-		thickness                = 40,
-		tolerance                = 1000,
-		turret                   = true,
-		weaponVelocity           = 1000,
-		customparams             = {
-			damagetype		     = "light",  
-			nofriendlyfire	     = 1,
-			nocosttofire		 = true,
-			
-			--Upgrades--
-			upgradeClass		 = "groundweapons",
-		}, 
-		damage                   = {
-			default              = weapon1Damage,
-		},
-	},
-
-	emp                          = {
-		AreaOfEffect             = 500,
-		avoidFriendly            = false,
-		avoidFeature             = false,
-		collideFriendly          = false,
-		collideFeature           = false,
-		explosionGenerator       = "custom:genericshellexplosion-large-blue-emp",
-		tolerance                = 1000,
-		energypershot            = 0,
-		explosionScar		     = false,
-		impulseFactor            = 0,
-		name                     = "Emp Blast Weapon",
-		noSelfDamage            = true,
-		paralyzer		         = true,
-		paralyzetime	         = 5,
-		range                    = 500,
-		reloadtime               = 10,
-		weaponType		         = "Cannon",
-		soundhit                 = "explosions/emp.wav",
-		size				     = 0,
-		turret                   = true,
-		weaponVelocity           = 10000,
-		customparams             = {
-			damagetype		     = "light",
-			nofriendlyfire	     = 1,
-			nocosttofire		 = true,
-			
-			--Upgrades--
-			upgradeClass		 = "light",
-		},      
-		damage                   = {
-			default              = 1000,
-		},
-	},
 	commnuke                   = {
 		AreaOfEffect              = 500,
 		avoidFriendly             = false,

@@ -8,7 +8,7 @@ end
 function gadget:GetInfo()
 	return {
 		name = "Single-Hit Weapon",
-		desc = "Forces marked weapons to only inflict damage once per projectile per unit",
+		desc = "Forces marked weapons to only inflict damage once per projectile per unit. For use with noexplode weapons.",
 		author = "Anarchid",
 		date = "25.03.2013",
 		license = "Public domain",

@@ -223,10 +223,18 @@ function WeaponDef_Post(name, wDef)
 	
 	--Potentially fix times when weapons explode without doing damage
 	if tonumber(wDef.areaofeffect) ~= nil and tonumber(wDef.areaofeffect) <= 25 then
-		wDef.areaofeffect = 25
+		if wDef.customparams and wDef.customparams.aoeoverride == true then
+			wDef.areaofeffect = wDef.areaofeffect
+		else
+			wDef.areaofeffect = 25
+		end
 	end
 	if tonumber(wDef.areaofeffect) ~= nil and tonumber(wDef.areaofeffect) <= 25 then
-		wDef.edgeeffectiveness = 1
+		if wDef.customparams and wDef.customparams.edgeeffectiveness == true then
+			wDef.edgeeffectiveness = wDef.edgeeffectiveness
+		else
+			wDef.edgeeffectiveness = 1
+		end
 	end
 	
 	--Override map gravity for all weapons

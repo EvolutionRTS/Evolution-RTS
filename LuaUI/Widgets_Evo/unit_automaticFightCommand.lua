@@ -39,14 +39,14 @@ local function SetupUnit(unitID)
 	local x, y, z = spGetUnitPosition(unitID)
 	if x and y and z then
 	    if (x > hmsx) then -- avoid to issue commands outside map
-	      x = x - 50
+	      x = x - 1
 	    else
-	      x = x + 50
+	      x = x + 1
 	    end
 	    if (z > hmsz) then
-	      z = z - 50
+	      z = z - 1
 	    else
-	      z = z + 50
+	      z = z + 1
 	    end	
 		-- meta enables reclaim enemy units, alt autoresurrect ( if available )
 		spGiveOrderToUnit(unitID, CMD_FIGHT, { x, y, z }, {"meta"})

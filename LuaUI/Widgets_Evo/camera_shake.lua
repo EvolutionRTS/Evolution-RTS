@@ -70,6 +70,10 @@ function widget:ShockFront(power, dx, dy, dz)
     power = 10
   end
   shake = shake + power
+  if shake > 0.05 then
+		shake = 0.05
+  end
+  --Spring.Echo ("Shake Power is " .. shake)
 end
 
 

@@ -6,10 +6,10 @@ local unitName                    = "estorage"
 --------------------------------------------------------------------------------
 
 local armortype					 = [[building]]
-local storage					  = 25
-local supplygranted				  = 10
+local storage					  = 50
+local supplygranted				  = 25
 
-local buildCostMetal 			  = 25
+local buildCostMetal 			  = 15
 local maxDamage					  = buildCostMetal * 12.5
 
 local unitDef                     = {

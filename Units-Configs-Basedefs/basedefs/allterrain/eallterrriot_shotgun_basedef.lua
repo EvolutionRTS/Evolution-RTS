@@ -161,8 +161,7 @@ weaponDefs                 = {
 		},
 	},
 
-	riottankshotgun              = {
-		AreaOfEffect             = 75,
+	riottankshotgun              = 75,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -172,16 +171,17 @@ weaponDefs                 = {
 		
 		cegTag                   = "bruisercannon",
 		edgeeffectiveness		 = 1,
-		explosionGenerator       = "custom:genericshellexplosion-small",
+		explosionGenerator       = "custom:genericshellexplosion-large-sparks-burn",
 		energypershot            = 0,
 		interceptedByShieldType  = 4,
 		impulseFactor            = 0,
 		name                     = "Shotgun",
 		noSelfDamage             = true,
+		noexplode		         = true,
 		projectiles		     	 = 5,
 		range                    = 500,
-		reloadtime               = 1.5,
-		sprayangle				 = 2000,
+		reloadtime               = 5,
+		sprayangle				 = 3500,
 		size					 = 2,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/mediumcannonhit.wav",
@@ -193,9 +193,10 @@ weaponDefs                 = {
 			isupgraded			 = isUpgraded,
 			damagetype		     = "light",  
 			nofriendlyfire	     = true,
+			single_hit			 = true,
 		},      
 		damage                   = {
-			default              = 30,
+			default              = 150,
 		},
 	},
 }
