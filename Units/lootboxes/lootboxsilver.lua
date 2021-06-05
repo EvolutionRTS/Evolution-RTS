@@ -34,7 +34,6 @@ return {
 		maxvelocity = 0.00000001,
 		maxwaterdepth = 0,
 		metalmake = 2,
-		movementclass = "HOVERTANK2",
 		movestate = 0,
 		name = "Lootbox",
 		noautofire = false,
