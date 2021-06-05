@@ -161,7 +161,8 @@ weaponDefs                 = {
 		},
 	},
 
-	riottankshotgun              = 75,
+	riottankshotgun              = {
+		areaofeffect 			 = 75,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,

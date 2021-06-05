@@ -19,13 +19,16 @@
 SaveDefsToCustomParams = false
 
 -------------------------
--- Process relevant modoptions first
+-- Process relevant modoptions and gamewide features first
 -------------------------
 unitHealthModifier = tonumber(Spring.GetModOptions().unithealthmodifier)
 if unitHealthModifier == nil then
 	unitHealthModifier = 500
 end
+
 unitHealthModifier = unitHealthModifier * 0.01
+
+canAnyUnitsReclaim = false
 
 -------------------------
 -- DEFS POST PROCESSING
@@ -590,6 +593,15 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			-- Set maximum possible workertime to 8
 			if unitDef.workertime and unitDef.workertime >= 8 then
 				unitDef.workertime = 8
+			end
+			-- Set reclaimspeed to be a multiple of workertime. This relies on max defaults set in featuredefs post. Without some mox defaults there, this will be a funny result.
+			if unitDef.workertime and unitDef.reclaimspeed then
+				unitDef.reclaimspeed = unitDef.workertime
+			end
+			if canAnyUnitsReclaim == false then
+				if unitDef.canreclaim == true then
+					unitDef.canreclaim = false
+				end
 			end
 		end
 	end

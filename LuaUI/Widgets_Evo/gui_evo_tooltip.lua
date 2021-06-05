@@ -415,7 +415,7 @@ function GetTooltipWeaponData(ud)
 					damagetype = "default"
 				end
 				
-				if damagetype == "light" then damagetype = "Light" end
+				if damagetype == "light" or damagetype == "antilight" then damagetype = "Light" end
 				if damagetype == "turretantilight" then damagetype = "Light Mobile Units" end
 				if damagetype == "turretantiarmored" then damagetype = "Armored Mobile Units" end
 				if damagetype == "turretantilightarmored" then damagetype = "Light/Armored Mobile Units" end

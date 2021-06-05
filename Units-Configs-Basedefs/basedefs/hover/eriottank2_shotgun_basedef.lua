@@ -190,5 +190,4 @@ weaponDefs                 = {
 			default              = 150,
 		},
 	},
-
 }

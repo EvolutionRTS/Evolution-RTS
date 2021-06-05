@@ -21,7 +21,7 @@ local modrules  = {
     allowCrushingAlliedUnits = false, -- defaults to false
     allowUnitCollisionDamage = false, -- defaults to false
 	allowUnitCollisionOverlap = true,  -- defaults to true     -- this lets units clump close together when moving, after which they are pushed apart
-	allowGroundUnitGravity	=	false,
+	allowGroundUnitGravity = false,
   },
   
   construction = {
@@ -32,7 +32,7 @@ local modrules  = {
 
 
   reclaim = {
-    multiReclaim  = 1,    -- defaults to 0
+    multiReclaim  = 0,    -- defaults to 0
     reclaimMethod = 0,    -- defaults to 1
     unitMethod    = 0,    -- defaults to 1
 
@@ -64,8 +64,9 @@ local modrules  = {
     requireSonarUnderWater = false,  -- defaults to true
 
     los = {
-      losMipLevel = 3,  -- defaults to 1
-      airMipLevel = 4,  -- defaults to 2
+      losMipLevel = 1,  -- defaults to 1
+      airMipLevel = 1,  -- defaults to 2
+	  radarMipLevel  = 2,
     },
   },
 

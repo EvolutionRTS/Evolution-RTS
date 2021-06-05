@@ -43,11 +43,20 @@ for name, fd in pairs(FeatureDefs) do
 --		  Spring.Echo("Feature["..name.."] is providing cover!")
 		end   
 	end
-end
-
-for name, fd in pairs(FeatureDefs) do
-	fd.metal = 0
-	fd.energy = 0
+	
+	-- Reset maximum feature values
+	if tonumber(fd["metal"]) == nil or tonumber(fd["metal"]) == 0 then
+		fd.metal = 100
+	end
+	if tonumber(fd["energy"]) == nil or tonumber(fd["energy"]) == 0 then
+		fd.energy = 100
+	end
+	if tonumber(fd["metal"]) > 100 then
+		fd.metal =  100
+	end
+	if tonumber(fd["energy"]) > 500 then
+		fd.energy = 500
+	end
 end
 
 

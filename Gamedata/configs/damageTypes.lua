@@ -4,12 +4,20 @@ local damageClasses = {
 	
 	-- classes with armor classes for weapons
 	damageTypes = {
-		light = {
+		--
+		light = { -- These values should always mirror antilight and vice versa
 			LIGHT		= 1.5,
 			ARMORED		= 1,
 			BUILDING	= 1,
 			AIR			= 1,
-		},	
+		},
+		antilight = {
+			LIGHT		= 1.5,
+			ARMORED		= 1,
+			BUILDING	= 1,
+			AIR			= 1,
+		},
+		--
 		turretantilight = {
 			LIGHT		= 1.5,
 			ARMORED		= 1,
