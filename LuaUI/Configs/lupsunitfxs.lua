@@ -1,7 +1,7 @@
 effectUnitDefs = {
 ------------------
 ------------------
-	edrone = {
+	escoutdrone = {
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=40, piece="fengine1", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=40, piece="fengine2", onActive=true}},
 		{class='AirJet',	options={color={1,0.5,0.0,0.75},	width =  2, length=40, piece="rengine1", onActive=true}},
