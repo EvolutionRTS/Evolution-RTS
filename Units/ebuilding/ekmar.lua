@@ -9,7 +9,7 @@ local armortype					 = [[building]]
 
 local techrequired				 = [[tech2]]
 
-local shield1Power               = 500
+local shield1Power               = 1000
 local shield1PowerRegen          = 50
 local shield1PowerRegenEnergy    = 50
 local buildCostMetal 			  = 50

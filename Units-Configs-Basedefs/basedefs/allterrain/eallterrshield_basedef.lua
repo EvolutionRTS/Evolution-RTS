@@ -18,7 +18,7 @@ unitDef                    = {
 
 	cancloak		             = true,
 	cloakCost		             = 0,
-	cloakCostMoving	             = 1,
+	cloakCostMoving	             = 0,
 	minCloakDistance             = 150,
 	decloakOnFire	             = false,
 	decloakSpherical             = true,
@@ -106,6 +106,8 @@ unitDef                    = {
 		factionname	             = "ateran",
 		corpse                   = "energycore",
 		retreatRangeDAI			 = 600,
+		
+		decloakradiushalved		 = true,
 		
 		area_cloak = 1, -- Can this unit emit a cloaking field?
 		area_cloak_upkeep = 5, -- How much energy does it cost to maintain the cloaking field?

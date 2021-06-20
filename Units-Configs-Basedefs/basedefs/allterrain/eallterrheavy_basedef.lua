@@ -18,8 +18,8 @@ unitDef                    = {
 	-- Cloaking
 
 	cancloak		             = true,
-	cloakCost		             = 1,
-	cloakCostMoving	             = 2,
+	cloakCost		             = 0,
+	cloakCostMoving	             = 0,
 	minCloakDistance             = 70,
 	decloakOnFire	             = true,
 	decloakSpherical             = true,
@@ -106,6 +106,7 @@ unitDef                    = {
 		buckettex                = "unittextures/lego2skin_explorerbucket.dds",
 		factionname	             = "ateran",
 		corpse                   = "energycore",
+		decloakradiushalved		 = true,
 	},
 }
 

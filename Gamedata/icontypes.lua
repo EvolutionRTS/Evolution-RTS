@@ -219,13 +219,13 @@ local icontypes = {
 
 	radar = {
 		bitmap='icons/radar.png',
-		size=3.5,
+		size=1,
 		radiusadjust=0,
 	},
   
 	radarjam = {
 		bitmap='icons/radarjam.png',
-		size=3.5,
+		size=1,
 		radiusadjust=0,
 	},
   

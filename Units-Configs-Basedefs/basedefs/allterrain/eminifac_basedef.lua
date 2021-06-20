@@ -90,6 +90,7 @@ unitDef                      = {
 		buckettex                  = "unittextures/lego2skin_explorerbucket.dds",
 		factionname					= "ateran",
 		corpse                   = "energycore",
+		decloakradiushalved		 = true,
 		--	ProvideTech            = "1 Powergrid",
 		--    ProvideTechRange     = "1500",
 		--	groundtexselectimg     = ":nc:bitmaps/power/powergrid.png",

@@ -143,6 +143,8 @@ function UnitDef_Post(name, uDef)
 	local radius = 8 * sqrt((fx * fx) + (fz * fz))
 	if uDef.customparams and uDef.customparams.decloakradiusmodifier then
 		uDef.mincloakdistance = (radius * uDef.customparams.decloakradiusmodifier)
+	elseif uDef.customparams and uDef.customparams.decloakradiushalved then
+		uDef.mincloakdistance = (radius * 3)
 	else
 		uDef.mincloakdistance = (radius * 6)
 	end

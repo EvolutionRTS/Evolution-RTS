@@ -27,9 +27,9 @@ local posradius = 150
 		return posradius
 	else
 		Spring.GiveOrderToUnit(scav, -(UDN.eradar2_scav.id), {posx, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx-200, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx+200, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx, posy, posz-200, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.esolar2_scav.id), {posx-200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.estorage_scav.id), {posx+200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.ejammer2_scav.id), {posx, posy, posz-200, 0}, {"shift"})
 		Spring.GiveOrderToUnit(scav, -(UDN.elightturret2_scav.id), {posx, posy, posz+200, 0}, {"shift"})
 	end
 end
@@ -43,9 +43,9 @@ local posradius = 150
 	if radiusCheck then
 		return posradius
 	else
-		Spring.GiveOrderToUnit(scav, -(UDN.eradar2_scav.id), {posx, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx-200, posy, posz, 0}, {"shift"})
-		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx+200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.eradar2_up1_scav.id), {posx, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.emine_scav.id), {posx-200, posy, posz, 0}, {"shift"})
+		Spring.GiveOrderToUnit(scav, -(UDN.emine_scav.id), {posx+200, posy, posz, 0}, {"shift"})
 		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx, posy, posz-200, 0}, {"shift"})
 		Spring.GiveOrderToUnit(scav, -(UDN.eheavyturret2_scav.id), {posx, posy, posz+200, 0}, {"shift"})
 	end

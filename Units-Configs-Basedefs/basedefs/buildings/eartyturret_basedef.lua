@@ -94,9 +94,12 @@ weaponDefs                  = {
 		
 		impulseFactor            = 0,
 		interceptedByShieldType  = 4,
+		
+		minIntensity			 = 1,
+		
 		name                     = "Plasma Cannon",
 		range                    = 8000,
-		reloadtime               = 15,
+		reloadtime               = 30,
 		size					 = 16,
 		weaponType		         = "Cannon",
 		soundHit                 = "explosions/artyhit.wav",
@@ -110,7 +113,7 @@ weaponDefs                  = {
 			--effectedByunitHealthModifier = true,
 		},  
 		damage                   = {
-			default              = 400,
+			default              = 1000,
 		},
 	},
 

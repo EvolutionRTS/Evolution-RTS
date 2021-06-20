@@ -1,6 +1,6 @@
 ConstructorsList = {
 	"ecommander",
-	"xcommander",
+	--"xcommander",
 }
 
 -- put ALL commander units from your game here
@@ -13,12 +13,12 @@ CommandersList = {
 	"ecommandermeteor",
 	"ecommandershield",
 	"zarm",
-	"xcommander",
+	--"xcommander",
 }
 
 ConstructorsCounter = {
 	UDN.ecommander.id,
-	UDN.xcommander.id,
+	--UDN.xcommander.id,
 }
 
 AssistUnits = {
