@@ -109,7 +109,6 @@ unitDef                    = {
 
 weaponDefs                 = {
 	sniper           = {
-		
 		AreaOfEffect              = 10,
 		avoidFeature              = false,
 		avoidFriendly             = false,

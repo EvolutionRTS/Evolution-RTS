@@ -31,7 +31,7 @@ local unitDef                     = {
 	cloakCost		              = 0,
 	cloakCostMoving	              = 0,
 	minCloakDistance              = 0,
-	decloakOnFire	              = false,
+	decloakOnFire	              = true,
 	decloakSpherical              = true,
 	initCloaked		              = true,
 	

@@ -5,9 +5,11 @@ unitName = [[emetalextractor]]
 
 --------------------------------------------------------------------------------
 
+ateranMexCost = Spring.GetModOptions().metalextractorcostateran or 50
+
 metalMultiplier = 1
 
-buildCostMetal = 50
+buildCostMetal = ateranMexCost
 energyUse = 0
 
 primaryCEG = "custom:fusionreactionnuclear-1color"

@@ -260,6 +260,37 @@ local options= {
 		-- (step <= 0) means that there is no quantization
 	},
 	
+	{
+		key    = 'mexcost',
+		name   = 'Metal Extractor Costs',
+		desc   = 'Allows you to set the cost of Metal Extractors',
+		type   = 'section',
+	},
+	{
+		key    = 'metalextractorcostateran',
+		name   = 'Ateran Metal Extractor Cost',
+		desc   = 'How much metal does an Ateran Metal Extractor cost?',
+		type   = 'number',
+		section= 'mexcost',
+		def    = 50,
+		min    = 1,
+		max    = 500,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	{
+		key    = 'metalextractorcostzaal',
+		name   = 'Zaal Metal Extractor Cost',
+		desc   = 'How much metal does an Zaal Metal Extractor cost?',
+		type   = 'number',
+		section= 'mexcost',
+		def    = 65,
+		min    = 1,
+		max    = 500,
+		step   = 1,  -- quantization is aligned to the def value
+		-- (step <= 0) means that there is no quantization
+	},
+	
 -- Gameplay Options	
 	{
 		key    = 'gameplayoptions',

@@ -59,7 +59,7 @@ for i = 1, #WeaponDefs do
 	end
 end
 
-local DEFAULT_DECLOAK_TIME = 100
+local DEFAULT_DECLOAK_TIME = 60
 local UPDATE_FREQUENCY = 10
 local CLOAK_MOVE_THRESHOLD = math.sqrt(0.2)
 

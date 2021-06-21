@@ -5,11 +5,13 @@ unitName = [[zmex]]
 
 --------------------------------------------------------------------------------
 
+zaalMexCost = Spring.GetModOptions().metalextractorcostzaal or 65
+
 metalMultiplier = 1
 
 energyUse = 0
 
-buildCostMetal = 65
+buildCostMetal = zaalMexCost
 
 yardMap = [[oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo]]
 
