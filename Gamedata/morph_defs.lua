@@ -26,6 +26,9 @@ local devolution = (-1 > 0)
 local energyCost_ecommander = 100
 local timeToBuild_ecommander = energyCost_ecommander * 0.10
 
+local energyCost_ecommanderhealer = 100
+local timeToBuild_ecommanderhealer = energyCost_ecommanderhealer * 0.10
+
 local energyCost_ecommandercloak = 100
 local timeToBuild_ecommandercloak = energyCost_ecommandercloak * 0.10
 
@@ -113,6 +116,16 @@ local timeToBuild_karganneth = 10
 local morphDefs = {
 	ecommander = {
 		{
+		into = 'ecommanderhealer',
+		time = timeToBuild_ecommanderhealer,
+		cmdname = [[Healer 
+Overseer]],
+			energy = energyCost_ecommanderhealer,
+			metal = 0,
+			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+			require = [[tech2]],
+		},
+		{
 		into = 'ecommandercloak',
 		time = timeToBuild_ecommandercloak,
 		cmdname = [[Cloaking 
@@ -166,13 +179,14 @@ Overseer]],
 	
 	ecommandercloak = {
 	    {
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Healer 
+		into = 'ecommanderhealer',
+		time = timeToBuild_ecommanderhealer,
+		cmdname = [[Healer 
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+			require = [[tech2]],
 		},
 		{
 			into = 'ecommandershield',
@@ -215,13 +229,14 @@ Overseer]],
 	
 	ecommandershield = {
 	    {
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Healer 
+		into = 'ecommanderhealer',
+		time = timeToBuild_ecommanderhealer,
+		cmdname = [[Healer 
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',
@@ -264,13 +279,14 @@ Overseer]],
 	
 	ecommanderbuild = {
 	    {
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Healer 
+		into = 'ecommanderhealer',
+		time = timeToBuild_ecommanderhealer,
+		cmdname = [[Healer 
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',
@@ -313,13 +329,14 @@ Overseer]],
 	
 	ecommanderfactory = {
 	    {
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Healer 
+		into = 'ecommanderhealer',
+		time = timeToBuild_ecommanderhealer,
+		cmdname = [[Healer 
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',
@@ -371,13 +388,14 @@ Overseer]],
 			require = [[tech3]],
 		},
 	    {
-			into = 'ecommander',
-			time = timeToBuild_ecommander,
-			cmdname = [[Healer 
+		into = 'ecommanderhealer',
+		time = timeToBuild_ecommanderhealer,
+		cmdname = [[Healer 
 Overseer]],
-			energy = energyCost_ecommander,
+			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
+			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',

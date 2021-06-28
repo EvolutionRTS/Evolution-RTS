@@ -182,7 +182,7 @@ local weaponDefs                 = {
 			nocosttofire		    = true,
 		}, 
 		damage                   = {
-			default              = 150,
+			default              = 200,
 		},
 	},
 

@@ -1,7 +1,7 @@
--- UNITDEF -- ECOMMANDER --
+-- UNITDEF -- ECOMMANDERHEALER --
 --------------------------------------------------------------------------------
 
-local unitName                   = "ecommander"
+local unitName                   = "ecommanderhealer"
 
 --------------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ local unitDef                    = {
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,
 	levelground                  = true,
-	maxDamage                    = 2000,
+	maxDamage                    = 5000,
 	maxSlope                     = 180,
 	maxVelocity                  = 3,
 	maxReverseVelocity           = 1,
@@ -62,7 +62,7 @@ local unitDef                    = {
 	metalStorage                 = 0,
 	movementClass                = "COMMANDERTANK4",
 	moveState			         = "0",
-	name                         = "The Overseer",
+	name                         = "The Healer Overseer",
 	noChaseCategories	         = "NOTAIR SUPPORT VTOL AMPHIB",
 	objectName                   = "ecommander4-battle.s3o",
 	script			             = "ecommander4-battle.cob",
