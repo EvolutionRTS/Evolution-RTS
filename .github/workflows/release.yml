@@ -1,0 +1,22 @@
+name: Build Release Artifacts
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-sdz:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: FranzDiebold/github-env-vars-action@v2.3.0
+      - run: sudo apt install -y zip
+      - run: zip -r repo.sdz .
+      - uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./repo.sdz
+          asset_name: ${{ env.CI_REPOSITORY_NAME }}-${{ env.CI_REF_NAME }}.sdz
+          asset_content_type: application/zip
