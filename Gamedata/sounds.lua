@@ -108,6 +108,15 @@ local Sounds = {
 			gainmod = 0,
 			pitchmod = 0,
 		},
+		
+		dothis = {
+			--- always play on the front speaker(s)
+			file = "sounds/acknowledgements/dothis.wav",
+			in3d = true,
+			maxconcurrent = 1,
+			gainmod = 0,
+			pitchmod = 0,
+		},
 	
 		IncomingChat = {
 			--- always play on the front speaker(s)
