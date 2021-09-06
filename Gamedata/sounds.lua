@@ -116,12 +116,25 @@ local Sounds = {
 			maxconcurrent = 1,
 		},
 		
+---------------------------------------------------
+--Unit Selections----------------------------------
+---------------------------------------------------
+		
 		UnitSelect = {
 			--- always play on the front speaker(s)
 			file = "sounds/miscfx/unitselect.wav",
 			in3d = true,
 			maxconcurrent = 1,
 		},
+		
+		EngineIdle = {
+			--- always play on the front speaker(s)
+			file = "sounds/unitselections/engineidle.wav",
+			in3d = true,
+			maxconcurrent = 1,
+		},
+		
+		
 		
 		BugSelect = {
 			--- always play on the front speaker(s)
