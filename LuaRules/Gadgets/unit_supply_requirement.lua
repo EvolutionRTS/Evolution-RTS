@@ -37,7 +37,7 @@ local PRIVATE = {private = true}
 --------------------------------------------------------------------------------
 -- Configuration
 
-local SUPPLY_CAP = tonumber(Spring.GetModOptions().supplycap) or 400
+local SUPPLY_CAP = tonumber(Spring.GetModOptions().supplycap) or 1000000 -- !!!SREMEMBER TO CHANGE THIS SETTING IN gui_resourceBar.lua !!!
 local INTRINSIC_SUPPLY = tonumber(Spring.GetModOptions().intrinsicsupply) or 10
 
 --------------------------------------------------------------------------------

@@ -58,7 +58,6 @@ local spGetSpectatingState = Spring.GetSpectatingState
 
 local aterancomDefID = UnitDefNames.ecommander.id
 local zaalcomDefID = UnitDefNames.zarm.id
-local patterncomDefID = UnitDefNames.xcommander.id
 
 local commanderDefID = spGetTeamRulesParam(myTeamID, 'startUnit')
 local amNewbie = (spGetTeamRulesParam(myTeamID, 'isNewbie') == 1)
@@ -199,9 +198,6 @@ function widget:DrawWorld()
 			elseif spGetTeamRulesParam(teamID, 'startUnit') == zaalcomDefID then
 				glTexture('LuaUI/Images/zarm.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 64)
-			elseif spGetTeamRulesParam(teamID, 'startUnit') == patterncomDefID then
-				glTexture('LuaUI/Images/xcommander.png')
-				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 64)
 			end
 		end
 	end
@@ -272,8 +268,6 @@ function GenerateFactionChangeList()
 	glTexRect(12*widgetScale, 17*widgetScale, 52*widgetScale, 59*widgetScale)
 	glTexture('LuaUI/Images/zarm.png')
 	glTexRect(76*widgetScale, 20*widgetScale, 116*widgetScale, 60*widgetScale)
-	-- glTexture('LuaUI/Images/xcommander.png')
-	-- glTexRect(140*widgetScale, 20*widgetScale, 180*widgetScale, 60*widgetScale)
 	glTexture(false)
 
 		-- Text
@@ -281,7 +275,6 @@ function GenerateFactionChangeList()
 	font:Print('Choose Your Faction', 96*widgetScale, 64*widgetScale, 11.5*widgetScale, 'ocd')
 	font:Print('Ateran', 32*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
 	font:Print('Zaal', 96*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
-	-- font:Print('Pattern(WIP)', 160*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
 	font:End()
 end
 

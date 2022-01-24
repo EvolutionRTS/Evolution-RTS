@@ -167,6 +167,14 @@ function UnitDef_Post(name, uDef)
 	if uDef.usegrounddecal == true and uDef.customparams and uDef.customparams.customgrounddecal ~= true then
 		if uDef.customparams and uDef.customparams.factionname == "ateran" then
 			uDef.buildinggrounddecaltype = "groundplate.dds"
+			--Make decals sizing easy
+			if uDef.footprintx ~= nil and uDef.footprintz ~= nil then
+				uDef.buildinggrounddecalsizex = uDef.footprintx + 2
+				uDef.buildinggrounddecalsizey = uDef.footprintz + 2
+				uDef.buildinggrounddecaldecayspeed = 0.9
+			else
+				Spring.Echo("[AllDefsPost] " .. uDef.name .. " Does not have it's footprint defined")
+			end
 		end
 		if uDef.customparams and uDef.customparams.factionname == "zaal" then
 			uDef.buildinggrounddecaltype = "zgroundtexture2.dds"
@@ -194,7 +202,14 @@ function UnitDef_Post(name, uDef)
 		VFS.Include("gamedata/scavengers/unitdef_post.lua")
 		uDef = scav_Udef_Post(name, uDef)
 	end
-	
+
+	--------------------------------------------------------------------------------
+	--------------------------------------------------------------------------------
+	-- Use per piece collision volumes
+	-- !Potentially very expensive!
+	-- I'm using this to save myself a boatload of time
+	uDef.usePieceCollisionVolumes = false
+
 end
 
 --------------------------------------------------------------------------------

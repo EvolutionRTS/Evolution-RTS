@@ -129,6 +129,22 @@ local moveDefs = {
 
 --hBot--
 
+   HOVERHBOT2 = {
+      footprintx=2,
+      footprintz=2,
+      maxslope=90,
+      maxwaterdepth=10,
+      maxwaterslope=255,
+      badwaterslope=255,
+      crushstrength=20,
+	  depthModParams = genericDepthmodParams,
+	  minwaterdepth=10,
+	  heatmod=unitHeat,
+	  slopemod=3,
+	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
+   },
+
    HOVERHBOT3 = {
       footprintx=3,
       footprintz=3,
@@ -213,6 +229,20 @@ local moveDefs = {
 
 
 --All Terrain--
+
+   ALLTERRTANK2 = {
+      footprintx=2,
+      footprintz=2,
+      maxslope=90,
+      maxwaterdepth=30,
+      crushstrength=20,
+	  depthModParams = genericDepthmodParams,
+	  minwaterdepth=10,
+	  heatmod=unitHeat,
+	  slopemod=4,
+	  allowRawMovement=true,
+	  flowMapping=flowMappingToggle,
+   },
 
    ALLTERRTANK3 = {
       footprintx=3,

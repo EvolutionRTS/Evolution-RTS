@@ -5,7 +5,6 @@ Factories = {
 	"ehbotfac",
 	"eairplant",
 	"zhatch",
-	"xklab",
 }
 
 FactoriesExcludedUnits = {

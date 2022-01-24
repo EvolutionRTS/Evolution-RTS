@@ -38,28 +38,6 @@ SmokeUnit(healthpercent, sleeptime, smoketype)
 	}
 }
 
-setSFXoccupy(setSFXoccupy_argument)
-{
-terraintype = setSFXoccupy_argument;
-
-                if(terraintype == 2)
-      {
-                move base to y-axis [-5] speed [50];
-                }
-      else
-      {
-                move base to y-axis [-5] speed [50];
-                }
-                if(terraintype == 4)
-      {
-                move base to y-axis [-5] speed [50];
-                }
-      else
-      {
-                move base to y-axis [-5] speed [50];
-                }
-}
-
 buildingfx()
 {
    while( TRUE )

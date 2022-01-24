@@ -241,10 +241,10 @@ local options= {
 		desc   = 'Determines the maximum army supply that is allowed.',
 		type   = 'number',
 		section= 'supplyoptions',
-		def    = 400,
-		min    = 0,
-		max    = 400,
-		step   = 1,  -- quantization is aligned to the def value
+		def    = 1000000,
+		min    = 50,
+		max    = 1000000,
+		step   = 50,  -- quantization is aligned to the def value
 		-- (step <= 0) means that there is no quantization
 	},
 	{
