@@ -25,11 +25,21 @@ Shared.buildList = {
 	[[ebox]],
 	[[ehbotengineer]],
 	[[eorb]],
+	[[eamphibleveler]],
+	[[ehbotkarganneth]],
+	[[eallterranarchid]],
+	[[elacerator]],
+	[[ekrow]],
 	-- [[ecommander]],
 }
 
 Shared.eorb = {
 	[[ehbotengineer]],
+	[[eamphibleveler]],
+	[[ehbotkarganneth]],
+	[[eallterranarchid]],
+	[[elacerator]],
+	[[ekrow]],
 }
 
 Shared.buildListeCommanderFactory = {
@@ -57,6 +67,11 @@ Shared.buildListeCommanderFactory = {
 	[[efighter]],
 	[[egunship2]],
 	[[ebomber]],
+	[[eamphibleveler]],
+	[[ehbotkarganneth]],
+	[[eallterranarchid]],
+	[[elacerator]],
+	[[ekrow]],
 }
 
 Shared.buildListZaal = {
@@ -147,6 +162,11 @@ local factory = {
 	[[efighter]],
 	[[egunship2]],
 	[[ebomber]],
+	[[eamphibleveler]],
+	[[ehbotkarganneth]],
+	[[eallterranarchid]],
+	[[elacerator]],
+	[[ekrow]],
 }
 
 Shared.buildListFactory = {}
@@ -380,4 +400,16 @@ Shared.buildListHbotFactory_up3 = {
 		[[ehbotsniper_up3]],
 		[[ehbotrocko_up3]],
 		[[ehbotkarganneth_up3]],
+}
+
+-----------------------------
+-----------------------------
+--Buildlists for T3/Experimentals
+
+Shared.buildListT3 = {
+		[[eamphibleveler]],
+		[[ehbotkarganneth]],
+		[[eallterranarchid]],
+		[[elacerator]],
+		[[ekrow]],
 }

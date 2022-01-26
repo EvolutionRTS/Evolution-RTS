@@ -86,6 +86,12 @@ local timeToBuild_euwturret = energyCost_euwturret * 0.10
 local energyCost_emetalextractor_up1 = 600
 local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
 
+local energyCost_emetalextractor_up2 = 1200
+local timeToBuild_emetalextractor_up2 = energyCost_emetalextractor_up2 * 0.10
+
+local energyCost_emetalextractor_up3 = 1800
+local timeToBuild_emetalextractor_up3 = energyCost_emetalextractor_up3 * 0.10
+
 local energyCost_zmex_up1 = 1200
 local timeToBuild_zmex_up1 = energyCost_zmex_up1 * 0.10
 
@@ -186,7 +192,6 @@ Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
-			require = [[tech2]],
 		},
 		{
 			into = 'ecommandershield',
@@ -223,7 +228,6 @@ Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
 			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
-			require = [[tech1]],
 		},
 	},
 	
@@ -236,7 +240,6 @@ Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
-			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',
@@ -273,7 +276,6 @@ Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
 			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
-			require = [[tech1]],
 		},
 	},
 	
@@ -286,7 +288,6 @@ Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
-			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',
@@ -323,7 +324,6 @@ Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
 			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
-			require = [[tech1]],
 		},
 	},
 	
@@ -336,7 +336,6 @@ Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
-			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',
@@ -373,7 +372,6 @@ Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
 			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
-			require = [[tech1]],
 		},
 	},
 	ecommanderbattle = {
@@ -388,14 +386,13 @@ Overseer]],
 			require = [[tech3]],
 		},
 	    {
-		into = 'ecommanderhealer',
-		time = timeToBuild_ecommanderhealer,
-		cmdname = [[Healer 
+			into = 'ecommanderhealer',
+			time = timeToBuild_ecommanderhealer,
+			cmdname = [[Healer 
 Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
-			require = [[tech2]],
 		},
 		{
 			into = 'ecommandercloak',
@@ -434,6 +431,65 @@ Overseer]],
 			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
 		},
 	},
+	
+	ecommanderhealer = {
+	    {
+			into = 'ecommandermeteor',
+			time = timeToBuild_ecommandermeteor,
+			cmdname = [[Meteor 
+Overseer]],
+			energy = energyCost_ecommandermeteor,
+			metal = 0,
+			text = 'Evolve into Meteor Overseer: Overseer can call down devastating meteor showers.',
+			require = [[tech3]],
+		},
+	    {
+		into = 'ecommanderbattle',
+			time = timeToBuild_ecommanderbattle,
+			cmdname = [[Battle
+Overseer]],
+			energy = energyCost_ecommanderbattle,
+			metal = 0,
+			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			require = [[tech2]],
+		{
+			into = 'ecommandercloak',
+			time = timeToBuild_ecommandercloak,
+			cmdname = [[Cloaking 
+Overseer]],
+			energy = energyCost_ecommandercloak,
+			metal = 0,
+			text = 'Evolve into Cloaking Overseer: Gains a large cloaking field which also cloaks the Overseer.',
+		},
+		{
+			into = 'ecommandershield',
+			time = timeToBuild_ecommandershield,
+			cmdname = [[Shield
+Overseer]],
+			energy = energyCost_ecommandershield,
+			metal = 0,
+			text = 'Evolve into Shielded Overseer: Gains a large shield which recharges quickly.',
+		},
+		{
+			into = 'ecommanderbuild',
+			time = timeToBuild_ecommanderbuild,
+			cmdname = [[Builder
+Overseer]],
+			energy = energyCost_ecommanderbuild,
+			metal = 0,
+			text = 'Evolve into Builder Overseer: Gains 16x buildpower.',
+		},
+		{
+			into = 'ecommanderfactory',
+			time = timeToBuild_ecommanderfactory,
+			cmdname = [[Factory
+Overseer]],
+			energy = energyCost_ecommanderfactory,
+			metal = 0,
+			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
+		},
+	},
+	
 	ecommandermeteor = {
 			{
 			into = 'ecommanderbattle',
@@ -443,7 +499,6 @@ Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
 			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
-			require = [[tech1]],
 		},
 	},
 	
@@ -468,14 +523,38 @@ Overseer]],
 --Economy
 	emetalextractor = 	{
 		{
-			into = 'emetalextractor_up3',
+			into = 'emetalextractor_up1',
 			--require = 'etech2',
 			time = timeToBuild_emetalextractor_up1,
 			cmdname = [[Evolve 2x Income]],
 			energy = energyCost_emetalextractor_up1,
 			metal = 0,
 			text = [[x2 Metal Extraction rate]],
+			require = [[tech1]],
+		},
+	},
+	emetalextractor_up1 = 	{
+		{
+			into = 'emetalextractor_up2',
+			--require = 'etech2',
+			time = timeToBuild_emetalextractor_up1,
+			cmdname = [[Evolve 4x Income]],
+			energy = energyCost_emetalextractor_up1,
+			metal = 0,
+			text = [[x4 Metal Extraction rate]],
 			require = [[tech2]],
+		},
+	},
+	emetalextractor_up2 = 	{
+		{
+			into = 'emetalextractor_up3',
+			--require = 'etech2',
+			time = timeToBuild_emetalextractor_up1,
+			cmdname = [[Evolve 8x Income]],
+			energy = energyCost_emetalextractor_up1,
+			metal = 0,
+			text = [[x8 Metal Extraction rate]],
+			require = [[tech3]],
 		},
 	},
 	zmex = 	{
