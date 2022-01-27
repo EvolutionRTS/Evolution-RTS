@@ -185,10 +185,10 @@ Overseer]],
 	
 	ecommandercloak = {
 	    {
-		into = 'ecommanderhealer',
-		time = timeToBuild_ecommanderhealer,
-		cmdname = [[Healer 
-Overseer]],
+			into = 'ecommanderhealer',
+			time = timeToBuild_ecommanderhealer,
+			cmdname = [[Healer 
+	Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
@@ -281,10 +281,10 @@ Overseer]],
 	
 	ecommanderbuild = {
 	    {
-		into = 'ecommanderhealer',
-		time = timeToBuild_ecommanderhealer,
-		cmdname = [[Healer 
-Overseer]],
+			into = 'ecommanderhealer',
+			time = timeToBuild_ecommanderhealer,
+			cmdname = [[Healer 
+	Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
@@ -329,10 +329,10 @@ Overseer]],
 	
 	ecommanderfactory = {
 	    {
-		into = 'ecommanderhealer',
-		time = timeToBuild_ecommanderhealer,
-		cmdname = [[Healer 
-Overseer]],
+			into = 'ecommanderhealer',
+			time = timeToBuild_ecommanderhealer,
+			cmdname = [[Healer 
+	Overseer]],
 			energy = energyCost_ecommanderhealer,
 			metal = 0,
 			text = 'Evolve into Healer Overseer: Overseer has a very strong AOE heal in it\'s immediate vicinity.',
@@ -452,6 +452,7 @@ Overseer]],
 			metal = 0,
 			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
 			require = [[tech2]],
+		},
 		{
 			into = 'ecommandercloak',
 			time = timeToBuild_ecommandercloak,

@@ -34,23 +34,19 @@ for name, fd in pairs(FeatureDefs) do
 	end
 	
 	if fd["footprintz"] ~= nil and fd["footprintx"] ~= nil then
-		if(
-		(
-			tonumber(fd["footprintz"]) <= 8 
-			or tonumber(fd["footprintx"]) <= 8 
-			or string.lower(fd["category"]) == "vegitation" 
-			or string.lower(fd["category"]) == "vegetation" 
-		)
-		and (not fd["name"] or string.lower(fd["name"]) ~= "ammobox")
-		) then
+		if tonumber(fd["footprintz"]) <= 8 
+		or tonumber(fd["footprintx"]) <= 8 
+		or string.lower(fd["category"]) == "vegitation" 
+		or string.lower(fd["category"]) == "vegetation" then
+
 			fd["blocking"] = false
 			if (not fd.customparams) then 
-			 fd.customparams = {}
+				fd.customparams = {}
 			end
-			if (not fd.customparams.provide_cover) then
-			 fd.customparams.provide_cover = 1
-	--		  Spring.Echo("Feature["..name.."] is providing cover!")
-			end   
+			
+			-- if (not fd.customparams.provide_cover) then
+			 -- fd.customparams.provide_cover = 1
+			-- end   
 		end
 	end
 	
