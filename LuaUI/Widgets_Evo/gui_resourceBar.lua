@@ -521,18 +521,12 @@ function generateDisplayList2()
 				supplyAvailableColor = green
 			end
 			
-			if sm > 999 then
 				supplyStr = supplyUsedColor .. su .. white .. "/" .. supplyAvailableColor .. "∞" .. " "
-			else
-				supplyStr = supplyUsedColor .. su .. white .. "/" .. supplyAvailableColor .. sm .. " "
-			end
+				--supplyStr = supplyUsedColor .. su .. white .. "/" .. supplyAvailableColor .. sm .. " "
 			
 		else
-			if sm > 999 then
 				supplyStr = white .. su .. "/" .. "∞" .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. "∞" .. white .. ") "
-			else
-				supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
-			end
+				--supplyStr = white .. su .. "/" .. sm .. " (" .. orange .. "±" .. tostring(sm - su) .. white .. "/" .. green .. maxSupply .. white .. ") "
 		end
 		font2:Begin()
 		font2:Print(supplyStr, supplyOffset+supplyBarWidth, textOffsetY, FontSize, "onr")

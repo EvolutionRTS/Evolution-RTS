@@ -83,14 +83,17 @@ local timeToBuild_eheavyturret2 = energyCost_eheavyturret2 * 0.10
 local energyCost_euwturret = 50
 local timeToBuild_euwturret = energyCost_euwturret * 0.10
 
-local energyCost_emetalextractor_up1 = 600
-local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 * 0.10
+-- energycost = time + rate
+-- time = energycost / rate
 
-local energyCost_emetalextractor_up2 = 1200
-local timeToBuild_emetalextractor_up2 = energyCost_emetalextractor_up2 * 0.10
+local energyCost_emetalextractor_up1 = 60 * 2
+local timeToBuild_emetalextractor_up1 = energyCost_emetalextractor_up1 / 2
 
-local energyCost_emetalextractor_up3 = 1800
-local timeToBuild_emetalextractor_up3 = energyCost_emetalextractor_up3 * 0.10
+local energyCost_emetalextractor_up2 = 300 * 25
+local timeToBuild_emetalextractor_up2 = energyCost_emetalextractor_up2 / 25
+
+local energyCost_emetalextractor_up3 = 480 * 50
+local timeToBuild_emetalextractor_up3 = energyCost_emetalextractor_up3 / 50
 
 local energyCost_zmex_up1 = 1200
 local timeToBuild_zmex_up1 = energyCost_zmex_up1 * 0.10
@@ -538,9 +541,9 @@ Overseer]],
 		{
 			into = 'emetalextractor_up2',
 			--require = 'etech2',
-			time = timeToBuild_emetalextractor_up1,
+			time = timeToBuild_emetalextractor_up2,
 			cmdname = [[Evolve 4x Income]],
-			energy = energyCost_emetalextractor_up1,
+			energy = energyCost_emetalextractor_up2,
 			metal = 0,
 			text = [[x4 Metal Extraction rate]],
 			require = [[tech2]],
@@ -550,9 +553,9 @@ Overseer]],
 		{
 			into = 'emetalextractor_up3',
 			--require = 'etech2',
-			time = timeToBuild_emetalextractor_up1,
+			time = timeToBuild_emetalextractor_up3,
 			cmdname = [[Evolve 8x Income]],
-			energy = energyCost_emetalextractor_up1,
+			energy = energyCost_emetalextractor_up3,
 			metal = 0,
 			text = [[x8 Metal Extraction rate]],
 			require = [[tech3]],

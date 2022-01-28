@@ -8,7 +8,7 @@ unitName = [[emetalextractor_up3]]
 metalMultiplier = 8
 
 buildCostMetal = 600
-energyUse = 10
+energyUse = 50
 
 primaryCEG = "custom:fusionreactionnuclear-4color"
 
