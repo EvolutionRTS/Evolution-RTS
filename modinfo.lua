@@ -19,7 +19,7 @@ return {
 	shortGame='EvoRTS',
 	modtype=1,
 	depend = {
-		"Evolution RTS Music Addon v2",
+		"Evolution RTS Music Addon v3",
 		-- "Spring Features v1.9",
 		-- "Evolution RTS Music Addon v1",
 		-- "Shard LuaAI $VERSION",
