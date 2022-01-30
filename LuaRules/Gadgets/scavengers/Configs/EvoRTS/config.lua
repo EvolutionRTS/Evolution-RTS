@@ -19,7 +19,7 @@ scavconfig = {
 		factoryControllerModule 		= true, --factory controller is to give orders to factories
 		unitSpawnerModule 				= true, --spawns units
 		startBoxProtection				= true, --spawns turrets around the startboxes (if you are using startboxes) and damages units inside of it
-		reinforcementsModule			= true, --reinforcements adds beacon capturing and friendly drops
+		reinforcementsModule			= false, --reinforcements adds beacon capturing and friendly drops
 		stockpilers						= false, --stockpilers adds controller for units with stockpile mechanic
 		nukes							= true, --nukes gives orders to nuke units
 	},
@@ -81,10 +81,10 @@ buildingSpawnerModuleConfig = {
 unitSpawnerModuleConfig = {
 	bossFightEnabled					= true,
 	FinalBossUnit						= true,
-		FinalBossHealth						= 250000, -- this*teamcount*difficulty
-		FinalBossMinionsPassive				= 3000, -- this/(teamcount*difficulty), how often does boss spawn minions passively, frames.
+		FinalBossHealth						= 1500000, -- this*teamcount*difficulty
+		FinalBossMinionsPassive				= 1000, -- this/(teamcount*difficulty), how often does boss spawn minions passively, frames.
 		FinalBossMinionsActive				= 150, -- this/(teamcount*difficulty), how often does boss spawn minions when taking damage, frames.
-	BossWaveTimeLeft					= 300,
+	BossWaveTimeLeft					= 480,
 	aircraftchance 						= 8, -- higher number = lower chance
 	globalscoreperoneunit 				= 200,
 	spawnchance							= 120,

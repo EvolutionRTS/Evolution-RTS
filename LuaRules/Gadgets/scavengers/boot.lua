@@ -579,8 +579,8 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			numOfSpawnBeacons = numOfSpawnBeacons + 1
 			if scavconfig.modules.reinforcementsModule == true then
 				Spring.SetUnitNeutral(unitID, true)
-				Spring.SetUnitMaxHealth(unitID, 100000)
-				Spring.SetUnitHealth(unitID, 100000)
+				Spring.SetUnitMaxHealth(unitID, 10000)
+				Spring.SetUnitHealth(unitID, 10000)
 			end
 		end
 		-- if UnitName == "lootboxgold" then //perhaps add this later when lootboxes are fully implemented
