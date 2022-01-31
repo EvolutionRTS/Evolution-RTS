@@ -40,8 +40,8 @@ function SelfDestructionControls(n, scav, scavDef)
 						local telstartposy = Spring.GetGroundHeight(selfdx[scav], selfdz[scav])
 						local telendposy = Spring.GetGroundHeight(posx, posz)
 						if (UnitDefs[scavDef].minWaterDepth and -(UnitDefs[scavDef].minWaterDepth) > telendposy) or (UnitDefs[scavDef].maxWaterDepth and -(UnitDefs[scavDef].maxWaterDepth) < telendposy) then
-							Spring.SpawnCEG("scav-spawnexplo",selfdx[scav],telstartposy,selfdz[scav],0,0,0)
-							Spring.SpawnCEG("scav-spawnexplo",posx,telendposy,posz,0,0,0)
+							Spring.SpawnCEG("scav-prettypop",selfdx[scav],telstartposy,selfdz[scav],0,0,0)
+							Spring.SpawnCEG("scav-prettypop",posx,telendposy,posz,0,0,0)
 							Spring.SetUnitPosition(scav, posx, posz)
 							Spring.GiveOrderToUnit(scav, CMD.STOP, 0, 0)
 							break

@@ -17,7 +17,7 @@ end
 
 function scav_Wdef_Post(name, wDef)
     if wDef.weapontype == "Cannon" then
-		Spring.Echo(wDef.name,wDef.weapontype)
+		--Spring.Echo(wDef.name,wDef.weapontype)
 		wDef.rgbcolor = {0.96, 0.42, 1}
         if wDef.explosiongenerator then
             --wDef.explosiongenerator = "custom:genericscavengershellexplosion-medium-purple"

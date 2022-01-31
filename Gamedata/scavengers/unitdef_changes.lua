@@ -25,17 +25,6 @@ end
 			providetech = [[tech0, tech1, tech2, tech3]],
 		},
 	}
-	
-	customDefs.xcommander = {
-		buildoptions = scavUnit,
-		workertime = 10,
-		repairspeed = 10,
-		explodeas = "mediumScavengerExplosionNuke",
-		selfdestructas = "mediumScavengerExplosionNuke",
-		customparams = {
-			providetech = [[tech0, tech1, tech2, tech3]],
-		},
-	}
 
 	customDefs.eamphibbuggybig = {
 		maxdamage = 2500,

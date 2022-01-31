@@ -13,7 +13,7 @@ return {
 	name='Evolution RTS -',
 	description='EvoRTS',
 	shortname='EvoRTS',
-	version='v17.03',
+	version='dev',
 	mutator='Official',
 	game='Evolution RTS',
 	shortGame='EvoRTS',
