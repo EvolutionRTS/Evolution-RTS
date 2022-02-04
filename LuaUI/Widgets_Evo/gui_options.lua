@@ -151,7 +151,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	low = {
-		msaa = 0,
+		msaa = 2,
 		bloom = false,
 		bloomhighlights = false,
 		ssao = false,
@@ -178,7 +178,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	medium = {
-		msaa = 2,
+		msaa = 4,
 		bloom = true,
 		bloomhighlights = false,
 		ssao = false,
@@ -196,7 +196,7 @@ local presets = {
 		timecyclesweathereffects = false,
 		outline = false,
 		guishader = false,
-		shadows = false,
+		shadows = true,
 		advmapshading = true,
 		advmodelshading = true,
 		decals = 1,
@@ -205,7 +205,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	high = {
-		msaa = 4,
+		msaa = 8,
 		bloom = true,
 		bloomhighlights = false,
 		ssao = true,
@@ -232,7 +232,7 @@ local presets = {
 		enemyspotter_highlight = false,
 	},
 	ultra = {
-		msaa = 8,
+		msaa = 16,
 		bloom = true,
 		bloomhighlights = true,
 		ssao = true,
@@ -2218,7 +2218,7 @@ function init()
 		{id="borderless", group="gfx", name="Borderless window", type="bool", value=tonumber(Spring.GetConfigInt("WindowBorderless",1) or 1) == 1, description="Changes will be applied next game.\n\n(dont forget to turn off the \'fullscreen\' option next game)"},
 		{id="windowpos", group="gfx", widget="Move Window Position", name="Move window position", type="bool", value=GetWidgetToggleValue("Move Window Position"), description='Toggle and move window position with the arrow keys or by dragging'},
 		{id="vsync", group="gfx", name="V-sync", type="bool", value=tonumber(Spring.GetConfigInt("VSync",1) or 1) == 1, description=''},
-		{id="msaa", group="gfx", name="Anti Aliasing", type="slider", steps={0,1,2,4}, restart=true, value=tonumber(Spring.GetConfigInt("MSAALevel",1) or 2), description='Enables multisample anti-aliasing. NOTE: Can be expensive!\n\nChanges will be applied next game'},
+		{id="msaa", group="gfx", name="Anti Aliasing", type="slider", steps={0,1,2,4,8,16}, restart=true, value=tonumber(Spring.GetConfigInt("MSAALevel",1) or 8), description='Enables multisample anti-aliasing. NOTE: Can be expensive!\n\nChanges will be applied next game'},
 		{id="advmapshading", group="gfx", name="Advanced map shading", type="bool", value=tonumber(Spring.GetConfigInt("AdvMapShading",1) or 1) == 1, description='When disabled: map shadows aren\'t rendered as well'},
 		{id="advmodelshading", group="gfx", name="Advanced model shading", type="bool", value=tonumber(Spring.GetConfigInt("AdvModelShading",1) or 1) == 1},
 		{id="advsky", group="gfx", name="Advanced sky", type="bool", restart=true, value=tonumber(Spring.GetConfigInt("AdvSky",1) or 1) == 1, description='Enables high resolution clouds\n\nChanges will be applied next game'},
@@ -2290,7 +2290,7 @@ function init()
 
 		{id="xrayshader", group="gfx", widget="XrayShader", name="Unit xray shader", type="bool", value=GetWidgetToggleValue("XrayShader"), description='Highlights all units, highlight effect dissolves on close camera range.\n\nFades out and disables at low fps\nWorks less on dark teamcolors'},
 		{id="particles", group="gfx", name="Max particles", type="slider", min=5000, max=25000, step=500, value=tonumber(Spring.GetConfigInt("MaxParticles",1) or 10000), description='Particles used for explosions, smoke, fire and missiletrails\n\nSetting a low value will mean that various effects wont show properly'},
-		{id="nanoparticles", group="gfx", name="Max nano particles", type="slider", min=500, max=5000, step=100, value=tonumber(Spring.GetConfigInt("MaxNanoParticles",1) or 500), description='NOTE: Nano particles are more expensive regarding the CPU'},
+		{id="nanoparticles", group="gfx", name="Max nano particles", type="slider", min=0, max=5000, step=100, value=tonumber(Spring.GetConfigInt("MaxNanoParticles",1) or 500), description='NOTE: Nano particles are more expensive regarding the CPU'},
 
 		--{id="treeradius", group="gfx", name="Tree render distance", type="slider", restart=true, min=0, max=2000, step=50, value=tonumber(Spring.GetConfigInt("TreeRadius",1) or 1000), description='Applies to SpringRTS engine default trees\n\nChanges will be applied next game'},
 
@@ -2509,9 +2509,9 @@ function init()
 	if tonumber(Spring.GetConfigInt("FSAALevel",0)) > 0 then
 		local fsaa = tonumber(Spring.GetConfigInt("FSAALevel",0))
 		if fsaa > 4 then
-			fsaa = 4
+			fsaa = 8
 		end
-		Spring.SetConfigInt("MSAALevel", fsaa)
+		Spring.SetConfigInt("MSAALevel", 8)
 		Spring.SetConfigInt("FSAALevel", 0)
 	end
 
@@ -2849,10 +2849,6 @@ function widget:Initialize()
 		if Spring.GetConfigInt("GrassDetail",0) ~= 0 then
 			Spring.SetConfigInt("GrassDetail",0)
 		end
-		-- limit MSAA
-		if Spring.GetConfigInt("MSAALevel",0) > 4 then
-			Spring.SetConfigInt("MSAALevel",4)
-		end
 
 		--if Platform ~= nil and Platform.gpuVendor ~= 'Nvidia' then	-- because UsePBO displays tiled map texture bug for ATI/AMD cards
 		--Spring.SetConfigInt("UsePBO",0)
@@ -2865,7 +2861,7 @@ function widget:Initialize()
 		--end
 		-- set lowest quality shadows for Intel GPU (they eat fps but dont really show, but without any shadows enables it looks glitchy)
 		if Platform ~= nil and Platform.gpuVendor == 'Intel' then
-			Spring.SendCommands("Shadows 1 1000")
+			Spring.SendCommands("Shadows 1 1024")
         end
 
         -- set custom user map sun position

@@ -83,7 +83,10 @@ local timeToBuild_eheavyturret2 = energyCost_eheavyturret2 * 0.10
 local energyCost_euwturret = 50
 local timeToBuild_euwturret = energyCost_euwturret * 0.10
 
--- energycost = time + rate
+local energyCost_eflakturret = 60 * 10
+local timeToBuild_eflakturret = energyCost_eflakturret / 10
+
+-- energycost = time * rate
 -- time = energycost / rate
 
 local energyCost_emetalextractor_up1 = 60 * 2
@@ -591,6 +594,18 @@ Overseer]],
 
 ----------------------------------------------------------
 ----------------------------------------------------------
+	
+	elaserbattery = 	{
+		{
+			into = 'eflakturret',
+			time = timeToBuild_eflakturret,
+			cmdname = [[Evolve]],
+			energy = energyCost_eflakturret,
+			metal = 0,
+			text = [[Evolve Projectile Based Flak with more Range and AOE Damage]],
+			require = [[tech2]],
+		},
+	},	
 	
 	-- elightturret2 = 	{
 		-- {

@@ -3,7 +3,7 @@
 #include "sfxtype.h"
 #include "exptype.h"
 
-piece base, beams, firepoint1, lilypad; // these are the pieces of the model
+piece base, beams, turret, barrel1, firepoint1, firepoint2, firepoint3, firepoint4, lilypad; // these are the pieces of the model
 
 static-var shooting_num, terraintype;
 

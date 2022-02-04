@@ -1,0 +1,148 @@
+#define TA // This is a TA script
+
+#include "sfxtype.h" 
+#include "exptype.h"
+
+piece base, beams, turret, barrel1, firepoint1, firepoint2, firepoint3, firepoint4, lilypad; // these are the pieces of the model
+
+static-var shooting_num, terraintype;
+
+// Signal definitions
+#define SIG_AIM 2 // this is a aim define <- o_O This is a kill flag
+
+
+// Custom SFX
+#define GDMARTY 1024+0
+
+SmokeUnit()// this is a standard smoke point define
+{
+	var healthpercent, sleeptime, smoketype;
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = SFXTYPE_BLACKSMOKE;
+			if( Rand( 1, 66 ) < healthpercent )
+				smoketype = SFXTYPE_WHITESMOKE;
+			emit-sfx 1026 from turret;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+			sleeptime = 200;
+		sleep sleeptime;
+	}
+}
+
+
+Create() // tells it what to do on creation 
+{
+		shooting_num=1;
+        start-script SmokeUnit(); 
+} 
+
+
+RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
+{ 
+sleep 3000; 
+turn turret to y-axis <0> speed <60>; 
+turn barrel1 to x-axis <0> speed <30>;  
+} 
+
+AimWeapon1(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+/*
+    if ( get IN_WATER(0) == 1 )
+    {
+     return (0);
+    }
+*/
+signal SIG_AIM; 
+set-signal-mask SIG_AIM; 
+turn turret to y-axis heading speed <5000>; 
+turn barrel1 to x-axis <0> - pitch speed <5000>;  
+wait-for-turn turret around y-axis;
+wait-for-turn barrel1 around x-axis;  
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
+
+
+FireWeapon1() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+         if(shooting_num==1)
+         {
+         	emit-sfx 1024 from firepoint2;
+         }
+
+         if(shooting_num==2)
+         {
+         	emit-sfx 1024 from firepoint3;
+         }
+         
+         if(shooting_num==3)
+         {
+         	emit-sfx 1024 from firepoint4;
+         }
+         
+         if(shooting_num==4)
+         {
+         	emit-sfx 1024 from firepoint1;
+         }
+	
+   shooting_num=shooting_num+1;
+
+            if( shooting_num == 5)
+            {  
+            	shooting_num=1;
+            }
+} 
+
+AimFromWeapon1(piecenum) // where it aims the weapon from 
+{ 
+piecenum = barrel1; 
+} 
+
+QueryWeapon1(piecenum) // where the shot is called from 
+{ 
+	 if (shooting_num==1) 
+     {  
+     	piecenum=firepoint1;     
+     }
+
+     if (shooting_num==2)
+     {   
+     	piecenum=firepoint2;
+     } 
+     
+     if (shooting_num==3)
+     {   
+     	piecenum=firepoint3;
+     } 
+     
+     if (shooting_num==4)
+     {   
+     	piecenum=firepoint4;
+     } 
+} 
+/*
+TechLost()
+{
+	CanFire=FALSE;
+	signal SIG_AIM;
+	stop-spin turret around y-axis decelerate <10>;
+	stop-spin barrel1 around x-axis decelerate <10>;
+}
+
+TechGranted()
+{
+	CanFire=TRUE;
+}
+*/
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode base type EXPLODE_ON_HIT;
+	explode beams type EXPLODE_ON_HIT;
+	explode lilypad type EXPLODE_ON_HIT;
+} 
