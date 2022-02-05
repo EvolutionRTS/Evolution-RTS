@@ -29,7 +29,7 @@ teamIDCount = Spring.GetGameRulesParam("peopleCount")
 Spring.Echo("[Default Mex Layout] Number of teamIDs in this match: " .. teamIDCount)
 --
 
-local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "enabled"
+local placeMexesInWater = Spring.GetModOptions().allowmexesinwater or "disabled"
 local maxMexElevationDiff = tonumber(Spring.GetModOptions().maximummexelevationdifference) or 50
 local mexSpotsPerSideMultiplier = tonumber(Spring.GetModOptions().mexspotspersidemultiplier) or 100
 local mexRandomLayout = Spring.GetModOptions().mexrandomlayout or "standard"

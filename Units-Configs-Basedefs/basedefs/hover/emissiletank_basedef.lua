@@ -132,7 +132,7 @@ weaponDefs                 = {
 		soundStart               = "weapons/missile_launch1.wav",
 		
 		tracks                   = true,
-		turnrate                 = 17500,
+		turnrate                 = 30000,
 		
 		weaponAcceleration       = 400,
 		weaponTimer              = 1,

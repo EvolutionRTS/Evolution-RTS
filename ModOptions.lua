@@ -125,7 +125,7 @@ local options= {
 		name   = 'Standard Metal Spot Layout: Allow metal spots to be placed in water?',
 		desc   = 'Should metal spots be placed in water? Sometimes turning this off can be beneficial if the water on a map does damage. (only works on Standard Metal Spot Layout)',
 		type="list",
-		def="enabled",
+		def="disabled",
 		section= "resourcing",
 		items={
 			{key="disabled", name="Disabled", desc="Disallow metal spots being placed in water."},

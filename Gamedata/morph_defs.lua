@@ -576,18 +576,6 @@ Overseer]],
 			require = [[tech2]],
 		},
 	},
-	xmetalextractor = 	{
-		{
-			into = 'xmetalextractormoho',
-			--require = 'etech2',
-			time = timeToBuild_xmetalextractor,
-			cmdname = [[Evolve 2x Income]],
-			energy = energyCost_xmetalextractor,
-			metal = 0,
-			text = [[x2 Metal Extraction rate]],
-			require = [[tech1]],
-		},
-	},
 ----------------------------------------------------------
 ----------------------------------------------------------
 --Factories	
@@ -599,7 +587,7 @@ Overseer]],
 		{
 			into = 'eflakturret',
 			time = timeToBuild_eflakturret,
-			cmdname = [[Evolve]],
+			cmdname = [[Evolve Flak Turret]],
 			energy = energyCost_eflakturret,
 			metal = 0,
 			text = [[Evolve Projectile Based Flak with more Range and AOE Damage]],
