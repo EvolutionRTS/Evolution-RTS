@@ -4,7 +4,7 @@
 #define WALK_PERIOD 50
 
 
-piece	base, nanopoint1, rf1, rf2, lf1, lf2, rr1, rr2, lr1, lr2, rfdirt, rrdirt, lfdirt, lrdirt, firepoint1, mandible;
+piece	base, nanopoint1, rf1, rf2, lf1, lf2, rr1, rr2, lr1, lr2, rfdirt, rrdirt, lfdirt, lrdirt, firepoint1, mandible, topantenna, innerring, outerring, centerring, emit;
 
 static-var maxreloadtime, moving, bMoving, terraintype, building;
 
@@ -322,6 +322,11 @@ Create()
 	start-script DoTheWalking();
 //	start-script Thrust();
 	start-script buildflame();
+	spin topantenna around y-axis speed <8>;
+	spin topantenna around x-axis speed <2>;
+	spin innerring around y-axis speed <-3>;
+	spin centerring around y-axis speed <4>;
+	spin outerring around y-axis speed <-7>;
 }
 
 AimFromPrimary(p)
@@ -386,4 +391,8 @@ Killed(severity, corpsetype) // how it explodes
 	explode lr1 type EXPLODE_ON_HIT;
 	explode lr2 type EXPLODE_ON_HIT;
 	explode mandible type EXPLODE_ON_HIT;
+	explode topantenna type EXPLODE_ON_HIT;
+	explode innerring type EXPLODE_ON_HIT;
+	explode centerring type EXPLODE_ON_HIT;
+	explode outerring type EXPLODE_ON_HIT;
 } 

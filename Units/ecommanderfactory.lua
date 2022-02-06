@@ -51,7 +51,7 @@ local unitDef                    = {
 	explodeAs                    = "commnuke",
 	footprintX                   = 4,
 	footprintZ                   = 4,
-	hideDamage		             = true,
+
 	iconType                     = "commander",
 	idleAutoHeal                 = .5,
 	idleTime                     = 2200,

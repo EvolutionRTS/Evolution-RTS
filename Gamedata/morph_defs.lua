@@ -167,16 +167,16 @@ Overseer]],
 			text = 'Evolve into Builder Overseer: Gains 16x buildpower and larger build radius.',
 			require = [[tech2]],
 		},
-		{
-			into = 'ecommanderfactory',
-			time = timeToBuild_ecommanderfactory,
-			cmdname = [[Factory
-Overseer]],
-			energy = energyCost_ecommanderfactory,
-			metal = 0,
-			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
-			require = [[tech2]],
-		},
+		-- {
+			-- into = 'ecommanderfactory',
+			-- time = timeToBuild_ecommanderfactory,
+			-- cmdname = [[Factory
+-- Overseer]],
+			-- energy = energyCost_ecommanderfactory,
+			-- metal = 0,
+			-- text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
+			-- require = [[tech2]],
+		-- },
 		{
 			into = 'ecommanderbattle',
 			time = timeToBuild_ecommanderbattle,
@@ -217,15 +217,15 @@ Overseer]],
 			metal = 0,
 			text = 'Evolve into Builder Overseer: Gains 16x buildpower and larger build radius.',
 		},
-		{
-			into = 'ecommanderfactory',
-			time = timeToBuild_ecommanderfactory,
-			cmdname = [[Factory
-Overseer]],
-			energy = energyCost_ecommanderfactory,
-			metal = 0,
-			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
-		},
+		-- {
+			-- into = 'ecommanderfactory',
+			-- time = timeToBuild_ecommanderfactory,
+			-- cmdname = [[Factory
+-- Overseer]],
+			-- energy = energyCost_ecommanderfactory,
+			-- metal = 0,
+			-- text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
+		-- },
 		{
 			into = 'ecommanderbattle',
 			time = timeToBuild_ecommanderbattle,
@@ -233,7 +233,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
-			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Evolve into Battle Overseer: Upgraded Beam Laser that does heavy damage to Light and Armored units. No longer grants supply.',
 		},
 	},
 	
@@ -265,15 +265,15 @@ Overseer]],
 			metal = 0,
 			text = 'Evolve into Builder Overseer: Gains 16x buildpower and larger build radius.',
 		},
-		{
-			into = 'ecommanderfactory',
-			time = timeToBuild_ecommanderfactory,
-			cmdname = [[Factory
-Overseer]],
-			energy = energyCost_ecommanderfactory,
-			metal = 0,
-			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
-		},
+		-- {
+			-- into = 'ecommanderfactory',
+			-- time = timeToBuild_ecommanderfactory,
+			-- cmdname = [[Factory
+-- Overseer]],
+			-- energy = energyCost_ecommanderfactory,
+			-- metal = 0,
+			-- text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
+		-- },
 		{
 			into = 'ecommanderbattle',
 			time = timeToBuild_ecommanderbattle,
@@ -281,7 +281,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
-			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Evolve into Battle Overseer: Upgraded Beam Laser that does heavy damage to Light and Armored units. No longer grants supply.',
 		},
 	},
 	
@@ -313,15 +313,15 @@ Overseer]],
 			metal = 0,
 			text = 'Evolve into Shielded Overseer: Gains a large shield which recharges quickly.',
 		},
-		{
-			into = 'ecommanderfactory',
-			time = timeToBuild_ecommanderfactory,
-			cmdname = [[Factory
-Overseer]],
-			energy = energyCost_ecommanderfactory,
-			metal = 0,
-			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
-		},
+		-- {
+			-- into = 'ecommanderfactory',
+			-- time = timeToBuild_ecommanderfactory,
+			-- cmdname = [[Factory
+-- Overseer]],
+			-- energy = energyCost_ecommanderfactory,
+			-- metal = 0,
+			-- text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
+		-- },
 		{
 			into = 'ecommanderbattle',
 			time = timeToBuild_ecommanderbattle,
@@ -329,7 +329,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
-			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Evolve into Battle Overseer: Upgraded Beam Laser that does heavy damage to Light and Armored units. No longer grants supply.',
 		},
 	},
 	
@@ -377,7 +377,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
-			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Evolve into Battle Overseer: Upgraded Beam Laser that does heavy damage to Light and Armored units. No longer grants supply.',
 		},
 	},
 	ecommanderbattle = {
@@ -388,7 +388,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommandermeteor,
 			metal = 0,
-			text = 'Evolve into Meteor Overseer: Overseer can call down devastating meteor showers.',
+			text = 'Evolve into Meteor Overseer: Overseer can call down devastating meteor showers. !THIS CHANGE IS PERMANENT!',
 			require = [[tech3]],
 		},
 	    {
@@ -427,28 +427,18 @@ Overseer]],
 			metal = 0,
 			text = 'Evolve into Builder Overseer: Gains 16x buildpower.',
 		},
-		{
-			into = 'ecommanderfactory',
-			time = timeToBuild_ecommanderfactory,
-			cmdname = [[Factory
-Overseer]],
-			energy = energyCost_ecommanderfactory,
-			metal = 0,
-			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
-		},
+		-- {
+			-- into = 'ecommanderfactory',
+			-- time = timeToBuild_ecommanderfactory,
+			-- cmdname = [[Factory
+-- Overseer]],
+			-- energy = energyCost_ecommanderfactory,
+			-- metal = 0,
+			-- text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
+		-- },
 	},
 	
 	ecommanderhealer = {
-	    {
-			into = 'ecommandermeteor',
-			time = timeToBuild_ecommandermeteor,
-			cmdname = [[Meteor 
-Overseer]],
-			energy = energyCost_ecommandermeteor,
-			metal = 0,
-			text = 'Evolve into Meteor Overseer: Overseer can call down devastating meteor showers.',
-			require = [[tech3]],
-		},
 	    {
 		into = 'ecommanderbattle',
 			time = timeToBuild_ecommanderbattle,
@@ -456,7 +446,7 @@ Overseer]],
 Overseer]],
 			energy = energyCost_ecommanderbattle,
 			metal = 0,
-			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
+			text = 'Evolve into Battle Overseer: Upgraded Beam Laser that does heavy damage to Light and Armored units. No longer grants supply.',
 			require = [[tech2]],
 		},
 		{
@@ -486,28 +476,17 @@ Overseer]],
 			metal = 0,
 			text = 'Evolve into Builder Overseer: Gains 16x buildpower.',
 		},
-		{
-			into = 'ecommanderfactory',
-			time = timeToBuild_ecommanderfactory,
-			cmdname = [[Factory
-Overseer]],
-			energy = energyCost_ecommanderfactory,
-			metal = 0,
-			text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
-		},
+		-- {
+			-- into = 'ecommanderfactory',
+			-- time = timeToBuild_ecommanderfactory,
+			-- cmdname = [[Factory
+-- Overseer]],
+			-- energy = energyCost_ecommanderfactory,
+			-- metal = 0,
+			-- text = 'Evolve into Factory Overseer: Gains the ability to build all raider, riot, and MBTs anywhere, gains 8x buildpower.',
+		-- },
 	},
 	
-	ecommandermeteor = {
-			{
-			into = 'ecommanderbattle',
-			time = timeToBuild_ecommanderbattle,
-			cmdname = [[Battle
-Overseer]],
-			energy = energyCost_ecommanderbattle,
-			metal = 0,
-			text = 'Evolve into Battle Overseer: Upgraded machinegun that does heavy damage to Light units and Buildings. No longer grants supply.',
-		},
-	},
 	
 ----------------------------------------------------------
 ----------------------------------------------------------
