@@ -59,7 +59,7 @@ unitDef                    = {
 		}, 
 
 		explosiongenerators      = {
-			"custom:dirt",
+			"custom:emptydirt",
 			"custom:blacksmoke",
 			"custom:jethtrail",
 		},

@@ -60,7 +60,7 @@ unitDef                    = {
 
 		explosiongenerators      = {
 			"custom:gdhcannon",
-			"custom:dirt",
+			"custom:emptydirt",
 			"custom:blacksmoke",
 		},
 	},

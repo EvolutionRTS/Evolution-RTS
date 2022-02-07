@@ -56,7 +56,7 @@ unitDef                    = {
 	sfxtypes                     = {
 		explosiongenerators      = {
 			"custom:electricity",
-			"custom:dirt",
+			"custom:emptydirt",
 			"custom:blacksmoke",
 		},
 		pieceExplosionGenerators = {

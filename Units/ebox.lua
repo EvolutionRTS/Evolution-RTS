@@ -74,7 +74,7 @@ local unitDef                    = {
 			"deathceg4",
 		},
 		explosiongenerators      = {
-			"custom:dirt",
+			"custom:emptydirt",
 		},
 	},
 	

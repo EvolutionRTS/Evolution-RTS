@@ -70,7 +70,7 @@ unitDef                    = {
 
 		explosiongenerators      = {
 			"custom:factorysparks",
-			"custom:dirtsmall",
+			"custom:emptydirt",
 			"custom:blacksmoke",
 		},
 	},

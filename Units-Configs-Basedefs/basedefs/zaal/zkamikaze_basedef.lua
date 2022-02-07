@@ -62,7 +62,7 @@ unitDef                    = {
 		explosiongenerators      = {
 			"custom:blood_spray",
 			"custom:blood_explode",
-			"custom:dirt",
+			"custom:emptydirt",
 		},
 	},
 	sounds                       = {

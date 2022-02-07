@@ -62,7 +62,7 @@ unitDef                    = {
 	sfxtypes                     = {
 		explosiongenerators      = {
 			"custom:gdhcannon",
-			"custom:dirt",
+			"custom:emptydirt",
 			"custom:blacksmoke",
 			"custom:airfactoryhtrail",
 		},
