@@ -611,10 +611,9 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			if unitDef.workertime and unitDef.workertime >= 8 then
 				unitDef.workertime = 8
 			end
-			-- Set reclaimspeed to be a multiple of workertime. This relies on max defaults set in featuredefs post. Without some mox defaults there, this will be a funny result.
-			if unitDef.workertime and unitDef.reclaimspeed then
-				unitDef.reclaimspeed = unitDef.workertime
-			end
+			-- Set reclaimspeed to be a multiple of workertime. This relies on max defaults set in featuredefs post. Without some max defaults there, this will be a funny result.
+			unitDef.reclaimspeed = unitDef.workertime
+			
 			if canAnyUnitsReclaim == false then
 				if unitDef.canreclaim == true then
 					unitDef.canreclaim = false
