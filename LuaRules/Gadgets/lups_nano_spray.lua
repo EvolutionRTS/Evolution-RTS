@@ -192,7 +192,7 @@ end
 --
 
 local nanoParticles = {}
-local maxEngineParticles = Spring.GetConfigInt("MaxNanoParticles", 10000)
+local maxEngineParticles = Spring.GetConfigInt("MaxNanoParticles", 25000)
 
 local function GetFaction(udid)
   --local udef_factions = UnitDefs[udid].factions or {}
@@ -210,17 +210,27 @@ local factionsNanoFx = {
     streamSpeed     = "limcount*0.05",
   },
   ["default_high_quality"] = {
-    fxtype      = "NanoParticles",
-    alpha       = 0.27,
-    size        = 6,
-    sizeSpread  = 6,
-    sizeGrowth  = 0.75,
-    rotSpeed    = 0.1,
-    rotSpread   = 360,
-    texture     = "bitmaps/Other/Poof.png",
-    particles   = 0.5,
+    fxtype          = "NanoLasers",
+    alpha           = "0.001",
+    corealpha       = "0.2",
+    corethickness   = "0.25",
+    streamThickness = "1",
+    streamSpeed     = "1",
   },
-  --[[arm = {
+  
+  -- ["default_high_quality"] = {
+    -- fxtype      = "NanoParticles",
+    -- alpha       = 0.50,
+    -- size        = 6,
+    -- sizeSpread  = 6,
+    -- sizeGrowth  = 0.75,
+    -- rotSpeed    = 0.1,
+    -- rotSpread   = 360,
+    -- texture     = "bitmaps/default/randdots.tga",
+    -- particles   = 0.5,
+  -- },  
+
+  arm = {
     fxtype      = "NanoParticles",
     delaySpread = 30,
     size        = 3,
@@ -254,7 +264,7 @@ local factionsNanoFx = {
     corethickness   = "limcount",
     streamThickness = "0.5+5*limcount",
     streamSpeed     = "limcount*0.05",
-  },]]--
+  },
 }
 
 -------------------------------------------------------------------------------------

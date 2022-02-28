@@ -35,7 +35,7 @@ end
 --------------------------------------------------------------------------------
 
 local aiStartUnits = {
-	["ecommander"] = {
+	["fedcommander"] = {
 		"ecommanderbattleai",
 		-- "ecommanderbuildai",
 		-- "ecommandercloakai",
@@ -43,24 +43,31 @@ local aiStartUnits = {
 		-- "ecommandershieldai",
 		-- "ecommanderhealerai",
 	},
-	["zarm"] = {
-		"zarm",
+	["lozcommander"] = {
+		"ecommanderbattleai",
+		-- "ecommanderbuildai",
+		-- "ecommandercloakai",
+		-- "ecommanderfactoryai",
+		-- "ecommandershieldai",
+		-- "ecommanderhealerai",
 	},
-	--["xcommander"] = {
-	--	"xcommander",
-	--},
 }
 
 local factionDefComms = {
-	[0] = "ecommander",
-	[1] = "zarm",
-	--[2] = "xcommander",
+	--[0] = "ecommander",
+	--[1] = "zarm",
+	--[2] = "xcommander",\
+	
+	[0] = "fedcommander",
+	[1] = "lozcommander",
 }
 
 local validStartComm = {
-	[UnitDefNames["ecommander"].id] = true,
-	[UnitDefNames["zarm"].id] = true,
+	--[UnitDefNames["ecommander"].id] = true,
+	--[UnitDefNames["zarm"].id] = true,
 	--[UnitDefNames["xcommander"].id] = true,
+	[UnitDefNames["fedcommander"].id] = true,
+	[UnitDefNames["lozcommander"].id] = true,
 }
 
 local ACCESS_LEVEL = {
@@ -121,10 +128,10 @@ local function SpawnStartUnit(teamID)
 
 	if (startUnit and startUnit ~= "") then
 	
-		if startUnit == "ecommander" then
-			playerFaction = "ateran"
-		elseif startUnit == "zarm" then
-			playerFaction = "zaal"
+		if startUnit == "fedcommander" then
+			playerFaction = "Federation of Kala"
+		elseif startUnit == "lozcommander" then
+			playerFaction = "Loz Alliance"
 		--elseif startUnit == "xcommander" then
 		--	playerFaction = "pattern"
 		elseif startUnit == nil then

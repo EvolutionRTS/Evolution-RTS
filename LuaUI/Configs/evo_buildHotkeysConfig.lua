@@ -31,6 +31,8 @@ nameToKeyCode = {
 	ebasefactory = {f, h},
 	eamphibfac = {f, a},
 	eairplant = {f, p},
+	f1landfac = {f, l},
+	f2landfac = {f, l},
 
 	etech1 = {b, t},
 	emetalextractor = {e, m},
@@ -52,6 +54,8 @@ nameToKeyCode = {
 	escoutdrone = {b, d},
 	ebox = {b, x},
 	ehbotengineer = {b, e},
+	fedengineer = {b, e},
+	lozengineer = {b, e},
 	eorb = {b, o},
 	ecommander = {v, o},
 

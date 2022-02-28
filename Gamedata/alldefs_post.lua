@@ -192,6 +192,14 @@ function UnitDef_Post(name, uDef)
 	end
 	
 	--------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------- Make units unable to be built in the water
+	if uDef.maxwaterdepth then
+		uDef.maxwaterdepth = 25
+	end
+	if uDef.floater then
+		uDef.floater = false
+	end
+	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- Turn off Chicken Egg drops
 	if uDef.corpse == "chicken_egg" then
@@ -300,7 +308,11 @@ function WeaponDef_Post(name, wDef)
 		wDef.energypershot = math.floor(wDef.damage.default * 0.05 * wDef.projectiles * ((wDef.areaofeffect * 0.001) + 1) * wDef.range^0.25 * 0.5 * 10 + 0.5) * 0.1
 	end	
 	
-	
+	--------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------- Turn off waterweapons
+	if wDef.waterweapon then
+		wDef.waterweapon = false
+	end
 	--------------------------------------------------------------------------------
 	--------------------------------------------------------------------------------
 	-- Disable Friendly Fire Completely

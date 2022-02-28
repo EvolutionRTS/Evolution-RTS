@@ -22,12 +22,69 @@ Shared.buildList = {
 	[[eshieldgen]],
 	[[esilo]],
 	[[escoutdrone]],
-	[[ebox]],
 	[[ehbotengineer]],
 	[[eorb]],
 	[[eamphibleveler]],
 	[[ehbotkarganneth]],
 	[[eallterranarchid]],
+	[[elacerator]],
+	[[ekrow]],
+	-- [[ecommander]],
+}
+
+Shared.buildListFed = {
+	[[f1landfac]],
+	[[eairplant]],
+	[[etech1]],
+	[[emetalextractor]],
+	[[esolar2]],
+	[[egeothermal]],
+	[[efusion2]],
+	[[estorage]],
+	[[eradar2]],
+	[[ejammer2]],
+	[[ekmar]],
+	[[emine]],
+	[[elightturret2]],
+	[[eheavyturret2]],
+	[[elaserbattery]],
+	[[eartyturret]],
+	-- [[euwturret]],
+	[[eshieldgen]],
+	[[esilo]],
+	[[escoutdrone]],
+	[[fedengineer]],
+	[[eorb]],
+	[[ehbotkarganneth]],
+	[[eallterranarchid]],
+	[[ekrow]],
+	-- [[ecommander]],
+}
+
+Shared.buildListLoz = {
+	[[f2landfac]],
+	[[eairplant]],
+	[[etech1]],
+	[[emetalextractor]],
+	[[esolar2]],
+	[[egeothermal]],
+	[[efusion2]],
+	[[estorage]],
+	[[eradar2]],
+	[[ejammer2]],
+	[[ekmar]],
+	[[emine]],
+	[[elightturret2]],
+	[[eheavyturret2]],
+	[[elaserbattery]],
+	[[eartyturret]],
+	-- [[euwturret]],
+	[[eshieldgen]],
+	[[esilo]],
+	[[escoutdrone]],
+	[[lozengineer]],
+	[[eorb]],
+	[[eamphibleveler]],
 	[[elacerator]],
 	[[ekrow]],
 	-- [[ecommander]],
@@ -103,27 +160,6 @@ Shared.buildListZaalArm = {
 
 Shared.buildListZaalTumor = {
 	[[ztumor]],
-}
-
-Shared.buildListXCommander = {
-	[[xklab]],
-	[[xkconstructor]],
-	[[xmetalextractor]],
-	[[xsolar]],
-	[[xstorage]],
-	[[xllt]],
-	[[xrocketturret]],
-	[[xantinuke]],
-	[[xnukesilo]],
-}
-
-Shared.buildListXKLab = {
-	[[xskulk]],
-	[[xhammer]],
-	[[xrocko]],
-	[[xwarrior]],
-	[[xcrasher]],
-	[[xflea]],
 }
 	
 local turrets = {
@@ -211,6 +247,37 @@ end
 -----------------------------
 -----------------------------
 --Buildlists for factories
+
+Shared.buildListf1landfac = {
+	[[eallterrlight]],
+	[[ehbotpeewee]],
+	[[eallterrriot_shotgun]],
+	[[ehbotthud]],
+	[[eallterrassault]],
+	[[eallterrshield]],
+	[[eallterrmed]],
+	[[ehbotsniper]],
+	[[eallterrheavy]],
+	[[ehbotrocko]],
+	[[fedengineer]],
+	[[eorb]],
+	
+}
+
+Shared.buildListf2landfac = {
+	[[eamphibbuggy]],
+	[[elighttank3]],
+	[[eriottank2_shotgun]],
+	[[eamphibneedle]],
+	[[eartytank]],
+	[[ebox]],
+	[[eamphibmedtank]],
+	[[eheavytank3]],
+	[[eamphibrock]],
+	[[emissiletank]],
+	[[lozengineer]],
+	[[eorb]],
+}
 
 Shared.buildListHoverFactory = {
 		[[elighttank3]],

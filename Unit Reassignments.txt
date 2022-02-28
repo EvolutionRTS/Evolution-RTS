@@ -1,0 +1,38 @@
+No buildings in/on water anymore
+
+Faction 1 - Remove Hovertank and replace with normal tank
+
+f1landfac
+
+Tech1
+eallterrlight
+ehbotpeewee
+eallterrriot_shotgun
+ehbotthud
+eallterrassault
+
+Tech2
+eallterrmed
+ehbotsniper
+eallterrheavy
+ehbotrocko
+eallterrshield
+
+
+Faction 2 - Remove Waterweapon1 - Reintroduce slow movement underwater
+
+ebasefactory
+
+Tech 1
+eamphibbuggy
+elighttank3
+eriottank_shotgun
+eamphibneedle
+eartytank
+ebox
+
+Tech 2
+eamphibmedtank
+eheavytank3
+eamphibrock
+emissiletank3

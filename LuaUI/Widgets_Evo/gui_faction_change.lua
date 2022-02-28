@@ -56,8 +56,8 @@ local spGetGroundHeight = Spring.GetGroundHeight
 local spSendLuaRulesMsg = Spring.SendLuaRulesMsg
 local spGetSpectatingState = Spring.GetSpectatingState
 
-local aterancomDefID = UnitDefNames.ecommander.id
-local zaalcomDefID = UnitDefNames.zarm.id
+local fedcomDefID = UnitDefNames.fedcommander.id
+local lozcomDefID = UnitDefNames.lozcommander.id
 
 local commanderDefID = spGetTeamRulesParam(myTeamID, 'startUnit')
 local amNewbie = (spGetTeamRulesParam(myTeamID, 'isNewbie') == 1)
@@ -192,10 +192,10 @@ function widget:DrawWorld()
 		local teamID = teamList[i]
 		local tsx, tsy, tsz = spGetTeamStartPosition(teamID)
 		if tsx and tsx > 0 then
-			if spGetTeamRulesParam(teamID, 'startUnit') == aterancomDefID then
+			if spGetTeamRulesParam(teamID, 'startUnit') == fedcomDefID then
 				glTexture('LuaUI/Images/ecommander.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 80)
-			elseif spGetTeamRulesParam(teamID, 'startUnit') == zaalcomDefID then
+			elseif spGetTeamRulesParam(teamID, 'startUnit') == lozcomDefID then
 				glTexture('LuaUI/Images/zarm.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 64)
 			end
@@ -255,9 +255,9 @@ function GenerateFactionChangeList()
 
 		-- Highlight
 	glColor(0.8, 0.8, 0.8, 0.3)
-	if commanderDefID == aterancomDefID then
+	if commanderDefID == fedcomDefID then
 		RectRound(3*widgetScale, 3*widgetScale, 61*widgetScale, 61*widgetScale,4.5*widgetScale)
-	elseif commanderDefID == zaalcomDefID then
+	elseif commanderDefID == lozcomDefID then
 		RectRound(65*widgetScale, 3*widgetScale, 125*widgetScale, 61*widgetScale,4.5*widgetScale)
 	elseif commanderDefID == patterncomDefID then
 		RectRound(128*widgetScale, 3*widgetScale, 189*widgetScale, 61*widgetScale,4.5*widgetScale)
@@ -273,8 +273,8 @@ function GenerateFactionChangeList()
 		-- Text
 	font:Begin()
 	font:Print('Choose Your Faction', 96*widgetScale, 64*widgetScale, 11.5*widgetScale, 'ocd')
-	font:Print('Ateran', 32*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
-	font:Print('Zaal', 96*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
+	font:Print('Federation of Kala', 32*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
+	font:Print('Loz Alliance', 96*widgetScale, 4*widgetScale, 12*widgetScale, 'ocd')
 	font:End()
 end
 
@@ -297,9 +297,9 @@ function widget:MousePress(mx, my, mButton)
 			local newCom
 			-- Which button?
 			if mx < px + (64*widgetScale) then
-				newCom = aterancomDefID
+				newCom = fedcomDefID
 			elseif mx < px + (128*widgetScale) then
-				newCom = zaalcomDefID
+				newCom = lozcomDefID
 			elseif mx < px + (192*widgetScale) then
 				newCom = patterncomDefID
 			end

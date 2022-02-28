@@ -42,7 +42,7 @@ local spTransferUnit	= Spring.TransferUnit
 local spKillTeam	= Spring.KillTeam
 local spGameOver	= Spring.GameOver
 
-local COMM_VALUE = UnitDefNames.ecommander.metalCost or 500
+local COMM_VALUE = 500
 local ECON_SUPREMACY_MULT = 25
 
 --------------------------------------------------------------------------------
