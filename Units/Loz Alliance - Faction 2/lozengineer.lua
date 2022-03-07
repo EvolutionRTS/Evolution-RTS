@@ -5,7 +5,7 @@ unitName = "lozengineer"
 
 --------------------------------------------------------------------------------
 
-buildCostMetal = 80
+buildCostMetal = 40
 buildDistance = 350
 
 maxDamage = 500

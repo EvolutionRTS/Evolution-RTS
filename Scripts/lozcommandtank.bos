@@ -1,0 +1,184 @@
+
+// One ninth of the full cycle duration, in millisecond
+// The larger this value the slower the walk animation
+#define WALK_PERIOD 50
+
+
+piece	base, nano, nanopoint1, rearwheels, frontwheels, sidetanks, reartanks, turret, barrel1, firepoint1, dirt;
+
+static-var maxreloadtime, moving, bMoving, terraintype, building;
+
+#define SIG_AIM1 2
+#define SIG_FIRE1 4
+#define SIG_MOVE 8
+#define SMOKEPIECE1 base
+#include "springdefs.h"
+#define SIG_BUILD 16
+#define SIG_AIM_2 32
+#define nanoflame 1024+0
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+   while( get BUILD_PERCENT_LEFT )
+   {
+      sleep 400;
+   }
+   while( TRUE )
+   {
+      healthpercent = get HEALTH;
+      if( healthpercent < 66 )
+      {
+         smoketype = 256 | 2;
+         if( Rand( 1, 66 ) < healthpercent )
+         {
+            smoketype = 256 | 1;
+         }
+         emit-sfx 1026 from turret;
+      }
+      sleeptime = healthpercent * 50;
+      if( sleeptime < 200 )
+      {
+         sleeptime = 200;
+      }
+      sleep sleeptime;
+   }
+}
+
+
+
+StartMoving()
+{
+	signal SIG_MOVE;
+	set-signal-mask SIG_MOVE;
+	moving=TRUE;
+   bMoving = TRUE;
+}
+
+StopMoving()
+{
+   bMoving = FALSE;
+	signal SIG_MOVE;
+	set-signal-mask SIG_MOVE;
+	moving=FALSE;
+}
+
+
+Thrust()
+{
+   while( TRUE )
+   {
+      if (moving)    
+      {
+  		 emit-sfx 1025 + 0 from dirt;
+         spin frontwheels around x-axis speed <500.005495>;
+         spin rearwheels around x-axis speed <500.005495>;
+         
+      }
+      else
+      {
+         stop-spin frontwheels around x-axis decelerate <200.000000>;
+         stop-spin rearwheels around x-axis decelerate <200.000000>;
+      }
+     sleep 400;    
+   }
+}
+
+
+buildflame()
+{
+   while( TRUE )
+   {
+      if (building)    
+      {
+              emit-sfx nanoflame from nanopoint1;
+      				
+      }
+        sleep 600;    
+   }
+}
+
+
+Create()
+{
+	moving=FALSE;
+	while(get BUILD_PERCENT_LEFT)
+	{
+		sleep 250;
+	}
+	start-script SmokeUnit();
+	start-script Thrust();
+	start-script buildflame();
+}
+
+RestoreAfterDelay() // restore function to turn the turret and so forth back to start 
+{ 
+sleep 3000; 
+turn turret to y-axis <0> speed <60>; 
+turn barrel1 to x-axis <0> speed <30>;    
+} 
+
+
+AimPrimary(heading, pitch) // single weapon with 2 fires this tell sit what to do while aiming 
+{ 
+signal SIG_AIM_2; 
+set-signal-mask SIG_AIM_2; 
+turn turret to y-axis heading speed <5000>; 
+turn barrel1 to x-axis <0> - pitch speed <5000>;  
+wait-for-turn turret around y-axis;
+wait-for-turn barrel1 around x-axis;
+start-script RestoreAfterDelay(); 
+return (1); 
+} 
+
+FirePrimary() // what do while firing, fires 1 barrel then the next , and resets 
+{ 
+emit-sfx 1027 + 0 from firepoint1;
+} 
+
+AimFromPrimary(piecenum) // where it aims the weapon from 
+{ 
+piecenum = barrel1; 
+} 
+
+QueryPrimary(piecenum) // where the shot is called from 
+{ 
+piecenum = firepoint1; 
+} 
+
+
+StartBuilding(heading, pitch)
+{
+   signal SIG_BUILD;
+   set-signal-mask SIG_BUILD;
+   set INBUILDSTANCE to 1;
+   building = 1;
+   while (1) {
+//   emit-sfx 2048 from nanopoint1;
+   sleep 30;
+   }
+}
+
+StopBuilding()
+{
+   signal SIG_BUILD;
+   set-signal-mask SIG_BUILD;
+   set INBUILDSTANCE to 0;
+   building = 0;
+}
+
+QueryNanoPiece(piecenum)
+{
+		piecenum = nanopoint1;
+}
+
+Killed(severity, corpsetype) // how it explodes 
+{ 
+	corpsetype = 1; 
+	explode frontwheels type EXPLODE_ON_HIT;
+	explode rearwheels type EXPLODE_ON_HIT;
+	explode reartanks type EXPLODE_ON_HIT;
+	explode sidetanks type EXPLODE_ON_HIT;
+	explode nano type EXPLODE_ON_HIT;
+	explode barrel1 type EXPLODE_ON_HIT;
+} 

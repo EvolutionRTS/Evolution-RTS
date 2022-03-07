@@ -35,6 +35,7 @@ local unitDef                     = {
 	metalStorage                  = 900,
 	name                          = "ATM Machine",
 	objectName                    = "efusion2.s3o",
+	script						  = "efusion2.cob",
 	radarDistance                 = 1000,
 	reclaimable		              = false,
 	selfDestructAs                = "FUSIONPOP",

@@ -28,7 +28,30 @@ local hmsz = Game.mapSizeZ/2
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local targetUnits = {eorb = true, eorb_up1 = true, eorb_up2 = true, eorb_up3 = true, ehbotengineer = true, ehbotengineer_turret = true, zarm = true, ztenticle = true}
+local targetUnits = {
+	eorb = true,
+	eorb_up1 = true,
+	eorb_up2 = true,
+	eorb_up3 = true,
+	ehbotengineer = true,
+	ehbotengineer_turret = true,
+	zarm = true,
+	ztenticle = true,
+	fedengineer = true,
+	lozengineer = true,
+	fedorb = true,
+	lozorb = true,
+	fedcommander = true
+	fedcommander_up1 = true,
+	fedcommander_up2 = true,
+	fedcommander_up3 = true,
+	fedcommander_up4 = true,
+	lozcommander = true,
+	lozcommander_up1 = true,
+	lozcommander_up2 = true,
+	lozcommander_up3 = true,
+	lozcommander_up4 = true
+}
 
 local function IsTargetUnit(ud)
     return ud and targetUnits[ud.name]

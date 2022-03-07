@@ -51,15 +51,15 @@ function widget:GameFrame(n)
 		end
 	elseif myFaction == "Loz Alliance" then
 		if n == 1 then
-			Spring.PlaySoundFile("LuaUI/Sounds/ambient/zaalambient.wav", 0.33, 'ui')
+			Spring.PlaySoundFile("LuaUI/Sounds/ambient/ambient-stereo-short.wav", 0.33, 'ui')
 		elseif (n % 50) == 4 then
-			Spring.PlaySoundFile("LuaUI/Sounds/ambient/zaalambient.wav", 0.33, 'ui')
+			Spring.PlaySoundFile("LuaUI/Sounds/ambient/ambient-stereo-short.wav", 0.33, 'ui')
 		end
-	elseif myFaction == "pattern" then
+	elseif myFaction == "zaal" then
 		if n == 1 then
-			Spring.PlaySoundFile("LuaUI/Sounds/ambient/ambient-stereo-short.wav", 0.33, 'ui')
+			Spring.PlaySoundFile("LuaUI/Sounds/ambient/zaalambient.wav", 0.33, 'ui')
 		elseif (n % 50) == 4 then
-			Spring.PlaySoundFile("LuaUI/Sounds/ambient/ambient-stereo-short.wav", 0.33, 'ui')
+			Spring.PlaySoundFile("LuaUI/Sounds/ambient/zaalambient.wav", 0.33, 'ui')
 		end
 	end
 	

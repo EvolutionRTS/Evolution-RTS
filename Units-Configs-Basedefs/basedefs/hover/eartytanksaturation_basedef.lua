@@ -105,7 +105,7 @@ unitDef                    = {
 weaponDefs                 = {
 	SaturationArtilleryweapon    = {
 		
-		AreaOfEffect             = 200,
+		AreaOfEffect             = 250,
 		avoidFriendly            = false,
 		avoidFeature             = false,
 		collideFriendly          = false,
@@ -116,7 +116,7 @@ weaponDefs                 = {
 		explosionGenerator       = "custom:genericshellexplosion-medium",
 		energypershot            = 0,
 		
-		burst					 = 5,
+		burst					 = 20,
 		burstRate				 = 0.25,
 		
 		impulseFactor            = 0,
@@ -138,7 +138,7 @@ weaponDefs                 = {
 			damagetype		     = "antibuildingarty",  
 		},  
 		damage                   = {
-			default              = 200,
+			default              = 100,
 		},
 	},
 }

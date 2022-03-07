@@ -1,33 +1,33 @@
--- UNITDEF -- lozcommander --
+-- UNITDEF -- fedcommander_up2 --
 --------------------------------------------------------------------------------
 
-unitName = [[lozcommander]]
+unitName = [[fedcommander_up2]]
 
 --------------------------------------------------------------------------------
 
-humanname = [[Loz Alliance Command Unit]]
-buildpicture = [[lozcommander.png]]
+humanname = [[Federation of Kala Command Unit]]
+buildpicture = [[ecommander.png]]
 
-armortype = [[light]]
+armortype = [[armored]]
 supplygiven = [[0]]
-techprovided = [[tech0, -overseer]]
+techprovided = [[tech0, tech1, tech2, -overseer]]
 techrequired = [[0 overseer]]
 
-maxdamage = 2000
+maxdamage = 10000
 maxvelocity = 3
-workertime = 1
+workertime = 3
 
 movementclass = [[COMMANDERTANK4]]
 
-objectname = [[lozcommandtank.s3o]]
-script = [[lozcommandtank.cob]]
+objectname = [[ecommander4-battle.s3o]]
+script = [[ecommander4-battle.cob]]
 
 footprintx = 4
 footprintz = 4
 
-buildlist = Shared.buildListLoz
+buildlist = Shared.buildListFed
 
-weapon1 = [[machinegun]]
+weapon1 = [[machinegun_up2]]
 
 VFS.Include("units-configs-basedefs/basedefs/commander_basedef.lua")
 

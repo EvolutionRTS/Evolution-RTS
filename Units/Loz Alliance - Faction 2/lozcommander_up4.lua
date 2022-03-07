@@ -1,33 +1,33 @@
--- UNITDEF -- lozcommander --
+-- UNITDEF -- lozcommander_up4 --
 --------------------------------------------------------------------------------
 
-unitName = [[lozcommander]]
+unitName = [[lozcommander_up4]]
 
 --------------------------------------------------------------------------------
 
-humanname = [[Loz Alliance Command Unit]]
+humanname = [[Loz Alliance BattleMech Command Unit]]
 buildpicture = [[lozcommander.png]]
 
-armortype = [[light]]
+armortype = [[armored]]
 supplygiven = [[0]]
-techprovided = [[tech0, -overseer]]
+techprovided = [[tech0, tech1, tech2, tech3, -overseer]]
 techrequired = [[0 overseer]]
 
-maxdamage = 2000
+maxdamage = 20000
 maxvelocity = 3
-workertime = 1
+workertime = 5
 
-movementclass = [[COMMANDERTANK4]]
+movementclass = [[COMMANDERTANK6]]
 
-objectname = [[lozcommandtank.s3o]]
+objectname = [[lozcommandtank-battle.s3o]]
 script = [[lozcommandtank.cob]]
 
-footprintx = 4
-footprintz = 4
+footprintx = 6
+footprintz = 6
 
 buildlist = Shared.buildListLoz
 
-weapon1 = [[machinegun]]
+weapon1 = [[heavybeamweapon]]
 
 VFS.Include("units-configs-basedefs/basedefs/commander_basedef.lua")
 

@@ -196,7 +196,7 @@ function widget:DrawWorld()
 				glTexture('LuaUI/Images/ecommander.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 80)
 			elseif spGetTeamRulesParam(teamID, 'startUnit') == lozcomDefID then
-				glTexture('LuaUI/Images/zarm.png')
+				glTexture('LuaUI/Images/lozcommander.png')
 				glBeginEnd(GL_QUADS, QuadVerts, tsx, spGetGroundHeight(tsx, tsz), tsz, 64)
 			end
 		end
@@ -266,7 +266,7 @@ function GenerateFactionChangeList()
 	glColor(1, 1, 1, 1)
 	glTexture('LuaUI/Images/ecommander.png')
 	glTexRect(12*widgetScale, 17*widgetScale, 52*widgetScale, 59*widgetScale)
-	glTexture('LuaUI/Images/zarm.png')
+	glTexture('LuaUI/Images/lozcommander.png')
 	glTexRect(76*widgetScale, 20*widgetScale, 116*widgetScale, 60*widgetScale)
 	glTexture(false)
 

@@ -54,7 +54,7 @@ Shared.buildListFed = {
 	[[esilo]],
 	[[escoutdrone]],
 	[[fedengineer]],
-	[[eorb]],
+	[[fedorb]],
 	[[ehbotkarganneth]],
 	[[eallterranarchid]],
 	[[ekrow]],
@@ -83,20 +83,21 @@ Shared.buildListLoz = {
 	[[esilo]],
 	[[escoutdrone]],
 	[[lozengineer]],
-	[[eorb]],
+	[[lozorb]],
 	[[eamphibleveler]],
 	[[elacerator]],
 	[[ekrow]],
 	-- [[ecommander]],
 }
 
-Shared.eorb = {
-	[[ehbotengineer]],
-	[[eamphibleveler]],
-	[[ehbotkarganneth]],
-	[[eallterranarchid]],
-	[[elacerator]],
-	[[ekrow]],
+Shared.fedOrb = {
+	[[fedorb]],
+	[[fedengineer]],
+}
+
+Shared.lozOrb = {
+	[[lozorb]],
+	[[lozengineer]],
 }
 
 Shared.buildListeCommanderFactory = {

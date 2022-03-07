@@ -359,7 +359,9 @@ function ModOptions_Post (UnitDefs, WeaponDefs)
 			
 			-- Set building Hitpoints
 				-- Ateran
-			if unitDef.customparams and unitDef.customparams.factionname == "ateran" then
+			if unitDef.customparams and unitDef.customparams.factionname == "ateran" 
+			or unitDef.customparams and unitDef.customparams.factionname == "Federation of Kala" 
+			or unitDef.customparams and unitDef.customparams.factionname == "Loz Alliance" then
 				if unitDef.customparams then
 					if unitDef.customparams.unittype == "building" then
 						unitDef.maxdamage = unitDef.buildcostmetal * 5
